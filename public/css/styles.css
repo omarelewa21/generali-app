@@ -126,3 +126,7 @@ input#flexRadioDefault1,input#flexRadioDefault2 {
 .main-vh {
   height: 87vh;
 }
+
+.sticky-bottom {
+  z-index:1019;
+}
