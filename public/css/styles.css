@@ -1,0 +1,128 @@
+img {
+display:flex;   
+}
+.bg-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.avatar-content 
+{
+  margin-top:14.75rem;
+}
+.male-avatar {
+  left:120px;
+}
+
+img.male-avatar , img.female-avatar {
+  max-width: 100%;
+  max-height: 100%;
+}
+.navbar-default {
+    background-color: transparent; 
+    border-color: transparent;
+}
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.main-logo {
+    scale:0.8;
+}
+.white-logo {
+  height: 81px;
+    width: 100%;
+}
+main {
+    position: relative;
+    z-index: 1;
+}
+.nav-header {
+  margin-top: 13.063rem;
+}
+.text-scroll {
+    max-height: 67vh; /* Set the desired maximum height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.timeline {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+  }
+
+  .timeline:before {
+    content: '';
+    position: absolute;
+    left: 69.5px; /* Adjust the left position as needed */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ccc;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 53px;
+    padding-left: 107px; /* Adjust the left padding as needed */
+  }
+  .timeline-item:first-child {
+    margin-top: 20px;
+  }
+  .timeline-item:first-child::before {
+    display: none;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-item::after{
+    content: '';
+    position: absolute;
+    left: 66px;
+    top: 50%;
+    width: 10px; /* Adjust the bullet width as needed */
+    height: 10px; /* Adjust the bullet height as needed */
+    border-radius: 50%;
+    background: #ccc;
+    transform: translateY(-50%);
+  }
+
+
+  /* this is needed to make the content scrollable on larger screens */
+@media (min-width: 576px) {
+  .h-sm-100 {
+      height: 100%;
+  }
+}
+
+/* #custom-radio .form-check-input, #custom-radio2 .form-check-input {
+  width:1.2em !important;
+  height:1.2em !important;
+} */
+
+input#flexRadioDefault1,input#flexRadioDefault2 {
+  margin-top:8px;
+}
+
+.form-check-input {
+  transform: scale(1.2);
+}
+
+.bg-welcome {
+  z-index: -1;
+}
+
+.p-basic-details {
+  padding-left: 5.438rem;
+  padding-right: 6.875rem;
+}
+
+.main-vh {
+  height: 87vh;
+}

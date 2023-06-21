@@ -1,0 +1,140 @@
+//bootstrap custom style using sass and css
+@font-face {
+    font-family: 'Helvetica Neue Regular';
+    src: local('Helvetica Neue Regular'),
+        url('/public/fonts/HelveticaNeue.woff2') format('woff2'),
+        url('/public/fonts/HelveticaNeue.woff') format('woff'),
+        url('/public/fonts/HelveticaNeue.ttf') format('truetype');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Helvetica Neue Medium';
+    src: url('/public/fonts/HelveticaNeue-Medium.eot');
+    src: local('Helvetica Neue Medium'),
+        url('/public/fonts/HelveticaNeue-Medium.eot?#iefix') format('embedded-opentype'),
+        url('/public/fonts/HelveticaNeue-Medium.woff2') format('woff2'),
+        url('/public/fonts/HelveticaNeue-Medium.woff') format('woff'),
+        url('/public/fonts/HelveticaNeue-Medium.ttf') format('truetype');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Helvetica Neue Bold Condensed';
+    src: url('/public/fonts/HelveticaNeueBoldCondensed.eot');
+    src: local('Helvetica Neue Condensed Bold'),
+        url('/public/fonts/HelveticaNeueBoldCondensed.eot?#iefix') format('embedded-opentype'),
+        url('/public/fonts/HelveticaNeueBoldCondensed.woff2') format('woff2'),
+        url('/public/fonts/HelveticaNeueBoldCondensed.woff') format('woff'),
+        url('/public/fonts/HelveticaNeueBoldCondensed.ttf') format('truetype');
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Helvetica Neue Bold';
+    src: local('Helvetica Neue Bold'),
+        url('/public/fonts/HelveticaNeue-Bold.woff2') format('woff2'),
+        url('/public/fonts/HelveticaNeue-Bold.woff') format('woff'),
+        url('/public/fonts/HelveticaNeue-Bold.ttf') format('truetype');
+    font-style: normal;
+}
+
+body, html {
+    overflow: hidden;
+    height:100vh;
+  }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+h1.headline1 {
+    font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+}
+h4 {
+    font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+}
+h4.font-bold {
+    font-family: 'Helvetica Neue', sans-serif;
+
+}
+p.welcome {
+    font-family: 'Helvetica Neue Regular', sans-serif;
+}
+h6 {
+    font-size: 1.125rem; //18px 
+}
+h6.nav-text {
+    font-weight: 700;
+    font-family: 'Helvetica Neue Medium', sans-serif;
+}
+p {
+    font-size:1.25rem; //20px;
+}
+a {
+    color:#ffffff;
+    text-decoration: none;
+}
+.bg-accent-bg-grey {
+    background-color: #F8F8F8;
+}
+.form-label {
+    font-family: 'Helvetica Neue Regular', sans-serif;
+}
+.form-control, .form-select {
+    font-size: 20px !important;
+    font-family: 'Helvetica Neue Regular', sans-serif;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important
+}
+
+footer {
+    max-height: 103px !important;
+}
+
+$container-max-widths: (
+    // sm: 540px,
+    // md: 720px,
+    // lg: 960px,
+    // xl: 1140px,
+  xxl: 1440px
+); 
+$primary: #C21B17;
+$secondary: #AA1B17;
+$tertiary: #000000;
+$font-family-sans-serif:  "Helvetica Neue Bold Condensed";
+$display-font-sizes: (
+  1: 7.5rem, //120px
+  2: 4rem, //64px
+  3: 3.5rem, //56px
+  4: 2.5rem, //40px;
+  5: 2.125rem, //34px;
+  6: 1.375rem //22px
+);
+$btn-font-family:  "Helvetica Neue";
+$btn-font-size: 18px;
+$btn-font-weight: 700;
+$btn-padding-x: 2rem;
+$btn-padding-y: 0.75rem;
+
+$input-bg: transparent;
+$input-border-color:#000000;
+$input-border-width: 4px;
+$input-border-radius: 0;
+$input-placeholder-color:rgba(10, 4, 60, 0.3);
+$form-select-indicator-color:#AA1B17;
+
+$form-label-font-size:20px;
+$form-label-color:rgba(10, 4, 60, 0.75);
+$form-label-margin-bottom:0.813rem;
+ 
+$offcanvas-bg-color: #C21B17;
+
+$btn-close-color:   #ffffff;
+$btn-close-opacity: 1;
+$btn-close-width: 1.938rem;
+$padding-x:0;
+
+@import 'bootstrap/scss/bootstrap';
