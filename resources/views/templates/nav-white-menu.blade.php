@@ -4,9 +4,9 @@
 
 <nav class="navbar">
     <div class="container mx-4 mt-4 px-4">
-        <a href="#" class="navbar-brand">
+        {{-- <a href="#" class="navbar-brand">
             <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
-        </a>
+        </a> --}}
 
         <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button"
         aria-controls="offcanvasMenu">

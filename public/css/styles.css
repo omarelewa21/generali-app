@@ -139,3 +139,25 @@ input#flexRadioDefault1,input#flexRadioDefault2 {
 .fade-effect:hover img {
   opacity: 1;
 }
+
+.color-box {
+  width: 48px;
+  height: 48px;
+  /* display: inline-block; */
+  border-radius: 5px;
+}
+.color-box-wrapper {
+width: 421.5px;
+height: 77.94px;
+flex-shrink: 0;
+border-radius: 5px;
+border: 1px solid var(--primary-red, #C21B17);
+background: var(--primary-white, #FFF);
+box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
+}
+
+.img-avatar {
+  width: 231px;
+  height: 642px;
+}
+

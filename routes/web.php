@@ -31,6 +31,7 @@ Route::get('/avatar-gender-selection', function () {
 Route::get('/protection', function () {
     return view('pages.priorities.protection.protection');
 });
-Route::get('/test-ipad', function () {
-    return view('test-ipad');
+
+Route::get('/avatar-marital-status', function () {
+    return view('pages.avatar.avatar-marital-status');
 });

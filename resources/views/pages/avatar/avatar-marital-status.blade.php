@@ -10,31 +10,7 @@
     <div class="row">
         <div class="col-sm-7">
             <div class="bg-image vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background.png') }}');">
-                <div class="row" style="margin-top:128px">
-                    <div class="col-sm text-center">
-                        <p class="display-6">Pick the skin colour that’s closest to yours.</p>
-                    </div>
-                </div>
-                  <div class="row color-box-wrapper d-flex justify-content-center flex-column align-items-center justify-content-center">
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #F5DEB3;"></div>
-                    </div>
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #F4A460;"></div>
-                    </div>
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #D2B48C;"></div>
-                    </div>
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #A0522D;"></div>
-                    </div>
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #8B4513;"></div>
-                    </div>
-                    <div class="col-2">
-                      <div class="color-box" style="background-color: #654321;"></div>
-                </div>
-                  </div>
+
                 <div class="row">
                     <div class="col-sm text-center">
                         <div class="m-4">
@@ -48,19 +24,36 @@
         <div class="col-sm-5 bg-primary vh-100 overflow-auto ">
             <div class="row">
                 <div class="col-sm">
-                    <h4 class="display-4 text-white m-4 font-normal">Nice to meet you, __</h4>
-                    <p class="text-white display-6 m-4">Please click to select your gender.</p>
+                    <h4 class="display-4 text-white m-4 font-normal">May we know your relationship status?</h4>
+                    <p class="text-white display-6 m-4">Click to select your marital status.</p>
                 </div>
             </div>
-            <div class="row text-center justify-content-center" style="height: 579px">
+            <div class="row text-center justify-content-center" style="height: 283px">
                 <a href="#" class="col-sm-5 bg-white mx-2 d-flex align-items-center justify-content-center fade-effect" >
                     <div class="m-4">                   
-                        <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/single-icon.svg') }}" class="img-fluid" alt="...">
+                        <h6 class="mt-4 avatar-text">Single</h6>
                     </div>
+
                 </a>
                 <a href="#" class="col-sm-5 bg-white mx-2 d-flex align-items-center justify-content-center fade-effect">
                     <div class="m-4">
-                        <img src="{{ asset('images/avatar/button-gender-female.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/married-icon.svg') }}" class="img-fluid" alt="...">
+                        <h6 class="mt-4 avatar-text">Married</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="row text-center justify-content-center" style="height: 283px">
+                <a href="#" class="col-sm-5 bg-white m-2 d-flex align-items-center justify-content-center fade-effect" >
+                    <div class="m-4">                   
+                        <img src="{{ asset('images/avatar/divorced-icon.svg') }}" class="img-fluid" alt="...">
+                        <h6 class="mt-4 avatar-text">Divorced</h6>
+                    </div>
+                </a>
+                <a href="#" class="col-sm-5 bg-white m-2 d-flex align-items-center justify-content-center fade-effect">
+                    <div class="m-4">
+                        <img src="{{ asset('images/avatar/widowed-icon.svg') }}" class="img-fluid" alt="...">
+                        <h6 class="mt-4 avatar-text">Widowed</h6>
                     </div>
                 </a>
             </div>
