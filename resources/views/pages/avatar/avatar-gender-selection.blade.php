@@ -1,44 +1,68 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('templates.master')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+@section('title')
+<title>Avatar Gender Selection</title>@endsection
 
-    <title>Avatar Gender Selection</title>
-    @vite(['resources/js/app.js', 'resources/css/app.scss'])
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
-    <!-- <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script> -->
-    {{--
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    --}}
+@section('content')
+@include('templates.nav-red-menu')
 
-</head>
-
-<body>
-    <div class="container overflow-hidden">
-        <div class="vh-100 overflow-auto">
-            <div class="col-12 col-sm-3 col-xl-3 px-sm-2 px-0 d-flex sticky-top">
-                <nav class="navbar">
-                    <div class="container mx-4 mt-4">
-                        <a href="#" class="navbar-brand">
-                            <img class="white-logo" src="{{ asset('images/logo.png') }}" alt="Logo" width="100px;">
-                        </a>
-                        <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-                            <img class="d-inline" src="{{ asset('images/menu-button.svg') }}" alt="Logo" width="60px;">
-                        </a>
+<div class="container-fluid overflow-hidden">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="bg-image vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background.png') }}');">
+                <div class="row">
+                    <div class="col-sm text-center">
+                        <p class="display-6">Pick the skin colour that’s closest to yours.</p>
                     </div>
-                </nav>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center">
+                        <p class="display-6">Pick the skin colour that’s closest to yours.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center">
+                        <div class="m-4">
+                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" class="img-fluid" alt="...">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <main>
+        </div>
+        
+        <div class="col-sm-5 bg-primary vh-100 overflow-auto ">
+            <div class="row">
+                <div class="col-sm">
+                    <h4 class="display-4 text-white m-4 font-normal">Nice to meet you, __</h4>
+                    <p class="text-white display-6 m-4">Please click to select your gender.</p>
+                </div>
+            </div>
+            <div class="row text-center justify-content-center" style="height: 579px">
+                <a href="#" @click="toggleActive('male-column', 'female-column')" class="col-sm-5 bg-white mx-2 d-flex align-items-center justify-content-center fade-effect" >
+                    <div class="m-4">                   
+                        <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="img-fluid" alt="...">
+                    </div>
+                </a>
+                <a href="#" @click="toggleActive('female-column', 'male-column')" class="col-sm-5 bg-white mx-2 d-flex align-items-center justify-content-center fade-effect">
+                    <div class="m-4">
+                        <img src="{{ asset('images/avatar/button-gender-female.png') }}" class="img-fluid" alt="...">
+                    </div>
+                </a>
+            </div>
+            
+            
+            <div class="row" style="height: 89px">
+
+            </div>
+            <div class="row bg-accent-light-white py-4 align-items-end sticky-bottom">
+                <div class="col d-flex justify-content-end">
+                    <a href="{{url('/pdpa-disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
+                    <a href="{{ url('/avatar-welcome') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
-            </main>
-</body>
-
-</div>
-</div>
-
-
-</html>
+    @endsection

@@ -5,13 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container overflow-hidden">
-        <div class="vh-100 overflow-auto">
-            <div class="col-12 col-sm-3 col-xl-3 px-sm-2 px-0 d-flex sticky-top">
         @include('templates.nav-red-menu')
-            </div>
-            <main>
-
                 <div class="container">
                     <div class="bg-image vh-100"
                         style="background-image: url('{{ asset('images/avatar/Welcome.png') }}');">
@@ -36,7 +30,7 @@
                                     <a href="{{ url('/avatar-gender-selection') }}" class="btn btn-primary text-uppercase">Create</a>
                                 </div>
                                 <div class="px-2 py-2">
-                                    <a href="{{ url('/avatar-gender-selection') }}" class="btn btn-outline-primary text-uppercase">Skip</a>
+                                    <a href="{{ url('/#') }}" class="btn btn-outline-primary text-uppercase">Skip</a>
                                 </div>
                             </div>
                             <div class="col justify-content-end">
@@ -50,11 +44,5 @@
 
                     </div>
                 </div>
-            </main>
-</body>
-
-</div>
-</div>
-
 
 @endsection

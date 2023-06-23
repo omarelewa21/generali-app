@@ -1,4 +1,6 @@
-@include('templates.nav-links')
+{{--start of nav links --}}
+@include('templates.nav-links') 
+{{--end of nav links --}}
 
 <nav class="navbar">
     <div class="container mx-4 mt-4 px-4">

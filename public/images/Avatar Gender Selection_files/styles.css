@@ -130,12 +130,3 @@ input#flexRadioDefault1,input#flexRadioDefault2 {
 .sticky-bottom {
   z-index:1019;
 }
-
-.fade-effect img {
-  opacity: 0.75;
-  transition: opacity 0.3s ease;
-}
-
-.fade-effect:hover img {
-  opacity: 1;
-}

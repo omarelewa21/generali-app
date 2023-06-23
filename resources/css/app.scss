@@ -40,15 +40,27 @@ body, html {
     overflow: hidden;
     height:100vh;
   }
+/* width */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 50px;
-  background: rgba(255, 255, 255, 0.5);
-}
-
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 10 0 10px #FD5B5B; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ffffff; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000; 
+  }
 h1.headline1 {
     font-family: 'Helvetica Neue Bold Condensed', sans-serif;
 }
@@ -58,6 +70,9 @@ h4 {
 h4.font-bold {
     font-family: 'Helvetica Neue', sans-serif;
 
+}
+h4.font-normal {
+    font-family: 'Helvetica Neue Regular', sans-serif;
 }
 p.welcome {
     font-family: 'Helvetica Neue Regular', sans-serif;
@@ -71,14 +86,20 @@ h6.nav-text {
 }
 p {
     font-size:1.25rem; //20px;
+    font-family: 'Helvetica Neue Regular', sans-serif;
+
 }
 a {
     color:#ffffff;
     text-decoration: none;
 }
 .bg-accent-bg-grey {
-    background-color: #F8F8F8;
+    background-color: #F8F8F8;   
 }
+.bg-accent-light-white {
+    background-color: #f0f0f0;
+}
+
 .form-label {
     font-family: 'Helvetica Neue Regular', sans-serif;
 }
