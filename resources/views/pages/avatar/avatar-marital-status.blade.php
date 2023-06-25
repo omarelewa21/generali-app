@@ -4,7 +4,7 @@
 <title>Avatar Gender Selection</title>@endsection
 
 @section('content')
-@include('templates.nav-red-menu')
+@include('templates.nav.nav-red-menu')
 
 <div class="container-fluid overflow-hidden">
     <div class="row">
@@ -64,8 +64,8 @@
             </div>
             <div class="row bg-accent-light-white py-4 align-items-end sticky-bottom">
                 <div class="col d-flex justify-content-end">
-                    <a href="{{url('/avatar-welcome')}}" class="btn btn-primary text-uppercase">Back</a>
-                    <a href="{{ url('/avatar-marital-status') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                    <a href="{{url('/avatar-gender-selection')}}" class="btn btn-primary text-uppercase">Back</a>
+                    <a href="{{ url('/avatar-my-assets') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 <title>Avatar Gender Selection</title>@endsection
 
 @section('content')
-@include('templates.nav-red-menu')
+@include('templates.nav.nav-red-menu')
 
 <div class="container-fluid overflow-hidden">
     <div class="row">

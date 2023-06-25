@@ -10,7 +10,7 @@
         <div class="col-12 col-sm-3 col-xl-3 px-sm-2 px-0 bg-primary d-flex sticky-top">
             
             @section('header')
-            @include('templates.nav-white')
+            @include('templates.nav.nav-white')
             @endsection
 
             <div class="nav-header text-white mx-4">

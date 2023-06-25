@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-        @include('templates.nav-red-menu')
+        @include('templates.nav.nav-red-menu')
                 <div class="container">
                     <div class="bg-image vh-100"
                         style="background-image: url('{{ asset('images/avatar/Welcome.png') }}');">

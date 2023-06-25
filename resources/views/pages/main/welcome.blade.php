@@ -5,10 +5,11 @@
 @endsection
 
 @section('header')
-@include('templates.nav-red')
+@include('templates.nav.nav-red')
 @endsection
 
 @section('content')
+<main class="container">
 <div class="ms-5">
     <div class="row">
         <div class="col-xxl-6">
@@ -23,7 +24,7 @@
 
         <div class="col-xxl-6">
             <img class="bg-welcome position-absolute top-0 end-0 vh-100"
-                src="{{ asset('images/welcome-page/bg-right.png') }}" alt="avatar">
+                src="{{ asset('images/welcome-page/welcome-page-avatar.jpeg') }}" alt="avatar">
         </div>
         {{--
     </div>
@@ -34,4 +35,5 @@
         </div>
     </div> --}}
 </div>
+</main>
 @endsection

@@ -35,3 +35,6 @@ Route::get('/protection', function () {
 Route::get('/avatar-marital-status', function () {
     return view('pages.avatar.avatar-marital-status');
 });
+Route::get('/avatar-my-assets', function () {
+    return view('pages.avatar.avatar-my-assets');
+});

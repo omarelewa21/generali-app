@@ -1,5 +1,5 @@
 {{--start of nav links --}}
-@include('templates.nav-links') 
+@include('templates.nav.nav-links')
 {{--end of nav links --}}
 
 <nav class="navbar">
@@ -8,9 +8,8 @@
             <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
         </a> --}}
 
-        <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button"
-        aria-controls="offcanvasMenu">
-        <img class="d-inline" src="{{ asset('images/menu-button.svg') }}" alt="Logo" width="60px;">
-    </a>
+        <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+            <img class="d-inline" src="{{ asset('images/menu-button.svg') }}" alt="Logo" width="32px" height="26px">
+        </a>
     </div>
 </nav>
