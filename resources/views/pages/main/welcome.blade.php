@@ -4,21 +4,19 @@
 <title>Welcome</title>
 @endsection
 
-@section('header')
-@include('templates.nav.nav-red')
-@endsection
-
 @section('content')
+@include('templates.nav.nav-red')
+
 <main class="container">
 <div class="ms-5">
     <div class="row">
         <div class="col-xxl-6">
-            <h1 class="display-1 text-uppercase" style="margin-top:18.25rem;">Welcome!</h1>
-            <h2 class="display-3 text-uppercase">Your Future Awaits.</h2>
+            <h1 class="text-uppercase" style="margin-top:18.25rem;">Welcome!</h1>
+            <h2 class="text-uppercase">Your Future Awaits.</h2>
             <p class="welcome" style="margin-top:1.938rem;">We’re glad you’re looking to secure your future with us.<br>
                 Let’s begin by getting to know you
                 better.</p>
-            <a href="{{ url('/pdpa-disclosure') }}" class="btn btn-primary font-weight-light">START YOUR JOURNEY</a>
+            <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary font-weight-light">START YOUR JOURNEY</a>
 
         </div>
 

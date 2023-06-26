@@ -7,6 +7,15 @@ display:flex;
   background-position: center;
 
 }
+.bg-image-avatar {
+background-size: contain;
+background-repeat: no-repeat;
+position: relative;
+z-index: -1;
+background-position: center right;
+left: 30px;
+top:10px;
+}
 .avatar-content 
 {
   margin-top:14.75rem;
@@ -156,8 +165,11 @@ background: var(--primary-white, #FFF);
 box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
 
-.img-avatar {
-  width: 231px;
-  height: 642px;
+
+.avatar-text {
+  text-decoration: none !important;
 }
 
+.btn-avatar {
+  border:0;
+}

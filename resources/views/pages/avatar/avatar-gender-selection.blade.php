@@ -5,11 +5,10 @@
 
 @section('content')
 @include('templates.nav.nav-red-menu')
-
 <div class="container-fluid overflow-hidden">
     <div class="row">
         <div class="col-sm-7">
-            <div class="bg-image vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background.png') }}');">
+            <div class="bg-image-avatar vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background-avatar.png') }}');">
                 <div class="row" style="margin-top:128px">
                     <div class="col-sm text-center">
                         <p class="display-6">Pick the skin colour that’s closest to yours.</p>
@@ -36,9 +35,17 @@
                 </div>
                   </div>
                 <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <div class="m-4">
+                        </div>
+                    </div>
                     <div class="col-sm text-center">
                         <div class="m-4">
-                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" class="img-fluid img-avatar" alt="...">
+                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" class="img-fluid" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="m-4">
                         </div>
                     </div>
                 </div>
@@ -71,8 +78,8 @@
             </div>
             <div class="row bg-accent-light-white py-4 align-items-end sticky-bottom">
                 <div class="col d-flex justify-content-end">
-                    <a href="{{url('/avatar-welcome')}}" class="btn btn-primary text-uppercase">Back</a>
-                    <a href="{{ url('/avatar-marital-status') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                    <a href="{{route('avatar.welcome')}}" class="btn btn-primary text-uppercase">Back</a>
+                    <a href="{{ route('avatar.marital.status') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
                 </div>
             </div>
         </div>

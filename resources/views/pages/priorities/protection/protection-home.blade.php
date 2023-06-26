@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
 
-    <title>protection</title>
+    <title>Home - Protection</title>
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
     <!-- <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script> -->

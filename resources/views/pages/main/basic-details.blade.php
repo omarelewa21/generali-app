@@ -72,8 +72,8 @@
             </main>
             <div class="row bg-white py-4 sticky-bottom">
                 <div class="col d-flex justify-content-end">
-                    <a href="{{url('/pdpa-disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
-                    <a href="{{ url('/avatar-welcome') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                    <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
+                    <a href="{{route('avatar.welcome') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
                 </div>
             </div>
         </div>

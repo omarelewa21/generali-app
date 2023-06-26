@@ -9,9 +9,7 @@
     <div class="row vh-100 overflow-auto">
         <div class="col-12 col-sm-3 col-xl-3 px-sm-2 px-0 bg-primary d-flex sticky-top">
             
-            @section('header')
             @include('templates.nav.nav-white')
-            @endsection
 
             <div class="nav-header text-white mx-4">
                 <h4 class="display-5 font-bold fw-bold px-4 mt-4">To begin,
@@ -77,8 +75,8 @@
             </main>
             <div class="row bg-white py-4 mt-auto">
                 <div class="col d-flex justify-content-end">
-                    <a href="{{url('/')}}" class="btn btn-primary">DECLINE</a>
-                    <a href="{{ url('/basic-details') }}" class="btn btn-primary mx-2">ACCEPT</a>
+                    <a href="{{route('home')}}" class="btn btn-primary">DECLINE</a>
+                    <a href="{{route('basic.details') }}" class="btn btn-primary mx-2">ACCEPT</a>
                 </div>
             </div>
         </div>

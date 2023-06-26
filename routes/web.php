@@ -1,40 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('pages.main.welcome');
-});
-Route::get('/pdpa-disclosure', function () {
-    return view('pages.main.pdpa-disclosure');
-});
-Route::get('/basic-details', function () {
-    return view('pages.main.basic-details');
-});
-Route::get('/avatar-welcome', function () {
-    return view('pages.avatar.avatar-welcome');
-});
-Route::get('/avatar-gender-selection', function () {
-    return view('pages.avatar.avatar-gender-selection');
-});
+/* main pages */
+Route::view('/', 'pages.main.welcome')->name('home');
+Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
+Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details');
 
-Route::get('/protection', function () {
-    return view('pages.priorities.protection.protection');
-});
+/* avatar pages */
+Route::view('/avatar-welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
+Route::view('/avatar-gender-selection', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
+Route::view('/avatar-marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
+Route::view('/avatar-family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
+Route::view('/avatar-my-assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 
-Route::get('/avatar-marital-status', function () {
-    return view('pages.avatar.avatar-marital-status');
-});
-Route::get('/avatar-my-assets', function () {
-    return view('pages.avatar.avatar-my-assets');
-});
+/* Priorities - Protection */
+Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+
+/* Priorities - Retirement */
+
+

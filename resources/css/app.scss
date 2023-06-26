@@ -128,6 +128,14 @@ $primary: #C21B17;
 $secondary: #AA1B17;
 $tertiary: #000000;
 $font-family-sans-serif:  "Helvetica Neue Bold Condensed";
+
+$h1-font-size:7.5rem; //120px
+$h2-font-size: 4rem; //64px
+$h3-font-size: 3.5rem; //56px
+$h4-font-size: 2.5rem; //40px
+$h5-font-size: 2.125rem; //34px
+$h6-font-size: 1.375rem; //22px
+
 $display-font-sizes: (
   1: 7.5rem, //120px
   2: 4rem, //64px
@@ -159,6 +167,7 @@ $offcanvas-bg-color: #C21B17;
 $btn-close-color:   #ffffff;
 $btn-close-opacity: 1;
 $btn-close-width: 1.938rem;
+
 $padding-x:0;
 
 @import 'bootstrap/scss/bootstrap';

@@ -14,9 +14,6 @@
 </head>
 
 <body>
-    <header>
-        @yield('header')
-    </header>
 
     <main>
         @yield('content')

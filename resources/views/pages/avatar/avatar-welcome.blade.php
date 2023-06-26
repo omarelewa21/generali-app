@@ -27,10 +27,10 @@
                             </div>
                             <div class="col-2">
                                 <div class="px-2 py-2">
-                                    <a href="{{ url('/avatar-gender-selection') }}" class="btn btn-primary text-uppercase">Create</a>
+                                    <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
                                 </div>
                                 <div class="px-2 py-2">
-                                    <a href="{{ url('/#') }}" class="btn btn-outline-primary text-uppercase">Skip</a>
+                                    <a href="{{ route('home') }}" class="btn btn-outline-primary text-uppercase">Skip</a>
                                 </div>
                             </div>
                             <div class="col justify-content-end">
