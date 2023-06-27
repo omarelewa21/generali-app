@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 /* main pages */
-Route::view('/', 'pages.main.welcome')->name('home');
+Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details');
 
@@ -18,5 +18,6 @@ Route::view('/avatar-my-assets', 'pages.avatar.avatar-my-assets')->name('avatar.
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
 
 /* Priorities - Retirement */
+
 
 

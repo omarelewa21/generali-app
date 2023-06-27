@@ -31,14 +31,14 @@
             <div class="row text-center justify-content-center my-2">
                 <button class="col-sm-5 btn-avatar bg-white d-flex me-2 align-items-center justify-content-center fade-effect">
                     <div class="m-4">                   
-                        <img src="{{ asset('images/avatar/car-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/car-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">Car</h6>
                     </div>
 
                 </button>
                 <button class="col-sm-5 btn-avatar bg-white d-flex align-items-center justify-content-center fade-effect">
                     <div class="m-4">
-                        <img src="{{ asset('images/avatar/motorcycle-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/motorcycle-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">Motorcycle</h6>
                     </div>
                 </button>
@@ -46,13 +46,13 @@
             <div class="row text-center justify-content-center my-2">
                 <button class="col-sm-5 btn-avatar bg-white d-flex me-2 align-items-center justify-content-center fade-effect">
                     <div class="m-4">                   
-                        <img src="{{ asset('images/avatar/house-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/house-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">House</h6>
                     </div>
                 </button>
                 <button class="col-sm-5 btn-avatar bg-white d-flex align-items-center justify-content-center fade-effect">
                     <div class="m-4">
-                        <img src="{{ asset('images/avatar/bungalow-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/bungalow-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">Bungalow</h6>
                     </div>
                 </button>
@@ -60,13 +60,13 @@
             <div class="row text-center justify-content-center my-2">
                 <button class="col-sm-5 btn-avatar bg-white d-flex me-2 align-items-center justify-content-center fade-effect">
                     <div class="m-4">                   
-                        <img src="{{ asset('images/avatar/apartment-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/apartment-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">Apartment</h6>
                     </div>
                 </button>
                 <button class="col-sm-5 btn-avatar bg-white d-flex align-items-center justify-content-center fade-effect">
                     <div class="m-4">
-                        <img src="{{ asset('images/avatar/others-icon.png') }}" class="img-fluid" alt="...">
+                        <img src="{{ asset('images/avatar/others-icon.png') }}" class="m-auto img-fluid" alt="...">
                         <h6 class="mt-4 avatar-text">Others</h6>
                     </div>
                 </button>

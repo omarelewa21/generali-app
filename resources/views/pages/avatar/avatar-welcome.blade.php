@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
+
         @include('templates.nav.nav-red-menu')
-                <div class="container">
+                <div class="container overflow-hidden">
                     <div class="bg-image vh-100"
                         style="background-image: url('{{ asset('images/avatar/Welcome.png') }}');">
                         <div class="row d-flex text-center justify-content-center">
@@ -19,24 +20,24 @@
                             </div>
                         </div>
                         <div class="row d-flex text-center justify-content-center">
-                            <div class="col justify-content-end position-relative">
+                            <div class="col justify-content-end">
                                 <div class="px-2 py-2">
-                                    <img class="male-avatar position-absolute" src="{{ asset('images/avatar/male.png') }}"
-                                        class="img-fluid" alt="...">
+                                    <img src="{{ asset('images/avatar/male.png') }}"
+                                        class="img-fluid male-avatar position-absolute" alt="...">
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="px-2 py-2">
+                                <div class="px-2 my-2">
                                     <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
                                 </div>
                                 <div class="px-2 py-2">
-                                    <a href="{{ route('home') }}" class="btn btn-outline-primary text-uppercase">Skip</a>
+                                    <a href="{{ route('home') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
                                 </div>
                             </div>
                             <div class="col justify-content-end">
                                 <div class="px-2 py-2">
                                     <img src="{{ asset('images/avatar/female.png') }}"
-                                        class="img-fluid" alt="...">
+                                        class="img-fluid female-avatar position-absolute" alt="...">
                                 </div>
                             </div>
 

@@ -50,4 +50,9 @@
         </div>
 
     </div>
+    <div class="row">
+        <div class="col d-flex mx-5 px-2">
+            <a href="{{route('home')}}" class="btn btn-exit btn-outline-primary d-flex text-uppercase"><img src="{{ asset('images/Logout.svg') }}" alt="logout" class="logout-svg">Save & Logout</a>
+        </div>
+    </div>
 </div>

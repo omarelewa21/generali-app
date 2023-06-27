@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
 @include('templates.nav.nav-red')
 
 <main class="container">

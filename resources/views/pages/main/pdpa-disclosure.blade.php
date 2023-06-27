@@ -75,7 +75,7 @@
             </main>
             <div class="row bg-white py-4 mt-auto">
                 <div class="col d-flex justify-content-end">
-                    <a href="{{route('home')}}" class="btn btn-primary">DECLINE</a>
+                    <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
                     <a href="{{route('basic.details') }}" class="btn btn-primary mx-2">ACCEPT</a>
                 </div>
             </div>

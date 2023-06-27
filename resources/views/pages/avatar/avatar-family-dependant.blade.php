@@ -12,9 +12,24 @@
             <div class="bg-image-avatar vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background.png') }}');">
 
                 <div class="row">
-                    <div class="col-sm text-center mt-5">
-                        <div>
-                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" class="img-fluid avatar-svg" alt="...">
+                    <div class="col-sm text-center mt-5 d-flex">
+                        <div class="position-absolute parent-father">
+                            <img src="{{ asset('images/avatar/parent-father.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
+                        </div>
+                        <div class="position-absolute parent-mother">
+                            <img src="{{ asset('images/avatar/parent-mother.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
+                        </div>
+                        <div class="position-absolute spouse">
+                            <img src="{{ asset('images/avatar/spouse.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
+                        </div>
+                        <div class="position-absolute male-avatar-character">
+                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
+                        </div>
+                        <div class="position-absolute children-boy">
+                            <img src="{{ asset('images/avatar/children-boy.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
+                        </div>
+                        <div class="position-absolute children-girl">
+                            <img src="{{ asset('images/avatar/children-girl.svg') }}" class="m-auto img-fluid avatar-svg" alt="...">
                         </div>
                     </div>
                 </div> 
