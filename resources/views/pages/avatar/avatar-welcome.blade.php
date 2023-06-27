@@ -31,7 +31,7 @@
                                     <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
                                 </div>
                                 <div class="px-2 py-2">
-                                    <a href="{{ route('home') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
+                                    <a href="{{ route('welcome') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
                                 </div>
                             </div>
                             <div class="col justify-content-end">
