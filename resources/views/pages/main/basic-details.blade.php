@@ -16,7 +16,7 @@
         <div class="col d-flex flex-column h-sm-100">
             <main class="main-vh p-basic-details row overflow-auto bg-accent-bg-grey">
                 <div class="col pt-4 py-2">
-                    <h1 class="display-3 pt-4 text-uppercase">Do introduce yourself.</h1>
+                    <h1 class="display-3 pt-4 text-uppercase text-dark">Do introduce yourself.</h1>
                     <div class="pt-4 row pr-4">
                         <div class="col-3">
                             <div class="my-3">

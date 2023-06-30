@@ -87,6 +87,7 @@ h6.avatar-text {
     font-family: 'Helvetica Neue Regular', sans-serif;
     font-weight: 700;
 }
+
 p {
     font-size:1.25rem; //20px;
     font-family: 'Helvetica Neue Regular', sans-serif;
@@ -145,6 +146,7 @@ $display-font-sizes: (
   5: 2.125rem, //34px;
   6: 1.375rem //22px
 );
+$body-color: transparent;
 
 $btn-font-family:  "Helvetica Neue";
 $btn-font-size: 18px;

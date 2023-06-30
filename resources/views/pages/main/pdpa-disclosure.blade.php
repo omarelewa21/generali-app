@@ -19,8 +19,8 @@
         <div class="col d-flex flex-column h-sm-100">
             <main class="row overflow-auto bg-accent-bg-grey">
                 <div class="col pt-4 py-2">
-                    <h1 class="display-2 px-4 pt-4 text-uppercase">Your Agreement</h1>
-                    <p class="p-4 welcome" style="padding-top:23px;">Lorem ipsum dolor sit amet, consectetur
+                    <h1 class="display-2 px-4 pt-4 text-uppercase text-dark">Your Agreement</h1>
+                    <p class="p-4 welcome text-dark" style="padding-top:23px;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit. Curabitur
                         tincidunt, velit sodales
                         congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,

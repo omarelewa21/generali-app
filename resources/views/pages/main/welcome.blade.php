@@ -12,9 +12,9 @@
 <div class="ms-5">
     <div class="row">
         <div class="col-xxl-6">
-            <h1 class="text-uppercase" style="margin-top:18.25rem;">Welcome!</h1>
-            <h2 class="text-uppercase">Your Future Awaits.</h2>
-            <p class="welcome" style="margin-top:1.938rem;">We’re glad you’re looking to secure your future with us.<br>
+            <h1 class="text-uppercase text-dark" style="margin-top:18.25rem;">Welcome!</h1>
+            <h2 class="text-uppercase text-dark">Your Future Awaits.</h2>
+            <p class="text-dark" style="margin-top:1.938rem;">We’re glad you’re looking to secure your future with us.<br>
                 Let’s begin by getting to know you
                 better.</p>
             <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary font-weight-light">START YOUR JOURNEY</a>

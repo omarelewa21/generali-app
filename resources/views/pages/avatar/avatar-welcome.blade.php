@@ -14,7 +14,7 @@
                             <div class="col-xxl-7 col-xl-9 col-md-9 pt-5">
                                 <div class="px-5 pt-5 mt-5 ">
                                     <div class="px-2 py-2 ">
-                                        <h1 class="display-3 headline1 text-uppercase">Now, shall we build your signature look?</h1>
+                                        <h1 class="display-3 headline1 text-uppercase text-dark">Now, shall we build your signature look?</h1>
                                     </div>
                                 </div>
                             </div>
