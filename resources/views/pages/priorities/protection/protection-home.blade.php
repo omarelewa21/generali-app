@@ -15,10 +15,11 @@
         </div>
         <div class="col d-flex p-0 flex-column h-sm-100">  
             <hr class="py-2 m-0 bg-primary opacity-100"/>       
-            <main class="main-vh p-basic-details row overflow-auto bg-accent-bg-grey">
+            <main class="main-vh row overflow-auto bg-accent-bg-grey">
+                <div class="protection-home d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/needs/protection/bg-home.png') }}');">
                 <div class="float-text position-fixed">
                     <p class="display-6 d-flex justify-content-end text-dark">Protection</p>
-                    <div class="progress blue">
+                    {{-- <div class="progress blue">
                         <span class="progress-left">
                           <span class="progress-bar"></span>
                         </span>
@@ -26,15 +27,9 @@
                             <span class="progress-bar"></span>
                         </span>
                         <div class="progress-value">1</div>
-                    </div>
+                    </div> --}}
                   </div>   
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 col-sm-6">
-
-        </div>
-</div>
+                </div>
             </main>
             <div class="row bg-white py-4 px-2 sticky-bottom">
                 <div class="col d-flex justify-content-end">

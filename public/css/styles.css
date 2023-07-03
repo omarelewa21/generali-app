@@ -16,6 +16,11 @@ background-position: center right;
 left: 30px;
 top:10px;
 }
+.protection-home {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .avatar-content 
 {
   margin-top:14.75rem;
