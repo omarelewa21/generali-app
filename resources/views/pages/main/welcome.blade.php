@@ -17,7 +17,7 @@
             <p class="text-dark" style="margin-top:1.938rem;">We’re glad you’re looking to secure your future with us.<br>
                 Let’s begin by getting to know you
                 better.</p>
-            <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary font-weight-light">START YOUR JOURNEY</a>
+            <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>
 
         </div>
 

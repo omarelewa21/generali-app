@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col d-flex flex-column h-sm-100">
-            <main class="row overflow-auto bg-accent-bg-grey">
+            <section class="row overflow-auto bg-accent-bg-grey">
                 <div class="col pt-4 py-2">
                     <h1 class="display-2 px-4 pt-4 text-uppercase text-dark">Your Agreement</h1>
                     <p class="p-4 welcome text-dark" style="padding-top:23px;">Lorem ipsum dolor sit amet, consectetur
@@ -72,7 +72,7 @@
                         sit amet aliquet leo felis ac ipsum.
                     </p>
                 </div>
-            </main>
+            </section>
             <div class="row bg-white py-4 mt-auto">
                 <div class="col d-flex justify-content-end">
                     <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
@@ -82,4 +82,27 @@
         </div>
     </div>
 </div>
+<style>
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #ffffff;
+  }
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 7px;
+	background-color: #F5F5F5;
+  }
+  *::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	background-color: #A0A0A0;
+    border-radius:0;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #707070;
+	/* border: 2px solid #707070; */
+    border-radius:0;
+  }
+</style>
 @endsection
