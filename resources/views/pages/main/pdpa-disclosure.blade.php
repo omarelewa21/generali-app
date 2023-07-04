@@ -11,18 +11,18 @@
             <div class="d-flex">
                 @include('templates.nav.nav-white')
             </div>
-            <div class="d-flex text-white mx-5 mt-5">
+            <div class="d-flex text-white mx-5 my-5">
                 <h4 class="display-5 font-bold fw-bold">To begin,
                     may we have permission to share or use your personal details?</h4>
             </div>
         </div>
-        <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
-            <div class="d-flex mt-4">
-                <h1 class="display-2 px-4 pt-4 text-uppercase">Your Agreement</h1>
+        <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-5 py-5 ">
+            <div class="d-flex">
+                <h1 class="display-2 text-uppercase">Your Agreement</h1>
             </div>
             <div class="d-flex">
-                <div class="col-11 overflow-scroll vh-100">
-                    <p class="p-4 welcome" style="padding-bottom:210px !important;">Lorem ipsum dolor sit amet, consectetur
+                <div class="col-12 overflow-scroll vh-100 pt-4">
+                    <p class="welcome" style="padding-bottom:210px !important;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit. Curabitur
                         tincidunt, velit sodales
                         congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,
