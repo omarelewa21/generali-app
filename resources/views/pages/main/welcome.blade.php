@@ -8,8 +8,8 @@
 
 @include('templates.nav.nav-red')
 
-<main class="container">
-<div class="ms-5">
+<main class="container-fluid">
+<div class="ms-5 container">
     <div class="row">
         <div class="col-xxl-6">
             <h1 class="text-uppercase text-dark" style="margin-top:18.25rem;">Welcome!</h1>
