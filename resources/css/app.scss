@@ -139,14 +139,14 @@ footer {
     color: #000!important;
   }
   h1 {
-    line-height: 1;
+    line-height: 1 !important;
   }
   .btn-primary {
     letter-spacing: 0.9px;
   }
   .btn-primary:hover {
-    background-color: transparent;
-    color: #C21B17;
+    background-color: transparent !important;
+    color: #C21B17 !important;
   }
     
 

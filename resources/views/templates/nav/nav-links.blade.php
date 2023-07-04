@@ -1,8 +1,8 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
     <div class="offcanvas-header mx-4 mt-4">
-        <a href="#" class="navbar-brand">
+        <div class="navbar-brand">
             <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
-        </a>
+        </div>
         <button type="button" class="btn-close btn-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
