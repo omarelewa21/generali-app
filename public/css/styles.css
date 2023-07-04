@@ -7,6 +7,16 @@ display:flex;
   background-position: center;
 
 }
+  /* Home */
+  #home {
+    background-image: url(/images/welcome-page/welcome-page-avatar.jpeg);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100%;
+    padding-top: 250px;
+  }
+
 .bg-image-avatar {
 background-size: contain;
 background-repeat: no-repeat;
@@ -84,16 +94,15 @@ img.male-avatar , img.female-avatar {
     right: 0;
     z-index: 1000;
 }
-.main-logo {
+/* .main-logo {
     scale:0.8;
-}
-.white-logo {
-  height: 81px;
-    width: 100%;
-}
+} */
+
 main {
     position: relative;
     z-index: 1;
+    height: 100%;
+
 }
 .nav-header {
   margin-top: 13.063rem;
@@ -209,7 +218,6 @@ border: 1px solid var(--primary-red, #C21B17);
 background: var(--primary-white, #FFF);
 box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
-
 
 .avatar-text {
   text-decoration: none !important;

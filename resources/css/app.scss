@@ -122,6 +122,33 @@ a {
 footer {
     max-height: 103px !important;
 }
+.text-dark {
+    color: #000!important;
+  }
+  h1 {
+    line-height: 1;
+  }
+  .btn-primary {
+    letter-spacing: 0.9px;
+  }
+  .btn-primary:hover {
+    background-color: transparent;
+    color: #C21B17;
+  }
+  .text-dark {
+    color: #000!important;
+  }
+  h1 {
+    line-height: 1;
+  }
+  .btn-primary {
+    letter-spacing: 0.9px;
+  }
+  .btn-primary:hover {
+    background-color: transparent;
+    color: #C21B17;
+  }
+    
 
 $container-max-widths: (
     // sm: 540px,
@@ -136,7 +163,7 @@ $tertiary: #000000;
 $font-family-sans-serif:  "Helvetica Neue Bold Condensed";
 
 $h1-font-size:7.5rem; //120px
-$h2-font-size: 4rem; //64px
+$h2-font-size: 3.5rem; //56px
 $h3-font-size: 3.5rem; //56px
 $h4-font-size: 2.5rem; //40px
 $h5-font-size: 2.125rem; //34px
@@ -156,7 +183,7 @@ $btn-font-family:  "Helvetica Neue";
 $btn-font-size: 18px;
 $btn-font-weight: 500;
 $btn-padding-x: 2rem;
-$btn-padding-y: 0.75rem;
+$btn-padding-y: 0.85rem;
 
 $input-bg: transparent;
 $input-border-color:#000000;

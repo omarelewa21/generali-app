@@ -5,7 +5,7 @@
 <title>Protection - Home</title>
 @section('content')
 
-<div class="container-fluid overflow-hidden">
+<div class="container overflow-hidden">
     <div class="row vh-100">
         <div class="col-12 col-sm-2 col-xl-2 px-sm-2 px-0 bg-primary sticky-top">
             @include('templates.nav.nav-white-menu')
