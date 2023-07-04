@@ -1,11 +1,11 @@
 @extends('templates.master')
 
 @section('title')
-<title>Welcome</title>
+<title>Agreement</title>
 @endsection
 
 @section('content')
-<div class="container p-0">
+<div class="container p-0" style="color:#000;">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 bg-primary">
             <div class="d-flex">
@@ -21,8 +21,8 @@
                 <h1 class="display-2 px-4 pt-4 text-uppercase">Your Agreement</h1>
             </div>
             <div class="d-flex">
-                <div class="col-11 overflow-scroll vh-100">
-                    <p class="p-4 welcome" style="padding-bottom:210px !important;">Lorem ipsum dolor sit amet, consectetur
+                <div class="col-11 overflow-auto vh-100">
+                    <p class="p-4 welcome" style="padding-bottom:220px !important;">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit. Curabitur
                         tincidunt, velit sodales
                         congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,

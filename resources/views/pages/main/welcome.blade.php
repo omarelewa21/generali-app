@@ -11,10 +11,10 @@
 <div class="container p-0">
     <div class="container p-0">
         <div class="row vh-100">
-            <div class="col-md-6 px-5" style="margin:auto;">
+            <div class="col-md-6 px-5" style="margin:auto;color:#000;">
                 <h1 class="text-uppercase">Welcome!</h1>
                 <h2 class="text-uppercase">Your Future Awaits.</h2>
-                <p class="welcome" style="margin-top:1.938rem;">We’re glad you’re looking to secure your future with us.<br>
+                <p class="welcome" style="margin:1.938rem 0;">We’re glad you’re looking to secure your future with us.<br>
                     Let’s begin by getting to know you
                     better.</p>
                 <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary font-weight-light">START YOUR JOURNEY</a>
