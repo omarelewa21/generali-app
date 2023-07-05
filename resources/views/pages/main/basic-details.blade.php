@@ -15,9 +15,9 @@
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary">
-                @include('templates.nav.nav-white-menu')       
-                <div class="nav-header text-white mx-4">
-                    <h4 class="display-5 font-bold fw-bold px-4 mt-4">Hello! Let's get to know you better.</h4>
+                @include('templates.nav.nav-white-menu')
+                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3">
+                    <h4 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h4>
                 </div>
             </div>
             <div class="col d-flex flex-column h-sm-100">
