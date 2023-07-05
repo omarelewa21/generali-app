@@ -1,6 +1,6 @@
 <?php
 /**
- * Navbar Section
+ * Navbar Section for Welcome Page
  */
 ?>
 

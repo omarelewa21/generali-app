@@ -16,9 +16,9 @@
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary">
-                <div class="d-flex">
+                <header id="wrapper-navbar">
                     @include('templates.nav.nav-white')
-                </div>
+                </header>
                 <div class="d-flex text-white mx-5 my-5">
                     <h4 class="display-5 font-bold fw-bold">To begin,
                         may we have permission to share or use your personal details?</h4>
