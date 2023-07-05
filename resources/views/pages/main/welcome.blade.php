@@ -15,7 +15,7 @@
 @include('templates.nav.nav-red')
 
 <div id="home">
-    <section class="main-content">
+    <section class="main-content position-relative">
         <div class="container px-5">
             <div class="row">
                 <div class="col-6">
