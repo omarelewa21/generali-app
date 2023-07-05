@@ -5,7 +5,7 @@
 ?>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
-    <div class="offcanvas-header mx-4 mt-4">
+    <div class="offcanvas-header px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-3">
         <div class="navbar-brand">
             <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
         </div>
@@ -56,8 +56,8 @@
         </div>
 
     </div>
-    <div class="row">
-        <div class="col d-flex mx-5 px-2">
+    <div class="footer-navigation col-12">
+        <div class="col-10 px-5 inline-block">
             <a href="{{route('welcome')}}" class="btn btn-exit btn-outline-primary d-flex text-uppercase"><img src="{{ asset('images/Logout.svg') }}" alt="logout" class="logout-svg">Save & Logout</a>
         </div>
     </div>

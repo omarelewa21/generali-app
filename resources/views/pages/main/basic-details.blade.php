@@ -11,54 +11,56 @@
 
 @section('content')
 
-<div id="basic_details" class="vh-100 overflow-auto">
-    <div class="container-fluid p-0 overflow-hidden">
+<div id="basic_details">
+    <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary full-height">
                 @include('templates.nav.nav-white-menu')
-                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3">
+                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
                     <h4 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h4>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
                 <section class="main-content px-5 py-5">
                     <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
-                    <div class="row mt-5">
-                        <div class="col-3">
-                            <label for="title" class="form-label">Title</label>
-                            <select class="form-select" aria-label="Title">
-                                <option selected>Select</option>
-                                <option value="1">Mr</option>
-                                <option value="2">Madam</option>
-                                <option value="3">Miss</option>
-                            </select>
+                    <div class="col-12 overflow-height overflow-auto px-2">
+                        <div class="row mt-5">
+                            <div class="col-3">
+                                <label for="title" class="form-label">Title</label>
+                                <select class="form-select" aria-label="Title">
+                                    <option selected>Select</option>
+                                    <option value="1">Mr</option>
+                                    <option value="2">Madam</option>
+                                    <option value="3">Miss</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-6">
-                            <label for="firstName" class="form-label">First Name:</label>
-                            <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <label for="firstName" class="form-label">First Name:</label>
+                                <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
+                            </div>
+                            <div class="col-6">
+                                <label for="lastName" class="form-label">Last Name:</label>
+                                <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <label for="lastName" class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <label for="mobileNumber" class="form-label">Mobile Number:</label>
+                                <input type="text" class="form-control" id="mobileNumber" placeholder="+60 00-000 000">
+                            </div>
+                            <div class="col-6">
+                                <label for=housePhoneNumber" class="form-label">House Phone Number:</label>
+                                <input type="text" class="form-control" id="housePhoneNumber"
+                                    placeholder="+60 00-000 000">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-6">
-                            <label for="mobileNumber" class="form-label">Mobile Number:</label>
-                            <input type="text" class="form-control" id="mobileNumber" placeholder="+60 00-000 000">
-                        </div>
-                        <div class="col-6">
-                            <label for=housePhoneNumber" class="form-label">House Phone Number:</label>
-                            <input type="text" class="form-control" id="housePhoneNumber"
-                                placeholder="+60 00-000 000">
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-6">
-                            <label for="email" class="form-label">Email Address:</label>
-                            <input type="text" class="form-control" id="email" placeholder="yourname@email.com">
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <label for="email" class="form-label">Email Address:</label>
+                                <input type="text" class="form-control" id="email" placeholder="yourname@email.com">
+                            </div>
                         </div>
                     </div>
                 </section>

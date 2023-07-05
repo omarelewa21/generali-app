@@ -27,6 +27,30 @@ display:flex;
   max-width:100%;
 }
 
+/* Basic Details Page */
+.overflow-height {
+  max-height: 800px;
+  overflow-x: hidden!important
+}
+
+/* Avatar Welcome Page */
+#avatar_welcome {
+  background-image: url(/images/avatar/Welcome.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  padding-top: 180px;
+}
+#avatar_welcome section.footer .male {
+  bottom: 10%;
+  left: 10%;
+}
+#avatar_welcome section.footer .female {
+  bottom: 10%;
+  right: 10%;
+}
+
 .bg-image-avatar {
 background-size: contain;
 background-repeat: no-repeat;
