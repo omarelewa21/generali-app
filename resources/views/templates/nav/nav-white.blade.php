@@ -1,7 +1,15 @@
-<nav class="navbar position-relative">
-    <div class="container px-4 mx-4 mt-4">
-        <div class="navbar-brand">
-            <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
+<?php
+/**
+ * Navbar Section for Left Navigation
+ */
+?>
+
+<header id="wrapper-navbar">
+    <nav class="navbar position-relative">
+        <div class="container px-5 pt-5">
+            <div class="navbar-brand">
+                <img class="white-logo" src="{{ asset('images/Logo-white-2x.png') }}" alt="Logo" width="100px;">
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
