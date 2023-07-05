@@ -11,10 +11,10 @@
 
 @section('content')
 
-<div id="basic_details">
-    <div class="container-fluid p-0">
+<div id="basic_details" class="vh-100 overflow-auto">
+    <div class="container-fluid p-0 overflow-hidden">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary vh-100">
+            <div class="col-12 col-md-4 col-lg-3 bg-primary full-height">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3">
                     <h4 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h4>
