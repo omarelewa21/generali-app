@@ -7,15 +7,18 @@ display:flex;
   background-position: center;
 
 }
-  /* Home */
-  #home {
-    background-image: url(/images/welcome-page/welcome-page-avatar.jpeg);
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 100%;
-    padding-top: 250px;
-  }
+/* Welcome Page */
+#home {
+  background-image: url(/images/welcome-page/welcome-page-avatar.jpeg);
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 100%;
+  padding-top: 250px;
+}
+.main-content {
+  z-index: 1;
+}
 
 .bg-image-avatar {
 background-size: contain;
