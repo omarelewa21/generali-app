@@ -19,7 +19,7 @@
                 <header id="wrapper-navbar">
                     @include('templates.nav.nav-white')
                 </header>
-                <div class="d-flex text-white mx-5 my-5">
+                <div class="text-white px-5 py-5">
                     <h4 class="display-5 font-bold fw-bold">To begin,
                         may we have permission to share or use your personal details?</h4>
                 </div>
