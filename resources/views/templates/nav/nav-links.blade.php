@@ -1,3 +1,9 @@
+<?php
+/**
+ * Off Canvas Section for Left Navigation
+ */
+?>
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
     <div class="offcanvas-header mx-4 mt-4">
         <div class="navbar-brand">
