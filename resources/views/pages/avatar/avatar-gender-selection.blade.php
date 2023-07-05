@@ -5,7 +5,7 @@
 
 @section('content')
 @include('templates.nav.nav-red-menu')
-<div class="container overflow-hidden">
+<div class="container-fluid overflow-hidden">
     <div class="row">
         <div class="col-sm-7">
             <div class="bg-image-avatar vh-100 d-flex flex-column align-items-center justify-content-center" style="background-image: url('{{ asset('images/avatar/bg-background-avatar.png') }}');">

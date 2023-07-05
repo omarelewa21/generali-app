@@ -2,7 +2,7 @@
 /**
  * The header for our theme
  *
- * This is the template that displays all of the <head> section and declaring content in <body>
+ * This is the template that displays all of the default <head> section and <body> content.
  */
 ?>
 
