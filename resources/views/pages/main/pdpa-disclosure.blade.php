@@ -13,7 +13,7 @@
 @section('content')
 
 <div id="pdpa">
-    <div class="container p-0">
+    <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary">
                 <div class="d-flex">
