@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-5 py-5 ">
+                <section class="page-content">
                 <div class="d-flex">
                     <h1 class="display-2 text-uppercase">Your Agreement</h1>
                 </div>
@@ -81,6 +82,8 @@
                         </p>
                     </div>
                 </div>
+                </section>
+                
                 <div class="row bg-white py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0; max-width:1098px">
                     <div class="container d-flex justify-content-end">
                         <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
