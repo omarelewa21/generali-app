@@ -23,7 +23,6 @@ display:flex;
 /* PDPA Disclosure Page */
 .button-container {
   width: -webkit-fill-available;
-  z-index:9999; 
   bottom:0; 
   max-width:100%;
 }
