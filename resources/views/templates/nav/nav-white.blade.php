@@ -1,6 +1,6 @@
 <?php
 /**
- * Navbar Section for Left Navigation
+ * Navbar Section for Left Logo
  */
 ?>
 
