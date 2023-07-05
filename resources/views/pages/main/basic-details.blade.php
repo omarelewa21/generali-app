@@ -65,7 +65,7 @@
                 
                 <section class="footer">
                     <div class="col-12 bg-white py-4 position-fixed button-container">
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end pe-4">
                             <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
                             <a href="{{route('avatar.welcome') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
                         </div>
