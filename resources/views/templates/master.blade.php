@@ -1,3 +1,11 @@
+<?php
+/**
+ * The header for our theme
+ *
+ * This is the template that displays all of the <head> section and declaring content in <body>
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
