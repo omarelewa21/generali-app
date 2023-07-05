@@ -22,14 +22,11 @@
                         may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-5 py-5 ">
-                <section class="page-content">
-                <div class="d-flex">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
+                <section class="main-content px-5 py-5">
                     <h1 class="display-2 text-uppercase">Your Agreement</h1>
-                </div>
-                <div class="d-flex">
-                    <div class="col-12 overflow-scroll vh-100 pt-4">
-                        <p class="welcome" style="padding-bottom:210px !important;">Lorem ipsum dolor sit amet, consectetur
+                    <div class="col-12 overflow-scroll vh-100 mt-4">
+                        <p class="welcome">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit. Curabitur
                             tincidunt, velit sodales
                             congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,
@@ -81,15 +78,16 @@
                             sit amet aliquet leo felis ac ipsum.
                         </p>
                     </div>
-                </div>
                 </section>
-                
-                <div class="row bg-white py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0; max-width:1098px">
-                    <div class="container d-flex justify-content-end">
-                        <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
-                        <a href="{{route('basic.details') }}" class="btn btn-primary mx-2">ACCEPT</a>
+
+                <section class="footer">
+                    <div class="col-12 bg-white py-4 position-fixed button-container">
+                        <div class="d-flex justify-content-end">
+                            <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
+                            <a href="{{route('basic.details') }}" class="btn btn-primary mx-2">ACCEPT</a>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

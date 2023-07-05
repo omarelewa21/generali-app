@@ -24,7 +24,7 @@
                     <p class="text-dark py-4">We’re glad you’re looking to secure your future with us.<br>
                         Let’s begin by getting to know you
                         better.</p>
-                    <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary py-3">START YOUR JOURNEY</a>
+                    <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>
                 </div>
             </div>
         </div>

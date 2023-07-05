@@ -20,6 +20,14 @@ display:flex;
   z-index: 1;
 }
 
+/* PDPA Disclosure Page */
+.button-container {
+  width: -webkit-fill-available;
+  z-index:9999; 
+  bottom:0; 
+  max-width:100%;
+}
+
 .bg-image-avatar {
 background-size: contain;
 background-repeat: no-repeat;
