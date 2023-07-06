@@ -7,7 +7,6 @@ display:flex;
   background-position: center;
 
 }
-<<<<<<< HEAD
 /* Welcome Page */
 #home {
   background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
@@ -78,8 +77,6 @@ display:flex;
 
 
 
-=======
->>>>>>> main
 .bg-image-avatar {
 background-size: contain;
 background-repeat: no-repeat;
@@ -470,18 +467,13 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 @media only screen and (max-width: 990px){
   .progress{ margin-bottom: 20px; }
 }
-<<<<<<< HEAD
 @media only screen and (min-width: 768px){
   .vh-100-desktop {
     height: 100vh;
-=======
-
-@media only screen and (max-width: 767px){
+  }
   .min-height-100{
     height: auto;
->>>>>>> main
   }
-
 }
 
 
