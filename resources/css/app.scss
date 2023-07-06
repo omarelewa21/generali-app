@@ -195,6 +195,7 @@ $form-select-indicator-color:#AA1B17;
 $form-label-font-size:20px;
 $form-label-color:rgba(10, 4, 60, 0.75);
 $form-label-margin-bottom:0.813rem;
+$form-label-font-weight: 700;
  
 $offcanvas-bg-color: #C21B17;
 
@@ -203,5 +204,7 @@ $btn-close-opacity: 1;
 $btn-close-width: 1.938rem;
 
 $padding-x:0;
+$form-select-border-width: 3px;
+$input-border-width: 3px;
 
 @import 'bootstrap/scss/bootstrap';
