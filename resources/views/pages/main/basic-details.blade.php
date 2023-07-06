@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div class="container p-0" style="color:#000;">
+<div class="container-fluid p-0" style="color:#000;">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 bg-primary">
             <div class="d-flex">
@@ -15,12 +15,12 @@
                 <h4 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h4>
             </div>
         </div>
-        <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey">
+        <div class="col-12 col-md-8 col-lg-9 bg-white">
             <div class="d-flex mt-4">
                 <h1 class="display-2 px-4 pt-4 text-uppercase">Do Introduce Yourself.</h1>
             </div>
             <div class="d-flex">
-                <div class="col-11 overflow-aut0 vh-100 p-4">
+                <div class="col-11 overflow-auto vh-100 p-4">
                     <div class="row pt-5">
                         <div class="col-lg-3 col-12">
                             <label for="title" class="form-label">Title</label>
@@ -52,7 +52,7 @@
                             <input type="tel" class="form-control" id="housePhoneNumber" placeholder="+60 00-000 000">
                         </div>
                     </div>
-                    <div class="row pt-5">
+                    <div class="row pt-5" style="padding-bottom:250px !important;">
                         <div class="col-lg-6 col-12">
                             <label for="email" class="form-label">Email Address:</label>
                             <input type="email" class="form-control" id="email" placeholder="yourname@email.com">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row bg-white py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0; max-width:1098px">
+            <div class="row bg-accent-bg-grey py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0;">
                 <div class="container d-flex justify-content-end">
                     <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
                     <a href="{{route('basic.details') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>

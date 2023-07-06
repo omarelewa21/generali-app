@@ -8,8 +8,8 @@
 
 @include('templates.nav.nav-red')
 
-<div class="container p-0">
-    <div class="container p-0">
+<div class="container-fluid p-0">
+    <!-- <div class="container p-0"> -->
         <div class="row vh-100">
             <div class="col-md-6 px-5" style="margin:auto;color:#000;">
                 <h1 class="text-uppercase">Welcome!</h1>
@@ -33,6 +33,6 @@
                     alt="avatar">
             </div>
         </div> --}}
-    </div>
+    <!-- </div> -->
 </div>
 @endsection

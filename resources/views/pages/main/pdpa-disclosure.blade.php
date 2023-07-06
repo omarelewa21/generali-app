@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container p-0" style="color:#000;">
+<div class="container-fluid p-0" style="color:#000;">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 bg-primary">
             <div class="d-flex">
@@ -75,10 +75,10 @@
                     </p>
                 </div>
             </div>
-            <div class="row bg-white py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0; max-width:1098px">
+            <div class="row bg-white py-4 position-fixed" style="width: -webkit-fill-available;z-index:9999; bottom:0;">
                 <div class="container d-flex justify-content-end">
                     <a href="{{route('welcome')}}" class="btn btn-primary">DECLINE</a>
-                    <a href="{{route('basic.details') }}" class="btn btn-primary mx-2">ACCEPT</a>
+                    <a href="{{route('education.home') }}" class="btn btn-primary mx-2">ACCEPT</a>
                 </div>
             </div>
         </div>
