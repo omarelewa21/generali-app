@@ -7,26 +7,6 @@ display:flex;
   background-position: center;
 
 }
-/* Welcome Page */
-#home {
-  background-image: url(/images/welcome-page/welcome-page-avatar.jpeg);
-  background-size: contain;
-  background-position: right;
-  background-repeat: no-repeat;
-  height: 100%;
-  padding-top: 250px;
-}
-.main-content {
-  z-index: 1;
-}
-
-/* PDPA Disclosure Page */
-.button-container {
-  width: -webkit-fill-available;
-  bottom:0; 
-  max-width:100%;
-}
-
 .bg-image-avatar {
 background-size: contain;
 background-repeat: no-repeat;
@@ -37,15 +17,9 @@ left: 30px;
 top:10px;
 }
 .protection-home {
-height: 60vh;
-}
-.protection-home img {
-  max-height: 65vh;
-  top: 60px;
-}
-.protection-home-avatar {
-  background-size: contain;
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .avatar-content 
 {
@@ -104,15 +78,16 @@ img.male-avatar , img.female-avatar {
     right: 0;
     z-index: 1000;
 }
-/* .main-logo {
+.main-logo {
     scale:0.8;
-} */
-
+}
+.white-logo {
+  height: 81px;
+    width: 100%;
+}
 main {
     position: relative;
     z-index: 1;
-    height: 100%;
-
 }
 .nav-header {
   margin-top: 13.063rem;
@@ -229,6 +204,7 @@ background: var(--primary-white, #FFF);
 box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
 
+
 .avatar-text {
   text-decoration: none !important;
 }
@@ -259,22 +235,27 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   height:25px;
 }
 
+.float-text {
+  top: 20px;
+  right: 10px;
+  padding: 10px;
+}
+
 .progress{
-  width: 44px;
-  height: 44px;
-  line-height: 10px;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
   background: none;
   margin: 0 auto;
   box-shadow: none;
   position: relative;
-  top:0.625rem;
 }
 .progress:after{
   content: "";
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2px solid #A0A0A0;
+  border: 12px solid #fff;
   position: absolute;
   top: 0;
   left: 0;
@@ -294,15 +275,15 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 100%;
   background: none;
-  border-width: 2px;
+  border-width: 12px;
   border-style: solid;
   position: absolute;
   top: 0;
 }
 .progress .progress-left .progress-bar{
   left: 100%;
-  border-top-right-radius:44px;
-  border-bottom-right-radius: 44px;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
   border-left: 0;
   -webkit-transform-origin: center left;
   transform-origin: center left;
@@ -312,8 +293,8 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
 .progress .progress-right .progress-bar{
   left: -100%;
-  border-top-left-radius: 44px;
-  border-bottom-left-radius: 44px;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
   border-right: 0;
   -webkit-transform-origin: center right;
   transform-origin: center right;
@@ -323,21 +304,45 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   width: 90%;
   height: 90%;
   border-radius: 50%;
-  background: transparent;
+  background: #ffffff;
   font-size: 24px;
   color: #d10b4f;
-  line-height:150%;
+  line-height: 135px;
   text-align: center;
   position: absolute;
   top: 5%;
   left: 5%;
 }
-.progress.color .progress-bar{
+.progress.blue .progress-bar{
   border-color: #d10b4f;
 }
-.progress.color .progress-left .progress-bar{
+.progress.blue .progress-left .progress-bar{
   animation: loading-2 1.5s linear forwards 1.8s;
 }
+.min-height-100{
+  height: 100vh;
+}
+/* Education */
+.bg-needs{
+  background-image: url('/images/needs/protection/bg-home.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
+.font-color-default{
+  color:#000;
+}
+.bg-btn_bar{
+  background-color: #F0F0F0;
+}
+.bg-needs_text{
+  background-color: #E9E9E9;
+}
+
+
+
+
+
 
 @keyframes loading-1{
   0%{
@@ -389,18 +394,14 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
       transform: rotate(126deg);
   }
 }
-
-
-@media only screen and (max-width: 768px){
-  .nav-header {
-    margin-top: 0;
-    text-align: center;
-  }
-
+@media only screen and (max-width: 990px){
+  .progress{ margin-bottom: 20px; }
 }
-@media only screen and (min-width: 768px){
-  .full-height {
-    height: 100vh!important;
+
+@media only screen and (max-width: 767px){
+  .min-height-100{
+    height: auto;
   }
 }
+
 
