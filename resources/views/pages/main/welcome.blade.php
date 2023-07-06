@@ -14,11 +14,11 @@
 
 @include('templates.nav.nav-red')
 
-<div id="home" class="vh-100">
-    <section class="main-content position-relative">
+<div id="home" class="vh-100 overflow-y-auto overflow-x-hidden">
+    <section class="main-content position-relative d-flex justify-content-center align-items-center h-100">
         <div class="container px-5">
             <div class="row">
-                <div class="col-xxl-6">
+                <div class="col-xxl-6 py-4">
                     <h1 class="text-uppercase text-dark">Welcome!</h1>
                     <h2 class="text-uppercase text-dark">Your Future Awaits.</h2>
                     <p class="text-dark py-4">We’re glad you’re looking to secure your future with us.<br>

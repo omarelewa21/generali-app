@@ -1,3 +1,12 @@
+/* Body */
+.main-content {
+  z-index: 1;
+}
+#pdpa .main-content, #basic_details .main-content {
+  z-index: 1;
+  padding-bottom: 105.8px;
+}
+
 img {
 display:flex;   
 }
@@ -14,10 +23,6 @@ display:flex;
   background-position: right;
   background-repeat: no-repeat;
   height: 100%;
-  padding-top: 250px;
-}
-.main-content {
-  z-index: 1;
 }
 
 /* Basic Details Page */
@@ -29,9 +34,11 @@ display:flex;
   height: calc(100vh - 250px);
   overflow-x: hidden!important;
 }
-.button-container {
-  bottom: 0;
-  width: inherit;
+.sidebanner {
+  z-index: 1;
+}
+.fixed-bottom {
+  z-index: 0!important;
 }
 
 /* Avatar Welcome Page */
@@ -153,10 +160,7 @@ img.male-avatar , img.female-avatar {
 .main-logo {
     scale:0.8;
 }
-.white-logo {
-  height: 81px;
-    width: 100%;
-}
+
 main {
     position: relative;
     z-index: 1;
@@ -470,9 +474,6 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   .progress{ margin-bottom: 20px; }
 }
 @media only screen and (min-width: 768px){
-  .vh-100-desktop {
-    height: 100vh;
-  }
   .min-height-100{
     height: auto;
   }
@@ -480,6 +481,10 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 @media only screen and (max-width: 767px){
   #home {
     background-size: cover;
+    padding-top: 176px;
+  }
+  .white-logo {
+    width: 60px;
   }
 }
 
