@@ -21,7 +21,7 @@
                 <section class="avatar-design-placeholder">
                     <div class="row pt-5">
                         <div class="col-12 text-center d-flex justify-content-center">
-                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="198px" alt="Male Avatar">
+                            <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="350px" alt="Male Avatar">
                         </div>
                     </div>
                 </section>
@@ -88,4 +88,5 @@
         </div>
     </div>
 </div>
-    @endsection
+
+@endsection

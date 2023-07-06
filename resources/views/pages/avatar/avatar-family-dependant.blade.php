@@ -1,9 +1,17 @@
+<?php
+ /**
+ * Template Name: Avatar - Family Dependant Page
+ */
+?>
+
 @extends('templates.master')
 
 @section('title')
-<title>Avatar Family Dependant</title>@endsection
+<title>Avatar - Family Dependant</title>
+@endsection
 
 @section('content')
+
 @include('templates.nav.nav-red-menu')
 
 <div class="container-fluid overflow-hidden">

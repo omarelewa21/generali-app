@@ -61,7 +61,7 @@ display:flex;
   height: 100%;
   padding-top: 100px;
 }
-#avatar_gender_selection .main-content h4 {
+#avatar_gender_selection .main-content h4, #avatar_marital_status .main-content h4 {
   font-weight: 700;
 }
 .main-content .overflow-auto.full-height-350 {
