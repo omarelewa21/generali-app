@@ -1,9 +1,17 @@
-<nav class="navbar navbar-default container py-5 my-3 px-4">
-    <div class="container p-0">
-        <div class="navbar-header">
-            <a href="/">
-                <img class="main-logo img-fluid" src="{{ asset('images/logo.png') }}" width="132px" height="107" alt="Logo">
-            </a>
+<?php
+/**
+ * Navbar Section for Welcome Page
+ */
+?>
+
+<header id="wrapper-navbar">
+    <nav class="navbar navbar-default">
+        <div class="container px-5">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img class="main-logo img-fluid pt-5" src="{{ asset('images/logo.png') }}" width="100px" alt="Logo">
+                </a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
