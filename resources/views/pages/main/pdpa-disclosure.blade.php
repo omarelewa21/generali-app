@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary">
                 @include('templates.nav.nav-white')
-                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3">
+                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
                     <h4 class="display-5 font-bold fw-bold">To begin,
                         may we have permission to share or use your personal details?</h4>
                 </div>
