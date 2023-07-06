@@ -9,7 +9,7 @@
         <div class="container px-5">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
-                    <img class="main-logo img-fluid pt-5" src="{{ asset('images/logo.png') }}" width="100px" alt="Logo">
+                    <img class="main-logo img-fluid pt-5" src="{{ asset('images/main-logo.png') }}" width="100px" alt="Logo">
                 </a>
             </div>
         </div>

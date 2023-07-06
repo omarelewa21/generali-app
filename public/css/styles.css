@@ -9,7 +9,7 @@ display:flex;
 }
 /* Welcome Page */
 #home {
-  background-image: url(/images/welcome-page/welcome-page-avatar.jpeg);
+  background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat;
@@ -20,36 +20,62 @@ display:flex;
   z-index: 1;
 }
 
-/* PDPA Disclosure Page */
-.button-container {
-  width: -webkit-fill-available;
-  bottom:0; 
-  max-width:100%;
-}
-
 /* Basic Details Page */
 .overflow-height {
   max-height: 800px;
   overflow-x: hidden!important
 }
+.main-content .overflow-auto.full-height {
+  height: calc(100vh - 250px);
+  overflow-x: hidden!important;
+}
+.button-container {
+  bottom: 0;
+  width: inherit;
+}
 
 /* Avatar Welcome Page */
 #avatar_welcome {
-  background-image: url(/images/avatar/Welcome.png);
+  background-image: url(/images/avatar/avatar-welcome-bg.jpg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
-  padding-top: 180px;
+  padding-top: 150px;
 }
 #avatar_welcome section.footer .male {
-  bottom: 10%;
+  bottom: 2%;
   left: 10%;
 }
 #avatar_welcome section.footer .female {
-  bottom: 10%;
+  bottom: 2%;
   right: 10%;
 }
+
+/* Gender Selection Page */
+.gender-selection-bg {
+  background-image: url(/images/avatar/gender-selection-bg.jpg);
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 100%;
+  padding-top: 100px;
+}
+#avatar_gender_selection .main-content h4 {
+  font-weight: 700;
+}
+.main-content .overflow-auto.full-height-350 {
+  height: calc(100vh - 350px);
+  overflow-x: hidden!important;
+}
+.overflow-auto.full-height-100 {
+  height: calc(100vh - 100px);
+  overflow-x: hidden!important;
+}
+
+/* Marital Status Page */
+
+
 
 .bg-image-avatar {
 background-size: contain;
@@ -423,8 +449,9 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 
 }
 @media only screen and (min-width: 768px){
-  .full-height {
-    height: 100vh!important;
+  .vh-100-desktop {
+    height: 100vh;
   }
+
 }
 

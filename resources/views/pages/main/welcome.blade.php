@@ -31,6 +31,9 @@
     </section>
     <section class="footer position-absolute bottom-0 start-0">
         <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector">
+        <div class="position-absolute bottom-0 end-0">
+            <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" width="700px" alt="Footer Vector">
+        </div>
     </section>
 </div>
 @endsection
