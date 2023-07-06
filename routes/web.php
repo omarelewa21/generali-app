@@ -16,6 +16,7 @@ Route::view('/avatar-my-assets', 'pages.avatar.avatar-my-assets')->name('avatar.
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 
 /* Priorities - Retirement */
 
