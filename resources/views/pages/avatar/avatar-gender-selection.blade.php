@@ -13,7 +13,7 @@
 
 @include('templates.nav.nav-red-menu')
 
-<div id="avatar_gender_selection">
+<div id="avatar_gender_selection" class="vh-100">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-7 col-lg-7 gender-selection-bg">

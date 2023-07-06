@@ -12,7 +12,7 @@
 
 @section('content')
 
-<div id="pdpa">
+<div id="pdpa" class="vh-100">
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary vh-100-desktop">

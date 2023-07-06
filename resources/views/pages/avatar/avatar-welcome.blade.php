@@ -14,7 +14,7 @@
 
 @include('templates.nav.nav-red-menu')
 
-<div id="avatar_welcome">
+<div id="avatar_welcome" class="vh-100">
     <section class="main-content position-relative">
         <div class="container px-5">
             <div class="row d-flex text-center justify-content-center">
