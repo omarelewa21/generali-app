@@ -34,10 +34,37 @@
                                     <p class="text-white display-6">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                 </div>
                             </div>
-                            <div class="row px-4">
+                            <div class="row px-4 py-3">
                                 <div class="col-12">
-                                    <label for="firstName" class="form-label">Citizenship:</label>
-                                    <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
+                                    <label for="firstName" class="form-label text-white">Citizenship:</label>
+                                    <select class="form-select bg-white" aria-label="00">
+                                        <option selected>Select</option>
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row px-4 py-3">
+                                <div class="col-12">
+                                    <label for="firstName" class="form-label text-white">ID Type:</label>
+                                    <select class="form-select bg-white" aria-label="00">
+                                        <option selected>Select</option>
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row px-4 py-3">
+                                <div class="col-12">
+                                    <label for="firstName" class="form-label text-white">ID Number:</label>
+                                    <select class="form-select bg-white" aria-label="00">
+                                        <option selected>Select</option>
+                                        <option value="00">00</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

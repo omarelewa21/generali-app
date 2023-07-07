@@ -137,6 +137,16 @@
   font-size: 1.4rem;;
 }
 
+/* Protection Home Page */
+.protection-bg {
+  background-image: url(/images/needs/protection/protection-home-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-color: #fff;
+}
+
 img {
   display:flex;   
   }
@@ -552,6 +562,9 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     width: 80px;
   }
   .main-content.scrollable-padding {
+    padding-bottom: 172px!important;
+  }
+  #pdpa .main-content, #basic_details .main-content {
     padding-bottom: 450px!important;
   }
   .navbar.transparent {

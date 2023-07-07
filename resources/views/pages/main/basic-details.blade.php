@@ -8,6 +8,7 @@
 
 @section('title')
 <title>Basic Details</title>
+@endsection
 
 @section('content')
 
@@ -29,42 +30,54 @@
                                     <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                 </div>
                             </div>
-                            <div class="row px-5">
+                            <div class="row px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5">
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-md-3">
                                             <label for="title" class="form-label">Title</label>
                                             <select class="form-select" aria-label="Title">
                                                 <option selected>Select</option>
-                                                <option value="1">Mr</option>
-                                                <option value="2">Madam</option>
-                                                <option value="3">Miss</option>
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Ms.">Ms.</option>
+                                                <option value="Mrs.">Mrs.</option>
+                                                <option value="Madam">Madam</option>
+                                                <option value="Datuk">Datuk</option>
+                                                <option value="Datin">Datin</option>
+                                                <option value="Dato Seri">Dato Seri</option>
+                                                <option value="Datin Seri">Datin Seri</option>
+                                                <option value="Tan Sri">Tan Sri</option>
+                                                <option value="Puan Sri">Puan Sri</option>
+                                                <option value="Dr.">Dr.</option>
+                                                <option value="Tun">Tun</option>
+                                                <option value="Sir">Sir</option>
+                                                <option value="Justice">Justice</option>
+                                                <option value="Others">Others</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
-                                        <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-md-6 mt-5">
                                             <label for="firstName" class="form-label">First Name:</label>
                                             <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6 mt-5">
                                             <label for="lastName" class="form-label">Last Name:</label>
                                             <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
-                                        <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-md-6 mt-5">
                                             <label for="mobileNumber" class="form-label">Mobile Number:</label>
                                             <input type="text" class="form-control" id="mobileNumber" placeholder="+60 00-000 000">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-md-6 mt-5">
                                             <label for=housePhoneNumber" class="form-label">House Phone Number:</label>
                                             <input type="text" class="form-control" id="housePhoneNumber"
                                                 placeholder="+60 00-000 000">
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
-                                        <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-md-6 mt-5">
                                             <label for="email" class="form-label">Email Address:</label>
                                             <input type="text" class="form-control" id="email" placeholder="yourname@email.com">
                                         </div>

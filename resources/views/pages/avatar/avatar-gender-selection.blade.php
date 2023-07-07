@@ -7,7 +7,8 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Gender Selection</title>@endsection
+<title>Avatar - Gender Selection</title>
+@endsection
 
 @section('content')
 
@@ -26,24 +27,12 @@
                         </div>
                         <div class="row d-flex justify-content-center">
                             <div class="col-12 color-box-wrapper d-flex justify-content-center align-items-center justify-content-center">
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #F5DEB3;"></div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #F4A460;"></div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #D2B48C;"></div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #A0522D;"></div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #8B4513;"></div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="color-box" style="background-color: #654321;"></div>
-                                </div>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #F5DEB3;"></button>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #F4A460;"></button>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #D2B48C;"></button>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #A0522D;"></button>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #8B4513;"></button>
+                                <button class="col-2 color-box border-0 mx-1" style="background-color: #654321;"></button>
                             </div>
                         </div>
                     </div>
@@ -64,7 +53,7 @@
                                     <p class="text-white display-6">Please click to select your gender.</p>
                                 </div>
                             </div>
-                            <div class="row px-4">
+                            <div class="row px-4 pb-4">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
