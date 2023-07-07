@@ -10,7 +10,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-xl-2 col-md-3 col-12 bg-primary">
-                @include('templates.nav.nav-needs')
+                @include('templates.nav.nav-needs-white')
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3">
+                        <h4 class="text-white display-5 font-bold fw-bold">My Priorities</h4>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-9 col-xl-10 col-md-9 col-12 font-color-default text-center overflow-y-scroll vh-100">
                 <section class="row bg-needs h-100">
@@ -42,7 +47,7 @@
                     <div style="height: fit-content;">
                         <div class="row d-flex justify-content-center bg-needs_text py-4">
                             <div class="col-12 col-md-4">
-                                <h5 class="">Let's figure out what you need for Protection.</h5>
+                                <h5 class="">Let's get into your plans for Education.</h5>
                             </div>
                         </div>
                     </div>
