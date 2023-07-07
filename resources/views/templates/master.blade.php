@@ -15,6 +15,7 @@
     @yield('title')
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/custom-ying.css') }}" rel="stylesheet" type="text/css">
 
 </head>
 
