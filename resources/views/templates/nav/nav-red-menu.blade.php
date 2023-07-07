@@ -9,8 +9,8 @@
 {{--end of nav links --}}
 
 <header id="wrapper-navbar">
-    <nav class="navbar navbar-default">
-        <div class="container px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-5 pt-5">
+    <nav class="navbar navbar-default transparent">
+        <div class="container px-5 pt-5 pb-3">
             {{-- <a href="#" class="navbar-brand">
                     <img class="white-logo" src="{{ asset('images/logo.png') }}" alt="Logo" width="100px;">
             </a> --}}
