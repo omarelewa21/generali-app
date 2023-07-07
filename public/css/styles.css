@@ -2,20 +2,79 @@
 .main-content {
   z-index: 1;
 }
-#pdpa .main-content, #basic_details .main-content {
+.main-content.scrollable-padding {
   z-index: 1;
   padding-bottom: 105.8px;
 }
-
-img {
-display:flex;   
+.sidebanner {
+  z-index: 1;
 }
-.bg-image {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-
+.fixed-bottom {
+  z-index: 0!important;
 }
+.sticky-top {
+  z-index: 0;
+}
+.content {
+  grid-area: content;
+}
+.header {
+  grid-area: header;
+  grid-gap: 20px;
+  grid-template-columns: 50% 50%;
+  display: grid;
+}
+.footer-main {
+  grid-area: footer-main;
+  grid-gap: 20px;
+  grid-template-columns: 50% 50%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "content" "footer-main";
+  grid-template-rows: 15vh 40vh 40vh;
+}
+.content-avatar {
+  grid-area: content-avatar;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+.header-avatar {
+  grid-area: header-avatar;
+}
+
+.wrapper-avatar {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header-avatar" "content-avatar";
+  grid-template-rows: 40vh 50vh;
+}
+.content-avatar-default {
+  grid-area: content-avatar-default;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+.header-avatar-default {
+  grid-area: header-avatar-default;
+}
+
+.wrapper-avatar-default {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header-avatar-default" "content-avatar-default";
+  grid-template-rows: 15vh 70vh;
+}
+
 /* Welcome Page */
 #home {
   background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
@@ -34,12 +93,6 @@ display:flex;
   height: calc(100vh - 250px);
   overflow-x: hidden!important;
 }
-.sidebanner {
-  z-index: 1;
-}
-.fixed-bottom {
-  z-index: 0!important;
-}
 
 /* Avatar Welcome Page */
 #avatar_welcome {
@@ -48,7 +101,6 @@ display:flex;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
-  padding-top: 150px;
 }
 #avatar_welcome section.footer .male {
   bottom: 2%;
@@ -62,12 +114,11 @@ display:flex;
 /* Gender Selection Page */
 .gender-selection-bg {
   background-image: url(/images/avatar/gender-selection-bg.jpg);
-  background-size: contain;
+  background-size: 70%;
   background-position: right;
   background-repeat: no-repeat;
   height: 100%;
-  padding-top: 100px;
-  max-height: 650px;
+  background-color: #fff;
 }
 #avatar_gender_selection .main-content h4, #avatar_marital_status .main-content h4, #avatar_family_dependant .main-content h4, #avatar_my_assets .main-content h4 {
   font-weight: 700;
@@ -86,6 +137,15 @@ display:flex;
   font-size: 1.4rem;;
 }
 
+img {
+  display:flex;   
+  }
+  .bg-image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  
+  }
 
 .bg-image-avatar {
 background-size: contain;
@@ -156,9 +216,6 @@ img.male-avatar , img.female-avatar {
     left: 0;
     right: 0;
     z-index: 1000;
-}
-.main-logo {
-    scale:0.8;
 }
 
 main {
@@ -477,14 +534,42 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   .min-height-100{
     height: auto;
   }
+  .gender-selection-bg {
+    z-index: 1;
+  }
+  .scrollable-content {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden; 
+  }
 }
 @media only screen and (max-width: 767px){
   #home {
     background-size: cover;
     padding-top: 176px;
   }
-  .white-logo {
-    width: 60px;
+  .white-logo, .main-logo {
+    width: 80px;
+  }
+  .main-content.scrollable-padding {
+    padding-bottom: 450px!important;
+  }
+  .navbar.transparent {
+    background-color: #fff;
+  }
+}
+@media only screen and (min-width: 576px) {
+  .wrapper {
+      grid-gap: 20px;
+      grid-template-columns: 100%;
+      grid-template-areas: "header" "content" "footer-main";
+      grid-template-rows: 10vh 40vh 40vh;
+  }
+  .wrapper-avatar {
+    grid-gap: 20px;
+    grid-template-columns: 100%;
+    grid-template-areas: "header-avatar" "content-avatar";
+    grid-template-rows: 35vh 55vh;
   }
 }
 

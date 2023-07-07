@@ -22,10 +22,12 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
-                    <section class="main-content">
+                    <section class="main-content scrollable-padding">
                         <div class="container">
                             <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
-                                <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
+                                <div class="col-12">
+                                    <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
+                                </div>
                             </div>
                             <div class="row px-5">
                                 <div class="col-12">

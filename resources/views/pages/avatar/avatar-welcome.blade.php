@@ -12,13 +12,12 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
-<div id="avatar_welcome" class="vh-100">
-    <section class="main-content position-relative">
+<div id="avatar_welcome" class="vh-100 overflow-y-auto overflow-x-hidden wrapper">
+    <div class="header">@include('templates.nav.nav-red-menu')</div>
+    <section class="main-content content position-relative d-flex justify-content-center align-items-center h-100">
         <div class="container px-5">
             <div class="row d-flex text-center justify-content-center">
-                <div class="col-6">
+                <div class="col-xxl-6 col-xl-6 col-md-6 py-4">
                     <h1 class="display-3 headline1 text-uppercase text-dark pb-5">Now, shall we build your signature look?</h1>
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
@@ -28,13 +27,14 @@
             </div>
         </div>
     </section>
-    <section class="footer">
-        <div class="position-absolute male">
-            <img src="{{ asset('images/avatar/main-male.png') }}" width="300px" alt="Male Avatar">
+    <section class="footer-main">
+        <div class="d-flex justify-content-center align-items-center" style="grid-column: span 1 / auto;">
+            <img src="{{ asset('images/avatar/main-male.png') }}" width="auto" height="100%" alt="Male Avatar">
         </div>
-        <div class="position-absolute female">
-            <img src="{{ asset('images/avatar/main-female.png') }}" width="300px" alt="Female Avatar">
+        <div class="d-flex justify-content-center align-items-center" style="grid-column: span 1 / auto;">
+            <img src="{{ asset('images/avatar/main-female.png') }}" width="auto" height="100%" alt="Female Avatar">
         </div>
     </section>
 </div>
+
 @endsection
