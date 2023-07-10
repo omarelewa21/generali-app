@@ -1,20 +1,20 @@
 <?php
  /**
- * Template Name: Avatar - Existing Assets Page
+ * Template Name: Top Priorities Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>My Assets</title>
+<title>Top Priorities</title>
 @endsection
 
 @section('content')
 
 @include('templates.nav.nav-red-menu')
 
-<div id="avatar_my_assets" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="top_priorities" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
@@ -30,8 +30,8 @@
                         <div class="container">
                             <div class="row px-4 py-4">
                                 <div class="col-12">
-                                    <h4 class="display-4 text-white font-normal pb-3">Right, let’s get an idea of your finances and loans.</h4>
-                                    <p class="text-white display-6">Click to add your assets next to your avatar.</p>
+                                    <h4 class="display-4 text-white font-normal pb-3">What are your top financial priorities?</h4>
+                                    <p class="text-white display-6">Select your priorities by first to last.</p>
                                 </div>
                             </div>
                             <div class="row px-4">
@@ -91,8 +91,8 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('avatar.family.dependant.details')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('identity.details') }}" class="btn btn-primary text-uppercase">Next</a>
+                                    <a href="{{route('identity.details')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>
