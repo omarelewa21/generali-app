@@ -74,6 +74,9 @@
   grid-template-areas: "header-avatar-default" "content-avatar-default";
   grid-template-rows: 15vh 70vh;
 }
+.form-select {
+  color: rgba(10, 4, 60, 0.50);;
+}
 
 /* Welcome Page */
 #home {

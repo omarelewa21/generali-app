@@ -59,12 +59,47 @@
                             <div class="row px-4 py-3">
                                 <div class="col-12">
                                     <label for="firstName" class="form-label text-white">ID Number:</label>
-                                    <select class="form-select bg-white" aria-label="00">
-                                        <option selected>Select</option>
-                                        <option value="00">00</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                    </select>
+                                    <input type="text" class="form-control bg-white" id="idNumber" placeholder="xxxxxx-xx-xxxx">
+                                </div>
+                            </div>
+                            <div class="row px-4 py-3">
+                                <div class="col-12">
+                                    <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <select class="form-select bg-white" aria-label="00">
+                                                <option selected>Select</option>
+                                                <option value="00">00</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-select bg-white" aria-label="00">
+                                                <option selected>Select</option>
+                                                <option value="January">January</option>
+                                                <option value="February">February</option>
+                                                <option value="March">March</option>
+                                                <option value="April">April</option>
+                                                <option value="May">May</option>
+                                                <option value="June">June</option>
+                                                <option value="July">July</option>
+                                                <option value="August">August</option>
+                                                <option value="September">September</option>
+                                                <option value="October">October</option>
+                                                <option value="November">November</option>
+                                                <option value="December">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-select bg-white" aria-label="00">
+                                                <option selected>Select</option>
+                                                <option value="00">00</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
