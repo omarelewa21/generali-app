@@ -3,7 +3,7 @@
 }
 /* Education */
 .bg-needs{
-    background-image: url('/images/needs/education/bg-needs-plain.png');
+    background-image: url('/images/needs/education/bg-need-plain.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -32,6 +32,9 @@
 #education-content p{
     font-size: 20px;
 }
+.pd-needs-home{
+    padding-top:100px;
+}
 
 /* Mobile  */
 @media only screen and (max-width: 767px){
@@ -57,4 +60,13 @@
         top: 50%;
         left: 50%;
     }
+}
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+@media only screen and (min-width: 380px) and (max-width: 539px) {
+
 }
