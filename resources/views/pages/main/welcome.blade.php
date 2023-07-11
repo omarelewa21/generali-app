@@ -29,7 +29,8 @@
             </div>
         </div>
     </section>
-    <section class="footer position-absolute bottom-0 start-0">
+    <section class="footer position-absolute bottom-0 start-0" id="welcome">
+        <welcome-component></welcome-component>
         <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector">
         <div class="position-absolute bottom-0 end-0 d-none d-xs-none d-sm-none d-md-none d-lg-block">
             <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" style="width: calc(100vh - 60px);" alt="Footer Vector">
