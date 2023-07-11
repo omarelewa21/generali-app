@@ -53,7 +53,7 @@
                                     <p class="text-white display-6">Click to select your family details.</p>
                                 </div>
                             </div>
-                            <div class="row px-4">
+                            <div class="row px-4 pb-4">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
