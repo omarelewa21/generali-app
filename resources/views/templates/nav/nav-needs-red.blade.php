@@ -1,5 +1,5 @@
 <div class="row d-flex align-items-center justify-content-center">
-    <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3">
+    <div class="col-12 col-md-8 mx-md-0 px-md-0 pt-md-5 py-3">
         {{--start of nav links --}}
             @include('templates.nav.nav-links')
         {{--end of nav links --}}

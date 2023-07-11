@@ -9,9 +9,9 @@
     background-position: center;
 }
 .bg-education{
-    background-image: url('/images/needs/education/education-home-bg.png');
+    background-image: url('/images/needs/education/education-master-bg.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position:center;
 }
 .font-color-default{
@@ -33,7 +33,51 @@
     font-size: 20px;
 }
 .pd-needs-home{
-    padding-top:100px;
+    padding:100px;
+}
+.progress:after{
+    border: 3px solid #a0a0a0;
+}
+.progress .progress-bar{
+    border-width: 3px;
+}
+.progress-text{
+    color: #C21B17;
+    font-family: 'Helvetica Neue Regular';
+}
+.progress-left,
+.progress-right{
+    width: 30px; 
+    height: 60px;
+}
+.progress{
+    width: 50px; 
+    height: 50px;
+}
+.progress .progress-value{
+    line-height:45px;
+}
+.education-home-content{
+    grid-area: education-home-content;
+    grid-gap: 20px;
+    grid-template-columns: 100%;
+    display: grid;
+    grid-auto-rows: 100%;
+}
+.wrapper-needs{
+    grid-gap: 20px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "education-home-content"
+        "education-home-text";
+    grid-template-rows: 35vh 55vh;
+    display: grid;
+}
+.coverage-content{
+    grid-gap: 20px;
+    grid-template-columns: 50% 50%;
+    display: grid;
+    grid-auto-rows: 100%;
 }
 
 /* Mobile  */
@@ -67,6 +111,13 @@
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
 }
-@media only screen and (min-width: 380px) and (max-width: 539px) {
-
+@media only screen and (min-width: 1441px){
+    .pd-needs-home{
+        padding-top:150px;
+    }
+}
+@media only screen and (max-height: 670px){
+    h5{
+        font-size: 21px;
+    }
 }
