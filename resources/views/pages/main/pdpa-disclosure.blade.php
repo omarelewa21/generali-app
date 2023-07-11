@@ -24,7 +24,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
-                    <section class="main-content">
+                    <section class="main-content scrollable-padding">
                         <div class="container">
                             <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
                                 <div class="col-12">
@@ -90,9 +90,9 @@
                     </section>
 
                     <section class="footer bg-white py-4 fixed-bottom">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
                                     <a href="{{route('welcome')}}" class="btn btn-primary me-md-2">DECLINE</a>
                                     <a href="{{route('basic.details') }}" class="btn btn-primary">ACCEPT</a>
                                 </div>

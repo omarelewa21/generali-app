@@ -45,7 +45,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary">
                 <div class="scrollable-content">
-                    <section class="main-content scrollable-padding">
+                    <section class="main-content scrollable-padding pt-3">
                         <div class="container">
                             <div class="row px-4 py-4">
                                 <div class="col-12">
@@ -75,9 +75,9 @@
                     </section>
 
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
                                     <a href="{{route('avatar.welcome')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
                                     <a href="{{ route('avatar.marital.status') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>

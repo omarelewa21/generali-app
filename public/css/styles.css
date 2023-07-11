@@ -86,6 +86,22 @@
   background-repeat: no-repeat;
   height: 100%;
 }
+.content-home {
+  grid-area: content-home;
+}
+.header-home {
+  grid-area: header-home;
+}
+.footer-home {
+  grid-area: footer-home;
+}
+.wrapper-home {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header-home" "content-home" "footer-home";
+  grid-template-rows: 20vh 50vh 20vh;
+}
 
 /* Basic Details Page */
 .overflow-height {
@@ -559,7 +575,6 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 @media only screen and (max-width: 767px){
   #home {
     background-size: cover;
-    padding-top: 176px;
   }
   .white-logo, .main-logo {
     width: 80px;
