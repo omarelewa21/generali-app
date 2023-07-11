@@ -21,7 +21,7 @@
                 <section class="avatar-design-placeholder content-avatar-default pt-4">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <div class="col-12 position-relative">
-                            <div class="position-absolute male-avatar-character" style="z-index:1">
+                            <div class="position-absolute male-avatar-character">
                                 <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="350px" alt="Male Avatar">
                             </div>
                             <div class="position-absolute parent-father">
@@ -33,7 +33,7 @@
                             <div class="position-absolute spouse">
                                 <img src="{{ asset('images/avatar/spouse.svg') }}" width="270px" alt="Spouse Avatar">
                             </div>
-                            <div class="position-absolute children-girl" style="z-index:1">
+                            <div class="position-absolute children-girl">
                                 <img src="{{ asset('images/avatar/children-girl.svg') }}" width="150px" alt="Girl Avatar">
                             </div>
                             <div class="position-absolute children-boy">
@@ -53,33 +53,79 @@
                                     <p class="text-white display-6">Tell us more about each of them.</p>
                                 </div>
                             </div>
-                            <div class="row px-4">
+                            <div class="row px-4 pb-4">
                                 <div class="col-12">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion accordion-flush" id="accordionDependantDetails">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
                                                     Spouse
                                                 </button>
                                             </h2>
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                            <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependantDetails">
                                                 <div class="accordion-body">
                                                     <div class="row py-2">
                                                         <div class="col-12">
                                                             <label for="firstName" class="form-label">First Name:</label>
-                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="First Name">
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
                                                         <div class="col-12">
                                                             <label for="lastName" class="form-label">Last Name:</label>
-                                                            <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name">
+                                                            <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
                                                         <div class="col-12">
                                                             <label for="dob" class="form-label">Date of Birth: (Age)</label>
-                                                            <input type="dropdown" class="form-control" id="dobInput" placeholder="0000">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="January">January</option>
+                                                                        <option value="February">February</option>
+                                                                        <option value="March">March</option>
+                                                                        <option value="April">April</option>
+                                                                        <option value="May">May</option>
+                                                                        <option value="June">June</option>
+                                                                        <option value="July">July</option>
+                                                                        <option value="August">August</option>
+                                                                        <option value="September">September</option>
+                                                                        <option value="October">October</option>
+                                                                        <option value="November">November</option>
+                                                                        <option value="December">December</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,8 +137,73 @@
                                                     Child
                                                 </button>
                                             </h2>
-                                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionDependantDetails">
+                                                <div class="accordion-body">
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                            <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="January">January</option>
+                                                                        <option value="February">February</option>
+                                                                        <option value="March">March</option>
+                                                                        <option value="April">April</option>
+                                                                        <option value="May">May</option>
+                                                                        <option value="June">June</option>
+                                                                        <option value="July">July</option>
+                                                                        <option value="August">August</option>
+                                                                        <option value="September">September</option>
+                                                                        <option value="October">October</option>
+                                                                        <option value="November">November</option>
+                                                                        <option value="December">December</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="accordion-item">
@@ -101,8 +212,73 @@
                                                     Parent 1
                                                 </button>
                                             </h2>
-                                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionDependantDetails">
+                                                <div class="accordion-body">
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                            <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="January">January</option>
+                                                                        <option value="February">February</option>
+                                                                        <option value="March">March</option>
+                                                                        <option value="April">April</option>
+                                                                        <option value="May">May</option>
+                                                                        <option value="June">June</option>
+                                                                        <option value="July">July</option>
+                                                                        <option value="August">August</option>
+                                                                        <option value="September">September</option>
+                                                                        <option value="October">October</option>
+                                                                        <option value="November">November</option>
+                                                                        <option value="December">December</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="accordion-item">
@@ -111,8 +287,73 @@
                                                     Parent 2
                                                 </button>
                                             </h2>
-                                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionDependantDetails">
+                                                <div class="accordion-body">
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                            <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="January">January</option>
+                                                                        <option value="February">February</option>
+                                                                        <option value="March">March</option>
+                                                                        <option value="April">April</option>
+                                                                        <option value="May">May</option>
+                                                                        <option value="June">June</option>
+                                                                        <option value="July">July</option>
+                                                                        <option value="August">August</option>
+                                                                        <option value="September">September</option>
+                                                                        <option value="October">October</option>
+                                                                        <option value="November">November</option>
+                                                                        <option value="December">December</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-select" aria-label="00">
+                                                                        <option selected>Select</option>
+                                                                        <option value="00">00</option>
+                                                                        <option value="01">01</option>
+                                                                        <option value="02">02</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-2">
+                                                        <div class="col-12">
+                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
+                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

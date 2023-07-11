@@ -210,5 +210,8 @@ $accordion-color: rgba(10, 4, 60, 0.75);
 $accordion-button-color: #0A043C;
 $accordion-icon-color: #C21B17;
 $btn-font-size-sm: 16px;
+$accordion-button-active-bg: #fff;
+$accordion-button-active-color: #0A043C;
+$accordion-button-focus-border-color: #000;
 
 @import 'bootstrap/scss/bootstrap';

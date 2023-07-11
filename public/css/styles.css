@@ -74,6 +74,9 @@
   grid-template-areas: "header-avatar-default" "content-avatar-default";
   grid-template-rows: 15vh 70vh;
 }
+.form-select {
+  color: rgba(10, 4, 60, 0.50);;
+}
 
 /* Welcome Page */
 #home {
@@ -82,6 +85,22 @@
   background-position: right;
   background-repeat: no-repeat;
   height: 100%;
+}
+.content-home {
+  grid-area: content-home;
+}
+.header-home {
+  grid-area: header-home;
+}
+.footer-home {
+  grid-area: footer-home;
+}
+.wrapper-home {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header-home" "content-home" "footer-home";
+  grid-template-rows: 20vh 50vh 20vh;
 }
 
 /* Basic Details Page */
@@ -135,6 +154,16 @@
 /* Family Details Page */
 .accordion-button {
   font-size: 1.4rem;;
+}
+
+/* Protection Home Page */
+.protection-bg {
+  background-image: url(/images/needs/protection/protection-home-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-color: #fff;
 }
 
 img {
@@ -546,12 +575,14 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 @media only screen and (max-width: 767px){
   #home {
     background-size: cover;
-    padding-top: 176px;
   }
   .white-logo, .main-logo {
     width: 80px;
   }
   .main-content.scrollable-padding {
+    padding-bottom: 172px!important;
+  }
+  #pdpa .main-content, #basic_details .main-content {
     padding-bottom: 450px!important;
   }
   .navbar.transparent {

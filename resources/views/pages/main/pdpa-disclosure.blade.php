@@ -90,9 +90,9 @@
                     </section>
 
                     <section class="footer bg-white py-4 fixed-bottom">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
                                     <a href="{{route('welcome')}}" class="btn btn-primary me-md-2">DECLINE</a>
                                     <a href="{{route('basic.details') }}" class="btn btn-primary">ACCEPT</a>
                                 </div>
