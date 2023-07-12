@@ -37,9 +37,9 @@
 }
 
 body, html {
-    overflow: hidden;
-    height:100vh;
-  }
+  overflow: hidden;
+  height:100vh;
+}
 
 //  code for scrollbar 
 /* width */
@@ -213,5 +213,6 @@ $btn-font-size-sm: 16px;
 $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
+$body-color: rgba(10, 4, 60, 0.30);
 
 @import 'bootstrap/scss/bootstrap';

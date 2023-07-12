@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+
 
 /* main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details');
+Route::post('/basic-details', [FormController::class, 'submit'])->name('form.submit');
 
 /* avatar pages */
 Route::view('/avatar-welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');

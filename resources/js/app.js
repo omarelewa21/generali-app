@@ -1,16 +1,17 @@
 import './bootstrap';
 
-import {createApp} from 'vue/dist/vue.esm-bundler';
-import welcome from './components/welcome.vue';
-import genderlogic from './components/gender-logic.vue';
+const titleSelect = document.getElementById('titleSelect');
+const firstNameInput = document.getElementById('firstNameInput');
+const lastNameInput = document.getElementById('lastNameInput');
 
-const gender = createApp({});
-gender.component('gender-component',genderlogic);
+titleSelect.addEventListener('change', function () {
+    titleSelect.classList.add('is-valid');
+});
 
-const welcome = createApp({});
-welcome.component('welcome-component', welcome);
+firstNameInput.addEventListener('change', function () {
+    firstNameInput.classList.add('is-valid');
+});
 
-
-gender.mount('#home');
-welcome.mount('#welcome');
-
+lastNameInput.addEventListener('change', function () {
+    lastNameInput.classList.add('is-valid');
+});

@@ -4,7 +4,7 @@
 }
 .main-content.scrollable-padding {
   z-index: 1;
-  padding-bottom: 105.8px;
+  padding-bottom: 150px;
 }
 .sidebanner {
   z-index: 1;
@@ -15,6 +15,8 @@
 .sticky-top {
   z-index: 0;
 }
+
+/* Grid Layout */
 .content {
   grid-area: content;
 }
@@ -74,8 +76,10 @@
   grid-template-areas: "header-avatar-default" "content-avatar-default";
   grid-template-rows: 15vh 70vh;
 }
-.form-select {
-  color: rgba(10, 4, 60, 0.50);;
+
+/* Form */
+.input:-internal-autofill-selected {
+  background-image: inherit;
 }
 
 /* Welcome Page */
