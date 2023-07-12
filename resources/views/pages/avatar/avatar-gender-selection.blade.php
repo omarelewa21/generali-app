@@ -90,39 +90,39 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var genderMaleBtn = document.getElementById('gendermale');
-        var genderFemaleBtn = document.getElementById('genderfemale');
-        var changeImageElement = document.querySelector('.changeImage');
+// Change the image of the avatar according to the gender selected
+document.addEventListener('DOMContentLoaded', function() {
+    var genderMaleBtn = document.getElementById('gendermale');
+    var genderFemaleBtn = document.getElementById('genderfemale');
+    var changeImageElement = document.querySelector('.changeImage');
 
-        genderMaleBtn.addEventListener('click', function() {
-            changeImage('male');
-        });
-
-        genderFemaleBtn.addEventListener('click', function() {
-            changeImage('female');
-        });
-
-        function changeImage(gender) {
-            var formData = new FormData();
-            formData.append('gender', gender);
-
-            fetch('{{ route('change.image') }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                changeImageElement.src = data.image;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+    genderMaleBtn.addEventListener('click', function() {
+        changeImage('male');
     });
 
+    genderFemaleBtn.addEventListener('click', function() {
+        changeImage('female');
+    });
+
+    function changeImage(gender) {
+        var formData = new FormData();
+        formData.append('gender', gender);
+
+        fetch('{{ route('change.image') }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            changeImageElement.src = data.image;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+});
 </script>
 @endsection

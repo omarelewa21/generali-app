@@ -14,7 +14,7 @@ class AvatarController extends Controller
     public function changeImage(Request $request)
     {
         $gender = $request->input('gender');
-        Log::debug('Gender: ' . $gender);
+        //Log::debug('Gender: ' . $gender);
 
         // Perform any necessary logic based on the selected gender
         // if ($gender === 'male') {

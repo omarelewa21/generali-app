@@ -18,15 +18,3 @@ lastNameInput.addEventListener('change', function () {
 });
 
 // Change the image of the avatar according to the gender selected
-const maleButton = document.getElementById('gendermale');
-const femaleButton = document.getElementById('genderfemale');
-const image = document.querySelector('.changeImage');
-
-// Add click event listeners to the buttons
-maleButton.addEventListener('click', function() {
-    image.src = "{{ asset('images/avatar/gender-male.svg') }}";
-});
-
-femaleButton.addEventListener('click', function() {
-    image.src = "{{ asset('images/avatar/gender-female.svg') }}";
-});

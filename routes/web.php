@@ -20,6 +20,8 @@ Route::view('/avatar-family-dependant-details', 'pages.avatar.avatar-family-depe
 Route::view('/avatar-my-assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::view('/identity-details', 'pages.avatar.identity-details')->name('identity.details');
 Route::post('/avatar-gender-selection', [AvatarController::class, 'changeImage'])->name('change.image');
+// Route::post('/avatar-gender-selection', 'AvatarController@changeImage')->name('change.image');
+
 
 
 /* Priorities */
