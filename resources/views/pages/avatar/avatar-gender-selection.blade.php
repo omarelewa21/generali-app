@@ -14,7 +14,6 @@
 
 @include('templates.nav.nav-red-menu')
 <div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
-<gender-logic></gender-logic>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar">
@@ -39,8 +38,7 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <!-- <img src="{{ asset('images/avatar/gender-male.svg') }}" width="auto" height="100%" alt="Male Avatar" class="changeImage"> -->
-                        <img :src="avatarImage" width="auto" height="100%" alt="Male Avatar" class="changeImage">
+                        <img src="{{ asset('images/avatar/gender-male.svg') }}" width="auto" height="100%" alt="Male Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -57,8 +55,7 @@
                             <div class="row px-4 pb-4">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
-                                    <button class="border-0 bg-white" @click="changeAvatarImage('{{ asset('images/avatar/button-gender-male.png') }}')">
-                                        <!-- <button class="border-0 bg-white"> -->
+                                        <button class="border-0 bg-white" id="gendermale">
                                             <img src="{{ asset('images/avatar/button-gender-male.png') }}" width="150px" alt="Gender Male">
                                             <h6 class="avatar-text text-center pt-4">Male</h6>
                                         </button>
@@ -66,7 +63,7 @@
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
-                                        <button class="border-0 bg-white">
+                                        <button class="border-0 bg-white" id="genderfemale">
                                             <img src="{{ asset('images/avatar/button-gender-female.png') }}" width="150px" alt="Gender Female">
                                             <h6 class="avatar-text text-center pt-4">Female</h6>
                                         </button>
@@ -91,19 +88,41 @@
         </div>
     </div>
 </div>
-@endsection
 
 <script>
-export default {
-  data() {
-    return {
-      avatarImage: '{{ asset('images/avatar/gender-male.svg') }}', // Initial image source
-    };
-  },
-  methods: {
-    changeAvatarImage(imageSrc) {
-      this.avatarImage = imageSrc; // Update the image source
-    },
-  },
-};
+    document.addEventListener('DOMContentLoaded', function() {
+        var genderMaleBtn = document.getElementById('gendermale');
+        var genderFemaleBtn = document.getElementById('genderfemale');
+        var changeImageElement = document.querySelector('.changeImage');
+
+        genderMaleBtn.addEventListener('click', function() {
+            changeImage('male');
+        });
+
+        genderFemaleBtn.addEventListener('click', function() {
+            changeImage('female');
+        });
+
+        function changeImage(gender) {
+            var formData = new FormData();
+            formData.append('gender', gender);
+
+            fetch('{{ route('change.image') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                changeImageElement.src = data.image;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+
 </script>
+@endsection
