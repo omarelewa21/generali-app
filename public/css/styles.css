@@ -6,6 +6,10 @@
   z-index: 1;
   padding-bottom: 150px;
 }
+.main-content.scrollable-padding-avatar {
+  z-index: 1;
+  padding-bottom: 110px;
+}
 .sidebanner {
   z-index: 1;
 }
@@ -142,9 +146,6 @@
   background-repeat: no-repeat;
   height: 100%;
   background-color: #fff;
-}
-#avatar_gender_selection .main-content h4, #avatar_marital_status .main-content h4, #avatar_family_dependant .main-content h4, #avatar_my_assets .main-content h4 {
-  font-weight: 700;
 }
 .main-content .overflow-auto.full-height-350 {
   height: calc(100vh - 350px);
@@ -584,6 +585,9 @@ box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     width: 80px;
   }
   .main-content.scrollable-padding {
+    padding-bottom: 172px!important;
+  }
+  .main-content.scrollable-padding-avatar {
     padding-bottom: 172px!important;
   }
   #pdpa .main-content, #basic_details .main-content {
