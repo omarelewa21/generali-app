@@ -177,7 +177,7 @@ $display-font-sizes: (
   5: 2.125rem, //34px;
   6: 1.375rem //22px
 );
-$body-color: transparent;
+$body-color: #000000;
 
 $btn-font-family:  "Helvetica Neue";
 $btn-font-size: 18px;
@@ -213,6 +213,7 @@ $btn-font-size-sm: 16px;
 $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
-$body-color: rgba(10, 4, 60, 0.30);
+$form-feedback-font-size: 20px;
+
 
 @import 'bootstrap/scss/bootstrap';

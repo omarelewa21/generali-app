@@ -39,7 +39,7 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('images/avatar/' . session('image') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset('images/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>

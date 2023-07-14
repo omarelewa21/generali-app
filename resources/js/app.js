@@ -47,28 +47,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// Validate the form if valid, show a success mark
-const titleSelect = document.getElementById('titleSelect');
-const idTypeSelect = document.getElementById('idTypeTest');
-const firstNameInput = document.getElementById('firstNameInput');
-const lastNameInput = document.getElementById('lastNameInput');
-
-titleSelect.addEventListener('change', function () {
-    titleSelect.classList.add('is-valid');
-});
-idTypeSelect.addEventListener('change', function () {
-    idTypeSelect.classList.add('is-valid');
-});
-
-firstNameInput.addEventListener('change', function () {
-    firstNameInput.classList.add('is-valid');
-});
-
-lastNameInput.addEventListener('change', function () {
-    lastNameInput.classList.add('is-valid');
-});
-
-idTypeSelect.addEventListener('change', function () {
-    idTypeSelect.classList.add('is-valid');
-});

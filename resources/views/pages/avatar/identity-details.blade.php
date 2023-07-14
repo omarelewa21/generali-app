@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-12 pt-4">
                                         <label for="idType" class="form-label text-white">ID Type</label>
-                                        <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idTypeTest" required>
+                                        <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
                                             <option value="" selected disabled>Select</option>
                                             <option value="New IC" @if(old('idType') == 'New IC') selected @endif>New IC</option>
                                             <option value="Passport" @if(old('idType') == 'Passport') selected @endif>Passport</option>
@@ -128,4 +128,125 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var countrySelect = document.getElementById('countrySelect');
+    var idType = document.getElementById('idType');
+    // var lastNameInput = document.getElementById('lastNameInput');
+    // var mobileNumberInput = document.getElementById('mobileNumber');
+    // var housePhoneNumberInput = document.getElementById('housePhoneNumber');
+    // var emailInput = document.getElementById('email');
+
+    countrySelect.addEventListener('blur', function() {
+        validateSelectField(countrySelect);
+    });
+    idType.addEventListener('blur', function() {
+        validateSelectField(idType);
+    });
+
+    // firstNameInput.addEventListener('blur', function() {
+    //     validateInputField(firstNameInput);
+    // });
+
+    // lastNameInput.addEventListener('blur', function() {
+    //     validateInputField(lastNameInput);
+    // });
+
+    // mobileNumberInput.addEventListener('blur', function() {
+    //     validateMobileNumberField(mobileNumberInput);
+    // });
+
+    // housePhoneNumberInput.addEventListener('blur', function() {
+    //     validateHousePhoneNumberField(housePhoneNumberInput);
+    // });
+
+    // emailInput.addEventListener('blur', function() {
+    //     validateEmailField(emailInput);
+    // });
+
+    function validateSelectField(field) {
+        if (field.value) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
+
+    // function validateInputField(field) {
+    //     if (field.value) {
+    //         field.classList.add('is-valid');
+    //         field.classList.remove('is-invalid');
+    //     } else {
+    //         field.classList.remove('is-valid');
+    //         field.classList.add('is-invalid');
+    //     }
+    // }
+
+    // function validateMobileNumberField(field) {
+    //     if (field.value && isValidMobileNumber(field.value)) {
+    //         field.classList.add('is-valid');
+    //         field.classList.remove('is-invalid');
+    //     } else {
+    //         field.classList.remove('is-valid');
+    //         field.classList.add('is-invalid');
+    //     }
+    // }
+
+    // function validateHousePhoneNumberField(field) {
+    //     if (field.value && isValidHousePhoneNumber(field.value)) {
+    //     field.classList.add('is-valid');
+    //     field.classList.remove('is-invalid');
+    //     } else {
+    //     field.classList.remove('is-valid');
+    //     field.classList.add('is-invalid');
+    //     }
+    // }
+
+    // function validateEmailField(field) {
+    //     if (field.value && isValidEmail(field.value)) {
+    //         field.classList.add('is-valid');
+    //         field.classList.remove('is-invalid');
+    //     } else {
+    //         field.classList.remove('is-valid');
+    //         field.classList.add('is-invalid');
+    //     }
+    // }
+
+    // function isValidMobileNumber(mobileNumber) {
+    //     // Regular expression pattern to validate mobile number format
+    //     var mobileNumberRegex = /^0\d{10}$/;
+
+    //     // Test the mobile number against the regex pattern
+    //     var isValid = mobileNumberRegex.test(mobileNumber);
+
+    //     return isValid;
+    // }
+
+    // function isValidHousePhoneNumber(phoneNumber) {
+    //     // Regular expression pattern to validate house phone number format
+    //     var phoneNumberRegex = /^0\d{10}$/;
+
+    //     // Test the phone number against the regex pattern
+    //     var isValid = phoneNumberRegex.test(phoneNumber);
+
+    //     return isValid;
+    // }
+
+    // function isValidEmail(email) {
+    //     // Implement your email validation logic here
+    //     // You can use a regular expression or any other method to validate the email format
+    //     // Return true if the email is valid, false otherwise
+    //     // Regular expression pattern to validate email format
+    //     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    //     // Test the email against the regex pattern
+    //     var isValid = emailRegex.test(email);
+
+    //     return isValid;
+    // }
+});
+</script>
 @endsection
