@@ -8,7 +8,7 @@
 <div id="education-home">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row needs-home-mobile">
-            <div class="col-12 col-sm-3 col-xl-2 col-md-3 col-lg-3 bg-primary sticky-top">
+            <div class="col-12 col-sm-3 col-xl-2 col-md-3 col-lg-3 bg-primary sticky-top needs-mobile-nav">
                 @include('templates.nav.nav-needs-white')
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3 text-white">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex p-0 flex-column bg-needs">
+            <div class="col d-flex p-0 flex-column bg-needs needs-mobile-content">
                 <hr class="py-2 m-0 bg-primary opacity-100 border-0 needs-home-line"/>
                 <section class="needs-home-nav">
                     <div class="col-12">
@@ -45,9 +45,9 @@
                     </div>
                 </section>
                 <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
-                    <div class="col-12 h-100">
+                    <div class="col-12 h-100 needs-row">
                         <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative m-auto avatar-height" style="z-index:99999;">
-                        <h5 class="d-flex justify-content-center text-center w-50 m-auto py-3 position-relative" style="z-index:99999;">Let's get into your plans for Education.</h5>
+                        <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative" style="z-index:99999;">Let's get into your plans for Education.</h5>
                     </div>
                     <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
                         <div class="col-11 col-md-4 text-center">
