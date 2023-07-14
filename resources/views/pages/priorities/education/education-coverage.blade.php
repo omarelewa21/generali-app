@@ -6,8 +6,8 @@
 @section('content')
 
 <div id="education-content">
-    <div class="container-fluid overflow-hidden font-color-default bg-education" style="max-height:100vh;">
-        <div class="row">
+    <div class="container-fluid overflow-hidden font-color-default">
+        <div class="row bg-education" style="max-height:100vh;height:100vh;">
             <section class="col-12 d-flex">
                 <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-needs-red')

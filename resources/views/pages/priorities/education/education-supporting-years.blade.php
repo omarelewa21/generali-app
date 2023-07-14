@@ -6,13 +6,15 @@
 @section('content')
 
 <div id="education-content">
-    <div class="container-fluid overflow-hidden font-color-default bg-education" style="max-height:100vh;">
-        <div class="row">
+    <div class="container-fluid overflow-hidden font-color-default">
+        <div class="row bg-education" style="height:100vh;">
             <section class="col-12 d-flex">
-                <div class="col-2 col-md-3 col-lg-3 sticky-top">
+                <div class="col-2 sticky-top">
                     @include('templates.nav.nav-needs-red')
                 </div>
-                <div class="col-10 col-md-9 col-lg-9">
+                <div class="col-7">
+                </div>
+                <div class="col-3">
                     <div class="row d-flex justify-content-end align-items-center pt-3">
                         <div class="col-3 col-xs-3 col-sm-2 col-md-2 col-xl-1">
                             <div class="row d-flex">
@@ -48,8 +50,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('education.home')}}" class="btn btn-primary me-md-2 text-uppercase">Back</a>
-                            <a href="{{route('education.coverage')}}" class="btn btn-primary text-uppercase">Next</a>
+                            <a href="{{route('education.coverage')}}" class="btn btn-primary me-md-2 text-uppercase">Back</a>
+                            <a href="{{route('education.supporting.years')}}" class="btn btn-primary text-uppercase">Next</a>
                         </div>
                     </div>
                 </div>

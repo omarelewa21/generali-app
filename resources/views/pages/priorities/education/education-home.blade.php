@@ -7,8 +7,8 @@
 
 <div id="education-home">
     <div class="container-fluid overflow-hidden font-color-default">
-        <div class="row vh-100">
-            <div class="col-12 col-sm-2 col-xl-2 col-md-3 col-lg-3 bg-primary sticky-top">
+        <div class="row needs-home-mobile">
+            <div class="col-12 col-sm-3 col-xl-2 col-md-3 col-lg-3 bg-primary sticky-top">
                 @include('templates.nav.nav-needs-white')
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3 text-white">
@@ -16,9 +16,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex p-0 flex-column h-sm-100 bg-needs">
-                <hr class="py-2 m-0 bg-primary opacity-100 border-0" />
-                <section>
+            <div class="col d-flex p-0 flex-column bg-needs">
+                <hr class="py-2 m-0 bg-primary opacity-100 border-0 needs-home-line"/>
+                <section class="needs-home-nav">
                     <div class="col-12">
                         <div class="row d-flex justify-content-end align-items-center">
                             <div class="col-3 col-xs-3 col-sm-2 col-md-2 col-xl-1">
@@ -44,14 +44,22 @@
                         </div>
                     </div>
                 </section>
-                <section class="education-wrapper h-100 w-100 overflow-hidden position-relative">
-                    <img src="{{ asset('images/needs/education/education-home-full.png') }}" class="position-absolute w-100 bottom-0" style="max-width:100%; max-height:100%;">
+                <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
+                    <div class="col-12 h-100">
+                        <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative m-auto avatar-height" style="z-index:99999;">
+                        <h5 class="d-flex justify-content-center text-center w-50 m-auto py-3 position-relative" style="z-index:99999;">Let's get into your plans for Education.</h5>
+                    </div>
+                    <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
+                        <div class="col-11 col-md-4 text-center">
+                            
+                        </div>
+                    </div>
                 </section>
-                <section>
+                <section class="needs-home-footer footer bg-needs_text">
                     <div class="bg-btn_bar py-4 px-2 sticky-bottom">
-                        <div class="col d-flex justify-content-end">
+                        <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('education.coverage')}}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                            <a href="{{route('education.coverage')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                         </div>
                     </div>
                 </section>
