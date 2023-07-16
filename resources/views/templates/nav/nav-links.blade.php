@@ -57,7 +57,7 @@
 
     </div>
     <div class="footer-navigation col-12">
-        <div class="col-10 px-5 inline-block">
+        <div class="col-10 px-5 my-3 inline-block">
             <a href="{{route('welcome')}}" class="btn btn-exit btn-outline-primary d-flex text-uppercase"><img src="{{ asset('images/Logout.svg') }}" alt="logout" class="logout-svg">Save & Logout</a>
         </div>
     </div>

@@ -28,4 +28,8 @@ Route::view('/education-home', 'pages.priorities.education.education-home')->nam
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 
+/* Priorities - Retirement */
+Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
+Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
+
 
