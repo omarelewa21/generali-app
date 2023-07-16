@@ -31,13 +31,13 @@
                     <section class="main-content scrollable-padding">
                         <div class="container">
                             <div class="row d-flex justify-content-center">
-                                <img src="{{ asset('images/needs/protection/protection-home-avatar.png') }}"
-                                    style="width:350px" alt="Protection">
+                                {{-- <img src="{{ asset('images/needs/protection/protection-home-avatar.png') }}"
+                                    style="width:350px" alt="Protection"> --}}
                             </div>
                             <div
                                 class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 bg-accent-bg-grey text-center">
                                 <div class="col-12">
-                                    <h4>Let’s figure out what you need for Protection.</h1>
+                                    <h4>Now let's talk about your plans for Retirement.</h1>
                                 </div>
                             </div>
                         </div>
@@ -92,8 +92,8 @@
                 <section>
                     <div class="row bg-white py-4 px-2 sticky-bottom">
                         <div class="col d-flex justify-content-end">
-                            <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('avatar.welcome') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
+                            <a href="{{route('retirement.home')}}" class="btn btn-primary text-uppercase">Back</a>
+                            <a href="{{route('retirement.home') }}" class="btn btn-primary mx-2 text-uppercase">Next</a>
                         </div>
                     </div>
                 </section>
