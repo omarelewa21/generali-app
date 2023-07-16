@@ -1,7 +1,11 @@
 ### README Last updated July 17 2023
 
 ## Prerequisities
-Homebrew and Composer package manager installed
+1. [Homebrew](https://brew.sh/) installed.
+2. [Composer](https://formulae.brew.sh/formula/composer) installed via Homebrew.
+3. [Node](https://formulae.brew.sh/formula/node#default) installed via Homebrew.
+4. PHP 8.2
+
 
 ## First time Installation Commands 
 
