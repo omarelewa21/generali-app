@@ -22,7 +22,7 @@
                     <h4 class="display-5 font-bold fw-bold">My Priorities</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 text-dark px-0 protection-bg">
+            <div class="col-12 col-md-8 col-lg-9 text-dark px-0 retirement-bg">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
 
@@ -77,7 +77,7 @@
                 </section>
                 <section class="main-vh row overflow-auto bg-accent-bg-grey">
                     <div class="protection-home d-flex flex-column align-items-center justify-content-center"
-                        style="background-image: url('{{ asset('images/needs/protection/bg-home.png') }}');">
+                        style="background-image: url('{{ asset('images/needs/retirement/bg-home.png') }}');">
                         <img class="protection-home-avatar position-absolute"
                             src="{{ asset('images/needs/protection/home-protection-avatar.png') }}"
                             alt="avatar-protection">

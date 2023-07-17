@@ -166,6 +166,16 @@
   background-color: #fff;
 }
 
+/* Retirement Home Page */
+.retirement-bg {
+  background-image: url(/images/needs/retirement/bg-home.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-color: #fff;
+}
+
 img {
   display:flex;   
   }
