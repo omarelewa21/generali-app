@@ -63,14 +63,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mt-5">
                                                 <label for="firstName" class="form-label">First Name:</label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName') }}" autocomplete="off" required>
+                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName') }}" required>
                                                     @error('firstName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
                                             <div class="col-md-6 mt-5">
                                                 <label for="lastName" class="form-label">Last Name:</label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName') }}" autocomplete="off" required>
+                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName') }}" required>
                                                     @error('lastName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -79,14 +79,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mt-5">
                                                 <label for="mobileNumber" class="form-label">Mobile Number:</label>
-                                                <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="+60 000-0000 000" value="{{ old('mobileNumber') }}" autocomplete="off" required>
+                                                <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="+60 000-0000 000" value="{{ old('mobileNumber') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
                                             <div class="col-md-6 mt-5">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number:</label>
-                                                <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="+60 000-0000 000" value="{{ old('housePhoneNumber') }}" autocomplete="off">
+                                                <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="+60 000-0000 000" value="{{ old('housePhoneNumber') }}">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -95,7 +95,7 @@
                                         <div class="row">
                                             <div class="col-md-6 mt-5">
                                                 <label for="email" class="form-label">Email Address:</label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email') }}" autocomplete="off">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email') }}">
                                                     @error('email')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -124,7 +124,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
     var firstNameInput = document.getElementById('firstNameInput');
     var lastNameInput = document.getElementById('lastNameInput');
@@ -208,7 +208,7 @@
 
     function isValidMobileNumber(mobileNumber) {
         // Regular expression pattern to validate mobile number format
-        var mobileNumberRegex = /^0\d{10}$/;
+        var mobileNumberRegex = /^0\d{0,11}$/;
 
         // Test the mobile number against the regex pattern
         var isValid = mobileNumberRegex.test(mobileNumber);
@@ -218,7 +218,7 @@
 
     function isValidHousePhoneNumber(phoneNumber) {
         // Regular expression pattern to validate house phone number format
-        var phoneNumberRegex = /^0\d{10}$/;
+        var phoneNumberRegex = /^0\d{0,11}$/;
 
         // Test the phone number against the regex pattern
         var isValid = phoneNumberRegex.test(phoneNumber);

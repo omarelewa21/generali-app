@@ -18,9 +18,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4">
+                <section class="avatar-design-placeholder content-avatar-default pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('images/avatar/avatar-' . session('image') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset('images/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -63,50 +63,131 @@
                                             <div class="invalid-feedback text-white">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-12 pt-4">
+                                    <div class="col-12 pt-4" id="newicgroup" style="display: none;">
                                         <label for="idNumber" class="form-label text-white">ID Number:</label>
-                                        <input type="number" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber') }}" autocomplete="off" required>
+                                        <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber') }}">
                                         @error('idNumber')
                                             <div class="invalid-feedback text-white">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="col-12 pt-4" id="passportgroup" style="display: none;">
+                                        <label for="passportNumber" class="form-label text-white">Passport Number:</label>
+                                        <input type="text" name="passportNumber" class="form-control bg-white @error('passportNumber') is-invalid @enderror" id="passportNumber" placeholder="A122345" value="{{ old('passportNumber') }}">
+                                        @error('passportNumber')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
+                                        <label for="birthCert" class="form-label text-white">Birth Certificate Number:</label>
+                                        <input type="text" name="birthCert" class="form-control bg-white @error('birthCert') is-invalid @enderror" id="birthCert" placeholder="T122345" value="{{ old('birthCert') }}">
+                                        @error('birthCert')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 pt-4" id="policegroup" style="display: none;">
+                                        <label for="policeNumber" class="form-label text-white">Police / Army Number:</label>
+                                        <input type="text" name="policeNumber" class="form-control bg-white @error('policeNumber') is-invalid @enderror" id="policeNumber" placeholder="Enter Police / Army Number" value="{{ old('policeNumber') }}">
+                                        @error('policeNumber')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-12 pt-4" id="registrationgroup" style="display: none;">
+                                        <label for="registrationNumber" class="form-label text-white">Registration Number:</label>
+                                        <input type="text" name="registrationNumber" class="form-control bg-white @error('registrationNumber') is-invalid @enderror" id="registrationNumber" placeholder="Enter Registration Number" value="{{ old('registrationNumber') }}">
+                                        @error('registrationNumber')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="col-12 pt-4">
-                                        <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                        @php
+                                            // Generate arrays for the date, month, and year ranges
+                                            $dateRange = range(1, 31);
+                                            $dateRange = array_map(function ($day) {
+                                                return sprintf('%02d', $day);
+                                            }, $dateRange);
+                                            $monthRange = range(1, 12);
+                                            $monthRange = array_map(function ($month) {
+                                                return sprintf('%02d', $month);
+                                            }, $monthRange);
+                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                            // Set the selected values
+                                            $selectedDay = old('day', null); 
+                                            $selectedMonth = old('month', null); 
+                                            $selectedYear = old('year', null);
+
+                                            // Adjust the selected month value to "01" format
+                                            if ($selectedMonth !== null) {
+                                                $selectedMonth = sprintf('%02d', $selectedMonth);
+                                            }
+                                            if ($selectedDay !== null) {
+                                                $selectedDay = sprintf('%02d', $selectedDay);
+                                            }
+                                        @endphp
+                                        <label for="dob" class="form-label text-white">Date of Birth: ( <div id="age" class="d-inline-block"></div> )</label>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <select class="form-select bg-white" aria-label="00">
-                                                    <option selected>Select</option>
-                                                    <option value="00">00</option>
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                </select>
+                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
                                             </div>
                                             <div class="col-md-4">
-                                                <select class="form-select bg-white" aria-label="00">
-                                                    <option selected>Select</option>
-                                                    <option value="January">January</option>
-                                                    <option value="February">February</option>
-                                                    <option value="March">March</option>
-                                                    <option value="April">April</option>
-                                                    <option value="May">May</option>
-                                                    <option value="June">June</option>
-                                                    <option value="July">July</option>
-                                                    <option value="August">August</option>
-                                                    <option value="September">September</option>
-                                                    <option value="October">October</option>
-                                                    <option value="November">November</option>
-                                                    <option value="December">December</option>
-                                                </select>
+                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                             </div>
                                             <div class="col-md-4">
-                                                <select class="form-select bg-white" aria-label="00">
-                                                    <option selected>Select</option>
-                                                    <option value="00">00</option>
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                </select>
+                                                <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
+                                                {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                    return substr($year, -2);
+                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 pt-4">
+                                        <div class="row">
+                                            <label for="habits" class="form-label text-white">Your Habits:</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="btn-group @error('btnradio') is-invalid @enderror" role="group">
+                                                <div class="col-6">
+                                                    <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker">
+                                                    <label class="btn btn-outline-primary" for="smoker">Smoker</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker">
+                                                    <label class="btn btn-outline-primary" for="nonSmoker">Non-Smoker</label>
+                                                </div>
+                                            </div>
+                                            @error('btnradio')
+                                                <div class="invalid-feedback text-white">Please select your habits</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 pt-4">
+                                        <label for="educationLevel" class="form-label text-white">Education Level:</label>
+                                        <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Education Level" id="educationLevel" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="New IC" @if(old('idType') == 'New IC') selected @endif>New IC</option>
+                                            <option value="Passport" @if(old('idType') == 'Passport') selected @endif>Passport</option>
+                                            <option value="Birth Certificate" @if(old('idType') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                            <option value="Police / Army" @if(old('idType') == 'Police / Army') selected @endif>Police / Army</option>
+                                            <option value="Registration" @if(old('idType') == 'Registration') selected @endif>Registration</option>
+                                        </select>
+                                        @error('educationLevel')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 pt-4">
+                                        <label for="occupation" class="form-label text-white">Occupation:</label>
+                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="New IC" @if(old('idType') == 'New IC') selected @endif>New IC</option>
+                                            <option value="Passport" @if(old('idType') == 'Passport') selected @endif>Passport</option>
+                                            <option value="Birth Certificate" @if(old('idType') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                            <option value="Police / Army" @if(old('idType') == 'Police / Army') selected @endif>Police / Army</option>
+                                            <option value="Registration" @if(old('idType') == 'Registration') selected @endif>Registration</option>
+                                        </select>
+                                        @error('occupation')
+                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -133,10 +214,11 @@
     document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
-    // var lastNameInput = document.getElementById('lastNameInput');
-    // var mobileNumberInput = document.getElementById('mobileNumber');
-    // var housePhoneNumberInput = document.getElementById('housePhoneNumber');
-    // var emailInput = document.getElementById('email');
+    var idNumber = document.getElementById('idNumber');
+    var passportNumber = document.getElementById('passportNumber');
+    var birthCert = document.getElementById('birthCert');
+    var policeNumber = document.getElementById('policeNumber');
+    var registrationNumber = document.getElementById('registrationNumber');
 
     countrySelect.addEventListener('blur', function() {
         validateSelectField(countrySelect);
@@ -145,13 +227,25 @@
         validateSelectField(idType);
     });
 
-    // firstNameInput.addEventListener('blur', function() {
-    //     validateInputField(firstNameInput);
-    // });
+    idNumber.addEventListener('blur', function() {
+        validateInputField(idNumber);
+    });
 
-    // lastNameInput.addEventListener('blur', function() {
-    //     validateInputField(lastNameInput);
-    // });
+    passportNumber.addEventListener('blur', function() {
+        validateInputField(passportNumber);
+    });
+
+    birthCert.addEventListener('blur', function() {
+        validateInputField(birthCert);
+    });
+
+    policeNumber.addEventListener('blur', function() {
+        validateInputField(policeNumber);
+    });
+
+    registrationNumber.addEventListener('blur', function() {
+        validateInputField(registrationNumber);
+    });
 
     // mobileNumberInput.addEventListener('blur', function() {
     //     validateMobileNumberField(mobileNumberInput);
@@ -175,15 +269,15 @@
         }
     }
 
-    // function validateInputField(field) {
-    //     if (field.value) {
-    //         field.classList.add('is-valid');
-    //         field.classList.remove('is-invalid');
-    //     } else {
-    //         field.classList.remove('is-valid');
-    //         field.classList.add('is-invalid');
-    //     }
-    // }
+    function validateInputField(field) {
+        if (field.value) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
 
     // function validateMobileNumberField(field) {
     //     if (field.value && isValidMobileNumber(field.value)) {

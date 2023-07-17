@@ -19,6 +19,26 @@
 .sticky-top {
   z-index: 0;
 }
+.btn-check:checked + .btn {
+  border-radius: 0;
+  border-right: inherit;
+  background-color: #d3d4d5;
+  color: inherit;
+  width: 100%;
+}
+.btn-check + .btn {
+  border-radius: 0;
+  border-right: inherit;
+  background-color: #fff;
+  color: inherit;
+  width: 100%;
+}
+.btn-check + .btn:hover {
+  border-radius: 0;
+  background-color: #d3d4d5;
+  color: inherit;
+  width: 100%;
+}
 
 /* Grid Layout */
 .content {

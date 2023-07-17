@@ -19,8 +19,8 @@ class FormController extends Controller
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'title' => 'required|in:Mr.,Ms.,Mrs.,Madam,Datuk,Datin,Dato Seri,Datin Seri,Tan Sri,Puan Sri,Dr.,Tun,Sir,Justice,Others',
-            'mobileNumber' => 'required|regex:/^0\d{10}$/',
-            'housePhoneNumber' => 'nullable|regex:/^0\d{10}$/',
+            'mobileNumber' => 'required|regex:/^0\d{0,11}$/',
+            'housePhoneNumber' => 'nullable|regex:/^0\d{0,11}$/',
             'email' => 'required|email|max:255',
 
         ]);
@@ -561,8 +561,32 @@ class FormController extends Controller
         $validatedData = $request->validate([
             'country' => 'required|in:' . implode(',', array_keys($countries)),
             'idType' => 'required|in:New IC,Passport,Birth Certificate,Police / Army,Registration',
-            'idNumber' => 'required|regex:/^\d{6}-\d{2}-\d{4}$/',
+            'btnradio' => 'required|in:smoker,nonSmoker',
         ]);
+
+        $idType = $request->input('idType');
+
+        if ($idType === 'New IC') {
+            $validatedData['idNumber'] = $request->validate([
+                'idNumber' => 'required|regex:/^\d{6}-\d{2}-\d{4}$/',
+            ]);
+        } elseif ($idType === 'Passport') {
+            $validatedData['passportNumber'] = $request->validate([
+                'passportNumber' => 'required|max:255',
+            ]);
+        } elseif ($idType === 'Birth Certificate') {
+            $validatedData['birthCert'] = $request->validate([
+                'birthCert' => 'required|max:255',
+            ]);
+        } elseif ($idType === 'Police / Army') {
+            $validatedData['policeNumber'] = $request->validate([
+                'policeNumber' => 'required|max:255',
+            ]);
+        } elseif ($idType === 'Registration') {
+            $validatedData['registrationNumber'] = $request->validate([
+                'registrationNumber' => 'required|max:255',
+            ]);
+        }
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
