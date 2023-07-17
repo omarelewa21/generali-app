@@ -15,47 +15,47 @@
 
             <div class="timeline-item-needs {{ $folderName == 'protection' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('#') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'protection' ? 'text-primary' : '' }}">Protection
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'protection' ? 'text-primary' : '' }}">Protection
                     </h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'retirement' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('retirement-home') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'retirement' ? 'text-primary' : '' }}">Retirement
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'retirement' ? 'text-primary' : '' }}">Retirement
                     </h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'education' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('#') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'education' ? 'text-primary' : '' }}">Education</h6>
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'education' ? 'text-primary' : '' }}">Education</h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'savings' ? 'active' : '' }}">   
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('#') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'savings' ? 'text-primary' : '' }}">Savings</h6>
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'savings' ? 'text-primary' : '' }}">Savings</h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'investment' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('#') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investment
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investment
                     </h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'estate planning' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('my-avatar') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">Debt
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">Debt
                         Cancellation</h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'debt cancellation' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('my-avatar') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">
                         Health and Medical</h6>
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'Others ' ? 'active' : '' }}">
                 <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{ url('my-avatar') }}">
-                    <h6 class="display-6 nav-text {{ $folderName == 'Others ' ? 'text-primary' : '' }}">Others</h6>
+                    <h6 class="display-6 nav-text-needs {{ $folderName == 'Others ' ? 'text-primary' : '' }}">Others</h6>
                 </a>
             </div>
         </div>
