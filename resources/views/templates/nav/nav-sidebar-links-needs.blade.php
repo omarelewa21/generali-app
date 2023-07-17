@@ -1,7 +1,7 @@
 {{-- Off Canvas Links for Right Sidebar Navigation --}}
 <div class="offcanvas bg-white offcanvas-end" tabindex="-1" id="offcanvasNeeds">
-    <div class="offcanvas-header px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-3">
-        <button type="button" class="btn-close btn-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="offcanvas-header px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-3 justify-content-end">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-2">
         <div class="timeline-needs text-end">
