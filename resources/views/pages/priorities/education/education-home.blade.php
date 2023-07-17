@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex p-0 flex-column bg-needs needs-mobile-content">
+            <div class="col d-flex p-0 flex-column bg-needs needs-mobile-content" id="needs-home">
                 <hr class="py-2 m-0 bg-primary opacity-100 border-0 needs-home-line"/>
                 <section class="needs-home-nav">
                     <div class="col-12">
@@ -69,79 +69,3 @@
 </div>
 
 @endsection 
- <!-- <section class="h-100 d-flex position-relative">
-                    <div class="col-12 text-center bg-needs_text mt-auto">
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <h4 class="display-5" style="padding-bottom:15px;padding-top:180px;">Let's get into your plans for Education.</h4>
-                        </div>
-                        <div class="position-absolute w-100 top-0">
-                            <img class="m-auto"
-                            src="{{ asset('images/needs/education/education-home.png') }}" alt="avatar-education">
-                        </div>
-                    </div>
-                </section> -->
-                <!-- <section class="main-vh row overflow-auto position-relative">
-                    <div class="education-home d-flex flex-column align-items-center justify-content-center">
-                        <img class="education-home-avatar position-absolute m-auto"
-                            src="{{ asset('images/needs/education/education-home.png') }}" alt="avatar-education">
-                    </div>
-                    <div class="col-12 mt-auto">
-                        <div class="d-flex align-items-center justify-content-center bg-needs_text">
-                            <div class="col-lg-4 col-md-6">
-                                <h4 class="display-5 text-dark text-center">Let's get into your plans for Education.</h4>
-                            </div>
-                        </div>
-                    </div>
-                </section>  -->
-
-
-                <!-- <section class="position-relative h-100 content-main">
-                    <div class="col-11 col-md-10 col-xl-7 m-auto">
-                        <div class="row d-flex justify-content-center">
-                            <img src="{{ asset('images/needs/education/education-home.png') }}" class="m-auto" style="z-index:9999;width:97%">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
-                        <div class="col-11 col-md-4 text-center">
-                            <h5 class="">Let's get into your plans for Education.</h5>
-                        </div>
-                    </div>
-                </section> -->
-                <!-- <section class="education-home-content">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('images/needs/education/education-home.png') }}" alt="Education Home">
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center bg-needs_text">
-                        <h5>Let's get into your plans for Education.</h5>
-                    </div> -->
-                    <!-- <div class="position-fixed bottom-0 right-0 col-12 col-sm-10 col-xl-10 col-md-9 col-lg-9"> -->
-                <!-- <div class="mt-auto"> -->
-                    <!-- <section class="position-relative"> -->
-                    <!-- <section class=""> -->
-                        <!-- <div class="position-absolute w-100 h-100 needs-top">
-                            <div class="col-11 col-md-10 col-xl-7 m-auto">
-                                <div class="row d-flex justify-content-center">
-                                    <img src="{{ asset('images/needs/education/education-home.png') }}" class="m-auto w-100 h-100">
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="d-flex justify-content-center bg-needs_text pd-needs-home">
-                            <div class="col-11 col-md-4 font-color-default text-center">
-                                <h5 class="">Let's get into your plans for Education.</h5>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <div class="bg-btn_bar py-4 px-2 sticky-bottom">
-                            <div class="col d-flex justify-content-end">
-                                <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">Back</a>
-                                <a href="{{route('education.coverage')}}" class="btn btn-primary mx-2 text-uppercase">Next</a>
-                            </div>
-                        </div>
-                    </section> -->
-                <!-- </div>   -->
-                 <!-- <section class="education-home-text bg-needs_text">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                        <h5>Let's get into your plans for Education.</h5>
-                    </div>
-                </section> -->
