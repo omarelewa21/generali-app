@@ -104,31 +104,4 @@
         </div>
     </div>
 </div>
-
-<style>
-/* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #ffffff;
-  }
-
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 7px;
-	background-color: #F5F5F5;
-  }
-
-  *::-webkit-scrollbar-track {
-    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
-	background-color: #A0A0A0;
-    border-radius:0;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: #707070;
-	/* border: 2px solid #707070; */
-    border-radius:0;
-  }
-</style>
 @endsection

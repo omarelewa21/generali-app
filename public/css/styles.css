@@ -5,7 +5,11 @@
 
 .main-content.scrollable-padding {
   z-index: 1;
-  padding-bottom: 105.8px;
+  padding-bottom: 150px;
+}
+.main-content.scrollable-padding-avatar {
+  z-index: 1;
+  padding-bottom: 110px;
 }
 
 .sidebanner {
@@ -18,7 +22,28 @@
 .sticky-top {
   z-index: 0;
 }
+.btn-check:checked + .btn {
+  border-radius: 0;
+  border-right: inherit;
+  background-color: #d3d4d5;
+  color: inherit;
+  width: 100%;
+}
+.btn-check + .btn {
+  border-radius: 0;
+  border-right: inherit;
+  background-color: #fff;
+  color: inherit;
+  width: 100%;
+}
+.btn-check + .btn:hover {
+  border-radius: 0;
+  background-color: #d3d4d5;
+  color: inherit;
+  width: 100%;
+}
 
+/* Grid Layout */
 .content {
   grid-area: content;
 }
@@ -89,6 +114,9 @@
 .form-select {
   color: rgba(10, 4, 60, 0.50);
   ;
+/* Form */
+.input:-internal-autofill-selected {
+  background-image: inherit;
 }
 
 /* Welcome Page */
@@ -691,10 +719,11 @@ input#flexRadioDefault2 {
   .main-content.scrollable-padding {
     padding-bottom: 172px !important;
   }
-
-  #pdpa .main-content,
-  #basic_details .main-content {
-    padding-bottom: 450px !important;
+  .main-content.scrollable-padding-avatar {
+    padding-bottom: 172px!important;
+  }
+  #pdpa .main-content, #basic_details .main-content {
+    padding-bottom: 450px!important;
   }
 
   .navbar.transparent {
