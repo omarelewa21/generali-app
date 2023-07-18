@@ -8,7 +8,7 @@
 <div id="education-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-education" style="max-height:100vh;height:100vh;">
-            <section class="col-12 d-flex needs-master-nav">
+            <section class="col-12 d-flex needs-coverage-nav">
                 <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-needs-red')
                 </div>
@@ -37,10 +37,10 @@
                     </div>
                 </div>
             </section>
-            <section class="col-12 d-flex justify-content-center py-2 text-center needs-master-title align-items-center">
+            <section class="col-12 d-flex justify-content-center py-2 text-center needs-coverage-title align-items-center">
                 <h5 class="m-0">I'd like to provide coverage for my:</h5>
             </section>
-            <section class="needs-master-content">
+            <section class="needs-coverage-content">
                 <div class="col-12">
                     <div class="row overflow-auto d-flex justify-content-center h-100 position-relative">
                         <div class="col-12 col-md-6 col-xl-3 h-100 position-relative">
