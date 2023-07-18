@@ -39,8 +39,8 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <!-- <img src="{{ asset('/images/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
-                        <img src="{{ (session('image') ? session('image') : 'gender-male') . '.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset('/images/avatar/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <!-- <img src="{{ (session('image') ? session('image') : 'gender-male') . '.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
                     </div>
                 </section>
             </div>
@@ -100,31 +100,29 @@
 const routeChangeImage = '{{ route('change.image') }}';
 const csrfToken = '{{ csrf_token() }}';
 
-$(document).ready(function() {
-  $('.gendercolor').click(function() {
-    var color = $(this).data('color'); // Get the color from the data attribute of the clicked button
+// $(document).ready(function() {
+//   $('.gendercolor').click(function() {
+//     var color = $(this).data('color'); // Get the color from the data attribute of the clicked button
 
-    // console.log(secondaryColor);
-    // Send an AJAX request to trigger the changeImage method and update the SVG
-    $.ajax({
-      url: '{{ route('changeImage') }}',
-      type: 'POST',
-      data: {
-        color: color
-      },
-      headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    });
-  });
-});
+//     // Send an AJAX request to trigger the changeImage method and update the SVG
+//     $.ajax({
+//       url: '{{ route('changeImage') }}',
+//       type: 'POST',
+//       data: {
+//         color: color
+//       },
+//       headers: {
+//         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+//         }
+//     });
+//   });
+// });
 
 // $(document).ready(function() {
 //   $('.gendercolor').click(function() {
 //     var color = $(this).data('color'); // Get the color from the data-color attribute of the clicked button
 //     // var secondaryColor = $(this).data('secondary-color'); // Get the secondary color from the data-secondary-color attribute of the clicked button
 
-//     //console.log(secondaryColor);
 //     // Send an AJAX request to trigger the changeImage method and update the SVG
 //     $.ajax({
 //       url: '{{ route('changeImage') }}',

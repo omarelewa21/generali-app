@@ -20,7 +20,8 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
                 <section class="avatar-design-placeholder content-avatar-default pt-4">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="350px" alt="Male Avatar">
+                        <!-- <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="350px" alt="Male Avatar"> -->
+                        <img src="{{ asset('images/avatar/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>

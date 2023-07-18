@@ -21,7 +21,7 @@
                     <h1 class="display-3 headline1 text-uppercase text-dark pb-5">Now, shall we build your signature look?</h1>
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
-                        <a href="{{ route('welcome') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
+                        <a href="{{ route('identity.details') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
                     </div>
                 </div>
             </div>
