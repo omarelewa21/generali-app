@@ -24,22 +24,8 @@
             <div class="col-12 col-md-8 col-lg-9 text-dark px-0 protection-bg">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
-                    <section class="progress-main">
-                        <div class="row justify-content-end align-items-center">
-                            <div class="col-auto ">
-                                <p class="display-6 text-dark d-inline-flex">Protection</p>
-                                <div class="progress color d-inline-flex mx-2">
-                                    <span class="progress-left">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <span class="progress-right">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <div class="progress-value">1</div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    @include ('templates.nav.nav-sidebar-needs')
+
                     <section class="main-content scrollable-padding">
                         <div class="container">
                             <div class="row d-flex justify-content-center">
