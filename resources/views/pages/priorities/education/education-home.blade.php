@@ -5,61 +5,64 @@
 
 @section('content')
 
-
-<div id="education">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-xl-2 col-md-3 col-12 bg-primary">
+<div id="education-home">
+    <div class="container-fluid overflow-hidden font-color-default">
+        <div class="row needs-home-mobile">
+            <div class="col-12 col-sm-3 col-xl-2 col-md-3 col-lg-3 bg-primary sticky-top needs-mobile-nav">
                 @include('templates.nav.nav-needs-white')
                 <div class="row d-flex align-items-center justify-content-center">
-                    <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3">
-                        <h4 class="text-white display-5 font-bold fw-bold">My Priorities</h4>
+                    <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3 text-white">
+                        <h4 class="display-5 font-bold fw-bold">My Priorities</h4>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-xl-10 col-md-9 col-12 font-color-default text-center overflow-y-scroll vh-100">
-                <section class="row bg-needs h-100">
-                    <div class="bg-primary" style="height:19px;"></div>
-                    <!-- Progress bar menu -->
-                    <!-- <div>
-                        <div class="row justify-content-end align-items-center">
-                            <div class="col-auto ">
-                                <p class="display-6 text-dark d-inline-flex">Education</p>
-                                <div class="progress color d-inline-flex mx-2">
-                                    <span class="progress-left">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <span class="progress-right">
-                                        <span class="progress-bar"></span>
-                                    </span>
-                                    <div class="progress-value">3</div>
+            <div class="col d-flex p-0 flex-column bg-needs needs-mobile-content" id="needs-home">
+                <hr class="py-2 m-0 bg-primary opacity-100 border-0 needs-home-line"/>
+                <section class="needs-home-nav">
+                    <div class="col-12">
+                        <div class="row d-flex justify-content-end align-items-center">
+                            <div class="col-3 col-xs-3 col-sm-2 col-md-2 col-xl-1">
+                                <div class="row d-flex">
+                                    <p class="display-6 m-0">Education</p>
+                                </div>
+                            </div>
+                            <div class="col-3 col-md-2 col-xl-1 py-2">
+                                <div class="row d-flex">
+                                    <div class="progress blue m-auto">
+                                        <span class="progress-left">
+                                            <span class="progress-bar"></span>
+                                        </span>
+                                        <span class="progress-right">
+                                            <span class="progress-bar"></span>
+                                        </span>
+                                        <div class="progress-value">
+                                            <span class="progress-text">3</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                    <div style="height: fit-content;">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-12 col-md-10">
-                                <img src="{{ asset('images/needs/education/education-home.png') }}" class="m-auto w-100 h-100">
-                            </div>
+                    </div>
+                </section>
+                <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
+                    <div class="col-12 h-100 needs-row">
+                        <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative m-auto avatar-height" style="z-index:99999;">
+                        <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative" style="z-index:99999;">Let's get into your plans for Education.</h5>
+                    </div>
+                    <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
+                        <div class="col-11 col-md-4 text-center">
+                            
                         </div>
                     </div>
-                    <div style="height: fit-content;">
-                        <div class="row d-flex justify-content-center bg-needs_text py-4">
-                            <div class="col-12 col-md-4">
-                                <h5 class="">Let's get into your plans for Education.</h5>
-                            </div>
+                </section>
+                <section class="needs-home-footer footer bg-needs_text">
+                    <div class="bg-btn_bar py-4 px-2 sticky-bottom">
+                        <div class="col-12 d-grid gap-2 d-md-block text-end">
+                            <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">Back</a>
+                            <a href="{{route('education.coverage')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                         </div>
                     </div>
-                    <div class="footer height-mobile" style="height: fit-content;">
-                        <div class="row py-4 bg-btn_bar d-flex">
-                            <div class="d-flex justify-content-end">
-                                <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">back</a>
-                                <a href="{{route('education.coverage')}}" class="btn btn-primary text-uppercase mx-2">next</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>  
+                </section>
             </div>
         </div>
     </div>
