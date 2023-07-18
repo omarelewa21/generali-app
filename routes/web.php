@@ -24,6 +24,7 @@ Route::post('/identity-details', [FormController::class, 'submitIdentity'])->nam
 // Route::get('/edit-svg', [SvgController::class, 'editSvg'])->name('editSvg');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
 
+Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 
 /* Priorities */
 Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
