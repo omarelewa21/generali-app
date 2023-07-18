@@ -207,13 +207,25 @@
   background-color: #fff;
 }
 
-/* retirement character position*/
 #retirement-character {
   top: 100px;
   z-index: 10;
   height: 100%;
 }
+/* Retirement Coverage */
+.retirement-coverage {
+  background-image: url(/images/needs/retirement/bg-coverage.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-color: #fff;
+}
+#coverage-avatar {
+  bottom:50%;
+}
 
+/* other codes */
 img {
   display: flex;
 }

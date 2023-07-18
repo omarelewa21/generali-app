@@ -12,7 +12,7 @@
 
 @section('content')
 
-<div id="basic_details" class="vh-100">
+<div id="retirement_home" class="vh-100">
 
     <div class="container-fluid p-0">
         <div class="row">

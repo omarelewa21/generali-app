@@ -7,43 +7,53 @@
 @extends('templates.master')
 
 @section('title')
-<title>Retirement - Home</title>
+<title>Retirement - Coverage</title>
 @endsection
 
 @section('content')
 
-<div id="basic_details" class="vh-100">
+<div id="retirement_coverage" class="vh-100">
 
     <div class="container-fluid p-0">
+        @include('templates.nav.nav-red-menu')
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
-                @include('templates.nav.nav-white-menu')
-                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
-                    <h4 class="display-5 font-bold fw-bold">My Priorities</h4>
-                </div>
-            </div>
-            <div class="col-12 col-md-8 col-lg-9 text-dark px-0 retirement-bg">
-                <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
+            @include ('templates.nav.nav-sidebar-needs')
+            <div class="col-12 text-dark px-0 retirement-coverage">
                 <div class="vh-100 overflow-auto">
-                    @include ('templates.nav.nav-sidebar-needs')
-                    <section class="main-content scrollable-padding">
-                        <div class="container-fluid">
-                            <div id="retirement-character" class="row d-flex justify-content-center position-relative">
-                                <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}"
-                                    style="width:350px" alt="Retirement Character">
+                    <section>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                            <h5>I’d like to provide coverage for my:</h5>
                             </div>
-                            <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-auto py-lg-5 py-md-0">
-                                </div>
+                        </div>
+                        <div class="row position-relative" id="coverage-avatar">
+                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
+                                <img src="{{ asset('images/needs/retirement/self.svg') }}" style="width:100px"
+                                    alt="self-character">
+                                <h6 class="text-center py-2">Self</h6>
                             </div>
-                            <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-6 py-4">
-                                    <h4 class="display-5 img-fluid">Now let's talk about your plans for Retirement.</h1>
-                                </div>
+                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
+                                <img src="{{ asset('images/needs/retirement/spouse.svg') }}" style="width:100px"
+                                    alt="spouse">
+                                <h6 class="text-center py-2">Spouse</h6>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                                <img src="{{ asset('images/needs/retirement/kid.svg') }}" style="width:100px" alt="kid">
+                                <h6 class="text-center py-2">Child(ren)</h6>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                                <img src="{{ asset('images/needs/retirement/parent.svg') }}" style="width:200px"
+                                    alt="parent">
+                                <h6 class="text-center py-2">Parent</h6>
                             </div>
                         </div>
                     </section>
 
+                    <section>
+                        <div class="row bg-accent-bg-grey text-center justify-content-center">
+
+                        </div>
+                    </section>
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
@@ -60,6 +70,5 @@
             </div>
         </div>
     </div>
-</div>
 
-@endsection
+    @endsection
