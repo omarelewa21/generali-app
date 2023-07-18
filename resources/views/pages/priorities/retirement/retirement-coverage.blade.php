@@ -31,7 +31,6 @@
                             <div id="retirement-character" class="row d-flex justify-content-center position-relative">
                                 <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}"
                                     style="width:350px" alt="Retirement Character">
-                                    {{-- <div id="bm"> </div> --}}
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
                                 <div class="col-auto py-lg-5 py-md-0">

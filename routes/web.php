@@ -32,4 +32,8 @@ Route::view('/education-coverage', 'pages.priorities.education.education-coverag
 Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
 
+Route::get('/files/{filename}', function($filename){
+    return \Storage::download($filename); // assuming default disk is set to 'public'
+});
+
 
