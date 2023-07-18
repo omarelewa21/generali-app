@@ -12,10 +12,6 @@
   z-index: 1100;
 }
 
-#bm {
-  height:300px;
-}
-
 /* .fixed-bottom {
   z-index: 0!important;
 } */
@@ -785,4 +781,10 @@ input#flexRadioDefault2 {
 .timeline-item-needs.active::after {
   background: #C21B17;
   border: 0;
+}
+
+/* test code for svg animation in retirement page */
+
+#bm {
+  height:300px;
 }
