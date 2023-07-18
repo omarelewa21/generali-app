@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Family Dependant Details Page
+ * Template Name: Avatar - Family Dependant Details Page  -Testing
  */
 ?>
 
