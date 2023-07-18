@@ -5,9 +5,9 @@
 
 {{-- Nav Sidebar Right Needs --}}
 <section class="progress-main">
-    <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
-        <div class="row justify-content-end align-items-center m-3">
-            <div class="col-auto">
+    <div class="row justify-content-end align-items-center m-3">
+        <div class="col-auto">
+            <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
                 <div class="text-dark d-inline-flex">
                     <p class="mb-0">
                         @php
@@ -21,8 +21,10 @@
                         <!-- Display the folder name with the first letter in uppercase -->
                     </p>
                 </div>
-            </div>
-            <div class="col-auto">
+            </a>
+        </div>
+        <div class="col-auto">
+            <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
                 <div class="progress color d-inline-flex mx-2">
                     <span class="progress-left">
                         <span class="progress-bar"></span>
@@ -67,8 +69,8 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-    </a>
+    </div>
 </section>
 {{-- Nav Sidebar Right Needs --}}
