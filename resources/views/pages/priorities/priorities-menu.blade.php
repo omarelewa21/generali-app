@@ -14,8 +14,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4">
-
+                <section class="pt-4">
+                    <div class="text-center">
+                    <img src="{{ asset('images/needs/needs-chart-empty.svg') }}" width="767px" height="380px" alt="Needs Chart">
+                    </div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary">
@@ -32,7 +34,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
-                                            <img src="{{ asset('images/avatar/protection-icon.svg') }}" width="150px" height="100px" alt="Protection">
+                                            <img src="{{ asset('images/needs/protection-icon.svg') }}" width="150px" height="100px" alt="Protection">
                                             <h6 class="avatar-text text-center pt-4">Protection</h6>
                                         </button>
                                     </div>
@@ -48,7 +50,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
-                                            <img src="{{ asset('images/needs/education-icon.svg') }}" width="150px" height="100px" alt="House">
+                                            <img src="{{ asset('images/needs/education-icon.svg') }}" width="150px" height="100px" alt="Education">
                                             <h6 class="avatar-text text-center pt-4">Education</h6>
                                         </button>
                                     </div>
@@ -56,7 +58,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
-                                            <img src="{{ asset('images/needs/savings-icon.svg') }}" width="150px" height="100px" alt="Bungalow">
+                                            <img src="{{ asset('images/needs/savings-icon.svg') }}" width="150px" height="100px" alt="Savings">
                                             <h6 class="avatar-text text-center pt-4">Savings</h6>
                                         </button>
                                     </div>
@@ -64,7 +66,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
-                                            <img src="{{ asset('images/needs/debt-cancellation-icon.svg') }}" width="150px" height="100px" alt="Apartment">
+                                            <img src="{{ asset('images/needs/debt-cancellation-icon.svg') }}" width="150px" height="100px" alt="Debt Cancellation">
                                             <h6 class="avatar-text text-center pt-4">Debt Cancellation</h6>
                                         </button>
                                     </div>
@@ -72,7 +74,23 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
                                     <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
                                         <button class="border-0 bg-white">
-                                            <img src="{{ asset('images/needs/health-medical-icon.svg') }}" width="150px" height="100px" alt="Others">
+                                            <img src="{{ asset('images/needs/health-medical-icon.svg') }}" width="150px" height="100px" alt="Health and Medical">
+                                            <h6 class="avatar-text text-center pt-4">Health & Medical</h6>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                        <button class="border-0 bg-white">
+                                            <img src="{{ asset('images/needs/investment-icon.svg') }}" width="150px" height="100px" alt="Investments">
+                                            <h6 class="avatar-text text-center pt-4">Debt Cancellation</h6>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                        <button class="border-0 bg-white">
+                                            <img src="{{ asset('images/needs/others-icon.svg') }}" width="150px" height="100px" alt="Others">
                                             <h6 class="avatar-text text-center pt-4">Health & Medical</h6>
                                         </button>
                                     </div>
