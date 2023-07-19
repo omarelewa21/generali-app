@@ -251,10 +251,10 @@
     height: 100%;
     background-color: #fff;
   }
-
   #coverage-avatar {
-    bottom: 50%;
-  }
+    z-index: 50;
+    top: 70px;
+}
 
   /* other codes */
   img {
@@ -517,7 +517,9 @@
     right: 10px;
     padding: 10px;
   }
-
+.progress-main {
+  z-index:1040;
+}
   .progress {
     width: 44px;
     height: 44px;
@@ -691,11 +693,6 @@
     }
   }
 
-  @media only screen and (max-width: 990px) {
-    .progress {
-      margin-bottom: 20px;
-    }
-  }
 
   @media only screen and (min-width: 768px) {
     .min-height-100 {
@@ -735,15 +732,10 @@
     #basic_details .main-content {
       padding-bottom: 450px !important;
     }
-
-    .navbar.transparent {
-      background-color: #fff;
-    }
-
+    
     #retirement-character {
-      top: 30px;
+      top: 0px;
     }
-
 
   }
 

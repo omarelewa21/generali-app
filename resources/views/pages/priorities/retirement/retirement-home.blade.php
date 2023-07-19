@@ -26,7 +26,7 @@
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-auto">
                     @include ('templates.nav.nav-sidebar-needs')
-                    <section class="main-content scrollable-padding">
+                    <section class="main-content">
                         <div class="container-fluid">
                             <div id="retirement-character" class="row d-flex justify-content-center position-relative">
                                 <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}"
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-6 py-4">
+                                <div class="col-lg-6 py-md-4 py-lg-5">
                                     <h4 class="display-5 img-fluid">Now let's talk about your plans for Retirement.</h1>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('retirement.home')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.home') }}"
+                                    <a href="{{route('retirement.coverage') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
