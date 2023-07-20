@@ -17,7 +17,7 @@
     <section class="main-content content-home">
         <div class="container px-5">
             <div class="row">
-                <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center">
+                <div class="col-xxl-6 col-xl-6 col-md-12">
                     <div class="col-12">
                         <h1 class="text-uppercase text-dark">Welcome!</h1>
                         <h2 class="text-uppercase text-dark">Your Future Awaits.</h2>
@@ -27,7 +27,7 @@
                         <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center d-none d-md-none d-sm-none d-xxl-flex d-xl-flex">
+                <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center d-none d-xxl-flex d-xl-flex">
                     <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" style="width: 100%;max-width:400px" alt="Footer Vector">
                 </div>
             </div>
