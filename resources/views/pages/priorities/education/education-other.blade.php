@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Supporting Years</title>
+<title>Education - Other Savings</title>
 
 @section('content')
 
@@ -35,7 +35,6 @@
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row d-flex h-100">
                                         <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="w-100" style="z-index:99;">
-                                        <p class="text-center py-2" style="z-index:99;"><strong>RM231,682</strong></p>
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                             <div class="col-11 col-md-4 text-center">
                                                 
@@ -46,7 +45,6 @@
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row d-flex h-100">
                                         <img src="{{ asset('images/avatar/daughter.png') }}" class="w-100" style="z-index:99;">
-                                        <p class="text-center py-2" style="z-index:99;"><strong>RM540,000</strong></p>
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                             <div class="col-11 col-md-4 text-center">
                                                 
@@ -57,7 +55,6 @@
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row h-100">
                                         <img src="{{ asset('images/avatar/son.png') }}" class="w-100" style="z-index:99;">
-                                        <p class="text-center py-2" style="z-index:99;"><strong>RM135,545</strong></p>
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                             <div class="col-11 col-md-4 text-center">
                                                 
@@ -78,18 +75,15 @@
                                     <div class="">
                                         <div class="col-10 mt-4">
                                             <div class="" style="height:fit-content;">
-                                                <p style="font-size:34px;"><strong>1st Child:</strong>
-                                                    <input type="number" name="fund_year" class="form-control d-inline-block w-25" id="fund_year" required>
-                                                    <strong>year(s) old</strong>
-                                                </p>
-                                                <p style="font-size:34px;"><strong>2nd Child:</strong>
-                                                    <input type="number" name="fund_year1" class="form-control d-inline-block w-25" id="fund_year1" required>
-                                                    <strong>year(s) old</strong>
-                                                </p>
-                                                <p style="font-size:34px;"><strong>3rd Child:</strong>
-                                                    <input type="number" name="fund_year2" class="form-control d-inline-block w-25" id="fund_year2" required>
-                                                    <strong>year(s) old</strong>
-                                                </p>
+                                                <p style="font-size:34px;"><strong>I’ve been saving up for my child(ren)’s education.</strong></p>
+                                                <span class="me-5">
+                                                    <input type="radio" id="education_yes" name="education_other_savings" value="Yes">
+                                                    <label for="education_yes" class="form-label">Yes</label>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="education_no" name="education_other_savings" value="No">
+                                                    <label for="education_no" class="form-label">No</label>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -107,8 +101,8 @@
             <section class="needs-master-footer footer bg-white">
                 <div class="bg-btn_bar py-4 px-2 bg-white">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
-                        <a href="{{route('education.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                        <a href="{{route('education.other')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                        <a href="{{route('education.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>
+                        <a href="{{route('education.gap')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                     </div>
                 </div>
             </section>

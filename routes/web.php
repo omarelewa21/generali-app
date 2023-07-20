@@ -37,6 +37,8 @@ Route::view('/education-home', 'pages.priorities.education.education-home')->nam
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
+Route::view('/education-other', 'pages.priorities.education.education-other')->name('education.other');
+Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
 
 /* Priorities - Retirement */
 Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
