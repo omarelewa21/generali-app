@@ -19,21 +19,27 @@ $(document).ready(function() {
 
 $(document).ready(function () {
   // Get the current URL path
-  var currentPath = window.location.href;
+  var currentPath = window.location.pathname;
 
   // Find all the timeline items and iterate through them
   $('.timeline-item').each(function () {
       // Get the URL of the timeline item
       var itemURL = $(this).find('a').attr('href');
-      console.log(currentPath);
+
+      // Create a URL object to parse the full URL
+      var urlObject = new URL(itemURL);
+
+      // Get only the path from the URL object
+      var itemPath = urlObject.pathname;
 
       // Check if the current URL matches the timeline item URL
-      if (itemURL === currentPath) {
+      if (itemPath === currentPath) {
           // Add the checkmark (you can use a class or a style here)
           $(this).addClass('active'); // Add your CSS class here
       }
   });
 });
+
 
 // Logics to choose avatar gender and skin color
 document.addEventListener('DOMContentLoaded', function() {

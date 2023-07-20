@@ -1,6 +1,6 @@
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -9,7 +9,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #C21B17;
+  background-color: #fff;
   border-radius: 10px;
 }
 
@@ -43,6 +43,15 @@ h6.nav-text {
 }
 .invalid-feedback {
   font-family: 'Helvetica Neue Medium', sans-serif;
+}
+
+/* Navigation Menu */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 /* Offcanvas Menu */
@@ -161,15 +170,55 @@ h6.nav-text {
   grid-area: footer-home;
 }
 
-/* .main-content.scrollable-padding {
-  z-index: 1;
-  padding-bottom: 150px;
+/* Avatar Welcome Page */
+#avatar_welcome {
+  background-image: url(/images/avatar/avatar-welcome-bg.jpg);
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.main-content.scrollable-padding-avatar {
-  z-index: 1;
-  padding-bottom: 110px;
-} */
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "content" "footer-main";
+  grid-template-rows: 15vh 38vh 40vh;
+}
+
+.header {
+  grid-area: header;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  display: grid;
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Avatar Gender Page */
+.wrapper-avatar {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  grid-template-areas: "header-avatar" "content-avatar";
+  grid-template-rows: 40vh 50vh;
+}
+.gender-selection-bg {
+  background-image: url(/images/avatar/gender-selection-bg.jpg);
+  background-size: 70%;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  z-index: 999;
+}
+
+
+
+
+
+
 
 .sidebanner {
   z-index: 1100;
@@ -203,16 +252,9 @@ h6.nav-text {
 }
 
 /* Grid Layout */
-.content {
-  grid-area: content;
-}
 
-.header {
-  grid-area: header;
-  grid-gap: 20px;
-  grid-template-columns: 50% 50%;
-  display: grid;
-}
+
+
 
 .footer-main {
   grid-area: footer-main;
@@ -220,14 +262,6 @@ h6.nav-text {
   grid-template-columns: 50% 50%;
   display: grid;
   grid-auto-rows: 100%;
-}
-
-.wrapper {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  grid-template-areas: "header" "content" "footer-main";
-  grid-template-rows: 15vh 40vh 40vh;
 }
 
 .content-avatar {
@@ -240,14 +274,6 @@ h6.nav-text {
 
 .header-avatar {
   grid-area: header-avatar;
-}
-
-.wrapper-avatar {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  grid-template-areas: "header-avatar" "content-avatar";
-  grid-template-rows: 40vh 50vh;
 }
 
 .content-avatar-default {
@@ -296,15 +322,6 @@ h6.nav-text {
     overflow-x: hidden !important;
   }
 
-  /* Avatar Welcome Page */
-  #avatar_welcome {
-    background-image: url(/images/avatar/avatar-welcome-bg.jpg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-  }
-
   #avatar_welcome section.footer .male {
     bottom: 2%;
     left: 10%;
@@ -316,14 +333,7 @@ h6.nav-text {
   }
 
   /* Gender Selection Page */
-  .gender-selection-bg {
-    background-image: url(/images/avatar/gender-selection-bg.jpg);
-    background-size: 70%;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
+
 
   #avatar_gender_selection .main-content h4,
   #avatar_marital_status .main-content h4,
@@ -471,17 +481,9 @@ h6.nav-text {
   /* .navbar-default {
     background-color: transparent;
     border-color: transparent;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
   } */
 
-  /* main {
+  /* /* main {
     position: relative;
     z-index: 1;
   } */
@@ -782,10 +784,6 @@ h6.nav-text {
       height: auto;
     }
 
-    .gender-selection-bg {
-      z-index: 1;
-    }
-
     .scrollable-content {
       height: 100vh;
       overflow-y: auto;
@@ -832,12 +830,12 @@ h6.nav-text {
   }
 
   @media only screen and (min-width: 576px) {
-    .wrapper {
+    /* .wrapper {
       grid-gap: 20px;
       grid-template-columns: 100%;
       grid-template-areas: "header" "content" "footer-main";
       grid-template-rows: 10vh 40vh 40vh;
-    }
+    } */
 
     .wrapper-avatar {
       grid-gap: 20px;
