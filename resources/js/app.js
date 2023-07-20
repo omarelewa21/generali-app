@@ -1,6 +1,40 @@
 import './bootstrap';
 import ('./delivery');
 
+// Get the height of any devices, and set a padding bottom to prevent footer overlay over the main content
+$(document).ready(function() {
+  function setMainContentPadding() {
+      const windowWidth = $(window).width();
+      const footerHeight = $(".footer").outerHeight();
+      const mainContentPadding = footerHeight + 50; // Adding 50 pixels
+      $(".main-content").css("padding-bottom", mainContentPadding + "px");
+  }
+
+  setMainContentPadding();
+
+  $(window).resize(function() {
+      setMainContentPadding();
+  });
+});
+
+$(document).ready(function () {
+  // Get the current URL path
+  var currentPath = window.location.href;
+
+  // Find all the timeline items and iterate through them
+  $('.timeline-item').each(function () {
+      // Get the URL of the timeline item
+      var itemURL = $(this).find('a').attr('href');
+      console.log(currentPath);
+
+      // Check if the current URL matches the timeline item URL
+      if (itemURL === currentPath) {
+          // Add the checkmark (you can use a class or a style here)
+          $(this).addClass('active'); // Add your CSS class here
+      }
+  });
+});
+
 // Logics to choose avatar gender and skin color
 document.addEventListener('DOMContentLoaded', function() {
     var genderMaleBtn = document.getElementById('gendermale');
@@ -201,4 +235,3 @@ calculateAge();
 dayFieldExtract.addEventListener('change', calculateAge);
 monthFieldExtract.addEventListener('change', calculateAge);
 yearFieldExtract.addEventListener('change', calculateAge);
-

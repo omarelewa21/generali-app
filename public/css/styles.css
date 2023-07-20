@@ -1,3 +1,22 @@
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #A0A0A0;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #C21B17;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C21B17;
+}
+
 /* Body */
 body,
 html {
@@ -5,8 +24,81 @@ html {
   height: 100vh;
 }
 
-.main-content {
-  z-index: 1;
+/* Headings */
+h4 {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+h6.nav-text {
+  font-weight: 700;
+  font-family: 'Helvetica Neue Medium', sans-serif;
+  letter-spacing: 1.1px;
+}
+
+/* Forms */
+.form-control,
+.form-select {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important
+}
+.invalid-feedback {
+  font-family: 'Helvetica Neue Medium', sans-serif;
+}
+
+/* Offcanvas Menu */
+.timeline {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  left: 37px;
+  /* Adjust the left position as needed */
+  top: 5px;
+  bottom: 5px;
+  width: 2px;
+  background: #ffffff;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 73px;
+  /* Adjust the left padding as needed */
+}
+
+.timeline-item:first-child {
+  margin-top: 20px;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translateY(-50%);
+  border: 3px solid #fff;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item.active::after {
+  content: "✔"; /* Use any symbol or style you prefer for the checkmark */
+  color: #fff; /* Customize the checkmark color */
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  background: #C21B17;
 }
 
 /* Button Styling */
@@ -14,10 +106,36 @@ html {
   letter-spacing: 0.9px;
 }
 
+.btn-exit {
+  border: 1px solid #ffffff;
+  border-radius: 66px;
+  color: #ffffff;
+}
+
+.btn-exit:hover {
+  background-color: #ffffff;
+  color: #C21B17;
+}
+
+.btn-exit:before {
+  content: url(/images/Logout.svg);
+  width: auto;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-exit:hover:before {
+  content: url(/images/Logout-red.svg);
+  width: auto;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* Welcome Page */
 #home {
   background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
-  background-size: contain;
+  background-size: auto 100%;
   background-position: right;
   background-repeat: no-repeat;
 }
@@ -32,6 +150,7 @@ html {
 
 .content-home {
   grid-area: content-home;
+  z-index: 1;
 }
 
 .header-home {
@@ -42,7 +161,7 @@ html {
   grid-area: footer-home;
 }
 
-.main-content.scrollable-padding {
+/* .main-content.scrollable-padding {
   z-index: 1;
   padding-bottom: 150px;
 }
@@ -50,7 +169,7 @@ html {
 .main-content.scrollable-padding-avatar {
   z-index: 1;
   padding-bottom: 110px;
-}
+} */
 
 .sidebanner {
   z-index: 1100;
@@ -151,9 +270,9 @@ html {
   grid-template-rows: 15vh 70vh;
 }
 
-.form-select {
+/* .form-select {
   color: rgba(10, 4, 60, 0.50);
-}
+} */
 
   /* Form */
   .input:-internal-autofill-selected {
@@ -362,10 +481,10 @@ html {
     z-index: 1000;
   } */
 
-  main {
+  /* main {
     position: relative;
     z-index: 1;
-  }
+  } */
 
   .nav-header {
     margin-top: 13.063rem;
@@ -378,54 +497,11 @@ html {
     /* Enable vertical scrolling */
   }
 
-  .timeline {
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-  }
+  
 
-  .timeline:before {
-    content: '';
-    position: absolute;
-    left: 37px;
-    /* Adjust the left position as needed */
-    top: 5px;
-    bottom: 5px;
-    width: 2px;
-    background: #ffffff;
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-    padding-left: 73px;
-    /* Adjust the left padding as needed */
-  }
-
-  .timeline-item:first-child {
-    margin-top: 20px;
-  }
-
-  .timeline-item:first-child::before {
+  /* .timeline-item:first-child::before {
     display: none;
-  }
-
-  .timeline-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .timeline-item::after {
-    content: '';
-    position: absolute;
-    left: 25px;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #ffffff;
-    transform: translateY(-50%);
-  }
+  } */
 
 
   /* this is needed to make the content scrollable on larger screens */
@@ -506,23 +582,15 @@ html {
     padding-right: 2.813rem;
   }
 
-  .btn-exit {
-    padding: 10px 14px;
-    border: 1px solid #ffffff;
-    border-radius: 66px;
-    color: #ffffff;
-    gap: 16px;
-  }
-
   .btn-exit:hover {
     background-color: #ffffff;
     color: #C21B17;
   }
-
+/* 
   .logout-svg {
     width: 30px;
     height: 25px;
-  }
+  } */
 
   .float-text {
     top: 20px;
@@ -725,7 +793,11 @@ html {
     }
   }
 
+  /* Mobile / Tab Responsive */
   @media only screen and (max-width: 767px) {
+    .main-content {
+      padding-bottom: 500px!important;
+    }
     #home {
       background-size: cover;
     }
@@ -735,18 +807,18 @@ html {
       width: 80px;
     }
 
-    .main-content.scrollable-padding {
+    /* .main-content.scrollable-padding {
       padding-bottom: 172px !important;
     }
 
     .main-content.scrollable-padding-avatar {
       padding-bottom: 172px !important;
-    }
+    } */
 
-    #pdpa .main-content,
+    /* #pdpa .main-content,
     #basic_details .main-content {
       padding-bottom: 450px !important;
-    }
+    } */
 
     .navbar.transparent {
       background-color: #fff;

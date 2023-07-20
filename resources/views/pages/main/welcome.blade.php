@@ -14,7 +14,7 @@
 
 <div id="home" class="vh-100 overflow-y-auto overflow-x-hidden wrapper-home">
     <div class="header-home">@include('templates.nav.nav-red')</div>
-    <section class="main-content content-home">
+    <section class="content-home">
         <div class="container px-5">
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-md-12">

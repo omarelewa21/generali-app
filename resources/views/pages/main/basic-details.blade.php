@@ -25,7 +25,7 @@
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
                     <form novalidate action="{{ route('form.submit') }}" method="POST">
                         @csrf
-                        <section class="main-content scrollable-padding">
+                        <section class="main-content">
                             <div class="container">
                                 <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
                                     <div class="col-12">
@@ -35,7 +35,7 @@
                                 <div class="row px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5">
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12">
                                                 <label for="title" class="form-label">Title</label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Select</option>
@@ -61,14 +61,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 mt-5">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="firstName" class="form-label">First Name:</label>
                                                 <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName') }}" required>
                                                     @error('firstName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
-                                            <div class="col-md-6 mt-5">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastName" class="form-label">Last Name:</label>
                                                 <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName') }}" required>
                                                     @error('lastName')
@@ -77,14 +77,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 mt-5">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumber" class="form-label">Mobile Number:</label>
                                                 <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="+60 000-0000 000" value="{{ old('mobileNumber') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
-                                            <div class="col-md-6 mt-5">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number:</label>
                                                 <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="+60 000-0000 000" value="{{ old('housePhoneNumber') }}">
                                                     @error('housePhoneNumber')
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 mt-5">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address:</label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email') }}">
                                                     @error('email')
