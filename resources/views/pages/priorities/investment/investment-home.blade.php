@@ -14,15 +14,15 @@
                     <h4 class="display-5 font-bold fw-bold">My Priorities</h4>
                 </div>
             </div>
-            <div class="col d-flex p-0 flex-column bg-needs needs-mobile-content" id="needs-home">
+            <div class="col d-flex p-0 flex-column bg-investments-needs needs-mobile-content" id="needs-home">
                 <hr class="py-2 m-0 bg-primary opacity-100 border-0 needs-home-line"/>
                 <section class="needs-home-nav">
                     @include ('templates.nav.nav-sidebar-needs')
                 </section>
                 <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
                     <div class="col-12 h-100 needs-row overflow-auto">
-                        <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative m-auto avatar-height z-99">
-                        <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative z-99">Let's get into your plans for Education.</h5>
+                        <img src="{{ asset('images/needs/investment/investment-home.png') }}" class="position-relative m-auto avatar-height z-99">
+                        <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative z-99">Now let's plan for your investments.</h5>
                     </div>
                     <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
                         <div class="col-11 col-md-4 text-center">

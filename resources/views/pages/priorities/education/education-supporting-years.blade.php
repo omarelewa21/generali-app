@@ -23,14 +23,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 col-md-3 col-xl-3">
+                <div class="col-10 col-md-3 col-xl-3 hide">
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
             <section class="needs-master-content">
             <div class="col-12">
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                        <div class="col-xl-6 col-12 position-relative">
+                        <div class="col-xl-6 col-12 position-relative hide">
                            <div class="row">
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row d-flex h-100">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-12 position-relative">
+                        <div class="col-xl-6 col-12 position-relative hide">
                             <div class="row">
                                 <div class="col-12 d-flex mt-5 justify-content-center">
                                     <div class="">

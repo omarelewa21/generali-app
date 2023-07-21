@@ -12,25 +12,14 @@
                 <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
                 </div>
-                <!-- <div class="col-md-7 col-xl-6 hide-mobile">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-6 bg-primary container" style="border-radius: 0px 0px 20px 20px;">
-                            <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 fund-progress-bar" style="width:45%;"></div>
-                            </div>
-                            <h3 class="font-color-white text-center">RM1,462,000</h3>
-                            <p class="font-color-white text-center">Total Education Fund Needed</p>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="col-10 col-md-9 col-lg-9">
+                <div class="col-10 col-md-9 col-lg-9 hide">
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
             <section class="needs-master-content">
             <div class="col-12">
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                        <div class="col-xl-6 col-12 position-relative">
+                        <div class="col-xl-6 col-12 position-relative hide">
                            <div class="row h-100 d-flex justify-content-center align-items-center">
                                 <div class="container-fluid">
                                     <div class="col-11 m-auto">
@@ -71,7 +60,7 @@
                 <div class="bg-btn_bar py-4 px-2 bg-white">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                         <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
-                        <a href="{{route('education.gap')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                        <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                     </div>
                 </div>
             </section>

@@ -135,7 +135,21 @@
 .hide-tablet{
     display: block !important;
 }
+button.choice:hover, 
+button.choice:focus {
+    filter: drop-shadow(2px 4px 6px black);
+}
+.z-99{
+    z-index:99;
+}
 
+/* Investment */
+.bg-investments-needs{
+    background-image: url('/images/needs/investment/bg-investment.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
 /* Form */
 
 /* Hide the default radio buttons */
@@ -168,7 +182,7 @@ input[type="radio"] + label::before {
   
   /* Style the custom radio button when it is selected */
 input[type="radio"]:checked + label::before {
-    background-color: #C21B17;  /* Change the background color when selected */
+    background-color: #fff;  /* Change the background color when selected */
 }
   
 /* Add a tick symbol using ::after pseudo-element when radio button is selected */
@@ -178,7 +192,11 @@ input[type="radio"]:checked + label::after {
     left: 6px; /* Adjust positioning of the tick symbol */
     top: 1px;
     font-size: 18px; /* Adjust font size to control the size of the tick symbol */
-    color: #fff; /* Color of the tick symbol */
+    color: #C21B17; /* Color of the tick symbol */
+}
+
+.hide-content{
+    display:none;
 }
   
   
