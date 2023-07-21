@@ -20,7 +20,7 @@ $(document).ready(function() {
 $(document).ready(function () {
   // Get the current URL path
   var currentPath = window.location.pathname;
-
+  
   // Find all the timeline items and iterate through them
   $('.timeline-item').each(function () {
       // Get the URL of the timeline item

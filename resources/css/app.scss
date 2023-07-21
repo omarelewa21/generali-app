@@ -47,7 +47,7 @@ $container-max-widths: (
   // xl: 1140px,
   xxl: 1440px
 );
-$dark: #000;
+$dark: #2C2738;
 $font-family-base: 'Helvetica Neue Regular', sans-serif;
 $font-size-base: 1.25rem; //20px
 $display-font-sizes: (
@@ -65,20 +65,34 @@ $h1-font-size: 7.5rem; //120px
 
 // Forms
 $input-font-size: 22px;
-$input-font-family: Helvetica Neue;
+$input-font-family: 'Helvetica Neue';
 $form-label-font-size: 22px;
 $form-label-color: rgba(10, 4, 60, 0.75);
 $form-select-indicator-color: #AA1B17;
 $input-placeholder-color: rgba(10, 4, 60, 0.30);
-$input-color: rgba(10, 4, 60, 0.75);
+$input-color: #0A043C;
 $form-feedback-font-size: 18px;
 $form-feedback-font-style: normal;
+$form-label-margin-bottom: 0.813rem;
+$form-label-font-weight: 700;
+$form-feedback-invalid-color: #C21B17;
 
 // Offcanvas Menu
 $offcanvas-bg-color: #C21B17;
 
 // Footer
 $zindex-fixed: 998;
+$danger: #AA1B17;
+
+// Modal
+$modal-header-border-color: #fff;
+$modal-content-color: #C21B17;
+$modal-title-line-height: normal;
+$modal-content-border-radius: normal;
+$modal-footer-bg: #C21B17;
+$zindex-modal-backdrop: 1000;
+
+
 
 
 
@@ -94,11 +108,11 @@ h6.nav-text-needs {
   letter-spacing: 1.1px;
 }
 
-h6.avatar-text {
-  font-size: 26px;
-  font-family: 'Helvetica Neue Regular', sans-serif;
-  font-weight: 700;
-}
+// h6.avatar-text {
+//   font-size: 26px;
+//   font-family: 'Helvetica Neue Regular', sans-serif;
+//   font-weight: 700;
+// }
 
 // p.welcome {
 //   font-family: 'Helvetica Neue Regular', sans-serif;
@@ -191,12 +205,6 @@ $input-border-width: 4px;
 $input-border-radius: 0;
 
 $input-placeholder-color: rgba(10, 4, 60, 0.3);
-
-
-
-$form-label-margin-bottom: 0.813rem;
-
-$form-label-font-weight: 700;
 
 
 

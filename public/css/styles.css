@@ -28,11 +28,6 @@ html {
 h4 {
   font-family: 'Helvetica Neue', sans-serif;
 }
-h6.nav-text {
-  font-weight: 700;
-  font-family: 'Helvetica Neue Medium', sans-serif;
-  letter-spacing: 1.1px;
-}
 
 /* Forms */
 .form-control,
@@ -41,8 +36,8 @@ h6.nav-text {
   border-left: 0 !important;
   border-right: 0 !important
 }
-.invalid-feedback {
-  font-family: 'Helvetica Neue Medium', sans-serif;
+.form-label {
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
 /* Navigation Menu */
@@ -103,11 +98,18 @@ h6.nav-text {
 
 .timeline-item.active::after {
   content: "✔"; /* Use any symbol or style you prefer for the checkmark */
-  color: #fff; /* Customize the checkmark color */
+  color: #fff!important; /* Customize the checkmark color */
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   background: #C21B17;
+}
+
+p.nav-text {
+  font-weight: 700;
+  font-family: 'Helvetica Neue Medium', sans-serif;
+  letter-spacing: 1.1px;
+  font-size: 22px;
 }
 
 /* Button Styling */
@@ -139,6 +141,37 @@ h6.nav-text {
   height: auto;
   display: inline-block;
   vertical-align: middle;
+}
+
+.btn-exit-sidebar {
+  border: 1px solid #ffffff;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #C21B17;
+}
+
+.btn-secondary:hover {
+  background-color: #AA1B17;
+  color: #fff;
+  border-color: #AA1B17;
+}
+
+/* Right Sidebar */
+.right-sidebar h1 {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Left Sidebar */
+.sidebanner h2 {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Modal */
+.modal-footer {
+  justify-content: center;
 }
 
 /* Welcome Page */
@@ -205,6 +238,15 @@ h6.nav-text {
   grid-template-areas: "header-avatar" "content-avatar";
   grid-template-rows: 40vh 50vh;
 }
+
+.content-avatar {
+  grid-area: content-avatar;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+
 .gender-selection-bg {
   background-image: url(/images/avatar/gender-selection-bg.jpg);
   background-size: 70%;
@@ -214,8 +256,41 @@ h6.nav-text {
   z-index: 999;
 }
 
+.color-box-wrapper {
+  width: 421.5px;
+  height: 77.94px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid var(--primary-red, #C21B17);
+  background: var(--primary-white, #FFF);
+  box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
+}
 
+.color-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 5px;
+}
 
+.avatar-text {
+  font-size: 26px;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Mobile / Tab Responsive */
+@media only screen and (min-width: 768px) {
+  .scrollable-content {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .main-content {
+    padding-bottom: 500px!important;
+  }
+}
 
 
 
@@ -264,13 +339,7 @@ h6.nav-text {
   grid-auto-rows: 100%;
 }
 
-.content-avatar {
-  grid-area: content-avatar;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  display: grid;
-  grid-auto-rows: 100%;
-}
+
 
 .header-avatar {
   grid-area: header-avatar;
@@ -553,27 +622,12 @@ h6.nav-text {
     opacity: 1;
   }
 
-  .color-box {
-    width: 48px;
-    height: 48px;
-    /* display: inline-block; */
-    border-radius: 5px;
-  }
-
-  .color-box-wrapper {
-    width: 421.5px;
-    height: 77.94px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    border: 1px solid var(--primary-red, #C21B17);
-    background: var(--primary-white, #FFF);
-    box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
-  }
 
 
-  .avatar-text {
-    text-decoration: none !important;
-  }
+
+
+
+
 
   .btn-avatar {
     border: 0;
@@ -784,18 +838,18 @@ h6.nav-text {
       height: auto;
     }
 
-    .scrollable-content {
+    /* .scrollable-content {
       height: 100vh;
       overflow-y: auto;
       overflow-x: hidden;
-    }
+    } */
   }
 
   /* Mobile / Tab Responsive */
   @media only screen and (max-width: 767px) {
-    .main-content {
+    /* .main-content {
       padding-bottom: 500px!important;
-    }
+    } */
     #home {
       background-size: cover;
     }
@@ -837,12 +891,12 @@ h6.nav-text {
       grid-template-rows: 10vh 40vh 40vh;
     } */
 
-    .wrapper-avatar {
+    /* .wrapper-avatar {
       grid-gap: 20px;
       grid-template-columns: 100%;
       grid-template-areas: "header-avatar" "content-avatar";
       grid-template-rows: 35vh 55vh;
-    }
+    } */
   }
 
 

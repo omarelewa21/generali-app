@@ -18,7 +18,7 @@
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
-                    <h4 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h4>
+                    <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
