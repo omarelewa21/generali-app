@@ -152,8 +152,6 @@ const csrfToken = '{{ csrf_token() }}';
 //   });
 // });
 
-
-
 </script>
 
 @endsection

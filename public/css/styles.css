@@ -249,7 +249,7 @@ p.nav-text {
 
 .gender-selection-bg {
   background-image: url(/images/avatar/gender-selection-bg.jpg);
-  background-size: 70%;
+  background-size: auto 100%;
   background-position: right;
   background-repeat: no-repeat;
   background-color: #fff;
@@ -276,6 +276,27 @@ p.nav-text {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
+.changeImage {
+  overflow-x: hidden;
+}
+
+/* Identity Details Page */
+.btn-check:checked+.btn {
+  border-radius: 0;
+  background-color: #EEEEEE;
+  color: inherit;
+  width: 100%;
+  border-color: #A0A0A0;
+}
+
+.btn-check+.btn {
+  border-radius: 0;
+  background-color: #fff;
+  color: inherit;
+  width: 100%;
+  border-color: #A0A0A0;
+}
+
 /* Mobile / Tab Responsive */
 @media only screen and (min-width: 768px) {
   .scrollable-content {
@@ -292,6 +313,18 @@ p.nav-text {
   .extra-padding {
     padding-bottom: 500px!important;
   }
+  .navbar {
+    box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
+  }
+  .wrapper-avatar {
+    grid-template-rows: 30vh 60vh;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .wrapper-avatar {
+    grid-template-rows: 50vh 40vh;
+  }
 }
 
 
@@ -303,22 +336,6 @@ p.nav-text {
 
 .sticky-top {
   z-index: 0;
-}
-
-.btn-check:checked+.btn {
-  border-radius: 0;
-  border-right: inherit;
-  background-color: #d3d4d5;
-  color: inherit;
-  width: 100%;
-}
-
-.btn-check+.btn {
-  border-radius: 0;
-  border-right: inherit;
-  background-color: #fff;
-  color: inherit;
-  width: 100%;
 }
 
 .btn-check+.btn:hover {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use SebastianBergmann\Environment\Console;
@@ -558,35 +559,55 @@ class FormController extends Controller
             'ZW' => 'Zimbabwe',
         ];   
 
+        $customMessages = [
+            'idNumber.regex' => 'The id number field must match the format 123456-78-9012.',
+            'passportNumber.max' => 'The passport number field must not exceed :max characters.',
+            'birthCert.max' => 'The birth certificate field must not exceed :max characters.',
+            'policeNumber.max' => 'The police number field must not exceed :max characters.',
+            'registrationNumber.max' => 'The registration number field must not exceed :max characters.',
+            'btnradio.required' => 'Please select your habits.',
+        ];
+
         $validatedData = $request->validate([
             'country' => 'required|in:' . implode(',', array_keys($countries)),
             'idType' => 'required|in:New IC,Passport,Birth Certificate,Police / Army,Registration',
+            'idNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+                }),
+                'regex:/^\d{6}-\d{2}-\d{4}$/',
+            ],
+            'passportNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('idNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+                }),
+                'max:15',
+            ],
+            'birthCert' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+                }),
+                'max:15',
+            ],
+            'policeNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('registrationNumber');
+                }),
+                'max:15',
+            ],
+            'registrationNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber');
+                }),
+                'max:15',
+            ],
             'btnradio' => 'required|in:smoker,nonSmoker',
-        ]);
-
-        $idType = $request->input('idType');
-
-        if ($idType === 'New IC') {
-            $validatedData['idNumber'] = $request->validate([
-                'idNumber' => 'required|regex:/^\d{6}-\d{2}-\d{4}$/',
-            ]);
-        } elseif ($idType === 'Passport') {
-            $validatedData['passportNumber'] = $request->validate([
-                'passportNumber' => 'required|max:255',
-            ]);
-        } elseif ($idType === 'Birth Certificate') {
-            $validatedData['birthCert'] = $request->validate([
-                'birthCert' => 'required|max:255',
-            ]);
-        } elseif ($idType === 'Police / Army') {
-            $validatedData['policeNumber'] = $request->validate([
-                'policeNumber' => 'required|max:255',
-            ]);
-        } elseif ($idType === 'Registration') {
-            $validatedData['registrationNumber'] = $request->validate([
-                'registrationNumber' => 'required|max:255',
-            ]);
-        }
+        ], $customMessages);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
