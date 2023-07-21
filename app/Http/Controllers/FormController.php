@@ -612,5 +612,4 @@ class FormController extends Controller
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
-
 }

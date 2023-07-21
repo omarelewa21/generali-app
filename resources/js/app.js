@@ -54,6 +54,42 @@ exitButton.addEventListener('click', function() {
     offcanvasElementBackdrop.classList.remove('show');
 });
 
+// Check if any avatar button is clicked, else disable the next button.
+document.addEventListener('DOMContentLoaded', function() {
+  const nextButton = document.getElementById('nextButton');
+
+  function isAnyButtonSelected() {
+      const buttons = document.querySelectorAll('.border-0.bg-white');
+      for (const button of buttons) {
+          if (button.classList.contains('selected')) {
+              return true;
+          }
+      }
+      return false;
+  }
+
+  function updateNextButtonState() {
+      if (isAnyButtonSelected()) {
+          nextButton.classList.remove('disabled');
+      } else {
+          nextButton.classList.add('disabled');
+      }
+  }
+
+  // Add click event listeners to each button
+  const buttons = document.querySelectorAll('.border-0.bg-white');
+  for (const button of buttons) {
+      button.addEventListener('click', function() {
+          // Toggle the "selected" class on each click
+          this.classList.toggle('selected');
+          updateNextButtonState();
+      });
+  }
+
+  // Update the initial state of the "Next" button on page load
+  updateNextButtonState();
+});
+
 // Logics to choose avatar gender and skin color
 document.addEventListener('DOMContentLoaded', function() {
     var genderMaleBtn = document.getElementById('gendermale');
