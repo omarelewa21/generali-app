@@ -24,7 +24,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
-                    <section class="main-content">
+                    <section class="main-content extra-padding">
                         <div class="container">
                             <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
                                 <div class="col-12">

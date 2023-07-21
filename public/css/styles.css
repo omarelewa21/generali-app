@@ -253,7 +253,6 @@ p.nav-text {
   background-position: right;
   background-repeat: no-repeat;
   background-color: #fff;
-  z-index: 999;
 }
 
 .color-box-wrapper {
@@ -284,10 +283,13 @@ p.nav-text {
     overflow-y: auto;
     overflow-x: hidden;
   }
+  .gender-selection-bg {
+    z-index: 2;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  .main-content {
+  .extra-padding {
     padding-bottom: 500px!important;
   }
 }

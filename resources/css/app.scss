@@ -81,7 +81,7 @@ $form-feedback-invalid-color: #C21B17;
 $offcanvas-bg-color: #C21B17;
 
 // Footer
-$zindex-fixed: 998;
+$zindex-fixed: 1;
 $danger: #AA1B17;
 
 // Modal
@@ -90,8 +90,8 @@ $modal-content-color: #C21B17;
 $modal-title-line-height: normal;
 $modal-content-border-radius: normal;
 $modal-footer-bg: #C21B17;
-$zindex-modal-backdrop: 1000;
-
+$zindex-modal: 2000;
+$zindex-modal-backdrop: 1199;
 
 
 

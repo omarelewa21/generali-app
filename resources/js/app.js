@@ -40,6 +40,19 @@ $(document).ready(function () {
   });
 });
 
+// Close the Offcanvas sidebar when the modal is opened.
+// Get the "EXIT" button element
+const exitButton = document.querySelector('.btn-exit');
+
+// Add a click event listener to the "EXIT" button
+exitButton.addEventListener('click', function() {
+    // Find the offcanvas element and remove the 'show' class
+    const offcanvasElement = document.querySelector('.offcanvas');
+    const offcanvasElementBackdrop = document.querySelector('.offcanvas-backdrop');
+    offcanvasElement.classList.remove('show');
+    offcanvasElementBackdrop.classList.remove('show');
+});
+
 
 // Logics to choose avatar gender and skin color
 document.addEventListener('DOMContentLoaded', function() {
