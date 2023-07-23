@@ -34,11 +34,11 @@
                                     {{-- <div id="bm"> </div> --}}
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-auto py-lg-5 py-md-0">
+                                <div class="col-auto py-lg-5 py-md-5">
                                 </div>
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-lg-6 py-md-4 py-lg-5">
+                                <div class="col-xxl-4 col-xl-5 col-md-8 my-xxl-4 my-xl-4 py-md-4 py-lg-5">
                                     <h4 class="display-5 img-fluid">Now let's talk about your plans for Retirement.</h1>
                                 </div>
                             </div>

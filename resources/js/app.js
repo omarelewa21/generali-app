@@ -1,5 +1,32 @@
 import './bootstrap';
 import ('./delivery');
+import Sortable from 'sortablejs';
+// Default SortableJS
+
+
+const rightContainer = document.getElementById('right-container');
+// var rightContainer = document.querySelector('#right-container .draggable');
+console.log(rightContainer);
+const leftContainer = document.getElementById('left-container');
+
+// Sortable options for the right container (draggable items)
+var sortable = Sortable.create(rightContainer, {
+  group: {
+    name: "shared",
+    pull: "clone",
+    put: false, // Do not allow items to be put into this list
+  },
+  animation: 150,
+});
+
+// Sortable options for the left container (drop target)
+var sortable2 = Sortable.create(leftContainer, {
+  group: "shared",
+  animation: 150,
+
+});
+
+
 
 // // Logics to choose avatar gender and skin color
 // document.addEventListener('DOMContentLoaded', function() {
@@ -50,7 +77,7 @@ import ('./delivery');
 //     }
 // });
 
-// // Logics to validate idNumber 
+// // Logics to validate idNumber
 // // Add event listener to the input field
 // document.getElementById('idNumber').addEventListener('input', function (e) {
 //     // Get the input value and remove any non-numeric characters
@@ -74,23 +101,23 @@ import ('./delivery');
 //     var birthcertgroup = document.getElementById('birthcertgroup');
 //     var policegroup = document.getElementById('policegroup');
 //     var registrationgroup = document.getElementById('registrationgroup');
-  
+
 //     // Retrieve the selected option from local storage
 //     var selectedOption = localStorage.getItem('selectedOption');
 //     if (selectedOption) {
 //       idTypeSelect.value = selectedOption;
 //       showSelectedGroup(selectedOption);
 //     }
-  
+
 //     // Add change event listener to the select element
 //     idTypeSelect.addEventListener('change', function() {
 //       var selectedOption = this.value;
 //       showSelectedGroup(selectedOption);
-  
+
 //       // Store the selected option in local storage
 //       localStorage.setItem('selectedOption', selectedOption);
 //     });
-  
+
 //     // Function to show the selected group
 //     function showSelectedGroup(selectedOption) {
 //       // Hide all groups
@@ -100,7 +127,7 @@ import ('./delivery');
 //       birthcertgroup.style.display = 'none';
 //       policegroup.style.display = 'none';
 //       registrationgroup.style.display = 'none';
-  
+
 //       // Show the relevant group based on the selected option
 //       if (selectedOption === 'New IC') {
 //         newicgroup.style.display = 'block';
@@ -115,7 +142,7 @@ import ('./delivery');
 //         registrationgroup.style.display = 'block';
 //       }
 //     }
-// });  
+// });
 
 // // Logics to calculate age
 // // Get the ID Number field and the date of birth fields

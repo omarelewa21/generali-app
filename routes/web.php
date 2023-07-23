@@ -42,9 +42,12 @@ Route::view('/education-supporting-years', 'pages.priorities.education.education
 /* Priorities - Retirement */
 Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
+Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
+Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
 
-// Route::get('/files/{filename}', function($filename){
-//     return \Storage::download($filename); // assuming default disk is set to 'public'
-// });
+
+Route::get('/files/{filename}', function($filename){
+    return \Storage::download($filename); // assuming default disk is set to 'public'
+});
 
 

@@ -223,7 +223,7 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
-    background-color: #fff;
+    padding-top:50px;
   }
 
   /* Retirement Home Page */
@@ -732,7 +732,7 @@
     #basic_details .main-content {
       padding-bottom: 450px !important;
     }
-    
+
     #retirement-character {
       top: 0px;
     }
@@ -818,3 +818,15 @@
 #bm {
   height:200px;
 }
+
+
+
+/* code test for priorities menu */
+
+  #left-container {
+    width: 120px;
+    height: 120px;
+    background-color: lightgreen;
+    border-radius: 50%;
+    padding: 10px;
+  }
