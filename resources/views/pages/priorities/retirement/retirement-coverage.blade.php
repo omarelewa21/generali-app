@@ -8,37 +8,43 @@
 
 @section('content')
 
-<div id="retirement_coverage" class="vh-100 overflow-hidden container-fluid">
+<div id="retirement_coverage" class="vh-100 container-fluid">
 
     <div class="container p-0 vh-100">
-        @include('templates.nav.nav-red-menu')
-        @include ('templates.nav.nav-sidebar-needs')
+        <div class="row">
+            <div class="col-6">
+                @include('templates.nav.nav-red-menu')
+            </div>
+            <div class="col-6">
+                @include ('templates.nav.nav-sidebar-needs')            </div>
+        </div>
+
             <div class="col-12 text-dark px-0 retirement-coverage my-4">
                 <div class="my-4">
                     <section class="row d-flex justify-content-center py-2 text-center align-items-center">
                         <h5 class="my-2">I'd like to provide coverage for my:</h5>
                     </section>
                     <section>
-                        <div class="row position-relative justify-content-end" id="coverage-avatar">
+                        <div class="row position-absolute justify-content-end" id="coverage-avatar">
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/self.svg') }}" class="img-fluid" style="max-width: 40%;" alt="self-character">
+                                <img src="{{ asset('images/needs/retirement/self.svg') }}" class="self-avatar" alt="self-character">
                                 <h6 class="text-center py-2">Self</h6>
                             </div>
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/spouse.svg') }}" class="img-fluid" style="max-width: 35%;" alt="spouse">
+                                <img src="{{ asset('images/needs/retirement/spouse.svg') }}" class="spouse-avatar" alt="spouse">
                                 <h6 class="text-center py-2">Spouse</h6>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/kid.svg') }}" class="img-fluid" style="max-width: 35%;" alt="kid">
+                                <img src="{{ asset('images/needs/retirement/kid.svg') }}" class="kid-avatar"  alt="kid">
                                 <h6 class="text-center py-2">Child(ren)</h6>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/parent.svg') }}" class="img-fluid" style="max-width: 80%;" alt="parent">
+                                <img src="{{ asset('images/needs/retirement/parent.svg') }}" class="parent-avatar" alt="parent">
                                 <h6 class="text-center py-2">Parent</h6>
                             </div>
                         </div>
-                        <div class="row bg-accent-bg-grey">
-                            <div class="col-auto py-lg-5 py-xxl-4 mb-xxl-4 py-md-0">
+                        <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                            <div class="col-12 col-md-4 text-center">
                             </div>
                         </div>
                     </section>

@@ -37,7 +37,7 @@
                     <section>
                         <div class="row">
                         <div id="bg-ideal-age" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
-                            <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/avatar-age-to-retire.svg') }}" class="img-fluid" style="max-width: 60%;" alt="avatar">
+                            <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/avatar-age-to-retire.svg') }}" alt="avatar">
                         </div>
                         <div class="col-lg-6 my-auto">
                             <h5 class="needs-text d-inline py-2 ms-5">I’d like to retire </h5> <br>
@@ -45,8 +45,8 @@
                             <input type="text" name="ageToRetire" class="form-control form-input-needs-sm d-inline text-primary" id="ageToRetireInput" placeholder=" " required>
                         </div>
                         </div>
-                        <div class="row bg-accent-bg-grey">
-                            <div class="col-auto py-lg-5 py-xxl-5 mb-xxl-4 py-md-0">
+                        <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                            <div class="col-11 col-md-4 text-center">
                             </div>
                         </div>
                     </section>

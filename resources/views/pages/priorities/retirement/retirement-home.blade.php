@@ -23,29 +23,17 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 text-dark px-0 retirement-bg">
-                <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
+                <hr class="needs-line py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-auto">
                     @include ('templates.nav.nav-sidebar-needs')
                     <section class="main-content">
-                        <div class="container-fluid">
-                            <div id="retirement-character" class="row d-flex justify-content-center position-relative">
-                                <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}"
-                                    style="width:350px" alt="Retirement Character">
-                                    {{-- <div id="bm"> </div> --}}
-                            </div>
-                            <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-auto py-lg-4 py-md-5">
-                                </div>
-                            </div>
-                            {{-- <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-xxl-5 col-xl-5 col-md-8 my-xxl-4 my-xl-4 py-md-4 py-lg-4">
-                                    <h4 class="display-5 fw-bold">Now let's talk about your plans for Retirement.</h1>
-                                </div>
-                            </div> --}}
+                        <div id="retirement-character" class="col-12 text-center justify-content-center position-absolute">
+                            <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}">
+                            <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Now let's talk about your plans for Retirement.</h5>
                         </div>
-                        <div class="d-flex justify-content-center bg-accent-bg-grey py-5 position-absolute w-100 bottom-0">
+
+                        <div class="d-flex needs-grey-bg justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
                             <div class="col-11 col-md-4 text-center">
-                                
                             </div>
                         </div>
                     </section>

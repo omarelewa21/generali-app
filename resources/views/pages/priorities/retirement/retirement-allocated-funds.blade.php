@@ -37,7 +37,7 @@
                     <section>
                         <div class="row">
                         <div id="bg-allocated-funds" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
-                            <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" class="img-fluid" style="max-width: 60%;" alt="avatar">
+                            <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" alt="avatar">
                         </div>
                         <div class="col-lg-6 my-auto">
                             <h5 class="needs-text d-inline">It would be great to have</h5><br> 
@@ -47,8 +47,9 @@
                             <h5 class="needs-text d-inline">support myself and my <br>loved ones when I retire.</h5>
                         </div>
                         </div>
-                        <div class="row bg-accent-bg-grey">
-                            <div class="col-auto py-lg-5 py-xxl-5 mb-xxl-4 py-md-0">
+
+                        <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                            <div class="col-11 col-md-4 text-center">
                             </div>
                         </div>
                     </section>
