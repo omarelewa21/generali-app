@@ -34,6 +34,8 @@
         </div>
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
+                    <form novalidate action="{{ route('form.age.to.retire') }}" method="POST">
+                        @csrf
                     <section>
                         <div class="row">
                         <div id="bg-ideal-age" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
@@ -42,7 +44,10 @@
                         <div class="col-lg-6 my-auto">
                             <h5 class="needs-text d-inline py-2 ms-5">I’d like to retire </h5> <br>
                             <h5 class="needs-text d-inline ms-5">at the age of</h5>
-                            <input type="text" name="ageToRetire" class="form-control form-input-needs-sm d-inline text-primary" id="ageToRetireInput" placeholder=" " required>
+                            <input type="text" name="ageToRetire" class="form-control form-input-needs-sm d-inline text-primary @error('ageToRetire') is-invalid @enderror" id="ageToRetireInput" placeholder=" " value="{{ old('ageToRetireInput') }}">
+                            @error('ageToRetire')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -58,12 +63,12 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('retirement.ideal')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.allocated.funds') }}"
-                                        class="btn btn-primary text-uppercase">Next</a>
+                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                                 </div>
                             </div>
                         </div>
                     </section>
+                </form>
                 </div>
             </div>
     </div>

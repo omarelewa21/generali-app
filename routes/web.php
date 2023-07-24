@@ -4,6 +4,7 @@ use App\Http\Controllers\ProgressBarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\formValidateRetirementNeeds;
 
 /* main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -45,6 +46,7 @@ Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-cove
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
 Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
 Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');
+Route::Post('/retirement-age-to-retire', [formValidateRetirementNeeds::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
 Route::view('/retirement-years-till-retire', 'pages.priorities.retirement.retirement-years-till-retire')->name('retirement.years.till.retire');
 Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.retirement-allocated-funds-aside')->name('retirement.allocated.funds.aside');
 
