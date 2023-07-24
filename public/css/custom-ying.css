@@ -1,6 +1,20 @@
 .min-height-100{
     height: 100vh;
 }
+.position-absolute.center{
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+.h-88{
+    height: 88%;
+}
+.f-64{
+    font-size: 64px !important;
+}
+.w-80{
+    width: 80%;
+}
 /* Education */
 .bg-needs{
     background-image: url('/images/needs/education/bg-need-plain.png');
@@ -19,6 +33,30 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;
+}
+.bg-education-supporting{
+    background-image: url('/images/needs/education/bg-supporting.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:center;
+}
+.bg-education-others{
+    background-image: url('/images/needs/education/bg-others-new.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+.bg-education-gap{
+    background-image: url('/images/needs/education/bg-gap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+.bg-education-others-section{
+    background-image: url('/images/needs/education/bg-others-element.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:top right 10%;
 }
 .font-color-default{
     color:#000;
@@ -126,6 +164,110 @@
     height:8px;
     margin-left:1px;
 }
+.hide-desktop{
+    display: none !important;
+}
+.hide-mobile{
+    display:block !important;
+}
+.hide-tablet{
+    display: block !important;
+}
+button.choice:hover, 
+button.choice:focus {
+    filter: drop-shadow(2px 4px 6px black);
+}
+.z-99{
+    z-index:99;
+}
+
+/* Investment */
+.bg-investments-needs{
+    background-image: url('/images/needs/investment/bg-investment.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.bg-investment{
+    background-image: url('/images/needs/investment/bg-investment-master.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:center;
+}
+.bg-investment-supporting{
+    background-image: url('/images/needs/investment/bg-investment-supporting.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:bottom;
+}
+.bg-investment-return{
+    background-image: url('/images/needs/investment/investment-avatar.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:center;
+}
+.bg-investment-others{
+    background-image: url('/images/needs/education/bg-others-new.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+.bg-investment-gap{
+    background-image: url('/images/needs/education/bg-gap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+/* Form */
+
+/* Hide the default radio buttons */
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+  
+/* Create the custom radio button using ::before pseudo-element */
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 40px; /* Space for the custom radio button */
+    cursor: pointer;
+}
+  
+input[type="radio"] + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px; /* Adjust the width and height to change the size */
+    height: 28px;
+    border: 1px solid #A0A0A0; /* Border color for the circular radio button */
+    background-color: #fff; /* Background color when the radio button is not selected */
+}
+  
+  /* Style the custom radio button when it is selected */
+input[type="radio"]:checked + label::before {
+    background-color: #fff;  /* Change the background color when selected */
+}
+  
+/* Add a tick symbol using ::after pseudo-element when radio button is selected */
+input[type="radio"]:checked + label::after {
+    content: "\2713"; /* Unicode for the tick symbol */
+    position: absolute;
+    left: 6px; /* Adjust positioning of the tick symbol */
+    top: 1px;
+    font-size: 18px; /* Adjust font size to control the size of the tick symbol */
+    color: #C21B17; /* Color of the tick symbol */
+}
+
+.hide-content{
+    display:none;
+}
+  
+  
 
 /* Mobile  */
 @media only screen and (max-width: 596px){
@@ -136,10 +278,13 @@
         height: 100%;
     }
     .needs-mobile-nav{
-        height:14.5vh;
+        height:23vh;
     }
     .needs-mobile-content{
-        height:85.5vh;
+        height:77vh;
+    }
+    .w-80{
+        width: 100%;
     }
 }
 @media only screen and (max-width: 767px){
@@ -166,6 +311,12 @@
     }
     .needs-master-footer{
         height: 19vh;
+    }
+    .hide-desktop{
+        display: block !important;
+    }
+    .hide-mobile{
+        display: none !important;
     }
 }
 @media only screen and (max-width: 596px) and (max-height: 700px){
@@ -210,6 +361,13 @@
     .avatar-height{
         max-height:100%;
         max-width:100%;
+        object-fit: contain;
+    }
+    .hide-tablet{
+        display: none !important;
+    }
+    .hide-desktop{
+        display: block !important;
     }
 }
 @media only screen and (min-width: 1024px){

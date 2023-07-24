@@ -14,7 +14,7 @@
             {{-- <a href="#" class="navbar-brand">
                     <img class="white-logo" src="{{ asset('images/logo.png') }}" alt="Logo" width="100px;">
             </a> --}}
-            <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+            <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu" onclick="jQuery('.hide').css('z-index','-1');">
                 <img class="d-flex" src="{{ asset('images/menu-button-red.svg') }}" alt="Logo" width="32px"
                     height="26px">
             </a>

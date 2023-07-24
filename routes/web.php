@@ -31,12 +31,20 @@ Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')-
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
-Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
+Route::view('/education-other', 'pages.priorities.education.education-other')->name('education.other');
+Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
+
+/* Priorities - Investment */
+Route::view('/investment-home', 'pages.priorities.investment.investment-home')->name('investment.home');
+Route::view('/investment-coverage', 'pages.priorities.investment.investment-coverage')->name('investment.coverage');
+Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
+Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
+Route::view('/investment-expected-return', 'pages.priorities.investment.investment-expected-return')->name('investment.expected.return');
 
 /* Priorities - Retirement */
 Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');

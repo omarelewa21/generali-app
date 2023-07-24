@@ -19,6 +19,8 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/custom-ying.css') }}" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @vite(['resources/js/custom-ying.js'])
+    <!-- <script src="{{ asset('resources/js/custom-ying.js') }}"></script> -->
 </head>
 
 <body>
