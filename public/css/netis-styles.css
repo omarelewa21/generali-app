@@ -1,0 +1,18 @@
+.form-input-needs-sm {
+    width: 10%;
+
+}
+
+/* Ideal age to retire page */
+#bg-ideal-age {
+    background-image: url(/images/needs/retirement/bg-age-to-retire.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+   padding-top:10%;
+}
+
+.avatar-age-to-retire {
+    top:30px;
+}

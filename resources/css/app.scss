@@ -227,16 +227,15 @@ a {
 
 .form-control,
 .form-select {
-
   font-size: 20px !important;
-
   font-family: 'Helvetica Neue Regular', sans-serif;
-
   border-top: 0 !important;
-
   border-left: 0 !important;
-
   border-right: 0 !important
+}
+.form-control:focus {
+  box-shadow: 0px 0.25rem rgba(194, 27, 23, 0.25) !important;
+
 }
 
 
@@ -400,7 +399,5 @@ $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
 $form-feedback-font-size: 20px;
-
-
 
 @import 'bootstrap/scss/bootstrap';

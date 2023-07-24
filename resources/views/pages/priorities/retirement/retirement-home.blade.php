@@ -34,7 +34,7 @@
                                     {{-- <div id="bm"> </div> --}}
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-auto py-lg-5 py-md-5">
+                                <div class="col-auto py-lg-4 py-md-5">
                                 </div>
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
