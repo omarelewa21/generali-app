@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Family Dependant Page (Nisha)
+ * Template Name: Avatar - Family Dependant Page
  */
 ?>
 
