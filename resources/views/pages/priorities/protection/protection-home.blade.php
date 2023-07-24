@@ -54,7 +54,7 @@
             <div class="col d-flex p-0 flex-column h-sm-100">
                 <hr class="py-2 m-0 bg-primary opacity-100" />
                 <section>
-                    {{-- <div class="row justify-content-end align-items-center bg-accent-bg-grey">
+                    <div class="row justify-content-end align-items-center bg-accent-bg-grey">
                         <div class="col-auto ">
                             <p class="display-6 text-dark d-inline-flex">Protection</p>
                             <div class="progress color d-inline-flex mx-2">
@@ -67,9 +67,7 @@
                                 <div class="progress-value">1</div>
                             </div>
                         </div>
-                    </div> --}}
-                    @include ('templates.nav.nav-sidebar-needs')
-
+                    </div>
                 </section>
                 <section class="main-vh row overflow-auto bg-accent-bg-grey">
                     <div class="protection-home d-flex flex-column align-items-center justify-content-center"
