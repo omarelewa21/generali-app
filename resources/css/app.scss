@@ -95,81 +95,6 @@ $zindex-modal-backdrop: 1199;
 
 
 
-/* Track */
-
-::-webkit-scrollbar-track {
-
-  box-shadow: inset 10 0 10px #FD5B5B;
-
-  border-radius: 10px;
-
-  background-color: #A0A0A0;
-
-  border-radius: 0;
-
-}
-
-
-
-/* Handle */
-
-::-webkit-scrollbar-thumb {
-
-  background-color: #ffffff;
-
-  border-radius: 10px;
-
-}
-
-
-
-/* Handle on hover */
-
-::-webkit-scrollbar-thumb:hover {
-
-  background: #b30000;
-
-}
-
-h1.headline1 {
-  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
-}
-h3.needsProgressValue {
-  font-family: 'Helvetica Neue Bold', sans-serif;
-}
-
-h4 {
-  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
-}
-
-h4.font-bold {
-
-  font-family: 'Helvetica Neue', sans-serif;
-}
-
-h4.font-normal {
-  font-family: 'Helvetica Neue Regular', sans-serif;
-}
-h5.needs-text {
-  font-family: 'Helvetica Neue Bold', sans-serif;
-}
-
-p.welcome {
-
-  font-family: 'Helvetica Neue Regular', sans-serif;
-
-}
-
-h6.nav-text {
-
-  font-weight: 700;
-
-  font-family: 'Helvetica Neue Medium', sans-serif;
-
-  letter-spacing: 1.1px;
-
-
-
 
 
 
@@ -197,21 +122,10 @@ h6.nav-text-needs {
 //   --bs-body-color: #212529 !important;
 // }
 
-  font-weight: 700;
-
-}
-
-
-p {
-  font-size: 1.25rem; //20px
-  font-family: 'Helvetica Neue Regular', sans-serif;
-}
-
-a {
-  color: #ffffff;
-  text-decoration: none;
-
-}
+// a {
+//   color: #ffffff;
+//   text-decoration: none;
+// }
 
 .bg-accent-bg-grey {
   background-color: #F8F8F8;
@@ -219,21 +133,6 @@ a {
 
 .bg-accent-light-white {
   background-color: #f0f0f0;
-}
-
-.form-label {
-
-  font-family: 'Helvetica Neue Regular', sans-serif;
-
-}
-
-.form-control,
-.form-select {
-  font-size: 20px !important;
-  font-family: 'Helvetica Neue Regular', sans-serif;
-  border-top: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important
 }
 
 // Footer
@@ -272,8 +171,6 @@ $tertiary: #000000;
 
 $font-family-sans-serif: "Helvetica Neue Bold Condensed";
 
-$h1-font-size: 7.5rem; //120px
-
 $h2-font-size: 3.5rem; //56px
 
 $h3-font-size: 3.5rem; //56px
@@ -285,25 +182,8 @@ $h5-font-size: 2.125rem; //34px
 $h6-font-size: 1.375rem; //22px
 
 
-$display-font-sizes: (
-  1: 7.5rem,
-  //120px
 
-  2: 4rem,
-  //64px
 
-  3: 3.5rem,
-  //56px
-
-  4: 2.5rem,
-  //40px;
-
-  5: 2.125rem,
-  //34px;
-
-  6: 1.375rem //22px
-
-);
 
 $body-color: #000000;
 
@@ -346,6 +226,7 @@ $btn-font-size-sm: 16px;
 $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
+
 
 
 

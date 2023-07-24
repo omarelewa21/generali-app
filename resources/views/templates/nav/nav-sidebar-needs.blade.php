@@ -147,18 +147,21 @@
     transform-origin: center right;
     animation: loading-1 1.8s linear forwards;
   }
-
+  .progress-value p {
+    font-size:20px;
+  }
   .progress .progress-value {
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
     background: #ffffff;
     color: #d10b4f;
     line-height: 3.2em;
     text-align: center;
     position: absolute;
-    top: 5%;
-    left: 5%;
+    top: 0;
+    left: 0;
+  
   }
 
   .progress.color .progress-bar {

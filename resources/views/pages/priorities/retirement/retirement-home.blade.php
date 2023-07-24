@@ -38,8 +38,8 @@
                                 </div>
                             </div>
                             <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-xxl-4 col-xl-5 col-md-8 my-xxl-4 my-xl-4 py-md-4 py-lg-5">
-                                    <h4 class="display-5 img-fluid">Now let's talk about your plans for Retirement.</h1>
+                                <div class="col-xxl-5 col-xl-5 col-md-8 my-xxl-4 my-xl-4 py-md-4 py-lg-4">
+                                    <h4 class="display-5 fw-bold">Now let's talk about your plans for Retirement.</h1>
                                 </div>
                             </div>
                         </div>

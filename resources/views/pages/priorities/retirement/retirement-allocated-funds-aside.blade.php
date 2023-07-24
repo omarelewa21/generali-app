@@ -3,7 +3,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Retirement - Years till Retire</title>
+<title>Retirement - Allocated Funds Aside</title>
 @endsection
 
 @section('content')

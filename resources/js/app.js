@@ -305,34 +305,3 @@ yearFieldExtract.addEventListener('change', calculateAge);
 
 
 
-import Sortable from 'sortablejs';
-// Default SortableJS
-
-rightContainer = document.getElementById("right-container");
-leftContainer = document.getElementById("left-container");
-// custom code for sortable js
-// Sortable options for the right container (draggable items)
-var sortable = Sortable.create(rightContainer, {
-  group: {
-    name: "shared",
-    pull: "clone",
-    put: false, // Do not allow items to be put into this list
-  },
-  animation: 150,
-});
-
-// Sortable options for the left container (drop target)
-var sortable2 = Sortable.create(leftContainer, {
-  group: "shared",
-  animation: 150,
-
-});
-
-
-// var animation = bodymovin.loadAnimation({
-//     container: document.getElementById('bm'),
-//     renderer: 'svg',
-//     loop: true,
-//     autoplay: true,
-//     path: '/images/data.json'
-//   })
