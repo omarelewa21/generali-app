@@ -25,46 +25,46 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <section class="main-content scrollable-padding">
+                    <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 py-4">
+                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
-                                    <h4 class="display-4 text-white font-normal pb-3">May we know your relationship status?</h4>
+                                    <h1 class="display-4 text-white font-normal pb-3 fw-bold">May we know your relationship status?</h1>
                                     <p class="text-white display-6">Click to select your marital status.</p>
                                 </div>
                             </div>
-                            <div class="row px-4 pb-4">
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                            <div class="row px-4 pb-4 px-sm-5">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white">
                                             <img src="{{ asset('images/avatar/single-icon.svg') }}" width="150px" height="100px" alt="Single">
-                                            <h6 class="avatar-text text-center pt-4">Single</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Single</p>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white">
                                             <img src="{{ asset('images/avatar/married-icon.svg') }}" width="150px" height="100px" alt="Married">
-                                            <h6 class="avatar-text text-center pt-4">Married</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Married</p>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white">
                                             <img src="{{ asset('images/avatar/divorced-icon.svg') }}" width="150px" height="100px" alt="Divorced">
-                                            <h6 class="avatar-text text-center pt-4">Divorced</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Divorced</p>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white">
                                             <img src="{{ asset('images/avatar/widowed-icon.svg') }}" width="150px" height="100px" alt="Widowed">
-                                            <h6 class="avatar-text text-center pt-4">Widowed</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Widowed</p>
                                         </button>
                                     </div>
                                 </div>
@@ -73,11 +73,11 @@
                     </section>
 
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('avatar.gender.selection')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('avatar.family.dependant') }}" class="btn btn-primary text-uppercase">Next</a>
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
+                                    <a href="{{route('identity.details')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('avatar.family.dependant') }}" class="btn btn-primary text-uppercase" id="nextButton">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -87,5 +87,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    
+</script>
 
 @endsection

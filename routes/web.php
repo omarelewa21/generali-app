@@ -4,7 +4,6 @@ use App\Http\Controllers\ProgressBarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
-use App\Http\Controllers\SvgController;
 
 /* main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -22,7 +21,6 @@ Route::get('/identity-details', [FormController::class, 'countries'])->name('ide
 Route::post('/avatar-gender-selection', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
-// Route::get('/edit-svg', [SvgController::class, 'editSvg'])->name('editSvg');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
 
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');

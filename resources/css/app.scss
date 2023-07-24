@@ -1,97 +1,97 @@
-:root {
-  --bs-body-color: #212529 !important;
-}
-
-//bootstrap custom style using sass and css
-
+/* Font Family Declaration */
 @font-face {
-
   font-family: 'Helvetica Neue Regular';
-
   src: local('Helvetica Neue Regular'),
-
     url('/public/fonts/HelveticaNeue.woff2') format('woff2'),
-
     url('/public/fonts/HelveticaNeue.woff') format('woff'),
-
     url('/public/fonts/HelveticaNeue.ttf') format('truetype');
-
   font-style: normal;
-
 }
-
 @font-face {
-
   font-family: 'Helvetica Neue Medium';
-
   src: url('/public/fonts/HelveticaNeue-Medium.eot');
-
   src: local('Helvetica Neue Medium'),
-
     url('/public/fonts/HelveticaNeue-Medium.eot?#iefix') format('embedded-opentype'),
-
     url('/public/fonts/HelveticaNeue-Medium.woff2') format('woff2'),
-
     url('/public/fonts/HelveticaNeue-Medium.woff') format('woff'),
-
     url('/public/fonts/HelveticaNeue-Medium.ttf') format('truetype');
-
   font-style: normal;
-
 }
 
 @font-face {
-
   font-family: 'Helvetica Neue Bold Condensed';
-
   src: url('/public/fonts/HelveticaNeueBoldCondensed.eot');
-
   src: local('Helvetica Neue Condensed Bold'),
-
     url('/public/fonts/HelveticaNeueBoldCondensed.eot?#iefix') format('embedded-opentype'),
-
     url('/public/fonts/HelveticaNeueBoldCondensed.woff2') format('woff2'),
-
     url('/public/fonts/HelveticaNeueBoldCondensed.woff') format('woff'),
-
     url('/public/fonts/HelveticaNeueBoldCondensed.ttf') format('truetype');
-
   font-style: normal;
-
 }
 
 @font-face {
-
   font-family: 'Helvetica Neue Bold';
-
   src: local('Helvetica Neue Bold'),
-
     url('/public/fonts/HelveticaNeue-Bold.woff2') format('woff2'),
-
     url('/public/fonts/HelveticaNeue-Bold.woff') format('woff'),
-
     url('/public/fonts/HelveticaNeue-Bold.ttf') format('truetype');
-
   font-style: normal;
-
 }
 
-body,
-html {
-  overflow: hidden;
-  height: 100vh;
-}
+// Body Styling
+$primary: #C21B17;
+$container-max-widths: (
+  // sm: 540px,
+  // md: 720px,
+  // lg: 960px,
+  // xl: 1140px,
+  xxl: 1440px
+);
+$dark: #2C2738;
+$font-family-base: 'Helvetica Neue Regular', sans-serif;
+$font-size-base: 1.25rem; //20px
+$display-font-sizes: (
+  1: 7.5rem, //120px
+  2: 4rem, //64px
+  3: 3.5rem, //56px
+  4: 2.5rem, //40px;
+  5: 2.125rem, //34px;
+  6: 1.375rem //22px
+);
 
+// Headings
+$headings-font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+$h1-font-size: 7.5rem; //120px
 
-//  code for scrollbar
+// Forms
+$input-font-size: 22px;
+$input-font-family: 'Helvetica Neue';
+$form-label-font-size: 22px;
+$form-label-color: rgba(10, 4, 60, 0.75);
+$form-select-indicator-color: #AA1B17;
+$input-placeholder-color: rgba(10, 4, 60, 0.30);
+$input-color: #0A043C;
+$form-feedback-font-size: 18px;
+$form-feedback-font-style: normal;
+$form-label-margin-bottom: 0.813rem;
+$form-label-font-weight: 700;
+$form-feedback-invalid-color: #C21B17;
 
-/* width */
+// Offcanvas Menu
+$offcanvas-bg-color: #C21B17;
 
-::-webkit-scrollbar {
+// Footer
+$zindex-fixed: 1;
+$danger: #AA1B17;
 
-  width: 6px;
-
-}
+// Modal
+$modal-header-border-color: #fff;
+$modal-content-color: #C21B17;
+$modal-title-line-height: normal;
+$modal-content-border-radius: normal;
+$modal-footer-bg: #C21B17;
+$zindex-modal: 2000;
+$zindex-modal-backdrop: 1199;
 
 
 
@@ -168,6 +168,13 @@ h6.nav-text {
 
   letter-spacing: 1.1px;
 
+
+
+
+
+
+h4.font-normal {
+  font-family: 'Helvetica Neue Regular', sans-serif;
 }
 
 h6.nav-text-needs {
@@ -176,11 +183,19 @@ h6.nav-text-needs {
   letter-spacing: 1.1px;
 }
 
-h6.avatar-text {
+// h6.avatar-text {
+//   font-size: 26px;
+//   font-family: 'Helvetica Neue Regular', sans-serif;
+//   font-weight: 700;
+// }
 
-  font-size: 26px;
+// p.welcome {
+//   font-family: 'Helvetica Neue Regular', sans-serif;
+// }
 
-  font-family: 'Helvetica Neue Regular', sans-serif;
+// :root {
+//   --bs-body-color: #212529 !important;
+// }
 
   font-weight: 700;
 
@@ -220,43 +235,19 @@ a {
   border-left: 0 !important;
   border-right: 0 !important
 }
-// .form-control:focus {
-//   box-shadow: 0px 0.25rem rgba(194, 27, 23, 0.25) !important;
 
-// }
-
-
+// Footer
 footer {
   max-height: 103px !important;
 }
 
-.text-dark {
-  color: #000 !important;
-}
-
-h1 {
-  line-height: 1;
-}
-
-.btn-primary {
-  letter-spacing: 0.9px;
-}
+// .text-dark {
+//   color: #000 !important;
+// }
 
 .btn-primary:hover {
   background-color: transparent;
   color: #C21B17;
-}
-
-.text-dark {
-  color: #000 !important;
-}
-
-h1 {
-  line-height: 1 !important;
-}
-
-.btn-primary {
-  letter-spacing: 0.9px;
 }
 
 .btn-primary:hover {
@@ -264,28 +255,16 @@ h1 {
   color: #C21B17 !important;
 }
 
-.bg-white {
-  background-color: #ffffff;
-}
+// .bg-white {
+//   background-color: #ffffff;
+// }
 
 #offcanvasNeeds {
   width: 344px;
   z-index: 1100;
 }
 
-$container-max-widths: (
-  // sm: 540px,
 
-  // md: 720px,
-
-  // lg: 960px,
-
-  // xl: 1140px,
-
-  xxl: 1440px
-);
-
-$primary: #C21B17;
 
 $secondary: #AA1B17;
 
@@ -325,6 +304,7 @@ $display-font-sizes: (
   6: 1.375rem //22px
 
 );
+
 $body-color: #000000;
 
 $btn-font-family: "Helvetica Neue";
@@ -347,17 +327,7 @@ $input-border-radius: 0;
 
 $input-placeholder-color: rgba(10, 4, 60, 0.3);
 
-$form-select-indicator-color: #AA1B17;
 
-$form-label-font-size: 20px;
-
-$form-label-color: rgba(10, 4, 60, 0.75);
-
-$form-label-margin-bottom: 0.813rem;
-
-$form-label-font-weight: 700;
-
-$offcanvas-bg-color: #C21B17;
 
 // $btn-close-color:   #ffffff;
 $btn-close-opacity: 1;
@@ -376,7 +346,7 @@ $btn-font-size-sm: 16px;
 $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
-$form-feedback-font-size: 20px;
+
 
 
 @import 'bootstrap/scss/bootstrap';
