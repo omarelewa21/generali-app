@@ -48,7 +48,7 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('retirement.home')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.home') }}"
+                                    <a href="{{route('retirement.age.to.retire') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>

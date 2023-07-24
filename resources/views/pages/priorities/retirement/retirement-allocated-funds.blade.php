@@ -3,7 +3,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Retirement - Age to Retire</title>
+<title>Retirement - Allocated Funds</title>
 @endsection
 
 @section('content')
@@ -55,9 +55,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.ideal')}}"
+                                    <a href="{{route('retirement.home')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.allocated.funds') }}"
+                                    <a href="{{route('retirement.home') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
