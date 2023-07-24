@@ -1,6 +1,10 @@
 <?php
  /**
+<<<<<<< HEAD
  * Template Name: Avatar - Family Dependant Page - This is just testing
+=======
+ * Template Name: Avatar - Family Dependant Page
+>>>>>>> main
  */
 ?>
 
