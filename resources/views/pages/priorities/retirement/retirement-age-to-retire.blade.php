@@ -17,7 +17,7 @@
             </div>
             <div class="col-6 col-md-6 col-lg-6">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-6 col-sm-12 bg-primary rounded-bottom px-1">
+                    <div class="col-lg-6 col-sm-12 bg-primary px-1 summary-progress-bar">
                         <!-- <div class="row d-flex"> -->
                             <div class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -40,7 +40,8 @@
                             <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/avatar-age-to-retire.svg') }}" class="img-fluid" style="max-width: 60%;" alt="avatar">
                         </div>
                         <div class="col-lg-6 my-auto">
-                            <h6 class="d-inline py-2 ms-5">I’d like to retire at the age of</h6> 
+                            <h5 class="needs-text d-inline py-2 ms-5">I’d like to retire </h5> <br>
+                            <h5 class="needs-text d-inline ms-5">at the age of</h5>
                             <input type="text" name="ageToRetire" class="form-control form-input-needs-sm d-inline text-primary" id="ageToRetireInput" placeholder=" " required>
                         </div>
                         </div>

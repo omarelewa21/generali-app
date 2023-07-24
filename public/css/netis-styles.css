@@ -1,6 +1,11 @@
 .form-input-needs-sm {
     width: 10%;
-
+}
+.form-input-needs-md{
+    width: 20%;
+}
+.form-input-needs-lg{
+    width: 45%;
 }
 
 /* Ideal age to retire page */
@@ -27,4 +32,36 @@
     background: linear-gradient(90deg, #AA1B17 0%, #DA331E 100%);
     height:8px;
     margin-left:1px;
+}
+
+.summary-progress-bar {
+    border-bottom-right-radius: 1.3rem;
+    border-bottom-left-radius:1.3rem;
+}
+
+/* Retirement - Allocated funds */
+#bg-allocated-funds {
+    background-image: url(/images/needs/retirement/bg-allocated-funds.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/* Retirement - years to retire */
+#bg-years-to-retire {
+    background-image: url(/images/needs/retirement/bg-years-to-retire.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/* Retirement - allocated funds aside */
+#bg-allocated-funds-aside {
+    background-image: url(/images/needs/retirement/bg-allocated-funds-aside.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }

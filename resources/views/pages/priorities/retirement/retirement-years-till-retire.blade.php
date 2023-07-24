@@ -3,12 +3,12 @@
 @extends('templates.master')
 
 @section('title')
-<title>Retirement - Allocated Funds</title>
+<title>Retirement - Years till Retire</title>
 @endsection
 
 @section('content')
 
-<div id="retirementAllocatedFunds" class="vh-100 overflow-auto container-fluid">
+<div id="retirementYearsTillRetire" class="vh-100 overflow-auto container-fluid">
 
     <div class="container p-0">
         <div class="row">
@@ -36,15 +36,14 @@
                 <div class="my-4">  
                     <section>
                         <div class="row">
-                        <div id="bg-allocated-funds" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
-                            <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" class="img-fluid" style="max-width: 60%;" alt="avatar">
+                        <div id="bg-years-to-retire" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
+                            <img class="position-relative avatar-age-to-retire" src="{{ asset('images/needs/retirement/years-to-retire-avatar.svg') }}" class="img-fluid" style="max-width: 60%;" alt="avatar">
                         </div>
                         <div class="col-lg-6 my-auto">
-                            <h5 class="needs-text d-inline">It would be great to have</h5><br> 
-                            <h5 class="needs-text d-inline ">RM</h5>
-                            <input type="text" name="allocatedFunds" class="form-control form-input-needs-md d-inline text-primary" id="allocatedFunds" placeholder=" " required> 
-                            <h5 class="needs-text d-inline">/ month to</h5><br>
-                            <h5 class="needs-text d-inline">support myself and my <br>loved ones when I retire.</h5>
+                            <h5 class="needs-text d-inline">I plan to have</h5><br> 
+                            <input type="text" name="yearsToRetire" class="form-control form-input-needs-sm d-inline text-primary" id="yearsToRetire" placeholder=" " required> 
+                            <h5 class="needs-text d-inline">golden years</h5><br>
+                            <h5>to enjoy my retirement.</h5>
                         </div>
                         </div>
                         <div class="row bg-accent-bg-grey">
@@ -53,14 +52,13 @@
                         </div>
                     </section>
                     
-
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.age.to.retire')}}"
+                                    <a href="{{route('retirement.allocated.funds')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.years.till.retire') }}"
+                                    <a href="{{route('retirement.allocated.funds.aside') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
