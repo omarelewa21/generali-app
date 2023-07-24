@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Family Dependant</title>
+<title>Avatar - Family Dependant Nisha</title>
 @endsection
 
 @section('content')
