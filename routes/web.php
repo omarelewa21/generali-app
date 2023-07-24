@@ -44,6 +44,7 @@ Route::view('/investment-home', 'pages.priorities.investment.investment-home')->
 Route::view('/investment-coverage', 'pages.priorities.investment.investment-coverage')->name('investment.coverage');
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
+Route::view('/investment-expected-return', 'pages.priorities.investment.investment-expected-return')->name('investment.expected.return');
 
 /* Priorities - Retirement */
 Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');

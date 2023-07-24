@@ -32,7 +32,7 @@
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
                         <div class="col-xl-6 col-12 hide position-relative">
                            <div class="row">
-                                <img src="{{ asset('images/needs/investment/investment-avatar.png') }}" class="w-80 m-auto z-99 mb-3">
+                                <img src="{{ asset('images/needs/investment/investment-expected-return-avatar.png') }}" class="w-80 m-auto z-99 mb-3">
                                 <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
                                     <div class="col-11 col-md-4 text-center">
                                         
@@ -44,10 +44,10 @@
                             <div class="row">
                                 <div class="col-12 d-flex mt-5 justify-content-start">
                                     <div class="row">
-                                        <div class="col-xl-8 col-10 mt-4">
-                                            <p style="font-size:34px;"><strong>Of course, ideally I'd like to see</strong></p>
-                                            <input type="number" name="fund_year" class="form-control d-inline-block w-50" id="fund_year" required>
-                                            <p style="font-size:34px;"><strong>in annual returns</strong></p>
+                                        <div class="col-12 mt-4">
+                                            <p style="font-size:34px;"><strong>Right now, I can invest</strong></p>
+                                            <p style="font-size:34px;"><input type="number" name="fund_year" class="form-control d-inline-block w-50" id="fund_year" required><strong>/month</strong></p>
+                                            <p style="font-size:34px;"><strong>for my expected returns.</strong></p>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
             <section class="needs-master-footer footer bg-white">
                 <div class="bg-btn_bar py-4 px-2 bg-white">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
-                        <a href="{{route('investment.supporting')}}" class="btn btn-primary text-uppercase">Back</a>
+                        <a href="{{route('investment.annual.return')}}" class="btn btn-primary text-uppercase">Back</a>
                         <a href="{{route('investment.expected.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                     </div>
                 </div>
