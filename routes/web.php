@@ -46,6 +46,7 @@ Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoadin
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
 Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
+Route::view('/retirement-allocated-funds ', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');
 
 
 Route::get('/files/{filename}', function($filename){

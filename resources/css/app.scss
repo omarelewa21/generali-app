@@ -132,30 +132,23 @@ html {
 }
 
 h1.headline1 {
-
   font-family: 'Helvetica Neue Bold Condensed', sans-serif;
-
+}
+h3.needsProgressValue {
+  font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
 h4 {
-
   font-family: 'Helvetica Neue Bold Condensed', sans-serif;
-
 }
 
 h4.font-bold {
 
   font-family: 'Helvetica Neue', sans-serif;
-
-
-
-
 }
 
 h4.font-normal {
-
   font-family: 'Helvetica Neue Regular', sans-serif;
-
 }
 
 p.welcome {
@@ -197,27 +190,18 @@ p {
 }
 
 a {
-
   color: #ffffff;
-
   text-decoration: none;
 
 }
 
 .bg-accent-bg-grey {
-
   background-color: #F8F8F8;
-
 }
 
 .bg-accent-light-white {
-
   background-color: #f0f0f0;
-
 }
-
-
-
 
 .form-label {
 
@@ -239,12 +223,8 @@ a {
 }
 
 
-
-
 footer {
-
   max-height: 103px !important;
-
 }
 
 .text-dark {
@@ -310,9 +290,6 @@ $tertiary: #000000;
 
 $font-family-sans-serif: "Helvetica Neue Bold Condensed";
 
-
-
-
 $h1-font-size: 7.5rem; //120px
 
 $h2-font-size: 3.5rem; //56px
@@ -324,8 +301,6 @@ $h4-font-size: 2.5rem; //40px
 $h5-font-size: 2.125rem; //34px
 
 $h6-font-size: 1.375rem; //22px
-
-
 
 
 $display-font-sizes: (
@@ -399,5 +374,6 @@ $accordion-button-active-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-focus-border-color: #000;
 $form-feedback-font-size: 20px;
+
 
 @import 'bootstrap/scss/bootstrap';
