@@ -34,7 +34,7 @@
                     <div class="bg-btn_bar py-4 px-2 sticky-bottom">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('education.coverage')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                            <a href="{{route('investment.coverage')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
                         </div>
                     </div>
                 </section>

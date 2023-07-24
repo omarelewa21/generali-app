@@ -30,11 +30,11 @@
             <section class="needs-master-content">
             <div class="col-12">
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                        <div class="col-xl-6 col-12 position-relative hide">
+                        <div class="col-xl-6 col-12 position-relative hide bg-education-supporting">
                            <div class="row">
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row d-flex h-100">
-                                        <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="w-100" style="z-index:99;">
+                                        <img src="{{ asset('images/avatar/son.png') }}" class="w-100" style="z-index:99;">
                                         <p class="text-center py-2" style="z-index:99;"><strong>RM231,682</strong></p>
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                             <div class="col-11 col-md-4 text-center">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row h-100">
-                                        <img src="{{ asset('images/avatar/son.png') }}" class="w-100" style="z-index:99;">
+                                        <img src="{{ asset('images/avatar/young-kid.png') }}" class="w-100" style="z-index:99;">
                                         <p class="text-center py-2" style="z-index:99;"><strong>RM135,545</strong></p>
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                             <div class="col-11 col-md-4 text-center">
