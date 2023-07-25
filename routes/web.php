@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProgressBarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\formValidateRetirementNeeds;
 
 /* main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -22,6 +24,8 @@ Route::post('/avatar-gender-selection', [AvatarController::class, 'changeImage']
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
+
+Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateAvatar'])->name('validate.avatar');
 
@@ -47,8 +51,15 @@ Route::view('/investment-annual-return', 'pages.priorities.investment.investment
 Route::view('/investment-expected-return', 'pages.priorities.investment.investment-expected-return')->name('investment.expected.return');
 
 /* Priorities - Retirement */
-Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
+// Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
+Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoading'])->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
+Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
+Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
+Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');
+Route::Post('/retirement-age-to-retire', [formValidateRetirementNeeds::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
+Route::view('/retirement-years-till-retire', 'pages.priorities.retirement.retirement-years-till-retire')->name('retirement.years.till.retire');
+Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.retirement-allocated-funds-aside')->name('retirement.allocated.funds.aside');
 
 Route::get('/files/{filename}', function($filename){
     return \Storage::download($filename); // assuming default disk is set to 'public'

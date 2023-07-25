@@ -4,7 +4,8 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "npm run development -- --watch",
-        "development": "mix"
+        "development": "mix",
+        "test": "command-to-run-tests"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
@@ -20,7 +21,6 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
         "axios": "^1.4.0",
-        "vue": "^3.2.36",
-        "vue-loader": "^17.0.1"
+        "sortablejs": "^1.15.0"
     }
 }
