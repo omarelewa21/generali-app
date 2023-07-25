@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
@@ -26,22 +27,17 @@ class FormController extends Controller
 
         ]);
 
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
 
-        // Remove the existing firstName session variable if it exists
-        if (session()->has('firstName')) {
-            session()->forget('firstName');
-        }
+        // Add or update the 'FirstName' value in the array
+        $arrayData['FirstName'] = $validatedData['firstName'];
 
-        // Store the new firstName in the session
-        session(['firstName' => $validatedData['firstName']]);
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
 
-        // // Process the form data and perform any necessary actions
+        // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
-    }
-    public function formSession(Request $request)
-    {
-        $firstName = $request->session()->get('firstName'); // Retrieve the stored firstName from the session
-        return view('pages/avatar/avatar-gender-selection', compact('firstName'));
     }
 
     public function countries()
@@ -611,5 +607,52 @@ class FormController extends Controller
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
+    }
+
+    public function validateAvatar(Request $request)
+    {
+        $request->validate([
+            'data-required' => 'required|in:selected',
+        ]);
+
+        return response()->json([
+            'validationPassed' => true,
+        ]);
+    }
+    public function handleAvatarSelection(Request $request)
+    {
+        // Get the selected avatar from the hidden input field
+        $selectedMaritalStatus = $request->input('selectedAvatarInput');
+        $dataUrl = $request->input('urlInput');
+        $selectedFamilies = $request->input('selectedFamilies');
+        Log::debug($request->all());
+        Log::debug($selectedFamilies);
+
+        // You can access the data for each entry like this:
+        // foreach ($selectedFamilies as $family) {
+        //     $key = $family['key'];
+        //     $value = $family['value'];
+        // }
+
+        // Perform any additional actions based on the validation result.
+        // For example, you can save the selection to the database.
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Add or update the value in the array
+        if ($selectedMaritalStatus !== null) {
+            // If not equal to null, then replace the data in $arrayData['maritalStatus']
+            $arrayData['maritalStatus'] = $selectedMaritalStatus;
+        }
+        //$arrayData['families'] = $value;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        // Log the session data to the Laravel log file
+        \Log::info('Session Data:', $arrayData);
+
+        return redirect()->route($dataUrl);
     }
 }

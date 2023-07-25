@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Regular expression pattern to validate email format
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // Test the email against the regex pattern
         var isValid = emailRegex.test(email);
 
         return isValid;

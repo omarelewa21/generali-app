@@ -14,6 +14,11 @@
 
 @include('templates.nav.nav-red-menu')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
@@ -39,8 +44,7 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('/images/avatar/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        <!-- <img src="{{ (session('image') ? session('image') : 'gender-male') . '.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                    <img src="{{ asset('/images/avatar/avatar/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -50,8 +54,8 @@
                         <div class="container">
                             <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
-                                    @if(isset($firstName))
-                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you,<br/>{{ $firstName }}</h1>
+                                    @if(isset($arrayData['FirstName']))
+                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you,<br/>{{ $arrayData['FirstName'] }}</h1>
                                     @else 
                                         <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h1>
                                     @endif

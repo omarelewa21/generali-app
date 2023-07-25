@@ -23,6 +23,14 @@ html {
   /* overflow: hidden; */
   height: 100vh;
 }
+.fade-effect img {
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.fade-effect button:not([disabled]):hover img {
+  opacity: 1;
+}
 
 /* Headings */
 h4 {
@@ -157,6 +165,10 @@ p.nav-text {
   background-color: #AA1B17;
   color: #fff;
   border-color: #AA1B17;
+}
+
+button[data-required="selected"] img {
+  opacity: 1;
 }
 
 /* Right Sidebar */
@@ -313,7 +325,7 @@ p.nav-text {
   .extra-padding {
     padding-bottom: 500px!important;
   }
-  .navbar {
+  .navbar-default.transparent {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   }
   .wrapper-avatar {
@@ -659,14 +671,9 @@ p.nav-text {
     z-index: 1019;
   }
 
-  .fade-effect img {
-    opacity: 0.75;
-    transition: opacity 0.3s ease;
-  }
+ 
 
-  .fade-effect:hover img {
-    opacity: 1;
-  }
+
 
 
 
