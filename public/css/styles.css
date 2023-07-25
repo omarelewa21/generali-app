@@ -20,7 +20,7 @@
 /* Body */
 body,
 html {
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100vh;
 }
 
@@ -467,7 +467,7 @@ p.nav-text {
   }
 
   #retirement-character {
-    top: 24%;
+    top: 16%;
     left: 14%;
     z-index: 10;
     height: 50vh;
@@ -764,10 +764,6 @@ p.nav-text {
     #basic_details .main-content {
       padding-bottom: 450px !important;
     } */
-
-    #retirement-character {
-      top: 0px;
-    }
 
   }
 
