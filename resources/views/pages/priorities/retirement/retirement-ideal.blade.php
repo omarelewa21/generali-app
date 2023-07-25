@@ -10,7 +10,7 @@
 
 <div id="retirement_ideal" class="vh-100 overflow-auto container-fluid">
 
-    <div class="container p-0">
+    <div class="container-fluid p-0">
         <div class="row">
             <div class="col-6">
                 @include('templates.nav.nav-red-menu')
@@ -19,7 +19,7 @@
                 @include ('templates.nav.nav-sidebar-needs')            </div>
         </div>
             <div class="col-12 text-dark px-0 my-4">
-                <div class="my-4">
+                <div class="container my-4">
                     <section class="row d-flex justify-content-center py-2 text-center align-items-center">
                         <h5 class="my-2">My ideal retirement involves:</h5>
                     </section>
