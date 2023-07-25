@@ -8,24 +8,25 @@
 
 @section('content')
 
-<div id="retirement_coverage" class="vh-100 container-fluid">
+<div id="retirement_coverage" class="vh-100">
 
-    <div class="container p-0 vh-100">
+
+    <div class="p-0 vh-100 container-fluid">
         <div class="row">
             <div class="col-6">
                 @include('templates.nav.nav-red-menu')
             </div>
             <div class="col-6">
-                @include ('templates.nav.nav-sidebar-needs')            </div>
+                @include ('templates.nav.nav-sidebar-needs')            
+            </div>
         </div>
 
             <div class="col-12 text-dark px-0 retirement-coverage my-4">
                 <div class="my-4">
-                    <section class="row d-flex justify-content-center py-2 text-center align-items-center">
+                    <div class="row d-flex justify-content-center py-2 text-center align-items-center">
                         <h5 class="my-2">I'd like to provide coverage for my:</h5>
-                    </section>
-                    <section>
-                        <div class="row position-absolute justify-content-end" id="coverage-avatar">
+                    </div>
+                        <div class="container row position-absolute justify-content-end" id="coverage-avatar">
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
                                 <img src="{{ asset('images/needs/retirement/self.svg') }}" class="self-avatar" alt="self-character">
                                 <h6 class="text-center py-2">Self</h6>
@@ -47,7 +48,6 @@
                             <div class="col-12 col-md-4 text-center">
                             </div>
                         </div>
-                    </section>
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">

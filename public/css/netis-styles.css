@@ -74,7 +74,7 @@
 #bg-years-to-retire {
     background-image: url(/images/needs/retirement/bg-years-to-retire.png);
     background-size: contain;
-    background-position: center;
+    background-position: left;
     background-repeat: no-repeat;
     height: 66vh;
 }
@@ -90,7 +90,7 @@
 #bg-allocated-funds-aside {
     background-image: url(/images/needs/retirement/bg-allocated-funds-aside.png);
     background-size: contain;
-    background-position: center;
+    background-position: left;
     background-repeat: no-repeat;
     height: 66vh;
 }
@@ -192,9 +192,9 @@
     z-index: 10;
     width: 59vh;
     }
-    #optionsForIdeal img {
+    /* #optionsForIdeal img {
         width: 100% !important;
-    }
+    } */
     #coverage-avatar img.self-avatar{
         width: 21vh;
       }
@@ -206,6 +206,10 @@
       }
       #coverage-avatar img.parent-avatar{
         width: 38vh;
+      }
+
+      #coverage-avatar {
+        left:12%;
       }
 }
 

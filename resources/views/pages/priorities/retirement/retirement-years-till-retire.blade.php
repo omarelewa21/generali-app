@@ -10,7 +10,7 @@
 
 <div id="retirementYearsTillRetire" class="vh-100 overflow-auto container-fluid">
 
-    <div class="container p-0">
+    <div class="container-fluid p-0">
         <div class="row">
             <div class="col-3 col-md-3 col-lg-3">
                 @include('templates.nav.nav-red-menu')
