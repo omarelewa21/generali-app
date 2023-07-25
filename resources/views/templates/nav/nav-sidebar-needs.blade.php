@@ -9,7 +9,7 @@
         <div class="col-auto">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
                 <div class="text-dark d-inline-flex">
-                    <p class="mb-0">
+                    <p class="needs-text mb-0">
                         @php
                         // Get the current route name
                         $routeName = Route::currentRouteName();
@@ -108,7 +108,7 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    z-index: 1;
+    z-index: 1000;
   }
 
   .progress .progress-left {

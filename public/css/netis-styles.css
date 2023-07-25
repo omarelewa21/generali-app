@@ -105,8 +105,15 @@
 .fixed-bottom {
     z-index: 1011;
 }
+.needs-text {
+    z-index:1000;
+}
 
 @media only screen and (max-width: 968px) {
+    body,
+    html {
+      overflow-y: auto;
+    }
 
     #retirement-character {
         top: 36%;
