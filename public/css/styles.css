@@ -493,7 +493,7 @@ p.nav-text {
 } */
 
 #coverage-avatar {
-  top: 22%;
+  top: 25%;
   left: 0%;
   z-index: 10;
   height: 50vh;
@@ -501,16 +501,16 @@ p.nav-text {
   width:100%;
 }
 #coverage-avatar img.self-avatar{
-  width: 21vh;
+  width: 19vh;
 }
 #coverage-avatar img.spouse-avatar{
-  width: 19vh;
+  width: 17vh;
 }
 #coverage-avatar img.kid-avatar{
-  width: 19vh;
+  width: 17vh;
 }
 #coverage-avatar img.parent-avatar{
-  width: 38vh;
+  width: 34vh;
 }
 
   /* img {

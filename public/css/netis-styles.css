@@ -31,7 +31,7 @@
 
 .avatar-age-to-retire {
     right: 14%;
-    bottom: 4%;
+    bottom: 9%;
     z-index: 10;
     width: 52vh;
 }
@@ -78,9 +78,10 @@
     background-repeat: no-repeat;
     height: 66vh;
 }
+
 .avatar-years-till-retire {
     right: 4%;
-    bottom: 12%;    
+    bottom: 12%;
     z-index: 10;
     width: 52vh;
 }
@@ -93,6 +94,7 @@
     background-repeat: no-repeat;
     height: 66vh;
 }
+
 .avatar-allocated-funds-aside {
     left: 3%;
     top: 10%;
@@ -130,21 +132,23 @@
         padding: 136px;
     }
 
-    #coverage-avatar img.self-avatar{
+    #coverage-avatar img.self-avatar {
         width: 19vh;
-      }
-      #coverage-avatar img.spouse-avatar{
+    }
+
+    #coverage-avatar img.spouse-avatar {
         width: 17vh;
-      }
-      #coverage-avatar img.kid-avatar{
+    }
+
+    #coverage-avatar img.kid-avatar {
         width: 17vh;
-      }
-      #coverage-avatar img.parent-avatar{
+    }
+
+    #coverage-avatar img.parent-avatar {
         width: 34vh;
-      }
+    }
 
-
-      .avatar-age-to-retire {
+    .avatar-age-to-retire {
         bottom: 10%;
         right: 1%;
         width: 43vh;
@@ -152,20 +156,57 @@
 
     .avatar-years-till-retire {
         right: 0;
-    width: 40vh;
+        width: 40vh;
     }
+
     .avatar-allocated-funds {
         right: 0;
         width: 45vh;
     }
+
     .avatar-allocated-funds-aside {
         left: 0;
         top: 0px;
         width: 43vh;
     }
+
+}
+
+@media screen and (min-height:800px) and (min-width:968px) {
+
+    .avatar-allocated-funds{
+        bottom:0;
+    }
+    .avatar-years-till-retire {
+        bottom:0;
+    }
+    .avatar-allocated-funds-aside {
+        top:22%;
+    }
+    .avatar-age-to-retire {
+    right: 11%;
+    bottom: 0%;
+    z-index: 10;
+    width: 59vh;
+    }
+    #optionsForIdeal img {
+        width: 100% !important;
+    }
+    #coverage-avatar img.self-avatar{
+        width: 21vh;
+      }
+      #coverage-avatar img.spouse-avatar{
+        width: 19vh;
+      }
+      #coverage-avatar img.kid-avatar{
+        width: 19vh;
+      }
+      #coverage-avatar img.parent-avatar{
+        width: 38vh;
+      }
 }
 
 /* Code for Retirement - Ideal page */
 #optionsForIdeal img {
-    width:90%;
+    width: 90%;
 }
