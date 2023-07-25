@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div id="education-home">
+<div id="investment-home">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row needs-home-mobile">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner needs-mobile-nav">

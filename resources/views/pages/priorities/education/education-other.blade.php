@@ -31,8 +31,8 @@
                 <section class="needs-master-content hide">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-xl-6 col-12 position-relative bg-education-others-section">
-                                <div class="row">
+                            <div class="col-xl-6 col-12 position-relative bg-education-others-mob second-order">
+                                <div class="row bg-education-others-section">
                                     <div class="col-4 d-flex align-items-center h-100">
                                         <div class="row d-flex h-100">
                                             <img src="{{ asset('images/avatar/son.png') }}" class="w-100" style="z-index:99;">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12 position-relative">
+                            <div class="col-xl-6 col-12 position-relative first-order">
                                 <div class="row">
                                     <div class="col-12 d-flex mt-5 justify-content-center">
                                         <div class="">

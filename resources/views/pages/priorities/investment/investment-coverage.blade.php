@@ -5,7 +5,7 @@
 
 @section('content')
 
-<div id="education-content">
+<div id="investment-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-investment vh-100">
             <section class="col-12 d-flex needs-coverage-nav">

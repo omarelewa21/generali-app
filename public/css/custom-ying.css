@@ -7,7 +7,7 @@
     left: 50%;
 }
 .h-88{
-    height: 88%;
+    height: 88% !important;
 }
 .f-64{
     font-size: 64px !important;
@@ -25,7 +25,7 @@
 .bg-education{
     background-image: url('/images/needs/education/education-master-bg.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position:center;
 }
 .bg-needs-content{
@@ -38,18 +38,6 @@
     background-image: url('/images/needs/education/bg-supporting.png');
     background-repeat: no-repeat;
     background-size: contain;
-    background-position:center;
-}
-.bg-education-others{
-    background-image: url('/images/needs/education/bg-others-new.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
-.bg-education-gap{
-    background-image: url('/images/needs/education/bg-gap.png');
-    background-repeat: no-repeat;
-    background-size: cover;
     background-position:center;
 }
 .bg-education-others-section{
@@ -369,6 +357,30 @@ input[type="radio"]:checked + label::after {
     .hide-desktop{
         display: block !important;
     }
+    .first-order{
+        order:1;
+    }
+    .second-order{
+        order:2;
+    }
+    .bg-half{
+        background-image: url('/images/needs/bg-half-plain.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .bg-education-others-mob{
+        background-image: url('/images/needs/education/bg-education-others-mob.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
+    .bg-education-gap-mob{
+        background-image: url('/images/needs/education/bg-education-gap-mob.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
 }
 @media only screen and (min-width: 1024px){
     .needs-home-nav {
@@ -388,6 +400,9 @@ input[type="radio"]:checked + label::after {
     }
     .needs-home-content{
         height:85.5vh;
+    }
+    #investment-supporting .overflow-y-auto{
+        overflow-y: hidden !important;
     }
 }
 @media only screen and (min-width: 992px) and (max-width: 1023px) {
@@ -620,6 +635,27 @@ input[type="radio"]:checked + label::after {
         height: 8vh;
     }
 }
+@media only screen and (min-width: 1250px){
+    .bg-needs-desktop{
+        background-image: url('/images/needs/education/bg-needs-master.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
+    .bg-education-others{
+        background-image: url('/images/needs/education/bg-others-new.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
+    .bg-education-gap{
+        background-image: url('/images/needs/education/bg-gap.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
+}
+
 /* @media only screen and (max-width: 1440px){
     .needs-home-line{
         height:2vh;

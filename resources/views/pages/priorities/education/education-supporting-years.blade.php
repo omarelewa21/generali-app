@@ -7,7 +7,7 @@
 
 <div id="education-content">
     <div class="container-fluid overflow-hidden font-color-default">
-        <div class="row bg-needs-content" style="max-height:100vh;height:100vh;">
+        <div class="row bg-needs-desktop" style="max-height:100vh;height:100vh;">
             <section class="col-12 d-flex needs-master-nav">
                 <div class="col-2 col-md-2 col-xl-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
@@ -30,8 +30,8 @@
             <section class="needs-master-content">
             <div class="col-12">
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                        <div class="col-xl-6 col-12 position-relative hide bg-education-supporting">
-                           <div class="row">
+                        <div class="col-xl-6 col-12 position-relative hide bg-half second-order">
+                           <div class="row bg-education-supporting">
                                 <div class="col-4 d-flex align-items-center h-100">
                                     <div class="row d-flex h-100">
                                         <img src="{{ asset('images/avatar/son.png') }}" class="w-100" style="z-index:99;">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-12 position-relative hide">
+                        <div class="col-xl-6 col-12 position-relative hide first-order">
                             <div class="row">
                                 <div class="col-12 d-flex mt-5 justify-content-center">
                                     <div class="">
