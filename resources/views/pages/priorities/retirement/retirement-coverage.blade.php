@@ -28,20 +28,28 @@
                     </div>
                         <div class="container row position-absolute justify-content-end" id="coverage-avatar">
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/self.svg') }}" class="self-avatar" alt="self-character">
-                                <h6 class="text-center py-2">Self</h6>
+                                <button class="border-0 bg-transparent box-shadow avatar-button" data-type="self" id="button-self-avatar" onclick="avatarSelect(this)">
+                                    <img src="{{ asset('images/needs/retirement/self.svg') }}" class="self-avatar" alt="self-character">
+                                    <h6 class="text-center py-2">Self</h6>
+                                </button>
                             </div>
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/spouse.svg') }}" class="spouse-avatar" alt="spouse">
-                                <h6 class="text-center py-2">Spouse</h6>
+                                <button class="border-0 bg-transparent box-shadow avatar-button" data-type="spouse" id="button-spouse-avatar" onclick="avatarSelect(this)">
+                                    <img src="{{ asset('images/needs/retirement/spouse.svg') }}" class="spouse-avatar" alt="spouse">
+                                    <h6 class="text-center py-2">Spouse</h6>
+                                </button>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/kid.svg') }}" class="kid-avatar"  alt="kid">
-                                <h6 class="text-center py-2">Child(ren)</h6>
+                                <button class="border-0 bg-transparent box-shadow avatar-button" data-type="kid" id="button-kid-avatar" onclick="avatarSelect(this)">
+                                    <img src="{{ asset('images/needs/retirement/kid.svg') }}" class="kid-avatar"  alt="kid">
+                                    <h6 class="text-center py-2">Child(ren)</h6>
+                                </button>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <img src="{{ asset('images/needs/retirement/parent.svg') }}" class="parent-avatar" alt="parent">
-                                <h6 class="text-center py-2">Parent</h6>
+                                <button class="border-0 bg-transparent box-shadow avatar-button" data-type="parent" id="button-parent-avatar" onclick="avatarSelect(this)">
+                                    <img src="{{ asset('images/needs/retirement/parent.svg') }}" class="parent-avatar" alt="parent">
+                                    <h6 class="text-center py-2">Parent</h6>
+                                </button>
                             </div>
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -65,3 +73,25 @@
     </div>
 
     @endsection
+
+
+<script>
+    function avatarSelect(button) {
+      const buttonType = button.getAttribute('data-type');
+      const buttons = document.querySelectorAll('.avatar-button');
+  
+      buttons.forEach((btn) => {
+        if (btn.getAttribute('data-type') !== buttonType) {
+            if (btn.classList.contains('greyed-out')) {
+                btn.classList.remove('greyed-out');
+            } else {
+                btn.classList.add('greyed-out');
+            }
+        } else {
+          btn.classList.remove('greyed-out');
+        }
+      });
+    }
+  </script>
+  
+  
