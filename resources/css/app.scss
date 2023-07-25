@@ -160,6 +160,7 @@ footer {
 
 #offcanvasNeeds {
   width: 344px;
+  z-index: 1100;
 }
 
 
@@ -228,7 +229,10 @@ $accordion-button-focus-border-color: #000;
 $danger-bg-subtle: #f8d7da;
 $danger-text-emphasis: #842029;
 
+h5.needs-text {
+font-family:'Helvetica Neue Bold', sans-serif;
 
+}
 
 
 @import 'bootstrap/scss/bootstrap';
