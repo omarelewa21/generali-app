@@ -137,14 +137,14 @@ p.nav-text {
 }
 
 .btn-exit:before {
-  content: url(/images/Logout.svg);
+  content: url(/images/general/Logout.svg);
   width: auto;
   height: auto;
   display: inline-block;
   vertical-align: middle;
 }
 .btn-exit:hover:before {
-  content: url(/images/Logout-red.svg);
+  content: url(/images/general/Logout-red.svg);
   width: auto;
   height: auto;
   display: inline-block;
@@ -217,7 +217,7 @@ button[data-required="selected"] img {
 
 /* Avatar Welcome Page */
 #avatar_welcome {
-  background-image: url(/images/avatar/avatar-welcome-bg.jpg);
+  background-image: url(/images/avatar-welcome/avatar-welcome-bg.jpg);
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -317,7 +317,7 @@ button[data-required="selected"] img {
     overflow-x: hidden;
   }
   .gender-selection-bg {
-    z-index: 2;
+    z-index: 1012;
   }
 }
 
@@ -327,6 +327,7 @@ button[data-required="selected"] img {
   }
   .navbar-default.transparent {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
+    background: #fff;
   }
   .wrapper-avatar {
     grid-template-rows: 30vh 60vh;
