@@ -27,7 +27,7 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education">
+            <form class="form-horizontal p-0"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education">
                 <section class="needs-master-content hide">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -78,16 +78,16 @@
                                                 <div class="" style="height:fit-content;">
                                                     <p style="font-size:34px;"><strong>I’ve been saving up for my child(ren)’s education.</strong></p>
                                                     <span class="me-5">
-                                                        <input type="radio" id="education_yes" name="education_other_savings" value="Yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required>
+                                                        <input type="radio" class="needs-radio" id="education_yes" name="education_other_savings" value="Yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required>
                                                         <label for="education_yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
-                                                        <input type="radio" id="education_no" name="education_other_savings" value="No" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);">
+                                                        <input type="radio" class="needs-radio" id="education_no" name="education_other_savings" value="No" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);">
                                                         <label for="education_no" class="form-label">No</label>
                                                     </span>
                                                 </div>
                                                 <p class="mt-5 hide-content">Current savings amount:
-                                                    <input type="text" name="education_saving_amount" class="form-control d-inline-block w-25" id="education_saving_amount">
+                                                    <input type="text" name="education_saving_amount" class="form-control d-inline-block w-25 money" id="education_saving_amount" placeholder="RM">
                                                 </p>
                                             </div>
                                         </div>
@@ -102,8 +102,8 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-white">
-                    <div class="bg-btn_bar py-4 px-2 bg-white">
+                <section class="needs-master-footer footer bg-btn_bar">
+                    <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('education.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>
                             <!-- <a href="{{route('education.gap')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->

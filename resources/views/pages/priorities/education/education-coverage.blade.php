@@ -63,8 +63,8 @@
                     </div>
                 </div>
             </section>
-            <section class="needs-master-footer footer bg-white p-0">
-                <div class="bg-btn_bar py-4 px-2 bg-white">
+            <section class="needs-master-footer footer bg-btn_bar">
+                <div class="py-4 px-2">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                         <a href="{{route('education.home')}}" class="btn btn-primary text-uppercase">Back</a>
                         <a href="{{route('education.supporting.years')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>

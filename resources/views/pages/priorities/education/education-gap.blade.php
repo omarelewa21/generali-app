@@ -21,11 +21,11 @@
                     <div class="row h-100 overflow-y-auto overflow-x-hidden">
                         <div class="col-xl-6 col-12 position-relative hide second-order bg-education-gap-mob">
                            <div class="row h-100 d-flex justify-content-center align-items-center">
-                                <!-- <div class="container-fluid">
-                                    <div class="col-11 m-auto"> -->
-                                        <canvas id="totalEducationFund" class="h-88 w-100 d-flex m-auto" style="object-fit:cover;"></canvas>
-                                    <!-- </div>
-                                </div> -->
+                                <!-- <div class="container-fluid"> -->
+                                       <!-- <div class="col-11 m-auto"> -->
+                                        <canvas id="totalEducationFund" class="w-100 h-88 d-flex m-auto d-hide object-fit-cover"></canvas>
+                                    <!-- </div>-->
+                                <!-- </div>  -->
                             </div>
                         </div>
                         <div class="col-xl-6 col-12 position-relative first-order">
@@ -39,13 +39,13 @@
                                                     <strong>years' time,</strong>
                                                 </p>
                                                 <p style="font-size:34px;"><strong>I want to enjoy my golden years with</strong>
-                                                    <input type="number" name="fund_money" class="form-control d-inline-block w-25" id="fund_money" placeholder="RM" required>
+                                                    <input type="number" name="fund_money" class="form-control d-inline-block w-25 money" id="fund_money" placeholder="RM" required>
                                                 </p>
                                                 <p style="font-size:34px;"><strong>I have set aside</strong>
-                                                    <input type="number" name="fund_money1" class="form-control d-inline-block w-25" id="fund_money1" placeholder="RM" required>
+                                                    <input type="number" name="fund_money1" class="form-control d-inline-block w-25 money" id="fund_money1" placeholder="RM" required>
                                                 </p>
                                                 <p style="font-size:34px;"><strong>So I need to plan for</strong>
-                                                    <input type="number" name="fund_money2" class="form-control d-inline-block w-25" id="fund_money2" placeholder="RM" required>
+                                                    <input type="number" name="fund_money2" class="form-control d-inline-block w-25 money" id="fund_money2" placeholder="RM" required>
                                                 </p>
                                             </div>
                                         </div>
@@ -56,8 +56,8 @@
                     </div>
                 </div>
             </section>
-            <section class="needs-master-footer footer bg-white">
-                <div class="bg-btn_bar py-4 px-2 bg-white">
+            <section class="needs-master-footer footer bg-btn_bar">
+                <div class="py-4 px-2">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                         <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
                         <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
@@ -70,128 +70,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
     $(document).ready(function() {
-       
-        // Chart.pluginService.register({
-        //     beforeDraw: function(chart) {
-        //         if (chart.config.options.elements.center) {
-        //             // Get ctx from string
-        //             var ctx = chart.chart.ctx;
-
-        //             // Get options from the center object in options
-        //             var centerConfig = chart.config.options.elements.center;
-        //             var fontStyle = centerConfig.fontStyle || 'Arial';
-        //             var txt = centerConfig.text;
-        //             var color = centerConfig.color || '#000';
-        //             var maxFontSize = centerConfig.maxFontSize || 75;
-        //             var sidePadding = centerConfig.sidePadding || 20;
-        //             var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
-        //             // Start with a base font of 30px
-        //             ctx.font = "30px " + fontStyle;
-
-        //             // Get the width of the string and also the width of the element minus 10 to give it 5px side padding
-        //             var stringWidth = ctx.measureText(txt).width;
-        //             var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
-
-        //             // Find out how much the font can grow in width.
-        //             var widthRatio = elementWidth / stringWidth;
-        //             var newFontSize = Math.floor(30 * widthRatio);
-        //             var elementHeight = (chart.innerRadius * 2);
-
-        //             // Pick a new font size so it will not be larger than the height of label.
-        //             var fontSizeToUse = Math.min(newFontSize, elementHeight, maxFontSize);
-        //             var minFontSize = centerConfig.minFontSize;
-        //             var lineHeight = centerConfig.lineHeight || 25;
-        //             var wrapText = false;
-
-        //             if (minFontSize === undefined) {
-        //                 minFontSize = 20;
-        //             }
-
-        //             if (minFontSize && fontSizeToUse < minFontSize) {
-        //                 fontSizeToUse = minFontSize;
-        //                 wrapText = true;
-        //             }
-
-        //             // Set font settings to draw it correctly.
-        //             ctx.textAlign = 'center';
-        //             ctx.textBaseline = 'middle';
-        //             var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
-        //             var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
-        //             ctx.font = fontSizeToUse + "px " + fontStyle;
-        //             ctx.fillStyle = color;
-
-        //             if (!wrapText) {
-        //                 ctx.fillText(txt, centerX, centerY);
-        //                 return;
-        //             }
-
-        //             var words = txt.split(' ');
-        //             var line = '';
-        //             var lines = [];
-
-        //             // Break words up into multiple lines if necessary
-        //             for (var n = 0; n < words.length; n++) {
-        //                 var testLine = line + words[n] + ' ';
-        //                 var metrics = ctx.measureText(testLine);
-        //                 var testWidth = metrics.width;
-        //                 if (testWidth > elementWidth && n > 0) {
-        //                     lines.push(line);
-        //                     line = words[n] + ' ';
-        //                 } else {
-        //                     line = testLine;
-        //                 }
-        //             }
-
-        //             // Move the center up depending on line height and number of lines
-        //             centerY -= (lines.length / 2) * lineHeight;
-
-        //             for (var n = 0; n < lines.length; n++) {
-        //                 ctx.fillText(lines[n], centerX, centerY);
-        //                 centerY += lineHeight;
-        //             }
-        //             //Draw text in center
-        //             ctx.fillText(line, centerX, centerY);
-        //         }
-        //     }
-        // });
-
-
-        // var config = {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: ["Uncovered", "Covered"],
-        //         datasets: [{
-        //             data: [300, 700],
-        //             backgroundColor: ["#C21B17", "#30DF8B"],
-        //             hoverBackgroundColor: [
-        //                 "#C21B17",
-        //                 "#30DF8B"
-        //             ]
-        //         }]
-        //     },
-        //     options: {
-        //         legend: {
-        //             display: false // This will hide the label data above the doughnut chart
-        //         },
-        //         elements: {
-        //             center: {
-        //                 // text1:{
-        //                 //     text: '70%',
-        //                 //     color: '#14A38B',
-        //                 // }
-        //                 text: '70%',
-        //                 color: '#14A38B', // Default is #000000
-        //                 fontStyle: 'Helvetica Neue', // Default is Arial
-        //                 sidePadding: 20, // Default is 20 (as a percentage)
-        //                 minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-        //                 lineHeight: 25 // Default is 25 (in px), used for when text wraps
-        //             }
-        //         }
-        //     }
-        // };
-
-        // var ctx = document.getElementById("totalEducationFund").getContext("2d");
-        // var myChart = new Chart(ctx, config);
+        // Chart for Desktop
         var config = {
             type: 'doughnut',
                 data: {
@@ -207,8 +86,10 @@
                 },
                 options: {
                     legend: {
-                                display: false // This will hide the label data above the doughnut chart
+                                display: false, // This will hide the label data above the doughnut chart
                             },
+                    responsive: true, // Enable responsiveness
+                    maintainAspectRatio: true, // Keep the aspect ratio (important for responsiveness)
                     elements: {
                         center: {
                             // First text style
@@ -217,7 +98,6 @@
                                 color: '#14A38B', 
                                 fontStyle: 'Helvetica Neue', // Font style for the first text
                                 fontSize: 45, // Font size for the first text
-                                lineHeight: 40
                             },
                             // Second text style
                             text2: {
@@ -225,7 +105,6 @@
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 16, // Font size for the second text
-                                lineHeight: 30
                             },
                             sidePadding: 20,
                             minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
@@ -244,16 +123,21 @@
                     var maxTextWidth = (chart.innerRadius * 2) - (centerConfig.sidePadding || 20) * 2;
 
                     // Draw the first text (text1)
-                    ctx.font = centerConfig.text1.fontSize + "px " + centerConfig.text1.fontStyle;
+                    if (window.innerWidth < 768) {
+                        ctx.font = getResponsiveFontSize(centerConfig.text1.fontSize) + "px " + centerConfig.text1.fontStyle;
+                    } else {
+                        ctx.font = centerConfig.text1.fontSize + "px " + centerConfig.text1.fontStyle;
+                    }
+                    // ctx.font = getResponsiveFontSize(centerConfig.text1.fontSize) + "px " + centerConfig.text1.fontStyle;
                     ctx.fillStyle = centerConfig.text1.color;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     // ctx.fillText(centerConfig.text1.text, centerX, centerY - 10); // Adjust the position as needed
                     // Wrap text if necessary
                     var lines1 = wrapText(centerConfig.text1.text, ctx.font, maxTextWidth);
-                    var lineHeight1 = centerConfig.text1.fontSize + (centerConfig.lineHeight || 35);
+                    var lineHeight1 = centerConfig.text1.fontSize + (centerConfig.lineHeight || 20);
                     var totalHeight1 = lineHeight1 * lines1.length;
-                    var startY1 = centerY - totalHeight1 / 2;
+                    var startY1 = centerY - totalHeight1 / 4;
 
                     for (var i = 0; i < lines1.length; i++) {
                         ctx.fillText(lines1[i], centerX, startY1 + i * lineHeight1);
@@ -261,21 +145,27 @@
 
 
                     // Set spacing between texts
-                    // var spacing = 10;
+                    var spacing = 8;
 
                     // Draw the second text (text2)
-                    ctx.font = centerConfig.text2.fontSize + "px " + centerConfig.text2.fontStyle;
+                    if (window.innerWidth < 768) {
+                        ctx.font = getResponsiveFontSize(centerConfig.text2.fontSize) + "px " + centerConfig.text2.fontStyle;
+                    } else {
+                        ctx.font = centerConfig.text2.fontSize + "px " + centerConfig.text2.fontStyle;
+                    }
+                    // ctx.font = centerConfig.text2.fontSize + "px " + centerConfig.text2.fontStyle;
                     ctx.fillStyle = centerConfig.text2.color;
                     // ctx.fillText(centerConfig.text2.text, centerX, centerY + centerConfig.text1.fontSize / 2 + spacing); // Adjust the position as needed
 
                     // Wrap text if necessary
                     var lines2 = wrapText(centerConfig.text2.text, ctx.font, maxTextWidth);
-                    var lineHeight2 = centerConfig.text2.fontSize + (centerConfig.lineHeight || 10);
+                    var lineHeight2 = centerConfig.text2.fontSize + (centerConfig.lineHeight || 5);
                     var totalHeight2 = lineHeight2 * lines2.length;
-                    var startY2 = centerY + totalHeight2 / 2 - lineHeight2; // Adjust starting position
+                    // var startY2 = centerY + totalHeight2 / 4; // Adjust starting position
+                    var startY2 = centerY + totalHeight2 / 4; // Adjust starting position
 
                     for (var j = 0; j < lines2.length; j++) {
-                        ctx.fillText(lines2[j], centerX, startY2 + j * lineHeight2);
+                        ctx.fillText(lines2[j], centerX, startY2 + j * lineHeight2 + spacing);
                     }
                 }
             }
@@ -301,6 +191,13 @@
             }
             lines.push(currentLine);
             return lines;
+        }
+
+        // Helper function to get the font size for responsive scaling
+        function getResponsiveFontSize(originalFontSize) {
+            // Adjust the scaling factor as needed
+            var scalingFactor = 0.6;
+            return Math.max(originalFontSize * scalingFactor, 10);
         }
 
         var ctx = document.getElementById("totalEducationFund").getContext("2d");
