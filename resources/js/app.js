@@ -1,5 +1,58 @@
 import './bootstrap';
-import ('./delivery');
+import './sortable-code';
+
+// Get the height of any devices, and set a padding bottom to prevent footer overlay over the main content
+$(document).ready(function() {
+  function setMainContentPadding() {
+      const windowWidth = $(window).width();
+      const footerHeight = $(".footer").outerHeight();
+      const mainContentPadding = footerHeight + 60; // Adding 50 pixels
+      $(".main-content").css("padding-bottom", mainContentPadding + "px");
+  }
+
+  setMainContentPadding();
+
+  $(window).resize(function() {
+      setMainContentPadding();
+  });
+});
+
+// Add checkmark for every page completed in left navigation menu
+$(document).ready(function () {
+  // Get the current URL path
+  var currentPath = window.location.pathname;
+  
+  // Find all the timeline items and iterate through them
+  $('.timeline-item').each(function () {
+      // Get the URL of the timeline item
+      var itemURL = $(this).find('a').attr('href');
+
+      // Create a URL object to parse the full URL
+      var urlObject = new URL(itemURL);
+
+      // Get only the path from the URL object
+      var itemPath = urlObject.pathname;
+
+      // Check if the current URL matches the timeline item URL
+      if (itemPath === currentPath) {
+          // Add the checkmark (you can use a class or a style here)
+          $(this).addClass('active'); // Add your CSS class here
+      }
+  });
+});
+
+// Close the Offcanvas sidebar when the modal is opened.
+// Get the "EXIT" button element
+const exitButton = document.querySelector('.btn-exit');
+
+// Add a click event listener to the "EXIT" button
+exitButton.addEventListener('click', function() {
+    // Find the offcanvas element and remove the 'show' class
+    const offcanvasElement = document.querySelector('.offcanvas');
+    const offcanvasElementBackdrop = document.querySelector('.offcanvas-backdrop');
+    offcanvasElement.classList.remove('show');
+    offcanvasElementBackdrop.classList.remove('show');
+});
 
 // Logics to choose avatar gender and skin color
 document.addEventListener('DOMContentLoaded', function() {
@@ -50,22 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Logics to validate idNumber 
-// Add event listener to the input field
-document.getElementById('idNumber').addEventListener('input', function (e) {
-    // Get the input value and remove any non-numeric characters
-    var inputValue = this.value.replace(/\D/g, '');
-
-    // Truncate the input value to a maximum length of 12 characters
-    inputValue = inputValue.slice(0, 12);
-
-    // Format the value with dashes
-    var formattedValue = inputValue.replace(/^(\d{6})(\d{2})(\d{4})$/, '$1-$2-$3');
-
-    // Set the formatted value back to the input field
-    this.value = formattedValue;
-});
-
 // Show the selected groups based on the dropdown selected
 document.addEventListener('DOMContentLoaded', function() {
     var idTypeSelect = document.getElementById('idType');
@@ -73,14 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var passportgroup = document.getElementById('passportgroup');
     var birthcertgroup = document.getElementById('birthcertgroup');
     var policegroup = document.getElementById('policegroup');
-    var registrationgroup = document.getElementById('registrationgroup');
-  
-    // Retrieve the selected option from local storage
-    var selectedOption = localStorage.getItem('selectedOption');
-    if (selectedOption) {
-      idTypeSelect.value = selectedOption;
-      showSelectedGroup(selectedOption);
-    }
+    // var registrationgroup = document.getElementById('registrationgroup');
   
     // Add change event listener to the select element
     idTypeSelect.addEventListener('change', function() {
@@ -93,20 +123,30 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Function to show the selected group
     function showSelectedGroup(selectedOption) {
-      // Hide all groups
+      // Hide all groups and remove the required attribute from all of them
       newicgroup.style.display = 'none';
+      idNumber.removeAttribute('required');
       passportgroup.style.display = 'none';
-      passportgroup.removeAttribute('required');
+      passportNumber.removeAttribute('required');
       birthcertgroup.style.display = 'none';
+      birthCert.removeAttribute('required');
       policegroup.style.display = 'none';
+      policeNumber.removeAttribute('required');
       registrationgroup.style.display = 'none';
-  
-      // Show the relevant group based on the selected option
+      registrationNumber.removeAttribute('required');
+
+      // Clear input fields in respective groups
+      idNumber.value = '';
+      passportNumber.value = '';
+      birthCert.value = '';
+      policeNumber.value = '';
+      registrationNumber.value = '';
+
+      // Show the relevant group based on the selected option and add the required attribute
       if (selectedOption === 'New IC') {
         newicgroup.style.display = 'block';
       } else if (selectedOption === 'Passport') {
         passportgroup.style.display = 'block';
-        passportgroup.setAttribute('required', 'required');
       } else if (selectedOption === 'Birth Certificate') {
         birthcertgroup.style.display = 'block';
       } else if (selectedOption === 'Police / Army') {
@@ -115,7 +155,30 @@ document.addEventListener('DOMContentLoaded', function() {
         registrationgroup.style.display = 'block';
       }
     }
-});  
+
+    // Check if a selected option is stored in local storage and show the relevant group on page load
+    var storedOption = localStorage.getItem('selectedOption');
+    if (storedOption) {
+      idTypeSelect.value = storedOption;
+      showSelectedGroup(storedOption);
+    }
+});
+
+// Logics to validate idNumber
+// Add event listener to the input field
+document.getElementById('idNumber').addEventListener('input', function (e) {
+  // Get the input value and remove any non-numeric characters
+  var inputValue = this.value.replace(/\D/g, '');
+
+  // Truncate the input value to a maximum length of 12 characters
+  inputValue = inputValue.slice(0, 12);
+
+  // Format the value with dashes
+  var formattedValue = inputValue.replace(/^(\d{6})(\d{2})(\d{4})$/, '$1-$2-$3');
+
+  // Set the formatted value back to the input field
+  this.value = formattedValue;
+});
 
 // Logics to calculate age
 // Get the ID Number field and the date of birth fields
@@ -172,7 +235,7 @@ function calculateAge() {
   const selectedYear = parseInt(yearFieldExtract.value);
 
   if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
-    ageField.textContent = 'Invalid date';
+    ageField.textContent = 'Invalid ID number entered';
     return;
   }
 
@@ -201,4 +264,7 @@ calculateAge();
 dayFieldExtract.addEventListener('change', calculateAge);
 monthFieldExtract.addEventListener('change', calculateAge);
 yearFieldExtract.addEventListener('change', calculateAge);
+
+
+
 

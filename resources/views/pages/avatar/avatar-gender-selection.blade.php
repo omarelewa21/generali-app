@@ -14,6 +14,11 @@
 
 @include('templates.nav.nav-red-menu')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
@@ -22,7 +27,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="display-6 text-dark">Pick the skin colour that’s closest to yours.</p>
+                                <p class="text-dark pb-3 display-6 fw-bold">Pick the skin colour that’s closest to yours.</p>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
@@ -39,39 +44,38 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('/images/avatar/avatar/' . (session('image') ? session('image') : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        <!-- <img src="{{ (session('image') ? session('image') : 'gender-male') . '.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                    <img src="{{ asset('/images/avatar/avatar/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <section class="main-content scrollable-padding-avatar">
+                    <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5">
+                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
-                                    @if(isset($firstName))
-                                        <h4 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you,<br/>{{ $firstName }}</h4>
+                                    @if(isset($arrayData['FirstName']))
+                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you,<br/>{{ $arrayData['FirstName'] }}</h1>
                                     @else 
-                                        <h4 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h4>
+                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h1>
                                     @endif
                                     <p class="text-white display-6">Please click to select your gender.</p>
                                 </div>
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" id="gendermale">
                                             <img src="{{ asset('images/avatar/button-gender-male.png') }}" width="150px" alt="Gender Male">
-                                            <h6 class="avatar-text text-center pt-4">Male</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Male</p>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center">
+                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" id="genderfemale">
                                             <img src="{{ asset('images/avatar/button-gender-female.png') }}" width="150px" alt="Gender Female">
-                                            <h6 class="avatar-text text-center pt-4">Female</h6>
+                                            <p class="avatar-text text-center pt-4 fw-bold">Female</p>
                                         </button>
                                     </div>
                                 </div>
@@ -151,8 +155,6 @@ const csrfToken = '{{ csrf_token() }}';
 //     });
 //   });
 // });
-
-
 
 </script>
 

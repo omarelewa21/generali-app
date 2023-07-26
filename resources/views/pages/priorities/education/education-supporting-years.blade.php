@@ -1,13 +1,17 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Supporting Years</title>
+<title>Education - Other Savings</title>
 
 @section('content')
 
 <div id="education-content">
     <div class="container-fluid overflow-hidden font-color-default">
+<<<<<<< HEAD
         <div class="row bg-needs-desktop" style="max-height:100vh;height:100vh;">
+=======
+        <div class="row bg-education-others" style="max-height:100vh;height:100vh;">
+>>>>>>> main
             <section class="col-12 d-flex needs-master-nav">
                 <div class="col-2 col-md-2 col-xl-3 sticky-top">
                     @include('templates.nav.nav-red-menu')

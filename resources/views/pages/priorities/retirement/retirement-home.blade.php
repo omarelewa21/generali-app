@@ -23,24 +23,17 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 text-dark px-0 retirement-bg">
-                <hr class="py-1 m-0 bg-primary opacity-100 border-0" />
+                <hr class="needs-line py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-auto">
                     @include ('templates.nav.nav-sidebar-needs')
-                    <section class="main-content scrollable-padding">
-                        <div class="container-fluid">
-                            <div id="retirement-character" class="row d-flex justify-content-center position-relative">
-                                <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}"
-                                    style="width:350px" alt="Retirement Character">
-                                    {{-- <div id="bm"> </div> --}}
-                            </div>
-                            <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-auto py-lg-5 py-md-0">
-                                </div>
-                            </div>
-                            <div class="row bg-accent-bg-grey text-center justify-content-center position-relative">
-                                <div class="col-6 py-4">
-                                    <h4 class="display-5 img-fluid">Now let's talk about your plans for Retirement.</h1>
-                                </div>
+                    <section class="main-content">
+                        <div id="retirement-character" class="col-12 text-center justify-content-center position-absolute">
+                            <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}">
+                            <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Now let's talk about your plans for Retirement.</h5>
+                        </div>
+
+                        <div class="d-flex needs-grey-bg justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                            <div class="col-11 col-md-4 text-center">
                             </div>
                         </div>
                     </section>
@@ -51,7 +44,7 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('retirement.home')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.home') }}"
+                                    <a href="{{route('retirement.coverage') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>

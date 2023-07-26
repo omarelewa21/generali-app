@@ -14,7 +14,7 @@ class AvatarController extends Controller
     {
         $gender = $request->input('gender');
         $color = $request->input('color');
-        Log::debug($color);
+
         // Retrieve the stored gender and image from the session
         $storedGender = session('gender');
         $storedImage = session('image');
@@ -36,7 +36,6 @@ class AvatarController extends Controller
         }
     
         // Perform any necessary logic based on the selected gender and color
-    
         if ($storedGender === 'female' && $color !== null) {
             $storedImage .= '-color-' . $color;
         } elseif ($storedGender === 'female' && $color === null) {
@@ -150,7 +149,17 @@ class AvatarController extends Controller
         }
 
         // Store the updated gender and image in the session
-        session(['gender' => $storedGender, 'image' => $storedImage]);
+        // session(['gender' => $storedGender, 'image' => $storedImage]);
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Add or update the value in the array
+        $arrayData['gender'] = $storedGender;
+        $arrayData['image'] = $storedImage;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
      
         return response()->json([
             'image' => asset('images/avatar/avatar/' . $storedImage . '.svg'),
