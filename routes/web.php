@@ -54,6 +54,7 @@ Route::view('/investment-expected-return', 'pages.priorities.investment.investme
 // Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
 Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoading'])->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
+Route::Post('/retirement-coverage', [formValidateRetirementNeeds::class, 'validateAvatarSelection'])->name('form.retirement.validateAvatar');
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
 Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
 Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');
