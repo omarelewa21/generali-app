@@ -102,9 +102,9 @@
     width: 70vh;
 }
 
-.fixed-bottom {
+/* .fixed-bottom {
     z-index: 1011;
-}
+} */
 .needs-text {
     z-index:1000;
 }
@@ -139,16 +139,20 @@
     html {
       overflow-y: auto;
     }
+    .vh-sm-0 {
+        height:100% !important;
+      }
 
-    #retirement-character {
+    .needs-home-avatar {
         top: 36%;
         left: 0%;
-        z-index: 10;
+        z-index: 1;
         bottom: 0;
         width: 100%;
+        position: relative !important;
     }
 
-    #retirement-character img {
+    .needs-home-avatar img {
         width: 33vh;
     }
 
@@ -156,27 +160,23 @@
         left: 0%;
     }
 
-    .needs-line {
-        display: none;
-    }
-
     .needs-grey-bg-md {
         padding: 136px;
     }
 
-    #coverage-avatar img.self-avatar {
+    .coverage-avatar img.self-avatar {
         width: 19vh;
     }
 
-    #coverage-avatar img.spouse-avatar {
+    .coverage-avatar img.spouse-avatar {
         width: 17vh;
     }
 
-    #coverage-avatar img.kid-avatar {
+    .coverage-avatar img.kid-avatar {
         width: 17vh;
     }
 
-    #coverage-avatar img.parent-avatar {
+    .coverage-avatar img.parent-avatar {
         width: 34vh;
     }
 
@@ -204,10 +204,10 @@
 
 }
 
-@media screen and (min-height:800px) and (min-width:968px) {
+@media screen and (min-height:840px) and (min-width:968px) {
 
-    #retirement-character {
-        top: 24%;
+    .needs-home-avatar {
+        top: 15%;
     }
     .avatar-allocated-funds{
         bottom:0;
@@ -227,21 +227,22 @@
     /* #optionsForIdeal img {
         width: 100% !important;
     } */
-    #coverage-avatar img.self-avatar{
+    .coverage-avatar img.self-avatar{
         width: 21vh;
       }
-      #coverage-avatar img.spouse-avatar{
+      .coverage-avatar img.spouse-avatar{
         width: 19vh;
       }
-      #coverage-avatar img.kid-avatar{
+      .coverage-avatar img.kid-avatar{
         width: 19vh;
       }
-      #coverage-avatar img.parent-avatar{
+      .coverage-avatar img.parent-avatar{
         width: 38vh;
       }
 
-      #coverage-avatar {
+      .coverage-avatar {
         left:12%;
+        top:21%;
       }
 }
 
@@ -249,3 +250,17 @@
 #optionsForIdeal img {
     width: 90%;
 }
+
+
+/* @media screen and (min-width: 320px) and (max-width: 1366px) and (orientation: portrait) {
+    html {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  } */
