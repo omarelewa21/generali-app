@@ -19,9 +19,9 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-
+        <section>
         <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-            <div class="my-4">
+            <div class="my-4 second-cloud">
                 <div class="row d-flex justify-content-center py-2 text-center align-items-center">
                     <h5 class="my-2">I'd like to provide coverage for my:</h5>
                 </div>
@@ -64,13 +64,14 @@
                     <div class="col-12 col-md-4 text-center">
                     </div>
                 </div>
+            </section>
                 <section class="footer bg-white py-4 fixed-bottom">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-grid gap-2 d-md-block text-end">
                                 <a href="{{route('protection.home')}}"
                                     class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.coverage')}}"
+                                    <a href="{{route('protection.monthly.support')}}"
                                     class="btn btn-primary text-uppercase me-md-2">Next</a>
                             </div>
                         </div>

@@ -23,9 +23,9 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 text-dark px-0 bg-needs-main">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-sm-block" />
-                <div class="vh-100 vh-sm-0 overflow-y-auto overflow-x-hidden">
+                <div class="overflow-y-auto overflow-x-hidden main-cloud">
                     @include ('templates.nav.nav-sidebar-needs')
-                    <section class="main-content">
+                    <section>
                         <div class="needs-home-avatar col-12 text-center justify-content-center position-absolute">
                                 <img src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
                                     <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Let’s figure out what you need for Protection.</h5>

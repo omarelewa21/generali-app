@@ -20,6 +20,37 @@
     left: 0px;
 }
 
+/* main css needs */
+.main-cloud {
+    background-image: url(/images/needs/background/abstracts/cloud-1.png);
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    height:100vh;
+}
+.second-cloud {
+    background-image: url(/images/needs/background/abstracts/cloud-2.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:25vh;
+}
+.bg-needs-1 {
+    background-image: url(/images/needs/background/bg-needs-1.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+/* Protection pages */
+/* Protection - Monthly Support */
+.monthly-support-asset {
+    left: 7%;
+    bottom: 0%;
+    z-index: 10;
+    width: 49vh;
+}
 /* Retirement - Ideal age to retire page */
 #bg-ideal-age {
     background-image: url(/images/needs/retirement/bg-age-to-retire.png);
@@ -244,6 +275,13 @@
         left:12%;
         top:21%;
       }
+
+      .monthly-support-asset {
+        left: 8%;
+        bottom: -3%;
+        z-index: 10;
+        width: 58vh;
+    }
 }
 
 /* Code for Retirement - Ideal page */

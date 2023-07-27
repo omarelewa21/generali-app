@@ -153,7 +153,7 @@
   .progress .progress-value {
     width: 100%;
     height: 100%;
-    border-radius: 0;
+    border-radius: 80px;
     background: #ffffff;
     color: #d10b4f;
     line-height: 3.2em;

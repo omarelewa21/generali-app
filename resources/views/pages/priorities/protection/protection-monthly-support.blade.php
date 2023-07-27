@@ -36,15 +36,14 @@
                 <div class="my-4">  
                     <section>
                         <div class="row">
-                        <div id="bg-allocated-funds" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
-                            <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
+                        <div class="col-lg-6 bg-needs-1 justify-content-end d-flex flex-column align-items-center">
+                            <img class="position-relative monthly-support-asset" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
                         <div class="col-lg-6 my-auto">
-                            <h5 class="needs-text d-inline">It would be great to have</h5><br> 
+                            <h5 class="needs-text d-inline">If anything should <br> happen to me, I'd like to <br>support my family with</h5><br> 
                             <h5 class="needs-text d-inline ">RM</h5>
                             <input type="text" name="allocatedFunds" class="form-control form-input-needs-md d-inline text-primary" id="allocatedFunds" placeholder=" " required> 
-                            <h5 class="needs-text d-inline">/ month to</h5><br>
-                            <h5 class="needs-text d-inline">support myself and my <br>loved ones when I retire.</h5>
+                            <h5 class="needs-text d-inline">/ month.</h5><br>
                         </div>
                         </div>
 
@@ -59,9 +58,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.age.to.retire')}}"
+                                    <a href="{{route('protection.coverage')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.years.till.retire') }}"
+                                    <a href="{{route('protection.monthly.support') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
