@@ -102,9 +102,9 @@
     width: 70vh;
 }
 
-.fixed-bottom {
+/* .fixed-bottom {
     z-index: 1011;
-}
+} */
 
 @media only screen and (max-width: 968px) {
 
