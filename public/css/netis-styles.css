@@ -20,7 +20,14 @@
     left: 0px;
 }
 
-/* main css needs */
+/* main css for needs */
+.bg-needs-1 {
+    background-image: url(/images/needs/background/bg-needs-1.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
 .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
@@ -34,13 +41,6 @@
     background-position: center;
     background-repeat: no-repeat;
     height:25vh;
-}
-.bg-needs-1 {
-    background-image: url(/images/needs/background/bg-needs-1.png);
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
-    height: 66vh;
 }
 
 /* Protection pages */
