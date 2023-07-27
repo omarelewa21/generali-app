@@ -19,7 +19,6 @@
         "vite-plugin-laravel": "^0.3.1"
     },
     "dependencies": {
-        "@vitejs/plugin-vue": "^4.2.3",
         "axios": "^1.4.0",
         "sortablejs": "^1.15.0"
     }

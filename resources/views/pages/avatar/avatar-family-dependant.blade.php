@@ -1,10 +1,6 @@
 <?php
  /**
-<<<<<<< HEAD
- * Template Name: Avatar - Family Dependant Page - This is just testing
-=======
  * Template Name: Avatar - Family Dependant Page
->>>>>>> main
  */
 ?>
 
@@ -28,8 +24,19 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
                 <section class="avatar-design-placeholder content-avatar-default pt-4">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                    <img src="{{ asset('/images/avatar/avatar/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <div class="row">
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/parent-father.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
+                            <img src="{{ asset('/images/avatar/avatar/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute" style="right:0;bottom:2%;max-height:88%">
+                        </div>
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage position-absolute start-0" style="z-index:1;bottom:2%">
+                            <img src="{{ asset('/images/spouse.svg') }}" width="auto" height="100%" alt="Spouse" class="changeImage position-absolute" style="right:0;max-height: 93%;bottom:2%">
+                        </div>
+                        <div class="col-12 col-xxl-4 position-relative">
+                            <!-- <img src="{{ asset('/images/avatar/avatar/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
+                            <img src="{{ asset('/images/avatar/avatar/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%"> -->
+                        </div>
                     </div>
                 </section>
             </div>
@@ -47,34 +54,34 @@
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" data-avatar="spouse" data-required="" id="spouseButton">
-                                            <img src="{{ asset('images/avatar/spouse-icon.svg') }}" width="150px" height="100px" alt="Spouse">
-                                            <p class="avatar-text text-center pt-4 fw-bold">Spouse</p>
+                                            <img src="{{ asset('images/avatar-family-dependant/spouse-icon.svg') }}" width="150px" height="100px" alt="Spouse">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" data-avatar="children" data-required="" id="childButton">
-                                            <img src="{{ asset('images/avatar/children-icon.svg') }}" width="150px" height="100px" alt="Child(ren)">
-                                            <p class="avatar-text text-center pt-4 fw-bold">Child(ren)</p>
+                                            <img src="{{ asset('images/avatar-family-dependant/children-icon.svg') }}" width="150px" height="100px" alt="Child(ren)">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" data-avatar="parents" data-required="" id="parentButton">
-                                            <img src="{{ asset('images/avatar/parents-icon.svg') }}" width="150px" height="100px" alt="Parent(s)">
-                                            <p class="avatar-text text-center pt-4 fw-bold">Parent(s)</p>
+                                            <img src="{{ asset('images/avatar-family-dependant/parents-icon.svg') }}" width="150px" height="100px" alt="Parent(s)">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                         <button class="border-0 bg-white" data-avatar="siblings" data-required="" id="siblingButton">
-                                            <img src="{{ asset('images/avatar/siblings-icon.svg') }}" width="150px" height="100px" alt="Sibling(s)">
-                                            <p class="avatar-text text-center pt-4 fw-bold">Sibling(s)</p>
+                                            <img src="{{ asset('images/avatar-family-dependant/siblings-icon.svg') }}" width="150px" height="100px" alt="Sibling(s)">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                         </button>
                                     </div>
                                 </div>
@@ -104,7 +111,14 @@
         </div>
     </div>
 </div>
-
+<style>
+    .avatar-bg {
+        background-image: url('/images/Shadow.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: contain;
+    }
+</style>
 <script>
 // Manually convert the PHP array to JSON
 var passingArrays = {!! json_encode(session('passingArrays')) !!};

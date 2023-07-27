@@ -12,8 +12,7 @@
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
             <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-                <img class="d-flex" src="{{ asset('images/menu-button-red.svg') }}" alt="Logo" width="32px"
-                    height="26px">
+                <img class="d-flex" src="{{ asset('images/general/menu-button-red.svg') }}" alt="Logo" width="32px" height="26px">
             </a>
         </div>
     </nav>
