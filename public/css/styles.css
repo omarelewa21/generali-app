@@ -460,13 +460,12 @@ button[data-required="selected"] img {
   }
 
   /* Protection Home Page */
-  .protection-bg {
-    background-image: url(/images/needs/protection/protection-home-bg.jpg);
-    background-size: cover;
+  .bg-needs-main {
+    background-image: url(/images/needs/background/bg-main.png);
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
-    padding-top:50px;
   }
 
   /* Retirement Home Page */
@@ -479,15 +478,15 @@ button[data-required="selected"] img {
     background-color: #fff;
   }
 
-  #retirement-character {
-    top: 16%;
+  .needs-home-avatar {
+    top: 10%;
     left: 14%;
     z-index: 10;
     height: 50vh;
     bottom:0;
     width:100%;
   }
-  #retirement-character img {
+  .needs-home-avatar img {
     width: 52vh;
   }
 
@@ -500,12 +499,12 @@ button[data-required="selected"] img {
     height: 100%;
     background-color: #fff;
   }
-  /* #coverage-avatar {
+  /* .coverage-avatar {
     z-index: 50;
     top: 70px;
 } */
 
-#coverage-avatar {
+.coverage-avatar {
   top: 25%;
   left: 0%;
   z-index: 10;
@@ -513,16 +512,16 @@ button[data-required="selected"] img {
   bottom:0;
   width:100%;
 }
-#coverage-avatar img.self-avatar{
+.coverage-avatar img.self-avatar{
   width: 19vh;
 }
-#coverage-avatar img.spouse-avatar{
+.coverage-avatar img.spouse-avatar{
   width: 17vh;
 }
-#coverage-avatar img.kid-avatar{
+.coverage-avatar img.kid-avatar{
   width: 17vh;
 }
-#coverage-avatar img.parent-avatar{
+.coverage-avatar img.parent-avatar{
   width: 34vh;
 }
 
