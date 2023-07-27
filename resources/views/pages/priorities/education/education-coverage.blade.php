@@ -28,10 +28,7 @@
                                 <button class="border-0 bg-transparent choice z-99" id="Self">
                                     <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="h-90">
                                     <p class="my-1"><strong>Self</strong></p>
-                                    <!-- <p class="py-2 py-xxl-3 m-auto position-absolute bottom-0"><strong>Child</strong></p> -->
                                 </button>
-                                <!-- <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="h-90" style="z-index:99;">
-                                <p class="py-2 py-xxl-3 m-auto position-absolute bottom-0" style="z-index:99;"><strong>Self</strong></p> -->
                                 <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
                                     <div class="col-11 col-md-4 text-center">
                                         
@@ -43,7 +40,7 @@
                             <!-- <div class="row d-flex m-auto"> -->
                             <div class="d-flex justify-content-center h-100">
                                 <button class="border-0 bg-transparent choice z-99" id="Child">
-                                <!-- <button class="border-0 bg-transparent choice" style="z-index:99;" id="<?php //$education_coverage_option; ?>"> -->
+                                <!-- <button class="border-0 bg-transparent choice z-99" id="<?php //$education_coverage_option; ?>"> -->
                                     <img src="{{ asset('images/avatar/daughter.png') }}" class="h-90">
                                     <p class="my-1"><strong>Child</strong></p>
                                     <!-- <p class="py-2 py-xxl-3 m-auto position-absolute bottom-0"><strong>Child</strong></p> -->
@@ -60,10 +57,18 @@
                                 
                             </div>
                         </div>
+                        <div class="col-12 show-mobile bg-btn_bar">
+                            <div class="py-4 px-2">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                    <a href="{{route('education.home')}}" class="btn btn-primary text-uppercase">Back</a>
+                                    <a href="{{route('education.supporting.years')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section class="needs-master-footer footer bg-btn_bar">
+            <section class="needs-master-footer footer bg-btn_bar p-0 hide-mobile">
                 <div class="py-4 px-2">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                         <a href="{{route('education.home')}}" class="btn btn-primary text-uppercase">Back</a>

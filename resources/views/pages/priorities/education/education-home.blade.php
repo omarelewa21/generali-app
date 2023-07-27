@@ -21,7 +21,7 @@
                 </section>
                 <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
                     <div class="col-12 h-100 needs-row overflow-auto">
-                        <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative m-auto avatar-height z-99">
+                        <img src="{{ asset('images/needs/education/education-home.png') }}" class="position-relative d-flex m-auto avatar-height z-99">
                         <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative z-99">Let's get into your plans for Education.</h5>
                     </div>
                     <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">

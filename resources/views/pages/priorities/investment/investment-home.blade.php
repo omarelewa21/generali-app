@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Home</title>
+<title>Investment - Home</title>
 
 @section('content')
 
@@ -21,7 +21,7 @@
                 </section>
                 <section class="education-wrapper overflow-hidden position-relative needs-home-content needs-height">
                     <div class="col-12 h-100 needs-row overflow-auto">
-                        <img src="{{ asset('images/needs/investment/investment-home.png') }}" class="position-relative m-auto avatar-height z-99">
+                        <img src="{{ asset('images/needs/investment/investment-home.png') }}" class="position-relative d-flex m-auto avatar-height z-99">
                         <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative z-99">Now let's plan for your investments.</h5>
                     </div>
                     <div class="d-flex justify-content-center bg-needs_text pd-needs-home position-absolute w-100 bottom-0">
@@ -30,8 +30,8 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-home-footer footer bg-needs_text">
-                    <div class="bg-btn_bar py-4 px-2 sticky-bottom">
+                <section class="needs-home-footer footer bg-btn_bar">
+                    <div class="py-4 px-2 sticky-bottom">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('welcome')}}" class="btn btn-primary text-uppercase">Back</a>
                             <a href="{{route('investment.coverage')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
