@@ -3,13 +3,12 @@
 @extends('templates.master')
 
 @section('title')
-<title>Retirement - Coverage</title>
+<title>Protection - Coverage</title>
 @endsection
 
 @section('content')
 
-<div id="retirement_coverage" class="vh-100">
-
+<div id="protection_coverage" class="vh-100">
 
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
@@ -20,14 +19,9 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-
-        <form novalidate action="{{ route('form.retirement.validateAvatar') }}" method="POST" onsubmit="return validateAvatarSelection(event)">
-            @csrf
-            <div class="invalid-feedback text-center alert alert-danger" id="avatar-validation-msg">
-                Please select an avatar before proceeding.
-            </div>
-        <div class="col-12 text-dark px-0 bg-needs-main my-4">
-            <div class="my-4">
+        <section>
+        <div class="col-12 text-dark px-0 my-4 bg-needs-main">
+            <div class="my-4 second-cloud">
                 <div class="row d-flex justify-content-center py-2 text-center align-items-center">
                     <h5 class="my-2">I'd like to provide coverage for my:</h5>
                 </div>
@@ -70,29 +64,29 @@
                     <div class="col-12 col-md-4 text-center">
                     </div>
                 </div>
+            </section>
                 <section class="footer bg-white py-4 fixed-bottom">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                <a href="{{route('retirement.home')}}"
+                                <a href="{{route('protection.home')}}"
                                     class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+                                    <a href="{{route('protection.monthly.support')}}"
+                                    class="btn btn-primary text-uppercase me-md-2">Next</a>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-    </form>
     </div>
 
     @endsection
 
-
     <script>
+        // javascript code for button click effect on avatar selection
         function avatarSelect(button) {
         const avatarValidationMsg = document.getElementById('avatar-validation-msg');
-    avatarValidationMsg.style.display = 'none';
       const buttonType = button.getAttribute('data-type');
       const buttons = document.querySelectorAll('.avatar-button');
 
@@ -110,27 +104,5 @@
         }
       });
     }
-    function validateAvatarSelection(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    const selectedAvatar = document.querySelector('.avatar-button.greyed-out');
-
-    if (!selectedAvatar) {
-        const avatarValidationMsg = document.getElementById('avatar-validation-msg');
-        avatarValidationMsg.style.display = 'block'; // Show the validation message
-        return false; // Prevent navigation to the next page
-    }
-
-    // window.location.href = "{{ route('retirement.ideal') }}"; // Replace with the appropriate route
-
-    // const selectedAvatarType = selectedAvatar.getAttribute('data-type');
-    // const form = event.target.closest('form');
-    // const input = document.createElement('input');
-    // input.setAttribute('type', 'hidden');
-    // input.setAttribute('name', 'selected_avatar');
-    // input.setAttribute('value', selectedAvatarType);
-    // form.appendChild(input);
-
-    // form.submit();
-}
+    
     </script>

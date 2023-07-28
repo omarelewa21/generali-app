@@ -27,7 +27,7 @@
                 <div class="vh-100 overflow-auto">
                     @include ('templates.nav.nav-sidebar-needs')
                     <section class="main-content">
-                        <div id="retirement-character" class="col-12 text-center justify-content-center position-absolute">
+                        <div class="needs-home-avatar col-12 text-center justify-content-center position-absolute">
                             <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}">
                             <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Now let's talk about your plans for Retirement.</h5>
                         </div>

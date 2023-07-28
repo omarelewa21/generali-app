@@ -25,7 +25,7 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
                 <section class="avatar-design-placeholder content-avatar-default pt-4">
                     <div class="col-12 text-center d-flex justify-content-center">
-                    <img src="{{ asset('/images/avatar/avatar/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <img src="{{ asset('/images/avatar/avatar/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -43,34 +43,34 @@
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                        <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                        <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                             <button class="border-0 bg-white" data-avatar="single" data-required="">
-                                                <img src="{{ asset('images/avatar/single-icon.svg') }}" width="150px" height="100px" alt="Single">
-                                                <p class="avatar-text text-center pt-4 fw-bold">Single</p>
+                                                <img src="{{ asset('images/avatar-marital-status/single-icon.svg') }}" width="150px" height="100px" alt="Single">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                        <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                        <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                             <button class="border-0 bg-white" data-avatar="married" data-required="">
-                                                <img src="{{ asset('images/avatar/married-icon.svg') }}" width="150px" height="100px" alt="Married">
-                                                <p class="avatar-text text-center pt-4 fw-bold">Married</p>
+                                                <img src="{{ asset('images/avatar-marital-status/married-icon.svg') }}" width="150px" height="100px" alt="Married">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                        <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                        <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                             <button class="border-0 bg-white" data-avatar="divorced" data-required="">
-                                                <img src="{{ asset('images/avatar/divorced-icon.svg') }}" width="150px" height="100px" alt="Divorced">
-                                                <p class="avatar-text text-center pt-4 fw-bold">Divorced</p>
+                                                <img src="{{ asset('images/avatar-marital-status/divorced-icon.svg') }}" width="150px" height="100px" alt="Divorced">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                        <div class="col-12 bg-white py-4 d-flex align-items-center justify-content-center border border-danger">
+                                        <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
                                             <button class="border-0 bg-white" data-avatar="widowed" data-required="">
-                                                <img src="{{ asset('images/avatar/widowed-icon.svg') }}" width="150px" height="100px" alt="Widowed">
-                                                <p class="avatar-text text-center pt-4 fw-bold">Widowed</p>
+                                                <img src="{{ asset('images/avatar-marital-status/widowed-icon.svg') }}" width="150px" height="100px" alt="Widowed">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                             </button>
                                         </div>
                                     </div>

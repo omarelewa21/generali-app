@@ -29,10 +29,10 @@
     </section>
     <section class="footer-main">
         <div class="d-flex justify-content-center align-items-center" style="grid-column: span 1 / auto;">
-            <img src="{{ asset('images/avatar/main-male.png') }}" width="auto" height="100%" alt="Male Avatar">
+            <img src="{{ asset('images/avatar-welcome/main-male.png') }}" width="auto" height="100%" alt="Male Avatar">
         </div>
         <div class="d-flex justify-content-center align-items-center" style="grid-column: span 1 / auto;">
-            <img src="{{ asset('images/avatar/main-female.png') }}" width="auto" height="100%" alt="Female Avatar">
+            <img src="{{ asset('images/avatar-welcome/main-female.png') }}" width="auto" height="100%" alt="Female Avatar">
         </div>
     </section>
 </div>
