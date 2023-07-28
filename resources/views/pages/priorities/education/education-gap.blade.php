@@ -24,9 +24,13 @@
                                 <div class="row d-flex">
                                     <!-- <div class="container-fluid"> -->
                                         <div class="col-11 m-auto d-flex justify-content-center my-5">
-                                            <canvas id="totalEducationFund" class="d-flex m-auto object-fit-cover"></canvas>
+                                            <!-- <div class="row"> -->
+                                                <canvas id="totalEducationFund" class="d-flex m-auto object-fit-cover chart-canvas"></canvas>
+                                            <!-- </div> -->
                                         </div>
                                     <!-- </div>  -->
+                                </div>
+                                <div class="row d-flex">
                                     <div class="col-12 show-mobile bg-btn_bar">
                                         <div class="py-4 px-2">
                                             <div class="col-12 d-grid gap-2 d-md-block text-end">
@@ -82,6 +86,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
     $(document).ready(function() {
+
         if (window.innerWidth < 596) {
             // Chart for Mobile
             var config = {
@@ -162,7 +167,7 @@
                                 text: 'Total Education Fund',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
-                                fontSize: 16, // Font size for the second text
+                                fontSize: 15, // Font size for the second text
                             },
                             sidePadding: 20,
                             minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.

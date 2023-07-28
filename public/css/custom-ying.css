@@ -22,6 +22,10 @@
 .fund-nav-rad{
     border-radius: 0px 0px 20px 20px;
 }
+.chart-canvas{
+    width: 434px !important;
+    height: 434px !important;
+}
 
 /* Global - Needs */
 .bg-needs{
@@ -308,6 +312,10 @@ button.choice:focus {
     }
     .h-88{
         height: 70% !important;
+    }
+    .chart-canvas{
+        width: 334px !important;
+        height: 334px !important;
     }
 }
 @media only screen and (max-width: 767px){
