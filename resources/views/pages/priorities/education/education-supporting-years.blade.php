@@ -31,13 +31,13 @@
                 <section class="needs-master-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-12 d-hide-desk">
+                            <div class="col-12 show-mobile">
                                 <div class="row d-flex justify-content-center align-items-center bg-primary">
-                                        <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
-                                            <div class="px-2 fund-progress-bar" style="width:45%;"></div>
-                                        </div>
-                                        <h3 class="font-color-white text-center">RM1,462,000</h3>
-                                        <p class="font-color-white text-center">Total Education Fund Needed</p>
+                                    <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
+                                        <div class="px-2 fund-progress-bar" style="width:45%;"></div>
+                                    </div>
+                                    <h3 class="font-color-white text-center">RM1,462,000</h3>
+                                    <p class="font-color-white text-center">Total Education Fund Needed</p>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-12 hide bg-half second-order position-relative d-flex justify-content-end align-items-end">

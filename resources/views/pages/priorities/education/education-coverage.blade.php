@@ -26,7 +26,7 @@
                             <!-- <div class="row d-flex m-auto"> -->
                             <div class="d-flex justify-content-center h-100 position-relative">
                                 <button class="border-0 bg-transparent choice z-99" id="Self">
-                                    <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="h-90">
+                                    <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" class="h-90">
                                     <p class="my-1"><strong>Self</strong></p>
                                 </button>
                                 <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">

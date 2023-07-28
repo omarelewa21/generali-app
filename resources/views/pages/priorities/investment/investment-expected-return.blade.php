@@ -1,14 +1,14 @@
 @extends('templates.master')
 
 @section('title')
-<title>Investment - Returns</title>
+<title>Investment - Monthly Returns</title>
 
 @section('content')
 
 <div id="investment-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-needs-desktop vh-100">
-            <section class="col-12 d-flex needs-master-nav">
+            <section class="col-12 d-flex needs-nav-mob">
                 <div class="col-2 col-md-2 col-xl-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
                 </div>
@@ -31,14 +31,43 @@
                 <section class="needs-master-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-xl-6 col-12 hide position-relative bg-half second-order">
-                            <div class="row">
-                                    <img src="{{ asset('images/needs/investment/investment-expected-return-avatar.png') }}" class="w-80 m-auto z-99 2">
-                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
-                                        <div class="col-11 col-md-4 text-center">
-                                            
+                            <div class="col-12 show-mobile">
+                                <div class="row d-flex justify-content-center align-items-center bg-primary">
+                                    <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
+                                        <div class="px-2 fund-progress-bar" style="width:75%;"></div>
+                                    </div>
+                                    <h3 class="font-color-white text-center">RM500,000</h3>
+                                    <p class="font-color-white text-center">Total Investment Fund Needed</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative h-auto">
+                                <div class="row">
+                                    <div class="show-desktop">
+                                        <img src="{{ asset('images/needs/investment/investment-expected-return-avatar.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute bottom-0 p-4">
+                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
+                                            <div class="col-11 col-md-4 text-center">
+                                                
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="position-relative hide-desktop">
+                                        <img src="{{ asset('images/needs/investment/investment-expected-return-avatar.png') }}" class="m-auto z-99 mh-100 mw-100 p-4 position-relative d-flex">
+                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
+                                            <div class="col-11 col-md-4 text-center">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 show-mobile bg-btn_bar">
+                                        <div class="py-4 px-2">
+                                            <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                                <a href="{{route('investment.supporting')}}" class="btn btn-primary text-uppercase">Back</a>
+                                                <!-- <a href="{{route('investment.expected.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
+                                                <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-xl-6 col-12 position-relative hide first-order">
@@ -62,7 +91,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-white">
+                <section class="needs-master-footer footer bg-btn_bar">
                     <div class="bg-btn_bar py-4 px-2 bg-white">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('investment.annual.return')}}" class="btn btn-primary text-uppercase">Back</a>
