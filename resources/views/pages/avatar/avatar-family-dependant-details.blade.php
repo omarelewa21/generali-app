@@ -19,41 +19,36 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
                 <section class="avatar-design-placeholder content-avatar-default pt-4">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                        <div class="col-12 position-relative">
-                            <div class="position-absolute male-avatar-character">
-                                <img src="{{ asset('images/avatar/male-avatar.svg') }}" width="350px" alt="Male Avatar">
-                            </div>
-                            <div class="position-absolute parent-father">
-                                <img src="{{ asset('images/avatar/parent-father.svg') }}" width="500px" alt="Parent Father Avatar">
-                            </div>
-                            <div class="position-absolute parent-mother">
-                                <img src="{{ asset('images/avatar/parent-mother.svg') }}" width="156px" alt="Parent Mother Avatar">
-                            </div>
-                            <div class="position-absolute spouse">
-                                <img src="{{ asset('images/avatar/spouse.svg') }}" width="270px" alt="Spouse Avatar">
-                            </div>
-                            <div class="position-absolute children-girl">
-                                <img src="{{ asset('images/avatar/children-girl.svg') }}" width="150px" alt="Girl Avatar">
-                            </div>
-                            <div class="position-absolute children-boy">
-                                <img src="{{ asset('images/avatar/children-boy.svg') }}" width="150px" alt="Boy Avatar">
-                            </div>
+                    <div class="row d-none d-xxl-flex d-xl-none">
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
+                            <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute end-0" style="bottom:2%;max-height:88%">
                         </div>
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage position-absolute start-0" style="bottom:2%">
+                            <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="100%" alt="Spouse" class="changeImage position-absolute end-0" style="max-height: 93%;bottom:2%">
+                        </div>
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
+                            <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%">
+                        </div>
+                    </div>
+                    <div class="row d-xxl-none">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <section class="main-content scrollable-padding">
+                    <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 py-4">
+                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
-                                    <h4 class="display-4 text-white font-normal pb-3">Thanks for introducing your family!</h4>
+                                    <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
                                     <p class="text-white display-6">Tell us more about each of them.</p>
                                 </div>
                             </div>
-                            <div class="row px-4 pb-4">
+                            <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12">
                                     <div class="accordion accordion-flush" id="accordionDependantDetails">
                                         <div class="accordion-item">
@@ -66,66 +61,80 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2">
                                                         <div class="col-12">
-                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <label for="firstName" class="form-label">First Name</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                        <div class="col-12 pt-4">
+                                                            <label for="lastName" class="form-label">Last Name</label>
                                                             <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                        <div class="col-12 pt-4">
+                                                            @php
+                                                                // Generate arrays for the date, month, and year ranges
+                                                                $dateRange = range(1, 31);
+                                                                $dateRange = array_map(function ($day) {
+                                                                    return sprintf('%02d', $day);
+                                                                }, $dateRange);
+                                                                $monthRange = range(1, 12);
+                                                                $monthRange = array_map(function ($month) {
+                                                                    return sprintf('%02d', $month);
+                                                                }, $monthRange);
+                                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                                                // Set the selected values
+                                                                $selectedDay = old('day', null); 
+                                                                $selectedMonth = old('month', null); 
+                                                                $selectedYear = old('year', null);
+
+                                                                // Adjust the selected month value to "01" format
+                                                                if ($selectedMonth !== null) {
+                                                                    $selectedMonth = sprintf('%02d', $selectedMonth);
+                                                                }
+                                                                if ($selectedDay !== null) {
+                                                                    $selectedDay = sprintf('%02d', $selectedDay);
+                                                                }
+                                                            @endphp
+                                                            <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="January">January</option>
-                                                                        <option value="February">February</option>
-                                                                        <option value="March">March</option>
-                                                                        <option value="April">April</option>
-                                                                        <option value="May">May</option>
-                                                                        <option value="June">June</option>
-                                                                        <option value="July">July</option>
-                                                                        <option value="August">August</option>
-                                                                        <option value="September">September</option>
-                                                                        <option value="October">October</option>
-                                                                        <option value="November">November</option>
-                                                                        <option value="December">December</option>
-                                                                    </select>
+                                                                    {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
+                                                                    {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                                        return substr($year, -2);
+                                                                    }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                        <div class="col-8 pt-4">
+                                                            <label for="firstName" class="form-label">Years of Support</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="00">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
-                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        <div class="col-8 pt-4">
+                                                            <label for="occupation" class="form-label">Dependent Marital Status</label>
+                                                            <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
+                                                                <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
+                                                                <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                                                <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
+                                                                <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                            </select>
+                                                            @error('occupation')
+                                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,66 +150,80 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2">
                                                         <div class="col-12">
-                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <label for="firstName" class="form-label">First Name</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                        <div class="col-12 pt-4">
+                                                            <label for="lastName" class="form-label">Last Name</label>
                                                             <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                        <div class="col-12 pt-4">
+                                                            @php
+                                                                // Generate arrays for the date, month, and year ranges
+                                                                $dateRange = range(1, 31);
+                                                                $dateRange = array_map(function ($day) {
+                                                                    return sprintf('%02d', $day);
+                                                                }, $dateRange);
+                                                                $monthRange = range(1, 12);
+                                                                $monthRange = array_map(function ($month) {
+                                                                    return sprintf('%02d', $month);
+                                                                }, $monthRange);
+                                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                                                // Set the selected values
+                                                                $selectedDay = old('day', null); 
+                                                                $selectedMonth = old('month', null); 
+                                                                $selectedYear = old('year', null);
+
+                                                                // Adjust the selected month value to "01" format
+                                                                if ($selectedMonth !== null) {
+                                                                    $selectedMonth = sprintf('%02d', $selectedMonth);
+                                                                }
+                                                                if ($selectedDay !== null) {
+                                                                    $selectedDay = sprintf('%02d', $selectedDay);
+                                                                }
+                                                            @endphp
+                                                            <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="January">January</option>
-                                                                        <option value="February">February</option>
-                                                                        <option value="March">March</option>
-                                                                        <option value="April">April</option>
-                                                                        <option value="May">May</option>
-                                                                        <option value="June">June</option>
-                                                                        <option value="July">July</option>
-                                                                        <option value="August">August</option>
-                                                                        <option value="September">September</option>
-                                                                        <option value="October">October</option>
-                                                                        <option value="November">November</option>
-                                                                        <option value="December">December</option>
-                                                                    </select>
+                                                                    {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
+                                                                    {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                                        return substr($year, -2);
+                                                                    }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                        <div class="col-8 pt-4">
+                                                            <label for="firstName" class="form-label">Years of Support</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="00">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
-                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        <div class="col-8 pt-4">
+                                                            <label for="occupation" class="form-label">Dependent Marital Status</label>
+                                                            <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
+                                                                <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
+                                                                <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                                                <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
+                                                                <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                            </select>
+                                                            @error('occupation')
+                                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -216,66 +239,80 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2">
                                                         <div class="col-12">
-                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <label for="firstName" class="form-label">First Name</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                        <div class="col-12 pt-4">
+                                                            <label for="lastName" class="form-label">Last Name</label>
                                                             <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                        <div class="col-12 pt-4">
+                                                            @php
+                                                                // Generate arrays for the date, month, and year ranges
+                                                                $dateRange = range(1, 31);
+                                                                $dateRange = array_map(function ($day) {
+                                                                    return sprintf('%02d', $day);
+                                                                }, $dateRange);
+                                                                $monthRange = range(1, 12);
+                                                                $monthRange = array_map(function ($month) {
+                                                                    return sprintf('%02d', $month);
+                                                                }, $monthRange);
+                                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                                                // Set the selected values
+                                                                $selectedDay = old('day', null); 
+                                                                $selectedMonth = old('month', null); 
+                                                                $selectedYear = old('year', null);
+
+                                                                // Adjust the selected month value to "01" format
+                                                                if ($selectedMonth !== null) {
+                                                                    $selectedMonth = sprintf('%02d', $selectedMonth);
+                                                                }
+                                                                if ($selectedDay !== null) {
+                                                                    $selectedDay = sprintf('%02d', $selectedDay);
+                                                                }
+                                                            @endphp
+                                                            <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="January">January</option>
-                                                                        <option value="February">February</option>
-                                                                        <option value="March">March</option>
-                                                                        <option value="April">April</option>
-                                                                        <option value="May">May</option>
-                                                                        <option value="June">June</option>
-                                                                        <option value="July">July</option>
-                                                                        <option value="August">August</option>
-                                                                        <option value="September">September</option>
-                                                                        <option value="October">October</option>
-                                                                        <option value="November">November</option>
-                                                                        <option value="December">December</option>
-                                                                    </select>
+                                                                    {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
+                                                                    {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                                        return substr($year, -2);
+                                                                    }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                        <div class="col-8 pt-4">
+                                                            <label for="firstName" class="form-label">Years of Support</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="00">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
-                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        <div class="col-8 pt-4">
+                                                            <label for="occupation" class="form-label">Dependent Marital Status</label>
+                                                            <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
+                                                                <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
+                                                                <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                                                <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
+                                                                <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                            </select>
+                                                            @error('occupation')
+                                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -291,66 +328,80 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2">
                                                         <div class="col-12">
-                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <label for="firstName" class="form-label">First Name</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                        <div class="col-12 pt-4">
+                                                            <label for="lastName" class="form-label">Last Name</label>
                                                             <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="dob" class="form-label">Date of Birth: (Age)</label>
+                                                        <div class="col-12 pt-4">
+                                                            @php
+                                                                // Generate arrays for the date, month, and year ranges
+                                                                $dateRange = range(1, 31);
+                                                                $dateRange = array_map(function ($day) {
+                                                                    return sprintf('%02d', $day);
+                                                                }, $dateRange);
+                                                                $monthRange = range(1, 12);
+                                                                $monthRange = array_map(function ($month) {
+                                                                    return sprintf('%02d', $month);
+                                                                }, $monthRange);
+                                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                                                // Set the selected values
+                                                                $selectedDay = old('day', null); 
+                                                                $selectedMonth = old('month', null); 
+                                                                $selectedYear = old('year', null);
+
+                                                                // Adjust the selected month value to "01" format
+                                                                if ($selectedMonth !== null) {
+                                                                    $selectedMonth = sprintf('%02d', $selectedMonth);
+                                                                }
+                                                                if ($selectedDay !== null) {
+                                                                    $selectedDay = sprintf('%02d', $selectedDay);
+                                                                }
+                                                            @endphp
+                                                            <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="January">January</option>
-                                                                        <option value="February">February</option>
-                                                                        <option value="March">March</option>
-                                                                        <option value="April">April</option>
-                                                                        <option value="May">May</option>
-                                                                        <option value="June">June</option>
-                                                                        <option value="July">July</option>
-                                                                        <option value="August">August</option>
-                                                                        <option value="September">September</option>
-                                                                        <option value="October">October</option>
-                                                                        <option value="November">November</option>
-                                                                        <option value="December">December</option>
-                                                                    </select>
+                                                                    {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-select" aria-label="00">
-                                                                        <option selected>Select</option>
-                                                                        <option value="00">00</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                    </select>
+                                                                    <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
+                                                                    {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                                        return substr($year, -2);
+                                                                    }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Years of Support:</label>
+                                                        <div class="col-8 pt-4">
+                                                            <label for="firstName" class="form-label">Years of Support</label>
                                                             <input type="text" class="form-control" id="firstNameInput" placeholder="00">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2">
-                                                        <div class="col-12">
-                                                            <label for="firstName" class="form-label">Dependent Marital Status:</label>
-                                                            <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                        <div class="col-8 pt-4">
+                                                            <label for="occupation" class="form-label">Dependent Marital Status</label>
+                                                            <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                                                <option value="" selected disabled>Select</option>
+                                                                <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
+                                                                <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
+                                                                <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
+                                                                <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
+                                                                <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                            </select>
+                                                            @error('occupation')
+                                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -363,9 +414,9 @@
                     </section>
                     
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
                                     <a href="{{route('avatar.family.dependant')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
                                     <a href="{{route('avatar.my.assets') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>

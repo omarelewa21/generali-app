@@ -13,18 +13,17 @@ Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details')
 Route::post('/basic-details', [FormController::class, 'submit'])->name('form.submit');
 
 /* avatar pages */
-Route::view('/avatar-welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
-Route::view('/avatar-marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
-Route::view('/avatar-family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
-Route::view('/avatar-family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
-Route::view('/avatar-my-assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
+Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
+Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
+Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
+Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
+Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::get('/identity-details', [FormController::class, 'countries'])->name('identity.details');
-Route::view('/avatar-gender-selection', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
-Route::post('/avatar-gender-selection', [AvatarController::class, 'changeImage'])->name('change.image');
+Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
+Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
-
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateAvatar'])->name('validate.avatar');

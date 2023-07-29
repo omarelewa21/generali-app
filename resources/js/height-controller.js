@@ -3,7 +3,7 @@ $(document).ready(function() {
     function setMainContentPadding() {
         const windowWidth = $(window).width();
         const footerHeight = $(".footer").outerHeight();
-        const mainContentPadding = footerHeight + 60; // Adding 50 pixels
+        const mainContentPadding = footerHeight + 10; // Adding 10 pixels
         $(".main-content").css("padding-bottom", mainContentPadding + "px");
     }
   

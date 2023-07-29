@@ -44,7 +44,7 @@ h4 {
   border-left: 0 !important;
   border-right: 0 !important
 }
-.form-label {
+.form-label, button.accordion-button {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -171,6 +171,23 @@ button[data-required="selected"] img {
   opacity: 1;
 }
 
+.button-bg.selected {
+  border: 5px solid #AA1B17;
+}
+
+.button-bg {
+  background: linear-gradient(360deg, #FFF 0%, #EAEAEA 100%, #EAEAEA 100%);
+  border: 5px solid #C21B17;
+}
+
+.button-bg button {
+  background-color: transparent;
+}
+
+.button-bg:hover {
+  border: 5px solid #AA1B17;
+}
+
 /* Right Sidebar */
 .right-sidebar h1 {
   font-family: 'Helvetica Neue', sans-serif;
@@ -213,6 +230,14 @@ button[data-required="selected"] img {
 
 .footer-home {
   grid-area: footer-home;
+}
+
+/* Avatar */
+.avatar-bg {
+  background-image: url('/images/avatar/avatar/Shadow.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
 }
 
 /* Avatar Welcome Page */
@@ -307,6 +332,28 @@ button[data-required="selected"] img {
   color: inherit;
   width: 100%;
   border-color: #A0A0A0;
+}
+
+/* Family Details Page */
+.accordion-button {
+  font-size: 1.375rem;
+  line-height: 33px;
+  font-weight: 700;
+}
+
+/* Assets Page */
+.assets-overlay {
+  position: relative;
+}
+
+.assets-overlay::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px; /* Adjust the height of the colored section as needed */
+  background-image: linear-gradient(to bottom, #E9E9E9, #E9E9E9);
 }
 
 /* Mobile / Tab Responsive */
@@ -453,11 +500,7 @@ button[data-required="selected"] img {
     overflow-x: hidden !important;
   }
 
-  /* Family Details Page */
-  .accordion-button {
-    font-size: 1.4rem;
-    ;
-  }
+  
 
   /* Protection Home Page */
   .bg-needs-main {

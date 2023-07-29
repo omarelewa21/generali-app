@@ -13,7 +13,7 @@
 @section('content')
 
 <div id="basic_details" class="vh-100">
-    <div class="container-fluid p-0">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
@@ -21,7 +21,7 @@
                     <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
                     <form novalidate action="{{ route('form.submit') }}" method="POST">
                         @csrf
@@ -32,7 +32,7 @@
                                         <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                     </div>
                                 </div>
-                                <div class="row px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5">
+                                <div class="row px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12">

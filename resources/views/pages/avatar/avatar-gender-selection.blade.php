@@ -44,7 +44,7 @@
                 </section>
                 <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
                     <div class="col-12 text-center d-flex justify-content-center">
-                    <img src="{{ asset('/images/avatar/avatar/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -63,18 +63,18 @@
                                 </div>
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" id="gendermale">
-                                            <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" width="150px" alt="Gender Male">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
+                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                        <button class="border-0 default" data-avatar="Male" data-required="" id="gendermale">
+                                            <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" width="120px" alt="Gender Male">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" id="genderfemale">
-                                            <img src="{{ asset('images/avatar-gender-selection/button-gender-female.png') }}" width="150px" alt="Gender Female">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
+                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center button-bg">
+                                        <button class="border-0" data-avatar="Female" data-required="" id="genderfemale">
+                                            <img src="{{ asset('images/avatar-gender-selection/button-gender-female.png') }}" width="120px" alt="Gender Female">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                         </button>
                                     </div>

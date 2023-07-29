@@ -1,5 +1,6 @@
 import './bootstrap';
 import './height-controller';
+import './button';
 import './sortable-code';
 
 // Add checkmark for every page completed in left navigation menu
