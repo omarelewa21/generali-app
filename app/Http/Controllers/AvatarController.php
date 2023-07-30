@@ -50,7 +50,7 @@ class AvatarController extends Controller
 
         if ($color !== null) {
             // SVG editing code
-            $svgPath = public_path('images/avatar/avatar/' . $svgMainImage . '.svg');
+            $svgPath = public_path('images/avatar-general/' . $svgMainImage . '.svg');
             $svg = simplexml_load_file($svgPath);
             $svg->registerXPathNamespace('svg', 'http://www.w3.org/2000/svg');
 
@@ -143,7 +143,7 @@ class AvatarController extends Controller
             $path5[0]['fill'] = 'url(#gradient-fill-5)';
 
             $newSvgContent = $svg->asXML();
-            $modifiedSvgPath = public_path('images/avatar/avatar/' . $storedImage . '.svg');
+            $modifiedSvgPath = public_path('images/avatar-general/' . $storedImage . '.svg');
 
             file_put_contents($modifiedSvgPath, $newSvgContent);
         }
@@ -162,7 +162,7 @@ class AvatarController extends Controller
         session(['passingArrays' => $arrayData]);
      
         return response()->json([
-            'image' => asset('images/avatar/avatar/' . $storedImage . '.svg'),
+            'image' => asset('images/avatar-general/' . $storedImage . '.svg'),
             'gender' => $storedGender,
             'storedImage' => $storedImage,
             'storedGender' => $storedGender

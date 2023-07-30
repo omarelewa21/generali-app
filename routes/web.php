@@ -18,7 +18,7 @@ Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avat
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
 Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
-Route::get('/identity-details', [FormController::class, 'countries'])->name('identity.details');
+Route::get('/identity-details', [FormController::class, 'identityData'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
@@ -27,6 +27,7 @@ Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('ch
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateAvatar'])->name('validate.avatar');
+// Route::get('/select-options', 'SelectOptionController@index')->name('select-options');
 
 /* Priorities */
 Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');

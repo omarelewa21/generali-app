@@ -12,8 +12,6 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
@@ -23,8 +21,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4">
-                    <div class="row d-none d-xxl-flex d-xl-none">
+                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/parent-father.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage">
+                        <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage" style="margin-left:-320px;margin-top: 35px;">
+                    </div>
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage" style="z-index:1;margin-left:-55px">
+                        <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage" style="margin-left: -120px;margin-top: 40px;">
+                    </div>
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage">
+                        <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage" style="margin-left: -50px;padding-bottom: 10px;">
+                    </div>
+                    <!-- <div class="row d-none d-xxl-flex d-xl-none">
                         <div class="col-12 col-xxl-4 position-relative avatar-bg">
                             <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
                             <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute end-0" style="bottom:2%;max-height:88%">
@@ -37,10 +48,7 @@
                             <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
                             <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%">
                         </div>
-                    </div>
-                    <div class="row d-xxl-none">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                    </div>
+                    </div> -->
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
@@ -115,6 +123,14 @@
         </div>
     </div>
 </div>
+
+
+<style>
+    .content-avatar-default {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-gap: 0;
+    }
+</style>
 
 <script>
 // Manually convert the PHP array to JSON

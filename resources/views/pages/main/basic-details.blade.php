@@ -35,7 +35,7 @@
                                 <div class="row px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5">
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-12">
+                                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
                                                 <label for="title" class="form-label">Title</label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>

@@ -12,8 +12,6 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
@@ -23,7 +21,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar">
-                <section class="avatar-color-palatte header-avatar d-flex justify-content-center align-items-end">
+                <div class="header-avatar">@include('templates.nav.nav-red-menu')</div>
+                <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="avatar-design-placeholder content-avatar pt-4 overflow-auto">
+                <section class="avatar-design-placeholder pt-4 bottom-avatar">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>

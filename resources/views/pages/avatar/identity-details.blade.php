@@ -12,8 +12,6 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
@@ -23,7 +21,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4 overflow-auto">
+                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center d-flex justify-content-center">
                     <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
@@ -196,12 +195,9 @@
                                         <div class="col-12 col-lg-6 col-md-12 col-sm-12 pt-4">
                                             <label for="occupation" class="form-label text-white">Occupation</label>
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                <option value="" selected disabled>Select</option>
-                                                <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                @foreach($rows as $row)
+                                                    <option value="{{ $row[0] }}">{{ $row[0] }}</option>
+                                                @endforeach
                                             </select>
                                             @error('occupation')
                                                 <div class="invalid-feedback text-white">{{ $message }}</div>
