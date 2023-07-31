@@ -5,9 +5,9 @@
 
 @section('content')
 
-<div id="education-content">
+<div id="investment-content">
     <div class="container-fluid overflow-hidden font-color-default">
-        <div class="row bg-investment vh-100">
+        <div class="row bg-needs-content-full vh-100">
             <section class="col-12 d-flex needs-coverage-nav">
                 <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
@@ -25,7 +25,7 @@
                         <div class="col-12 col-md-6 col-xl-3 h-100 position-relative p-0">
                             <div class="d-flex justify-content-center h-100 position-relative">
                                 <button class="border-0 bg-transparent choice z-99" id="Self">
-                                    <img src="{{ asset('images/avatar/button-gender-male.png') }}" class="h-90">
+                                    <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" class="h-90">
                                     <p class="my-1"><strong>Self</strong></p>
                                 </button>
                                 <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
@@ -40,11 +40,19 @@
                                 
                             </div>
                         </div>
+                        <div class="col-12 show-mobile bg-btn_bar">
+                            <div class="py-4 px-2">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                    <a href="{{route('investment.home')}}" class="btn btn-primary text-uppercase">Back</a>
+                                    <a href="{{route('investment.supporting')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section class="needs-master-footer footer bg-white p-0">
-                <div class="bg-btn_bar py-4 px-2 bg-white">
+            <section class="needs-master-footer footer bg-btn_bar p-0 hide-mobile">
+                <div class="py-4 px-2">
                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                         <a href="{{route('investment.home')}}" class="btn btn-primary text-uppercase">Back</a>
                         <a href="{{route('investment.supporting')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>

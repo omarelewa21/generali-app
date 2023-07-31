@@ -1,13 +1,13 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Gap</title>
+<title>Investment - Gap</title>
 
 @section('content')
 
-<div id="education-content">
+<div id="investment-content">
     <div class="container-fluid overflow-hidden font-color-default">
-        <div class="row bg-education-gap vh-100">
+        <div class="row bg-needs-desktop vh-100">
             <section class="col-12 d-flex needs-coverage-nav">
                 <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
@@ -16,26 +16,21 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal p-0"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education">
+            <form class="form-horizontal p-0"action="{{route('investment.gap')}}" method="get" id="investment" name="investment">
                 <section class="needs-gap-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-xl-6 col-12 position-relative hide second-order bg-education-gap-mob">
+                            <div class="col-xl-6 col-12 position-relative hide second-order bg-half">
                                 <div class="row d-flex">
-                                    <!-- <div class="container-fluid"> -->
-                                        <div class="col-11 m-auto d-flex justify-content-center my-5">
-                                            <!-- <div class="row"> -->
-                                                <canvas id="totalEducationFund" class="d-flex m-auto object-fit-cover chart-canvas"></canvas>
-                                            <!-- </div> -->
-                                        </div>
-                                    <!-- </div>  -->
+                                    <div class="col-11 m-auto d-flex justify-content-center my-5">
+                                        <canvas id="totalInvestmentFund" class="d-flex m-auto object-fit-cover chart-canvas"></canvas>
+                                    </div>
                                 </div>
                                 <div class="row d-flex">
                                     <div class="col-12 show-mobile bg-btn_bar">
                                         <div class="py-4 px-2">
                                             <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                                <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
-                                                <!-- <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
+                                                <a href="{{route('investment.expected.return')}}" class="btn btn-primary text-uppercase">Back</a>
                                                 <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
                                             </div>
                                         </div>
@@ -52,7 +47,7 @@
                                                         <input type="number" name="fund_year3" class="form-control d-inline-block w-25" id="fund_year3" required>
                                                         <strong>years' time,</strong>
                                                     </p>
-                                                    <p class="f-34"><strong>I want to enjoy my golden years with</strong>
+                                                    <p class="f-34"><strong>I expect to have an annual return of</strong>
                                                         <input type="number" name="fund_money" class="form-control d-inline-block w-25 money" id="fund_money" placeholder="RM" required>
                                                     </p>
                                                     <p class="f-34"><strong>I have set aside</strong>
@@ -73,8 +68,7 @@
                 <section class="needs-master-footer footer bg-btn_bar hide-mobile">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <!-- <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
+                            <a href="{{route('investment.expected.return')}}" class="btn btn-primary text-uppercase">Back</a>
                             <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
                         </div>
                     </div>
@@ -119,7 +113,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Education Fund',
+                                text: 'Total Savings Needed',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 14, // Font size for the second text
@@ -164,7 +158,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Education Fund',
+                                text: 'Total Savings Needed',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 15, // Font size for the second text
@@ -253,7 +247,7 @@
             }
         });
 
-        var ctx = document.getElementById("totalEducationFund").getContext("2d");
+        var ctx = document.getElementById("totalInvestmentFund").getContext("2d");
         var desktopChart = new Chart(ctx, config);
 
         // Helper function to wrap text into multiple lines based on the available width
