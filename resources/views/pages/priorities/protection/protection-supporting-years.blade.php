@@ -2,8 +2,9 @@
 
 @section('title')
 <title>Protection - Supporting Years</title>
-@section('content')
+@endsection
 
+@section('content')
 <div id="investment-supporting">
     <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-investment-supporting vh-100">
@@ -26,7 +27,7 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal p-0"action="{{route('protection.home')}}" method="get" id="investment" name="investment">
+            <form class="form-horizontal p-0" action="{{route('protection.existing.policy')}}" method="get" id="investment" name="investment">
                 <section class="needs-master-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -51,7 +52,7 @@
                                 <div class="py-4 px-2">
                                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                                         <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                                        <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                        <button type="submit" class="btn btn-primary text-uppercase">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +63,7 @@
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <!-- <a href="{{route('investment.annual.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                            <button type="submit" class="btn btn-primary text-uppercase">Next</button>
                         </div>
                     </div>
                 </section>

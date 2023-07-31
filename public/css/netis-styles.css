@@ -53,6 +53,7 @@
 }
 .calendar-protection {
     width:80%;
+    z-index: -1;
 }
 
 

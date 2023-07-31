@@ -32,6 +32,7 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>  
         </div>
+        <form class="form-horizontal p-0" action="{{route('protection.supporting.years')}}" method="get">
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
                     <section>
@@ -60,14 +61,14 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('protection.coverage')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.supporting.years') }}"
-                                        class="btn btn-primary text-uppercase">Next</a>
+                                        <button type="submit" class="btn btn-primary text-uppercase">Next</button>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
+        </form>
     </div>
 
     @endsection

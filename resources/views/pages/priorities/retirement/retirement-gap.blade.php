@@ -1,11 +1,10 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Gap</title>
+<title>Retirement - Gap</title>
 
 @section('content')
 
-<div id="protection-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-needs-desktop vh-100">
             <section class="col-12 d-flex needs-coverage-nav">
@@ -76,7 +75,7 @@
             </form>
         </div>
     </div>
-</div>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
     $(document).ready(function() {
@@ -113,7 +112,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Protection Fund',
+                                text: 'Total Retirement Fund',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 14, // Font size for the second text
@@ -158,7 +157,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Protection Fund',
+                                text: 'Total Retirement Fund',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 15, // Font size for the second text
