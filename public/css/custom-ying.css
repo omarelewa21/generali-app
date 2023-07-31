@@ -28,7 +28,7 @@
 }
 /* Only show on bigger screen like desktop (min width 1250px) */
 .show-desktop{
-    display: none;
+    display: none !important;
 }
 /* Only show on mobile and tablet devices (max width 1024px) */
 .hide-desktop{
@@ -739,7 +739,7 @@ button.choice:focus {
         background-position:center;
     }
     .show-desktop{
-        display: block;
+        display: block !important;
     }
 }
 @media only screen and (max-width: 1199px){
