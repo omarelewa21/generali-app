@@ -23,15 +23,15 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
-                    <div class="d-flex">
-                        <img src="{{ asset('/images/avatar-general/parent-father.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage">
+                    <div class="d-flex align-self-end avatar-bg">
+                        <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="100%" height="auto" alt="Parent" class="changeImage">
                         <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage" style="margin-left:-320px;margin-top: 35px;">
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex align-self-end">
                         <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage" style="margin-left:-55px">
                         <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage" style="margin-left: -120px;margin-top: 40px;">
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex align-self-end">
                         <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage">
                         <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage" style="margin-left: -50px;padding-bottom: 10px;">
                     </div>
