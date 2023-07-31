@@ -1,74 +1,75 @@
-{{-- Retirement Coverage page --}}
-
 @extends('templates.master')
 
 @section('title')
 <title>Protection - Supporting Years</title>
-@endsection
-
 @section('content')
 
-<div id="retirementAllocatedFunds" class="vh-100 overflow-auto container-fluid">
-
-    <div class="container-fluid p-0">
-        <div class="row">
-            <div class="col-3 col-md-3 col-lg-3">
-                @include('templates.nav.nav-red-menu')
-            </div>
-            <div class="col-6 col-md-6 col-lg-6">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-6 col-sm-12 bg-primary summary-progress-bar px-1">
-                        <!-- <div class="row d-flex"> -->
-                            <div class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div id="investment-supporting">
+    <div class="container-fluid overflow-hidden font-color-default text-center">
+        <div class="row bg-investment-supporting vh-100">
+            <section class="col-12 d-flex needs-nav-mob">
+                <div class="col-2 col-md-2 col-xl-3 sticky-top">
+                    @include('templates.nav.nav-red-menu')
+                </div>
+                <div class="col-md-7 col-xl-6 hide-mobile">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-6 bg-primary container fund-nav-rad">
+                            <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
+                                <div class="px-2 fund-progress-bar" style="width:75%;"></div>
                             </div>
-                            <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
-                            <p class="text-light text-center">Total Retirement Fund Needed</p>
-                        <!-- </div> -->
+                            <h3 class="font-color-white">RM1,500,000</h3>
+                            <p class="font-color-white">Total Protection Fund Needed</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-3 col-md-3 col-lg-3">
-                @include ('templates.nav.nav-sidebar-needs')
-            </div>  
-        </div>
-            <div class="col-12 text-dark px-0 my-4">
-                <div class="my-4">  
-                    <section>
-                        <div class="row">
-                        <div id="bg-allocated-funds" class="col-lg-6 justify-content-end d-flex flex-column align-items-center">
-                            <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" alt="avatar">
-                        </div>
-                        <div class="col-lg-6 my-auto">
-                            <h5 class="needs-text d-inline">It would be great to have</h5><br> 
-                            <h5 class="needs-text d-inline ">RM</h5>
-                            <input type="text" name="allocatedFunds" class="form-control form-input-needs-md d-inline text-primary" id="allocatedFunds" placeholder=" " required> 
-                            <h5 class="needs-text d-inline">/ month to</h5><br>
-                            <h5 class="needs-text d-inline">support myself and my <br>loved ones when I retire.</h5>
-                        </div>
-                        </div>
-
-                        <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
-                            <div class="col-11 col-md-4 text-center">
-                            </div>
-                        </div>
-                    </section>
-                    
-
-                    <section class="footer bg-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.age.to.retire')}}"
-                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.years.till.retire') }}"
-                                        class="btn btn-primary text-uppercase">Next</a>
+                <div class="col-10 col-md-3 col-xl-3 hide">
+                    @include ('templates.nav.nav-sidebar-needs')
+                </div>
+            </section>
+            <form class="form-horizontal p-0"action="{{route('protection.home')}}" method="get" id="investment" name="investment">
+                <section class="needs-master-content">
+                    <div class="col-12">
+                        <div class="row h-100 overflow-y-auto overflow-x-hidden">
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-4 d-flex d-flex justify-content-end">
+                                        <h5 class="m-0 mt-4 needs-text">I will need</h5>
+                                    </div>  
+                                    <div class="col-4">
+                                        <div class="position-relative py-4 d-flex justify-content-center align-items-center">
+                                            <img src="{{ asset('images/needs/investment/Calendar.png') }}" class="calendar-protection">
+                                            <div class="position-absolute center w-100">
+                                                <input type="number" name="fund_year1" class="form-control d-inline-block w-25 f-64 text-center" id="fund_year1" required>
+                                                <p class="f-34" class="mt-4"><strong>years</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-start">
+                                            <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
+                                    </div>
+                                </div>
+                            <div class="col-12 show-mobile bg-btn_bar">
+                                <div class="py-4 px-2">
+                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                        <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
+                                        <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
-            </div>
+                    </div>
+                </section>
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                    <div class="py-4 px-2">
+                        <div class="col-12 d-grid gap-2 d-md-block text-end">
+                            <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase">Back</a>
+                            <!-- <a href="{{route('investment.annual.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
+                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
     </div>
+</div>
 
-    @endsection
+@endsection
