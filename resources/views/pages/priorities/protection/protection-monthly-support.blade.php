@@ -60,7 +60,7 @@
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
                                     <a href="{{route('protection.coverage')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.monthly.support') }}"
+                                    <a href="{{route('protection.supporting.years') }}"
                                         class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
