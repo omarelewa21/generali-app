@@ -40,7 +40,7 @@
                                         <p class="font-color-white text-center">Total Education Fund Needed</p>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12 position-relative bg-education-others-mob second-order d-flex justify-content-end align-items-end">
+                            <div class="col-xl-6 col-12 position-relative bg-education-others-mob second-order d-flex justify-content-end align-items-end h-xxl-100">
                                 <div class="row bg-education-others-section">
                                     <div class="col-4 d-flex align-items-center h-100 py-3 position-relative">
                                         <div class="row d-flex h-100">
