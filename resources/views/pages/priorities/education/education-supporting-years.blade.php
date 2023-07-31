@@ -9,7 +9,7 @@
     <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-needs-desktop vh-100">
             <section class="col-12 d-flex needs-nav-mob">
-                <div class="col-2 col-md-2 col-xl-3 sticky-top">
+                <div class="col-6 col-md-2 col-lg-2 col-xl-3">
                     @include('templates.nav.nav-red-menu')
                 </div>
                 <div class="col-md-7 col-xl-6 hide-mobile">
@@ -23,9 +23,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 col-md-3 col-xl-3 hide">
+                <div class="col-6 col-md-3 col-lg-3 col-xl-3">
                     @include ('templates.nav.nav-sidebar-needs')
-                </div>
+                </div> 
+                
             </section>
             <form class="form-horizontal p-0"action="{{route('education.other')}}" method="get" id="children_education" name="children_education">
                 <section class="needs-master-content">
@@ -172,18 +173,27 @@
                                     <div class="col-12 d-flex mt-5 justify-content-center">
                                         <div class="">
                                             <div class="col-10 mt-4">
-                                                <div class="">
-                                                    <p class="f-34"><strong>1st Child:</strong>
-                                                        <input type="number" name="fund_year" class="form-control d-inline-block w-25" id="fund_year" required>
-                                                        <strong>year(s) old</strong>
+                                                <div class="text-start">
+                                                    <p class="f-34">
+                                                        <strong>
+                                                            <label class="mb-3">1st Child</label>:
+                                                            <input type="number" name="education_year_1" class="form-control d-inline-block w-25" id="education_year_1" required>
+                                                            year(s) old
+                                                        </strong>
                                                     </p>
-                                                    <p class="f-34"><strong>2nd Child:</strong>
-                                                        <input type="number" name="fund_year1" class="form-control d-inline-block w-25" id="fund_year1" required>
-                                                        <strong>year(s) old</strong>
+                                                    <p class="f-34">
+                                                        <strong>
+                                                            <label class="mb-3">2nd Child</label>:
+                                                            <input type="number" name="education_year_2" class="form-control d-inline-block w-25" id="education_year_2" required>
+                                                            year(s) old
+                                                        </strong>
                                                     </p>
-                                                    <p class="f-34"><strong>3rd Child:</strong>
-                                                        <input type="number" name="fund_year2" class="form-control d-inline-block w-25" id="fund_year2" required>
-                                                        <strong>year(s) old</strong>
+                                                    <p class="f-34">
+                                                        <strong>
+                                                            <label class="mb-3">3rd Child</label>:
+                                                            <input type="number" name="education_year_3" class="form-control d-inline-block w-25" id="education_year_3" required>
+                                                            year(s) old
+                                                        </strong>
                                                     </p>
                                                 </div>
                                             </div>

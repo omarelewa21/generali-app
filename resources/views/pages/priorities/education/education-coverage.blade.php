@@ -9,12 +9,15 @@
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-education vh-100">
             <section class="col-12 d-flex needs-coverage-nav">
-                <div class="col-2 col-md-3 col-lg-3 sticky-top">
-                    @include('templates.nav.nav-red-menu')
-                </div>
-                <div class="col-10 col-md-9 col-lg-9 hide">
-                    @include ('templates.nav.nav-sidebar-needs')
-                </div>
+                <!-- <div class="row"> -->
+                    <div class="col-6">
+                        @include('templates.nav.nav-red-menu')
+                    </div>
+                    <div class="col-6">
+                        @include ('templates.nav.nav-sidebar-needs')
+                    </div>
+                <!-- </div> -->
+                
             </section>
             <section class="col-12 d-flex justify-content-center py-2 text-center needs-coverage-title align-items-center">
                 <h5 class="m-0">I'd like to provide coverage for my:</h5>
