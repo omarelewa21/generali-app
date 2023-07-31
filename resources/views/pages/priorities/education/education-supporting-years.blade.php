@@ -6,7 +6,7 @@
 @section('content')
 
 <div id="education-content">
-    <div class="container-fluid overflow-hidden font-color-default">
+    <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-needs-desktop vh-100">
             <section class="col-12 d-flex needs-nav-mob">
                 <div class="col-2 col-md-2 col-xl-3 sticky-top">
@@ -40,45 +40,121 @@
                                     <p class="font-color-white text-center">Total Education Fund Needed</p>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative d-flex justify-content-end align-items-end">
+                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative d-flex justify-content-end align-items-end h-xxl-100">
                                 <div class="row bg-education-supporting">
-                                    <div class="col-4 d-flex align-items-center h-100 position-relative">
-                                        <div class="row d-flex h-100">
-                                            <img src="{{ asset('images/avatar/son.png') }}" class="w-100 z-99">
-                                            <p class="text-center py-2 z-99"><strong>RM231,682</strong></p>
-                                            <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
-                                                <div class="col-11 col-md-4 text-center">
-                                                    
+                                    <div class="show-desktop h-100 d-flex p-0">
+                                        <div class="col-12 d-flex h-100">
+                                            <div class="row">
+                                                <div class="col-4 position-relative h-100">
+                                                    <div class="row h-100">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/son.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM231,682</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <img src="{{ asset('images/avatar/son.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute bottom-0 py-4">
+                                                    <p class="text-center py-2 z-99"><strong>RM231,682</strong></p>
+                                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
+                                                        <div class="col-11 col-md-4 text-center">
+                                                            
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="col-4 position-relative">
+                                                    <div class="row">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/daughter.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM540,000</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 position-relative">
+                                                    <div class="row">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/young-kid.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM135,545</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-4 d-flex align-items-center h-100 position-relative">
-                                        <div class="row d-flex h-100">
-                                            <img src="{{ asset('images/avatar/daughter.png') }}" class="w-100 z-99">
-                                            <p class="text-center py-2 z-99"><strong>RM540,000</strong></p>
-                                            <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
-                                                <div class="col-11 col-md-4 text-center">
-                                                    
-                                                </div>
+                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
+                                            <div class="col-11 col-md-4 text-center">
+                                                
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-4 d-flex align-items-center h-100 position-relative">
-                                        <div class="row h-100">
-                                            <img src="{{ asset('images/avatar/young-kid.png') }}" class="w-100 z-99">
-                                            <p class="text-center py-2 z-99"><strong>RM135,545</strong></p>
-                                            <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
-                                                <div class="col-11 col-md-4 text-center">
-                                                    
+                                    <div class="col-12 hide-desktop p-0">
+                                        <div class="col-11 col-sm-12 m-auto h-100">
+                                            <div class="row">
+                                                <div class="col-4 position-relative h-100">
+                                                    <div class="row h-100">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/son.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM231,682</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <img src="{{ asset('images/avatar/son.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute bottom-0 py-4">
+                                                    <p class="text-center py-2 z-99"><strong>RM231,682</strong></p>
+                                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
+                                                        <div class="col-11 col-md-4 text-center">
+                                                            
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="col-4 position-relative">
+                                                    <div class="row">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/daughter.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM540,000</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 position-relative">
+                                                    <div class="row">
+                                                        <div class="z-99">
+                                                            <img src="{{ asset('images/avatar/young-kid.png') }}" class="m-auto mh-100 mw-100">
+                                                            <p class="py-2 m-0"><strong>RM135,545</strong></p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
+                                                            <div class="col-11 col-md-4 text-center">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
-                                        <div class="col-11 col-md-4 text-center">
-                                            
-                                        </div>
+                                        <!-- <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile">
+                                            <div class="col-11 col-md-4 text-center">
+                                                
+                                            </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-12 show-mobile bg-btn_bar">
                                         <div class="py-4 px-2">
