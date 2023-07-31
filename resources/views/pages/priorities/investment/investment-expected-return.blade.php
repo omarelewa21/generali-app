@@ -27,7 +27,7 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal p-0"action="{{route('investment.expected.return')}}" method="get" id="investment" name="investment">
+            <form class="form-horizontal p-0"action="{{route('investment.gap')}}" method="get" id="investment" name="investment">
                 <section class="needs-master-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
