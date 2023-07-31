@@ -16,7 +16,7 @@
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-6 bg-primary container fund-nav-rad">
                             <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 fund-progress-bar" style="width:75%;"></div>
+                                <div class="px-2 fund-progress-bar" style="width:25%;"></div>
                             </div>
                             <h3 class="font-color-white text-center">RM1,500,000</h3>
                             <p class="font-color-white text-center">Total Protection Fund Needed</p>
@@ -34,13 +34,12 @@
                             <div class="col-12 show-mobile">
                                 <div class="row d-flex justify-content-center align-items-center bg-primary">
                                     <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
-                                        <div class="px-2 fund-progress-bar" style="width:75%;"></div>
                                     </div>
                                     <h3 class="font-color-white text-center">RM1,500,000</h3>
                                     <p class="font-color-white text-center">Total Protection Fund Needed</p>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative h-auto">
+                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative">
                                 <div class="row">
                                     <div class="show-desktop">
                                         <img src="{{ asset('images/needs/protection/protection-existing.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute center py-4">
@@ -51,7 +50,7 @@
                                         </div>
                                     </div>
                                     <div class="position-relative hide-desktop">
-                                        <img src="{{ asset('images/needs/protection/protection-existing.png') }}" class="m-auto z-99 mh-100 mw-100 py-4 position-relative">
+                                        <img src="{{ asset('images/needs/protection/protection-existing.png') }}" class="m-auto z-99 mh-100 mw-100 py-4 position-relative d-flex justify-content-center">
                                         <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
                                             <div class="col-11 col-md-4 text-center">
                                                 
