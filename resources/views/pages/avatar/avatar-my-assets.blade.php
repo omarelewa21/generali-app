@@ -106,42 +106,4 @@
     </div>
 </div>
 
-<style>
-    .assets-car::after {
-        content: "";
-        position: absolute;
-        bottom: 5%;
-        right: 0;
-        width: 100%;
-        height: 200px;
-        background-image: url(/images/avatar-my-assets/car-vector.png);
-        background-position: right bottom;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-    .assets-scooter::after {
-        content: "";
-        position: absolute;
-        bottom: 5%;
-        right: 0;
-        width: 100%;
-        height: 200px;
-        background-image: url(/images/avatar-my-assets/scooter-vector.png);
-        background-position: left bottom;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-    .assets-house::after {
-        content: "";
-        position: absolute;
-        bottom: 10%;
-        right: 0;
-        width: 100%;
-        height: 90%;
-        background-image: url(/images/avatar-my-assets/house-vector.png);
-        background-position: left;
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-</style>
 @endsection

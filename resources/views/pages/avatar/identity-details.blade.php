@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-container pb-5">
                                     <div class="row px-4 pb-2 px-sm-5">
-                                        <div class="col-12 col-lg-6 col-md-12 col-sm-12">
+                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12">
                                             <label for="country" class="form-label text-white">Citizenship</label>
                                             <select class="form-select bg-white @error('country') is-invalid @enderror" name="country" aria-label="Countries" id="countrySelect" required>
                                                 <option value="" selected disabled>Please Select</option>
@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
-                                        <div class="col-12 col-lg-6 col-md-12 col-sm-12 pt-4">
+                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="idType" class="form-label text-white">ID Type</label>
                                             <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
                                                 <option value="" selected disabled>Please Select</option>
@@ -176,10 +176,10 @@
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
-                                        <div class="col-12 col-lg-6 col-md-12 col-sm-12 pt-4">
+                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="educationLevel" class="form-label text-white">Education Level</label>
                                             <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Education Level" id="educationLevel" required>
-                                                <option value="" selected disabled>Select</option>
+                                                <option value="" selected disabled>Please Select</option>
                                                 <option value="New IC" @if(old('educationLevel') == 'New IC') selected @endif>New IC</option>
                                                 <option value="Passport" @if(old('educationLevel') == 'Passport') selected @endif>Passport</option>
                                                 <option value="Birth Certificate" @if(old('educationLevel') == 'Birth Certificate') selected @endif>Birth Certificate</option>
@@ -192,9 +192,10 @@
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
-                                        <div class="col-12 col-lg-6 col-md-12 col-sm-12 pt-4">
+                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="occupation" class="form-label text-white">Occupation</label>
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
+                                                <option value="" selected disabled>Please Select</option>
                                                 @foreach($rows as $row)
                                                     <option value="{{ $row[0] }}">{{ $row[0] }}</option>
                                                 @endforeach
@@ -263,18 +264,6 @@
         validateInputField(registrationNumber);
     });
 
-    // mobileNumberInput.addEventListener('blur', function() {
-    //     validateMobileNumberField(mobileNumberInput);
-    // });
-
-    // housePhoneNumberInput.addEventListener('blur', function() {
-    //     validateHousePhoneNumberField(housePhoneNumberInput);
-    // });
-
-    // emailInput.addEventListener('blur', function() {
-    //     validateEmailField(emailInput);
-    // });
-
     function validateSelectField(field) {
         if (field.value) {
             field.classList.add('is-valid');
@@ -314,53 +303,6 @@
 
         return isValid;
     }
-
-    
-
-    // function validateHousePhoneNumberField(field) {
-    //     if (field.value && isValidHousePhoneNumber(field.value)) {
-    //     field.classList.add('is-valid');
-    //     field.classList.remove('is-invalid');
-    //     } else {
-    //     field.classList.remove('is-valid');
-    //     field.classList.add('is-invalid');
-    //     }
-    // }
-
-    // function validateEmailField(field) {
-    //     if (field.value && isValidEmail(field.value)) {
-    //         field.classList.add('is-valid');
-    //         field.classList.remove('is-invalid');
-    //     } else {
-    //         field.classList.remove('is-valid');
-    //         field.classList.add('is-invalid');
-    //     }
-    // }
-
-    
-
-    // function isValidHousePhoneNumber(phoneNumber) {
-    //     // Regular expression pattern to validate house phone number format
-    //     var phoneNumberRegex = /^0\d{10}$/;
-
-    //     // Test the phone number against the regex pattern
-    //     var isValid = phoneNumberRegex.test(phoneNumber);
-
-    //     return isValid;
-    // }
-
-    // function isValidEmail(email) {
-    //     // Implement your email validation logic here
-    //     // You can use a regular expression or any other method to validate the email format
-    //     // Return true if the email is valid, false otherwise
-    //     // Regular expression pattern to validate email format
-    //     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    //     // Test the email against the regex pattern
-    //     var isValid = emailRegex.test(email);
-
-    //     return isValid;
-    // }
 });
 </script>
 @endsection

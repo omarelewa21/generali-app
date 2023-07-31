@@ -24,7 +24,7 @@ html {
   height: 100vh;
 }
 .fade-effect img {
-  opacity: 0.55;
+  opacity: 0.3;
   transition: opacity 0.3s ease;
 }
 
@@ -384,6 +384,43 @@ button[data-required="selected"] img {
   background-image: linear-gradient(to bottom, #E9E9E9, #E9E9E9);
 }
 
+.assets-car::after {
+  content: "";
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+  width: 100%;
+  height: 200px;
+  background-image: url(/images/avatar-my-assets/car-vector.png);
+  background-position: right bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.assets-scooter::after {
+  content: "";
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+  width: 100%;
+  height: 200px;
+  background-image: url(/images/avatar-my-assets/scooter-vector.png);
+  background-position: left bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.assets-house::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  width: 100%;
+  height: 90%;
+  background-image: url(/images/avatar-my-assets/house-vector.png);
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 /* Mobile / Tab Responsive */
 @media only screen and (min-width: 768px) {
   .scrollable-content {
@@ -392,7 +429,7 @@ button[data-required="selected"] img {
     overflow-x: hidden;
   }
   .gender-selection-bg {
-    z-index: 2;
+    z-index: 1;
   }
 }
 
@@ -406,9 +443,10 @@ button[data-required="selected"] img {
   }
 }
 
-@media only screen and (max-width: 575px) {
 
-}
+
+
+
 
 
 
