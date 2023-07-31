@@ -9,7 +9,7 @@
     <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-investment-supporting vh-100">
             <section class="col-12 d-flex needs-nav-mob">
-                <div class="col-2 col-md-2 col-xl-3 sticky-top">
+                <div class="col-6 col-md-2 col-lg-2 col-xl-3">
                     @include('templates.nav.nav-red-menu')
                 </div>
                 <div class="col-md-7 col-xl-6 hide-mobile">
@@ -18,14 +18,14 @@
                             <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 fund-progress-bar" style="width:75%;"></div>
                             </div>
-                            <h3 class="font-color-white">RM500,000</h3>
-                            <p class="font-color-white">Total Investment Fund Needed</p>
+                            <h3 class="font-color-white text-center">RM500,000</h3>
+                            <p class="font-color-white text-center">Total Investment Fund Needed</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-10 col-md-3 col-xl-3 hide">
+                <div class="col-6 col-md-3 col-lg-3 col-xl-3">
                     @include ('templates.nav.nav-sidebar-needs')
-                </div>
+                </div> 
             </section>
             <form class="form-horizontal p-0"action="{{route('investment.annual.return')}}" method="get" id="investment" name="investment">
                 <section class="needs-master-content">
