@@ -51,6 +51,11 @@
     z-index: 10;
     width: 49vh;
 }
+.calendar-protection {
+    width:80%;
+}
+
+
 /* Retirement - Ideal age to retire page */
 #bg-ideal-age {
     background-image: url(/images/needs/retirement/bg-age-to-retire.png);
@@ -59,7 +64,6 @@
     background-repeat: no-repeat;
     height: 66vh;
 }
-
 .avatar-age-to-retire {
     right: 14%;
     bottom: 9%;

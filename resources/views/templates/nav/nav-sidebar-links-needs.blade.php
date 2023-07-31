@@ -49,7 +49,7 @@
                 </a>
             </div>
             <div class="timeline-item-needs {{ $folderName == 'investment' ? 'active' : '' }}">
-                <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{url('#')}}">
+                <a class="nav-item text-dark text-decoration-none text-uppercase" href="{{url('investment-home')}}">
                     <h6 class="display-6 nav-text-needs {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investment
                     </h6>
                 </a>
