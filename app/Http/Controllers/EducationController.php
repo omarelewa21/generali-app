@@ -16,13 +16,26 @@ class EducationController extends Controller
    public function submitEducationNeeds(Request $request){
 
       $customMessages = [
-         'educationSupportingAge.regex' => 'The age field must match the format 123456-78-9012.',
-         'passportNumber.max' => 'The passport number field must not exceed :max characters.',
-         'birthCert.max' => 'The birth certificate field must not exceed :max characters.',
-         'policeNumber.max' => 'The police number field must not exceed :max characters.',
-         'registrationNumber.max' => 'The registration number field must not exceed :max characters.',
-         'btnradio.required' => 'Please select your habits.',
+         'educationNumber.regex' => 'The value must be a number.',
      ];
+
+     $validatedData = $request->validate([
+      'idType' => 'required|in:New IC,Passport,Birth Certificate,Police / Army,Registration',
+      'idNumber' => [
+          'nullable',
+          Rule::requiredIf(function () use ($request) {
+              return !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+          }),
+          'regex:/^\d{6}-\d{2}-\d{4}$/',
+      ],
+      'passportNumber' => [
+          'nullable',
+          Rule::requiredIf(function () use ($request) {
+              return !$request->input('idNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+          }),
+          'max:15',
+      ],
+  ], $customMessages);
 
       $child_discovered = $request->input('education_other_savings');
       $amount = $request->input('education_saving_amount');
@@ -31,4 +44,6 @@ class EducationController extends Controller
       $storedAmount = session('education_saving_amount');
    }
 
+
+   // hello testing here
 }
