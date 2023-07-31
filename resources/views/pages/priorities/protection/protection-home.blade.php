@@ -41,7 +41,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('protection.home')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('priorities.to.discuss')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
                                     <a href="{{route('protection.coverage') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
