@@ -13,16 +13,16 @@
 @section('content')
 
 <div id="pdpa" class="vh-100">
-    <div class="container-fluid p-0">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
-                    <h4 class="display-5 font-bold fw-bold text-white">To begin,
+                    <h4 class="display-5 fw-bold text-white">To begin,
                         may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
                     <section class="main-content extra-padding">
                         <div class="container">

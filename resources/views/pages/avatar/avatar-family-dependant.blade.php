@@ -12,8 +12,6 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
@@ -23,102 +21,117 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4">
-                    <div class="row">
-                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
-                            <img src="{{ asset('/images/parent-father.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
-                            <img src="{{ asset('/images/avatar/avatar/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute" style="right:0;bottom:2%;max-height:88%">
-                        </div>
-                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
-                            <img src="{{ asset('/images/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage position-absolute start-0" style="z-index:1;bottom:2%">
-                            <img src="{{ asset('/images/spouse.svg') }}" width="auto" height="100%" alt="Spouse" class="changeImage position-absolute" style="right:0;max-height: 93%;bottom:2%">
-                        </div>
-                        <div class="col-12 col-xxl-4 position-relative">
-                            <!-- <img src="{{ asset('/images/avatar/avatar/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
-                            <img src="{{ asset('/images/avatar/avatar/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%"> -->
-                        </div>
+                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/parent-father.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage">
+                        <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage" style="margin-left:-320px;margin-top: 35px;">
                     </div>
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage" style="z-index:1;margin-left:-55px">
+                        <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage" style="margin-left: -120px;margin-top: 40px;">
+                    </div>
+                    <div class="d-flex">
+                        <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage">
+                        <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage" style="margin-left: -50px;padding-bottom: 10px;">
+                    </div>
+                    <!-- <div class="row d-none d-xxl-flex d-xl-none">
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
+                            <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute end-0" style="bottom:2%;max-height:88%">
+                        </div>
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage position-absolute start-0" style="bottom:2%">
+                            <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="100%" alt="Spouse" class="changeImage position-absolute end-0" style="max-height: 93%;bottom:2%">
+                        </div>
+                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
+                            <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
+                            <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%">
+                        </div>
+                    </div> -->
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                <form action="{{ route('handle.avatar.selection') }}" method="post" id="avatarForm">
-                        @csrf
-                    <section class="main-content">
-                        <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
-                                <div class="col-12">
-                                    <h1 class="display-4 text-white font-normal pb-3 fw-bold">Great, now let’s get to know your family. </h1>
-                                    <p class="text-white display-6">Click to select your family details.</p>
-                                </div>
-                            </div>
-                            <div class="row px-4 pb-4 px-sm-5">
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" data-avatar="spouse" data-required="" id="spouseButton">
-                                            <img src="{{ asset('images/avatar-family-dependant/spouse-icon.svg') }}" width="150px" height="100px" alt="Spouse">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
-                                        </button>
+                    <form action="{{ route('handle.avatar.selection') }}" method="post" id="avatarForm">
+                    @csrf
+                        <section class="main-content">
+                            <div class="container">
+                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                    <div class="col-12">
+                                        <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family. </h1>
+                                        <p class="text-white display-6">Click to select your family details.</p>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" data-avatar="children" data-required="" id="childButton">
-                                            <img src="{{ asset('images/avatar-family-dependant/children-icon.svg') }}" width="150px" height="100px" alt="Child(ren)">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
-                                        </button>
+                                <div class="row px-4 pb-4 px-sm-5">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
+                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                            <button class="border-0" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
+                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                            <button class="border-0" data-avatar="children" data-required="" id="childButton">
+                                                <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
+                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                            <button class="border-0" data-avatar="parents" data-required="" id="parentButton">
+                                                <img src="{{ asset('images/avatar-family-dependant/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
+                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                            <button class="border-0" data-avatar="siblings" data-required="" id="siblingButton">
+                                                <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" data-avatar="parents" data-required="" id="parentButton">
-                                            <img src="{{ asset('images/avatar-family-dependant/parents-icon.svg') }}" width="150px" height="100px" alt="Parent(s)">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
-                                        </button>
-                                    </div>
+                                <div class="row px-4 pb-4 px-sm-5">
+                                    <!-- Container to display error messages -->
+                                    <div id="errorContainer" style="display: none;" class="alert alert-danger"></div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 py-1">
-                                    <div class="col-12 bg-white py-5 d-flex align-items-center justify-content-center border border-danger">
-                                        <button class="border-0 bg-white" data-avatar="siblings" data-required="" id="siblingButton">
-                                            <img src="{{ asset('images/avatar-family-dependant/siblings-icon.svg') }}" width="150px" height="100px" alt="Sibling(s)">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
-                                        </button>
+                            </div>
+                        </section>
+                        
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
+                                        <!-- Add a hidden input field to store the selected avatar value -->
+                                        <input type="hidden" name="urlInput" id="urlInput">
+                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                        <!-- <a href="{{route('avatar.family.dependant.details') }}" class="btn btn-primary text-uppercase" id="nextButton">Next</a> -->
+                                        <button type="submit" class="btn btn-primary text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row px-4 pb-4 px-sm-5">
-                                <!-- Container to display error messages -->
-                                <div id="errorContainer" style="display: none;" class="alert alert-danger"></div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
-                                    <!-- Add a hidden input field to store the selected avatar value -->
-                                    <input type="hidden" name="urlInput" id="urlInput">
-                                    <a href="{{route('avatar.marital.status')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <!-- <a href="{{route('avatar.family.dependant.details') }}" class="btn btn-primary text-uppercase" id="nextButton">Next</a> -->
-                                    <button type="submit" class="btn btn-primary text-uppercase" id="nextButton">Next</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section></form>
+                        </section>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <style>
-    .avatar-bg {
-        background-image: url('/images/Shadow.png');
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: contain;
+    .content-avatar-default {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-gap: 0;
     }
 </style>
+
 <script>
 // Manually convert the PHP array to JSON
 var passingArrays = {!! json_encode(session('passingArrays')) !!};

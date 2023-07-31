@@ -11,6 +11,7 @@ use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
 class FormController extends Controller
@@ -40,7 +41,7 @@ class FormController extends Controller
         return redirect()->route('avatar.welcome');
     }
 
-    public function countries()
+    public function identityData()
     {
         $countries = [
             'AF' => 'Afghanistan',
@@ -295,9 +296,21 @@ class FormController extends Controller
             'YE' => 'Yemen',
             'ZM' => 'Zambia',
             'ZW' => 'Zimbabwe',
-        ];        
-        return view('pages/avatar/identity-details', compact('countries'));
+        ];  
+        
+        $xlsxFile = storage_path('app/occupation.xlsx');
+
+        if (!file_exists($xlsxFile)) {
+            abort(404, 'Excel file not found.');
+        }
+
+        $spreadsheet = IOFactory::load($xlsxFile);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
+
+        return view('pages/avatar/identity-details', compact('countries', 'rows'));
     }
+
     public function submitIdentity(Request $request)
     {
         $countries = [
