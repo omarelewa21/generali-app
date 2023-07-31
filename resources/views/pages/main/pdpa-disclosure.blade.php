@@ -12,7 +12,7 @@
 
 @section('content')
 
-<div id="pdpa" class="vh-100">
+<div id="pdpa" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">

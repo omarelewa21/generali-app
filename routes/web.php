@@ -27,7 +27,6 @@ Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('ch
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateAvatar'])->name('validate.avatar');
-// Route::get('/select-options', 'SelectOptionController@index')->name('select-options');
 
 /* Priorities */
 Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');

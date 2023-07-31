@@ -230,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Implement your email validation logic here
         // You can use a regular expression or any other method to validate the email format
         // Return true if the email is valid, false otherwise
-        // Regular expression pattern to validate email format
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         var isValid = emailRegex.test(email);

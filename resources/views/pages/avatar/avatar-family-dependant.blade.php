@@ -28,7 +28,7 @@
                         <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage" style="margin-left:-320px;margin-top: 35px;">
                     </div>
                     <div class="d-flex">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage" style="z-index:1;margin-left:-55px">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage" style="margin-left:-55px">
                         <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage" style="margin-left: -120px;margin-top: 40px;">
                     </div>
                     <div class="d-flex">
@@ -127,7 +127,7 @@
 
 <style>
     .content-avatar-default {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         grid-gap: 0;
     }
 </style>
