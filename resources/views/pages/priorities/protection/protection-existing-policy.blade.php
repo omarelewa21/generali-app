@@ -104,7 +104,7 @@
                 <section class="needs-master-footer footer bg-btn_bar">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('investment.supporting')}}" class="btn btn-primary text-uppercase">Back</a>
+                            <a href="{{route('protection.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>
                             <!-- <a href="{{route('investment.expected.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
                             <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
                         </div>

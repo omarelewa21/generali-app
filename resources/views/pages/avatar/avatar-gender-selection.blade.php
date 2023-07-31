@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Gender Selection Page
+ * Template Name: Gender Selection Page
  */
 ?>
 

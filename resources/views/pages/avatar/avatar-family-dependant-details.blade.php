@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Family Dependant Details Page
+ * Template Name: Family Dependant Details Page
  */
 ?>
 
@@ -14,27 +14,22 @@
 
 @include('templates.nav.nav-red-menu')
 
-<div id="avatar_family_dependant" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="avatar_family_dependant_details" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
-                <section class="avatar-design-placeholder content-avatar-default pt-4">
-                    <div class="row d-none d-xxl-flex d-xl-none">
-                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
-                            <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute start-0" style="bottom:2%;">
-                            <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage position-absolute end-0" style="bottom:2%;max-height:88%">
-                        </div>
-                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
-                            <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="100%" alt="Main character" class="changeImage position-absolute start-0" style="bottom:2%">
-                            <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="100%" alt="Spouse" class="changeImage position-absolute end-0" style="max-height: 93%;bottom:2%">
-                        </div>
-                        <div class="col-12 col-xxl-4 position-relative avatar-bg">
-                            <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute" style="left:0;bottom:2%;z-index:1;max-height: 45%;">
-                            <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="100%" alt="Children" class="changeImage position-absolute end-0" style="bottom:2%;max-height:65%">
-                        </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
+                    <div class="avatar-bg position-relative">
+                        <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage pb-2">
+                        <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage position-absolute bottom-0 pb-2" style="right:-80px">
                     </div>
-                    <div class="row d-xxl-none">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <div class="avatar-bg position-relative">
+                        <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage position-absolute" style="bottom: 10px;right: -80px;">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="98%" alt="Main character" class="changeImage position-absolute" style="left:40px">
+                    </div>
+                    <div class="avatar-bg position-relative">
+                        <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="80%" alt="Children" class="changeImage position-absolute end-0" style="bottom:10px">
+                        <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="50%" alt="Children" class="changeImage position-absolute" style="bottom:10px">
                     </div>
                 </section>
             </div>

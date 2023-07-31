@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Identity Details Page
+ * Template Name: Identity Details Page
  */
 ?>
 

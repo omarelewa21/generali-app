@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Existing Assets Page
+ * Template Name: Existing Assets Page
  */
 ?>
 
@@ -17,14 +17,16 @@
 <div id="avatar_my_assets" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default assets-overlay overflow-auto px-0">
-                <section class="avatar-design-placeholder content-avatar-default pt-4 overflow-hidden position-relative">
-                    <div class="col-12 text-center d-flex justify-content-center align-items-end">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="400px" alt="Avatar" class="changeImage" style="z-index:1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default assets-overlay overflow-hidden px-0">
+                <section class="avatar-design-placeholder content-avatar-default position-relative">
+                    <img src="{{ asset('/images/avatar-my-assets/house-vector.png') }}" width="auto" height="100%" alt="">
+                </section>
+                <section class="footer-avatar-default d-flex justify-content-center">
+                    <div class="col-12 position-relative">
+                        <img src="{{ asset('/images/avatar-my-assets/car-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;right:-200px">
+                        <img src="{{ asset('/images/avatar-my-assets/scooter-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;left:0">
                     </div>
-                    <div class="assets-house"></div>
-                    <div class="assets-car"></div>
-                    <div class="assets-scooter"></div>
+                    <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="50%" alt="" class="position-absolute" style="bottom: 50px;">
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
@@ -105,5 +107,4 @@
         </div>
     </div>
 </div>
-
 @endsection

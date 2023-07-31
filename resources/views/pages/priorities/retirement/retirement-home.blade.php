@@ -42,7 +42,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.home')}}"
+                                    <a href="{{route('protection.gap')}}"
                                         class="btn btn-primary text-uppercase me-md-2">Back</a>
                                     <a href="{{route('retirement.coverage') }}"
                                         class="btn btn-primary text-uppercase">Next</a>

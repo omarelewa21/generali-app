@@ -62,8 +62,8 @@
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <!-- <a href="{{route('investment.annual.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                            <a href="{{route('protection.existing.policy')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                            <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
                         </div>
                     </div>
                 </section>
