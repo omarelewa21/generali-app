@@ -23,6 +23,12 @@ html {
   overflow: hidden;
   height: 100vh;
 }
+h6.nav-text-needs {
+  font-weight: 500;
+  font-family: 'Helvetica Neue Medium', sans-serif;
+  letter-spacing: 1.1px;
+  font-size:18px;
+}
 .fade-effect img {
   opacity: 0.3;
   transition: opacity 0.3s ease;
@@ -865,7 +871,7 @@ button[data-required="selected"] img {
 
   .timeline-item-needs {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 53px;
     padding-right: 73px;
     /* Adjust the right padding as needed */
   }
