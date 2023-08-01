@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Avatar - Marital Status Page
+ * Template Name: Marital Status Page
  */
 ?>
 

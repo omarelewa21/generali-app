@@ -76,7 +76,9 @@
                             <div class="col-12 d-grid gap-2 d-md-block text-end">
                                 <a href="{{route('retirement.home')}}"
                                     class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+                                    <a href="{{route('retirement.ideal') }}"
+                                        class="btn btn-primary text-uppercase">Next</a>
+                                <!-- <button type="submit" class="btn btn-primary text-uppercase">Next</button> -->
                             </div>
                         </div>
                     </div>

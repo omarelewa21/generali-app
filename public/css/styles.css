@@ -368,57 +368,27 @@ button[data-required="selected"] img {
   line-height: 33px;
   font-weight: 700;
 }
+#avatar_family_dependant .content-avatar-default, #avatar_family_dependant_details .content-avatar-default {
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  grid-gap: 0;
+}
 
 /* Assets Page */
 .assets-overlay {
   position: relative;
 }
 
-.assets-overlay::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 300px; /* Adjust the height of the colored section as needed */
-  background-image: linear-gradient(to bottom, #E9E9E9, #E9E9E9);
+#avatar_my_assets .wrapper-avatar-default {
+  grid-template-areas:
+      "header-avatar-default"
+      "content-avatar-default"
+      "footer-avatar-default";
+  grid-template-rows: 15vh 55vh 30vh;
+  grid-gap:0;
 }
-
-.assets-car::after {
-  content: "";
-  position: absolute;
-  bottom: 5%;
-  right: 0;
-  width: 100%;
-  height: 200px;
-  background-image: url(/images/avatar-my-assets/car-vector.png);
-  background-position: right bottom;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.assets-scooter::after {
-  content: "";
-  position: absolute;
-  bottom: 5%;
-  right: 0;
-  width: 100%;
-  height: 200px;
-  background-image: url(/images/avatar-my-assets/scooter-vector.png);
-  background-position: left bottom;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.assets-house::after {
-  content: "";
-  position: absolute;
-  bottom: 10%;
-  right: 0;
-  width: 100%;
-  height: 90%;
-  background-image: url(/images/avatar-my-assets/house-vector.png);
-  background-position: left;
-  background-size: contain;
-  background-repeat: no-repeat;
+#avatar_my_assets .footer-avatar-default {
+  grid-area: footer-avatar-default;
+  background-color:rgba(233, 233, 233, 1);
 }
 
 /* Mobile / Tab Responsive */

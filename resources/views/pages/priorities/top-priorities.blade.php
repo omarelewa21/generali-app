@@ -22,15 +22,15 @@
                     <div class="col-12 text-center">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
                         
-                        <div id="sortable-list" class="col-12">
+                        <!-- <div id="sortable-list" class="col-12">
                             <div class="position-relative main first">
                                 <img src="{{ asset('/images/top-priorities/vector-01.svg') }}" width="100%" alt="">
                                 <div class="droppableArea d-flex justify-content-center align-items-center"></div>
                             </div>
                             
-                        </div>
-                        <!-- <img src="{{ asset('/images/top-priorities/priorities-grid.png') }}" width="500px" class="mx-auto d-block pt-4" alt="">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                        </div> -->
+                        <img src="{{ asset('/images/top-priorities/priorities-grid.png') }}" width="500px" class="mx-auto d-block pt-4" alt="">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
