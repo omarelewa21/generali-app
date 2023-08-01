@@ -13,11 +13,14 @@
 /* Retirement - Home page */
 .needs-grey-bg {
     padding: 140px;
+    background-color: #E9E9E9;
 }
 
 .needs-grey-bg-md {
     padding: 100px;
     left: 0px;
+    background-color: #E9E9E9;
+
 }
 
 /* main css for needs */

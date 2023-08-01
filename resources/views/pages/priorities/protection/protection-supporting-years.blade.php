@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                <section class="needs-master-footer footer bg-white hide-mobile">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase">Back</a>
