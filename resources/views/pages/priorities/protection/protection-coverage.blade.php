@@ -60,7 +60,7 @@
                 </div>
 
                 <div
-                    class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                    class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                     <div class="col-12 col-md-4 text-center">
                     </div>
                 </div>

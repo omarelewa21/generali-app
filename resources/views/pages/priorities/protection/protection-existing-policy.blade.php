@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="show-desktop">
                                         <img src="{{ asset('images/needs/protection/protection-existing.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute center py-4">
-                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
+                                        <div class="d-flex justify-content-center needs-grey-bg-md p-master position-absolute w-100 bottom-0">
                                             <div class="col-11 col-md-4 text-center">
                                                 
                                             </div>
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="position-relative hide-desktop">
                                         <img src="{{ asset('images/needs/protection/protection-existing.png') }}" class="m-auto z-99 mh-100 mw-100 py-4 position-relative d-flex justify-content-center">
-                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0">
+                                        <div class="d-flex justify-content-center needs-grey-bg-md p-master position-absolute w-100 bottom-0">
                                             <div class="col-11 col-md-4 text-center">
                                                 
                                             </div>
@@ -91,7 +91,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
+                                    <div class="d-flex justify-content-center needs-grey-bg-md p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
                                         <div class="col-12">
                                             
                                         </div>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar">
+                <section class="needs-master-footer footer bg-white">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('protection.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>

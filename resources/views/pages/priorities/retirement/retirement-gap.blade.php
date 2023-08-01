@@ -1,18 +1,17 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Gap</title>
+<title>Retirement - Gap</title>
 
 @section('content')
 
-<div id="protection-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-needs-desktop vh-100">
             <section class="col-12 d-flex needs-coverage-nav">
-                <div class="col-6">
+                <div class="col-2 col-md-3 col-lg-3 sticky-top">
                     @include('templates.nav.nav-red-menu')
                 </div>
-                <div class="col-6">
+                <div class="col-10 col-md-9 col-lg-9 hide">
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
@@ -65,19 +64,18 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer bg-white footer hide-mobile">
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('protection.existing.policy')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('retirement.home') }}" class="btn btn-primary text-uppercase">Next</a>
-                            <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
+                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
                         </div>
                     </div>
                 </section>
             </form>
         </div>
     </div>
-</div>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
     $(document).ready(function() {
@@ -114,7 +112,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Protection Fund',
+                                text: 'Total Retirement Fund',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 14, // Font size for the second text
@@ -159,7 +157,7 @@
                             },
                             // Second text style
                             text2: {
-                                text: 'Total Protection Fund',
+                                text: 'Total Retirement Fund',
                                 color: '#000', // Blue color
                                 fontStyle: 'Helvetica Neue', // Font style for the second text
                                 fontSize: 15, // Font size for the second text

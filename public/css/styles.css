@@ -870,18 +870,10 @@ button[data-required="selected"] img {
     /* Adjust the right padding as needed */
   }
 
-  .timeline-item-needs:first-child {
-    margin-top: 20px;
-  }
-
   .timeline-item-needs:first-child::before {
     display: none;
   }
-
-  .timeline-item-needs:last-child {
-    margin-bottom: 0;
-  }
-
+  
   .timeline-item-needs::after {
     content: '';
     position: absolute;
@@ -900,7 +892,7 @@ button[data-required="selected"] img {
     background: #C21B17;
     border: 0;
   }
-
+ */
   /*test case - used for svg animation height in retirement page */
 #bm {
   height:200px;

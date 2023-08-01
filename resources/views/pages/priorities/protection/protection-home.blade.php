@@ -31,7 +31,7 @@
                                     <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Let’s figure out what you need for Protection.</h5>
                         </div>
                     
-                        <div class="d-flex needs-grey-bg justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
+                        <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
                             <div class="col-11 col-md-4 text-center">
                             </div>
                         </div>
