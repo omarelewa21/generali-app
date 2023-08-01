@@ -46,20 +46,20 @@
                                 <div class="row">
                                     <div class="col-12 d-flex mt-5 justify-content-center">
                                         <div class="">
-                                            <div class="col-10 mt-4">
+                                            <div class="col-10 m-auto">
                                                 <div class="">
                                                     <p class="f-34"><strong>In</strong>
-                                                        <input type="number" name="fund_year3" class="form-control d-inline-block w-25" id="fund_year3" required>
+                                                        <input type="number" name="education_years_times" class="form-control d-inline-block w-25 f-34" id="education_years_times" required>
                                                         <strong>years' time,</strong>
                                                     </p>
                                                     <p class="f-34"><strong>I want to enjoy my golden years with</strong>
-                                                        <input type="number" name="fund_money" class="form-control d-inline-block w-25 money" id="fund_money" placeholder="RM" required>
+                                                        <span class="currencyinput">RM<input type="number" name="education_amount_per_year" class="form-control d-inline-block w-25 f-34" id="education_amount_per_year" required></span>
                                                     </p>
                                                     <p class="f-34"><strong>I have set aside</strong>
-                                                        <input type="number" name="fund_money1" class="form-control d-inline-block w-25 money" id="fund_money1" placeholder="RM" required>
+                                                        <span class="currencyinput">RM<input type="number" name="education_aside_amount" class="form-control d-inline-block w-25 f-34" id="education_aside_amount" required></span>
                                                     </p>
                                                     <p class="f-34"><strong>So I need to plan for</strong>
-                                                        <input type="number" name="fund_money2" class="form-control d-inline-block w-25 money" id="fund_money2" placeholder="RM" required>
+                                                        <span class="currencyinput">RM<input type="number" name="education_plan_amount" class="form-control d-inline-block w-25 f-34" id="education_plan_amount" required></span>
                                                     </p>
                                                 </div>
                                             </div>

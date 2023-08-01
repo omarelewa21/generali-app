@@ -27,7 +27,9 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div> 
             </section>
-            <form class="form-horizontal p-0"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education">
+            <!-- <form class="form-horizontal"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education"> -->
+            <form novalidate action="{{route('form.submit.education.other')}}" method="POST">
+                @csrf
                 <section class="needs-master-content hide">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -82,7 +84,7 @@
                                             <div class="col-12 d-grid gap-2 d-md-block text-end">
                                                 <a href="{{route('education.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>
                                                 <!-- <a href="{{route('education.gap')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                                                <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                                <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                                             </div>
                                         </div>
                                     </div>
@@ -92,20 +94,26 @@
                                 <div class="row">
                                     <div class="col-12 d-flex mt-5 justify-content-center">
                                         <div class="">
-                                            <div class="col-10 mt-4">
-                                                <div class="">
+                                            <div class="col-10 m-auto">
+                                                <div class="@error('education_other_savings') is-invalid @enderror">
                                                     <p class="f-34"><strong>I’ve been saving up for my child(ren)’s education.</strong></p>
                                                     <span class="me-5">
-                                                        <input type="radio" class="needs-radio" id="education_yes" name="education_other_savings" value="Yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required>
-                                                        <label for="education_yes" class="form-label">Yes</label>
+                                                        <input type="radio" class="needs-radio" id="yes" name="education_other_savings" value="yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required>
+                                                        <label for="yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
-                                                        <input type="radio" class="needs-radio" id="education_no" name="education_other_savings" value="No" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);">
-                                                        <label for="education_no" class="form-label">No</label>
+                                                        <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);">
+                                                        <label for="no" class="form-label">No</label>
                                                     </span>
                                                 </div>
-                                                <p class="mt-5 hide-content">Current savings amount:
-                                                    <input type="text" name="education_saving_amount" class="form-control d-inline-block w-25 money" id="education_saving_amount" placeholder="RM">
+                                                @if ($errors->has('education_other_savings'))
+                                                    <div class="invalid-feedback">{{ $errors->first('education_other_savings') }}</div>
+                                                @endif
+                                                <p class="mt-5 hide-content @error('education_saving_amount') is-invalid @enderror">Current savings amount:
+                                                    <span class="currencyinput f-34">RM<input type="text" name="education_saving_amount" class="form-control d-inline-block w-25 money f-34 @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" required></span>
+                                                    @if ($errors->has('education_saving_amount'))
+                                                        <div class="invalid-feedback">{{ $errors->first('education_saving_amount') }}</div>
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>
@@ -120,12 +128,12 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('education.supporting.years')}}" class="btn btn-primary text-uppercase">Back</a>
                             <!-- <a href="{{route('education.gap')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                            <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                         </div>
                     </div>
                 </section>
@@ -133,5 +141,26 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var education_saving = document.getElementById('education_saving_amount');
 
+        education_saving.addEventListener('blur', function() {
+            validateNumberField(education_saving);
+        });
+
+        function validateNumberField(field) {
+
+            var value = field.value.trim();
+
+            if (value === '' || isNaN(value)) {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            } else {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            }
+        }
+    });
+</script>
 @endsection
