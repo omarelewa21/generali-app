@@ -176,36 +176,30 @@
                                         <div class="">
                                             <div class="col-10 m-auto">
                                                 <div class="text-start">
-                                                    <!-- <p class="f-34"> -->
-                                                        <strong class="f-34">
-                                                            <label class="mb-3">1st Child</label>:
-                                                            <input type="text" name="education_year_1" class="form-control d-inline-block w-25 f-34 @error('education_year_1') is-invalid @enderror" id="education_year_1" required>
-                                                            year(s) old
-                                                            @if ($errors->has('education_year_1'))
-                                                                <div class="invalid-feedback">{{ $errors->first('education_year_1') }}</div>
-                                                            @endif
-                                                        </strong>
-                                                    <!-- </p> -->
-                                                    <!-- <p class="f-34"> -->
-                                                        <strong class="f-34">
-                                                            <label class="mb-3">2nd Child</label>:
-                                                            <input type="text" name="education_year_2" class="form-control d-inline-block w-25 f-34 @error('education_year_2') is-invalid @enderror" id="education_year_2" required>
-                                                            year(s) old
-                                                            @if ($errors->has('education_year_2'))
-                                                                <div class="invalid-feedback">{{ $errors->first('education_year_2') }}</div>
-                                                            @endif
-                                                        </strong>
-                                                    <!-- </p> -->
-                                                    <!-- <p class="f-34"> -->
-                                                        <strong class="f-34">
-                                                            <label class="mb-3">3rd Child</label>:
-                                                            <input type="text" name="education_year_3" class="form-control d-inline-block w-25 f-34 @error('education_year_3') is-invalid @enderror" id="education_year_3" required>
-                                                            year(s) old
-                                                            @if ($errors->has('education_year_3'))
-                                                                <div class="invalid-feedback">{{ $errors->first('education_year_3') }}</div>
-                                                            @endif
-                                                        </strong>
-                                                    <!-- </p> -->
+                                                    <p class="f-34 @error('education_year_1') is-invalid @enderror">
+                                                        <label>1st Child</label>:
+                                                        <span class="currencyinput"><input type="text" name="education_year_1" class="form-control d-inline-block w-25 f-34 @error('education_year_1') is-invalid @enderror" id="education_year_1" required></span>
+                                                        &nbsp;year(s) old
+                                                        @if ($errors->has('education_year_1'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_year_1') }}</div>
+                                                        @endif
+                                                    </p>
+                                                    <p class="f-34 @error('education_year_2') is-invalid @enderror">
+                                                        <label>2nd Child</label>:
+                                                        <span class="currencyinput"><input type="text" name="education_year_2" class="form-control d-inline-block w-25 f-34 @error('education_year_2') is-invalid @enderror" id="education_year_2" required></span>
+                                                        &nbsp;year(s) old
+                                                        @if ($errors->has('education_year_2'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_year_2') }}</div>
+                                                        @endif
+                                                    </p>
+                                                    <p class="f-34 @error('education_year_3') is-invalid @enderror">
+                                                        <label>3rd Child</label>:
+                                                        <span class="currencyinput"><input type="text" name="education_year_3" class="form-control d-inline-block w-25 f-34 @error('education_year_3') is-invalid @enderror" id="education_year_3" required></span>
+                                                        &nbsp;year(s) old
+                                                        @if ($errors->has('education_year_3'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_year_3') }}</div>
+                                                        @endif
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

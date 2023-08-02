@@ -28,7 +28,7 @@
                 </div> 
             </section>
             <!-- <form class="form-horizontal"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education"> -->
-            <form novalidate action="{{route('form.submit.education.other')}}" method="POST">
+            <form novalidate action="{{route('form.submit.education.other')}}" method="POST" id="children_education">
                 @csrf
                 <section class="needs-master-content hide">
                     <div class="col-12">
@@ -98,7 +98,7 @@
                                                 <div class="@error('education_other_savings') is-invalid @enderror">
                                                     <p class="f-34"><strong>I’ve been saving up for my child(ren)’s education.</strong></p>
                                                     <span class="me-5">
-                                                        <input type="radio" class="needs-radio" id="yes" name="education_other_savings" value="yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required>
+                                                        <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror" id="yes" name="education_other_savings" value="yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);" required @error('education_saving_amount') checked @enderror>
                                                         <label for="yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
@@ -144,10 +144,15 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var education_saving = document.getElementById('education_saving_amount');
+        var yesRadio = document.getElementById('yes');
 
         education_saving.addEventListener('blur', function() {
             validateNumberField(education_saving);
         });
+
+        if (yesRadio.classList.contains('checked-yes')) {
+            jQuery('.hide-content').css('display','block');
+        }
 
         function validateNumberField(field) {
 

@@ -16,7 +16,9 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal p-0"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education">
+            <!-- <form class="form-horizontal p-0"action="{{route('education.gap')}}" method="get" id="children_education" name="children_education"> -->
+            <form novalidate action="{{route('form.submit.education.gap')}}" method="POST" id="education-gap">
+                @csrf
                 <section class="needs-gap-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -36,7 +38,7 @@
                                             <div class="col-12 d-grid gap-2 d-md-block text-end">
                                                 <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
                                                 <!-- <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                                                <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                                <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                                             </div>
                                         </div>
                                     </div>
@@ -47,19 +49,32 @@
                                     <div class="col-12 d-flex mt-5 justify-content-center">
                                         <div class="">
                                             <div class="col-10 m-auto">
-                                                <div class="">
-                                                    <p class="f-34"><strong>In</strong>
-                                                        <input type="number" name="education_years_times" class="form-control d-inline-block w-25 f-34" id="education_years_times" required>
+                                                <div>
+                                                    <p class="f-34 @error('education_years_times') is-invalid @enderror">
+                                                        <strong>In</strong>
+                                                        <span class="currencyinput"><input type="text" name="education_years_times" class="form-control d-inline-block w-25 f-34 @error('education_years_times') is-invalid @enderror" id="education_years_times" required></span>
                                                         <strong>years' time,</strong>
+                                                        @if ($errors->has('education_years_times'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_years_times') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>I want to enjoy my golden years with</strong>
-                                                        <span class="currencyinput">RM<input type="number" name="education_amount_per_year" class="form-control d-inline-block w-25 f-34" id="education_amount_per_year" required></span>
+                                                    <p class="f-34 @error('education_amount_per_year') is-invalid @enderror"><strong>I want to enjoy my golden years with</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="education_amount_per_year" class="form-control d-inline-block w-25 f-34 @error('education_amount_per_year') is-invalid @enderror" id="education_amount_per_year" required></span>
+                                                        @if ($errors->has('education_amount_per_year'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_amount_per_year') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>I have set aside</strong>
-                                                        <span class="currencyinput">RM<input type="number" name="education_aside_amount" class="form-control d-inline-block w-25 f-34" id="education_aside_amount" required></span>
+                                                    <p class="f-34 @error('education_aside_amount') is-invalid @enderror"><strong>I have set aside</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="education_aside_amount" class="form-control d-inline-block w-25 f-34 @error('education_aside_amount') is-invalid @enderror" id="education_aside_amount" required></span>
+                                                        @if ($errors->has('education_aside_amount'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_aside_amount') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>So I need to plan for</strong>
-                                                        <span class="currencyinput">RM<input type="number" name="education_plan_amount" class="form-control d-inline-block w-25 f-34" id="education_plan_amount" required></span>
+                                                    <p class="f-34 @error('education_plan_amount') is-invalid @enderror"><strong>So I need to plan for</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="education_plan_amount" class="form-control d-inline-block w-25 f-34 @error('education_plan_amount') is-invalid @enderror" id="education_plan_amount" required></span>
+                                                        @if ($errors->has('education_plan_amount'))
+                                                            <div class="invalid-feedback">{{ $errors->first('education_plan_amount') }}</div>
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>
@@ -74,7 +89,7 @@
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('investment.home')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
+                            <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                             <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
                         </div>
                     </div>
@@ -85,6 +100,58 @@
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var education_years_times = document.getElementById('education_years_times');
+        var education_amount_per_year = document.getElementById('education_amount_per_year');
+        var education_aside_amount = document.getElementById('education_aside_amount');
+        var education_plan_amount = document.getElementById('education_plan_amount');
+
+        education_amount_per_year.addEventListener('blur', function() {
+            validateNumberField(education_amount_per_year);
+        });
+        education_aside_amount.addEventListener('blur', function() {
+            validateNumberField(education_aside_amount);
+        });
+        education_plan_amount.addEventListener('blur', function() {
+            validateNumberField(education_plan_amount);
+        });
+
+        function validateNumberField(field) {
+
+            var value = field.value.trim();
+
+            if (value === '' || isNaN(value)) {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            } else {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            }
+        }
+
+        education_years_times.addEventListener('blur', function() {
+            validateYearsNumberField(education_years_times);
+        });
+
+        function validateYearsNumberField(field) {
+            var minYear = 1;
+            var maxYears = 100;
+
+            var value = parseInt(field.value);
+
+            if (!isNaN(value) && value >= minYear && value <= maxYears) {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            } else {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            }
+        }
+    });
+
+
+    // Chart
     $(document).ready(function() {
 
         if (window.innerWidth < 596) {

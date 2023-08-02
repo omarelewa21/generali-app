@@ -70,8 +70,50 @@ class EducationController extends Controller
 
         ], $customMessages);
 
-        // Process the form data and perform any necessary actions
+        // // Process the form data and perform any necessary actions
         return redirect()->route('education.gap');
+    }
+
+   public function submitEducationGap(Request $request){
+
+        $customMessages = [
+            'education_years_times.required' => 'Please enter a year',
+            'education_years_times.integer' => 'The year must be a number',
+            'education_years_times.min' => 'The year must be at least :min.',
+            'education_years_times.max' => 'The year must not more than :max.',
+            'education_amount_per_year.required' => 'You are required to enter an amount.',
+            'education_amount_per_year.integer' => 'The amount must be a number',
+            'education_aside_amount.required' => 'You are required to enter an amount.',
+            'education_aside_amount.integer' => 'The amount must be a number',
+            'education_plan_amount.required' => 'You are required to enter an amount.',
+            'education_plan_amount.integer' => 'The amount must be a number',
+        ];
+
+        $validatedData = $request->validate([
+            'education_years_times' => 'required|integer|min:1|max:100',
+            'education_amount_per_year' => 'required|integer',
+            'education_aside_amount' => 'required|integer',
+            'education_plan_amount' => 'required|integer',
+
+        ], $customMessages);
+
+        // // Process the form data and perform any necessary actions
+        return redirect()->route('investment.home');
+    }
+    
+    public function validateCoverageSelection(Request $request)
+    {
+        $selectedCoverage = $request->input('selectedCoverageInput');
+        $dataUrl = $request->input('urlInput');
+        Log::debug($request->all());
+
+        if ($selectedCoverage !== null) {
+            // If not equal to null, then replace the data in $arrayData['coverageSelection']
+            $arrayData['coverageSelection'] = $selectedCoverage;
+        }
+
+        // // Process the form data and perform any necessary actions
+        return redirect()->route($dataUrl);
     }
 
 }
