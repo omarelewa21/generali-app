@@ -33,9 +33,7 @@
     padding: 140px;
     background-color: #E9E9E9;
 }
-.needs-grey-bg-mobile {
-    display: none;
-}
+
 
 .needs-grey-bg-md {
     padding: 100px;
@@ -219,7 +217,7 @@
   }
 
   /* mobile css */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     body,
     html {
       overflow-y: auto;
@@ -249,8 +247,7 @@
     }
 
     .needs-grey-bg-mobile {
-        display: flex !important;
-        padding: 40px;
+        padding: 25px;
         background-color: #E9E9E9;
         width: 100%;
     }
@@ -355,6 +352,7 @@
         z-index: 10;
         width: 58vh;
     }
+
 }
 
 /* Code for Retirement - Ideal page */
@@ -368,9 +366,15 @@
         border-bottom-right-radius: 1.3rem;
         border-bottom-left-radius: 1.3rem;
     }
-
+    .needs-home-avatar img {
+        width: 56vh;
+    }
+}
+/* target iPad Pro */
+@media only screen and (width: 834px) and (height: 1112px) {
 
 }
+
 
 /* @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
     html {

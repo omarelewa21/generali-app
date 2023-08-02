@@ -537,11 +537,11 @@ button[data-required="selected"] img {
   }
 
   .needs-home-avatar {
-    top: 10%;
-    left: 14%;
+    /* top: 10%;
+    left: 14%; */
     z-index: 10;
     height: 50vh;
-    bottom:0;
+    /* bottom:0; */
     width:100%;
   }
   .needs-home-avatar img {

@@ -25,10 +25,10 @@
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-sm-block" />
                 <div class="overflow-y-auto overflow-x-hidden main-cloud">
                     @include ('templates.nav.nav-sidebar-needs')
-                    <section>
-                        <div class="needs-home-avatar col-12 text-center justify-content-center position-absolute">
+                    <section class="row row justify-content-center align-items-center">
+                        <div class="needs-home-avatar col-12 text-center justify-content-center align-items-center">
                                 <img src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
-                                    <h5 class="d-flex justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
+                                    <h5 class="d-flex col-12 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
                         </div>
                     
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
