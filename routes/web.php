@@ -71,6 +71,7 @@ Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retireme
 Route::Post('/retirement-age-to-retire', [formValidateRetirementNeeds::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
 Route::view('/retirement-years-till-retire', 'pages.priorities.retirement.retirement-years-till-retire')->name('retirement.years.till.retire');
 Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.retirement-allocated-funds-aside')->name('retirement.allocated.funds.aside');
+Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
 
 Route::get('/files/{filename}', function($filename){
     return \Storage::download($filename); // assuming default disk is set to 'public'

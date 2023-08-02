@@ -123,7 +123,7 @@
         return false; // Prevent navigation to the next page
     }
 
-    // window.location.href = "{{ route('retirement.ideal') }}"; // Replace with the appropriate route
+    window.location.href = "{{ route('retirement.ideal') }}"; // Replace with the appropriate route
 
     // const selectedAvatarType = selectedAvatar.getAttribute('data-type');
     // const form = event.target.closest('form');
