@@ -1,8 +1,8 @@
 import './bootstrap';
-import './height-controller';
-import './button';
-import './avatar';
-import './form-display';
+// import './height-controller';
+// import './button';
+// import './avatar';
+// import './form-display';
 // import './sortable';
 
 

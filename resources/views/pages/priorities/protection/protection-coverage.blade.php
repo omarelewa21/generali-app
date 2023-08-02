@@ -12,51 +12,52 @@
 
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-12">
                 @include('templates.nav.nav-red-menu')
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-12">
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
         <section>
         <div class="col-12 text-dark px-0 my-4 bg-needs-main">
             <div class="my-4 second-cloud">
-                <div class="row d-flex justify-content-center py-2 text-center align-items-center">
-                    <h5 class="my-2">I'd like to provide coverage for my:</h5>
+                <div class="row d-flex justify-content-center py-4 text-center align-items-center">
+                    <h5>I'd like to provide coverage for my:</h5>
                 </div>
-                <div class="container btn-group row position-absolute justify-content-end coverage-avatar">
-                    <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
+                <div class="container row d-flex m-auto btn-group coverage-avatar">
+                    <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow avatar-button" data-type="self"
                             id="button-self-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
                                 alt="self-character">
-                            <h6 class="text-center py-2">Self</h6>
+                            <h6 class="text-center py-4">Self</h6>
                         </button>
                     </div>
-                    <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
+                    <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow avatar-button" data-type="spouse"
                             id="button-spouse-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
                                 alt="spouse">
-                            <h6 class="text-center py-2">Spouse</h6>
+                            <h6 class="text-center py-4">Spouse</h6>
                         </button>
                     </div>
-                    <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                    <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow avatar-button" data-type="kid"
                             id="button-kid-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="kid">
-                            <h6 class="text-center py-2">Child(ren)</h6>
+                            <h6 class="text-center py-4">Child(ren)</h6>
                         </button>
                     </div>
-                    <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                    <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow avatar-button" data-type="parent"
                             id="button-parent-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
                                 alt="parent">
-                            <h6 class="text-center py-2">Parent</h6>
+                            <h6 class="text-center py-4">Parent</h6>
                         </button>
                     </div>
+
                 </div>
 
                 <div

@@ -4,7 +4,7 @@
 
 
 {{-- Nav Sidebar Right Needs --}}
-<section class="progress-main">
+<section class="progress-main progress-mobile">
   <div class="row justify-content-end align-items-center m-3">
     <div class="col-auto">
       <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
@@ -100,11 +100,6 @@
   </div>
 </section>
 {{-- Nav Sidebar Right Needs --}}
-<script>
-  console.log({{ $dynamicNumber }});
-console.log({{ $progress }});
-console.log({{$pageNumber }});
-</script>
 
 <style>
   /* code for progress bar css */
@@ -127,7 +122,7 @@ console.log({{$pageNumber }});
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 12px solid #fff;
+    border: 2px solid #fff;
     position: absolute;
     top: 0;
     left: 0;
@@ -194,7 +189,6 @@ console.log({{$pageNumber }});
     position: absolute;
     top: 0;
     left: 0;
-
   }
 
   .progress.color .progress-bar {
@@ -229,4 +223,17 @@ console.log({{$pageNumber }});
       transform: rotate({{$progressRight}}deg);
     }
   }
+
+@media only screen and (max-device-width:986px) {
+  .progress .progress-value{
+      background:transparent;
+      z-index:1000;
+  }
+  .progress-mobile {
+        position: fixed;
+        /* left: 0; */
+        /* top: 0; */
+        right: 0;
+    }
+}
 </style>

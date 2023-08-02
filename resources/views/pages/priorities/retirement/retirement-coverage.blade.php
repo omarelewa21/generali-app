@@ -20,12 +20,12 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-
+        <div class="invalid-feedback text-center alert alert-danger" id="avatar-validation-msg">
+            Please select an avatar before proceeding.
+        </div>
         <form novalidate action="{{ route('form.retirement.validateAvatar') }}" method="POST" onsubmit="return validateAvatarSelection(event)">
             @csrf
-            <div class="invalid-feedback text-center alert alert-danger" id="avatar-validation-msg">
-                Please select an avatar before proceeding.
-            </div>
+
         <div class="col-12 text-dark px-0 bg-needs-main my-4">
             <div class="my-4">
                 <div class="row d-flex justify-content-center py-2 text-center align-items-center">
@@ -123,7 +123,7 @@
         return false; // Prevent navigation to the next page
     }
 
-    window.location.href = "{{ route('retirement.ideal') }}"; // Replace with the appropriate route
+    // window.location.href = "{{ route('retirement.ideal') }}"; // Replace with the appropriate route
 
     // const selectedAvatarType = selectedAvatar.getAttribute('data-type');
     // const form = event.target.closest('form');

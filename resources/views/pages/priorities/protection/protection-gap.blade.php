@@ -6,76 +6,57 @@
 @section('content')
 
 <div id="protection-content">
-    <div class="container-fluid overflow-hidden font-color-default">
-        <div class="row bg-needs-desktop vh-100">
-            <section class="col-12 d-flex needs-coverage-nav">
-                <div class="col-6">
+    <div class="p-0 vh-100 container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
                     @include('templates.nav.nav-red-menu')
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-md-12">
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
-            </section>
-            <form class="form-horizontal p-0"action="{{route('retirement.home')}}" method="get" id="protection" name="protection">
-                <section class="needs-gap-content">
-                    <div class="col-12">
-                        <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-xl-6 col-12 position-relative hide second-order bg-half">
-                                <div class="row d-flex">
-                                    <div class="col-11 m-auto d-flex justify-content-center my-5">
-                                        <canvas id="totalProtectionFund" class="d-flex m-auto object-fit-cover chart-canvas"></canvas>
-                                    </div>
-                                </div>
-                                <div class="row d-flex">
-                                    <div class="col-12 show-mobile bg-btn_bar">
-                                        <div class="py-4 px-2">
-                                            <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                                <a href="{{route('protection.existing.policy')}}" class="btn btn-primary text-uppercase">Back</a>
-                                                <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            </div>
+            <form class="form-horizontal p-0" action="{{route('retirement.home')}}" method="get">
+                <div class="col-12 text-dark px-0 my-4">
+                    <div class="my-4">  
+                        <section>
+                            <div class="row">
+                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-center align-items-center">
+                                <canvas id="totalProtectionFund" class="d-flex object-fit-cover chart-canvas"></canvas>
                             </div>
-                            <div class="col-xl-6 col-12 position-relative first-order">
+                            <div class="col-lg-6 my-auto">
+                                <h5 class="needs-text d-inline">In</h5>
+                                <input type="number" name="years" class="form-control form-input-needs-sm d-inline text-primary" id="years" placeholder=" " required> 
+                                <h5 class="needs-text d-inline ">years' time,</h5><br><br>
+                                <h5 class="needs-text d-inline ">I want to protect my</h5><br>
+                                <h5 class="needs-text d-inline ">loved ones with</h5>
+                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
+                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" "required><br><br>
+                                <h5 class="needs-text d-inline">I have set aside</h5>
+                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
+                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" " required><br><br>
+                                <h5 class="needs-text">So I need a plan for</h5>
+                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
+                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" " required>
+
+                            </div>
+                            </div>
+    
+                        </section>
+    
+                        <section class="footer bg-white py-4 fixed-bottom">
+                            <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center">
-                                        <div class="">
-                                            <div class="col-10 mt-4">
-                                                <div class="">
-                                                    <p class="f-34"><strong>In</strong>
-                                                        <input type="number" name="fund_year3" class="form-control d-inline-block w-25" id="fund_year3" required>
-                                                        <strong>years' time,</strong>
-                                                    </p>
-                                                    <p class="f-34"><strong>I want to protect my loved ones with</strong>
-                                                        <input type="number" name="fund_money" class="form-control d-inline-block w-25 money" id="fund_money" placeholder="RM" required>
-                                                    </p>
-                                                    <p class="f-34"><strong>I have set aside</strong>
-                                                        <input type="number" name="fund_money1" class="form-control d-inline-block w-25 money" id="fund_money1" placeholder="RM" required>
-                                                    </p>
-                                                    <p class="f-34"><strong>So I need to plan for</strong>
-                                                        <input type="number" name="fund_money2" class="form-control d-inline-block w-25 money" id="fund_money2" placeholder="RM" required>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                        <a href="{{route('protection.existing.policy')}}"
+                                            class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                            <button type="submit" class="btn btn-primary text-uppercase">Next</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
-                </section>
-                <section class="needs-master-footer bg-white footer hide-mobile">
-                    <div class="py-4 px-2">
-                        <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('protection.existing.policy')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('retirement.home') }}" class="btn btn-primary text-uppercase">Next</a>
-                            <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
-                        </div>
-                    </div>
-                </section>
+                </div>
             </form>
-        </div>
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
