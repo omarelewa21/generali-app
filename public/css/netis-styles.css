@@ -1,5 +1,5 @@
 .form-input-needs-xs {
-    width: 10%;
+    width: 11%;
     font-size: 2.125rem;
     line-height: 1rem;
     background-color:transparent !important;
@@ -22,11 +22,10 @@
     font-size: 2.125rem;
     line-height: 1rem;
 }
-.neg-left {
+/* .neg-left {
     position:relative;
     left:-6px;
-    top:0.5px;
-}
+} */
 
 /* Retirement - Home page */
 .needs-grey-bg {
@@ -239,7 +238,7 @@
     }
 
     .needs-home-avatar img {
-        width: 33vh;
+        height: 50vh;
     }
 
     .needs-grey-bg, .needs-grey-bg-md {
@@ -329,22 +328,21 @@
     }
 
     .coverage-avatar img.self-avatar{
-        width: 21vh;
+        width: 25vh;
       }
       .coverage-avatar img.spouse-avatar{
-        width: 19vh;
+        width: 21vh;
       }
       .coverage-avatar img.kid-avatar{
-        width: 19vh;
+        width: 23vh;
       }
       .coverage-avatar img.parent-avatar{
-        width: 38vh;
+        width: 40vh;
       }
 
       .coverage-avatar {
         bottom:15%;
       }
-      .covera
 
       .monthly-support-asset {
         left: 8%;
@@ -361,14 +359,15 @@
 }
 
 /* target iPad */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-height: 1024px) {
     .summary-progress-bar {
         border-bottom-right-radius: 1.3rem;
         border-bottom-left-radius: 1.3rem;
     }
     .needs-home-avatar img {
-        width: 56vh;
+        width: 70vh;
     }
+    
 }
 /* target iPad Pro */
 @media only screen and (width: 834px) and (height: 1112px) {

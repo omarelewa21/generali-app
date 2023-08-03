@@ -59,38 +59,23 @@
           </span>
 
           <div class="progress-value">
+            @php
+            
+            $folderNumber = [
+              'protection' => 1,
+              'retirement' => 2,
+              'education' => 3,
+              'savings' => 4,
+              'investment' => 5,
+              'debt cancellation' => 6,
+              'Health and Medical' => 7,
+              // 'Others' => 8,
+            ];
+
+            $dynamicNumber = $folderNumber[$folderName] ?? 0;
+          @endphp
+
             <p class="mb-0">
-              @php
-              // Set the dynamic number based on the page slug name
-              switch ($folderName) {
-              case 'protection':
-              $dynamicNumber = 1;
-              break;
-              case 'retirement':
-              $dynamicNumber = 2;
-              break;
-              case 'education':
-              $dynamicNumber = 3;
-              break;
-              case 'savings':
-              $dynamicNumber = 4;
-              break;
-              case 'investment':
-              $dynamicNumber = 5;
-              break;
-              case 'debt cancellation':
-              $dynamicNumber = 6;
-              break;
-              case 'Health and Medical':
-              $dynamicNumber = 7;
-              break;
-              case 'Others ':
-              $dynamicNumber = 8;
-              break;
-              default:
-              $dynamicNumber = 0;
-              }
-              @endphp
               {{ $dynamicNumber }}
             </p>
           </div>
@@ -224,16 +209,16 @@
     }
   }
 
-@media only screen and (max-device-width:986px) {
-  .progress .progress-value{
-      background:transparent;
-      z-index:1000;
-  }
-  .progress-mobile {
-        position: fixed;
-        /* left: 0; */
-        /* top: 0; */
-        right: 0;
+  @media only screen and (max-device-width:986px) {
+    .progress .progress-value{
+        background:transparent;
+        z-index:1000;
     }
-}
+    .progress-mobile {
+          position: fixed;
+          /* left: 0; */
+          /* top: 0; */
+          right: 0;
+      }
+  }
 </style>

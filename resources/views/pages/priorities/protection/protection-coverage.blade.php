@@ -19,6 +19,9 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
+        <div class="text-danger mt-2 text-center" id="avatar-validation-msg" style="display: none;">
+            Please select an avatar before proceeding.
+        </div>
         <section>
         <div class="col-12 text-dark px-0 my-4 bg-needs-main">
             <div class="my-4 second-cloud">
@@ -31,7 +34,7 @@
                             id="button-self-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
                                 alt="self-character">
-                            <h6 class="text-center py-4">Self</h6>
+                            <h6 class="text-center py-2">Self</h6>
                         </button>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
@@ -39,14 +42,14 @@
                             id="button-spouse-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
                                 alt="spouse">
-                            <h6 class="text-center py-4">Spouse</h6>
+                            <h6 class="text-center py-2">Spouse</h6>
                         </button>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow avatar-button" data-type="kid"
                             id="button-kid-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="kid">
-                            <h6 class="text-center py-4">Child(ren)</h6>
+                            <h6 class="text-center py-2">Child(ren)</h6>
                         </button>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
@@ -54,7 +57,7 @@
                             id="button-parent-avatar" onclick="avatarSelect(this)">
                             <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
                                 alt="parent">
-                            <h6 class="text-center py-4">Parent</h6>
+                            <h6 class="text-center py-2">Parent</h6>
                         </button>
                     </div>
 
@@ -73,7 +76,7 @@
                                 <a href="{{route('protection.home')}}"
                                     class="btn btn-primary text-uppercase me-md-2">Back</a>
                                     <a href="{{route('protection.monthly.support')}}"
-                                    class="btn btn-primary text-uppercase me-md-2">Next</a>
+                                    class="btn btn-primary text-uppercase me-md-2" onclick="validateSelection()">Next</a>
                             </div>
                         </div>
                     </div>
@@ -105,5 +108,6 @@
         }
       });
     }
+
     
     </script>

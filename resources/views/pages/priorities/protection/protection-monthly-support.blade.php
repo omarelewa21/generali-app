@@ -36,14 +36,18 @@
                 <div class="my-4">  
                     <section>
                         <div class="row">
-                        <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end justify-content-center align-items-center">
+                        <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center">
                             <img class="position-relative monthly-support-asset" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-6 my-auto">
-                            <h5 class="needs-text d-inline">If anything should <br> happen to me, I'd like to <br>support my family with</h5><br> 
-                            <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
-                            <input type="text" name="allocatedFunds" class="form-control form-input-needs-md neg-left d-inline text-primary" id="allocatedFunds" placeholder=" " required> 
-                            <h5 class="needs-text d-inline">/ month.</h5><br>
+                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                            <h5 class="needs-text">If anything should</h5>
+                            <h5 class="needs-text">happen to me, I'd like to</h5>
+                            <h5 class="needs-text">support my family with</h5>
+                            <div class="d-flex">
+                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
+                                <input type="text" name="allocatedFunds" class="form-control form-input-needs-md text-primary" id="allocatedFunds" placeholder=" " required> 
+                                <h5 class="needs-text d-inline-flex">/ month.</h5>
+                            </div>
                         </div>
                         </div>
 

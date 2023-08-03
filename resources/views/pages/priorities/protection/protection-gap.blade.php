@@ -23,22 +23,32 @@
                             <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-center align-items-center">
                                 <canvas id="totalProtectionFund" class="d-flex object-fit-cover chart-canvas"></canvas>
                             </div>
-                            <div class="col-lg-6 my-auto">
-                                <h5 class="needs-text d-inline">In</h5>
-                                <input type="number" name="years" class="form-control form-input-needs-sm d-inline text-primary" id="years" placeholder=" " required> 
-                                <h5 class="needs-text d-inline ">years' time,</h5><br><br>
-                                <h5 class="needs-text d-inline ">I want to protect my</h5><br>
-                                <h5 class="needs-text d-inline ">loved ones with</h5>
-                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
-                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" "required><br><br>
-                                <h5 class="needs-text d-inline">I have set aside</h5>
-                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
-                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" " required><br><br>
-                                <h5 class="needs-text">So I need a plan for</h5>
-                                <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
-                                <input type="number" name="years" class="form-control form-input-needs-md neg-left d-inline text-primary" id="years" placeholder=" " required>
-
-                            </div>
+                                <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                                    <div class="d-flex">
+                                        <h5 class="needs-text d-inline-flex">In</h5>
+                                        <input type="number" name="years" class="form-control form-input-needs-sm text-primary" id="years" placeholder=" " required> 
+                                        <h5 class="needs-text d-inline-flex">years' time,</h5> 
+                                    </div>
+                                    <br>
+                                    <h5 class="needs-text">I want to protect my</h5>
+                                    <div class="d-flex">
+                                        <h5 class="needs-text d-inline-flex">loved ones with</h5>
+                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
+                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" "required>
+                                    </div>
+                                    <br>
+                                    <div class="d-flex">
+                                        <h5 class="needs-text d-inline-flex">I have set aside</h5>
+                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
+                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required><br><br>
+                                    </div>
+                                    <br>
+                                    <h5 class="needs-text d-inline-flex">So I need a plan for</h5>
+                                     <div class="d-flex">
+                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
+                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required>
+                                    </div>                                           
+                                </div>
                             </div>
     
                         </section>
