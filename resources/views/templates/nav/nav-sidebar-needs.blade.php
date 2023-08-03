@@ -1,11 +1,19 @@
 {{-- Links for Needs Sidebar Right --}}
 @include('templates.nav.nav-sidebar-links-needs')
 {{-- Links for Needs Sidebar Right --}}
-
+<header id="wrapper-navbar">
+  <nav class="navbar navbar-default transparent">
+      <div class="container-fluid px-4 px-xxl-5 px-xl-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
+          <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
+              <img class="d-flex" src="{{ asset('images/general/menu-button-red.svg') }}" alt="Logo" width="32px" height="26px">
+          </a>
+      </div>
+  </nav>
+</header>
 
 {{-- Nav Sidebar Right Needs --}}
 <section class="progress-main progress-mobile">
-  <div class="row justify-content-end align-items-center m-3">
+  <div class="row justify-content-end align-items-center px-4 px-xxl-5 px-xl-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
     <div class="col-auto">
       <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
         <div class="text-dark d-inline-flex">
