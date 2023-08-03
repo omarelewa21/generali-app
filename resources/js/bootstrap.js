@@ -1,6 +1,7 @@
 import * as Popper from '@popperjs/core'
 window.Popper = Popper
 import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'jquery';
 import 'jquery-ui-dist/jquery-ui';
 

@@ -1,15 +1,6 @@
 {{-- Links for Needs Sidebar Right --}}
 @include('templates.nav.nav-sidebar-links-needs')
 {{-- Links for Needs Sidebar Right --}}
-<header id="wrapper-navbar">
-  <nav class="navbar navbar-default transparent">
-      <div class="container-fluid px-4 px-xxl-5 px-xl-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
-          <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-              <img class="d-flex" src="{{ asset('images/general/menu-button-red.svg') }}" alt="Logo" width="32px" height="26px">
-          </a>
-      </div>
-  </nav>
-</header>
 
 {{-- Nav Sidebar Right Needs --}}
 <section class="progress-main progress-mobile">
@@ -108,6 +99,7 @@
     margin: 0 auto;
     box-shadow: none;
     position: relative;
+    z-index: 1000;
   }
 
   .progress:after {
@@ -115,7 +107,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 2px solid #A0A0A0;
     position: absolute;
     top: 0;
     left: 0;
@@ -224,8 +216,8 @@
     }
     .progress-mobile {
           position: fixed;
-          /* left: 0; */
-          /* top: 0; */
+          left: 0;
+          top: 0;
           right: 0;
       }
   }

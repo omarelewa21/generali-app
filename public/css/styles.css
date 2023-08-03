@@ -563,16 +563,16 @@ button[data-required="selected"] img {
   z-index: 10;
 }
 .coverage-avatar img.self-avatar{
-  width: 22vh;
+  width: 21vh;
 }
 .coverage-avatar img.spouse-avatar{
-  width: 19vh;
+  width: 18vh;
 }
 .coverage-avatar img.kid-avatar{
-  width: 19vh;
+  width: 17vh;
 }
 .coverage-avatar img.parent-avatar{
-  width: 36vh;
+  width: 35vh;
 }
 
   /* img {
