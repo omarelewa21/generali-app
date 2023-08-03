@@ -5,6 +5,11 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="education-content">
     <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-needs-desktop vh-100">
@@ -172,7 +177,7 @@
                             </div>
                             <div class="col-xl-6 col-12 position-relative hide first-order">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center">
+                                    <div class="col-12 d-flex mt-5 justify-content-center z-99">
                                         <div class="">
                                             <div class="col-10 m-auto">
                                                 <div class="text-start">

@@ -5,6 +5,11 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="education-content">
     <div class="container-fluid overflow-hidden font-color-default">
         <div class="row bg-education-gap vh-100">

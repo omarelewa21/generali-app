@@ -37,20 +37,26 @@ class EducationController extends Controller
 
         // ], $customMessages);
         ], $customMessages)
-            ->after(function ($validator) use ($request) {
-                $education_year_1 = intval($request->input('education_year_1'));
-                $education_year_2 = intval($request->input('education_year_2'));
-                $education_year_3 = intval($request->input('education_year_3'));
-            
-                if ($education_year_1 <= $education_year_2) {
-                    $validator->errors()->add('education_year_2', "2nd Child must be younger than 1st Child.");
-                }
-            
-                if ($education_year_2 <= $education_year_3 || $education_year_1 <= $education_year_3) {
-                    $validator->errors()->add('education_year_3', "3rd Child must be younger than 2nd Child.");
-                }
-            })
-            ->validate();
+        ->after(function ($validator) use ($request) {
+            $education_year_1 = intval($request->input('education_year_1'));
+            $education_year_2 = intval($request->input('education_year_2'));
+            $education_year_3 = intval($request->input('education_year_3'));
+        
+            if ($education_year_1 <= $education_year_2) {
+                $validator->errors()->add('education_year_2', "2nd Child must be younger than 1st Child.");
+            }
+        
+            if ($education_year_2 <= $education_year_3 || $education_year_1 <= $education_year_3) {
+                $validator->errors()->add('education_year_3', "3rd Child must be younger than 2nd Child.");
+            }
+        })
+        ->validate();
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('education.other');
@@ -69,6 +75,12 @@ class EducationController extends Controller
             'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|integer',
 
         ], $customMessages);
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
         return redirect()->route('education.gap');
@@ -97,6 +109,12 @@ class EducationController extends Controller
 
         ], $customMessages);
 
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
         // // Process the form data and perform any necessary actions
         return redirect()->route('investment.home');
     }
@@ -107,10 +125,19 @@ class EducationController extends Controller
         $dataUrl = $request->input('urlInput');
         Log::debug($request->all());
 
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
         if ($selectedCoverage !== null) {
             // If not equal to null, then replace the data in $arrayData['coverageSelection']
             $arrayData['coverageSelection'] = $selectedCoverage;
         }
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        // Log the session data to the Laravel log file
+        \Log::info('Session Data:', $arrayData);
 
         // // Process the form data and perform any necessary actions
         return redirect()->route($dataUrl);

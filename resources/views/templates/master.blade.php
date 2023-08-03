@@ -19,9 +19,14 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/custom-ying.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- @vite(['resources/js/custom-ying.js']) --}}
-    <!-- <script src="{{ asset('resources/js/custom-ying.js') }}"></script> -->
+    @vite(['resources/js/jquery.min.js'])
+    @vite(['resources/js/slick.min.js'])
 </head>
 
 <body>
