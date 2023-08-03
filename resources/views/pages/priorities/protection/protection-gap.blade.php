@@ -19,8 +19,8 @@
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
-                            <div class="row">
-                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-center align-items-center">
+                            <div class="row vh-100 justify-content-center">
+                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-start align-items-center">
                                 <canvas id="totalProtectionFund" class="d-flex object-fit-cover chart-canvas"></canvas>
                             </div>
                                 <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">

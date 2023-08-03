@@ -6,14 +6,15 @@
 @section('content')
 
 <div id="protection-existing-policy">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 container-fluid overflow-hidden d-flex h-100 flex-column">
+        <section>
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
                 @include('templates.nav.nav-red-menu')
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar">
+                    <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                         <div
                             class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
@@ -28,23 +29,24 @@
                 @include('templates.nav.nav-sidebar-needs')
             </div>
         </div>
+    </section>
             <form class="form-horizontal p-0"action="{{route('protection.gap')}}" method="get" id="protection-existing-policy" name="protection-existing-policy">
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
                             <div class="row">
-                            <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end justify-content-center align-items-center">
+                            <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset" src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div class="col-lg-5 my-auto">
+                            <div class="col-11 col-md-10 col-lg-5 o d-flex flex-column justify-content-sm-center justify-content-lg-end my-auto mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
                                     <h5 class="needs-text">Luckily, I do have an existing life insurance policy.</h5>
                                     <div class="my-5">
                                     <span class="me-5">
-                                        <input type="radio" class="needs-radio" id="protection_yes" name="protection_existing_policy" value="Yes" onclick="jQuery('.hide-content').css('display','block');jQuery('#protection_policy_amount').attr('required',true);" required>
+                                        <input type="radio" class="needs-radio" id="protection_yes" name="protection_existing_policy" value="Yes" required>
                                         <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
                                     <span>
-                                        <input type="radio" class="needs-radio" id="protection_no" name="protection_existing_policy" value="No" onclick="jQuery('.hide-content').css('display','none');jQuery('#protection_policy_amount').removeAttr('required',false);">
+                                        <input type="radio" class="needs-radio" id="protection_no" name="protection_existing_policy" value="No" required>
                                         <label for="protection_no" class="form-label">No</label>
                                     </span>
                                 </div>

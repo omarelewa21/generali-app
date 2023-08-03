@@ -59,10 +59,10 @@
 }
 .bg-needs-3 {
     background-image: url(/images/needs/background/bg-needs-3.png);
-    background-size: contain;
-    background-position: left;
+    background-size: cover;
+    background-position: right;
     background-repeat: no-repeat;
-    height: 74vh;
+    height: 100%;
 }
 .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
@@ -252,9 +252,9 @@
         position: relative !important;
     }
 
-    .needs-home-avatar img {
+    /* .needs-home-avatar img {
         height: 50vh;
-    }
+    } */
 
     .needs-grey-bg {
         display:none !important;        
@@ -319,6 +319,11 @@
     bottom: -5%;
     width: 22vh;
 }
+.protection-existing-policy-asset {
+    left: 0;
+    bottom: 0;
+    width: 22vh;
+}
 .form-input-needs-xs {
     width:16%;
     font-size: calc(1.3375rem + 1.05vw);
@@ -331,7 +336,11 @@
 width: 50%;
 }
 .fixed-bottom {
-    z-index: 1000;
+    z-index:
+     1000;
+}
+.needs-home-avatar img {
+    height:33vh;
 }
     
 }
@@ -381,6 +390,7 @@ width: 50%;
         width: 58vh;
     }
 
+
 }
 
 /* Code for Retirement - Ideal page */
@@ -388,18 +398,34 @@ width: 50%;
     width: 90%;
 }
 
-/* target iPad */
-@media only screen and (min-device-width: 768px) and (max-device-height: 1024px) {
 
-    .needs-home-avatar img {
-        width: 70vh;
+/* target iPad air,iPad Pro */
+@media only screen and (min-width: 768px) and (max-height: 1180px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    .calendar-protection {
+        width: 62%;
     }
-    
+    .protection-existing-policy-asset {
+        left: 0;
+        bottom: 6%;
+        z-index: 10;
+        width: 35vh;
+    }
+    .needs-home-avatar img {
+        height: 56vh;
+       }
     
 }
-/* target iPad Pro */
-@media only screen and (width: 834px) and (height: 1112px) {
 
+/* target large screen */
+@media only screen and (width: 688px) and (height:1031px) and (orientation:portrait) {
+    .protection-existing-policy-asset {
+        left: 0px;
+        bottom: 22%;
+        width: 28vh;
+    }
+    .needs-home-avatar img {
+        height: 43vh;
+    }
 }
 
 

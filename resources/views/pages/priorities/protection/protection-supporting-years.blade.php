@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar">
+                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
@@ -32,11 +32,11 @@
         </section>
             <section>
                 <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-4 m-lg-0" action="{{route('protection.existing.policy')}}" method="get">
+                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0" action="{{route('protection.existing.policy')}}" method="get">
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
-                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end z-1">
                                     <h5 class="m-0 mt-4 needs-text">I will need</h5>
                                 </div>
                                 <div class="col-12 col-lg-4">
