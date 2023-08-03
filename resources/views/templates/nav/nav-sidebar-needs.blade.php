@@ -87,10 +87,13 @@
 
 <style>
   /* code for progress bar css */
-  .progress-main {
-    z-index: 1040;
-  }
 
+  .progress-main {
+    position: fixed;
+    z-index: 1039;
+    top: 0;
+    right: 0;
+}
   .progress {
     width: 44px;
     height: 44px;
@@ -220,5 +223,7 @@
           top: 0;
           right: 0;
       }
+
   }
+
 </style>

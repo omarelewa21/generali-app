@@ -52,10 +52,10 @@
 }
 .bg-needs-2 {
     background-image: url(/images/needs/background/bg-needs-2.png);
-    background-size: contain;
-    background-position: center;
+    background-size: cover;
+    background-position: center top;
     background-repeat: no-repeat;
-    height: 66vh;
+    height: 100%;
 }
 .bg-needs-3 {
     background-image: url(/images/needs/background/bg-needs-3.png);
@@ -99,7 +99,7 @@
 
 
 .calendar-protection {
-    width:80%;
+    width:85%;
 }
 
 
@@ -239,6 +239,10 @@
         background-size:cover;
 
     }
+    .bg-needs-1 {
+        background-size:cover;
+
+    }
     .needs-home-avatar {
         top: 36%;
         left: 0%;
@@ -310,11 +314,26 @@
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
-    .monthly-support-asset {
-        left: 0;
-        bottom: 18%;
-        width: 35vh;
-    }
+.monthly-support-asset {
+    left: 0;
+    bottom: -5%;
+    width: 22vh;
+}
+.form-input-needs-xs {
+    width:16%;
+    font-size: calc(1.3375rem + 1.05vw);
+}
+.form-input-needs-md{
+    width:34%;
+    font-size: calc(1.3375rem + 1.05vw);
+}
+.calendar-protection {
+width: 50%;
+}
+.fixed-bottom {
+    z-index: 1000;
+}
+    
 }
 /* large desktop css */
 @media screen and (min-height:840px) and (min-width:968px) {
@@ -371,13 +390,11 @@
 
 /* target iPad */
 @media only screen and (min-device-width: 768px) and (max-device-height: 1024px) {
-    .summary-progress-bar {
-        border-bottom-right-radius: 1.3rem;
-        border-bottom-left-radius: 1.3rem;
-    }
+
     .needs-home-avatar img {
         width: 70vh;
     }
+    
     
 }
 /* target iPad Pro */
