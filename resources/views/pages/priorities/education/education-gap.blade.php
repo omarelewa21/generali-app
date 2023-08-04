@@ -51,32 +51,32 @@
                             </div>
                             <div class="col-xl-6 col-12 position-relative first-order">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center">
+                                    <div class="col-12 d-flex mt-5 justify-content-center z-99">
                                         <div class="">
                                             <div class="col-10 m-auto">
                                                 <div>
                                                     <p class="f-34 @error('education_years_times') is-invalid @enderror">
                                                         <strong>In</strong>
-                                                        <span class="currencyinput"><input type="text" name="education_years_times" class="form-control d-inline-block w-25 f-34 @error('education_years_times') is-invalid @enderror" id="education_years_times" required></span>
+                                                        <span class="currencyinput"><input type="text" name="education_years_times" class="form-control d-inline-block w-30 f-34 @error('education_years_times') is-invalid @enderror" id="education_years_times" required></span>
                                                         <strong>years' time,</strong>
                                                         @if ($errors->has('education_years_times'))
                                                             <div class="invalid-feedback">{{ $errors->first('education_years_times') }}</div>
                                                         @endif
                                                     </p>
                                                     <p class="f-34 @error('education_amount_per_year') is-invalid @enderror"><strong>I want to enjoy my golden years with</strong>
-                                                        <span class="currencyinput">RM<input type="text" name="education_amount_per_year" class="form-control d-inline-block w-25 f-34 @error('education_amount_per_year') is-invalid @enderror" id="education_amount_per_year" required></span>
+                                                        <span class="currencyinput">RM<input type="text" name="education_amount_per_year" class="form-control d-inline-block w-30 f-34 @error('education_amount_per_year') is-invalid @enderror" id="education_amount_per_year" required></span>
                                                         @if ($errors->has('education_amount_per_year'))
                                                             <div class="invalid-feedback">{{ $errors->first('education_amount_per_year') }}</div>
                                                         @endif
                                                     </p>
                                                     <p class="f-34 @error('education_aside_amount') is-invalid @enderror"><strong>I have set aside</strong>
-                                                        <span class="currencyinput">RM<input type="text" name="education_aside_amount" class="form-control d-inline-block w-25 f-34 @error('education_aside_amount') is-invalid @enderror" id="education_aside_amount" required></span>
+                                                        <span class="currencyinput">RM<input type="text" name="education_aside_amount" class="form-control d-inline-block w-30 f-34 @error('education_aside_amount') is-invalid @enderror" id="education_aside_amount" required></span>
                                                         @if ($errors->has('education_aside_amount'))
                                                             <div class="invalid-feedback">{{ $errors->first('education_aside_amount') }}</div>
                                                         @endif
                                                     </p>
                                                     <p class="f-34 @error('education_plan_amount') is-invalid @enderror"><strong>So I need to plan for</strong>
-                                                        <span class="currencyinput">RM<input type="text" name="education_plan_amount" class="form-control d-inline-block w-25 f-34 @error('education_plan_amount') is-invalid @enderror" id="education_plan_amount" required></span>
+                                                        <span class="currencyinput">RM<input type="text" name="education_plan_amount" class="form-control d-inline-block w-30 f-34 @error('education_plan_amount') is-invalid @enderror" id="education_plan_amount" required></span>
                                                         @if ($errors->has('education_plan_amount'))
                                                             <div class="invalid-feedback">{{ $errors->first('education_plan_amount') }}</div>
                                                         @endif
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('education.other')}}" class="btn btn-primary text-uppercase">Back</a>

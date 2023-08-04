@@ -26,6 +26,9 @@
     width: 434px !important;
     height: 434px !important;
 }
+.w-30{
+    width: 30%;
+}
 /* Only show on bigger screen like desktop (min width 1250px) */
 .show-desktop{
     display: none !important;
@@ -404,9 +407,9 @@ button.choice:focus {
         height: fit-content !important;
         max-height: 100% !important;
     }
-    .slick-padding{
+    /* .slick-padding{
         padding: 3rem !important;
-    }
+    } */
     .desktop-height{
         height: auto;
     }
@@ -482,9 +485,9 @@ button.choice:focus {
     .calendar{
         max-width: 70%;
     }
-    .slick-padding{
+    /* .slick-padding{
         padding: 0.5rem;
-    }
+    } */
 }
 @media only screen and (min-width: 1024px){
     .needs-home-nav {
@@ -753,9 +756,9 @@ button.choice:focus {
     .wd-80{
         width:80% !important;
     }
-    .slick-padding{
+    /* .slick-padding{
         padding: 3rem;
-    }
+    } */
 }
 @media only screen and (min-width: 1280px) and (max-height: 800px){
     .needs-home-content {

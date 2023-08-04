@@ -122,7 +122,7 @@
                 {
                     breakpoint: 1200,
                     settings: {
-                        centerMode: true,
+                        centerMode: false,
                         slidesToShow: 2,
                         infinite: true,
                         dots: false

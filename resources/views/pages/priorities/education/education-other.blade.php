@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-xl-6 col-12 position-relative first-order">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center">
+                                    <div class="col-12 d-flex mt-5 justify-content-center z-99">
                                         <div class="">
                                             <div class="col-10 m-auto">
                                                 <div class="@error('education_other_savings') is-invalid @enderror">
@@ -115,7 +115,7 @@
                                                     <div class="invalid-feedback">{{ $errors->first('education_other_savings') }}</div>
                                                 @endif
                                                 <p class="mt-5 hide-content @error('education_saving_amount') is-invalid @enderror">Current savings amount:
-                                                    <span class="currencyinput f-34">RM<input type="text" name="education_saving_amount" class="form-control d-inline-block w-25 money f-34 @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" required></span>
+                                                    <span class="currencyinput f-34">RM<input type="text" name="education_saving_amount" class="form-control d-inline-block w-30 money f-34 @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" required></span>
                                                     @if ($errors->has('education_saving_amount'))
                                                         <div class="invalid-feedback">{{ $errors->first('education_saving_amount') }}</div>
                                                     @endif

@@ -6,6 +6,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\formValidateRetirementNeeds;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\InvestmentController;
 
 /* main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -55,10 +56,15 @@ Route::post('/education-gap', [EducationController::class, 'submitEducationGap']
 /* Priorities - Investment */
 Route::view('/investment-home', 'pages.priorities.investment.investment-home')->name('investment.home');
 Route::view('/investment-coverage', 'pages.priorities.investment.investment-coverage')->name('investment.coverage');
+Route::post('/investment-coverage', [InvestmentController::class, 'validateCoverageSelection'])->name('validate.coverage.selection');
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
+Route::post('/investment-supporting', [InvestmentController::class, 'submitInvestmentSupporting'])->name('form.submit.investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
+Route::post('/investment-annual-return', [InvestmentController::class, 'submitInvestmentAnnualReturn'])->name('form.submit.investment.annual.return');
 Route::view('/investment-expected-return', 'pages.priorities.investment.investment-expected-return')->name('investment.expected.return');
+Route::post('/investment-expected-return', [InvestmentController::class, 'submitInvestmentExpectedReturn'])->name('form.submit.investment.expected.return');
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
+Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
 /* Priorities - Retirement */
 // Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');

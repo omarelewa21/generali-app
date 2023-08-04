@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Other Savings</title>
+<title>Education - Supporting Years</title>
 
 @section('content')
 
