@@ -24,7 +24,7 @@
         </div>
         <section>
             <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-                <div class="my-4 second-cloud">
+                <div class="my-4 second-cloud" style="padding-top:5.5rem;">
                     <div class="row d-flex justify-content-center py-4 text-center align-items-center">
                         <h5>I'd like to provide coverage for my:</h5>
                     </div>

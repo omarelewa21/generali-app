@@ -35,13 +35,13 @@
                     <div class="my-4">  
                         <section>
                             <div class="row">
-                            <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
+                            <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-end align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset" src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div class="col-11 col-md-10 col-lg-5 o d-flex flex-column justify-content-sm-center justify-content-lg-end my-auto mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
-                                    <h5 class="needs-text">Luckily, I do have an existing life insurance policy.</h5>
-                                    <div class="my-5">
-                                    <span class="me-5">
+                            <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-center justify-content-md-center justify-content-lg-end my-auto mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
+                                    <h5 class="needs-text mt-0 mt-md-5">Luckily, I do have an existing life insurance policy.</h5>
+                                    <div class="py-3 py-md-4 py-lg-5 mb-4 mb-md-0 mb-lg-0">
+                                    <span class="me-3 me-md-5 me-lg-5">
                                         <input type="radio" class="needs-radio" id="protection_yes" name="protection_existing_policy" value="Yes" required>
                                         <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
