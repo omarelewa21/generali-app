@@ -5,6 +5,11 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="investment-supporting">
     <div class="container-fluid overflow-hidden font-color-default text-center">
         <div class="row bg-investment-supporting vh-100">
@@ -18,8 +23,8 @@
                             <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 fund-progress-bar" style="width:75%;"></div>
                             </div>
-                            <h3 class="font-color-white text-center">RM500,000</h3>
-                            <p class="font-color-white text-center">Total Investment Fund Needed</p>
+                            <h3 class="font-color-white" id="investment_fund_needed"></h3>
+                            <p class="font-color-white">Total Investment Fund Needed</p>
                         </div>
                     </div>
                 </div>
@@ -27,7 +32,8 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div> 
             </section>
-            <form class="form-horizontal p-0"action="{{route('investment.annual.return')}}" method="get" id="investment" name="investment">
+            <form novalidate action="{{route('form.submit.investment.supporting')}}" method="POST">
+                @csrf
                 <section class="needs-master-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -36,7 +42,7 @@
                                     <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
                                         <div class="px-2 fund-progress-bar" style="width:75%;"></div>
                                     </div>
-                                    <h3 class="font-color-white">RM500,000</h3>
+                                    <h3 class="font-color-white" id="investment_fund_needed"></h3>
                                     <p class="font-color-white">Total Investment Fund Needed</p>
                                 </div>
                             </div>
@@ -49,8 +55,11 @@
                                         <div class="position-relative py-4 d-flex justify-content-center align-items-center">
                                             <img src="{{ asset('images/needs/investment/Calendar.png') }}" class="m-auto calendar">
                                             <div class="position-absolute center w-100">
-                                                <input type="number" name="fund_year1" class="form-control d-inline-block w-25 f-64 text-center" id="fund_year1" required>
+                                                <input type="text" name="invest_year" class="form-control d-inline-block w-25 f-64 text-center @error('invest_year') is-invalid @enderror" id="invest_year" required>
                                                 <p class="f-34" class="mt-4"><strong>years</strong></p>
+                                                @if ($errors->has('invest_year'))
+                                                    <div class="invalid-feedback">{{ $errors->first('invest_year') }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     <!-- </div> -->
@@ -60,20 +69,19 @@
                                 <div class="py-4 px-2">
                                     <div class="col-12 d-grid gap-2 d-md-block text-end">
                                         <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                                        <!-- <a href="{{route('investment.annual.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                                        <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
+                            <input type="hidden" name="total_investment_fund_needed" id="total_investment_fund_needed" value="">
                             <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <!-- <a href="{{route('investment.annual.return')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                            <button class="btn btn-primary text-uppercase" type="submit">Next</button>
                         </div>
                     </div>
                 </section>
@@ -81,5 +89,53 @@
         </div>
     </div>
 </div>
+
+<script>
+    function calculateInvestmentFund() {
+        // Get the input value
+        var yearsInput = document.getElementById("invest_year").value;
+
+        var years = parseInt(yearsInput);
+
+        // Calculate months
+        var amount = years * 12 * 1000;
+
+        // Display the result
+        var result = amount.toLocaleString();
+        document.getElementById("investment_fund_needed").innerText = "RM " + result;
+
+        // Set the value of the hidden input field
+        document.getElementById("total_investment_fund_needed").value = amount;
+
+    }
+
+    // Add an event listener to the input field
+    document.getElementById("invest_year").addEventListener("input", function() {
+        calculateInvestmentFund();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var invest_year = document.getElementById('invest_year');
+
+        invest_year.addEventListener('blur', function() {
+            validateYearsNumberField(invest_year);
+        });
+
+        function validateYearsNumberField(field) {
+            var minAge = 1;
+            var maxAge = 100;
+
+            var value = parseInt(field.value);
+
+            if (!isNaN(value) && value >= minAge && value <= maxAge) {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            } else {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            }
+        }
+    });
+</script>
 
 @endsection

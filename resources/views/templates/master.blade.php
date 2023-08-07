@@ -23,7 +23,8 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {{-- @vite(['resources/js/custom-ying.js']) --}}
-    <!-- <script src="{{ asset('resources/js/custom-ying.js') }}"></script> -->
+    @vite(['resources/js/jquery.min.js'])
+    @vite(['resources/js/slick.min.js'])
 </head>
 
 <body>
