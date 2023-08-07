@@ -93,12 +93,12 @@
                         <section class="footer bg-accent-light-white py-4 fixed-bottom">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected avatar value -->
                                         <input type="hidden" name="urlInput" id="urlInput">
-                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
                                         <!-- <a href="{{route('avatar.family.dependant.details') }}" class="btn btn-primary text-uppercase" id="nextButton">Next</a> -->
-                                        <button type="submit" class="btn btn-primary text-uppercase" id="nextButton">Next</button>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
                             </div>

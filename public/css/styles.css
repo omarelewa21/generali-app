@@ -30,7 +30,7 @@ h6.nav-text-needs {
   font-size:18px;
 }
 .fade-effect img {
-  opacity: 0.3;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -52,6 +52,13 @@ h4 {
 }
 .form-label, button.accordion-button {
   font-family: 'Helvetica Neue', sans-serif;
+}
+
+.input-group-text {
+  background-color: #e9ecef;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
 }
 
 /* Navigation Menu */
@@ -177,21 +184,37 @@ button[data-required="selected"] img {
   opacity: 1;
 }
 
-.button-bg.selected {
+/* .button-bg.selected {
   border: 5px solid #AA1B17;
-}
+} */
 
 .button-bg {
   background: linear-gradient(360deg, #FFF 0%, #EAEAEA 100%, #EAEAEA 100%);
-  border: 5px solid #C21B17;
 }
 
 .button-bg button {
   background-color: transparent;
 }
 
+.button-bg:hover .hover {
+  border: 5px solid #961E23;
+}
+
 .button-bg:hover {
-  border: 5px solid #AA1B17;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.button-bg:hover .hover img {
+  transform: translateY(-15px);
+}
+
+.button-bg .hover img {
+  transition: transform 0.7s ease;
+}
+
+.button-bg .hover {
+  border: 5px solid transparent;
+  transition: border 0.7s ease;
 }
 
 /* Right Sidebar */
@@ -202,6 +225,9 @@ button[data-required="selected"] img {
 /* Left Sidebar */
 .sidebanner h2 {
   font-family: 'Helvetica Neue', sans-serif;
+}
+.sidebanner {
+  z-index: 2;
 }
 
 /* Modal */
@@ -331,6 +357,37 @@ button[data-required="selected"] img {
   overflow-x: hidden;
 }
 
+.slide-button {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  background-color: #fff;
+}
+
+.slide-button:hover svg path{
+  fill: #fff;
+}
+
+.slide-button.left-top {
+  top: 10%;
+  left: 20%;
+}
+.slide-button.left-bottom {
+  bottom: 40%;
+  left: 20%;
+}
+
+.slide-button.right-top {
+  top: 10%;
+  right: 20%;
+}
+
+.slide-button.right-bottom {
+  bottom: 40%;
+  right: 20%;
+}
+
 /* Identity Details Page */
 .btn-check:checked+.btn {
   border-radius: 0;
@@ -397,6 +454,142 @@ button[data-required="selected"] img {
   background-color:rgba(233, 233, 233, 1);
 }
 
+/* Skin Tone */
+:where(html) {
+  --gradient-1:linear-gradient(to bottom right,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3);
+  --gradient-2:linear-gradient(to bottom right,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460);
+  --gradient-3:linear-gradient(to bottom right,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C);
+  --gradient-4:linear-gradient(to bottom right,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D);
+  --gradient-5:linear-gradient(to bottom right,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513);
+  --gradient-6:linear-gradient(to bottom right,#654321,#654321,#654321,#654321,#654321,#654321,#654321,#654321);
+  --surface-1:var(--gray-0);
+  --text-1:var(--gray-9);
+}
+
+:root {
+--lerp-0: 1;
+--lerp-1: 0.5625;
+--lerp-2: 0.25;
+--lerp-3: 0.0625;
+--lerp-4: 0;
+}
+
+.blocks:hover {
+--show: 1;
+}
+
+.block {
+width: 48px;
+height: 48px;
+display: grid;
+place-items: center;
+align-content: center;
+transition: flex 0.2s;
+flex: calc(0.2 + (var(--lerp, 0) * 1.5));
+position: relative;
+padding:8px;
+}
+
+.block:after {
+content: "";
+width: 5%;
+aspect-ratio: 1;
+background: var(--text-1);
+position: absolute;
+bottom: 10%;
+left: 50%;
+border-radius: var(--radius-3);
+transform: translate(-50%, -50%);
+z-index: -1;
+}
+
+.block:before {
+content: "";
+position: absolute;
+width: calc(100% + var(--size-4));
+bottom: 0;
+aspect-ratio: 1 / 2;
+left: 50%;
+transition: transform 0.2s;
+transform-origin: 50% 100%;
+transform: translateX(-50%) scaleY(var(--show, 0));
+z-index: -1;
+}
+
+:is(.block:hover, .block:focus-visible) .block__item {
+outline: var(--surface-1) var(--size-1) solid;
+}
+
+.block__item {
+width: 100%;
+aspect-ratio: 1;
+border-radius: 5px;
+background: var(--bg), var(--surface-1);
+display: inline-block;
+transition: transform 0.2s;
+transform-origin: 50% 100%;
+position: relative;
+/* transform: translateY(calc(var(--lerp) * -75%)); */
+}
+
+.block__item:after {
+content: "";
+position: absolute;
+height: 100%;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+aspect-ratio: 1;
+border-radius: var(--radius-3);
+}
+
+:is(.block:hover, .block:focus-visible) {
+--lerp: var(--lerp-0);
+z-index: 5;
+}
+.block:has(+ :is(.block:hover, .block:focus-visible)),
+:is(.block:hover, .block:focus-visible) + .block {
+--lerp: var(--lerp-1);
+z-index: 4;
+}
+.block:has(+ .block + :is(.block:hover, .block:focus-visible)),
+:is(.block:hover, .block:focus-visible) + .block + .block {
+--lerp: var(--lerp-2);
+z-index: 3;
+}
+.block:has(+ .block + .block + :is(.block:hover, .block:focus-visible)),
+:is(.block:hover, .block:focus-visible) + .block + .block + .block {
+--lerp: var(--lerp-3);
+z-index: 2;
+}
+.block:has(+ .block
++ .block
++ .block
++ :is(.block:hover, .block:focus-visible)),
+:is(.block:hover, .block:focus-visible) + .block + .block + .block + .block {
+--lerp: var(--lerp-4);
+z-index: 1;
+}
+
+body:has(a[style="--bg: var(--gradient-1);"]:focus) {
+background: var(--gradient-1);
+}
+body:has(a[style="--bg: var(--gradient-2);"]:focus) {
+background: var(--gradient-2);
+}
+body:has(a[style="--bg: var(--gradient-3);"]:focus) {
+background: var(--gradient-3);
+}
+body:has(a[style="--bg: var(--gradient-4);"]:focus) {
+background: var(--gradient-4);
+}
+body:has(a[style="--bg: var(--gradient-5);"]:focus) {
+background: var(--gradient-5);
+}
+body:has(a[style="--bg: var(--gradient-6);"]:focus) {
+background: var(--gradient-6);
+}
+
 /* Mobile / Tab Responsive */
 @media only screen and (min-width: 768px) {
   .scrollable-content {
@@ -411,7 +604,7 @@ button[data-required="selected"] img {
 
 @media only screen and (max-width: 767px) {
   .extra-padding {
-    padding-bottom: 500px!important;
+    padding-bottom: 400px!important;
   }
   .navbar-default.transparent {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
@@ -427,13 +620,6 @@ button[data-required="selected"] img {
 
 
 
-.sidebanner {
-  z-index: 1015;
-}
-
-.sticky-top {
-  z-index: 0;
-}
 
 .btn-check+.btn:hover {
   border-radius: 0;
