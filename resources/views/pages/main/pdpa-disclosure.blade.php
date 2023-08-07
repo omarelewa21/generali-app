@@ -17,21 +17,20 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white')
-                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
-                    <h4 class="display-5 fw-bold text-white">To begin,
-                        may we have permission to share or use your personal details?</h4>
+                <div class="text-white px-4 px-md-5 py-3 py-md-5">
+                    <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
                     <section class="main-content extra-padding">
                         <div class="container">
-                            <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
+                            <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-top bg-accent-bg-grey">
                                 <div class="col-12">
                                     <h1 class="display-2 text-uppercase">Your Agreement</h1>
                                 </div>
                             </div>
-                            <div class="row px-5">
+                            <div class="row px-4">
                                 <div class="col-12">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt, velit sodales
                                     congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,
@@ -89,9 +88,9 @@
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
-                                    <a href="{{route('welcome')}}" class="btn btn-primary me-md-2">DECLINE</a>
-                                    <a href="{{route('basic.details') }}" class="btn btn-primary">ACCEPT</a>
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('welcome')}}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
+                                    <a href="{{route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
                                 </div>
                             </div>
                         </div>

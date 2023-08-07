@@ -22,8 +22,8 @@ class FormController extends Controller
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'title' => 'required|in:Mr.,Ms.,Mrs.,Madam,Datuk,Datin,Dato Seri,Datin Seri,Tan Sri,Puan Sri,Dr.,Tun,Sir,Justice,Others',
-            'mobileNumber' => 'required|regex:/^0\d{0,11}$/',
-            'housePhoneNumber' => 'nullable|regex:/^0\d{0,11}$/',
+            'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
+            'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
             'email' => 'required|email|max:255',
 
         ]);

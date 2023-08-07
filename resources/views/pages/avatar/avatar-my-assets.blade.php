@@ -95,9 +95,9 @@
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
-                                    <a href="{{route('avatar.family.dependant.details')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('top.priorities') }}" class="btn btn-primary text-uppercase">Next</a>
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('avatar.family.dependant.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('top.priorities') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>

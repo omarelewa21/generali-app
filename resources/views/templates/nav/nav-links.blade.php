@@ -5,7 +5,7 @@
 ?>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
-    <div class="offcanvas-header px-5 pt-5 pb-3">
+    <div class="offcanvas-header px-4 px-md-5 pt-4 pt-md-5 pb-3">
         <div class="navbar-brand">
             <img class="white-logo" src="{{ asset('images/general/Logo-white-2x.png') }}" alt="Logo" width="100px;">
         </div>
