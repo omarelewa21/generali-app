@@ -7,6 +7,11 @@
 @endsection
 
 @section('content')
+
+@php
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="Protection-monthly-support" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
@@ -31,9 +36,10 @@
                     @include('templates.nav.nav-sidebar-needs')
                 </div>
             </div>
-        
+            {{-- <div class="invalid-feedback text-center alert alert-danger position-absolute" id="avatar-validation-msg">
+                Please enter amount for the fund
+            </div> --}}
         <form class="form-horizontal p-0 needs-validation" id="protectionAllocatedFundsForm" novalidate action="{{route('form.protection.monthly.support')}}" method="POST">
-            {{-- <form class="form-horizontal p-0" action="{{route('form.submit.protection.monthly.support')}}" method="POST"> --}}
             @csrf           
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
@@ -50,11 +56,9 @@
                                 <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
                                 <input type="number" name="protectionFunds" min=0 step=".01" oninput="validity.valid||(value='');" class="form-control form-input-needs-md text-primary  @error('protectionFunds') is-invalid @enderror" id="protectionFunds" placeholder=" " required> 
                                 <h5 class="needs-text">/ month.</h5>
-                                <div class="invalid-feedback w-100">Please enter the amount for the fund.</div>
-                                @error('protectionFunds')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-
+                                @if ($errors->has('protectionFunds'))
+                                <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
+                            @endif
                             </div>
 
                         </div>
@@ -84,23 +88,49 @@
     </div>
 
 
+</div>
+
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const protectionFunds = document.getElementById("protectionFunds");
+    // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
 
-    document.getElementById("protectionAllocatedFundsForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    var form = event.target;
-    if (form.checkValidity() === false) {
-      // If the form is invalid, show custom error messages
-      form.classList.add("was-validated");
+    // form.addEventListener("submit", function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+        
+    //     validateNumberField(protectionFunds);
+
+    //     if (form.checkValidity() === false) {
+    //         form.classList.add("was-validated");
+    //         protectionFundsErrorMsg.style.display = "block";
+    //     } else {
+    //         protectionFundsErrorMsg.style.display = "none";
+    //         form.submit();
+    //     }
+    // });
+
+    protectionFunds.addEventListener("blur", function() {
+        validateNumberField(protectionFunds);
+    });
+
+    protectionFunds.addEventListener("input", function() {
+        protectionFundsErrorMsg.style.display = "none";
+    });
+
+    function validateNumberField(field) {
+        const value = field.value.trim();
+
+        if (value === "" || isNaN(value)) {
+            field.classList.remove("is-valid");
+            field.classList.add("is-invalid");
+        } else {
+            field.classList.add("is-valid");
+            field.classList.remove("is-invalid");
+        }
     }
-    else {
-
-form.submit();
-    }
-  });
-
+});
 </script>
+
 
     @endsection

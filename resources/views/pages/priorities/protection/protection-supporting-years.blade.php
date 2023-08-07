@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+@php
+    $arrayData = session('passingArrays');
+@endphp
 <div id="protection-supporting-years">
     <div class="container-fluid overflow-hidden d-flex h-100 flex-column">
             <section>
@@ -29,10 +32,14 @@
                     @include('templates.nav.nav-sidebar-needs')
                 </div>
             </div>
-        </section>
+        </section>   
             <section>
                 <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation"  id="protectionSupportingYears" novalidate action="{{route('protection.existing.policy')}}" method="get">
+                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation"  id="protectionSupportingYearsForm" novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
+                    @csrf
+                    @if ($errors->has('protectionSupportingYears'))
+                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">{{ $errors->first('protectionSupportingYears') }}</div>
+                @endif
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
@@ -45,17 +52,19 @@
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
                                             class="calendar-protection">
                                         <div class="position-absolute center w-100 text-center">
-                                            <input type="number" name="fund_year1"
-                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center"
-                                                id="fund_year1" required>
+                                            <input type="number" name="protectionSupportingYears"
+                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center @error('protectionFunds') is-invalid @enderror"
+                                                id="protectionSupportingYears" required> 
                                             <h5 class="needs-text">years</h5>
-                                            <div class="invalid-feedback w-100">Please enter the years.</div>
+
+                                        
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
                                     <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -76,20 +85,28 @@
     </div>
 </div>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
+    var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
-    document.getElementById("protectionSupportingYears").addEventListener("submit", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    var form = event.target;
-    if (form.checkValidity() === false) {
-      // If the form is invalid, show custom error messages
-      form.classList.add("was-validated");
+    protectionSupportingYears.addEventListener('blur', function() {
+            validateNumberField(protectionSupportingYears);
+        });
+
+function validateYearsNumberField(field) {
+    var minAge = 1;
+    var maxAge = 100;
+
+    var value = parseInt(field.value);
+
+    if (!isNaN(value) && value >= minAge && value <= maxAge) {
+        field.classList.add('is-valid');
+        field.classList.remove('is-invalid');
     } else {
-        //route to next page if success
-        window.location.href = "{{route('protection.existing.policy')}}";
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
     }
-  });
-
+}
+});
 </script>
 @endsection
