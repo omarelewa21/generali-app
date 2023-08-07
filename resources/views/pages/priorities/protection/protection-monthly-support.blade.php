@@ -3,11 +3,10 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Monthly Support</title>
+<title>3.Protection - Monthly Support</title>
 @endsection
 
 @section('content')
-
 <div id="Protection-monthly-support" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
@@ -33,7 +32,9 @@
                 </div>
             </div>
         
-        <form class="form-horizontal p-0" action="{{route('protection.supporting.years')}}" method="get">
+        <form class="form-horizontal p-0 needs-validation" id="protectionAllocatedFundsForm" novalidate action="{{route('form.protection.monthly.support')}}" method="POST">
+            {{-- <form class="form-horizontal p-0" action="{{route('form.submit.protection.monthly.support')}}" method="POST"> --}}
+            @csrf           
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
                     <section>
@@ -45,17 +46,24 @@
                             <h5 class="needs-text">If anything should</h5>
                             <h5 class="needs-text">happen to me, I'd like to</h5>
                             <h5 class="needs-text">support my family with</h5>
-                            <div class="d-flex">
+                            <div class="d-flex flex-wrap"> 
                                 <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
-                                <input type="number" name="allocatedFunds" class="form-control form-input-needs-md text-primary" id="allocatedFunds" placeholder=" " required> 
-                                <h5 class="needs-text d-inline-flex">/ month.</h5>
+                                <input type="number" name="protectionFunds" min=0 step=".01" oninput="validity.valid||(value='');" class="form-control form-input-needs-md text-primary  @error('protectionFunds') is-invalid @enderror" id="protectionFunds" placeholder=" " required> 
+                                <h5 class="needs-text">/ month.</h5>
+                                <div class="invalid-feedback w-100">Please enter the amount for the fund.</div>
+                                @error('protectionFunds')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                             </div>
+
                         </div>
-                        </div>
+                        
 
                         <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                             <div class="col-11 col-md-4 text-center">
                             </div>
+                        </div>
                         </div>
                     </section>
 
@@ -74,5 +82,25 @@
             </div>
         </form>
     </div>
+
+
+<script>
+
+    document.getElementById("protectionAllocatedFundsForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    var form = event.target;
+    if (form.checkValidity() === false) {
+      // If the form is invalid, show custom error messages
+      form.classList.add("was-validated");
+    }
+    else {
+
+form.submit();
+    }
+  });
+
+</script>
 
     @endsection

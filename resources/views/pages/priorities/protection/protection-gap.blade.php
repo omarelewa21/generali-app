@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Gap</title>
+<title>6.Protection - Gap</title>
 
 @section('content')
 

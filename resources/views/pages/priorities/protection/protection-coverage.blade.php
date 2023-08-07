@@ -3,7 +3,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Coverage</title>
+<title>2.Protection - Coverage</title>
 @endsection
 
 @section('content')
@@ -93,8 +93,6 @@
     </div>
 </div>
 
-@endsection
-
 <script>
     // javascript code for button click effect on avatar selection
         function avatarSelect(button) {
@@ -117,5 +115,7 @@
       });
     }
 
-    
 </script>
+
+@endsection
+

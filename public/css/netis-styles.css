@@ -202,12 +202,12 @@
 }
 
 .box-shadow:hover{
-    -webkit-transform: translateY(-15px);
-	-moz-transform: translateY(-15px);
-	-ms-transform: translateY(-15px);
-	-o-transform: translateY(-15px);
-	transform: translateY(-15px);
-	filter:drop-shadow(2px -9px 4px rgba(0, 69, 134, 0.4));
+    -webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	transform: scale(1.05);
+	filter:drop-shadow(2px -7px 4px rgba(0, 69, 134, 0.4));
 
 }
 .greyed-out {

@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Existing Policy</title>
+<title>5.Protection - Existing Policy</title>
 
 @section('content')
 
@@ -30,7 +30,8 @@
             </div>
         </div>
     </section>
-            <form class="form-horizontal p-0"action="{{route('protection.gap')}}" method="get" id="protection-existing-policy" name="protection-existing-policy">
+            <form class="form-horizontal p-0 needs-validation" action="{{route('protection.gap')}}"  novalidate method="get" id="protectionExistingPolicy" method="get">
+
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
@@ -49,6 +50,8 @@
                                         <input type="radio" class="needs-radio" id="protection_no" name="protection_existing_policy" value="No" required>
                                         <label for="protection_no" class="form-label">No</label>
                                     </span>
+                                    <div class="invalid-feedback w-100">Please enter the years.</div>
+
                                 </div>
                                 {{-- <p class="mt-5 hide-content">Existing policy amount:
                                     <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs px-0 d-inline text-primary" value="RM">
@@ -80,5 +83,22 @@
             </form>
     </div>
 </div>
+<script>
 
+    document.getElementById("protectionExistingPolicy").addEventListener("submit", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    var form = event.target;
+    if (form.checkValidity() === false) {
+      // If the form is invalid, show custom error messages
+      form.classList.add("was-validated");
+    }
+    else {
+        //route to next page if success
+        window.location.href = "{{route('protection.gap')}}";
+    }
+  });
+
+</script>
 @endsection

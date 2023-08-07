@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Supporting Years</title>
+<title>4.Protection - Supporting Years</title>
 @endsection
 
 @section('content')
@@ -32,7 +32,7 @@
         </section>
             <section>
                 <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0" action="{{route('protection.existing.policy')}}" method="get">
+                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation"  id="protectionSupportingYears" novalidate action="{{route('protection.existing.policy')}}" method="get">
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
@@ -49,6 +49,7 @@
                                                 class="form-control d-inline-flex text-primary w-25 f-64 text-center"
                                                 id="fund_year1" required>
                                             <h5 class="needs-text">years</h5>
+                                            <div class="invalid-feedback w-100">Please enter the years.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,5 +75,21 @@
             </section>
     </div>
 </div>
+<script>
 
+    document.getElementById("protectionSupportingYears").addEventListener("submit", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    var form = event.target;
+    if (form.checkValidity() === false) {
+      // If the form is invalid, show custom error messages
+      form.classList.add("was-validated");
+    } else {
+        //route to next page if success
+        window.location.href = "{{route('protection.existing.policy')}}";
+    }
+  });
+
+</script>
 @endsection

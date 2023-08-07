@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProgressBarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formValidateRetirementNeeds;
 
 /* main pages */
@@ -36,9 +36,11 @@ Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')-
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
+Route::post('/protection-monthly-support', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
 Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
 Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
 Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
+
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
@@ -56,8 +58,8 @@ Route::view('/investment-expected-return', 'pages.priorities.investment.investme
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 
 /* Priorities - Retirement */
-// Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
-Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoading'])->name('retirement.home');
+Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
+// Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoading'])->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
 Route::Post('/retirement-coverage', [formValidateRetirementNeeds::class, 'validateAvatarSelection'])->name('form.retirement.validateAvatar');
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');

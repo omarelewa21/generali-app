@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Home</title>
+<title>1.Protection - Home</title>
 @endsection
 
 @section('content')
