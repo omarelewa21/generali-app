@@ -30,8 +30,11 @@
             </div>
         </div>
     </section>
-            <form class="form-horizontal p-0 needs-validation" action="{{route('protection.gap')}}"  novalidate method="get" id="protectionExistingPolicy" method="get">
-
+            <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
+            @csrf
+            @if ($errors->has('protectionExistingPolicy'))
+            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">{{ $errors->first('protectionExistingPolicy') }}</div>
+        @endif
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
@@ -43,14 +46,13 @@
                                     <h5 class="needs-text mt-0 mt-md-5">Luckily, I do have an existing life insurance policy.</h5>
                                     <div class="py-3 py-md-4 py-lg-5 mb-4 mb-md-0 mb-lg-0">
                                     <span class="me-3 me-md-5 me-lg-5">
-                                        <input type="radio" class="needs-radio" id="protection_yes" name="protection_existing_policy" value="Yes" required>
+                                        <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" required>
                                         <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
                                     <span>
-                                        <input type="radio" class="needs-radio" id="protection_no" name="protection_existing_policy" value="No" required>
+                                        <input type="radio" class="needs-radio" id="protection_no" name="protectionExistingPolicy" value="no" required>
                                         <label for="protection_no" class="form-label">No</label>
                                     </span>
-                                    <div class="invalid-feedback w-100">Please enter the years.</div>
 
                                 </div>
                                 {{-- <p class="mt-5 hide-content">Existing policy amount:
@@ -85,20 +87,28 @@
 </div>
 <script>
 
-    document.getElementById("protectionExistingPolicy").addEventListener("submit", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    var form = event.target;
-    if (form.checkValidity() === false) {
-      // If the form is invalid, show custom error messages
-      form.classList.add("was-validated");
+document.addEventListener("DOMContentLoaded", function() {
+    const protectionExistingPolicy = document.getElementById("protectionExistingPolicy");
+    protectionExistingPolicy.addEventListener("blur", function() {
+        validateNumberField(protectionExistingPolicy);
+    });
+
+    protectionExistingPolicy.addEventListener("input", function() {
+        protectionExistingPolicyErrorMsg.style.display = "none";
+    });
+
+    function validateNumberField(field) {
+        const value = field.value.trim();
+
+        if (value === "" || isNaN(value)) {
+            field.classList.remove("is-valid");
+            field.classList.add("is-invalid");
+        } else {
+            field.classList.add("is-valid");
+            field.classList.remove("is-invalid");
+        }
     }
-    else {
-        //route to next page if success
-        window.location.href = "{{route('protection.gap')}}";
-    }
-  });
+});
 
 </script>
 @endsection

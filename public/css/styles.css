@@ -713,7 +713,7 @@ background: var(--gradient-6);
   }
 
   /* Retirement Home Page */
-  .retirement-bg {
+  .bg-retirement-home {
     background-image: url(/images/needs/retirement/bg-home.png);
     background-size: contain;
     background-position: center;

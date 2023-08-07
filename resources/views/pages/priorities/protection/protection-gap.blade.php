@@ -33,21 +33,25 @@
                                     <h5 class="needs-text">I want to protect my</h5>
                                     <div class="d-flex">
                                         <h5 class="needs-text d-inline-flex">loved ones with</h5>
-                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
-                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" "required>
+                                        <div class="input-group w-25">
+                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
+                                            <input type="number" name="years" class="form-control text-primary" id="years" placeholder=" "required>
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="d-flex">
                                         <h5 class="needs-text d-inline-flex">I have set aside</h5>
-                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
-                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required><br><br>
+                                        <div class="input-group w-25">
+                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
+                                            <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required><br><br>
+                                        </div>
                                     </div>
                                     <br>
                                     <h5 class="needs-text d-inline-flex">So I need a plan for</h5>
-                                     <div class="d-flex">
-                                        <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 d-inline text-primary" value="RM">
-                                        <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required>
-                                    </div>                                           
+                                        <div class="input-group w-25 d-flex">
+                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
+                                            <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required>
+                                        </div>
                                 </div>
                             </div>
     

@@ -3,7 +3,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>3.Protection - Monthly Support</title>
+<title>Protection - Monthly Support</title>
 @endsection
 
 @section('content')
@@ -54,8 +54,8 @@
                             <h5 class="needs-text">support my family with</h5>
                             <div class="d-flex flex-wrap"> 
                                 <input disabled readonly class="text-primary form-control fw-bold form-input-needs-xs pe-0 text-primary" value="RM">
-                                <input type="number" name="protectionFunds" min=0 step=".01" oninput="validity.valid||(value='');" class="form-control form-input-needs-md text-primary  @error('protectionFunds') is-invalid @enderror" id="protectionFunds" placeholder=" " required> 
-                                <h5 class="needs-text">/ month.</h5>
+                                <input type="number" name="protectionFunds" value="{{ old('protectionFunds') }}" class="form-control form-input-needs-md text-primary  @error('protectionFunds') is-invalid @enderror" id="protectionFunds" placeholder=" " required> 
+                                <h5 class="needs-text">/ month.</h5>    
                                 @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
                             @endif
@@ -93,23 +93,6 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const protectionFunds = document.getElementById("protectionFunds");
-    // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
-
-    // form.addEventListener("submit", function(event) {
-    //     event.preventDefault();
-    //     event.stopPropagation();
-        
-    //     validateNumberField(protectionFunds);
-
-    //     if (form.checkValidity() === false) {
-    //         form.classList.add("was-validated");
-    //         protectionFundsErrorMsg.style.display = "block";
-    //     } else {
-    //         protectionFundsErrorMsg.style.display = "none";
-    //         form.submit();
-    //     }
-    // });
-
     protectionFunds.addEventListener("blur", function() {
         validateNumberField(protectionFunds);
     });
@@ -130,6 +113,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+    // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
+
+    // form.addEventListener("submit", function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+        
+    //     validateNumberField(protectionFunds);
+
+    //     if (form.checkValidity() === false) {
+    //         form.classList.add("was-validated");
+    //         protectionFundsErrorMsg.style.display = "block";
+    //     } else {
+    //         protectionFundsErrorMsg.style.display = "none";
+    //         form.submit();
+    //     }
+    // });
 </script>
 
 

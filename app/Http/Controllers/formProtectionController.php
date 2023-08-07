@@ -17,13 +17,26 @@ use Illuminate\Support\Facades\Session;
 class formProtectionController extends Controller
 {
 
+    public function submitProtectionCoverage(Request $request)
+    {
+        $customMessages = [
+            'protectionSelectedAvatar' => 'Please select an option',
+        ];
+        $validatedData = $request->validate([
+            'protectionSelectedAvatar' => 'required|in:self,spouse,children,parent',
+
+        ], $customMessages);
+
+        // Process the form data and perform any necessary actions
+        return redirect()->route('protection.monthly.support')
+        ->withInput(); 
+    }
     public function submitProtectionMonthlySupport(Request $request)
     {
         $customMessages = [
             'protectionFunds.required' => 'You are required to enter an amount.',
             'protectionFunds.integer' => 'The amount must be a number',
             'protectionFunds.min' => 'The amount must be at least :min.',
-
         ];
 
         $validatedData = $request->validate([
@@ -31,11 +44,8 @@ class formProtectionController extends Controller
 
         ], $customMessages);
 
-        $arrayData = session('passingArrays', []);
-
-        session(['passingArrays' => $arrayData]);
-
-        return redirect()->route('protection.supporting.years');
+        return redirect()->route('protection.supporting.years')
+                ->withInput(); 
     }
     public function submitProtectionSupportingYears(Request $request){
 
@@ -57,11 +67,30 @@ class formProtectionController extends Controller
         session(['passingArrays' => $arrayData]);
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('protection.existing.policy');
+        return redirect()->route('protection.existing.policy')
+        ->withInput(); 
    }
 
+   public function submitProtectionExistingPolicy(Request $request){
 
+        $customMessages = [
+            'protectionExistingPolicy.required' => 'Please select an option',
+        ];
+        $validatedData = $request->validate([
+            'protectionExistingPolicy' => 'required|in:yes,no',
 
+        ], $customMessages);
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        // Process the form data and perform any necessary actions
+        return redirect()->route('protection.gap')
+        ->withInput(); 
+   }
     
     
 }

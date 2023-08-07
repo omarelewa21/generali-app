@@ -1,13 +1,8 @@
-<?php
- /**
- * Template Name: Protection Homepage Page
- */
-?>
-
+{{-- Protection - Home --}}
 @extends('templates.master')
 
 @section('title')
-<title>1.Protection - Home</title>
+<title>Protection - Home</title>
 @endsection
 
 @section('content')
