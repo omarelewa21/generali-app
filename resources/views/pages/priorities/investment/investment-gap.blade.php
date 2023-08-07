@@ -16,7 +16,8 @@
                     @include ('templates.nav.nav-sidebar-needs')
                 </div>
             </section>
-            <form class="form-horizontal p-0"action="{{route('investment.gap')}}" method="get" id="investment" name="investment">
+            <form novalidate action="{{route('form.submit.investment.gap')}}" method="POST" id="investment-gap">
+                @csrf
                 <section class="needs-gap-content">
                     <div class="col-12">
                         <div class="row h-100 overflow-y-auto overflow-x-hidden">
@@ -31,7 +32,7 @@
                                         <div class="py-4 px-2">
                                             <div class="col-12 d-grid gap-2 d-md-block text-end">
                                                 <a href="{{route('investment.expected.return')}}" class="btn btn-primary text-uppercase">Back</a>
-                                                <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                                                <button class="btn btn-primary text-uppercase" id="nextBtn" type="submit">Next</button>
                                             </div>
                                         </div>
                                     </div>
@@ -39,22 +40,35 @@
                             </div>
                             <div class="col-xl-6 col-12 position-relative first-order">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center">
+                                    <div class="col-12 d-flex mt-5 justify-content-center z-99">
                                         <div class="">
-                                            <div class="col-10 mt-4">
-                                                <div class="">
-                                                    <p class="f-34"><strong>In</strong>
-                                                        <input type="number" name="fund_year3" class="form-control d-inline-block w-25" id="fund_year3" required>
+                                            <div class="col-10 m-auto">
+                                                <div>
+                                                    <p class="f-34 @error('investment_years_times') is-invalid @enderror">
+                                                        <strong>In</strong>
+                                                        <span class="currencyinput"><input type="text" name="investment_years_times" class="form-control d-inline-block w-30 f-34" id="investment_years_times" required></span>
                                                         <strong>years' time,</strong>
+                                                        @if ($errors->has('investment_years_times'))
+                                                            <div class="invalid-feedback">{{ $errors->first('investment_years_times') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>I expect to have an annual return of</strong>
-                                                        <input type="number" name="fund_money" class="form-control d-inline-block w-25 money" id="fund_money" placeholder="RM" required>
+                                                    <p class="f-34 @error('investment_annual_return') is-invalid @enderror"><strong>I expect to have an annual return of</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="investment_annual_return" class="form-control d-inline-block w-30 f-34" id="investment_annual_return" required></span>
+                                                        @if ($errors->has('investment_annual_return'))
+                                                            <div class="invalid-feedback">{{ $errors->first('investment_annual_return') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>I have set aside</strong>
-                                                        <input type="number" name="fund_money1" class="form-control d-inline-block w-25 money" id="fund_money1" placeholder="RM" required>
+                                                    <p class="f-34 @error('investment_aside_amount') is-invalid @enderror"><strong>I have set aside</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="investment_aside_amount" class="form-control d-inline-block w-30 f-34" id="investment_aside_amount" required></span>
+                                                        @if ($errors->has('investment_aside_amount'))
+                                                            <div class="invalid-feedback">{{ $errors->first('investment_aside_amount') }}</div>
+                                                        @endif
                                                     </p>
-                                                    <p class="f-34"><strong>So I need to plan for</strong>
-                                                        <input type="number" name="fund_money2" class="form-control d-inline-block w-25 money" id="fund_money2" placeholder="RM" required>
+                                                    <p class="f-34 @error('investment_plan_amount') is-invalid @enderror"><strong>So I need to plan for</strong>
+                                                        <span class="currencyinput">RM<input type="text" name="investment_plan_amount" class="form-control d-inline-block w-30 f-34" id="investment_plan_amount" required></span>
+                                                        @if ($errors->has('investment_plan_amount'))
+                                                            <div class="invalid-feedback">{{ $errors->first('investment_plan_amount') }}</div>
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>
@@ -65,11 +79,11 @@
                         </div>
                     </div>
                 </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile">
+                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
                             <a href="{{route('investment.expected.return')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button>
+                            <button class="btn btn-primary text-uppercase" id="nextBtn" type="submit">Next</button>
                         </div>
                     </div>
                 </section>
@@ -79,6 +93,55 @@
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var investment_years_times = document.getElementById('investment_years_times');
+        var investment_annual_return = document.getElementById('investment_annual_return');
+        var investment_aside_amount = document.getElementById('investment_aside_amount');
+        var investment_plan_amount = document.getElementById('investment_plan_amount');
+
+        investment_annual_return.addEventListener('blur', function() {
+            validateNumberField(investment_annual_return);
+        });
+        investment_aside_amount.addEventListener('blur', function() {
+            validateNumberField(investment_aside_amount);
+        });
+        investment_plan_amount.addEventListener('blur', function() {
+            validateNumberField(investment_plan_amount);
+        });
+
+        function validateNumberField(field) {
+
+            var value = field.value.trim();
+
+            if (value === '' || isNaN(value)) {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            } else {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            }
+        }
+
+        investment_years_times.addEventListener('blur', function() {
+            validateYearsNumberField(investment_years_times);
+        });
+
+        function validateYearsNumberField(field) {
+            var minYear = 1;
+            var maxYears = 100;
+
+            var value = parseInt(field.value);
+
+            if (!isNaN(value) && value >= minYear && value <= maxYears) {
+                field.classList.add('is-valid');
+                field.classList.remove('is-invalid');
+            } else {
+                field.classList.remove('is-valid');
+                field.classList.add('is-invalid');
+            }
+        }
+    });
+
     $(document).ready(function() {
 
         if (window.innerWidth < 596) {

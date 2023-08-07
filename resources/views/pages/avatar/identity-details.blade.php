@@ -43,7 +43,7 @@
                                 <div class="form-container pb-5">
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12">
-                                            <label for="country" class="form-label text-white">Citizenship</label>
+                                            <label for="country" class="form-label text-white">Citizenship *</label>
                                             <select class="form-select bg-white @error('country') is-invalid @enderror" name="country" aria-label="Countries" id="countrySelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach($countries as $code => $name)
@@ -51,13 +51,13 @@
                                                 @endforeach
                                             </select>
                                             @error('country')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
-                                            <label for="idType" class="form-label text-white">ID Type</label>
+                                            <label for="idType" class="form-label text-white">ID Type *</label>
                                             <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 <option value="New IC" @if(old('idType') == 'New IC') selected @endif>New IC</option>
@@ -67,45 +67,45 @@
                                                 <option value="Registration" @if(old('idType') == 'Registration') selected @endif>Registration</option>
                                             </select>
                                             @error('idType')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4" id="newicgroup" style="display: none;">
-                                            <label for="idNumber" class="form-label text-white">ID Number</label>
+                                            <label for="idNumber" class="form-label text-white">ID Number *</label>
                                             <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber') }}">
                                             @error('idNumber')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="passportgroup" style="display: none;">
-                                            <label for="passportNumber" class="form-label text-white">Passport Number</label>
+                                            <label for="passportNumber" class="form-label text-white">Passport Number *</label>
                                             <input type="text" name="passportNumber" class="form-control bg-white @error('passportNumber') is-invalid @enderror" id="passportNumber" placeholder="A122345" value="{{ old('passportNumber') }}">
                                             @error('passportNumber')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
-                                            <label for="birthCert" class="form-label text-white">Birth Certificate Number</label>
+                                            <label for="birthCert" class="form-label text-white">Birth Certificate Number *</label>
                                             <input type="text" name="birthCert" class="form-control bg-white @error('birthCert') is-invalid @enderror" id="birthCert" placeholder="T122345" value="{{ old('birthCert') }}">
                                             @error('birthCert')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="policegroup" style="display: none;">
-                                            <label for="policeNumber" class="form-label text-white">Police / Army Number</label>
+                                            <label for="policeNumber" class="form-label text-white">Police / Army Number *</label>
                                             <input type="text" name="policeNumber" class="form-control bg-white @error('policeNumber') is-invalid @enderror" id="policeNumber" placeholder="Enter Police / Army Number" value="{{ old('policeNumber') }}">
                                             @error('policeNumber')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
 
                                         <div class="col-12 pt-4" id="registrationgroup" style="display: none;">
-                                            <label for="registrationNumber" class="form-label text-white">Registration Number</label>
+                                            <label for="registrationNumber" class="form-label text-white">Registration Number *</label>
                                             <input type="text" name="registrationNumber" class="form-control bg-white @error('registrationNumber') is-invalid @enderror" id="registrationNumber" placeholder="Enter Registration Number" value="{{ old('registrationNumber') }}">
                                             @error('registrationNumber')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                                                     $selectedDay = sprintf('%02d', $selectedDay);
                                                 }
                                             @endphp
-                                            <label for="dob" class="form-label text-white">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
+                                            <label for="dob" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
@@ -155,29 +155,25 @@
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4">
-                                            <div class="row">
-                                                <label for="habits" class="form-label text-white">Your Habits</label>
-                                            </div>
-                                            <div class="row">
-                                                <div class="btn-group @error('btnradio') is-invalid @enderror" role="group">
-                                                    <div class="col-6">
-                                                        <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker">
-                                                        <label class="btn btn-outline-primary" for="smoker">Smoker</label>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker">
-                                                        <label class="btn btn-outline-primary" for="nonSmoker">Non-Smoker</label>
-                                                    </div>
+                                            <label for="habits" class="form-label text-white">Your Habits *</label>
+                                            <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
+                                                <div class="col-6">
+                                                    <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker">
+                                                    <label class="btn btn-outline-primary" for="smoker">Smoker</label>
                                                 </div>
-                                                @error('btnradio')
-                                                    <div class="invalid-feedback text-white">Please select your habits</div>
-                                                @enderror
+                                                <div class="col-6">
+                                                    <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker">
+                                                    <label class="btn btn-outline-primary" for="nonSmoker">Non-Smoker</label>
+                                                </div>
                                             </div>
+                                            @error('btnradio')
+                                                <div class="invalid-feedback alert alert-danger">Please select your habits</div>
+                                            @enderror  
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
-                                            <label for="educationLevel" class="form-label text-white">Education Level</label>
+                                            <label for="educationLevel" class="form-label text-white">Education Level *</label>
                                             <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Education Level" id="educationLevel" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 <option value="New IC" @if(old('educationLevel') == 'New IC') selected @endif>New IC</option>
@@ -187,13 +183,13 @@
                                                 <option value="Registration" @if(old('educationLevel') == 'Registration') selected @endif>Registration</option>
                                             </select>
                                             @error('educationLevel')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
-                                            <label for="occupation" class="form-label text-white">Occupation</label>
+                                            <label for="occupation" class="form-label text-white">Occupation *</label>
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach($rows as $row)
@@ -201,7 +197,7 @@
                                                 @endforeach
                                             </select>
                                             @error('occupation')
-                                                <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -212,9 +208,9 @@
                         <section class="footer bg-accent-light-white py-4 fixed-bottom">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
-                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <button class="btn btn-primary flex-fill text-uppercase" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>

@@ -12,12 +12,12 @@
 
 @section('content')
 
-<div id="basic_details" class="vh-100">
+<div id="basic_details" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
-                <div class="text-white px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5 py-sm-3 py-3">
+                <div class="text-white px-4 px-md-5 py-md-5 py-3">
                     <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
@@ -27,16 +27,16 @@
                         @csrf
                         <section class="main-content extra-padding">
                             <div class="container">
-                                <div class="row pt-4 px-5 pb-3 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-4 sticky-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-top bg-accent-bg-grey">
                                     <div class="col-12">
                                         <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                     </div>
                                 </div>
-                                <div class="row px-5 py-xxl-5 py-xl-5 py-lg-5 py-md-5">
+                                <div class="row px-4">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
-                                                <label for="title" class="form-label">Title</label>
+                                                <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
                                                     <option value="Mr." @if(old('title') == 'Mr.') selected @endif>Mr.</option>
@@ -62,14 +62,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="firstName" class="form-label">First Name</label>
+                                                <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName') }}" required>
                                                     @error('firstName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName') }}" required>
                                                     @error('lastName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -78,23 +78,29 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="mobileNumber" class="form-label">Mobile Number</label>
-                                                <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="+60 000-0000 000" value="{{ old('mobileNumber') }}" required>
+                                                <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">+60</span>
+                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
+                                                </div>
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number</label>
-                                                <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="+60 000-0000 000" value="{{ old('housePhoneNumber') }}">
+                                                <div class="input-group">
+                                                    <span class="input-group-text">+60</span>
+                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber') }}">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="email" class="form-label">Email Address</label>
+                                                <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email') }}">
                                                     @error('email')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -109,9 +115,9 @@
                         <section class="footer bg-white py-4 fixed-bottom">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                        <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidMobileNumber(mobileNumber) {
         // Regular expression pattern to validate mobile number format
-        var mobileNumberRegex = /^0\d{0,11}$/;
+        var mobileNumberRegex = /^[1-9]\d{8,9}$/;
 
         // Test the mobile number against the regex pattern
         var isValid = mobileNumberRegex.test(mobileNumber);
@@ -218,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidHousePhoneNumber(phoneNumber) {
         // Regular expression pattern to validate house phone number format
-        var phoneNumberRegex = /^0\d{0,11}$/;
+        var phoneNumberRegex = /^[1-9]\d{8,9}$/;
 
         // Test the phone number against the regex pattern
         var isValid = phoneNumberRegex.test(phoneNumber);
