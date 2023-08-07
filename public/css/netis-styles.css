@@ -317,6 +317,7 @@
     .avatar-allocated-funds {
         right: 0;
         width: 45vh;
+        bottom: 0;
     }
 
     .avatar-allocated-funds-aside {
