@@ -66,7 +66,7 @@
                                 <h6 class="text-center py-2">Spouse</h6>
                             </button>
                         </div>
-                        <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
+                        <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
                             <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'children' ? 'greyed-out' : '' }}" 
                              data-type="children"
                                 id="button-kid-avatar" onclick="avatarSelect(this)">

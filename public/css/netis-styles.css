@@ -288,19 +288,19 @@
     }
 
     .coverage-avatar img.self-avatar {
-        width: 20vh;
+        width: 17vh;
     }
 
     .coverage-avatar img.spouse-avatar {
-        width: 17vh;
+        width: 15vh;
     }
 
     .coverage-avatar img.kid-avatar {
-        width: 17vh;
+        width: 15vh;
     }
 
     .coverage-avatar img.parent-avatar {
-        width: 34vh;
+        width: 30vh;
     }
 
     .avatar-age-to-retire {
@@ -308,7 +308,9 @@
         right: 0%;
         width: 41vh;
     }
-
+/* .children-avatar-mobile {
+    min-height: 430px !important;
+} */
     .avatar-years-till-retire {
         right: 0;
         width: 40vh;
