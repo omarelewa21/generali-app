@@ -24,7 +24,7 @@ class formRetirementController extends Controller
         ], $customMessages);
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('retirement.ideal')
+        return redirect()->route('retirement.age.to.retire')
         ->withInput(); 
     }
 
