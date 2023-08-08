@@ -364,18 +364,18 @@ $(function() {
         }
     }
 
-    $("button img", $needs).draggable({
-        cancel: "a.ui-icon",
-        revert: "invalid",
-        containment: "document",
-        helper: "clone",
-        cursor: "move",
-        start: function(event, ui) {
-            if ($(this).hasClass("item-dropped")) {
-                ui.helper.addClass("item-dropped");
-            }
-        }
-    });
+    // $("button img", $needs).draggable({
+    //     cancel: "a.ui-icon",
+    //     revert: "invalid",
+    //     containment: "document",
+    //     helper: "clone",
+    //     cursor: "move",
+    //     start: function(event, ui) {
+    //         if ($(this).hasClass("item-dropped")) {
+    //             ui.helper.addClass("item-dropped");
+    //         }
+    //     }
+    // });
 
     $sortable.droppable({
         accept: "#needs button img:not(.item-dropped)",

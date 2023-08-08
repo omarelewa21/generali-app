@@ -8,6 +8,7 @@ import './bootstrap';
 import './coverage-carousel';
 
 
+
 // Add checkmark for every page completed in left navigation menu
 $(document).ready(function () {
   // Get the current URL path
