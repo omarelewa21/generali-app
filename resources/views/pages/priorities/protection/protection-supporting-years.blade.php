@@ -1,76 +1,112 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Supporting Years</title>
+<title>4.Protection - Supporting Years</title>
 @endsection
 
 @section('content')
-<div id="investment-supporting">
-    <div class="container-fluid overflow-hidden font-color-default text-center">
-        <div class="row bg-investment-supporting vh-100">
+@php
+    $arrayData = session('passingArrays');
+@endphp
+<div id="protection-supporting-years">
+    <div class="container-fluid overflow-hidden d-flex h-100 flex-column">
+            <section>
             <div class="row">
-                <div class="col-3 col-md-3 col-lg-3">
+                <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
                     @include('templates.nav.nav-red-menu')
                 </div>
-                <div class="col-6 col-md-6 col-lg-6">
+                <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-lg-6 col-sm-12 bg-primary summary-progress-bar px-1">
-                                <div class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                    <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
-                                <p class="text-light text-center">Total Protection Fund Needed</p>
+                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
+                            <div
+                                class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
+                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
+                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
+                            <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-3 col-md-3 col-lg-3">
-                    @include ('templates.nav.nav-sidebar-needs')
-                </div>  
+                <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                    @include('templates.nav.nav-sidebar-needs')
+                </div>
             </div>
-            <form class="form-horizontal p-0" action="{{route('protection.existing.policy')}}" method="get" id="investment" name="investment">
-                <section class="needs-master-content">
-                    <div class="col-12">
-                        <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                    <div class="col-4 d-flex d-flex justify-content-end">
-                                        <h5 class="m-0 mt-4 needs-text">I will need</h5>
-                                    </div>  
-                                    <div class="col-4">
-                                        <div class="position-relative py-4 d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('images/needs/investment/Calendar.png') }}" class="calendar-protection">
-                                            <div class="position-absolute center w-100">
-                                                <input type="number" name="fund_year1" class="form-control d-inline-block w-25 f-64 text-center" id="fund_year1" required>
-                                                <p class="f-34" class="mt-4"><strong>years</strong></p>
-                                            </div>
+        </section>   
+            <section>
+                <div class="row flex-grow-1">
+                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation"  id="protectionSupportingYearsForm" novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
+                    @csrf
+                    @if ($errors->has('protectionSupportingYears'))
+                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">{{ $errors->first('protectionSupportingYears') }}</div>
+                @endif
+                    <div class="col-12 ">
+                        <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
+                            <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
+                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end z-1">
+                                    <h5 class="m-0 mt-4 needs-text">I will need</h5>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div
+                                        class="position-relative pt-4 pb-4 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('images/needs/protection/Calendar.png') }}"
+                                            class="calendar-protection">
+                                        <div class="position-absolute center w-100 text-center">
+                                            <input type="number" name="protectionSupportingYears"
+                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center @error('protectionFunds') is-invalid @enderror"
+                                                id="protectionSupportingYears" required> 
+                                            <h5 class="needs-text">years</h5>
+
+                                        
                                         </div>
                                     </div>
-                                    <div class="col-4 d-flex justify-content-start">
-                                            <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
-                                    </div>
                                 </div>
-                            <div class="col-12 show-mobile bg-btn_bar">
-                                <div class="py-4 px-2">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                        <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                                        <button type="submit" class="btn btn-primary text-uppercase">Next</button>
-                                    </div>
+                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
+                                    <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer bg-white py-4 fixed-bottom">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                    <a href="{{route('protection.monthly.support')}}"
+                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <button type="submit" class="btn btn-primary text-uppercase">Next</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section class="needs-master-footer footer bg-white hide-mobile">
-                    <div class="py-4 px-2">
-                        <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <a href="{{route('protection.existing.policy')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a>
-                            <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
-                        </div>
-                    </div>
-                </section>
-            </form>
-        </div>
+                </form>
+            </div>
+            </section>
     </div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
+    var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
+    protectionSupportingYears.addEventListener('blur', function() {
+            validateNumberField(protectionSupportingYears);
+        });
+
+function validateYearsNumberField(field) {
+    var minAge = 1;
+    var maxAge = 100;
+
+    var value = parseInt(field.value);
+
+    if (!isNaN(value) && value >= minAge && value <= maxAge) {
+        field.classList.add('is-valid');
+        field.classList.remove('is-invalid');
+    } else {
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
+    }
+}
+});
+</script>
 @endsection

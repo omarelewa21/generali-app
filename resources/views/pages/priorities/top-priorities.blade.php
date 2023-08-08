@@ -98,10 +98,10 @@
                                     </svg>
                                 </button>
                             </div>
-                        </div>
-                        <div class="col-12 position-absolute" style="bottom: -60%;">
-                            <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        </div>
+                            
+                        </div> -->
+                        <img src="{{ asset('/images/top-priorities/priorities-grid.png') }}" width="500px" class="mx-auto d-block pt-4" alt="">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -115,11 +115,11 @@
                                     <p class="text-white display-6">Select your priorities by first to last.</p>
                                 </div>
                             </div>
-                            <div id="needs" class="row px-4 pb-4 px-sm-5 needs">
+                            <div id="needs" class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="protection" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.svg') }}" width="auto" alt="Protection">
+                                            <img class="needs" src="{{ asset('images/top-priorities/protection-icon.svg') }}" width="auto" height="100px" alt="Protection">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
                                         </button>
                                     </div>
@@ -151,7 +151,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="debt-cancellation" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" alt="Debt Cancellation">
+                                            <img class="needs" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
                                         </button>
                                     </div>
@@ -159,7 +159,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="health-medical" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" alt="Health & Medical">
+                                            <img class="needs" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
                                         </button>
                                     </div>
@@ -167,7 +167,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="investments" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" alt="Investments">
+                                            <img class="needs" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Investments">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Investments</p>
                                         </button>
                                     </div>
@@ -175,7 +175,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="others" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" alt="Others">
+                                            <img class="needs" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                         </button>
                                     </div>
@@ -187,9 +187,9 @@
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
+                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -286,51 +286,36 @@
 
 .needs-icon {
     height:100px;
-    z-index: 2;
 }
-.svg-button svg {
-    width: 100%; 
-    height: auto;
+#sortable-list .main.first {
+  transform: translate(189px, 146px);
+  width:109px;
 }
-#sortable {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(1%, 1fr));
+#sortable-list .main.second {
+  transform: translate(103px, 72px);
+  width:123px;
+}
+#sortable-list .main.third {
+  transform: translate(37px, 19px);
+  width:122px;
+}
+#sortable-list .main.fifth {
+  transform: translate(-1px, 1px);
+}
+#sortable-list .main.sixth {
+  transform: translate(-40px, 20px);
+  width:122px;
+}
+#sortable-list .main.seventh {
+  transform: translate(-115px, 75px);
+  width:122px;
+}
+#sortable-list .main.eight {
+  transform: translate(-115px, 75px);
+  width:117px;
+}
+.needs {
     z-index: 1;
-}
-#sortable .first {
-    grid-column: 20 / span 14;
-    grid-row: 59 / 96;
-}
-#sortable .second {
-    grid-column: 22 / span 16;
-    grid-row: 28 / 73;
-    transform: translate(1px, 2px);
-}
-#sortable .third {
-    grid-column: 29 / span 16;
-    grid-row: 9 / 51;
-}
-#sortable .fourth {
-    grid-column: 40 / span 13;
-    grid-row: 1 / 39;
-}
-#sortable .fifth {
-    grid-column: 53 / span 13;
-    grid-row: 1 / 39;
-}
-#sortable .sixth {
-    grid-column: 61 / span 16;
-    grid-row: 9 / 51;
-}
-#sortable .seventh {
-    grid-column: 68 / span 16;
-    grid-row: 28 / 73;
-    transform: translate(-2px, 3px);
-}
-#sortable .eight {
-    grid-column: 72 / span 14;
-    grid-row: 59 / 96;
 }
 </style>
 

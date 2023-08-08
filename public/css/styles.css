@@ -713,7 +713,7 @@ background: var(--gradient-6);
   }
 
   /* Retirement Home Page */
-  .retirement-bg {
+  .bg-retirement-home {
     background-image: url(/images/needs/retirement/bg-home.png);
     background-size: contain;
     background-position: center;
@@ -723,15 +723,11 @@ background: var(--gradient-6);
   }
 
   .needs-home-avatar {
-    top: 10%;
-    left: 14%;
     z-index: 10;
-    height: 50vh;
-    bottom:0;
     width:100%;
   }
   .needs-home-avatar img {
-    width: 52vh;
+   height:60vh;
   }
 
   /* Retirement Coverage */
@@ -743,30 +739,22 @@ background: var(--gradient-6);
     height: 100%;
     background-color: #fff;
   }
-  /* .coverage-avatar {
-    z-index: 50;
-    top: 70px;
-} */
+
 
 .coverage-avatar {
-  top: 25%;
-  left: 0%;
   z-index: 10;
-  height: 50vh;
-  bottom:0;
-  width:100%;
 }
 .coverage-avatar img.self-avatar{
-  width: 19vh;
+  width: 21vh;
 }
 .coverage-avatar img.spouse-avatar{
-  width: 17vh;
+  width: 18vh;
 }
 .coverage-avatar img.kid-avatar{
   width: 17vh;
 }
 .coverage-avatar img.parent-avatar{
-  width: 34vh;
+  width: 35vh;
 }
 
   /* img {
