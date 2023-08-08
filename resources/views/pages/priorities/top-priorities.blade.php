@@ -327,42 +327,42 @@ $(function() {
 
     var addedNeedsImages = []; // Array to keep track of added needs images
 
-    function addImageToSortable(imageName) {
-        var droppedContainer = $sortable.find(".dropped:empty:first");
+    // function addImageToSortable(imageName) {
+    //     var droppedContainer = $sortable.find(".dropped:empty:first");
 
-        if (droppedContainer.length > 0) {
-            if (addedNeedsImages.indexOf(imageName) === -1) {
-                addedNeedsImages.push(imageName);
+    //     if (droppedContainer.length > 0) {
+    //         if (addedNeedsImages.indexOf(imageName) === -1) {
+    //             addedNeedsImages.push(imageName);
 
-                var img = new Image();
-                img.src = imageName;
-                img.onload = function() {
-                    var droppedItem = $("<img>").attr("src", imageName);
-                    droppedContainer.append(droppedItem);
-                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
-                    droppedContainer.append(removeButton);
+    //             var img = new Image();
+    //             img.src = imageName;
+    //             img.onload = function() {
+    //                 var droppedItem = $("<img>").attr("src", imageName);
+    //                 droppedContainer.append(droppedItem);
+    //                 var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+    //                 droppedContainer.append(removeButton);
 
-                    droppedItem.animate({ width: "40%" }, function() {
-                        droppedItem.animate({ height: "auto" });
-                    });
+    //                 droppedItem.animate({ width: "40%" }, function() {
+    //                     droppedItem.animate({ height: "auto" });
+    //                 });
 
-                    var parentSvgButton = droppedContainer.closest(".svg-button");
-                    parentSvgButton.addClass("item-dropped");
+    //                 var parentSvgButton = droppedContainer.closest(".svg-button");
+    //                 parentSvgButton.addClass("item-dropped");
 
-                    removeButton.click(function() {
-                        parentSvgButton.removeClass("item-dropped");
-                        droppedItem.remove();
-                        removeButton.remove();
+    //                 removeButton.click(function() {
+    //                     parentSvgButton.removeClass("item-dropped");
+    //                     droppedItem.remove();
+    //                     removeButton.remove();
 
-                        var index = addedNeedsImages.indexOf(imageName);
-                        if (index !== -1) {
-                            addedNeedsImages.splice(index, 1);
-                        }
-                    });
-                };
-            }
-        }
-    }
+    //                     var index = addedNeedsImages.indexOf(imageName);
+    //                     if (index !== -1) {
+    //                         addedNeedsImages.splice(index, 1);
+    //                     }
+    //                 });
+    //             };
+    //         }
+    //     }
+    // }
 
     $("button img", $needs).draggable({
         cancel: "a.ui-icon",
@@ -444,10 +444,10 @@ $(function() {
     });
 
     // Add click functionality to #needs button images
-    $("button img", $needs).click(function() {
-        var imageName = $(this).attr("src");
-        addImageToSortable(imageName);
-    });
+    // $("button img", $needs).click(function() {
+    //     var imageName = $(this).attr("src");
+    //     addImageToSortable(imageName);
+    // });
 
     // $( "#sortable .dropped img" ).sortable();
 
