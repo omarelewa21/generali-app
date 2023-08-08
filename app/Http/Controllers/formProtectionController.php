@@ -43,6 +43,14 @@ class formProtectionController extends Controller
             'protectionFunds' => 'required|integer|min:1',
 
         ], $customMessages);
+        
+                // Calculate the multiplied value
+                $protectionFunds = $request->input('protectionFunds');
+                $TotalProtectionValue = $request->input('protectionFunds') * 12;
+
+                // Store the multiplied value in the session
+                Session::put('protectionFunds', $protectionFunds);
+                Session::put('TotalProtectionValue', $TotalProtectionValue);
 
         return redirect()->route('protection.supporting.years')
                 ->withInput(); 

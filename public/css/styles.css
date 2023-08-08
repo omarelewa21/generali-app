@@ -745,7 +745,7 @@ background: var(--gradient-6);
   z-index: 10;
 }
 .coverage-avatar img.self-avatar{
-  width: 21vh;
+  width: 20vh;
 }
 .coverage-avatar img.spouse-avatar{
   width: 18vh;
