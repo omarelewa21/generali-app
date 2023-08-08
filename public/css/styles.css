@@ -723,7 +723,7 @@ background: var(--gradient-6);
   }
 
   .needs-home-avatar {
-    z-index: 10;
+    z-index: 1;
     width:100%;
   }
   .needs-home-avatar img {
