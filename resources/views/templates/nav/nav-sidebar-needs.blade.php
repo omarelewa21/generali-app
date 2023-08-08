@@ -2,10 +2,9 @@
 @include('templates.nav.nav-sidebar-links-needs')
 {{-- Links for Needs Sidebar Right --}}
 
-
 {{-- Nav Sidebar Right Needs --}}
-<section class="progress-main">
-  <div class="row justify-content-end align-items-center m-3">
+<section class="progress-main progress-mobile">
+  <div class="row justify-content-end align-items-center px-4 px-xxl-5 px-xl-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
     <div class="col-auto">
       <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
         <div class="text-dark d-inline-flex">
@@ -59,38 +58,23 @@
           </span>
 
           <div class="progress-value">
+            @php
+            
+            $folderNumber = [
+              'protection' => 1,
+              'retirement' => 2,
+              'education' => 3,
+              'savings' => 4,
+              'investment' => 5,
+              'debt cancellation' => 6,
+              'Health and Medical' => 7,
+              // 'Others' => 8,
+            ];
+
+            $dynamicNumber = $folderNumber[$folderName] ?? 0;
+          @endphp
+
             <p class="mb-0">
-              @php
-              // Set the dynamic number based on the page slug name
-              switch ($folderName) {
-              case 'protection':
-              $dynamicNumber = 1;
-              break;
-              case 'retirement':
-              $dynamicNumber = 2;
-              break;
-              case 'education':
-              $dynamicNumber = 3;
-              break;
-              case 'savings':
-              $dynamicNumber = 4;
-              break;
-              case 'investment':
-              $dynamicNumber = 5;
-              break;
-              case 'debt cancellation':
-              $dynamicNumber = 6;
-              break;
-              case 'Health and Medical':
-              $dynamicNumber = 7;
-              break;
-              case 'Others ':
-              $dynamicNumber = 8;
-              break;
-              default:
-              $dynamicNumber = 0;
-              }
-              @endphp
               {{ $dynamicNumber }}
             </p>
           </div>
@@ -100,18 +84,16 @@
   </div>
 </section>
 {{-- Nav Sidebar Right Needs --}}
-<script>
-  console.log({{ $dynamicNumber }});
-console.log({{ $progress }});
-console.log({{$pageNumber }});
-</script>
 
 <style>
   /* code for progress bar css */
-  .progress-main {
-    z-index: 1040;
-  }
 
+  .progress-main {
+    position: fixed;
+    z-index: 1039;
+    top: 0;
+    right: 0;
+}
   .progress {
     width: 44px;
     height: 44px;
@@ -120,6 +102,7 @@ console.log({{$pageNumber }});
     margin: 0 auto;
     box-shadow: none;
     position: relative;
+    z-index: 1000;
   }
 
   .progress:after {
@@ -127,7 +110,7 @@ console.log({{$pageNumber }});
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 12px solid #fff;
+    border: 2px solid #A0A0A0;
     position: absolute;
     top: 0;
     left: 0;
@@ -194,7 +177,6 @@ console.log({{$pageNumber }});
     position: absolute;
     top: 0;
     left: 0;
-
   }
 
   .progress.color .progress-bar {
@@ -229,4 +211,18 @@ console.log({{$pageNumber }});
       transform: rotate({{$progressRight}}deg);
     }
   }
+
+  @media only screen and (max-device-width:986px) {
+    .progress .progress-value{
+        background:transparent;
+        z-index:1000;
+    }
+    .progress-mobile {
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: 0;
+      }
+  }
+
 </style>

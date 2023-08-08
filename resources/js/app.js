@@ -1,9 +1,12 @@
 import './bootstrap';
-import './height-controller';
-import './button';
-import './avatar';
-import './form-display';
+
+// import './height-controller';
+// import './button';
+// import './avatar';
+// import './form-display';
 // import './sortable';
+import './coverage-carousel';
+
 
 
 // Add checkmark for every page completed in left navigation menu

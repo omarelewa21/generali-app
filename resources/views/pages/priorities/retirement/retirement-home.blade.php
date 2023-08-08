@@ -1,9 +1,4 @@
-<?php
- /**
- * Template Name: Protection Homepage Page
- */
-?>
-
+{{-- Retirement - Home --}}
 @extends('templates.master')
 
 @section('title')
@@ -13,8 +8,7 @@
 @section('content')
 
 <div id="retirement_home" class="vh-100">
-
-    <div class="container-fluid p-0">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
@@ -22,14 +16,14 @@
                     <h4 class="display-5 font-bold fw-bold">My Priorities</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 text-dark px-0 retirement-bg">
+            <div class="col-12 col-md-8 col-lg-9 text-dark px-0 bg-retirement-home">
                 <hr class="needs-line py-1 m-0 bg-primary opacity-100 border-0" />
                 <div class="vh-100 overflow-auto">
                     @include ('templates.nav.nav-sidebar-needs')
-                    <section class="main-content">
-                        <div class="needs-home-avatar col-12 text-center justify-content-center position-absolute">
+                    <section class="row justify-content-center align-items-center vh-100">
+                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2">
                             <img src="{{ asset('images/needs/retirement/retirement-character.svg') }}">
-                            <h5 class="d-flex justify-content-center text-center w-md-50 px-2 px-md-0 m-auto py-3 position-relative">Now let's talk about your plans for Retirement.</h5>
+                            <h5 class="d-flex col-12 col-md-8 justify-content-center needs-grey-bg-mobile">Now let's talk about your plans for Retirement.</h5>
                         </div>
 
                         <div class="d-flex needs-grey-bg justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">

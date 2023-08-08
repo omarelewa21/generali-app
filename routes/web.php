@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProgressBarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
-use App\Http\Controllers\formValidateRetirementNeeds;
+use App\Http\Controllers\formProtectionController;
+use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\InvestmentController;
 
@@ -37,10 +37,15 @@ Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')-
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
+Route::post('/protection-coverage', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
+Route::post('/protection-monthly-support', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
 Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
+Route::post('/protection-supporting-years', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
 Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
+Route::post('/protection-existing-policy', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
 Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
+
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
@@ -67,16 +72,18 @@ Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->na
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
 /* Priorities - Retirement */
-// Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
-Route::get('/retirement-home', [ProgressBarController::class, 'progressBarLoading'])->name('retirement.home');
+Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
-Route::Post('/retirement-coverage', [formValidateRetirementNeeds::class, 'validateAvatarSelection'])->name('form.retirement.validateAvatar');
+Route::Post('/retirement-coverage', [formRetirementController::class, 'submitRetirementCoverage'])->name('form.retirement.coverage');
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
 Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
+Route::Post('/retirement-age-to-retire', [formRetirementController::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
 Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');
-Route::Post('/retirement-age-to-retire', [formValidateRetirementNeeds::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
+Route::Post('/retirement-allocated-funds', [formRetirementController::class, 'submitRetirementAllocatedFunds'])->name('form.retirement.allocated.funds');
 Route::view('/retirement-years-till-retire', 'pages.priorities.retirement.retirement-years-till-retire')->name('retirement.years.till.retire');
+Route::Post('/retirement-years-till-retire', [formRetirementController::class, 'submitRetirementYearsTillRetire'])->name('form.retirement.years.till.retire');
 Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.retirement-allocated-funds-aside')->name('retirement.allocated.funds.aside');
+Route::Post('/retirement-allocated-funds-aside', [formRetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
 Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
 
 Route::get('/files/{filename}', function($filename){

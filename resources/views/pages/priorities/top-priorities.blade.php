@@ -21,21 +21,21 @@
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
+
                         <div id="sortable" class="position-relative pt-3">
                             <div class="svg-container first">
                                 <button class="svg-button position-relative px-0">
-                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 138" fill="none">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center ui-state-default"></div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 138" fill="none">
                                         <path d="M164.769 55.0442C154.767 80.802 149.189 108.766 148.949 138L0 130.454C1.31449 85.1007 10.4816 41.7136 26.2098 1.61914L164.769 55.0442Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">1</text>
-                                        <!-- <image xlink:href="{{ asset('images/top-priorities/protection-icon.svg') }}" width="60%" height="60%" x="50%" y="50%" preserveAspectRatio="xMidYMid meet" /> -->
                                     </svg>
                                 </button>
                             </div>
                             <div class="svg-container second">
                                 <button class="svg-button position-relative px-0">
-                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 180" fill="none">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center ui-state-default"></div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 180" fill="none">
                                         <path d="M188.69 102.091C167.716 124.11 150.97 150.188 139.769 179.045L1.20972 125.62C19.5897 78.8027 46.8854 36.4788 81.0165 0.740234L188.69 102.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">2</text>
                                     </svg>
@@ -44,7 +44,7 @@
                             <div class="svg-container third">
                                 <button class="svg-button position-relative px-0">
                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187 191" fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187 191" fill="none">
                                         <path d="M186.051 136.266C156.687 148.865 130.42 167.294 108.691 190.091L1.0166 88.7402C36.6679 51.401 79.7832 21.2644 127.951 0.685547L186.051 136.266Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="55%" y="55%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">3</text>
                                     </svg>
@@ -98,10 +98,10 @@
                                     </svg>
                                 </button>
                             </div>
-                        </div>
-                        <div class="col-12 position-absolute" style="bottom: -60%;">
-                            <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        </div>
+                            
+                        </div> -->
+                        <img src="{{ asset('/images/top-priorities/priorities-grid.png') }}" width="500px" class="mx-auto d-block pt-4" alt="">
+                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -115,11 +115,11 @@
                                     <p class="text-white display-6">Select your priorities by first to last.</p>
                                 </div>
                             </div>
-                            <div id="needs" class="row px-4 pb-4 px-sm-5 needs">
+                            <div id="needs" class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="protection" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.svg') }}" width="auto" alt="Protection">
+                                            <img class="needs" src="{{ asset('images/top-priorities/protection-icon.svg') }}" width="auto" height="100px" alt="Protection">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
                                         </button>
                                     </div>
@@ -127,7 +127,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="retirement" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" alt="Retirement">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.svg') }}" width="auto" alt="Retirement">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
                                         </button>
                                     </div>
@@ -135,7 +135,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="education" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" alt="Education">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.svg') }}" width="auto" alt="Education">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
                                         </button>
                                     </div>
@@ -143,7 +143,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="savings" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" alt="Savings">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.svg') }}" width="auto" alt="Savings">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
                                         </button>
                                     </div>
@@ -151,7 +151,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="debt-cancellation" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" alt="Debt Cancellation">
+                                            <img class="needs" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
                                         </button>
                                     </div>
@@ -159,7 +159,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="health-medical" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" alt="Health & Medical">
+                                            <img class="needs" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
                                         </button>
                                     </div>
@@ -167,7 +167,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="investments" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" alt="Investments">
+                                            <img class="needs" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Investments">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Investments</p>
                                         </button>
                                     </div>
@@ -175,7 +175,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="others" data-required="">
-                                            <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" alt="Others">
+                                            <img class="needs" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                         </button>
                                     </div>
@@ -187,9 +187,9 @@
                     <section class="footer bg-accent-light-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                <div class="col-12 d-grid gap-2 d-md-block text-end px-5">
+                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -205,17 +205,30 @@
     background-color: transparent;
     border: none;
     margin: 0;
-    padding: 0;
 }
 .dropped {
     width:100%;
     height:100%;
 }
-.first .dropped img:not(.close) {
-    padding: 10px;
+.dropped img:not(.close) {
     position: absolute;
-    bottom: 15px;
+    top: 33%;
+    height: auto;
+    max-height: 88px;
 }
+
+.third .dropped img:not(.close) {
+    left: 35%;
+}
+
+.fourth .dropped img:not(.close) {
+    left: 40%;
+}
+
+.fifth .dropped img:not(.close) {
+    left: 20%;
+}
+
 .item-dropped svg path {
     fill:#fff;
     stroke: #AA1B17;
@@ -224,66 +237,85 @@
 .item-dropped svg text {
     display: none;
 }
+
 .remove-button {
     position: absolute;
-    width: 30px;
+    width: 35px;
+    max-width: 46px;
 }
+
 .first .remove-button {
-    bottom: 20%;
+    bottom: 23%;
     right: 0;
 }
+
 .second .remove-button {
-    bottom: 33px;
-    left: 72%;
-    transform: translateX(40%);
+    bottom: 16%;
+    right: 10%;
 }
+
+.third .remove-button {
+    bottom: 12%;
+    right: 18%;
+}
+
+.fourth .remove-button {
+    bottom: 5%;
+    right: 23%;
+}
+
+.fifth .remove-button {
+    bottom: 5%;
+    left: 25%;
+}
+
+.sixth .remove-button {
+    bottom: 13%;
+    left: 17%;
+}
+
+.seventh .remove-button {
+    bottom: 17%;
+    left: 10%;
+}
+
+.eight .remove-button {
+    bottom: 24%;
+    left: 0;
+}
+
 .needs-icon {
     height:100px;
-    z-index: 2;
 }
-.svg-button svg {
-    width: 100%; 
-    height: auto;
+#sortable-list .main.first {
+  transform: translate(189px, 146px);
+  width:109px;
 }
-#sortable {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(1%, 1fr));
+#sortable-list .main.second {
+  transform: translate(103px, 72px);
+  width:123px;
+}
+#sortable-list .main.third {
+  transform: translate(37px, 19px);
+  width:122px;
+}
+#sortable-list .main.fifth {
+  transform: translate(-1px, 1px);
+}
+#sortable-list .main.sixth {
+  transform: translate(-40px, 20px);
+  width:122px;
+}
+#sortable-list .main.seventh {
+  transform: translate(-115px, 75px);
+  width:122px;
+}
+#sortable-list .main.eight {
+  transform: translate(-115px, 75px);
+  width:117px;
+}
+.needs {
     z-index: 1;
-}
-#sortable .first {
-    grid-column: 20 / span 14;
-    grid-row: 59 / 96;
-}
-#sortable .second {
-    grid-column: 22 / span 16;
-    grid-row: 28 / 73;
-    transform: translate(1px, 2px);
-}
-#sortable .third {
-    grid-column: 29 / span 16;
-    grid-row: 9 / 51;
-}
-#sortable .fourth {
-    grid-column: 40 / span 13;
-    grid-row: 1 / 39;
-}
-#sortable .fifth {
-    grid-column: 53 / span 13;
-    grid-row: 1 / 39;
-}
-#sortable .sixth {
-    grid-column: 61 / span 16;
-    grid-row: 9 / 51;
-}
-#sortable .seventh {
-    grid-column: 68 / span 16;
-    grid-row: 28 / 73;
-    transform: translate(-2px, 3px);
-}
-#sortable .eight {
-    grid-column: 72 / span 14;
-    grid-row: 59 / 96;
 }
 </style>
 
@@ -291,22 +323,59 @@
 $(function() {
 
     var $needs = $("#needs"),
-        $sortable = $("#sortable");
+    $sortable = $("#sortable");
 
     var addedNeedsImages = []; // Array to keep track of added needs images
 
-    $("button img", $needs).draggable({
-        cancel: "a.ui-icon",
-        revert: "invalid",
-        containment: "document",
-        helper: "clone",
-        cursor: "move",
-        start: function(event, ui) {
-            if ($(this).hasClass("item-dropped")) {
-                ui.helper.addClass("item-dropped");
-            }
-        }
-    });
+    // function addImageToSortable(imageName) {
+    //     var droppedContainer = $sortable.find(".dropped:empty:first");
+
+    //     if (droppedContainer.length > 0) {
+    //         if (addedNeedsImages.indexOf(imageName) === -1) {
+    //             addedNeedsImages.push(imageName);
+
+    //             var img = new Image();
+    //             img.src = imageName;
+    //             img.onload = function() {
+    //                 var droppedItem = $("<img>").attr("src", imageName);
+    //                 droppedContainer.append(droppedItem);
+    //                 var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+    //                 droppedContainer.append(removeButton);
+
+    //                 droppedItem.animate({ width: "40%" }, function() {
+    //                     droppedItem.animate({ height: "auto" });
+    //                 });
+
+    //                 var parentSvgButton = droppedContainer.closest(".svg-button");
+    //                 parentSvgButton.addClass("item-dropped");
+
+    //                 removeButton.click(function() {
+    //                     parentSvgButton.removeClass("item-dropped");
+    //                     droppedItem.remove();
+    //                     removeButton.remove();
+
+    //                     var index = addedNeedsImages.indexOf(imageName);
+    //                     if (index !== -1) {
+    //                         addedNeedsImages.splice(index, 1);
+    //                     }
+    //                 });
+    //             };
+    //         }
+    //     }
+    // }
+
+    // $("button img", $needs).draggable({
+    //     cancel: "a.ui-icon",
+    //     revert: "invalid",
+    //     containment: "document",
+    //     helper: "clone",
+    //     cursor: "move",
+    //     start: function(event, ui) {
+    //         if ($(this).hasClass("item-dropped")) {
+    //             ui.helper.addClass("item-dropped");
+    //         }
+    //     }
+    // });
 
     $sortable.droppable({
         accept: "#needs button img:not(.item-dropped)",
@@ -327,7 +396,7 @@ $(function() {
                     var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
                     droppedContainer.append(removeButton);
 
-                    droppedItem.animate({ width: "60%" }, function() {
+                    droppedItem.animate({ width: "40%" }, function() {
                         droppedItem.find("img").animate({ height: "30px" });
                     });
 
@@ -373,7 +442,17 @@ $(function() {
             }
         }
     });
+
+    // Add click functionality to #needs button images
+    // $("button img", $needs).click(function() {
+    //     var imageName = $(this).attr("src");
+    //     addImageToSortable(imageName);
+    // });
+
+    // $( "#sortable .dropped img" ).sortable();
+
 });
+
 </script>
 
 @endsection
