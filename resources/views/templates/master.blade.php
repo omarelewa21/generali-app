@@ -22,6 +22,7 @@
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     {{-- @vite(['resources/js/custom-ying.js']) --}}
     @vite(['resources/js/jquery.min.js'])
     @vite(['resources/js/slick.min.js'])
