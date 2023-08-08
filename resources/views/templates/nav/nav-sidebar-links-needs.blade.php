@@ -84,3 +84,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        var currentPath = "{{ Request::url() }}"; // Get the current URL path
+        
+        console.log(currentPath);
+
+        $('.timeline-needs').each(function (index) {
+            var itemURL = $(this).find('a').attr('href');
+
+            console.log(itemURL);
+
+            if (itemURL === currentPath) {
+                $(this).addClass('active');
+
+                // Also mark all previous steps as active
+                for (var i = 0; i < index; i++) {
+                    $('.timeline-item-needs:eq(' + i + ')').addClass('active');
+                }
+            }
+        });
+    });
+</script>

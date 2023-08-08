@@ -21,21 +21,21 @@
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
+
                         <div id="sortable" class="position-relative pt-3">
                             <div class="svg-container first">
                                 <button class="svg-button position-relative px-0">
-                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 138" fill="none">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center ui-state-default"></div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 138" fill="none">
                                         <path d="M164.769 55.0442C154.767 80.802 149.189 108.766 148.949 138L0 130.454C1.31449 85.1007 10.4816 41.7136 26.2098 1.61914L164.769 55.0442Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">1</text>
-                                        <!-- <image xlink:href="{{ asset('images/top-priorities/protection-icon.svg') }}" width="60%" height="60%" x="50%" y="50%" preserveAspectRatio="xMidYMid meet" /> -->
                                     </svg>
                                 </button>
                             </div>
                             <div class="svg-container second">
                                 <button class="svg-button position-relative px-0">
-                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 180" fill="none">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center ui-state-default"></div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 180" fill="none">
                                         <path d="M188.69 102.091C167.716 124.11 150.97 150.188 139.769 179.045L1.20972 125.62C19.5897 78.8027 46.8854 36.4788 81.0165 0.740234L188.69 102.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">2</text>
                                     </svg>
@@ -44,7 +44,7 @@
                             <div class="svg-container third">
                                 <button class="svg-button position-relative px-0">
                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187 191" fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 187 191" fill="none">
                                         <path d="M186.051 136.266C156.687 148.865 130.42 167.294 108.691 190.091L1.0166 88.7402C36.6679 51.401 79.7832 21.2644 127.951 0.685547L186.051 136.266Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                         <text x="55%" y="55%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">3</text>
                                     </svg>
@@ -127,7 +127,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="retirement" data-required="">
-                                            <img class="needs" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.svg') }}" width="auto" alt="Retirement">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
                                         </button>
                                     </div>
@@ -135,7 +135,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="education" data-required="">
-                                            <img class="needs" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.svg') }}" width="auto" alt="Education">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
                                         </button>
                                     </div>
@@ -143,7 +143,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1 d-flex">
                                     <div class="col-12 py-4 px-3 d-flex align-items-center justify-content-center button-bg flex-grow-1">
                                         <button class="border-0" data-avatar="savings" data-required="">
-                                            <img class="needs" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
+                                            <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.svg') }}" width="auto" alt="Savings">
                                             <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
                                         </button>
                                     </div>
@@ -201,18 +201,90 @@
 </div>
 
 <style>
-#sortable-list ul {
-    list-style: none;
+#sortable button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
 }
-.droppableArea {
+.dropped {
+    width:100%;
+    height:100%;
+}
+.dropped img:not(.close) {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 33%;
+    height: auto;
+    max-height: 88px;
 }
-#sortable-list .main {
-    width:100px;
+
+.third .dropped img:not(.close) {
+    left: 35%;
+}
+
+.fourth .dropped img:not(.close) {
+    left: 40%;
+}
+
+.fifth .dropped img:not(.close) {
+    left: 20%;
+}
+
+.item-dropped svg path {
+    fill:#fff;
+    stroke: #AA1B17;
+    stroke-width: 2px;
+}
+.item-dropped svg text {
+    display: none;
+}
+
+.remove-button {
+    position: absolute;
+    width: 35px;
+    max-width: 46px;
+}
+
+.first .remove-button {
+    bottom: 23%;
+    right: 0;
+}
+
+.second .remove-button {
+    bottom: 16%;
+    right: 10%;
+}
+
+.third .remove-button {
+    bottom: 12%;
+    right: 18%;
+}
+
+.fourth .remove-button {
+    bottom: 5%;
+    right: 23%;
+}
+
+.fifth .remove-button {
+    bottom: 5%;
+    left: 25%;
+}
+
+.sixth .remove-button {
+    bottom: 13%;
+    left: 17%;
+}
+
+.seventh .remove-button {
+    bottom: 17%;
+    left: 10%;
+}
+
+.eight .remove-button {
+    bottom: 24%;
+    left: 0;
+}
+
+.needs-icon {
     height:100px;
 }
 #sortable-list .main.first {
@@ -251,9 +323,46 @@
 $(function() {
 
     var $needs = $("#needs"),
-        $sortable = $("#sortable");
+    $sortable = $("#sortable");
 
     var addedNeedsImages = []; // Array to keep track of added needs images
+
+    function addImageToSortable(imageName) {
+        var droppedContainer = $sortable.find(".dropped:empty:first");
+
+        if (droppedContainer.length > 0) {
+            if (addedNeedsImages.indexOf(imageName) === -1) {
+                addedNeedsImages.push(imageName);
+
+                var img = new Image();
+                img.src = imageName;
+                img.onload = function() {
+                    var droppedItem = $("<img>").attr("src", imageName);
+                    droppedContainer.append(droppedItem);
+                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                    droppedContainer.append(removeButton);
+
+                    droppedItem.animate({ width: "40%" }, function() {
+                        droppedItem.animate({ height: "auto" });
+                    });
+
+                    var parentSvgButton = droppedContainer.closest(".svg-button");
+                    parentSvgButton.addClass("item-dropped");
+
+                    removeButton.click(function() {
+                        parentSvgButton.removeClass("item-dropped");
+                        droppedItem.remove();
+                        removeButton.remove();
+
+                        var index = addedNeedsImages.indexOf(imageName);
+                        if (index !== -1) {
+                            addedNeedsImages.splice(index, 1);
+                        }
+                    });
+                };
+            }
+        }
+    }
 
     $("button img", $needs).draggable({
         cancel: "a.ui-icon",
@@ -287,7 +396,7 @@ $(function() {
                     var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
                     droppedContainer.append(removeButton);
 
-                    droppedItem.animate({ width: "60%" }, function() {
+                    droppedItem.animate({ width: "40%" }, function() {
                         droppedItem.find("img").animate({ height: "30px" });
                     });
 
@@ -333,7 +442,17 @@ $(function() {
             }
         }
     });
+
+    // Add click functionality to #needs button images
+    $("button img", $needs).click(function() {
+        var imageName = $(this).attr("src");
+        addImageToSortable(imageName);
+    });
+
+    // $( "#sortable .dropped img" ).sortable();
+
 });
+
 </script>
 
 @endsection
