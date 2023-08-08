@@ -23,6 +23,8 @@
     <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {{-- @vite(['resources/js/custom-ying.js']) --}}
     @vite(['resources/js/jquery.min.js'])
     @vite(['resources/js/slick.min.js'])

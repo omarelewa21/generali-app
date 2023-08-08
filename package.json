@@ -24,6 +24,7 @@
         "jquery-ui": "^1.13.2",
         "jquery-ui-dist": "^1.13.2",
         "slick-carousel": "^1.8.1",
-        "sortablejs": "^1.15.0"
+        "sortablejs": "^1.15.0",
+        "ui": "^0.2.4"
     }
 }

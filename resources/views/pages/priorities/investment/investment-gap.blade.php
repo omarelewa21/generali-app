@@ -52,8 +52,8 @@
                                                             <div class="invalid-feedback">{{ $errors->first('investment_years_times') }}</div>
                                                         @endif
                                                     </p>
-                                                    <p class="f-34 @error('investment_annual_return') is-invalid @enderror"><strong>I expect to have an annual return of</strong>
-                                                        <span class="currencyinput">RM<input type="text" name="investment_annual_return" class="form-control d-inline-block w-30 f-34" id="investment_annual_return" required></span>
+                                                    <p class="f-34"><strong>I expect to have an annual return of</strong></p>
+                                                    <p class="f-34 @error('investment_annual_return') is-invalid @enderror"><span class="currencyinput">RM<input type="text" name="investment_annual_return" class="form-control d-inline-block w-30 f-34" id="investment_annual_return" required></span>
                                                         @if ($errors->has('investment_annual_return'))
                                                             <div class="invalid-feedback">{{ $errors->first('investment_annual_return') }}</div>
                                                         @endif
