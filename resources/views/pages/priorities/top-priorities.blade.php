@@ -99,7 +99,7 @@
                                 </button>
                             </div>
                             
-                        </div> -->
+                        </div>
                         <img src="{{ asset('/images/top-priorities/priorities-grid.png') }}" width="500px" class="mx-auto d-block pt-4" alt="">
                         <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
