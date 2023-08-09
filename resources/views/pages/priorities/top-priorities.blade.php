@@ -22,6 +22,31 @@
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
 
+                        <!-- <div id="sortable" class="position-relative pt-3">
+                            <ul>
+                                <li>
+                                <div class="svg-container first">
+                                <div class="svg-button position-relative px-0">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166 138" fill="none">
+                                        <path d="M164.769 55.0442C154.767 80.802 149.189 108.766 148.949 138L0 130.454C1.31449 85.1007 10.4816 41.7136 26.2098 1.61914L164.769 55.0442Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                        <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">1</text>
+                                    </svg>
+                                </div>
+                            </div>
+                                </li>
+                                <li><div class="svg-container first">
+                                <div class="svg-button position-relative px-0">
+                                    <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 180" fill="none">
+                                        <path d="M188.69 102.091C167.716 124.11 150.97 150.188 139.769 179.045L1.20972 125.62C19.5897 78.8027 46.8854 36.4788 81.0165 0.740234L188.69 102.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                        <text x="50%" y="60%" font-family="Helvetica Neue" font-size="64" fill="#707070" font-weight="700" opacity="0.5" text-anchor="middle" dominant-baseline="middle">2</text>
+                                    </svg>
+                                </div>
+                            </div></li>
+                            </ul>
+                            
+                        </div> -->
                         <div id="sortable" class="position-relative pt-3">
                             <div class="svg-container first">
                                 <div class="svg-button position-relative px-0">
@@ -274,5 +299,220 @@
     </div>
 </div>
 
+<!-- <script>
+    $(function() {
+    var $needs = $("#needs"),
+    $sortable = $("#sortable");
 
+    var addedNeedsImages = []; // Array to keep track of added needs images
+
+    console.log(addedNeedsImages);
+
+    function addImageToSortable(imageName) {
+        var droppedContainer = $sortable.find(".dropped:empty:first");
+        if (droppedContainer.length > 0) {
+            
+            if (addedNeedsImages.indexOf(imageName) === -1) {
+                addedNeedsImages.push(imageName);
+                var img = new Image();
+                img.src = imageName;
+                img.onload = function() {
+                    var droppedItem = $("<img>").attr("src", imageName);
+                    droppedContainer.append(droppedItem);
+                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                    droppedContainer.append(removeButton);
+                    droppedItem.animate({ width: "40%" }, function() {
+                        droppedItem.animate({ height: "auto" });
+                    });
+                    
+                    var parentSvgButton = droppedContainer.closest(".svg-button");
+                    parentSvgButton.addClass("item-dropped");
+                    
+                    removeButton.click(function() {
+                        parentSvgButton.removeClass("item-dropped");
+                        droppedItem.remove();
+                        removeButton.remove();
+                        var index = addedNeedsImages.indexOf(imageName);
+
+                        if (index !== -1) {
+                            addedNeedsImages.splice(index, 1);
+                        }
+                    });
+                };
+            }
+        }
+    }
+    
+    $("button img", $needs).draggable({
+        cancel: "a.ui-icon",
+        revert: "invalid",
+        containment: "document",
+        helper: "clone",
+        cursor: "move",
+        start: function(event, ui) {
+            if ($(this).hasClass("item-dropped")) {
+                ui.helper.addClass("item-dropped");
+            }
+        }
+    });
+
+    $sortable.sortable({
+        items: ".dropped img",
+        placeholder: "ui-state-highlight",
+        forcePlaceholderSize: true,
+        containment: "#sortable",
+        update: function(event, ui) {
+            // Check if all .svg-button elements have the class .item-dropped
+            var allButtonsDropped = $(".svg-button:not(.item-dropped)").length === 0;
+    
+            if (allButtonsDropped) {
+                // Enable sorting only when all items are dropped
+            } else {
+                // Disable sorting if any item is not dropped
+                $sortable.sortable("cancel");
+            }
+        }
+    }).disableSelection();
+    
+    $sortable.sortable({
+        items: ".svg-button .dropped img",
+        placeholder: "ui-state-highlight",
+        forcePlaceholderSize: true,
+        containment: "#sortable",
+        update: function(event, ui) {
+            // Check if all .svg-button elements have .item-dropped class
+            var allButtonsDropped = $(".svg-button:not(.item-dropped)").length === 0;
+    
+            if (allButtonsDropped) {
+                // Allow sorting if all buttons have .item-dropped class
+                var droppedItem = ui.item;
+                var droppedIndex = droppedItem.index();
+                var droppedContainer = droppedItem.parent();
+    
+                // Update the addedNeedsImages array to match the new order
+                var newOrder = [];
+                droppedContainer.find("img").each(function() {
+                    var imageName = $(this).attr("src");
+                    newOrder.push(imageName);
+                });
+                addedNeedsImages = newOrder;
+    
+                // Remove the dropped item from the DOM and re-add it to the correct position
+                droppedItem.remove();
+                droppedContainer.children().eq(droppedIndex).before(droppedItem);
+            } else {
+                // Prevent sorting if not all buttons have .item-dropped class
+                $sortable.sortable("cancel");
+            }
+        }
+    }).disableSelection();
+
+    
+    // $sortable.sortable({
+    //     items: ".svg-button .dropped img",
+    //     placeholder: "ui-state-highlight",
+    //     forcePlaceholderSize: true,
+    //     containment: "#sortable",
+    //     update: function(event, ui) {
+    //         // // Handle sorting update here
+    //         // var droppedItem = ui.item;
+    //         // var droppedIndex = droppedItem.index();
+    //         // var droppedContainer = droppedItem.parent();
+
+    //         // // Update the addedNeedsImages array to match the new order
+    //         // var newOrder = [];
+    //         // droppedContainer.find("img").each(function() {
+    //         //     var imageName = $(this).attr("src");
+    //         //     newOrder.push(imageName);
+    //         // });
+    //         // addedNeedsImages = newOrder;
+
+    //         // // Remove the dropped item from the DOM and re-add it to the correct position
+    //         // droppedItem.remove();
+    //         // droppedContainer.children().eq(droppedIndex).before(droppedItem);
+    //     }
+    // }).disableSelection();
+    
+
+    $sortable.droppable({
+        accept: "#needs button img:not(.item-dropped)",
+        classes: {
+            "ui-droppable-active": "ui-state-highlight"
+        },
+
+        drop: function(event, ui) {
+            var droppedItem = ui.draggable.clone();
+            var droppedContainer = $(this).find(".dropped:empty:first");
+            
+            if (droppedContainer.length > 0) {
+                // Check if the needs image has already been added
+                var imageName = droppedItem.attr("src");
+                if (addedNeedsImages.indexOf(imageName) === -1) {
+                    addedNeedsImages.push(imageName);
+                    droppedContainer.append(droppedItem);
+                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                    droppedContainer.append(removeButton);
+
+                    droppedItem.animate({ width: "40%" }, function() {
+                        droppedItem.find("img").animate({ height: "30px" });
+                    });
+                    
+                    var parentSvgButton = droppedContainer.closest(".svg-button");
+                    parentSvgButton.addClass("item-dropped");
+                    
+                    removeButton.click(function() {
+                        parentSvgButton.removeClass("item-dropped");
+                        droppedItem.remove();
+                        removeButton.remove();
+                        
+                        // Remove the image from the addedNeedsImages array
+                        var index = addedNeedsImages.indexOf(imageName);
+
+                        if (index !== -1) {
+                            addedNeedsImages.splice(index, 1);
+                        }
+                    });
+                }
+            }
+        }
+    });
+    
+    $needs.droppable({
+        accept: "#sortable button img",
+        classes: {
+            "ui-droppable-active": "custom-state-active"
+        },
+
+        drop: function(event, ui) {
+            var droppedItem = ui.draggable;
+            var parentSvgButton = droppedItem.closest(".svg-button");
+            droppedItem.draggable("enable");
+            droppedItem.removeClass("item-dropped");
+            parentSvgButton.removeClass("item-dropped");
+            droppedItem.remove();
+            
+            // Remove the image from the addedNeedsImages array
+            var imageName = droppedItem.attr("src");
+            var index = addedNeedsImages.indexOf(imageName);
+
+            if (index !== -1) {
+                addedNeedsImages.splice(index, 1);
+            }
+        }
+    });
+    
+    // Add click functionality to #needs button images
+    $("button img", $needs).click(function() {
+        var imageName = $(this).attr("src");
+        addImageToSortable(imageName);
+    });    
+});
+</script> -->
+
+<!-- <script>
+  $( function() {
+    $( "#sortable ul" ).sortable();
+    $( "#sortable ul" ).disableSelection();
+  } );
+  </script> -->
 @endsection
