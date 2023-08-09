@@ -140,5 +140,29 @@ document.addEventListener("DOMContentLoaded", function() {
             existingPolicyAmount.style.display = 'none';
         }
     }
+    $(document).ready(function () {
+        function updateProgress(inputValue) {
+            var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
+            var totalProtectionValue = (parseFloat(totalProtectionValueStr));
+  console.log(inputValue);
+  console.log(parseFloat(totalProtectionValueStr));
+            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
+
+
+            $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
+            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+        }
+        var inputValue = $('#protectionPolicyAmount').val();
+        if (inputValue !== "") {
+            updateProgress(inputValue);
+        } else {
+            // updateProgress(0); // Or you can use any default value you want
+        }
+        $('#protectionPolicyAmount').on('input', function () {
+            var inputValue = $(this).val();
+            updateProgress(inputValue);
+        });
+    });
+
 </script>
 @endsection

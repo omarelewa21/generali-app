@@ -27,6 +27,10 @@ class formProtectionController extends Controller
 
         ], $customMessages);
 
+        $protectionSelectedAvatar = $request->input('protectionSelectedAvatar');
+
+        Session::put('protectionSelectedAvatar', $protectionSelectedAvatar);
+
         // // Process the form data and perform any necessary actions
         // return redirect()->route('viewProtectionMonthlySupport')
         // ->withInput(); 
@@ -120,9 +124,16 @@ class formProtectionController extends Controller
             'protectionPolicyAmount' => 'required_if:protectionExistingPolicy,yes|numeric',
         ], $customMessages);
 
-        $TotalProtectionValue = $request->input('TotalProtectionValue');
+        $previousTotalProtectionValue = Session::get('TotalProtectionValue'); // Assuming this key is used to store the value
+        // $TotalProtectionValue = $request->input('TotalProtectionValue');
         $protectionExistingPolicy = $request->input('protectionExistingPolicy');
         $protectionPolicyAmount = $request->input('protectionPolicyAmount');
+        $previousTotalProtectionValue = str_replace(['RM', ','], '', $previousTotalProtectionValue);
+
+        // Convert the stripped value to a numeric format
+        $previousTotalProtectionValue = floatval($previousTotalProtectionValue);
+
+        $TotalProtectionValue = $previousTotalProtectionValue - $protectionPolicyAmount;
         $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
         Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
         Session::put('protectionExistingPolicy', $protectionExistingPolicy);

@@ -115,7 +115,8 @@ $(document).ready(function () {
             var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
             var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
-            console.log(totalProtectionValueStr);   
+            console.log(totalProtectionValueStr);
+            console.log (totalProtectionValue);
             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
             $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
 
@@ -124,7 +125,7 @@ $(document).ready(function () {
         if (inputValue !== "") {
             updateProgress(inputValue);
         } else {
-            updateProgress(0); // Or you can use any default value you want
+            // updateProgress(0); // Or you can use any default value you want
         }
 
         $('#protectionSupportingYears').on('input', function () {
