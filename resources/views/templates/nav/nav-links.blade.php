@@ -64,38 +64,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    // $(document).ready(function () {
-    //     // Get the current URL path
-    //     var currentPath = window.location.pathname;
-
-    //     // Find all the timeline items and iterate through them
-    //     $('.timeline-item').each(function (index) {
-    //         // Get the URL of the timeline item
-    //         var itemURL = $(this).find('a').attr('href');
-
-    //         // Create a URL object to parse the full URL
-    //         var urlObject = new URL(itemURL);
-
-    //         // Get only the path from the URL object
-    //         var itemPath = urlObject.pathname;
-
-    //         // Check if the current URL matches the timeline item URL
-    //         // if (itemPath === currentPath) {
-    //         if (itemPath === currentPath || (currentPath === '/welcome' && index < $('.timeline-item').length - 1)) {
-    //             // Add the checkmark (you can use a class or a style here)
-    //             $(this).addClass('active'); // Add your CSS class here
-
-    //             // Also mark all previous steps as active
-    //             for (var i = 0; i < index; i++) {
-    //                 $('.timeline-item:eq(' + i + ')').addClass('active');
-    //             }
-    //         }
-    //     });
-    // });
-
-    
-
-</script>
