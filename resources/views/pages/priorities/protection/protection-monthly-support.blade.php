@@ -21,14 +21,12 @@
                         <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
+                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                        {{-- <h3 id="TotalProtectionValue" class="m-1 text-light text-center">$value </h3>
-                            <p class="text-light text-center">Total Protection Fund Needed</p> --}}
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM{{ Session::get('TotalProtectionValue', 0) }}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
                             <script>
-                                console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
+                                // console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
                             </script>
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
@@ -55,7 +53,7 @@
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text">RM</h5></span>
-                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ old('protectionFunds') }}" class="form-control text-primary @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
+                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="form-control text-primary @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
                                 @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
@@ -114,24 +112,19 @@ $(document).ready(function () {
         function updateProgress(inputValue) {
             var month = 12;
             var totalProtectionValue = inputValue * month;
-            var progressTotalProtectionValue = totalProtectionValue *100;
+            // var progressTotalProtectionValue = totalProtectionValue * 100;
+            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
+
 
             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-            $('#TotalProtectionValue').text('RM' + totalProtectionValue);
-
-            // $.ajax({
-            //     url: '{{ route('form.protection.monthly.support') }}',
-            //     type: 'POST',
-            //     data: {
-            //         _token: '{{ csrf_token() }}',
-            //         TotalProtectionValue: totalProtectionValue
-            //     },
-            //     success: function (response) {
-            //         console.log('TotalProtectionValue updated in session.');
-            //     }
-            // });
+            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
         }
-
+        var inputValue = $('#protectionFunds').val();
+        if (inputValue !== "") {
+            updateProgress(inputValue);
+        } else {
+            updateProgress(0); // Or you can use any default value you want
+        }
         $('#protectionFunds').on('input', function () {
             var inputValue = $(this).val();
             updateProgress(inputValue);
