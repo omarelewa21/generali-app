@@ -234,10 +234,10 @@
     html {
       overflow-y: auto;
     }
-    body {
+    /* body {
         min-height: 51.5rem;
     padding-top: 5.5rem;
-    }
+    } */
     .vh-sm-0 {
         height:100% !important;
       }
