@@ -467,127 +467,274 @@ button[data-required="selected"] img {
 }
 
 :root {
---lerp-0: 1;
---lerp-1: 0.5625;
---lerp-2: 0.25;
---lerp-3: 0.0625;
---lerp-4: 0;
+  --lerp-0: 1;
+  --lerp-1: 0.5625;
+  --lerp-2: 0.25;
+  --lerp-3: 0.0625;
+  --lerp-4: 0;
 }
 
 .blocks:hover {
---show: 1;
+  --show: 1;
 }
 
 .block {
-width: 48px;
-height: 48px;
-display: grid;
-place-items: center;
-align-content: center;
-transition: flex 0.2s;
-flex: calc(0.2 + (var(--lerp, 0) * 1.5));
-position: relative;
-padding:8px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  transition: flex 0.2s;
+  flex: calc(0.2 + (var(--lerp, 0) * 1.5));
+  position: relative;
+  padding:8px;
 }
 
 .block:after {
-content: "";
-width: 5%;
-aspect-ratio: 1;
-background: var(--text-1);
-position: absolute;
-bottom: 10%;
-left: 50%;
-border-radius: var(--radius-3);
-transform: translate(-50%, -50%);
-z-index: -1;
+  content: "";
+  width: 5%;
+  aspect-ratio: 1;
+  background: var(--text-1);
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  border-radius: var(--radius-3);
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .block:before {
-content: "";
-position: absolute;
-width: calc(100% + var(--size-4));
-bottom: 0;
-aspect-ratio: 1 / 2;
-left: 50%;
-transition: transform 0.2s;
-transform-origin: 50% 100%;
-transform: translateX(-50%) scaleY(var(--show, 0));
-z-index: -1;
+  content: "";
+  position: absolute;
+  width: calc(100% + var(--size-4));
+  bottom: 0;
+  aspect-ratio: 1 / 2;
+  left: 50%;
+  transition: transform 0.2s;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) scaleY(var(--show, 0));
+  z-index: -1;
 }
 
 :is(.block:hover, .block:focus-visible) .block__item {
-outline: var(--surface-1) var(--size-1) solid;
+  outline: var(--surface-1) var(--size-1) solid;
 }
 
 .block__item {
-width: 100%;
-aspect-ratio: 1;
-border-radius: 5px;
-background: var(--bg), var(--surface-1);
-display: inline-block;
-transition: transform 0.2s;
-transform-origin: 50% 100%;
-position: relative;
-/* transform: translateY(calc(var(--lerp) * -75%)); */
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+  background: var(--bg), var(--surface-1);
+  display: inline-block;
+  transition: transform 0.2s;
+  transform-origin: 50% 100%;
+  position: relative;
+  /* transform: translateY(calc(var(--lerp) * -75%)); */
 }
 
 .block__item:after {
-content: "";
-position: absolute;
-height: 100%;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-aspect-ratio: 1;
-border-radius: var(--radius-3);
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  border-radius: var(--radius-3);
 }
 
 :is(.block:hover, .block:focus-visible) {
---lerp: var(--lerp-0);
-z-index: 5;
+  --lerp: var(--lerp-0);
+  z-index: 5;
 }
 .block:has(+ :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block {
---lerp: var(--lerp-1);
-z-index: 4;
+  --lerp: var(--lerp-1);
+  z-index: 4;
 }
 .block:has(+ .block + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block {
---lerp: var(--lerp-2);
-z-index: 3;
+  --lerp: var(--lerp-2);
+  z-index: 3;
 }
 .block:has(+ .block + .block + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block + .block {
---lerp: var(--lerp-3);
-z-index: 2;
+  --lerp: var(--lerp-3);
+  z-index: 2;
 }
 .block:has(+ .block
 + .block
 + .block
 + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block + .block + .block {
---lerp: var(--lerp-4);
-z-index: 1;
+  --lerp: var(--lerp-4);
+  z-index: 1;
 }
 
 body:has(a[style="--bg: var(--gradient-1);"]:focus) {
-background: var(--gradient-1);
+  background: var(--gradient-1);
 }
 body:has(a[style="--bg: var(--gradient-2);"]:focus) {
-background: var(--gradient-2);
+  background: var(--gradient-2);
 }
 body:has(a[style="--bg: var(--gradient-3);"]:focus) {
-background: var(--gradient-3);
+  background: var(--gradient-3);
 }
 body:has(a[style="--bg: var(--gradient-4);"]:focus) {
-background: var(--gradient-4);
+  background: var(--gradient-4);
 }
 body:has(a[style="--bg: var(--gradient-5);"]:focus) {
-background: var(--gradient-5);
+  background: var(--gradient-5);
 }
 body:has(a[style="--bg: var(--gradient-6);"]:focus) {
-background: var(--gradient-6);
+  background: var(--gradient-6);
+}
+
+/* Top Priorities Page */
+#sortable button {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropped {
+  width:100%;
+  height:100%;
+}
+
+.dropped img:not(.close) {
+  position: absolute;
+  top: 33%;
+  height: auto;
+  max-height: 88px;
+}
+
+.third .dropped img:not(.close) {
+  left: 35%;
+}
+
+.fourth .dropped img:not(.close) {
+  left: 40%;
+}
+
+.fifth .dropped img:not(.close) {
+  left: 20%;
+}
+
+.item-dropped svg path {
+  fill:#fff;
+  stroke: #AA1B17;
+  stroke-width: 2px;
+}
+
+.item-dropped svg text {
+  display: none;
+}
+
+.remove-button {
+  position: absolute;
+  width: 35px;
+  max-width: 25px;
+}
+
+.first .remove-button {
+  bottom: 23%;
+  right: 0;
+}
+
+.second .remove-button {
+  bottom: 16%;
+  right: 10%;
+}
+
+.third .remove-button {
+  bottom: 12%;
+  right: 18%;
+}
+
+.fourth .remove-button {
+  bottom: 5%;
+  right: 23%;
+}
+
+.fifth .remove-button {
+  bottom: 5%;
+  left: 25%;
+}
+
+.sixth .remove-button {
+  bottom: 13%;
+  left: 17%;
+}
+
+.seventh .remove-button {
+  bottom: 17%;
+  left: 10%;
+}
+
+.eight .remove-button {
+  bottom: 24%;
+  left: 0;
+}
+
+.needs-icon {
+  height:100px;
+  z-index: 2;
+}
+
+.svg-button svg {
+  width: 100%; 
+  height: auto;
+}
+
+#sortable {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1%, 1fr));
+  z-index: 1;
+}
+
+#sortable .first {
+  grid-column: 20 / span 14;
+  grid-row: 59 / 96;
+}
+
+#sortable .second {
+  grid-column: 22 / span 16;
+  grid-row: 28 / 73;
+  transform: translate(1px, 2px);
+}
+
+#sortable .third {
+  grid-column: 29 / span 16;
+  grid-row: 9 / 51;
+}
+
+#sortable .fourth {
+  grid-column: 40 / span 13;
+  grid-row: 1 / 39;
+}
+
+#sortable .fifth {
+  grid-column: 53 / span 13;
+  grid-row: 1 / 39;
+}
+
+#sortable .sixth {
+  grid-column: 61 / span 16;
+  grid-row: 9 / 51;
+}
+
+#sortable .seventh {
+  grid-column: 68 / span 16;
+  grid-row: 28 / 73;
+  transform: translate(-2px, 3px);
+}
+
+#sortable .eight {
+  grid-column: 72 / span 14;
+  grid-row: 59 / 96;
 }
 
 /* Mobile / Tab Responsive */
