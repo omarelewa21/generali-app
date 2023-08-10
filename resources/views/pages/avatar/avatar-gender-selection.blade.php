@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0 default" data-avatar="Male" data-required="" id="gendermale">
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0" data-avatar="Female" data-required="" id="genderfemale">
