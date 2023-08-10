@@ -48,4 +48,11 @@
     </div>
 </div>
 
+<style>
+@media only screen and (max-width: 767px) {
+.needs-text {
+    color:#ffffff;
+}
+}
+</style>
 @endsection

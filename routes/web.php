@@ -76,6 +76,7 @@ Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->
 Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
 Route::Post('/retirement-coverage', [formRetirementController::class, 'submitRetirementCoverage'])->name('form.retirement.coverage');
 Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
+Route::Post('/retirement-ideal', [formRetirementController::class, 'submitRetirementIdeal'])->name('form.retirement.ideal');
 Route::view('/retirement-age-to-retire', 'pages.priorities.retirement.retirement-age-to-retire')->name('retirement.age.to.retire');
 Route::Post('/retirement-age-to-retire', [formRetirementController::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
 Route::view('/retirement-allocated-funds', 'pages.priorities.retirement.retirement-allocated-funds ')->name('retirement.allocated.funds');

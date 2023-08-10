@@ -16,76 +16,129 @@
                 @include('templates.nav.nav-red-menu')
             </div>
             <div class="col-6">
-                @include ('templates.nav.nav-sidebar-needs')            </div>
+                @include ('templates.nav.nav-sidebar-needs')
+            </div>
         </div>
-            <div class="col-12 text-dark px-0 my-4">
-                <div class="container my-4">
-                    <section class="row d-flex justify-content-center py-2 text-center align-items-center">
-                        <h5 class="my-2">My ideal retirement involves:</h5>
-                    </section>
-                    <section>
-                        <div class="row" id="optionsForIdeal">
-                        <div class="col-lg-3 justify-content-end d-flex flex-column align-items-center">
-                            <button class="border-0 bg-transparent box-shadow retire-ideal-button" data-type="option 1" id="button-option-1" onclick="retireIdeal(this)">
-                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-1.svg') }}" alt="option 1">
-                            <h6 class="text-center mx-5 py-2"> Visiting destinations
+        @if ($errors->has('retirementIdeal'))
+        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block"
+            id="retirementIdealErrorMsg">{{ $errors->first('retirementIdeal') }}</div>
+        @endif
+        <form class="form-horizontal p-0 needs-validation" id="retirementIdealForm" novalidate action="{{route('form.retirement.ideal')}}"  method="POST">
+            @csrf
+    
+        <div class="col-12 text-dark px-0 my-4">
+            <div class="my-4" style="padding-top:4.5rem;">
+                <div class="row d-flex justify-content-center py-4 text-center align-items-center">
+                    <h5 class="my-2">My ideal retirement involves:</h5>
+                </div>
+                <div class="container">
+                    {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
+                    <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
+                        <i class="bi bi-arrow-left-circle text-primary"></i>
+                    </div>
+
+                    {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
+                    <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
+                        <i class="bi bi-arrow-right-circle text-primary"></i>
+                    </div>
+                </div>
+                <div class="container row d-flex m-auto btn-group row h-75" id="optionsForIdeal" data-carousel="true">
+                    <div class="col-sm-3 col-lg-3 justify-content-start d-flex flex-column align-items-center">
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option1' ? 'selected-box-shadow' : '' }}" data-type="option1"
+                            id="button-option-1" onclick="retireIdeal(this)">
+                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-1.svg') }}"
+                                alt="option 1">
+                            <h6 class="text-center py-2"> Visiting destinations
                                 on my bucket list</h6>
-                            </button>
-                        </div>
-                        <div class="col-lg-3 justify-content-end d-flex flex-column align-items-center">
-                            <button class="border-0 bg-transparent box-shadow retire-ideal-button" data-type="option 2" id="button-option-2" onclick="retireIdeal(this)">
-                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-2.svg') }}" alt="option 2">
-                            <h6 class="text-center mx-5 py-2">Maintaining a 
+                        </button>
+                    </div>
+                    <div class="col-lg-3 justify-content-start d-flex flex-column align-items-center">
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option2' ? 'selected-box-shadow' : '' }}" data-type="option2"
+                            id="button-option-2" onclick="retireIdeal(this)">
+                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-2.svg') }}"
+                                alt="option 2">
+                            <h6 class="text-center py-2">Maintaining a
                                 comfortable lifestyle</h6>
-                            </button>
-                        </div>
-                        <div class="col-lg-3 justify-content-end d-flex flex-column align-items-center">
-                            <button class="border-0 bg-transparent box-shadow retire-ideal-button" data-type="option 3" id="button-option-3" onclick="retireIdeal(this)">
-                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-3.svg') }}" alt="option 3">
-                            <h6 class="text-center mx-5 py-2">Retiring early with
+                        </button>
+                    </div>
+                    <div class="col-lg-3 justify-content-start d-flex flex-column align-items-center">
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option3' ? 'selected-box-shadow' : '' }}" data-type="option3"
+                            id="button-option-3" onclick="retireIdeal(this)">
+                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-3.svg') }}"
+                                alt="option 3">
+                            <h6 class="text-center py-2">Retiring early with
                                 secure finances</h6>
-                            </button>
-                        </div>
-                        <div class="col-lg-3 justify-content-top pt-lg-3 pt-xl-5 d-flex flex-column align-items-center">
-                            <button class="border-0 bg-transparent box-shadow retire-ideal-button" data-type="option 4" id="button-option-4" onclick="retireIdeal(this)">
-                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-4.svg') }}" alt="option 4">
-                            </button>
-                        </div>
-                        </div>
-                    </section>
-                    <section class="footer bg-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.coverage')}}"
-                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('retirement.age.to.retire') }}"
-                                        class="btn btn-primary text-uppercase">Next</a>
-                                </div>
+                        </button>
+                    </div>
+                    <div class="col-lg-3 justify-content-start pt-lg-3 pt-xl-5 d-flex flex-column align-items-center">
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option4' ? 'selected-box-shadow' : '' }}" data-type="option4"
+                            id="button-option-4" onclick="retireIdeal(this)">
+                            <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-4.svg') }}"
+                                alt="option 4">
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="retirementIdeal" id="retirementIdealInput"
+                    value="{{Session::get('retirementIdeal')}}">
+                <script>
+                                console.log("Session Data:", {{ json_encode(Session::get('retirementIdeal')) }});
+
+                </script>
+            </div>
+        </div>
+                <section class="footer bg-white py-4 fixed-bottom">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                <a href="{{route('retirement.coverage')}}"
+                                    class="btn btn-primary text-uppercase me-md-2">Back</a>
+                                <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+
                             </div>
                         </div>
-                    </section>
-                </div>
-            </div>
+                    </div>
+                </section>
+            </form>
     </div>
+</div>
 
     @endsection
 
     <script>
-        function retireIdeal(button) {
-          const buttonType = button.getAttribute('data-type');
-          const buttons = document.querySelectorAll('.retire-ideal-button');
-      
-          buttons.forEach((btn) => {
-            if (btn.getAttribute('data-type') !== buttonType) {
-                if (btn.classList.contains('greyed-out')) {
-                    btn.classList.remove('greyed-out');
+    function retireIdeal(button) {
+    event.preventDefault();
+    const optionType = button.getAttribute('data-type');
+    console.log(optionType + ' clicked');
+    const buttons = document.querySelectorAll('.retire-ideal-button');
+    const retirementIdealErrorMsg = document.getElementById("retirementIdealErrorMsg");
+    const retirementIdealInput = document.getElementById('retirementIdealInput');
+
+    if (retirementIdealInput.value === optionType) {
+        retirementIdealInput.value = '';
+        buttons.forEach((btn) => {
+            btn.classList.remove('selected-box-shadow');
+            btn.classList.add('box-shadow');
+        });
+    } else {
+        retirementIdealInput.value = optionType;
+        buttons.forEach((btn) => {
+            // Only add the class to the clicked button and remove from others
+            if (btn.getAttribute('data-type') === optionType) {
+                if (btn.classList.contains('selected-box-shadow')) {
+                    btn.classList.remove('selected-box-shadow');
                 } else {
-                    btn.classList.add('greyed-out');
+                    // Remove class from all buttons before adding to the clicked button
+                    buttons.forEach((otherBtn) => {
+                        otherBtn.classList.remove('selected-box-shadow');
+                    });
+                    btn.classList.add('selected-box-shadow');
+                    btn.classList.remove('box-shadow');
+                    retirementIdealErrorMsg.classList.remove('d-block');
                 }
             } else {
-              btn.classList.remove('greyed-out');
+                btn.classList.remove('selected-box-shadow');
             }
-          });
-        }
-      </script>
+        });
+    }
+}
+    </script>

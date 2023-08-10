@@ -53,10 +53,10 @@
                                         class="position-relative pt-4 pb-4 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
                                             class="calendar-protection">
-                                        <div class="position-absolute center w-100 text-center">
+                                        <div class="position-absolute center w-100 text-center px-5 px-lg-0">
                                             <input type="number" name="protectionSupportingYears"
                                                 value="{{ Session::get('protectionSupportingYears' ) }}"
-                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
+                                                class="form-control d-inline-flex text-primary w-50 fs-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
                                                 id="protectionSupportingYears" required>
                                             <h5 class="needs-text">years</h5>
                                         </div>
@@ -109,29 +109,55 @@ function validateYearsNumberField(field) {
     }
 }
 });
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function() {
         function updateProgress(inputValue) {
             console.log($('#TotalProtectionValue').text());
             var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
             var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
-            console.log(totalProtectionValueStr);
-            console.log (totalProtectionValue);
+
             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
             $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
 
         }
-        var inputValue = $('#protectionSupportingYears').val();
-        if (inputValue !== "") {
-            updateProgress(inputValue);
-        } else {
-            // updateProgress(0); // Or you can use any default value you want
-        }
+        // var inputValue = $('#protectionSupportingYears').val();
+        // if (inputValue !== "") {
+        //     updateProgress(inputValue);
+        // } else {
+        //     // updateProgress(0); // Or you can use any default value you want
+        // }
 
         $('#protectionSupportingYears').on('input', function () {
             var inputValue = $(this).val();
             updateProgress(inputValue);
         });
+        
     });
 </script>
+
+<style>
+.was-validated .form-control:valid, .form-control.is-valid {
+    padding-right: calc(0.6em + 0.75rem);
+    background-position: right;
+    background-size: 3rem;
+
+}
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    padding-right: calc(0.5em + 0.75rem);
+    background-position: right;
+    background-size: 3rem;
+}
+@media only screen and (max-width: 767px) {
+    body {
+        min-height: 51.5rem;
+    padding-top: 5.5rem;
+    }
+    .was-validated .form-control:valid, .form-control.is-valid, .was-validated .form-control:invalid, .form-control.is-invalid {
+    background-size: 1.5rem;
+
+}
+
+}
+
+</style>
 @endsection

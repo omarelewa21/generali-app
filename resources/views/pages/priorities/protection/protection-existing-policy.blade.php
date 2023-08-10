@@ -34,7 +34,7 @@
             <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
             @csrf
             @if ($errors->has('protectionExistingPolicy'))
-            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">{{ $errors->first('protectionExistingPolicy') }}</div>
+            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionExistingPolicyErrorMsg">{{ $errors->first('protectionExistingPolicy') }}</div>
         @endif
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
@@ -59,10 +59,10 @@
 
                                 </div>
                                 <div id="existingPolicyAmount" style="display:none">
-                                    <div class="input-group w-75">
-                                        <p class="d-flex flex-column justify-content-end pe-2 mb-0">Existing policy amount: </p>
+                                    <div class="input-group w-75 pb-4 pb-lg-0">
+                                        <p class="d-flex flex-column justify-content-end pe-2 mb-0 w-sm-100">Existing policy amount: </p>
                                         <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="number" name="protectionPolicyAmount" value="{{Session::get('protectionPolicyAmount')}}" class="form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
+                                    <input type="number" name="protectionPolicyAmount" value="{{Session::get('protectionPolicyAmount')}}" class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
                                     </div>
                                     @error('protectionPolicyAmount')
                                     <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionPolicyAmountErrorMsg">{{ $message }}</div>
@@ -140,24 +140,22 @@ document.addEventListener("DOMContentLoaded", function() {
             existingPolicyAmount.style.display = 'none';
         }
     }
-    $(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function() {
         function updateProgress(inputValue) {
             var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
             var totalProtectionValue = (parseFloat(totalProtectionValueStr));
-  console.log(inputValue);
-  console.log(parseFloat(totalProtectionValueStr));
             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
 
 
             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
             $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
         }
-        var inputValue = $('#protectionPolicyAmount').val();
-        if (inputValue !== "") {
-            updateProgress(inputValue);
-        } else {
-            // updateProgress(0); // Or you can use any default value you want
-        }
+        // var inputValue = $('#protectionPolicyAmount').val();
+        // if (inputValue !== "") {
+        //     updateProgress(inputValue);
+        // } else {
+        //     // updateProgress(0); // Or you can use any default value you want
+        // }
         $('#protectionPolicyAmount').on('input', function () {
             var inputValue = $(this).val();
             updateProgress(inputValue);
@@ -165,4 +163,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 </script>
+
+<style>
+@media only screen and (max-width: 767px) {
+
+    body {
+    min-height: 51.5rem;
+    padding-top: 5.5rem;
+    }
+}
+
+</style>
 @endsection
