@@ -362,10 +362,10 @@ font-size:2.125rem;
 .calendar-protection {
 width: 80%;
 }
-.fixed-bottom {
+/* .fixed-bottom {
     z-index:
      1000;
-}
+} */
 .needs-home-avatar img {
     height:33vh;
 }

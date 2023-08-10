@@ -23,12 +23,12 @@ html {
   overflow: hidden;
   height: 100vh;
 }
-h6.nav-text-needs {
+/* h6.nav-text-needs {
   font-weight: 500;
   font-family: 'Helvetica Neue Medium', sans-serif;
   letter-spacing: 1.1px;
   font-size:18px;
-}
+} */
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -131,6 +131,24 @@ p.nav-text {
   font-family: 'Helvetica Neue Medium', sans-serif;
   letter-spacing: 1.1px;
   font-size: 22px;
+}
+
+.timeline-needs {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.timeline-needs:before {
+  content: '';
+  position: absolute;
+  right: 37px;
+  /* Adjust the right position as needed */
+  top: 10px;
+  bottom: 15px;
+  width: 2px;
+  background: #707070;
 }
 
 /* Button Styling */
@@ -771,6 +789,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     background: #fff;
   }
+  .progress-main p {
+    color: #fff!important;
+  }
 }
 
 
@@ -1179,23 +1200,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
   /* Sidebar code for Needs timeline */
 
-  .timeline-needs {
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-  }
 
-  .timeline-needs:before {
-    content: '';
-    position: absolute;
-    right: 37px;
-    /* Adjust the right position as needed */
-    top: 10px;
-    bottom: 15px;
-    width: 2px;
-    background: #707070;
-  }
 
   .timeline-item-needs {
     position: relative;
