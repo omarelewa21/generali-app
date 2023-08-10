@@ -64,13 +64,13 @@
     background-repeat: no-repeat;
     height: 100%;
 }
-.main-cloud {
+/* .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
     background-position: top;
     background-repeat: no-repeat;
     height:100vh;
-}
+} */
 .second-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-2.png);
     background-size: contain;

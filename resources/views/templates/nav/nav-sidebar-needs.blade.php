@@ -1,12 +1,19 @@
+<?php
+/**
+ * Navbar Section for Right Progress Navigation
+ */
+?>
+
 {{-- Links for Needs Sidebar Right --}}
 @include('templates.nav.nav-sidebar-links-needs')
 {{-- Links for Needs Sidebar Right --}}
 
 {{-- Nav Sidebar Right Needs --}}
+
 <section class="progress-main progress-mobile">
-  <div class="row justify-content-end align-items-center px-4 px-xxl-5 px-xl-5 pt-4 pt-sm-4 pt-md-5 pb-4 pb-sm-4 pb-md-3">
+  <div class="row justify-content-end align-items-center px-4 px-md-5 pt-4 pt-md-5 pb-0">
     <div class="col-auto">
-      <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
+      <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds">
         <div class="text-dark d-inline-flex">
           <p class="needs-text mb-0">
             @php
@@ -88,12 +95,6 @@
 <style>
   /* code for progress bar css */
 
-  .progress-main {
-    position: fixed;
-    z-index: 1039;
-    top: 0;
-    right: 0;
-}
   .progress {
     width: 44px;
     height: 44px;
