@@ -52,19 +52,16 @@ class formProtectionController extends Controller
         ], $customMessages);
         // Calculate the multiplied value
         $protectionFunds = $request->input('protectionFunds');
-        $TotalProtectionValue = $protectionFunds * 12;
+        $TotalprotectionFunds = $protectionFunds * 12;
+        $TotalProtectionValue = $TotalprotectionFunds;
         $progressTotalProtectionValue = ($TotalProtectionValue / $TotalProtectionValue) * 100;
 
         // Format the calculated values for display
         $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
         $formattedProgressTotalProtectionValue = number_format($progressTotalProtectionValue, 2, '.', ',');
 
-        // Store the multiplied value in the session
-        // Session::put('protectionFunds', $protectionFunds);
-        // Session::put('TotalProtectionValue', $TotalProtectionValue);
-        // Session::put('progressTotalProtectionValue',$progressTotalProtectionValue);
-
         Session::put('protectionFunds', $protectionFunds);
+        Session::put('TotalprotectionFunds',$TotalprotectionFunds);
         Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
         Session::put('progressTotalProtectionValue', $formattedProgressTotalProtectionValue);
         // dd(Session::all()); // Debug to see all session data
@@ -73,7 +70,6 @@ class formProtectionController extends Controller
     }
     public function submitProtectionSupportingYears(Request $request)
     {
-
         $customMessages = [
             'protectionSupportingYears.required' => 'You are required to enter the year.',
             'protectionSupportingYears.integer' => 'The year must be a number',
@@ -86,24 +82,16 @@ class formProtectionController extends Controller
         ], $customMessages);
 
         $protectionSupportingYears = $request->input('protectionSupportingYears');
-        $previousTotalProtectionValue = Session::get('TotalProtectionValue'); // Assuming this key is used to store the value
- // Strip off "RM" and commas from the previousTotalProtectionValue
-        $previousTotalProtectionValue = str_replace(['RM', ','], '', $previousTotalProtectionValue);
+        $TotalprotectionFunds = Session::get('TotalprotectionFunds'); // Assuming this key is used to store the value
 
-        // Convert the stripped value to a numeric format
-        $previousTotalProtectionValue = floatval($previousTotalProtectionValue);
-
-        $TotalProtectionValue = $previousTotalProtectionValue * $protectionSupportingYears;
-        // $progressTotalProtectionValue = ($TotalProtectionValue / $TotalProtectionValue) * 100;
+        $TotalProtectionValue = $TotalprotectionFunds * $protectionSupportingYears;
 
         // Format the calculated values for display
         $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
-        // $formattedProgressTotalProtectionValue = number_format($progressTotalProtectionValue, 2, '.', ',');
 
         // Store the multiplied value in the session
         Session::put('protectionSupportingYears', $protectionSupportingYears);
         Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
-        // Session::put('progressTotalProtectionValue',$formattedProgressTotalProtectionValue);
         // dd(Session::all()); // Debug to see all session data
 
         // Process the form data and perform any necessary actions

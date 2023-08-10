@@ -7,10 +7,6 @@
 @endsection
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayData = session('passingArrays');
-@endphp
 
 <div id="protection_coverage" class="vh-100">
 
@@ -24,25 +20,23 @@
             </div>
         </div>
         @if ($errors->has('protectionSelectedAvatar'))
-        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatar">{{ $errors->first('protectionSelectedAvatar') }}</div>
+        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif
-
-        <section>
-            
-            <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
-                @csrf
+    <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
+        @csrf
+        <section>         
             <div class="col-12 text-dark px-0 my-4 bg-needs-main">
                 <div class="my-4 second-cloud" style="padding-top:5.5rem;">
                     <div class="row d-flex justify-content-center py-4 text-center align-items-center">
                         <h5>I'd like to provide coverage for my:</h5>
                     </div>
                     <div class="container">
-                        {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
+                        {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
                         <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
                             <i class="bi bi-arrow-left-circle text-primary"></i>
                         </div>
 
-                        {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
+                        {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
                         <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
                             <i class="bi bi-arrow-right-circle text-primary"></i>
                         </div>
@@ -92,6 +86,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <section class="footer bg-white py-4 fixed-bottom">
             <div class="container-fluid">
@@ -118,7 +113,7 @@
     event.preventDefault();
     const avatarType = button.getAttribute('data-type');
     const buttons = document.querySelectorAll('.avatar-button');
-    const protectionSelectedAvatarErrorMsg = document.getElementById("protectionSelectedAvatar");
+    const protectionSelectedAvatarErrorMsg = document.getElementById("protectionSelectedAvatarErrorMsg");
     const selectedAvatarInput = document.getElementById('protectionSelectedAvatarInput');
 
     if (selectedAvatarInput.value === avatarType) {
@@ -148,6 +143,7 @@
             }
         });
     }
+    
 }
 
 

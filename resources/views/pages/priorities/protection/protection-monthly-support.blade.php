@@ -25,9 +25,9 @@
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
-                            <script>
-                                // console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
-                            </script>
+                            {{-- <script>
+                                console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
+                            </script> --}}
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
                     </div>
@@ -46,14 +46,14 @@
                         <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative monthly-support-asset" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-4 mx-lg-5 order-0 order-lg-1">
+                        <div class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center mx-4 mx-lg-5 order-0 order-lg-1">
                             <h5 class="needs-text">If anything should</h5>
                             <h5 class="needs-text">happen to me, I'd like to</h5>
                             <h5 class="needs-text">support my family with</h5>
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
-                                    <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text">RM</h5></span>
-                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="form-control text-primary @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
+                                    <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
+                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
                                 @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     protectionFunds.addEventListener("input", function() {
-        protectionFundsErrorMsg.remove("d-block");
+        protectionFundsErrorMsg.style.display="none";
     });
 
     function validateNumberField(field) {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function() {
         function updateProgress(inputValue) {
             var month = 12;
             var totalProtectionValue = inputValue * month;
@@ -123,7 +123,7 @@ $(document).ready(function () {
         if (inputValue !== "") {
             updateProgress(inputValue);
         } else {
-            updateProgress(0); // Or you can use any default value you want
+            // updateProgress(0); // Or you can use any default value you want
         }
         $('#protectionFunds').on('input', function () {
             var inputValue = $(this).val();
@@ -132,6 +132,18 @@ $(document).ready(function () {
     });
 
 </script>
+<style>
+@media only screen and (max-width: 767px) {
+    /* body,
+    html {
+      overflow-y: auto;
+    } */
+    body {
+        min-height: 51.5rem;
+    padding-top: 5.5rem;
+    }
+}
+</style>
 
 
     @endsection

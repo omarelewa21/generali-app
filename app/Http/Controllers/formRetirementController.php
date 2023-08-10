@@ -23,12 +23,31 @@ class formRetirementController extends Controller
 
         ], $customMessages);
 
-        // Process the form data and perform any necessary actions
-        return redirect()->route('retirement.age.to.retire')
-        ->withInput(); 
+        $retirementSelectedAvatar = $request->input('retirementSelectedAvatar');
+
+        Session::put('retirementSelectedAvatar', $retirementSelectedAvatar);
+
+        return redirect()->route('retirement.ideal')
+            ->withInput();
     }
 
+public function submitRetirementIdeal(Request $request)
+    {
+        $customMessages = [
+            'retirementIdeal' => 'Please select an option',
+        ];
+        $validatedData = $request->validate([
+            'retirementIdeal' => 'required|in:option1, option2, option3, option4',
 
+        ], $customMessages);
+
+        $retirementIdeal = $request->input('retirementIdeal');
+
+        Session::put('retirementIdeal', $retirementIdeal);
+
+        return redirect()->route('retirement.age.to.retire')
+            ->withInput();
+    }
     public function submitRetirementAgeToRetire(Request $request)
     {
         $customMessages = [
