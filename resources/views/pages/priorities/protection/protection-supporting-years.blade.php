@@ -1,29 +1,28 @@
 @extends('templates.master')
 
 @section('title')
-<title>4.Protection - Supporting Years</title>
+<title>Protection - Supporting Years</title>
 @endsection
 
 @section('content')
-@php
-    $arrayData = session('passingArrays');
-@endphp
+
 <div id="protection-supporting-years">
     <div class="container-fluid overflow-hidden d-flex h-100 flex-column">
-            <section>
+        <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
                     @include('templates.nav.nav-red-menu')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
+                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{
+                                Session::get('TotalProtectionValue', 'RM0') }}</h3>
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
                     </div>
@@ -32,17 +31,20 @@
                     @include('templates.nav.nav-sidebar-needs')
                 </div>
             </div>
-        </section>   
-            <section>
-                <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation"  id="protectionSupportingYearsForm" novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
+        </section>
+        <section>
+            <div class="row flex-grow-1">
+                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
+                    novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
                     @if ($errors->has('protectionSupportingYears'))
-                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">{{ $errors->first('protectionSupportingYears') }}</div>
-                @endif
+                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">
+                        {{ $errors->first('protectionSupportingYears') }}</div>
+                    @endif
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
-                            <div class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
+                            <div
+                                class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
                                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end z-1">
                                     <h5 class="m-0 mt-4 needs-text">I will need</h5>
                                 </div>
@@ -53,11 +55,10 @@
                                             class="calendar-protection">
                                         <div class="position-absolute center w-100 text-center">
                                             <input type="number" name="protectionSupportingYears"
-                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center @error('protectionFunds') is-invalid @enderror"
-                                                id="protectionSupportingYears" required> 
+                                                value="{{ Session::get('protectionSupportingYears' ) }}"
+                                                class="form-control d-inline-flex text-primary w-25 f-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
+                                                id="protectionSupportingYears" required>
                                             <h5 class="needs-text">years</h5>
-
-                                        
                                         </div>
                                     </div>
                                 </div>
@@ -81,16 +82,16 @@
                     </div>
                 </form>
             </div>
-            </section>
+        </section>
     </div>
 </div>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
     var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
     protectionSupportingYears.addEventListener('blur', function() {
-            validateNumberField(protectionSupportingYears);
+            validateYearsNumberField(protectionSupportingYears);
         });
 
 function validateYearsNumberField(field) {
@@ -108,5 +109,29 @@ function validateYearsNumberField(field) {
     }
 }
 });
+$(document).ready(function () {
+        function updateProgress(inputValue) {
+            console.log($('#TotalProtectionValue').text());
+            var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
+            var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
+            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
+            console.log(totalProtectionValueStr);
+            console.log (totalProtectionValue);
+            $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
+            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+
+        }
+        var inputValue = $('#protectionSupportingYears').val();
+        if (inputValue !== "") {
+            updateProgress(inputValue);
+        } else {
+            // updateProgress(0); // Or you can use any default value you want
+        }
+
+        $('#protectionSupportingYears').on('input', function () {
+            var inputValue = $(this).val();
+            updateProgress(inputValue);
+        });
+    });
 </script>
 @endsection

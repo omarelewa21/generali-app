@@ -36,7 +36,7 @@
 
 
 .needs-grey-bg-md {
-    padding: 100px;
+    padding-top: 240px;
     left: 0px;
     background-color: #E9E9E9;
 
@@ -202,18 +202,17 @@
 }
 
 .box-shadow:hover{
-    -webkit-transform: scale(1.05);
+    /* -webkit-transform: scale(1.05);
 	-moz-transform: scale(1.05);
 	-ms-transform: scale(1.05);
 	-o-transform: scale(1.05);
-	transform: scale(1.05);
-	filter:drop-shadow(2px -7px 4px rgba(0, 69, 134, 0.4));
+	transform: scale(1.05); */
+	filter:drop-shadow(1px 5px 4px rgba(0, 69, 134, 0.4));
 
 }
-.greyed-out {
-    filter: grayscale(100%);
-    opacity: 0.6;
-    pointer-events: none;
+.selected-box-shadow {
+    filter:drop-shadow(1px 5px 4px rgba(179, 73, 91, 0.4));
+    /* pointer-events: none; */
 }
 .slick-arrow {
     display: flex;
@@ -234,10 +233,10 @@
     html {
       overflow-y: auto;
     }
-    body {
+    /* body {
         min-height: 51.5rem;
     padding-top: 5.5rem;
-    }
+    } */
     .vh-sm-0 {
         height:100% !important;
       }
@@ -385,13 +384,13 @@ width: 50%;
     }
 
     .coverage-avatar img.self-avatar{
-        width: 25vh;
+        width: 23vh;
       }
       .coverage-avatar img.spouse-avatar{
-        width: 21vh;
+        width: 20vh;
       }
       .coverage-avatar img.kid-avatar{
-        width: 23vh;
+        width: 21vh;
       }
       .coverage-avatar img.parent-avatar{
         width: 40vh;

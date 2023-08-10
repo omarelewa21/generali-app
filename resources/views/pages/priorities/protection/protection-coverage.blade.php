@@ -26,6 +26,7 @@
         @if ($errors->has('protectionSelectedAvatar'))
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatar">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif
+
         <section>
             
             <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
@@ -49,7 +50,7 @@
                     
                     <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'self' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'self' ? 'selected-box-shadow' : '' }}" 
                             data-type="self"
                             id="button-self-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
@@ -58,7 +59,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'spouse' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'spouse' ? 'selected-box-shadow' : '' }}" 
                             data-type="spouse"
                                 id="button-spouse-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
@@ -67,7 +68,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'children' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'children' ? 'selected-box-shadow' : '' }}" 
                              data-type="children"
                                 id="button-kid-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="children">
@@ -75,7 +76,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'parent' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'parent' ? 'selected-box-shadow' : '' }}" 
                             data-type="parent"
                                 id="button-parent-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
@@ -84,8 +85,8 @@
                             </button>
                         </div>
                     </div>
-                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{ old('protectionSelectedAvatar') }}">
-
+                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{Session::get('protectionSelectedAvatar')}}">
+                
                     <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                         <div class="col-12 col-md-4 text-center">
                         </div>
@@ -110,33 +111,45 @@
 </div>
 
 <script>
+
+
     // javascript code for button click effect on avatar selection
     function avatarSelect(button) {
     event.preventDefault();
     const avatarType = button.getAttribute('data-type');
     const buttons = document.querySelectorAll('.avatar-button');
+    const protectionSelectedAvatarErrorMsg = document.getElementById("protectionSelectedAvatar");
     const selectedAvatarInput = document.getElementById('protectionSelectedAvatarInput');
 
     if (selectedAvatarInput.value === avatarType) {
         selectedAvatarInput.value = '';
         buttons.forEach((btn) => {
-            btn.classList.remove('greyed-out');
+            btn.classList.remove('selected-box-shadow');
+            btn.classList.add('box-shadow');
         });
     } else {
         selectedAvatarInput.value = avatarType;
         buttons.forEach((btn) => {
-            if (btn.getAttribute('data-type') !== avatarType) {
-                if (btn.classList.contains('greyed-out')) {
-                    btn.classList.remove('greyed-out');
+            // Only add the class to the clicked button and remove from others
+            if (btn.getAttribute('data-type') === avatarType) {
+                if (btn.classList.contains('selected-box-shadow')) {
+                    btn.classList.remove('selected-box-shadow');
                 } else {
-                    btn.classList.add('greyed-out');
-                    selectedAvatarInput.classList.remove('d-block');
-
+                    // Remove class from all buttons before adding to the clicked button
+                    buttons.forEach((otherBtn) => {
+                        otherBtn.classList.remove('selected-box-shadow');
+                    });
+                    btn.classList.add('selected-box-shadow');
+                    btn.classList.remove('box-shadow');
+                    protectionSelectedAvatarErrorMsg.classList.remove('d-block');
                 }
+            } else {
+                btn.classList.remove('selected-box-shadow');
             }
         });
     }
 }
+
 
 
 </script>
