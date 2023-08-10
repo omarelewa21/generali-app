@@ -32,15 +32,28 @@
                 </div>
             </div>
         </section>
+        
         <section>
             <div class="row flex-grow-1">
                 <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
                     novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
                     @if ($errors->has('protectionSupportingYears'))
+                    <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+                        <div id="protectionSupportingYearsErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                            <div class="d-flex">
+                                <div class="toast-body p-2">
+                                    {{ $errors->first('protectionSupportingYears') }}
+                                </div>
+                                {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    {{-- @if ($errors->has('protectionSupportingYears'))
                     <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">
                         {{ $errors->first('protectionSupportingYears') }}</div>
-                    @endif
+                    @endif --}}
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
@@ -87,7 +100,7 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
+    const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
     var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
     protectionSupportingYears.addEventListener('blur', function() {

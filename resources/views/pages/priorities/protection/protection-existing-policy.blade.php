@@ -34,8 +34,20 @@
             <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
             @csrf
             @if ($errors->has('protectionExistingPolicy'))
+            <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+                <div id="protectionExistingPolicyErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex">
+                        <div class="toast-body p-2">
+                            {{ $errors->first('protectionExistingPolicy') }}
+                        </div>
+                        {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+                    </div>
+                </div>
+            </div>
+            @endif
+            {{-- @if ($errors->has('protectionExistingPolicy'))
             <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionExistingPolicyErrorMsg">{{ $errors->first('protectionExistingPolicy') }}</div>
-        @endif
+        @endif --}}
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
@@ -64,9 +76,9 @@
                                         <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="number" name="protectionPolicyAmount" value="{{Session::get('protectionPolicyAmount')}}" class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
                                     </div>
-                                    @error('protectionPolicyAmount')
+                                    {{-- @error('protectionPolicyAmount')
                                     <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionPolicyAmountErrorMsg">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                             </div>
                                 </div>
 

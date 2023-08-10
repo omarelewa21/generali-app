@@ -30,10 +30,8 @@ class formProtectionController extends Controller
         $protectionSelectedAvatar = $request->input('protectionSelectedAvatar');
 
         Session::put('protectionSelectedAvatar', $protectionSelectedAvatar);
-
-        // // Process the form data and perform any necessary actions
-        // return redirect()->route('viewProtectionMonthlySupport')
-        // ->withInput(); 
+        // dd(Session::all()); // Debug to see all session data
+        Log::info('Session Data:', Session::all());
 
         return redirect()->route('protection.monthly.support')
             ->withInput();
@@ -50,6 +48,7 @@ class formProtectionController extends Controller
             'protectionFunds' => 'required|integer|min:1',
 
         ], $customMessages);
+        
         // Calculate the multiplied value
         $protectionFunds = $request->input('protectionFunds');
         $TotalprotectionFunds = $protectionFunds * 12;
@@ -57,13 +56,14 @@ class formProtectionController extends Controller
         $progressTotalProtectionValue = ($TotalProtectionValue / $TotalProtectionValue) * 100;
 
         // Format the calculated values for display
-        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
         $formattedProgressTotalProtectionValue = number_format($progressTotalProtectionValue, 2, '.', ',');
 
         Session::put('protectionFunds', $protectionFunds);
         Session::put('TotalprotectionFunds',$TotalprotectionFunds);
         Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
         Session::put('progressTotalProtectionValue', $formattedProgressTotalProtectionValue);
+        Log::info('Session Data:', Session::all());
         // dd(Session::all()); // Debug to see all session data
         return redirect()->route('protection.supporting.years')
             ->withInput();
@@ -82,12 +82,12 @@ class formProtectionController extends Controller
         ], $customMessages);
 
         $protectionSupportingYears = $request->input('protectionSupportingYears');
-        $TotalprotectionFunds = Session::get('TotalprotectionFunds'); // Assuming this key is used to store the value
+        $TotalprotectionFunds = Session::get('TotalprotectionFunds'); 
 
         $TotalProtectionValue = $TotalprotectionFunds * $protectionSupportingYears;
 
         // Format the calculated values for display
-        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
 
         // Store the multiplied value in the session
         Session::put('protectionSupportingYears', $protectionSupportingYears);
@@ -122,10 +122,11 @@ class formProtectionController extends Controller
         $previousTotalProtectionValue = floatval($previousTotalProtectionValue);
 
         $TotalProtectionValue = $previousTotalProtectionValue - $protectionPolicyAmount;
-        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, '.', ',');
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
         Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
         Session::put('protectionExistingPolicy', $protectionExistingPolicy);
         Session::put('protectionPolicyAmount', $protectionPolicyAmount);
+        // dd(Session::all()); // Debug to see all session data
 
 
         // Process the form data and perform any necessary actions
