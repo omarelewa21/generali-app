@@ -232,7 +232,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover {
-  border: 5px solid #961E23;
+  border: 10px solid #8995CB;
 }
 
 .button-bg:hover {
@@ -240,7 +240,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover img {
-  transform: translateY(-15px);
+  transform: scale(1.2);
 }
 
 .button-bg .hover img {
@@ -248,7 +248,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg .hover {
-  border: 5px solid transparent;
+  border: 10px solid transparent;
   transition: border 0.7s ease;
 }
 
