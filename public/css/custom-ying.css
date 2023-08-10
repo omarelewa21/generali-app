@@ -69,6 +69,12 @@
 .slick-padding{
     padding: 3rem;
 }
+.slide-button:hover path{
+    fill: #fff;
+}
+svg.slide-button.slick-arrow:hover {
+    background: #C21B17;
+}
 
 /* Global - Needs */
 .bg-needs{

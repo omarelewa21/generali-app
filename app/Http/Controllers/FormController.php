@@ -25,17 +25,23 @@ class FormController extends Controller
             'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
             'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
             'email' => 'required|email|max:255',
-
         ]);
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
-        // Add or update the 'FirstName' value in the array
+        // Add or update the data value in the array
+        $arrayData['Title'] = $validatedData['title'];
         $arrayData['FirstName'] = $validatedData['firstName'];
+        $arrayData['LastName'] = $validatedData['lastName'];
+        $arrayData['MobileNumber'] = $validatedData['mobileNumber'];
+        $arrayData['HousePhoneNumber'] = $validatedData['housePhoneNumber'];
+        $arrayData['Email'] = $validatedData['email'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
+
+        Log::debug($arrayData);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');

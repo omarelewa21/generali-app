@@ -23,12 +23,31 @@ class formRetirementController extends Controller
 
         ], $customMessages);
 
-        // Process the form data and perform any necessary actions
-        return redirect()->route('retirement.age.to.retire')
-        ->withInput(); 
+        $retirementSelectedAvatar = $request->input('retirementSelectedAvatar');
+
+        Session::put('retirementSelectedAvatar', $retirementSelectedAvatar);
+
+        return redirect()->route('retirement.ideal')
+            ->withInput();
     }
 
+public function submitRetirementIdeal(Request $request)
+    {
+        $customMessages = [
+            'retirementIdeal' => 'Please select an option',
+        ];
+        $validatedData = $request->validate([
+            'retirementIdeal' => 'required|in:option 1,option 2,option 3,option 4',
 
+        ], $customMessages);
+
+        $retirementIdeal = $request->input('retirementIdeal');
+
+        Session::put('retirementIdeal', $retirementIdeal);
+
+        return redirect()->route('retirement.age.to.retire')
+            ->withInput();
+    }
     public function submitRetirementAgeToRetire(Request $request)
     {
         $customMessages = [
@@ -42,7 +61,10 @@ class formRetirementController extends Controller
 
         ], $customMessages);
 
-        // Process the form data and perform any necessary actions
+        $retirementAgeToRetire = $request->input('retirementAgeToRetire');
+        
+        Session::put('retirementAgeToRetire', $retirementAgeToRetire);
+
         return redirect()->route('retirement.allocated.funds')
         ->withInput(); 
     }
@@ -59,6 +81,19 @@ class formRetirementController extends Controller
 
         ], $customMessages);
 
+        $retirementAllocatedFunds = $request->input('retirementAllocatedFunds');
+        
+        $TotalRetirementValue = $retirementAllocatedFunds * 12;
+        $progressTotalRetirementValue = ($TotalRetirementValue / $TotalRetirementValue) * 100;
+
+        // Format the calculated values for display
+        $formattedTotalRetirementValue = 'RM' . number_format($TotalRetirementValue, 2, ',');
+        $formattedProgressTotalRetirementValue = number_format($progressTotalRetirementValue, 2, ',');
+
+        Session::put('retirementAllocatedFunds', $retirementAllocatedFunds);
+        Session::put('TotalRetirementValue', $formattedTotalRetirementValue);
+        
+
         return redirect()->route('retirement.years.till.retire')    
                 ->withInput(); 
     }
@@ -74,6 +109,12 @@ class formRetirementController extends Controller
             'retirementYearsTillRetire' => 'required|integer|min:1|max:100',
 
         ], $customMessages);
+        $retirementYearsTillRetire = $request->input('retirementYearsTillRetire');
+
+        $TotalRetirementValue = $retirementYearsTillRetire * 12;
+
+        Session::put('TotalRetirementValue', $TotalRetirementValue);
+        Session::put('retirementYearsTillRetire', $retirementYearsTillRetire);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('retirement.allocated.funds.aside')
@@ -95,6 +136,14 @@ class formRetirementController extends Controller
             'retirementAllocatedFundsAside' => 'required|integer|min:1',
             'retirementOtherSourceOfIncome' => 'required|integer|min:1',
         ], $customMessages);
+
+        $retirementYearsTillRetire = $request->input('retirementYearsTillRetire');
+
+        $TotalRetirementValue = $retirementYearsTillRetire * 12;
+
+        Session::put('TotalRetirementValue', $TotalRetirementValue);
+        Session::put('retirementYearsTillRetire', $retirementYearsTillRetire);
+
 
         return redirect()->route('retirement.gap')    
                 ->withInput(); 

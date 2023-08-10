@@ -23,12 +23,12 @@ html {
   overflow: hidden;
   height: 100vh;
 }
-h6.nav-text-needs {
+/* h6.nav-text-needs {
   font-weight: 500;
   font-family: 'Helvetica Neue Medium', sans-serif;
   letter-spacing: 1.1px;
   font-size:18px;
-}
+} */
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -50,6 +50,7 @@ h4 {
   border-left: 0 !important;
   border-right: 0 !important
 }
+
 .form-label, button.accordion-button {
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -61,6 +62,10 @@ h4 {
   border-right: 0 !important;
 }
 
+.input-group > .form-control:not(:focus).is-invalid, .input-group > .form-control:focus {
+  z-index: inherit;
+}
+
 /* Navigation Menu */
 .navbar {
   position: absolute;
@@ -68,6 +73,10 @@ h4 {
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+.main-logo {
+  max-width: 100px;
 }
 
 /* Offcanvas Menu */
@@ -118,19 +127,39 @@ h4 {
 }
 
 .timeline-item.active::after {
-  content: "✔"; /* Use any symbol or style you prefer for the checkmark */
-  color: #fff!important; /* Customize the checkmark color */
+  content: "";
+  background-image: url(/images/general/tick-icon.png);
+  color: #fff!important;
   display: block;
   text-align: center;
   font-size: 12px;
-  background: #C21B17;
+  background-size: contain;
+  border: none;
 }
 
 p.nav-text {
   font-weight: 700;
   font-family: 'Helvetica Neue Medium', sans-serif;
   letter-spacing: 1.1px;
-  font-size: 22px;
+  font-size: 1.375rem;
+}
+
+.timeline-needs {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.timeline-needs:before {
+  content: '';
+  position: absolute;
+  right: 37px;
+  /* Adjust the right position as needed */
+  top: 10px;
+  bottom: 15px;
+  width: 2px;
+  background: #707070;
 }
 
 /* Button Styling */
@@ -150,18 +179,24 @@ p.nav-text {
 }
 
 .btn-exit:before {
-  content: url(/images/general/Logout.svg);
-  width: auto;
-  height: auto;
+  content: "";
+  background-image: url(/images/general/Logout.svg);
+  width: 30px;
+  height: 30px;
   display: inline-block;
   vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .btn-exit:hover:before {
-  content: url(/images/general/Logout-red.svg);
-  width: auto;
-  height: auto;
+  content: "";
+  background-image: url(/images/general/Logout-red.svg);
+  width: 30px;
+  height: 30px;
   display: inline-block;
   vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .btn-exit-sidebar {
@@ -197,7 +232,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover {
-  border: 5px solid #961E23;
+  border: 10px solid #8995CB;
 }
 
 .button-bg:hover {
@@ -205,7 +240,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover img {
-  transform: translateY(-15px);
+  transform: scale(1.2);
 }
 
 .button-bg .hover img {
@@ -213,7 +248,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg .hover {
-  border: 5px solid transparent;
+  border: 10px solid transparent;
   transition: border 0.7s ease;
 }
 
@@ -371,21 +406,21 @@ button[data-required="selected"] img {
 
 .slide-button.left-top {
   top: 10%;
-  left: 20%;
+  left: 10%;
 }
 .slide-button.left-bottom {
   bottom: 40%;
-  left: 20%;
+  left: 10%;
 }
 
 .slide-button.right-top {
   top: 10%;
-  right: 20%;
+  right: 10%;
 }
 
 .slide-button.right-bottom {
   bottom: 40%;
-  right: 20%;
+  right: 10%;
 }
 
 /* Identity Details Page */
@@ -467,127 +502,283 @@ button[data-required="selected"] img {
 }
 
 :root {
---lerp-0: 1;
---lerp-1: 0.5625;
---lerp-2: 0.25;
---lerp-3: 0.0625;
---lerp-4: 0;
+  --lerp-0: 1;
+  --lerp-1: 0.5625;
+  --lerp-2: 0.25;
+  --lerp-3: 0.0625;
+  --lerp-4: 0;
 }
 
 .blocks:hover {
---show: 1;
+  --show: 1;
 }
 
 .block {
-width: 48px;
-height: 48px;
-display: grid;
-place-items: center;
-align-content: center;
-transition: flex 0.2s;
-flex: calc(0.2 + (var(--lerp, 0) * 1.5));
-position: relative;
-padding:8px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  transition: flex 0.2s;
+  flex: calc(0.2 + (var(--lerp, 0) * 1.5));
+  position: relative;
+  padding:8px;
 }
 
 .block:after {
-content: "";
-width: 5%;
-aspect-ratio: 1;
-background: var(--text-1);
-position: absolute;
-bottom: 10%;
-left: 50%;
-border-radius: var(--radius-3);
-transform: translate(-50%, -50%);
-z-index: -1;
+  content: "";
+  width: 5%;
+  aspect-ratio: 1;
+  background: var(--text-1);
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  border-radius: var(--radius-3);
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .block:before {
-content: "";
-position: absolute;
-width: calc(100% + var(--size-4));
-bottom: 0;
-aspect-ratio: 1 / 2;
-left: 50%;
-transition: transform 0.2s;
-transform-origin: 50% 100%;
-transform: translateX(-50%) scaleY(var(--show, 0));
-z-index: -1;
+  content: "";
+  position: absolute;
+  width: calc(100% + var(--size-4));
+  bottom: 0;
+  aspect-ratio: 1 / 2;
+  left: 50%;
+  transition: transform 0.2s;
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) scaleY(var(--show, 0));
+  z-index: -1;
 }
 
 :is(.block:hover, .block:focus-visible) .block__item {
-outline: var(--surface-1) var(--size-1) solid;
+  outline: var(--surface-1) var(--size-1) solid;
 }
 
 .block__item {
-width: 100%;
-aspect-ratio: 1;
-border-radius: 5px;
-background: var(--bg), var(--surface-1);
-display: inline-block;
-transition: transform 0.2s;
-transform-origin: 50% 100%;
-position: relative;
-/* transform: translateY(calc(var(--lerp) * -75%)); */
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+  background: var(--bg), var(--surface-1);
+  display: inline-block;
+  transition: transform 0.2s;
+  transform-origin: 50% 100%;
+  position: relative;
+  /* transform: translateY(calc(var(--lerp) * -75%)); */
 }
 
 .block__item:after {
-content: "";
-position: absolute;
-height: 100%;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-aspect-ratio: 1;
-border-radius: var(--radius-3);
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  border-radius: var(--radius-3);
 }
 
 :is(.block:hover, .block:focus-visible) {
---lerp: var(--lerp-0);
-z-index: 5;
+  --lerp: var(--lerp-0);
+  z-index: 5;
 }
 .block:has(+ :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block {
---lerp: var(--lerp-1);
-z-index: 4;
+  --lerp: var(--lerp-1);
+  z-index: 4;
 }
 .block:has(+ .block + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block {
---lerp: var(--lerp-2);
-z-index: 3;
+  --lerp: var(--lerp-2);
+  z-index: 3;
 }
 .block:has(+ .block + .block + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block + .block {
---lerp: var(--lerp-3);
-z-index: 2;
+  --lerp: var(--lerp-3);
+  z-index: 2;
 }
 .block:has(+ .block
 + .block
 + .block
 + :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block + .block + .block + .block {
---lerp: var(--lerp-4);
-z-index: 1;
+  --lerp: var(--lerp-4);
+  z-index: 1;
 }
 
 body:has(a[style="--bg: var(--gradient-1);"]:focus) {
-background: var(--gradient-1);
+  background: var(--gradient-1);
 }
 body:has(a[style="--bg: var(--gradient-2);"]:focus) {
-background: var(--gradient-2);
+  background: var(--gradient-2);
 }
 body:has(a[style="--bg: var(--gradient-3);"]:focus) {
-background: var(--gradient-3);
+  background: var(--gradient-3);
 }
 body:has(a[style="--bg: var(--gradient-4);"]:focus) {
-background: var(--gradient-4);
+  background: var(--gradient-4);
 }
 body:has(a[style="--bg: var(--gradient-5);"]:focus) {
-background: var(--gradient-5);
+  background: var(--gradient-5);
 }
 body:has(a[style="--bg: var(--gradient-6);"]:focus) {
-background: var(--gradient-6);
+  background: var(--gradient-6);
+}
+
+/* Top Priorities Page */
+#sortable button {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropped {
+  width:100%;
+  height:100%;
+}
+
+.dropped img:not(.close) {
+  position: absolute;
+  top: 33%;
+  height: auto;
+  max-height: 88px;
+}
+
+.third .dropped img:not(.close) {
+  left: 35%;
+}
+
+.fourth .dropped img:not(.close) {
+  left: 40%;
+}
+
+.fifth .dropped img:not(.close) {
+  left: 20%;
+}
+
+.item-dropped svg path {
+  fill:#fff;
+  stroke: #AA1B17;
+  stroke-width: 2px;
+}
+
+.item-dropped svg text {
+  display: none;
+}
+
+.remove-button {
+  position: absolute;
+  width: 35px;
+  max-width: 25px;
+}
+
+.first .remove-button {
+  bottom: 23%;
+  right: 0;
+}
+
+.second .remove-button {
+  bottom: 16%;
+  right: 10%;
+}
+
+.third .remove-button {
+  bottom: 12%;
+  right: 18%;
+}
+
+.fourth .remove-button {
+  bottom: 5%;
+  right: 23%;
+}
+
+.fifth .remove-button {
+  bottom: 5%;
+  left: 25%;
+}
+
+.sixth .remove-button {
+  bottom: 13%;
+  left: 17%;
+}
+
+.seventh .remove-button {
+  bottom: 17%;
+  left: 10%;
+}
+
+.eight .remove-button {
+  bottom: 24%;
+  left: 0;
+}
+
+.needs-icon {
+  height:100px;
+  z-index: 2;
+}
+
+.svg-button svg {
+  width: 100%; 
+  height: auto;
+}
+
+#sortable {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(1%, 1fr));
+  z-index: 1;
+}
+
+#sortable .first {
+  grid-column: 20 / span 14;
+  grid-row: 59 / 96;
+}
+
+#sortable .second {
+  grid-column: 22 / span 16;
+  grid-row: 28 / 73;
+  transform: translate(1px, 2px);
+}
+
+#sortable .third {
+  grid-column: 29 / span 16;
+  grid-row: 9 / 51;
+}
+
+#sortable .fourth {
+  grid-column: 40 / span 13;
+  grid-row: 1 / 39;
+}
+
+#sortable .fifth {
+  grid-column: 53 / span 13;
+  grid-row: 1 / 39;
+}
+
+#sortable .sixth {
+  grid-column: 61 / span 16;
+  grid-row: 9 / 51;
+}
+
+#sortable .seventh {
+  grid-column: 68 / span 16;
+  grid-row: 28 / 73;
+  transform: translate(-2px, 3px);
+}
+
+#sortable .eight {
+  grid-column: 72 / span 14;
+  grid-row: 59 / 96;
+}
+
+/* Protection Home Page */
+.bg-needs-main {
+  background-image: url(/images/needs/background/bg-main.png), url(/images/needs/background/abstracts/cloud-1.png);
+  background-size: contain;
+  background-position: center, top center;
+  background-repeat: no-repeat;
+  height: 100%;
 }
 
 /* Mobile / Tab Responsive */
@@ -600,15 +791,44 @@ background: var(--gradient-6);
   .gender-selection-bg {
     z-index: 1;
   }
+  .progress-main {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
   .extra-padding {
-    padding-bottom: 400px!important;
+    padding-bottom: 320px!important;
   }
   .navbar-default.transparent {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     background: #fff;
+  }
+  .progress-main p {
+    color: #fff!important;
+  }
+  .main-logo {
+    width: 80px;
+  }
+  .white-logo {
+    width: 60px;
+  }
+  .display-5, p.nav-text {
+    font-size: 20px;
+  }
+  .timeline-item {
+    margin-bottom: 35px;
+  }
+  .sidebanner {
+    box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .main-logo {
+    padding-top: inherit!important;
   }
 }
 
@@ -703,14 +923,7 @@ background: var(--gradient-6);
 
   
 
-  /* Protection Home Page */
-  .bg-needs-main {
-    background-image: url(/images/needs/background/bg-main.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-  }
+
 
   /* Retirement Home Page */
   .bg-retirement-home {
@@ -745,7 +958,7 @@ background: var(--gradient-6);
   z-index: 10;
 }
 .coverage-avatar img.self-avatar{
-  width: 21vh;
+  width: 20vh;
 }
 .coverage-avatar img.spouse-avatar{
   width: 18vh;
@@ -986,10 +1199,7 @@ background: var(--gradient-6);
       background-size: cover;
     }
 
-    .white-logo,
-    .main-logo {
-      width: 80px;
-    }
+    
 
     /* .main-content.scrollable-padding {
       padding-bottom: 172px !important;
@@ -1025,23 +1235,7 @@ background: var(--gradient-6);
 
   /* Sidebar code for Needs timeline */
 
-  .timeline-needs {
-    position: relative;
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-  }
 
-  .timeline-needs:before {
-    content: '';
-    position: absolute;
-    right: 37px;
-    /* Adjust the right position as needed */
-    top: 10px;
-    bottom: 15px;
-    width: 2px;
-    background: #707070;
-  }
 
   .timeline-item-needs {
     position: relative;

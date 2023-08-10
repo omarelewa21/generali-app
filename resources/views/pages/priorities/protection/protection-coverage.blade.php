@@ -7,10 +7,6 @@
 @endsection
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayData = session('passingArrays');
-@endphp
 
 <div id="protection_coverage" class="vh-100">
 
@@ -23,25 +19,37 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-        @if ($errors->has('protectionSelectedAvatar'))
-        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatar">{{ $errors->first('protectionSelectedAvatar') }}</div>
-    @endif
-        <section>
-            
-            <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
-                @csrf
+        {{-- @if ($errors->has('protectionSelectedAvatar'))
+        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
+    @endif --}}
+    @if ($errors->has('protectionSelectedAvatar'))
+<div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+    <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex">
+            <div class="toast-body p-2">
+                {{ $errors->first('protectionSelectedAvatar') }}
+            </div>
+            {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+        </div>
+    </div>
+</div>
+@endif
+
+    <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
+        @csrf
+        <section>         
             <div class="col-12 text-dark px-0 my-4 bg-needs-main">
                 <div class="my-4 second-cloud" style="padding-top:5.5rem;">
                     <div class="row d-flex justify-content-center py-4 text-center align-items-center">
                         <h5>I'd like to provide coverage for my:</h5>
                     </div>
                     <div class="container">
-                        {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
+                        {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
                         <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
                             <i class="bi bi-arrow-left-circle text-primary"></i>
                         </div>
 
-                        {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
+                        {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
                         <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
                             <i class="bi bi-arrow-right-circle text-primary"></i>
                         </div>
@@ -49,7 +57,7 @@
                     
                     <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'self' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'self' ? 'selected-box-shadow' : '' }}" 
                             data-type="self"
                             id="button-self-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
@@ -58,7 +66,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'spouse' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'spouse' ? 'selected-box-shadow' : '' }}" 
                             data-type="spouse"
                                 id="button-spouse-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
@@ -67,7 +75,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'children' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'children' ? 'selected-box-shadow' : '' }}" 
                              data-type="children"
                                 id="button-kid-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="children">
@@ -75,7 +83,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ old('protectionSelectedAvatar') === 'parent' ? 'greyed-out' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'parent' ? 'selected-box-shadow' : '' }}" 
                             data-type="parent"
                                 id="button-parent-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
@@ -84,13 +92,14 @@
                             </button>
                         </div>
                     </div>
-                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{ old('protectionSelectedAvatar') }}">
-
+                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{Session::get('protectionSelectedAvatar')}}">
+                
                     <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                         <div class="col-12 col-md-4 text-center">
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <section class="footer bg-white py-4 fixed-bottom">
             <div class="container-fluid">
@@ -110,6 +119,9 @@
 </div>
 
 <script>
+
+var toast = new bootstrap.Toast(document.getElementById('protectionSelectedAvatarErrorMsg'));
+    toast.show();
     // javascript code for button click effect on avatar selection
     function avatarSelect(button) {
     event.preventDefault();
@@ -120,23 +132,32 @@
     if (selectedAvatarInput.value === avatarType) {
         selectedAvatarInput.value = '';
         buttons.forEach((btn) => {
-            btn.classList.remove('greyed-out');
+            btn.classList.remove('selected-box-shadow');
+            btn.classList.add('box-shadow');
         });
     } else {
         selectedAvatarInput.value = avatarType;
         buttons.forEach((btn) => {
-            if (btn.getAttribute('data-type') !== avatarType) {
-                if (btn.classList.contains('greyed-out')) {
-                    btn.classList.remove('greyed-out');
+            // Only add the class to the clicked button and remove from others
+            if (btn.getAttribute('data-type') === avatarType) {
+                if (btn.classList.contains('selected-box-shadow')) {
+                    btn.classList.remove('selected-box-shadow');
                 } else {
-                    btn.classList.add('greyed-out');
-                    selectedAvatarInput.classList.remove('d-block');
-
+                    // Remove class from all buttons before adding to the clicked button
+                    buttons.forEach((otherBtn) => {
+                        otherBtn.classList.remove('selected-box-shadow');
+                    });
+                    btn.classList.add('selected-box-shadow');
+                    btn.classList.remove('box-shadow');
                 }
+            } else {
+                btn.classList.remove('selected-box-shadow');
             }
         });
     }
+    
 }
+
 
 
 </script>

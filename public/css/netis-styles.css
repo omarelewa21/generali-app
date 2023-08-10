@@ -36,7 +36,7 @@
 
 
 .needs-grey-bg-md {
-    padding: 100px;
+    padding-top: 240px;
     left: 0px;
     background-color: #E9E9E9;
 
@@ -64,13 +64,13 @@
     background-repeat: no-repeat;
     height: 100%;
 }
-.main-cloud {
+/* .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
     background-position: top;
     background-repeat: no-repeat;
     height:100vh;
-}
+} */
 .second-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-2.png);
     background-size: contain;
@@ -202,18 +202,17 @@
 }
 
 .box-shadow:hover{
-    -webkit-transform: scale(1.05);
+    /* -webkit-transform: scale(1.05);
 	-moz-transform: scale(1.05);
 	-ms-transform: scale(1.05);
 	-o-transform: scale(1.05);
-	transform: scale(1.05);
-	filter:drop-shadow(2px -7px 4px rgba(0, 69, 134, 0.4));
+	transform: scale(1.05); */
+	filter:drop-shadow(1px 5px 4px rgba(0, 69, 134, 0.4));
 
 }
-.greyed-out {
-    filter: grayscale(100%);
-    opacity: 0.6;
-    pointer-events: none;
+.selected-box-shadow {
+    filter:drop-shadow(1px 5px 4px rgba(179, 73, 91, 0.4));
+    /* pointer-events: none; */
 }
 .slick-arrow {
     display: flex;
@@ -226,6 +225,13 @@
 .errorMessage {
     top:20%;
     left:0;
+}
+
+.input-text {
+font-size:2.125rem;
+}
+.fs-64 {
+    font-size:4rem;
 }
 
   /* mobile css */
@@ -241,6 +247,9 @@
     .vh-sm-0 {
         height:100% !important;
       }
+    .w-sm-100 {
+        width:100% !important;
+    }
     .bg-needs-main {
         background-size:cover;
 
@@ -351,14 +360,22 @@
     font-size: calc(1.3375rem + 1.05vw);
 }
 .calendar-protection {
-width: 50%;
+width: 80%;
 }
-.fixed-bottom {
+/* .fixed-bottom {
     z-index:
      1000;
-}
+} */
 .needs-home-avatar img {
     height:33vh;
+}
+
+/* form input-needs */
+.input-text {
+    font-size:calc(1.3375rem + 1.05vw);
+}
+.fs-64 {
+    font-size:calc(1.3375rem + 1.05vw);
 }
     
 }
@@ -385,13 +402,13 @@ width: 50%;
     }
 
     .coverage-avatar img.self-avatar{
-        width: 25vh;
+        width: 23vh;
       }
       .coverage-avatar img.spouse-avatar{
-        width: 21vh;
+        width: 20vh;
       }
       .coverage-avatar img.kid-avatar{
-        width: 23vh;
+        width: 21vh;
       }
       .coverage-avatar img.parent-avatar{
         width: 40vh;
@@ -413,7 +430,7 @@ width: 50%;
 
 /* Code for Retirement - Ideal page */
 #optionsForIdeal img {
-    width: 90%;
+    width: 40vh;
 }
 
 

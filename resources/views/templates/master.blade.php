@@ -24,9 +24,13 @@
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    <!-- {{-- @vite(['resources/js/custom-ying.js']) --}}
-    @vite(['resources/js/slick.min.js']) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+    {{-- @vite(['resources/js/custom-ying.js']) --}}
+    @vite(['resources/js/slick.min.js'])
 </head>
 
 <body>
@@ -34,7 +38,7 @@
         @yield('content')
     </main>
     
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    {{-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> --}}
 
 </body>
     <!-- Modal -->

@@ -1,83 +1,68 @@
+<?php
+/**
+ * Off Canvas Section for Right Navigation
+ */
+?>
+
 {{-- Off Canvas Links for Right Sidebar Navigation --}}
+
 <div class="offcanvas bg-white offcanvas-end" tabindex="-1" id="offcanvasNeeds">
-    <div class="offcanvas-header px-5 pt-xxl-5 pt-xl-5 pt-lg-5 pt-md-5 pt-sm-3 justify-content-end">
+    <div class="offcanvas-header px-5 pt-5 pb-3 justify-content-end">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body mx-2 mt-5">
+    <div class="offcanvas-body pt-5">
         <div class="timeline-needs text-end">
             @php
-            // Get the current URL path
-            $routeName = Route::currentRouteName();
+                // Get the current URL path
+                $routeName = Route::currentRouteName();
 
-            // Extract the folder name from the URL
-            $folderName = explode('.', $routeName)[0];
+                // Extract the folder name from the URL
+                $folderName = explode('.', $routeName)[0];
             @endphp
             <a class="nav-item text-decoration-none text-dark" href="{{route('protection.home')}}">
-                <div class="timeline-item-needs {{ $folderName == 'protection' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'protection' ? 'text-primary' : '' }}">
-                        Protection
-                    </h6>
-
+                <div class="timeline-item-needs {{ $folderName == 'protection' ? 'active' : '' }}" data-folder-name="protection">
+                    <p class="nav-text text-uppercase {{ $folderName == 'protection' ? 'text-primary' : '' }}">Protection</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{route('retirement.home')}}">
-                <div class="timeline-item-needs {{ $folderName == 'retirement' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'retirement' ? 'text-primary' : '' }}">
-                        Retirement
-                    </h6>
+                <div class="timeline-item-needs {{ $folderName == 'retirement' ? 'active' : '' }}" data-folder-name="retirement">
+                    <p class="nav-text text-uppercase {{ $folderName == 'retirement' ? 'text-primary' : '' }}">Retirement</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{route('education.home')}}">
-                <div class="timeline-item-needs {{ $folderName == 'education' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'education' ? 'text-primary' : '' }}">
-                        Education</h6>
+                <div class="timeline-item-needs {{ $folderName == 'education' ? 'active' : '' }}" data-folder-name="education">
+                    <p class="nav-text text-uppercase {{ $folderName == 'education' ? 'text-primary' : '' }}">Education</p>
                 </div>
             </a>
             <a class="nav-item text-decoration-none text-dark" href="{{url('#')}}">
-                <div class="timeline-item-needs {{ $folderName == 'savings' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'savings' ? 'text-primary' : '' }}">
-                        Savings
-                    </h6>
+                <div class="timeline-item-needs {{ $folderName == 'savings' ? 'active' : '' }}" data-folder-name="savings">
+                    <p class="nav-text text-uppercase {{ $folderName == 'savings' ? 'text-primary' : '' }}">Savings</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{url('investment-home')}}">
-                <div class="timeline-item-needs {{ $folderName == 'investment' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'investment' ? 'text-primary' : '' }}">
-                        Investments
-                    </h6>
+                <div class="timeline-item-needs {{ $folderName == 'investment' ? 'active' : '' }}" data-folder-name="investment">
+                    <p class="nav-text text-uppercase {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investments</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{url('#') }}">
-                <div class="timeline-item-needs {{ $folderName == 'health and medical' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">
-                        Health and Medical</h6>
+                <div class="timeline-item-needs {{ $folderName == 'health and medical' ? 'active' : '' }}" data-folder-name="health and medical">
+                    <p class="nav-text text-uppercase {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">Health and Medical</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{ url('#')}}">
-                <div class="timeline-item-needs {{ $folderName == 'debt cancellation' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">
-                        Debt Cancellation</h6>
+                <div class="timeline-item-needs {{ $folderName == 'debt cancellation' ? 'active' : '' }}" data-folder-name="debt cancellation">
+                    <p class="nav-text text-uppercase {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">Debt Cancellation</p>
                 </div>
             </a>
 
             {{-- <a class="nav-item text-decoration-none text-dark" href="{{url('#') }}">
-                <div class="timeline-item-needs {{ $folderName == 'Others ' ? 'active' : '' }}">
-                    <h6
-                        class="display-6 nav-text-needs text-uppercase {{ $folderName == 'Others ' ? 'text-primary' : '' }}">
-                        Others
-                    </h6>
+                <div class="timeline-item-needs {{ $folderName == 'others ' ? 'active' : '' }}" data-folder-name="others">
+                    <p class="nav-text text-uppercase {{ $folderName == 'others ' ? 'text-primary' : '' }}">Others</p>
                 </div>
             </a> --}}
 
@@ -86,24 +71,28 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        var currentPath = "{{ Request::url() }}"; // Get the current URL path
-        
-        console.log(currentPath);
 
-        $('.timeline-needs').each(function (index) {
-            var itemURL = $(this).find('a').attr('href');
+// Keep this script within this file
 
-            console.log(itemURL);
+$(document).ready(function () {
+    // Get the current folder name
+    var currentFolderName = '{{ $folderName }}';
 
-            if (itemURL === currentPath) {
-                $(this).addClass('active');
+    // Find all the timeline items and iterate through them
+    $('.timeline-item-needs').each(function (index) {
+        // Get the folder name from the data attribute
+        var folderName = $(this).data('folder-name');
 
-                // Also mark all previous steps as active
-                for (var i = 0; i < index; i++) {
-                    $('.timeline-item-needs:eq(' + i + ')').addClass('active');
-                }
+        // Check if the current folder name matches the currentFolderName
+        if (folderName === currentFolderName) {
+            $(this).addClass('active');
+
+            // Also mark all previous folders as active
+            for (var i = 0; i < index; i++) {
+                $('.timeline-item-needs:eq(' + i + ')').addClass('active');
             }
-        });
+        }
     });
+});
+
 </script>

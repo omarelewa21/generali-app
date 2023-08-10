@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div id="retirementAgeToRetire" class="vh-100 overflow-auto container-fluid">
+<div id="retirementAgeToRetirePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
         <div class="row">
@@ -23,7 +23,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
+                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -34,7 +35,7 @@
         </div>
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
-                    <form class="form-horizontal p-0 needs-validation" id="retirementAgeToRetire" novalidate action="{{ route('form.age.to.retire') }}" method="POST">
+                    <form class="form-horizontal p-0 needs-validation" id="retirementAgeToRetireForm" novalidate action="{{ route('form.age.to.retire') }}" method="POST">
                         @csrf
                     <section>
                         <div class="row">
@@ -45,7 +46,8 @@
                             <h5 class="needs-text">I’d like to retire </h5> 
                             <div class="d-flex flex-wrap"> 
                             <h5 class="needs-text">at the age of</h5>
-                            <input type="text" name="retirementAgeToRetire" class="w-25 form-control d-inline text-primary @error('retirementAgeToRetire') is-invalid @enderror" id="retirementAgeToRetireInput" placeholder=" " value="{{ old('retirementAgeToRetire') }}">
+                            <input type="text" name="retirementAgeToRetire" value="{{ Session::get('retirementAgeToRetire' ) }}"            
+class="w-25 form-control d-inline text-primary @error('retirementAgeToRetire') is-invalid @enderror" id="retirementAgeToRetireInput" placeholder=" ">
                             @if ($errors->has('retirementAgeToRetire'))
                             <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage" id="retirementAgeToRetireErrorMsg">{{ $errors->first('retirementAgeToRetire') }}</div>
                             @endif
@@ -98,6 +100,25 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+        function updateProgress(inputValue) {
+            console.log($('#TotalRetirementValue').text());
+            var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
+            var totalRetirementValue = inputValue * parseFloat(totalRetirementValueStr); // Convert to decimal value
+            var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
+
+            $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
+            $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+
+        }
+
+        $('#retirementAgeToRetire').on('input', function () {
+            var inputValue = $(this).val();
+            updateProgress(inputValue);
+        });
+        
+    });
 </script>
 
     @endsection
