@@ -44,7 +44,7 @@
                 </div>
                 <div class="container row d-flex m-auto btn-group row h-75" id="optionsForIdeal" data-carousel="true">
                     <div class="col-sm-3 col-lg-3 justify-content-start d-flex flex-column align-items-center">
-                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option1' ? 'selected-box-shadow' : '' }}" data-type="option1"
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option 1' ? 'selected-box-shadow' : '' }}" data-type="option 1"
                             id="button-option-1" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-1.svg') }}"
                                 alt="option 1">
@@ -53,7 +53,7 @@
                         </button>
                     </div>
                     <div class="col-lg-3 justify-content-start d-flex flex-column align-items-center">
-                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option2' ? 'selected-box-shadow' : '' }}" data-type="option2"
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option 2' ? 'selected-box-shadow' : '' }}" data-type="option 2"
                             id="button-option-2" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-2.svg') }}"
                                 alt="option 2">
@@ -62,7 +62,7 @@
                         </button>
                     </div>
                     <div class="col-lg-3 justify-content-start d-flex flex-column align-items-center">
-                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option3' ? 'selected-box-shadow' : '' }}" data-type="option3"
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option 3' ? 'selected-box-shadow' : '' }}" data-type="option 3"
                             id="button-option-3" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-3.svg') }}"
                                 alt="option 3">
@@ -71,7 +71,7 @@
                         </button>
                     </div>
                     <div class="col-lg-3 justify-content-start pt-lg-3 pt-xl-5 d-flex flex-column align-items-center">
-                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option4' ? 'selected-box-shadow' : '' }}" data-type="option4"
+                        <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ Session::get('retirementIdeal') === 'option 4' ? 'selected-box-shadow' : '' }}" data-type="option 4"
                             id="button-option-4" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-4.svg') }}"
                                 alt="option 4">

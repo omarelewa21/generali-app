@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div id="retirementYearsTillRetire" class="vh-100 overflow-auto container-fluid">
+<div id="retirementYearsTillRetirePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
         <div class="row">
@@ -23,7 +23,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
+                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                         <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center align-items-lg-start mx-4 mx-lg-5 order-0 order-lg-1">
                             <h5 class="needs-text">I plan to have</h5>
                             <div class="input-group w-50">
-                                <input type="text" name="retirementYearsTillRetire" class="form-control text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" value="{{ old('retirementOtherSourceOfIncome') }}" id="retirementYearsTillRetire" placeholder=" " required> 
+                                <input type="text" name="retirementYearsTillRetire" value="{{Session::get('retirementYearsTillRetire')}}" class="form-control text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
                             </div>
                             <h5 class="needs-text">to enjoy my retirement.</h5>
@@ -74,5 +75,49 @@
                 </div>
             </div>
     </div>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const retirementYearsTillRetire = document.getElementById("retirementYearsTillRetire");
+            const retirementYearsTillRetireErrorMsg = document.getElementById("retirementYearsTillRetireErrorMsg");
+            
+            retirementYearsTillRetire.addEventListener("blur", function() {
+                validateNumberField(retirementYearsTillRetire);
+            });
+        
+            retirementYearsTillRetire.addEventListener("input", function() {
+                retirementYearsTillRetireErrorMsg.style.display = "none";
+            });
+        
+            function validateNumberField(field) {
+                const value = field.value.trim();
+        
+                if (value === "" || isNaN(value)) {
+                    field.classList.remove("is-valid");
+                    field.classList.add("is-invalid");
+                } else {
+                    field.classList.add("is-valid");
+                    field.classList.remove("is-invalid");
+                }
+            }
+        });
+        
+        document.addEventListener("DOMContentLoaded", function() {
+                function updateProgress(inputValue) {
+                    // console.log($('#TotalRetirementValue').text());
+                    var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
+                    var totalRetirementValue = inputValue * parseFloat(totalRetirementValueStr); // Convert to decimal value
+                    var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
+        
+                    $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
+                    $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+        
+                }
+        
+                $('#retirementYearsTillRetire').on('input', function () {
+                    var inputValue = $(this).val();
+                    updateProgress(inputValue);
+                });
+                
+            });
+        </script>
     @endsection

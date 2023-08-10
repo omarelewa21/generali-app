@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div id="retirementAllocatedFundsAside" class="vh-100 overflow-auto container-fluid">
+<div id="retirementAllocatedFundsAsidePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
         <div class="row">
@@ -23,7 +23,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 class="needsProgressValue m-1 text-light text-center">RM1,500,000</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
+                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -45,16 +46,16 @@
                             <h5 class="needs-text">So far, I’ve put aside</h5>
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                    <input type="text" name="retirementAllocatedFundsAside" class="form-control d-inline text-primary @error('retirementAllocatedFundsAside') is-invalid @enderror" value="{{ old('retirementAllocatedFundsAside') }}" id="retirementAllocatedFundsAside" placeholder=" " required>
+                                    <input type="text" name="retirementAllocatedFundsAside" value="{{Session::get('retirementAllocatedFundsAside') }}" class="form-control d-inline text-primary @error('retirementAllocatedFundsAside') is-invalid @enderror" id="retirementAllocatedFundsAside" placeholder=" " required>
                                 </div>
                             <h5 class="needs-text">for my retirement.</h5>
                             <h5 class="needs-text">Other sources of income:</h5>
                             <div class="input-group w-50">
                                 <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                <input type="text" name="retirementOtherSourceOfIncome" class="form-control d-inline text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" value="{{ old('retirementOtherSourceOfIncome') }}" id="retirementOtherSourceOfIncome" placeholder=" " required>
+                                <input type="text" name="retirementOtherSourceOfIncome" value="{{ Session::get('retirementOtherSourceOfIncome') }}" class="form-control d-inline text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" id="retirementOtherSourceOfIncome" placeholder=" " required>
                             </div>
-                            @if ($errors->has('retirementAllocatedFundsAside'))
-                            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="retirementAllocatedFundsAsideErrorMsg">{{ $errors->first('retirementAllocatedFundsAside') }}</div>
+                            @if ($errors->has('retirementOtherSourceOfIncome'))
+                            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="retirementOtherSourceOfIncomeErrorMsg">{{ $errors->first('retirementOtherSourceOfIncome') }}</div>
                             @endif
                         </div>
                         </div>
@@ -83,17 +84,28 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
     const retirementAllocatedFundsAside = document.getElementById("retirementAllocatedFundsAside");
+    const retirementOtherSourceOfIncome = document.getElementById("retirementOtherSourceOfIncome");
+    const retirementAllocatedFundsAsideErrorMsg = document.getElementById("retirementAllocatedFundsAsideErrorMsg");
+    const retirementOtherSourceOfIncomeErrorMsg = document.getElementById("retirementOtherSourceOfIncomeErrorMsg");
+
     retirementAllocatedFundsAside.addEventListener("blur", function() {
-        validateNumberField(retirementAllocatedFunds);
+        validateNumberField(retirementAllocatedFundsAside);
     });
 
     retirementAllocatedFundsAside.addEventListener("input", function() {
         retirementAllocatedFundsErrorMsg.style.display = "none";
     });
 
+    retirementOtherSourceOfIncome.addEventListener("blur", function() {
+        validateNumberField(retirementOtherSourceOfIncome);
+    });
+
+    retirementOtherSourceOfIncome.addEventListener("input", function() {
+        retirementOtherSourceOfIncomeErrorMsg.style.display = "none";
+    }); 
+
     function validateNumberField(field) {
         const value = field.value.trim();
-
         if (value === "" || isNaN(value)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
@@ -103,5 +115,30 @@
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+                function updateProgress(inputValue,inputValue2) {
+                    // console.log($('#TotalRetirementValue').text());
+                    var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
+                    var totalRetirementValue = inputValue + inputValue2 - parseFloat(totalRetirementValueStr); // Convert to decimal value
+                    var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
+        
+                    $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
+                    $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+        
+                }
+        
+                $('#retirementAllocatedFundsAside').on('input', function () {
+                    var inputValue = $(this).val();
+                    updateProgress(inputValue);
+                });
+                $('#retirementOtherSourceOfIncome').on('input', function () {
+                    var inputValue2 = $(this).val();
+                    updateProgress(inputValue2);
+                });
+                
+            });
+
+
 </script>
     @endsection
