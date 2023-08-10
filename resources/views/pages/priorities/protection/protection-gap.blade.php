@@ -278,5 +278,13 @@
         
     });
 </script>
-
+<style>
+    @media only screen and (max-width: 767px) {
+    
+        body {
+        min-height: 51.5rem;
+        padding-top: 5.5rem;
+        }
+    }
+    </style>
 @endsection

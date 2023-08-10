@@ -58,7 +58,6 @@
                             <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
                                     <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance policy.</h5>
                                     <div class="py-3 py-md-2 py-lg-1 mb-4 mb-md-0 mb-lg-0">
-                                        {{-- <div> --}}
 
                                     <span class="me-3 me-md-5 me-lg-5">
                                         <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{Session::get('protectionExistingPolicy') === 'yes' ? 'checked' : ''}} required>
@@ -184,6 +183,5 @@ document.addEventListener("DOMContentLoaded", function() {
     padding-top: 5.5rem;
     }
 }
-
 </style>
 @endsection

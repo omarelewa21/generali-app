@@ -53,6 +53,12 @@
 .needs-text {
     color:#ffffff;
 }
+
+/* body {
+    min-height: 51.5rem;
+    padding-top: 5.5rem;
+    } */
 }
+
 </style>
 @endsection

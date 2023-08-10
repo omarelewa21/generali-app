@@ -23,7 +23,8 @@
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif --}}
     @if ($errors->has('protectionSelectedAvatar'))
-<div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+<div class="position-fixed top-0 left-0 transform-middle m-2" style="z-index:1099">
+
     <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="d-flex">
             <div class="toast-body p-2">
@@ -158,9 +159,15 @@ var toast = new bootstrap.Toast(document.getElementById('protectionSelectedAvata
     
 }
 
-
-
 </script>
-
+<style>
+    @media only screen and (max-width: 767px) {
+    
+        body {
+        min-height: 51.5rem;
+        padding-top: 5.5rem;
+        }
+    }
+    </style>
 @endsection
 
