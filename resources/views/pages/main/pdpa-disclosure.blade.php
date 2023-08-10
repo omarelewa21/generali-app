@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white')
-                <div class="text-white px-4 px-md-5 py-3 py-md-5">
+                <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="vh-100 overflow-y-auto overflow-x-hidden">
                     <section class="main-content extra-padding">
                         <div class="container">
-                            <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-top bg-accent-bg-grey">
+                            <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                 <div class="col-12">
                                     <h1 class="display-2 text-uppercase">Your Agreement</h1>
                                 </div>
@@ -100,4 +100,5 @@
         </div>
     </div>
 </div>
+
 @endsection

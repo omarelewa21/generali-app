@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
-                <div class="text-white px-4 px-md-5 py-md-5 py-3">
+                <div class="text-white px-4 px-xl-5 py-md-5 py-3">
                     <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                         @csrf
                         <section class="main-content extra-padding">
                             <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
                                         <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                     </div>
