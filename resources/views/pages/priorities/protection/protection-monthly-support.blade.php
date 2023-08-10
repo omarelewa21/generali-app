@@ -36,7 +36,18 @@
                     @include('templates.nav.nav-sidebar-needs')
                 </div>
             </div>
-
+            @if ($errors->has('protectionFunds'))
+            <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+                <div id="protectionFundsErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex">
+                        <div class="toast-body p-2">
+                            {{ $errors->first('protectionFunds') }}
+                        </div>
+                        {{-- <button type="button" class="btn btn-primary me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+                    </div>
+                </div>
+            </div>
+            @endif
         <form class="form-horizontal p-0 needs-validation" id="protectionAllocatedFundsForm" novalidate action="{{route('form.protection.monthly.support')}}" method="POST">
             @csrf           
             <div class="col-12 text-dark px-0 my-4">
@@ -55,9 +66,9 @@
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
-                                @if ($errors->has('protectionFunds'))
+                                {{-- @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
-                                @endif
+                                @endif --}}
                                 <h5 class="needs-text">/ month.</h5>    
                             </div>
                         </div>

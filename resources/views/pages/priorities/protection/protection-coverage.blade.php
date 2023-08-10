@@ -19,9 +19,22 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-        @if ($errors->has('protectionSelectedAvatar'))
+        {{-- @if ($errors->has('protectionSelectedAvatar'))
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
-    @endif
+    @endif --}}
+    @if ($errors->has('protectionSelectedAvatar'))
+<div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+    <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex">
+            <div class="toast-body p-2">
+                {{ $errors->first('protectionSelectedAvatar') }}
+            </div>
+            {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+        </div>
+    </div>
+</div>
+@endif
+
     <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
         @csrf
         <section>         
@@ -107,13 +120,13 @@
 
 <script>
 
-
+var toast = new bootstrap.Toast(document.getElementById('protectionSelectedAvatarErrorMsg'));
+    toast.show();
     // javascript code for button click effect on avatar selection
     function avatarSelect(button) {
     event.preventDefault();
     const avatarType = button.getAttribute('data-type');
     const buttons = document.querySelectorAll('.avatar-button');
-    const protectionSelectedAvatarErrorMsg = document.getElementById("protectionSelectedAvatarErrorMsg");
     const selectedAvatarInput = document.getElementById('protectionSelectedAvatarInput');
 
     if (selectedAvatarInput.value === avatarType) {
@@ -136,7 +149,6 @@
                     });
                     btn.classList.add('selected-box-shadow');
                     btn.classList.remove('box-shadow');
-                    protectionSelectedAvatarErrorMsg.classList.remove('d-block');
                 }
             } else {
                 btn.classList.remove('selected-box-shadow');

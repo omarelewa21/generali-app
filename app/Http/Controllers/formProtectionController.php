@@ -48,6 +48,7 @@ class formProtectionController extends Controller
             'protectionFunds' => 'required|integer|min:1',
 
         ], $customMessages);
+        
         // Calculate the multiplied value
         $protectionFunds = $request->input('protectionFunds');
         $TotalprotectionFunds = $protectionFunds * 12;
