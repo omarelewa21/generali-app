@@ -624,7 +624,24 @@ class FormController extends Controller
             'btnradio' => 'required|in:smoker,nonSmoker',
         ], $customMessages);
 
-        // Process the form data and perform any necessary actions
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Add or update the data value in the array
+        $arrayData['Country'] = $validatedData['country'];
+        $arrayData['IdType'] = $validatedData['idType'];
+        $arrayData['IdNumber'] = $validatedData['idNumber'];
+        $arrayData['PassportNumber'] = $validatedData['passportNumber'];
+        $arrayData['BirthCert'] = $validatedData['birthCert'];
+        $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
+        $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        Log::debug($arrayData);
+
+        // // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
 

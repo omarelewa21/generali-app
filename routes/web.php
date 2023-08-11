@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\formProtectionController;

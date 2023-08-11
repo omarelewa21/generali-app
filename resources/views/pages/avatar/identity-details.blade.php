@@ -30,6 +30,14 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
+                    @if ($errors->any())
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <div class="text">There was a problem with your submission. Errors are marked below.</div>
+                        </div>
+                    @endif
                     <form novalidate action="{{ route('form.submit.identity') }}" method="POST">
                         @csrf
                         <section class="main-content">
@@ -51,7 +59,7 @@
                                                 @endforeach
                                             </select>
                                             @error('country')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -67,37 +75,37 @@
                                                 <option value="Registration" @if(old('idType') == 'Registration') selected @endif>Registration</option>
                                             </select>
                                             @error('idType')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-sm-5" id="groups">
                                         <div class="col-12 pt-4" id="newicgroup" style="display: none;">
                                             <label for="idNumber" class="form-label text-white">ID Number *</label>
                                             <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber') }}">
                                             @error('idNumber')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="passportgroup" style="display: none;">
                                             <label for="passportNumber" class="form-label text-white">Passport Number *</label>
                                             <input type="text" name="passportNumber" class="form-control bg-white @error('passportNumber') is-invalid @enderror" id="passportNumber" placeholder="A122345" value="{{ old('passportNumber') }}">
                                             @error('passportNumber')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
                                             <label for="birthCert" class="form-label text-white">Birth Certificate Number *</label>
                                             <input type="text" name="birthCert" class="form-control bg-white @error('birthCert') is-invalid @enderror" id="birthCert" placeholder="T122345" value="{{ old('birthCert') }}">
                                             @error('birthCert')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="policegroup" style="display: none;">
                                             <label for="policeNumber" class="form-label text-white">Police / Army Number *</label>
                                             <input type="text" name="policeNumber" class="form-control bg-white @error('policeNumber') is-invalid @enderror" id="policeNumber" placeholder="Enter Police / Army Number" value="{{ old('policeNumber') }}">
                                             @error('policeNumber')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -105,7 +113,7 @@
                                             <label for="registrationNumber" class="form-label text-white">Registration Number *</label>
                                             <input type="text" name="registrationNumber" class="form-control bg-white @error('registrationNumber') is-invalid @enderror" id="registrationNumber" placeholder="Enter Registration Number" value="{{ old('registrationNumber') }}">
                                             @error('registrationNumber')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -117,10 +125,22 @@
                                                 $dateRange = array_map(function ($day) {
                                                     return sprintf('%02d', $day);
                                                 }, $dateRange);
-                                                $monthRange = range(1, 12);
-                                                $monthRange = array_map(function ($month) {
-                                                    return sprintf('%02d', $month);
-                                                }, $monthRange);
+
+                                                $monthNames = [
+                                                    '01' => 'January',
+                                                    '02' => 'February',
+                                                    '03' => 'March',
+                                                    '04' => 'April',
+                                                    '05' => 'May',
+                                                    '06' => 'June',
+                                                    '07' => 'July',
+                                                    '08' => 'August',
+                                                    '09' => 'September',
+                                                    '10' => 'October',
+                                                    '11' => 'November',
+                                                    '12' => 'December',
+                                                ];
+
                                                 $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
 
                                                 // Set the selected values
@@ -138,15 +158,14 @@
                                             @endphp
                                             <label for="dob" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
+                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}  
                                                 </div>
-                                                <div class="col-md-4">
-                                                    {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
+                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
-                                                    {!! Form::select('year', array_combine(array_map(function ($year) {
+                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                    {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                         return substr($year, -2);
                                                     }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
                                                 </div>
@@ -157,17 +176,17 @@
                                         <div class="col-12 pt-4">
                                             <label for="habits" class="form-label text-white">Your Habits *</label>
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
-                                                <div class="col-6">
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-fill">
                                                     <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker">
-                                                    <label class="btn btn-outline-primary" for="smoker">Smoker</label>
-                                                </div>
-                                                <div class="col-6">
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
+                                                </label>
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-fill">
                                                     <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker">
-                                                    <label class="btn btn-outline-primary" for="nonSmoker">Non-Smoker</label>
-                                                </div>
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
+                                                </label>
                                             </div>
                                             @error('btnradio')
-                                                <div class="invalid-feedback alert alert-danger">Please select your habits</div>
+                                                <div class="invalid-feedback">Please select your habits</div>
                                             @enderror  
                                         </div>
                                     </div>
@@ -183,7 +202,7 @@
                                                 <option value="Registration" @if(old('educationLevel') == 'Registration') selected @endif>Registration</option>
                                             </select>
                                             @error('educationLevel')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -197,7 +216,7 @@
                                                 @endforeach
                                             </select>
                                             @error('occupation')
-                                                <div class="invalid-feedback alert alert-danger">{{ $message }}</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -301,4 +320,5 @@
     }
 });
 </script>
+
 @endsection

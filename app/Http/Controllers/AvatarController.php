@@ -160,7 +160,9 @@ class AvatarController extends Controller
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-     
+
+        Log::debug($arrayData);
+        
         return response()->json([
             'image' => asset('images/avatar-general/' . $storedImage . '.svg'),
             'gender' => $storedGender,

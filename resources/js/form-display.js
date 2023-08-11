@@ -4,6 +4,10 @@ const specificPageURLs = [
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
+
+    // Clear the selected option from localStorage on page load
+    // localStorage.removeItem('selectedOption');
+    
     // Show the selected groups based on the dropdown selected
     document.addEventListener('DOMContentLoaded', function() {
         var idTypeSelect = document.getElementById('idType');
@@ -11,13 +15,14 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         var passportgroup = document.getElementById('passportgroup');
         var birthcertgroup = document.getElementById('birthcertgroup');
         var policegroup = document.getElementById('policegroup');
-        // var registrationgroup = document.getElementById('registrationgroup');
-      
+        var registrationgroup = document.getElementById('registrationgroup');
+
         // Add change event listener to the select element
         idTypeSelect.addEventListener('change', function() {
             var selectedOption = this.value;
+    
             showSelectedGroup(selectedOption);
-        
+
             // Store the selected option in local storage
             localStorage.setItem('selectedOption', selectedOption);
         });
@@ -36,13 +41,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             registrationgroup.style.display = 'none';
             registrationNumber.removeAttribute('required');
 
-            // Clear input fields in respective groups
-            idNumber.value = '';
-            passportNumber.value = '';
-            birthCert.value = '';
-            policeNumber.value = '';
-            registrationNumber.value = '';
-
             // Show the relevant group based on the selected option and add the required attribute
             if (selectedOption === 'New IC') {
                 newicgroup.style.display = 'block';
@@ -57,10 +55,9 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             }
         }
 
-        // Check if a selected option is stored in local storage and show the relevant group on page load
+        // Check if a selected option is stored in local storage
         var storedOption = localStorage.getItem('selectedOption');
         if (storedOption) {
-            idTypeSelect.value = storedOption;
             showSelectedGroup(storedOption);
         }
     });
