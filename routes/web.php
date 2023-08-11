@@ -8,12 +8,15 @@ use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\DropdownController;
 
 /* main pages */
+Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
-Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details');
 Route::post('/basic-details', [FormController::class, 'submit'])->name('form.submit');
+Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
+Route::post('/save-button-click', [FormController::class, 'saveButtonClick'])->name('save.button.click');
 
 /* avatar pages */
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
@@ -21,7 +24,7 @@ Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avat
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
 Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
-Route::get('/identity-details', [FormController::class, 'identityData'])->name('identity.details');
+Route::get('/identity-details', [DropdownController::class, 'countries'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');

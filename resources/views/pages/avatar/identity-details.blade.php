@@ -52,10 +52,10 @@
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12">
                                             <label for="country" class="form-label text-white">Citizenship *</label>
-                                            <select class="form-select bg-white @error('country') is-invalid @enderror" name="country" aria-label="Countries" id="countrySelect" required>
+                                            <select name="country" class="form-select bg-white @error('country') is-invalid @enderror" aria-label="Countries" id="countrySelect" required>
                                                 <option value="" selected disabled>Please Select</option>
-                                                @foreach($countries as $code => $name)
-                                                    <option value="{{ $code }}" @if(old('country') == $code) selected @endif>{{ $name }}</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->countries }}" {{ old('country', $arrayData['Country'] ?? '') === $country->countries ? 'selected' : '' }}>{{ $country->countries }}</option>
                                                 @endforeach
                                             </select>
                                             @error('country')
@@ -209,12 +209,7 @@
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="occupation" class="form-label text-white">Occupation *</label>
-                                            <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                <option value="" selected disabled>Please Select</option>
-                                                @foreach($rows as $row)
-                                                    <option value="{{ $row[0] }}">{{ $row[0] }}</option>
-                                                @endforeach
-                                            </select>
+                                            
                                             @error('occupation')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
