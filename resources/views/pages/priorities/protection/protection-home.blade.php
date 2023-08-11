@@ -50,9 +50,10 @@
 
 <style>
 @media only screen and (max-width: 767px) {
-.needs-text {
+.needs-text, .progress .progress-value {
     color:#ffffff;
 }
+
 
 /* body {
     min-height: 51.5rem;

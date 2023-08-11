@@ -24,7 +24,7 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{ Session::get('TotalProtectionValue', 0) }}</h3>
                             {{-- <script>
                                 console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
                             </script> --}}
@@ -124,11 +124,9 @@ document.addEventListener("DOMContentLoaded", function() {
             var month = 12;
             var totalProtectionValue = inputValue * month;
             // var progressTotalProtectionValue = totalProtectionValue * 100;
-            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
-
 
             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+            $('#TotalProtectionValue').text( totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
         }
         var inputValue = $('#protectionFunds').val();
         if (inputValue !== "") {
