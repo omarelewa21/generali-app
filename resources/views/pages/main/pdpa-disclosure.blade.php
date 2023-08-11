@@ -89,8 +89,10 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('welcome')}}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
-                                    <a href="{{route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
+                                <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
+<a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
+                                    <!-- <a id="declineButton" href="{{route('welcome')}}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
+                                    <a id="acceptButton" href="{{route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a> -->
                                 </div>
                             </div>
                         </div>
@@ -100,5 +102,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('declineButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            storeData('Declined', true);
+            window.location.href = '{{ route('welcome') }}';
+        });
+
+        document.getElementById('acceptButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            storeData('Accept', true);
+            window.location.href = '{{ route('basic.details') }}';
+        });
+
+        function storeData(key, value) {
+            // Perform an AJAX request to store the data in the session
+            fetch('/store-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add Laravel CSRF token
+                },
+                body: JSON.stringify({
+                    key: key,
+                    value: value,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data stored in session:', data);
+            })
+            .catch(error => {
+                console.error('Error storing data:', error);
+            });
+        }
+    });
+</script>
 
 @endsection

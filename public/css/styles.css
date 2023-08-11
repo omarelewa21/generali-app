@@ -66,6 +66,24 @@ h4 {
   z-index: inherit;
 }
 
+.bg-primary .invalid-feedback {
+  color: rgb(255, 230, 156);
+}
+
+
+/* Alerts */
+.alert div.text {
+  font-size: 18px;
+}
+
+.alert.alert-danger svg path {
+  fill: #842029;
+}
+
+.alert.alert-warning svg path {
+  fill: #664d03;
+}
+
 /* Navigation Menu */
 .navbar {
   position: absolute;
@@ -426,7 +444,7 @@ button[data-required="selected"] img {
 /* Identity Details Page */
 .btn-check:checked+.btn {
   border-radius: 0;
-  background-color: #EEEEEE;
+  background-color: #d3d4d5;
   color: inherit;
   width: 100%;
   border-color: #A0A0A0;
@@ -435,7 +453,7 @@ button[data-required="selected"] img {
 .btn-check+.btn {
   border-radius: 0;
   background-color: #fff;
-  color: inherit;
+  color: rgba(10, 4, 60, 0.50);
   width: 100%;
   border-color: #A0A0A0;
 }
