@@ -68,11 +68,9 @@
                                             <label for="idType" class="form-label text-white">ID Type *</label>
                                             <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
                                                 <option value="" selected disabled>Please Select</option>
-                                                <option value="New IC" @if(old('idType') == 'New IC') selected @endif>New IC</option>
-                                                <option value="Passport" @if(old('idType') == 'Passport') selected @endif>Passport</option>
-                                                <option value="Birth Certificate" @if(old('idType') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                <option value="Police / Army" @if(old('idType') == 'Police / Army') selected @endif>Police / Army</option>
-                                                <option value="Registration" @if(old('idType') == 'Registration') selected @endif>Registration</option>
+                                                @foreach ($idtypes as $idtype)
+                                                    <option value="{{ $idtype->idtypes }}" {{ old('idType', $arrayData['IdType'] ?? '') === $idtype->idtypes ? 'selected' : '' }}>{{ $idtype->idtypes }}</option>
+                                                @endforeach
                                             </select>
                                             @error('idType')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -210,9 +208,9 @@
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="occupation" class="form-label text-white">Occupation *</label>
                                             
-                                            @error('occupation')
+                                            <!-- @error('occupation')
                                                 <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                            @enderror -->
                                         </div>
                                     </div>
                                 </div>
