@@ -106,14 +106,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     document.getElementById("declineButton").addEventListener("click", function() {
-        saveButtonClick("Declined");
+        pdpa("Declined");
     });
 
     document.getElementById("acceptButton").addEventListener("click", function() {
-        saveButtonClick("Accepted");
+        pdpa("Accepted");
     });
 
-    function saveButtonClick(decision, route) {
+    function pdpa(decision, route) {
         $.ajax({
             type: "POST",
             url: "{{ route('save.button.click') }}",

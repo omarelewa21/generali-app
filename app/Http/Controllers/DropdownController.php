@@ -6,15 +6,10 @@ use App\Models\Occupation;
 use App\Models\Country;
 use App\Models\Title;
 use App\Models\IDType;
+use App\Models\educationLevel;
 
 class DropdownController extends Controller
 {
-    // public function index()
-    // {
-    //     $occupations = Occupation::all();
-    //     return view('pages/main/basic-details', compact('occupations'));
-    // }
-
     public function titles()
     {
         $titles = Title::all();
@@ -25,6 +20,8 @@ class DropdownController extends Controller
     {
         $countries = Country::all();
         $idtypes = IDType::all();
-        return view('pages/avatar/identity-details', compact('countries', 'idtypes'));
+        $occupations = Occupation::all();
+        $educationLevels = educationLevel::all();
+        return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
     }
 }

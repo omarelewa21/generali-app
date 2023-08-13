@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
-    public function saveButtonClick(Request $request)
+    public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
         
@@ -32,7 +32,7 @@ class FormController extends Controller
         return response()->json(['message' => 'Button click saved successfully']);
     }
 
-    public function submit(Request $request)
+    public function basicDetails(Request $request)
     {
         // Fetch titles from the database
         $titles = DB::table('titles')->pluck('titles')->toArray();
@@ -69,6 +69,8 @@ class FormController extends Controller
         // Fetch titles from the database
         $countries = DB::table('countries')->pluck('countries')->toArray();
         $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+        $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
+        $occupation = DB::table('occupations')->pluck('name')->toArray();
 
         $customMessages = [
             'idNumber.regex' => 'The id number field must match the format 123456-78-9012.',
@@ -117,7 +119,12 @@ class FormController extends Controller
                 }),
                 'max:15',
             ],
+            'day' => 'required',
+            'month' => 'required',
+            'year' => 'required',
             'btnradio' => 'required|in:smoker,nonSmoker',
+            'educationLevel' => 'required|in:' . implode(',', $educationLevel),
+            'occupation' => 'required|in:' . implode(',', $occupation),
         ], $customMessages);
 
         // Get the existing array from the session
@@ -131,60 +138,69 @@ class FormController extends Controller
         $arrayData['BirthCert'] = $validatedData['birthCert'];
         $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
         $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
+        $arrayData['DobDay'] = $validatedData['day'];
+        $arrayData['DobMonth'] = $validatedData['month'];
+        $arrayData['DobYear'] = $validatedData['year'];
+        $arrayData['Habits'] = $validatedData['btnradio'];
+        $arrayData['EducationLevel'] = $validatedData['educationLevel'];
+        $arrayData['Occupation'] = $validatedData['occupation'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
-        Log::debug($arrayData);
-
-        // // Process the form data and perform any necessary actions
+        // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
 
-    public function validateAvatar(Request $request)
+    public function validateButton(Request $request)
     {
-        $request->validate([
-            'data-required' => 'required|in:selected',
-        ]);
+        // $request->validate([
+        //     'data-required' => 'required|in:selected',
+        // ]);
 
-        return response()->json([
-            'validationPassed' => true,
-        ]);
+        // return response()->json([
+        //     'validationPassed' => true,
+        // ]);
     }
     public function handleAvatarSelection(Request $request)
     {
-        // Get the selected avatar from the hidden input field
-        $selectedMaritalStatus = $request->input('selectedAvatarInput');
-        $dataUrl = $request->input('urlInput');
-        $selectedFamilies = $request->input('selectedFamilies');
-        Log::debug($request->all());
-        Log::debug($selectedFamilies);
-
-        // You can access the data for each entry like this:
-        // foreach ($selectedFamilies as $family) {
-        //     $key = $family['key'];
-        //     $value = $family['value'];
-        // }
-
-        // Perform any additional actions based on the validation result.
-        // For example, you can save the selection to the database.
-
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
-        // Add or update the value in the array
-        if ($selectedMaritalStatus !== null) {
-            // If not equal to null, then replace the data in $arrayData['maritalStatus']
-            $arrayData['maritalStatus'] = $selectedMaritalStatus;
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+
+                return true;
+            }
+            
+            $customMessage = "At least one button must be selected.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'selectedButtonInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        //$arrayData['families'] = $value;
+
+        // Validation passed, perform any necessary processing...
+        // Add or update the data value in the array
+        $selectedButtonInput = $request->input('selectedButtonInput');
+        $arrayData['maritalStatus'] = $selectedButtonInput;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
-        // Log the session data to the Laravel log file
-        \Log::info('Session Data:', $arrayData);
-
+        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
         return redirect()->route($dataUrl);
     }
+
 }
