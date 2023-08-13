@@ -27,14 +27,14 @@
                 
                 <div class="needs-home">
                     <section class="content-needs">
-                        <!-- <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2">
-                            <img src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
-                            <h5 class="d-flex col-12 col-md-8 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
+                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2">
+                            <img class="z-1" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
+                            <h5 class="z-1 d-flex col-12 col-md-8 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
                         </div>
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
                             <div class="col-11 col-md-4 text-center">
                             </div>
-                        </div> -->
+                        </div> 
                     </section>
 
                     <section class="footer-needs">
