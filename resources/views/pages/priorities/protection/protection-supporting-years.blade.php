@@ -5,7 +5,12 @@
 @endsection
 
 @section('content')
-
+@php
+    // Retrieving values from the session
+    $arrayDataProtection = session('passingArraysProtection');
+    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
+    $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
+@endphp
 <div id="protection-supporting-years">
     <div class="container-fluid overflow-hidden d-flex h-100 flex-column">
         <section>
@@ -21,8 +26,8 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{
-                                Session::get('TotalProtectionValue', 'RM0') }}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
+                                $formattedTotalProtectionValue}}</h3>
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
                     </div>
@@ -68,7 +73,7 @@
                                             class="calendar-protection">
                                         <div class="position-absolute center w-100 text-center px-5 px-lg-0">
                                             <input type="number" name="protectionSupportingYears"
-                                                value="{{ Session::get('protectionSupportingYears' ) }}"
+                                                value="{{$protectionSupportingYears}}"
                                                 class="form-control d-inline-flex text-primary w-50 fs-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
                                                 id="protectionSupportingYears" required>
                                             <h5 class="needs-text">years</h5>
@@ -99,53 +104,53 @@
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
-    var protectionSupportingYears = document.getElementById('protectionSupportingYears');
+//     document.addEventListener("DOMContentLoaded", function() {
+//     const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
+//     var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
-    protectionSupportingYears.addEventListener('blur', function() {
-            validateYearsNumberField(protectionSupportingYears);
-        });
+//     protectionSupportingYears.addEventListener('blur', function() {
+//             validateYearsNumberField(protectionSupportingYears);
+//         });
 
-function validateYearsNumberField(field) {
-    var minAge = 1;
-    var maxAge = 100;
+// function validateYearsNumberField(field) {
+//     var minAge = 1;
+//     var maxAge = 100;
 
-    var value = parseInt(field.value);
+//     var value = parseInt(field.value);
 
-    if (!isNaN(value) && value >= minAge && value <= maxAge) {
-        field.classList.add('is-valid');
-        field.classList.remove('is-invalid');
-    } else {
-        field.classList.remove('is-valid');
-        field.classList.add('is-invalid');
-    }
-}
-});
-document.addEventListener("DOMContentLoaded", function() {
-        function updateProgress(inputValue) {
-            console.log($('#TotalProtectionValue').text());
-            var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
-            var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
-            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
+//     if (!isNaN(value) && value >= minAge && value <= maxAge) {
+//         field.classList.add('is-valid');
+//         field.classList.remove('is-invalid');
+//     } else {
+//         field.classList.remove('is-valid');
+//         field.classList.add('is-invalid');
+//     }
+// }
+// });
+// document.addEventListener("DOMContentLoaded", function() {
+//         function updateProgress(inputValue) {
+//             console.log($('#TotalProtectionValue').text());
+//             var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
+//             var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
+//             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
 
-            $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+//             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
+//             $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
 
-        }
-        // var inputValue = $('#protectionSupportingYears').val();
-        // if (inputValue !== "") {
-        //     updateProgress(inputValue);
-        // } else {
-        //     // updateProgress(0); // Or you can use any default value you want
-        // }
+//         }
+//         // var inputValue = $('#protectionSupportingYears').val();
+//         // if (inputValue !== "") {
+//         //     updateProgress(inputValue);
+//         // } else {
+//         //     // updateProgress(0); // Or you can use any default value you want
+//         // }
 
-        $('#protectionSupportingYears').on('input', function () {
-            var inputValue = $(this).val();
-            updateProgress(inputValue);
-        });
+//         $('#protectionSupportingYears').on('input', function () {
+//             var inputValue = $(this).val();
+//             updateProgress(inputValue);
+//         });
         
-    });
+//     });
 </script>
 
 <style>
