@@ -7,11 +7,7 @@
 @endsection
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayDataProtection = session('passingArraysProtection');
-    $protectionSelectedAvatar= isset($arrayDataProtection['protectionSelectedAvatar']) ? $arrayDataProtection['protectionSelectedAvatar'] : '';
-@endphp
+
 <div id="protection_coverage" class="vh-100">
 
     <div class="p-0 vh-100 container-fluid">
@@ -27,8 +23,8 @@
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif --}}
     @if ($errors->has('protectionSelectedAvatar'))
-<div class="position-fixed mt-5 top-0 start-50 translate-middle" style="z-index:1099">
-    <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+<div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
+    <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="d-flex">
             <div class="toast-body p-2">
                 {{ $errors->first('protectionSelectedAvatar') }}
@@ -61,7 +57,7 @@
                     
                     <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $protectionSelectedAvatar === 'self' ? 'selected-box-shadow' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'self' ? 'selected-box-shadow' : '' }}" 
                             data-type="self"
                             id="button-self-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
@@ -70,7 +66,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $protectionSelectedAvatar === 'spouse' ? 'selected-box-shadow' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'spouse' ? 'selected-box-shadow' : '' }}" 
                             data-type="spouse"
                                 id="button-spouse-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
@@ -79,7 +75,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $protectionSelectedAvatar === 'children' ? 'selected-box-shadow' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'children' ? 'selected-box-shadow' : '' }}" 
                              data-type="children"
                                 id="button-kid-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="children">
@@ -87,7 +83,7 @@
                             </button>
                         </div>
                         <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $protectionSelectedAvatar === 'parent' ? 'selected-box-shadow' : '' }}" 
+                            <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('protectionSelectedAvatar') === 'parent' ? 'selected-box-shadow' : '' }}" 
                             data-type="parent"
                                 id="button-parent-avatar" onclick="avatarSelect(this)">
                                 <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
@@ -96,7 +92,7 @@
                             </button>
                         </div>
                     </div>
-                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{$protectionSelectedAvatar}}">
+                    <input type="hidden" name="protectionSelectedAvatar" id="protectionSelectedAvatarInput" value="{{Session::get('protectionSelectedAvatar')}}">
                 
                     <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                         <div class="col-12 col-md-4 text-center">
@@ -124,6 +120,8 @@
 
 <script>
 
+var toast = new bootstrap.Toast(document.getElementById('protectionSelectedAvatarErrorMsg'));
+    toast.show();
     // javascript code for button click effect on avatar selection
     function avatarSelect(button) {
     event.preventDefault();
