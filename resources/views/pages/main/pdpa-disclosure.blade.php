@@ -89,8 +89,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('welcome')}}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
-                                    <a href="{{route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
+                                    <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
+                                    <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
                                 </div>
                             </div>
                         </div>
@@ -100,5 +100,36 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    document.getElementById("declineButton").addEventListener("click", function() {
+        pdpa("Declined");
+    });
+
+    document.getElementById("acceptButton").addEventListener("click", function() {
+        pdpa("Accepted");
+    });
+
+    function pdpa(decision, route) {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('save.button.click') }}",
+            data: { decision: decision, route: route },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                // Handle success, if needed
+            },
+            error: function(xhr, status, error) {
+                // Handle error, if needed
+            }
+        });
+    }
+});
+</script>
 
 @endsection
