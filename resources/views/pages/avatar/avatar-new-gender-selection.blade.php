@@ -227,7 +227,8 @@
                 var headImageSrc = selectedGenderValue === 'Female' ? '/female-head-1' : '/male-head-1';
 
                 // Update the image source
-                $('#avatarImage').attr('src', '{{ asset("images/avatar-general/new-") }}' + imageSrc + '.svg');
+                // $('#avatarImage').attr('src', '{{ asset("images/avatar-general/new-") }}' + imageSrc + '.svg');
+                $('#avatarImage').attr('src', '/images/avatar-general/new-' + imageSrc + '.svg');
                 $('#avatar-head').attr('src', '{{ asset("images/avatar-clothes/") }}' + headImageSrc + '.svg');
 
                 // Update the image source based on the selected gender and index
