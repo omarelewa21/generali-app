@@ -25,30 +25,15 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage pb-2">
-                        <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage position-absolute bottom-0 pb-2" style="right:-80px">
-                    </div>
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage position-absolute" style="bottom: 10px;right: -80px;">
+                    <div class="avatar-bg position-relative imageContainerParents"></div>
+                    <div class="avatar-bg position-relative imageContainerSpouse">
                         <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="98%" alt="Main character" class="changeImage position-absolute" style="left:40px">
                     </div>
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="80%" alt="Children" class="changeImage position-absolute end-0" style="bottom:10px">
-                        <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="50%" alt="Children" class="changeImage position-absolute" style="bottom:10px">
-                    </div>
+                    <div class="avatar-bg position-relative imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    @if ($errors->any())
-                        <div class="alert alert-warning d-flex align-items-center" role="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                            </svg>
-                            <div class="text">There was a problem with your submission. Errors are marked below.</div>
-                        </div>
-                    @endif
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
@@ -60,6 +45,16 @@
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
+                                    @if ($errors->has('familyDependantButtonInput'))
+                                        <div class="col-12 pb-3">
+                                            <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                </svg>
+                                                <div class="text">{{ $errors->first('familyDependantButtonInput') }}</div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'spouse' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
@@ -100,11 +95,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row px-4 pb-4 px-sm-5">
-                                    @if ($errors->has('familyDependantButtonInput'))
-                                        <div class="invalid-feedback" style="display:block">{{ $errors->first('familyDependantButtonInput') }}</div>
-                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -151,8 +141,8 @@ if (maritalStatus === 'single') {
 
     const spouseImg = spouseButton.querySelector('img');
     const childImg = childButton.querySelector('img');
-    spouseImg.style.opacity = '0.7'; 
-    childImg.style.opacity = '0.7'; 
+    spouseImg.style.opacity = '0.5'; 
+    childImg.style.opacity = '0.5'; 
 
 } else if (maritalStatus === 'divorced' || maritalStatus === 'widowed') {
     const spouseButton = document.getElementById('spouseButton');
@@ -177,6 +167,10 @@ dataButtons.forEach(button => {
         document.getElementById('urlInput').value = dataUrl;
     });
 });
+
+
+
+
 
 // // Get the elements you need
 // const avatarForm = document.getElementById('avatarForm');

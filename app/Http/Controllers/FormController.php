@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Support\Facades\Response;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\View;
@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 
-class FormController extends Controller
-{
+class FormController extends Controller {
     public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
@@ -173,7 +172,7 @@ class FormController extends Controller
                 return true;
             }
             
-            $customMessage = "At least one button must be selected.";
+            $customMessage = "Please select at least one.";
             $validator->errors()->add($attribute, $customMessage);
     
             return false;
@@ -181,6 +180,9 @@ class FormController extends Controller
 
         $validator = Validator::make($request->all(), [
             'maritalStatusButtonInput' => [
+                'at_least_one_selected',
+            ],
+            'familyDependantButtonInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -191,9 +193,11 @@ class FormController extends Controller
         }
 
         // Validation passed, perform any necessary processing...
+
         // Add or update the data value in the array
         $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
         $familyDependantButtonInput = $request->input('familyDependantButtonInput');
+
         $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
 
         if ($maritalStatusButtonInput) {
@@ -202,7 +206,7 @@ class FormController extends Controller
         else if ($familyDependantButtonInput) {
             $arrayData['familyDependant'] = $familyDependantButtonInput;
         }
-        
+
         $arrayData['dataUrl'] = $dataUrl;   
 
         // Store the updated array back into the session

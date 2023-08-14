@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $gender = isset($arrayData['gender']) ? $arrayData['gender'] : '';
 @endphp
 
 <div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
@@ -103,7 +104,7 @@
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
-                                    <div class="col-12 button-bg">
+                                    <div class="col-12 button-bg {{$gender === 'male' ? 'selected' : ''}}">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0 @if(isset($arrayData['gender']) && $arrayData['gender'] === 'male') default @endif" data-avatar="Male" data-required="" id="gendermale">
                                                 <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" width="120px" alt="Gender Male">
@@ -113,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
-                                    <div class="col-12 button-bg">
+                                    <div class="col-12 button-bg {{$gender === 'female' ? 'selected' : ''}}">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0 @if(isset($arrayData['gender']) && $arrayData['gender'] === 'female') default @endif" data-avatar="Female" data-required="" id="genderfemale">
                                                 <img src="{{ asset('images/avatar-gender-selection/button-gender-female.png') }}" width="120px" alt="Gender Female">
@@ -131,7 +132,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('avatar.welcome')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{ route('identity.details') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{ route('identity.details') }}" class="btn btn-primary flex-fill text-uppercase" data-url="avatar.family.dependant">Next</a>
                                 </div>
                             </div>
                         </div>
