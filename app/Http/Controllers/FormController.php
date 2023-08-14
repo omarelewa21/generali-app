@@ -12,16 +12,35 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
-    public function submit(Request $request)
+    public function pdpa(Request $request)
     {
+        $decision = $request->input('decision');
+        
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Add or update the data value in the array
+        $arrayData['PDPA'] = $decision;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);        
+        
+        return response()->json(['message' => 'Button click saved successfully']);
+    }
+
+    public function basicDetails(Request $request)
+    {
+        // Fetch titles from the database
+        $titles = DB::table('titles')->pluck('titles')->toArray();
+    
         $validatedData = $request->validate([
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
-            'title' => 'required|in:Mr.,Ms.,Mrs.,Madam,Datuk,Datin,Dato Seri,Datin Seri,Tan Sri,Puan Sri,Dr.,Tun,Sir,Justice,Others',
+            'title' => 'required|in:' . implode(',', $titles),
             'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
             'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
             'email' => 'required|email|max:255',
@@ -41,538 +60,17 @@ class FormController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
-        Log::debug($arrayData);
-
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
 
-    public function identityData()
-    {
-        $countries = [
-            'AF' => 'Afghanistan',
-            'AX' => 'Aland Islands',
-            'AL' => 'Albania',
-            'DZ' => 'Algeria',
-            'AS' => 'American Samoa',
-            'AD' => 'Andorra',
-            'AO' => 'Angola',
-            'AI' => 'Anguilla',
-            'AQ' => 'Antarctica',
-            'AG' => 'Antigua and Barbuda',
-            'AR' => 'Argentina',
-            'AM' => 'Armenia',
-            'AW' => 'Aruba',
-            'AU' => 'Australia',
-            'AT' => 'Austria',
-            'AZ' => 'Azerbaijan',
-            'BS' => 'Bahamas',
-            'BH' => 'Bahrain',
-            'BD' => 'Bangladesh',
-            'BB' => 'Barbados',
-            'BY' => 'Belarus',
-            'BE' => 'Belgium',
-            'BZ' => 'Belize',
-            'BJ' => 'Benin',
-            'BM' => 'Bermuda',
-            'BT' => 'Bhutan',
-            'BO' => 'Bolivia',
-            'BQ' => 'Bonaire, Sint Eustatius and Saba',
-            'BA' => 'Bosnia and Herzegovina',
-            'BW' => 'Botswana',
-            'BV' => 'Bouvet Island',
-            'BR' => 'Brazil',
-            'IO' => 'British Indian Ocean Territory',
-            'BN' => 'Brunei Darussalam',
-            'BG' => 'Bulgaria',
-            'BF' => 'Burkina Faso',
-            'BI' => 'Burundi',
-            'KH' => 'Cambodia',
-            'CM' => 'Cameroon',
-            'CA' => 'Canada',
-            'CV' => 'Cape Verde',
-            'KY' => 'Cayman Islands',
-            'CF' => 'Central African Republic',
-            'TD' => 'Chad',
-            'CL' => 'Chile',
-            'CN' => 'China',
-            'CX' => 'Christmas Island',
-            'CC' => 'Cocos (Keeling) Islands',
-            'CO' => 'Colombia',
-            'KM' => 'Comoros',
-            'CG' => 'Congo',
-            'CD' => 'Congo, Democratic Republic of the Congo',
-            'CK' => 'Cook Islands',
-            'CR' => 'Costa Rica',
-            'CI' => 'Cote D\'Ivoire',
-            'HR' => 'Croatia',
-            'CU' => 'Cuba',
-            'CW' => 'Curacao',
-            'CY' => 'Cyprus',
-            'CZ' => 'Czech Republic',
-            'DK' => 'Denmark',
-            'DJ' => 'Djibouti',
-            'DM' => 'Dominica',
-            'DO' => 'Dominican Republic',
-            'EC' => 'Ecuador',
-            'EG' => 'Egypt',
-            'SV' => 'El Salvador',
-            'GQ' => 'Equatorial Guinea',
-            'ER' => 'Eritrea',
-            'EE' => 'Estonia',
-            'ET' => 'Ethiopia',
-            'FK' => 'Falkland Islands (Malvinas)',
-            'FO' => 'Faroe Islands',
-            'FJ' => 'Fiji',
-            'FI' => 'Finland',
-            'FR' => 'France',
-            'GF' => 'French Guiana',
-            'PF' => 'French Polynesia',
-            'TF' => 'French Southern Territories',
-            'GA' => 'Gabon',
-            'GM' => 'Gambia',
-            'GE' => 'Georgia',
-            'DE' => 'Germany',
-            'GH' => 'Ghana',
-            'GI' => 'Gibraltar',
-            'GR' => 'Greece',
-            'GL' => 'Greenland',
-            'GD' => 'Grenada',
-            'GP' => 'Guadeloupe',
-            'GU' => 'Guam',
-            'GT' => 'Guatemala',
-            'GG' => 'Guernsey',
-            'GN' => 'Guinea',
-            'GW' => 'Guinea-Bissau',
-            'GY' => 'Guyana',
-            'HT' => 'Haiti',
-            'HM' => 'Heard Island and Mcdonald Islands',
-            'VA' => 'Holy See (Vatican City State)',
-            'HN' => 'Honduras',
-            'HK' => 'Hong Kong',
-            'HU' => 'Hungary',
-            'IS' => 'Iceland',
-            'IN' => 'India',
-            'ID' => 'Indonesia',
-            'IR' => 'Iran, Islamic Republic of',
-            'IQ' => 'Iraq',
-            'IE' => 'Ireland',
-            'IM' => 'Isle of Man',
-            'IL' => 'Israel',
-            'IT' => 'Italy',
-            'JM' => 'Jamaica',
-            'JP' => 'Japan',
-            'JE' => 'Jersey',
-            'JO' => 'Jordan',
-            'KZ' => 'Kazakhstan',
-            'KE' => 'Kenya',
-            'KI' => 'Kiribati',
-            'KP' => 'Korea, Democratic People\'s Republic of',
-            'KR' => 'Korea, Republic of',
-            'XK' => 'Kosovo',
-            'KW' => 'Kuwait',
-            'KG' => 'Kyrgyzstan',
-            'LA' => 'Lao People\'s Democratic Republic',
-            'LV' => 'Latvia',
-            'LB' => 'Lebanon',
-            'LS' => 'Lesotho',
-            'LR' => 'Liberia',
-            'LY' => 'Libyan Arab Jamahiriya',
-            'LI' => 'Liechtenstein',
-            'LT' => 'Lithuania',
-            'LU' => 'Luxembourg',
-            'MO' => 'Macao',
-            'MK' => 'Macedonia, the Former Yugoslav Republic of',
-            'MG' => 'Madagascar',
-            'MW' => 'Malawi',
-            'MY' => 'Malaysia',
-            'MV' => 'Maldives',
-            'ML' => 'Mali',
-            'MT' => 'Malta',
-            'MH' => 'Marshall Islands',
-            'MQ' => 'Martinique',
-            'MR' => 'Mauritania',
-            'MU' => 'Mauritius',
-            'YT' => 'Mayotte',
-            'MX' => 'Mexico',
-            'FM' => 'Micronesia, Federated States of',
-            'MD' => 'Moldova, Republic of',
-            'MC' => 'Monaco',
-            'MN' => 'Mongolia',
-            'ME' => 'Montenegro',
-            'MS' => 'Montserrat',
-            'MA' => 'Morocco',
-            'MZ' => 'Mozambique',
-            'MM' => 'Myanmar',
-            'NA' => 'Namibia',
-            'NR' => 'Nauru',
-            'NP' => 'Nepal',
-            'NL' => 'Netherlands',
-            'AN' => 'Netherlands Antilles',
-            'NC' => 'New Caledonia',
-            'NZ' => 'New Zealand',
-            'NI' => 'Nicaragua',
-            'NE' => 'Niger',
-            'NG' => 'Nigeria',
-            'NU' => 'Niue',
-            'NF' => 'Norfolk Island',
-            'MP' => 'Northern Mariana Islands',
-            'NO' => 'Norway',
-            'OM' => 'Oman',
-            'PK' => 'Pakistan',
-            'PW' => 'Palau',
-            'PS' => 'Palestinian Territory, Occupied',
-            'PA' => 'Panama',
-            'PG' => 'Papua New Guinea',
-            'PY' => 'Paraguay',
-            'PE' => 'Peru',
-            'PH' => 'Philippines',
-            'PN' => 'Pitcairn',
-            'PL' => 'Poland',
-            'PT' => 'Portugal',
-            'PR' => 'Puerto Rico',
-            'QA' => 'Qatar',
-            'RE' => 'Reunion',
-            'RO' => 'Romania',
-            'RU' => 'Russian Federation',
-            'RW' => 'Rwanda',
-            'BL' => 'Saint Barthelemy',
-            'SH' => 'Saint Helena',
-            'KN' => 'Saint Kitts and Nevis',
-            'LC' => 'Saint Lucia',
-            'MF' => 'Saint Martin',
-            'PM' => 'Saint Pierre and Miquelon',
-            'VC' => 'Saint Vincent and the Grenadines',
-            'WS' => 'Samoa',
-            'SM' => 'San Marino',
-            'ST' => 'Sao Tome and Principe',
-            'SA' => 'Saudi Arabia',
-            'SN' => 'Senegal',
-            'RS' => 'Serbia',
-            'CS' => 'Serbia and Montenegro',
-            'SC' => 'Seychelles',
-            'SL' => 'Sierra Leone',
-            'SG' => 'Singapore',
-            'SX' => 'Sint Maarten',
-            'SK' => 'Slovakia',
-            'SI' => 'Slovenia',
-            'SB' => 'Solomon Islands',
-            'SO' => 'Somalia',
-            'ZA' => 'South Africa',
-            'GS' => 'South Georgia and the South Sandwich Islands',
-            'SS' => 'South Sudan',
-            'ES' => 'Spain',
-            'LK' => 'Sri Lanka',
-            'SD' => 'Sudan',
-            'SR' => 'Suriname',
-            'SJ' => 'Svalbard and Jan Mayen',
-            'SZ' => 'Swaziland',
-            'SE' => 'Sweden',
-            'CH' => 'Switzerland',
-            'SY' => 'Syrian Arab Republic',
-            'TW' => 'Taiwan, Province of China',
-            'TJ' => 'Tajikistan',
-            'TZ' => 'Tanzania, United Republic of',
-            'TH' => 'Thailand',
-            'TL' => 'Timor-Leste',
-            'TG' => 'Togo',
-            'TK' => 'Tokelau',
-            'TO' => 'Tonga',
-            'TT' => 'Trinidad and Tobago',
-            'TN' => 'Tunisia',
-            'TR' => 'Turkey',
-            'TM' => 'Turkmenistan',
-            'TC' => 'Turks and Caicos Islands',
-            'TV' => 'Tuvalu',
-            'UG' => 'Uganda',
-            'UA' => 'Ukraine',
-            'AE' => 'United Arab Emirates',
-            'GB' => 'United Kingdom',
-            'US' => 'United States',
-            'UM' => 'United States Minor Outlying Islands',
-            'UY' => 'Uruguay',
-            'UZ' => 'Uzbekistan',
-            'VU' => 'Vanuatu',
-            'VE' => 'Venezuela',
-            'VN' => 'Viet Nam',
-            'VG' => 'Virgin Islands, British',
-            'VI' => 'Virgin Islands, U.s.',
-            'WF' => 'Wallis and Futuna',
-            'EH' => 'Western Sahara',
-            'YE' => 'Yemen',
-            'ZM' => 'Zambia',
-            'ZW' => 'Zimbabwe',
-        ];  
-        
-        $xlsxFile = storage_path('app/occupation.xlsx');
-
-        if (!file_exists($xlsxFile)) {
-            abort(404, 'Excel file not found.');
-        }
-
-        $spreadsheet = IOFactory::load($xlsxFile);
-        $worksheet = $spreadsheet->getActiveSheet();
-        $rows = $worksheet->toArray();
-
-        return view('pages/avatar/identity-details', compact('countries', 'rows'));
-    }
-
     public function submitIdentity(Request $request)
     {
-        $countries = [
-            'AF' => 'Afghanistan',
-            'AX' => 'Aland Islands',
-            'AL' => 'Albania',
-            'DZ' => 'Algeria',
-            'AS' => 'American Samoa',
-            'AD' => 'Andorra',
-            'AO' => 'Angola',
-            'AI' => 'Anguilla',
-            'AQ' => 'Antarctica',
-            'AG' => 'Antigua and Barbuda',
-            'AR' => 'Argentina',
-            'AM' => 'Armenia',
-            'AW' => 'Aruba',
-            'AU' => 'Australia',
-            'AT' => 'Austria',
-            'AZ' => 'Azerbaijan',
-            'BS' => 'Bahamas',
-            'BH' => 'Bahrain',
-            'BD' => 'Bangladesh',
-            'BB' => 'Barbados',
-            'BY' => 'Belarus',
-            'BE' => 'Belgium',
-            'BZ' => 'Belize',
-            'BJ' => 'Benin',
-            'BM' => 'Bermuda',
-            'BT' => 'Bhutan',
-            'BO' => 'Bolivia',
-            'BQ' => 'Bonaire, Sint Eustatius and Saba',
-            'BA' => 'Bosnia and Herzegovina',
-            'BW' => 'Botswana',
-            'BV' => 'Bouvet Island',
-            'BR' => 'Brazil',
-            'IO' => 'British Indian Ocean Territory',
-            'BN' => 'Brunei Darussalam',
-            'BG' => 'Bulgaria',
-            'BF' => 'Burkina Faso',
-            'BI' => 'Burundi',
-            'KH' => 'Cambodia',
-            'CM' => 'Cameroon',
-            'CA' => 'Canada',
-            'CV' => 'Cape Verde',
-            'KY' => 'Cayman Islands',
-            'CF' => 'Central African Republic',
-            'TD' => 'Chad',
-            'CL' => 'Chile',
-            'CN' => 'China',
-            'CX' => 'Christmas Island',
-            'CC' => 'Cocos (Keeling) Islands',
-            'CO' => 'Colombia',
-            'KM' => 'Comoros',
-            'CG' => 'Congo',
-            'CD' => 'Congo, Democratic Republic of the Congo',
-            'CK' => 'Cook Islands',
-            'CR' => 'Costa Rica',
-            'CI' => 'Cote D\'Ivoire',
-            'HR' => 'Croatia',
-            'CU' => 'Cuba',
-            'CW' => 'Curacao',
-            'CY' => 'Cyprus',
-            'CZ' => 'Czech Republic',
-            'DK' => 'Denmark',
-            'DJ' => 'Djibouti',
-            'DM' => 'Dominica',
-            'DO' => 'Dominican Republic',
-            'EC' => 'Ecuador',
-            'EG' => 'Egypt',
-            'SV' => 'El Salvador',
-            'GQ' => 'Equatorial Guinea',
-            'ER' => 'Eritrea',
-            'EE' => 'Estonia',
-            'ET' => 'Ethiopia',
-            'FK' => 'Falkland Islands (Malvinas)',
-            'FO' => 'Faroe Islands',
-            'FJ' => 'Fiji',
-            'FI' => 'Finland',
-            'FR' => 'France',
-            'GF' => 'French Guiana',
-            'PF' => 'French Polynesia',
-            'TF' => 'French Southern Territories',
-            'GA' => 'Gabon',
-            'GM' => 'Gambia',
-            'GE' => 'Georgia',
-            'DE' => 'Germany',
-            'GH' => 'Ghana',
-            'GI' => 'Gibraltar',
-            'GR' => 'Greece',
-            'GL' => 'Greenland',
-            'GD' => 'Grenada',
-            'GP' => 'Guadeloupe',
-            'GU' => 'Guam',
-            'GT' => 'Guatemala',
-            'GG' => 'Guernsey',
-            'GN' => 'Guinea',
-            'GW' => 'Guinea-Bissau',
-            'GY' => 'Guyana',
-            'HT' => 'Haiti',
-            'HM' => 'Heard Island and Mcdonald Islands',
-            'VA' => 'Holy See (Vatican City State)',
-            'HN' => 'Honduras',
-            'HK' => 'Hong Kong',
-            'HU' => 'Hungary',
-            'IS' => 'Iceland',
-            'IN' => 'India',
-            'ID' => 'Indonesia',
-            'IR' => 'Iran, Islamic Republic of',
-            'IQ' => 'Iraq',
-            'IE' => 'Ireland',
-            'IM' => 'Isle of Man',
-            'IL' => 'Israel',
-            'IT' => 'Italy',
-            'JM' => 'Jamaica',
-            'JP' => 'Japan',
-            'JE' => 'Jersey',
-            'JO' => 'Jordan',
-            'KZ' => 'Kazakhstan',
-            'KE' => 'Kenya',
-            'KI' => 'Kiribati',
-            'KP' => 'Korea, Democratic People\'s Republic of',
-            'KR' => 'Korea, Republic of',
-            'XK' => 'Kosovo',
-            'KW' => 'Kuwait',
-            'KG' => 'Kyrgyzstan',
-            'LA' => 'Lao People\'s Democratic Republic',
-            'LV' => 'Latvia',
-            'LB' => 'Lebanon',
-            'LS' => 'Lesotho',
-            'LR' => 'Liberia',
-            'LY' => 'Libyan Arab Jamahiriya',
-            'LI' => 'Liechtenstein',
-            'LT' => 'Lithuania',
-            'LU' => 'Luxembourg',
-            'MO' => 'Macao',
-            'MK' => 'Macedonia, the Former Yugoslav Republic of',
-            'MG' => 'Madagascar',
-            'MW' => 'Malawi',
-            'MY' => 'Malaysia',
-            'MV' => 'Maldives',
-            'ML' => 'Mali',
-            'MT' => 'Malta',
-            'MH' => 'Marshall Islands',
-            'MQ' => 'Martinique',
-            'MR' => 'Mauritania',
-            'MU' => 'Mauritius',
-            'YT' => 'Mayotte',
-            'MX' => 'Mexico',
-            'FM' => 'Micronesia, Federated States of',
-            'MD' => 'Moldova, Republic of',
-            'MC' => 'Monaco',
-            'MN' => 'Mongolia',
-            'ME' => 'Montenegro',
-            'MS' => 'Montserrat',
-            'MA' => 'Morocco',
-            'MZ' => 'Mozambique',
-            'MM' => 'Myanmar',
-            'NA' => 'Namibia',
-            'NR' => 'Nauru',
-            'NP' => 'Nepal',
-            'NL' => 'Netherlands',
-            'AN' => 'Netherlands Antilles',
-            'NC' => 'New Caledonia',
-            'NZ' => 'New Zealand',
-            'NI' => 'Nicaragua',
-            'NE' => 'Niger',
-            'NG' => 'Nigeria',
-            'NU' => 'Niue',
-            'NF' => 'Norfolk Island',
-            'MP' => 'Northern Mariana Islands',
-            'NO' => 'Norway',
-            'OM' => 'Oman',
-            'PK' => 'Pakistan',
-            'PW' => 'Palau',
-            'PS' => 'Palestinian Territory, Occupied',
-            'PA' => 'Panama',
-            'PG' => 'Papua New Guinea',
-            'PY' => 'Paraguay',
-            'PE' => 'Peru',
-            'PH' => 'Philippines',
-            'PN' => 'Pitcairn',
-            'PL' => 'Poland',
-            'PT' => 'Portugal',
-            'PR' => 'Puerto Rico',
-            'QA' => 'Qatar',
-            'RE' => 'Reunion',
-            'RO' => 'Romania',
-            'RU' => 'Russian Federation',
-            'RW' => 'Rwanda',
-            'BL' => 'Saint Barthelemy',
-            'SH' => 'Saint Helena',
-            'KN' => 'Saint Kitts and Nevis',
-            'LC' => 'Saint Lucia',
-            'MF' => 'Saint Martin',
-            'PM' => 'Saint Pierre and Miquelon',
-            'VC' => 'Saint Vincent and the Grenadines',
-            'WS' => 'Samoa',
-            'SM' => 'San Marino',
-            'ST' => 'Sao Tome and Principe',
-            'SA' => 'Saudi Arabia',
-            'SN' => 'Senegal',
-            'RS' => 'Serbia',
-            'CS' => 'Serbia and Montenegro',
-            'SC' => 'Seychelles',
-            'SL' => 'Sierra Leone',
-            'SG' => 'Singapore',
-            'SX' => 'Sint Maarten',
-            'SK' => 'Slovakia',
-            'SI' => 'Slovenia',
-            'SB' => 'Solomon Islands',
-            'SO' => 'Somalia',
-            'ZA' => 'South Africa',
-            'GS' => 'South Georgia and the South Sandwich Islands',
-            'SS' => 'South Sudan',
-            'ES' => 'Spain',
-            'LK' => 'Sri Lanka',
-            'SD' => 'Sudan',
-            'SR' => 'Suriname',
-            'SJ' => 'Svalbard and Jan Mayen',
-            'SZ' => 'Swaziland',
-            'SE' => 'Sweden',
-            'CH' => 'Switzerland',
-            'SY' => 'Syrian Arab Republic',
-            'TW' => 'Taiwan, Province of China',
-            'TJ' => 'Tajikistan',
-            'TZ' => 'Tanzania, United Republic of',
-            'TH' => 'Thailand',
-            'TL' => 'Timor-Leste',
-            'TG' => 'Togo',
-            'TK' => 'Tokelau',
-            'TO' => 'Tonga',
-            'TT' => 'Trinidad and Tobago',
-            'TN' => 'Tunisia',
-            'TR' => 'Turkey',
-            'TM' => 'Turkmenistan',
-            'TC' => 'Turks and Caicos Islands',
-            'TV' => 'Tuvalu',
-            'UG' => 'Uganda',
-            'UA' => 'Ukraine',
-            'AE' => 'United Arab Emirates',
-            'GB' => 'United Kingdom',
-            'US' => 'United States',
-            'UM' => 'United States Minor Outlying Islands',
-            'UY' => 'Uruguay',
-            'UZ' => 'Uzbekistan',
-            'VU' => 'Vanuatu',
-            'VE' => 'Venezuela',
-            'VN' => 'Viet Nam',
-            'VG' => 'Virgin Islands, British',
-            'VI' => 'Virgin Islands, U.s.',
-            'WF' => 'Wallis and Futuna',
-            'EH' => 'Western Sahara',
-            'YE' => 'Yemen',
-            'ZM' => 'Zambia',
-            'ZW' => 'Zimbabwe',
-        ];   
+        // Fetch titles from the database
+        $countries = DB::table('countries')->pluck('countries')->toArray();
+        $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+        $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
+        $occupation = DB::table('occupations')->pluck('name')->toArray();
 
         $customMessages = [
             'idNumber.regex' => 'The id number field must match the format 123456-78-9012.',
@@ -584,8 +82,8 @@ class FormController extends Controller
         ];
 
         $validatedData = $request->validate([
-            'country' => 'required|in:' . implode(',', array_keys($countries)),
-            'idType' => 'required|in:New IC,Passport,Birth Certificate,Police / Army,Registration',
+            'country' => 'required|in:' . implode(',', $countries),
+            'idType' => 'required|in:' . implode(',', $idtypes),
             'idNumber' => [
                 'nullable',
                 Rule::requiredIf(function () use ($request) {
@@ -621,57 +119,90 @@ class FormController extends Controller
                 }),
                 'max:15',
             ],
+            'day' => 'required',
+            'month' => 'required',
+            'year' => 'required',
             'btnradio' => 'required|in:smoker,nonSmoker',
+            'educationLevel' => 'required|in:' . implode(',', $educationLevel),
+            'occupation' => 'required|in:' . implode(',', $occupation),
         ], $customMessages);
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Add or update the data value in the array
+        $arrayData['Country'] = $validatedData['country'];
+        $arrayData['IdType'] = $validatedData['idType'];
+        $arrayData['IdNumber'] = $validatedData['idNumber'];
+        $arrayData['PassportNumber'] = $validatedData['passportNumber'];
+        $arrayData['BirthCert'] = $validatedData['birthCert'];
+        $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
+        $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
+        $arrayData['DobDay'] = $validatedData['day'];
+        $arrayData['DobMonth'] = $validatedData['month'];
+        $arrayData['DobYear'] = $validatedData['year'];
+        $arrayData['Habits'] = $validatedData['btnradio'];
+        $arrayData['EducationLevel'] = $validatedData['educationLevel'];
+        $arrayData['Occupation'] = $validatedData['occupation'];
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
 
-    public function validateAvatar(Request $request)
+    public function validateButton(Request $request)
     {
-        $request->validate([
-            'data-required' => 'required|in:selected',
-        ]);
+        // $request->validate([
+        //     'data-required' => 'required|in:selected',
+        // ]);
 
-        return response()->json([
-            'validationPassed' => true,
-        ]);
+        // return response()->json([
+        //     'validationPassed' => true,
+        // ]);
     }
     public function handleAvatarSelection(Request $request)
     {
-        // Get the selected avatar from the hidden input field
-        $selectedMaritalStatus = $request->input('selectedAvatarInput');
-        $dataUrl = $request->input('urlInput');
-        $selectedFamilies = $request->input('selectedFamilies');
-        Log::debug($request->all());
-        Log::debug($selectedFamilies);
-
-        // You can access the data for each entry like this:
-        // foreach ($selectedFamilies as $family) {
-        //     $key = $family['key'];
-        //     $value = $family['value'];
-        // }
-
-        // Perform any additional actions based on the validation result.
-        // For example, you can save the selection to the database.
-
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
-        // Add or update the value in the array
-        if ($selectedMaritalStatus !== null) {
-            // If not equal to null, then replace the data in $arrayData['maritalStatus']
-            $arrayData['maritalStatus'] = $selectedMaritalStatus;
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "At least one button must be selected.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'selectedButtonInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        //$arrayData['families'] = $value;
+
+        // Validation passed, perform any necessary processing...
+        // Add or update the data value in the array
+        $selectedButtonInput = $request->input('selectedButtonInput');
+        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
+
+        $arrayData['maritalStatus'] = $selectedButtonInput;
+        $arrayData['dataUrl'] = $dataUrl;   
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
-        // Log the session data to the Laravel log file
-        \Log::info('Session Data:', $arrayData);
+        Log::info('Session Data:', Session::all());
 
         return redirect()->route($dataUrl);
     }
+
 }

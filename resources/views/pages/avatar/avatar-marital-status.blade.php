@@ -15,6 +15,8 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $maritalStatus = isset($arrayData['maritalStatus']) ? $arrayData['maritalStatus'] : '';
+    $dataUrl = isset($arrayData['dataUrl']) ? $arrayData['dataUrl'] : '';
 @endphp
 
 <div id="avatar_marital_status" class="vh-100 overflow-y-auto overflow-x-hidden">
@@ -24,59 +26,76 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <form action="{{ route('handle.avatar.selection') }}" method="post" id="avatarForm">
+                    @if ($errors->any())
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <div class="text">There was a problem with your submission. Errors are marked below.</div>
+                        </div>
+                    @endif
+                    <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">May we know your relationship status?</h1>
-                                        <p class="text-white display-6">Click to select your marital status.</p>
+                                        <p class="text-white display-6 lh-base">Click to select your marital status.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="single" data-required="">
-                                                <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
-                                            </button>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                        <div class="col-12 button-bg {{$maritalStatus === 'single' ? 'selected' : ''}}">
+                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="single" data-required="">
+                                                    <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="married" data-required="">
-                                                <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
-                                            </button>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                        <div class="col-12 button-bg {{$maritalStatus === 'married' ? 'selected' : ''}}">
+                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="married" data-required="">
+                                                    <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="divorced" data-required="">
-                                                <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
-                                            </button>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                        <div class="col-12 button-bg {{$maritalStatus === 'divorced' ? 'selected' : '' }}">
+                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="divorced" data-required="">
+                                                    <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="widowed" data-required="">
-                                                <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
-                                            </button>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                        <div class="col-12 button-bg {{$maritalStatus === 'widowed' ? 'selected' : '' }}">
+                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="widowed" data-required="">
+                                                    <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
-                                    <!-- Container to display error messages -->
-                                    <div id="errorContainer" style="display: none;" class="alert alert-danger"></div>
+                                    @if ($errors->has('selectedButtonInput'))
+                                        <div class="invalid-feedback" style="display:block">{{ $errors->first('selectedButtonInput') }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -85,12 +104,14 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <!-- Add a hidden input field to store the selected avatar value -->
-                                        <input type="hidden" name="selectedAvatarInput" id="selectedAvatarInput">
-                                        <input type="hidden" name="urlInput" id="urlInput">
+                                        <!-- Add a hidden input field to store the selected button -->
+                                        <input type="hidden" name="selectedButtonInput" id="selectedButtonInput" value="{{$maritalStatus}}">
+                                        <input type="hidden" name="urlInput" id="urlInput" value="{{$dataUrl}}">
+                                        <script>
+console.log(urlInput.value );
+                                        </script>
                                         <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                        <!-- <a href="{{route('avatar.family.dependant') }}" class="btn btn-primary text-uppercase" id="nextButton">Next</a> -->
-                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton" data-url="avatar.family.dependant">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -101,75 +122,5 @@
         </div>
     </div>
 </div>
-
-<script>
-// Get the elements you need
-const avatarForm = document.getElementById('avatarForm');
-const nextButton = document.getElementById('nextButton');
-let selectedAvatar = null;
-
-// Add event listener to each button with the 'data-required' attribute
-const dataAvatarButtons = document.querySelectorAll('[data-avatar]');
-dataAvatarButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default behavior of the button click
-
-        // Remove 'selected' attribute from all buttons
-        dataAvatarButtons.forEach(btn => btn.removeAttribute('data-required'));
-        // Add 'selected' attribute to the clicked button
-        this.setAttribute('data-required', 'selected');
-        // Store the selected data-avatar value
-        selectedAvatar = this.getAttribute('data-required');
-        selectedAvatarValue = this.getAttribute('data-avatar');
-
-        // Update the hidden input field value with the selected avatar
-        document.getElementById('selectedAvatarInput').value = selectedAvatarValue;
-        document.getElementById('urlInput').value = 'avatar.family.dependant';
-    });
-});
-
-// Add event listener to the form's submit event
-avatarForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    if (!selectedAvatar) {
-        // If no button is selected, prevent form submission and show an error message
-        const errorContainer = document.getElementById('errorContainer');
-        errorContainer.innerHTML = 'Please select your marital status.';
-        errorContainer.style.display = 'block';
-        return;
-    }
-
-    // Perform your server-side validation here using Laravel or JavaScript fetch API
-    // Use the selectedAvatar value instead of sending a separate fetch request
-    fetch('/validate-avatar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Use Blade templating to get the CSRF token
-        },
-        body: JSON.stringify({
-            'data-required': selectedAvatar, // Include the selectedAvatar value in the request body
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.validationPassed) {
-            // Form validation passed, proceed with the form submission
-            // This will only trigger when the Next button is clicked, not the data-required buttons
-            avatarForm.submit(); // "this" refers to the avatarForm element
-        } else {
-            // Form validation failed, handle the error (display an error message, etc.)
-            const errorContainer = document.getElementById('errorContainer');
-            errorContainer.innerHTML = 'Form validation failed: ' + data.errors.join(', ');
-            errorContainer.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        // Handle any errors that occur during the fetch request
-        console.error('Error during fetch request:', error);
-    });
-});
-</script>
 
 @endsection
