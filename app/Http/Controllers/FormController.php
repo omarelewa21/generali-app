@@ -200,7 +200,7 @@ class FormController extends Controller
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        Log::info('Session Data:', Session::all());
+        // Log::info('Session Data:', Session::all());
 
         return redirect()->route($dataUrl);
     }

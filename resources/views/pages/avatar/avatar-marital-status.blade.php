@@ -107,9 +107,6 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="selectedButtonInput" id="selectedButtonInput" value="{{$maritalStatus}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="{{$dataUrl}}">
-                                        <script>
-console.log(urlInput.value );
-                                        </script>
                                         <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton" data-url="avatar.family.dependant">Next</button>
                                     </div>
