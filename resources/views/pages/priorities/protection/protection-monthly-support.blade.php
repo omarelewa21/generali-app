@@ -7,7 +7,14 @@
 @endsection
 
 @section('content')
-
+@php
+    // Retrieving values from the session
+    $arrayDataProtection = session('passingArraysProtection');
+    $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : '';
+    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : 0;
+    $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
+    $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
+@endphp
 
 <div id="Protection-monthly-support" class="vh-100 overflow-auto container-fluid">
 
@@ -126,9 +133,16 @@ document.addEventListener("DOMContentLoaded", function() {
             // var progressTotalProtectionValue = totalProtectionValue * 100;
             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
 
+    function updateProgress(inputValue) {
+        var month = 12;
+        var protectionFunds = parseFloat($('#protectionFunds').val().replace(',', '')); // Parse and remove commas
+        
+        if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
+            TotalProtectionValue = inputValue * month * protectionSupportingYears;
+            console.log(TotalProtectionValue);
 
-            $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-            $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+        } else {
+            TotalProtectionValue = inputValue * month;
         }
         var inputValue = $('#protectionFunds').val();
         if (inputValue !== "") {

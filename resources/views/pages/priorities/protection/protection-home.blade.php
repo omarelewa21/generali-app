@@ -37,9 +37,7 @@
                         </div> -->
                     </section>
 
-                    <section class="footer-needs">
-                    
-                    </section>
+
                 </div>
 
                 <section class="footer bg-white py-4 fixed-bottom">
@@ -74,9 +72,16 @@
 }
 
 @media only screen and (max-width: 767px) {
-.needs-text {
+.needs-text, .progress .progress-value {
     color:#ffffff;
 }
+
+
+/* body {
+    min-height: 51.5rem;
+    padding-top: 5.5rem;
+    } */
 }
+
 </style>
 @endsection
