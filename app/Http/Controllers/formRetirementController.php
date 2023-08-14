@@ -25,14 +25,7 @@ class formRetirementController extends Controller
 
         $retirementSelectedAvatar = $request->input('retirementSelectedAvatar');
 
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
-        $arrayDataRetirement['retirementSelectedAvatar'] = $retirementSelectedAvatar;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
-        
-        Log::info('Session Data:', Session::all());
+        Session::put('retirementSelectedAvatar', $retirementSelectedAvatar);
 
         return redirect()->route('retirement.ideal')
             ->withInput();
@@ -50,13 +43,7 @@ public function submitRetirementIdeal(Request $request)
 
         $retirementIdeal = $request->input('retirementIdeal');
 
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
-
-        $arrayDataRetirement['retirementIdeal'] = $retirementIdeal;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
+        Session::put('retirementIdeal', $retirementIdeal);
 
         return redirect()->route('retirement.age.to.retire')
             ->withInput();
@@ -76,13 +63,7 @@ public function submitRetirementIdeal(Request $request)
 
         $retirementAgeToRetire = $request->input('retirementAgeToRetire');
         
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
-        
-        $arrayDataRetirement['retirementAgeToRetire'] = $retirementAgeToRetire;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
+        Session::put('retirementAgeToRetire', $retirementAgeToRetire);
 
         return redirect()->route('retirement.allocated.funds')
         ->withInput(); 
@@ -101,22 +82,17 @@ public function submitRetirementIdeal(Request $request)
         ], $customMessages);
 
         $retirementAllocatedFunds = $request->input('retirementAllocatedFunds');
-
+        
         $TotalRetirementValue = $retirementAllocatedFunds * 12;
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
+        $progressTotalRetirementValue = ($TotalRetirementValue / $TotalRetirementValue) * 100;
 
-        //update the array
-        $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
-        $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
+        // Format the calculated values for display
+        $formattedTotalRetirementValue = 'RM' . number_format($TotalRetirementValue, 2, ',');
+        $formattedProgressTotalRetirementValue = number_format($progressTotalRetirementValue, 2, ',');
 
-        $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');
-
-        $arrayDataRetirement['formattedTotalRetirementValue'] = $formattedTotalRetirementValue;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
-        Log::info('Session Data:', Session::all());
+        Session::put('retirementAllocatedFunds', $retirementAllocatedFunds);
+        Session::put('TotalRetirementValue', $formattedTotalRetirementValue);
+        
 
         return redirect()->route('retirement.years.till.retire')    
                 ->withInput(); 
@@ -133,28 +109,12 @@ public function submitRetirementIdeal(Request $request)
             'retirementYearsTillRetire' => 'required|integer|min:1|max:100',
 
         ], $customMessages);
-
         $retirementYearsTillRetire = $request->input('retirementYearsTillRetire');
 
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
+        $TotalRetirementValue = $retirementYearsTillRetire * 12;
 
-        $retirementAllocatedFunds = session('passingArraysRetirement.retirementAllocatedFunds');
-
-        $TotalRetirementValue = $retirementAllocatedFunds * 12 * $retirementYearsTillRetire;
-
-        //update the array
-        $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
-        $arrayDataRetirement['retirementYearsTillRetire'] = $retirementYearsTillRetire;
-        $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
-
-        $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');
-
-        $arrayDataRetirement['formattedTotalRetirementValue'] = $formattedTotalRetirementValue;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
-        Log::info('Session Data:', Session::all());
+        Session::put('TotalRetirementValue', $TotalRetirementValue);
+        Session::put('retirementYearsTillRetire', $retirementYearsTillRetire);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('retirement.allocated.funds.aside')
@@ -177,35 +137,13 @@ public function submitRetirementIdeal(Request $request)
             'retirementOtherSourceOfIncome' => 'required|integer|min:1',
         ], $customMessages);
 
-        $retirementAllocatedFundsAside = $request->input('retirementAllocatedFundsAside');
-        $retirementOtherSourceOfIncome = $request->input('retirementOtherSourceOfIncome');
+        $retirementYearsTillRetire = $request->input('retirementYearsTillRetire');
 
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
+        $TotalRetirementValue = $retirementYearsTillRetire * 12;
 
-        $retirementAllocatedFunds = session('passingArraysRetirement.retirementAllocatedFunds');
-        $retirementYearsTillRetire = session('passingArraysRetirement.retirementYearsTillRetire');
-        $TotalRetirementValue = session('passingArraysRetirement.TotalRetirementValue');
-        
-        $retirementAllocatedFundsAsideTotal = $retirementAllocatedFundsAside + $retirementOtherSourceOfIncome ;
-        $retirementGap = $TotalRetirementValue - $retirementAllocatedFundsAsideTotal;
+        Session::put('TotalRetirementValue', $TotalRetirementValue);
+        Session::put('retirementYearsTillRetire', $retirementYearsTillRetire);
 
-        //update the array
-        $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
-        $arrayDataRetirement['retirementYearsTillRetire'] = $retirementYearsTillRetire;
-        $arrayDataRetirement['retirementAllocatedFundsAside'] = $retirementAllocatedFundsAside;
-        $arrayDataRetirement['retirementOtherSourceOfIncome'] = $retirementOtherSourceOfIncome;
-        $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] = $retirementAllocatedFundsAsideTotal;
-        $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
-        $arrayDataRetirement['retirementGap'] = $retirementGap;
-
-        $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');
-
-        $arrayDataRetirement['formattedTotalRetirementValue'] = $formattedTotalRetirementValue;
-
-        // Store the updated array back into the session
-        session(['passingArraysRetirement' =>  $arrayDataRetirement]);
-        Log::info('Session Data:', Session::all());
 
         return redirect()->route('retirement.gap')    
                 ->withInput(); 

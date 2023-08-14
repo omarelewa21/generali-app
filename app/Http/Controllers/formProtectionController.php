@@ -29,13 +29,7 @@ class formProtectionController extends Controller
 
         $protectionSelectedAvatar = $request->input('protectionSelectedAvatar');
 
-        // Get the existing array from the session
-        $arrayDataProtection = session('passingArraysProtection', []);
-        $arrayDataProtection['protectionSelectedAvatar'] = $protectionSelectedAvatar;
-
-        // Store the updated array back into the session
-        session(['passingArraysProtection' => $arrayDataProtection]);
-
+        Session::put('protectionSelectedAvatar', $protectionSelectedAvatar);
         // dd(Session::all()); // Debug to see all session data
         Log::info('Session Data:', Session::all());
 
@@ -54,31 +48,21 @@ class formProtectionController extends Controller
             'protectionFunds' => 'required|integer|min:1',
 
         ], $customMessages);
-
+        
         // Calculate the multiplied value
         $protectionFunds = $request->input('protectionFunds');
+        $TotalprotectionFunds = $protectionFunds * 12;
+        $TotalProtectionValue = $TotalprotectionFunds;
+        $progressTotalProtectionValue = ($TotalProtectionValue / $TotalProtectionValue) * 100;
 
-        $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
-        $protectionsupportingYears = session('passingArraysProtection.protectionSupportingYears');
+        // Format the calculated values for display
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
+        $formattedProgressTotalProtectionValue = number_format($progressTotalProtectionValue, 2, '.', ',');
 
-        if ($TotalProtectionValue = null || $TotalProtectionValue != 0) {
-            $TotalProtectionValue = $protectionFunds * 12 * $protectionsupportingYears;
-        } else {
-            $TotalProtectionValue = $protectionFunds * 12;
-        }
-        // Get the existing array from the session
-        $arrayDataProtection = session('passingArraysProtection', []);
-
-        //update the array
-        $arrayDataProtection['protectionFunds'] = $protectionFunds;
-        $arrayDataProtection['TotalProtectionValue'] = $TotalProtectionValue;
-
-        $formattedTotalProtectionValue = number_format($TotalProtectionValue, 0, '.', ',');
-
-        $arrayDataProtection['formattedTotalProtectionValue'] = $formattedTotalProtectionValue;
-
-        // Store the updated array back into the session
-        session(['passingArraysProtection' => $arrayDataProtection]);
+        Session::put('protectionFunds', $protectionFunds);
+        Session::put('TotalprotectionFunds',$TotalprotectionFunds);
+        Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
+        Session::put('progressTotalProtectionValue', $formattedProgressTotalProtectionValue);
         Log::info('Session Data:', Session::all());
         // dd(Session::all()); // Debug to see all session data
         return redirect()->route('protection.supporting.years')
@@ -98,22 +82,17 @@ class formProtectionController extends Controller
         ], $customMessages);
 
         $protectionSupportingYears = $request->input('protectionSupportingYears');
+        $TotalprotectionFunds = Session::get('TotalprotectionFunds'); 
 
-        // Get the existing array from the session
-        $arrayDataProtection = session('passingArraysProtection', []);
+        $TotalProtectionValue = $TotalprotectionFunds * $protectionSupportingYears;
 
-        $protectionFunds = $arrayDataProtection['protectionFunds'];
-        $TotalProtectionValue = $protectionFunds * 12 * $protectionSupportingYears;
-        $formattedTotalProtectionValue = number_format($TotalProtectionValue, 0, '.', ',');
+        // Format the calculated values for display
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
 
-        //update the array
-        $arrayDataProtection['protectionSupportingYears'] = $protectionSupportingYears;
-        $arrayDataProtection['formattedTotalProtectionValue'] = $formattedTotalProtectionValue;
-
-        Log::info('Session Data:', Session::all());
-
-        //store the updated array back into the session
-        session(['passingArraysProtection' =>  $arrayDataProtection]);
+        // Store the multiplied value in the session
+        Session::put('protectionSupportingYears', $protectionSupportingYears);
+        Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
+        // dd(Session::all()); // Debug to see all session data
 
         // Process the form data and perform any necessary actions
         return redirect()->route('protection.existing.policy')
@@ -131,28 +110,23 @@ class formProtectionController extends Controller
         $validatedData = $request->validate([
             'protectionExistingPolicy' => 'required|in:yes,no',
             'protectionPolicyAmount' => 'required_if:protectionExistingPolicy,yes|numeric',
-
         ], $customMessages);
 
+        $previousTotalProtectionValue = Session::get('TotalProtectionValue'); // Assuming this key is used to store the value
+        // $TotalProtectionValue = $request->input('TotalProtectionValue');
         $protectionExistingPolicy = $request->input('protectionExistingPolicy');
         $protectionPolicyAmount = $request->input('protectionPolicyAmount');
+        $previousTotalProtectionValue = str_replace(['RM', ','], '', $previousTotalProtectionValue);
 
-        $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
+        // Convert the stripped value to a numeric format
+        $previousTotalProtectionValue = floatval($previousTotalProtectionValue);
 
-        $protectionPolicyAmount = ($protectionExistingPolicy == 'yes') ? $protectionPolicyAmount : 0;
-
-        $protectionGap = $protectionPolicyAmount - $TotalProtectionValue;
-        // Get the existing array from the session
-        $arrayDataProtection = session('passingArraysProtection', []);
-
-        //update the array
-        $arrayDataProtection['protectionExistingPolicy'] = $protectionExistingPolicy;
-        $arrayDataProtection['protectionPolicyAmount'] = $protectionPolicyAmount;
-        $arrayDataProtection['protectionGap'] = $protectionGap;
-
-        // Store the updated array back into the session
-        session(['passingArraysProtection' => $arrayDataProtection]);
-        Log::info('Session Data:', Session::all());
+        $TotalProtectionValue = $previousTotalProtectionValue - $protectionPolicyAmount;
+        $formattedTotalProtectionValue = 'RM' . number_format($TotalProtectionValue, 2, ',');
+        Session::put('TotalProtectionValue', $formattedTotalProtectionValue);
+        Session::put('protectionExistingPolicy', $protectionExistingPolicy);
+        Session::put('protectionPolicyAmount', $protectionPolicyAmount);
+        // dd(Session::all()); // Debug to see all session data
 
 
         // Process the form data and perform any necessary actions

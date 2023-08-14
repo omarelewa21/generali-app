@@ -4,14 +4,6 @@
 <title>Protection - Gap</title>
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayDataProtection = session('passingArraysProtection');
-    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
-    $protectionPolicyAmount = isset($arrayDataProtection['protectionPolicyAmount']) ? $arrayDataProtection['protectionPolicyAmount'] : 0;
-    $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
-    $protectionGap = isset($arrayDataProtection['protectionGap']) ? $arrayDataProtection['protectionGap'] : 0;
-@endphp
 
 <div id="protection-content">
     <div class="p-0 vh-100 container-fluid">
@@ -34,7 +26,7 @@
                                 <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                     <div class="d-flex">
                                         <h5 class="needs-text d-inline-flex">In</h5>
-                                        <input type="number" name="protectionSupportingYears" value="{{ $protectionSupportingYears}}" class="form-control text-primary w-25" id="years" placeholder=" " required> 
+                                        <input type="number" name="protectionSupportingYears" value="{{ Session::get('protectionSupportingYears' ) }}" class="form-control text-primary w-25" id="years" placeholder=" " required> 
                                         <h5 class="needs-text d-inline-flex">years' time,</h5> 
                                     </div>
                                     <br>
@@ -43,7 +35,7 @@
                                         <h5 class="needs-text d-inline-flex">loved ones with</h5>
                                         <div class="input-group w-25">
                                             <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="TotalProtectionValue" value="{{ $TotalProtectionValue }}" class="form-control text-primary" id="TotalProtectionValue" placeholder=" "required>
+                                            <input type="number" name="TotalProtectionValue" value="{{ Session::get('TotalProtectionValue' ) }}" class="form-control text-primary" id="TotalProtectionValue" placeholder=" "required>
                                         </div>
                                     </div>
                                     <br>
