@@ -41,51 +41,63 @@
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="car" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/car-icon-02.png') }}" width="auto" height="100px" alt="Car">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Car</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="car" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/car-icon-02.png') }}" width="auto" height="100px" alt="Car">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Car</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="motorcycle" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/motorcycle-icon.png') }}" width="auto" height="100px" alt="Motorcycle">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Motorcycle</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="motorcycle" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/motorcycle-icon.png') }}" width="auto" height="100px" alt="Motorcycle">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Motorcycle</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="house" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/house-icon.png') }}" width="auto" height="100px" alt="House">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">House</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="house" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/house-icon.png') }}" width="auto" height="100px" alt="House">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">House</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="bungalow" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/bungalow-icon.png') }}" width="auto" height="100px" alt="Bungalow">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Bungalow</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="bungalow" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/bungalow-icon.png') }}" width="auto" height="100px" alt="Bungalow">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Bungalow</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="apartment" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/apartment-icon.png') }}" width="auto" height="100px" alt="Apartment">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Apartment</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="apartment" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/apartment-icon.png') }}" width="auto" height="100px" alt="Apartment">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Apartment</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                    <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                        <button class="border-0" data-avatar="others" data-required="">
-                                            <img src="{{ asset('images/avatar-my-assets/others-icon.png') }}" width="auto" height="100px" alt="Others">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
-                                        </button>
+                                    <div class="col-12 button-bg">
+                                        <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
+                                            <button class="border-0" data-avatar="others" data-required="">
+                                                <img src="{{ asset('images/avatar-my-assets/others-icon.png') }}" width="auto" height="100px" alt="Others">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
