@@ -97,7 +97,7 @@
                 data: {
                     labels: ["Uncovered", "Covered"],
                     datasets: [{
-                        data: [protectionGap, protectionPolicyAmount],
+                        data: [Uncovered, Covered],
                         backgroundColor: ["#C21B17", "#30DF8B"],
                         hoverBackgroundColor: [
                             "#C21B17",
@@ -142,7 +142,7 @@
                 data: {
                     labels: ["Uncovered", "Covered"],
                     datasets: [{
-                        data: [protectionGap, protectionPolicyAmount],
+                        data: [Uncovered, Covered],
                         backgroundColor: ["#C21B17", "#30DF8B"],
                         hoverBackgroundColor: [
                             "#C21B17",

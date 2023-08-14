@@ -122,28 +122,28 @@
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-                function updateProgress(inputValue,inputValue2) {
-                    // console.log($('#TotalRetirementValue').text());
-                    var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
-                    var totalRetirementValue = inputValue + inputValue2 - parseFloat(totalRetirementValueStr); // Convert to decimal value
-                    var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
+// document.addEventListener("DOMContentLoaded", function() {
+//                 function updateProgress(inputValue,inputValue2) {
+//                     // console.log($('#TotalRetirementValue').text());
+//                     var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
+//                     var totalRetirementValue = inputValue + inputValue2 - parseFloat(totalRetirementValueStr); // Convert to decimal value
+//                     var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
         
-                    $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
-                    $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+//                     $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
+//                     $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
         
-                }
+//                 }
         
-                $('#retirementAllocatedFundsAside').on('input', function () {
-                    var inputValue = $(this).val();
-                    updateProgress(inputValue);
-                });
-                $('#retirementOtherSourceOfIncome').on('input', function () {
-                    var inputValue2 = $(this).val();
-                    updateProgress(inputValue2);
-                });
+//                 $('#retirementAllocatedFundsAside').on('input', function () {
+//                     var inputValue = $(this).val();
+//                     updateProgress(inputValue);
+//                 });
+//                 $('#retirementOtherSourceOfIncome').on('input', function () {
+//                     var inputValue2 = $(this).val();
+//                     updateProgress(inputValue2);
+//                 });
                 
-            });
+//             });
 
 
 </script>
