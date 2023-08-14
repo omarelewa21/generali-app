@@ -11,7 +11,7 @@
     // Retrieving values from the session
     $arrayDataProtection = session('passingArraysProtection');
     $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : '';
-    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
+    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : 0;
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
 @endphp
@@ -135,10 +135,12 @@ var protectionSupportingYears = {{$protectionSupportingYears}};
         var month = 12;
         var protectionFunds = parseFloat($('#protectionFunds').val().replace(',', '')); // Parse and remove commas
         
-        if (TotalProtectionValue !== 0 || isNaN(TotalProtectionValue)) {
-            var TotalProtectionValue = inputValue * month * protectionSupportingYears;
+        if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
+            TotalProtectionValue = inputValue * month * protectionSupportingYears;
+            console.log(TotalProtectionValue);
+
         } else {
-            var TotalProtectionValue = inputValue * month;
+            TotalProtectionValue = inputValue * month;
         }
         
         // $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
