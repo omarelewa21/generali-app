@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Gender Selection Page
+ * Template Name: New Gender Selection Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Gender Selection</title>
+<title>Avatar - New Gender Selection</title>
 @endsection
 
 @section('content')
@@ -110,7 +110,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 default" data-avatar="Male" data-required="" id="gendermale">
+                                                <button class="border-0 default" data-avatar="Male" data-required="" id="newgendermale">
                                                     <img src="{{ asset('images/avatar-gender-selection/new-button-gender-male.png') }}" width="120px" alt="Gender Male">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
                                                 </button>
@@ -120,7 +120,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0" data-avatar="Female" data-required="" id="genderfemale">
+                                                <button class="border-0" data-avatar="Female" data-required="" id="newgenderfemale">
                                                     <img src="{{ asset('images/avatar-gender-selection/new-button-gender-female.png') }}" width="120px" alt="Gender Female">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                                 </button>
@@ -153,128 +153,7 @@
 <script>
 
     $(document).ready(function() {
-        const avatarHead = document.getElementById('avatar-head');
-        const avatarBody = document.getElementById('avatar-body');
-        const bodySlideRight = document.getElementById('body-slide-right');
-        const bodySlideLeft = document.getElementById('body-slide-left');
-        const headSlideRight = document.getElementById('head-slide-right');
-        const headSlideLeft = document.getElementById('head-slide-left');
-
-        const svgFileNames = ['male-head-1.svg', 'male-head-2.svg', 'male-head-3.svg', 'male-head-4.svg', 'male-head-5.svg']; // Add more SVG file names as needed
-        const bodySvgFileNames = ['male-body-1.svg', 'male-body-2.svg', 'male-body-3.svg', 'male-body-4.svg', 'male-body-5.svg']; // Add more SVG file names as needed
-        let currentIndex = 0;
-
-        // Function to update the avatar head image source based on gender and index
-        function updateAvatarHeadSource() {
-            const prefix = selectedGenderValue === 'Female' ? 'fe' : '';
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + prefix + svgFileNames[currentIndex];
-            avatarHead.setAttribute('src', newImageSrc);
-        }
-        function updateAvatarBodySource() {
-            const prefix = selectedGenderValue === 'Female' ? 'fe' : '';
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + prefix + bodySvgFileNames[currentIndex];
-            avatarBody.setAttribute('src', newImageSrc);
-        }
-
-        // Attach event listeners for sliding buttons
-        headSlideLeft.addEventListener('click', function() {
-            currentIndex = (currentIndex - 1 + svgFileNames.length) % svgFileNames.length;
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + svgFileNames[currentIndex];
-            avatarHead.setAttribute('src', newImageSrc);
-            updateAvatarHeadSource();
-        });
-
-        headSlideRight.addEventListener('click', function() {
-            currentIndex = (currentIndex + 1) % svgFileNames.length;
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + svgFileNames[currentIndex];
-            avatarHead.setAttribute('src', newImageSrc);
-            updateAvatarHeadSource();
-        });
-
-        bodySlideLeft.addEventListener('click', function() {
-            currentIndex = (currentIndex - 1 + bodySvgFileNames.length) % bodySvgFileNames.length;
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + bodySvgFileNames[currentIndex];
-            avatarBody.setAttribute('src', newImageSrc);
-            updateAvatarBodySource();
-        });
-
-        bodySlideRight.addEventListener('click', function() {
-            currentIndex = (currentIndex + 1) % bodySvgFileNames.length;
-            const newImageSrc = "{{ asset('/images/avatar-clothes') }}" + "/" + bodySvgFileNames[currentIndex];
-            avatarBody.setAttribute('src', newImageSrc);
-            updateAvatarBodySource();
-        });
-
-        const genderSelection = document.getElementById('gender_selection');
-        const nextButton = document.getElementById('nextBtn');
-        let selectedGender = null;
-
-        // Add event listener to each button with the 'data-required' attribute
-        const dataAvatarButtons = document.querySelectorAll('[data-avatar]');
-        dataAvatarButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default behavior of the button click
-
-                // Remove 'selected' attribute from all buttons
-                dataAvatarButtons.forEach(btn => btn.removeAttribute('data-required'));
-                // Add 'selected' attribute to the clicked button
-                this.setAttribute('data-required', 'selected');
-                // Store the selected data-avatar value
-                selectedGender = this.getAttribute('data-required');
-                selectedGenderValue = this.getAttribute('data-avatar');
-
-                var imageSrc = selectedGenderValue === 'Female' ? 'gender-female' : 'gender-male';
-                var headImageSrc = selectedGenderValue === 'Female' ? '/female-head-1' : '/male-head-1';
-
-                // Update the image source
-                // $('#avatarImage').attr('src', '{{ asset("images/avatar-general/new-") }}' + imageSrc + '.svg');
-                $('#avatarImage').attr('src', '/images/avatar-general/new-' + imageSrc + '.svg');
-                $('#avatar-head').attr('src', '{{ asset("images/avatar-clothes/") }}' + headImageSrc + '.svg');
-
-                // Update the image source based on the selected gender and index
-                updateAvatarHeadSource();
-                updateAvatarBodySource();
-
-                // Update the hidden input field value with the selected avatar
-                document.getElementById('gender').value = selectedGenderValue;
-                
-            });
-        });
-
-        // Add event listener to the form's submit event
-        genderSelection.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Perform your server-side validation here using Laravel or JavaScript fetch API
-            // Use the selectedGender value instead of sending a separate fetch request
-            fetch('/validate-avatar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Use Blade templating to get the CSRF token
-                },
-                body: JSON.stringify({
-                    'data-required': selectedGender, // Include the selectedGender value in the request body
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.validationPassed) {
-                    // Form validation passed, proceed with the form submission
-                    // This will only trigger when the Next button is clicked, not the data-required buttons
-                    genderSelection.submit(); // "this" refers to the genderSelection element
-                } else {
-                    // Form validation failed, handle the error (display an error message, etc.)
-                    const errorContainer = document.getElementById('errorContainer');
-                    errorContainer.innerHTML = 'Form validation failed: ' + data.errors.join(', ');
-                    errorContainer.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                // Handle any errors that occur during the fetch request
-                console.error('Error during fetch request:', error);
-            });
-        });
+       
     });
 
 </script>

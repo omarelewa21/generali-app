@@ -12,7 +12,7 @@ class AvatarGenderSelectionController extends Controller
 {
     public function newChangeImage(Request $request)
     {
-        $gender = $request->input('gender');
+        $gender = $request->input('genderSelection');
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
