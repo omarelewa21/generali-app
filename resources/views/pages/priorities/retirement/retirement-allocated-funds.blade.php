@@ -7,7 +7,12 @@
 @endsection
 
 @section('content')
-
+@php
+    // Retrieving values from the session
+    $arrayDataRetirement = session('passingArraysRetirement');
+    $retirementAllocatedFunds = isset($arrayDataRetirement['retirementAllocatedFunds']) ? $arrayDataRetirement['retirementAllocatedFunds'] : '';
+    $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
+@endphp
 <div id="retirementAllocatedFundsPage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
@@ -23,8 +28,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
-                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
+                            $formattedTotalRetirementValue}}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -47,7 +52,7 @@
                             <div class="d-flex">
                             <div class="input-group w-50">
                                 <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                <input type="text" name="retirementAllocatedFunds" class="form-control text-primary @error('retirementAllocatedFunds') is-invalid @enderror" value="{{Session::get('retirementAllocatedFunds') }}" id="retirementAllocatedFunds" placeholder=" " required> 
+                                <input type="text" name="retirementAllocatedFunds" class="form-control text-primary @error('retirementAllocatedFunds') is-invalid @enderror" value="{{$retirementAllocatedFunds }}" id="retirementAllocatedFunds" placeholder=" " required> 
                             </div>
                             <h5 class="needs-text">/ month to</h5>
                             </div>

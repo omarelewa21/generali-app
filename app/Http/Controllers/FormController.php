@@ -193,12 +193,15 @@ class FormController extends Controller
         // Validation passed, perform any necessary processing...
         // Add or update the data value in the array
         $selectedButtonInput = $request->input('selectedButtonInput');
+        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
+
         $arrayData['maritalStatus'] = $selectedButtonInput;
+        $arrayData['dataUrl'] = $dataUrl;   
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
+        Log::info('Session Data:', Session::all());
 
-        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
         return redirect()->route($dataUrl);
     }
 

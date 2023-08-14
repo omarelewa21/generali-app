@@ -7,7 +7,12 @@
 @endsection
 
 @section('content')
-
+@php
+    // Retrieving values from the session
+    $arrayDataRetirement = session('passingArraysRetirement');
+    $retirementAgeToRetire = isset($arrayDataRetirement['retirementAgeToRetire']) ? $arrayDataRetirement['retirementAgeToRetire'] : '';
+    $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
+@endphp
 <div id="retirementAgeToRetirePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
@@ -23,8 +28,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
-                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
+                            $formattedTotalRetirementValue }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -46,7 +51,7 @@
                             <h5 class="needs-text">I’d like to retire </h5> 
                             <div class="d-flex flex-wrap"> 
                             <h5 class="needs-text">at the age of</h5>
-                            <input type="text" name="retirementAgeToRetire" value="{{ Session::get('retirementAgeToRetire' ) }}"            
+                            <input type="text" name="retirementAgeToRetire" value="{{ $retirementAgeToRetire }}"            
 class="w-25 form-control d-inline text-primary @error('retirementAgeToRetire') is-invalid @enderror" id="retirementAgeToRetireInput" placeholder=" ">
                             @if ($errors->has('retirementAgeToRetire'))
                             <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage" id="retirementAgeToRetireErrorMsg">{{ $errors->first('retirementAgeToRetire') }}</div>
