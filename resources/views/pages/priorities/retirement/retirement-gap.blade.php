@@ -4,7 +4,14 @@
 <title>Retirement - Gap</title>
 
 @section('content')
-
+@php
+    // Retrieving values from the session
+    $arrayDataRetirement = session('passingArraysRetirement');
+    $retirementYearsTillRetire = isset($arrayDataRetirement['retirementYearsTillRetire']) ? $arrayDataRetirement['retirementYearsTillRetire'] : '';
+    $retirementAllocatedFundsAsideTotal = (isset($arrayDataRetirement['retirementAllocatedFundsAsideTotal']) ? $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] : 0);
+    $TotalRetirementValue = isset($arrayDataRetirement['TotalRetirementValue']) ? $arrayDataRetirement['TotalRetirementValue'] : 0;
+    $retirementGap = isset($arrayDataRetirement['retirementGap']) ? $arrayDataRetirement['retirementGap'] : 0;
+@endphp
 <div id="protection-content">
     <div class="p-0 vh-100 container-fluid">
             <div class="row">
@@ -26,7 +33,7 @@
                                 <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                     <div class="d-flex">
                                         <h5 class="needs-text d-inline-flex">In</h5>
-                                        <input type="number" name="years" class="form-control form-input-needs-sm text-primary" id="years" placeholder=" " required> 
+                                        <input type="number" name="years" class="form-control form-input-needs-sm text-primary" id="years" value={{$retirementYearsTillRetire}} placeholder=" " required> 
                                         <h5 class="needs-text d-inline-flex">years' time,</h5> 
                                     </div>
                                     <br>
@@ -35,7 +42,7 @@
                                         <h5 class="needs-text d-inline-flex">loved ones with</h5>
                                         <div class="input-group w-25">
                                             <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" class="form-control text-primary" id="years" placeholder=" "required>
+                                            <input type="number" name="years" value="{{$TotalRetirementValue}}" class="form-control text-primary" id="years" placeholder=" "required>
                                         </div>
                                     </div>
                                     <br>
@@ -43,14 +50,14 @@
                                         <h5 class="needs-text d-inline-flex">I have set aside</h5>
                                         <div class="input-group w-25">
                                             <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required><br><br>
+                                            <input type="number" name="years" value="{{$retirementAllocatedFundsAsideTotal}}" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required><br><br>
                                         </div>
                                     </div>
                                     <br>
                                     <h5 class="needs-text d-inline-flex">So I need a plan for</h5>
                                         <div class="input-group w-25 d-flex">
                                             <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required>
+                                            <input type="number" name="years" value="{{$retirementGap}}" class="form-control form-input-needs-md text-primary" id="years" placeholder=" " required>
                                         </div>
                                 </div>
                             </div>
