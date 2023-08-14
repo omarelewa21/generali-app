@@ -37,9 +37,7 @@
                         </div> 
                     </section>
 
-                    <section class="footer-needs">
-                    
-                    </section>
+
                 </div>
 
                 <section class="footer bg-white py-4 fixed-bottom">
