@@ -34,6 +34,7 @@ Route::post('/new-gender', [AvatarGenderSelectionController::class, 'newChangeIm
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
+Route::post('/new-change-image', [AvatarGenderSelectionController::class, 'newChangeImage'])->name('newChangeImage');
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
