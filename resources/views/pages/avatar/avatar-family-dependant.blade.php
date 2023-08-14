@@ -51,35 +51,43 @@
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="spouse" data-required="" id="spouseButton">
-                                                <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
-                                            </button>
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="spouse" data-required="" id="spouseButton">
+                                                    <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="children" data-required="" id="childButton">
-                                                <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
-                                            </button>
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="children" data-required="" id="childButton">
+                                                    <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="parents" data-required="" id="parentButton">
-                                                <img src="{{ asset('images/avatar-family-dependant/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
-                                            </button>
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="parents" data-required="" id="parentButton">
+                                                    <img src="{{ asset('images/avatar-family-dependant/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
-                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
-                                            <button class="border-0" data-avatar="siblings" data-required="" id="siblingButton">
-                                                <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
-                                            </button>
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 py-5 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0" data-avatar="siblings" data-required="" id="siblingButton">
+                                                    <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -128,6 +136,18 @@ if (maritalStatus === 'single') {
     const childButton = document.getElementById('childButton');
     spouseButton.disabled = true;
     childButton.disabled = true;
+
+    // Remove hover effect if it is disabled
+    const spouseParentDiv = spouseButton.parentElement;
+    const childParentDiv = childButton.parentElement;
+    spouseParentDiv.classList.remove('hover');
+    childParentDiv.classList.remove('hover');
+
+    const spouseImg = spouseButton.querySelector('img');
+    const childImg = childButton.querySelector('img');
+    spouseImg.style.opacity = '0.7'; 
+    childImg.style.opacity = '0.7'; 
+
 } else if (maritalStatus === 'divorced' || maritalStatus === 'widowed') {
     const spouseButton = document.getElementById('spouseButton');
     spouseButton.disabled = true;

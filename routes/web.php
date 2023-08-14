@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\AvatarGenderSelectionController;
 use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
@@ -28,6 +29,8 @@ Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets'
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
+Route::view('/new-gender', 'pages.avatar.avatar-new-gender-selection')->name('avatar.new.gender.selection');
+Route::post('/new-gender', [AvatarGenderSelectionController::class, 'newChangeImage'])->name('new.change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
