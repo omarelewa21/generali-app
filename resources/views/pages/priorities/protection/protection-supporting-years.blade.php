@@ -43,22 +43,34 @@
                 <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
                     novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
-                    @if ($errors->has('protectionSupportingYears'))
+                    {{-- @if ($errors->has('protectionSupportingYears'))
                     <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
                         <div id="protectionSupportingYearsErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
                             <div class="d-flex">
                                 <div class="toast-body p-2">
                                     {{ $errors->first('protectionSupportingYears') }}
                                 </div>
-                                {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
                             </div>
                         </div>
                     </div>
-                    @endif
+                    @endif --}}
                     {{-- @if ($errors->has('protectionSupportingYears'))
                     <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">
                         {{ $errors->first('protectionSupportingYears') }}</div>
                     @endif --}}
+                    @if ($errors->has('protectionSupportingYears'))
+<div class="position-fixed top-0 end-0 start-50 translate-middle mt-4 w-100" style="z-index: 1099">
+    <div id="protectionSupportingYearsErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex justify-content-center">
+            <i class="bi bi-exclamation-circle p-2"></i>
+            <div class="p-2">
+                {{ $errors->first('protectionSupportingYears') }}
+            </div>
+            {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
+        </div>
+    </div>
+</div>
+@endif
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
@@ -151,6 +163,21 @@
 //         });
         
 //     });
+    // Get the toast element
+    const protectionSupportingYearsErrorMsg = document.getElementById('protectionSupportingYearsErrorMsg');
+
+    // Show the toast and apply the animation
+    function showToast() {
+        protectionSupportingYearsErrorMsg.classList.add('show');
+
+        // Auto-hide the toast after a delay
+        setTimeout(() => {
+            protectionSupportingYearsErrorMsg.classList.remove('show');
+        }, 2500);
+    }
+
+    // Trigger the toast animation on page load or when error condition is met
+    document.addEventListener('DOMContentLoaded', showToast);
 </script>
 
 <style>
@@ -165,17 +192,31 @@
     background-position: right;
     background-size: 3rem;
 }
-@media only screen and (max-width: 767px) {
-    body {
-        min-height: 51.5rem;
-    padding-top: 5.5rem;
+    /* Apply the initial state for the toast */
+    .protectionSupportingYearsErrorMsg {
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     }
+
+    /* Apply the animation when the "show" class is added */
+    .protectionSupportingYearsErrorMsg.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+@media only screen and (max-width: 767px) {
+
     .was-validated .form-control:valid, .form-control.is-valid, .was-validated .form-control:invalid, .form-control.is-invalid {
     background-size: 1.5rem;
 
+}
+.fixed-bottom {
+    z-index: 1;
 }
 
 }
 
 </style>
+
+
 @endsection

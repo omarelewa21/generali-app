@@ -24,7 +24,7 @@
                     @include('templates.nav.nav-red-menu')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
-                    <div class="row d-flex justify-content-center align-items-center">
+                    <div class="row d-flex justify-content-center align-items-center mt-3 mt-md-0 mt-lg-0">
                         <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
@@ -45,13 +45,13 @@
                 </div>
             </div>
             @if ($errors->has('protectionFunds'))
-            <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
-                <div id="protectionFundsErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                    <div class="d-flex">
-                        <div class="toast-body p-2">
+            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                <div id="protectionFundsErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex justify-content-center">
+                        <i class="bi bi-exclamation-circle p-2"></i>
+                        <div class="p-2">
                             {{ $errors->first('protectionFunds') }}
                         </div>
-                        {{-- <button type="button" class="btn btn-primary me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
                     </div>
                 </div>
             </div>
@@ -164,18 +164,44 @@ var protectionSupportingYears = {{$protectionSupportingYears}};
         // updateProgress(0); // Or you can use any default value you want
     }
 });
+    // Get the toast element
+    const protectionFundsErrorMsg = document.getElementById('protectionFundsErrorMsg');
+
+    // Show the toast and apply the animation
+    function showToast() {
+        protectionFundsErrorMsg.classList.add('show');
+
+        // Auto-hide the toast after a delay
+        setTimeout(() => {
+            protectionFundsErrorMsg.classList.remove('show');
+        }, 2500);
+    }
+
+    // Trigger the toast animation on page load or when error condition is met
+    document.addEventListener('DOMContentLoaded', showToast);
+
 
 </script>
 <style>
 @media only screen and (max-width: 767px) {
-    /* body,
-    html {
-      overflow-y: auto;
-    } */
-    body {
-        min-height: 51.5rem;
-    padding-top: 5.5rem;
+    .fixed-bottom {
+        z-index: 10;
     }
+}
+@media only screen and (width:688px) and (height:1031px) and (orientation:portrait) {
+    .monthly-support-asset {
+    left: -5%;
+    bottom: 17%;
+    width: 32vh;
+    }
+}
+@media only screen and (width:800px) and (height:1280px) and (orientation:portrait) {
+
+.monthly-support-asset {
+    left: 0;
+    bottom: 0%;
+    width: 40vh;
+}
 }
 </style>
 

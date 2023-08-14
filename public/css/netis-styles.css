@@ -30,7 +30,7 @@
 
 /* Retirement - Home page */
 .needs-grey-bg {
-    padding: 140px;
+    padding-top: 280px;
     background-color: #E9E9E9;
 }
 
@@ -345,7 +345,7 @@ font-size:2.125rem;
     }
 .monthly-support-asset {
     left: 0;
-    bottom: -5%;
+    bottom: -10%;
     width: 22vh;
 }
 .protection-existing-policy-asset {
@@ -449,8 +449,14 @@ width: 80%;
         width: 34vh;
     }
     .needs-home-avatar img {
-        height: 56vh;
+        height: 63vh;
        }
+       .monthly-support-asset {
+        left: -5%;
+        bottom: 8%;
+        z-index: 10;
+        width: 40vh;
+    }
     
 }
 

@@ -27,13 +27,13 @@
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif --}}
     @if ($errors->has('protectionSelectedAvatar'))
-<div class="position-fixed mt-5 top-0 start-50 translate-middle" style="z-index:1099">
-    <div id="protectionSelectedAvatarErrorMsg" class="toast align-items-center text-white bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-        <div class="d-flex">
-            <div class="toast-body p-2">
+<div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+    <div id="protectionSelectedAvatarErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex justify-content-center">
+            <i class="bi bi-exclamation-circle p-2"></i>
+            <div class="p-2">
                 {{ $errors->first('protectionSelectedAvatar') }}
             </div>
-            {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
         </div>
     </div>
 </div>
@@ -43,8 +43,8 @@
         @csrf
         <section>         
             <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-                <div class="my-4 second-cloud" style="padding-top:5.5rem;">
-                    <div class="row d-flex justify-content-center py-4 text-center align-items-center">
+                <div class="my-0 my-lg-4 p-4 p-md-5 p-lg-5 second-cloud" style="padding-top:5.5rem;">
+                    <div class="row d-flex justify-content-center py-4 py-md-5 text-center align-items-center">
                         <h5>I'd like to provide coverage for my:</h5>
                     </div>
                     <div class="container">
@@ -159,10 +159,55 @@
     }
     
 }
+    // Get the toast element
+    const protectionSelectedAvatarErrorMsg = document.getElementById('protectionSelectedAvatarErrorMsg');
 
+    // Show the toast and apply the animation
+    function showToast() {
+        protectionSelectedAvatarErrorMsg.classList.add('show');
+
+        // Auto-hide the toast after a delay
+        setTimeout(() => {
+            protectionSelectedAvatarErrorMsg.classList.remove('show');
+        }, 2500);
+    }
+
+    // Trigger the toast animation on page load or when error condition is met
+    document.addEventListener('DOMContentLoaded', showToast);
 
 
 </script>
+<style>
+    .navbar {
+        right:50%;
+    }
+@media only screen and (max-width: 767px) {
+.progress-value p{
+    color:inherit !important;
+}
+.fixed-bottom {
+    z-index: 1;
+}
+.navbar {
+        right:0;
+    }
+}
+@media only screen and (width: 414px) and (height: 896px) {
+.coverage-avatar img.self-avatar {
+  width: 20vh;
+}
+.coverage-avatar img.spouse-avatar {
+  width: 18vh;
+}
+}
 
+.monthly-support-asset {
+    left: -5%;
+    bottom: 8%;
+    z-index: 10;
+    width: 40vh;
+}
+
+</style>
 @endsection
 

@@ -72,15 +72,58 @@
 }
 
 @media only screen and (max-width: 767px) {
-.needs-text, .progress .progress-value {
-    color:#ffffff;
+.progress-value p{
+    color:inherit !important;
 }
-
-
-/* body {
-    min-height: 51.5rem;
-    padding-top: 5.5rem;
-    } */
+.fixed-bottom {
+    z-index: 1;
+}
+.needs-home {
+    grid-template-rows: 8vh 26vh 30vh;
+}
+}
+@media only screen and (width: 414px) and (height: 896px) {
+    .needs-home {
+    grid-template-rows: 14vh 26vh 30vh;
+}
+}
+@media only screen and (width:688px) and (height:1031px) and (orientation:portrait) {
+    .needs-home-avatar img {
+    height: 52vh;
+}
+}
+@media only screen and (width:1024px) and (height:1366px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 23vh 45vh 30vh;
+}
+}
+@media only screen and (width:800px) and (height:1280px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 22vh 38vh 31vh;
+}
+}
+@media only screen and (width: 1031px) and (height: 688px) and (orientation: landscape) {
+    .needs-home-avatar img {
+    height: 54vh;
+}
+}
+@media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
+    .needs-grey-bg {
+    padding-top: 300px;
+    }
+}
+@media only screen and (width:1024px) and (max-height:778px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 58vh;
+}
+}
+@media only screen and (max-width:896px) and (max-height:414px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 44vh;
+}
+.needs-grey-bg {
+    padding-top: 170px;
+}
 }
 
 </style>

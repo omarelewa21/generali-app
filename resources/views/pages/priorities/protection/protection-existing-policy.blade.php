@@ -40,13 +40,15 @@
             <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
             @csrf
             @if ($errors->has('protectionExistingPolicy'))
-            <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
-                <div id="protectionExistingPolicyErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                    <div class="d-flex">
-                        <div class="toast-body p-2">
+            <div class="position-fixed top-0 end-0 start-50 translate-middle mt-4 w-100" style="z-index: 1099">
+                <div id="protectionExistingPolicyErrorMsg"
+                    class="align-items-center alert alert-warning border-0 fade" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <i class="bi bi-exclamation-circle p-2"></i>
+                        <div class="p-2">
                             {{ $errors->first('protectionExistingPolicy') }}
                         </div>
-                        {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
                     </div>
                 </div>
             </div>
@@ -178,16 +180,27 @@ document.addEventListener("DOMContentLoaded", function() {
             updateProgress(inputValue);
         });
     });
+        // Get the toast element
+        const protectionExistingPolicyErrorMsg = document.getElementById('protectionExistingPolicyErrorMsg');
+
+// Show the toast and apply the animation
+function showToast() {
+    protectionExistingPolicyErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        protectionExistingPolicyErrorMsg.classList.remove('show');
+    }, 2500);
+}
+
+// Trigger the toast animation on page load or when error condition is met
+document.addEventListener('DOMContentLoaded', showToast);
 
 </script>
 
 <style>
 @media only screen and (max-width: 767px) {
 
-    body {
-    min-height: 51.5rem;
-    padding-top: 5.5rem;
-    }
 }
 </style>
 @endsection

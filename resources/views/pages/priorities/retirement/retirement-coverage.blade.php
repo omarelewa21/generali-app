@@ -24,8 +24,16 @@
             </div>
         </div>
         @if ($errors->has('retirementSelectedAvatar'))
-        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block"
-            id="retirementSelectedAvatar">{{ $errors->first('retirementSelectedAvatar') }}</div>
+        <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+            <div id="retirementSelectedAvatarErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="d-flex justify-content-center">
+                    <i class="bi bi-exclamation-circle p-2"></i>
+                    <div class="p-2">
+                        {{ $errors->first('retirementSelectedAvatar') }}
+                    </div>
+                </div>
+            </div>
+        </div>
         @endif
 
         <section>
@@ -143,6 +151,18 @@
             }
         });
     }
+}
+        // Get the toast element
+        const retirementSelectedAvatarErrorMsg = document.getElementById('retirementSelectedAvatarErrorMsg');
+
+// Show the toast and apply the animation
+function showToast() {
+    retirementSelectedAvatarErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementSelectedAvatarErrorMsg.classList.remove('show');
+    }, 2500);
 }
 
 </script>

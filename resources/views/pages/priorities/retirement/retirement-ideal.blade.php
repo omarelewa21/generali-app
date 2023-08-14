@@ -24,8 +24,16 @@
             </div>
         </div>
         @if ($errors->has('retirementIdeal'))
-        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block"
-            id="retirementIdealErrorMsg">{{ $errors->first('retirementIdeal') }}</div>
+        <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+            <div id="retirementIdealErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="d-flex justify-content-center">
+                    <i class="bi bi-exclamation-circle p-2"></i>
+                    <div class="p-2">
+                        {{ $errors->first('retirementIdeal') }}
+                    </div>
+                </div>
+            </div>
+        </div>
         @endif
         <form class="form-horizontal p-0 needs-validation" id="retirementIdealForm" novalidate action="{{route('form.retirement.ideal')}}"  method="POST">
             @csrf
@@ -141,5 +149,19 @@
             }
         });
     }
+
+
+// Show the toast and apply the animation
+function showToast() {
+    retirementIdealErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementIdealErrorMsg.classList.remove('show');
+    }, 2500);
+}
+
+// Trigger the toast animation on page load or when error condition is met
+document.addEventListener('DOMContentLoaded', showToast);
 }
     </script>
