@@ -93,8 +93,8 @@
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
-                                    @if ($errors->has('selectedButtonInput'))
-                                        <div class="invalid-feedback" style="display:block">{{ $errors->first('selectedButtonInput') }}</div>
+                                    @if ($errors->has('maritalStatusButtonInput'))
+                                        <div class="invalid-feedback" style="display:block">{{ $errors->first('maritalStatusButtonInput') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
-                                        <input type="hidden" name="selectedButtonInput" id="selectedButtonInput" value="{{$maritalStatus}}">
+                                        <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="{{$dataUrl}}">
                                         <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton" data-url="avatar.family.dependant">Next</button>
@@ -120,4 +120,24 @@
     </div>
 </div>
 
+<script>
+// Add event listener to each button with the 'data-required' attribute
+const dataButtons = document.querySelectorAll('[data-avatar]');
+
+dataButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default behavior of the button click
+
+        const nextButton = document.getElementById('nextButton');
+        const dataUrl = nextButton.getAttribute('data-url');
+
+        // Get the selected data-avatar value
+        const dataAvatar = this.getAttribute('data-avatar');
+
+        // Update the hidden input field value with the selected avatar
+        document.getElementById('maritalStatusButtonInput').value = dataAvatar;
+        document.getElementById('urlInput').value = dataUrl;
+    });
+});
+</script>
 @endsection

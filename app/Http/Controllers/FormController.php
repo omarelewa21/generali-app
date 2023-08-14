@@ -180,7 +180,7 @@ class FormController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'selectedButtonInput' => [
+            'maritalStatusButtonInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -192,10 +192,17 @@ class FormController extends Controller
 
         // Validation passed, perform any necessary processing...
         // Add or update the data value in the array
-        $selectedButtonInput = $request->input('selectedButtonInput');
+        $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
+        $familyDependantButtonInput = $request->input('familyDependantButtonInput');
         $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
 
-        $arrayData['maritalStatus'] = $selectedButtonInput;
+        if ($maritalStatusButtonInput) {
+            $arrayData['maritalStatus'] = $maritalStatusButtonInput;
+        }
+        else if ($familyDependantButtonInput) {
+            $arrayData['familyDependant'] = $familyDependantButtonInput;
+        }
+        
         $arrayData['dataUrl'] = $dataUrl;   
 
         // Store the updated array back into the session
