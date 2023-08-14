@@ -261,6 +261,10 @@ button[data-required="selected"] img {
   transform: scale(1.2);
 }
 
+.button-bg.selected .hover {
+  border: 10px solid #8995CB;
+}
+
 .button-bg .hover img {
   transition: transform 0.7s ease;
 }

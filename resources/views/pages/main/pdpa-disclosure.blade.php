@@ -89,10 +89,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
-<a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
-                                    <!-- <a id="declineButton" href="{{route('welcome')}}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
-                                    <a id="acceptButton" href="{{route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a> -->
+                                    <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-primary flex-fill me-md-2">DECLINE</a>
+                                    <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
                                 </div>
                             </div>
                         </div>
@@ -104,41 +102,34 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('declineButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-            storeData('Declined', true);
-            window.location.href = '{{ route('welcome') }}';
-        });
+document.addEventListener("DOMContentLoaded", function() {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        document.getElementById('acceptButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-            storeData('Accept', true);
-            window.location.href = '{{ route('basic.details') }}';
-        });
-
-        function storeData(key, value) {
-            // Perform an AJAX request to store the data in the session
-            fetch('/store-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add Laravel CSRF token
-                },
-                body: JSON.stringify({
-                    key: key,
-                    value: value,
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Data stored in session:', data);
-            })
-            .catch(error => {
-                console.error('Error storing data:', error);
-            });
-        }
+    document.getElementById("declineButton").addEventListener("click", function() {
+        pdpa("Declined");
     });
+
+    document.getElementById("acceptButton").addEventListener("click", function() {
+        pdpa("Accepted");
+    });
+
+    function pdpa(decision, route) {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('save.button.click') }}",
+            data: { decision: decision, route: route },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                // Handle success, if needed
+            },
+            error: function(xhr, status, error) {
+                // Handle error, if needed
+            }
+        });
+    }
+});
 </script>
 
 @endsection

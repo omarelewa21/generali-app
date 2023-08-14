@@ -4,9 +4,6 @@ const specificPageURLs = [
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
-
-    // Clear the selected option from localStorage on page load
-    // localStorage.removeItem('selectedOption');
     
     // Show the selected groups based on the dropdown selected
     document.addEventListener('DOMContentLoaded', function() {
@@ -17,14 +14,11 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         var policegroup = document.getElementById('policegroup');
         var registrationgroup = document.getElementById('registrationgroup');
 
-        // Add change event listener to the select element
-        idTypeSelect.addEventListener('change', function() {
-            var selectedOption = this.value;
-    
-            showSelectedGroup(selectedOption);
+        var selectedOption;
 
-            // Store the selected option in local storage
-            localStorage.setItem('selectedOption', selectedOption);
+        idTypeSelect.addEventListener('change', function() {
+            selectedOption = this.value;
+            showSelectedGroup(selectedOption);
         });
       
         // Function to show the selected group
@@ -53,12 +47,17 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             } else if (selectedOption === 'Registration') {
                 registrationgroup.style.display = 'block';
             }
+
+            // Store the selected option in local storage
+            localStorage.setItem('selectedOption', selectedOption);
         }
 
-        // Check if a selected option is stored in local storage
+        // Get the stored selected option from local storage
         var storedOption = localStorage.getItem('selectedOption');
         if (storedOption) {
-            showSelectedGroup(storedOption);
+            selectedOption = storedOption;
+            idTypeSelect.value = selectedOption;
+            showSelectedGroup(selectedOption);
         }
     });
 

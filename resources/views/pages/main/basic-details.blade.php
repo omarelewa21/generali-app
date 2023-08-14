@@ -12,6 +12,11 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+@endphp
+
 <div id="basic_details" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
@@ -47,38 +52,26 @@
                                                 <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
-                                                    <option value="Mr." @if(old('title') == 'Mr.') selected @endif>Mr.</option>
-                                                    <option value="Ms." @if(old('title') == 'Ms.') selected @endif>Ms.</option>
-                                                    <option value="Mrs." @if(old('title') == 'Mrs.') selected @endif>Mrs.</option>
-                                                    <option value="Madam" @if(old('title') == 'Madam') selected @endif>Madam</option>
-                                                    <option value="Datuk" @if(old('title') == 'Datuk') selected @endif>Datuk</option>
-                                                    <option value="Datin" @if(old('title') == 'Datin') selected @endif>Datin</option>
-                                                    <option value="Dato Seri" @if(old('title') == 'Dato Seri') selected @endif>Dato Seri</option>
-                                                    <option value="Datin Seri" @if(old('title') == 'Datin Seri') selected @endif>Datin Seri</option>
-                                                    <option value="Tan Sri" @if(old('title') == 'Tan Sri') selected @endif>Tan Sri</option>
-                                                    <option value="Puan Sri" @if(old('title') == 'Puan Sri') selected @endif>Puan Sri</option>
-                                                    <option value="Dr." @if(old('title') == 'Dr.') selected @endif>Dr.</option>
-                                                    <option value="Tun" @if(old('title') == 'Tun') selected @endif>Tun</option>
-                                                    <option value="Sir" @if(old('title') == 'Sir') selected @endif>Sir</option>
-                                                    <option value="Justice" @if(old('title') == 'Justice') selected @endif>Justice</option>
-                                                    <option value="Others" @if(old('title') == 'Others') selected @endif>Others</option>
+                                                    @foreach ($titles as $title)
+                                                        <option value="{{ $title->titles }}" {{ old('title', $arrayData['Title'] ?? '') === $title->titles ? 'selected' : '' }}>{{ $title->titles }}</option>
+                                                    @endforeach
                                                 </select>
-                                                    @error('title')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                @error('title')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName') }}" required>
+                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $arrayData['FirstName'] ?? '') }}" required>
                                                     @error('firstName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName') }}" required>
+                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $arrayData['LastName'] ?? '') }}" required>
                                                     @error('lastName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -89,7 +82,7 @@
                                                 <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">+60</span>
-                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber') }}" required>
+                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber', $arrayData['MobileNumber'] ?? '') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -99,7 +92,7 @@
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">+60</span>
-                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber') }}">
+                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber', $arrayData['HousePhoneNumber'] ?? '') }}">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -109,7 +102,7 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email') }}">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $arrayData['Email'] ?? '') }}">
                                                     @error('email')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror

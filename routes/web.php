@@ -8,12 +8,16 @@ use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\SessionController;
 
 /* main pages */
+Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
-Route::view('/basic-details', 'pages.main.basic-details')->name('basic.details');
-Route::post('/basic-details', [FormController::class, 'submit'])->name('form.submit');
+Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.submit');
+Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
+Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.button.click');
 
 /* avatar pages */
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
@@ -21,7 +25,7 @@ Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avat
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
 Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
-Route::get('/identity-details', [FormController::class, 'identityData'])->name('identity.details');
+Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
@@ -29,7 +33,7 @@ Route::post('/identity-details', [FormController::class, 'submitIdentity'])->nam
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
-Route::post('/validate-avatar', [FormController::class, 'validateAvatar'])->name('validate.avatar');
+Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
 
 /* Priorities */
 Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
@@ -91,5 +95,8 @@ Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->na
 Route::get('/files/{filename}', function($filename){
     return \Storage::download($filename); // assuming default disk is set to 'public'
 });
+
+// Sessions
+Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
 
 
