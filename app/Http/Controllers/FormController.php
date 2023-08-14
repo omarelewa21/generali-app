@@ -170,7 +170,6 @@ class FormController extends Controller
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
-
                 return true;
             }
             

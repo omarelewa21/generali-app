@@ -105,11 +105,6 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="selectedButtonInput" id="selectedButtonInput">
                                         <input type="hidden" name="urlInput" id="urlInput">
-                                        @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'single')
-        <input type="hidden" name="requiredAttribute" id="requiredAttribute" value="single">
-    @else
-        <input type="hidden" name="requiredAttribute" id="requiredAttribute" value="">
-    @endif
                                         <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton" data-url="avatar.family.dependant">Next</button>
                                     </div>
