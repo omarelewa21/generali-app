@@ -72,6 +72,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+.progress-main p{
+    color:#ffffff !important;
+}
 .progress-value p{
     color:inherit !important;
 }
