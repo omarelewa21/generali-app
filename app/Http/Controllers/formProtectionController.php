@@ -46,7 +46,7 @@ class formProtectionController extends Controller
     {
         $customMessages = [
             'protectionFunds.required' => 'You are required to enter an amount.',
-            'protectionFunds.integer' => 'The amount must be a number',
+            'protectionFunds.integer' => 'The amount must be in numbers',
             'protectionFunds.min' => 'The amount must be at least :min.',
         ];
 

@@ -23,15 +23,15 @@
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
                     @include('templates.nav.nav-red-menu')
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
-                    <div class="row d-flex justify-content-center align-items-center mt-3 mt-md-0 mt-lg-0">
+                <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
+                    <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM{{ $formattedTotalProtectionValue }}</h3>
 
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
@@ -41,18 +41,6 @@
                     @include('templates.nav.nav-sidebar-needs')
                 </div>
             </div>
-            {{-- @if ($errors->has('protectionFunds'))
-            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
-                <div id="protectionFundsErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                    <div class="d-flex justify-content-center">
-                        <i class="bi bi-exclamation-circle p-2"></i>
-                        <div class="p-2">
-                            {{ $errors->first('protectionFunds') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif --}}
         <form class="form-horizontal p-0 needs-validation" id="protectionAllocatedFundsForm" novalidate action="{{route('form.protection.monthly.support')}}" method="POST">
             @csrf           
             <div class="col-12 text-dark px-0 my-4">
@@ -69,11 +57,8 @@
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
+                                    <input type="text" name="protectionFunds" id="protectionFunds" value="{{ $protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
-                                {{-- @if ($errors->has('protectionFunds'))
-                                <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
-                                @endif --}}
                                 <h5 class="needs-text">/ month.</h5>    
                             </div>
                         </div>
@@ -210,5 +195,4 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 </style>
 
-
-    @endsection
+@endsection

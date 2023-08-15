@@ -23,21 +23,7 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-        {{-- @if ($errors->has('protectionSelectedAvatar'))
-        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
-    @endif --}}
-    {{-- @if ($errors->has('protectionSelectedAvatar'))
-<div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
-    <div id="protectionSelectedAvatarErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-        <div class="d-flex justify-content-center">
-            <i class="bi bi-exclamation-circle p-2"></i>
-            <div class="p-2">
-                {{ $errors->first('protectionSelectedAvatar') }}
-            </div>
-        </div>
-    </div>
-</div>
-@endif --}}
+        
     <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
         @csrf
         <section>         
