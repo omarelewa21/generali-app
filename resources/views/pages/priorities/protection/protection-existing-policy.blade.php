@@ -4,38 +4,32 @@
 <title>Protection - Existing Policy</title>
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayDataProtection = session('passingArraysProtection');
-    $protectionExistingPolicy = isset($arrayDataProtection['protectionExistingPolicy']) ? $arrayDataProtection['protectionExistingPolicy'] : '';
-    $protectionPolicyAmount = isset($arrayDataProtection['protectionPolicyAmount']) ? $arrayDataProtection['protectionPolicyAmount'] : '';
-    $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
-@endphp
+
 <div id="protection-existing-policy">
     <div class="container-fluid p-0 container-fluid overflow-hidden d-flex h-100 flex-column">
         <section>
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
-                </div>
-                <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
-                            <div
-                                class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
-                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
-                                $formattedTotalProtectionValue}}</h3>
-                            <p class="text-light text-center">Total Protection Fund Needed</p>
-                        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
+                @include('templates.nav.nav-red-menu')
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
+                        <div
+                        class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
+                        <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
+                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{
+                        Session::get('TotalProtectionValue', 'RM0') }}</h3>
+                    <p class="text-light text-center">Total Protection Fund Needed</p>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
-                    @include('templates.nav.nav-sidebar-needs')
-                </div>
             </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                @include('templates.nav.nav-sidebar-needs')
+            </div>
+        </div>
     </section>
             <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
             @csrf
@@ -64,14 +58,13 @@
                             <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
                                     <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance policy.</h5>
                                     <div class="py-3 py-md-2 py-lg-1 mb-4 mb-md-0 mb-lg-0">
-                                        {{-- <div> --}}
 
                                     <span class="me-3 me-md-5 me-lg-5">
-                                        <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{$protectionExistingPolicy === 'yes' ? 'checked' : ''}} required>
+                                        <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{Session::get('protectionExistingPolicy') === 'yes' ? 'checked' : ''}} required>
                                         <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
                                     <span>
-                                        <input type="radio" class="needs-radio" id="protection_no" name="protectionExistingPolicy" value="no" {{$protectionExistingPolicy === 'no' ? 'checked' : ''}} required>
+                                        <input type="radio" class="needs-radio" id="protection_no" name="protectionExistingPolicy" value="no" {{Session::get('protectionExistingPolicy') === 'no' ? 'checked' : ''}} required>
                                         <label for="protection_no" class="form-label">No</label>
                                     </span>
 
@@ -80,7 +73,7 @@
                                     <div class="input-group w-75 pb-4 pb-lg-0">
                                         <p class="d-flex flex-column justify-content-end pe-2 mb-0 w-sm-100">Existing policy amount: </p>
                                         <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="number" name="protectionPolicyAmount" value="{{ $protectionPolicyAmount }}" class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
+                                    <input type="number" name="protectionPolicyAmount" value="{{Session::get('protectionPolicyAmount')}}" class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
                                     </div>
                                     {{-- @error('protectionPolicyAmount')
                                     <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionPolicyAmountErrorMsg">{{ $message }}</div>
@@ -190,6 +183,5 @@ document.addEventListener("DOMContentLoaded", function() {
     padding-top: 5.5rem;
     }
 }
-
 </style>
 @endsection
