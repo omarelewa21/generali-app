@@ -12,12 +12,11 @@
 
 @section('content')
 
-@include('templates.nav.nav-red-menu')
-
 <div id="avatar_family_dependant_details" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
             <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="avatar-bg position-relative">
                         <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage pb-2">
@@ -40,10 +39,10 @@
                             <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
                                     <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
-                                    <p class="text-white display-6">Tell us more about each of them.</p>
+                                    <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
                                 </div>
                             </div>
-                            <div class="row px-4 pb-4 px-sm-5">
+                            <div class="row px-4 pb-4 px-sm-5 pt-2">
                                 <div class="col-12">
                                     <div class="accordion accordion-flush" id="accordionDependantDetails">
                                         <div class="accordion-item">

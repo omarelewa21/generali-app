@@ -7,6 +7,7 @@ import './form-display';
 import './coverage-carousel';
 import './drag-drop';
 import './navigation-flow';
+import './button-avatar-display';
 
 document.getElementById('saveSession').addEventListener('click', function() {
     var clearRoute = this.getAttribute('data-clear-route');
