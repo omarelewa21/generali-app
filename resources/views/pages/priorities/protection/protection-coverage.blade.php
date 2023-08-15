@@ -26,7 +26,7 @@
         {{-- @if ($errors->has('protectionSelectedAvatar'))
         <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionSelectedAvatarErrorMsg">{{ $errors->first('protectionSelectedAvatar') }}</div>
     @endif --}}
-    @if ($errors->has('protectionSelectedAvatar'))
+    {{-- @if ($errors->has('protectionSelectedAvatar'))
 <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
     <div id="protectionSelectedAvatarErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
         <div class="d-flex justify-content-center">
@@ -37,8 +37,7 @@
         </div>
     </div>
 </div>
-@endif
-
+@endif --}}
     <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
         @csrf
         <section>         
@@ -108,12 +107,9 @@
         <section class="footer bg-white py-4 fixed-bottom">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 d-grid gap-2 d-md-block text-end">
-                        <a href="{{route('protection.home')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                        {{-- <a href="{{route('protection.monthly.support')}}" class="btn btn-primary text-uppercase me-md-2"
-                            onclick="validateSelection()">Next</a> --}}
-                            <button type="submit" class="btn btn-primary text-uppercase">Next</button>
-
+                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                        <a href="{{route('protection.home')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                            <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                     </div>
                 </div>
             </div>
@@ -121,6 +117,19 @@
     </form>
     </div>
 </div>
+<div class="d-flex justify-content-center align-items-end vh-100">
+    <div class="position-relative mb-auto w-50">
+        @if ($errors->has('protectionSelectedAvatar'))
+        <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-3" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            {{ $errors->first('protectionSelectedAvatar') }}
+        </div>
+        @endif
+    </div>
+</div>
+
 
 <script>
 
@@ -159,21 +168,18 @@
     }
     
 }
-    // Get the toast element
-    const protectionSelectedAvatarErrorMsg = document.getElementById('protectionSelectedAvatarErrorMsg');
+    // // Get the toast element
+    // const protectionSelectedAvatarErrorMsg = document.getElementById('protectionSelectedAvatarErrorMsg');
 
-    // Show the toast and apply the animation
-    function showToast() {
-        protectionSelectedAvatarErrorMsg.classList.add('show');
+    // // Show the toast and apply the animation
+    // function showToast() {
+    //     protectionSelectedAvatarErrorMsg.classList.add('show');
 
-        // Auto-hide the toast after a delay
-        setTimeout(() => {
-            protectionSelectedAvatarErrorMsg.classList.remove('show');
-        }, 2500);
-    }
+        
+    // }
 
-    // Trigger the toast animation on page load or when error condition is met
-    document.addEventListener('DOMContentLoaded', showToast);
+    // // Trigger the toast animation on page load or when error condition is met
+    // document.addEventListener('DOMContentLoaded', showToast);
 
 
 </script>

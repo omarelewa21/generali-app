@@ -369,8 +369,12 @@ width: 80%;
     z-index:
      1000;
 } */
-.needs-home-avatar img {
-    height:33vh;
+#protection_home .needs-home-avatar img {
+    height:53vh;
+}
+
+#protection_home .needs-home {
+    grid-template-rows: 5vh 26vh 42vh;
 }
 
 /* form input-needs */

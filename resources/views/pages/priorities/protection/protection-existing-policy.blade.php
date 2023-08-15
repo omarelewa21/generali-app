@@ -100,10 +100,10 @@
                         <section class="footer bg-white py-4 fixed-bottom">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <a href="{{route('protection.supporting.years')}}"
-                                            class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                            <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+                                            class="btn btn-primary text-uppercase me-md-2 flex-fill">Back</a>
+                                            <button type="submit" class="btn btn-primary text-uppercase flex-fill">Next</button>
                                     </div>
                                 </div>
                             </div>

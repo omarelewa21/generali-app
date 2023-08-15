@@ -43,9 +43,9 @@
                 <section class="footer bg-white py-4 fixed-bottom">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                <a href="{{route('priorities.to.discuss')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                <a href="{{route('protection.coverage') }}" class="btn btn-primary text-uppercase">Next</a>
+                            <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                <a href="{{route('priorities.to.discuss')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                <a href="{{route('protection.coverage') }}" class="btn btn-primary text-uppercase flex-fill">Next</a>
                             </div>
                         </div>
                     </div>
@@ -85,6 +85,7 @@
     grid-template-rows: 8vh 26vh 30vh;
 }
 }
+
 @media only screen and (width: 414px) and (height: 896px) {
     .needs-home {
     grid-template-rows: 14vh 26vh 30vh;

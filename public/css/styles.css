@@ -826,7 +826,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   }
   .navbar-default.transparent {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
-    /* background: #fff; */
+    background: #fff;
   }
   /* .progress-main p {
     color: #fff!important;
