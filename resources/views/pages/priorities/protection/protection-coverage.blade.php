@@ -178,7 +178,8 @@
 
 </script>
 <style>
-    .navbar {
+
+.navbar {
         right:50%;
     }
 @media only screen and (max-width: 767px) {
@@ -186,11 +187,17 @@
     color:inherit !important;
 }
 .fixed-bottom {
-    z-index: 1;
+    z-index: 10;
 }
 .navbar {
         right:0;
     }
+    .slick-track {
+    height: 57vh;
+}
+.navbar-default.transparent {
+    background: transparent !important;
+}
 }
 @media only screen and (width: 414px) and (height: 896px) {
 .coverage-avatar img.self-avatar {
@@ -200,6 +207,24 @@
   width: 18vh;
 }
 }
+@media only screen and (min-width:768px) and (max-height:1280px) and (orientation:portrait) {
+    .needs-grey-bg-md {
+        padding-top: 300px;
+    }
+    .slick-track {
+        height:63vh;
+    }
+    .coverage-avatar img.parent-avatar {
+        width:36vh;
+    }
+    .bg-needs-main {
+    background-position: center center;
+    height: 110vh;
+    width: 100%;
+    }
+ 
+
+}
 
 .monthly-support-asset {
     left: -5%;
@@ -207,7 +232,6 @@
     z-index: 10;
     width: 40vh;
 }
-
 </style>
 @endsection
 
