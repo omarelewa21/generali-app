@@ -204,6 +204,9 @@
         transform: translateY(0);
         opacity: 1;
     }
+    .navbar {
+        right:50%;
+    }
 @media only screen and (max-width: 767px) {
 
     .was-validated .form-control:valid, .form-control.is-valid, .was-validated .form-control:invalid, .form-control.is-invalid {
@@ -211,9 +214,11 @@
 
 }
 .fixed-bottom {
-    z-index: 1;
+    z-index: 1000;
 }
-
+.navbar {
+        right:0;
+    }
 }
 
 </style>

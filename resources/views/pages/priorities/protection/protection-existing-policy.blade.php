@@ -199,8 +199,16 @@ document.addEventListener('DOMContentLoaded', showToast);
 </script>
 
 <style>
+        .navbar {
+        right:50%;
+    }
 @media only screen and (max-width: 767px) {
-
+    .navbar {
+        right:0;
+    }
+    .fixed-bottom {
+        z-index: 1000;
+    }
 }
 </style>
 @endsection

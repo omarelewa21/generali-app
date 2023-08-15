@@ -28,10 +28,10 @@
                     <div class="my-4">  
                         <section>
                             <div class="row vh-100 justify-content-center">
-                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-start align-items-center">
+                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-center align-items-center">
                                 <canvas id="totalProtectionFund" class="d-flex object-fit-cover chart-canvas"></canvas>
                             </div>
-                                <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                                <div class="col-10 col-md-5 col-lg-5 my-0 my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                     <div class="d-flex">
                                         <h5 class="needs-text d-inline-flex">In</h5>
                                         <input type="number" name="protectionSupportingYears" value="{{ $protectionSupportingYears}}" class="form-control text-primary w-25" id="years" placeholder=" " required> 
@@ -292,12 +292,24 @@
     });
 </script>
 <style>
+    .navbar {
+        right:50%;
+    }
     @media only screen and (max-width: 767px) {
     
         body {
         min-height: 51.5rem;
         padding-top: 5.5rem;
         }
+        .navbar {
+        right:0;
+    }
+    .fixed-bottom {
+        z-index: 1000;
+    }
+    .bg-needs-3 {
+        height:auto;
+    }
     }
     </style>
 @endsection

@@ -1,4 +1,4 @@
-{{-- Protection Coverage page --}}
+{{-- Retirement Coverage page --}}
 
 @extends('templates.master')
 
@@ -31,11 +31,8 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
-                                $formattedTotalProtectionValue}}</h3>
-                            {{-- <script>
-                                console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
-                            </script> --}}
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
+
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
                     </div>
@@ -72,7 +69,7 @@
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ $protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
+                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
                                 {{-- @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
@@ -107,13 +104,13 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const protectionFunds = document.getElementById("protectionFunds");
-    const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
+    // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
     protectionFunds.addEventListener("blur", function() {
         validateNumberField(protectionFunds);
     });
 
     protectionFunds.addEventListener("input", function() {
-        protectionFundsErrorMsg.style.display="none";
+        // protectionFundsErrorMsg.style.display="none";
     });
 
     function validateNumberField(field) {
@@ -128,9 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 document.addEventListener("DOMContentLoaded", function() {
-var TotalProtectionValue = {{$TotalProtectionValue}};
-var protectionSupportingYears = {{$protectionSupportingYears}};
-
     function updateProgress(inputValue) {
         var month = 12;
         var protectionFunds = parseFloat($('#protectionFunds').val().replace(',', '')); // Parse and remove commas
@@ -142,19 +136,13 @@ var protectionSupportingYears = {{$protectionSupportingYears}};
         } else {
             TotalProtectionValue = inputValue * month;
         }
-        
-        // $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-        $('#TotalProtectionValue').text('RM ' + TotalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
-    }
-    
-    $('#protectionFunds').on('input', function () {
-        var inputValue = $(this).val().replace(',', ''); // Remove commas from input value
+        var inputValue = $('#protectionFunds').val();
         if (inputValue !== "") {
             updateProgress(inputValue);
         } else {
             // updateProgress(0); // Or you can use any default value you want
         }
-    });
+    };
     
     // Initial calculation when the page loads
     var initialValue = $('#protectionFunds').val().replace(',', '');
@@ -163,7 +151,7 @@ var protectionSupportingYears = {{$protectionSupportingYears}};
     } else {
         // updateProgress(0); // Or you can use any default value you want
     }
-});
+
     // Get the toast element
     const protectionFundsErrorMsg = document.getElementById('protectionFundsErrorMsg');
 
@@ -180,10 +168,13 @@ var protectionSupportingYears = {{$protectionSupportingYears}};
     // Trigger the toast animation on page load or when error condition is met
     document.addEventListener('DOMContentLoaded', showToast);
 
-
+});
 </script>
 <style>
 @media only screen and (max-width: 767px) {
+    .navbar-default.transparent {
+    background: transparent !important;
+  }
     .fixed-bottom {
         z-index: 10;
     }
