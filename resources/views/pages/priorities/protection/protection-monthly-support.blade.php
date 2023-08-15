@@ -1,4 +1,4 @@
-{{-- Protection Coverage page --}}
+{{-- Retirement Coverage page --}}
 
 @extends('templates.master')
 
@@ -11,7 +11,7 @@
     // Retrieving values from the session
     $arrayDataProtection = session('passingArraysProtection');
     $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : '';
-    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
+    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : 0;
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
 @endphp
@@ -31,8 +31,7 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
-                                $formattedTotalProtectionValue}}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">{{ Session::get('TotalProtectionValue', 'RM0') }}</h3>
                             {{-- <script>
                                 console.log("Session Data:", {{ json_encode(Session::get('TotalProtectionValue')) }});
                             </script> --}}
@@ -72,7 +71,7 @@
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ $protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
+                                    <input type="number" name="protectionFunds" id="protectionFunds" value="{{ Session::get('protectionFunds') }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
                                 </div>
                                 {{-- @if ($errors->has('protectionFunds'))
                                 <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionFundsErrorMsg">{{ $errors->first('protectionFunds') }}</div>
@@ -128,40 +127,34 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 document.addEventListener("DOMContentLoaded", function() {
-var TotalProtectionValue = {{$TotalProtectionValue}};
-var protectionSupportingYears = {{$protectionSupportingYears}};
+        function updateProgress(inputValue) {
+            var month = 12;
+            var totalProtectionValue = inputValue * month;
+            // var progressTotalProtectionValue = totalProtectionValue * 100;
+            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
 
     function updateProgress(inputValue) {
         var month = 12;
         var protectionFunds = parseFloat($('#protectionFunds').val().replace(',', '')); // Parse and remove commas
         
-        if (TotalProtectionValue !== 0 || isNaN(TotalProtectionValue)) {
-            var TotalProtectionValue = inputValue * month * protectionSupportingYears;
+        if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
+            TotalProtectionValue = inputValue * month * protectionSupportingYears;
+            console.log(TotalProtectionValue);
+
         } else {
-            var TotalProtectionValue = inputValue * month;
+            TotalProtectionValue = inputValue * month;
         }
-        
-        // $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-        $('#TotalProtectionValue').text('RM ' + TotalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
-    }
-    
-    $('#protectionFunds').on('input', function () {
-        var inputValue = $(this).val().replace(',', ''); // Remove commas from input value
+        var inputValue = $('#protectionFunds').val();
         if (inputValue !== "") {
             updateProgress(inputValue);
         } else {
             // updateProgress(0); // Or you can use any default value you want
         }
+        $('#protectionFunds').on('input', function () {
+            var inputValue = $(this).val();
+            updateProgress(inputValue);
+        });
     });
-    
-    // Initial calculation when the page loads
-    var initialValue = $('#protectionFunds').val().replace(',', '');
-    if (initialValue !== "") {
-        updateProgress(initialValue);
-    } else {
-        // updateProgress(0); // Or you can use any default value you want
-    }
-});
 
 </script>
 <style>

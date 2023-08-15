@@ -7,11 +7,7 @@
 @endsection
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayDataRetirement = session('passingArraysRetirement');
-    $retirementSelectedAvatar= isset($arrayDataRetirement['retirementSelectedAvatar']) ? $arrayDataRetirement['retirementSelectedAvatar'] : '';
-@endphp
+
 <div id="retirement_coverage" class="vh-100">
 
     <div class="p-0 vh-100 container-fluid">
@@ -51,7 +47,7 @@
                         </div>
                         <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <button class="btn border-0 bg-transparent box-shadow avatar-button  {{ $retirementSelectedAvatar  === 'self' ? 'selected-box-shadow' : '' }}" data-type="self"
+                                <button class="btn border-0 bg-transparent box-shadow avatar-button  {{ Session::get('retirementSelectedAvatar') === 'self' ? 'selected-box-shadow' : '' }}" data-type="self"
                                     id="button-self-avatar" onclick="avatarSelect(this)">
                                     <img src="{{ asset('images/needs/avatar/self.svg') }}" class="self-avatar"
                                         alt="self-character">
@@ -59,7 +55,7 @@
                                 </button>
                             </div>
                             <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
-                                <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $retirementSelectedAvatar  === 'spouse' ? 'selected-box-shadow' : '' }}" data-type="spouse"
+                                <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('retirementSelectedAvatar') === 'spouse' ? 'selected-box-shadow' : '' }}" data-type="spouse"
                                     id="button-spouse-avatar" onclick="avatarSelect(this)">
                                     <img src="{{ asset('images/needs/avatar/spouse.svg') }}" class="spouse-avatar"
                                         alt="spouse">
@@ -67,14 +63,14 @@
                                 </button>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <button class="btn border-0 bg-transparent box-shadow avatar-button {{ $retirementSelectedAvatar  === 'children' ? 'selected-box-shadow' : '' }}" data-type="children"
+                                <button class="btn border-0 bg-transparent box-shadow avatar-button {{ Session::get('retirementSelectedAvatar') === 'children' ? 'selected-box-shadow' : '' }}" data-type="children"
                                     id="button-kid-avatar" onclick="avatarSelect(this)">
                                     <img src="{{ asset('images/needs/avatar/kid.svg') }}" class="kid-avatar" alt="kid">
                                     <h6 class="text-center py-2">Child(ren)</h6>
                                 </button>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
-                                <button class="btn border-0 bg-transparent box-shadow avatar-button  {{ $retirementSelectedAvatar  === 'parent' ? 'selected-box-shadow' : '' }}" data-type="parent"
+                                <button class="btn border-0 bg-transparent box-shadow avatar-button  {{ Session::get('retirementSelectedAvatar') === 'parent' ? 'selected-box-shadow' : '' }}" data-type="parent"
                                     id="button-parent-avatar" onclick="avatarSelect(this)">
                                     <img src="{{ asset('images/needs/avatar/parent.svg') }}" class="parent-avatar"
                                         alt="parent">
@@ -83,7 +79,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="retirementSelectedAvatar" id="retirementSelectedAvatarInput"
-                        value="{{ $retirementSelectedAvatar}}">
+                        value="{{Session::get('retirementSelectedAvatar')}}">
 
                         <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">
                             <div class="col-12 col-md-4 text-center">
