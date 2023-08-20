@@ -23,12 +23,12 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-        
+
     <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate action="{{route('form.protection.coverage')}}"  method="POST">
         @csrf
         <section>         
             <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-                <div class="my-0 my-lg-4 p-4 p-md-5 p-lg-5 second-cloud" style="padding-top:5.5rem;">
+                <div class="my-0 my-lg-4 p-4 p-md-5 p-lg-5" style="padding-top:5.5rem;">
                     <div class="row d-flex justify-content-center py-4 py-md-5 text-center align-items-center">
                         <h5>I'd like to provide coverage for my:</h5>
                     </div>
@@ -184,7 +184,7 @@
 .navbar {
         right:0;
     }
-    .slick-track {
+.slick-track {
     height: 57vh;
 }
 .navbar-default.transparent {
@@ -214,10 +214,7 @@
     height: 110vh;
     width: 100%;
     }
- 
-
 }
-
 .monthly-support-asset {
     left: -5%;
     bottom: 8%;

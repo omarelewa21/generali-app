@@ -101,7 +101,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const protectionFunds = document.getElementById("protectionFunds");
+    const protectionFunds = document.getElementById("TotalProtectionValue");
     // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
     protectionFunds.addEventListener("blur", function() {
         validateNumberField(protectionFunds);
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     function updateProgress(inputValue) {
         var month = 12;
-        var protectionFunds = parseFloat($('#protectionFunds').val().replace(',', '')); // Parse and remove commas
+        var TotalProtectionValue = parseFloat($('#TotalProtectionValue').val().replace(',', '')); // Parse and remove commas
         
         if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
             TotalProtectionValue = inputValue * month * protectionSupportingYears;
@@ -134,38 +134,25 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             TotalProtectionValue = inputValue * month;
         }
-        var inputValue = $('#protectionFunds').val();
+        var inputValue = $('#TotalProtectionValue').val();
         if (inputValue !== "") {
             updateProgress(inputValue);
         } else {
             // updateProgress(0); // Or you can use any default value you want
         }
+        document.getElementById('TotalProtectionValue').value = TotalProtectionValue.toFixed(2);
     };
     
     // Initial calculation when the page loads
-    var initialValue = $('#protectionFunds').val().replace(',', '');
+    var initialValue = $('#TotalProtectionValue').val().replace(',', '');
     if (initialValue !== "") {
         updateProgress(initialValue);
     } else {
         // updateProgress(0); // Or you can use any default value you want
     }
 
-    // Get the toast element
-    const protectionFundsErrorMsg = document.getElementById('protectionFundsErrorMsg');
-
-    // Show the toast and apply the animation
-    function showToast() {
-        protectionFundsErrorMsg.classList.add('show');
-
-        // Auto-hide the toast after a delay
-        setTimeout(() => {
-            protectionFundsErrorMsg.classList.remove('show');
-        }, 2500);
-    }
-
-    // Trigger the toast animation on page load or when error condition is met
-    document.addEventListener('DOMContentLoaded', showToast);
-
+    // Recalculate the progress whenever the input changes
+    
 });
 </script>
 <style>

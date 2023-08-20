@@ -64,6 +64,13 @@
     background-repeat: no-repeat;
     height: 100%;
 }
+.bg-needs-gap {
+    background-image: url(/images/needs/background/bg-needs-gap.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 80vh;
+}
 /* .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
@@ -190,6 +197,16 @@
 .needs-text {
     z-index:1000;
 }
+h5.gap-text {
+    font-size: 1.6rem;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+h5.gap-value {
+    font-size: 2rem;
+}
 
 
 .box-shadow{
@@ -229,12 +246,11 @@
 
 .input-text {
 font-size:2.125rem;
+font-family:"Helvetica Neue Bold", sans-serif;
 }
 .fs-64 {
     font-size:4rem;
 }
-
-
 
 
   /* mobile css */
