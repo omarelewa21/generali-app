@@ -67,10 +67,18 @@
 .bg-needs-gap {
     background-image: url(/images/needs/background/bg-needs-gap.png);
     background-size: contain;
-    background-position: center center;
+    background-position: center bottom;
     background-repeat: no-repeat;
     height: 80vh;
 }
+.bg-needs-gap2 {
+    background-image: url(/images/needs/background/bg-needs-gap2.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    width:100%;
+}
+
 /* .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
@@ -85,7 +93,30 @@
     background-repeat: no-repeat;
     height: 100%;
 }
-
+.green-tick {
+    display: inline-block;
+    width: 30px; /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/green-tick.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.red-tick {
+    display: inline-block;
+    width: 30px; /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/red-tick.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.clock-icon {
+    display: inline-block;
+    width: 17px; /* Adjust the width and height to match your icon size */
+    height: 17px;
+    background: url('/images/needs/background/clock-icon.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.glow-box {
+    box-shadow: 4px 20px 20px 0px rgba(198, 198, 198, 0.25), -4px -10px 20px 0px #E4F4F6;
+}
 /* Protection pages */
 
 /* Protection - Monthly Support */
@@ -399,6 +430,10 @@ width: 80%;
 }
 .fs-64 {
     font-size:calc(1.3375rem + 1.05vw);
+}
+.posErrorMessageMobile {
+    top:0 !important;
+    z-index: 1000;
 }
     
 }

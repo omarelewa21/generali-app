@@ -27,7 +27,7 @@
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
-                            <div class="row h-100 justify-content-center bg-needs-gap">
+                            <div class="container mx-auto h-100 row justify-content-center bg-needs-gap">
                             <div class="col-lg-5 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-center align-items-center">
                                 {{-- <div class="svg-container">
                                 <div class="card-gap" id="gap">
@@ -48,14 +48,17 @@
                                     </div>
                                 </div>
                                 </div> --}}
-                                <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="80%">
+                                <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
                                     Your browser does not support SVGs
                                 </object>
+                                <h5 class="gap-text mb-4">
+                                    Total Protection Fund
+                                </h5>
                                 
                             </div>
                                 <div class="col-12 col-md-5 col-lg-6 my-0 my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 mb-3 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     After the next
                                                 </h5>
@@ -63,45 +66,44 @@
                                                     {{$protectionSupportingYears}} years
                                                 </h5>
                                             </div>
-                                            <span class="text-success align-self-center">&#10004;</span>
+                                            <span class="align-self-center green-tick"></span>
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 mb-3 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto w-50">                                             
                                                     I want to protect my loved ones with
                                                 </h5>
                                                 <h5 class="gap-value text-primary my-auto">                                             
-                                                    RM {{$TotalProtectionValue}} 
+                                                    RM {{number_format($TotalProtectionValue)}} 
                                                 </h5>
                                             </div>
-                                            <span class="text-success align-self-center">&#10004;</span>
+                                            <span class="align-self-center green-tick"></span>
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 mb-3 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     I have set aside
                                                 </h5>
                                                 <h5 class="gap-value text-primary my-auto">                                             
-                                                    RM {{$protectionPolicyAmount}}
+                                                    RM {{number_format($protectionPolicyAmount)}}
                                                 </h5>
                                             </div>
-                                            <span class="text-success align-self-center">&#10004;</span>
+                                            <span class="align-self-center green-tick"></span>
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 mb-3 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     So I need a plan for
                                                 </h5>
-                                                <h5 class="gap-value text-primary my-auto">                                             
-                                                    RM {{$protectionGap}}
+                                                <h5 class="gap-value my-auto {{ $protectionGap === 0 ? 'text-dark' : 'text-primary ' }}">                                             
+                                                    RM {{number_format($protectionGap)}}
                                                 </h5>
                                             </div>
-                                            <span class="text-success align-self-center">&#10004;</span>
+                                            <span class="align-self-center {{ $protectionGap === 0 ? 'green-tick' : 'red-tick' }}"></span>
                                         </div>
-                                    
                                 </div>
                             </div>
     
@@ -111,7 +113,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('protection.home')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('protection.existing.policy')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                     </div>
                                 </div>

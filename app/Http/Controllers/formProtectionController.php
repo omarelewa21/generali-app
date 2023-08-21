@@ -145,10 +145,18 @@ class formProtectionController extends Controller
         // Get the existing array from the session
         $arrayDataProtection = session('passingArraysProtection', []);
 
+        if ($protectionGap > 0) {
+            $protectionGap = 0;
+        }
+        else if ($protectionGap < 0) {
+            $protectionGap = abs($protectionGap);
+        }
         //update the array
         $arrayDataProtection['protectionExistingPolicy'] = $protectionExistingPolicy;
         $arrayDataProtection['protectionPolicyAmount'] = $protectionPolicyAmount;
         $arrayDataProtection['protectionGap'] = $protectionGap;
+
+
 
         // Store the updated array back into the session
         session(['passingArraysProtection' => $arrayDataProtection]);

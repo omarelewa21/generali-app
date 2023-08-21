@@ -10,7 +10,7 @@
 @php
     // Retrieving values from the session
     $arrayDataProtection = session('passingArraysProtection');
-    $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : '';
+    $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
     $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : 0;
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
@@ -31,7 +31,7 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{ Session::get('ProgressTotalProtectionValue', 45) }}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM{{ $formattedTotalProtectionValue }}</h3>
+                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{ $formattedTotalProtectionValue }}</h3>
 
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
@@ -56,9 +56,8 @@
                             <h5 class="needs-text">support my family with</h5>
                             <div class="d-flex flex-wrap"> 
                                 <div class="input-group w-50">
-                                    <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="text" name="protectionFunds" id="protectionFunds" value="{{ $protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required> 
-                                </div>
+                                    <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
+                                    <input type="text" name="protectionFunds" id="protectionFunds" value="{{$protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required>                                </div>
                                 <h5 class="needs-text">/ month.</h5>    
                             </div>
                         </div>
@@ -86,10 +85,10 @@
     </div>
 
 </div>
-    <div class="d-flex justify-content-center align-items-end vh-100">
-        <div class="position-relative mb-auto w-50">
+    <div class="d-flex justify-content-center align-items-end h-100">
+        <div class="position-absolute mb-auto w-50 w-sm-100 posErrorMessageMobile">
             @if ($errors->has('protectionFunds'))
-            <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-3" role="alert">
+            <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                     <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
@@ -101,15 +100,15 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const protectionFunds = document.getElementById("TotalProtectionValue");
-    // const protectionFundsErrorMsg = document.getElementById("protectionFundsErrorMsg");
-    protectionFunds.addEventListener("blur", function() {
-        validateNumberField(protectionFunds);
-    });
+    // const protectionFunds = document.getElementById("TotalProtectionValue");
+    // const rmString = document.getElementById("RM");
+    // protectionFunds.addEventListener("blur", function() {
+    //     validateNumberField(protectionFunds);
+    // });
 
-    protectionFunds.addEventListener("input", function() {
-        // protectionFundsErrorMsg.style.display="none";
-    });
+    // protectionFunds.addEventListener("input", function() {
+    //     // protectionFundsErrorMsg.style.display="none";
+    // });
 
     function validateNumberField(field) {
         const value = field.value.trim();
@@ -122,38 +121,37 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-document.addEventListener("DOMContentLoaded", function() {
-    function updateProgress(inputValue) {
-        var month = 12;
-        var TotalProtectionValue = parseFloat($('#TotalProtectionValue').val().replace(',', '')); // Parse and remove commas
+// document.addEventListener("DOMContentLoaded", function() {
+//     function updateProgress(inputValue) {
+//         var month = 12;
+//         var TotalProtectionValue = parseFloat($('#TotalProtectionValue').val().replace(',', '')); // Parse and remove commas
         
-        if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
-            TotalProtectionValue = inputValue * month * protectionSupportingYears;
-            console.log(TotalProtectionValue);
+//         if (TotalProtectionValue !== 0 || TotalProtectionValue !== null) {
+//             TotalProtectionValue = inputValue * month * protectionSupportingYears;
+//             console.log(TotalProtectionValue);
 
-        } else {
-            TotalProtectionValue = inputValue * month;
-        }
-        var inputValue = $('#TotalProtectionValue').val();
-        if (inputValue !== "") {
-            updateProgress(inputValue);
-        } else {
-            // updateProgress(0); // Or you can use any default value you want
-        }
-        document.getElementById('TotalProtectionValue').value = TotalProtectionValue.toFixed(2);
-    };
+//         } else {
+//             TotalProtectionValue = inputValue * month;
+//         }
+//         var inputValue = $('#TotalProtectionValue').val();
+//         if (inputValue !== "") {
+//             updateProgress(inputValue);
+//         } else {
+//             // updateProgress(0); // Or you can use any default value you want
+//         }
+//         document.getElementById('TotalProtectionValue').value = TotalProtectionValue.toFixed(2);
+//     };
     
-    // Initial calculation when the page loads
-    var initialValue = $('#TotalProtectionValue').val().replace(',', '');
-    if (initialValue !== "") {
-        updateProgress(initialValue);
-    } else {
-        // updateProgress(0); // Or you can use any default value you want
-    }
+//     // Initial calculation when the page loads
+//     var initialValue = $('#TotalProtectionValue').val().replace(',', '');
+//     if (initialValue !== "") {
+//         updateProgress(initialValue);
+//     } else {
+//         // updateProgress(0); // Or you can use any default value you want
+//     }
+    
+// });
 
-    // Recalculate the progress whenever the input changes
-    
-});
 </script>
 <style>
 @media only screen and (max-width: 767px) {

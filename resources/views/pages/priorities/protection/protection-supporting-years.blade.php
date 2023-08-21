@@ -43,34 +43,6 @@
                 <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
                     novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
-                    {{-- @if ($errors->has('protectionSupportingYears'))
-                    <div class="position-fixed top-0 end-0 m-2" style="z-index:1099">
-                        <div id="protectionSupportingYearsErrorMsg" class="toast align-items-center text-white bg-primary border-0 fade show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                            <div class="d-flex">
-                                <div class="toast-body p-2">
-                                    {{ $errors->first('protectionSupportingYears') }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif --}}
-                    {{-- @if ($errors->has('protectionSupportingYears'))
-                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block">
-                        {{ $errors->first('protectionSupportingYears') }}</div>
-                    @endif --}}
-                    @if ($errors->has('protectionSupportingYears'))
-<div class="position-fixed top-0 end-0 start-50 translate-middle mt-4 w-100" style="z-index: 1099">
-    <div id="protectionSupportingYearsErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex justify-content-center">
-            <i class="bi bi-exclamation-circle p-2"></i>
-            <div class="p-2">
-                {{ $errors->first('protectionSupportingYears') }}
-            </div>
-            {{-- <button type="button" class="btn-close btn-close-white me-1 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> --}}
-        </div>
-    </div>
-</div>
-@endif
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
@@ -84,12 +56,13 @@
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
                                             class="calendar-protection">
                                         <div class="position-absolute center w-100 text-center px-5 px-lg-0">
-                                            <input type="number" name="protectionSupportingYears"
+                                            <input type="text" name="protectionSupportingYears"
                                                 value="{{$protectionSupportingYears}}"
-                                                class="form-control d-inline-flex text-primary w-50 fs-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
+                                                class="form-control input-text d-inline-flex text-primary w-50 fs-64 text-center @error('protectionSupportingYears') is-invalid @enderror"
                                                 id="protectionSupportingYears" required>
                                             <h5 class="needs-text">years</h5>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
@@ -113,6 +86,18 @@
                 </form>
             </div>
         </section>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-end h-100">
+    <div class="position-absolute mb-auto w-50 w-sm-100 bottom-0 posErrorMessageMobile">
+        @if ($errors->has('protectionSupportingYears'))
+        <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            {{ $errors->first('protectionSupportingYears') }}
+        </div>
+        @endif
     </div>
 </div>
 <script>
@@ -163,21 +148,8 @@
 //         });
         
 //     });
-    // Get the toast element
-    const protectionSupportingYearsErrorMsg = document.getElementById('protectionSupportingYearsErrorMsg');
 
-    // Show the toast and apply the animation
-    function showToast() {
-        protectionSupportingYearsErrorMsg.classList.add('show');
 
-        // Auto-hide the toast after a delay
-        setTimeout(() => {
-            protectionSupportingYearsErrorMsg.classList.remove('show');
-        }, 2500);
-    }
-
-    // Trigger the toast animation on page load or when error condition is met
-    document.addEventListener('DOMContentLoaded', showToast);
 </script>
 
 <style>
