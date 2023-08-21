@@ -11,6 +11,7 @@
     $protectionPolicyAmount = isset($arrayDataProtection['protectionPolicyAmount']) ? $arrayDataProtection['protectionPolicyAmount'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
     $protectionGap = isset($arrayDataProtection['protectionGap']) ? $arrayDataProtection['protectionGap'] : 0;
+    $protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ? $arrayDataProtection['protectionPercentage'] : 0;
 @endphp
 
 <div id="protection-content">
@@ -27,7 +28,7 @@
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
-                            <div class="container mx-auto h-100 row justify-content-center bg-needs-gap">
+                            <div class="container mx-auto row justify-content-center bg-needs-gap">
                             <div class="col-lg-5 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-center align-items-center">
                                 {{-- <div class="svg-container">
                                 <div class="card-gap" id="gap">
@@ -66,13 +67,13 @@
                                       <div class="ell3">
                                         <div class="ell4">
                                           <div class="ellText">
-                                            <h1 class="text-primary"><span id="covered">70</span>%</h1>
+                                            <h1 class="text-primary"><span id="covered">{{$protectionPercentage}}</span>%</h1>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                 </div>
-                                <h5 class="gap-text mb-4">
+                                <h5 class="row gap-text mb-4 justify-content-end d-flex">
                                     Total Protection Fund
                                 </h5>
                                 

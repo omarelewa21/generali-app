@@ -148,6 +148,7 @@ class formProtectionController extends Controller
         }
         else {
         $protectionGap =  $TotalProtectionValue - $protectionPolicyAmount;
+        $protectionPercentage = intval(($protectionPolicyAmount / $TotalProtectionValue) * 100);
         }
         
         // Get the existing array from the session
@@ -157,6 +158,7 @@ class formProtectionController extends Controller
         $arrayDataProtection['protectionExistingPolicy'] = $protectionExistingPolicy;
         $arrayDataProtection['protectionPolicyAmount'] = $protectionPolicyAmount;
         $arrayDataProtection['protectionGap'] = $protectionGap;
+        $arrayDataProtection['protectionPercentage'] = $protectionPercentage;
 
         // Store the updated array back into the session
         session(['passingArraysProtection' => $arrayDataProtection]);
