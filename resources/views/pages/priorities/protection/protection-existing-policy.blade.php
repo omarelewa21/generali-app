@@ -37,25 +37,23 @@
                 </div>
             </div>
     </section>
+    <div id="protectionExistingPolicyErrorMessage" class="d-flex position-absolute w-100 justify-content-center align-items-end h-100">
+        <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
+            @if ($errors->has('protectionExistingPolicy'))
+            <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-4 py-lg-4 posErrorMessage"
+                role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
+                    viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                    <path
+                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg>
+                <p class="mx-2 my-0">{{ $errors->first('protectionExistingPolicy') }}</p>
+            </div>
+            @endif
+        </div>
+    </div>
             <form class="form-horizontal p-0 needs-validation" id="protectionExistingPolicyForm" action="{{route('form.protection.existing.policy')}}"  novalidate method="POST">
             @csrf
-            {{-- @if ($errors->has('protectionExistingPolicy'))
-            <div class="position-fixed top-0 end-0 start-50 translate-middle mt-4 w-100" style="z-index: 1099">
-                <div id="protectionExistingPolicyErrorMsg"
-                    class="align-items-center alert alert-warning border-0 fade" role="alert"
-                    aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <i class="bi bi-exclamation-circle p-2"></i>
-                        <div class="p-2">
-                            {{ $errors->first('protectionExistingPolicy') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif --}}
-            {{-- @if ($errors->has('protectionExistingPolicy'))
-            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionExistingPolicyErrorMsg">{{ $errors->first('protectionExistingPolicy') }}</div>
-        @endif --}}
                 <div class="col-12 text-dark px-0 my-4">
                     <div class="my-4">  
                         <section>
@@ -113,18 +111,7 @@
             </form>
     </div>
 </div>
-<div class="d-flex justify-content-center align-items-end h-100">
-    <div class="position-absolute mb-auto w-50 w-sm-100 bottom-0 posErrorMessageMobile">
-        @if ($errors->has('protectionExistingPolicy'))
-        <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
-            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </svg>
-            {{ $errors->first('protectionExistingPolicy') }}
-        </div>
-        @endif
-    </div>
-</div>
+
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {

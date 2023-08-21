@@ -286,6 +286,7 @@ font-family:"Helvetica Neue Bold", sans-serif;
 .posErrorMessage {
     width: 90% !important;
     left: 11px;
+    bottom:0;
 }
 
 
@@ -440,6 +441,9 @@ width: 80%;
     top:0 !important;
     z-index: 1000;
     bottom: auto !important;
+    width:100% !important;
+    left:0;
+    position:relative !important;
 }
     
 }

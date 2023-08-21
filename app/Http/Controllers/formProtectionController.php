@@ -108,6 +108,7 @@ class formProtectionController extends Controller
 
         //update the array
         $arrayDataProtection['protectionSupportingYears'] = $protectionSupportingYears;
+        $arrayDataProtection['TotalProtectionValue'] = $TotalProtectionValue;
         $arrayDataProtection['formattedTotalProtectionValue'] = $formattedTotalProtectionValue;
 
         Log::info('Session Data:', Session::all());
@@ -142,7 +143,7 @@ class formProtectionController extends Controller
         $protectionPolicyAmount = ($protectionExistingPolicy == 'yes') ? $protectionPolicyAmount : 0;
 
         
-        if ($protectionPolicyAmount> $TotalProtectionValue){
+        if ($protectionPolicyAmount > $TotalProtectionValue){
             $protectionGap = 0;
         }
         else {

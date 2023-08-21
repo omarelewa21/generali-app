@@ -35,16 +35,16 @@
                                       <svg>
                                         <defs>
                                           <radialGradient id="gradient" cx="50%" cy="50%" r="60%" fx="50%" fy="50%">
-                                            <stop offset="30%"   stop-color="var(--primary-dark)"/>
-                                            <stop offset="100%" stop-color="var(--primary-light)"/>
+                                            <stop offset="30%"   stop-color="#FF7D7A"/>
+                                            <stop offset="100%" stop-color="#C1210D"/>
                                           </radialGradient>
                                         </defs>
-                                        <circle cx="90" cy="90" r="90" stroke="url(#gradient)" id="circle"></circle>
+                                        <circle cx="90" cy="90" r="140" stroke="url(#gradient)" id="circle"></circle>
                                       </svg>
                                       <div class="circle"></div>
                                       <div class="circle circle__medium"></div>
                                       <div class="circle circle__small"></div>
-                                      <div class="card-gap__number">50%</div>
+                                      <div class="card-gap__number text-primary">50%</div>
                                     </div>
                                 </div>
                                 </div> --}}
@@ -60,7 +60,7 @@
                                   <stop offset="100%" stop-color="#C1210D"/>
                                   </linearGradient>
                                           <circle sx="70" cy="70" r="120"></circle> 
-                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar"  stroke="url(#test)"></circle>   
+                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar" stroke="url(#test)"></circle>   
                                               </svg>
                                       </div>
                                       <div class="ell3">

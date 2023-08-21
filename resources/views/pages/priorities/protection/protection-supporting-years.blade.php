@@ -8,13 +8,14 @@
 @php
     // Retrieving values from the session
     $arrayDataProtection = session('passingArraysProtection');
+    $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
     $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
 
 @endphp
 <div id="protection-supporting-years">
-    <div class="container-fluid overflow-hidden d-flex h-100 flex-column">
+    <div class="overflow-hidden d-flex flex-column">
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -28,7 +29,7 @@
                                 <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
+                            <h3 id="TotalProtectionValueText" class="m-1 text-light text-center">RM {{
                                 $formattedTotalProtectionValue}}</h3>
                             <p class="text-light text-center">Total Protection Fund Needed</p>
                         </div>
@@ -39,7 +40,21 @@
                 </div>
             </div>
         </section>
-        
+        <div id="protectionSupportingYearsErrorMessage" class="d-flex justify-content-center align-items-end h-100">
+            <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
+                @if ($errors->has('protectionSupportingYears'))
+                <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-4 py-lg-4 posErrorMessage"
+                    role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
+                        viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                        <path
+                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    <p class="mx-2 my-0">{{ $errors->first('protectionSupportingYears') }}</p>
+                </div>
+                @endif
+            </div>
+        </div>
         <section>
             <div class="row flex-grow-1">
                 <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
@@ -54,7 +69,7 @@
                                 </div>
                                 <div class="col-12 col-lg-4">
                                     <div
-                                        class="position-relative pt-4 pb-4 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
+                                        class="position-relative pt-0 pb-0 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
                                             class="calendar-protection">
                                         <div class="position-absolute center w-100 text-center px-5 px-lg-0">
@@ -67,6 +82,7 @@
                                         
                                     </div>
                                 </div>
+                                
                                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
                                     <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
                                 </div>
@@ -90,18 +106,8 @@
         </section>
     </div>
 </div>
-<div class="d-flex justify-content-center align-items-end h-100">
-    <div class="position-absolute mb-auto w-50 w-sm-100 bottom-0 posErrorMessageMobile">
-        @if ($errors->has('protectionSupportingYears'))
-        <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
-            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </svg>
-            {{ $errors->first('protectionSupportingYears') }}
-        </div>
-        @endif
-    </div>
-</div>
+
+
 <script>
 //     document.addEventListener("DOMContentLoaded", function() {
 //     const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
@@ -126,30 +132,37 @@
 //     }
 // }
 // });
-// document.addEventListener("DOMContentLoaded", function() {
-//         function updateProgress(inputValue) {
-//             console.log($('#TotalProtectionValue').text());
-//             var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
-//             var totalProtectionValue = inputValue * parseFloat(totalProtectionValueStr); // Convert to decimal value
-//             var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue',0) }};
+document.addEventListener("DOMContentLoaded", function() {
+    var inputField = document.getElementById("protectionSupportingYears");
+    var TotalProtectionValueText = document.getElementById("TotalProtectionValueText");
+    //get session array protection protectionFunds
+    var protectionFunds = {{$protectionFunds}};
+    console.log(protectionFunds);
 
-//             $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-//             $('#TotalProtectionValue').text('RM' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
+  // Listen for input changes on the input field
+  inputField.addEventListener("input", function() {
 
-//         }
-//         // var inputValue = $('#protectionSupportingYears').val();
-//         // if (inputValue !== "") {
-//         //     updateProgress(inputValue);
-//         // } else {
-//         //     // updateProgress(0); // Or you can use any default value you want
-//         // }
+    // Get the value from the input field
+    var inputValue = inputField.value;
+    if (inputValue == "" || protectionFunds == "") {
+        TotalProtectionValueText.innerText = "RM 0";
+        protectionSupportingYears.value = inputValue;
+    }
+    else {
+        //change inputValue to comma separated value
+    var protectionSupportingYears = inputValue;
+    var inputValue = protectionFunds * 12 * protectionSupportingYears;
+    console.log(inputValue);
+    TotalProtectionValueText.innerText = parseFloat(inputValue).toLocaleString("en-MY", {
+                style: "currency",
+                currency: "MYR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+    }
 
-//         $('#protectionSupportingYears').on('input', function () {
-//             var inputValue = $(this).val();
-//             updateProgress(inputValue);
-//         });
-        
-//     });
+    });
+});
 
 
 </script>
