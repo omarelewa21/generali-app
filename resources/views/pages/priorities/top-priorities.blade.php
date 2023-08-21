@@ -255,11 +255,11 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 overflow-y-auto">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar overflow-y-auto">
                                 <div class="col-12">
                                     <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
                                     <p class="text-white display-6">Select your priorities by first to last.</p>
