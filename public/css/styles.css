@@ -261,7 +261,7 @@ button[data-required="selected"] img {
   transform: scale(1.1);
 }
 
-.button-bg.selected .hover {
+.button-bg.selected .hover, .button-bg.selected .border-default {
   border: 10px solid #8995CB;
 }
 

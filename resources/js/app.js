@@ -2,6 +2,7 @@ import './bootstrap';
 
 import './height-controller';
 import './button';
+import './button-multiple-select';
 import './avatar';
 import './form-display';
 import './coverage-carousel';

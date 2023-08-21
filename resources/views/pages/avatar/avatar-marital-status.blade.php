@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $maritalStatus = isset($arrayData['maritalStatus']) ? $arrayData['maritalStatus'] : '';
 @endphp
 
 <div id="avatar_marital_status" class="vh-100 overflow-y-auto overflow-x-hidden">
@@ -101,9 +102,9 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="{{$dataUrl}}">
+                                        <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant">
                                         <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton" data-url="avatar.family.dependant">Next</button>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -124,14 +125,12 @@ dataButtons.forEach(button => {
         event.preventDefault(); // Prevent the default behavior of the button click
 
         const nextButton = document.getElementById('nextButton');
-        const dataUrl = nextButton.getAttribute('data-url');
 
         // Get the selected data-avatar value
         const dataAvatar = this.getAttribute('data-avatar');
 
         // Update the hidden input field value with the selected avatar
         document.getElementById('maritalStatusButtonInput').value = dataAvatar;
-        document.getElementById('urlInput').value = dataUrl;
     });
 });
 </script>
