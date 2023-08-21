@@ -547,3 +547,77 @@ width: 80%;
     }
   } */
 
+  .ell1 {
+    display: flex;
+    /* margin: auto; */
+    width: 309px;
+    height: 309px;
+    background:#FFFFFF;
+    /* box-shadow: 3px 3px 1px #3B3F44; */
+    filter: drop-shadow(-11px -10px 20px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.30));
+    border-radius: 1000px;
+  }
+  .ell2 {
+    display: flex;
+    margin: auto;
+    width: 268px;
+    height: 268px;
+    background: #575757;
+    border: 1px solid #1D1F22;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.30) inset;
+    border-radius: 1000px;
+  }
+  .ell3 {
+    display: flex;
+    margin: auto;
+    width: 219px;
+    height: 219px;
+    background:  #ffffff;
+    border: 1px solid #1E2023;
+    border-radius: 1000px;
+    z-index: 1;
+  }
+  .ell4 {
+    display: flex;
+    margin: auto;
+    width: 175px;
+    height: 175px;
+    background: #ffffff;
+    /* border: 3px solid #292D32; */
+    border-radius: 1000px;
+  }
+  .ell4 .ellText {
+    margin: auto;
+    /* width: 95px; */
+    text-align: center;
+  }
+  .ellText h1 {
+    font-weight: normal;
+    font-size: 80px;
+    line-height: 35px;
+  }
+  
+  .ellP {
+      position: absolute;
+      width: 268px;
+      height: 268px;
+      border-radius: 1000px;
+      transform: rotate(-83.2deg);
+  }
+  #chart-gap svg {
+    height: 268px;
+  }
+  .ellP svg circle {
+      margin: auto;
+      fill: none;
+      stroke-width: 28px;
+      stroke-linecap: round;
+      transform: translate(134px, 64px);
+      width: 268px;
+      height: 268px;
+        background: linear-gradient(180deg, #FF7D7A 0%, #C1210D 100%);
+  }
+  #chart-gap svg circle:nth-child(2) {
+      stroke-dashoffset: calc(440 - (440 * 90) / 100);
+      stroke-dasharray: 440;
+  }

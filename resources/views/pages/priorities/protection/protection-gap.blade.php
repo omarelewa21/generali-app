@@ -48,9 +48,30 @@
                                     </div>
                                 </div>
                                 </div> --}}
-                                <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
+                                {{-- <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
                                     Your browser does not support SVGs
-                                </object>
+                                </object> --}}
+                                <div class="ell1" id="chart-gap" style="transform: scale(1.3);">
+                                    <div class="ell2">
+                                      <div class="ellP">
+                                        <svg>
+                                          <linearGradient id="test">
+                                  <stop offset="0%" stop-color="#FF7D7A"/>
+                                  <stop offset="100%" stop-color="#C1210D"/>
+                                  </linearGradient>
+                                          <circle sx="70" cy="70" r="120"></circle> 
+                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar"  stroke="url(#test)"></circle>   
+                                              </svg>
+                                      </div>
+                                      <div class="ell3">
+                                        <div class="ell4">
+                                          <div class="ellText">
+                                            <h1 class="text-primary"><span id="covered">70</span>%</h1>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
                                 <h5 class="gap-text mb-4">
                                     Total Protection Fund
                                 </h5>
@@ -133,25 +154,17 @@
         var Uncovered = (100 - Covered).toFixed(2);
     });
     document.addEventListener("DOMContentLoaded", function () {
-  // Calculate the progress percentage (0 to 100)
-  const progressPercentage = 50; // Example: 50%
-
-  // Calculate the stroke-dashoffset value based on the progress percentage
-  const circumference = 2 * Math.PI * 240; // Circumference of the circle
-  const currentOffset = circumference * (1 - progressPercentage / 100);
-
-  // Get the circular progress bar element by its id
-  const progressBar = document.getElementById("progress-gap");
-
-  if (progressBar) {
-    // Update the stroke-dashoffset property of the circular progress bar
-    progressBar.setAttribute("stroke-dashoffset", currentOffset);
-  } else {
-    console.error("Circular progress bar element with id 'progress-gap' not found.");
-  }
-});
-
-
+  
+var covered = parseInt(document.getElementById("covered").innerHTML);
+var percent = covered/100;
+var dasharaay = 800*percent;
+var CPB = document.getElementById("CircleProgressBar");
+CPB.style.strokeDasharray = dasharaay;
+console.log(covered);
+console.log(percent);
+console.log(dasharaay);
+console.log(dasharaay);
+    });
 </script>
 <style>
 
@@ -159,9 +172,7 @@
         font-size: 62.5%; // 1rem = 10px    100% = 16px
 
     } */
-    #gap {
-        font-size: 62.5%; // 1rem = 10px    100% = 16px
-    }
+
     .navbar {
         right:50%;
     }
