@@ -23,12 +23,7 @@ html {
   overflow: hidden;
   height: 100vh;
 }
-/* h6.nav-text-needs {
-  font-weight: 500;
-  font-family: 'Helvetica Neue Medium', sans-serif;
-  letter-spacing: 1.1px;
-  font-size:18px;
-} */
+
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -36,6 +31,10 @@ html {
 
 .fade-effect button:not([disabled]):hover img {
   opacity: 1;
+}
+
+.text-red {
+  color: #C21B17!important;
 }
 
 /* Headings */
@@ -70,6 +69,17 @@ h4 {
   color: rgb(255, 230, 156);
 }
 
+/* Works for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Works for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 /* Alerts */
 .alert div.text {
@@ -236,10 +246,6 @@ p.nav-text {
 button[data-required="selected"] img {
   opacity: 1;
 }
-
-/* .button-bg.selected {
-  border: 5px solid #AA1B17;
-} */
 
 .button-bg {
   background: linear-gradient(360deg, #FFF 0%, #EAEAEA 100%, #EAEAEA 100%);
