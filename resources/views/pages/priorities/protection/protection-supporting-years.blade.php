@@ -10,6 +10,8 @@
     $arrayDataProtection = session('passingArraysProtection');
     $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
+    $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
+
 @endphp
 <div id="protection-supporting-years">
     <div class="container-fluid overflow-hidden d-flex h-100 flex-column">

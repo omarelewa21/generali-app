@@ -154,6 +154,14 @@
 
 </script>
 <style>
+
+    /* html {
+        font-size: 62.5%; // 1rem = 10px    100% = 16px
+
+    } */
+    #gap {
+        font-size: 62.5%; // 1rem = 10px    100% = 16px
+    }
     .navbar {
         right:50%;
     }

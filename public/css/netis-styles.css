@@ -273,6 +273,7 @@ h5.gap-value {
 .errorMessage {
     top:20%;
     left:0;
+    
 }
 
 .input-text {
@@ -281,6 +282,10 @@ font-family:"Helvetica Neue Bold", sans-serif;
 }
 .fs-64 {
     font-size:4rem;
+}
+.posErrorMessage {
+    width: 90% !important;
+    left: 11px;
 }
 
 
@@ -431,9 +436,10 @@ width: 80%;
 .fs-64 {
     font-size:calc(1.3375rem + 1.05vw);
 }
-.posErrorMessageMobile {
+.posErrorMessage {
     top:0 !important;
     z-index: 1000;
+    bottom: auto !important;
 }
     
 }

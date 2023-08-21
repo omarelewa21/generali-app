@@ -34,12 +34,12 @@
                     </div>
                     <div class="container">
                         {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
-                        <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
+                        <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-4 px-md-5">
                             <i class="bi bi-arrow-left-circle text-primary"></i>
                         </div>
 
                         {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
-                        <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
+                        <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-4 px-md-5">
                             <i class="bi bi-arrow-right-circle text-primary"></i>
                         </div>
                     </div>
@@ -104,13 +104,13 @@
     </div>
 </div>
 <div class="d-flex justify-content-center align-items-end h-100">
-    <div class="position-absolute mb-auto w-50 w-sm-100 posErrorMessageMobile">
+    <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
         @if ($errors->has('protectionSelectedAvatar'))
-        <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
-            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+        <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessage" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
             </svg>
-            {{ $errors->first('protectionSelectedAvatar') }}
+            <p class="mx-2 my-0">{{ $errors->first('protectionSelectedAvatar') }}</p>
         </div>
         @endif
     </div>
@@ -198,6 +198,9 @@
 .coverage-avatar img.spouse-avatar {
   width: 18vh;
 }
+.slick-slide {
+    height:110%;
+}
 }
 @media only screen and (min-width:768px) and (max-height:1280px) and (orientation:portrait) {
     .needs-grey-bg-md {
@@ -214,6 +217,11 @@
     height: 110vh;
     width: 100%;
     }
+}
+@media only screen and (min-width:834px) and (max-height:1112px) and (orientation:portrait) {
+    .slick-track {
+    height: 69vh;
+}
 }
 .monthly-support-asset {
     left: -5%;

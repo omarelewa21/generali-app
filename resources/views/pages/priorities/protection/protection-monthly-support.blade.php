@@ -85,8 +85,8 @@
     </div>
 
 </div>
-    <div class="d-flex justify-content-center align-items-end h-100">
-        <div class="position-absolute mb-auto w-50 w-sm-100 posErrorMessageMobile">
+    <div class="d-flex justify-content-center align-items-end">
+        <div class="position-absolute mb-auto w-50 w-sm-100 posErrorMessage">
             @if ($errors->has('protectionFunds'))
             <div class="alert alert-danger d-flex align-items-center text-center position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-5 py-lg-4 posErrorMessageMobile" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">

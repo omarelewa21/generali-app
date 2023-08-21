@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if (env(key: 'APP_ENV') !=='local') {
+            URL::forceScheme(scheme:'https');
+          }
         //
     }
 
