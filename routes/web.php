@@ -24,8 +24,8 @@ Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.b
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
-// Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
-Route::post('/family-dependant-details', [FormController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
+Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
+// Route::post('/family-dependant-details', [FormController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
