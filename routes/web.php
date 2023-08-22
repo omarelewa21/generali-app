@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\AvatarGenderSelectionController;
 use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
@@ -23,14 +24,18 @@ Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.b
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
-Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
+Route::get('/family-dependant-details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
+Route::post('/family-dependant-details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
+Route::view('/new-gender', 'pages.avatar.avatar-new-gender-selection')->name('avatar.new.gender.selection');
+Route::post('/new-gender', [AvatarGenderSelectionController::class, 'newChangeImage'])->name('new.change.image');
 // Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
+Route::post('/new-change-image', [AvatarGenderSelectionController::class, 'newChangeImage'])->name('newChangeImage');
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
@@ -94,9 +99,9 @@ Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.re
 Route::Post('/retirement-allocated-funds-aside', [formRetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
 Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
 
-Route::get('/files/{filename}', function($filename){
-    return \Storage::download($filename); // assuming default disk is set to 'public'
-});
+// Route::get('/files/{filename}', function($filename){
+//     return \Storage::download($filename); // assuming default disk is set to 'public'
+// });
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

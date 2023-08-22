@@ -7,13 +7,7 @@
 @endsection
 
 @section('content')
-@php
-    // Retrieving values from the session
-    $arrayDataRetirement = session('passingArraysRetirement');
-    $retirementAllocatedFundsAside = isset($arrayDataRetirement['retirementAllocatedFundsAside']) ? $arrayDataRetirement['retirementAllocatedFundsAside'] : '';
-    $retirementOtherSourceOfIncome = isset($arrayDataRetirement['retirementOtherSourceOfIncome']) ? $arrayDataRetirement['retirementOtherSourceOfIncome'] : '';
-    $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
-@endphp
+
 <div id="retirementAllocatedFundsAsidePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
@@ -29,8 +23,8 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
-                            $formattedTotalRetirementValue }}</h3>
+                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">{{
+                            Session::get('TotalRetirementValue', 'RM0') }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -52,13 +46,13 @@
                             <h5 class="needs-text">So far, I’ve put aside</h5>
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                    <input type="text" name="retirementAllocatedFundsAside" value="{{$retirementAllocatedFundsAside}}" class="form-control d-inline text-primary @error('retirementAllocatedFundsAside') is-invalid @enderror" id="retirementAllocatedFundsAside" placeholder=" " required>
+                                    <input type="text" name="retirementAllocatedFundsAside" value="{{Session::get('retirementAllocatedFundsAside') }}" class="form-control d-inline text-primary @error('retirementAllocatedFundsAside') is-invalid @enderror" id="retirementAllocatedFundsAside" placeholder=" " required>
                                 </div>
                             <h5 class="needs-text">for my retirement.</h5>
                             <h5 class="needs-text">Other sources of income:</h5>
                             <div class="input-group w-50">
                                 <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                <input type="text" name="retirementOtherSourceOfIncome" value="{{ $retirementOtherSourceOfIncome }}" class="form-control d-inline text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" id="retirementOtherSourceOfIncome" placeholder=" " required>
+                                <input type="text" name="retirementOtherSourceOfIncome" value="{{ Session::get('retirementOtherSourceOfIncome') }}" class="form-control d-inline text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" id="retirementOtherSourceOfIncome" placeholder=" " required>
                             </div>
 
                             @if ($errors->has('retirementOtherSourceOfIncome' ))
