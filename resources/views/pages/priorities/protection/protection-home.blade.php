@@ -43,9 +43,9 @@
                 <section class="footer bg-white py-4 fixed-bottom">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                <a href="{{route('priorities.to.discuss')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                <a href="{{route('protection.coverage') }}" class="btn btn-primary text-uppercase">Next</a>
+                            <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                <a href="{{route('priorities.to.discuss')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                <a href="{{route('protection.coverage') }}" class="btn btn-primary text-uppercase flex-fill">Next</a>
                             </div>
                         </div>
                     </div>
@@ -72,15 +72,62 @@
 }
 
 @media only screen and (max-width: 767px) {
-.needs-text, .progress .progress-value {
-    color:#ffffff;
+.progress-main p{
+    color:#ffffff !important;
+}
+.progress-value p{
+    color:inherit !important;
+}
+.fixed-bottom {
+    z-index: 1;
+}
+.needs-home {
+    grid-template-rows: 8vh 26vh 30vh;
+}
 }
 
-
-/* body {
-    min-height: 51.5rem;
-    padding-top: 5.5rem;
-    } */
+@media only screen and (width: 414px) and (height: 896px) {
+    .needs-home {
+    grid-template-rows: 14vh 26vh 30vh;
+}
+}
+@media only screen and (width:688px) and (height:1031px) and (orientation:portrait) {
+    .needs-home-avatar img {
+    height: 52vh;
+}
+}
+@media only screen and (width:1024px) and (height:1366px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 23vh 45vh 30vh;
+}
+}
+@media only screen and (width:800px) and (height:1280px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 22vh 38vh 31vh;
+}
+}
+@media only screen and (width: 1031px) and (height: 688px) and (orientation: landscape) {
+    .needs-home-avatar img {
+    height: 54vh;
+}
+}
+@media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
+    .needs-grey-bg {
+    padding-top: 300px;
+    }
+}
+@media only screen and (width:1024px) and (max-height:778px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 58vh;
+}
+}
+@media only screen and (max-width:896px) and (max-height:414px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 44vh;
+}
+.needs-grey-bg {
+    padding-top: 170px;
+}
 }
 
 </style>

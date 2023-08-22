@@ -91,6 +91,7 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
+
 <style>
 /* code for progress bar css */
 
@@ -217,6 +218,7 @@
     background:transparent;
     z-index:1000;
 }
+
 /* .progress-mobile {
         position: fixed;
         left: 0;

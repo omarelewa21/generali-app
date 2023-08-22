@@ -51,7 +51,16 @@
                             <h5 class="needs-text">to enjoy my retirement.</h5>
                         </div>
                         @if ($errors->has('retirementYearsTillRetire'))
-                        <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="retirementYearsTillRetireErrorMsg">{{ $errors->first('retirementYearsTillRetire') }}</div>
+                        <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                            <div id="retirementYearsTillRetireErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                                <div class="d-flex justify-content-center">
+                                    <i class="bi bi-exclamation-circle p-2"></i>
+                                    <div class="p-2">
+                                        {{ $errors->first('retirementYearsTillRetire') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @endif
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -118,6 +127,19 @@
                     updateProgress(inputValue);
                 });
                 
-            });
+        //     });
+        // Show the toast and apply the animation
+function showToast() {
+    retirementYearsTillRetireErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementYearsTillRetireErrorMsg.classList.remove('show');
+    }, 2500);
+}
+
+// Trigger the toast animation on page load or when error condition is met
+document.addEventListener('DOMContentLoaded', showToast);
+
         </script>
     @endsection

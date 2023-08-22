@@ -55,6 +55,8 @@ Route::post('/protection-supporting-years', [formProtectionController::class, 's
 Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
 Route::post('/protection-existing-policy', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
 Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
+Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
+
 
 
 /* Priorities - Education */
