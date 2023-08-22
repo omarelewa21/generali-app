@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="form-container pb-5">
                                     @if ($errors->any())
-                                        <div class="row px-4 pb-3 px-sm-5">
+                                        <div class="row px-4 px-sm-5">
                                             <div class="col-12">
                                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -67,6 +67,43 @@
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12">
                                             <div class="accordion accordion-flush" id="accordionDependantDetails">
+                                                @php
+                                                    // Generate arrays for the date, month, and year ranges
+                                                    $dateRange = range(1, 31);
+                                                    $dateRange = array_map(function ($day) {
+                                                        return sprintf('%02d', $day);
+                                                    }, $dateRange);
+
+                                                    $monthNames = [
+                                                        '01' => 'January',
+                                                        '02' => 'February',
+                                                        '03' => 'March',
+                                                        '04' => 'April',
+                                                        '05' => 'May',
+                                                        '06' => 'June',
+                                                        '07' => 'July',
+                                                        '08' => 'August',
+                                                        '09' => 'September',
+                                                        '10' => 'October',
+                                                        '11' => 'November',
+                                                        '12' => 'December',
+                                                    ];
+
+                                                    $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+
+                                                    // Set the selected values
+                                                    $selectedDay = old('day', null); 
+                                                    $selectedMonth = old('month', null); 
+                                                    $selectedYear = old('year', null);
+
+                                                    // Adjust the selected month value to "01" format
+                                                    if ($selectedMonth !== null) {
+                                                        $selectedMonth = sprintf('%02d', $selectedMonth);
+                                                    }
+                                                    if ($selectedDay !== null) {
+                                                        $selectedDay = sprintf('%02d', $selectedDay);
+                                                    }
+                                                @endphp
                                                 @if(isset($arrayData['familyDependant']) && in_array('spouse', $arrayData['familyDependant']))
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
@@ -79,7 +116,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
                                                                         <label for="spouseFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['SpouseFirstName'] ?? '') }}" required>
+                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['familyDependant']['spouse']['FirstName'] ?? '') }}" required>
                                                                         @error('spouseFirstName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -88,7 +125,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
                                                                         <label for="spouseLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['SpouseLastName'] ?? '') }}" required>
+                                                                        <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['familyDependant']['spouse']['LastName'] ?? '') }}" required>
                                                                         @error('spouseLastName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -96,59 +133,23 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-
-                                                                            $monthNames = [
-                                                                                '01' => 'January',
-                                                                                '02' => 'February',
-                                                                                '03' => 'March',
-                                                                                '04' => 'April',
-                                                                                '05' => 'May',
-                                                                                '06' => 'June',
-                                                                                '07' => 'July',
-                                                                                '08' => 'August',
-                                                                                '09' => 'September',
-                                                                                '10' => 'October',
-                                                                                '11' => 'November',
-                                                                                '12' => 'December',
-                                                                            ];
-
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="ageGroup" style="display:none">( <span id="spouseAge" class="d-inline-block"></span> )</span></label>
+                                                                        
+                                                                        <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $arrayData['DobDay'] ?? ''), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                                                {!! Form::select('spouseday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('spouseday', $arrayData['familyDependant']['spouse']['Day'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseday') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $arrayData['DobMonth'] ?? ''), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                                                {!! Form::select('spousemonth', ['' => 'Select'] + $monthNames, old('spousemonth', $arrayData['familyDependant']['spouse']['Month'] ?? ''), ['class' => 'form-select' . ($errors->has('spousemonth') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                {!! Form::select('spouseyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                     return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), old('year', $arrayData['DobYear'] ?? ''), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                                                }, $yearRange), $yearRange), old('spouseyear', $arrayData['familyDependant']['spouse']['Year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                             </div>
-                                                                            @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
+                                                                            @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
                                                                                 <div class="col-md-12">
-                                                                                    <div class="invalid-feedback" style="display:block">Please select a day, month, and year.</div>
+                                                                                    <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
                                                                                 </div>
                                                                             @endif
                                                                         </div>
@@ -157,7 +158,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
                                                                         <label for="spouseYearsOfSupport" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="spouseYearsOfSupport" class="form-control @error('spouseYearsOfSupport') is-invalid @enderror" id="spouseYearsOfSupportInput" placeholder="Number of Years" value="{{ old('spouseYearsOfSupport', $arrayData['SpouseYearsOfSupport'] ?? '') }}" required>
+                                                                        <input type="number" name="spouseYearsOfSupport" class="form-control @error('spouseYearsOfSupport') is-invalid @enderror" id="spouseYearsOfSupportInput" placeholder="Number of Years" value="{{ old('spouseYearsOfSupport', $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '') }}" required>
                                                                         @error('spouseYearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -169,11 +170,11 @@
                                                                         <select name="spouseMaritalStatus" class="form-select @error('spouseMaritalStatus') is-invalid @enderror" aria-label="Spouse Marital Status" id="spouseMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
-                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['SpouseMaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['familyDependant']['spouse']['MaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                         @error('spouseMaritalStatus')
-                                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -183,482 +184,75 @@
                                                 @endif
                                                 @if(isset($arrayData['familyDependant']) && in_array('child_1', $arrayData['familyDependant']))
                                                     <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingTwo">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                        <h2 class="accordion-header" id="flush-headingOne">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
                                                                 Child 1
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependantDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
-                                                                        <label for="firstName" class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        <label for="lastName" class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-                                                                            $monthRange = range(1, 12);
-                                                                            $monthRange = array_map(function ($month) {
-                                                                                return sprintf('%02d', $month);
-                                                                            }, $monthRange);
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select', 'id' => 'day']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select', 'id' => 'month']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('year', array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select', 'id' => 'year']) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="firstName" class="form-label">Years of Support</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="00">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="occupation" class="form-label">Dependent Marital Status</label>
-                                                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                                            <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                                            <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                                            <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                                            <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
-                                                                        </select>
-                                                                        @error('occupation')
-                                                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                                        <label for="spouseFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['familyDependant']['spouse']['FirstName'] ?? '') }}" required>
+                                                                        @error('spouseFirstName')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if(isset($arrayData['familyDependant']) && in_array('child_2', $arrayData['familyDependant']))
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingFour">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                                                Child 2
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionDependantDetails">
-                                                            <div class="accordion-body">
-                                                                <div class="row py-2">
-                                                                    <div class="col-12">
-                                                                        <label for="firstName" class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
-                                                                    </div>
-                                                                </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="lastName" class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-                                                                            $monthRange = range(1, 12);
-                                                                            $monthRange = array_map(function ($month) {
-                                                                                return sprintf('%02d', $month);
-                                                                            }, $monthRange);
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
-                                                                                {!! Form::select('year', array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="firstName" class="form-label">Years of Support</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="00">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="occupation" class="form-label">Dependent Marital Status</label>
-                                                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                                            <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                                            <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                                            <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                                            <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
-                                                                        </select>
-                                                                        @error('occupation')
-                                                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                                        <label for="spouseLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                                        <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['familyDependant']['spouse']['LastName'] ?? '') }}" required>
+                                                                        @error('spouseLastName')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if(isset($arrayData['familyDependant']) && in_array('parent_1', $arrayData['familyDependant']))
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingFour">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                                                Parent 1
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionDependantDetails">
-                                                            <div class="accordion-body">
-                                                                <div class="row py-2">
-                                                                    <div class="col-12">
-                                                                        <label for="firstName" class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
-                                                                    </div>
-                                                                </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="lastName" class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-                                                                            $monthRange = range(1, 12);
-                                                                            $monthRange = array_map(function ($month) {
-                                                                                return sprintf('%02d', $month);
-                                                                            }, $monthRange);
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
-                                                                                {!! Form::select('year', array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="firstName" class="form-label">Years of Support</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="00">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="occupation" class="form-label">Dependent Marital Status</label>
-                                                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                                            <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                                            <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                                            <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                                            <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
-                                                                        </select>
-                                                                        @error('occupation')
-                                                                            <div class="invalid-feedback text-white">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if(isset($arrayData['familyDependant']) && in_array('parent_2', $arrayData['familyDependant']))
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingFour">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                                                Parent 2
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionDependantDetails">
-                                                            <div class="accordion-body">
-                                                                <div class="row py-2">
-                                                                    <div class="col-12">
-                                                                        <label for="firstName" class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        <label for="lastName" class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-                                                                            $monthRange = range(1, 12);
-                                                                            $monthRange = array_map(function ($month) {
-                                                                                return sprintf('%02d', $month);
-                                                                            }, $monthRange);
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
-                                                                                {!! Form::select('year', array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="firstName" class="form-label">Years of Support</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="00">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="occupation" class="form-label">Dependent Marital Status</label>
-                                                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                                            <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                                            <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                                            <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                                            <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
-                                                                        </select>
-                                                                        @error('occupation')
-                                                                            <div class="invalid-feedback text-white">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if(isset($arrayData['familyDependant']) && in_array('siblings', $arrayData['familyDependant']))
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingFour">
-                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                                                Siblings
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionDependantDetails">
-                                                            <div class="accordion-body">
-                                                                <div class="row py-2">
-                                                                    <div class="col-12">
-                                                                        <label for="firstName" class="form-label">First Name</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="Your First Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        <label for="lastName" class="form-label">Last Name</label>
-                                                                        <input type="text" class="form-control" id="lastNameInput" placeholder="Your Last Name">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row py-2">
-                                                                    <div class="col-12 pt-4">
-                                                                        @php
-                                                                            // Generate arrays for the date, month, and year ranges
-                                                                            $dateRange = range(1, 31);
-                                                                            $dateRange = array_map(function ($day) {
-                                                                                return sprintf('%02d', $day);
-                                                                            }, $dateRange);
-
-                                                                            $monthNames = [
-                                                                                '01' => 'January',
-                                                                                '02' => 'February',
-                                                                                '03' => 'March',
-                                                                                '04' => 'April',
-                                                                                '05' => 'May',
-                                                                                '06' => 'June',
-                                                                                '07' => 'July',
-                                                                                '08' => 'August',
-                                                                                '09' => 'September',
-                                                                                '10' => 'October',
-                                                                                '11' => 'November',
-                                                                                '12' => 'December',
-                                                                            ];
-
-                                                                            $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
-
-                                                                            // Set the selected values
-                                                                            $selectedDay = old('day', null); 
-                                                                            $selectedMonth = old('month', null); 
-                                                                            $selectedYear = old('year', null);
-
-                                                                            // Adjust the selected month value to "01" format
-                                                                            if ($selectedMonth !== null) {
-                                                                                $selectedMonth = sprintf('%02d', $selectedMonth);
-                                                                            }
-                                                                            if ($selectedDay !== null) {
-                                                                                $selectedDay = sprintf('%02d', $selectedDay);
-                                                                            }
-                                                                        @endphp
-                                                                        <label for="dob" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
+                                                                        
+                                                                        <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $arrayData['DobDay'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                                                {!! Form::select('spouseday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('spouseday', $arrayData['familyDependant']['spouse']['Day'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseday') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $arrayData['DobMonth'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                                                {!! Form::select('spousemonth', ['' => 'Select'] + $monthNames, old('spousemonth', $arrayData['familyDependant']['spouse']['Month'] ?? ''), ['class' => 'form-select' . ($errors->has('spousemonth') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                {!! Form::select('spouseyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                     return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), old('year', $arrayData['DobYear'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                                                }, $yearRange), $yearRange), old('spouseyear', $arrayData['familyDependant']['spouse']['Year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                             </div>
-                                                                            @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
+                                                                            @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
                                                                                 <div class="col-md-12">
-                                                                                    <div class="invalid-feedback" style="display:block">Please select a day, month, and year.</div>
+                                                                                    <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
                                                                                 </div>
                                                                             @endif
                                                                         </div>
-                                                                        <label for="dob" class="form-label">Date of Birth ( <div id="age" class="d-inline-block"></div> )</label>
-                                                                        <div class="row">
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('day', array_combine($dateRange, $dateRange), $selectedDay, ['class' => 'form-select bg-white', 'id' => 'day']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                {!! Form::select('month', array_combine($monthRange, $monthRange), $selectedMonth, ['class' => 'form-select bg-white', 'id' => 'month']) !!}
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <!-- {!! Form::select('year', $yearRange, $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!} -->
-                                                                                {!! Form::select('year', array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), $selectedYear, ['class' => 'form-select bg-white', 'id' => 'year']) !!}
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
-                                                                        <label for="firstName" class="form-label">Years of Support</label>
-                                                                        <input type="text" class="form-control" id="firstNameInput" placeholder="00">
+                                                                        <label for="spouseYearsOfSupport" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                        <input type="number" name="spouseYearsOfSupport" class="form-control @error('spouseYearsOfSupport') is-invalid @enderror" id="spouseYearsOfSupportInput" placeholder="Number of Years" value="{{ old('spouseYearsOfSupport', $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '') }}" required>
+                                                                        @error('spouseYearsOfSupport')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
-                                                                        <label for="occupation" class="form-label">Dependent Marital Status</label>
-                                                                        <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Occupation" id="occupation" required>
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option value="New IC" @if(old('occupation') == 'New IC') selected @endif>New IC</option>
-                                                                            <option value="Passport" @if(old('occupation') == 'Passport') selected @endif>Passport</option>
-                                                                            <option value="Birth Certificate" @if(old('occupation') == 'Birth Certificate') selected @endif>Birth Certificate</option>
-                                                                            <option value="Police / Army" @if(old('occupation') == 'Police / Army') selected @endif>Police / Army</option>
-                                                                            <option value="Registration" @if(old('occupation') == 'Registration') selected @endif>Registration</option>
+                                                                        <label for="spouseMaritalStatus" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                        <select name="spouseMaritalStatus" class="form-select @error('spouseMaritalStatus') is-invalid @enderror" aria-label="Spouse Marital Status" id="spouseMaritalStatusSelect" required>
+                                                                            <option value="" selected disabled>Please Select</option>
+                                                                            @foreach ($maritalstatuses as $status)
+                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['familyDependant']['spouse']['MaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                            @endforeach
                                                                         </select>
-                                                                        @error('occupation')
-                                                                            <div class="invalid-feedback text-white">{{ $message }}</div>
+                                                                        @error('spouseMaritalStatus')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -706,6 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var spouseFirstNameInput = document.getElementById('spouseFirstNameInput');
     var spouseLastNameInput = document.getElementById('spouseLastNameInput');
     var spouseYearsOfSupportInput = document.getElementById('spouseYearsOfSupportInput');
+    var spouseMaritalStatusSelect = document.getElementById('spouseMaritalStatusSelect');
 
     spouseFirstNameInput.addEventListener('blur', function() {
         validateInputField(spouseFirstNameInput);
@@ -717,6 +312,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     spouseYearsOfSupportInput.addEventListener('blur', function() {
         validateNumberField(spouseYearsOfSupportInput);
+    });
+
+    spouseMaritalStatusSelect.addEventListener('blur', function() {
+        validateSelectField(spouseMaritalStatusSelect);
     });
 
     function validateInputField(field) {
@@ -739,6 +338,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function validateSelectField(field) {
+        if (field.value) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
+
     function isValidSupportYears(spouseYearsOfSupport) {
         var supportYearsRegex = /^\d+$/;  // Regular expression to match only digits
 
@@ -753,11 +362,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Age Logics
 // Get references to the day, month, and year select elements
-var daySelect = document.getElementById('day');
-var monthSelect = document.getElementById('month');
-var yearSelect = document.getElementById('year');
+var daySelect = document.getElementById('spouseday');
+var monthSelect = document.getElementById('spousemonth');
+var yearSelect = document.getElementById('spouseyear');
 
-// Add event listener to detect changes in the selected values
+// Add event listeners to detect changes in the selected values
 daySelect.addEventListener('change', calculateAge);
 monthSelect.addEventListener('change', calculateAge);
 yearSelect.addEventListener('change', calculateAge);
@@ -766,9 +375,10 @@ yearSelect.addEventListener('change', calculateAge);
 function calculateAge() {
     var selectedDay = daySelect.value;
     var selectedMonth = monthSelect.value;
-    var selectedYear = yearSelect.value;
+    const selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+    const selectedYear = selectedYearOption.textContent;
 
-    var spouseAgeDiv = document.getElementById('ageGroup');
+    var spouseAgeDiv = document.getElementById('spouseAge');
 
     if (selectedYear) {
         if (selectedDay && selectedMonth) {
@@ -782,14 +392,16 @@ function calculateAge() {
             }
 
             spouseAgeDiv.textContent = 'Age: ' + age;
-            spouseAgeDiv.style.display = 'inline-block'; // Show the div
         } else {
-            spouseAgeDiv.style.display = 'none'; // Hide the div
+            spouseAgeDiv.textContent = 'Age: Please select a year';
         }
     } else {
-        spouseAgeDiv.style.display = 'none'; // Hide the div
+        spouseAgeDiv.textContent = 'Age: Please select a year';
     }
 }
+
+// Calculate age on initial load
+calculateAge();
 
 </script>
 @endsection

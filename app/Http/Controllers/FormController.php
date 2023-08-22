@@ -205,13 +205,17 @@ class FormController extends Controller {
 
     public function familyDependantDetails(Request $request)
     {
+        // Fetch spouseMaritalStatus from the database
+        $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
+
         $validatedData = $request->validate([
             'spouseFirstName' => 'required|max:255',
             'spouseLastName' => 'required|max:255',
             'spouseYearsOfSupport' => 'required|numeric|max:100',
-            'day' => 'required',
-            'month' => 'required',
-            'year' => 'required',
+            'spouseday' => 'required',
+            'spousemonth' => 'required',
+            'spouseyear' => 'required',
+            'spouseMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
         ]);
 
         // Get the existing array from the session
@@ -226,9 +230,10 @@ class FormController extends Controller {
         $arrayData['familyDependant']['spouse']['FirstName'] = $validatedData['spouseFirstName'];
         $arrayData['familyDependant']['spouse']['LastName'] = $validatedData['spouseLastName'];
         $arrayData['familyDependant']['spouse']['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
-        $arrayData['familyDependant']['spouse']['Day'] = $validatedData['day'];
-        $arrayData['familyDependant']['spouse']['Month'] = $validatedData['month'];
-        $arrayData['familyDependant']['spouse']['Year'] = $validatedData['year'];
+        $arrayData['familyDependant']['spouse']['Day'] = $validatedData['spouseday'];
+        $arrayData['familyDependant']['spouse']['Month'] = $validatedData['spousemonth'];
+        $arrayData['familyDependant']['spouse']['Year'] = $validatedData['spouseyear'];
+        $arrayData['familyDependant']['spouse']['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
