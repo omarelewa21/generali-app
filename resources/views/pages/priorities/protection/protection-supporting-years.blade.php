@@ -221,7 +221,11 @@ document.addEventListener("DOMContentLoaded", function() {
         right:0;
     }
 }
-
+@media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
+    .calendar-protection {
+        width: 100% !important;
+    }
+}
 </style>
 
 
