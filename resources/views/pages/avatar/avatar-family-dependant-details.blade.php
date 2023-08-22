@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $arrayData = session('passingArrays');
     $familyDependant = isset($arrayData['familyDependant']) ? json_encode($arrayData['familyDependant']) : '';
+    $familyDependant = $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '';
 @endphp
 
 <div id="avatar_family_dependant_details" class="vh-100 overflow-y-auto overflow-x-hidden">
@@ -132,7 +133,7 @@
                                                                                 $selectedDay = sprintf('%02d', $selectedDay);
                                                                             }
                                                                         @endphp
-                                                                        <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <div id="age" class="d-inline-block"></div> )</label>
+                                                                        <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="ageGroup" style="display:none">( <span id="spouseAge" class="d-inline-block"></span> )</span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $arrayData['DobDay'] ?? ''), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
@@ -749,6 +750,46 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid <= 100;
     }
 });
-</script>
 
+// Age Logics
+// Get references to the day, month, and year select elements
+var daySelect = document.getElementById('day');
+var monthSelect = document.getElementById('month');
+var yearSelect = document.getElementById('year');
+
+// Add event listener to detect changes in the selected values
+daySelect.addEventListener('change', calculateAge);
+monthSelect.addEventListener('change', calculateAge);
+yearSelect.addEventListener('change', calculateAge);
+
+// Calculate age based on selected date of birth
+function calculateAge() {
+    var selectedDay = daySelect.value;
+    var selectedMonth = monthSelect.value;
+    var selectedYear = yearSelect.value;
+
+    var spouseAgeDiv = document.getElementById('ageGroup');
+
+    if (selectedYear) {
+        if (selectedDay && selectedMonth) {
+            var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+            var currentDate = new Date();
+
+            var age = currentDate.getFullYear() - dob.getFullYear();
+            if (currentDate.getMonth() < dob.getMonth() ||
+                (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            spouseAgeDiv.textContent = 'Age: ' + age;
+            spouseAgeDiv.style.display = 'inline-block'; // Show the div
+        } else {
+            spouseAgeDiv.style.display = 'none'; // Hide the div
+        }
+    } else {
+        spouseAgeDiv.style.display = 'none'; // Hide the div
+    }
+}
+
+</script>
 @endsection

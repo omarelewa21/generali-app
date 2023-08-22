@@ -209,15 +209,26 @@ class FormController extends Controller {
             'spouseFirstName' => 'required|max:255',
             'spouseLastName' => 'required|max:255',
             'spouseYearsOfSupport' => 'required|numeric|max:100',
+            'day' => 'required',
+            'month' => 'required',
+            'year' => 'required',
         ]);
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
-        // Add or update the data value in the array
-        $arrayData['SpouseFirstName'] = $validatedData['spouseFirstName'];
-        $arrayData['SpouseLastName'] = $validatedData['spouseLastName'];
-        $arrayData['SpouseYearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+        // Create the 'familyDependant' array if it doesn't exist
+        if (!isset($arrayData['familyDependant'])) {
+            $arrayData['familyDependant'] = [];
+        }
+
+        // Update the spouse data within the 'familyDependant' array
+        $arrayData['familyDependant']['spouse']['FirstName'] = $validatedData['spouseFirstName'];
+        $arrayData['familyDependant']['spouse']['LastName'] = $validatedData['spouseLastName'];
+        $arrayData['familyDependant']['spouse']['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+        $arrayData['familyDependant']['spouse']['Day'] = $validatedData['day'];
+        $arrayData['familyDependant']['spouse']['Month'] = $validatedData['month'];
+        $arrayData['familyDependant']['spouse']['Year'] = $validatedData['year'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -225,6 +236,5 @@ class FormController extends Controller {
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.my.assets');
-        
     }
 }
