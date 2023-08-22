@@ -62,7 +62,7 @@
                             <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset" src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
+                            <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto order-0 order-lg-1">
                                     <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance policy.</h5>
                                     <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
 
