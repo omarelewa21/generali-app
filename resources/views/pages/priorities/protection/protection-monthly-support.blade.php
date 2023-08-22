@@ -175,6 +175,10 @@ document.addEventListener("DOMContentLoaded", function() {
         border-color: #000000;
         box-shadow: none;
     }
+    .form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
 @media only screen and (max-width: 767px) {
 
     .navbar-default.transparent {

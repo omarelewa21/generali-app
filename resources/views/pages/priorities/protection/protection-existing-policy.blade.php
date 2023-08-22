@@ -200,6 +200,11 @@ document.addEventListener("DOMContentLoaded", function() {
         border-color: #000000;
         box-shadow: none;
     }
+    .form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+}
+
 @media only screen and (max-width: 767px) {
     .navbar {
         right:0;
@@ -214,12 +219,20 @@ document.addEventListener("DOMContentLoaded", function() {
         top: 2%;
     }
 }
-@media only screen and (max-width:834px) and (max-height:1112px) {
+@media only screen and (width:834px) and (height:1112px) {
     .protection-existing-policy-asset {
-        left: 0px;
+    left: 0px;
     bottom: 13%;
     z-index: 10;
     width: 30vh;
+    }
+}
+@media only screen and (width:778px) and (height:1024px) {
+    .protection-existing-policy-asset {
+    left: 0px;
+    bottom: 19%;
+    z-index: 10;
+    width: 25vh;
     }
 }
 </style>

@@ -181,6 +181,18 @@ document.addEventListener("DOMContentLoaded", function() {
     background-position: right;
     background-size: 3rem;
 }
+.form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+}
+.was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+    }
+    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
     /* Apply the initial state for the toast */
     .protectionSupportingYearsErrorMsg {
         transform: translateY(-100%);

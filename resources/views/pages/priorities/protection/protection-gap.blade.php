@@ -212,7 +212,7 @@ display:none;
 
     }
 }
-@media only screen and (min-width:768px) and (max-width: 1112px) and (orientation:portrait) {
+@media only screen and (min-width:768px) and (max-height: 1112px) and (orientation:portrait) {
     #chart-gap {
         margin-top: 130px !important;
         transform: scale(1.3) !important;
