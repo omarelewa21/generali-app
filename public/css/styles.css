@@ -803,8 +803,8 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 /* Protection Home Page */
 .bg-needs-main {
   background-image: url(/images/needs/background/bg-main.png), url(/images/needs/background/abstracts/cloud-1.png);
-  background-size: contain;
-  background-position: center, top center;
+  background-size: contain,90%;
+  background-position: center, center 20%;
   background-repeat: no-repeat;
   height: 100%;
 }
@@ -834,9 +834,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     background: #fff;
   }
-  .progress-main p {
+  /* .progress-main p {
     color: #fff!important;
-  }
+  } */
   .main-logo {
     width: 80px;
   }
@@ -859,6 +859,8 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     padding-top: inherit!important;
   }
 }
+
+
 
 
 

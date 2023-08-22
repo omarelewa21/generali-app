@@ -54,8 +54,30 @@
                                 <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
                                 <input type="text" name="retirementOtherSourceOfIncome" value="{{ Session::get('retirementOtherSourceOfIncome') }}" class="form-control d-inline text-primary @error('retirementOtherSourceOfIncome') is-invalid @enderror" id="retirementOtherSourceOfIncome" placeholder=" " required>
                             </div>
-                            @if ($errors->has('retirementOtherSourceOfIncome'))
-                            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="retirementOtherSourceOfIncomeErrorMsg">{{ $errors->first('retirementOtherSourceOfIncome') }}</div>
+
+                            @if ($errors->has('retirementOtherSourceOfIncome' ))
+                            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                                <div id="retirementOtherSourceOfIncomeErrorMsg" class="align-items-center alert alert-warning border-0 fade d-block" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                                    <div class="d-flex justify-content-center">
+                                        <i class="bi bi-exclamation-circle p-2"></i>
+                                        <div class="p-2">
+                                            {{ $errors->first('retirementOtherSourceOfIncome') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if ($errors->has('retirementallocatedfundsaside'))
+                            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                                <div id="retirementallocatedfundsasideErrorMsg" class="align-items-center alert alert-warning border-0 fade d-block" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                                    <div class="d-flex justify-content-center">
+                                        <i class="bi bi-exclamation-circle p-2"></i>
+                                        <div class="p-2">
+                                            {{ $errors->first('retirementallocatedfundsaside') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endif
                         </div>
                         </div>
@@ -138,7 +160,18 @@
 //                 });
                 
 //             });
+        // Show the toast and apply the animation
+        function showToast() {
+    retirementOtherSourceOfIncomeErrorMsg.classList.add('show');
+    retirementAllocatedFundsAsideErrorMsg.classList.add('show');
 
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementOtherSourceOfIncomeErrorMsg.classList.remove('show');
+        retirementAllocatedFundsAsideErrorMsg.classList.remove('show');
+    }, 2500);
+    
+}
 
 </script>
     @endsection
