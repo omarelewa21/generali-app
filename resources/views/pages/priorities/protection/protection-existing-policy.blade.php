@@ -235,5 +235,10 @@ document.addEventListener("DOMContentLoaded", function() {
     width: 25vh;
     }
 }
+@media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
+    #existingPolicyAmount .input-group {
+        width:90% !important;
+    }
+}
 </style>
 @endsection
