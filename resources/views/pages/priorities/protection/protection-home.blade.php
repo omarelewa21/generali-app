@@ -1,9 +1,3 @@
-<?php
- /**
- * Template Name: Protection Home
- */
-?>
-
 {{-- Protection - Home --}}
 @extends('templates.master')
 
