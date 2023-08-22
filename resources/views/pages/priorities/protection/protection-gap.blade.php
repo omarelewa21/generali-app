@@ -29,7 +29,7 @@
                     <div class="my-4">  
                         <section>
                             <div class="container mx-auto row justify-content-center bg-needs-gap">
-                            <div class="col-lg-5 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-center align-items-center">
+                            <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
                                 {{-- <div class="svg-container">
                                 <div class="card-gap" id="gap">
                                     <div class="card-gap__percent">
@@ -52,7 +52,7 @@
                                 {{-- <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
                                     Your browser does not support SVGs
                                 </object> --}}
-                                <div class="ell1" id="chart-gap" style="transform: scale(1.3);">
+                                <div class="ell1 my-4 my-md-0" id="chart-gap" style="transform: scale(1.6);">
                                     <div class="ell2">
                                       <div class="ellP">
                                         <svg>
@@ -73,14 +73,14 @@
                                       </div>
                                     </div>
                                 </div>
-                                <h5 class="row gap-text mb-4 justify-content-end d-flex">
+                                <h5 id="textProtectionFund" class="row position-relative gap-text">
                                     Total Protection Fund
                                 </h5>
                                 
                             </div>
-                                <div class="col-12 col-md-5 col-lg-6 my-0 my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                                <div class="col-12 col-md-10 col-lg-6 my-5 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     After the next
                                                 </h5>
@@ -92,7 +92,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto w-50">                                             
                                                     I want to protect my loved ones with
                                                 </h5>
@@ -104,7 +104,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     I have set aside
                                                 </h5>
@@ -116,7 +116,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     So I need a plan for
                                                 </h5>
@@ -158,9 +158,18 @@
   
 var covered = parseInt(document.getElementById("covered").innerHTML);
 var percent = covered/100;
-var dasharaay = 800*percent;
+var dasharaay = percent * 800 ;
 var CPB = document.getElementById("CircleProgressBar");
-CPB.style.strokeDasharray = dasharaay;
+if (dasharaay < 300) {
+  // Calculate the combined length of all three segments
+  var combinedLength = dasharaay * 3;
+
+  // Set the combined length as strokeDasharray
+  CPB.style.strokeDasharray = combinedLength;
+} else {
+  CPB.style.strokeDasharray = dasharaay;
+}
+// CPB.style.strokeDasharray = dasharaay;
 console.log(covered);
 console.log(percent);
 console.log(dasharaay);
@@ -169,11 +178,9 @@ console.log(dasharaay);
 </script>
 <style>
 
-    /* html {
-        font-size: 62.5%; // 1rem = 10px    100% = 16px
-
-    } */
-
+#textProtectionFund {
+    top:18%;
+}
     .navbar {
         right:50%;
     }
@@ -188,6 +195,28 @@ console.log(dasharaay);
     .bg-needs-3 {
         height:auto;
     }
+    #chart-gap {
+        transform: scale(1) !important;
     }
+    #textProtectionFund {
+        top:6%;
+    }
+    .gap-text {
+        font-size: 1.2rem !important;
+    }
+    .gap-value {
+        font-size: 1.3rem !important;
+    }
+    .green-tick,.red-tick {
+display:none;
+
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 1112px) and (orientation:portrait) {
+    #chart-gap {
+        margin-top: 130px !important;
+        transform: scale(1.3) !important;
+    }
+}
     </style>
 @endsection

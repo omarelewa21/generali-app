@@ -12,6 +12,8 @@
     $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
+    $protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ? $arrayDataProtection['protectionPercentage'] : 0;
+
 
 @endphp
 <div id="protection-supporting-years">
@@ -26,7 +28,7 @@
                         <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:0%;"
+                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionPercentage}}%;"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <h3 id="TotalProtectionValueText" class="m-1 text-light text-center">RM {{

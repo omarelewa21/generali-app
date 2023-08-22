@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto mx-md-auto mx-lg-5 order-0 order-lg-1">
                                     <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance policy.</h5>
-                                    <div class="py-3 py-md-2 py-lg-1 mb-4 mb-md-0 mb-lg-0">
+                                    <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
 
                                     <span class="me-3 me-md-5 me-lg-5">
                                         <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{$protectionExistingPolicy === 'yes' ? 'checked' : ''}} required>
@@ -82,9 +82,6 @@
                                         <span class="input-group-text text-primary fw-bold bg-transparent pe-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="protectionPolicyAmount" value="{{ $protectionPolicyAmount }}" class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror" id="protectionPolicyAmount" placeholder=" " required>                                
                                     </div>
-                                    {{-- @error('protectionPolicyAmount')
-                                    <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="protectionPolicyAmountErrorMsg">{{ $message }}</div>
-                                    @enderror --}}
                             </div>
                                 </div>
 
@@ -190,9 +187,14 @@ document.addEventListener("DOMContentLoaded", function() {
         .navbar {
         right:50%;
     }
+    .input-group-text, .form-control {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
     .was-validated .form-control:valid, .form-control.is-valid {
         background-image:none;
         border-color: #000000;
+        padding-right:0;
     }
     .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
         border-color: #000000;
@@ -204,6 +206,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     .fixed-bottom {
         z-index: 1000;
+    }
+}
+@media only screen and (max-width:414px) and (max-height:896px) {
+    .protection-existing-policy-asset {
+        width: 24vh;
+        top: 2%;
+    }
+}
+@media only screen and (max-width:834px) and (max-height:1112px) {
+    .protection-existing-policy-asset {
+        left: 0px;
+    bottom: 13%;
+    z-index: 10;
+    width: 30vh;
     }
 }
 </style>
