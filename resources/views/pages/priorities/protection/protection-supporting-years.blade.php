@@ -111,19 +111,19 @@
 
 
 <script>
-//     document.addEventListener("DOMContentLoaded", function() {
-//     const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
-//     var protectionSupportingYears = document.getElementById('protectionSupportingYears');
+    document.addEventListener("DOMContentLoaded", function() {
+    const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
+    var protectionSupportingYears = document.getElementById('protectionSupportingYears');
 
-//     protectionSupportingYears.addEventListener('blur', function() {
-//             validateYearsNumberField(protectionSupportingYears);
-//         });
+    protectionSupportingYears.addEventListener('blur', function() {
+            validateYearsNumberField(protectionSupportingYears);
+        });
 
-// function validateYearsNumberField(field) {
-//     var minAge = 1;
-//     var maxAge = 100;
+function validateYearsNumberField(field) {
+    var minAge = 1;
+    var maxAge = 100;
 
-//     var value = parseInt(field.value);
+    var value = parseInt(field.value);
 
 //     if (!isNaN(value) && value >= minAge && value <= maxAge) {
 //         field.classList.add('is-valid');

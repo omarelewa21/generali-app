@@ -258,10 +258,10 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover img {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
-.button-bg.selected .hover {
+.button-bg.selected .hover, .button-bg.selected .border-default {
   border: 10px solid #8995CB;
 }
 
@@ -269,7 +269,7 @@ button[data-required="selected"] img {
   transition: transform 0.7s ease;
 }
 
-.button-bg .hover {
+.button-bg div.d-flex {
   border: 10px solid transparent;
   transition: border 0.7s ease;
 }

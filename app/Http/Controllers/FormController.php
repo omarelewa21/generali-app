@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Support\Facades\Response;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\View;
@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 
-class FormController extends Controller
-{
+class FormController extends Controller {
     public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
@@ -152,16 +151,6 @@ class FormController extends Controller
         return redirect()->route('avatar.marital.status');
     }
 
-    public function validateButton(Request $request)
-    {
-        // $request->validate([
-        //     'data-required' => 'required|in:selected',
-        // ]);
-
-        // return response()->json([
-        //     'validationPassed' => true,
-        // ]);
-    }
     public function handleAvatarSelection(Request $request)
     {
         // Get the existing array from the session
@@ -173,14 +162,17 @@ class FormController extends Controller
                 return true;
             }
             
-            $customMessage = "At least one button must be selected.";
+            $customMessage = "Please select at least one.";
             $validator->errors()->add($attribute, $customMessage);
     
             return false;
         });
 
         $validator = Validator::make($request->all(), [
-            'selectedButtonInput' => [
+            'maritalStatusButtonInput' => [
+                'at_least_one_selected',
+            ],
+            'familyDependantButtonInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -190,19 +182,123 @@ class FormController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Validation passed, perform any necessary processing...
-        // Add or update the data value in the array
-        $selectedButtonInput = $request->input('selectedButtonInput');
-        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
+        // Validation passed, perform any necessary processing.
+        $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
+        $familyDependantSerialized = $request->input('familyDependantButtonInput');
+        $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
 
-        $arrayData['maritalStatus'] = $selectedButtonInput;
-        $arrayData['dataUrl'] = $dataUrl;   
+        $dataUrl = $request->input('urlInput');
+
+        // Add or update the data value in the array
+        if ($maritalStatusButtonInput) {
+            $arrayData['maritalStatus'] = $maritalStatusButtonInput;
+        }
+        elseif ($familyDependantButtonInput) {
+            $arrayData['familyDependant'] = $familyDependantButtonInput;
+        }
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        Log::info('Session Data:', Session::all());
 
         return redirect()->route($dataUrl);
     }
 
+    public function familyDependantDetails(Request $request)
+    {
+        // Fetch titles from the database
+        // $countries = DB::table('countries')->pluck('countries')->toArray();
+        // $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+        // $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
+        // $occupation = DB::table('occupations')->pluck('name')->toArray();
+
+        // $customMessages = [
+        //     'idNumber.regex' => 'The id number field must match the format 123456-78-9012.',
+        //     'passportNumber.max' => 'The passport number field must not exceed :max characters.',
+        //     'birthCert.max' => 'The birth certificate field must not exceed :max characters.',
+        //     'policeNumber.max' => 'The police number field must not exceed :max characters.',
+        //     'registrationNumber.max' => 'The registration number field must not exceed :max characters.',
+        //     'btnradio.required' => 'Please select your habits.',
+        // ];
+
+        // $validatedData = $request->validate([
+        //     'country' => 'required|in:' . implode(',', $countries),
+        //     'idType' => 'required|in:' . implode(',', $idtypes),
+        //     'idNumber' => [
+        //         'nullable',
+        //         Rule::requiredIf(function () use ($request) {
+        //             return !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+        //         }),
+        //         'regex:/^\d{6}-\d{2}-\d{4}$/',
+        //     ],
+        //     'passportNumber' => [
+        //         'nullable',
+        //         Rule::requiredIf(function () use ($request) {
+        //             return !$request->input('idNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+        //         }),
+        //         'max:15',
+        //     ],
+        //     'birthCert' => [
+        //         'nullable',
+        //         Rule::requiredIf(function () use ($request) {
+        //             return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('policeNumber') && !$request->input('registrationNumber');
+        //         }),
+        //         'max:15',
+        //     ],
+        //     'policeNumber' => [
+        //         'nullable',
+        //         Rule::requiredIf(function () use ($request) {
+        //             return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('registrationNumber');
+        //         }),
+        //         'max:15',
+        //     ],
+        //     'registrationNumber' => [
+        //         'nullable',
+        //         Rule::requiredIf(function () use ($request) {
+        //             return !$request->input('idNumber') && !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber');
+        //         }),
+        //         'max:15',
+        //     ],
+        //     'day' => 'required',
+        //     'month' => 'required',
+        //     'year' => 'required',
+        //     'btnradio' => 'required|in:smoker,nonSmoker',
+        //     'educationLevel' => 'required|in:' . implode(',', $educationLevel),
+        //     'occupation' => 'required|in:' . implode(',', $occupation),
+        // ], $customMessages);
+
+        // // Get the existing array from the session
+        // $arrayData = session('passingArrays', []);
+
+        // // Add or update the data value in the array
+        // $arrayData['Country'] = $validatedData['country'];
+        // $arrayData['IdType'] = $validatedData['idType'];
+        // $arrayData['IdNumber'] = $validatedData['idNumber'];
+        // $arrayData['PassportNumber'] = $validatedData['passportNumber'];
+        // $arrayData['BirthCert'] = $validatedData['birthCert'];
+        // $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
+        // $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
+        // $arrayData['DobDay'] = $validatedData['day'];
+        // $arrayData['DobMonth'] = $validatedData['month'];
+        // $arrayData['DobYear'] = $validatedData['year'];
+        // $arrayData['Habits'] = $validatedData['btnradio'];
+        // $arrayData['EducationLevel'] = $validatedData['educationLevel'];
+        // $arrayData['Occupation'] = $validatedData['occupation'];
+
+        // // Store the updated array back into the session
+        // session(['passingArrays' => $arrayData]);
+
+        // // Process the form data and perform any necessary actions
+        // return redirect()->route('avatar.marital.status');
+    }
+
+    // public function validateButton(Request $request)
+    // {
+    //     // $request->validate([
+    //     //     'data-required' => 'required|in:selected',
+    //     // ]);
+
+    //     // return response()->json([
+    //     //     'validationPassed' => true,
+    //     // ]);
+    // }
 }
