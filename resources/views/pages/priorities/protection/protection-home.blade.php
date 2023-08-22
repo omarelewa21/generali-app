@@ -1,15 +1,3 @@
-<?php
-
-/**
-
-* Template Name: Protection Home
-
-*/
-
-?>
-
- 
-
 {{-- Protection - Home --}}
 
 @extends('templates.master')
@@ -107,34 +95,6 @@
  
 
 <style>
-
-.needs-home {
-
-    grid-template-areas: "header-avatar-default" "content-needs" "footer-avatar-default";
-
-    grid-template-rows: 15vh 55vh 30vh;
-
-    grid-gap: 0;
-
-    display: grid;
-
-    grid-template-columns: 100%;
-
-}
-
-.content-needs {
-
-    grid-area: content-needs;
-
-}
-
-.footer-needs {
-
-    grid-area: footer-needs;
-
-    background-color: rgba(233, 233, 233, 1);
-
-}
 
  
 
