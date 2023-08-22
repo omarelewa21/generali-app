@@ -65,9 +65,9 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $arrayData['FirstName'] ?? '') }}" required>
-                                                    @error('firstName')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                @error('firstName')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
@@ -195,11 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function validateHousePhoneNumberField(field) {
         if (field.value && isValidHousePhoneNumber(field.value)) {
-        field.classList.add('is-valid');
-        field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
         } else {
-        field.classList.remove('is-valid');
-        field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
         }
     }
 

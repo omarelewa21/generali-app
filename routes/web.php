@@ -24,8 +24,8 @@ Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.b
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
-Route::view('/family-dependant-details', 'pages.avatar.avatar-family-dependant-details')->name('avatar.family.dependant.details');
-// Route::post('/family-dependant-details', [FormController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
+Route::get('/family-dependant-details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
+Route::post('/family-dependant-details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
@@ -99,9 +99,9 @@ Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.re
 Route::Post('/retirement-allocated-funds-aside', [formRetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
 Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
 
-Route::get('/files/{filename}', function($filename){
-    return \Storage::download($filename); // assuming default disk is set to 'public'
-});
+// Route::get('/files/{filename}', function($filename){
+//     return \Storage::download($filename); // assuming default disk is set to 'public'
+// });
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
