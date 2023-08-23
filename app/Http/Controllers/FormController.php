@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\AvatarSelectionRequest;
 use Illuminate\Support\Facades\Response;
 use SebastianBergmann\Environment\Console;
 use Illuminate\Support\Facades\View;
@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 
-class FormController extends Controller {
+class FormController extends Controller
+{
     public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
@@ -151,6 +152,16 @@ class FormController extends Controller {
         return redirect()->route('avatar.marital.status');
     }
 
+    public function validateButton(Request $request)
+    {
+        // $request->validate([
+        //     'data-required' => 'required|in:selected',
+        // ]);
+
+        // return response()->json([
+        //     'validationPassed' => true,
+        // ]);
+    }
     public function handleAvatarSelection(Request $request)
     {
         // Get the existing array from the session
@@ -162,17 +173,14 @@ class FormController extends Controller {
                 return true;
             }
             
-            $customMessage = "Please select at least one.";
+            $customMessage = "At least one button must be selected.";
             $validator->errors()->add($attribute, $customMessage);
     
             return false;
         });
 
         $validator = Validator::make($request->all(), [
-            'maritalStatusButtonInput' => [
-                'at_least_one_selected',
-            ],
-            'familyDependantButtonInput' => [
+            'selectedButtonInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -182,49 +190,19 @@ class FormController extends Controller {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Validation passed, perform any necessary processing.
-        $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
-        $familyDependantSerialized = $request->input('familyDependantButtonInput');
-        $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
-
-        $dataUrl = $request->input('urlInput');
-
+        // Validation passed, perform any necessary processing...
         // Add or update the data value in the array
-        if ($maritalStatusButtonInput) {
-            $arrayData['maritalStatus'] = $maritalStatusButtonInput;
-        }
-        elseif ($familyDependantButtonInput) {
-            $arrayData['familyDependant'] = $familyDependantButtonInput;
-        }
+        $selectedButtonInput = $request->input('selectedButtonInput');
+        $dataUrl = $request->input('urlInput', 'welcome'); // Provide a default route name here
+
+        $arrayData['maritalStatus'] = $selectedButtonInput;
+        $arrayData['dataUrl'] = $dataUrl;   
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
+        Log::info('Session Data:', Session::all());
 
         return redirect()->route($dataUrl);
     }
 
-    public function familyDependantDetails(Request $request)
-    {
-        $validatedData = $request->validate([
-            'spouseFirstName' => 'required|max:255',
-            'spouseLastName' => 'required|max:255',
-            'spouseYearsOfSupport' => 'required|numeric|max:100',
-        ]);
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        // Add or update the data value in the array
-        $arrayData['SpouseFirstName'] = $validatedData['spouseFirstName'];
-        $arrayData['SpouseLastName'] = $validatedData['spouseLastName'];
-        $arrayData['SpouseYearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        return redirect()->route('avatar.my.assets');
-        
-    }
 }

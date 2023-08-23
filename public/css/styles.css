@@ -23,7 +23,12 @@ html {
   overflow: hidden;
   height: 100vh;
 }
-
+/* h6.nav-text-needs {
+  font-weight: 500;
+  font-family: 'Helvetica Neue Medium', sans-serif;
+  letter-spacing: 1.1px;
+  font-size:18px;
+} */
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -31,10 +36,6 @@ html {
 
 .fade-effect button:not([disabled]):hover img {
   opacity: 1;
-}
-
-.text-red {
-  color: #C21B17!important;
 }
 
 /* Headings */
@@ -69,17 +70,6 @@ h4 {
   color: rgb(255, 230, 156);
 }
 
-/* Works for Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Works for Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
 
 /* Alerts */
 .alert div.text {
@@ -247,6 +237,10 @@ button[data-required="selected"] img {
   opacity: 1;
 }
 
+/* .button-bg.selected {
+  border: 5px solid #AA1B17;
+} */
+
 .button-bg {
   background: linear-gradient(360deg, #FFF 0%, #EAEAEA 100%, #EAEAEA 100%);
 }
@@ -264,10 +258,10 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover img {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
-.button-bg.selected .hover, .button-bg.selected .border-default {
+.button-bg.selected .hover {
   border: 10px solid #8995CB;
 }
 
@@ -275,7 +269,7 @@ button[data-required="selected"] img {
   transition: transform 0.7s ease;
 }
 
-.button-bg div.d-flex {
+.button-bg .hover {
   border: 10px solid transparent;
   transition: border 0.7s ease;
 }
