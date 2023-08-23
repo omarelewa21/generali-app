@@ -189,7 +189,7 @@ siblingButton.addEventListener('click', function(event) {
     event.preventDefault();
 
     if (!siblingClicked) {
-        const dataAvatar = 'siblings';
+        const dataAvatar = 'sibling';
         clickedAvatars.push(dataAvatar);
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
         siblingClicked = true;
