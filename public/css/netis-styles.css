@@ -1,3 +1,7 @@
+/* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+.navbar {
+    right:50%;
+}
 
 .form-input-needs-xs {
     width: 11%;
@@ -318,6 +322,11 @@ font-family:"Helvetica Neue Bold", sans-serif;
     body,
     html {
       overflow-y: auto;
+    }
+
+    /* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+    .navbar {
+        right:0;
     }
     /* body {
         min-height: 51.5rem;

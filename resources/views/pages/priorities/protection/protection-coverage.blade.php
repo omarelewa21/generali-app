@@ -29,7 +29,7 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
             action="{{route('form.protection.coverage')}}" method="POST">
             @csrf
 
-            <div id="protectionSelectedAvatarErrorMessage" class="d-flex justify-content-center align-items-end h-100">
+            {{-- <div id="protectionSelectedAvatarErrorMessage" class="d-flex justify-content-center align-items-end h-100">
                 <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
                     @if ($errors->has('protectionSelectedAvatar'))
                     <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-4 py-lg-4 posErrorMessage"
@@ -43,8 +43,24 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
                     </div>
                     @endif
                 </div>
-            </div>
+            </div> --}}
 
+            @if ($errors->has('protectionSelectedAvatar'))
+            <div class="toast w-100" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+              <div class="alert alert-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
+                viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                <path
+                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+                                {{ $errors->first('protectionSelectedAvatar') }}
+                </small>                  
+                <button type="button" class="close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            @endif
             <section>
                 <div class="col-12 text-dark px-0 my-4 bg-needs-main">
                     <div class="my-0 my-lg-4 p-4 p-md-5 p-lg-5" style="padding-top:5.5rem;">
@@ -127,32 +143,10 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
     </div>
 </div>
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const footer = document.getElementById("footer");
+        
 
-        function toggleFooterVisibility() {
-            const scrollY = window.scrollY || window.pageYOffset;
-            const windowHeight = window.innerHeight;
-            const documentHeight = Math.max(
-                document.body.scrollHeight,
-                document.body.offsetHeight,
-                document.documentElement.clientHeight,
-                document.documentElement.scrollHeight,
-                document.documentElement.offsetHeight
-            );
-
-            if (scrollY + windowHeight >= documentHeight) {
-                footer.style.display = "block";
-            } else {
-                footer.style.display = "none";
-            }
-        }
-
-        toggleFooterVisibility(); // Initial check
-
-        window.addEventListener("scroll", toggleFooterVisibility);
     });
 
     // javascript code for button click effect on avatar selection
@@ -199,9 +193,9 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
 
 </script>
 <style>
-    .navbar {
-        right: 50%;
-    }
+.alert {
+    margin-bottom: 0 !important;
+}
 
     @media only screen and (max-width: 767px) {
         .progress-value p {
@@ -210,10 +204,6 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
 
         .fixed-bottom {
             z-index: 10;
-        }
-
-        .navbar {
-            right: 0;
         }
 
         .slick-track {
