@@ -21,7 +21,7 @@ $arrayDataProtection['protectionPercentage'] : 0;
 
 @endphp
 <div id="protection-supporting-years">
-    <div class="overflow-hidden d-flex flex-column">
+    <div class="overflow-hidden d-flex flex-column container-fluid p-0">
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">

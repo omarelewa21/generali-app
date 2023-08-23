@@ -25,7 +25,7 @@
                             class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2 py-2 py-md-3 py-lg-5 py-xl-2">
                             <img class="z-1" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}"
                                 alt="Protection">
-                            <h5 class="z-1 d-flex col-12 col-md-8 py-0 py-md-3 py-lg-3 py-xl-2 justify-content-center needs-grey-bg-mobile">Let’s
+                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-4 py-0 py-md-3 py-lg-3 justify-content-center needs-grey-bg-mobile">Let’s
                                 figure out what you need for Protection.</h5>
                         </div>
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">

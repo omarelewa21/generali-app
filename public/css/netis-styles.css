@@ -585,7 +585,7 @@ width: 80%;
 }
 /* Target iPad air,mini, iPad Pro */
 /* Target iPad air,mini, iPad Pro in landscape mode */
-@media only screen and (min-width: 768px) and (max-height: 1024px) and (orientation: landscape) {
+@media only screen and (min-width: 768px) and (max-width:1024px) and (max-height: 1024px) and (orientation: landscape) {
     .needs-home-avatar img {
         height: 54vh;
     }
