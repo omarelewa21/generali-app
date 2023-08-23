@@ -149,6 +149,8 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
 
     });
 
+var toast = new bootstrap.Toast(document.getElementById('protectionSelectedAvatarErrorMsg'));
+    toast.show();
     // javascript code for button click effect on avatar selection
     function avatarSelect(button) {
     event.preventDefault();
