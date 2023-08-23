@@ -4,7 +4,7 @@ const specificPageURLs = [
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
-
+    
     // Show the selected groups based on the dropdown selected
     document.addEventListener('DOMContentLoaded', function() {
         var idTypeSelect = document.getElementById('idType');
@@ -129,9 +129,8 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     function calculateAge() {
         const selectedDay = parseInt(dayFieldExtract.value);
         const selectedMonth = parseInt(monthFieldExtract.value);
-        const selectedYearOption = yearFieldExtract.options[yearFieldExtract.selectedIndex];
-        const selectedYear = selectedYearOption.textContent;
-        
+        const selectedYear = parseInt(yearFieldExtract.value);
+
         if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
             ageField.textContent = 'Invalid ID number entered';
             return;

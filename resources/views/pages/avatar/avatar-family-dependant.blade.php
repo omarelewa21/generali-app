@@ -50,24 +50,12 @@
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
-                                    @if ($errors->has('familyDependantButtonInput'))
-                                        <div class="col-12">
-                                            <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                                </svg>
-                                                <div class="text">{{ $errors->first('familyDependantButtonInput') }}</div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                        <div class="col-12 button-bg {{$familyDependant === 'spouse' ? 'selected' : ''}}">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['familyDependant']) && in_array('spouse', $arrayData['familyDependant'])) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
-                                                    <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
-                                                </button>
-                                            </div>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pe-xxl-1 pe-xl-1 py-1">
+                                        <div class="col-12 py-5 d-flex align-items-center justify-content-center button-bg">
+                                            <button class="border-0" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect ps-xxl-1 ps-xl-1 py-1">
@@ -183,26 +171,36 @@ avatarForm.addEventListener('submit', function(event) {
         return;
     }
 
-siblingButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    if (!siblingClicked) {
-        const dataAvatar = 'sibling';
-        clickedAvatars.push(dataAvatar);
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        siblingClicked = true;
-    }
-});
-
-spouseButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    if (!spouseClicked) {
-        const dataAvatar = 'spouse';
-        clickedAvatars.push(dataAvatar);
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        spouseClicked = true;
-    }
+    // Perform your server-side validation here using Laravel or JavaScript fetch API
+    // Use the selectedFamilies array instead of sending a separate fetch request
+    fetch('/validate-avatar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Use Blade templating to get the CSRF token
+        },
+        body: JSON.stringify({
+            'data-required': selectedAvatar,
+            'selectedFamilies': selectedFamilies, // Include the selectedFamilies array in the request body
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.validationPassed) {
+            // Form validation passed, proceed with the form submission
+            // This will only trigger when the Next button is clicked, not the data-required buttons
+            avatarForm.submit(); // "this" refers to the avatarForm element
+        } else {
+            // Form validation failed, handle the error (display an error message, etc.)
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.innerHTML = 'Form validation failed: ' + data.errors.join(', ');
+            errorContainer.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        // Handle any errors that occur during the fetch request
+        console.error('Error during fetch request:', error);
+    });
 });
 
 </script>
