@@ -32,11 +32,24 @@
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
                 @include('templates.nav.nav-sidebar-needs')
             </div>
+            @if ($errors->has('retirementAllocatedFunds'))
+            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                <div id="retirementAllocatedFundsErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="d-flex justify-content-center">
+                        <i class="bi bi-exclamation-circle p-2"></i>
+                        <div class="p-2">
+                            {{ $errors->first('retirementAllocatedFunds') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
             <div class="col-12 text-dark px-0 my-4">
                 <div class="my-4">  
                     <form class="form-horizontal p-0 needs-validation" id="retirementAllocatedFundsForm" novalidate action="{{ route('form.retirement.allocated.funds') }}" method="POST">
                         @csrf
+
                     <section>
                         <div class="row">
                         <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
@@ -49,12 +62,11 @@
                                 <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
                                 <input type="text" name="retirementAllocatedFunds" class="form-control text-primary @error('retirementAllocatedFunds') is-invalid @enderror" value="{{Session::get('retirementAllocatedFunds') }}" id="retirementAllocatedFunds" placeholder=" " required> 
                             </div>
+                            
                             <h5 class="needs-text">/ month to</h5>
                             </div>
                             <h5 class="needs-text ">support myself and my <br>loved ones when I retire.</h5>
-                            @if ($errors->has('retirementAllocatedFunds'))
-                            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage d-block" id="retirementAllocatedFundsErrorMsg">{{ $errors->first('retirementAllocatedFunds') }}</div>
-                            @endif
+
                         </div>
                         </div>
 
@@ -119,6 +131,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     updateProgress(inputValue);
                 });
 });
+        // Get the toast element
+        const retirementAllocatedFundsErrorMsg = document.getElementById('retirementAllocatedFundsErrorMsg');
+
+// Show the toast and apply the animation
+function showToast() {
+    retirementAllocatedFundsErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementAllocatedFundsErrorMsg.classList.remove('show');
+    }, 2500);
+}
 
 </script>
     @endsection

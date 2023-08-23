@@ -49,7 +49,16 @@
                             <input type="text" name="retirementAgeToRetire" value="{{ Session::get('retirementAgeToRetire' ) }}"            
 class="w-25 form-control d-inline text-primary @error('retirementAgeToRetire') is-invalid @enderror" id="retirementAgeToRetireInput" placeholder=" ">
                             @if ($errors->has('retirementAgeToRetire'))
-                            <div class="invalid-feedback text-center alert alert-danger position-absolute errorMessage" id="retirementAgeToRetireErrorMsg">{{ $errors->first('retirementAgeToRetire') }}</div>
+                            <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
+                                <div id="retirementAgeToRetireErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                                    <div class="d-flex justify-content-center">
+                                        <i class="bi bi-exclamation-circle p-2"></i>
+                                        <div class="p-2">
+                                            {{ $errors->first('retirementAgeToRetire') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endif
                             </div>
                         </div>
@@ -119,6 +128,21 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         
     });
+        // Get the toast element
+        const retirementAgeToRetireErrorMsg = document.getElementById('retirementAgeToRetireErrorMsg');
+
+// Show the toast and apply the animation
+function showToast() {
+    retirementAgeToRetireErrorMsg.classList.add('show');
+
+    // Auto-hide the toast after a delay
+    setTimeout(() => {
+        retirementAgeToRetireErrorMsg.classList.remove('show');
+    }, 2500);
+}
+
+// Trigger the toast animation on page load or when error condition is met
+document.addEventListener('DOMContentLoaded', showToast);
 </script>
 
     @endsection

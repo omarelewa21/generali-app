@@ -4,6 +4,7 @@ const specificPageURLs = [
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
+    
     // Show the selected groups based on the dropdown selected
     document.addEventListener('DOMContentLoaded', function() {
         var idTypeSelect = document.getElementById('idType');
@@ -11,15 +12,13 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         var passportgroup = document.getElementById('passportgroup');
         var birthcertgroup = document.getElementById('birthcertgroup');
         var policegroup = document.getElementById('policegroup');
-        // var registrationgroup = document.getElementById('registrationgroup');
-      
-        // Add change event listener to the select element
+        var registrationgroup = document.getElementById('registrationgroup');
+
+        var selectedOption;
+
         idTypeSelect.addEventListener('change', function() {
-            var selectedOption = this.value;
+            selectedOption = this.value;
             showSelectedGroup(selectedOption);
-        
-            // Store the selected option in local storage
-            localStorage.setItem('selectedOption', selectedOption);
         });
       
         // Function to show the selected group
@@ -36,13 +35,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             registrationgroup.style.display = 'none';
             registrationNumber.removeAttribute('required');
 
-            // Clear input fields in respective groups
-            idNumber.value = '';
-            passportNumber.value = '';
-            birthCert.value = '';
-            policeNumber.value = '';
-            registrationNumber.value = '';
-
             // Show the relevant group based on the selected option and add the required attribute
             if (selectedOption === 'New IC') {
                 newicgroup.style.display = 'block';
@@ -55,13 +47,17 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             } else if (selectedOption === 'Registration') {
                 registrationgroup.style.display = 'block';
             }
+
+            // Store the selected option in local storage
+            localStorage.setItem('selectedOption', selectedOption);
         }
 
-        // Check if a selected option is stored in local storage and show the relevant group on page load
+        // Get the stored selected option from local storage
         var storedOption = localStorage.getItem('selectedOption');
         if (storedOption) {
-            idTypeSelect.value = storedOption;
-            showSelectedGroup(storedOption);
+            selectedOption = storedOption;
+            idTypeSelect.value = selectedOption;
+            showSelectedGroup(selectedOption);
         }
     });
 
@@ -133,8 +129,10 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     function calculateAge() {
         const selectedDay = parseInt(dayFieldExtract.value);
         const selectedMonth = parseInt(monthFieldExtract.value);
-        const selectedYear = parseInt(yearFieldExtract.value);
-
+        // const selectedYear = parseInt(yearFieldExtract.value);
+        const selectedYearOption = yearFieldExtract.options[yearFieldExtract.selectedIndex];
+        const selectedYear = selectedYearOption.textContent;
+        
         if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
             ageField.textContent = 'Invalid ID number entered';
             return;
@@ -149,6 +147,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         }
 
         let age = currentDate.getFullYear() - selectedDate.getFullYear();
+        
         const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
 
         if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {

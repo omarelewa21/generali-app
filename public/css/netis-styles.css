@@ -1,3 +1,7 @@
+/* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+.navbar {
+    right:50%;
+}
 
 .form-input-needs-xs {
     width: 11%;
@@ -30,7 +34,7 @@
 
 /* Retirement - Home page */
 .needs-grey-bg {
-    padding: 140px;
+    padding-top: 280px;
     background-color: #E9E9E9;
 }
 
@@ -61,9 +65,30 @@
     background-image: url(/images/needs/background/bg-needs-3.png);
     background-size: cover;
     background-position: right;
+    background-repeat: no-repeat;.bg-needs-4 {
+    background-image: url(/images/needs/background/bg-needs-4.png);
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     height: 100%;
 }
+    height: 100%;
+}
+.bg-needs-gap {
+    background-image: url(/images/needs/background/bg-needs-gap.png);
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 120px);
+}
+.bg-needs-gap2 {
+    background-image: url(/images/needs/background/bg-needs-gap2.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    width:100%;
+}
+
 /* .main-cloud {
     background-image: url(/images/needs/background/abstracts/cloud-1.png);
     background-size: contain;
@@ -78,7 +103,30 @@
     background-repeat: no-repeat;
     height: 100%;
 }
-
+.green-tick {
+    display: inline-block;
+    width: 30px; /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/green-tick.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.red-tick {
+    display: inline-block;
+    width: 30px; /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/red-tick.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.clock-icon {
+    display: inline-block;
+    width: 17px; /* Adjust the width and height to match your icon size */
+    height: 17px;
+    background: url('/images/needs/background/clock-icon.svg') no-repeat center center;
+    background-size: contain; /* Adjust this property based on your image dimensions */
+}
+.glow-box {
+    box-shadow: 4px 20px 20px 0px rgba(198, 198, 198, 0.25), -4px -10px 20px 0px #E4F4F6;
+}
 /* Protection pages */
 
 /* Protection - Monthly Support */
@@ -100,6 +148,23 @@
 
 .calendar-protection {
     width:85%;
+}
+
+/* Protection Pages */
+/* Protection - Home */
+.needs-home {
+    grid-template-areas: "header-avatar-default" "content-needs" "footer-avatar-default";
+    grid-template-rows: 15vh 55vh 30vh;
+    grid-gap: 0;
+    display: grid;
+    grid-template-columns: 100%;
+}
+.content-needs {
+    grid-area: content-needs;
+}
+.footer-needs {
+    grid-area: footer-needs;
+    background-color: rgba(233, 233, 233, 1);
 }
 
 
@@ -190,6 +255,16 @@
 .needs-text {
     z-index:1000;
 }
+h5.gap-text {
+    font-size: 1.6rem;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+h5.gap-value {
+    font-size: 2rem;
+}
 
 
 .box-shadow{
@@ -225,20 +300,33 @@
 .errorMessage {
     top:20%;
     left:0;
+    
 }
 
 .input-text {
 font-size:2.125rem;
+font-family:"Helvetica Neue Bold", sans-serif;
 }
 .fs-64 {
     font-size:4rem;
 }
+.posErrorMessage {
+    width: 90% !important;
+    left: 11px;
+    bottom:0;
+}
+
 
   /* mobile css */
 @media only screen and (max-width: 767px) {
     body,
     html {
       overflow-y: auto;
+    }
+
+    /* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+    .navbar {
+        right:0;
     }
     /* body {
         min-height: 51.5rem;
@@ -342,8 +430,8 @@ font-size:2.125rem;
     }
 .monthly-support-asset {
     left: 0;
-    bottom: -5%;
-    width: 22vh;
+    bottom: -10%;
+    width: 30vh;
 }
 .protection-existing-policy-asset {
     left: 0;
@@ -366,8 +454,12 @@ width: 80%;
     z-index:
      1000;
 } */
-.needs-home-avatar img {
-    height:33vh;
+#protection_home .needs-home-avatar img {
+    height:53vh;
+}
+
+#protection_home .needs-home {
+    grid-template-rows: 5vh 26vh 42vh;
 }
 
 /* form input-needs */
@@ -376,6 +468,14 @@ width: 80%;
 }
 .fs-64 {
     font-size:calc(1.3375rem + 1.05vw);
+}
+.posErrorMessage {
+    top:0 !important;
+    z-index: 1000;
+    bottom: auto !important;
+    width:100% !important;
+    left:0;
+    position:relative !important;
 }
     
 }
@@ -441,13 +541,19 @@ width: 80%;
     }
     .protection-existing-policy-asset {
         left: 0;
-        bottom: 0%;
+        bottom: 19%;
         z-index: 10;
-        width: 34vh;
+        width: 28vh;
     }
     .needs-home-avatar img {
-        height: 56vh;
+        height: 63vh;
        }
+       .monthly-support-asset {
+        left: -5%;
+        bottom: 8%;
+        z-index: 10;
+        width: 40vh;
+    }
     
 }
 
@@ -477,3 +583,77 @@ width: 80%;
     }
   } */
 
+  .ell1 {
+    display: flex;
+    /* margin: auto; */
+    width: 309px;
+    height: 309px;
+    background:#FFFFFF;
+    /* box-shadow: 3px 3px 1px #3B3F44; */
+    filter: drop-shadow(-11px -10px 20px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.30));
+    border-radius: 1000px;
+  }
+  .ell2 {
+    display: flex;
+    margin: auto;
+    width: 268px;
+    height: 268px;
+    background: #575757;
+    border: 1px solid #1D1F22;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.30) inset;
+    border-radius: 1000px;
+  }
+  .ell3 {
+    display: flex;
+    margin: auto;
+    width: 219px;
+    height: 219px;
+    background:  #ffffff;
+    border: 1px solid #1E2023;
+    border-radius: 1000px;
+    z-index: 1;
+  }
+  .ell4 {
+    display: flex;
+    margin: auto;
+    width: 175px;
+    height: 175px;
+    background: #ffffff;
+    /* border: 3px solid #292D32; */
+    border-radius: 1000px;
+  }
+  .ell4 .ellText {
+    margin: auto;
+    /* width: 95px; */
+    text-align: center;
+  }
+  .ellText h1 {
+    font-weight: normal;
+    font-size: 80px;
+    line-height: 35px;
+  }
+  
+  .ellP {
+      position: absolute;
+      width: 268px;
+      height: 268px;
+      border-radius: 1000px;
+      transform: rotate(-83.2deg);
+  }
+  #chart-gap svg {
+    height: 268px;
+  }
+  .ellP svg circle {
+      margin: auto;
+      fill: none;
+      stroke-width: 28px;
+      stroke-linecap: round;
+      transform: translate(134px, 64px);
+      width: 268px;
+      height: 268px;
+        background: linear-gradient(180deg, #FF7D7A 0%, #C1210D 100%);
+  }
+  #chart-gap svg circle:nth-child(2) {
+      stroke-dashoffset: calc(440 - (440 * 90) / 100);
+      stroke-dasharray: 440;
+  }

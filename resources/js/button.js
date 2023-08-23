@@ -1,17 +1,20 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'gender'
+    '/gender',
+    'marital-status'
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
+
     // Add event listener to each button with the 'data-required' attribute
-    const dataAvatarButtons = document.querySelectorAll('[data-avatar]');
-    dataAvatarButtons.forEach(button => {
+    const dataButtons = document.querySelectorAll('[data-avatar]');
+
+    dataButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent the default behavior of the button click
 
             // Remove 'selected' attribute from all buttons
-            dataAvatarButtons.forEach(btn => btn.removeAttribute('data-required'));
+            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
                 
             // Add the 'selected' attribute to the clicked button
             this.setAttribute('data-required', 'selected');
@@ -25,7 +28,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         });
     });
 
-    // Preselect the 'Male' button on page load
+    // Preselect the button on page load
     window.addEventListener('DOMContentLoaded', function() {
         const defaultButton = document.querySelector('.default'); 
         defaultButton.setAttribute('data-required', 'selected');
