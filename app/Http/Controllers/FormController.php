@@ -204,42 +204,122 @@ class FormController extends Controller {
     }
 
     public function familyDependantDetails(Request $request)
-    {
-        // Fetch spouseMaritalStatus from the database
-        $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
+{
+    // Fetch marital statuses from the database
+    $maritalStatuses = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
 
-        $validatedData = $request->validate([
-            'spouseFirstName' => 'required|max:255',
-            'spouseLastName' => 'required|max:255',
-            'spouseYearsOfSupport' => 'required|numeric|max:100',
-            'spouseday' => 'required',
-            'spousemonth' => 'required',
-            'spouseyear' => 'required',
-            'spouseMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
-        ]);
+    $validationRules = [];
+    $familyDependants = $arrayData['familyDependant'];
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        // Create the 'familyDependant' array if it doesn't exist
-        if (!isset($arrayData['familyDependant'])) {
-            $arrayData['familyDependant'] = [];
-        }
-
-        // Update the spouse data within the 'familyDependant' array
-        $arrayData['familyDependant']['spouse']['FirstName'] = $validatedData['spouseFirstName'];
-        $arrayData['familyDependant']['spouse']['LastName'] = $validatedData['spouseLastName'];
-        $arrayData['familyDependant']['spouse']['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
-        $arrayData['familyDependant']['spouse']['Day'] = $validatedData['spouseday'];
-        $arrayData['familyDependant']['spouse']['Month'] = $validatedData['spousemonth'];
-        $arrayData['familyDependant']['spouse']['Year'] = $validatedData['spouseyear'];
-        $arrayData['familyDependant']['spouse']['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        return redirect()->route('avatar.my.assets');
+    foreach ($familyDependants as $dependent) {
+        $validationRules["{$dependent}FirstName"] = "sometimes|required|max:255";
+        $validationRules["{$dependent}LastName"] = "sometimes|required|max:255";
+        $validationRules["{$dependent}YearsOfSupport"] = "sometimes|required|numeric|max:100";
+        $validationRules["{$dependent}day"] = "sometimes|required";
+        $validationRules["{$dependent}month"] = "sometimes|required";
+        $validationRules["{$dependent}year"] = "sometimes|required";
+        $validationRules["{$dependent}MaritalStatus"] = "required_with:{$dependent}FirstName|in:" . implode(',', $maritalStatuses);
     }
+
+    $validatedData = $request->validate($validationRules);
+
+    $arrayData = session('passingArrays', []);
+
+    if (!isset($arrayData['familyDependant'])) {
+        $arrayData['familyDependant'] = [];
+    }
+
+    foreach ($familyDependants as $dependent) {
+        if (array_key_exists($dependent, $validatedData)) {
+            $arrayData['familyDependant'][$dependent]['FirstName'] = $validatedData["{$dependent}FirstName"];
+            $arrayData['familyDependant'][$dependent]['LastName'] = $validatedData["{$dependent}LastName"];
+            $arrayData['familyDependant'][$dependent]['YearsOfSupport'] = $validatedData["{$dependent}YearsOfSupport"];
+            $arrayData['familyDependant'][$dependent]['Day'] = $validatedData["{$dependent}day"];
+            $arrayData['familyDependant'][$dependent]['Month'] = $validatedData["{$dependent}month"];
+            $arrayData['familyDependant'][$dependent]['Year'] = $validatedData["{$dependent}year"];
+            $arrayData['familyDependant'][$dependent]['MaritalStatus'] = $validatedData["{$dependent}MaritalStatus"];
+        }
+    }
+
+    session(['passingArrays' => $arrayData]);
+
+    Log::debug($arrayData);
+
+    return redirect()->route('avatar.my.assets');
+}
+
+
+    // public function familyDependantDetails(Request $request)
+    // {
+    //     // Fetch spouseMaritalStatus from the database
+    //     $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
+
+    //     $validatedData = $request->validate([
+    //         'spouseFirstName' => 'sometimes|required|max:255',
+    //         'spouseLastName' => 'sometimes|required|max:255',
+    //         'spouseYearsOfSupport' => 'sometimes|required|numeric|max:100',
+    //         'spouseday' => 'sometimes|required',
+    //         'spousemonth' => 'sometimes|required',
+    //         'spouseyear' => 'sometimes|required',
+    //         'spouseMaritalStatus' => 'required_with:spouseFirstName|in:' . implode(',', $maritalStatus),
+    //         'child_1FirstName' => 'sometimes|required|max:255',
+    //         'child_1LastName' => 'sometimes|required|max:255',
+    //         'child_1YearsOfSupport' => 'sometimes|required|numeric|max:100',
+    //         'child_1day' => 'sometimes|required',
+    //         'child_1month' => 'sometimes|required',
+    //         'child_1year' => 'sometimes|required',
+    //         'child_1MaritalStatus' => 'required_with:child_1FirstName|in:' . implode(',', $maritalStatus),
+    //         'child_2FirstName' => 'sometimes|required|max:255',
+    //         'child_2LastName' => 'sometimes|required|max:255',
+    //         'child_2YearsOfSupport' => 'sometimes|required|numeric|max:100',
+    //         'child_2day' => 'sometimes|required',
+    //         'child_2month' => 'sometimes|required',
+    //         'child_2year' => 'sometimes|required',
+    //         'child_2MaritalStatus' => 'required_with:child_2FirstName|in:' . implode(',', $maritalStatus),
+    //     ]);
+
+    //     // Get the existing array from the session
+    //     $arrayData = session('passingArrays', []);
+
+    //     // Create the 'familyDependant' array if it doesn't exist
+    //     if (!isset($arrayData['familyDependant'])) {
+    //         $arrayData['familyDependant'] = [];
+    //     }
+
+    //     // Loop through the indexed array to handle each accordion
+    //     foreach ($arrayData['familyDependant'] as $accordion) {
+    //         if ($accordion === 'spouse') {
+    //             $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['spouseFirstName'];
+    //             $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['spouseLastName'];
+    //             $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+    //             $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['spouseday'];
+    //             $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['spousemonth'];
+    //             $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['spouseyear'];
+    //             $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
+    //         } elseif ($accordion === 'child_1') {
+    //             $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_1FirstName'];
+    //             $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_1LastName'];
+    //             $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_1YearsOfSupport'];
+    //             $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_1day'];
+    //             $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_1month'];
+    //             $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_1year'];
+    //             $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_1MaritalStatus'];
+    //         } elseif ($accordion === 'child_2') {
+    //             $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_2FirstName'];
+    //             $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_2LastName'];
+    //             $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_2YearsOfSupport'];
+    //             $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_2day'];
+    //             $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_2month'];
+    //             $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_2year'];
+    //             $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_2MaritalStatus'];
+    //         }
+    //     }
+        
+    //     // Store the updated array back into the session
+    //     session(['passingArrays' => $arrayData]);
+
+    //     Log::debug($arrayData);
+    //     // Process the form data and perform any necessary actions
+    //     return redirect()->route('avatar.my.assets');
+    // }
 }
