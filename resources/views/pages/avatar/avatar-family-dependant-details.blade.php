@@ -23,6 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
             <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="avatar-bg position-relative">
                         <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage pb-2">
@@ -40,12 +41,15 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <section class="main-content">
-                        <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
-                                <div class="col-12">
-                                    <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
-                                    <p class="text-white display-6">Tell us more about each of them.</p>
+                    <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST">
+                        @csrf
+                        <section class="main-content">
+                            <div class="container">
+                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                    <div class="col-12">
+                                        <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
+                                        <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
+                                    </div>
                                 </div>
                                 <div class="form-container pb-5">
                                     @if ($errors->any())
@@ -569,15 +573,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
                     
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('avatar.family.dependant')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('avatar.my.assets') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <a href="{{route('avatar.family.dependant')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
