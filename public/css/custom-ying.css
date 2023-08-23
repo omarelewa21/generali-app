@@ -121,11 +121,26 @@ svg.slide-button.slick-arrow:hover {
 }
 
 /* Education */
+.position-absolute.center.up{
+    top: 45% !important;
+}
 .bg-education{
     background-image: url('/images/needs/education/education-master-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;
+}
+.bg-education-home{
+    background-image: url(/images/needs/background/bg-main.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
+}
+.bg-education-book{
+    background-image: url(/images/needs/education/education-plain-home.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
 }
 .bg-education-supporting{
     background-image: url('/images/needs/education/bg-supporting.png');
@@ -518,6 +533,12 @@ button.choice:focus {
     /* .slick-padding{
         padding: 0.5rem;
     } */
+    .bg-education-home{
+        background-size: cover;
+    }
+    .bg-education-book{
+        background-size: cover;
+    }
 }
 @media only screen and (min-width: 1024px){
     .needs-home-nav {
@@ -839,6 +860,9 @@ button.choice:focus {
     }
     .show-desktop{
         display: block !important;
+    }
+    .d-vh-100{
+        height: 100vh !important;
     }
 }
 @media only screen and (max-width: 1199px){
