@@ -1,6 +1,6 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    '/gender',
+    'gender',
     'marital-status'
 ];
 
@@ -25,6 +25,19 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
             // Add the 'selected' class to the closest button-bg div of the clicked button
             this.closest('.button-bg').classList.add('selected');
+
+            const nextButton = document.getElementById('nextButton');
+            const dataUrl = nextButton.getAttribute('data-url');
+
+            // Get the selected data-avatar value
+            const dataAvatar = this.getAttribute('data-avatar');
+
+            // Update the hidden input field value with the selected avatar
+            document.getElementById('selectedButtonInput').value = dataAvatar;
+            document.getElementById('urlInput').value = dataUrl;
+
+            // const requiredAttributeInput = document.getElementById('requiredAttribute');
+            // requiredAttributeInput.value = 'selected';
         });
     });
 

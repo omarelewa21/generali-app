@@ -33,11 +33,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                    @include('templates.nav.nav-sidebar-needs')
+                </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
-                @include('templates.nav.nav-sidebar-needs')
-            </div>
-        </div>
     </section>
     <div id="protectionExistingPolicyErrorMessage" class="d-flex position-absolute w-100 justify-content-center align-items-end">
         <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
@@ -68,11 +67,11 @@
                                     <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
 
                                     <span class="me-3 me-md-5 me-lg-5">
-                                        <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{Session::get('protectionExistingPolicy') === 'yes' ? 'checked' : ''}} required>
+                                        <input type="radio" class="needs-radio" id="protection_yes" name="protectionExistingPolicy" value="yes" {{$protectionExistingPolicy === 'yes' ? 'checked' : ''}} required>
                                         <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
                                     <span>
-                                        <input type="radio" class="needs-radio" id="protection_no" name="protectionExistingPolicy" value="no" {{Session::get('protectionExistingPolicy') === 'no' ? 'checked' : ''}} required>
+                                        <input type="radio" class="needs-radio" id="protection_no" name="protectionExistingPolicy" value="no" {{$protectionExistingPolicy === 'no' ? 'checked' : ''}} required>
                                         <label for="protection_no" class="form-label">No</label>
                                     </span>
 

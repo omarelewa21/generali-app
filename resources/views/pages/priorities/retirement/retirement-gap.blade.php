@@ -42,7 +42,7 @@
                                         <h5 class="needs-text d-inline-flex">loved ones with</h5>
                                         <div class="input-group w-25">
                                             <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" class="form-control text-primary" id="years" placeholder=" "required>
+                                            <input type="number" name="years" value="{{$TotalRetirementValue}}" class="form-control text-primary" id="years" placeholder=" "required>
                                         </div>
                                     </div>
                                     <br>
