@@ -6,13 +6,17 @@
 
 @section('content')
 @php
-    // Retrieving values from the session
-    $arrayDataProtection = session('passingArraysProtection');
-    $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
-    $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : '';
-    $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
-    $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
-    $protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ? $arrayDataProtection['protectionPercentage'] : 0;
+// Retrieving values from the session
+$arrayDataProtection = session('passingArraysProtection');
+$protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
+$protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ?
+$arrayDataProtection['protectionSupportingYears'] : '';
+$formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ?
+$arrayDataProtection['formattedTotalProtectionValue'] : 0;
+$TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ?
+$arrayDataProtection['TotalProtectionValue'] : 0;
+$protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ?
+$arrayDataProtection['protectionPercentage'] : 0;
 
 
 @endphp
@@ -28,8 +32,9 @@
                         <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionPercentage}}%;"
-                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="px-2 retirement-progress-bar" role="progressbar"
+                                    style="width:{{$protectionPercentage}}%;" aria-valuenow="100" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
                             </div>
                             <h3 id="TotalProtectionValueText" class="m-1 text-light text-center">RM {{
                                 $formattedTotalProtectionValue}}</h3>
@@ -42,21 +47,29 @@
                 </div>
             </div>
         </section>
-        <div id="protectionSupportingYearsErrorMessage" class="d-flex justify-content-center align-items-end h-100">
-            <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
-                @if ($errors->has('protectionSupportingYears'))
-                <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-4 py-lg-4 posErrorMessage"
-                    role="alert">
+
+        {{-- error message notifications --}}
+        @if ($errors->has('protectionSupportingYears'))
+        <div id="protectionSupportingYearsErrorMessageErrorMessage"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+                <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                         <path
                             d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                     </svg>
-                    <p class="mx-2 my-0">{{ $errors->first('protectionSupportingYears') }}</p>
+                    <span class="mx-2 fs-18">{{ $errors->first('protectionSupportingYears') }}</span>
                 </div>
-                @endif
+                <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
+        @endif
+        {{-- end of error message notifications --}}
+        
         <section>
             <div class="row flex-grow-1">
                 <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
@@ -81,10 +94,10 @@
                                                 id="protectionSupportingYears" required>
                                             <h5 class="needs-text">years</h5>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
                                     <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
                                 </div>
@@ -102,39 +115,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
             </div>
-        </section>
+            </form>
     </div>
+    </section>
+</div>
 </div>
 
 
 <script>
-//     document.addEventListener("DOMContentLoaded", function() {
-//     const protectionSupportingYearsErrorMsg = document.getElementById("protectionSupportingYearsErrorMsg");
-//     var protectionSupportingYears = document.getElementById('protectionSupportingYears');
-
-//     protectionSupportingYears.addEventListener('blur', function() {
-//             validateYearsNumberField(protectionSupportingYears);
-//         });
-
-// function validateYearsNumberField(field) {
-//     var minAge = 1;
-//     var maxAge = 100;
-
-//     var value = parseInt(field.value);
-
-//     if (!isNaN(value) && value >= minAge && value <= maxAge) {
-//         field.classList.add('is-valid');
-//         field.classList.remove('is-invalid');
-//     } else {
-//         field.classList.remove('is-valid');
-//         field.classList.add('is-invalid');
-//     }
-// }
-// });
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     var inputField = document.getElementById("protectionSupportingYears");
     var TotalProtectionValueText = document.getElementById("TotalProtectionValueText");
     //get session array protection protectionFunds
@@ -170,29 +160,40 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <style>
-.was-validated .form-control:valid, .form-control.is-valid {
-    padding-right: calc(0.6em + 0.75rem);
-    background-position: right;
-    background-size: 3rem;
+    .was-validated .form-control:valid,
+    .form-control.is-valid {
+        padding-right: calc(0.6em + 0.75rem);
+        background-position: right;
+        background-size: 3rem;
 
-}
-.was-validated .form-control:invalid, .form-control.is-invalid {
-    padding-right: calc(0.5em + 0.75rem);
-    background-position: right;
-    background-size: 3rem;
-}
-.form-control:focus {
-        border-color: #000000;
-        box-shadow: none;
-}
-.was-validated .form-control:valid, .form-control.is-valid {
-        background-image:none;
-        border-color: #000000;
     }
-    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        padding-right: calc(0.5em + 0.75rem);
+        background-position: right;
+        background-size: 3rem;
+    }
+
+    .form-control:focus {
         border-color: #000000;
         box-shadow: none;
     }
+
+    .was-validated .form-control:valid,
+    .form-control.is-valid {
+        background-image: none;
+        border-color: #000000;
+    }
+
+    .was-validated .form-control:valid:focus,
+    .form-control.is-valid:focus,
+    .was-validated .form-control:invalid:focus,
+    .form-control.is-invalid:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+
     /* Apply the initial state for the toast */
     .protectionSupportingYearsErrorMsg {
         transform: translateY(-100%);
@@ -205,27 +206,35 @@ document.addEventListener("DOMContentLoaded", function() {
         transform: translateY(0);
         opacity: 1;
     }
+
     .navbar {
-        right:50%;
+        right: 50%;
     }
-@media only screen and (max-width: 767px) {
 
-    .was-validated .form-control:valid, .form-control.is-valid, .was-validated .form-control:invalid, .form-control.is-invalid {
-    background-size: 1.5rem;
+    @media only screen and (max-width: 767px) {
 
-}
-.fixed-bottom {
-    z-index: 1000;
-}
-.navbar {
-        right:0;
+        .was-validated .form-control:valid,
+        .form-control.is-valid,
+        .was-validated .form-control:invalid,
+        .form-control.is-invalid {
+            background-size: 1.5rem;
+
+        }
+
+        .fixed-bottom {
+            z-index: 1000;
+        }
+
+        .navbar {
+            right: 0;
+        }
     }
-}
-@media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
-    .calendar-protection {
-        width: 100% !important;
+
+    @media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
+        .calendar-protection {
+            width: 100% !important;
+        }
     }
-}
 </style>
 
 

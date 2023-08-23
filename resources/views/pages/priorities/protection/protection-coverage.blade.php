@@ -28,37 +28,25 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
         <form class="form-horizontal p-0 needs-validation" id="protectionCoverage" novalidate
             action="{{route('form.protection.coverage')}}" method="POST">
             @csrf
-
-            {{-- <div id="protectionSelectedAvatarErrorMessage" class="d-flex justify-content-center align-items-end h-100">
-                <div class="position-absolute mb-auto w-sm-100 posErrorMessage">
-                    @if ($errors->has('protectionSelectedAvatar'))
-                    <div class="alert alert-danger d-flex position-absolute bottom-0 z-1 w-100 my-0 my-lg-3 py-4 py-lg-4 posErrorMessage"
-                        role="alert">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
-                            viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                            <path
-                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                        </svg>
-                        <p class="mx-2 my-0">{{ $errors->first('protectionSelectedAvatar') }}</p>
-                    </div>
-                    @endif
-                </div>
-            </div> --}}
-
+            
+            {{-- error message notifications --}}
             @if ($errors->has('protectionSelectedAvatar'))
-            <div id="protectionSelectedAvatarErrorMessage" class="toast w-100 position-absolute top-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-                <div class="alert alert-danger d-flex align-items-center">
+            <div id="protectionSelectedAvatarErrorMessage" class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
+                <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
                     <div class="flex-grow-1 d-flex justify-content-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                              viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                         </svg>
-                        <span class="mx-2">{{ $errors->first('protectionSelectedAvatar') }}</span>
+                        <span class="mx-2 fs-18">{{ $errors->first('protectionSelectedAvatar') }}</span>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>                
                 </div>
             </div>
             @endif
+            {{-- end of error message notifications --}}
             
             
             <section>
@@ -155,7 +143,7 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
     const avatarType = button.getAttribute('data-type');
     const buttons = document.querySelectorAll('.avatar-button');
     const selectedAvatarInput = document.getElementById('protectionSelectedAvatarInput');
-    const protectionSelectedAvatarErrorMessage = document.getElementById('protectionSelectedAvatarErrorMessage');
+    // const protectionSelectedAvatarErrorMessage = document.getElementById('protectionSelectedAvatarErrorMessage');
 
 
     if (selectedAvatarInput.value === avatarType) {
@@ -176,8 +164,8 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
                     buttons.forEach((otherBtn) => {
                         otherBtn.classList.remove('selected-box-shadow');
                     });
-                    protectionSelectedAvatarErrorMessage.classList.remove('d-flex');
-                    protectionSelectedAvatarErrorMessage.classList.add('d-none');
+                    // protectionSelectedAvatarErrorMessage.classList.remove('d-flex');
+                    // protectionSelectedAvatarErrorMessage.classList.add('d-none');
                     btn.classList.add('selected-box-shadow');
                     btn.classList.remove('box-shadow');
                 }
@@ -189,16 +177,8 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
     
 }
 
- 
-
 </script>
 <style>
-.alert {
-    margin-bottom: 0 !important;
-    margin-top: -1px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
 
     @media only screen and (max-width: 767px) {
         .progress-value p {
