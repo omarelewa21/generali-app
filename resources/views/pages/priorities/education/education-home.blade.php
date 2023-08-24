@@ -1,3 +1,8 @@
+<?php
+ /**
+ * Template Name: Education Homepage
+ */
+?>
 @extends('templates.master')
 
 @section('title')

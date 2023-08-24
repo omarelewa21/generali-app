@@ -156,6 +156,12 @@ svg.slide-button.slick-arrow:hover {
     background-position: center, center 20%;
     background-repeat: no-repeat;
 }
+.bg-education-coverage{
+    background-image: url(/images/needs/education/education-coverage-vector.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
+}
 .bg-education-supporting{
     background-image: url('/images/needs/education/bg-supporting.png');
     background-repeat: no-repeat;
