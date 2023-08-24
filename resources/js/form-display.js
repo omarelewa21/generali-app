@@ -4,7 +4,7 @@ const specificPageURLs = [
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
-
+    
     // Show the selected groups based on the dropdown selected
     document.addEventListener('DOMContentLoaded', function() {
         var idTypeSelect = document.getElementById('idType');
