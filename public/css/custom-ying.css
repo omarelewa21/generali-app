@@ -1,3 +1,92 @@
+/* Education Global */
+.bg-education-home{
+    background-image: url(/images/needs/background/bg-main.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
+}
+
+/* Education Coverage Page */
+.wrapper-needs-coverage-default {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-needs-default"
+        "footer-needs-default";
+    grid-template-rows: 15vh 60vh 25vh;
+}
+.header-needs-default {
+    grid-area: header-needs-default;
+}
+.content-needs-default {
+    /* grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-gap: 0; */
+}
+.footer-needs-default {
+    grid-area: footer-needs-default;
+}
+.bg-education-coverage{
+    background-image: url(/images/needs/education/education-coverage-vector.png);
+    background-size: auto;
+    background-position: center top 25%;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+/* Media Query - Mobile (screen size max 767px) */
+@media only screen and (max-width: 767px){
+
+}
+
+/* Media Query - Medium device (screen size max 767px) */
+@media only screen and (max-width: 1024px){
+    .bg-education-coverage{
+        background-size: contain;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** Redo Everything ******************************************************************/
+
 /* Gender Selection */
 :where(html){
     --skinColor-1: linear-gradient(to bottom right,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E);
@@ -157,22 +246,10 @@ svg.slide-button.slick-arrow:hover {
     background-size: cover;
     background-position:center;
 }
-.bg-education-home{
-    background-image: url(/images/needs/background/bg-main.png);
-    background-size: contain,90%;
-    background-position: center, center 20%;
-    background-repeat: no-repeat;
-}
 .bg-education-book{
     background-image: url(/images/needs/education/education-plain-home.png);
     background-size: contain,90%;
     background-position: center, center 20%;
-    background-repeat: no-repeat;
-}
-.bg-education-coverage{
-    background-image: url(/images/needs/education/education-coverage-vector.png);
-    background-size: auto;
-    background-position: center top 25%;
     background-repeat: no-repeat;
 }
 .bg-education-supporting{
