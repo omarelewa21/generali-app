@@ -121,6 +121,20 @@ svg.slide-button.slick-arrow:hover {
 }
 
 /* Education */
+.education-needs-home {
+    grid-template-areas: "header-spacing" "education-content-needs" "footer-avatar-default";
+    grid-template-rows: 10vh 60vh 30vh;
+    grid-gap: 0;
+    display: grid;
+    grid-template-columns: 100%;
+}
+.education-content-needs {
+    grid-area: education-content-needs;
+}
+.footer-needs {
+    grid-area: footer-needs;
+    background-color: rgba(233, 233, 233, 1);
+}
 .position-absolute.center.up{
     top: 45% !important;
 }
