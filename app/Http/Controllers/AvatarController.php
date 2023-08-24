@@ -59,6 +59,11 @@ class AvatarController extends Controller
         //     $svgPath = public_path('images/avatar-general/' . $svgMainImage . '-1.svg');
         //     $svg = simplexml_load_file($svgPath);
         //     $svg->registerXPathNamespace('svg', 'http://www.w3.org/2000/svg');
+        if ($color !== null) {
+            // SVG editing code
+            $svgPath = public_path('images/avatar-general/' . $svgMainImage . '.svg');
+            $svg = simplexml_load_file($svgPath);
+            $svg->registerXPathNamespace('svg', 'http://www.w3.org/2000/svg');
 
         //     // Create the first gradient fill element
         //     $gradient1 = $svg->addChild('linearGradient');

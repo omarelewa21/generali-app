@@ -257,6 +257,7 @@ button[data-required="selected"] img {
 
 .button-bg:hover .hover {
   border: 10px solid #8995CB;
+  transition: border 0.7s ease;
 }
 
 .button-bg:hover {
@@ -277,7 +278,6 @@ button[data-required="selected"] img {
 
 .button-bg div.d-flex {
   border: 10px solid transparent;
-  transition: border 0.7s ease;
 }
 
 /* Right Sidebar */
@@ -296,6 +296,11 @@ button[data-required="selected"] img {
 /* Modal */
 .modal-footer {
   justify-content: center;
+}
+
+.otherModalText {
+  font-size: 5rem;
+  line-height: 3.6rem;
 }
 
 /* Welcome Page */

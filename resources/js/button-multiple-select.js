@@ -1,6 +1,7 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'family-dependant'
+    'family-dependant',
+    'assets'
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {

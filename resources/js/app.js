@@ -1,6 +1,4 @@
 import './bootstrap';
-$('.toast').toast('show');
-
 
 import './height-controller';
 import './button';

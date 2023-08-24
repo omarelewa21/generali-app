@@ -129,7 +129,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     function calculateAge() {
         const selectedDay = parseInt(dayFieldExtract.value);
         const selectedMonth = parseInt(monthFieldExtract.value);
-        // const selectedYear = parseInt(yearFieldExtract.value);
         const selectedYearOption = yearFieldExtract.options[yearFieldExtract.selectedIndex];
         const selectedYear = selectedYearOption.textContent;
         
@@ -147,7 +146,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         }
 
         let age = currentDate.getFullYear() - selectedDate.getFullYear();
-        
         const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
 
         if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {
