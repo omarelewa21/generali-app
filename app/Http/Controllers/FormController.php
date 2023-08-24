@@ -58,7 +58,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
+        
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -146,7 +146,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
+        
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
@@ -199,7 +199,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
+        
         return redirect()->route($dataUrl);
     }
 

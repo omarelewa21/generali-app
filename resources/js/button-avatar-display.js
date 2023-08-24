@@ -80,6 +80,24 @@ $(document).ready(function () {
         }
     ];
 
+    var bungalowImages = [
+        {
+            src: "/images/avatar-my-assets/bunglow-vector.png",
+            width: "auto",
+            height: "100%",
+            alt: "Bungalow"
+        }
+    ];
+
+    var condoImages = [
+        {
+            src: "/images/avatar-my-assets/condo-vector.png",
+            width: "auto",
+            height: "100%",
+            alt: "Bungalow"
+        }
+    ];
+
     // Set the quantity of clicks allowed
     var parentImageIndex = 0;
     var spouseImageIndex = 0;
@@ -87,6 +105,8 @@ $(document).ready(function () {
     var carImageIndex = 0;
     var scooterImageIndex = 0;
     var houseImageIndex = 0;
+    var bungalowImageIndex = 0;
+    var condoImageIndex = 0;
 
     // Set initial background to none
     $(".imageContainerParents").css("background-image", "none");
@@ -165,11 +185,35 @@ $(document).ready(function () {
     $("#houseButton").on("click", function () {
         if (houseImageIndex < houseImages.length) {
             var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
-            $(".imageContainerHouse").append(newImage);
+            $(".imageContainerHouse").html(newImage);
             houseImageIndex++;
 
             if (houseImageIndex >= houseImages.length) {
                 $("#houseButton").parent().removeClass("hover");
+            }
+        }
+    });
+
+    $("#bungalowButton").on("click", function () {
+        if (bungalowImageIndex < bungalowImages.length) {
+            var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
+            $(".imageContainerHouse").html(newImage);
+            bungalowImageIndex++;
+
+            if (bungalowImageIndex >= bungalowImages.length) {
+                $("#bungalowButton").parent().removeClass("hover");
+            }
+        }
+    });
+
+    $("#condoButton").on("click", function () {
+        if (condoImageIndex < condoImages.length) {
+            var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
+            $(".imageContainerHouse").html(newImage);
+            condoImageIndex++;
+
+            if (condoImageIndex >= condoImages.length) {
+                $("#condoButton").parent().removeClass("hover");
             }
         }
     });
