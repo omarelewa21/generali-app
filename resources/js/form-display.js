@@ -146,7 +146,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         }
 
         let age = currentDate.getFullYear() - selectedDate.getFullYear();
-        
         const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
 
         if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {

@@ -26,7 +26,10 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-default d-flex justify-content-center">
-                    <div class="col-12 position-relative imageContainerCar"></div>
+                    <div class="col-12 position-relative">
+                        <img src="{{ asset('/images/avatar-my-assets/car-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;right:-200px">
+                        <img src="{{ asset('/images/avatar-my-assets/scooter-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;left:0">
+                    </div>
                     <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="50%" alt="" class="position-absolute" style="bottom: 50px;">
                 </section>
             </div>
@@ -37,7 +40,7 @@
                             <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
                                     <h1 class="display-4 text-white pb-3 fw-bold">Right, let’s get an idea of your finances and loans.</h1>
-                                    <p class="text-white display-6 lh-base">Click to add your assets next to your avatar.</p>
+                                    <p class="text-white display-6">Click to add your assets next to your avatar.</p>
                                 </div>
                             </div>
                             <div class="row px-4 pb-4 px-sm-5">
