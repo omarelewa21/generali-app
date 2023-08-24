@@ -119,28 +119,30 @@ class EducationController extends Controller
         return redirect()->route('investment.home');
     }
     
-    public function validateCoverageSelection(Request $request)
+    public function validateEducationCoverageSelection(Request $request)
     {
-        $selectedCoverage = $request->input('selectedCoverageInput');
-        $dataUrl = $request->input('urlInput');
-        Log::debug($request->all());
+        $customMessages = [
+            'educationSelectedAvatar' => 'Please select an option',
+        ];
+        $validatedData = $request->validate([
+            'educationSelectedAvatar' => 'required|in:self,child-1,child-2,child-3',
+
+        ], $customMessages);
+
+        $educationSelectedAvatar = $request->input('educationSelectedAvatar');
 
         // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        if ($selectedCoverage !== null) {
-            // If not equal to null, then replace the data in $arrayData['coverageSelection']
-            $arrayData['coverageSelection'] = $selectedCoverage;
-        }
+        $arrayDataEducation = session('passingArraysProtection', []);
+        $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatar;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        session(['passingArraysProtection' => $arrayDataEducation]);
 
-        // Log the session data to the Laravel log file
-        \Log::info('Session Data:', $arrayData);
+        // dd(Session::all()); // Debug to see all session data
+        Log::info('Session Data:', Session::all());
 
-        // // Process the form data and perform any necessary actions
-        return redirect()->route($dataUrl);
+        return redirect()->route('education.supporting.years')
+            ->withInput();
     }
 
 }

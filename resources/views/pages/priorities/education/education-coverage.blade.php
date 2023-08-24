@@ -19,7 +19,7 @@
 @endphp
 
 <div id="education-coverage" class="vh-100">
-    <div class="container-fluid font-color-default text-center">
+    <div class="container-fluid font-color-default text-center vh-100">
         <div class="row bg-education">
             <div class="col-lg-6 col-md-12">
                 @include('templates.nav.nav-red-menu')
@@ -28,10 +28,10 @@
                 @include ('templates.nav.nav-sidebar-needs')
             </div>
         </div>
-        <form novalidate action="{{route('validate.coverage.selection')}}" method="POST" id="coverage_selection" class="form-horizontal p-0 needs-validation">
+        <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" id="coverage_selection" class="form-horizontal p-0 needs-validation">
             @csrf
             {{-- error message notifications --}}
-            @if ($errors->has('protectionSelectedAvatar'))
+            @if ($errors->has('educationSelectedAvatar'))
             <div class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
                 <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
                     <div class="flex-grow-1 d-flex justify-content-center">
@@ -51,57 +51,44 @@
                 
             <section>
                 <div class="col-12 text-dark px-0 my-4 bg-education-home">
-                    <div class="row d-flex justify-content-center">
-                        <div class="row position-relative py-4 py-md-5 d-flex align-items-center">
+                    <div class="row d-flex justify-content-center bg-education-coverage">
+                        <div class="row position-relative d-flex align-items-center" style="padding-top:5.5rem;">
                             <h5>I'd like to provide coverage for my:</h5>
                         </div>
-                        <div class="container">
-                            {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
-                            <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-4 px-md-5">
-                                <i class="bi bi-arrow-left-circle text-primary"></i>
-                            </div>
-
-                            {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
-                            <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-4 px-md-5">
-                                <i class="bi bi-arrow-right-circle text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
-                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                                <button
-                                    class="btn border-0 bg-transparent box-shadow avatar-button {{ $educationSelectedAvatar === 'self' ? 'selected-box-shadow' : '' }}"
-                                    data-type="self" id="button-self-avatar">
-                                    <img src="{{ asset('images/needs/education/education-avatar/Male.png') }}" class="self-avatar"
-                                        alt="self-character">
-                                    <h6 class="text-center py-2">Self</h6>
-                                </button>
-                            </div>
-                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                                <button
-                                    class="btn border-0 bg-transparent box-shadow avatar-button {{ $educationSelectedAvatar === 'child-1' ? 'selected-box-shadow' : '' }}"
-                                    data-type="child-1" id="button-child-1-avatar">
-                                    <img src="{{ asset('images/needs/education/education-avatar/Daughter.png') }}" class="child-1"
-                                        alt="child-1-character">
-                                    <h6 class="text-center py-2">Child 1</h6>
-                                </button>
-                            </div>
-                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                                <button
-                                    class="btn border-0 bg-transparent box-shadow avatar-button {{ $educationSelectedAvatar === 'child-2' ? 'selected-box-shadow' : '' }}"
-                                    data-type="child-2" id="button-child-2-avatar">
-                                    <img src="{{ asset('images/needs/education/education-avatar/Son.png') }}" class="child-2"
-                                        alt="child-2-character">
-                                    <h6 class="text-center py-2">Child 2</h6>
-                                </button>
-                            </div>
-                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center">
-                                <button
-                                    class="btn border-0 bg-transparent box-shadow avatar-button {{ $educationSelectedAvatar === 'child-3' ? 'selected-box-shadow' : '' }}"
-                                    data-type="child-3" id="button-child-3-avatar">
-                                    <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="child-3"
-                                        alt="child-1-character">
-                                    <h6 class="text-center py-2">Child 3</h6>
-                                </button>
+                        <div class="container row m-auto btn-group coverage_selection education-needs-coverage" data-carousel="true">
+                            <div class="row education-coverage-content h-100">
+                                <div class="col-sm-3 h-100 z-1">
+                                    <button class="btn border-0 bg-transparent h-100 box-shadow avatar-button {{ $educationSelectedAvatar === 'self' ? 'selected-box-shadow' : '' }}" data-type="self" id="button-self-avatar">
+                                        <div class="d-flex flex-column h-100 justify-content-end">
+                                            <img src="{{ asset('images/needs/education/education-avatar/Male.png') }}" class="self-avatar max-h-100" alt="self-character">
+                                            <h6 class="text-center py-2">Self</h6>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 h-100 z-1">
+                                    <button class="btn border-0 bg-transparent box-shadow h-100 avatar-button {{ $educationSelectedAvatar === 'child-1' ? 'selected-box-shadow' : '' }}" data-type="child-1" id="button-child-1-avatar">
+                                        <div class="d-flex flex-column h-100 justify-content-end">
+                                            <img src="{{ asset('images/needs/education/education-avatar/Daughter.png') }}" class="child-1 max-h-100" alt="child-1-character">
+                                            <h6 class="text-center py-2">Child 1</h6>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 h-100 z-1">
+                                    <button class="btn border-0 bg-transparent box-shadow h-100 avatar-button {{ $educationSelectedAvatar === 'child-2' ? 'selected-box-shadow' : '' }}" data-type="child-2" id="button-child-2-avatar">
+                                        <div class="d-flex flex-column h-100 justify-content-end">
+                                            <img src="{{ asset('images/needs/education/education-avatar/Son.png') }}" class="child-2 max-h-100" alt="child-2-character">
+                                            <h6 class="text-center py-2">Child 2</h6>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 h-100 z-1">
+                                    <button class="btn border-0 bg-transparent box-shadow h-100 avatar-button {{ $educationSelectedAvatar === 'child-3' ? 'selected-box-shadow' : '' }}" data-type="child-3" id="button-child-3-avatar">
+                                        <div class="d-flex flex-column h-100 justify-content-end">
+                                            <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="child-3 max-h-100" alt="child-1-character">
+                                            <h6 class="text-center py-2">Child 3</h6>
+                                        </div>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <input type="hidden" name="educationSelectedAvatar" id="educationSelectedAvatarInput" value="{{$educationSelectedAvatar}}">
@@ -135,7 +122,5 @@ dataAvatarButtons.forEach(button => {
         event.preventDefault(); // Prevent the default behavior of the button click
     });
 });
-
-</script>
 
 @endsection
