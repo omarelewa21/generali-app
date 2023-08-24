@@ -298,6 +298,10 @@ button[data-required="selected"] img {
   justify-content: center;
 }
 
+.modal-title {
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
 .otherModalText {
   font-size: 5rem;
   line-height: 3.6rem;

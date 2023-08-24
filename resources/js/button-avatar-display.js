@@ -99,7 +99,6 @@ $(document).ready(function () {
     ];
 
     // Set the quantity of clicks allowed
-    var parentImageIndex = 0;
     var spouseImageIndex = 0;
     var childImageIndex = 0;
     var carImageIndex = 0;
@@ -113,21 +112,39 @@ $(document).ready(function () {
     $(".imageContainerChildren").css("background-image", "none");
 
     // Do the logics for button clicks
-    // $("#parentButton").on("click", function () {
-    //     if (parentImageIndex < parentImages.length) {
-    //         var newImage = '<img src="' + parentImages[parentImageIndex].src + '" width="' + parentImages[parentImageIndex].width + '" height="' + parentImages[parentImageIndex].height + '" alt="' + parentImages[parentImageIndex].alt + '" class="' + parentImages[parentImageIndex].class + '" style="' + parentImages[parentImageIndex].style + '">';
-    //         $(".imageContainerParents").append(newImage);
-    //         parentImageIndex++;
+    // Parents selection
+    $(".btn-exit-parent").on("click", function () {
+        // Get the selected value from the dropdown
+        var selectedValue = $("#parentsSelect").val();
+
+        if (selectedValue === "father" || selectedValue === "mother" || selectedValue === "both") {
+            // Clear the existing images
+            $(".imageContainerParents").empty();
+
+            var selectedImages = [];
+
+            if (selectedValue === "father" || selectedValue === "both") {
+                selectedImages.push(parentImages[1]);
+            }
+
+            if (selectedValue === "mother" || selectedValue === "both") {
+                selectedImages.push(parentImages[0]);
+            }
+
+            selectedImages.forEach(function (image) {
+                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                $(".imageContainerParents").append(newImage);
+            });
+
+            // Display the background image
+            $(".imageContainerParents").css("background-image", 'url("/images/avatar-general/Shadow.png")');
             
-    //         // Display the background image
-    //         $(".imageContainerParents").css("background-image", 'url("/images/avatar-general/Shadow.png")');
+            // Close the modal
+            $("#parentAvatars").modal("hide");
+        }
+    });
 
-    //         if (parentImageIndex >= parentImages.length) {
-    //             $("#parentButton").parent().removeClass("hover");
-    //         }
-    //     }
-    // });
-
+    // Spouse selection
     $("#spouseButton").on("click", function () {
         if (spouseImageIndex < spouseImages.length) {
             var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
@@ -143,20 +160,37 @@ $(document).ready(function () {
         }
     });
 
-    $("#childButton").on("click", function () {
-        if (childImageIndex < childrenImages.length) {
-            var newImage = '<img src="' + childrenImages[childImageIndex].src + '" width="' + childrenImages[childImageIndex].width + '" height="' + childrenImages[childImageIndex].height + '" alt="' + childrenImages[childImageIndex].alt + '" class="' + childrenImages[childImageIndex].class + '" style="' + childrenImages[childImageIndex].style + '">';
-            $(".imageContainerChildren").append(newImage);
-            childImageIndex++;
-            
-            // Display the background image
-            $(".imageContainerChildren").css("background-image", 'url("/images/avatar-general/Shadow.png")');
-
-            if (childImageIndex >= childrenImages.length) {
-                $("#childButton").parent().removeClass("hover");
-            }
+    // Children selection
+    $(".btn-exit-children").on("click", function () {
+        // Get the selected value from the dropdown
+        var selectedValue = parseInt($("#childrenSelect").val());
+    
+        // Clear the existing images
+        $(".imageContainerChildren").empty();
+    
+        var selectedImages = [];
+    
+        if (selectedValue >= 1) {
+            selectedImages.push(childrenImages[0]);
         }
+    
+        if (selectedValue >= 2) {
+            selectedImages.push(childrenImages[1]);
+        }
+    
+        selectedImages.forEach(function (image) {
+            var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+            $(".imageContainerChildren").append(newImage);
+        });
+    
+        // Display the background image
+        $(".imageContainerChildren").css("background-image", 'url("/images/avatar-general/Shadow.png")');
+    
+        // Close the modal
+        $("#childrenAvatars").modal("hide");
     });
+    
+    
 
     $("#carButton").on("click", function () {
         if (carImageIndex < carImages.length) {
