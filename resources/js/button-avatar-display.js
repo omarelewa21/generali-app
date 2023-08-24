@@ -113,20 +113,20 @@ $(document).ready(function () {
     $(".imageContainerChildren").css("background-image", "none");
 
     // Do the logics for button clicks
-    $("#parentButton").on("click", function () {
-        if (parentImageIndex < parentImages.length) {
-            var newImage = '<img src="' + parentImages[parentImageIndex].src + '" width="' + parentImages[parentImageIndex].width + '" height="' + parentImages[parentImageIndex].height + '" alt="' + parentImages[parentImageIndex].alt + '" class="' + parentImages[parentImageIndex].class + '" style="' + parentImages[parentImageIndex].style + '">';
-            $(".imageContainerParents").append(newImage);
-            parentImageIndex++;
+    // $("#parentButton").on("click", function () {
+    //     if (parentImageIndex < parentImages.length) {
+    //         var newImage = '<img src="' + parentImages[parentImageIndex].src + '" width="' + parentImages[parentImageIndex].width + '" height="' + parentImages[parentImageIndex].height + '" alt="' + parentImages[parentImageIndex].alt + '" class="' + parentImages[parentImageIndex].class + '" style="' + parentImages[parentImageIndex].style + '">';
+    //         $(".imageContainerParents").append(newImage);
+    //         parentImageIndex++;
             
-            // Display the background image
-            $(".imageContainerParents").css("background-image", 'url("/images/avatar-general/Shadow.png")');
+    //         // Display the background image
+    //         $(".imageContainerParents").css("background-image", 'url("/images/avatar-general/Shadow.png")');
 
-            if (parentImageIndex >= parentImages.length) {
-                $("#parentButton").parent().removeClass("hover");
-            }
-        }
-    });
+    //         if (parentImageIndex >= parentImages.length) {
+    //             $("#parentButton").parent().removeClass("hover");
+    //         }
+    //     }
+    // });
 
     $("#spouseButton").on("click", function () {
         if (spouseImageIndex < spouseImages.length) {
