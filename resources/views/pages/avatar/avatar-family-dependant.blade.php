@@ -128,8 +128,8 @@
             <div class="modal-header px-5 py-2 justify-content-center">
                 <h3 class="modal-title text-center display-4" id="parentAvatarsLabel">Parent(s)</h2>
             </div>
-            <div class="modal-body text-center px-5 pt-2 pb-5">
-                <select name="parents" class="form-select @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" required>
+            <div class="modal-body text-center px-5 pt-2 pb-5 d-flex justify-content-center">
+                <select name="parents" class="form-select @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" style="width:60%" required>
                     <option value="father" selected>Father</option>
                     <option value="mother">Mother</option>
                     <option value="both">Both Parents</option>

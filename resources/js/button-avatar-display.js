@@ -100,7 +100,6 @@ $(function() {
 
     // Set the quantity of clicks allowed
     var spouseImageIndex = 0;
-    var childImageIndex = 0;
     var carImageIndex = 0;
     var scooterImageIndex = 0;
     var houseImageIndex = 0;

@@ -172,9 +172,9 @@ class FormController extends Controller {
             'maritalStatusButtonInput' => [
                 'at_least_one_selected',
             ],
-            'familyDependantButtonInput' => [
-                'at_least_one_selected',
-            ],
+            // 'familyDependantButtonInput' => [
+            //     'at_least_one_selected',
+            // ],
         ]);
 
 
