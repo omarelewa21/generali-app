@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function() {
 
     // Set the avatar according to button clicks
     var parentImages = [
@@ -25,7 +25,7 @@ $(document).ready(function () {
             width: "auto",
             height: "90%",
             alt: "Spouse",
-            class: "changeImage position-absolute",
+            class: "changeImage position-absolute appended-image",
             style: "bottom: 10px;right: -80px;"
         },
     ];
@@ -100,7 +100,6 @@ $(document).ready(function () {
 
     // Set the quantity of clicks allowed
     var spouseImageIndex = 0;
-    var childImageIndex = 0;
     var carImageIndex = 0;
     var scooterImageIndex = 0;
     var houseImageIndex = 0;
@@ -159,6 +158,40 @@ $(document).ready(function () {
             }
         }
     });
+
+    // $("#spouseButton").on("click", function () {
+    //     const $button = $(this);
+    //     const $buttonBg = $button.closest('.button-bg');
+    //     const $imageContainerSpouse = $(".imageContainerSpouse");
+        
+    //     if ($buttonBg.hasClass("selected")) {
+    //         if (spouseImageIndex < spouseImages.length) {
+    //             var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+    //             $imageContainerSpouse.append(newImage);
+    //             spouseImageIndex++;
+                
+    //             // Display the background image
+    //             $imageContainerSpouse.css("background-image", 'url("/images/avatar-general/Shadow.png")');
+    
+    //             if (spouseImageIndex >= spouseImages.length) {
+    //                 $button.parent().removeClass("hover");
+    //             }
+    //         }
+    //     } else {
+    //         // If the button is not selected, remove the appended images
+    //         $imageContainerSpouse.find('.appended-image').remove();
+    //         spouseImageIndex = 0;
+    
+    //         // Restore the background image
+    //         $imageContainerSpouse.css("background-image", 'url("/images/avatar-general/Shadow.png")');
+    //     }
+    
+    //     // Toggle the 'selected' class
+    //     $buttonBg.classList.toggle('selected');
+    // });
+    
+    
+    
 
     // Children selection
     $(".btn-exit-children").on("click", function () {
