@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function() {
 
     // Set the avatar according to button clicks
     var parentImages = [

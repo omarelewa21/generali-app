@@ -39,7 +39,7 @@
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family. </h1>
+                                        <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family. Tetsing</h1>
                                         <p class="text-white display-6 lh-base">Click to select your family details.</p>
                                     </div>
                                 </div>
