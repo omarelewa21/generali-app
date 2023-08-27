@@ -172,9 +172,9 @@ class FormController extends Controller {
             'maritalStatusButtonInput' => [
                 'at_least_one_selected',
             ],
-            'familyDependantButtonInput' => [
-                'at_least_one_selected',
-            ],
+            // 'familyDependantButtonInput' => [
+            //     'at_least_one_selected',
+            // ],
         ]);
 
 
@@ -199,7 +199,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
+        Log::debug($arrayData);
         return redirect()->route($dataUrl);
     }
 
