@@ -6,6 +6,12 @@
 .needs-stand-bg.error-padding{
     padding:140px;
 }
+.show-tablet{
+    display:none;
+}
+.hide-tablets{
+    display:block;
+}
 /* Education Global */
 .bg-education-home{
     background-image: url(/images/needs/background/bg-main.png);
@@ -111,18 +117,12 @@
         grid-template-rows: 14% auto auto 17%;
         /* grid-template-rows: 14% 69% 17%; */
     }
-    .content-needs-default {
-        grid-template-rows: 10% 90%;
-    }
 }
 @media only screen and (max-width: 600px) and (max-height: 760px){
     .wrapper-needs-coverage-default {
         /* grid-template-rows: 12.5% 73% 14.5%; */
         /* grid-template-rows: 12.5% auto auto 14.5%; */
         grid-template-rows: 13.5% auto auto 16%;
-    }
-    .content-needs-default {
-        grid-template-rows: 10% 90%;
     }
 }
 @media only screen and (max-width: 600px) and (min-height: 760px){
@@ -135,9 +135,6 @@
         /* grid-template-rows: 11.5% 75% 13.5%; */
         grid-template-rows: 11.5% auto auto 13.5%;
     }
-    .content-needs-default {
-        grid-template-rows: 10% 90%;
-    }
     .education_coverage .slick-slide button{
         grid-template-rows: 92% 8%;
     }
@@ -146,9 +143,6 @@
     .wrapper-needs-coverage-default {
         /* grid-template-rows: 10% 78% 12%; */
         grid-template-rows: 10% auto auto 12%;
-    }
-    .content-needs-default {
-        grid-template-rows: 10% 90%;
     }
     .education_coverage .slick-slide button{
         grid-template-rows: 92% 8%;
@@ -166,24 +160,55 @@
 }
 
 /* Media Query - Medium device (screen size max 1024px) */
-@media only screen and (min-width: 768px) and (max-width: 10px){
+@media only screen and (min-width: 768px) and (max-width: 1200px){
     .bg-education-coverage{
         background-size: contain;
     }
     .wrapper-needs-coverage-default {
+        grid-template-areas:
+            "header-needs-default"
+            "warning"
+            "content-needs-default"
+            "footer-needs-default";
         grid-template-rows: 15% auto auto 8%;
     }
 }
-/* @media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 800px){ */
-@media only screen and (min-width: 1024px) and (min-height: 800px){
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1199px){
     .wrapper-needs-coverage-default {
-        /* grid-template-rows: 15% auto auto 13%; */
-        grid-template-rows: 15% auto max(4.5%) 8%;
+        grid-template-rows: 15% auto auto 10.5% !important;
     }
 }
-@media only screen and (min-width: 768px) and (max-width: 1023px) and (min-height: 800px){
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
     .wrapper-needs-coverage-default {
-        grid-template-rows: 15% auto auto 10.5%;
+        grid-template-rows: 15% auto auto 8%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% auto auto 13%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 1200px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% auto auto 8%;
+    }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1200px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% auto auto 13%;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 700px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% auto auto 18%;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+    .show-tablet{
+        display:block;
+    }
+    .hide-tablets{
+        display:none;
     }
 }
 
