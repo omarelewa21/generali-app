@@ -118,7 +118,8 @@
 @media only screen and (max-width: 600px) and (max-height: 760px){
     .wrapper-needs-coverage-default {
         /* grid-template-rows: 12.5% 73% 14.5%; */
-        grid-template-rows: 12.5% auto auto 14.5%;
+        /* grid-template-rows: 12.5% auto auto 14.5%; */
+        grid-template-rows: 13.5% auto auto 16%;
     }
     .content-needs-default {
         grid-template-rows: 10% 90%;
@@ -176,7 +177,8 @@
 /* @media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 800px){ */
 @media only screen and (min-width: 1024px) and (min-height: 800px){
     .wrapper-needs-coverage-default {
-        grid-template-rows: 15% auto auto 13%;
+        /* grid-template-rows: 15% auto auto 13%; */
+        grid-template-rows: 15% auto max(4.5%) 8%;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) and (min-height: 800px){

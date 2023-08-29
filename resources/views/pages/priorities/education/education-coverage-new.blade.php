@@ -38,31 +38,31 @@
                     </div>
                     <div class="col-11 m-auto selection-content-coverage h-100 education_coverage z-1">
                         <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto" id="Self" data-avatar="Self" data-required="">
+                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto justify-content-center align-items-center" id="Self" data-avatar="Self" data-required="">
                                 <img src="{{ asset('images/needs/education/education-avatar/Male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                 <p class="py-2 m-0"><strong>Self</strong></p>
                             </button>
                         </div>
                         <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto" id="Child1" data-avatar="Child1" data-required="">
+                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto justify-content-center align-items-center" id="Child1" data-avatar="Child1" data-required="">
                                 <img src="{{ asset('images/needs/education/education-avatar/Daughter.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                 <p class="py-2 m-0 coverage-text"><strong>Child 1</strong></p>
                             </button>
                         </div>
                         <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto" id="Child2" data-avatar="Child2" data-required="">
+                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto justify-content-center align-items-center" id="Child2" data-avatar="Child2" data-required="">
                                 <img src="{{ asset('images/needs/education/education-avatar/Son.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                 <p class="py-2 m-0 coverage-text"><strong>Child 2</strong></p>
                             </button>
                         </div>
                         <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto" id="Child3" data-avatar="Child3" data-required="">
+                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto justify-content-center align-items-center" id="Child3" data-avatar="Child3" data-required="">
                                 <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                 <p class="py-2 m-0"><strong>Child 3</strong></p>
                             </button>
                         </div>
                         <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto" id="Child3" data-avatar="Child3" data-required="">
+                            <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto justify-content-center align-items-center" id="Child3" data-avatar="Child3" data-required="">
                                 <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                 <p class="py-2 m-0"><strong>Child 3</strong></p>
                             </button>
@@ -70,20 +70,20 @@
                     </div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="position-absolute bottom-0 needs-stand-bg{{ $errors->has('genderSelection') ? 'error-padding' : '' }}"></div>
+                            <div class="position-absolute bottom-0 needs-stand-bg error-padding {{ $errors->has('genderSelection') ? 'error-padding' : '' }}"></div>
                         </div>
                     </div>
                 </section>
-                
-                @if ($errors->has('genderSelection'))
-                <section class="col-12 warning">
+                <!-- <section class="col-12 warning">
                         <div class="col-12 alert alert-warning d-flex align-items-center m-0" role="alert">
                             <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                             </svg>
                             <div class="text">Please Select one!</div>
                         </div>
-                    </section>
+                    </section> -->
+                @if ($errors->has('genderSelection'))
+                
                     
                 @endif
                 <section class="footer bg-btn_bar py-4 fixed-bottom footer-needs-default">
