@@ -30,29 +30,30 @@
                         <section>
                             <div class="container mx-auto row justify-content-center bg-needs-gap">
                             <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
-                                {{-- <div class="svg-container">
+                                <div class="svg-container">
                                 <div class="card-gap" id="gap">
                                     <div class="card-gap__percent">
                                       <svg>
                                         <defs>
-                                          <radialGradient id="gradient" cx="50%" cy="50%" r="60%" fx="50%" fy="50%">
-                                            <stop offset="30%"   stop-color="#FF7D7A"/>
+                                          <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
+                                            <stop offset="10%"   stop-color="#FF7D7A"/>
                                             <stop offset="100%" stop-color="#C1210D"/>
-                                          </radialGradient>
+                                          </linearGradient >
                                         </defs>
-                                        <circle cx="90" cy="90" r="140" stroke="url(#gradient)" id="circle"></circle>
+                                        <circle cx="90" cy="90" r="144" stroke="url(#gradient)" id="circle"></circle>
+                                        <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle>
                                       </svg>
                                       <div class="circle"></div>
                                       <div class="circle circle__medium"></div>
                                       <div class="circle circle__small"></div>
-                                      <div class="card-gap__number text-primary">50%</div>
+                                      <div class="card-gap__number text-primary">{{$protectionPercentage}}%</div>
                                     </div>
                                 </div>
-                                </div> --}}
+                                </div>
                                 {{-- <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
                                     Your browser does not support SVGs
                                 </object> --}}
-                                <div class="ell1 my-4 my-md-0" id="chart-gap" style="transform: scale(1.6);">
+                                {{-- <div class="ell1 my-4 my-md-0" id="chart-gap" style="transform: scale(1.6);">
                                     <div class="ell2">
                                       <div class="ellP">
                                         <svg>
@@ -61,7 +62,7 @@
                                   <stop offset="100%" stop-color="#C1210D"/>
                                   </linearGradient>
                                           <circle sx="70" cy="70" r="120"></circle> 
-                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar" stroke="url(#test)"></circle>   
+                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar" stroke="url(#test)" stroke-dasharray="800"></circle>   
                                               </svg>
                                       </div>
                                       <div class="ell3">
@@ -72,7 +73,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <h5 id="textProtectionFund" class="row position-relative gap-text">
                                     Total Protection Fund
                                 </h5>
@@ -151,30 +152,39 @@
       var protectionPolicyAmount =  {{$protectionPolicyAmount}};
         var TotalProtectionValue = {{$TotalProtectionValue}};
         var protectionGap = {{$protectionGap}};
-        var Covered = (protectionPolicyAmount / (protectionPolicyAmount + TotalProtectionValue) * 100).toFixed(2)
+        var Covered = (protectionPolicyAmount / TotalProtectionValue * 100).toFixed(2)
         var Uncovered = (100 - Covered).toFixed(2);
+        var circle = document.getElementById("circle");
+//    var change = 879.65 - (879.65 * Covered) / 100;
+//    circle.style.strokeDashoffset = change;
+//    console.log('change', change);
+circle.style.strokeDasharray = 904.896;
+let change = 904.896 - (904.896 * Covered) / 100;
+    circle.style.strokeDashoffset = change;
     });
-    document.addEventListener("DOMContentLoaded", function () {
-  
-var covered = parseInt(document.getElementById("covered").innerHTML);
-var percent = covered/100;
-var dasharaay = percent * 800 ;
-var CPB = document.getElementById("CircleProgressBar");
-if (dasharaay < 300) {
-  // Calculate the combined length of all three segments
-  var combinedLength = dasharaay * 3;
 
-  // Set the combined length as strokeDasharray
-  CPB.style.strokeDasharray = combinedLength;
-} else {
-  CPB.style.strokeDasharray = dasharaay;
-}
-// CPB.style.strokeDasharray = dasharaay;
-console.log(covered);
-console.log(percent);
-console.log(dasharaay);
-console.log(dasharaay);
-    });
+    
+//     document.addEventListener("DOMContentLoaded", function () {
+  
+// var covered = parseFloat(document.getElementById("covered").innerHTML);
+// var percent = covered/100;
+// var dasharaay = percent * 800 ;
+// var CPB = document.getElementById("CircleProgressBar");
+// // var CPB = document.getElementById("circle");
+// console.log('dasharaay', dasharaay);
+
+// if (dasharaay < 300) {
+//   // Calculate the combined length of all three segments
+//   var combinedLength = dasharaay * 3;
+
+//   // Set the combined length as strokeDasharray
+//   CPB.style.strokeDasharray = combinedLength;
+// } else {
+//   CPB.style.strokeDasharray = dasharaay;
+// }
+// // CPB.style.strokeDasharray = dasharaay;
+
+//     });
 </script>
 <style>
 

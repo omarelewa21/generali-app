@@ -42,6 +42,24 @@
                 <div class="my-4">  
                     <form class="form-horizontal p-0 needs-validation" id="retirementYearsTillRetireForm" novalidate action="{{ route('form.retirement.years.till.retire') }}" method="POST">
                         @csrf
+                                {{-- error message notifications --}}
+        @if ($errors->has('retirementYearsTillRetire'))
+        <div id="retirementYearsTillRetireErrorMessage"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+                <div class="flex-grow-1 d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
+                        viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                        <path
+                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    <span class="mx-2 fs-18">{{ $errors->first('retirementYearsTillRetire') }}</span>
+                </div>
+            </div>
+        </div>
+        @endif
+        {{-- end of error message notifications --}}
                     <section>
                         <div class="row">
                         <div class="bg-needs-1 col-lg-6 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
@@ -55,18 +73,7 @@
                             </div>
                             <h5 class="needs-text">to enjoy my retirement.</h5>
                         </div>
-                        @if ($errors->has('retirementYearsTillRetire'))
-                        <div class="position-fixed mt-4 top-0 start-50 translate-middle w-100" style="z-index:1099">
-                            <div id="retirementYearsTillRetireErrorMsg" class="align-items-center alert alert-warning border-0 fade" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                                <div class="d-flex justify-content-center">
-                                    <i class="bi bi-exclamation-circle p-2"></i>
-                                    <div class="p-2">
-                                        {{ $errors->first('retirementYearsTillRetire') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
                             <div class="col-11 col-md-4 text-center">

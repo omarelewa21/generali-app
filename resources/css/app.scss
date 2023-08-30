@@ -322,7 +322,6 @@ font-family:'Helvetica Neue Bold', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 6rem;
   }
 
   &__number {
@@ -369,12 +368,13 @@ font-family:'Helvetica Neue Bold', sans-serif;
   height: 100%;
   fill: none;
   stroke-linecap: round;
-  transform: translate(6.5rem, 6.5rem);
-  stroke-dasharray: 565.49; // 2 * PI * radius
-  stroke-dashoffset: 282.75;
+  transform: translate(6.4rem, 6.4rem);
+  stroke-dasharray: 904.896; // 2 * PI * radius
+  stroke-dashoffset: 904.896;
   transition: all 1s ease;
-  stroke-width: 32;
+  stroke-width: 42;
 }
+
 #gap .circle {
   position: absolute;
   width: 23rem;

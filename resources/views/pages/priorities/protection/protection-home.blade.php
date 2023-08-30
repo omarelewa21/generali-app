@@ -23,9 +23,9 @@
                     <section class="content-needs">
                         <div
                             class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2 py-2 py-md-3 py-lg-5 py-xl-2">
-                            <img class="z-1" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}"
+                            <img class="z-1 img-fluid" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}"
                                 alt="Protection">
-                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-4 py-0 py-md-3 py-lg-3 justify-content-center needs-grey-bg-mobile">Let’s
+                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-4 py-3 py-md-3 py-lg-3 justify-content-center needs-grey-bg-mobile">Let’s
                                 figure out what you need for Protection.</h5>
                         </div>
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
@@ -52,49 +52,4 @@
     </div>
 </div>
 
-<style>
-    /* @media only screen and (width: 414px) and (height: 896px) {
-    .needs-home {
-    grid-template-rows: 14vh 26vh 30vh;
-}
-}
-@media only screen and (width:688px) and (height:1031px) and (orientation:portrait) {
-    .needs-home-avatar img {
-    height: 52vh;
-}
-}
-@media only screen and (width:1024px) and (height:1366px) and (orientation:portrait) {
-    .needs-home {
-    grid-template-rows: 23vh 45vh 30vh;
-}
-}
-@media only screen and (width:800px) and (height:1280px) and (orientation:portrait) {
-    .needs-home {
-    grid-template-rows: 22vh 38vh 31vh;
-}
-}
-@media only screen and (width: 1031px) and (height: 688px) and (orientation: landscape) {
-    .needs-home-avatar img {
-    height: 54vh;
-}
-}
-@media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
-    .needs-grey-bg {
-    padding-top: 300px;
-    }
-}
-@media only screen and (width:1024px) and (max-height:778px) and (orientation:landscape) {
-    .needs-home-avatar img {
-    height: 58vh;
-}
-}
-@media only screen and (max-width:896px) and (max-height:414px) and (orientation:landscape) {
-    .needs-home-avatar img {
-    height: 44vh;
-}
-.needs-grey-bg {
-    padding-top: 170px;
-}
-} */
-</style>
 @endsection

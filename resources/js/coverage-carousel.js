@@ -3,7 +3,7 @@
 function initSlickCarousel() {
     const windowWidth = $(window).width();
     
-    if (windowWidth <= 1024) {
+    if (windowWidth < 1024) {
     $('.coverage-avatar[data-carousel="true"]').slick({
     slidesToShow: 1,
     slidesToScroll: 1,

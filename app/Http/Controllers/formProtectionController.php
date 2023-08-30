@@ -145,6 +145,7 @@ class formProtectionController extends Controller
         
         if ($protectionPolicyAmount > $TotalProtectionValue){
             $protectionGap = 0;
+            $protectionPercentage = 100;
         }
         else {
         $protectionGap =  $TotalProtectionValue - $protectionPolicyAmount;

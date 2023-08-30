@@ -29,7 +29,7 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                             <div
                                 class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                 <div class="px-2 retirement-progress-bar" role="progressbar"
-                                    style="width:{{$protectionPercentage}}%;" aria-valuenow="100" aria-valuemin="0"
+                                    style="width:{{$protectionPercentage}}%;" aria-valuenow="{{$protectionPercentage}}%;" aria-valuemin="0"
                                     aria-valuemax="100"></div>
                             </div>
                             <h3 id="TotalProtectionValue" class="m-1 text-light text-center">RM {{
@@ -206,14 +206,9 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
         // Get the toast element
         const protectionExistingPolicyErrorMsg = document.getElementById('protectionExistingPolicyErrorMsg');
 
-
 </script>
 
 <style>
-    .navbar {
-        right: 50%;
-    }
-
     .input-group-text,
     .form-control {
         padding-top: 0 !important;
