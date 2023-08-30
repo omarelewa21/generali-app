@@ -121,28 +121,44 @@ class EducationController extends Controller
     
     public function validateEducationCoverageSelection(Request $request)
     {
-        $customMessages = [
-            'educationSelectedAvatar' => 'Please select an option',
-        ];
-        $validatedData = $request->validate([
-            'educationSelectedAvatar' => 'required|in:self,child-1,child-2,child-3',
-
-        ], $customMessages);
-
-        $educationSelectedAvatar = $request->input('educationSelectedAvatar');
-
         // Get the existing array from the session
-        $arrayDataEducation = session('passingArraysProtection', []);
-        $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatar;
+        $arrayDataEducation = session('passingArrays', []);
+
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'educationSelectedAvatarInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+
+        // Add or update the data value in the array
+        // if ($educationSelectedAvatarInput) { 
+        // }
+        $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatarInput;
 
         // Store the updated array back into the session
-        session(['passingArraysProtection' => $arrayDataEducation]);
-
-        // dd(Session::all()); // Debug to see all session data
-        Log::info('Session Data:', Session::all());
-
-        return redirect()->route('education.supporting.years')
-            ->withInput();
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
+        return redirect()->route('education.supporting.years');
     }
 
 }

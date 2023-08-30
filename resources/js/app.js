@@ -6,7 +6,6 @@ import './button-multiple-select';
 import './avatar';
 import './form-display';
 import './coverage-carousel';
-import './carousel-needs';
 import './drag-drop';
 import './navigation-flow';
 import './button-avatar-display';

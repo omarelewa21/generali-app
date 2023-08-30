@@ -222,7 +222,7 @@
                 <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
                     <div class="py-4 px-2">
                         <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('education.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
+                            <a href="{{route('education.coverage.new')}}" class="btn btn-primary text-uppercase">Back</a>
                             <!-- <a href="{{route('education.other')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
                             <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
                             <button class="btn btn-primary text-uppercase" type="submit">Next</button>
