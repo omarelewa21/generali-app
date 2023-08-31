@@ -549,8 +549,12 @@ svg.slide-button.slick-arrow:hover {
 }
 button.choice:hover, 
 button.choice:focus,
+.button-needs[data-required="selected"],
 .button-needs.selected {
-    filter: drop-shadow(2px 4px 6px black);
+    background-image: url('/images/general/Hover.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
 }
 .z-99{
     z-index:99;

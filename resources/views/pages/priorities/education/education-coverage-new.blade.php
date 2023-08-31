@@ -13,7 +13,7 @@
 
 @php
     // Retrieving values from the session
-    $arrayDataEducation = session('passingArraysEducation');
+    $arrayDataEducation = session('passingArrays');
     $educationSelectedAvatar = isset($arrayDataEducation['educationSelectedAvatar']) ? $arrayDataEducation['educationSelectedAvatar'] : '';
 @endphp
 
@@ -169,14 +169,9 @@
             // Add 'selected' attribute to the clicked button
             this.setAttribute('data-required', 'selected');
 
-            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+            selectedAvatar = this.getAttribute('data-required');
 
-            if (this.getAttribute('data-required') === 'selected') {
-                this.classList.add('selected');
-            }
-            else{
-                dataButtons.forEach(but => but.classList.remove('selected'));
-            }
+            dataButtons.forEach(btn => btn.classList.remove('selected'));
 
             const nextButton = document.getElementById('nextButton');
 
@@ -185,6 +180,16 @@
 
             // Update the hidden input field value with the selected avatar
             document.getElementById('educationSelectedAvatarInput').value = dataAvatar;
+        });
+    });
+
+    // Preselect the button on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const defaultBtn = document.querySelectorAll('.default');
+
+        defaultBtn.forEach(defaultBtn => {
+            // Add the 'selected' class to the closest .button-bg div of each default button
+            defaultBtn.classList.add('selected');
         });
     });
 </script>

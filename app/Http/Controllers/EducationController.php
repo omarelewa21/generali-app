@@ -158,6 +158,7 @@ class EducationController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayDataEducation]);
         Log::debug($arrayDataEducation);
+        // return $arrayDataEducation;
         return redirect()->route('education.supporting.years');
     }
 
