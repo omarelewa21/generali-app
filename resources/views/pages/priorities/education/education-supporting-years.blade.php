@@ -1,3 +1,8 @@
+<?php
+ /**
+ * Template Name: Education Supporting Years
+ */
+?>
 @extends('templates.master')
 
 @section('title')
@@ -7,229 +12,91 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
+    $arrayDataEducation = session('passingArrays');
+    $educationSelectedAvatar = isset($arrayDataEducation['educationSelectedAvatar']) ? $arrayDataEducation['educationSelectedAvatar'] : '';
+    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
 @endphp
 
-<div id="education-content">
-    <div class="container-fluid overflow-hidden font-color-default text-center">
-        <div class="row bg-needs-desktop vh-100">
-            <section class="col-12 d-flex needs-nav-mob">
-                <div class="col-6 col-md-2 col-lg-2 col-xl-3">
-                    @include('templates.nav.nav-red-menu')
-                </div>
-                <div class="col-md-7 col-xl-6 hide-mobile">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-6 bg-primary container fund-nav-rad">
-                            <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 fund-progress-bar" style="width:45%;"></div>
+
+<div id="education-supporting" class="vh-100 overflow-y-auto overflow-x-hidden">
+    <div class="container-fluid">
+        <div class="row h-100">
+            <div class="col-12">
+                <div class="row h-100 bg-needs-desktop">
+                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="wrapper-needs-supporting-default">
+                        @csrf
+                        <section class="header-needs-default">
+                            <div class="col-sm-6 col-md-4 col-lg-3 order-0">
+                                @include('templates.nav.nav-red-menu')
                             </div>
-                            <h3 class="font-color-white text-center">RM1,462,000</h3>
-                            <p class="font-color-white text-center">Total Education Fund Needed</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 col-lg-3 col-xl-3">
-                    @include ('templates.nav.nav-sidebar-needs')
-                </div> 
-                
-            </section>
-            <!-- <form class="form-horizontal"action="{{route('education.other')}}" method="get" id="children_education" name="children_education"> -->
-            <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST">
-                @csrf
-                <section class="needs-master-content">
-                    <div class="col-12">
-                        <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-12 show-mobile">
-                                <div class="row d-flex justify-content-center align-items-center bg-primary">
-                                    <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
-                                        <div class="px-2 fund-progress-bar" style="width:45%;"></div>
-                                    </div>
-                                    <h3 class="font-color-white text-center">RM1,462,000</h3>
-                                    <p class="font-color-white text-center">Total Education Fund Needed</p>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-12 hide bg-half second-order position-relative d-flex justify-content-end align-items-end h-xxl-100">
-                                <div class="row bg-education-supporting">
-                                    <div class="show-desktop h-100 d-flex">
-                                        <div class="col-12 d-flex h-100">
-                                            <div class="row">
-                                                <div class="col-4 position-relative">
-                                                    <div class="row h-100">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/son.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="p-1 m-0"><strong>RM231,682</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <img src="{{ asset('images/avatar/son.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute bottom-0 py-4">
-                                                    <p class="text-center py-2 z-99"><strong>RM231,682</strong></p>
-                                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
-                                                        <div class="col-11 col-md-4 text-center">
-                                                            
-                                                        </div>
-                                                    </div> -->
-                                                </div>
-                                                <div class="col-4 position-relative">
-                                                    <div class="row">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/daughter.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="p-1 m-0"><strong>RM540,000</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 position-relative">
-                                                    <div class="row">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/young-kid.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="p-1 m-0"><strong>RM135,545</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 m-auto">
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
+                                        <div
+                                            class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
+                                            <div class="px-2 retirement-progress-bar" role="progressbar"
+                                                style="" aria-valuenow="100" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
                                         </div>
-                                        <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
-                                            <div class="col-11 col-md-4 text-center">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 hide-desktop">
-                                        <!-- <div class="col-11 col-sm-12 m-auto h-100"> -->
-                                            <div class="row">
-                                                <div class="col-4 position-relative h-100">
-                                                    <div class="row h-100">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/son.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="py-2 m-0"><strong>RM231,682</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <img src="{{ asset('images/avatar/son.png') }}" class="m-auto z-99 mh-100 mw-100 position-absolute bottom-0 py-4">
-                                                    <p class="text-center py-2 z-99"><strong>RM231,682</strong></p>
-                                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-desktop">
-                                                        <div class="col-11 col-md-4 text-center">
-                                                            
-                                                        </div>
-                                                    </div> -->
-                                                </div>
-                                                <div class="col-4 position-relative">
-                                                    <div class="row">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/daughter.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="py-2 m-0"><strong>RM540,000</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 position-relative">
-                                                    <div class="row">
-                                                        <div class="z-99">
-                                                            <img src="{{ asset('images/avatar/young-kid.png') }}" class="m-auto mh-100 mw-100">
-                                                            <p class="py-2 m-0"><strong>RM135,545</strong></p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-center bg-needs_text p-master w-100 position-absolute bottom-0">
-                                                            <div class="col-11 col-md-4 text-center">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <!-- </div> -->
-                                        <!-- <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile">
-                                            <div class="col-11 col-md-4 text-center">
-                                                
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                    <div class="col-12 show-mobile bg-btn_bar">
-                                        <div class="py-4 px-2">
-                                            <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                                <a href="{{route('education.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                                                <!-- <a href="{{route('education.other')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                                                <button class="btn btn-primary text-uppercase" type="submit">Next</button>
-                                            </div>
-                                        </div>
+                                        <h3 id="TotalEducationValueText" class="m-1 text-light text-center">RM </h3>
+                                        <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-12 position-relative hide first-order">
+                            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                                @include('templates.nav.nav-sidebar-needs')
+                            </div>
+                        </section>
+                        <section class="row content-supporting-default">
+                            <div class="col-12 col-md-6 d-flex align-items-end z-1">
+                                <div class="row edu_sup_years">
+                                    <div class="text-center">
+                                    </div>
+                                    <div class="text-center">
+                                        <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto coverage-image">
+                                        <p class="py-2 m-0"><strong>RM</strong></p>
+                                    </div>
+                                    <div class="text-center">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-8 d-flex align-items-center">
+                                <p class="f-34"><strong>I plan to study</strong>
+                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" required></span>
+                                    <strong>years for my education.</strong>
+                                </p>
+                            </div>
+                            <div class="col-12">
                                 <div class="row">
-                                    <div class="col-12 d-flex mt-5 justify-content-center z-99">
-                                        <div class="">
-                                            <div class="col-10 m-auto">
-                                                <div class="text-start">
-                                                    <p class="f-34 @error('education_year_1') is-invalid @enderror">
-                                                        <label>1st Child</label>:
-                                                        <span class="currencyinput"><input type="text" name="education_year_1" class="form-control d-inline-block w-25 f-34 @error('education_year_1') is-invalid @enderror" id="education_year_1" required></span>
-                                                        &nbsp;year(s) old
-                                                        @if ($errors->has('education_year_1'))
-                                                            <div class="invalid-feedback">{{ $errors->first('education_year_1') }}</div>
-                                                        @endif
-                                                    </p>
-                                                    <p class="f-34 @error('education_year_2') is-invalid @enderror">
-                                                        <label>2nd Child</label>:
-                                                        <span class="currencyinput"><input type="text" name="education_year_2" class="form-control d-inline-block w-25 f-34 @error('education_year_2') is-invalid @enderror" id="education_year_2" required></span>
-                                                        &nbsp;year(s) old
-                                                        @if ($errors->has('education_year_2'))
-                                                            <div class="invalid-feedback">{{ $errors->first('education_year_2') }}</div>
-                                                        @endif
-                                                    </p>
-                                                    <p class="f-34 @error('education_year_3') is-invalid @enderror">
-                                                        <label>3rd Child</label>:
-                                                        <span class="currencyinput"><input type="text" name="education_year_3" class="form-control d-inline-block w-25 f-34 @error('education_year_3') is-invalid @enderror" id="education_year_3" required></span>
-                                                        &nbsp;year(s) old
-                                                        @if ($errors->has('education_year_3'))
-                                                            <div class="invalid-feedback">{{ $errors->first('education_year_3') }}</div>
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center bg-needs_text p-master position-absolute w-100 bottom-0 hide-mobile hide-tablet">
-                                        <div class="col-12">
-                                            
-                                        </div>
+                                    <div class="position-absolute bottom-0 needs-stand-bg {{ $errors->has('educationSelectedAvatarInput') ? 'error-padding' : '' }}"></div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- @if ($errors->has('educationSelectedAvatarInput')) -->
+                            <section class="col-12 warning hide-tablets">
+                                <div class="col-12 alert alert-warning d-flex align-items-center m-0" role="alert">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    <div class="text">Please Select One!</div>
+                                    <!-- <div class="text">{{ $errors->first('educationSelectedAvatarInput') }}</div> -->
+                                </div>
+                            </section>
+                        <!-- @endif -->
+                        <section class="footer bg-btn_bar py-4 fixed-bottom footer-needs-default">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <input type="hidden" name="educationSelectedAvatarInput" id="educationSelectedAvatarInput" value="{{$educationSelectedAvatar}}">
+                                        <a href="{{route('education.home')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
-                    <div class="py-4 px-2">
-                        <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <a href="{{route('education.coverage.new')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <!-- <a href="{{route('education.other')}}" class="btn btn-primary mx-md-2 text-uppercase">Next</a> -->
-                            <!-- <button type="submit" name="btn_next" id="btn_next" class="btn btn-primary mx-md-2 text-uppercase" value="btn_next">Next</button> -->
-                            <button class="btn btn-primary text-uppercase" type="submit">Next</button>
-                        </div>
-                    </div>
-                </section>
-            </form>
+                        </section>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

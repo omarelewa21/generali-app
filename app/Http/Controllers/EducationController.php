@@ -149,16 +149,17 @@ class EducationController extends Controller
 
         // Validation passed, perform any necessary processing.
         $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+        $educationSelectedImage = $request->input('educationSelectedAvatarImage');
 
         // Add or update the data value in the array
         // if ($educationSelectedAvatarInput) { 
         // }
         $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatarInput;
+        $arrayDataEducation['educationSelectedImage'] = $educationSelectedImage;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayDataEducation]);
         Log::debug($arrayDataEducation);
-        // return $arrayDataEducation;
         return redirect()->route('education.supporting.years');
     }
 

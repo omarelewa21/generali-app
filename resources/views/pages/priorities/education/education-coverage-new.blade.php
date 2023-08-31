@@ -15,6 +15,7 @@
     // Retrieving values from the session
     $arrayDataEducation = session('passingArrays');
     $educationSelectedAvatar = isset($arrayDataEducation['educationSelectedAvatar']) ? $arrayDataEducation['educationSelectedAvatar'] : '';
+    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
 @endphp
 
 <div id="education-coverage" class="vh-100">
@@ -23,14 +24,14 @@
             <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST">
                 @csrf
                 <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-home">
-                    <div class="header-needs-default">
+                    <section class="header-needs-default">
                         <div class="col-lg-6 col-md-12">
                             @include('templates.nav.nav-red-menu')
                         </div>
                         <div class="col-lg-6 col-md-12">
                             @include ('templates.nav.nav-sidebar-needs')
                         </div>
-                    </div>
+                    </section>
                     @if ($errors->has('educationSelectedAvatarInput'))
                         <section class="col-12 warning show-tablet">
                             <div class="col-12 alert alert-warning d-flex align-items-center m-0" role="alert">
@@ -100,6 +101,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <input type="hidden" name="educationSelectedAvatarInput" id="educationSelectedAvatarInput" value="{{$educationSelectedAvatar}}">
+                                    <input type="hidden" name="educationSelectedAvatarImage" id="educationSelectedAvatarImage" value="{{$educationSelectedImage}}">
                                     <a href="{{route('education.home')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
@@ -177,9 +179,11 @@
 
             // Get the selected data-avatar value
             const dataAvatar = this.getAttribute('data-avatar');
+            const dataAvatarImg = this.querySelector('img').getAttribute('src');
 
             // Update the hidden input field value with the selected avatar
             document.getElementById('educationSelectedAvatarInput').value = dataAvatar;
+            document.getElementById('educationSelectedAvatarImage').value = dataAvatarImg;
         });
     });
 

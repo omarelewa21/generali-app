@@ -104,8 +104,29 @@
     grid-template-columns: 100%;
     
 }
-
-
+/* Education Supporting Page */
+.wrapper-needs-supporting-default {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-supporting-default"
+        "warning"
+        "footer-needs-default";
+    grid-template-rows: 15% min(69%) auto 11%;
+}
+.content-supporting-default{
+    grid-area: content-supporting-default;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    display: grid;
+}
+.edu_sup_years{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-gap: 0;
+}
 
 
 
