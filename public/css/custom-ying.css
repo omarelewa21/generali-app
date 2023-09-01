@@ -12,6 +12,16 @@
 .hide-tablets{
     display:block;
 }
+.f-family{
+    font-family: Helvetica Neue;
+}
+.fw-700{
+    font-weight: 700;
+}
+.f-20{
+    font-size: 20px;
+}
+
 /* Education Global */
 .bg-education-home{
     background-image: url(/images/needs/background/bg-main.png);
@@ -107,27 +117,52 @@
 /* Education Supporting Page */
 .wrapper-needs-supporting-default {
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 0px;
     grid-template-columns: 100%;
     grid-template-areas:
         "header-needs-default"
-        "content-supporting-default"
-        "warning"
-        "footer-needs-default";
-    grid-template-rows: 15% min(69%) auto 11%;
+        "content-supporting-default";
+    grid-template-rows: 19vh 68vh;
 }
 .content-supporting-default{
     grid-area: content-supporting-default;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
     display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+    "edu-con"
+    "alert-support";
+    grid-template-rows: minmax(90%, 100%) auto;
+}
+.edu-con{
+    grid-area: edu-con;
+}
+.alert-support{
+    grid-area: alert-support;
+    height: 50px;
 }
 .edu_sup_years{
     display: grid;
     grid-template-columns: repeat(3, minmax(250px, 1fr));
     grid-gap: 0;
 }
-
+.education-support{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-template-areas:
+        "avatar-img"
+        "avatar-text";
+    grid-gap: 0px;
+}
+.avatar-img {
+    grid-area: avatar-img;
+    grid-template-columns: 100%;
+}
+.avatar-text {
+    grid-area: avatar-text;
+    grid-template-columns: 100%;
+}
 
 
 
@@ -177,6 +212,22 @@
 @media only screen and (min-width: 601px) and (max-width: 797px){
     .wrapper-needs-coverage-default {
         grid-template-rows: 20% auto auto 10.5%;
+    }
+}
+@media only screen and (max-width: 600px){
+    .scroll-content {
+       overflow-x: hidden;
+       overflow-y: auto;
+       height: 100vh;
+    }
+    .wrapper-needs-supporting-default {
+        grid-template-rows: auto;
+    }
+    .alert-support{
+        height: 57px;
+    }
+    .pb-7{
+        padding-bottom: 150px;
     }
 }
 
@@ -447,8 +498,8 @@ svg.slide-button.slick-arrow:hover {
 .bg-education-supporting{
     background-image: url('/images/needs/education/bg-supporting.png');
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position:center;
+    background-size: 67%;
+    background-position: bottom 10% left 28%;
 }
 .bg-education-others-section{
     background-image: url('/images/needs/education/bg-others-element.png');
@@ -747,7 +798,7 @@ button.choice:focus,
         height: 88vh;
     }
     .f-34{
-        font-size: 16px !important;
+        font-size: 25px !important;
     }
     #education-content p{
         font-size: 16px;
