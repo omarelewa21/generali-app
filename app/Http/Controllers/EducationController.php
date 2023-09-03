@@ -13,6 +13,39 @@ use Illuminate\Support\Facades\Session;
 
 class EducationController extends Controller
 {
+    public function submitEducationMonthly(Request $request){
+
+        // Get the existing array from the session
+        $arrayDataEducation = session('passingArrays', []);
+
+        $customMessages = [
+            'monthly_education_amount.required' => 'You are required to enter an amount.',
+            'monthly_education_amount.integer' => 'The amount must be a number',
+            'monthly_education_amount.min' => 'Your amount must be at least :min.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'monthly_education_amount' => 'required|integer|min:1',
+        ], $customMessages);
+        
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $monthly_education_amount = $request->input('monthly_education_amount');
+        $totalEducationFund = $request->input('total_educationFund');
+
+        $arrayDataEducation['educationMonthlyAmount'] = $monthly_education_amount;
+        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
+        // Process the form data and perform any necessary actions
+        // return $arrayDataEducation;
+        return redirect()->route('education.supporting.years');
+   }
    public function submitEducationSupporting(Request $request){
 
         $customMessages = [
@@ -160,7 +193,7 @@ class EducationController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayDataEducation]);
         Log::debug($arrayDataEducation);
-        return redirect()->route('education.supporting.years');
+        return redirect()->route('education.monthly.amount');
     }
 
 }

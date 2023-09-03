@@ -21,7 +21,7 @@
 <div id="education-coverage" class="vh-100">
     <div class="container-fluid">
         <div class="row">
-            <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST">
+            <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="p-mb-0 m-0">
                 @csrf
                 <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-home">
                     <section class="header-needs-default">
@@ -32,16 +32,6 @@
                             @include ('templates.nav.nav-sidebar-needs')
                         </div>
                     </section>
-                    @if ($errors->has('educationSelectedAvatarInput'))
-                        <section class="col-12 warning show-tablet">
-                            <div class="col-12 alert alert-warning d-flex align-items-center m-0" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                </svg>
-                                <div class="text">{{ $errors->first('educationSelectedAvatarInput') }}</div>
-                            </div>
-                        </section>
-                    @endif
                     <section class="content-needs-default overflow-auto overflow-hidden bg-education-coverage row">
                         <div class="col-12 header-content-coverage">
                             <div class="row d-flex justify-content-center align-items-center text-center">
@@ -87,8 +77,8 @@
                         </div>
                     </section>
                     @if ($errors->has('educationSelectedAvatarInput'))
-                        <section class="col-12 warning hide-tablets">
-                            <div class="col-12 alert alert-warning d-flex align-items-center m-0" role="alert">
+                        <section class="col-12 warning">
+                            <div class="col-12 alert alert-danger d-flex justify-content-center align-items-center m-0" role="alert">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                     <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                 </svg>
