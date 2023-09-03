@@ -48,50 +48,36 @@ class EducationController extends Controller
    }
    public function submitEducationSupporting(Request $request){
 
+        // Get the existing array from the session
+        $arrayDataEducation = session('passingArrays', []);
+
         $customMessages = [
-            'education_year_1.required' => 'You are required to enter the age.',
-            'education_year_1.integer' => 'The age must be a number',
-            'education_year_1.min' => 'Your age must be at least :min.',
-            'education_year_1.max' => 'Your age must not more than :max.',
-            'education_year_2.required' => 'You are required to enter the age.',
-            'education_year_2.integer' => 'The age must be a number',
-            'education_year_2.min' => 'Your age must be at least :min.',
-            'education_year_2.max' => 'Your age must not more than :max.',
-            'education_year_3.required' => 'You are required to enter the age.',
-            'education_year_3.integer' => 'The age must be a number',
-            'education_year_3.min' => 'Your age must be at least :min.',
-            'education_year_3.max' => 'Your age must not more than :max.',
+            'tertiary_education_years.required' => 'You are required to enter a year.',
+            'tertiary_education_years.integer' => 'The year must be a number',
+            'tertiary_education_years.min' => 'The year must be at least :min.',
+            'tertiary_education_years.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'education_year_1' => 'required|integer|min:1|max:100',
-            'education_year_2' => 'required|integer|min:1|max:100',
-            'education_year_3' => 'required|integer|min:1|max:100',
-
-        // ], $customMessages);
-        ], $customMessages)
-        ->after(function ($validator) use ($request) {
-            $education_year_1 = intval($request->input('education_year_1'));
-            $education_year_2 = intval($request->input('education_year_2'));
-            $education_year_3 = intval($request->input('education_year_3'));
+            'tertiary_education_years' => 'required|integer|min:1|max:100',
+        ], $customMessages);
         
-            if ($education_year_1 <= $education_year_2) {
-                $validator->errors()->add('education_year_2', "2nd Child must be younger than 1st Child.");
-            }
-        
-            if ($education_year_2 <= $education_year_3 || $education_year_1 <= $education_year_3) {
-                $validator->errors()->add('education_year_3', "3rd Child must be younger than 2nd Child.");
-            }
-        })
-        ->validate();
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Validation passed, perform any necessary processing.
+        $tertiary_education_years = $request->input('tertiary_education_years');
+        $totalEducationFund = $request->input('total_educationFund');
+
+        $arrayDataEducation['totalEducationYear'] = $tertiary_education_years;
+        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
         // Process the form data and perform any necessary actions
+        // return $arrayDataEducation;
         return redirect()->route('education.other');
    }
 

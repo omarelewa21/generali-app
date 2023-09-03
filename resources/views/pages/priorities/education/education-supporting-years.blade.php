@@ -15,6 +15,7 @@
     $arrayDataEducation = session('passingArrays');
     $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
     $educationMonthlyAmount = isset($arrayDataEducation['educationMonthlyAmount']) ? $arrayDataEducation['educationMonthlyAmount'] : '';
+    $totalEducationYear = isset($arrayDataEducation['totalEducationYear']) ? $arrayDataEducation['totalEducationYear'] : '';
     $totalEducationFundNeeded = isset($arrayDataEducation['totalEducationFundNeeded']) ? $arrayDataEducation['totalEducationFundNeeded'] : '';
 @endphp
 
@@ -37,7 +38,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style=""
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM @php echo number_format($totalEducationFundNeeded); @endphp</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -47,7 +48,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('educationSelectedAvatarInput')) pb-7 @endif">
+                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('tertiary_education_years')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
                             <div class="col-12 position-relative">
@@ -55,11 +56,11 @@
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
-                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM @php echo number_format($totalEducationFundNeeded); @endphp</p>
+                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p>
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
-                                                <div class="needs-stand-bg {{ $errors->has('educationSelectedAvatarInput') ? 'error-padding' : '' }}" style="background-color:#c21b17 !important;"></div>
+                                                <div class="needs-stand-bg {{ $errors->has('tertiary_education_years') ? 'error-padding' : '' }}" style="background-color:#c21b17 !important;"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -67,9 +68,10 @@
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>I plan to study</strong>
-                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" required></span>
+                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
                                                     <strong>years for my education.</strong>
                                                 </p>
+                                                <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
                                             </div>
                                         </div>
                                     </div>
@@ -86,13 +88,13 @@
                                 </div>
                             </div>
                         </section>
-                        @if ($errors->has('educationSelectedAvatarInput'))
+                        @if ($errors->has('tertiary_education_years'))
                             <section class="col-12 alert-support z-1 hide-mobile">
                                 <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('educationSelectedAvatarInput') }}</div>
+                                    <div class="text">{{ $errors->first('tertiary_education_years') }}</div>
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
@@ -100,13 +102,13 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('educationSelectedAvatarInput') }}</div>
+                                    <div class="text">{{ $errors->first('tertiary_education_years') }}</div>
                                 </div>
                             </section>
                         @endif
                         <div class="col-12 hide-mobile">
                             <div class="row">
-                                <div class="position-absolute bottom-0 needs-stand-bg {{ $errors->has('educationSelectedAvatarInput') ? 'error-padding' : '' }}"></div>
+                                <div class="position-absolute bottom-0 needs-stand-bg {{ $errors->has('tertiary_education_years') ? 'error-padding' : '' }}"></div>
                             </div>
                         </div>
                         <section class="footer bg-btn_bar py-4 fixed-bottom footer-needs-default hide-mobile">
@@ -126,35 +128,28 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var education_coverage_1 = document.getElementById('education_year_1');
-        var education_coverage_2 = document.getElementById('education_year_2');
-        var education_coverage_3 = document.getElementById('education_year_3');
+    // Get the input value
+    var educationYear = document.getElementById("tertiary_education_years");
 
-        education_coverage_1.addEventListener('blur', function() {
-            validateAgeNumberField(education_coverage_1);
-        });
-        education_coverage_2.addEventListener('blur', function() {
-            validateAgeNumberField(education_coverage_2);
-        });
-        education_coverage_3.addEventListener('blur', function() {
-            validateAgeNumberField(education_coverage_3);
-        });
+    educationYear.addEventListener("input", function() {
 
-        function validateAgeNumberField(field) {
-            var minAge = 1;
-            var maxAge = 100;
+        // Retrieve the current input value
+        var educationYearValue = educationYear.value;
 
-            var value = parseInt(field.value);
+        var Year = parseInt(educationYearValue);
+        var oldTotalFund = {{ $totalEducationFundNeeded }};
 
-            if (!isNaN(value) && value >= minAge && value <= maxAge) {
-                field.classList.add('is-valid');
-                field.classList.remove('is-invalid');
-            } else {
-                field.classList.remove('is-valid');
-                field.classList.add('is-invalid');
-            }
-        }
+        // Calculate months
+        var totalAmount = Year * oldTotalFund;
+
+        // Display the result
+        var result = totalAmount.toLocaleString();
+
+        document.getElementById("TotalEducationFund").innerText = "RM " + result;
+        document.getElementById("displayFund").innerText = "RM " + result;
+
+        // Set the value of the hidden input field
+        document.getElementById("total_educationFund").value = totalAmount;
     });
 </script>
 @endsection

@@ -37,7 +37,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style=""
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM @php echo number_format($totalEducationFundNeeded); @endphp</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
-                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM @php echo number_format($totalEducationFundNeeded); @endphp</p>
+                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p>
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
