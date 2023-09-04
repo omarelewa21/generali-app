@@ -1,3 +1,27 @@
+/* Gender Selection */
+:where(html){
+    --skinColor-1: linear-gradient(to bottom right,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E);
+    --skinColor-2: linear-gradient(to bottom right,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391);
+    --skinColor-3: linear-gradient(to bottom right,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E);
+    --skinColor-4: linear-gradient(to bottom right,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471);
+    --skinColor-5: linear-gradient(to bottom right,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951);
+    --skinColor-6: linear-gradient(to bottom right,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F);
+}
+.bg-gender{
+    background: url(/images/avatar-general/gender-selection-display.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: bottom;
+}
+.left-center{
+    bottom: 50%;
+    left: 10%;
+}
+.right-center{
+    bottom: 50%;
+    right: 10%;
+}
+
 /* Global */
 .position-absolute.center{
     transform: translate(-50%, -50%);

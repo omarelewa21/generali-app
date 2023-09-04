@@ -129,8 +129,9 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     function calculateAge() {
         const selectedDay = parseInt(dayFieldExtract.value);
         const selectedMonth = parseInt(monthFieldExtract.value);
-        const selectedYear = parseInt(yearFieldExtract.value);
-
+        const selectedYearOption = yearFieldExtract.options[yearFieldExtract.selectedIndex];
+        const selectedYear = selectedYearOption.textContent;
+        
         if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
             ageField.textContent = 'Invalid ID number entered';
             return;

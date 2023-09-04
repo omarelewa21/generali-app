@@ -77,10 +77,9 @@ $form-feedback-font-style: normal;
 $form-label-margin-bottom: 0.813rem;
 $form-label-font-weight: 700;
 $form-feedback-invalid-color: #C21B17;
-
-// Alerts
-// $alert-border-radius: 0;
-// $alert-margin-bottom: 0;
+$input-btn-focus-blur: none;
+$input-btn-focus-box-shadow: none;
+$form-select-focus-box-shadow: none;
 
 // Offcanvas Menu
 $offcanvas-bg-color: #C21B17;
@@ -100,6 +99,7 @@ $modal-content-border-radius: normal;
 $modal-footer-bg: #C21B17;
 $zindex-modal: 2000;
 $zindex-modal-backdrop: 1199;
+$btn-close-color: #C21B17;
 
 // Accordion
 $accordion-bg: #F0F0F0;
