@@ -1,4 +1,7 @@
 import './bootstrap';
+$('.toast').toast('show');
+$('.tooltip').tooltip('show');
+
 
 import './height-controller';
 import './button';

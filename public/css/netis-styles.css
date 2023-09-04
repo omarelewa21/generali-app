@@ -154,7 +154,7 @@
 /* Protection - Home */
 .needs-home {
     grid-template-areas: "header-avatar-default" "content-needs" "footer-avatar-default";
-    grid-template-rows: 15vh 55vh 30vh;
+    grid-template-rows: 15vh 71vh 13vh;
     grid-gap: 0;
     display: grid;
     grid-template-columns: 100%;
@@ -165,6 +165,12 @@
 .footer-needs {
     grid-area: footer-needs;
     background-color: rgba(233, 233, 233, 1);
+}
+#protection_home .needs-home-avatar img {
+    max-height: 55vh;
+  }
+#retirement_home .needs-home-avatar img {
+        max-height: 53vh;
 }
 
 
@@ -334,6 +340,14 @@ font-family:"Helvetica Neue Bold", sans-serif;
     z-index:100;
 
   }
+  .label-invalid {
+    border:3px solid var(--bs-form-invalid-border-color);
+  }
+  .label-invalid:focus {
+    border-color: #000000;
+  }
+
+
   /* mobile css */
 @media only screen and (max-width: 767px) {
     body,
@@ -364,7 +378,8 @@ font-family:"Helvetica Neue Bold", sans-serif;
 
     }
     .bg-retirement-home{
-        background-size:cover;
+        /* background-size:cover; */
+        background: none;
 
     }
     .needs-home-avatar {
@@ -377,7 +392,7 @@ font-family:"Helvetica Neue Bold", sans-serif;
         position: relative !important;
     }
     #retirement_home .needs-home-avatar img {
-        height: 37vh;
+        height: 53vh;
     }
 
     /* .needs-home-avatar img {
@@ -445,6 +460,9 @@ font-family:"Helvetica Neue Bold", sans-serif;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
+    #optionsForIdeal img {
+        width: 100% !important;
+    }
 .monthly-support-asset {
     left: 0;
     bottom: -10%;
@@ -468,9 +486,6 @@ font-family:"Helvetica Neue Bold", sans-serif;
 width: 80%;
 }
 
-#protection_home .needs-home-avatar img {
-    height:53vh;
-}
 
 #protection_home .needs-home {
     grid-template-rows: 5vh 26vh 42vh;
@@ -484,21 +499,28 @@ width: 80%;
     font-size:calc(1.3375rem + 1.05vw);
 }
 
-/* Protection - Home - Mobile CSS */
-#protection_home .progress-main p{
+/* Needs - Home - Mobile CSS */
+#protection_home .progress-main p , #retirement_home .progress-main p{
     color:#ffffff !important;
 }
-#protection_home .progress-value p{
+#protection_home .progress-value p, #retirement_home .progress-value p {
     color:inherit !important;
 }
-#protection_home .fixed-bottom {
+#protection_home .fixed-bottom , #retirement_home .fixed-bottom {
     z-index: 1;
 }
 .needs-home {
     grid-template-rows: 8vh 26vh 30vh;
 }
-/* End for Protection - Home - Mobile CSS */
-    
+/* End for Needs - Home - Mobile CSS */
+
+.svg-container {
+    transform: scale(1) !important;
+}
+.needs-text {
+    display: flex;
+    justify-content: center;
+}
 }
 /* large desktop css */
 @media screen and (min-height:840px) and (min-width:968px) {
@@ -551,7 +573,8 @@ width: 80%;
 
 /* Code for Retirement - Ideal page */
 #optionsForIdeal img {
-    width: 40vh;
+    width: 100%;
+    max-width: 330px;
 }
 
 
@@ -561,9 +584,7 @@ width: 80%;
     .bg-needs-main {
         /* background-position: center 70%, center 55%; */
         background-size: cover;
-      }
-
-      
+      }  
     .calendar-protection {
         width: 62%;
     }
@@ -574,16 +595,28 @@ width: 80%;
         width: 28vh;
     }
     .needs-home-avatar img {
-        height: 63vh;
+        max-height: 60vh !important;
        }
+       
        .monthly-support-asset {
         left: -5%;
         bottom: 8%;
         z-index: 10;
         width: 40vh;
     }
+    .needs-text {
+        display: flex;
+        justify-content: center;
+    }
+    .w-sm-25 {
+        width: 25% !important;
+      }
+      .avatar-allocated-funds-aside {
+        width: 60vh !important;
+        top: 0;
+      }
 }
-/* Target iPad air,mini, iPad Pro */
+
 /* Target iPad air,mini, iPad Pro in landscape mode */
 @media only screen and (min-width: 768px) and (max-width:1024px) and (max-height: 1024px) and (orientation: landscape) {
     .needs-home-avatar img {
@@ -616,96 +649,6 @@ width: 80%;
         height: 43vh;
     }
 }
-
-
-/* @media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    html {
-      transform: rotate(-90deg);
-      transform-origin: left top;
-      width: 100vh;
-      height: 100vw;
-      overflow-x: hidden;
-      position: absolute;
-      top: 100%;
-      left: 0;
-    }
-  } */
-
-  .ell1 {
-    display: flex;
-    /* margin: auto; */
-    width: 309px;
-    height: 309px;
-    background:#FFFFFF;
-    /* box-shadow: 3px 3px 1px #3B3F44; */
-    filter: drop-shadow(-11px -10px 20px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.30));
-    border-radius: 1000px;
-  }
-  .ell2 {
-    display: flex;
-    margin: auto;
-    width: 268px;
-    height: 268px;
-    background: #575757;
-    border: 1px solid #1D1F22;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.30) inset;
-    border-radius: 1000px;
-  }
-  .ell3 {
-    display: flex;
-    margin: auto;
-    width: 219px;
-    height: 219px;
-    background:  #ffffff;
-    border: 1px solid #1E2023;
-    border-radius: 1000px;
-    z-index: 1;
-  }
-  .ell4 {
-    display: flex;
-    margin: auto;
-    width: 175px;
-    height: 175px;
-    background: #ffffff;
-    /* border: 3px solid #292D32; */
-    border-radius: 1000px;
-  }
-  .ell4 .ellText {
-    margin: auto;
-    /* width: 95px; */
-    text-align: center;
-  }
-  .ellText h1 {
-    font-weight: normal;
-    font-size: 80px;
-    line-height: 35px;
-  }
-  
-  .ellP {
-      position: absolute;
-      width: 268px;
-      height: 268px;
-      border-radius: 1000px;
-      transform: rotate(-83.2deg);
-  }
-  #chart-gap svg {
-    height: 268px;
-  }
-  .ellP svg circle {
-      margin: auto;
-      fill: none;
-      stroke-width: 28px;
-      stroke-linecap: round;
-      transform: translate(134px, 64px);
-      width: 268px;
-      height: 268px;
-        background: linear-gradient(180deg, #FF7D7A 0%, #C1210D 100%);
-  }
-  #chart-gap svg circle:nth-child(2) {
-      stroke-dashoffset: calc(440 - (440 * 90) / 100);
-      stroke-dasharray: 440;
-  }
-
 
 
 

@@ -40,9 +40,7 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
                         </svg>
                         <span class="mx-2 fs-18">{{ $errors->first('protectionSelectedAvatar') }}</span>
                     </div>
-                    <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>                
+               
                 </div>
             </div>
             @endif
