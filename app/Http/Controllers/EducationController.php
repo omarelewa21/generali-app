@@ -13,52 +13,71 @@ use Illuminate\Support\Facades\Session;
 
 class EducationController extends Controller
 {
-   public function submitEducationSupporting(Request $request){
+    public function submitEducationMonthly(Request $request){
+
+        // Get the existing array from the session
+        $arrayDataEducation = session('passingArrays', []);
 
         $customMessages = [
-            'education_year_1.required' => 'You are required to enter the age.',
-            'education_year_1.integer' => 'The age must be a number',
-            'education_year_1.min' => 'Your age must be at least :min.',
-            'education_year_1.max' => 'Your age must not more than :max.',
-            'education_year_2.required' => 'You are required to enter the age.',
-            'education_year_2.integer' => 'The age must be a number',
-            'education_year_2.min' => 'Your age must be at least :min.',
-            'education_year_2.max' => 'Your age must not more than :max.',
-            'education_year_3.required' => 'You are required to enter the age.',
-            'education_year_3.integer' => 'The age must be a number',
-            'education_year_3.min' => 'Your age must be at least :min.',
-            'education_year_3.max' => 'Your age must not more than :max.',
+            'monthly_education_amount.required' => 'You are required to enter an amount.',
+            'monthly_education_amount.integer' => 'The amount must be a number',
+            'monthly_education_amount.min' => 'Your amount must be at least :min.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'education_year_1' => 'required|integer|min:1|max:100',
-            'education_year_2' => 'required|integer|min:1|max:100',
-            'education_year_3' => 'required|integer|min:1|max:100',
-
-        // ], $customMessages);
-        ], $customMessages)
-        ->after(function ($validator) use ($request) {
-            $education_year_1 = intval($request->input('education_year_1'));
-            $education_year_2 = intval($request->input('education_year_2'));
-            $education_year_3 = intval($request->input('education_year_3'));
+            'monthly_education_amount' => 'required|integer|min:1',
+        ], $customMessages);
         
-            if ($education_year_1 <= $education_year_2) {
-                $validator->errors()->add('education_year_2', "2nd Child must be younger than 1st Child.");
-            }
-        
-            if ($education_year_2 <= $education_year_3 || $education_year_1 <= $education_year_3) {
-                $validator->errors()->add('education_year_3', "3rd Child must be younger than 2nd Child.");
-            }
-        })
-        ->validate();
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Validation passed, perform any necessary processing.
+        $monthly_education_amount = $request->input('monthly_education_amount');
+        $totalEducationFund = $request->input('total_educationFund');
+
+        $arrayDataEducation['educationMonthlyAmount'] = $monthly_education_amount;
+        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
         // Process the form data and perform any necessary actions
+        // return $arrayDataEducation;
+        return redirect()->route('education.supporting.years');
+   }
+   public function submitEducationSupporting(Request $request){
+
+        // Get the existing array from the session
+        $arrayDataEducation = session('passingArrays', []);
+
+        $customMessages = [
+            'tertiary_education_years.required' => 'You are required to enter a year.',
+            'tertiary_education_years.integer' => 'The year must be a number',
+            'tertiary_education_years.min' => 'The year must be at least :min.',
+            'tertiary_education_years.max' => 'The year must not more than :max.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'tertiary_education_years' => 'required|integer|min:1|max:100',
+        ], $customMessages);
+        
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $tertiary_education_years = $request->input('tertiary_education_years');
+        $totalEducationFund = $request->input('total_educationFund');
+
+        $arrayDataEducation['totalEducationYear'] = $tertiary_education_years;
+        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
+        // Process the form data and perform any necessary actions
+        // return $arrayDataEducation;
         return redirect()->route('education.other');
    }
 
@@ -119,28 +138,48 @@ class EducationController extends Controller
         return redirect()->route('investment.home');
     }
     
-    public function validateCoverageSelection(Request $request)
+    public function validateEducationCoverageSelection(Request $request)
     {
-        $selectedCoverage = $request->input('selectedCoverageInput');
-        $dataUrl = $request->input('urlInput');
-        Log::debug($request->all());
-
         // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        $arrayDataEducation = session('passingArrays', []);
 
-        if ($selectedCoverage !== null) {
-            // If not equal to null, then replace the data in $arrayData['coverageSelection']
-            $arrayData['coverageSelection'] = $selectedCoverage;
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'educationSelectedAvatarInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Validation passed, perform any necessary processing.
+        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+        $educationSelectedImage = $request->input('educationSelectedAvatarImage');
+
+        // Add or update the data value in the array
+        // if ($educationSelectedAvatarInput) { 
+        // }
+        $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatarInput;
+        $arrayDataEducation['educationSelectedImage'] = $educationSelectedImage;
+
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
-        // Log the session data to the Laravel log file
-        \Log::info('Session Data:', $arrayData);
-
-        // // Process the form data and perform any necessary actions
-        return redirect()->route($dataUrl);
+        session(['passingArrays' => $arrayDataEducation]);
+        Log::debug($arrayDataEducation);
+        return redirect()->route('education.monthly.amount');
     }
 
 }

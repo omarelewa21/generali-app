@@ -1,3 +1,337 @@
+/* Global */
+.needs-stand-bg{
+    background:#fff !important; 
+    padding:120px;
+}
+.needs-stand-bg.error-padding{
+    padding:140px;
+}
+.show-tablet{
+    display:none;
+}
+.hide-tablets{
+    display:block;
+}
+.f-family{
+    font-family: Helvetica Neue;
+}
+.fw-700{
+    font-weight: 700;
+}
+.f-20{
+    font-size: 20px;
+}
+
+/* Education Global */
+.bg-education-home{
+    background-image: url(/images/needs/background/bg-main.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
+}
+
+/* Education Coverage Page */
+.wrapper-needs-coverage-default {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-needs-default"
+        "warning"
+        "footer-needs-default";
+    /* grid-template-rows: 15% minmax(66%,73%) auto 12%; */
+    grid-template-rows: 15% minmax(63.2%,71%) auto 14%;
+    /* grid-template-rows: 15% auto auto 14.5%; */
+}
+.header-needs-default {
+    grid-area: header-needs-default;
+}
+.content-needs-default {
+    grid-area: content-needs-default;
+    grid-template-columns: 100%;
+    display: grid;
+    grid-template-areas:
+        "header-content-coverage"
+        "selection-content-coverage";
+    grid-template-rows: 10% 90%;
+}
+.warning{
+    grid-area: warning;
+}
+.footer-needs-default {
+    grid-area: footer-needs-default;
+    
+}
+.header-content-coverage{
+    grid-area: header-content-coverage;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.selection-content-coverage{
+    grid-area: selection-content-coverage;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.bg-education-coverage{
+    background-image: url(/images/needs/education/education-coverage-vector.png);
+    background-size: auto;
+    background-position: center top 25%;
+    background-repeat: no-repeat;
+}
+#education-coverage .progress{
+    width: 44px;
+    height: 44px;
+    line-height: 150px;
+    background: transparent;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+    z-index: 1000;
+}
+.education_coverage .slick-slide button{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-template-areas:
+        "coverage-image"
+        "coverage-text";
+    grid-gap: 0px;
+    align-items: end;
+}
+.coverage-image {
+    grid-area: coverage-image;
+    grid-template-columns: 100%;
+    
+}
+.coverage-text {
+    grid-area: coverage-text;
+    grid-template-columns: 100%;
+    
+}
+/* Education Supporting Page */
+.wrapper-needs-supporting-default {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-supporting-default";
+    grid-template-rows: 19% 66%;
+}
+.content-supporting-default{
+    grid-area: content-supporting-default;
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+    "edu-con"
+    "alert-support";
+    grid-template-rows: minmax(90%, 100%) auto;
+}
+.edu-con{
+    grid-area: edu-con;
+}
+.alert-support{
+    grid-area: alert-support;
+    height: 50px;
+}
+.edu_sup_years{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-gap: 0;
+}
+.education-support{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-template-areas:
+        "avatar-img"
+        "avatar-text";
+    grid-gap: 0px;
+}
+.avatar-img {
+    grid-area: avatar-img;
+    grid-template-columns: 100%;
+}
+.avatar-text {
+    grid-area: avatar-text;
+    grid-template-columns: 100%;
+}
+
+
+
+
+/* Media Query - Mobile (screen size max 767px) */
+@media only screen and (max-width: 600px) and (max-height: 699px){
+    .wrapper-needs-coverage-default {
+       grid-template-rows: 14% minmax(61%,69%) auto 17%;
+    }
+}
+@media only screen and (max-width: 600px) and (max-height: 760px){
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 12.5% 73% 14.5%; */
+        /* grid-template-rows: 12.5% auto auto 14.5%; */
+    }
+}
+@media only screen and (max-width: 600px) and (min-height: 760px){
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 15% auto auto 14.5%; */
+    }
+}
+@media only screen and (max-width: 600px) and (min-height: 799px) and (max-height: 860px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 11.5% minmax(68%,75%) auto 13.5%;
+    }
+    .education_coverage .slick-slide button{
+        grid-template-rows: 92% 8%;
+    }
+}
+@media only screen and (max-width: 600px) and (min-height:861px) and (max-height: 900px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 10.5% minmax(71%, 77.5%) auto 12%;
+    }
+    .education_coverage .slick-slide button{
+        grid-template-rows: 92% 8%;
+    }
+}
+@media only screen and (max-width: 600px) and (min-height:901px) and (max-height: 1024px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% minmax(67%,74%) auto 11%;
+    }
+}
+@media only screen and (min-width: 601px) and (max-width: 797px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 9% minmax(74.7%,80.5%) auto 10.5%;
+    }
+}
+@media only screen and (max-width: 600px){
+    .scroll-content {
+       overflow-x: hidden;
+       overflow-y: auto;
+       height: 100vh;
+    }
+    .wrapper-needs-supporting-default {
+        grid-template-rows: auto;
+    }
+    .alert-support{
+        height: 57px;
+    }
+    .pb-7{
+        padding-bottom: 150px;
+    }
+}
+
+/* Media Query - Medium device (screen size max 1024px) */
+@media only screen and (min-width: 768px) and (max-width: 1200px){
+    .bg-education-coverage{
+        background-size: contain;
+    }
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 15% auto auto 8%; */
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1199px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% minmax(69.5%,75.5%) auto 9.5% !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 15% auto auto 8%; */
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% minmax(63.2%,71%) auto 13%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 1200px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 15% minmax(72.7%,77%) auto 8%;
+    }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1200px){
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 15% auto auto 13%; */
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 700px){
+    .wrapper-needs-coverage-default {
+        /* grid-template-rows: 15% auto auto 18%; */
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+    .show-tablet{
+        display:block;
+    }
+    .hide-tablets{
+        display:none;
+    }
+}
+@media only screen and (max-width: 1024px){
+    .p-mb-0{
+        padding: 0px;
+    }
+}
+
+/* Media Query - Large device (screen size max 1500px) */
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (min-height: 900px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 12% minmax(70%,75%) auto 11%;
+    }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 800px){
+    .wrapper-needs-coverage-default {
+        grid-template-rows: 13% minmax(66%,73.5%) auto 13.5%;
+    }
+}
+@media only screen and (min-width: 1400px) and (min-height: 900px){
+    .wrapper-needs-coverage-default{
+        /* grid-template-rows: 15% minmax(62%,71%) auto 14.5%; */
+        grid-template-rows: 15% minmax(66%,73%) auto 12%;
+    }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (min-height: 900px){
+    .wrapper-needs-supporting-default{
+        grid-template-rows: 19% 70%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** Redo Everything ******************************************************************/
+
 /* Gender Selection */
 :where(html){
     --skinColor-1: linear-gradient(to bottom right,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E);
@@ -53,6 +387,9 @@
 .w-30{
     width: 30%;
 }
+.max-h-100{
+    max-height: 100%;
+}
 /* Only show on bigger screen like desktop (min width 1250px) */
 .show-desktop{
     display: none !important;
@@ -91,7 +428,7 @@
     height: 100% !important;
 }
 .slick-padding{
-    padding: 3rem;
+    padding: 3rem 3rem 0px 3rem;
 }
 .slide-button:hover path{
     fill: #fff;
@@ -121,17 +458,50 @@ svg.slide-button.slick-arrow:hover {
 }
 
 /* Education */
+.education-needs-home {
+    grid-template-areas: "header-spacing" "education-content-needs" "footer-avatar-default";
+    grid-template-rows: 10vh 60vh 30vh;
+    grid-gap: 0;
+    display: grid;
+    grid-template-columns: 100%;
+}
+.education-content-needs {
+    grid-area: education-content-needs;
+}
+.education-needs-coverage {
+    grid-template-areas: "education-coverage-content" "footer-avatar-default";
+    grid-template-rows: 66vh 34vh;
+    grid-gap: 0;
+    display: grid;
+    grid-template-columns: 100%;
+}
+.education-coverage-content {
+    grid-area: education-coverage-content;
+}
+.footer-needs {
+    grid-area: footer-needs;
+    background-color: rgba(233, 233, 233, 1);
+}
+.position-absolute.center.up{
+    top: 45% !important;
+}
 .bg-education{
     background-image: url('/images/needs/education/education-master-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center;
 }
+.bg-education-book{
+    background-image: url(/images/needs/education/education-plain-home.png);
+    background-size: contain,90%;
+    background-position: center, center 20%;
+    background-repeat: no-repeat;
+}
 .bg-education-supporting{
     background-image: url('/images/needs/education/bg-supporting.png');
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position:center;
+    background-size: 67%;
+    background-position: bottom 10% left 28%;
 }
 .bg-education-others-section{
     background-image: url('/images/needs/education/bg-others-element.png');
@@ -252,8 +622,13 @@ svg.slide-button.slick-arrow:hover {
     margin-left:1px;
 }
 button.choice:hover, 
-button.choice:focus {
-    filter: drop-shadow(2px 4px 6px black);
+button.choice:focus,
+.button-needs[data-required="selected"],
+.button-needs.selected {
+    background-image: url('/images/general/Hover.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
 }
 .z-99{
     z-index:99;
@@ -425,7 +800,7 @@ button.choice:focus {
         height: 88vh;
     }
     .f-34{
-        font-size: 16px !important;
+        font-size: 25px !important;
     }
     #education-content p{
         font-size: 16px;
@@ -518,6 +893,12 @@ button.choice:focus {
     /* .slick-padding{
         padding: 0.5rem;
     } */
+    .bg-education-home{
+        background-size: cover;
+    }
+    .bg-education-book{
+        background-size: cover;
+    }
 }
 @media only screen and (min-width: 1024px){
     .needs-home-nav {
@@ -814,9 +1195,6 @@ button.choice:focus {
     }
 }
 @media only screen and (min-width: 1250px) and (max-width: 1280px) and (min-height: 801px){
-    .slick-padding{
-        padding: 2rem;
-    }
 }
 @media only screen and (min-width: 1250px){
     .bg-needs-desktop{
@@ -839,6 +1217,9 @@ button.choice:focus {
     }
     .show-desktop{
         display: block !important;
+    }
+    .d-vh-100{
+        height: 100vh !important;
     }
 }
 @media only screen and (max-width: 1199px){
