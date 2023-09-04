@@ -31,14 +31,6 @@
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <!-- <div class="col-12 color-box-wrapper d-flex justify-content-center align-items-center justify-content-center">
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #F5DEB3;" data-color="FFAE9E"></button>
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #F4A460;" data-color="F4A460"></button>
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #D2B48C;" data-color="D2B48C"></button>
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #A0522D;" data-color="A0522D"></button>
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #8B4513;" data-color="8B4513"></button>
-                                <button class="col-2 color-box border-0 mx-1 gendercolor" style="background-color: #654321;" data-color="654321"></button>
-                            </div> -->
                             <div class="blocks col-12 color-box-wrapper d-flex justify-content-center align-items-center justify-content-center">
                                 <a href="#" class="block" style="--bg: var(--gradient-1);">
                                     <div class="block__item"></div>
@@ -95,7 +87,7 @@
                             <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                 <div class="col-12">
                                     @if(isset($arrayData['FirstName']))
-                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you,<br/>{{ $arrayData['FirstName'] }}</h1>
+                                        <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you, {{ $arrayData['FirstName'] }}</h1>
                                     @else 
                                         <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h1>
                                     @endif
@@ -107,7 +99,7 @@
                                     <div class="col-12 button-bg {{$gender === 'male' ? 'selected' : ''}}">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0 @if(isset($arrayData['gender']) && $arrayData['gender'] === 'male') default @endif" data-avatar="Male" data-required="" id="gendermale">
-                                                <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" width="120px" alt="Gender Male">
+                                                <img src="{{ asset('images/avatar-gender-selection/button-gender-male.png') }}" width="200px" alt="Gender Male">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
                                             </button>
                                         </div>
@@ -117,7 +109,7 @@
                                     <div class="col-12 button-bg {{$gender === 'female' ? 'selected' : ''}}">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
                                             <button class="border-0 @if(isset($arrayData['gender']) && $arrayData['gender'] === 'female') default @endif" data-avatar="Female" data-required="" id="genderfemale">
-                                                <img src="{{ asset('images/avatar-gender-selection/button-gender-female.png') }}" width="120px" alt="Gender Female">
+                                                <img src="{{ asset('images/avatar-gender-selection/button-gender-female.png') }}" width="200px" alt="Gender Female">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                             </button>
                                         </div>
@@ -132,7 +124,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('avatar.welcome')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{ route('identity.details') }}" class="btn btn-primary flex-fill text-uppercase" data-url="avatar.family.dependant">Next</a>
+                                    <a href="{{ route('identity.details') }}" class="btn btn-secondary flex-fill text-uppercase" data-url="avatar.family.dependant">Next</a>
                                 </div>
                             </div>
                         </div>

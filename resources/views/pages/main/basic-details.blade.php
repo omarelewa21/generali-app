@@ -118,7 +118,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <a href="{{route('pdpa.disclosure')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
+                                        <button class="btn btn-secondary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>

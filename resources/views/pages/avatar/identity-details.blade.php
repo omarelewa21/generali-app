@@ -183,12 +183,12 @@
                                         <div class="col-12 pt-4">
                                             <label for="habits" class="form-label text-white">Your Habits *</label>
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
-                                                <label class="radio-container d-flex justify-content-center align-items-center flex-fill">
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker"
                                                     {{ (old('btnradio') === 'smoker' || (isset($arrayData['Habits']) && $arrayData['Habits'] === 'smoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                 </label>
-                                                <label class="radio-container d-flex justify-content-center align-items-center flex-fill">
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker"
                                                     {{ (old('btnradio') === 'nonSmoker' || (isset($arrayData['Habits']) && $arrayData['Habits'] === 'nonSmoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
@@ -240,7 +240,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <a href="{{route('avatar.gender.selection')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
+                                        <button class="btn btn-secondary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>
                             </div>

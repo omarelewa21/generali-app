@@ -37,6 +37,10 @@ html {
   color: #C21B17!important;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 /* Headings */
 h4 {
   font-family: 'Helvetica Neue', sans-serif;
@@ -539,10 +543,10 @@ button[data-required="selected"] img {
 }
 
 :root {
-  --lerp-0: 1;
-  --lerp-1: 0.5625;
+  --lerp-0: 0.5625;
+  --lerp-1: 0.25;
   --lerp-2: 0.25;
-  --lerp-3: 0.0625;
+  --lerp-3: 0.25;
   --lerp-4: 0;
 }
 
@@ -560,19 +564,6 @@ button[data-required="selected"] img {
   flex: calc(0.2 + (var(--lerp, 0) * 1.5));
   position: relative;
   padding:8px;
-}
-
-.block:after {
-  content: "";
-  width: 5%;
-  aspect-ratio: 1;
-  background: var(--text-1);
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  border-radius: var(--radius-3);
-  transform: translate(-50%, -50%);
-  z-index: -1;
 }
 
 .block:before {
