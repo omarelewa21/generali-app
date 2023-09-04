@@ -13,8 +13,11 @@ $protectionPolicyAmount = isset($arrayDataProtection['protectionPolicyAmount']) 
 $arrayDataProtection['protectionPolicyAmount'] : '';
 $protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ?
 $arrayDataProtection['protectionPercentage'] : 0;
+$formattedProtectionPolicyAmount = isset($arrayDataProtection['formattedProtectionPolicyAmount']) ?
+$arrayDataProtection['formattedProtectionPolicyAmount'] : null;
 $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ?
 $arrayDataProtection['formattedTotalProtectionValue'] : 0;
+
 @endphp
 <div id="protection-existing-policy">
     <div class="container-fluid p-0 container-fluid overflow-hidden d-flex h-100 flex-column">
@@ -105,7 +108,7 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                             <h5 class="needs-text m-0">RM</h5>
                                         </span>
                                         <input type="text" name="protectionPolicyAmount"
-                                            value="{{ $protectionPolicyAmount }}"
+                                            value="{{ $formattedProtectionPolicyAmount }}"
                                             class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror"
                                             id="protectionPolicyAmount" placeholder=" " required>
                                     </div>
@@ -138,73 +141,70 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const protectionPolicyAmount = document.getElementById("protectionPolicyAmount");
-    const protectionYes = document.getElementById('protection_yes');
+document.addEventListener("DOMContentLoaded", function() {
+    var protectionYes = document.getElementById('protection_yes');
+    var protectionNo = document.getElementById('protection_no');
+    var existingPolicyAmountInput = document.getElementById('existingPolicyAmount');
+    var protectionPolicyAmountInput = document.getElementById('protectionPolicyAmount');
+    var protectionExistingPolicyErrorMsg = document.getElementById('protectionExistingPolicyErrorMsg');
 
+    // Check the initial state of the radio buttons when the page loads
     if (protectionYes.checked) {
-            existingPolicyAmount.style.display = 'block';
-        } else {
-            existingPolicyAmount.style.display = 'none';
-        }
-        
-    protectionPolicyAmount.addEventListener('blur', function() {
-        validateNumberField(protectionPolicyAmount);
-    });
-
-    protectionPolicyAmount.addEventListener('input', function() {
-        protectionExistingPolicyErrorMsg.style.display = "none";
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            field.classList.remove("is-valid");
-            field.classList.add("is-invalid");
-        } else {
-            field.classList.add("is-valid");
-            field.classList.remove("is-invalid");
-        }
+        existingPolicyAmountInput.style.display = 'block';
+    } else {
+        existingPolicyAmountInput.style.display = 'none';
     }
-});
-    const protectionYes = document.getElementById('protection_yes');
-    const protectionNo = document.getElementById('protection_no');
-    const existingPolicyAmount = document.getElementById('existingPolicyAmount');
-
     protectionYes.addEventListener('change', toggleExistingPolicy);
     protectionNo.addEventListener('change', toggleExistingPolicy);
 
     function toggleExistingPolicy() {
         if (protectionYes.checked) {
-            existingPolicyAmount.style.display = 'block';
+            existingPolicyAmountInput.style.display = 'block';
         } else {
-            existingPolicyAmount.style.display = 'none';
+            existingPolicyAmountInput.style.display = 'none';
         }
     }
-    document.addEventListener("DOMContentLoaded", function() {
-        function updateProgress(inputValue) {
-            var totalProtectionValueStr =  $('#TotalProtectionValue').text().replace('RM', '').replace(/,/g, '');
-            var totalProtectionValue = (parseFloat(totalProtectionValueStr));
-            var progressTotalProtectionValue = {{ Session::get('ProgressTotalProtectionValue', 0) }};
+    protectionPolicyAmountInput.addEventListener("blur", function() {
+        validateNumberField(protectionPolicyAmountInput);
 
-
-            $('.retirement-progress-bar').css('width', progressTotalProtectionValue + '%');
-            $('#TotalProtectionValue').text('RM ' + totalProtectionValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
-        }
-        // var inputValue = $('#protectionPolicyAmount').val();
-        // if (inputValue !== "") {
-        //     updateProgress(inputValue);
-        // } else {
-        //     // updateProgress(0); // Or you can use any default value you want
-        // }
-        $('#protectionPolicyAmount').on('input', function () {
-            var inputValue = $(this).val();
-            updateProgress(inputValue);
-        });
     });
-        // Get the toast element
-        const protectionExistingPolicyErrorMsg = document.getElementById('protectionExistingPolicyErrorMsg');
+
+    function validateNumberField(field) {
+        const value = field.value.replace(/,/g, ''); // Remove commas
+        const numericValue = parseFloat(value);
+
+        if (isNaN(numericValue)) {
+            field.classList.remove("is-valid");
+            field.classList.add("is-invalid");
+            console.log('invalid')
+        } else {
+            field.classList.add("is-valid");
+            field.classList.remove("is-invalid");
+            // protectionFundsErrorMessage.classList.remove('d-flex');
+            // protectionFundsErrorMessage.classList.add('d-none');
+        }
+    }
+
+    function updateProgress(inputValue) {
+        var protectionPercentage = {{ $protectionPercentage }};
+
+        $('.retirement-progress-bar').css('width', protectionPercentage + '%');
+    }
+
+    protectionPolicyAmountInput.addEventListener('input', function() {
+        let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        inputValue = Number(inputValue);
+
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+
+        var formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
+        this.value = formattedValue;
+    });
+
+});
+
 
 </script>
 

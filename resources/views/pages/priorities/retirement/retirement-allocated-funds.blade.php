@@ -11,6 +11,7 @@
     // Retrieving values from the session
     $arrayDataRetirement = session('passingArraysRetirement');
     $retirementAllocatedFunds = isset($arrayDataRetirement['retirementAllocatedFunds']) ? $arrayDataRetirement['retirementAllocatedFunds'] : '';
+    $formattedRetirementAllocatedFunds = isset($arrayDataRetirement['formattedRetirementAllocatedFunds']) ? $arrayDataRetirement['formattedRetirementAllocatedFunds'] : '';
     $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 @endphp
 <div id="retirementAllocatedFundsPage" class="vh-100 overflow-auto container-fluid">
@@ -28,7 +29,7 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
+                        <h3 id="TotalRetirementValueText" class="m-1 text-light text-center">RM {{
                             $formattedTotalRetirementValue}}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
@@ -66,14 +67,13 @@
                         <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center align-items-lg-start mx-4 mx-lg-5 order-0 order-lg-1">
+                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-start align-items-lg-start mx-0 py-3 mx-lg-0 order-0 order-lg-1">
                             <h5 class="needs-text">It would be great to have</h5> 
-                            <div class="d-flex">
+                            <div class="d-flex flex-wrap">
                             <div class="input-group w-50">
-                                <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                <input type="text" name="retirementAllocatedFunds" class="form-control text-primary @error('retirementAllocatedFunds') is-invalid @enderror" value="{{$retirementAllocatedFunds }}" id="retirementAllocatedFunds" placeholder=" " required> 
-                            </div>
-                            
+                                <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0 @error('retirementAllocatedFunds')  label-invalid @enderror"><h5 class="needs-text m-0">RM</h5></span>
+                                <input type="text" name="retirementAllocatedFunds" class="input-text form-control text-primary py-0 @error('retirementAllocatedFunds') is-invalid @enderror" value="{{$formattedRetirementAllocatedFunds}}" id="retirementAllocatedFunds" placeholder=" " required> 
+                            </div>  
                             <h5 class="needs-text">/ month to</h5>
                             </div>
                             <h5 class="needs-text ">support myself and my <br>loved ones when I retire.</h5>
@@ -89,10 +89,9 @@
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.age.to.retire')}}"
-                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('retirement.age.to.retire')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                    <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                 </div>
                             </div>
                         </div>
@@ -105,44 +104,104 @@
 document.addEventListener("DOMContentLoaded", function() {
     
     const retirementAllocatedFunds = document.getElementById("retirementAllocatedFunds");
-    const retirementAllocatedFundsErrorMsg = document.getElementById("retirementAllocatedFundsErrorMsg");
+    var inputField = document.getElementById("retirementAllocatedFunds");
+    var TotalRetirementValueText = document.getElementById("TotalRetirementValueText");
+
+  // Listen for input changes on the input field
+  inputField.addEventListener("input", function() {
+
+    // Get the value from the input field
+    var inputValue = inputField.value;
+    if (inputValue == "") {
+        TotalRetirementValueText.innerText = "RM 0";
+        retirementAllocatedFunds.value = inputValue;
+    }
+    else {
+        //change inputValue to comma separated value
+    retirementAllocatedFunds.value = inputValue;
+    console.log(inputValue);
+    TotalRetirementValueText.innerText = parseFloat(inputValue).toLocaleString("en-MY", {
+                style: "currency",
+                currency: "MYR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+    }
+  });
+  retirementAllocatedFunds.addEventListener('input', function() {
+        let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        inputValue = Number(inputValue);
+
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+
+        var formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
+        this.value = formattedValue;
+    });
 
     retirementAllocatedFunds.addEventListener("blur", function() {
+        
         validateNumberField(retirementAllocatedFunds);
     });
 
-    retirementAllocatedFunds.addEventListener("input", function() {
-        retirementAllocatedFundsErrorMsg.style.display = "none";
-    });
 
     function validateNumberField(field) {
+        const RM = document.getElementById("RM");
         const value = field.value.trim();
 
         if (value === "" || isNaN(value)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
+            RM.classlist.add("label-invalid");
+
         } else {
             field.classList.add("is-valid");
             field.classList.remove("is-invalid");
+            RM.classlist.remove("label-invalid");   
         }
     }
-    function updateProgress(inputValue) {
-                    // console.log($('#TotalRetirementValue').text());
-                    var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
-                    var totalRetirementValue = inputValue * parseFloat(totalRetirementValueStr); // Convert to decimal value
-                    var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
-        
-                    $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
-                    $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
-        
-                }
-        
-                $('#retirementAllocatedFunds').on('input', function () {
-                    var inputValue = $(this).val();
-                    updateProgress(inputValue);
-                });
+
 });
-
-
 </script>
-    @endsection
+<style>
+        <style>
+              .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+        padding-right:0;
+    }
+        .navbar {
+        right:50%;
+    }
+    .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+    }
+    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    .form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    
+    .form-control {
+    line-height: 1.2 !important;
+}
+@media only screen and (max-width: 767px) {
+
+.navbar-default.transparent {
+background: transparent !important;
+}
+.fixed-bottom {
+    z-index: 10;
+}
+.navbar {
+    right:0;
+}
+}
+    </style>
+    
+@endsection

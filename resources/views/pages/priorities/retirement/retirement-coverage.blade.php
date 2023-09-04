@@ -25,6 +25,13 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
             </div>
         </div>
 
+
+
+        <section>
+            <form class="form-horizontal p-0 needs-validation" novalidate
+                action="{{ route('form.retirement.coverage') }}" method="POST">
+                @csrf
+
         {{-- error message notifications --}}
         @if ($errors->has('retirementSelectedAvatar'))
         <div id="retirementSelectedAvatarErrorMessage"
@@ -43,30 +50,25 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
         </div>
         @endif
         {{-- end of error message notifications --}}
-
         <section>
-            <form class="form-horizontal p-0 needs-validation" novalidate
-                action="{{ route('form.retirement.coverage') }}" method="POST">
-                @csrf
-
                 <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-                    <div class="my-4 second-cloud" style="padding-top:5.5rem;">
-                        <div class="row d-flex justify-content-center py-2 text-center align-items-center">
-                            <h5 class="my-2">I'd like to provide coverage for my:</h5>
+                    <div class="my-4 y-lg-4 p-4 p-md-5 p-lg-5 second-cloud">
+                        <div class="row d-flex justify-content-center py-4 py-md-5 text-center align-items-center">
+                            <h5>I'd like to provide coverage for my:</h5>
                         </div>
                         <div class="container">
                             {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
-                            <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
+                            <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-4 px-md-5">
                                 <i class="bi bi-arrow-left-circle text-primary"></i>
                             </div>
 
                             {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
-                            <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
+                            <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-4 px-md-5">
                                 <i class="bi bi-arrow-right-circle text-primary"></i>
                             </div>
                         </div>
                         <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
-                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
+                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
                                 <button
                                     class="btn border-0 bg-transparent box-shadow avatar-button  {{ $retirementSelectedAvatar  === 'self' ? 'selected-box-shadow' : '' }}"
                                     data-type="self" id="button-self-avatar" onclick="avatarSelect(this)">
@@ -84,7 +86,7 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
                                     <h6 class="text-center py-2">Spouse</h6>
                                 </button>
                             </div>
-                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
                                 <button
                                     class="btn border-0 bg-transparent box-shadow avatar-button {{ $retirementSelectedAvatar  === 'children' ? 'selected-box-shadow' : '' }}"
                                     data-type="children" id="button-kid-avatar" onclick="avatarSelect(this)">
@@ -113,9 +115,9 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
         <section class="footer bg-white py-4 fixed-bottom">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 d-grid gap-2 d-md-block text-end">
-                        <a href="{{route('retirement.home')}}" class="btn btn-primary text-uppercase me-md-2">Back</a>
-                        <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                        <a href="{{route('retirement.home')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                        <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                     </div>
                 </div>
             </div>
@@ -124,8 +126,6 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
     </div>
 </div>
 </div>
-
-@endsection
 
 
 <script>
@@ -165,7 +165,86 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
     }
 }
  
-
-
-
 </script>
+
+<style>
+
+@media only screen and (max-width: 767px) {
+    .progress-value p {
+        color: inherit !important;
+    }
+
+    .fixed-bottom {
+        z-index: 10;
+    }
+
+    .slick-track {
+        height: 57vh;
+    }
+
+    .navbar-default.transparent {
+        background: transparent !important;
+    }
+}
+
+@media only screen and (width: 414px) and (height: 896px) {
+    .coverage-avatar img.self-avatar {
+        width: 22vh;
+    }
+
+    .coverage-avatar img.spouse-avatar {
+        width: 20vh;
+    }
+
+    .slick-slide {
+        height: 110%;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-height:1280px) and (orientation:portrait) {
+    .needs-grey-bg-md {
+        padding-top: 300px;
+    }
+
+    .slick-track {
+        height: 63vh;
+    }
+
+    .coverage-avatar img.parent-avatar {
+        width: 36vh;
+    }
+
+    .bg-needs-main {
+        background-position: center center;
+        height: 110vh;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width:834px) and (max-height:1112px) and (orientation:portrait) {
+    .slick-track {
+        height: 69vh;
+    }
+    .coverage-avatar img.self-avatar {
+        width: 24vh;
+    }
+    .coverage-avatar img.spouse-avatar {
+        width: 20vh;
+    }
+}
+@media only screen and (min-width:768px) and (max-height:1024px) and (orientation:portrait) {
+    .slick-track {
+        height: 67vh;
+    }
+    .coverage-avatar img.self-avatar {
+        width: 24vh;
+    }
+    .coverage-avatar img.spouse-avatar {
+        width: 20vh;
+    }
+}
+
+
+</style>
+@endsection

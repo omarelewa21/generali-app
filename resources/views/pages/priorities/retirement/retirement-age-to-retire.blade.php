@@ -11,7 +11,7 @@
 // Retrieving values from the session
 $arrayDataRetirement = session('passingArraysRetirement');
 $retirementAgeToRetire = isset($arrayDataRetirement['retirementAgeToRetire']) ?
-$arrayDataRetirement['retirementAgeToRetire'] : '';
+$arrayDataRetirement['retirementAgeToRetire'] : null;
 $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ?
 $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 @endphp
@@ -71,12 +71,12 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                     src="{{ asset('images/needs/retirement/avatar-age-to-retire.svg') }}" alt="avatar">
                             </div>
                             <div
-                                class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center align-items-lg-start mx-4 mx-lg-5 order-0 order-lg-1">
+                                class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                                 <h5 class="needs-text">I’d like to retire </h5>
-                                <div class="d-flex flex-wrap">
+                                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start">
                                     <h5 class="needs-text">at the age of</h5>
                                     <input type="text" name="retirementAgeToRetire" value="{{ $retirementAgeToRetire }}"
-                                        class="w-25 form-control d-inline text-primary @error('retirementAgeToRetire') is-invalid @enderror"
+                                        class="w-25 input-text form-control text-primary py-0 @error('retirementAgeToRetire') is-invalid @enderror"
                                         id="retirementAgeToRetireInput" placeholder=" ">
                                 </div>
                             </div>
@@ -87,15 +87,12 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                             </div>
                         </div>
                     </section>
-
-
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.ideal')}}"
-                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                    <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('retirement.ideal')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                    <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                 </div>
                             </div>
                         </div>
@@ -106,19 +103,19 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const retirementAgeToRetire = document.getElementById("retirementAgeToRetire");
-    retirementAgeToRetire.addEventListener("blur", function() {
+console.log(retirementAgeToRetire);
+
+retirementAgeToRetire.addEventListener("blur", function() {
         validateNumberField(retirementAgeToRetire);
     });
 
-    retirementAgeToRetire.addEventListener("input", function() {
-        retirementAgeToRetireErrorMsg.style.display = "none";
-    });
 
     function validateNumberField(field) {
+        console.log(field);
         const value = field.value.trim();
-
+console.log(value);
         if (value === "" || isNaN(value)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
@@ -127,14 +124,11 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
             field.classList.remove("is-invalid");
         }
     }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
         function updateProgress(inputValue) {
             console.log($('#TotalRetirementValue').text());
             var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
             var totalRetirementValue = inputValue * parseFloat(totalRetirementValueStr); // Convert to decimal value
-            var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
+            // var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
 
             $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
             $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
@@ -147,21 +141,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         
     });
-        // Get the toast element
-        const retirementAgeToRetireErrorMsg = document.getElementById('retirementAgeToRetireErrorMsg');
 
-// Show the toast and apply the animation
-function showToast() {
-    retirementAgeToRetireErrorMsg.classList.add('show');
-
-    // Auto-hide the toast after a delay
-    setTimeout(() => {
-        retirementAgeToRetireErrorMsg.classList.remove('show');
-    }, 2500);
-}
-
-// Trigger the toast animation on page load or when error condition is met
-document.addEventListener('DOMContentLoaded', showToast);
     </script>
 
+<style>
+.form-control {
+    line-height: 1.2 !important;
+}
+@media only screen and (max-width: 767px) {
+
+.navbar-default.transparent {
+background: transparent !important;
+}
+.fixed-bottom {
+    z-index: 10;
+}
+.navbar {
+    right:0;
+}
+}
+
+</style>
     @endsection

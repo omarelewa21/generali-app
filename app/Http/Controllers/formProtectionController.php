@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
@@ -11,8 +10,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-
-
 
 class formProtectionController extends Controller
 {
@@ -51,12 +48,13 @@ class formProtectionController extends Controller
         ];
 
         $validatedData = $request->validate([
-            'protectionFunds' => 'required|integer|min:1',
+            'protectionFunds' => 'required|numeric_commas_stripped|min:1',
 
         ], $customMessages);
 
         // Calculate the multiplied value
         $protectionFunds = $request->input('protectionFunds');
+        $protectionFunds = (int) preg_replace('/[^\d]/', '', $validatedData['protectionFunds']);
 
         $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
         $protectionsupportingYears = session('passingArraysProtection.protectionSupportingYears');
@@ -73,9 +71,11 @@ class formProtectionController extends Controller
         $arrayDataProtection['protectionFunds'] = $protectionFunds;
         $arrayDataProtection['TotalProtectionValue'] = $TotalProtectionValue;
 
+        $formattedProtectionFunds = number_format($protectionFunds, 0, '.', ',');
         $formattedTotalProtectionValue = number_format($TotalProtectionValue, 0, '.', ',');
 
         $arrayDataProtection['formattedTotalProtectionValue'] = $formattedTotalProtectionValue;
+        $arrayDataProtection['formattedProtectionFunds'] = $formattedProtectionFunds;
 
         // Store the updated array back into the session
         session(['passingArraysProtection' => $arrayDataProtection]);
@@ -131,13 +131,16 @@ class formProtectionController extends Controller
         ];
         $validatedData = $request->validate([
             'protectionExistingPolicy' => 'required|in:yes,no',
-            'protectionPolicyAmount' => 'required_if:protectionExistingPolicy,yes|numeric',
+            'protectionPolicyAmount' => 'required_if:protectionExistingPolicy,yes|numeric_commas_stripped|min:1'
 
         ], $customMessages);
 
         $protectionExistingPolicy = $request->input('protectionExistingPolicy');
         $protectionPolicyAmount = $request->input('protectionPolicyAmount');
 
+        $protectionPolicyAmount = (int) preg_replace('/[^\d]/', '', $validatedData['protectionPolicyAmount']);
+
+        $formattedProtectionPolicyAmount = number_format($protectionPolicyAmount, 0, '.', ',');
         $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
 
         $protectionPolicyAmount = ($protectionExistingPolicy == 'yes') ? $protectionPolicyAmount : 0;
@@ -160,6 +163,7 @@ class formProtectionController extends Controller
         $arrayDataProtection['protectionPolicyAmount'] = $protectionPolicyAmount;
         $arrayDataProtection['protectionGap'] = $protectionGap;
         $arrayDataProtection['protectionPercentage'] = $protectionPercentage;
+        $arrayDataProtection['formattedProtectionPolicyAmount'] = $formattedProtectionPolicyAmount;
 
         // Store the updated array back into the session
         session(['passingArraysProtection' => $arrayDataProtection]);

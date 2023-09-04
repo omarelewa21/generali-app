@@ -15,7 +15,7 @@
 @endphp
 
 <div id="protection-content">
-    <div class="p-0 vh-100 container-fluid">
+    <div class="p-0 container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     @include('templates.nav.nav-red-menu')
@@ -25,12 +25,12 @@
                 </div>
             </div>
             <form class="form-horizontal p-0" action="{{route('retirement.home')}}" method="get">
-                <div class="col-12 text-dark px-0 my-4">
+                <div class="col-12 text-dark px-0 my-4 d-flex justify-content-center">
                     <div class="my-4">  
                         <section>
-                            <div class="container mx-auto row justify-content-center bg-needs-gap">
+                            <div class="mt-4 container mx-auto row justify-content-center bg-needs-gap">
                             <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
-                                <div class="svg-container">
+                                <div class="svg-container" style="transform:scale(1.3)">
                                 <div class="card-gap" id="gap">
                                     <div class="card-gap__percent">
                                       <svg>
@@ -41,7 +41,7 @@
                                           </linearGradient >
                                         </defs>
                                         <circle cx="90" cy="90" r="144" stroke="url(#gradient)" id="circle"></circle>
-                                        <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle>
+                                        {{-- <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle> --}}
                                       </svg>
                                       <div class="circle"></div>
                                       <div class="circle circle__medium"></div>
@@ -50,36 +50,8 @@
                                     </div>
                                 </div>
                                 </div>
-                                {{-- <object type="image/svg+xml" data="{{ asset('images/needs/background/PieChart.svg') }}" width="85%">
-                                    Your browser does not support SVGs
-                                </object> --}}
-                                {{-- <div class="ell1 my-4 my-md-0" id="chart-gap" style="transform: scale(1.6);">
-                                    <div class="ell2">
-                                      <div class="ellP">
-                                        <svg>
-                                          <linearGradient id="test">
-                                  <stop offset="0%" stop-color="#FF7D7A"/>
-                                  <stop offset="100%" stop-color="#C1210D"/>
-                                  </linearGradient>
-                                          <circle sx="70" cy="70" r="120"></circle> 
-                                          <circle sx="70" cy="70" r="120" id="CircleProgressBar" stroke="url(#test)" stroke-dasharray="800"></circle>   
-                                              </svg>
-                                      </div>
-                                      <div class="ell3">
-                                        <div class="ell4">
-                                          <div class="ellText">
-                                            <h1 class="text-primary"><span id="covered">{{$protectionPercentage}}</span>%</h1>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div> --}}
-                                <h5 id="textProtectionFund" class="row position-relative gap-text">
-                                    Total Protection Fund
-                                </h5>
-                                
                             </div>
-                                <div class="col-12 col-md-10 col-lg-6 my-5 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                            <div class="col-12 col-md-10 col-lg-6 my-2 my-md-5 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-2 mx-md-5">
                                         <div class="d-flex">
                                             <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
@@ -128,7 +100,13 @@
                                             <span class="align-self-center {{ $protectionGap === 0 ? 'green-tick' : 'red-tick' }}"></span>
                                         </div>
                                 </div>
+                                <div class="d-flex row">
+                                    <h5 id="textProtectionFund" class="text-center col-5 gap-text">
+                                        Total Protection Fund
+                                    </h5>
+                                </div>
                             </div>
+
     
                         </section>
     
@@ -157,40 +135,25 @@
         var circle = document.getElementById("circle");
 //    var change = 879.65 - (879.65 * Covered) / 100;
 //    circle.style.strokeDashoffset = change;
-//    console.log('change', change);
 circle.style.strokeDasharray = 904.896;
-let change = 904.896 - (904.896 * Covered) / 100;
+let change = 904.896 - (904.896 * Covered) / 100; 
+if (change < 0) {
+    change = 0; // 0 represents 100% coverage
     circle.style.strokeDashoffset = change;
+    // console.log('change', change);
+}
+else   {
+    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
+}
     });
-
-    
-//     document.addEventListener("DOMContentLoaded", function () {
   
-// var covered = parseFloat(document.getElementById("covered").innerHTML);
-// var percent = covered/100;
-// var dasharaay = percent * 800 ;
-// var CPB = document.getElementById("CircleProgressBar");
-// // var CPB = document.getElementById("circle");
-// console.log('dasharaay', dasharaay);
-
-// if (dasharaay < 300) {
-//   // Calculate the combined length of all three segments
-//   var combinedLength = dasharaay * 3;
-
-//   // Set the combined length as strokeDasharray
-//   CPB.style.strokeDasharray = combinedLength;
-// } else {
-//   CPB.style.strokeDasharray = dasharaay;
-// }
-// // CPB.style.strokeDasharray = dasharaay;
-
-//     });
 </script>
+
 <style>
 
-#textProtectionFund {
+/* #textProtectionFund {
     top:18%;
-}
+} */
     .navbar {
         right:50%;
     }
@@ -227,6 +190,18 @@ display:none;
         margin-top: 130px !important;
         transform: scale(1.3) !important;
     }
+}
+@media only screen and (max-width: 767px) {
+
+.navbar-default.transparent {
+background: transparent !important;
+}
+.fixed-bottom {
+    z-index: 10;
+}
+.navbar {
+    right:0;
+}
 }
     </style>
 @endsection

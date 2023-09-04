@@ -10,6 +10,8 @@
 @php
     // Retrieving values from the session
     $arrayDataRetirement = session('passingArraysRetirement');
+    $retirementAllocatedFunds = isset($arrayDataRetirement['retirementAllocatedFunds']) ? $arrayDataRetirement['retirementAllocatedFunds'] : '';
+    $retirementAgeToRetire = isset($arrayDataRetirement['retirementAgeToRetire']) ? $arrayDataRetirement['retirementAgeToRetire'] : '';
     $retirementYearsTillRetire = isset($arrayDataRetirement['retirementYearsTillRetire']) ? $arrayDataRetirement['retirementYearsTillRetire'] : '';
     $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 @endphp
@@ -28,7 +30,7 @@
                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
+                        <h3 id="TotalRetirementValueText" class="m-1 text-light text-center">RM {{
                             $formattedTotalRetirementValue }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
@@ -65,10 +67,10 @@
                         <div class="bg-needs-1 col-lg-6 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative avatar-years-till-retire" src="{{ asset('images/needs/retirement/years-to-retire-avatar.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center align-items-lg-start mx-4 mx-lg-5 order-0 order-lg-1">
+                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-center justify-content-lg-end align-items-start align-items-lg-start mx-0 mx-lg-0 order-0 order-lg-1">
                             <h5 class="needs-text">I plan to have</h5>
                             <div class="input-group w-50">
-                                <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="form-control text-primary @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
+                                <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="input-text form-control text-primary py-0 @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
                             </div>
                             <h5 class="needs-text">to enjoy my retirement.</h5>
@@ -84,10 +86,9 @@
                     <section class="footer bg-white py-4 fixed-bottom">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                    <a href="{{route('retirement.allocated.funds')}}"
-                                        class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('retirement.allocated.funds')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                    <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                 </div>
                             </div>
                         </div>
@@ -97,61 +98,126 @@
             </div>
     </div>
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     const retirementYearsTillRetire = document.getElementById("retirementYearsTillRetire");
-        //     const retirementYearsTillRetireErrorMsg = document.getElementById("retirementYearsTillRetireErrorMsg");
-            
-        //     retirementYearsTillRetire.addEventListener("blur", function() {
-        //         validateNumberField(retirementYearsTillRetire);
-        //     });
-        
-        //     retirementYearsTillRetire.addEventListener("input", function() {
-        //         retirementYearsTillRetireErrorMsg.style.display = "none";
-        //     });
-        
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-        
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.remove("is-valid");
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             field.classList.add("is-valid");
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // });
-        
-        // document.addEventListener("DOMContentLoaded", function() {
-        //         function updateProgress(inputValue) {
-        //             // console.log($('#TotalRetirementValue').text());
-        //             var totalRetirementValueStr =  $('#TotalRetirementValue').text().replace('RM', '').replace(/,/g, '');
-        //             var totalRetirementValue = inputValue * parseFloat(totalRetirementValueStr); // Convert to decimal value
-        //             var progressTotalRetirementValue = {{ Session::get('ProgressTotalRetirementValue',0) }};
-        
-        //             $('.retirement-progress-bar').css('width', progressTotalRetirementValue + '%');
-        //             $('#TotalRetirementValue').text('RM' + totalRetirementValue.toLocaleString('en-MY', { maximumFractionDigits: 2 }));
-        
-        //         }
-        
-        //         $('#retirementYearsTillRetire').on('input', function () {
-        //             var inputValue = $(this).val();
-        //             updateProgress(inputValue);
-        //         });
-                
-        //     });
-        // Show the toast and apply the animation
-function showToast() {
-    retirementYearsTillRetireErrorMsg.classList.add('show');
+        document.addEventListener("DOMContentLoaded", function() {
+            const retirementYearsTillRetire = document.getElementById("retirementYearsTillRetire");
+            const retirementYearsTillRetireErrorMsg = document.getElementById("retirementYearsTillRetireErrorMsg");
+            var inputField = document.getElementById("retirementYearsTillRetire");
+            var TotalRetirementValueText = document.getElementById("TotalRetirementValueText");
+            var retirementAgeToRetire = {{$retirementAgeToRetire}};
+            var retirementAllocatedFunds = {{$retirementAllocatedFunds}};
 
-    // Auto-hide the toast after a delay
-    setTimeout(() => {
-        retirementYearsTillRetireErrorMsg.classList.remove('show');
-    }, 2500);
-}
+            retirementYearsTillRetire.addEventListener("blur", function() {
+                validateNumberField(retirementYearsTillRetire);
+            });
+        
+            retirementYearsTillRetire.addEventListener("input", function() {
+                // retirementYearsTillRetireErrorMsg.style.display = "none";
+            });
+        
+            function validateNumberField(field) {
+                const value = field.value.trim();
+        
+                if (value === "" || isNaN(value)) {
+                    field.classList.remove("is-valid");
+                    field.classList.add("is-invalid");
+                } else {
+                    field.classList.add("is-valid");
+                    field.classList.remove("is-invalid");
+                }
+            }
 
-// Trigger the toast animation on page load or when error condition is met
-document.addEventListener('DOMContentLoaded', showToast);
+        
+
+
+  // Listen for input changes on the input field
+  inputField.addEventListener("input", function() {
+
+    // Get the value from the input field
+    var inputValue = inputField.value;
+    if (inputValue == "") {
+        TotalRetirementValueText.innerText = "RM 0";
+        retirementYearsTillRetire.value = inputValue;
+    }
+    else {
+        //change inputValue to comma separated value
+    var retirementYearsTillRetire = inputValue;
+    var inputValue = retirementAllocatedFunds * 12 * retirementYearsTillRetire;
+
+
+    TotalRetirementValueText.innerText = parseFloat(inputValue).toLocaleString("en-MY", {
+                style: "currency",
+                currency: "MYR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+    }
+  });
+
+});
 
         </script>
+
+        <style>
+                <style>
+              .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+        padding-right:0;
+    }
+        .navbar {
+        right:50%;
+    }
+    .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+    }
+    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    .form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    <style>
+              .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+        padding-right:0;
+    }
+        .navbar {
+        right:50%;
+    }
+    .was-validated .form-control:valid, .form-control.is-valid {
+        background-image:none;
+        border-color: #000000;
+    }
+    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    .form-control:focus {
+        border-color: #000000;
+        box-shadow: none;
+    }
+    .form-control {
+    line-height: 1.2 !important;
+}
+@media only screen and (max-width: 767px) {
+
+.navbar-default.transparent {
+background: transparent !important;
+}
+.fixed-bottom {
+    z-index: 10;
+}
+.navbar {
+    right:0;
+}
+.avatar-years-till-retire {
+    top:2%;
+}
+}
+    </style>
+    
     @endsection

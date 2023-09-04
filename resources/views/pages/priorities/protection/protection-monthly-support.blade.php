@@ -13,6 +13,7 @@
     $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
     $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ? $arrayDataProtection['protectionSupportingYears'] : 0;
     $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ? $arrayDataProtection['formattedTotalProtectionValue'] : 0;
+    $formattedProtectionFunds = isset($arrayDataProtection['formattedProtectionFunds']) ? $arrayDataProtection['formattedProtectionFunds'] : null;
     $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ? $arrayDataProtection['TotalProtectionValue'] : 0;
     $protectionPercentage = isset($arrayDataProtection['protectionPercentage']) ? $arrayDataProtection['protectionPercentage'] : 0;
 
@@ -56,9 +57,7 @@
                 </svg>
                 <span class="mx-2 fs-18">{{ $errors->first('protectionFunds') }}</span>
             </div>
-            <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>                
+               
         </div>
     </div>
     @endif
@@ -71,14 +70,15 @@
                         <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative monthly-support-asset z-1" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center mx-4 mx-lg-auto order-0 order-lg-1">
+                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                             <h5 class="needs-text">If anything should</h5>
                             <h5 class="needs-text">happen to me, I'd like to</h5>
                             <h5 class="needs-text">support my family with</h5>
-                            <div class="d-flex flex-wrap"> 
-                                <div class="input-group w-50">
-                                    <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
-                                    <input type="text" name="protectionFunds" id="protectionFunds" value="{{$protectionFunds }}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required>                                </div>
+                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
+                                <div class="input-group w-50 w-sm-25">
+                                    <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0 @error('protectionFunds') label-invalid @enderror"><h5 class="needs-text m-0">RM</h5></span>
+                                    <input type="text" name="protectionFunds" id="protectionFunds" value="{{$formattedProtectionFunds}}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required>                                
+                                </div>
                                 <h5 class="needs-text">/ month.</h5>    
                             </div>
                         </div>
@@ -111,69 +111,74 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const protectionFunds = document.getElementById("protectionFunds");
 
-    protectionFunds.addEventListener("blur", function() {
-        validateNumberField(protectionFunds);
+    var protectionFundsInput = document.getElementById('protectionFunds');
+    var totalProtectionValueText = document.getElementById('TotalProtectionValueText');
+    var RM = document.getElementById("RM");
+
+    // const protectionFundsErrorMessage = document.getElementById("protectionFundsErrorMessage");
+
+    protectionFundsInput.addEventListener("blur", function() {
+        validateNumberField(protectionFundsInput);
     });
 
     function validateNumberField(field) {
-        const value = field.value.trim();
+        var value = field.value.replace(/,/g, ''); // Remove commas
+        var numericValue = parseFloat(value);
 
-        if (value === "" || isNaN(value)) {
+        if (isNaN(numericValue)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
+            RM.classList.add("label-invalid");
+
         } else {
             field.classList.add("is-valid");
             field.classList.remove("is-invalid");
-            protectionFundsErrorMessage.classList.remove('d-flex');
-            protectionFundsErrorMessage.classList.add('d-none');
+            RM.classList.remove("label-invalid");
+            // protectionFundsErrorMessage.classList.remove('d-flex');
+            // protectionFundsErrorMessage.classList.add('d-none');
         }
     }
-    
-    var inputField = document.getElementById("protectionFunds");
-    var TotalProtectionValueText = document.getElementById("TotalProtectionValueText");
 
-  // Listen for input changes on the input field
-  inputField.addEventListener("input", function() {
 
-    // Get the value from the input field
-    var inputValue = inputField.value;
-    if (inputValue == "") {
-        TotalProtectionValueText.innerText = "RM 0";
-        protectionFunds.value = inputValue;
-    }
-    else {
-        //change inputValue to comma separated value
-    protectionFunds.value = inputValue;
-    console.log(inputValue);
-    TotalProtectionValueText.innerText = parseFloat(inputValue).toLocaleString("en-MY", {
-                style: "currency",
-                currency: "MYR",
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            });
-    }
-  });
+    protectionFundsInput.addEventListener('input', function() {
+        // RM.classList.remove("label-invalid");
+        let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        inputValue = Number(inputValue);
 
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+
+        const formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
+        this.value = formattedValue;
+
+        totalProtectionValueText.innerText = inputValue.toLocaleString('en-MY', {
+            style: 'currency',
+            currency: 'MYR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    });
 });
+
 
 </script>
 <style>
       .was-validated .form-control:valid, .form-control.is-valid {
         background-image:none;
         border-color: #000000;
-        padding-right:0;
+        padding-right:5px;
     }
         .navbar {
         right:50%;
     }
-    .was-validated .form-control:valid, .form-control.is-valid {
-        background-image:none;
+
+    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus {
         border-color: #000000;
+        box-shadow: none;
     }
-    .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
-        border-color: #000000;
+    .form-control.is-invalid:focus {
         box-shadow: none;
     }
     .form-control:focus {
