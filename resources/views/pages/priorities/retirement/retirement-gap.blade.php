@@ -11,6 +11,7 @@
     $retirementAllocatedFundsAsideTotal = (isset($arrayDataRetirement['retirementAllocatedFundsAsideTotal']) ? $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] : 0);
     $TotalRetirementValue = isset($arrayDataRetirement['TotalRetirementValue']) ? $arrayDataRetirement['TotalRetirementValue'] : 0;
     $retirementGap = isset($arrayDataRetirement['retirementGap']) ? $arrayDataRetirement['retirementGap'] : 0;
+    $retirementPercentage = isset($arrayDataRetirement['retirementPercentage']) ? $arrayDataRetirement['retirementPercentage'] : 0;
 @endphp
 <div id="Retirement-content">
     <div class="p-0 vh-100 container-fluid">
@@ -23,54 +24,95 @@
                 </div>
             </div>
             <form class="form-horizontal p-0" action="{{route('retirement.home')}}" method="get">
-                <div class="col-12 text-dark px-0 my-4">
+                <div class="col-12 text-dark px-0 my-4 d-flex justify-content-center">
                     <div class="my-4">  
                         <section>
-                            <div class="row vh-100 justify-content-center">
-                            <div class="col-lg-6 bg-needs-3 d-flex flex-column justify-content-sm-start justify-content-lg-center justify-content-start align-items-center">
-                                <canvas id="totalRetirementFund" class="d-flex object-fit-cover chart-canvas"></canvas>
-                            </div>
-                                <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
-                                    <div class="d-flex">
-                                        <h5 class="needs-text d-inline-flex">In</h5>
-                                        <input type="number" name="years" class="form-control text-primary w-25" id="years" value={{$retirementYearsTillRetire}} placeholder=" " required> 
-                                        <h5 class="needs-text d-inline-flex">years' time,</h5> 
+                            <div class="mt-4 container mx-auto row justify-content-center bg-needs-gap">
+                            <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
+                                <div class="svg-container" style="transform:scale(1.3)">
+                                <div class="card-gap" id="gap">
+                                    <div class="card-gap__percent">
+                                      <svg>
+                                        <defs>
+                                          <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
+                                            <stop offset="10%"   stop-color="#FF7D7A"/>
+                                            <stop offset="100%" stop-color="#C1210D"/>
+                                          </linearGradient >
+                                        </defs>
+                                        <circle cx="90" cy="90" r="144" stroke="url(#gradient)" id="circle"></circle>
+                                        {{-- <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle> --}}
+                                      </svg>
+                                      <div class="circle"></div>
+                                      <div class="circle circle__medium"></div>
+                                      <div class="circle circle__small"></div>
+                                      <div class="card-gap__number text-primary">{{$retirementPercentage}}%</div>
                                     </div>
-                                    <br>
-                                    <h5 class="needs-text">I want to protect my</h5>
-                                    <div class="d-flex">
-                                        <h5 class="needs-text d-inline-flex">loved ones with</h5>
-                                        <div class="input-group w-25">
-                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" value="{{$TotalRetirementValue}}" class="form-control text-primary" id="years" placeholder=" "required>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="d-flex">
-                                        <h5 class="needs-text d-inline-flex">I have set aside</h5>
-                                        <div class="input-group w-25">
-                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" value="{{$retirementAllocatedFundsAsideTotal}}" class="form-control text-primary" id="years" placeholder=" " required><br><br>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <h5 class="needs-text d-inline-flex">So I need a plan for</h5>
-                                        <div class="input-group w-25 d-flex">
-                                            <span class="input-group-text text-primary fw-bold bg-transparent pe-0">RM</span>
-                                            <input type="number" name="years" value="{{$retirementGap}}" class="form-control text-primary" id="years" placeholder=" " required>
-                                        </div>
+                                </div>
                                 </div>
                             </div>
-    
-                        </section>
-    
+                            <div class="col-12 col-md-10 col-lg-6 my-2 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
+                                        <div class="d-flex">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                                <h5 class="gap-text my-auto">                                             
+                                                    After the next
+                                                </h5>
+                                                <h5 class="gap-value text-primary my-auto">                                             
+                                                    {{$retirementYearsTillRetire}} years
+                                                </h5>
+                                            </div>
+                                            <span class="align-self-center green-tick"></span>
+                                        </div>
+                                        
+                                        <div class="d-flex">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                                <h5 class="gap-text my-auto w-50">                                             
+                                                    I want to enjoy my golden years with
+                                                </h5>
+                                                <h5 class="gap-value text-primary my-auto">                                             
+                                                    RM {{number_format($TotalRetirementValue)}} 
+                                                </h5>
+                                            </div>
+                                            <span class="align-self-center green-tick"></span>
+                                        </div>
+                                        
+                                        <div class="d-flex">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                                <h5 class="gap-text my-auto">                                             
+                                                    I have set aside
+                                                </h5>
+                                                <h5 class="gap-value text-primary my-auto">                                             
+                                                    RM {{number_format($retirementAllocatedFundsAsideTotal)}}
+                                                </h5>
+                                            </div>
+                                            <span class="align-self-center green-tick"></span>
+                                        </div>
+                                        
+                                        <div class="d-flex">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                                <h5 class="gap-text my-auto">                                             
+                                                    So I need a plan for
+                                                </h5>
+                                                <h5 class="gap-value my-auto {{ $retirementGap === 0 ? 'text-dark' : 'text-primary ' }}">                                             
+                                                    RM {{number_format($retirementGap)}}
+                                                </h5>
+                                            </div>
+                                            <span class="align-self-center {{ $retirementGap === 0 ? 'green-tick' : 'red-tick' }}"></span>
+                                        </div>
+                                </div>
+                                <div class="d-flex row">
+                                    <h5 id="textretirementFund" class="text-center col-5 gap-text">
+                                        Total Retirement Fund
+                                    </h5>
+                                </div>
+                            </div>
+                      </section>
+
                         <section class="footer bg-white py-4 fixed-bottom">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                        <a href="{{route('retirement.allocated.funds.aside')}}"
-                                            class="btn btn-primary text-uppercase me-md-2">Back</a>
-                                            <button type="submit" class="btn btn-primary text-uppercase">Next</button>
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <a href="{{route('retirement.allocated.funds.aside')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -80,215 +122,71 @@
             </form>
     </div>
 </div>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
 <script>
-    $(document).ready(function() {
-        var retirementAllocatedFundsAsideTotal =  {{$retirementAllocatedFundsAsideTotal}};
+       document.addEventListener("DOMContentLoaded", function() {
+      var $retirementAllocatedFundsAsideTotal =  {{$retirementAllocatedFundsAsideTotal}};
         var TotalRetirementValue = {{$TotalRetirementValue}};
         var retirementGap = {{$retirementGap}};
-        var Covered = (retirementAllocatedFundsAsideTotal / (retirementAllocatedFundsAsideTotal + TotalRetirementValue) * 100).toFixed(2)
+        var Covered = ($retirementAllocatedFundsAsideTotal / TotalRetirementValue * 100).toFixed(2)
         var Uncovered = (100 - Covered).toFixed(2);
-
-        if (window.innerWidth < 596) {
-            // Chart for Mobile
-            var config = {
-                type: 'doughnut',
-                data: {
-                    labels: ["Uncovered", "Covered"],
-                    datasets: [{
-                        data: [Uncovered, Covered],
-                        backgroundColor: ["#C21B17", "#30DF8B"],
-                        hoverBackgroundColor: [
-                            "#C21B17",
-                            "#30DF8B"
-                        ]
-                    }]
-                },
-                options: {
-                    legend: {
-                                display: false, // This will hide the label data above the doughnut chart
-                            },
-                    responsive: true, // Enable responsiveness
-                    maintainAspectRatio: true, // Keep the aspect ratio (important for responsiveness)
-                    elements: {
-                        center: {
-                            // First text style
-                            text1: {
-                                text: Covered + '%',
-                                color: '#14A38B', 
-                                fontStyle: 'Helvetica Neue', // Font style for the first text
-                                fontSize: 45, // Font size for the first text
-                            },
-                            // Second text style
-                            text2: {
-                                text: 'Total Retirement Fund',
-                                color: '#000', // Blue color
-                                fontStyle: 'Helvetica Neue', // Font style for the second text
-                                fontSize: 14, // Font size for the second text
-                            },
-                            sidePadding: 20,
-                            minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-                            // lineHeight: 25 // Default is 25 (in px), used for when text wraps
-                        }
-                    }
-                }
-            };
-        }
-        else{
-            // Chart for Desktop
-            var config = {
-                type: 'doughnut',
-                data: {
-                    labels: ["Uncovered", "Covered"],
-                    datasets: [{
-                        data: [Uncovered, Covered],
-                        backgroundColor: ["#C21B17", "#30DF8B"],
-                        hoverBackgroundColor: [
-                            "#C21B17",
-                            "#30DF8B"
-                        ]
-                    }]
-                },
-                options: {
-                    legend: {
-                                display: false, // This will hide the label data above the doughnut chart
-                            },
-                    responsive: true, // Enable responsiveness
-                    maintainAspectRatio: true, // Keep the aspect ratio (important for responsiveness)
-                    elements: {
-                        center: {
-                            // First text style
-                            text1: {
-                                text: Covered + '%',
-                                color: '#14A38B', 
-                                fontStyle: 'Helvetica Neue', // Font style for the first text
-                                fontSize: 45, // Font size for the first text
-                            },
-                            // Second text style
-                            text2: {
-                                text: 'Total Retirement Fund',
-                                color: '#000', // Blue color
-                                fontStyle: 'Helvetica Neue', // Font style for the second text
-                                fontSize: 15, // Font size for the second text
-                            },
-                            sidePadding: 20,
-                            minFontSize: 20, // Default is 20 (in px), set to false and text will not wrap.
-                            // lineHeight: 25 // Default is 25 (in px), used for when text wraps
-                        }
-                    }
-                }
-            };
-        }
-        Chart.pluginService.register({
-            beforeDraw: function(chart) {
-                if (chart.config.options.elements.center) {
-                    var ctx = chart.chart.ctx;
-                    var centerConfig = chart.config.options.elements.center;
-                    var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
-                    var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
-                    var maxTextWidth = (chart.innerRadius * 2) - (centerConfig.sidePadding || 20) * 2;
-
-                    // Draw the first text (text1)
-                    if (window.innerWidth < 768) {
-                        ctx.font = getResponsiveFontSize(centerConfig.text1.fontSize) + "px " + centerConfig.text1.fontStyle;
-                    } else {
-                        ctx.font = centerConfig.text1.fontSize + "px " + centerConfig.text1.fontStyle;
-                    }
-                    // ctx.font = getResponsiveFontSize(centerConfig.text1.fontSize) + "px " + centerConfig.text1.fontStyle;
-                    ctx.fillStyle = centerConfig.text1.color;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    // ctx.fillText(centerConfig.text1.text, centerX, centerY - 10); // Adjust the position as needed
-                    // Wrap text if necessary
-                    var lines1 = wrapText(centerConfig.text1.text, ctx.font, maxTextWidth);
-                    var lineHeight1 = centerConfig.text1.fontSize + (centerConfig.lineHeight || 20);
-                    var totalHeight1 = lineHeight1 * lines1.length;
-                    if (window.innerWidth < 596) {
-                        var startY1 = centerY - totalHeight1 / 4;
-                    }
-                    else{
-                        var startY1 = centerY - totalHeight1 / 4;
-                    }
-                    
-
-                    for (var i = 0; i < lines1.length; i++) {
-                        ctx.fillText(lines1[i], centerX, startY1 + i * lineHeight1);
-                    }
-
-
-                    // Set spacing between texts
-                    var spacing = 8;
-
-                    // Draw the second text (text2)
-                    if (window.innerWidth < 768) {
-                        ctx.font = getResponsiveFontSize(centerConfig.text2.fontSize) + "px " + centerConfig.text2.fontStyle;
-                    } else {
-                        ctx.font = centerConfig.text2.fontSize + "px " + centerConfig.text2.fontStyle;
-                    }
-                    // ctx.font = centerConfig.text2.fontSize + "px " + centerConfig.text2.fontStyle;
-                    ctx.fillStyle = centerConfig.text2.color;
-                    // ctx.fillText(centerConfig.text2.text, centerX, centerY + centerConfig.text1.fontSize / 2 + spacing); // Adjust the position as needed
-
-                    // Wrap text if necessary
-                    var lines2 = wrapText(centerConfig.text2.text, ctx.font, maxTextWidth);
-                     
-                    if (window.innerWidth < 596) {
-                        var lineHeight2 = centerConfig.text2.fontSize + (centerConfig.lineHeight || 0);
-                    }
-                    else{
-                        var lineHeight2 = centerConfig.text2.fontSize + (centerConfig.lineHeight || 5);
-                    }
-                    var totalHeight2 = lineHeight2 * lines2.length;
-                    // var startY2 = centerY + totalHeight2 / 4; // Adjust starting position
-                    
-                    if (window.innerWidth < 596) {
-                        var startY2 = centerY - totalHeight2 / 8;
-                    }
-                    else{
-                        var startY2 = centerY + totalHeight2 / 4; // Adjust starting position
-                    }
-
-                    for (var j = 0; j < lines2.length; j++) {
-                        ctx.fillText(lines2[j], centerX, startY2 + j * lineHeight2 + spacing);
-                    }
-                }
-            }
-        });
-
-        var ctx = document.getElementById("totalRetirementFund").getContext("2d");
-        var desktopChart = new Chart(ctx, config);
-
-        // Helper function to wrap text into multiple lines based on the available width
-        function wrapText(text, font, maxWidth) {
-            var words = text.split(' ');
-            var lines = [];
-            var currentLine = words[0];
-
-            for (var i = 1; i < words.length; i++) {
-                var word = words[i];
-                var testLine = currentLine + ' ' + word;
-                var metrics = ctx.measureText(testLine);
-                var testWidth = metrics.width;
-
-                if (testWidth > maxWidth) {
-                    lines.push(currentLine);
-                    currentLine = word;
-                } else {
-                    currentLine = testLine;
-                }
-            }
-            lines.push(currentLine);
-            return lines;
-        }
-
-        // Helper function to get the font size for responsive scaling
-        function getResponsiveFontSize(originalFontSize) {
-            // Adjust the scaling factor as needed
-            var scalingFactor = 0.6;
-            return Math.max(originalFontSize * scalingFactor, 10);
-        }
-        
+        var circle = document.getElementById("circle");
+//    var change = 879.65 - (879.65 * Covered) / 100;
+//    circle.style.strokeDashoffset = change;
+//    console.log('change', change);
+circle.style.strokeDasharray = 904.896;
+let change = 904.896 - (904.896 * Covered) / 100; 
+if (change < 0) {
+    change = 0; // 0 represents 100% coverage
+    circle.style.strokeDashoffset = change;
+}
+else   {
+    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
+}
     });
 </script>
+<style>
+      .navbar {
+        right:50%;
+    }
+    @media only screen and (max-width: 767px) {
+    
+        .navbar {
+        right:0;
+    }
+    .fixed-bottom {
+        z-index: 1000;
+    }
+    .bg-needs-3 {
+        height:auto;
+    }
+    #chart-gap {
+        transform: scale(1) !important;
+    }
+    #textProtectionFund {
+        top:6%;
+    }
+    .gap-text {
+        font-size: 1.2rem !important;
+    }
+    .gap-value {
+        font-size: 1.3rem !important;
+    }
+    .green-tick,.red-tick {
+display:none;
 
+    }
+}
+@media only screen and (max-width: 767px) {
+
+.navbar-default.transparent {
+background: transparent !important;
+}
+.fixed-bottom {
+    z-index: 10;
+}
+.navbar {
+    right:0;
+}
+}
+</style>
 @endsection

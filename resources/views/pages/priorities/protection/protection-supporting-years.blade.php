@@ -10,7 +10,7 @@
 $arrayDataProtection = session('passingArraysProtection');
 $protectionFunds = isset($arrayDataProtection['protectionFunds']) ? $arrayDataProtection['protectionFunds'] : " ";
 $protectionSupportingYears = isset($arrayDataProtection['protectionSupportingYears']) ?
-$arrayDataProtection['protectionSupportingYears'] : '';
+$arrayDataProtection['protectionSupportingYears'] : " ";
 $formattedTotalProtectionValue = isset($arrayDataProtection['formattedTotalProtectionValue']) ?
 $arrayDataProtection['formattedTotalProtectionValue'] : 0;
 $TotalProtectionValue = isset($arrayDataProtection['TotalProtectionValue']) ?
@@ -62,9 +62,6 @@ $arrayDataProtection['protectionPercentage'] : 0;
                     </svg>
                     <span class="mx-2 fs-18">{{ $errors->first('protectionSupportingYears') }}</span>
                 </div>
-                <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         </div>
         @endif
@@ -129,7 +126,23 @@ $arrayDataProtection['protectionPercentage'] : 0;
     var TotalProtectionValueText = document.getElementById("TotalProtectionValueText");
     //get session array protection protectionFunds
     var protectionFunds = {{$protectionFunds}};
-    console.log(protectionFunds);
+    // console.log(protectionFunds);
+
+    inputField.addEventListener("blur", function() {
+        validateNumberField(inputField);
+    });
+    function validateNumberField(field) {
+        const numericValue = parseFloat(field.value); // Convert input value to a float
+
+        if (isNaN(numericValue)) {
+            field.classList.remove("is-valid");
+            field.classList.add("is-invalid");
+        } else {
+            field.classList.add("is-valid");
+            field.classList.remove("is-invalid");
+        }
+    }
+
 
   // Listen for input changes on the input field
   inputField.addEventListener("input", function() {

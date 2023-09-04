@@ -42,6 +42,11 @@ class AppServiceProvider extends ServiceProvider
             return !empty($idNumber) || !empty($passportNumber) || !empty($birthCert) || !empty($policeNumber) || !empty($registrationNumber);
         });
 
+        Validator::extend('numeric_commas_stripped', function ($attribute, $value, $parameters, $validator) {
+                $strippedValue = preg_replace('/[^\d]/', '', $value);
+                return is_numeric($strippedValue);
+        });
+        
 
     }
 }

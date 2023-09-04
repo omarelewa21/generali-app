@@ -96,11 +96,15 @@ public function submitRetirementIdeal(Request $request)
         ];
 
         $validatedData = $request->validate([
-            'retirementAllocatedFunds' => 'required|integer|min:1',
+            'retirementAllocatedFunds' => 'required|numeric_commas_stripped|min:1',
+            
 
         ], $customMessages);
 
         $retirementAllocatedFunds = $request->input('retirementAllocatedFunds');
+
+        $retirementAllocatedFunds = (int) preg_replace('/[^\d]/', '', $validatedData['retirementAllocatedFunds']);
+
 
         $TotalRetirementValue = $retirementAllocatedFunds * 12;
         // Get the existing array from the session
@@ -110,8 +114,10 @@ public function submitRetirementIdeal(Request $request)
         $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
         $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
 
+        $formattedRetirementAllocatedFunds = number_format($retirementAllocatedFunds, 0, '.', ',');
         $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');
 
+        $arrayDataRetirement['formattedRetirementAllocatedFunds'] = $formattedRetirementAllocatedFunds;
         $arrayDataRetirement['formattedTotalRetirementValue'] = $formattedTotalRetirementValue;
 
         // Store the updated array back into the session
@@ -173,22 +179,30 @@ public function submitRetirementIdeal(Request $request)
         ];
 
         $validatedData = $request->validate([
-            'retirementAllocatedFundsAside' => 'required|integer|min:1',
-            'retirementOtherSourceOfIncome' => 'required|integer|min:1',
+            'retirementAllocatedFundsAside' => 'required|integer|min:0',
+            'retirementOtherSourceOfIncome' => 'required|integer|min:0',
         ], $customMessages);
 
         $retirementAllocatedFundsAside = $request->input('retirementAllocatedFundsAside');
         $retirementOtherSourceOfIncome = $request->input('retirementOtherSourceOfIncome');
 
-        // Get the existing array from the session
-        $arrayDataRetirement = session('passingArraysRetirement', []);
-
+        $retirementAllocatedFundsAsideTotal = $retirementAllocatedFundsAside + $retirementOtherSourceOfIncome ;
+        
         $retirementAllocatedFunds = session('passingArraysRetirement.retirementAllocatedFunds');
         $retirementYearsTillRetire = session('passingArraysRetirement.retirementYearsTillRetire');
         $TotalRetirementValue = session('passingArraysRetirement.TotalRetirementValue');
-        
-        $retirementAllocatedFundsAsideTotal = $retirementAllocatedFundsAside + $retirementOtherSourceOfIncome ;
-        $retirementGap = $TotalRetirementValue - $retirementAllocatedFundsAsideTotal;
+
+        if ($retirementAllocatedFundsAsideTotal > $TotalRetirementValue){
+            $retirementGap = 0;
+            $retirementPercentage = 100;
+        }
+        else {
+            $retirementGap = $TotalRetirementValue - $retirementAllocatedFundsAsideTotal;
+            $retirementPercentage = intval(($retirementAllocatedFundsAsideTotal / $TotalRetirementValue) * 100);
+        }
+
+        // Get the existing array from the session
+        $arrayDataRetirement = session('passingArraysRetirement', []);
 
         //update the array
         $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
@@ -197,6 +211,7 @@ public function submitRetirementIdeal(Request $request)
         $arrayDataRetirement['retirementOtherSourceOfIncome'] = $retirementOtherSourceOfIncome;
         $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] = $retirementAllocatedFundsAsideTotal;
         $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
+        $arrayDataRetirement['retirementPercentage'] = $retirementPercentage;
         $arrayDataRetirement['retirementGap'] = $retirementGap;
 
         $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');

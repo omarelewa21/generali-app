@@ -979,7 +979,8 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     width:100%;
   }
   .needs-home-avatar img {
-   height:60vh;
+    max-width: 100%;
+    height: auto;
   }
 
   /* Retirement Coverage */
