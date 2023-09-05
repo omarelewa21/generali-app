@@ -144,7 +144,7 @@ class formProtectionController extends Controller
         $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
 
         $protectionPolicyAmount = ($protectionExistingPolicy == 'yes') ? $protectionPolicyAmount : 0;
-
+        $arrayDataProtection['protectionExistingPolicy'] = $protectionExistingPolicy;
         
         if ($protectionPolicyAmount > $TotalProtectionValue){
             $protectionGap = 0;
