@@ -638,6 +638,9 @@ width: 80%;
       .avatar-years-till-retire {
         width: 46vh !important;
       }
+      .svg-container {
+        transform: scale(1) !important;
+      }
     
 }
 
@@ -695,6 +698,15 @@ width: 80%;
             top: 0;
             width: 60vh;
         }
+        h5.gap-value {
+            font-size: 1.5rem;
+        }   
+        h5.gap-text {
+            font-size: 1.2rem;
+        }
+        .svg-container {
+            transform: scale(1.2) !important;
+          }
 
 }
 
