@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-needs-desktop wrapper-needs-supporting-default">
+                <div class="row h-100 bg-needs-desktop bg-half wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -48,11 +48,11 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.monthly')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('monthly_education_amount')) pb-7 @endif">
+                    <form novalidate action="{{route('form.submit.education.monthly')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('monthly_education_amount')) pb-7 @endif h-100">
                         @csrf
-                        <section class="row edu-con">
-                            <div class="col-12 position-relative">
-                                <div class="row h-100">
+                        <section class="row edu-con align-items-end mh-100">
+                            <div class="col-12 position-relative mh-100">
+                                <div class="row h-100" id="education-monthly-content">
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
@@ -60,11 +60,11 @@
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
-                                                <div class="needs-stand-bg {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}" style="background-color:#c21b17 !important;"></div>
+                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order py-5">
+                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>Right now, I need</strong><br>
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 show-mobile footer bg-btn_bar py-4 z-1">
+                            <div class="col-12 show-mobile footer bg-white py-4 z-1">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -90,7 +90,7 @@
                         </section>
                         @if ($errors->has('monthly_education_amount'))
                             <section class="row alert-support z-1 hide-mobile">
-                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 rounded-0" role="alert">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
@@ -98,7 +98,7 @@
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
-                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 rounded-0" role="alert">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
@@ -108,10 +108,10 @@
                         @endif
                         <div class="col-12 hide-mobile">
                             <div class="row">
-                                <div class="position-absolute bottom-0 needs-stand-bg {{ $errors->has('monthly_education_amount') ? 'error-padding' : '' }}"></div>
+                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('monthly_education_amount') ? 'error-padding' : '' }}"></div>
                             </div>
                         </div>
-                        <section class="footer bg-btn_bar py-4 fixed-bottom footer-needs-default hide-mobile">
+                        <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -130,7 +130,13 @@
 <script>
     // Get the input value
     var monthlyInput = document.getElementById("monthly_education_amount");
-    const formatNumber = (value) 
+
+    // const cleanedValue = monthlyInput.value.replace(/[^0-9.]/g, "");
+
+    // Format the value with commas for thousands
+    // const formattedValue = Number(cleanedValue).toLocaleString();
+
+    // monthlyInput.value = formattedValue;
 
     monthlyInput.addEventListener("input", function() {
 
@@ -142,16 +148,51 @@
         // Calculate months
         var amountPerYear = monthlyAmount * 12;
 
-        // Display the result
-        var result = amountPerYear.toLocaleString();
-        // var monthly_result = monthlyInputValue.toLocaleString();
+        if (isNaN(monthlyAmount)) {
+            // Input is not a valid number
+            document.getElementById("TotalEducationFund").innerText = "RM 0";
+            document.getElementById("displayFund").innerText = "RM 0";
+        } else {
+            // Input is a valid number, perform the calculation
+            // Display the result
+            var result = amountPerYear.toLocaleString();
 
-        document.getElementById("TotalEducationFund").innerText = "RM " + result;
-        document.getElementById("displayFund").innerText = "RM " + result;
-        // monthlyInput.value = monthly_result;
+            document.getElementById("TotalEducationFund").innerText = "RM " + result;
+            document.getElementById("displayFund").innerText = "RM " + result;
+        }
+        
+
+        // Display the result
+        // var result = amountPerYear.toLocaleString();
+
+        
+        // Try the code
+        // if (monthlyInput.value === ""){
+        //     this.value.toLocaleString();
+        // }
+        // else{
+        //     this.value.toLocaleString();
+        // }
+        // }
+        // let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        // inputValue = Number(inputValue);
+
+        // if (isNaN(inputValue)) {
+        //     inputValue = 0;
+        // }
+
+        // const formattedValue = monthlyInput.toLocaleString('en-MY'); // Format with commas
+        // monthlyInput = formattedValue;
+
+        // End try the code
+        
+
+        // document.getElementById("TotalEducationFund").innerText = "RM " + result;
+        // document.getElementById("displayFund").innerText = "RM " + result;
 
         // Set the value of the hidden input field
         document.getElementById("total_educationFund").value = amountPerYear;
+        // document.getElementById("monthly_education_amount").value = parseInt(cleanedValue.replace(/,/g, ''), 10) || "";
     });
 
     document.addEventListener("DOMContentLoaded", function() {
