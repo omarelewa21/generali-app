@@ -95,7 +95,7 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                     src="{{ asset('images/needs/retirement/allocated-funds-aside.svg') }}" alt="avatar">
                             </div>
                             <div
-                                class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-xl-center align-items-center align-items-lg-start mx-0 mx-lg-0 mx-xl-5 order-0 order-lg-1">
+                                class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-xl-center align-items-center align-items-lg-start mx-0  mx-lg-0 mx-xl-5 order-0 order-lg-1">
                                 <h5 class="needs-text">So far, I’ve put aside</h5>
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
@@ -112,6 +112,8 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                         value="{{$formattedRetirementOtherSourceOfIncome }}"
                                         class="input-text form-control text-primary py-0 @error('retirementOtherSourceOfIncome') is-invalid @enderror"
                                         id="retirementOtherSourceOfIncome" placeholder=" " required>
+                                </div>
+                                <div class="custom-space" style="padding-bottom: 90px">
                                 </div>
 
 
@@ -234,6 +236,15 @@ background: transparent !important;
 .navbar {
     right:0;
 }
+.custom-space {
+    display: none;
+}
+}
+@media only screen and (min-width: 768px) and (max-height: 1366px) and (orientation: portrait) {
+    .custom-space {
+    display: none;
+}
+
 }
 </style>
 
