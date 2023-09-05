@@ -12,11 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayDataEducation = session('passingArrays');
-    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
-    $educationMonthlyAmount = isset($arrayDataEducation['educationMonthlyAmount']) ? $arrayDataEducation['educationMonthlyAmount'] : '';
-    $totalEducationFundNeeded = isset($arrayDataEducation['totalEducationFundNeeded']) ? $arrayDataEducation['totalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayDataEducation['educationFundPercentage']) ? $arrayDataEducation['educationFundPercentage'] : 0;
+    $arrayData = session('passingArrays');
+    $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
+    $educationMonthlyAmount = isset($arrayData['educationMonthlyAmount']) ? $arrayData['educationMonthlyAmount'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
+    $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
 @endphp
 
 
@@ -143,7 +143,28 @@
         // Retrieve the current input value
         var monthlyInputValue = monthlyInput.value;
 
-        var monthlyAmount = parseInt(monthlyInputValue);
+        // Remove non-digit characters
+        const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+
+        // Attempt to parse the cleaned value as a float
+        const parsedValue = parseFloat(cleanedValue);
+
+        // Check if the parsed value is a valid number
+        if (!isNaN(parsedValue)) {
+        // If it's a valid number, format it with commas
+            const formattedValue = parsedValue.toLocaleString('en-MY');
+            this.value = formattedValue;
+        } else {
+        // If it's not a valid number, display the cleaned value as is
+            this.value = monthlyInputValue;
+        }
+
+         // Format the cleaned value with commas
+        // const formattedValue = cleanedValue.toLocaleString('en-MY');
+
+        // this.value = formattedValue;
+
+        var monthlyAmount = parseInt(cleanedValue);
 
         // Calculate months
         var amountPerYear = monthlyAmount * 12;

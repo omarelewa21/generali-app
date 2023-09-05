@@ -16,7 +16,7 @@ class EducationController extends Controller
     public function submitEducationMonthly(Request $request){
 
         // Get the existing array from the session
-        $arrayDataEducation = session('passingArrays', []);
+        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'monthly_education_amount.required' => 'You are required to enter an amount.',
@@ -36,20 +36,20 @@ class EducationController extends Controller
         $monthly_education_amount = $request->input('monthly_education_amount');
         $totalEducationFund = $request->input('total_educationFund');
 
-        $arrayDataEducation['educationMonthlyAmount'] = $monthly_education_amount;
-        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['educationMonthlyAmount'] = $monthly_education_amount;
+        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayDataEducation]);
-        Log::debug($arrayDataEducation);
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayDataEducation;
+        // return $arrayData;
         return redirect()->route('education.supporting.years');
    }
    public function submitEducationSupporting(Request $request){
 
         // Get the existing array from the session
-        $arrayDataEducation = session('passingArrays', []);
+        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'tertiary_education_years.required' => 'You are required to enter a year.',
@@ -70,14 +70,14 @@ class EducationController extends Controller
         $tertiary_education_years = $request->input('tertiary_education_years');
         $totalEducationFund = $request->input('total_educationFund');
 
-        $arrayDataEducation['totalEducationYear'] = $tertiary_education_years;
-        $arrayDataEducation['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['totalEducationYear'] = $tertiary_education_years;
+        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayDataEducation]);
-        Log::debug($arrayDataEducation);
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayDataEducation;
+        // return $arrayData;
         return redirect()->route('education.other');
    }
 
@@ -141,7 +141,7 @@ class EducationController extends Controller
     public function validateEducationCoverageSelection(Request $request)
     {
         // Get the existing array from the session
-        $arrayDataEducation = session('passingArrays', []);
+        $arrayData = session('passingArrays', []);
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -173,12 +173,12 @@ class EducationController extends Controller
         // Add or update the data value in the array
         // if ($educationSelectedAvatarInput) { 
         // }
-        $arrayDataEducation['educationSelectedAvatar'] = $educationSelectedAvatarInput;
-        $arrayDataEducation['educationSelectedImage'] = $educationSelectedImage;
+        $arrayData['educationSelectedAvatar'] = $educationSelectedAvatarInput;
+        $arrayData['educationSelectedImage'] = $educationSelectedImage;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayDataEducation]);
-        Log::debug($arrayDataEducation);
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
         return redirect()->route('education.monthly.amount');
     }
 

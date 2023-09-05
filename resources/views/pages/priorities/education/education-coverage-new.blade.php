@@ -13,9 +13,9 @@
 
 @php
     // Retrieving values from the session
-    $arrayDataEducation = session('passingArrays');
-    $educationSelectedAvatar = isset($arrayDataEducation['educationSelectedAvatar']) ? $arrayDataEducation['educationSelectedAvatar'] : '';
-    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
+    $arrayData = session('passingArrays');
+    $educationSelectedAvatar = isset($arrayData['educationSelectedAvatar']) ? $arrayData['educationSelectedAvatar'] : '';
+    $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
 @endphp
 
 <div id="education-coverage" class="vh-100">
@@ -42,31 +42,31 @@
                             </div>
                             <div class="col-11 m-auto selection-content-coverage h-100 education_coverage z-1">
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayDataEducation['educationSelectedAvatar']) && $arrayDataEducation['educationSelectedAvatar'] === 'self') default @endif" id="self" data-avatar="self" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'self') default @endif" id="self" data-avatar="self" data-required="">
                                         <img src="{{ asset('images/needs/education/education-avatar/Male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Self</strong></p>
                                     </button>
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayDataEducation['educationSelectedAvatar']) && $arrayDataEducation['educationSelectedAvatar'] === 'child1') default @endif" id="child1" data-avatar="child1" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child1') default @endif" id="child1" data-avatar="child1" data-required="">
                                         <img src="{{ asset('images/needs/education/education-avatar/Daughter.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 1</strong></p>
                                     </button>
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayDataEducation['educationSelectedAvatar']) && $arrayDataEducation['educationSelectedAvatar'] === 'child2') default @endif" id="child2" data-avatar="child2" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child2') default @endif" id="child2" data-avatar="child2" data-required="">
                                         <img src="{{ asset('images/needs/education/education-avatar/Son.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 2</strong></p>
                                     </button>
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayDataEducation['educationSelectedAvatar']) && $arrayDataEducation['educationSelectedAvatar'] === 'child3') default @endif" id="child3" data-avatar="child3" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child3') default @endif" id="child3" data-avatar="child3" data-required="">
                                         <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 3</strong></p>
                                     </button>
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayDataEducation['educationSelectedAvatar']) && $arrayDataEducation['educationSelectedAvatar'] === 'child4') default @endif" id="child4" data-avatar="child4" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child4') default @endif" id="child4" data-avatar="child4" data-required="">
                                         <img src="{{ asset('images/needs/education/education-avatar/Kid.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 cf-family fw-700 overage-text"><strong>Child 4</strong></p>
                                     </button>
@@ -79,7 +79,7 @@
                             </div>
                         </section>
                         @if ($errors->has('educationSelectedAvatarInput'))
-                            <section class="row warning">
+                            <section class="row warning z-1">
                                 <div class="col-12 alert alert-danger d-flex justify-content-center align-items-center py-2 m-0 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
