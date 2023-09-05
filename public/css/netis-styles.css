@@ -457,7 +457,6 @@ font-family:"Helvetica Neue Bold", sans-serif;
 
     .avatar-allocated-funds-aside {
         left: 0;
-        top: 0px;
         width: 43vh;
     }
     .summary-progress-bar {
@@ -621,8 +620,8 @@ width: 80%;
         width: 25% !important;
       }
       .avatar-allocated-funds-aside {
-        width: 60vh !important;
-        top: 0;
+        width: 50vh;
+        top: -10%;
       }
       #retirement_home .needs-home{
         grid-template-rows: 23vh 53vh 13vh;
@@ -635,6 +634,9 @@ width: 80%;
       }
       .avatar-allocated-funds {
         width: 52vh !important;
+      }
+      .avatar-years-till-retire {
+        width: 46vh !important;
       }
     
 }
@@ -689,6 +691,11 @@ width: 80%;
         #retirmentAllocatedFunds .bg-needs-1 {
             height: 57vh;
         }
+        .avatar-allocated-funds-aside {
+            top: 0;
+            width: 60vh;
+        }
+
 }
 
 

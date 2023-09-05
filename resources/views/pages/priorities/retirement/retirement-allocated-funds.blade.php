@@ -49,9 +49,9 @@
                         <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-start align-items-lg-start mx-0 py-3 mx-lg-0 order-0 order-lg-1">
+                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                             <h5 class="needs-text">It would be great to have</h5> 
-                            <div class="d-flex flex-wrap">
+                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
                             <div class="input-group w-50">
                                 <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0 @error('retirementAllocatedFunds')  label-invalid @enderror"><h5 class="needs-text m-0">RM</h5></span>
                                 <input type="text" name="retirementAllocatedFunds" class="input-text form-control text-primary py-0 @error('retirementAllocatedFunds') is-invalid @enderror" value="{{$formattedRetirementAllocatedFunds}}" id="retirementAllocatedFunds" placeholder=" " required> 
@@ -59,7 +59,6 @@
                             <h5 class="needs-text">/ month to</h5>
                             </div>
                             <h5 class="needs-text ">support myself and my <br>loved ones when I retire.</h5>
-
                         </div>
                         </div>
 
