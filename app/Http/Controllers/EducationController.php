@@ -20,12 +20,12 @@ class EducationController extends Controller
 
         $customMessages = [
             'monthly_education_amount.required' => 'You are required to enter an amount.',
-            'monthly_education_amount.integer' => 'The amount must be a number',
             'monthly_education_amount.min' => 'Your amount must be at least :min.',
+            'monthly_education_amount.regex' => 'You must enter number',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'monthly_education_amount' => 'required|integer|min:1',
+            'monthly_education_amount' => 'required|min:1|regex:/^[0-9,]+$/',
         ], $customMessages);
         
         if ($validatedData->fails()) {
@@ -33,7 +33,7 @@ class EducationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $monthly_education_amount = $request->input('monthly_education_amount');
+        $monthly_education_amount = str_replace(',','',$request->input('monthly_education_amount'));
         $totalEducationFund = $request->input('total_educationFund');
 
         $arrayData['educationMonthlyAmount'] = $monthly_education_amount;
@@ -81,52 +81,49 @@ class EducationController extends Controller
         return redirect()->route('education.other');
    }
 
-   public function submitEducationOther(Request $request){
+    public function submitEducationOther(Request $request){
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'education_other_savings.required' => 'Please select an option',
             'education_saving_amount.required_if' => 'You are required to enter an amount.',
-            'education_saving_amount.integer' => 'The amount must be a number',
+            'education_saving_amount.min' => 'Your amount must be at least :min.',
+            'education_saving_amount.regex' => 'The amount must be a number',
         ];
 
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|integer',
+            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:2',
 
         ], $customMessages);
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+        // Validation passed, perform any necessary processing.
+        $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
+        $education_other_savings = $request->input('education_other_savings');
+        $totalEducationFund = $request->input('total_educationFund');
+        $totalAmountNeeded = $request->input('total_amountNeeded');
+        $totalPercentage = $request->input('percentage');
+
+        $arrayData['educationSavingAmount'] = $education_saving_amount;
+        $arrayData['edcationSaving'] = $education_other_savings;
+        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
+        $arrayData['educationFundPercentage'] = $totalPercentage;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('education.gap');
+        return $arrayData;
+        // return redirect()->route('education.gap.new');
     }
 
    public function submitEducationGap(Request $request){
-
-        $customMessages = [
-            'education_years_times.required' => 'Please enter a year',
-            'education_years_times.integer' => 'The year must be a number',
-            'education_years_times.min' => 'The year must be at least :min.',
-            'education_years_times.max' => 'The year must not more than :max.',
-            'education_amount_per_year.required' => 'You are required to enter an amount.',
-            'education_amount_per_year.integer' => 'The amount must be a number',
-            'education_aside_amount.required' => 'You are required to enter an amount.',
-            'education_aside_amount.integer' => 'The amount must be a number',
-            'education_plan_amount.required' => 'You are required to enter an amount.',
-            'education_plan_amount.integer' => 'The amount must be a number',
-        ];
-
-        $validatedData = $request->validate([
-            'education_years_times' => 'required|integer|min:1|max:100',
-            'education_amount_per_year' => 'required|integer',
-            'education_aside_amount' => 'required|integer',
-            'education_plan_amount' => 'required|integer',
-
-        ], $customMessages);
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);

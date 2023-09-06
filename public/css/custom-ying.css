@@ -20,6 +20,9 @@
 .f-20{
     font-size: 20px;
 }
+.w-45{
+    width: 45%;
+}
 
 /* Form Style */
 .form-control.money {
@@ -682,10 +685,10 @@ svg.slide-button.slick-arrow:hover {
     background-position: bottom 10% left 28%;
 }
 .bg-education-others-section{
-    background-image: url('/images/needs/education/bg-others-element.png');
+    background-image: url('/images/needs/education/bg-others-ele.png');
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position:top right 10%;
+    background-size: 52%;
+    background-position: left 66% top;
 }
 .font-color-default{
     color:#000;
@@ -1382,10 +1385,10 @@ button.choice:focus,
         background-position:center;
     }
     .bg-education-others{
-        background-image: url('/images/needs/education/bg-others-new.png');
+        background-image: url('/images/needs/education/bg-education-others.png');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position:center;
+        background-position:left;
     }
     .bg-education-gap{
         background-image: url('/images/needs/education/bg-gap.png');

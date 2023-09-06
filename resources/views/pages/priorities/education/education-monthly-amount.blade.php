@@ -68,7 +68,8 @@
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>Right now, I need</strong><br>
-                                                    <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span>
+                                                    <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{ $educationMonthlyAmount !== null ? number_format(floatval($educationMonthlyAmount)) : $educationMonthlyAmount }}" required></span>
+                                                    <!-- <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span> -->
                                                     <strong>/month for my tertiary education.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
@@ -224,14 +225,19 @@
     function validateNumberField(field) {
         const value = field.value.trim();
 
+        var pattern = /^[0-9,]+$/;
+
         if (value === "" || isNaN(value)) {
             // field.classList.remove("is-valid");
             field.classList.add("is-invalid");
-        } else {
+        }else{
             // field.classList.add("is-valid");
             field.classList.remove("is-invalid");
         }
-    }
+        if (pattern.test(value)){
+            document.getElementById("monthly_education_amount").classList.remove("is-invalid");
+        }
+    } 
 
 });
 
