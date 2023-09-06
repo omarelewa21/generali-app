@@ -95,7 +95,7 @@ class EducationController extends Controller
 
         $validatedData = Validator::make($request->all(), [
             'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:2',
+            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
 
         ], $customMessages);
 
