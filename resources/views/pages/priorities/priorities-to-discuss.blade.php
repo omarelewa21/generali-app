@@ -133,6 +133,12 @@
                                                             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
                                                             <label class="form-check-label display-6 toggle-label toggle-label-right" for="flexSwitchCheckDefaultCovered">YES</label>
                                                         </div>
+                                                        <div class="col-md-3 form-check form-switch form-check-reverse d-flex p-0">
+    <label class="form-check-label display-6 toggle-label toggle-label-left" for="flexSwitchCheckDefaultCovered">NO</label>
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
+    <label class="form-check-label display-6 toggle-label toggle-label-middle" for="flexSwitchCheckDefaultCovered"></label>
+    <label class="form-check-label display-6 toggle-label toggle-label-right" for="flexSwitchCheckDefaultCovered">YES</label>
+</div>
                                                     </div>
                                                     <div class="row py-2 px-3">
                                                         <div class="col-12 form-check form-switch form-check-reverse">
