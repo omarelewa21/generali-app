@@ -543,11 +543,11 @@ button[data-required="selected"] img {
 }
 
 :root {
-  --lerp-0: 0.5625;
-  --lerp-1: 0.25;
+  --lerp-0: 0.15;
+  /* --lerp-1: 0.25;
   --lerp-2: 0.25;
   --lerp-3: 0.25;
-  --lerp-4: 0;
+  --lerp-4: 0; */
 }
 
 .blocks:hover {
@@ -606,11 +606,12 @@ button[data-required="selected"] img {
   border-radius: var(--radius-3);
 }
 
-:is(.block:hover, .block:focus-visible) {
+ :is(.block:hover, .block:focus-visible) {
   --lerp: var(--lerp-0);
   z-index: 5;
 }
-.block:has(+ :is(.block:hover, .block:focus-visible)),
+
+/* .block:has(+ :is(.block:hover, .block:focus-visible)),
 :is(.block:hover, .block:focus-visible) + .block {
   --lerp: var(--lerp-1);
   z-index: 4;
@@ -632,7 +633,7 @@ button[data-required="selected"] img {
 :is(.block:hover, .block:focus-visible) + .block + .block + .block + .block {
   --lerp: var(--lerp-4);
   z-index: 1;
-}
+} */
 
 body:has(a[style="--bg: var(--gradient-1);"]:focus) {
   background: var(--gradient-1);
@@ -667,28 +668,45 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 .dropped img:not(.close) {
-  position: absolute;
-  top: 33%;
+  /* position: absolute;
+  top: 33%; */
   height: auto;
   max-height: 88px;
 }
 
+.first .dropped img:not(.close) {
+  margin-top:25px;
+}
+
 .third .dropped img:not(.close) {
-  left: 35%;
+  margin-left:25px;
 }
 
 .fourth .dropped img:not(.close) {
-  left: 40%;
+  margin-left:35px;
 }
 
 .fifth .dropped img:not(.close) {
-  left: 20%;
+  margin-right:35px;
 }
 
-.item-dropped svg path {
+.sixth .dropped img:not(.close) {
+  margin-right:20px;
+}
+
+.eight .dropped img:not(.close) {
+  margin-top:20px;
+}
+
+#sortable-main .item-dropped {
   fill:#fff;
   stroke: #AA1B17;
   stroke-width: 2px;
+  stroke-dasharray:none;
+}
+
+.svg-container.item-dropped svg path {
+  fill:#fff;
 }
 
 .item-dropped svg text {
@@ -702,32 +720,32 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 .first .remove-button {
-  bottom: 23%;
+  bottom: 27%;
   right: 0;
 }
 
 .second .remove-button {
   bottom: 16%;
-  right: 10%;
+  right: 9%;
 }
 
 .third .remove-button {
-  bottom: 12%;
+  bottom: 4%;
   right: 18%;
 }
 
 .fourth .remove-button {
-  bottom: 5%;
+  bottom: 0;
   right: 23%;
 }
 
 .fifth .remove-button {
-  bottom: 5%;
+  bottom: 0;
   left: 25%;
 }
 
 .sixth .remove-button {
-  bottom: 13%;
+  bottom: 5%;
   left: 17%;
 }
 
@@ -756,8 +774,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   grid-template-columns: repeat(auto-fit, minmax(1%, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(1%, 1fr));
   z-index: 1;
+  top: 10px;
+  width: 100%;
+  height: 100%;
 }
-
 #sortable .first {
   grid-column: 20 / span 14;
   grid-row: 59 / 96;

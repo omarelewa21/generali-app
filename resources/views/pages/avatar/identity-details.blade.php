@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $selectedCountry = session('passingArrays.Country', 'Malaysia');
 @endphp
 
 <div id="identity_details" class="vh-100 overflow-y-auto overflow-x-hidden">
@@ -59,7 +60,9 @@
                                             <select name="country" class="form-select bg-white @error('country') is-invalid @enderror" aria-label="Countries" id="countrySelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($countries as $country)
-                                                    <option value="{{ $country->countries }}" {{ old('country', $arrayData['Country'] ?? '') === $country->countries ? 'selected' : '' }}>{{ $country->countries }}</option>
+                                                    <option value="{{ $country->countries }}" {{ ($selectedCountry === $country->countries || (!$selectedCountry && $country->countries === 'Malaysia')) ? 'selected' : '' }}>
+                                                        {{ $country->countries }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('country')
@@ -239,8 +242,8 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-secondary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
+                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-outline-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>
                             </div>
