@@ -9,6 +9,7 @@
     // Retrieving values from the session
     $arrayData = session('passingArrays');
     $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
+    $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
     $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
     $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
@@ -63,7 +64,7 @@
                                             <div class="col-10 col-md-9 py-xl-5 my-xl-5">
                                                 <p class="f-34 m-0"><strong>I’ve been saving up for my child’s education.</strong><br>
                                                     <span class="me-5">
-                                                        <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$arrayData['edcationSaving'] === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);"
+                                                        <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);"
                                                         {{ (isset($arrayData['edcationSaving']) && $arrayData['edcationSaving'] === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
                                                         <label for="yes" class="form-label">Yes</label>
                                                     </span>
@@ -138,8 +139,10 @@
     var education_saving = document.getElementById('education_saving_amount');
     var yesRadio = document.getElementById('yes');
     var noRadio = document.getElementById('no');
+    var totalAmountNeeded = document.getElementById("total_amountNeeded");
+    var totalEducationPercentage = document.getElementById("percentage");
     var oldTotalFund = {{ $totalEducationFundNeeded }};
-    // var sessionSaving = {{ $educationSavingAmount }};
+    var sessionSaving = {{ $educationSavingAmount }};
     var educationFundPercentage = {{ $educationFundPercentage }};
 
     education_saving.addEventListener("input", function() {
@@ -162,54 +165,42 @@
         // If it's not a valid number, display the cleaned value as is
             this.value = educationSavingValue;
         }
-        // if (yesRadio.checked || noRadio === "yes") {
-        //     var savingAmount = parseInt(cleanedValue);
-        //     var total = oldTotalFund - savingAmount;
-        //     document.getElementById("total_amountNeeded").value = total;
-        //     var totalPercentage = savingAmount / oldTotalFund * 100;
-        //     document.getElementById("percentage").value = totalPercentage;
-        // }
-        // else{
-        //     var total = oldTotalFund - 0;
-        //     document.getElementById("total_amountNeeded").value = total;
-        //     var totalPercentage = 0 / oldTotalFund * 100;
-        //     document.getElementById("percentage").value = totalPercentage;
-        // }
 
+        var savingAmount = parseInt(cleanedValue);
+
+        var total = oldTotalFund - savingAmount;
+        totalAmountNeeded.value = total;
+        var totalPercentage = savingAmount / oldTotalFund * 100;
+        totalEducationPercentage.value = totalPercentage;
+        $('.retirement-progress-bar').css('width', totalPercentage + '%');
+
+    });
+    // Add event listeners to the radio buttons
+    yesRadio.addEventListener('change', function () {
+        jQuery('.hide-content').css('display','block');
+        education_saving.value = ''; // Clear the money input
+        totalAmountNeeded.value = '';
+        totalEducationPercentage.value = '';
+    });
+
+    noRadio.addEventListener('change', function () {
+        jQuery('.hide-content').css('display','none');
+        education_saving.value = 0; // Clear the money input
+        totalAmountNeeded.value = oldTotalFund;
+        var totalPercentage = 0 / oldTotalFund * 100;
+        totalEducationPercentage.value = totalPercentage;
     });
 
     document.addEventListener('DOMContentLoaded', function() {
 
         education_saving.addEventListener('blur', function() {
             validateNumberField(education_saving);
+            // passValue(education_saving);
         });
 
         if (yesRadio.classList.contains('checked-yes')) {
             jQuery('.hide-content').css('display','block');
         }
-        // Retrieve the current input value
-        // var educationSavingValue = education_saving.value;
-        // Remove non-digit characters
-        // const cleanedValue = parseFloat(educationSavingValue.replace(/\D/g, ''));
-        // var savingAmount = parseInt(cleanedValue);
-        
-
-        // if (yesRadio.checked || noRadio === "yes") {
-        //     if(education_saving.value !== null && education_saving.value !== ''){
-        //         var total = oldTotalFund - savingAmount;
-        //         document.getElementById("total_amountNeeded").value = total;
-        //     }
-        //     // var total = oldTotalFund - savingAmount;
-        //     // document.getElementById("total_amountNeeded").value = total;
-            
-        //     var totalPercentage = savingAmount / oldTotalFund * 100;
-        //     document.getElementById("percentage").value = totalPercentage;
-        // } else {
-        //     var total = oldTotalFund - 0;
-        //     document.getElementById("total_amountNeeded").value = total;
-        //     var totalPercentage = 0 / oldTotalFund * 100;
-        //     document.getElementById("percentage").value = totalPercentage;
-        // }
         
         function validateNumberField(field) {
 

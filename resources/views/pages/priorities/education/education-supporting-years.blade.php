@@ -12,11 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayDataEducation = session('passingArrays');
-    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
-    $educationMonthlyAmount = isset($arrayDataEducation['educationMonthlyAmount']) ? $arrayDataEducation['educationMonthlyAmount'] : '';
-    $totalEducationYear = isset($arrayDataEducation['totalEducationYear']) ? $arrayDataEducation['totalEducationYear'] : '';
-    $totalEducationFundNeeded = isset($arrayDataEducation['totalEducationFundNeeded']) ? $arrayDataEducation['totalEducationFundNeeded'] : '';
+    $arrayData = session('passingArrays');
+    $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
+    $educationMonthlyAmount = isset($arrayData['educationMonthlyAmount']) ? $arrayData['educationMonthlyAmount'] : '';
+    $totalEducationYear = isset($arrayData['totalEducationYear']) ? $arrayData['totalEducationYear'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
+    $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
 @endphp
 
 
@@ -35,7 +36,7 @@
                                     <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                                         <div
                                             class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                            <div class="px-2 retirement-progress-bar" role="progressbar" style=""
+                                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
@@ -68,7 +69,7 @@
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>I plan to study</strong>
-                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
+                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{ $totalEducationYear !== null ? $totalEducationYear : '' }}" required></span>
                                                     <strong>years for my education.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
@@ -130,6 +131,21 @@
 <script>
     // Get the input value
     var educationYear = document.getElementById("tertiary_education_years");
+    var educationYearSessionValue = {{$totalEducationYear}};
+    var oldTotalFund = {{ $totalEducationFundNeeded }};
+    var totalEducationFund = document.getElementById("TotalEducationFund");
+    var displayAvatar = document.getElementById("displayFund");
+
+    // if (educationYear.value !== '' && educationYearSessionValue !== ''){
+    //     var totalAmount = educationYearSessionValue * oldTotalFund;
+    //     var result = totalAmount.toLocaleString();
+
+    //     totalEducationFund.innerText = "RM " + result;
+    //     displayAvatar.innerText = "RM " + result;
+    // }
+    // else{ 
+    //     educationYear.addEventListener("input", function());
+    // }
 
     educationYear.addEventListener("input", function() {
 
@@ -137,22 +153,27 @@
         var educationYearValue = educationYear.value;
 
         var Year = parseInt(educationYearValue);
-        var oldTotalFund = {{ $totalEducationFundNeeded }};
 
-        // Calculate months
-        var totalAmount = Year * oldTotalFund;
+        if(Year !== ''){
+            // Calculate months
+            var totalAmount = educationYearSessionValue * oldTotalFund;
+        }
+        else{
+            // Calculate months
+            var totalAmount = Year * oldTotalFund;
+        }
 
         if (isNaN(Year)) {
             // Input is not a valid number
-            document.getElementById("TotalEducationFund").innerText = "RM 0";
-            document.getElementById("displayFund").innerText = "RM 0";
+            totalEducationFund.innerText = "RM 0";
+            displayAvatar.innerText = "RM 0";
         } else {
             // Input is a valid number, perform the calculation
             // Display the result
             var result = totalAmount.toLocaleString();
 
-            document.getElementById("TotalEducationFund").innerText = "RM " + result;
-            document.getElementById("displayFund").innerText = "RM " + result;
+            totalEducationFund.innerText = "RM " + result;
+            displayAvatar.innerText = "RM " + result;
         }
 
         // Display the result
@@ -165,6 +186,7 @@
         document.getElementById("total_educationFund").value = totalAmount;
         
     });
+   
     document.addEventListener("DOMContentLoaded", function() {
         educationYear.addEventListener("blur", function() {
             validateNumberField(educationYear);

@@ -77,8 +77,8 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayData;
-        return redirect()->route('education.other');
+        return $arrayData;
+        // return redirect()->route('education.other');
    }
 
     public function submitEducationOther(Request $request){
@@ -119,8 +119,8 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        return $arrayData;
-        // return redirect()->route('education.gap.new');
+        // return $arrayData;
+        return redirect()->route('education.gap.new');
     }
 
    public function submitEducationGap(Request $request){
