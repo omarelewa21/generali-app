@@ -70,7 +70,7 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
-                                                            <div class="m-0 d-flex align-items-center">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/clock.png') }}">
                                                                 <h6 class="f-family fw-700 m-0 ps-3">After the next</h6>
                                                             </div>
@@ -86,9 +86,9 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
-                                                            <div class="m-0 d-flex align-items-center">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I should have a fund of</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to give my child a head start with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
                                                                 <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalEducationFundNeeded))}}</h4>
@@ -102,7 +102,7 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
-                                                            <div class="m-0 d-flex align-items-center">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/saving.png') }}">
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I have set aside</h6>
                                                             </div>
@@ -118,7 +118,7 @@
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
-                                                            <div class="m-0 d-flex align-items-center">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/summary.png') }}">
                                                                 <h6 class="f-family fw-700 m-0 ps-3">So I need a plan for</h6>
                                                             </div>
