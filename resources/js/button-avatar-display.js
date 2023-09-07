@@ -21,12 +21,23 @@ $(function() {
 
     var spouseImages = [
         {
-            src: "/images/avatar-general/spouse-no-shadow.svg",
+            src: "/images/avatar-general/spouse.png",
             width: "auto",
             height: "90%",
             alt: "Spouse",
             class: "changeImage position-absolute appended-image",
             style: "bottom: 10px;right: -80px;"
+        },
+    ];
+
+    var spouseWidowedImages = [
+        {
+            src: "/images/avatar-general/spouse.png",
+            width: "auto",
+            height: "90%",
+            alt: "Spouse",
+            class: "changeImage position-absolute",
+            style: "bottom: 10px;right: -80px; opacity: 0.5;"
         },
     ];
 
@@ -100,6 +111,7 @@ $(function() {
 
     // Set the quantity of clicks allowed
     var spouseImageIndex = 0;
+    var spouseWidowedImageIndex = 0;
     var carImageIndex = 0;
     var scooterImageIndex = 0;
     var houseImageIndex = 0;
@@ -110,7 +122,64 @@ $(function() {
     $(".imageContainerParents").css("background-image", "none");
     $(".imageContainerChildren").css("background-image", "none");
 
+    var preselect = document.getElementById('maritalStatusButtonInput');
+
+    if (preselect.value == 'married') {
+        var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+        $(".imageContainerSpouse").append(newImage);
+    }
+    else if (preselect.value == 'widowed') {
+        var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
+        $(".imageContainerSpouse").append(newImage);
+    }
+    else {
+        $(".imageContainerSpouse").empty;
+    }
+
     // Do the logics for button clicks
+    // Married selection
+    $("#marriedButton").on("click", function () {
+        var $imageContainer = $(".imageContainerSpouse");
+        var $existingImage = $imageContainer.find("img");
+
+        // If an existing image is found, update its attributes
+        if ($existingImage.length) {
+            $existingImage.attr({
+                src: spouseImages[spouseImageIndex].src,
+                width: spouseImages[spouseImageIndex].width,
+                height: spouseImages[spouseImageIndex].height,
+                alt: spouseImages[spouseImageIndex].alt,
+                class: spouseImages[spouseImageIndex].class,
+                style: spouseImages[spouseImageIndex].style
+            });
+        } else {
+            // If no existing image, create a new one and append it
+            var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+            $imageContainer.append(newImage);
+        }
+    });
+
+    $("#widowedButton").on("click", function () {
+        var $imageContainer = $(".imageContainerSpouse");
+        var $existingImage = $imageContainer.find("img");
+
+        // If an existing image is found, update its attributes
+        if ($existingImage.length) {
+            $existingImage.attr({
+                src: spouseWidowedImages[spouseWidowedImageIndex].src,
+                width: spouseWidowedImages[spouseWidowedImageIndex].width,
+                height: spouseWidowedImages[spouseWidowedImageIndex].height,
+                alt: spouseWidowedImages[spouseWidowedImageIndex].alt,
+                class: spouseWidowedImages[spouseWidowedImageIndex].class,
+                style: spouseWidowedImages[spouseWidowedImageIndex].style
+            });
+        } else {
+            // If no existing image, create a new one and append it
+            var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
+            $imageContainer.append(newImage);
+        }
+    });
+
     // Parents selection
     $(".btn-exit-parent").on("click", function () {
         // Get the selected value from the dropdown

@@ -30,8 +30,10 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
     // Preselect the button on page load
     window.addEventListener('DOMContentLoaded', function() {
-        const defaultButton = document.querySelector('.default'); 
-        defaultButton.setAttribute('data-required', 'selected');
-        defaultButton.closest('.button-bg').classList.add('selected');
+        const defaultButton = document.querySelector('.default');
+        if (defaultButton) {
+            defaultButton.setAttribute('data-required', 'selected');
+            defaultButton.closest('.button-bg').classList.add('selected');
+        }
     });
 }

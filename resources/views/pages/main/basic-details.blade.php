@@ -117,7 +117,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-outline-primary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
@@ -234,8 +234,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isValidEmail(email) {
-        // Implement your email validation logic here
-        // You can use a regular expression or any other method to validate the email format
         // Return true if the email is valid, false otherwise
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

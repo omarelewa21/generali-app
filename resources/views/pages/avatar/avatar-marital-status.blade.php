@@ -21,11 +21,12 @@
 <div id="avatar_marital_status" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-                <section class="avatar-design-placeholder content-avatar-default">
+                <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <div class="avatar-bg position-relative imageContainerSpouse"></div>
                     </div>
                 </section>
             </div>
@@ -65,7 +66,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'married') default @endif" data-avatar="married" data-required="">
+                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
@@ -85,7 +86,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'widowed') default @endif" data-avatar="widowed" data-required="">
+                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
@@ -103,7 +104,7 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant">
-                                        <a href="{{route('identity.details')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('identity.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
