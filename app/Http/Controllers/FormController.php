@@ -147,6 +147,7 @@ class FormController extends Controller {
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         
+        Log::debug($arrayData);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
