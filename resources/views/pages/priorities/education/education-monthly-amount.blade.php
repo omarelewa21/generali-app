@@ -12,11 +12,16 @@
 
 @php
     // Retrieving values from the session
-    $arrayDataEducation = session('passingArrays');
-    $educationSelectedImage = isset($arrayDataEducation['educationSelectedImage']) ? $arrayDataEducation['educationSelectedImage'] : '';
-    $educationMonthlyAmount = isset($arrayDataEducation['educationMonthlyAmount']) ? $arrayDataEducation['educationMonthlyAmount'] : '';
-    $totalEducationFundNeeded = isset($arrayDataEducation['totalEducationFundNeeded']) ? $arrayDataEducation['totalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayDataEducation['educationFundPercentage']) ? $arrayDataEducation['educationFundPercentage'] : 0;
+    $arrayData = session('passingArrays');
+    $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
+    $educationMonthlyAmount = isset($arrayData['educationMonthlyAmount']) ? $arrayData['educationMonthlyAmount'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
+    $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
+    $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
+    $totalEducationYear = isset($arrayData['totalEducationYear']) ? $arrayData['totalEducationYear'] : '';
+    $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';
+    $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
+    $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
 @endphp
 
 
@@ -24,7 +29,7 @@
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-needs-desktop wrapper-needs-supporting-default">
+                <div class="row h-100 bg-needs-desktop bg-half wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -38,7 +43,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -48,11 +53,11 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.monthly')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('monthly_education_amount')) pb-7 @endif">
+                    <form novalidate action="{{route('form.submit.education.monthly')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('monthly_education_amount')) pb-7 @endif h-100">
                         @csrf
-                        <section class="row edu-con">
-                            <div class="col-12 position-relative">
-                                <div class="row h-100">
+                        <section class="row edu-con align-items-end mh-100">
+                            <div class="col-12 position-relative mh-100">
+                                <div class="row h-100" id="education-monthly-content">
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
@@ -60,24 +65,31 @@
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
-                                                <div class="needs-stand-bg {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}" style="background-color:#c21b17 !important;"></div>
+                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order py-5">
+                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>Right now, I need</strong><br>
-                                                    <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span>
+                                                    <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{ $educationMonthlyAmount !== null ? number_format(floatval($educationMonthlyAmount)) : $educationMonthlyAmount }}" required></span>
+                                                    <!-- <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span> -->
                                                     <strong>/month for my tertiary education.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
+                                                <input type="hidden" name="tertiary_education_years" id="tertiary_education_years" value="{{$totalEducationYear}}">
+                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
+                                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                                <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
+                                                <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
+                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 show-mobile footer bg-btn_bar py-4 z-1">
+                            <div class="col-12 show-mobile footer bg-white py-4 z-1">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -90,7 +102,7 @@
                         </section>
                         @if ($errors->has('monthly_education_amount'))
                             <section class="row alert-support z-1 hide-mobile">
-                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 rounded-0" role="alert">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
@@ -98,7 +110,7 @@
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
-                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 rounded-0" role="alert">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
@@ -108,10 +120,10 @@
                         @endif
                         <div class="col-12 hide-mobile">
                             <div class="row">
-                                <div class="position-absolute bottom-0 needs-stand-bg {{ $errors->has('monthly_education_amount') ? 'error-padding' : '' }}"></div>
+                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('monthly_education_amount') ? 'error-padding' : '' }}"></div>
                             </div>
                         </div>
-                        <section class="footer bg-btn_bar py-4 fixed-bottom footer-needs-default hide-mobile">
+                        <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -130,28 +142,109 @@
 <script>
     // Get the input value
     var monthlyInput = document.getElementById("monthly_education_amount");
-    const formatNumber = (value) 
+
+    var totalEducationYear = document.getElementById("tertiary_education_years");
+    var totalEducationFund = document.getElementById("TotalEducationFund");
+    var totalEducationFundNeeded = document.getElementById("total_educationFund");
+    var totalAmountNeeded = document.getElementById("total_amountNeeded");
+    var totalEducationPercentage = document.getElementById("percentage");
+    var education_saving_amount = document.getElementById('education_saving_amount');
+    var education_saving = document.getElementById('education_other_savings');
+    
+    var newTotalFund = document.getElementById("newTotal_educationFund");
+    var displayAvatar = document.getElementById("displayFund");
+
+    // const cleanedValue = monthlyInput.value.replace(/[^0-9.]/g, "");
+
+    // Format the value with commas for thousands
+    // const formattedValue = Number(cleanedValue).toLocaleString();
+
+    // monthlyInput.value = formattedValue;
 
     monthlyInput.addEventListener("input", function() {
 
         // Retrieve the current input value
         var monthlyInputValue = monthlyInput.value;
 
-        var monthlyAmount = parseInt(monthlyInputValue);
+        // Remove non-digit characters
+        const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+
+        // Attempt to parse the cleaned value as a float
+        const parsedValue = parseFloat(cleanedValue);
+
+        // Check if the parsed value is a valid number
+        if (!isNaN(parsedValue)) {
+        // If it's a valid number, format it with commas
+            const formattedValue = parsedValue.toLocaleString('en-MY');
+            this.value = formattedValue;
+        } else {
+        // If it's not a valid number, display the cleaned value as is
+            this.value = monthlyInputValue;
+        }
+
+         // Format the cleaned value with commas
+        // const formattedValue = cleanedValue.toLocaleString('en-MY');
+
+        // this.value = formattedValue;
+
+        var monthlyAmount = parseInt(cleanedValue);
 
         // Calculate months
         var amountPerYear = monthlyAmount * 12;
 
-        // Display the result
-        var result = amountPerYear.toLocaleString();
-        // var monthly_result = monthlyInputValue.toLocaleString();
+        if (isNaN(monthlyAmount)) {
+            // Input is not a valid number
+            totalEducationFund.innerText = "RM 0";
+            displayAvatar.innerText = "RM 0";
+        } else {
+            // Input is a valid number, perform the calculation
+            // Display the result
+            var result = amountPerYear.toLocaleString();
 
-        document.getElementById("TotalEducationFund").innerText = "RM " + result;
-        document.getElementById("displayFund").innerText = "RM " + result;
-        // monthlyInput.value = monthly_result;
+            totalEducationFund.innerText = "RM " + result;
+            displayAvatar.innerText = "RM " + result;
+        }
+        
+
+        // Display the result
+        // var result = amountPerYear.toLocaleString();
+
+        
+        // Try the code
+        // if (monthlyInput.value === ""){
+        //     this.value.toLocaleString();
+        // }
+        // else{
+        //     this.value.toLocaleString();
+        // }
+        // }
+        // let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        // inputValue = Number(inputValue);
+
+        // if (isNaN(inputValue)) {
+        //     inputValue = 0;
+        // }
+
+        // const formattedValue = monthlyInput.toLocaleString('en-MY'); // Format with commas
+        // monthlyInput = formattedValue;
+
+        // End try the code
+        
+
+        // document.getElementById("TotalEducationFund").innerText = "RM " + result;
+        // document.getElementById("displayFund").innerText = "RM " + result;
 
         // Set the value of the hidden input field
-        document.getElementById("total_educationFund").value = amountPerYear;
+        totalEducationFundNeeded.value = amountPerYear;
+        // If type new value, clear the session year and pass again
+        totalEducationYear.value = '';
+        newTotalFund.value = '';
+        totalAmountNeeded.value = '';
+        totalEducationPercentage.value = '';
+        education_saving_amount.value = '';
+        education_saving.value = '';
+        $('.retirement-progress-bar').css('width', '0%');
+        // document.getElementById("monthly_education_amount").value = parseInt(cleanedValue.replace(/,/g, ''), 10) || "";
     });
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -162,14 +255,19 @@
     function validateNumberField(field) {
         const value = field.value.trim();
 
+        var pattern = /^[0-9,]+$/;
+
         if (value === "" || isNaN(value)) {
             // field.classList.remove("is-valid");
             field.classList.add("is-invalid");
-        } else {
+        }else{
             // field.classList.add("is-valid");
             field.classList.remove("is-invalid");
         }
-    }
+        if (pattern.test(value)){
+            document.getElementById("monthly_education_amount").classList.remove("is-invalid");
+        }
+    } 
 
 });
 

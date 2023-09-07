@@ -13,7 +13,7 @@
 <div id="education-home" class="vh-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3 bg-primary sidebanner">
+            <div class="col-12 col-md-2 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-md-5 py-md-5 py-3">
                     <h2 class="display-5 font-bold fw-bold">My Priorities</h2>
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <a href="{{route('retirement.allocated.funds.aside')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
-                                <a href="{{route('education.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                <a href="{{route('education.coverage.new')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                             </div>
                         </div>
                     </div>
