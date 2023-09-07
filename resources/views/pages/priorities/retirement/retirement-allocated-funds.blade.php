@@ -143,6 +143,25 @@ document.addEventListener("DOMContentLoaded", function() {
         
         validateNumberField(retirementAllocatedFunds);
     });
+        protectionFundsInput.addEventListener('input', function() {
+        // RM.classList.remove("label-invalid");
+        let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+        inputValue = Number(inputValue);
+
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+
+        const formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
+        this.value = formattedValue;
+
+        totalProtectionValueText.innerText = inputValue.toLocaleString('en-MY', {
+            style: 'currency',
+            currency: 'MYR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    });
 
 
     function validateNumberField(field) {
@@ -162,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function() {
             RM.classlist.remove("label-invalid");   
         }
     }
-
 });
 </script>
 <style>

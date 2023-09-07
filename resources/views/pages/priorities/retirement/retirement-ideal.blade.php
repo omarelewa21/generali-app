@@ -200,7 +200,6 @@
     #optionsForIdeal img {
 max-width: 360px;
 }
-
 }
 
 @media only screen and (min-width:834px) and (max-height:1112px) and (orientation:portrait) {
