@@ -145,18 +145,6 @@ class EducationController extends Controller
         return redirect()->route('education.gap.new');
     }
 
-   public function submitEducationGap(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
-        // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.home');
-    }
-    
     public function validateEducationCoverageSelection(Request $request)
     {
         // Get the existing array from the session
@@ -199,6 +187,18 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         return redirect()->route('education.monthly.amount');
+    }
+
+    public function submitEducationGap(Request $request){
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        // // Process the form data and perform any necessary actions
+        return redirect()->route('investment.home');
     }
 
 }

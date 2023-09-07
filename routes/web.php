@@ -70,6 +70,7 @@ Route::post('/education-other', [EducationController::class, 'submitEducationOth
 Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
 Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 Route::view('/education-gap-new', 'pages.priorities.education.education-gap-new')->name('education.gap.new');
+Route::post('/education-gap-new', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 
 /* Priorities - Investment */
 Route::view('/investment-home', 'pages.priorities.investment.investment-home')->name('investment.home');

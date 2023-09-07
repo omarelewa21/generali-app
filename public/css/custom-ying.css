@@ -178,11 +178,80 @@
     grid-area: avatar-text;
     grid-template-columns: 100%;
 }
-
-
-
+/* =============================== Education Other Savings Page ===============================*/
+.bg-education-others-section{
+    background-image: url('/images/needs/education/bg-others-ele.png');
+    background-repeat: no-repeat;
+    background-size: 52%;
+    background-position: left 66% top;
+}
+/* =============================== Education Gap Page ===============================*/
+.wrapper-needs-gap-default {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-gap-default";
+    grid-template-rows: 13% 87%;
+}
+.content-gap-default{
+    grid-area: content-gap-default;
+    grid-template-columns: 100%;
+    display: grid;
+    grid-template-rows: 84.5%;
+}
+.bg-education-gap{
+    background-image: url('/images/needs/background/bg-master-needs-gap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center top;
+}
+.graph-wrapper{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "gap-graph"
+        "gap-title";
+    grid-template-rows: 90% 10%;
+}
+.gap-graph{
+    grid-area: gap-graph;
+    grid-template-columns: 100%;
+}
+.gap-title{
+    grid-area: gap-title;
+    grid-template-columns: 100%;
+}
+.summary-value{
+    color:#C21B17;
+    text-align: right;
+}
+#education-summary h6{
+    font-size: 26px;
+}
+.text-correct{
+    color: #14A38B;
+}
+#education-summary #gap .circle{
+    filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
+}
+#education-summary #gap .circle__medium{
+    filter: none;
+}
+#education-summary #gap .circle__small{
+    filter: none;
+}
 
 /* Media Query - Mobile (screen size max 767px) */
+@media only screen and (max-width: 360px){
+    .col-xs-10{
+        flex: 0 0 auto;
+        width: 83.33333333%;
+    }
+}
+
 @media only screen and (max-width: 767px){
     .wrapper-needs-supporting-default {
         grid-template-rows: auto;
@@ -263,6 +332,9 @@
 @media only screen and (min-width: 768px) and (max-width: 1200px){
     .bg-education-coverage{
         background-size: contain;
+    }
+    .mt-md-6{
+        margin-top: 4rem;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1050px){
@@ -376,6 +448,12 @@
     .p-mb-0{
         padding: 0px;
     }
+    .bg-education-others-mob{
+        background-image: url('/images/needs/education/bg-education-others-mob.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center;
+    }
 }
 @media only screen and (min-width: 1024px){
     .hide-h-100{
@@ -447,8 +525,13 @@
         grid-template-rows: 93.5% auto !important;
     }
 }
-@media screen and (min-width: 1200px) {
-    
+@media screen and (min-width: 1250px) {
+    .bg-education-others{
+        background-image: url('/images/needs/education/bg-education-others.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:left;
+    }
 }
 @media screen and (min-width: 1600px) {
     .content-needs-default {
@@ -683,12 +766,6 @@ svg.slide-button.slick-arrow:hover {
     background-repeat: no-repeat;
     background-size: 67%;
     background-position: bottom 10% left 28%;
-}
-.bg-education-others-section{
-    background-image: url('/images/needs/education/bg-others-ele.png');
-    background-repeat: no-repeat;
-    background-size: 52%;
-    background-position: left 66% top;
 }
 .font-color-default{
     color:#000;
@@ -1056,12 +1133,6 @@ button.choice:focus,
         background-size: cover;
         background-position: center;
     }
-    .bg-education-others-mob{
-        background-image: url('/images/needs/education/bg-education-others-mob.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center;
-    }
     .bg-education-gap-mob{
         background-image: url('/images/needs/education/bg-education-gap-mob.png');
         background-repeat: no-repeat;
@@ -1380,18 +1451,6 @@ button.choice:focus,
 @media only screen and (min-width: 1250px){
     .bg-needs-desktop{
         background-image: url('/images/needs/education/bg-needs-master.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center;
-    }
-    .bg-education-others{
-        background-image: url('/images/needs/education/bg-education-others.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:left;
-    }
-    .bg-education-gap{
-        background-image: url('/images/needs/education/bg-gap.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position:center;
