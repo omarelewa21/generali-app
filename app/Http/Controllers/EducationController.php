@@ -35,9 +35,21 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $monthly_education_amount = str_replace(',','',$request->input('monthly_education_amount'));
         $totalEducationFund = $request->input('total_educationFund');
+        $tertiary_education_years = $request->input('tertiary_education_years');
+        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
+        $totalAmountNeeded = $request->input('total_amountNeeded');
+        $totalPercentage = $request->input('percentage');
+        $education_saving_amount = $request->input('education_saving_amount');
+        $education_other_savings = $request->input('education_other_savings');
 
         $arrayData['educationMonthlyAmount'] = $monthly_education_amount;
         $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        $arrayData['totalEducationYear'] = $tertiary_education_years;
+        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
+        $arrayData['educationFundPercentage'] = $totalPercentage;
+        $arrayData['educationSavingAmount'] = $education_saving_amount;
+        $arrayData['edcationSaving'] = $education_other_savings;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -69,16 +81,26 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $tertiary_education_years = $request->input('tertiary_education_years');
         $totalEducationFund = $request->input('total_educationFund');
+        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
+        $totalAmountNeeded = $request->input('total_amountNeeded');
+        $totalPercentage = $request->input('percentage');
+        $education_saving_amount = $request->input('education_saving_amount');
+        $education_other_savings = $request->input('education_other_savings');
 
         $arrayData['totalEducationYear'] = $tertiary_education_years;
         $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
+        $arrayData['educationFundPercentage'] = $totalPercentage;
+        $arrayData['educationSavingAmount'] = $education_saving_amount;
+        $arrayData['edcationSaving'] = $education_other_savings;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        return $arrayData;
-        // return redirect()->route('education.other');
+        // return $arrayData;
+        return redirect()->route('education.other');
    }
 
     public function submitEducationOther(Request $request){
@@ -105,13 +127,13 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $totalEducationFund = $request->input('total_educationFund');
+        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
         $totalAmountNeeded = $request->input('total_amountNeeded');
         $totalPercentage = $request->input('percentage');
 
         $arrayData['educationSavingAmount'] = $education_saving_amount;
         $arrayData['edcationSaving'] = $education_other_savings;
-        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
         $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
         $arrayData['educationFundPercentage'] = $totalPercentage;
 
@@ -119,7 +141,7 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        // return $arrayData;
+        // return ($arrayData);
         return redirect()->route('education.gap.new');
     }
 

@@ -10,7 +10,7 @@
     $arrayData = session('passingArrays');
     $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
     $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
-    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
+    $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
     $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
     $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';
@@ -34,7 +34,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -77,9 +77,9 @@
                                                 <p class="hide-content">Current savings amount:
                                                     <span class="currencyinput f-34">RM<input type="text" name="education_saving_amount" class="form-control d-inline-block w-45 money f-34 @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" value="{{ $educationSavingAmount !== null ? number_format(floatval($educationSavingAmount)) : $educationSavingAmount }}" required></span>
                                                 </p>
-                                                <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
                                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                                 <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
+                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
                                             </div>
                                         </div>
                                     </div>
@@ -141,8 +141,7 @@
     var noRadio = document.getElementById('no');
     var totalAmountNeeded = document.getElementById("total_amountNeeded");
     var totalEducationPercentage = document.getElementById("percentage");
-    var oldTotalFund = {{ $totalEducationFundNeeded }};
-    var sessionSaving = {{ $educationSavingAmount }};
+    var oldTotalFund = {{ $newTotalEducationFundNeeded }};
     var educationFundPercentage = {{ $educationFundPercentage }};
 
     education_saving.addEventListener("input", function() {

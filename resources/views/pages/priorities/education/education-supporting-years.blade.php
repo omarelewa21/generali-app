@@ -17,7 +17,11 @@
     $educationMonthlyAmount = isset($arrayData['educationMonthlyAmount']) ? $arrayData['educationMonthlyAmount'] : '';
     $totalEducationYear = isset($arrayData['totalEducationYear']) ? $arrayData['totalEducationYear'] : '';
     $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
+    $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
+    $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';
+    $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
+    $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
 @endphp
 
 
@@ -39,7 +43,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -57,7 +61,7 @@
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
-                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p>
+                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</p>
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
@@ -69,10 +73,15 @@
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>I plan to study</strong>
-                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{ $totalEducationYear !== null ? $totalEducationYear : '' }}" required></span>
+                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
                                                     <strong>years for my education.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
+                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
+                                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                                <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
+                                                <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
+                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}">
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +140,16 @@
 <script>
     // Get the input value
     var educationYear = document.getElementById("tertiary_education_years");
-    var educationYearSessionValue = {{$totalEducationYear}};
+    // var educationYearSessionValue = {{$totalEducationYear}};
     var oldTotalFund = {{ $totalEducationFundNeeded }};
+    var newTotalFund = document.getElementById("newTotal_educationFund");
+
     var totalEducationFund = document.getElementById("TotalEducationFund");
+    var totalAmountNeeded = document.getElementById("total_amountNeeded");
+    var totalEducationPercentage = document.getElementById("percentage");
+    var education_saving_amount = document.getElementById('education_saving_amount');
+    var education_saving = document.getElementById('education_other_savings');
+    
     var displayAvatar = document.getElementById("displayFund");
 
     // if (educationYear.value !== '' && educationYearSessionValue !== ''){
@@ -154,14 +170,8 @@
 
         var Year = parseInt(educationYearValue);
 
-        if(Year !== ''){
-            // Calculate months
-            var totalAmount = educationYearSessionValue * oldTotalFund;
-        }
-        else{
-            // Calculate months
-            var totalAmount = Year * oldTotalFund;
-        }
+        // Calculate months
+        var totalAmount = Year * oldTotalFund;
 
         if (isNaN(Year)) {
             // Input is not a valid number
@@ -183,7 +193,13 @@
         // document.getElementById("displayFund").innerText = "RM " + result;
 
         // Set the value of the hidden input field
-        document.getElementById("total_educationFund").value = totalAmount;
+        newTotalFund.value = totalAmount;
+        totalAmountNeeded.value = '';
+        totalEducationPercentage = '';
+        education_saving.value = '';
+        education_saving_amount.value = '';
+        education_saving.value = '';
+        $('.retirement-progress-bar').css('width', '0%');
         
     });
    
