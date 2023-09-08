@@ -1,6 +1,6 @@
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -9,12 +9,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #fff;
+  background-color: #C0232C;
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #C21B17;
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 /* Body */
@@ -34,7 +35,7 @@ html {
 }
 
 .text-red {
-  color: #C21B17!important;
+  color: #C0232C!important;
 }
 
 .flex-1 {
@@ -207,7 +208,7 @@ p.nav-text {
 
 .btn-exit:hover {
   background-color: #ffffff;
-  color: #C21B17;
+  color: #C0232C;
 }
 
 .btn-exit:before {
@@ -238,7 +239,7 @@ p.nav-text {
 
 .btn-secondary {
   background-color: #ffffff;
-  color: #C21B17;
+  color: #C0232C;
 }
 
 .btn-secondary:hover {
@@ -303,7 +304,7 @@ button[data-required="selected"] img {
 }
 
 .modal-title {
-  font-family: 'Helvetica Neue Bold', sans-serif;
+  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
 }
 
 .otherModalText {
@@ -338,14 +339,6 @@ button[data-required="selected"] img {
 
 .footer-home {
   grid-area: footer-home;
-}
-
-/* Avatar */
-.avatar-bg {
-  background-image: url('/images/avatar-general/Shadow.png');
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
 }
 
 /* Avatar Welcome Page */
@@ -413,7 +406,7 @@ button[data-required="selected"] img {
   height: 77.94px;
   flex-shrink: 0;
   border-radius: 5px;
-  border: 1px solid var(--primary-red, #C21B17);
+  border: 1px solid var(--primary-red, #C0232C);
   background: var(--primary-white, #FFF);
   box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
@@ -502,7 +495,7 @@ button[data-required="selected"] img {
 }
 
 /* Marital Status Page */
-#avatar_marital_status .avatar-design-placeholder {
+#avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder {
   background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
   background-size: 25%,20%;
   background-position: top left, bottom right;
@@ -868,7 +861,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     width: 80px;
   }
   .white-logo {
-    width: 60px;
+    width: 150px;
   }
   .display-5, p.nav-text {
     font-size: 20px;
@@ -1196,7 +1189,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
   .btn-exit:hover {
     background-color: #ffffff;
-    color: #C21B17;
+    color: #C0232C;
   }
 /* 
   .logout-svg {
@@ -1321,7 +1314,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   }
 
   .timeline-item-needs.active::after {
-    background: #C21B17;
+    background: #C0232C;
     border: 0;
   }
  */

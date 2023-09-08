@@ -132,7 +132,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-header px-5 pt-2 pb-0">
-                <h3 class="modal-title text-center text-uppercase otherModalText" id="otherAssetsLabel">I Have</h2>
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="otherAssetsLabel">I Have</h3>
             </div>
             <div class="modal-body text-white text-center px-5 pt-5 bg-primary">
                 <input type="text" name="otherAssetsInput" class="form-control bg-white @error('otherAssetsInput') is-invalid @enderror" id="otherAssetsInput" placeholder="Add your asset" value="{{ old('otherAssetsInput', $arrayData['otherAssetsInput'] ?? '') }}">

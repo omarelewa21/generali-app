@@ -27,4 +27,3 @@ document.getElementById('saveSession').addEventListener('click', function() {
         }
     });
 });
-

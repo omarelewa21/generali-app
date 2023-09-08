@@ -21,14 +21,14 @@
 <div id="avatar_family_dependant" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
-                    <div class="avatar-bg position-relative imageContainerParents"></div>
-                    <div class="avatar-bg position-relative imageContainerSpouse">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="98%" alt="Main character" class="changeImage position-absolute" style="left:40px">
+                    <div class="position-relative imageContainerParents"></div>
+                    <div class="position-relative imageContainerSpouse">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
-                    <div class="avatar-bg position-relative imageContainerChildren"></div>
+                    <div class="position-relative imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
@@ -105,7 +105,7 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{$familyDependant}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant.details">
-                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -125,11 +125,11 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 py-2 justify-content-center">
-                <h3 class="modal-title text-center display-4" id="parentAvatarsLabel">Parent(s)</h2>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="parentAvatarsLabel">Parent(s)</h3>
             </div>
-            <div class="modal-body text-center px-5 pt-2 pb-5 d-flex justify-content-center">
-                <select name="parents" class="form-select @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" style="width:60%" required>
+            <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
+                <select name="parents" class="form-select bg-white @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" required>
                     <option value="father" selected>Father</option>
                     <option value="mother">Mother</option>
                     <option value="both">Both Parents</option>
@@ -148,12 +148,12 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 py-2 justify-content-center">
-                <h3 class="modal-title text-center display-4" id="childrenAvatarsLabel">Child(ren)</h2>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="childrenAvatarsLabel">Child(ren)</h3>
             </div>
-            <div class="modal-body text-center px-5 pt-2 pb-5 d-flex justify-content-center">
-                <select name="children" class="form-select @error('children') is-invalid @enderror" aria-label="Children" id="childrenSelect" style="width:60%" required>
-                    @for ($i = 1; $i <= 20; $i++)
+            <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
+                <select name="children" class="form-select bg-white @error('children') is-invalid @enderror" aria-label="Children" id="childrenSelect" required>
+                    @for ($i = 0; $i <= 20; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
                 </select>
@@ -203,16 +203,16 @@ if (maritalStatus === 'single') {
 }
 
 const childButton = document.getElementById('childButton');
-const parentButton = document.getElementById('parentButton');
-const siblingButton = document.getElementById('siblingButton');
+// const parentButton = document.getElementById('parentButton');
+// const siblingButton = document.getElementById('siblingButton');
 const spouseButton = document.getElementById('spouseButton');
 const familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
 const clickedAvatars = [];
 
 let spouseClicked = false;
 let childClicked = false;
-let parentClicked = false;
-let siblingClicked = false;
+// let parentClicked = false;
+// let siblingClicked = false;
 
 spouseButton.addEventListener('click', function(event) {
     event.preventDefault();
@@ -248,54 +248,54 @@ confirmChildrenButton.addEventListener('click', function(event) {
     }
 });
 
-const confirmParentButton = document.querySelector('.btn-exit-parent');
-confirmParentButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const parentsSelect = document.getElementById('parentsSelect');
-    const selectedParent = parentsSelect.value;
-
-    if (selectedParent !== "") {
-        if (selectedParent === "mother") {
-            clickedAvatars.push("parent_1");
-        } else if (selectedParent === "father") {
-            clickedAvatars.push("parent_2");
-        } else if (selectedParent === "both") {
-            clickedAvatars.push("parent_1", "parent_2");
-        }
-
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-
-        // Close the modal
-        const parentAvatarsModal = new bootstrap.Modal(document.getElementById('parentAvatars'));
-        parentAvatarsModal.hide();
-
-        parentClicked = true;
-    }
-});
-
-
-// parentButton.addEventListener('click', function(event) {
+// const confirmParentButton = document.querySelector('.btn-exit-parent');
+// confirmParentButton.addEventListener('click', function(event) {
 //     event.preventDefault();
 
-//     if (!parentClicked) {
-//         const dataAvatar = 'parents';
-//         clickedAvatars.push(dataAvatar);
+//     const parentsSelect = document.getElementById('parentsSelect');
+//     const selectedParent = parentsSelect.value;
+
+//     if (selectedParent !== "") {
+//         if (selectedParent === "mother") {
+//             clickedAvatars.push("parent_1");
+//         } else if (selectedParent === "father") {
+//             clickedAvatars.push("parent_2");
+//         } else if (selectedParent === "both") {
+//             clickedAvatars.push("parent_1", "parent_2");
+//         }
+
 //         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+
+//         // Close the modal
+//         const parentAvatarsModal = new bootstrap.Modal(document.getElementById('parentAvatars'));
+//         parentAvatarsModal.hide();
+
 //         parentClicked = true;
 //     }
 // });
 
-siblingButton.addEventListener('click', function(event) {
-    event.preventDefault();
 
-    if (!siblingClicked) {
-        const dataAvatar = 'siblings';
-        clickedAvatars.push(dataAvatar);
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        siblingClicked = true;
-    }
-});
+// // parentButton.addEventListener('click', function(event) {
+// //     event.preventDefault();
+
+// //     if (!parentClicked) {
+// //         const dataAvatar = 'parents';
+// //         clickedAvatars.push(dataAvatar);
+// //         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+// //         parentClicked = true;
+// //     }
+// // });
+
+// siblingButton.addEventListener('click', function(event) {
+//     event.preventDefault();
+
+//     if (!siblingClicked) {
+//         const dataAvatar = 'siblings';
+//         clickedAvatars.push(dataAvatar);
+//         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+//         siblingClicked = true;
+//     }
+// });
 
 </script>
 

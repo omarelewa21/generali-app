@@ -79,7 +79,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 const dataColor = this.getAttribute('data-color');
                 const filePrefix = selectedGenderValue === 'Female' ? 'fe' : '';
 
-                console.log(genderSelection);
                 const newImageSrc = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".svg";
                 avatar.setAttribute('src', newImageSrc);
 

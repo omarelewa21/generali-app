@@ -26,7 +26,7 @@
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        <div class="avatar-bg position-relative imageContainerSpouse"></div>
+                        <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>
             </div>
@@ -56,7 +56,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'single') default @endif" data-avatar="single" data-required="">
+                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
                                                     <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
@@ -76,7 +76,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'divorced') default @endif" data-avatar="divorced" data-required="">
+                                                <button class="border-0 @if(isset($arrayData['maritalStatus']) && $arrayData['maritalStatus'] === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
@@ -117,22 +117,4 @@
     </div>
 </div>
 
-<script>
-// Add event listener to each button with the 'data-required' attribute
-const dataButtons = document.querySelectorAll('[data-avatar]');
-
-dataButtons.forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default behavior of the button click
-
-        const nextButton = document.getElementById('nextButton');
-
-        // Get the selected data-avatar value
-        const dataAvatar = this.getAttribute('data-avatar');
-
-        // Update the hidden input field value with the selected avatar
-        document.getElementById('maritalStatusButtonInput').value = dataAvatar;
-    });
-});
-</script>
 @endsection
