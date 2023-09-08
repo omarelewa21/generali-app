@@ -7,6 +7,9 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
+    let clickedAvatars = {
+        spouse: []
+    };
 
     $(function() {
         
@@ -148,14 +151,21 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             }
         }
         else if (path == '/family-dependant') {
-            var preselect = document.getElementById('familyDependantButtonInput');
+            var familyDependantInputValue = document.getElementById('familyDependantButtonInput').value;
+            var $imageContainer = $(".imageContainerSpouse");
+            var $existingImage = $imageContainer.find("img.appended-image");
 
-            if (preselect.value == '["spouse"]') {
-                var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                $(".imageContainerSpouse").append(newImage);
-            }
-            else {
-                $(".imageContainerSpouse").empty;
+            if (familyDependantInputValue.trim() !== "") {
+                var familyDependant = JSON.parse(familyDependantInputValue);
+
+                if (familyDependant.spouse && familyDependant.spouse.includes("yes")) {
+                    var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+                    $(".imageContainerSpouse").append(newImage);
+                } else {
+                    $existingImage.remove();
+                }
+            } else {
+                console.log("familyDependantInputValue is empty");
             }
         }
         
@@ -209,7 +219,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         // Spouse selection
         $("#spouseButton").on("click", function () {
             var $imageContainer = $(".imageContainerSpouse");
-            
+
             // Check if an image already exists
             if ($imageContainer.find("img.appended-image").length > 0) {
                 // If an image exists, remove it

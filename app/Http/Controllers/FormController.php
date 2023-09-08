@@ -186,7 +186,6 @@ class FormController extends Controller {
         $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
         $familyDependantSerialized = $request->input('familyDependantButtonInput');
         $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
-
         $dataUrl = $request->input('urlInput');
 
         // Add or update the data value in the array
