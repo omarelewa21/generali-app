@@ -14,8 +14,15 @@ $retirementAllocatedFundsAside = isset($arrayDataRetirement['retirementAllocated
 $arrayDataRetirement['retirementAllocatedFundsAside'] : '';
 $retirementOtherSourceOfIncome = isset($arrayDataRetirement['retirementOtherSourceOfIncome']) ?
 $arrayDataRetirement['retirementOtherSourceOfIncome'] : '';
+$formattedRetirementAllocatedFundsAside = isset($arrayDataRetirement['formattedRetirementAllocatedFundsAside']) ?
+$arrayDataRetirement['formattedRetirementAllocatedFundsAside'] : null;
+$formattedRetirementOtherSourceOfIncome = isset($arrayDataRetirement['formattedRetirementOtherSourceOfIncome']) ?
+$arrayDataRetirement['formattedRetirementOtherSourceOfIncome'] : null;
 $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ?
 $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
+$retirementPercentage = isset($arrayDataProtection['retirementPercentage']) ?
+$arrayDataProtection['retirementPercentage'] : 0;
+
 @endphp
 <div id="retirementAllocatedFundsAsidePage" class="vh-100 overflow-auto container-fluid">
 
@@ -28,8 +35,7 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-lg-2">
                         <div class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:45%;"
-                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$retirementPercentage}}%;" aria-valuenow="{{$retirementPercentage}}%;" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h3 id="TotalRetirementValue" class="m-1 text-light text-center">RM {{
                             $formattedTotalRetirementValue }}</h3>
@@ -90,12 +96,12 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                     src="{{ asset('images/needs/retirement/allocated-funds-aside.svg') }}" alt="avatar">
                             </div>
                             <div
-                                class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-xl-end align-items-center align-items-lg-start mx-0 mx-lg-0 mx-xl-5 order-0 order-lg-1">
+                                class="col-lg-5 d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-xl-center align-items-center align-items-lg-start mx-0  mx-lg-0 mx-xl-5 order-0 order-lg-1">
                                 <h5 class="needs-text">So far, I’ve put aside</h5>
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="retirementAllocatedFundsAside"
-                                        value="{{$retirementAllocatedFundsAside}}"
+                                        value="{{$formattedRetirementAllocatedFundsAside}}"
                                         class="input-text form-control text-primary py-0 @error('retirementAllocatedFundsAside') is-invalid @enderror"
                                         id="retirementAllocatedFundsAside" placeholder=" " required>
                                 </div>
@@ -104,9 +110,11 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                 <div class="input-group w-50">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="retirementOtherSourceOfIncome"
-                                        value="{{$retirementOtherSourceOfIncome }}"
+                                        value="{{$formattedRetirementOtherSourceOfIncome }}"
                                         class="input-text form-control text-primary py-0 @error('retirementOtherSourceOfIncome') is-invalid @enderror"
                                         id="retirementOtherSourceOfIncome" placeholder=" " required>
+                                </div>
+                                <div class="custom-space" style="padding-bottom: 90px">
                                 </div>
 
 
@@ -135,30 +143,54 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    const retirementAllocatedFundsAside = document.getElementById("retirementAllocatedFundsAside");
-    const retirementOtherSourceOfIncome = document.getElementById("retirementOtherSourceOfIncome");
-    const retirementAllocatedFundsAsideErrorMsg = document.getElementById("retirementAllocatedFundsAsideErrorMsg");
-    const retirementOtherSourceOfIncomeErrorMsg = document.getElementById("retirementOtherSourceOfIncomeErrorMsg");
+    var retirementAllocatedFundsAside = document.getElementById("retirementAllocatedFundsAside");
+    var retirementOtherSourceOfIncome = document.getElementById("retirementOtherSourceOfIncome");
+    var TotalRetirementValueText = document.getElementById("TotalRetirementValue");
 
     retirementAllocatedFundsAside.addEventListener("blur", function() {
         validateNumberField(retirementAllocatedFundsAside);
-    });
-
-    retirementAllocatedFundsAside.addEventListener("input", function() {
-        retirementAllocatedFundsErrorMsg.style.display = "none";
     });
 
     retirementOtherSourceOfIncome.addEventListener("blur", function() {
         validateNumberField(retirementOtherSourceOfIncome);
     });
 
-    retirementOtherSourceOfIncome.addEventListener("input", function() {
-        retirementOtherSourceOfIncomeErrorMsg.style.display = "none";
-    }); 
+
+    function updateTotalRetirementValue() {
+    let allocatedValue = retirementAllocatedFundsAside.value.replace(/\D/g, ''); // Remove non-digit characters
+    allocatedValue = Number(allocatedValue);
+
+    if (isNaN(allocatedValue)) {
+        allocatedValue = 0;
+    }
+
+    let otherIncomeValue = retirementOtherSourceOfIncome.value.replace(/\D/g, ''); // Remove non-digit characters
+    otherIncomeValue = Number(otherIncomeValue);
+
+    if (isNaN(otherIncomeValue)) {
+        otherIncomeValue = 0;
+    }
+
+    const totalValue = allocatedValue + otherIncomeValue;
+
+    var formattedValue = allocatedValue.toLocaleString('en-MY'); // Format with commas
+    retirementAllocatedFundsAside.value = formattedValue;
+
+    var formattedValue2 = otherIncomeValue.toLocaleString('en-MY'); // Format with commas
+    retirementOtherSourceOfIncome.value = formattedValue2;
+    // TotalRetirementValueText.innerText = totalValue;
+}
+
+retirementAllocatedFundsAside.addEventListener('input', updateTotalRetirementValue);
+retirementOtherSourceOfIncome.addEventListener('input', updateTotalRetirementValue);
+
+
 
     function validateNumberField(field) {
-        const value = field.value.trim();
-        if (value === "" || isNaN(value)) {
+        var value = field.value.trim();
+        let Inputvalue = value.replace(/\D/g, ''); // Remove non-digit characters
+
+        if (Inputvalue === "" || isNaN(Inputvalue)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
         } else {
@@ -166,6 +198,8 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
             field.classList.remove("is-invalid");
         }
     }
+
+
 });
 
     </script>
@@ -203,6 +237,15 @@ background: transparent !important;
 .navbar {
     right:0;
 }
+.custom-space {
+    display: none;
+}
+}
+@media only screen and (min-width: 768px) and (max-height: 1366px) and (orientation: portrait) {
+    .custom-space {
+    display: none;
+}
+
 }
 </style>
 
