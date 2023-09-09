@@ -88,7 +88,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'siblings' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="siblings" data-required="" id="siblingButton">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']) && $arrayData['FamilyDependant']['siblings'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                                 </button>
@@ -206,21 +206,22 @@ if (maritalStatus === 'single') {
     spouseImg.style.opacity = '0.5'; 
 }
 
-// // const siblingButton = document.getElementById('siblingButton');
 const spouseButton = document.getElementById('spouseButton');
 const confirmChildrenButton = document.querySelector('.btn-exit-children');
 const parentButton = document.getElementById('parentButton');
+const siblingButton = document.getElementById('siblingButton');
 const familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
 const clickedAvatars = {
     spouse: null,
     children: [],
-    parents: []
+    parents: [],
+    siblings: null
 };
 
 let spouseClicked = false;
 let childClicked = false;
 let parentClicked = false;
-// // let siblingClicked = false;
+let siblingClicked = false;
 
 spouseButton.addEventListener('click', function(event) {
     event.preventDefault();
@@ -307,17 +308,21 @@ confirmParentButton.addEventListener('click', function(event) {
     }
 });
 
-// siblingButton.addEventListener('click', function(event) {
-//     event.preventDefault();
+siblingButton.addEventListener('click', function(event) {
+    event.preventDefault();
 
-//     if (!siblingClicked) {
-//         const dataAvatar = 'siblings';
-//         clickedAvatars.push(dataAvatar);
-//         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-//         siblingClicked = true;
-//     }
-// });
-
+    const dataAvatar = 'siblings';
+    var isSelected = this.closest('.button-bg').classList.contains('selected');
+    
+    if (isSelected) {
+        clickedAvatars[dataAvatar]='no';
+    }
+    else {
+        clickedAvatars[dataAvatar]='yes';
+    }
+    familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+    siblingClicked = true;
+});
 </script>
 
 @endsection

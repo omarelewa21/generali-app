@@ -15,28 +15,22 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $familyDependant = isset($arrayData['familyDependant']) ? json_encode($arrayData['familyDependant']) : '';
-    $familyDependant = $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '';
+    $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
+    $familyDependants = $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '';
+    $gender = isset($arrayData['Gender']) ? ($arrayData['Gender'] === 'Male' ? 'Female' : 'Male') : '';
 @endphp
 
 <div id="avatar_family_dependant_details" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
             <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-            <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/parent-father-no-shadow.svg') }}" width="auto" height="100%" alt="Parent" class="changeImage pb-2">
-                        <img src="{{ asset('/images/avatar-general/parent-mother.svg') }}" width="auto" height="90%" alt="Parent" class="changeImage position-absolute bottom-0 pb-2" style="right:-80px">
+                <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
+                    <div class="position-relative imageContainerParents"></div>
+                    <div class="position-relative imageContainerSpouse">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/spouse-no-shadow.svg') }}" width="auto" height="90%" alt="Spouse" class="changeImage position-absolute" style="bottom: 10px;right: -80px;">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="98%" alt="Main character" class="changeImage position-absolute" style="left:40px">
-                    </div>
-                    <div class="avatar-bg position-relative">
-                        <img src="{{ asset('/images/avatar-general/children-boy.svg') }}" width="auto" height="80%" alt="Children" class="changeImage position-absolute end-0" style="bottom:10px">
-                        <img src="{{ asset('/images/avatar-general/children-girl.svg') }}" width="auto" height="50%" alt="Children" class="changeImage position-absolute" style="bottom:10px">
-                    </div>
+                    <div class="position-relative imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
@@ -104,7 +98,7 @@
                                                         $selectedDay = sprintf('%02d', $selectedDay);
                                                     }
                                                 @endphp
-                                                @if(isset($arrayData['familyDependant']) && in_array('spouse', $arrayData['familyDependant']))
+                                                @if(isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse'] === 'yes')
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
@@ -133,7 +127,6 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        
                                                                         <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
@@ -170,7 +163,7 @@
                                                                         <select name="spouseMaritalStatus" class="form-select @error('spouseMaritalStatus') is-invalid @enderror" aria-label="Spouse Marital Status" id="spouseMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
-                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['familyDependant']['spouse']['MaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['FamilyDependant']['spouse']['MaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                         @error('spouseMaritalStatus')
@@ -579,6 +572,9 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <!-- Add a hidden input field to store the selected button -->
+                                        <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{$familyDependant}}">
+                                        <input type="hidden" name="spouseGenderInput" id="spouseGenderInput" value="{{$gender}}">
                                         <a href="{{route('avatar.family.dependant')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>

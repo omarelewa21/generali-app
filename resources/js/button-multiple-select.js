@@ -4,7 +4,9 @@ const specificPageURLs = [
     'assets'
 ];
 
-if (specificPageURLs.some(url => window.location.href.includes(url))) {
+const currentURL = window.location.href;
+
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     // Add event listener to each button with the 'data-required' attribute
     const dataButtons = document.querySelectorAll('[data-avatar]');
@@ -21,7 +23,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             // For Spouse and Sibling(s) buttons, toggle the 'selected' class
             if (this.getAttribute('data-avatar') === 'spouse' || this.getAttribute('data-avatar') === 'siblings') {
                 this.setAttribute('data-required', 'selected');
-                this.closest('.button-bg').classList.add('selected'); // Toggle the 'selected' class
+                this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
             }
         });
     });
@@ -55,5 +57,4 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             defaultButton.closest('.button-bg').classList.add('selected');
         });
     });
-
 }

@@ -1,9 +1,12 @@
 const specificPageURLs = [
     'marital-status',
-    'family-dependant'
+    'family-dependant',
+    'family-dependant-details'
 ];
 
-if (specificPageURLs.some(url => window.location.href.includes(url))) {
+const currentURL = window.location.href;
+
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -190,7 +193,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 $(".imageContainerMarried").empty;
             }
         }
-        else if (path == '/family-dependant') {
+        else if (path == '/family-dependant' || path == '/family-dependant-details') {
             var familyDependantInputValue = document.getElementById('familyDependantButtonInput').value;
             var $imageContainer = $(".imageContainerSpouse");
             var $existingImage = $imageContainer.find("img.appended-image");
@@ -207,7 +210,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
                 if (familyDependant.children && familyDependant.children.length > 0) {
                     var childImages = []; // An array to store child image HTML
-    
+
                     // Loop through familyDependant.children
                     for (var i = 0; i < familyDependant.children.length; i++) {
                         var childIndex = i % childrenImages.length; // Get the index within childrenImages
@@ -217,6 +220,9 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                     
                     // Append child images to the container
                     $(".imageContainerChildren").append(childImages.join(''));
+
+                    var newButton = '<div class="popover position-absolute py-1" style="top:30%;right:10%"> x' + familyDependant.children.length + '</div>';
+                    $(".imageContainerChildren").append(newButton);
                 }
 
                 if (familyDependant.parents && familyDependant.parents.length > 0) {
@@ -230,10 +236,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                         var parentImage = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
-
-            
                 }
-
             } else {
                 console.log("familyDependantInputValue is empty");
             }
@@ -325,7 +328,11 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
                 $(".imageContainerChildren").append(newImage);
             });
-        
+            
+            if (selectedValue) {
+                var newButton = '<div class="popover position-absolute py-1" style="top:30%;right:10%"> x' + selectedValue + '</div>';
+                $(".imageContainerChildren").append(newButton);
+            }
             // Close the modal
             $("#childrenAvatars").modal("hide");
         });
@@ -358,46 +365,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 $("#parentAvatars").modal("hide");
             }
         });
-
-        
-
-        // $("#spouseButton").on("click", function () {
-        //     const $button = $(this);
-        //     const $buttonBg = $button.closest('.button-bg');
-        //     const $imageContainerSpouse = $(".imageContainerSpouse");
-            
-        //     if ($buttonBg.hasClass("selected")) {
-        //         if (spouseImageIndex < spouseImages.length) {
-        //             var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-        //             $imageContainerSpouse.append(newImage);
-        //             spouseImageIndex++;
-                    
-        //             // Display the background image
-        //             $imageContainerSpouse.css("background-image", 'url("/images/avatar-general/Shadow.png")');
-        
-        //             if (spouseImageIndex >= spouseImages.length) {
-        //                 $button.parent().removeClass("hover");
-        //             }
-        //         }
-        //     } else {
-        //         // If the button is not selected, remove the appended images
-        //         $imageContainerSpouse.find('.appended-image').remove();
-        //         spouseImageIndex = 0;
-        
-        //         // Restore the background image
-        //         $imageContainerSpouse.css("background-image", 'url("/images/avatar-general/Shadow.png")');
-        //     }
-        
-        //     // Toggle the 'selected' class
-        //     $buttonBg.classList.toggle('selected');
-        // });
-        
-        
-        
-
-        
-        
-        
 
         $("#carButton").on("click", function () {
             if (carImageIndex < carImages.length) {

@@ -168,13 +168,27 @@ class FormController extends Controller {
             return false;
         });
 
+        Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
+            $decodedValue = json_decode($value, true);
+
+            if (isset($decodedValue['spouse']) && $decodedValue['spouse'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents']) || isset($decodedValue['siblings']) && $decodedValue['siblings'] === 'yes') {
+                return true;
+            }
+        
+            // If any of the conditions are not met, add a different error message
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+        
+            return false;
+        });        
+        
         $validator = Validator::make($request->all(), [
             'maritalStatusButtonInput' => [
                 'at_least_one_selected',
             ],
-            // 'familyDependantButtonInput' => [
-            //     'at_least_one_selected',
-            // ],
+            'familyDependantButtonInput' => [
+                'at_least_one_selected_family',
+            ],
         ]);
 
 
@@ -198,7 +212,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
+        
         return redirect()->route($dataUrl);
     }
 

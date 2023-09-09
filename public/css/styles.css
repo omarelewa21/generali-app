@@ -42,6 +42,16 @@ html {
   flex: 1;
 }
 
+.popover {
+  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+  background: linear-gradient(90deg, #66B560 0%, #2272B6 100%);
+  border-radius: 17.5px;
+  font-size: 26px;
+  color: #fff;
+  width: 80px;
+  text-align: center;
+}
+
 /* Headings */
 h4 {
   font-family: 'Helvetica Neue', sans-serif;
