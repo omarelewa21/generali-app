@@ -32,7 +32,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
     childrenConfirmButton.addEventListener('click', function() {
         const selectedChildButton = document.querySelector('[data-avatar="children"][data-required]');
-        console.log(selectedChildButton.classList.contains('selected'));
         if (selectedChildButton) {
             selectedChildButton.closest('.button-bg').classList.add('selected');
             selectedChildButton.setAttribute('data-required', 'selected');

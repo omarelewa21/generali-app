@@ -190,10 +190,10 @@ class FormController extends Controller {
 
         // Add or update the data value in the array
         if ($maritalStatusButtonInput) {
-            $arrayData['maritalStatus'] = $maritalStatusButtonInput;
+            $arrayData['MaritalStatus'] = $maritalStatusButtonInput;
         }
         elseif ($familyDependantButtonInput) {
-            $arrayData['familyDependant'] = $familyDependantButtonInput;
+            $arrayData['FamilyDependant'] = $familyDependantButtonInput;
         }
 
         // Store the updated array back into the session
@@ -249,12 +249,12 @@ class FormController extends Controller {
         $arrayData = session('passingArrays', []);
 
         // Create the 'familyDependant' array if it doesn't exist
-        if (!isset($arrayData['familyDependant'])) {
-            $arrayData['familyDependant'] = [];
+        if (!isset($arrayData['FamilyDependant'])) {
+            $arrayData['FamilyDependant'] = [];
         }
 
         // Loop through the indexed array to handle each accordion
-        foreach ($arrayData['familyDependant'] as $accordion) {
+        foreach ($arrayData['FamilyDependant'] as $accordion) {
             if ($accordion === 'spouse') {
                 $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['spouseFirstName'];
                 $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['spouseLastName'];

@@ -7,16 +7,21 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    let clickedAvatars = {
-        spouse: []
-    };
 
     $(function() {
         
-        // Set the avatar according to button clicks
-        var spouseImages = [
+        // Set the avatar images in index
+        var spouseMarriedImages = [
             {
-                src: "/images/avatar-general/spouse.png",
+                src: "/images/avatar-general/spouse-male.png",
+                width: "auto",
+                height: "100%",
+                alt: "Spouse",
+                class: "changeImage appended-image",
+                style: ""
+            },
+            {
+                src: "/images/avatar-general/spouse-female.png",
                 width: "auto",
                 height: "90%",
                 alt: "Spouse",
@@ -27,7 +32,15 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
         var spouseWidowedImages = [
             {
-                src: "/images/avatar-general/spouse.png",
+                src: "/images/avatar-general/spouse-male.png",
+                width: "auto",
+                height: "100%",
+                alt: "Spouse",
+                class: "changeImage",
+                style: "opacity: 0.5;"
+            },
+            {
+                src: "/images/avatar-general/spouse-female.png",
                 width: "auto",
                 height: "90%",
                 alt: "Spouse",
@@ -36,40 +49,60 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             },
         ];
 
-        var parentImages = [
+        var spouseImages = [
             {
-                src: "/images/avatar-general/parent-mother.svg",
-                width: "auto",
-                height: "90%",
-                alt: "Parent",
-                class: "changeImage position-absolute bottom-0 pb-2",
-                style: "right: -80px;"
-            },
-            {
-                src: "/images/avatar-general/parent-father-no-shadow.svg",
+                src: "/images/avatar-general/spouse-male.png",
                 width: "auto",
                 height: "100%",
-                alt: "Parent",
-                class: "changeImage pb-2"
-            }
+                alt: "Spouse",
+                class: "changeImage position-absolute appended-image",
+                style: "bottom: 0;right: -120px;"
+            },
+            {
+                src: "/images/avatar-general/spouse-female.png",
+                width: "auto",
+                height: "90%",
+                alt: "Spouse",
+                class: "changeImage position-absolute appended-image",
+                style: "bottom: 10px;right: -80px;"
+            },
         ];
 
         var childrenImages = [
             {
-                src: "/images/avatar-general/children-boy.svg",
+                src: "/images/avatar-general/son.png",
                 width: "auto",
-                height: "80%",
-                alt: "Children",
-                class: "changeImage position-absolute end-0",
-                style: "bottom:10px"
-            },
-            {
-                src: "/images/avatar-general/children-girl.svg",
-                width: "auto",
-                height: "50%",
+                height: "75%",
                 alt: "Children",
                 class: "changeImage position-absolute",
-                style: "bottom:10px"
+                style: "bottom:0"
+            },
+            {
+                src: "/images/avatar-general/daughter.png",
+                width: "auto",
+                height: "60%",
+                alt: "Children",
+                class: "changeImage position-absolute end-0",
+                style: "bottom:0"
+            }
+        ];
+
+        var parentImages = [
+            {
+                src: "/images/avatar-general/grandma.png",
+                width: "auto",
+                height: "90%",
+                alt: "Parent",
+                class: "changeImage position-absolute bottom-0 pb-2",
+                style: "right: -80px;z-index: 1"
+            },
+            {
+                src: "/images/avatar-general/grandpa.png",
+                width: "auto",
+                height: "100%",
+                alt: "Parent",
+                class: "changeImage pb-2",
+                style: ""
             }
         ];
 
@@ -131,15 +164,22 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         var bungalowImageIndex = 0;
         var condoImageIndex = 0;
 
-        // Set initial background to none
-        $(".imageContainerParents").css("background-image", "none");
-        $(".imageContainerChildren").css("background-image", "none");
+        // Set the spouseImageIndex based on gender
+        var spouseGender = document.getElementById('spouseGenderInput');
+        var spouseImageIndex = 0; // Default to male avatar
+        var spouseWidowedImageIndex = 0;
+        
+        if (spouseGender.value === 'Female') {
+            spouseImageIndex = 1; // Index for female avatar
+            spouseWidowedImageIndex = 1;
+        }
 
+        // Pre-select the options if sessions exist
         if (path == '/marital-status') {
             var preselect = document.getElementById('maritalStatusButtonInput');
 
             if (preselect.value == 'married') {
-                var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+                var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
                 $(".imageContainerMarried").append(newImage);
             }
             else if (preselect.value == 'widowed') {
@@ -164,11 +204,41 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 } else {
                     $existingImage.remove();
                 }
+
+                if (familyDependant.children && familyDependant.children.length > 0) {
+                    var childImages = []; // An array to store child image HTML
+    
+                    // Loop through familyDependant.children
+                    for (var i = 0; i < familyDependant.children.length; i++) {
+                        var childIndex = i % childrenImages.length; // Get the index within childrenImages
+                        var childImage = '<img src="' + childrenImages[childIndex].src + '" width="' + childrenImages[childIndex].width + '" height="' + childrenImages[childIndex].height + '" alt="' + childrenImages[childIndex].alt + '" class="' + childrenImages[childIndex].class + '" style="' + childrenImages[childIndex].style + '">';
+                        childImages.push(childImage);
+                    }
+                    
+                    // Append child images to the container
+                    $(".imageContainerChildren").append(childImages.join(''));
+                }
+
+                if (familyDependant.parents && familyDependant.parents.length > 0) {
+
+                    if (familyDependant.parents.includes("grandfather")) {
+                        var parentImage = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
+                        $(".imageContainerParents").append(parentImage);
+                    }
+
+                    if (familyDependant.parents.includes("grandmother")) {
+                        var parentImage = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
+                        $(".imageContainerParents").append(parentImage);
+                    }
+
+            
+                }
+
             } else {
                 console.log("familyDependantInputValue is empty");
             }
         }
-        
+
         // Do the logics for button clicks
         // Married selection
         $("#marriedButton").on("click", function () {
@@ -176,13 +246,13 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             var $existingImage = $imageContainer.find("img");
 
             // If an existing image is found, update its attributes
-            if ($existingImage.length) {  
+            if ($existingImage.length) {
                 $imageContainer.empty();
-                var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                $imageContainer.append(newImage);              
+                var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
+                $imageContainer.append(newImage);           
             } else {
                 // If no existing image, create a new one and append it
-                var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+                var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
                 $imageContainer.append(newImage);
             }
         });
@@ -233,15 +303,42 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             }
         });
 
+        // Children selection
+        $(".btn-exit-children").on("click", function () {
+            // Get the selected value from the dropdown
+            var selectedValue = parseInt($("#childrenSelect").val());
+        
+            // Clear the existing images
+            $(".imageContainerChildren").empty();
+        
+            var selectedImages = [];
+        
+            if (selectedValue >= 1) {
+                selectedImages.push(childrenImages[0]);
+            }
+        
+            if (selectedValue >= 2) {
+                selectedImages.push(childrenImages[1]);
+            }
+        
+            selectedImages.forEach(function (image) {
+                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                $(".imageContainerChildren").append(newImage);
+            });
+        
+            // Close the modal
+            $("#childrenAvatars").modal("hide");
+        });
+
         // Parents selection
         $(".btn-exit-parent").on("click", function () {
             // Get the selected value from the dropdown
             var selectedValue = $("#parentsSelect").val();
 
-            if (selectedValue === "father" || selectedValue === "mother" || selectedValue === "both") {
-                // Clear the existing images
-                $(".imageContainerParents").empty();
+            // Clear the existing images
+            $(".imageContainerParents").empty();
 
+            if (selectedValue === "father" || selectedValue === "mother" || selectedValue === "both") {
                 var selectedImages = [];
 
                 if (selectedValue === "father" || selectedValue === "both") {
@@ -256,9 +353,6 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                     var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
                     $(".imageContainerParents").append(newImage);
                 });
-
-                // Display the background image
-                $(".imageContainerParents").css("background-image", 'url("/images/avatar-general/Shadow.png")');
                 
                 // Close the modal
                 $("#parentAvatars").modal("hide");
@@ -301,35 +395,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         
         
 
-        // Children selection
-        $(".btn-exit-children").on("click", function () {
-            // Get the selected value from the dropdown
-            var selectedValue = parseInt($("#childrenSelect").val());
         
-            // Clear the existing images
-            $(".imageContainerChildren").empty();
-        
-            var selectedImages = [];
-        
-            if (selectedValue >= 1) {
-                selectedImages.push(childrenImages[0]);
-            }
-        
-            if (selectedValue >= 2) {
-                selectedImages.push(childrenImages[1]);
-            }
-        
-            selectedImages.forEach(function (image) {
-                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
-                $(".imageContainerChildren").append(newImage);
-            });
-        
-            // Display the background image
-            $(".imageContainerChildren").css("background-image", 'url("/images/avatar-general/Shadow.png")');
-        
-            // Close the modal
-            $("#childrenAvatars").modal("hide");
-        });
         
         
 
