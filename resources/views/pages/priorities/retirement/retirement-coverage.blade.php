@@ -17,7 +17,7 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
 
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-6 col-md-12 navbar-needs">
                 @include('templates.nav.nav-red-menu')
             </div>
             <div class="col-lg-6 col-md-12">
@@ -35,8 +35,8 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
 
         <section>
                 <div class="col-12 text-dark px-0 my-4 bg-needs-main">
-                    <div class="my-4 y-lg-4 p-4 p-md-5 p-lg-5 second-cloud">
-                        <div class="row d-flex justify-content-center py-4 py-md-5 text-center align-items-center">
+                    <div class="my-4 my-lg-4 p-4 p-md-5 p-lg-5">
+                        <div class="row d-flex justify-content-center py-4 py-md-5 py-xl-4 text-center align-items-center">
                             <h5>I'd like to provide coverage for my:</h5>
                         </div>
                         <div class="container">
@@ -51,7 +51,7 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
                             </div>
                         </div>
                         <div class="container row d-flex m-auto btn-group coverage-avatar" data-carousel="true">
-                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
                                 <button
                                     class="btn border-0 bg-transparent box-shadow avatar-button  {{ $retirementSelectedAvatar  === 'self' ? 'selected-box-shadow' : '' }}"
                                     data-type="self" id="button-self-avatar" onclick="avatarSelect(this)">
@@ -69,7 +69,7 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
                                     <h6 class="text-center py-2">Spouse</h6>
                                 </button>
                             </div>
-                            <div class="col-sm-3 d-flex justify-content-end flex-column align-items-center children-avatar-mobile">
+                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center children-avatar-mobile">
                                 <button
                                     class="btn border-0 bg-transparent box-shadow avatar-button {{ $retirementSelectedAvatar  === 'children' ? 'selected-box-shadow' : '' }}"
                                     data-type="children" id="button-kid-avatar" onclick="avatarSelect(this)">
@@ -77,7 +77,7 @@ $arrayDataRetirement['retirementSelectedAvatar'] : '';
                                     <h6 class="text-center py-2">Child(ren)</h6>
                                 </button>
                             </div>
-                            <div class="col-sm-3 d-flex justify-content-end d-flex flex-column align-items-center">
+                            <div class="col-sm-3 justify-content-end d-flex flex-column align-items-center">
                                 <button
                                     class="btn border-0 bg-transparent box-shadow avatar-button  {{ $retirementSelectedAvatar  === 'parent' ? 'selected-box-shadow' : '' }}"
                                     data-type="parent" id="button-parent-avatar" onclick="avatarSelect(this)">

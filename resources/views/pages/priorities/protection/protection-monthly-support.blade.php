@@ -67,19 +67,23 @@
                 <div class="my-4">  
                     <section>
                         <div class="row">
-                        <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
+                        <div class="col-12 col-lg-12 col-xl-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-center align-items-center order-1 order-lg-1 order-xl-0">
                             <img class="position-relative monthly-support-asset z-1" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
+                        <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                            <div class="row justify-content-center">
+                            <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">If anything should</h5>
                             <h5 class="needs-text">happen to me, I'd like to</h5>
                             <h5 class="needs-text">support my family with</h5>
-                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
-                                <div class="input-group w-50 w-sm-25">
+                            <div class="d-flex flex-wrap"> 
+                                <div class="input-group w-50 w-md-65">
                                     <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0 @error('protectionFunds') label-invalid @enderror"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="protectionFunds" id="protectionFunds" value="{{$formattedProtectionFunds}}" class="input-text form-control text-primary py-0 @error('protectionFunds') is-invalid @enderror" placeholder=" " required>                                
                                 </div>
                                 <h5 class="needs-text">/ month.</h5>    
+                            </div>
+                            </div>
                             </div>
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center position-absolute w-100 bottom-0">

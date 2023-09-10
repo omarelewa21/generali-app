@@ -64,15 +64,20 @@
         {{-- end of error message notifications --}}
                     <section>
                         <div class="row">
-                        <div class="bg-needs-1 col-lg-6 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
+                        <div class="col-12 col-lg-12 col-xl-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-1 order-xl-0">
                             <img class="position-relative avatar-years-till-retire" src="{{ asset('images/needs/retirement/years-to-retire-avatar.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
+                        <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                            <div class="row justify-content-center">
+                                <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">I plan to have</h5>
                             <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
                             <div class="input-group w-50">
                                 <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="input-text form-control text-primary py-0 @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
+                            </div>
+                            <h5 class="needs-text">to enjoy my retirement.</h5>
+                            </div>
                             </div>
                         </div>
                         <h5 class="needs-text">to enjoy my retirement.</h5>

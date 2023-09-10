@@ -76,10 +76,10 @@ $arrayDataProtection['protectionPercentage'] : 0;
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
                                 class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
-                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end z-1">
+                                <div class="col-12 col-lg-4 col-xl-4 d-flex justify-content-center justify-content-xl-end z-1">
                                     <h5 class="m-0 mt-4 needs-text">I will need</h5>
                                 </div>
-                                <div class="col-12 col-lg-4">
+                                <div class="col-12 col-lg-4 col-xl-4">
                                     <div
                                         class="position-relative pt-0 pb-0 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
@@ -95,7 +95,7 @@ $arrayDataProtection['protectionPercentage'] : 0;
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
+                                <div class="col-12 col-lg-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
                                     <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
                                 </div>
 
@@ -169,11 +169,10 @@ $arrayDataProtection['protectionPercentage'] : 0;
     });
 });
 
-
 </script>
 
 <style>
-    .was-validated .form-control:valid,
+        .was-validated .form-control:valid,
     .form-control.is-valid {
         padding-right: calc(0.6em + 0.75rem);
         background-position: right;
@@ -207,48 +206,22 @@ $arrayDataProtection['protectionPercentage'] : 0;
         box-shadow: none;
     }
 
-    /* Apply the initial state for the toast */
-    .protectionSupportingYearsErrorMsg {
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    }
-
-    /* Apply the animation when the "show" class is added */
-    .protectionSupportingYearsErrorMsg.show {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .navbar {
-        right: 50%;
-    }
-
     @media only screen and (max-width: 767px) {
+    .was-validated .form-control:valid,
+    .form-control.is-valid,
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        background-size: 1.5rem;
 
-        .was-validated .form-control:valid,
-        .form-control.is-valid,
-        .was-validated .form-control:invalid,
-        .form-control.is-invalid {
-            background-size: 1.5rem;
-
-        }
-
-        .fixed-bottom {
-            z-index: 1000;
-        }
-
-        .navbar {
-            right: 0;
-        }
     }
+}
 
-    @media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
-        .calendar-protection {
-            width: 100% !important;
-        }
-    }
 </style>
+
+
+
+
+
 
 
 @endsection

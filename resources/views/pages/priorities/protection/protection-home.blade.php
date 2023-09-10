@@ -21,9 +21,9 @@
                 
                 <section class="needs-home">
                     <div class="content-needs">
-                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2">
+                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2 py-xl-4">
                             <img class="z-1" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
-                            <h5 class="z-1 d-flex col-12 col-md-8 col-lg-6 col-xl-5 p-3 p-sm-4 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
+                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-4 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
                         </div>
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
                             </div>

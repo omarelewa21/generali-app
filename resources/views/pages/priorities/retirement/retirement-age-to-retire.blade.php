@@ -70,14 +70,17 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                 <img class="position-relative avatar-age-to-retire"
                                     src="{{ asset('images/needs/retirement/avatar-age-to-retire.svg') }}" alt="avatar">
                             </div>
-                            <div
-                                class="col-lg-5 d-flex flex-column justify-content-center justify-content-md-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
+                            <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                                <div class="row justify-content-center">
+                                    <div class="col-8 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                                 <h5 class="needs-text">I’d like to retire </h5>
-                                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start">
+                                <div class="d-flex flex-wrap justify-content-start justify-content-lg-start">
                                     <h5 class="needs-text">at the age of</h5>
                                     <input type="text" name="retirementAgeToRetire" value="{{ $retirementAgeToRetire }}"
                                         class="w-25 input-text form-control text-primary py-0 @error('retirementAgeToRetire') is-invalid @enderror"
                                         id="retirementAgeToRetireInput" placeholder=" ">
+                                </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -187,9 +190,6 @@ background: transparent !important;
 }
 .fixed-bottom {
     z-index: 10;
-}
-.navbar {
-    right:0;
 }
 }
 
