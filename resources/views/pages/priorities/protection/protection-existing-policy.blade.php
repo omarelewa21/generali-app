@@ -88,11 +88,11 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                     <section>
                         <div class="row">
                             <div
-                                class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
+                                class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset"
                                     src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                            <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                                 <div class="row justify-content-center">
                                 <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                                 <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance

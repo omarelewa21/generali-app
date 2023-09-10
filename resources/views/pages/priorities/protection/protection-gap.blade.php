@@ -51,9 +51,9 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-xl-6 my-2 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5 mx-lg-2">
-                                <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                            <div class="col-12 col-md-10 col-lg-6 my-2 my-md-5 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-2 mx-md-5 mx-lg-0">
+                                        <div class="d-flex">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     After the next
                                                 </h5>
@@ -65,7 +65,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto w-50">                                             
                                                     I want to protect my loved ones with
                                                 </h5>
@@ -77,7 +77,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     I have set aside
                                                 </h5>
@@ -89,7 +89,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     So I need a plan for
                                                 </h5>
@@ -101,7 +101,7 @@
                                         </div>
                                 </div>
                                 <div class="d-flex row">
-                                    <h5 id="textProtectionFund" class="text-center col-6 gap-text">
+                                    <h5 id="textProtectionFund" class="text-center col-5 col-md-6 gap-text">
                                         Total Protection Fund
                                     </h5>
                                 </div>
