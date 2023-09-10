@@ -14,7 +14,7 @@
     $formattedRetirementAllocatedFunds = isset($arrayDataRetirement['formattedRetirementAllocatedFunds']) ? $arrayDataRetirement['formattedRetirementAllocatedFunds'] : '';
     $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ? $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 @endphp
-<div id="retirementAllocatedFundsPage" class="vh-100 overflow-auto">
+<div id="retirementAllocatedFundsPage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
         <div class="row">
@@ -38,36 +38,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
                 @include('templates.nav.nav-sidebar-needs')
             </div>
-        </div>
-            <div class="col-12 text-dark px-0 my-4">
-                <div class="my-4">  
-                    <form class="form-horizontal p-0 needs-validation" id="retirementAllocatedFundsForm" novalidate action="{{ route('form.retirement.allocated.funds') }}" method="POST">
-                        @csrf
-
-                    <section>
-                        <div class="row">
-                        <div class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
-                            <img class="position-relative avatar-allocated-funds" src="{{ asset('images/needs/retirement/avatar-family.svg') }}" alt="avatar">
-                        </div>
-                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
-                            <h5 class="needs-text">It would be great to have</h5> 
-                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
-                            <div class="input-group w-50">
-                                <span id="RM" class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0 @error('retirementAllocatedFunds')  label-invalid @enderror"><h5 class="needs-text m-0">RM</h5></span>
-                                <input type="text" name="retirementAllocatedFunds" class="input-text form-control text-primary py-0 @error('retirementAllocatedFunds') is-invalid @enderror" value="{{$formattedRetirementAllocatedFunds}}" id="retirementAllocatedFunds" placeholder=" " required> 
-                            </div>  
-                            <h5 class="needs-text">/ month to</h5>
-                            </div>
-                            <h5 class="needs-text ">support myself and my <br>loved ones when I retire.</h5>
-                        </div>
-                        </div>
-
-                        <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
-                            <div class="col-11 col-md-4 text-center">
-                            </div>
-                        </div>
-                    </section>
-                            {{-- error message notifications --}}
+        {{-- error message notifications --}}
         @if ($errors->has('retirementAllocatedFunds'))
         <div id="retirementAllocatedFundsErrorMessage"
             class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
@@ -139,27 +110,27 @@ document.addEventListener("DOMContentLoaded", function() {
     var inputField = document.getElementById("retirementAllocatedFunds");
     var TotalRetirementValueText = document.getElementById("TotalRetirementValueText");
 
-    // Listen for input changes on the input field
-    inputField.addEventListener("input", function() {
+  // Listen for input changes on the input field
+  inputField.addEventListener("input", function() {
 
-        // Get the value from the input field
-        var inputValue = inputField.value;
-        if (inputValue == "") {
-            TotalRetirementValueText.innerText = "RM 0";
-            retirementAllocatedFunds.value = inputValue;
-        }
-        else {
-            //change inputValue to comma separated value
+    // Get the value from the input field
+    var inputValue = inputField.value;
+    if (inputValue == "") {
+        TotalRetirementValueText.innerText = "RM 0";
         retirementAllocatedFunds.value = inputValue;
-        console.log(inputValue);
-        TotalRetirementValueText.innerText = inputValue.toLocaleString("en-MY", {
-                    style: "currency",
-                    currency: "MYR",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-        }
-    });
+    }
+    else {
+        //change inputValue to comma separated value
+    retirementAllocatedFunds.value = inputValue;
+    console.log(inputValue);
+    TotalRetirementValueText.innerText = parseFloat(inputValue).toLocaleString("en-MY", {
+                style: "currency",
+                currency: "MYR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+    }
+  });
   retirementAllocatedFunds.addEventListener('input', function() {
         let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
         inputValue = Number(inputValue);
@@ -168,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
             inputValue = 0;
         }
 
-        this.value = inputValue.toLocaleString('en-MY'); // Format with commas
+        var formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
         this.value = formattedValue;
     });
 
@@ -176,34 +147,13 @@ document.addEventListener("DOMContentLoaded", function() {
         
         validateNumberField(retirementAllocatedFunds);
     });
-        protectionFundsInput.addEventListener('input', function() {
-        // RM.classList.remove("label-invalid");
-        let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
-        inputValue = Number(inputValue);
-
-        if (isNaN(inputValue)) {
-            inputValue = 0;
-        }
-
-        const formattedValue = inputValue.toLocaleString('en-MY'); // Format with commas
-        this.value = formattedValue;
-
-        totalProtectionValueText.innerText = inputValue.toLocaleString('en-MY', {
-            style: 'currency',
-            currency: 'MYR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
-    });
 
 
     function validateNumberField(field) {
         const RM = document.getElementById("RM");
         const value = field.value.trim();
-        let Inputvalue = value.replace(/\D/g, ''); // Remove non-digit characters
 
-
-        if (Inputvalue === "" || isNaN(Inputvalue)) {
+        if (value === "" || isNaN(value)) {
             field.classList.remove("is-valid");
             field.classList.add("is-invalid");
             RM.classlist.add("label-invalid");
@@ -214,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
             RM.classlist.remove("label-invalid");   
         }
     }
+
 });
 </script>
 <style>

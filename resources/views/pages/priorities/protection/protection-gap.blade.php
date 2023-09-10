@@ -29,8 +29,8 @@
                     <div class="my-4">  
                         <section>
                             <div class="mt-4 container mx-auto row justify-content-center bg-needs-gap">
-                                <div class="col-lg-5 col-xl-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
-                                    <div class="svg-container" style="transform:scale(1.3)">
+                            <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
+                                <div class="svg-container" style="transform:scale(1.3)">
                                 <div class="card-gap" id="gap">
                                     <div class="card-gap__percent">
                                       <svg>

@@ -28,7 +28,7 @@
                     <div class="my-4">  
                         <section>
                             <div class="mt-4 container mx-auto row justify-content-center bg-needs-gap">
-                            <div class="col-lg-5 col-xl-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
+                            <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
                                 <div class="svg-container" style="transform:scale(1.3)">
                                 <div class="card-gap" id="gap">
                                     <div class="card-gap__percent">
@@ -50,7 +50,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-xl-6 my-2 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5 mx-lg-2">
+                            <div class="col-12 col-md-10 col-lg-6 my-2 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-5">
                                         <div class="d-flex">
                                             <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-3 rounded-3 glow-box" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
@@ -100,7 +100,7 @@
                                         </div>
                                 </div>
                                 <div class="d-flex row">
-                                    <h5 id="textretirementFund" class="text-center col-6 gap-text">
+                                    <h5 id="textretirementFund" class="text-center col-5 gap-text">
                                         Total Retirement Fund
                                     </h5>
                                 </div>

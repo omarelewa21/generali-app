@@ -39,13 +39,13 @@
 
 /* Retirement - Home page */
 .needs-grey-bg {
-    height: 280px;
+    padding-top: 280px;
     background-color: #E9E9E9;
 }
 
 
 .needs-grey-bg-md {
-    height: 240px;
+    padding-top: 240px;
     left: 0px;
     background-color: #E9E9E9;
 
@@ -215,10 +215,10 @@
 }
 
 .avatar-age-to-retire {
-        right: 0%;
-        bottom: 9%;
-        z-index: 10;
-        width: 64vh;
+    right: 14%;
+    bottom: 9%;
+    z-index: 10;
+    width: 52vh;
 }
 
 .retirement-progress {
@@ -391,24 +391,10 @@ h5.gap-value {
 
 .label-invalid:focus {
     border-color: #000000;
-<<<<<<< HEAD
-  }
-  .ideal-text {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-  }
-  .coverage-avatar img.spouse-avatar {
-    padding-right: 10px;
-  }
-  
-  /* mobile css */
-=======
 }
 
 
 /* mobile css */
->>>>>>> e93d6fe (protection fixes)
 @media only screen and (max-width: 767px) {
 
     body,
@@ -454,7 +440,7 @@ h5.gap-value {
     }
 
     .needs-home-avatar {
-        top: 0;
+        top: 5%;
         left: 0%;
         z-index: 1;
         bottom: 0;
@@ -466,21 +452,23 @@ h5.gap-value {
     #retirement_home .needs-home-avatar img {
         height: 53vh;
     }
+
+    /* .needs-home-avatar img {
+        height: 50vh;
+    } */
+
     .needs-grey-bg {
         display: none !important;
     }
 
     .needs-grey-bg-mobile {
-        height: 90px;
+        padding: 25px;
         background-color: #E9E9E9;
         width: 100%;
-        position:relative;
-        top:-1%;
-        z-index: 0 !important;
     }
 
     .needs-grey-bg-md {
-        height: 0;
+        padding: 136px;
     }
 
     .coverage-avatar {
@@ -488,20 +476,21 @@ h5.gap-value {
     }
 
     .coverage-avatar img.self-avatar {
-        width: 19vh;
+        width: 17vh;
     }
 
     .coverage-avatar img.spouse-avatar {
-        width: 17vh;
+        width: 15vh;
     }
 
     .coverage-avatar img.kid-avatar {
-        width: 17vh;
+        width: 15vh;
     }
 
     .coverage-avatar img.parent-avatar {
-        width: 32vh;
+        width: 30vh;
     }
+
     .avatar-age-to-retire {
         top: 5%;
         right: 0%;
@@ -524,6 +513,7 @@ h5.gap-value {
 
     .avatar-allocated-funds-aside {
         left: 0;
+        top: 0px;
         width: 43vh;
     }
 
@@ -905,49 +895,14 @@ h5.gap-value {
     }
 }
 
-/* target Nexus 10:800px, iPad Air:820px and iPad Pro:1024px */
-@media only screen and (min-width:800px) and (max-width:1024px) and (max-device-height:1366px) {
-    .needs-home-avatar img {
-        max-height: 60vh !important;
-        max-width: 100vh;
-    }
-    .needs-home {
-        grid-template-rows: 21vh 71vh 13vh;
-        }
-    .bg-needs-main {
-            /* background-position: center 70%, center 55%; */
-            background-size: cover;
-    }  
-    #protection_coverage .slick-track {
-        height: 74vh;
-    } 
-    .needs-grey-bg-md {
-        height:300px;
-    }
-    .pos-bottom-error {
-        bottom: 7.5% !important;
-    }
-}
-
-/* target Nexus 10:1280px, iPad Air:1180px and iPad Pro:1366px */
-@media only screen and (min-width:1180px) and (max-width:1366px) and (max-device-height:1366px) and (orientation:landscape) {
-    .needs-grey-bg {
-        height:300px;
-    }
-}
-
-/* target Galaxy Tab 4 */
+/* target Galaxy Tab */
 @media only screen and (width:712px) and (height:1138px) and (orientation:portrait) {
     #protection_home .needs-home-avatar img {
         height: 60vh;
     }
 
     .needs-grey-bg-mobile {
-        padding: 30px 190px !important;
-        height: 125px;
-        position: relative;
-        top: -2%;
-        z-index: 0 !important;
+        padding: 30px 150px !important;
     }
 }
 

@@ -15,7 +15,7 @@ $arrayDataRetirement['retirementAgeToRetire'] : null;
 $formattedTotalRetirementValue = isset($arrayDataRetirement['formattedTotalRetirementValue']) ?
 $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 @endphp
-<div id="retirementAgeToRetirePage" class="vh-100 overflow-auto">
+<div id="retirementAgeToRetirePage" class="vh-100 overflow-auto container-fluid">
 
     <div class="container-fluid p-0">
         <div class="row">
@@ -107,9 +107,10 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
 
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const retirementAgeToRetire = document.getElementById("retirementAgeToRetireInput");
+    const retirementAgeToRetire = document.getElementById("retirementAgeToRetire");
+console.log(retirementAgeToRetire);
 
-    retirementAgeToRetireInput.addEventListener("blur", function() {
+retirementAgeToRetire.addEventListener("blur", function() {
         validateNumberField(retirementAgeToRetire);
     });
 
@@ -147,39 +148,6 @@ console.log(value);
     </script>
 
 <style>
-    .was-validated .form-control:valid,
-    .form-control.is-valid {
-        padding-right: calc(0.6em + 0.75rem);
-        background-position: right;
-        background-size: 3rem;
-
-    }
-
-    .was-validated .form-control:invalid,
-    .form-control.is-invalid {
-        padding-right: calc(0.5em + 0.75rem);
-        background-position: right;
-        background-size: 3rem;
-    }
-
-    .form-control:focus {
-        border-color: #000000;
-        box-shadow: none;
-    }
-
-    .was-validated .form-control:valid,
-    .form-control.is-valid {
-        background-image: none;
-        border-color: #000000;
-    }
-
-    .was-validated .form-control:valid:focus,
-    .form-control.is-valid:focus,
-    .was-validated .form-control:invalid:focus,
-    .form-control.is-invalid:focus {
-        border-color: #000000;
-        box-shadow: none;
-    }
 .form-control {
     line-height: 1.2 !important;
 }

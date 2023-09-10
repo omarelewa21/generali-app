@@ -31,7 +31,7 @@
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h3 id="TotalRetirementValueText" class="m-1 text-light text-center">RM {{
-                            $formattedTotalRetirementValue}}</h3>
+                            $formattedTotalRetirementValue }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -71,7 +71,6 @@
                             <div class="row justify-content-center">
                                 <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">I plan to have</h5>
-                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
                             <div class="input-group w-50">
                                 <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="input-text form-control text-primary py-0 @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
@@ -80,10 +79,6 @@
                             </div>
                             </div>
                         </div>
-                        <h5 class="needs-text">to enjoy my retirement.</h5>
-
-                        </div>
-
 
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -225,10 +220,6 @@ background: transparent !important;
 }
 .avatar-years-till-retire {
     top:2%;
-}
-input#retirementYearsTillRetire {
-    width: 50%;
-    text-align: center; 
 }
 }
     </style>
