@@ -201,7 +201,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (familyDependantInputValue.trim() !== "") {
                 var familyDependant = JSON.parse(familyDependantInputValue);
 
-                if (familyDependant.spouse && familyDependant.spouse.includes("yes")) {
+                if (familyDependant.spouse && familyDependant.spouse.status.includes("yes")) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
                     $(".imageContainerSpouse").append(newImage);
                 } else {

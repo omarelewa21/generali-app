@@ -58,7 +58,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'spouse' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse'] === 'yes') default @endif" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['spouse']['status']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes') default @endif" data-avatar="spouse" data-required="" id="spouseButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
                                                 </button>
@@ -230,10 +230,14 @@ spouseButton.addEventListener('click', function(event) {
     var isSelected = this.closest('.button-bg').classList.contains('selected');
     
     if (isSelected) {
-        clickedAvatars[dataAvatar]='no';
+        clickedAvatars[dataAvatar] = {
+            'status': 'no',
+        };
     }
     else {
-        clickedAvatars[dataAvatar]='yes';
+        clickedAvatars[dataAvatar] = {
+            'status': 'yes',
+        };
     }
     familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
     spouseClicked = true;

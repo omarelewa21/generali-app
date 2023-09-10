@@ -186,9 +186,9 @@ class FormController extends Controller {
             'maritalStatusButtonInput' => [
                 'at_least_one_selected',
             ],
-            'familyDependantButtonInput' => [
-                'at_least_one_selected_family',
-            ],
+            // 'familyDependantButtonInput' => [
+            //     'at_least_one_selected_family',
+            // ],
         ]);
 
 
@@ -212,7 +212,6 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
         return redirect()->route($dataUrl);
     }
 
@@ -262,55 +261,70 @@ class FormController extends Controller {
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
-        // Create the 'familyDependant' array if it doesn't exist
-        if (!isset($arrayData['FamilyDependant'])) {
-            $arrayData['FamilyDependant'] = [];
-        }
+        // // Create the 'familyDependant' array if it doesn't exist
+        // if (!isset($arrayData['FamilyDependant'])) {
+        //     $arrayData['FamilyDependant'] = [];
+        // }
 
-        // Loop through the indexed array to handle each accordion
-        foreach ($arrayData['FamilyDependant'] as $accordion) {
-            if ($accordion === 'spouse') {
-                $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['spouseFirstName'];
-                $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['spouseLastName'];
-                $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
-                $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['spouseday'];
-                $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['spousemonth'];
-                $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['spouseyear'];
-                $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
-            } elseif ($accordion === 'child_1') {
-                $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_1FirstName'];
-                $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_1LastName'];
-                $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_1YearsOfSupport'];
-                $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_1day'];
-                $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_1month'];
-                $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_1year'];
-                $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_1MaritalStatus'];
-            } elseif ($accordion === 'child_2') {
-                $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_2FirstName'];
-                $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_2LastName'];
-                $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_2YearsOfSupport'];
-                $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_2day'];
-                $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_2month'];
-                $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_2year'];
-                $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_2MaritalStatus'];
-            } elseif ($accordion === 'parent_1') {
-                $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['parent_1FirstName'];
-                $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['parent_1LastName'];
-                $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['parent_1YearsOfSupport'];
-                $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['parent_1day'];
-                $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['parent_1month'];
-                $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['parent_1year'];
-                $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['parent_1MaritalStatus'];
-            } elseif ($accordion === 'parent_2') {
-                $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['parent_2FirstName'];
-                $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['parent_2LastName'];
-                $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['parent_2YearsOfSupport'];
-                $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['parent_2day'];
-                $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['parent_2month'];
-                $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['parent_2year'];
-                $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['parent_2MaritalStatus'];
+        if ($arrayData['FamilyDependant']['spouse']['status'] === 'yes') {
+            $arrayData['FamilyDependant']['spouse']['FirstName'] = $validatedData['spouseFirstName'];
+            $arrayData['FamilyDependant']['spouse']['LastName'] = $validatedData['spouseLastName'];
+            $arrayData['FamilyDependant']['spouse']['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+            $arrayData['FamilyDependant']['spouse']['Day'] = $validatedData['spouseday'];
+            $arrayData['FamilyDependant']['spouse']['Month'] = $validatedData['spousemonth'];
+            $arrayData['FamilyDependant']['spouse']['Year'] = $validatedData['spouseyear'];
+            $arrayData['FamilyDependant']['spouse']['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
+        }
+        elseif (isset($arrayData['FamilyDependant']['children'])) {
+            Log::debug('yes');
+            foreach ($validatedData['children'] as $key => $childData) {
+                $arrayData['FamilyDependant']['children'][$key]['FirstName'] = $childData['FirstName'];
+                $arrayData['FamilyDependant']['children'][$key]['LastName'] = $childData['LastName'];
+                $arrayData['FamilyDependant']['children'][$key]['YearsOfSupport'] = $childData['YearsOfSupport'];
+                $arrayData['FamilyDependant']['children'][$key]['Day'] = $childData['day'];
+                $arrayData['FamilyDependant']['children'][$key]['Month'] = $childData['month'];
+                $arrayData['FamilyDependant']['children'][$key]['Year'] = $childData['year'];
+                $arrayData['FamilyDependant']['children'][$key]['MaritalStatus'] = $childData['MaritalStatus'];
             }
         }
+
+        // foreach ($arrayData['FamilyDependant'] as $accordion) {
+        //     if ($accordion === 'yes') {
+                
+        //     } elseif ($accordion === 'child_1') {
+        //         $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_1FirstName'];
+        //         $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_1LastName'];
+        //         $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_1YearsOfSupport'];
+        //         $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_1day'];
+        //         $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_1month'];
+        //         $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_1year'];
+        //         $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_1MaritalStatus'];
+        //     } elseif ($accordion === 'child_2') {
+        //         $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['child_2FirstName'];
+        //         $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['child_2LastName'];
+        //         $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['child_2YearsOfSupport'];
+        //         $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['child_2day'];
+        //         $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['child_2month'];
+        //         $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['child_2year'];
+        //         $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['child_2MaritalStatus'];
+        //     } elseif ($accordion === 'parent_1') {
+        //         $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['parent_1FirstName'];
+        //         $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['parent_1LastName'];
+        //         $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['parent_1YearsOfSupport'];
+        //         $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['parent_1day'];
+        //         $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['parent_1month'];
+        //         $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['parent_1year'];
+        //         $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['parent_1MaritalStatus'];
+        //     } elseif ($accordion === 'parent_2') {
+        //         $arrayData['familyDependant'][$accordion]['FirstName'] = $validatedData['parent_2FirstName'];
+        //         $arrayData['familyDependant'][$accordion]['LastName'] = $validatedData['parent_2LastName'];
+        //         $arrayData['familyDependant'][$accordion]['YearsOfSupport'] = $validatedData['parent_2YearsOfSupport'];
+        //         $arrayData['familyDependant'][$accordion]['Day'] = $validatedData['parent_2day'];
+        //         $arrayData['familyDependant'][$accordion]['Month'] = $validatedData['parent_2month'];
+        //         $arrayData['familyDependant'][$accordion]['Year'] = $validatedData['parent_2year'];
+        //         $arrayData['familyDependant'][$accordion]['MaritalStatus'] = $validatedData['parent_2MaritalStatus'];
+        //     }
+        // }
         
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);

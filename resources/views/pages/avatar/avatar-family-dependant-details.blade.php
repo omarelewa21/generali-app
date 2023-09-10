@@ -98,7 +98,7 @@
                                                         $selectedDay = sprintf('%02d', $selectedDay);
                                                     }
                                                 @endphp
-                                                @if(isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse'] === 'yes')
+                                                @if(isset($arrayData['FamilyDependant']['spouse']['status']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes')
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
@@ -110,7 +110,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
                                                                         <label for="spouseFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['familyDependant']['spouse']['FirstName'] ?? '') }}" required>
+                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['FamilyDependant']['spouse']['FirstName'] ?? '') }}" required>
                                                                         @error('spouseFirstName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -119,7 +119,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
                                                                         <label for="spouseLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['familyDependant']['spouse']['LastName'] ?? '') }}" required>
+                                                                        <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['FamilyDependant']['spouse']['LastName'] ?? '') }}" required>
                                                                         @error('spouseLastName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -130,15 +130,15 @@
                                                                         <label for="spouseDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('spouseday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('spouseday', $arrayData['familyDependant']['spouse']['Day'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseday') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
+                                                                                {!! Form::select('spouseday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('spouseday', $arrayData['FamilyDependant']['spouse']['Day'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseday') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('spousemonth', ['' => 'Select'] + $monthNames, old('spousemonth', $arrayData['familyDependant']['spouse']['Month'] ?? ''), ['class' => 'form-select' . ($errors->has('spousemonth') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
+                                                                                {!! Form::select('spousemonth', ['' => 'Select'] + $monthNames, old('spousemonth', $arrayData['FamilyDependant']['spouse']['Month'] ?? ''), ['class' => 'form-select' . ($errors->has('spousemonth') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 {!! Form::select('spouseyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                     return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), old('spouseyear', $arrayData['familyDependant']['spouse']['Year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
+                                                                                }, $yearRange), $yearRange), old('spouseyear', $arrayData['FamilyDependant']['spouse']['Year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                             </div>
                                                                             @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
                                                                                 <div class="col-md-12">
@@ -151,7 +151,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
                                                                         <label for="spouseYearsOfSupport" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="spouseYearsOfSupport" class="form-control @error('spouseYearsOfSupport') is-invalid @enderror" id="spouseYearsOfSupportInput" placeholder="Number of Years" value="{{ old('spouseYearsOfSupport', $arrayData['familyDependant']['spouse']['YearsOfSupport'] ?? '') }}" required>
+                                                                        <input type="number" name="spouseYearsOfSupport" class="form-control @error('spouseYearsOfSupport') is-invalid @enderror" id="spouseYearsOfSupportInput" placeholder="Number of Years" value="{{ old('spouseYearsOfSupport', $arrayData['FamilyDependant']['spouse']['YearsOfSupport'] ?? '') }}" required>
                                                                         @error('spouseYearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
@@ -163,8 +163,8 @@
                                                                         <select name="spouseMaritalStatus" class="form-select @error('spouseMaritalStatus') is-invalid @enderror" aria-label="Spouse Marital Status" id="spouseMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
-                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['FamilyDependant']['spouse']['MaritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
-                                                                            @endforeach
+                                                                                <option value="{{ $status->maritalStatus }}" {{ old('spouseMaritalStatus', $arrayData['FamilyDependant']['spouse']['MaritalStatus'] ?? 'Married') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                                @endforeach
                                                                         </select>
                                                                         @error('spouseMaritalStatus')
                                                                             <div class="invalid-feedback text-red">Please select a marital status</div>
@@ -175,7 +175,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if(isset($arrayData['familyDependant']) && in_array('child_1', $arrayData['familyDependant']))
+                                                @if(isset($arrayData['FamilyDependant']['children']) && in_array('child_1', $arrayData['FamilyDependant']['children']))
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingTwo">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
