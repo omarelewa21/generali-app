@@ -92,8 +92,9 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                 <img class="position-relative protection-existing-policy-asset"
                                     src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div
-                                class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto order-0 order-lg-1">
+                            <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                                <div class="row justify-content-center">
+                                <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                                 <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance
                                     policy.</h5>
                                 <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
@@ -110,7 +111,6 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                             {{$protectionExistingPolicy==='no' ? 'checked' : '' }} required>
                                         <label for="protection_no" class="form-label @error('protectionPolicyAmount') is-invalid @enderror">No</label>
                                     </span>
-
                                 </div>
                                 <div id="existingPolicyAmount" style="display:none">
                                     <div class="input-group w-75 pb-4 pb-lg-0">
@@ -124,6 +124,8 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                             class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror"
                                             id="protectionPolicyAmount" placeholder=" " required>
                                     </div>
+                                </div>
+                                </div>
                                 </div>
                             </div>
 
