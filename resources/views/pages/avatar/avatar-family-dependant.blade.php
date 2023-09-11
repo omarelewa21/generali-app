@@ -68,7 +68,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'children' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']) && is_array($arrayData['FamilyDependant']['children']) && count($arrayData['FamilyDependant']['children']) > 0) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['children']) && is_array($arrayData['FamilyDependant']['children']) && count($arrayData['FamilyDependant']['children']) > 0) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
                                                     <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
                                                 </button>
@@ -214,7 +214,9 @@ const familyDependantButtonInput = document.getElementById('familyDependantButto
 const clickedAvatars = {
     spouse: null,
     children: [],
+    children_details: [],
     parents: [],
+    parents_details: [],
     siblings: null
 };
 
@@ -261,11 +263,6 @@ confirmChildrenButton.addEventListener('click', function(event) {
         }
 
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-
-        // Close the modal
-        const childrenAvatarsModal = new bootstrap.Modal(document.getElementById('childrenAvatars'));
-        childrenAvatarsModal.hide();
-
         childClicked = true;
     }
     else if(selectedChildren == 'noChildren') {
@@ -297,11 +294,6 @@ confirmParentButton.addEventListener('click', function(event) {
         }
 
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-
-        // Close the modal
-        const parentAvatarsModal = new bootstrap.Modal(document.getElementById('parentAvatars'));
-        parentAvatarsModal.hide();
-
         parentClicked = true;
     }
     else if(selectedParent == 'noParents') {
