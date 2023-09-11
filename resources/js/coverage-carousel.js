@@ -1,5 +1,4 @@
 // Function to initialize Slick carousel
-// Function to initialize Slick carousel
 function initSlickCarousel() {
     const windowWidth = $(window).width();
     
@@ -42,6 +41,4 @@ jQuery(function() {
     initSlickCarousel();
 
 })
-// $(document).ready(function() {
-//   initSlickCarousel();
-// });
+

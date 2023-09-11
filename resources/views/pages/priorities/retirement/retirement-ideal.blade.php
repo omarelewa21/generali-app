@@ -47,7 +47,7 @@
     
         <div class="col-12 text-dark px-0 my-4">
             <div class="my-4 y-lg-4 p-4 p-md-5 p-lg-5">
-                <div class="row d-flex justify-content-center py-4 py-md-5 py-xl-4 text-center align-items-center">
+                <div class="row d-flex justify-content-center py-4 py-md-4 py-xl-4 text-center align-items-center retirement-ideal-text">
                     <h5 class="my-2">My ideal retirement involves:</h5>
                 </div>
                 <div class="container">
