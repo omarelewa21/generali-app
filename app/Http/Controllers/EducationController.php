@@ -114,8 +114,8 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        return $arrayData;
-        // return redirect()->route('education.other');
+        // return $arrayData;
+        return redirect()->route('education.other');
    }
 
     public function submitEducationOther(Request $request){
@@ -130,28 +130,28 @@ class EducationController extends Controller
             'education_saving_amount.regex' => 'The amount must be a number',
         ];
 
-        $validatedData = Validator::make($request->all(), [
-            'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
-
-        ], $customMessages);
-
         // $validatedData = Validator::make($request->all(), [
         //     'education_other_savings' => 'required|in:yes,no',
-        //     'education_saving_amount' => [
-        //         'required_if:education_other_savings,yes',
-        //         'nullable',
-        //         'regex:/^[0-9,]+$/',
-        //         function ($attribute, $value, $fail) {
-        //             // Remove commas and check if the value is at least 1
-        //             $numericValue = str_replace(',', '', $value);
-        //             $min = 1;
-        //             if (intval($numericValue) < $min) {
-        //                 $fail('Your amount must be at least ' .$min. '.');
-        //             }
-        //         },
-        //     ],
+        //     'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
+
         // ], $customMessages);
+
+        $validatedData = Validator::make($request->all(), [
+            'education_other_savings' => 'required|in:yes,no',
+            'education_saving_amount' => [
+                'required_if:education_other_savings,yes',
+                'nullable',
+                'regex:/^[0-9,]+$/',
+                function ($attribute, $value, $fail) {
+                    // Remove commas and check if the value is at least 1
+                    $numericValue = str_replace(',', '', $value);
+                    $min = 1;
+                    if (intval($numericValue) < $min) {
+                        $fail('Your amount must be at least ' .$min. '.');
+                    }
+                },
+            ],
+        ], $customMessages);
 
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();

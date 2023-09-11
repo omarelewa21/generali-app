@@ -92,7 +92,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I want to give my child a head start with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalEducationFundNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalEducationFundNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -143,15 +143,15 @@
     // Get the input value
     var monthlyInput = document.getElementById("monthly_education_amount");
 
-    var totalEducationYear = document.getElementById("tertiary_education_years");
+    // var totalEducationYear = document.getElementById("tertiary_education_years");
     var totalEducationFund = document.getElementById("TotalEducationFund");
     var totalEducationFundNeeded = document.getElementById("total_educationFund");
-    var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    var totalEducationPercentage = document.getElementById("percentage");
-    var education_saving_amount = document.getElementById('education_saving_amount');
-    var education_saving = document.getElementById('education_other_savings');
+    // var totalAmountNeeded = document.getElementById("total_amountNeeded");
+    // var totalEducationPercentage = document.getElementById("percentage");
+    // var education_saving_amount = document.getElementById('education_saving_amount');
+    // var education_saving = document.getElementById('education_other_savings');
     
-    var newTotalFund = document.getElementById("newTotal_educationFund");
+    // var newTotalFund = document.getElementById("newTotal_educationFund");
     var displayAvatar = document.getElementById("displayFund");
 
     monthlyInput.addEventListener("input", function() {

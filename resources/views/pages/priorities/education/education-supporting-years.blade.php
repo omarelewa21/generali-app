@@ -148,33 +148,21 @@
 <script>
     // Get the input value
     var educationYear = document.getElementById("tertiary_education_years");
-    var educationYearSessionValue = {{$totalEducationYear}};
-    var oldTotalFund = {{ $totalEducationFundNeeded }};
+    var educationYearSessionValue = parseFloat({{$totalEducationYear}});
+    var oldTotalFund = parseFloat({{ $totalEducationFundNeeded }});
     var newTotalFund = document.getElementById("newTotal_educationFund");
-    // var newTotalFund = document.getElementById("newTotal_educationFund");
 
-    var totalEducationFund = document.getElementById("TotalEducationFund");
     // var totalAmountNeeded = document.getElementById("total_amountNeeded");
     // var totalEducationPercentage = document.getElementById("percentage");
     // var education_saving_amount = document.getElementById('education_saving_amount');
     // var education_saving = document.getElementById('education_other_savings');
     
     var displayAvatar = document.getElementById("displayFund");
+    var totalEducationFund = document.getElementById("TotalEducationFund");
 
-    // if (educationYear.value !== '' && educationYearSessionValue !== ''){
-    //     var totalAmount = educationYearSessionValue * oldTotalFund;
-    //     var result = totalAmount.toLocaleString();
-
-    //     totalEducationFund.innerText = "RM " + result;
-    //     displayAvatar.innerText = "RM " + result;
-    // }
-    // else{ 
-    //     educationYear.addEventListener("input", function());
-    // }
-    // if (educationYearSessionValue !== null && oldTotalFund !== null) {
-    //     // User is returning with session values
-    //     newTotalFund.value = educationYearSessionValue * oldTotalFund;
-    // }
+    if (educationYearSessionValue !== '' || educationYearSessionValue !== 0 && oldTotalFund !== '') {
+            newTotalFund.value = educationYearSessionValue * oldTotalFund;
+    } 
     
 
     educationYear.addEventListener("input", function() {
@@ -198,6 +186,7 @@
 
             totalEducationFund.innerText = "RM " + result;
             displayAvatar.innerText = "RM " + result;
+            newTotalFund.value = Year * oldTotalFund;
         }
 
         // Display the result
@@ -209,20 +198,17 @@
 
         // Set the value of the hidden input field
         // Check if educationYearSessionValue and oldTotalFund are stored in sessions
-        // if (educationYearSessionValue === '' || educationYearSessionValue == null) {
-        //     newTotalFund.value = oldTotalFund;
+        // if (educationYearSessionValue !== '' || educationYearSessionValue !== 0 && oldTotalFund !== '') {
+        //         newTotalFund.value = educationYear.value * oldTotalFund;
+        // } else {
+        //     newTotalFund.value = educationYearSessionValue * oldTotalFund;
         // }
-        if (educationYearSessionValue !== '' && oldTotalFund !== '') {
-            if (educationYear.value === null || educationYear.value === '') {
-                // User is returning with session values, and no new educationYear.value is provided
-                newTotalFund.value = educationYearSessionValue * oldTotalFund;
-            } else {
-                // User provided a new educationYear.value, calculate accordingly
-                newTotalFund.value = educationYear.value * oldTotalFund;
-            }
-        } else {
-            // Handle other cases or fallback to defaults if needed
-        }
+        // if (educationYearSessionValue !== '') {
+                
+        //         newTotalFund.value = educationYearSessionValue * oldTotalFund;
+        // } else {
+        //     
+        // }
         // newTotalFund.value = totalAmount;
         // totalAmountNeeded.value = '';
         // totalEducationPercentage = '';
