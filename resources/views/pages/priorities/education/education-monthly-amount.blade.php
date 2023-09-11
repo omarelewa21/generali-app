@@ -43,7 +43,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -78,12 +78,12 @@
                                                     <strong>/month for my tertiary education.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
-                                                <input type="hidden" name="tertiary_education_years" id="tertiary_education_years" value="{{$totalEducationYear}}">
+                                                <!-- <input type="hidden" name="tertiary_education_years" id="tertiary_education_years" value="{{$totalEducationYear}}">
                                                 <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
                                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                                 <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
                                                 <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
-                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}">
+                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}"> -->
                                             </div>
                                         </div>
                                     </div>
@@ -154,13 +154,6 @@
     var newTotalFund = document.getElementById("newTotal_educationFund");
     var displayAvatar = document.getElementById("displayFund");
 
-    // const cleanedValue = monthlyInput.value.replace(/[^0-9.]/g, "");
-
-    // Format the value with commas for thousands
-    // const formattedValue = Number(cleanedValue).toLocaleString();
-
-    // monthlyInput.value = formattedValue;
-
     monthlyInput.addEventListener("input", function() {
 
         // Retrieve the current input value
@@ -182,11 +175,6 @@
             this.value = monthlyInputValue;
         }
 
-         // Format the cleaned value with commas
-        // const formattedValue = cleanedValue.toLocaleString('en-MY');
-
-        // this.value = formattedValue;
-
         var monthlyAmount = parseInt(cleanedValue);
 
         // Calculate months
@@ -204,47 +192,17 @@
             totalEducationFund.innerText = "RM " + result;
             displayAvatar.innerText = "RM " + result;
         }
-        
-
-        // Display the result
-        // var result = amountPerYear.toLocaleString();
-
-        
-        // Try the code
-        // if (monthlyInput.value === ""){
-        //     this.value.toLocaleString();
-        // }
-        // else{
-        //     this.value.toLocaleString();
-        // }
-        // }
-        // let inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
-        // inputValue = Number(inputValue);
-
-        // if (isNaN(inputValue)) {
-        //     inputValue = 0;
-        // }
-
-        // const formattedValue = monthlyInput.toLocaleString('en-MY'); // Format with commas
-        // monthlyInput = formattedValue;
-
-        // End try the code
-        
-
-        // document.getElementById("TotalEducationFund").innerText = "RM " + result;
-        // document.getElementById("displayFund").innerText = "RM " + result;
 
         // Set the value of the hidden input field
         totalEducationFundNeeded.value = amountPerYear;
         // If type new value, clear the session year and pass again
-        totalEducationYear.value = '';
-        newTotalFund.value = '';
-        totalAmountNeeded.value = '';
-        totalEducationPercentage.value = '';
-        education_saving_amount.value = '';
-        education_saving.value = '';
-        $('.retirement-progress-bar').css('width', '0%');
-        // document.getElementById("monthly_education_amount").value = parseInt(cleanedValue.replace(/,/g, ''), 10) || "";
+        // totalEducationYear.value = '';
+        // newTotalFund.value = '';
+        // totalAmountNeeded.value = '';
+        // totalEducationPercentage.value = '';
+        // education_saving_amount.value = '';
+        // education_saving.value = '';
+        // $('.retirement-progress-bar').css('width', '0%');
     });
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -252,22 +210,35 @@
             validateNumberField(monthlyInput);
     });
 
+    // function validateNumberField(field) {
+    //     const value = field.value.trim();
+
+    //     var pattern = /^[0-9,]+$/;
+
+    //     if (value === "" || isNaN(value)) {
+    //         // field.classList.remove("is-valid");
+    //         field.classList.add("is-invalid");
+    //     }else{
+    //         // field.classList.add("is-valid");
+    //         field.classList.remove("is-invalid");
+    //     }
+    //     if (pattern.test(value)){
+    //         document.getElementById("monthly_education_amount").classList.remove("is-invalid");
+    //     }
+    // } 
     function validateNumberField(field) {
-        const value = field.value.trim();
+        var value = field.value.replace(/,/g, ''); // Remove commas
+        var numericValue = parseFloat(value);
 
-        var pattern = /^[0-9,]+$/;
-
-        if (value === "" || isNaN(value)) {
+        if (isNaN(numericValue)) {
             // field.classList.remove("is-valid");
             field.classList.add("is-invalid");
-        }else{
+
+        } else {
             // field.classList.add("is-valid");
             field.classList.remove("is-invalid");
         }
-        if (pattern.test(value)){
-            document.getElementById("monthly_education_amount").classList.remove("is-invalid");
-        }
-    } 
+    }
 
 });
 

@@ -46,6 +46,9 @@
     background-position: center, center 20%;
     background-repeat: no-repeat;
 }
+.bottom-33{
+    bottom: -33px;
+}
 
 /* =============================== Needs Home Page ===============================*/
 .needs-home-wrapper{
@@ -552,12 +555,6 @@
     .p-mb-0{
         padding: 0px;
     }
-    .bg-education-others-mob{
-        background-image: url('/images/needs/education/bg-education-others-mob.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center;
-    }
     .needs-home-avatars{
         grid-template-columns: repeat(3, 0% 100% 0%);
     }
@@ -635,12 +632,26 @@
         grid-template-rows: 93.5% auto !important;
     }
 }
+@media screen and (max-width: 1200px) {
+    .bg-half{
+        background-image: url('/images/needs/background/bg-half-master-mob.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+    }
+    .bg-education-others-mob{
+        background-image: url('/images/needs/education/background/bg-education-others-mob.png');
+        background-repeat: no-repeat;
+        background-size: containxs;
+        background-position:left center;
+    }
+}
 @media screen and (min-width: 1250px) {
     .bg-education-others{
-        background-image: url('/images/needs/education/bg-education-others.png');
+        background-image: url('/images/needs/education/background/bg-education-other.png');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position:left;
+        background-position:left bottom 28%;;
     }
 }
 @media screen and (min-width: 1600px) {
@@ -1243,12 +1254,6 @@ button.choice:focus,
     .hide-desktop{
         display: block !important;
     }
-    .bg-half{
-        background-image: url('/images/needs/bg-half-plain.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
     .bg-education-gap-mob{
         background-image: url('/images/needs/education/bg-education-gap-mob.png');
         background-repeat: no-repeat;
@@ -1568,10 +1573,10 @@ button.choice:focus,
 }
 @media only screen and (min-width: 1250px){
     .bg-needs-desktop{
-        background-image: url('/images/needs/education/bg-needs-master.png');
+        background-image: url('/images/needs/background/bg-master-needs.png');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position:center;
+        background-position:left center;
     }
     .show-desktop{
         display: block !important;

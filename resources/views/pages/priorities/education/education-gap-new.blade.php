@@ -9,6 +9,7 @@
     // Retrieving values from the session
     $arrayData = session('passingArrays');
     $totalEducationYear = isset($arrayData['totalEducationYear']) ? $arrayData['totalEducationYear'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
     $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
     $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
     $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';
@@ -91,7 +92,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I want to give my child a head start with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalEducationFundNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalEducationFundNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>

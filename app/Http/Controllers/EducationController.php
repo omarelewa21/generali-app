@@ -50,21 +50,21 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $monthly_education_amount = str_replace(',','',$request->input('monthly_education_amount'));
         $totalEducationFund = $request->input('total_educationFund');
-        $tertiary_education_years = $request->input('tertiary_education_years');
-        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
-        $totalAmountNeeded = $request->input('total_amountNeeded');
-        $totalPercentage = $request->input('percentage');
-        $education_saving_amount = $request->input('education_saving_amount');
-        $education_other_savings = $request->input('education_other_savings');
+        // $tertiary_education_years = $request->input('tertiary_education_years');
+        // $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
+        // $totalAmountNeeded = $request->input('total_amountNeeded');
+        // $totalPercentage = $request->input('percentage');
+        // $education_saving_amount = $request->input('education_saving_amount');
+        // $education_other_savings = $request->input('education_other_savings');
 
         $arrayData['educationMonthlyAmount'] = $monthly_education_amount;
         $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
-        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        $arrayData['totalEducationYear'] = $tertiary_education_years;
-        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        $arrayData['educationFundPercentage'] = $totalPercentage;
-        $arrayData['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['edcationSaving'] = $education_other_savings;
+        // $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        // $arrayData['totalEducationYear'] = $tertiary_education_years;
+        // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
+        // $arrayData['educationFundPercentage'] = $totalPercentage;
+        // $arrayData['educationSavingAmount'] = $education_saving_amount;
+        // $arrayData['edcationSaving'] = $education_other_savings;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -97,25 +97,25 @@ class EducationController extends Controller
         $tertiary_education_years = $request->input('tertiary_education_years');
         $totalEducationFund = $request->input('total_educationFund');
         $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
-        $totalAmountNeeded = $request->input('total_amountNeeded');
-        $totalPercentage = $request->input('percentage');
-        $education_saving_amount = $request->input('education_saving_amount');
-        $education_other_savings = $request->input('education_other_savings');
+        // $totalAmountNeeded = $request->input('total_amountNeeded');
+        // $totalPercentage = $request->input('percentage');
+        // $education_saving_amount = $request->input('education_saving_amount');
+        // $education_other_savings = $request->input('education_other_savings');
 
         $arrayData['totalEducationYear'] = $tertiary_education_years;
         $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
         $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        $arrayData['educationFundPercentage'] = $totalPercentage;
-        $arrayData['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['edcationSaving'] = $education_other_savings;
+        // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
+        // $arrayData['educationFundPercentage'] = $totalPercentage;
+        // $arrayData['educationSavingAmount'] = $education_saving_amount;
+        // $arrayData['edcationSaving'] = $education_other_savings;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayData;
-        return redirect()->route('education.other');
+        return $arrayData;
+        // return redirect()->route('education.other');
    }
 
     public function submitEducationOther(Request $request){
@@ -130,28 +130,28 @@ class EducationController extends Controller
             'education_saving_amount.regex' => 'The amount must be a number',
         ];
 
-        // $validatedData = Validator::make($request->all(), [
-        //     'education_other_savings' => 'required|in:yes,no',
-        //     'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
-
-        // ], $customMessages);
-
         $validatedData = Validator::make($request->all(), [
             'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => [
-                'required_if:education_other_savings,yes',
-                'nullable',
-                'regex:/^[0-9,]+$/',
-                function ($attribute, $value, $fail) {
-                    // Remove commas and check if the value is at least 1
-                    $numericValue = str_replace(',', '', $value);
-                    $min = 1;
-                    if (intval($numericValue) < $min) {
-                        $fail('Your amount must be at least ' .$min. '.');
-                    }
-                },
-            ],
+            'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
+
         ], $customMessages);
+
+        // $validatedData = Validator::make($request->all(), [
+        //     'education_other_savings' => 'required|in:yes,no',
+        //     'education_saving_amount' => [
+        //         'required_if:education_other_savings,yes',
+        //         'nullable',
+        //         'regex:/^[0-9,]+$/',
+        //         function ($attribute, $value, $fail) {
+        //             // Remove commas and check if the value is at least 1
+        //             $numericValue = str_replace(',', '', $value);
+        //             $min = 1;
+        //             if (intval($numericValue) < $min) {
+        //                 $fail('Your amount must be at least ' .$min. '.');
+        //             }
+        //         },
+        //     ],
+        // ], $customMessages);
 
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();

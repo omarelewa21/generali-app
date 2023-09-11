@@ -9,12 +9,12 @@
 {{--end of nav links --}}
 
 @php
-    $needsPages = ['protection-home', 'retirement-home', 'education-home']; // Add your needs page slugs here
+    $needsPages = ['protection-home', 'retirement-home', 'education-home' , 'investment-home']; // Add your needs page slugs here
     
 @endphp
 
 @if(in_array(request()->path(), $needsPages))
-    <div class="row" id="main-menu">
+    <div class="row">
         <div class="col-3 col-lg-6">
             <header id="wrapper-navbar">
                 <nav class="navbar position-relative">
@@ -41,45 +41,5 @@
         </div>
     </nav>
 </header>
-
-<style>
-.sidebanner{
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030!important;
-}
-.scrolled-up {
-  /* transform: translateY(0); */
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.scrolled-down {
-  transform: translateY(-100%);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-</style>
-
-<script>
-    // function menu_scroll() {
-        var last_scroll_top = 0;
-    
-        jQuery(window).on('scroll', function() {
-            scroll_top = jQuery(this).scrollTop();
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                if(scroll_top < last_scroll_top) {
-                    jQuery('.sidebanner').removeClass('scrolled-down').addClass('scrolled-up');
-                } else {
-                    jQuery('.sidebanner').removeClass('scrolled-up').addClass('scrolled-down');
-                }
-            } else {
-                jQuery('.sidebanner').removeClass('scrolled-down').addClass('scrolled-up');
-            }
-            last_scroll_top = scroll_top;
-    
-        });
-    // }
-</script>
 
 @endif
