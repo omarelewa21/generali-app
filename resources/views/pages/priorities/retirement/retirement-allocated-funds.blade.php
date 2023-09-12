@@ -19,7 +19,7 @@
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                 <div class="row d-flex justify-content-center align-items-center">
@@ -41,9 +41,9 @@
         {{-- error message notifications --}}
         @if ($errors->has('retirementAllocatedFunds'))
         <div id="retirementAllocatedFundsErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">

@@ -25,7 +25,7 @@
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -48,8 +48,8 @@
         </section>
 
     @if ($errors->has('protectionFunds'))
-    <div id="protectionFundsErrorMessage" class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-        <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+    <div id="protectionFundsErrorMessage" class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
+        <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
             <div class="flex-grow-1 d-flex justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                      viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -67,12 +67,12 @@
                 <div class="my-4">  
                     <section>
                         <div class="row">
-                        <div class="col-12 col-lg-12 col-xl-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-center align-items-center order-1 order-lg-1 order-xl-0">
+                        <div class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-center align-items-center order-1 order-lg-0 order-xl-0">
                             <img class="position-relative monthly-support-asset z-1" src="{{ asset('images/needs/protection/monthly-support-asset.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                        <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1 order-xl-1">
                             <div class="row justify-content-center">
-                            <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
+                            <div class="col-10 col-md-8 col-lg-10 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">If anything should</h5>
                             <h5 class="needs-text">happen to me, I'd like to</h5>
                             <h5 class="needs-text">support my family with</h5>

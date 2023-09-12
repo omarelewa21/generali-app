@@ -25,7 +25,7 @@ $arrayDataProtection['protectionPercentage'] : 0;
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -51,9 +51,9 @@ $arrayDataProtection['protectionPercentage'] : 0;
         {{-- error message notifications --}}
         @if ($errors->has('protectionSupportingYears'))
         <div id="protectionSupportingYearsErrorMessageErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -69,13 +69,13 @@ $arrayDataProtection['protectionPercentage'] : 0;
         
         <section>
             <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
+                <form class="form-horizontal p-0 m-0 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
                     novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
-                                class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
+                                class="row d-flex flex-column flex-lg-row justify-content-start justify-content-md-center align-items-start align-items-md-start align-items-lg-center h-75">
                                 <div class="col-12 col-lg-4 col-xl-4 d-flex justify-content-center justify-content-xl-end z-1">
                                     <h5 class="m-0 mt-4 needs-text">I will need</h5>
                                 </div>

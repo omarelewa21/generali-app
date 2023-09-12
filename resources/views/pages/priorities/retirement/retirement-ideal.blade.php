@@ -17,7 +17,7 @@
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-lg-6 col-md-12">
                 @include ('templates.nav.nav-sidebar-needs')
@@ -26,9 +26,9 @@
         {{-- error message notifications --}}
         @if ($errors->has('retirementIdeal'))
         <div id="retirementIdealErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -46,7 +46,7 @@
             @csrf
     
         <div class="col-12 text-dark px-0 my-4">
-            <div class="my-4 y-lg-4 p-4 p-md-5 p-lg-5">
+            <div id="retire_ideal_content" class="my-4 y-lg-4 p-4 p-md-5 p-lg-5">
                 <div class="row d-flex justify-content-center py-4 py-md-4 py-xl-4 text-center align-items-center retirement-ideal-text">
                     <h5 class="my-2">My ideal retirement involves:</h5>
                 </div>
@@ -160,14 +160,8 @@
 <style>
 @media only screen and (max-width: 767px) {
 
-.navbar-default.transparent {
-background: transparent !important;
-}
 .fixed-bottom {
     z-index: 10;
-}
-.navbar {
-    right:0;
 }
 }
 

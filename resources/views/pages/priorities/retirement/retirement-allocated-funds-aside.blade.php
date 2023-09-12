@@ -22,7 +22,7 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                 <div class="row d-flex justify-content-center align-items-center">
@@ -49,9 +49,9 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                     {{-- error message notifications --}}
                     @if ($errors->has('retirementAllocatedFundsAside'))
                     <div id="retirementAllocatedFundsAsideErrorMessage"
-                        class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+                        class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
                         aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-                        <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+                        <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                             <div class="flex-grow-1 d-flex justify-content-center">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2" viewBox="0 0 16 16"
@@ -66,9 +66,9 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                     @endif
                     @if ($errors->has('retirementOtherSourceOfIncome'))
                     <div id="retirementOtherSourceOfIncomeErrorMessage"
-                        class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+                        class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
                         aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-                        <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+                        <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                             <div class="flex-grow-1 d-flex justify-content-center">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2" viewBox="0 0 16 16"
@@ -85,14 +85,16 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                     <section>
                         <div class="row">
                             <div
-                                class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
+                                class="col-12 col-lg-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                                 <img class="position-relative avatar-allocated-funds-aside"
                                     src="{{ asset('images/needs/retirement/allocated-funds-aside.svg') }}" alt="avatar">
                             </div>
                             <div
-                                class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-center justify-content-xl-end align-items-center align-items-lg-start mx-0 mx-lg-0 mx-xl-5 order-0 order-lg-1">
+                                class="col-12 col-lg-5 my-auto d-flex flex-column justify-content-sm-start justify-content-lg-start justify-content-xl-end align-items-start mx-0 mx-lg-0 mx-xl-5 order-0 order-lg-1">
+                                <div class="row d-flex justify-content-center w-sm-100 w-md-100">
+                                <div class="col-10 col-md-10 col-lg-12">
                                 <h5 class="needs-text">So far, I’ve put aside</h5>
-                                <div class="input-group w-50">
+                                <div class="input-group w-50 w-sm-100 w-md-100">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="retirementAllocatedFundsAside"
                                         value="{{$retirementAllocatedFundsAside}}"
@@ -100,14 +102,16 @@ $arrayDataRetirement['formattedTotalRetirementValue'] : 0;
                                         id="retirementAllocatedFundsAside" placeholder=" " required>
                                 </div>
                                 <h5 class="needs-text">for my retirement.</h5>
-                                <h5 class="needs-text">Other sources of income:</h5>
-                                <div class="input-group w-50">
+                                <h5 class="mt-3 needs-text">Other sources of income:</h5>
+                                <div class="input-group w-50 w-sm-100 w-md-100">
                                     <span class="input-group-text text-primary fw-bold bg-transparent pe-0 py-0"><h5 class="needs-text m-0">RM</h5></span>
                                     <input type="text" name="retirementOtherSourceOfIncome"
                                         value="{{$retirementOtherSourceOfIncome }}"
                                         class="input-text form-control text-primary py-0 @error('retirementOtherSourceOfIncome') is-invalid @enderror"
                                         id="retirementOtherSourceOfIncome" placeholder=" " required>
                                 </div>
+                            </div>
+                        </div>
 
 
                             </div>
@@ -204,6 +208,7 @@ background: transparent !important;
     right:0;
 }
 }
+
 </style>
 
 @endsection

@@ -24,7 +24,7 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -49,9 +49,9 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
         {{-- error message notifications --}}
         @if ($errors->has('protectionExistingPolicy'))
         <div id="protectionExistingPolicyErrorMessageErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -83,7 +83,7 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                             <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                                 <div class="row justify-content-center">
                                 <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
-                                <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance
+                                <h5 class="needs-text my-0 my-md-4">Luckily, I do have an existing life insurance
                                     policy.</h5>
                                 <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
 

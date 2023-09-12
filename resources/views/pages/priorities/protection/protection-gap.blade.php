@@ -18,7 +18,7 @@
     <div class="p-0 container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-lg-6 col-md-12">
                     @include ('templates.nav.nav-sidebar-needs')

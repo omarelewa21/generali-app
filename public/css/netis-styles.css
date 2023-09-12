@@ -2,7 +2,13 @@
 /* .navbar {
     right:50%;
 } */
-
+.navbar-needs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+    z-index: 1000;
+}
 
 .form-input-needs-xs {
     width: 11%;
@@ -401,7 +407,7 @@ h5.gap-value {
     }
 
     /* added to fix overlaying issue with needs navigation unable to be selected in mobile */
-    .navbar {
+    .navbar-needs {
         right: 0;
     }
 
@@ -701,7 +707,9 @@ h5.gap-value {
     .w-md-25 {
         width: 25% !important;
     }
-
+    .w-md-100 {
+        width: 100% !important;
+    }
     .avatar-allocated-funds-aside {
         width: 60vh !important;
         top: 0;
@@ -734,6 +742,10 @@ h5.gap-value {
         padding-top:0px !important;
         padding-bottom:0px !important;
     }
+    .fixed-bottom {
+        z-index: 10;
+    }
+    
 
 }
 
@@ -779,6 +791,15 @@ h5.gap-value {
     .svg-container {
         transform: scale(1.1) !important;
     }
+    #Protection-monthly-support .bg-needs-1 {
+        height: 51vh !important;
+    }
+    .monthly-support-asset {
+        bottom: -10% !important;
+    }
+    .w-sm-100 {
+        width: 100%;
+    }
 }
 
 /* target iPad */
@@ -803,6 +824,10 @@ h5.gap-value {
     .protection-existing-policy-asset {
         width: 32vh;
     }
+    .avatar-allocated-funds-aside {
+        width: 50vh !important;
+        top: -8%;
+    }
 }
 
 /* Nexus 10 */
@@ -813,6 +838,14 @@ h5.gap-value {
     }
     #retirement_home .needs-home{
     grid-template-rows: 39vh 52vh 11vh;
+    }
+    .avatar-age-to-retire {
+        right: 2%;
+        bottom: -5%;
+        width: 57vh;
+    }
+    .w-sm-100 {
+        width: 100% !important;
     }
 }
 
@@ -845,7 +878,10 @@ h5.gap-value {
     .coverage-avatar img.spouse-avatar{
         width: 20vh;
     }
-    
+    .avatar-age-to-retire {
+        bottom: -5%;
+        width: 46vh;
+    }
 
 }
 
@@ -950,11 +986,24 @@ h5.gap-value {
     .coverage-avatar img.self-avatar {
         width: 25vh;
     }
+    #retire_ideal_content {
+        margin:7% 0 !important;
+    }
 }
+
+
 
 @media only screen and (min-height:800px) and (max-height:860px) and (orientation:landscape) {
     .coverage-avatar img.self-avatar {
         width: 22vh;
+    }
+    #retirementAllocatedFundsAsidePage .bg-needs-1 {
+        height: 50vh;
+        background-size: cover;
+        background-position: left 0;
+    }
+    .avatar-allocated-funds-aside {
+        top: 46%;
     }
 }
 /* target phone landscape */
