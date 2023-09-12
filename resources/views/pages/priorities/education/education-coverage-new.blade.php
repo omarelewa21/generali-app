@@ -23,7 +23,7 @@
         <div class="row">
             <!-- <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="p-mb-0 m-0">
                 @csrf -->
-                <div class="col-12 vh-100 wrapper-needs-coverage-default">
+                <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
                     <section class="header-needs-default">
                         <div class="col-lg-6 col-md-12">
                             @include('templates.nav.nav-red-menu')

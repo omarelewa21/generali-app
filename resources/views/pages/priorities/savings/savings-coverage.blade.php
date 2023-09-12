@@ -20,7 +20,7 @@
 <div id="savings-coverage" class="vh-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 vh-100 wrapper-needs-coverage-default">
+            <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
                 <section class="header-needs-default">
                     <div class="col-lg-6 col-md-12">
                         @include('templates.nav.nav-red-menu')

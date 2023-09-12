@@ -1078,9 +1078,9 @@ button.choice:hover,
 button.choice:focus,
 .button-needs[data-required="selected"],
 .button-needs.selected {
-    background-image: url('/images/general/Hover2.png');
+    background-image: url('/images/needs/hover-coverage.png');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom 8%;
     background-size: 80%;
 }
 .z-99{
