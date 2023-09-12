@@ -171,7 +171,7 @@ class FormController extends Controller {
         Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
             $decodedValue = json_decode($value, true);
 
-            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents']) || isset($decodedValue['siblings']) && $decodedValue['siblings'] === 'yes') {
+            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents']) || isset($decodedValue['siblings']['status']) && $decodedValue['siblings']['status'] === 'yes') {
                 return true;
             }
         
@@ -200,6 +200,8 @@ class FormController extends Controller {
         $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
         $familyDependantSerialized = $request->input('familyDependantButtonInput');
         $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
+        $assetsSerialized = $request->input('assetsButtonInput');
+        $assetsButtonInput = json_decode($assetsSerialized, true);
         $dataUrl = $request->input('urlInput');
 
         // Add or update the data value in the array
@@ -209,9 +211,13 @@ class FormController extends Controller {
         elseif ($familyDependantButtonInput) {
             $arrayData['FamilyDependant'] = $familyDependantButtonInput;
         }
+        elseif ($assetsButtonInput) {
+            $arrayData['Assets'] = $assetsButtonInput;
+        }
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
         return redirect()->route($dataUrl);
     }
 
@@ -232,6 +238,13 @@ class FormController extends Controller {
             'spousemonth' => 'sometimes|required',
             'spouseyear' => 'sometimes|required',
             'spouseMaritalStatus' => 'required_with:spouseFirstName|in:' . implode(',', $maritalStatus),
+            'siblingFirstName' => 'sometimes|required|max:255',
+            'siblingLastName' => 'sometimes|required|max:255',
+            'siblingYearsOfSupport' => 'sometimes|required|numeric|max:100',
+            'siblingday' => 'sometimes|required',
+            'siblingmonth' => 'sometimes|required',
+            'siblingyear' => 'sometimes|required',
+            'siblingMaritalStatus' => 'required_with:siblingFirstName|in:' . implode(',', $maritalStatus),
         ];
 
         if (isset($arrayData['FamilyDependant']['children'])) {
@@ -261,25 +274,25 @@ class FormController extends Controller {
         $validatedData = $request->validate($commonRules);
 
         if (isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes') {
-            $arrayData['FamilyDependant']['spouse']['FirstName'] = $validatedData['spouseFirstName'];
-            $arrayData['FamilyDependant']['spouse']['LastName'] = $validatedData['spouseLastName'];
-            $arrayData['FamilyDependant']['spouse']['YearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
-            $arrayData['FamilyDependant']['spouse']['Day'] = $validatedData['spouseday'];
-            $arrayData['FamilyDependant']['spouse']['Month'] = $validatedData['spousemonth'];
-            $arrayData['FamilyDependant']['spouse']['Year'] = $validatedData['spouseyear'];
-            $arrayData['FamilyDependant']['spouse']['MaritalStatus'] = $validatedData['spouseMaritalStatus'];
+            $arrayData['FamilyDependant']['spouse']['firstName'] = $validatedData['spouseFirstName'];
+            $arrayData['FamilyDependant']['spouse']['lastName'] = $validatedData['spouseLastName'];
+            $arrayData['FamilyDependant']['spouse']['yearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+            $arrayData['FamilyDependant']['spouse']['day'] = $validatedData['spouseday'];
+            $arrayData['FamilyDependant']['spouse']['month'] = $validatedData['spousemonth'];
+            $arrayData['FamilyDependant']['spouse']['year'] = $validatedData['spouseyear'];
+            $arrayData['FamilyDependant']['spouse']['maritalStatus'] = $validatedData['spouseMaritalStatus'];
         }
         
         if (isset($arrayData['FamilyDependant']['children'])) {
             foreach ($arrayData['FamilyDependant']['children'] as $key => $childName) {
                 $childData = array(
-                    'FirstName' => $validatedData[$childName . 'FirstName'],
-                    'LastName' => $validatedData[$childName . 'LastName'],
-                    'YearsOfSupport' => $validatedData[$childName . 'YearsOfSupport'],
-                    'Day' => $validatedData[$childName . 'day'],
-                    'Month' => $validatedData[$childName . 'month'],
-                    'Year' => $validatedData[$childName . 'year'],
-                    'MaritalStatus' => $validatedData[$childName . 'MaritalStatus'],
+                    'firstName' => $validatedData[$childName . 'FirstName'],
+                    'lastName' => $validatedData[$childName . 'LastName'],
+                    'yearsOfSupport' => $validatedData[$childName . 'YearsOfSupport'],
+                    'day' => $validatedData[$childName . 'day'],
+                    'month' => $validatedData[$childName . 'month'],
+                    'year' => $validatedData[$childName . 'year'],
+                    'maritalStatus' => $validatedData[$childName . 'MaritalStatus'],
                 );
                 $arrayData['FamilyDependant']['children_details'][$childName] = $childData;
             }
@@ -288,16 +301,26 @@ class FormController extends Controller {
         if (isset($arrayData['FamilyDependant']['parents'])) {
             foreach ($arrayData['FamilyDependant']['parents'] as $key => $parentsName) {
                 $parentsData = array(
-                    'FirstName' => $validatedData[$parentsName . 'FirstName'],
-                    'LastName' => $validatedData[$parentsName . 'LastName'],
-                    'YearsOfSupport' => $validatedData[$parentsName . 'YearsOfSupport'],
-                    'Day' => $validatedData[$parentsName . 'day'],
-                    'Month' => $validatedData[$parentsName . 'month'],
-                    'Year' => $validatedData[$parentsName . 'year'],
-                    'MaritalStatus' => $validatedData[$parentsName . 'MaritalStatus'],
+                    'firstName' => $validatedData[$parentsName . 'FirstName'],
+                    'lastName' => $validatedData[$parentsName . 'LastName'],
+                    'yearsOfSupport' => $validatedData[$parentsName . 'YearsOfSupport'],
+                    'day' => $validatedData[$parentsName . 'day'],
+                    'month' => $validatedData[$parentsName . 'month'],
+                    'year' => $validatedData[$parentsName . 'year'],
+                    'maritalStatus' => $validatedData[$parentsName . 'MaritalStatus'],
                 );
                 $arrayData['FamilyDependant']['parents_details'][$parentsName] = $parentsData;
             }
+        }
+
+        if (isset($arrayData['FamilyDependant']['siblings']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') {
+            $arrayData['FamilyDependant']['siblings']['firstName'] = $validatedData['siblingFirstName'];
+            $arrayData['FamilyDependant']['siblings']['lastName'] = $validatedData['siblingLastName'];
+            $arrayData['FamilyDependant']['siblings']['yearsOfSupport'] = $validatedData['siblingYearsOfSupport'];
+            $arrayData['FamilyDependant']['siblings']['day'] = $validatedData['siblingday'];
+            $arrayData['FamilyDependant']['siblings']['month'] = $validatedData['siblingmonth'];
+            $arrayData['FamilyDependant']['siblings']['year'] = $validatedData['siblingyear'];
+            $arrayData['FamilyDependant']['siblings']['maritalStatus'] = $validatedData['siblingMaritalStatus'];
         }
         
         // Store the updated array back into the session

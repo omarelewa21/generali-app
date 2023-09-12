@@ -88,7 +88,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'siblings' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']) && $arrayData['FamilyDependant']['siblings'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                                 </button>
@@ -220,11 +220,6 @@ const clickedAvatars = {
     siblings: null
 };
 
-let spouseClicked = false;
-let childClicked = false;
-let parentClicked = false;
-let siblingClicked = false;
-
 spouseButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -241,8 +236,16 @@ spouseButton.addEventListener('click', function(event) {
             'status': 'yes',
         };
     }
-    familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    spouseClicked = true;
+
+    if (familyDependantButtonInput.value == '') {
+        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value), 
+            spouse: clickedAvatars.spouse 
+        });
+    }
 });
 
 
@@ -261,15 +264,20 @@ confirmChildrenButton.addEventListener('click', function(event) {
             const dataAvatarval = `child_${i}`;
             clickedAvatars[dataAvatar].push(dataAvatarval);
         }
-
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        childClicked = true;
     }
     else if(selectedChildren == 'noChildren') {
         // Clear the children array
         clickedAvatars[dataAvatar] = [];
+    }
 
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value),
+            children: clickedAvatars.children
+        });
     }
 });
 
@@ -292,15 +300,20 @@ confirmParentButton.addEventListener('click', function(event) {
         } else if (selectedParent === "both") {
             clickedAvatars[dataAvatar].push("grandfather", "grandmother");
         }
-
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        parentClicked = true;
     }
     else if(selectedParent == 'noParents') {
         // Clear the parents array
         clickedAvatars[dataAvatar] = [];
+    }
 
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value),
+            parents: clickedAvatars.parents
+        });
     }
 });
 
@@ -311,13 +324,25 @@ siblingButton.addEventListener('click', function(event) {
     var isSelected = this.closest('.button-bg').classList.contains('selected');
     
     if (isSelected) {
-        clickedAvatars[dataAvatar]='no';
+        clickedAvatars[dataAvatar] = {
+            'status': 'no',
+        };
     }
     else {
-        clickedAvatars[dataAvatar]='yes';
+        clickedAvatars[dataAvatar] = {
+            'status': 'yes',
+        };
     }
-    familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    siblingClicked = true;
+
+    if (familyDependantButtonInput.value == '') {
+        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value), 
+            siblings: clickedAvatars.siblings 
+        });
+    }
 });
 </script>
 

@@ -1,7 +1,8 @@
 const specificPageURLs = [
     'marital-status',
     'family-dependant',
-    'family-dependant-details'
+    'family-dependant-details',
+    'assets',
 ];
 
 const currentURL = window.location.href;
@@ -167,18 +168,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         var bungalowImageIndex = 0;
         var condoImageIndex = 0;
 
-        // Set the spouseImageIndex based on gender
-        var spouseGender = document.getElementById('spouseGenderInput');
-        var spouseImageIndex = 0; // Default to male avatar
-        var spouseWidowedImageIndex = 0;
-        
-        if (spouseGender.value === 'Female') {
-            spouseImageIndex = 1; // Index for female avatar
-            spouseWidowedImageIndex = 1;
-        }
-
         // Pre-select the options if sessions exist
         if (path == '/marital-status') {
+            // Set the spouseImageIndex based on gender
+            var spouseGender = document.getElementById('spouseGenderInput');
+            var spouseImageIndex = 0; // Default to male avatar
+            var spouseWidowedImageIndex = 0;
+            
+            if (spouseGender.value === 'Female') {
+                spouseImageIndex = 1; // Index for female avatar
+                spouseWidowedImageIndex = 1;
+            }
+
             var preselect = document.getElementById('maritalStatusButtonInput');
 
             if (preselect.value == 'married') {
@@ -194,6 +195,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         }
         else if (path == '/family-dependant' || path == '/family-dependant-details') {
+            // Set the spouseImageIndex based on gender
+            var spouseGender = document.getElementById('spouseGenderInput');
+            var spouseImageIndex = 0; // Default to male avatar
+            var spouseWidowedImageIndex = 0;
+            
+            if (spouseGender.value === 'Female') {
+                spouseImageIndex = 1; // Index for female avatar
+                spouseWidowedImageIndex = 1;
+            }
+
             var familyDependantInputValue = document.getElementById('familyDependantButtonInput').value;
             var $imageContainer = $(".imageContainerSpouse");
             var $existingImage = $imageContainer.find("img.appended-image");
@@ -366,6 +377,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
+        // Car Selection
         $("#carButton").on("click", function () {
             if (carImageIndex < carImages.length) {
                 var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
@@ -380,6 +392,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         $("#scooterButton").on("click", function () {
             if (scooterImageIndex < scooterImages.length) {
+                
                 var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
                 $(".imageContainerCar").append(newImage);
                 scooterImageIndex++;
