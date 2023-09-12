@@ -230,7 +230,7 @@ class EducationController extends Controller
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.home');
+        return redirect()->route('savings.home');
     }
 
 }
