@@ -18,7 +18,7 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-lg-6 col-md-12">
                 @include ('templates.nav.nav-sidebar-needs')
@@ -95,9 +95,9 @@ $arrayDataProtection['protectionSelectedAvatar'] : '';
             {{-- error message notifications --}}
             @if ($errors->has('protectionSelectedAvatar'))
             <div id="protectionSelectedAvatarErrorMessage"
-                class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+                class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
                 aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-                <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+                <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                     <div class="flex-grow-1 d-flex justify-content-center">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2" viewBox="0 0 16 16" role="img"

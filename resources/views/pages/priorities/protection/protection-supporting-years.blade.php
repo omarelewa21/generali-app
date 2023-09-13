@@ -25,7 +25,7 @@ $arrayDataProtection['protectionPercentage'] : 0;
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -51,9 +51,9 @@ $arrayDataProtection['protectionPercentage'] : 0;
         {{-- error message notifications --}}
         @if ($errors->has('protectionSupportingYears'))
         <div id="protectionSupportingYearsErrorMessageErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -69,17 +69,17 @@ $arrayDataProtection['protectionPercentage'] : 0;
         
         <section>
             <div class="row flex-grow-1">
-                <form class="form-horizontal p-0  m-0 m-md-4 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
+                <form class="form-horizontal p-0 m-0 m-lg-0 needs-validation" id="protectionSupportingYearsForm"
                     novalidate action="{{route('form.protection.supporting.years')}}" method="POST">
                     @csrf
                     <div class="col-12 ">
                         <div class="row overflow-y-auto overflow-x-hidden bg-needs-2 vh-100 justify-content-center">
                             <div
-                                class="row d-flex flex-column flex-lg-row justify-content-start align-items-start align-items-md-start align-items-lg-center h-75">
-                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end z-1">
+                                class="row d-flex flex-column flex-lg-row justify-content-start justify-content-md-center align-items-start align-items-md-start align-items-lg-center h-75">
+                                <div class="col-12 col-lg-4 col-xl-4 d-flex justify-content-center justify-content-xl-end z-1">
                                     <h5 class="m-0 mt-4 needs-text">I will need</h5>
                                 </div>
-                                <div class="col-12 col-lg-4">
+                                <div class="col-12 col-lg-4 col-xl-4">
                                     <div
                                         class="position-relative pt-0 pb-0 pt-lg-0 pb-lg-4 m-2 m-lg-4 d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/needs/protection/Calendar.png') }}"
@@ -95,7 +95,7 @@ $arrayDataProtection['protectionPercentage'] : 0;
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
+                                <div class="col-12 col-lg-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
                                     <h5 class="m-0 mt-4 needs-text">to achieve my goal.</h5>
                                 </div>
 
@@ -169,11 +169,10 @@ $arrayDataProtection['protectionPercentage'] : 0;
     });
 });
 
-
 </script>
 
 <style>
-    .was-validated .form-control:valid,
+        .was-validated .form-control:valid,
     .form-control.is-valid {
         padding-right: calc(0.6em + 0.75rem);
         background-position: right;
@@ -207,48 +206,22 @@ $arrayDataProtection['protectionPercentage'] : 0;
         box-shadow: none;
     }
 
-    /* Apply the initial state for the toast */
-    .protectionSupportingYearsErrorMsg {
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    }
-
-    /* Apply the animation when the "show" class is added */
-    .protectionSupportingYearsErrorMsg.show {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .navbar {
-        right: 50%;
-    }
-
     @media only screen and (max-width: 767px) {
+    .was-validated .form-control:valid,
+    .form-control.is-valid,
+    .was-validated .form-control:invalid,
+    .form-control.is-invalid {
+        background-size: 1.5rem;
 
-        .was-validated .form-control:valid,
-        .form-control.is-valid,
-        .was-validated .form-control:invalid,
-        .form-control.is-invalid {
-            background-size: 1.5rem;
-
-        }
-
-        .fixed-bottom {
-            z-index: 1000;
-        }
-
-        .navbar {
-            right: 0;
-        }
     }
+}
 
-    @media only screen and (min-width:1024px) and (max-width:1112px) and (orientation:landscape) {
-        .calendar-protection {
-            width: 100% !important;
-        }
-    }
 </style>
+
+
+
+
+
 
 
 @endsection

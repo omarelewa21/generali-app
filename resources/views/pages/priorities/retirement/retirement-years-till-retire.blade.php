@@ -20,7 +20,7 @@
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2">
                 <div class="row d-flex justify-content-center align-items-center">
@@ -31,7 +31,7 @@
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h3 id="TotalRetirementValueText" class="m-1 text-light text-center">RM {{
-                            $formattedTotalRetirementValue}}</h3>
+                            $formattedTotalRetirementValue }}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                                 {{-- error message notifications --}}
         @if ($errors->has('retirementYearsTillRetire'))
         <div id="retirementYearsTillRetireErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -64,21 +64,21 @@
         {{-- end of error message notifications --}}
                     <section>
                         <div class="row">
-                        <div class="bg-needs-1 col-lg-6 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
+                        <div class="col-12 col-lg-12 col-xl-6 bg-needs-1 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-1 order-xl-0">
                             <img class="position-relative avatar-years-till-retire" src="{{ asset('images/needs/retirement/years-to-retire-avatar.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
+                        <div class="col-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-0 order-xl-1">
+                            <div class="row justify-content-center">
+                                <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">I plan to have</h5>
-                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
                             <div class="input-group w-50">
                                 <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="input-text form-control text-primary py-0 @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
                             </div>
+                            <h5 class="needs-text">to enjoy my retirement.</h5>
+                            </div>
+                            </div>
                         </div>
-                        <h5 class="needs-text">to enjoy my retirement.</h5>
-
-                        </div>
-
 
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -220,10 +220,6 @@ background: transparent !important;
 }
 .avatar-years-till-retire {
     top:2%;
-}
-input#retirementYearsTillRetire {
-    width: 50%;
-    text-align: center; 
 }
 }
     </style>

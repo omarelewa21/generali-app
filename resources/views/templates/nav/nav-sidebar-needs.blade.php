@@ -214,10 +214,10 @@
 }
 
 @media only screen and (max-device-width:986px) {
-/* .progress .progress-value{
+.progress .progress-value{
     background:transparent;
     z-index:1000;
-} */
+}
 
 /* .progress-mobile {
         position: fixed;

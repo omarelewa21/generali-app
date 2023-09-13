@@ -24,7 +24,7 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
         <section>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                    @include('templates.nav.nav-red-menu')
+                    @include('templates.nav.nav-red-menu-needs')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -49,9 +49,9 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
         {{-- error message notifications --}}
         @if ($errors->has('protectionExistingPolicy'))
         <div id="protectionExistingPolicyErrorMessageErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -60,21 +60,9 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                     </svg>
                     <span class="mx-2 fs-18">{{ $errors->first('protectionExistingPolicy') }}</span>
                 </div>
-            </div>
-        </div>
-        @endif
-        @if ($errors->has('protectionPolicyAmount'))
-        <div class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
-            aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
-                <div class="flex-grow-1 d-flex justify-content-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
-                        viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                        <path
-                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                    </svg>
-                    <span class="mx-2 fs-18">{{ $errors->first('protectionPolicyAmount') }}</span>
-                </div>
+                <button type="button" class="btn-custom-close text-danger" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
         @endif
@@ -88,13 +76,15 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                     <section>
                         <div class="row">
                             <div
-                                class="col-lg-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
+                                class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
+                                class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset"
                                     src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>
-                            <div
-                                class="col-11 col-md-10 col-lg-5 d-flex flex-column justify-content-start justify-content-md-start justify-content-lg-start mx-auto order-0 order-lg-1">
-                                <h5 class="needs-text my-0 my-md-5">Luckily, I do have an existing life insurance
+                            <div class="col-12 col-lg-6 col-xl-6 d-flex flex-column justify-content-start justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
+                                <div class="row justify-content-center">
+                                <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
+                                <h5 class="needs-text my-0 my-md-4">Luckily, I do have an existing life insurance
                                     policy.</h5>
                                 <div class="py-3 py-md-2 py-lg-1 mb-0 mb-md-0 mb-lg-0">
 
@@ -102,15 +92,14 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                         <input type="radio" class="needs-radio" id="protection_yes"
                                             name="protectionExistingPolicy" value="yes"
                                             {{$protectionExistingPolicy==='yes' ? 'checked' : '' }} required>
-                                        <label for="protection_yes" class="form-label @error('protectionPolicyAmount') is-invalid @enderror">Yes</label>
+                                        <label for="protection_yes" class="form-label">Yes</label>
                                     </span>
                                     <span>
                                         <input type="radio" class="needs-radio" id="protection_no"
                                             name="protectionExistingPolicy" value="no"
                                             {{$protectionExistingPolicy==='no' ? 'checked' : '' }} required>
-                                        <label for="protection_no" class="form-label @error('protectionPolicyAmount') is-invalid @enderror">No</label>
+                                        <label for="protection_no" class="form-label">No</label>
                                     </span>
-
                                 </div>
                                 <div id="existingPolicyAmount" style="display:none">
                                     <div class="input-group w-75 pb-4 pb-lg-0">
@@ -124,6 +113,8 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                                             class="input-text form-control text-primary @error('protectionPolicyAmount') is-invalid @enderror"
                                             id="protectionPolicyAmount" placeholder=" " required>
                                     </div>
+                                </div>
+                                </div>
                                 </div>
                             </div>
 

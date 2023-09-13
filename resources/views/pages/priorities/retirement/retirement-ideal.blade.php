@@ -17,7 +17,7 @@
     <div class="p-0 vh-100 container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-12">
-                @include('templates.nav.nav-red-menu')
+                @include('templates.nav.nav-red-menu-needs')
             </div>
             <div class="col-lg-6 col-md-12">
                 @include ('templates.nav.nav-sidebar-needs')
@@ -26,9 +26,9 @@
         {{-- error message notifications --}}
         @if ($errors->has('retirementIdeal'))
         <div id="retirementIdealErrorMessage"
-            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100" role="alert"
+            class="toast slide-in-from-bottom position-absolute pos-bottom-error w-100 rounded-0" role="alert"
             aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false">
-            <div class="alert alert-danger d-flex align-items-center mb-0 py-2">
+            <div class="alert alert-danger d-flex align-items-center mb-0 py-2 rounded-0">
                 <div class="flex-grow-1 d-flex justify-content-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 mx-2"
                         viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -46,28 +46,28 @@
             @csrf
     
         <div class="col-12 text-dark px-0 my-4">
-            <div class="my-4 my-lg-4 p-4 p-md-5 p-lg-5">
-                <div class="row d-flex justify-content-center py-4 text-center align-items-center">
-                    <h5 class="my-2 title-ideal">My ideal retirement involves:</h5>
+            <div id="retire_ideal_content" class="my-4 y-lg-4 p-4 p-md-5 p-lg-5">
+                <div class="row d-flex justify-content-center py-4 py-md-4 py-xl-4 text-center align-items-center retirement-ideal-text">
+                    <h5 class="my-2">My ideal retirement involves:</h5>
                 </div>
                 <div class="container">
-                            {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
-                            <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-4 px-md-5">
-                                <i class="bi bi-arrow-left-circle text-primary"></i>
-                            </div>
+                    {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
+                    <div class="prev-arrow position-absolute top-50 start-0 translate-middle-y px-2">
+                        <i class="bi bi-arrow-left-circle text-primary"></i>
+                    </div>
 
-                            {{-- hidden by default on desktop using JS js/coverage-carousel.js --}}
-                            <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-4 px-md-5">
-                                <i class="bi bi-arrow-right-circle text-primary"></i>
-                            </div>
+                    {{-- hidden by default on desktop using JS script js/coverage-carousel.js --}}
+                    <div class="next-arrow position-absolute top-50 end-0 translate-middle-y px-2">
+                        <i class="bi bi-arrow-right-circle text-primary"></i>
+                    </div>
                 </div>
-                <div class="row d-flex m-auto btn-group row retirement-ideal-avatar" id="optionsForIdeal" data-carousel="true">
-                    <div class="col-sm-3 col-lg-3 justify-content-start justify-content-md-start d-flex flex-column align-items-center">
+                <div class="row d-flex m-auto btn-group row coverage-avatar" id="optionsForIdeal" data-carousel="true">
+                    <div class="col-sm-3 col-lg-3 justify-content-start justify-content-md-center d-flex flex-column align-items-center">
                         <button class="btn border-0 bg-transparent box-shadow retire-ideal-button {{ $retirementIdeal === 'option 1' ? 'selected-box-shadow' : '' }}" data-type="option 1"
                             id="button-option-1" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-1.svg') }}"
                                 alt="option 1">
-                            <h6 class="text-center py-2 ideal-text"> Visiting destinations <br>
+                            <h6 class="text-center py-2"> Visiting destinations
                                 on my bucket list</h6>
                         </button>
                     </div>
@@ -76,7 +76,7 @@
                             id="button-option-2" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-2.svg') }}"
                                 alt="option 2">
-                            <h6 class="text-center py-2 ideal-text">Maintaining a<br>
+                            <h6 class="text-center py-2">Maintaining a
                                 comfortable lifestyle</h6>
                         </button>
                     </div>
@@ -85,7 +85,7 @@
                             id="button-option-3" onclick="retireIdeal(this)">
                             <img class="p-4" src="{{ asset('images/needs/retirement/ideal-option-3.svg') }}"
                                 alt="option 3">
-                            <h6 class="text-center py-2 ideal-text">Retiring early with<br>
+                            <h6 class="text-center py-2">Retiring early with
                                 secure finances</h6>
                         </button>
                     </div>
@@ -159,61 +159,11 @@
 
 <style>
 @media only screen and (max-width: 767px) {
-    .progress-value p {
-        color: inherit !important;
-    }
 
-    .fixed-bottom {
-        z-index: 10;
-    }
-
-    .slick-track {
-        height: 57vh;
-    }
-
-    .navbar-default.transparent {
-        background: transparent !important;
-    }
-}
-
-@media only screen and (width: 414px) and (height: 896px) {
-
-    .slick-slide {
-        height: 110%;
-    }
-
-}
-
-@media only screen and (min-width:768px) and (max-height:1280px) and (orientation:portrait) {
-
-.title-ideal {
-    margin-top: 10vh !important;
-}
-    .slick-track {
-        height: 63vh;
-    }
-    .bg-needs-main {
-        background-position: center center;
-        height: 110vh;
-        width: 100%;
-    }
-    #optionsForIdeal img {
-max-width: 360px;
+.fixed-bottom {
+    z-index: 10;
 }
 }
-
-@media only screen and (min-width:834px) and (max-height:1112px) and (orientation:portrait) {
-    .slick-track {
-        height: 69vh;
-    }
-
-}
-@media only screen and (min-width:768px) and (max-height:1024px) and (orientation:portrait) {
-    .slick-track {
-        height: 67vh;
-    }
-}
-
 
 </style>
 
