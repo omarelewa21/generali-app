@@ -9,6 +9,7 @@
     // Retrieving values from the session
     $arrayData = session('passingArrays');
     $totalEducationYear = isset($arrayData['totalEducationYear']) ? $arrayData['totalEducationYear'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
     $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
     $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
     $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';

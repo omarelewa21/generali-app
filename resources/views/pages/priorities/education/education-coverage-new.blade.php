@@ -23,7 +23,7 @@
         <div class="row">
             <!-- <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="p-mb-0 m-0">
                 @csrf -->
-                <div class="col-12 vh-100 wrapper-needs-coverage-default">
+                <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
                     <section class="header-needs-default">
                         <div class="col-lg-6 col-md-12">
                             @include('templates.nav.nav-red-menu')
@@ -49,13 +49,13 @@
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                     <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child1') default @endif" id="child1" data-avatar="child1" data-required="">
-                                        <img src="{{ asset('images/avatar/avatar-child.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                        <img src="{{ asset('images/avatar/avatar-child-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 1</strong></p>
                                     </button>
                                 </div>
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                     <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['educationSelectedAvatar']) && $arrayData['educationSelectedAvatar'] === 'child2') default @endif" id="child2" data-avatar="child2" data-required="">
-                                        <img src="{{ asset('images/avatar/avatar-child.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                        <img src="{{ asset('images/avatar/avatar-child-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 2</strong></p>
                                     </button>
                                 </div>

@@ -10,6 +10,7 @@
     $arrayData = session('passingArrays');
     $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
     $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
+    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
     $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
     $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
@@ -34,7 +35,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($totalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($newTotalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -141,8 +142,40 @@
     var noRadio = document.getElementById('no');
     var totalAmountNeeded = document.getElementById("total_amountNeeded");
     var totalEducationPercentage = document.getElementById("percentage");
-    var oldTotalFund = {{ $newTotalEducationFundNeeded }};
-    var educationFundPercentage = {{ $educationFundPercentage }};
+    var oldTotalFund = parseFloat({{ $newTotalEducationFundNeeded }});
+    var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
+    var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
+    var sessionSavingAmount = parseFloat({{$educationSavingAmount}});
+
+    if (sessionSavingAmount !== '' || sessionSavingAmount !== 0) {
+        var newTotal = oldTotalFund - sessionSavingAmount;
+        var newTotalPercentage = sessionSavingAmount / oldTotalFund * 100;
+        if (newTotal <= 0){
+            totalAmountNeeded.value = 0;
+            totalEducationPercentage.value = 100;
+            $('.retirement-progress-bar').css('width','100%');
+        }
+        else{
+            totalAmountNeeded.value = newTotal;
+            totalEducationPercentage.value = newTotalPercentage;
+            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+        }
+    } 
+
+    // if (sessionSavingAmount !== 0 || sessionSavingAmount !== '' || sessionSavingAmount !== null){
+    //     var total = oldTotalFund - sessionSavingAmount;
+    //     var totalPercentage = sessionSavingAmount / oldTotalFund * 100;\
+    //     if (total <= 0){
+    //         totalAmountNeeded.value = 0;
+    //         totalEducationPercentage.value = 100;
+    //         $('.retirement-progress-bar').css('width','100%');
+    //     }
+    //     else{
+    //         totalAmountNeeded.value = total;
+    //         totalEducationPercentage.value = totalPercentage;
+    //         $('.retirement-progress-bar').css('width', totalPercentage + '%');
+    //     }
+    // } 
 
     education_saving.addEventListener("input", function() {
 
@@ -168,18 +201,27 @@
         var savingAmount = parseInt(cleanedValue);
 
         var total = oldTotalFund - savingAmount;
-        totalAmountNeeded.value = total;
         var totalPercentage = savingAmount / oldTotalFund * 100;
-        totalEducationPercentage.value = totalPercentage;
+        
         $('.retirement-progress-bar').css('width', totalPercentage + '%');
+        if (total <= 0){
+            totalAmountNeeded.value = 0;
+            totalEducationPercentage.value = 100;
+            $('.retirement-progress-bar').css('width','100%');
+        }
+        else{
+            totalAmountNeeded.value = total;
+            totalEducationPercentage.value = totalPercentage;
+            $('.retirement-progress-bar').css('width', totalPercentage + '%');
+        }
 
     });
     // Add event listeners to the radio buttons
     yesRadio.addEventListener('change', function () {
         jQuery('.hide-content').css('display','block');
-        education_saving.value = ''; // Clear the money input
-        totalAmountNeeded.value = '';
-        totalEducationPercentage.value = '';
+        // education_saving.value = ''; // Clear the money input
+        // totalAmountNeeded.value = '';
+        // totalEducationPercentage.value = '';
     });
 
     noRadio.addEventListener('change', function () {

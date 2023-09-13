@@ -1,16 +1,16 @@
 <?php
  /**
- * Template Name: Investment Homepage
+ * Template Name: Savings Homepage
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Investment - Home</title>
+<title>Savings - Home</title>
 
 @section('content')
 
-<div id="investment-home" class="vh-100 overflow-x-hidden scrollable-content">
+<div id="savings-home" class="vh-100 overflow-x-hidden scrollable-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner">
@@ -29,16 +29,16 @@
                                     <div class="position-relative h-100 mh-100">
                                     </div>
                                     <div class="position-relative h-100 mh-100 z-1 d-flex justify-content-center">
-                                        <img src="{{ asset('images/needs/investment/home/coins-left.png') }}" class="position-absolute bottom-33 start-0 mh-90 z-1">
-                                        <img src="{{ asset('images/needs/investment/home/home-avatar.png') }}" class="position-absolute bottom-33 mh-90">
-                                        <img src="{{ asset('images/needs/investment/home/coins-right.png') }}" class="position-absolute bottom-0 end-0 mh-90">
+                                        <img src="{{ asset('images/needs/savings/home/coins-left.png') }}" class="position-absolute bottom-0 start-25 mh-90">
+                                        <img src="{{ asset('images/needs/savings/home/home-avatar.png') }}" class="position-absolute bottom-33 mh-90 z-1">
+                                        <img src="{{ asset('images/needs/savings/home/coins-right.png') }}" class="position-absolute bottom-0 end-0 mh-90">
                                     </div>
                                     <div class="position-relative h-100 mh-100">
                                     </div>
                                 </div>
                                 <div class="col-12 needs-home-text z-1 align-items-end d-grid">
-                                    <div class="col-md-6 d-flex justify-content-center text-center m-auto z-1">
-                                        <h4 class="py-3 f-family fw-700">Now let's plan for your investments.</h4>
+                                    <div class="col-lg-6 col-md-8 d-flex justify-content-center text-center m-auto z-1">
+                                        <h4 class="py-3 f-family fw-700">Let's discuss how to reach your Savings goals.</h4>
                                     </div>
                                 </div>
                             </div>
@@ -48,8 +48,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4 z-1 bg-white py-4">
-                                    <a href="{{route('education.gap.new')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
-                                    <a href="{{route('investment.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('education.home')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('savings.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                                 <div class="col-12 position-absolute bottom-0 show-mobile">
                                     <div class="row">
@@ -68,8 +68,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('education.gap.new')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
-                                    <a href="{{route('investment.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('education.home')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('savings.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>

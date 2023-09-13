@@ -23,6 +23,15 @@
 .w-45{
     width: 45%;
 }
+.mh-90{
+    max-height: 90%;
+}
+.start-25{
+    left: 25px;
+}
+.start-20{
+    left: 20%;
+}
 
 /* Form Style */
 .form-control.money {
@@ -37,7 +46,65 @@
     background-position: center, center 20%;
     background-repeat: no-repeat;
 }
+.bottom-33{
+    bottom: -33px;
+}
 
+/* =============================== Needs Home Page ===============================*/
+.needs-home-wrapper{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 0px;
+    grid-template-areas: 
+    "needs-home-contents";
+    grid-template-rows: 87vh;
+}
+.needs-home-contents{
+    grid-area: needs-home-contents;
+    grid-template-columns: 100%;
+    /* test */
+    display: grid;
+    /* grid-template-areas: 
+    "needs-home-avatars"
+    "needs-home-text";
+    grid-template-rows: 75% 25%; */
+    /* grid-template-columns: repeat(3, minmax(250px, 1fr)); */
+
+}
+.needs-home-avatar-wrapper{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 0px;
+    grid-template-areas: 
+    "needs-home-avatars"
+    "needs-home-text";
+    grid-template-rows: 80% 20%;
+}
+.needs-home-avatars{
+    grid-area: needs-home-avatars;
+    display: grid;
+    grid-template-columns: repeat(3, 15% 70% auto);
+    /* grid-template-columns: repeat(3, minmax(250px, 1fr)); */
+}
+.needs-home-text{
+    grid-area: needs-home-text;
+    grid-template-columns: 100%;
+}
+#education-home .needs-stand-bg{
+    padding: 180px;
+}
+.bg-needs-home{
+    background-image: url(/images/needs/background/bg-home-needs.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+.bg-needs-home-element{
+    background-image: url(/images/needs/education/home/bg-education-home-element.png);
+    background-repeat: no-repeat;
+    background-position: center top 15%;
+    background-size: 80%;
+}
 /* =============================== Education Coverage Page ===============================*/
 .wrapper-needs-coverage-default {
     display: grid;
@@ -109,7 +176,8 @@
     position: relative;
     z-index: 1000;
 }
-.education_coverage .slick-slide button{
+.education_coverage .slick-slide button,
+.savings_coverage .slick-slide button{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 90% 10%;
@@ -137,7 +205,7 @@
     grid-template-areas:
         "header-needs-default"
         "content-supporting-default";
-    grid-template-rows: 18vh 69vh;
+    grid-template-rows: 19vh 67vh;
 }
 .content-supporting-default{
     grid-area: content-supporting-default;
@@ -161,13 +229,17 @@
     grid-template-columns: repeat(3, minmax(250px, 1fr));
     grid-gap: 0;
 }
+.avatar-supporting-wrapper{
+    grid-template-columns: 100%;
+    display: grid;
+}
 .education-support{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 90% 10%;
+    grid-template-rows: 5% 80%;
     grid-template-areas:
-        "avatar-img"
-        "avatar-text";
+        "avatar-text"
+        "avatar-img";
     grid-gap: 0px;
 }
 .avatar-img {
@@ -185,7 +257,7 @@
     background-size: 52%;
     background-position: left 66% top;
 }
-/* =============================== Education Gap Page ===============================*/
+/* =============================== Education Gap Page =======================================*/
 .wrapper-needs-gap-default {
     display: grid;
     grid-gap: 0px;
@@ -244,6 +316,14 @@
     filter: none;
 }
 
+/* =============================== Savings Monthly Payment =======================================*/
+.savings-monthly{
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 55% 20%;
+    grid-template-rows: 100%;
+}
+
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
     .col-xs-10{
@@ -258,6 +338,20 @@
     }
     .bg-education-supporting{
         background-size: 100%;
+    }
+    .savings-monthly{
+        grid-template-columns: 60% 27%;
+        grid-template-rows: 90%;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 740px) and (max-height: 800px){
+    .start-20{
+        top: 62% !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 801px) {
+    .start-20{
+        top: 65% !important;
     }
 }
 @media only screen and (max-width: 600px) and (max-height: 699px){
@@ -337,6 +431,14 @@
         margin-top: 4rem;
     }
 }
+@media only screen and (max-width: 992px){
+    .start-20{
+        max-width: 100%;
+        transform: translate(-50%, -50%);
+        top: 58%;
+        left: 50%;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1050px){
     .content-needs-default {
         grid-template-rows: auto 4vh 11vh !important;
@@ -348,8 +450,14 @@
         grid-template-rows: 94% auto !important;
     }
     .education-support{
-        grid-template-rows: 80% 10% !important;
+        grid-template-rows: 10% 80% !important;
     }
+    .start-20{
+        top: 65% !important;
+    }
+    /* .savings-monthly{
+        grid-template-rows: 70% !important;
+    } */
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1059px) and (max-height: 1199px){
     .content-needs-default {
@@ -358,10 +466,25 @@
     .wrapper-needs-supporting-default {
         grid-template-rows: 15vh 75.5vh!important;
     }
+    .start-20{
+        top: 68% !important;
+    }
+    /* .savings-monthly{
+        grid-template-rows: 80% !important;
+    } */
+    
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
     .content-needs-default {
         grid-template-rows: auto 4vh 8.5vh !important;
+    }
+    .start-20{
+        top: 73% !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 900px){
+    #savings-home .needs-stand-bg {
+        padding: 250px !important;
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px){
@@ -379,6 +502,18 @@
     }
     .content-supporting-default{
         grid-template-rows: 96% auto;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 90vh;
+    }
+    #education-home .needs-stand-bg {
+        padding: 250px;
+    }
+    #savings-home .needs-stand-bg{
+        padding: 200px;
+    }
+    .savings-monthly{
+        grid-template-rows: 90% !important;
     }
 }
 @media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 700px){
@@ -406,6 +541,9 @@
     }
     .education-support {
         grid-template-rows: 80% 10%;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 80vh;
     }
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px){
@@ -440,19 +578,30 @@
     .needs-stand-bg{
         padding: 130px;
     }
+    
     .needs-stand-bg.error-padding{
         padding: 140px;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 86vh;
+    }
+    #savings-home .needs-home-avatar-wrapper {
+        grid-template-rows: 75% 15%;
+    }
+    .savings-monthly{
+        grid-template-columns: 20% 20%;
+        grid-template-rows: 65%;
     }
 }
 @media only screen and (max-width: 1024px){
     .p-mb-0{
         padding: 0px;
     }
-    .bg-education-others-mob{
-        background-image: url('/images/needs/education/bg-education-others-mob.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center;
+    .needs-home-avatars{
+        grid-template-columns: repeat(3, 0% 100% 0%);
+    }
+    .start-25{
+        left: 0px;
     }
 }
 @media only screen and (min-width: 1024px){
@@ -473,6 +622,15 @@
     .content-supporting-default {
         grid-template-rows:93% auto;
     }
+    .needs-home-wrapper{
+        grid-template-rows: 88vh;
+    }
+    .needs-home-avatar-wrapper {
+        grid-template-rows: 85% 15%;
+    }
+    #savings-home .needs-home-avatars {
+        grid-template-columns: repeat(3, 5% 90% auto);
+    }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 840px){
     .content-needs-default {
@@ -490,6 +648,12 @@
     }
     .content-supporting-default{
         grid-template-rows: 92.5% auto;
+    }
+    .needs-home-avatars {
+        grid-template-columns: repeat(3, 10% 75% auto);
+    }
+    #savings-home .needs-home-avatars {
+        grid-template-columns: repeat(3, 8% 80% auto);
     }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 700px){
@@ -525,12 +689,26 @@
         grid-template-rows: 93.5% auto !important;
     }
 }
+@media screen and (max-width: 1200px) {
+    .bg-half{
+        background-image: url('/images/needs/background/bg-half-master-mob.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+    }
+    .bg-education-others-mob{
+        background-image: url('/images/needs/education/background/bg-education-others-mob.png');
+        background-repeat: no-repeat;
+        background-size: containxs;
+        background-position:left center;
+    }
+}
 @media screen and (min-width: 1250px) {
     .bg-education-others{
-        background-image: url('/images/needs/education/bg-education-others.png');
+        background-image: url('/images/needs/education/background/bg-education-other.png');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position:left;
+        background-position:left bottom 28%;;
     }
 }
 @media screen and (min-width: 1600px) {
@@ -542,6 +720,15 @@
     }
     .content-supporting-default {
         grid-template-rows:94.5% auto;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 88vh;
+    }
+    .needs-home-avatar-wrapper{
+        grid-template-rows: 85% 15%;
+    }
+    #savings-monthly .content-supporting-default {
+        grid-template-rows: 90% auto;
     }
 }
 @media screen and (min-width: 2000px) {
@@ -559,6 +746,18 @@
     }
     .content-supporting-default {
         grid-template-rows:96% auto;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 90vh;
+    }
+    #education-home .needs-stand-bg {
+        padding: 250px;
+    }
+    .needs-home-wrapper{
+        grid-template-rows: 90vh;
+    }
+    .savings-monthly{
+        grid-template-columns: 42% 20%;
     }
 }
 
@@ -883,9 +1082,9 @@ button.choice:hover,
 button.choice:focus,
 .button-needs[data-required="selected"],
 .button-needs.selected {
-    background-image: url('/images/general/Hover2.png');
+    background-image: url('/images/needs/hover-coverage.png');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom 8%;
     background-size: 80%;
 }
 .z-99{
@@ -1127,12 +1326,6 @@ button.choice:focus,
     .hide-desktop{
         display: block !important;
     }
-    .bg-half{
-        background-image: url('/images/needs/bg-half-plain.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
     .bg-education-gap-mob{
         background-image: url('/images/needs/education/bg-education-gap-mob.png');
         background-repeat: no-repeat;
@@ -1218,6 +1411,7 @@ button.choice:focus,
     .slick-height{
         height: fit-content !important;
     }
+    
 
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -1253,7 +1447,9 @@ button.choice:focus,
     .w-md-50{
         width:50%;
     }
-
+    .vh-md-100{
+        height: 100vh;
+    }
 }
 @media only screen and (min-width: 700px) and (max-width: 767px) and (min-height: 1024px) {
     .needs-home-nav{
@@ -1450,10 +1646,10 @@ button.choice:focus,
 }
 @media only screen and (min-width: 1250px){
     .bg-needs-desktop{
-        background-image: url('/images/needs/education/bg-needs-master.png');
+        background-image: url('/images/needs/background/bg-master-needs.png');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position:center;
+        background-position:left center;
     }
     .show-desktop{
         display: block !important;
