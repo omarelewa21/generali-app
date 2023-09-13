@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-md-12">
                     <div class="col-12">
-                        <h1 class="text-uppercase text-dark">Welcome!</h1>
-                        <h2 class="text-uppercase text-dark">Your Future Awaits.</h2>
+                        <h1 class="text-uppercase text-primary">Welcome!</h1>
+                        <h2 class="text-uppercase text-primary">Your Future Awaits.</h2>
                         <p class="text-dark py-4">We’re glad you’re looking to secure your future with us.<br>
                             Let’s begin by getting to know you
                             better.</p>

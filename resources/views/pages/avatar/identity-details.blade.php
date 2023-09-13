@@ -21,11 +21,11 @@
 <div id="identity_details" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset('/images/avatar-general/' . (isset($arrayData['image']) ? $arrayData['image'] : 'gender-male') . '.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -242,7 +242,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-outline-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>

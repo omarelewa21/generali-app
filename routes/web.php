@@ -7,6 +7,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
@@ -72,6 +73,13 @@ Route::view('/education-gap', 'pages.priorities.education.education-gap')->name(
 Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 Route::view('/education-gap-new', 'pages.priorities.education.education-gap-new')->name('education.gap.new');
 Route::post('/education-gap-new', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
+
+/* Priorities - Savings */
+Route::view('/savings-home', 'pages.priorities.savings.savings-home')->name('savings.home');
+Route::view('/savings-coverage', 'pages.priorities.savings.savings-coverage')->name('savings.coverage');
+Route::post('/savings-coverage', [SavingsController::class, 'validateSavingsCoverageSelection'])->name('validate.savings.coverage.selection');
+Route::view('/savings-monthly-payment', 'pages.priorities.savings.savings-monthly-payment')->name('savings.monthly.payment');
+Route::post('/savings-monthly-payment', [SavingsController::class, 'validateMonthlyPayment'])->name('validate.monthly.payment');
 
 /* Priorities - Investment */
 Route::view('/investment-home', 'pages.priorities.investment.investment-home')->name('investment.home');
