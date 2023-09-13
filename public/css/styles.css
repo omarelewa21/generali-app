@@ -1,6 +1,6 @@
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -9,12 +9,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #fff;
+  background-color: #C0232C;
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #C21B17;
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 /* Body */
@@ -34,11 +35,21 @@ html {
 }
 
 .text-red {
-  color: #C21B17!important;
+  color: #C0232C!important;
 }
 
 .flex-1 {
   flex: 1;
+}
+
+.popover {
+  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+  background: linear-gradient(90deg, #66B560 0%, #2272B6 100%);
+  border-radius: 17.5px;
+  font-size: 26px;
+  color: #fff;
+  width: 80px;
+  text-align: center;
 }
 
 /* Headings */
@@ -108,7 +119,7 @@ input[type="number"] {
 }
 
 .main-logo {
-  max-width: 100px;
+  max-width: 220px;
 }
 
 /* Offcanvas Menu */
@@ -207,7 +218,7 @@ p.nav-text {
 
 .btn-exit:hover {
   background-color: #ffffff;
-  color: #C21B17;
+  color: #C0232C;
 }
 
 .btn-exit:before {
@@ -238,7 +249,7 @@ p.nav-text {
 
 .btn-secondary {
   background-color: #ffffff;
-  color: #C21B17;
+  color: #C0232C;
 }
 
 .btn-secondary:hover {
@@ -303,7 +314,7 @@ button[data-required="selected"] img {
 }
 
 .modal-title {
-  font-family: 'Helvetica Neue Bold', sans-serif;
+  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
 }
 
 .otherModalText {
@@ -313,9 +324,9 @@ button[data-required="selected"] img {
 
 /* Welcome Page */
 #home {
-  background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
-  background-size: auto 100%;
-  background-position: right;
+  background-image: url(/images/welcome-page/welcome-bg-gradient.png);
+  background-size: auto 80%;
+  background-position: right top;
   background-repeat: no-repeat;
 }
 
@@ -338,14 +349,6 @@ button[data-required="selected"] img {
 
 .footer-home {
   grid-area: footer-home;
-}
-
-/* Avatar */
-.avatar-bg {
-  background-image: url('/images/avatar-general/Shadow.png');
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
 }
 
 /* Avatar Welcome Page */
@@ -400,10 +403,10 @@ button[data-required="selected"] img {
   grid-auto-rows: 100%;
 }
 
-.gender-selection-bg {
-  background-image: url(/images/avatar-gender-selection/gender-selection-bg.jpg);
-  background-size: auto 90%;
-  background-position: right;
+.main-default-bg {
+  background-image: url(/images/general/main-default-bg.png);
+  background-size: auto 70%;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: #fff;
 }
@@ -413,7 +416,7 @@ button[data-required="selected"] img {
   height: 77.94px;
   flex-shrink: 0;
   border-radius: 5px;
-  border: 1px solid var(--primary-red, #C21B17);
+  border: 1px solid var(--primary-red, #C0232C);
   background: var(--primary-white, #FFF);
   box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
@@ -501,6 +504,13 @@ button[data-required="selected"] img {
   grid-area: header-avatar-default;
 }
 
+/* Marital Status Page */
+#avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder {
+  background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
+  background-size: 25%,20%;
+  background-position: top left, bottom right;
+  background-repeat: no-repeat;
+}
 /* Family Details Page */
 .accordion-button {
   font-size: 1.375rem;
@@ -532,12 +542,12 @@ button[data-required="selected"] img {
 
 /* Skin Tone */
 :where(html) {
-  --gradient-1:linear-gradient(to bottom right,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3,#F5DEB3);
-  --gradient-2:linear-gradient(to bottom right,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460,#F4A460);
-  --gradient-3:linear-gradient(to bottom right,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C,#D2B48C);
-  --gradient-4:linear-gradient(to bottom right,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D,#A0522D);
-  --gradient-5:linear-gradient(to bottom right,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513,#8B4513);
-  --gradient-6:linear-gradient(to bottom right,#654321,#654321,#654321,#654321,#654321,#654321,#654321,#654321);
+  --gradient-1: repeating-linear-gradient(to bottom, #FFAE9E 0%, #FCD7CB 100%);
+  --gradient-2: repeating-linear-gradient(to bottom, #F3A391 0%, #FED08E 100%);
+  --gradient-3: repeating-linear-gradient(to bottom, #F69E6E 0%, #FCDCCE 100%);
+  --gradient-4: repeating-linear-gradient(to bottom, #C68471 0%, #E2A387 100%);
+  --gradient-5: repeating-linear-gradient(to bottom, #B66951 0%, #CE8864 100%);
+  --gradient-6: repeating-linear-gradient(to bottom, #8F452F 0%, #A35D38 100%);
   --surface-1:var(--gray-0);
   --text-1:var(--gray-9);
 }
@@ -566,7 +576,7 @@ button[data-required="selected"] img {
   padding:8px;
 }
 
-.block:before {
+/* .block:before {
   content: "";
   position: absolute;
   width: calc(100% + var(--size-4));
@@ -577,7 +587,7 @@ button[data-required="selected"] img {
   transform-origin: 50% 100%;
   transform: translateX(-50%) scaleY(var(--show, 0));
   z-index: -1;
-}
+} */
 
 :is(.block:hover, .block:focus-visible) .block__item {
   outline: var(--surface-1) var(--size-1) solid;
@@ -595,7 +605,7 @@ button[data-required="selected"] img {
   /* transform: translateY(calc(var(--lerp) * -75%)); */
 }
 
-.block__item:after {
+/* .block__item:after {
   content: "";
   position: absolute;
   height: 100%;
@@ -604,7 +614,7 @@ button[data-required="selected"] img {
   transform: translate(-50%, -50%);
   aspect-ratio: 1;
   border-radius: var(--radius-3);
-}
+} */
 
  :is(.block:hover, .block:focus-visible) {
   --lerp: var(--lerp-0);
@@ -836,7 +846,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .gender-selection-bg {
+  .main-default-bg {
     z-index: 1;
   }
   .progress-main {
@@ -861,7 +871,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     width: 80px;
   }
   .white-logo {
-    width: 60px;
+    width: 150px;
   }
   .display-5, p.nav-text {
     font-size: 20px;
@@ -1189,7 +1199,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
   .btn-exit:hover {
     background-color: #ffffff;
-    color: #C21B17;
+    color: #C0232C;
   }
 /* 
   .logout-svg {
@@ -1314,7 +1324,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   }
 
   .timeline-item-needs.active::after {
-    background: #C21B17;
+    background: #C0232C;
     border: 0;
   }
  */

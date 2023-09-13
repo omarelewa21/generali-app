@@ -15,20 +15,21 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $familyDependant = isset($arrayData['familyDependant']) ? json_encode($arrayData['familyDependant']) : '';
+    $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
+    $gender = isset($arrayData['Gender']) ? ($arrayData['Gender'] === 'Male' ? 'Female' : 'Male') : '';
 @endphp
 
 <div id="avatar_family_dependant" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
-                    <div class="avatar-bg position-relative imageContainerParents"></div>
-                    <div class="avatar-bg position-relative imageContainerSpouse">
-                        <img src="{{ asset('/images/avatar-general/avatar-gender-male-no-shadow.svg') }}" width="auto" height="98%" alt="Main character" class="changeImage position-absolute" style="left:40px">
+                    <div class="position-relative imageContainerParents"></div>
+                    <div class="position-relative imageContainerSpouse">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
-                    <div class="avatar-bg position-relative imageContainerChildren"></div>
+                    <div class="position-relative imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
@@ -57,7 +58,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'spouse' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['familyDependant']) && in_array('spouse', $arrayData['familyDependant'])) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['spouse']['status']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes') default @endif" data-avatar="spouse" data-required="" id="spouseButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
                                                 </button>
@@ -67,7 +68,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'children' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['familyDependant']) && preg_grep('/^child_\d+$/', $arrayData['familyDependant'])) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['children']) && is_array($arrayData['FamilyDependant']['children']) && count($arrayData['FamilyDependant']['children']) > 0) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
                                                     <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
                                                 </button>
@@ -77,7 +78,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'parents' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['familyDependant']) && preg_grep('/^parent_\d+$/', $arrayData['familyDependant'])) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']) && is_array($arrayData['FamilyDependant']['parents']) && count($arrayData['FamilyDependant']['parents']) > 0) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
                                                     <img src="{{ asset('images/avatar-family-dependant/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
                                                 </button>
@@ -87,7 +88,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'siblings' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="siblings" data-required="" id="siblingButton">
+                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                                 </button>
@@ -105,7 +106,8 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{$familyDependant}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant.details">
-                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="spouseGenderInput" id="spouseGenderInput" value="{{$gender}}">
+                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -125,12 +127,13 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 py-2 justify-content-center">
-                <h3 class="modal-title text-center display-4" id="parentAvatarsLabel">Parent(s)</h2>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="parentAvatarsLabel">Parent(s)</h3>
             </div>
-            <div class="modal-body text-center px-5 pt-2 pb-5 d-flex justify-content-center">
-                <select name="parents" class="form-select @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" style="width:60%" required>
-                    <option value="father" selected>Father</option>
+            <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
+                <select name="parents" class="form-select bg-white @error('parents') is-invalid @enderror" aria-label="Parents" id="parentsSelect" required>
+                    <option value="noParents">No parents</option> 
+                    <option value="father">Father</option>
                     <option value="mother">Mother</option>
                     <option value="both">Both Parents</option>
                 </select>
@@ -148,11 +151,12 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 py-2 justify-content-center">
-                <h3 class="modal-title text-center display-4" id="childrenAvatarsLabel">Child(ren)</h2>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="childrenAvatarsLabel">Child(ren)</h3>
             </div>
-            <div class="modal-body text-center px-5 pt-2 pb-5 d-flex justify-content-center">
-                <select name="children" class="form-select @error('children') is-invalid @enderror" aria-label="Children" id="childrenSelect" style="width:60%" required>
+            <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
+                <select name="children" class="form-select bg-white @error('children') is-invalid @enderror" aria-label="Children" id="childrenSelect" required>
+                    <option value="noChildren">No children</option>    
                     @for ($i = 1; $i <= 20; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
@@ -170,7 +174,7 @@
 var passingArrays = {!! json_encode(session('passingArrays')) !!};
 
 // Access the elements of the array in JavaScript
-var maritalStatus = passingArrays.maritalStatus;
+var maritalStatus = passingArrays.MaritalStatus;
 
 // Disable the 'Spouse' button if maritalStatus is 'single'
 if (maritalStatus === 'single') {
@@ -202,49 +206,78 @@ if (maritalStatus === 'single') {
     spouseImg.style.opacity = '0.5'; 
 }
 
-const childButton = document.getElementById('childButton');
+const spouseButton = document.getElementById('spouseButton');
+const confirmChildrenButton = document.querySelector('.btn-exit-children');
 const parentButton = document.getElementById('parentButton');
 const siblingButton = document.getElementById('siblingButton');
-const spouseButton = document.getElementById('spouseButton');
 const familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
-const clickedAvatars = [];
-
-let spouseClicked = false;
-let childClicked = false;
-let parentClicked = false;
-let siblingClicked = false;
+const clickedAvatars = {
+    spouse: null,
+    children: [],
+    children_details: [],
+    parents: [],
+    parents_details: [],
+    siblings: null
+};
 
 spouseButton.addEventListener('click', function(event) {
     event.preventDefault();
 
-    if (!spouseClicked) {
-        const dataAvatar = 'spouse';
-        clickedAvatars.push(dataAvatar);
+    const dataAvatar = 'spouse';
+    var isSelected = this.closest('.button-bg').classList.contains('selected');
+    
+    if (isSelected) {
+        clickedAvatars[dataAvatar] = {
+            'status': 'no',
+        };
+    }
+    else {
+        clickedAvatars[dataAvatar] = {
+            'status': 'yes',
+        };
+    }
+
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        spouseClicked = true;
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value), 
+            spouse: clickedAvatars.spouse 
+        });
     }
 });
 
-const confirmChildrenButton = document.querySelector('.btn-exit-children');
+
 confirmChildrenButton.addEventListener('click', function(event) {
     event.preventDefault();
 
+    const dataAvatar = 'children';
     const childrenSelect = document.getElementById('childrenSelect');
     const selectedChildren = childrenSelect.value;
 
+    // Clear the children array to start fresh
+    clickedAvatars[dataAvatar] = [];
+
     if (selectedChildren > 0) {
         for (let i = 1; i <= selectedChildren; i++) {
-            const dataAvatar = `child_${i}`;
-            clickedAvatars.push(dataAvatar);
+            const dataAvatarval = `child_${i}`;
+            clickedAvatars[dataAvatar].push(dataAvatarval);
         }
+    }
+    else if(selectedChildren == 'noChildren') {
+        // Clear the children array
+        clickedAvatars[dataAvatar] = [];
+    }
 
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-
-        // Close the modal
-        const childrenAvatarsModal = new bootstrap.Modal(document.getElementById('childrenAvatars'));
-        childrenAvatarsModal.hide();
-
-        childClicked = true;
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value),
+            children: clickedAvatars.children
+        });
     }
 });
 
@@ -252,51 +285,65 @@ const confirmParentButton = document.querySelector('.btn-exit-parent');
 confirmParentButton.addEventListener('click', function(event) {
     event.preventDefault();
 
+    const dataAvatar = 'parents';
     const parentsSelect = document.getElementById('parentsSelect');
     const selectedParent = parentsSelect.value;
 
+    // Clear the parents array to start fresh
+    clickedAvatars[dataAvatar] = [];
+
     if (selectedParent !== "") {
-        if (selectedParent === "mother") {
-            clickedAvatars.push("parent_1");
-        } else if (selectedParent === "father") {
-            clickedAvatars.push("parent_2");
+        if (selectedParent === "father") {
+            clickedAvatars[dataAvatar].push("grandfather");
+        } else if (selectedParent === "mother") {
+            clickedAvatars[dataAvatar].push("grandmother");
         } else if (selectedParent === "both") {
-            clickedAvatars.push("parent_1", "parent_2");
+            clickedAvatars[dataAvatar].push("grandfather", "grandmother");
         }
+    }
+    else if(selectedParent == 'noParents') {
+        // Clear the parents array
+        clickedAvatars[dataAvatar] = [];
+    }
 
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-
-        // Close the modal
-        const parentAvatarsModal = new bootstrap.Modal(document.getElementById('parentAvatars'));
-        parentAvatarsModal.hide();
-
-        parentClicked = true;
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value),
+            parents: clickedAvatars.parents
+        });
     }
 });
-
-
-// parentButton.addEventListener('click', function(event) {
-//     event.preventDefault();
-
-//     if (!parentClicked) {
-//         const dataAvatar = 'parents';
-//         clickedAvatars.push(dataAvatar);
-//         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-//         parentClicked = true;
-//     }
-// });
 
 siblingButton.addEventListener('click', function(event) {
     event.preventDefault();
 
-    if (!siblingClicked) {
-        const dataAvatar = 'siblings';
-        clickedAvatars.push(dataAvatar);
+    const dataAvatar = 'siblings';
+    var isSelected = this.closest('.button-bg').classList.contains('selected');
+    
+    if (isSelected) {
+        clickedAvatars[dataAvatar] = {
+            'status': 'no',
+        };
+    }
+    else {
+        clickedAvatars[dataAvatar] = {
+            'status': 'yes',
+        };
+    }
+
+    if (familyDependantButtonInput.value == '') {
         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-        siblingClicked = true;
+    }
+    else {
+        familyDependantButtonInput.value = JSON.stringify({
+            ...JSON.parse(familyDependantButtonInput.value), 
+            siblings: clickedAvatars.siblings 
+        });
     }
 });
-
 </script>
 
 @endsection

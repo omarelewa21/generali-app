@@ -132,6 +132,7 @@ class formProtectionController extends Controller
         $validatedData = $request->validate([
             'protectionExistingPolicy' => 'required|in:yes,no',
             'protectionPolicyAmount' => 'required_if:protectionExistingPolicy,yes|numeric_commas_stripped|min:1'
+            
 
         ], $customMessages);
 
@@ -143,12 +144,19 @@ class formProtectionController extends Controller
         $formattedProtectionPolicyAmount = number_format($protectionPolicyAmount, 0, '.', ',');
         $TotalProtectionValue = session('passingArraysProtection.TotalProtectionValue');
 
-        $protectionPolicyAmount = ($protectionExistingPolicy == 'yes') ? $protectionPolicyAmount : 0;
+        if ($protectionExistingPolicy == 'no') {
+            $protectionPolicyAmount = 0;
+        }
 
+        $arrayDataProtection['protectionExistingPolicy'] = $protectionExistingPolicy;
         
         if ($protectionPolicyAmount > $TotalProtectionValue){
             $protectionGap = 0;
             $protectionPercentage = 100;
+        }
+        else if ($protectionPolicyAmount == 0){
+            $protectionGap = 0;
+            $protectionPercentage = 0;
         }
         else {
         $protectionGap =  $TotalProtectionValue - $protectionPolicyAmount;

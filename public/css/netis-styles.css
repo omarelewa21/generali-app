@@ -34,13 +34,13 @@
 
 /* Retirement - Home page */
 .needs-grey-bg {
-    padding-top: 280px;
+    height: 280px;
     background-color: #E9E9E9;
 }
 
 
 .needs-grey-bg-md {
-    padding-top: 240px;
+    height: 240px;
     left: 0px;
     background-color: #E9E9E9;
 
@@ -169,8 +169,9 @@
 #protection_home .needs-home-avatar img {
     max-height: 55vh;
   }
+
 #retirement_home .needs-home-avatar img {
-        max-height: 53vh;
+        max-height: 52vh;
 }
 
 
@@ -183,10 +184,10 @@
     height: 66vh;
 }
 .avatar-age-to-retire {
-    right: 14%;
-    bottom: 9%;
-    z-index: 10;
-    width: 52vh;
+        right: 0%;
+        bottom: 9%;
+        z-index: 10;
+        width: 64vh;
 }
 
 .retirement-progress {
@@ -336,9 +337,8 @@ font-family:"Helvetica Neue Bold", sans-serif;
   }
 
   .pos-bottom-error {
-    bottom:12% !important;
+    bottom:13% !important;
     z-index:100;
-
   }
   .label-invalid {
     border:3px solid var(--bs-form-invalid-border-color);
@@ -346,8 +346,15 @@ font-family:"Helvetica Neue Bold", sans-serif;
   .label-invalid:focus {
     border-color: #000000;
   }
-
-
+  .ideal-text {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+  }
+  .coverage-avatar img.spouse-avatar {
+    padding-right: 10px;
+  }
+  
   /* mobile css */
 @media only screen and (max-width: 767px) {
     body,
@@ -371,6 +378,7 @@ font-family:"Helvetica Neue Bold", sans-serif;
     }
     .bg-needs-main {
         background-size:cover;
+        height:100vh;
 
     }
     .bg-needs-1 {
@@ -383,7 +391,7 @@ font-family:"Helvetica Neue Bold", sans-serif;
 
     }
     .needs-home-avatar {
-        top: 5%;
+        top: 0;
         left: 0%;
         z-index: 1;
         bottom: 0;
@@ -394,52 +402,46 @@ font-family:"Helvetica Neue Bold", sans-serif;
     #retirement_home .needs-home-avatar img {
         height: 53vh;
     }
-
-    /* .needs-home-avatar img {
-        height: 50vh;
-    } */
-
     .needs-grey-bg {
         display:none !important;        
     }
 
     .needs-grey-bg-mobile {
-        padding: 25px;
+        height: 90px;
         background-color: #E9E9E9;
         width: 100%;
+        position:relative;
+        top:-1%;
+        z-index: 0 !important;
     }
 
     .needs-grey-bg-md {
-        padding: 136px;
+        height: 0;
     }
     .coverage-avatar {
         z-index:5;
     }
 
     .coverage-avatar img.self-avatar {
-        width: 17vh;
+        width: 19vh;
     }
 
     .coverage-avatar img.spouse-avatar {
-        width: 15vh;
+        width: 17vh;
     }
 
     .coverage-avatar img.kid-avatar {
-        width: 15vh;
+        width: 17vh;
     }
 
     .coverage-avatar img.parent-avatar {
-        width: 30vh;
+        width: 32vh;
     }
-
     .avatar-age-to-retire {
         top: 5%;
         right: 0%;
         width: 41vh;
     }
-/* .children-avatar-mobile {
-    min-height: 430px !important;
-} */
     .avatar-years-till-retire {
         right: 0;
         width: 40vh;
@@ -453,7 +455,6 @@ font-family:"Helvetica Neue Bold", sans-serif;
 
     .avatar-allocated-funds-aside {
         left: 0;
-        top: 0px;
         width: 43vh;
     }
     .summary-progress-bar {
@@ -486,9 +487,9 @@ font-family:"Helvetica Neue Bold", sans-serif;
 width: 80%;
 }
 
-
 #protection_home .needs-home {
-    grid-template-rows: 5vh 26vh 42vh;
+    /* grid-template-rows: 5vh 73vh 16vh; */
+    grid-template-rows: 5vh 52vh 16vh;
 }
 
 /* form input-needs */
@@ -500,10 +501,10 @@ width: 80%;
 }
 
 /* Needs - Home - Mobile CSS */
-#protection_home .progress-main p , #retirement_home .progress-main p{
+#protection_home .progress-main p.display-6 , #retirement_home .progress-main p.display-6{
     color:#ffffff !important;
 }
-#protection_home .progress-value p, #retirement_home .progress-value p {
+.progress-value p {
     color:inherit !important;
 }
 #protection_home .fixed-bottom , #retirement_home .fixed-bottom {
@@ -521,13 +522,29 @@ width: 80%;
     display: flex;
     justify-content: center;
 }
+.pos-bottom-error {
+    bottom:11% !important;
+  }
+
+.fixed-bottom {
+    z-index: 10;
+}
+
+#protection_coverage.slick-track {
+    height: 57vh;
+}
+
+.navbar-default.transparent {
+    background: transparent !important;
+}
+/* used for kid height in mobile */
+#protection_coverage .slick-track {
+    height: 57vh;
+}
 }
 /* large desktop css */
 @media screen and (min-height:840px) and (min-width:968px) {
 
-    .needs-home-avatar {
-        top: 15%;
-    }
     .avatar-allocated-funds{
         bottom:0;
     }
@@ -538,36 +555,33 @@ width: 80%;
         top:22%;
     }
     .avatar-age-to-retire {
-    right: 11%;
-    bottom: 0%;
-    z-index: 10;
-    width: 59vh;
+        right: 0%;
+        bottom: 8%;
+        z-index: 10;
+        width: 50vh;
     }
 
     .coverage-avatar img.self-avatar{
-        width: 23vh;
+        width: 24vh;
       }
       .coverage-avatar img.spouse-avatar{
-        width: 20vh;
+        width: 21vh;
       }
       .coverage-avatar img.kid-avatar{
-        width: 21vh;
+        width: 19vh;
       }
       .coverage-avatar img.parent-avatar{
         width: 40vh;
       }
-
-      .coverage-avatar {
-        bottom:3%;
-      }
-
       .monthly-support-asset {
         left: 8%;
         bottom: -3%;
         z-index: 10;
         width: 58vh;
     }
-
+    .pos-bottom-error {
+        bottom:11% !important;
+      }
 
 }
 
@@ -578,63 +592,208 @@ width: 80%;
 }
 
 
-/* target iPad air,mini, iPad Pro */
-@media only screen and (min-width: 768px) and (max-height: 1366px) and (orientation: portrait) {
+/* target iPad, iPad mini */
+@media only screen and (width: 768px) and (max-height: 1366px) and (orientation: portrait) {
     /* protection - home */
     .bg-needs-main {
         /* background-position: center 70%, center 55%; */
         background-size: cover;
-      }  
-    .calendar-protection {
+      }
+  
+      .calendar-protection {
         width: 62%;
-    }
-    .protection-existing-policy-asset {
+      }
+  
+      .protection-existing-policy-asset {
         left: 0;
         bottom: 19%;
         z-index: 10;
         width: 28vh;
-    }
-    .needs-home-avatar img {
-        max-height: 60vh !important;
-       }
-       
-       .monthly-support-asset {
+      }
+  
+      .monthly-support-asset {
         left: -5%;
         bottom: 8%;
         z-index: 10;
         width: 40vh;
-    }
-    .needs-text {
+      }
+  
+      .needs-text {
         display: flex;
         justify-content: center;
-    }
-    .w-sm-25 {
+      }
+  
+      .w-sm-25 {
         width: 25% !important;
       }
+  
       .avatar-allocated-funds-aside {
-        width: 60vh !important;
-        top: 0;
+        width: 50vh;
+        top: -10%;
       }
+  
+      .needs-home {
+        grid-template-rows: 21vh 71vh 13vh;
+      }
+  
+      #retirement_home .needs-home {
+        grid-template-rows: 23vh 53vh 13vh;
+      }
+  
+      .pos-bottom-error {
+        bottom: 10% !important;
+      }
+  
+      .avatar-age-to-retire {
+        width: 50vh !important;
+      }
+  
+      .avatar-allocated-funds {
+        width: 52vh !important;
+      }
+  
+      .avatar-years-till-retire {
+        width: 46vh !important;
+      }
+  
+      .svg-container {
+        transform: scale(1) !important;
+      }
+  
+      .needs-grey-bg-md {
+        padding-top: 300px;
+      }
+  
+      .slick-track {
+        height: 63vh;
+      }
+  
+      #protection_coverage .bg-needs-main {
+        background-position: center center;
+        height: 110vh;
+        width: 100%;
+      }
+  
+      #protection_coverage .slick-track {
+        height: 67vh;
+      }
+  
+      .coverage-avatar img.self-avatar {
+        width: 24vh;
+      }
+  
+      .coverage-avatar img.spouse-avatar {
+        width: 20vh;
+      }
+  
+      .coverage-avatar img.parent-avatar {
+        width: 36vh;
+      }
+    
 }
 
-/* Target iPad air,mini, iPad Pro in landscape mode */
-@media only screen and (min-width: 768px) and (max-width:1024px) and (max-height: 1024px) and (orientation: landscape) {
+/* Target iPad,iPad mini in landscape mode */
+@media only screen and (min-width: 768px) and (max-width:1112px) and (max-height: 1024px) and (orientation: landscape) {
     .needs-home-avatar img {
         height: 54vh;
     }
     .needs-home {
         grid-template-rows: 13vh 60vh 17vh;
         }
+        #retirement_home .needs-home-avatar img {
+            max-height: 48vh;
+        }
+        #bg-ideal-age {
+            max-width: 50vh;
+        }
+        .avatar-age-to-retire {
+            left:18%;
+          }
+        #optionsForIdeal img {
+            max-width: 310px;
+        }        
+
+        .slick-track {
+            height: 63vh;
+        }
+        .bg-needs-main {
+            background-position: center center;
+            height: 110vh;
+            /* width: 100%; */
+        }
+        .retire-ideal-button {
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        .retire-ideal-button.selected-box-shadow {
+            box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+        }      
+        .avatar-age-to-retire {
+            width: 50vh !important;
+          }
+        #retirmentAllocatedFunds .bg-needs-1 {
+            height: 57vh;
+        }
+        .avatar-allocated-funds-aside {
+            top: 0;
+            width: 60vh;
+        }
+        h5.gap-value {
+            font-size: 1.5rem;
+        }   
+        h5.gap-text {
+            font-size: 1.2rem;
+        }
+        .svg-container {
+            transform: scale(1.2) !important;
+          }
+
 }
 
 
-/* target Galaxy Tab */
+/* target Nexus 10:800px, iPad Air:820px and iPad Pro:1024px */
+@media only screen and (min-width:800px) and (max-width:1024px) and (max-device-height:1366px) {
+    .needs-home-avatar img {
+        max-height: 60vh !important;
+        max-width: 100vh;
+    }
+    .needs-home {
+        grid-template-rows: 21vh 71vh 13vh;
+        }
+    .bg-needs-main {
+            /* background-position: center 70%, center 55%; */
+            background-size: cover;
+    }  
+    #protection_coverage .slick-track {
+        height: 74vh;
+    } 
+    .needs-grey-bg-md {
+        height:300px;
+    }
+    .pos-bottom-error {
+        bottom: 7.5% !important;
+    }
+}
+
+/* target Nexus 10:1280px, iPad Air:1180px and iPad Pro:1366px */
+@media only screen and (min-width:1180px) and (max-width:1366px) and (max-device-height:1366px) and (orientation:landscape) {
+    .needs-grey-bg {
+        height:300px;
+    }
+}
+
+/* target Galaxy Tab 4 */
 @media only screen and (width:712px) and (height:1138px) and (orientation:portrait) {
     #protection_home .needs-home-avatar img {
         height: 60vh;
     }
     .needs-grey-bg-mobile {
-        padding: 30px 150px !important;
+        padding: 30px 190px !important;
+        height: 125px;
+        position: relative;
+        top: -2%;
+        z-index: 0 !important;
     }
 }
 
@@ -649,7 +808,25 @@ width: 80%;
         height: 43vh;
     }
 }
-
+@media only screen and (width:820px) and (orientation:portrait) {
+    .needs-home {
+        grid-template-rows: 19vh 71vh 13vh
+    }
+}
+@media only screen and (min-height:768px) and (max-height:780px) and (orientation:landscape) {
+    .coverage-avatar img.self-avatar {
+        width: 21vh;
+    }
+    .coverage-avatar img.spouse-avatar {
+        width: 19vh;
+    }
+    .coverage-avatar img.kid{
+        width: 21vh;
+    }
+    .coverage-avatar img.parent-avatar {
+        width: 32vh;
+    }
+}
 
 
   /* old css */

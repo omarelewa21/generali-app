@@ -31,7 +31,7 @@
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h3 id="TotalRetirementValueText" class="m-1 text-light text-center">RM {{
-                            $formattedTotalRetirementValue }}</h3>
+                            $formattedTotalRetirementValue}}</h3>
                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                     </div>
                 </div>
@@ -67,14 +67,18 @@
                         <div class="bg-needs-1 col-lg-6 d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-center order-1 order-lg-0">
                             <img class="position-relative avatar-years-till-retire" src="{{ asset('images/needs/retirement/years-to-retire-avatar.svg') }}" alt="avatar">
                         </div>
-                        <div class="col-lg-5 my-auto d-flex flex-column justify-content-center justify-content-lg-end align-items-start align-items-lg-start mx-0 mx-lg-0 order-0 order-lg-1">
+                        <div class="col-lg-5 d-flex flex-column justify-content-center justify-content-sm-center justify-content-lg-center mx-0 mx-lg-auto order-0 order-lg-1">
                             <h5 class="needs-text">I plan to have</h5>
+                            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start"> 
                             <div class="input-group w-50">
                                 <input type="text" name="retirementYearsTillRetire" value="{{$retirementYearsTillRetire}}" class="input-text form-control text-primary py-0 @error('retirementYearsTillRetire') is-invalid @enderror" id="retirementYearsTillRetire" placeholder=" " required> 
                                 <h5 class="needs-text">golden years</h5>
                             </div>
-                            <h5 class="needs-text">to enjoy my retirement.</h5>
                         </div>
+                        <h5 class="needs-text">to enjoy my retirement.</h5>
+
+                        </div>
+
 
                         </div>
                         <div class="d-flex needs-grey-bg-md justify-content-center bg-accent-bg-grey position-absolute w-100 bottom-0">
@@ -216,6 +220,10 @@ background: transparent !important;
 }
 .avatar-years-till-retire {
     top:2%;
+}
+input#retirementYearsTillRetire {
+    width: 50%;
+    text-align: center; 
 }
 }
     </style>

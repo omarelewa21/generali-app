@@ -7,7 +7,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
     <div class="offcanvas-header px-4 px-md-5 pt-4 pt-md-5 pb-3">
         <div class="navbar-brand">
-            <img class="white-logo" src="{{ asset('images/general/Logo-white-2x.png') }}" alt="Logo" width="100px;">
+            <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220;">
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
