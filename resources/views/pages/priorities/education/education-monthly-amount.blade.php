@@ -58,10 +58,10 @@
                         <section class="row edu-con align-items-end mh-100">
                             <div class="col-12 position-relative mh-100">
                                 <div class="row h-100" id="education-monthly-content">
-                                    <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
+                                    <div class="col-12 col-xl-6 avatar-supporting-wrapper align-items-end justify-content-center z-1 mh-100 second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
-                                            <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
-                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p>
+                                            <img src="{{ asset('images/needs/education/monthly-amount/education-monthly-avatar.png') }}" class="mt-auto mh-100 w-auto mw-100 mx-auto avatar-img">
+                                            <!-- <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p> -->
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
@@ -72,10 +72,10 @@
                                     <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
-                                                <p class="f-34"><strong>Right now, I need</strong><br>
+                                                <p class="f-34"><strong>I plan to fund my child’s education with a total of</strong><br>
                                                     <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{ $educationMonthlyAmount !== null ? number_format(floatval($educationMonthlyAmount)) : $educationMonthlyAmount }}" required></span>
                                                     <!-- <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span> -->
-                                                    <strong>/month for my tertiary education.</strong>
+                                                    <strong>/month.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
                                                 <!-- <input type="hidden" name="tertiary_education_years" id="tertiary_education_years" value="{{$totalEducationYear}}">
@@ -152,7 +152,7 @@
     // var education_saving = document.getElementById('education_other_savings');
     
     // var newTotalFund = document.getElementById("newTotal_educationFund");
-    var displayAvatar = document.getElementById("displayFund");
+    // var displayAvatar = document.getElementById("displayFund");
 
     monthlyInput.addEventListener("input", function() {
 
@@ -183,14 +183,14 @@
         if (isNaN(monthlyAmount)) {
             // Input is not a valid number
             totalEducationFund.innerText = "RM 0";
-            displayAvatar.innerText = "RM 0";
+            // displayAvatar.innerText = "RM 0";
         } else {
             // Input is a valid number, perform the calculation
             // Display the result
             var result = amountPerYear.toLocaleString();
 
             totalEducationFund.innerText = "RM " + result;
-            displayAvatar.innerText = "RM " + result;
+            // displayAvatar.innerText = "RM " + result;
         }
 
         // Set the value of the hidden input field
