@@ -28,7 +28,7 @@
                 <div class="col-12 text-dark px-0 my-4 d-flex justify-content-center">
                     <div class="my-4">  
                         <section>
-                            <div class="mt-4 container mx-auto row justify-content-center bg-needs-gap">
+                            <div class="mt-4 container-fluid mx-auto row justify-content-center bg-needs-gap">
                             <div class="col-lg-5 d-flex flex-column justify-content-md-center justify-content-center align-items-center">
                                 <div class="svg-container" style="transform:scale(1.3)">
                                 <div class="card-gap" id="gap">
@@ -41,19 +41,19 @@
                                           </linearGradient >
                                         </defs>
                                         <circle cx="90" cy="90" r="144" stroke="url(#gradient)" id="circle"></circle>
-                                        {{-- <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle> --}}
+                                        <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle>
                                       </svg>
                                       <div class="circle"></div>
                                       <div class="circle circle__medium"></div>
                                       <div class="circle circle__small"></div>
-                                      <div class="card-gap__number text-primary">{{$protectionPercentage}}%</div>
+                                      <div class="card-gap__number text-primary needs-text">{{$protectionPercentage}}%</div>
                                     </div>
                                 </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-10 col-lg-6 my-2 my-md-5 my-md-auto my-lg-auto d-flex flex-column justify-content-sm-center justify-content-lg-end mx-2 mx-md-5 mx-lg-0">
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     After the next
                                                 </h5>
@@ -65,7 +65,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3" style="height:95px">
                                                 <h5 class="gap-text my-auto w-50">                                             
                                                     I want to protect my loved ones with
                                                 </h5>
@@ -77,7 +77,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mx-0 mx-md-2 mx-lg-2 rounded-3" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     I have set aside
                                                 </h5>
@@ -89,7 +89,7 @@
                                         </div>
                                         
                                         <div class="d-flex">
-                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-2 mx-lg-2 rounded-3 glow-box" style="height:95px">
+                                            <div class="bg-white p-3 m-2 border flex-grow-1 position-relative d-flex justify-content-between mb-md-0 mx-0 mx-md-2 mx-lg-2 rounded-3" style="height:95px">
                                                 <h5 class="gap-text my-auto">                                             
                                                     So I need a plan for
                                                 </h5>

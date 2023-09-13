@@ -155,7 +155,10 @@
 }
 
 /* Protection pages */
-
+/* protection coverage */
+#protection_coverage .coverage-avatar img.spouse-avatar {
+    margin-right:15px;
+}
 /* Protection - Monthly Support */
 .monthly-support-asset {
     left: 7%;

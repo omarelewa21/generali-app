@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-lg-5 my-auto d-flex flex-column justify-content-sm-center justify-content-lg-end align-items-start align-items-lg-start mx-0 py-3 mx-lg-0 order-0 order-lg-1">
                             <div class="row justify-content-center">
-                                <div class="col-10 col-md-8 col-lg-8 col-xl-10 my-0 my-md-3 my-lg-4">
+                                <div class="col-10 col-md-8 col-lg-12 col-xl-10 my-0 my-md-3 my-lg-4">
                             <h5 class="needs-text">It would be great to have</h5> 
                             <div class="d-flex flex-wrap">
                             <div class="input-group w-50">
