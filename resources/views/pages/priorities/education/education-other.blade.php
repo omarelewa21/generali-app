@@ -8,13 +8,13 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $educationSelectedImage = isset($arrayData['educationSelectedImage']) ? $arrayData['educationSelectedImage'] : '';
-    $edcationSaving = isset($arrayData['edcationSaving']) ? $arrayData['edcationSaving'] : '';
-    $totalEducationFundNeeded = isset($arrayData['totalEducationFundNeeded']) ? $arrayData['totalEducationFundNeeded'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['newTotalEducationFundNeeded']) ? $arrayData['newTotalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['educationFundPercentage']) ? $arrayData['educationFundPercentage'] : 0;
-    $educationSavingAmount = isset($arrayData['educationSavingAmount']) ? $arrayData['educationSavingAmount'] : '';
-    $totalAmountNeeded = isset($arrayData['totalAmountNeeded']) ? $arrayData['totalAmountNeeded'] : '';
+    $educationSelectedImage = isset($arrayData['education']['educationSelectedImage']) ? $arrayData['education']['educationSelectedImage'] : '';
+    $edcationSaving = isset($arrayData['education']['edcationSaving']) ? $arrayData['education']['edcationSaving'] : '';
+    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
+    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
+    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
+    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
+    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
 @endphp
 
 <div id="education-content"  class="vh-100 scroll-content">
@@ -66,12 +66,12 @@
                                                 <p class="f-34 m-0 fw-700">Luckily, I do have funds saved up for my child’s education.<br>
                                                     <span class="me-5">
                                                         <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);"
-                                                        {{ (isset($arrayData['edcationSaving']) && $arrayData['edcationSaving'] === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
+                                                        {{ (isset($arrayData['education']['edcationSaving']) && $arrayData['education']['edcationSaving'] === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
                                                         <label for="yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
                                                         <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);"
-                                                        {{ (isset($arrayData['edcationSaving']) && $arrayData['edcationSaving'] === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
+                                                        {{ (isset($arrayData['education']['edcationSaving']) && $arrayData['education']['edcationSaving'] === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
                                                         <label for="no" class="form-label">No</label>
                                                     </span>
                                                 </p>

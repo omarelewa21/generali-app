@@ -57,8 +57,8 @@ class EducationController extends Controller
         // $education_saving_amount = $request->input('education_saving_amount');
         // $education_other_savings = $request->input('education_other_savings');
 
-        $arrayData['educationMonthlyAmount'] = $monthly_education_amount;
-        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['education']['educationMonthlyAmount'] = $monthly_education_amount;
+        $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
         // $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
         // $arrayData['totalEducationYear'] = $tertiary_education_years;
         // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
@@ -102,9 +102,9 @@ class EducationController extends Controller
         // $education_saving_amount = $request->input('education_saving_amount');
         // $education_other_savings = $request->input('education_other_savings');
 
-        $arrayData['totalEducationYear'] = $tertiary_education_years;
-        $arrayData['totalEducationFundNeeded'] = $totalEducationFund;
-        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        $arrayData['education']['totalEducationYear'] = $tertiary_education_years;
+        $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
+        $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
         // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
         // $arrayData['educationFundPercentage'] = $totalPercentage;
         // $arrayData['educationSavingAmount'] = $education_saving_amount;
@@ -163,11 +163,11 @@ class EducationController extends Controller
         $totalAmountNeeded = $request->input('total_amountNeeded');
         $totalPercentage = $request->input('percentage');
 
-        $arrayData['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['edcationSaving'] = $education_other_savings;
-        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        $arrayData['educationFundPercentage'] = $totalPercentage;
+        $arrayData['education']['educationSavingAmount'] = $education_saving_amount;
+        $arrayData['education']['edcationSaving'] = $education_other_savings;
+        $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
+        $arrayData['education']['educationFundPercentage'] = $totalPercentage;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -212,8 +212,8 @@ class EducationController extends Controller
         // Add or update the data value in the array
         // if ($educationSelectedAvatarInput) { 
         // }
-        $arrayData['educationSelectedAvatar'] = $educationSelectedAvatarInput;
-        $arrayData['educationSelectedImage'] = $educationSelectedImage;
+        $arrayData['education']['educationSelectedAvatar'] = $educationSelectedAvatarInput;
+        $arrayData['education']['educationSelectedImage'] = $educationSelectedImage;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
