@@ -139,14 +139,14 @@ class EducationController extends Controller
         $validatedData = Validator::make($request->all(), [
             'education_other_savings' => 'required|in:yes,no',
             'education_saving_amount' => [
-                'required_if:education_other_savings,yes',
                 'nullable',
                 'regex:/^[0-9,]+$/',
-                function ($attribute, $value, $fail) {
+                'required_if:education_other_savings,yes',
+                function ($attribute, $value, $fail) use ($request) {
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
-                    if (intval($numericValue) < $min) {
+                    if (intval($numericValue) < $min && $request->input('education_other_savings') === 'yes') {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
                 },

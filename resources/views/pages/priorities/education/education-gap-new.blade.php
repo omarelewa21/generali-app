@@ -55,7 +55,9 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary">{{ $totalAmountNeeded > $newTotalEducationFundNeeded ? '100' : number_format(floatval($educationFundPercentage))}}%</div>
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalEducationFundNeeded ? '100' : number_format(floatval($educationFundPercentage))}}%
+                                                                <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

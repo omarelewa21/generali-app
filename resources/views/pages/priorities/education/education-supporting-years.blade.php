@@ -25,11 +25,11 @@
 @endphp
 
 
-<div id="education-supporting" class="vh-100 scroll-content">
+<div id="education-supporting" class="vh-100 scroll-content bg-master-mob">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-needs-desktop wrapper-needs-supporting-default">
+                <div class="row h-100 wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -57,41 +57,29 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('tertiary_education_years')) pb-7 @endif">
+                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('tertiary_education_years')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
-                            <div class="col-12 position-relative">
-                                <div class="row h-100">
-                                    <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 bg-education-supporting second-order">
-                                        <div class="text-center education-support mh-100 z-1 h-100">
-                                            <img src="{{$educationSelectedImage}}" class="mt-auto mh-100 mx-auto avatar-img">
-                                            <p class="py-2 m-0 avatar-text" id="displayFund">RM 
-                                                {{$totalEducationYear !== '' && $totalEducationFundNeeded !== '' ? 
-                                                    number_format(floatval($totalEducationFundNeeded) * floatval($totalEducationYear)) : 
-                                                    number_format(floatval($totalEducationFundNeeded)) }}
-                                            </p>
-                                        </div>
-                                        <div class="col-12 position-absolute bottom-0 show-mobile">
-                                            <div class="row">
-                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}"></div>
-                                            </div>
-                                        </div>
+                            <div class="col-12">
+                                <div class="row justify-content-center align-items-center h-100 calendar-wrapper">
+                                    <div class="col-12 col-lg-2 col-xl-3 d-flex align-items-center justify-content-end calendar-text">
+                                        <h4 class="">I plan to take</h4>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order py-5">
-                                        <div class="row justify-content-center">
-                                            <div class="col-10 col-md-8 d-flex align-items-center">
-                                                <p class="f-34"><strong>I plan to study</strong>
-                                                    <span class="currencyinput f-34"><input type="text" name="tertiary_education_years" class="form-control d-inline-block w-30 money f-34" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
-                                                    <strong>years for my education.</strong>
-                                                </p>
-                                                <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
-                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
-                                                <!-- <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                                <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
-                                                <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
-                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}"> -->
-                                            </div>
+                                    <div class="col-12 col-xl-5 col-lg-6 d-flex align-items-center mh-100 h-100 calendar-content position-relative" id="calendar">
+                                        <img src="{{ asset('images/needs/background/Calendar.png') }}" class="m-auto mh-100 p-lg-3 mx-100">
+                                        <div class="position-absolute center text-center">
+                                            <input type="text" name="tertiary_education_years" class="form-control d-inline-block money text-center f-64 w-75" id="tertiary_education_years" value="{{$totalEducationYear}}" required>
+                                            <h4 class="mt-4">years</h4>
                                         </div>
+                                        <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
+                                        <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
+                                        <!-- <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                        <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
+                                        <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
+                                        <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}"> -->
+                                    </div>
+                                    <div class="col-12 col-xl-3 col-lg-2 d-flex align-items-center calendar-text2">
+                                        <h4 class="">to build this fund.</h4>
                                     </div>
                                 </div>
                             </div>
@@ -124,11 +112,6 @@
                                 </div>
                             </section>
                         @endif
-                        <div class="col-12 hide-mobile">
-                            <div class="row">
-                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('tertiary_education_years') ? 'error-padding' : '' }}"></div>
-                            </div>
-                        </div>
                         <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
                             <div class="container-fluid">
                                 <div class="row">
@@ -157,7 +140,6 @@
     // var education_saving_amount = document.getElementById('education_saving_amount');
     // var education_saving = document.getElementById('education_other_savings');
     
-    var displayAvatar = document.getElementById("displayFund");
     var totalEducationFund = document.getElementById("TotalEducationFund");
 
     if (educationYearSessionValue !== '' || educationYearSessionValue !== 0 && oldTotalFund !== '') {
@@ -178,16 +160,15 @@
         if (isNaN(Year)) {
             // Input is not a valid number
             totalEducationFund.innerText = "RM 0";
-            displayAvatar.innerText = "RM 0";
         } else {
             // Input is a valid number, perform the calculation
             // Display the result
             var result = totalAmount.toLocaleString();
 
             totalEducationFund.innerText = "RM " + result;
-            displayAvatar.innerText = "RM " + result;
-            newTotalFund.value = Year * oldTotalFund;
         }
+        
+        newTotalFund.value = Year * oldTotalFund;
 
         // Display the result
         // var result = totalAmount.toLocaleString();
