@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 $(document).ready(function () {
     // Get the current URL path
     var currentPath = window.location.pathname;

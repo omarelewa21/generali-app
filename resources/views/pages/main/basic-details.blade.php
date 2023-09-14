@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $selectedCountry = session('passingArrays.PhoneCode', '60');
 @endphp
 
 <div id="basic_details" class="vh-100 overflow-hidden">
@@ -81,7 +82,11 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">+60</span>
+                                                    <select name="phoneCodeMobile" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeMobileSelect" required>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCountry === $country->phone_code || (!$selectedCountry && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
+                                                        @endforeach
+                                                    </select>
                                                     <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber', $arrayData['MobileNumber'] ?? '') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -91,7 +96,11 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">+60</span>
+                                                    <select name="phoneCode" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeSelect" required>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCountry === $country->phone_code || (!$selectedCountry && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
+                                                        @endforeach
+                                                    </select>
                                                     <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber', $arrayData['HousePhoneNumber'] ?? '') }}">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -242,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
+
 </script>
 
 @endsection

@@ -74,6 +74,8 @@ h4 {
   border-top: 0 !important;
   border-left: 0 !important;
   border-right: 0 !important;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 .input-group > .form-control:not(:focus).is-invalid, .input-group > .form-control:focus {
