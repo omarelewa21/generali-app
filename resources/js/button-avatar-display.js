@@ -317,6 +317,9 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
                 $imageContainer.append(newImage);
             }
+
+            var isSelected = this.closest('.button-bg').classList.contains('selected');
+            console.log(isSelected);
         });
 
         // Children selection
