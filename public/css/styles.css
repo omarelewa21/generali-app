@@ -436,6 +436,7 @@ button[data-required="selected"] img {
 
 .changeImage {
   overflow-x: hidden;
+  z-index: 1;
 }
 
 .slide-button {

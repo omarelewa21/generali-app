@@ -43,6 +43,7 @@ class FormController extends Controller {
             'title' => 'required|in:' . implode(',', $titles),
             'phoneCodeMobile' => 'required|in:' . implode(',', $code),
             'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
+            'phoneCodeHouse' => 'required|in:' . implode(',', $code),
             'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
             'email' => 'required|email|max:255',
         ]);
@@ -56,12 +57,13 @@ class FormController extends Controller {
         $arrayData['LastName'] = $validatedData['lastName'];
         $arrayData['PhoneCode'] = $validatedData['phoneCodeMobile'];
         $arrayData['MobileNumber'] = $validatedData['mobileNumber'];
+        $arrayData['PhoneCodeHouse'] = $validatedData['phoneCodeHouse'];
         $arrayData['HousePhoneNumber'] = $validatedData['housePhoneNumber'];
         $arrayData['Email'] = $validatedData['email'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -149,7 +151,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }

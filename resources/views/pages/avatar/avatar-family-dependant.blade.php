@@ -26,10 +26,10 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative imageContainerSpouse">
+                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
                         <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
-                    <div class="position-relative imageContainerChildren"></div>
+                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">

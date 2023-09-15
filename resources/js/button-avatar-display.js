@@ -23,7 +23,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Spouse",
-                class: "changeImage appended-image",
+                class: "appended-image",
                 style: ""
             },
             {
@@ -31,7 +31,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "90%",
                 alt: "Spouse",
-                class: "changeImage position-absolute appended-image",
+                class: "position-absolute appended-image",
                 style: "bottom: 10px;right: -80px;"
             },
         ];
@@ -42,7 +42,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Spouse",
-                class: "changeImage",
+                class: "",
                 style: "opacity: 0.5;"
             },
             {
@@ -50,7 +50,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "90%",
                 alt: "Spouse",
-                class: "changeImage position-absolute",
+                class: "position-absolute",
                 style: "bottom: 10px;right: -80px; opacity: 0.5;"
             },
         ];
@@ -61,7 +61,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Spouse",
-                class: "changeImage position-absolute appended-image",
+                class: "position-absolute appended-image",
                 style: "bottom: 0;right: -120px;"
             },
             {
@@ -69,7 +69,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "90%",
                 alt: "Spouse",
-                class: "changeImage position-absolute appended-image",
+                class: "position-absolute appended-image",
                 style: "bottom: 10px;right: -80px;"
             },
         ];
@@ -80,7 +80,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "75%",
                 alt: "Children",
-                class: "changeImage position-absolute",
+                class: "position-absolute",
                 style: "bottom:0"
             },
             {
@@ -88,7 +88,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "60%",
                 alt: "Children",
-                class: "changeImage position-absolute end-0",
+                class: "position-absolute end-0",
                 style: "bottom:0"
             }
         ];
@@ -99,7 +99,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "90%",
                 alt: "Parent",
-                class: "changeImage position-absolute bottom-0 pb-2",
+                class: "position-absolute bottom-0 pb-2",
                 style: "right: -80px;z-index: 1"
             },
             {
@@ -107,7 +107,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Parent",
-                class: "changeImage pb-2",
+                class: "pb-2",
                 style: ""
             }
         ];
@@ -251,7 +251,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     }
                 }
             } else {
-                console.log("familyDependantInputValue is empty");
+                
             }
         }
 
@@ -346,8 +346,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var newButton = '<div class="popover position-absolute py-1" style="top:30%;right:10%"> x' + selectedValue + '</div>';
                 $(".imageContainerChildren").append(newButton);
             }
-            // Close the modal
-            $("#childrenAvatars").modal("hide");
         });
 
         // Parents selection
@@ -373,9 +371,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
                     $(".imageContainerParents").append(newImage);
                 });
-                
-                // Close the modal
-                $("#parentAvatars").modal("hide");
             }
         });
 

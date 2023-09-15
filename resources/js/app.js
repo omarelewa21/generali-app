@@ -1,6 +1,5 @@
-import './bootstrap';
 import $ from 'jquery';
-
+import './bootstrap';
 import './navigation-flow';
 import './height-controller';
 import './button';
