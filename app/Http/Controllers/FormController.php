@@ -176,7 +176,7 @@ class FormController extends Controller {
         Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
             $decodedValue = json_decode($value, true);
 
-            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents']) || isset($decodedValue['siblings']['status']) && $decodedValue['siblings']['status'] === 'yes') {
+            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents'])) {
                 return true;
             }
         
@@ -230,37 +230,81 @@ class FormController extends Controller {
     {
         // Fetch spouseMaritalStatus from the database
         $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
+        $titles = DB::table('titles')->pluck('titles')->toArray();
+        $countries = DB::table('countries')->pluck('countries')->toArray();
+        $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+        $occupation = DB::table('occupations')->pluck('name')->toArray();
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
         // Define the common validation rules for spouse
         $commonRules = [
-            'spouseFirstName' => 'sometimes|required|max:255',
-            'spouseLastName' => 'sometimes|required|max:255',
-            'spouseYearsOfSupport' => 'sometimes|required|numeric|max:100',
-            'spouseday' => 'sometimes|required',
-            'spousemonth' => 'sometimes|required',
-            'spouseyear' => 'sometimes|required',
-            'spouseMaritalStatus' => 'required_with:spouseFirstName|in:' . implode(',', $maritalStatus),
-            'siblingFirstName' => 'sometimes|required|max:255',
-            'siblingLastName' => 'sometimes|required|max:255',
-            'siblingYearsOfSupport' => 'sometimes|required|numeric|max:100',
-            'siblingday' => 'sometimes|required',
-            'siblingmonth' => 'sometimes|required',
-            'siblingyear' => 'sometimes|required',
-            'siblingMaritalStatus' => 'required_with:siblingFirstName|in:' . implode(',', $maritalStatus),
+            'spouseTitle' => 'required|in:' . implode(',', $titles),
+            'spouseFirstName' => 'required|max:255',
+            'spouseLastName' => 'required|max:255',
+            'spouseCountry' => 'required|in:' . implode(',', $countries),
+            'spouseIdType' => 'required|in:' . implode(',', $idtypes),
+            'spouseIdNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('spousePassportNumber') && !$request->input('spouseBirthCert') && !$request->input('spousePoliceNumber') && !$request->input('spouseRegistrationNumber');
+                }),
+                'regex:/^\d{6}-\d{2}-\d{4}$/',
+            ],
+            'spousePassportNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('spouseIdNumber') && !$request->input('spouseBirthCert') && !$request->input('spousePoliceNumber') && !$request->input('spouseRegistrationNumber');
+                }),
+                'max:15',
+            ],
+            'spouseBirthCert' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('spouseIdNumber') && !$request->input('spousePassportNumber') && !$request->input('spousePoliceNumber') && !$request->input('spouseRegistrationNumber');
+                }),
+                'max:15',
+            ],
+            'spousePoliceNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('spouseIdNumber') && !$request->input('spousePassportNumber') && !$request->input('spouseBirthCert') && !$request->input('spouseRegistrationNumber');
+                }),
+                'max:15',
+            ],
+            'spouseRegistrationNumber' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return !$request->input('spouseIdNumber') && !$request->input('spousePassportNumber') && !$request->input('spouseBirthCert') && !$request->input('spousePoliceNumber');
+                }),
+                'max:15',
+            ],
+            'genderBtnradio' => 'required|in:male,female',
+            'smokingBtnradio' => 'required|in:smoker,nonSmoker',
+            'spouseday' => 'required',
+            'spousemonth' => 'required',
+            'spouseyear' => 'required',
+            'spouseOccupation' => 'required|in:' . implode(',', $occupation),
+            // 'siblingFirstName' => 'required|max:255',
+            // 'siblingLastName' => 'required|max:255',
+            // 'siblingYearsOfSupport' => 'required|numeric|max:100',
+            // 'siblingday' => 'required',
+            // 'siblingmonth' => 'required',
+            // 'siblingyear' => 'required',
+            // 'siblingMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
         ];
 
         if (isset($arrayData['FamilyDependant']['children'])) {
             foreach ($arrayData['FamilyDependant']['children'] as $key => $childName) {
-                $commonRules[$childName . 'FirstName'] = 'sometimes|required|max:255';
-                $commonRules[$childName . 'LastName'] = 'sometimes|required|max:255';
-                $commonRules[$childName . 'YearsOfSupport'] = 'sometimes|required|numeric|max:100';
-                $commonRules[$childName . 'day'] = 'sometimes|required';
-                $commonRules[$childName . 'month'] = 'sometimes|required';
-                $commonRules[$childName . 'year'] = 'sometimes|required';
-                $commonRules[$childName . 'MaritalStatus'] = 'required_with:' . $childName . 'FirstName|in:' . implode(',', $maritalStatus);
+                $commonRules[$childName . 'FirstName'] = 'required|max:255';
+                $commonRules[$childName . 'LastName'] = 'required|max:255';
+                $commonRules[$childName . 'GenderBtnradio'] = 'required|in:male,female';
+                $commonRules[$childName . 'YearsOfSupport'] = 'required|numeric|max:100';
+                $commonRules[$childName . 'day'] = 'required';
+                $commonRules[$childName . 'month'] = 'required';
+                $commonRules[$childName . 'year'] = 'required';
+                $commonRules[$childName . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
             }
         }
 
@@ -272,20 +316,29 @@ class FormController extends Controller {
                 $commonRules[$parentsName . 'day'] = 'sometimes|required';
                 $commonRules[$parentsName . 'month'] = 'sometimes|required';
                 $commonRules[$parentsName . 'year'] = 'sometimes|required';
-                $commonRules[$parentsName . 'MaritalStatus'] = 'required_with:' . $parentsName . 'FirstName|in:' . implode(',', $maritalStatus);
+                $commonRules[$parentsName . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
             }
         }
 
         $validatedData = $request->validate($commonRules);
 
         if (isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes') {
+            $arrayData['FamilyDependant']['spouse']['title'] = $validatedData['spouseTitle'];
             $arrayData['FamilyDependant']['spouse']['firstName'] = $validatedData['spouseFirstName'];
             $arrayData['FamilyDependant']['spouse']['lastName'] = $validatedData['spouseLastName'];
-            $arrayData['FamilyDependant']['spouse']['yearsOfSupport'] = $validatedData['spouseYearsOfSupport'];
+            $arrayData['FamilyDependant']['spouse']['country'] = $validatedData['spouseCountry'];
+            $arrayData['FamilyDependant']['spouse']['idType'] = $validatedData['spouseIdType'];
+            $arrayData['FamilyDependant']['spouse']['idNumber'] = $validatedData['spouseIdNumber'];
+            $arrayData['FamilyDependant']['spouse']['passportNumber'] = $validatedData['spousePassportNumber'];
+            $arrayData['FamilyDependant']['spouse']['birthCert'] = $validatedData['spouseBirthCert'];
+            $arrayData['FamilyDependant']['spouse']['policeNumber'] = $validatedData['spousePoliceNumber'];
+            $arrayData['FamilyDependant']['spouse']['registrationNumber'] = $validatedData['spouseRegistrationNumber'];
+            $arrayData['FamilyDependant']['spouse']['gender'] = $validatedData['genderBtnradio'];
+            $arrayData['FamilyDependant']['spouse']['habits'] = $validatedData['smokingBtnradio'];
             $arrayData['FamilyDependant']['spouse']['day'] = $validatedData['spouseday'];
             $arrayData['FamilyDependant']['spouse']['month'] = $validatedData['spousemonth'];
             $arrayData['FamilyDependant']['spouse']['year'] = $validatedData['spouseyear'];
-            $arrayData['FamilyDependant']['spouse']['maritalStatus'] = $validatedData['spouseMaritalStatus'];
+            $arrayData['FamilyDependant']['spouse']['occupation'] = $validatedData['spouseOccupation'];
         }
         
         if (isset($arrayData['FamilyDependant']['children'])) {
@@ -293,12 +346,14 @@ class FormController extends Controller {
                 $childData = array(
                     'firstName' => $validatedData[$childName . 'FirstName'],
                     'lastName' => $validatedData[$childName . 'LastName'],
+                    'gender' => $validatedData[$childName . 'GenderBtnradio'],
                     'yearsOfSupport' => $validatedData[$childName . 'YearsOfSupport'],
                     'day' => $validatedData[$childName . 'day'],
                     'month' => $validatedData[$childName . 'month'],
                     'year' => $validatedData[$childName . 'year'],
-                    'maritalStatus' => $validatedData[$childName . 'MaritalStatus'],
+                    'maritalStatus' => $validatedData[$childName . 'MaritalStatus']
                 );
+                
                 $arrayData['FamilyDependant']['children_details'][$childName] = $childData;
             }
         }

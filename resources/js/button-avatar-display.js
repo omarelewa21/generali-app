@@ -234,7 +234,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     // Append child images to the container
                     $(".imageContainerChildren").append(childImages.join(''));
 
-                    var newButton = '<div class="popover position-absolute py-1" style="top:30%;right:10%"> x' + familyDependant.children.length + '</div>';
+                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + familyDependant.children.length + '</div>';
                     $(".imageContainerChildren").append(newButton);
                 }
 
@@ -302,6 +302,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             $imageContainer.empty();
         });
 
+        const clickedAvatars = {
+            spouse: null,
+            children: [],
+            children_details: [],
+            parents: [],
+            parents_details: [],
+        };
+
+        var familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
+
         // Spouse selection
         $("#spouseButton").on("click", function () {
             var $imageContainer = $(".imageContainerSpouse");
@@ -319,7 +329,27 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
 
             var isSelected = this.closest('.button-bg').classList.contains('selected');
-            console.log(isSelected);
+            
+            if (isSelected == true) {
+                clickedAvatars['spouse'] = {
+                    'status': 'yes',
+                };
+            }
+            else if (isSelected == false){
+                clickedAvatars['spouse'] = {
+                    'status': 'no',
+                };
+            }
+            
+            if (familyDependantButtonInput.value == '') {
+                familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+            }
+            else {
+                familyDependantButtonInput.value = JSON.stringify({
+                    ...JSON.parse(familyDependantButtonInput.value), 
+                    spouse: clickedAvatars.spouse 
+                });
+            }
         });
 
         // Children selection
@@ -346,8 +376,35 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             });
             
             if (selectedValue) {
-                var newButton = '<div class="popover position-absolute py-1" style="top:30%;right:10%"> x' + selectedValue + '</div>';
+                var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + selectedValue + '</div>';
                 $(".imageContainerChildren").append(newButton);
+            }
+
+            const childrenSelect = document.getElementById('childrenSelect');
+            const selectedChildren = childrenSelect.value;
+
+            // Clear the children array to start fresh
+            clickedAvatars['children'] = [];
+
+            if (selectedChildren > 0) {
+                for (let i = 1; i <= selectedChildren; i++) {
+                    const dataAvatarval = `child_${i}`;
+                    clickedAvatars['children'].push(dataAvatarval);
+                }
+            }
+            else if(selectedChildren == 'noChildren') {
+                // Clear the children array
+                clickedAvatars['children'] = [];
+            }
+
+            if (familyDependantButtonInput.value == '') {
+                familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+            }
+            else {
+                familyDependantButtonInput.value = JSON.stringify({
+                    ...JSON.parse(familyDependantButtonInput.value),
+                    children: clickedAvatars.children
+                });
             }
         });
 
@@ -361,18 +418,47 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             if (selectedValue === "father" || selectedValue === "mother" || selectedValue === "both") {
                 var selectedImages = [];
+                clickedAvatars['parents'] = [];
 
-                if (selectedValue === "father" || selectedValue === "both") {
+                // if (selectedValue === "father" || selectedValue === "both") {
+                //     selectedImages.push(parentImages[1]);
+                // }
+
+                // if (selectedValue === "mother" || selectedValue === "both") {
+                //     selectedImages.push(parentImages[0]);
+                // }
+
+                if (selectedValue === "father") {
                     selectedImages.push(parentImages[1]);
+                    clickedAvatars['parents'].push("grandfather");
                 }
-
-                if (selectedValue === "mother" || selectedValue === "both") {
+                else if (selectedValue === "mother") {
                     selectedImages.push(parentImages[0]);
+                    clickedAvatars['parents'].push("grandmother");
+                }
+                else if (selectedValue === "both") {
+                    selectedImages.push(parentImages[1]);
+                    selectedImages.push(parentImages[0]);
+                    clickedAvatars['parents'].push("grandfather", "grandmother");
                 }
 
                 selectedImages.forEach(function (image) {
                     var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
                     $(".imageContainerParents").append(newImage);
+                });
+            }
+            else if(selectedValue == 'noParents') {
+                // Clear the parents array
+                clickedAvatars['parents'] = [];
+            }
+
+            if (familyDependantButtonInput.value == '') {
+                familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+            }
+            else {
+                familyDependantButtonInput.value = JSON.stringify({
+                    ...JSON.parse(familyDependantButtonInput.value),
+                    parents: clickedAvatars.parents
                 });
             }
         });

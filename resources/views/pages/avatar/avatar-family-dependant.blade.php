@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <!-- <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$familyDependant === 'siblings' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
@@ -94,7 +94,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </section>
@@ -206,144 +206,33 @@ if (maritalStatus === 'single') {
     spouseImg.style.opacity = '0.5'; 
 }
 
-const spouseButton = document.getElementById('spouseButton');
-const confirmChildrenButton = document.querySelector('.btn-exit-children');
-const parentButton = document.getElementById('parentButton');
-const siblingButton = document.getElementById('siblingButton');
-const familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
-const clickedAvatars = {
-    spouse: null,
-    children: [],
-    children_details: [],
-    parents: [],
-    parents_details: [],
-    siblings: null
-};
+// siblingButton.addEventListener('click', function(event) {
+//     event.preventDefault();
 
-spouseButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const dataAvatar = 'spouse';
-    var isSelected = this.closest('.button-bg').classList.contains('selected');
+//     const dataAvatar = 'siblings';
+//     var isSelected = this.closest('.button-bg').classList.contains('selected');
     
-    if (isSelected) {
-        clickedAvatars[dataAvatar] = {
-            'status': 'no',
-        };
-    }
-    else {
-        clickedAvatars[dataAvatar] = {
-            'status': 'yes',
-        };
-    }
+//     if (isSelected) {
+//         clickedAvatars[dataAvatar] = {
+//             'status': 'no',
+//         };
+//     }
+//     else {
+//         clickedAvatars[dataAvatar] = {
+//             'status': 'yes',
+//         };
+//     }
 
-    if (familyDependantButtonInput.value == '') {
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    }
-    else {
-        familyDependantButtonInput.value = JSON.stringify({
-            ...JSON.parse(familyDependantButtonInput.value), 
-            spouse: clickedAvatars.spouse 
-        });
-    }
-});
-
-
-confirmChildrenButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const dataAvatar = 'children';
-    const childrenSelect = document.getElementById('childrenSelect');
-    const selectedChildren = childrenSelect.value;
-
-    // Clear the children array to start fresh
-    clickedAvatars[dataAvatar] = [];
-
-    if (selectedChildren > 0) {
-        for (let i = 1; i <= selectedChildren; i++) {
-            const dataAvatarval = `child_${i}`;
-            clickedAvatars[dataAvatar].push(dataAvatarval);
-        }
-    }
-    else if(selectedChildren == 'noChildren') {
-        // Clear the children array
-        clickedAvatars[dataAvatar] = [];
-    }
-
-    if (familyDependantButtonInput.value == '') {
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    }
-    else {
-        familyDependantButtonInput.value = JSON.stringify({
-            ...JSON.parse(familyDependantButtonInput.value),
-            children: clickedAvatars.children
-        });
-    }
-});
-
-const confirmParentButton = document.querySelector('.btn-exit-parent');
-confirmParentButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const dataAvatar = 'parents';
-    const parentsSelect = document.getElementById('parentsSelect');
-    const selectedParent = parentsSelect.value;
-
-    // Clear the parents array to start fresh
-    clickedAvatars[dataAvatar] = [];
-
-    if (selectedParent !== "") {
-        if (selectedParent === "father") {
-            clickedAvatars[dataAvatar].push("grandfather");
-        } else if (selectedParent === "mother") {
-            clickedAvatars[dataAvatar].push("grandmother");
-        } else if (selectedParent === "both") {
-            clickedAvatars[dataAvatar].push("grandfather", "grandmother");
-        }
-    }
-    else if(selectedParent == 'noParents') {
-        // Clear the parents array
-        clickedAvatars[dataAvatar] = [];
-    }
-
-    if (familyDependantButtonInput.value == '') {
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    }
-    else {
-        familyDependantButtonInput.value = JSON.stringify({
-            ...JSON.parse(familyDependantButtonInput.value),
-            parents: clickedAvatars.parents
-        });
-    }
-});
-
-siblingButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const dataAvatar = 'siblings';
-    var isSelected = this.closest('.button-bg').classList.contains('selected');
-    
-    if (isSelected) {
-        clickedAvatars[dataAvatar] = {
-            'status': 'no',
-        };
-    }
-    else {
-        clickedAvatars[dataAvatar] = {
-            'status': 'yes',
-        };
-    }
-
-    if (familyDependantButtonInput.value == '') {
-        familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-    }
-    else {
-        familyDependantButtonInput.value = JSON.stringify({
-            ...JSON.parse(familyDependantButtonInput.value), 
-            siblings: clickedAvatars.siblings 
-        });
-    }
-});
+//     if (familyDependantButtonInput.value == '') {
+//         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+//     }
+//     else {
+//         familyDependantButtonInput.value = JSON.stringify({
+//             ...JSON.parse(familyDependantButtonInput.value), 
+//             siblings: clickedAvatars.siblings 
+//         });
+//     }
+// });
 </script>
 
 @endsection
