@@ -1,15 +1,15 @@
+import $ from 'jquery';
 import './bootstrap';
-$('.toast').toast('show');
-$('.tooltip').tooltip('show');
-
+import './navigation-flow';
 import './height-controller';
 import './button';
 import './button-multiple-select';
 import './avatar';
 import './form-display';
-import './coverage-carousel';
-import './drag-drop';
-import './navigation-flow';
+// $('.toast').toast('show');
+// $('.tooltip').tooltip('show');
+// import './coverage-carousel';
+// import './drag-drop';
 import './button-avatar-display';
 
 document.getElementById('saveSession').addEventListener('click', function() {

@@ -56,8 +56,8 @@
                                     @endif
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12">
-                                            <label for="country" class="form-label text-white">Citizenship *</label>
-                                            <select name="country" class="form-select bg-white @error('country') is-invalid @enderror" aria-label="Countries" id="countrySelect" required>
+                                            <label for="countrySelect" class="form-label text-white">Citizenship *</label>
+                                            <select name="country" class="form-select bg-white @error('country') is-invalid @enderror" aria-label="Countries" id="countrySelect" autocomplete="country" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->countries }}" {{ ($selectedCountry === $country->countries || (!$selectedCountry && $country->countries === 'Malaysia')) ? 'selected' : '' }}>
@@ -161,7 +161,7 @@
                                                     $selectedDay = sprintf('%02d', $selectedDay);
                                                 }
                                             @endphp
-                                            <label for="dob" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
+                                            <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                     {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $arrayData['DobDay'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
@@ -184,7 +184,7 @@
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4">
-                                            <label for="habits" class="form-label text-white">Your Habits *</label>
+                                            <label for="smoker" class="form-label text-white">Your Habits *</label>
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker"
@@ -204,7 +204,7 @@
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
-                                            <label for="educationLevel" class="form-label text-white">Education Level *</label>
+                                            <label for="educationLevelSelect" class="form-label text-white">Education Level *</label>
                                             <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Countries" id="educationLevelSelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($educationLevels as $educationLevel)
@@ -222,7 +222,7 @@
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
-                                            <label for="occupation" class="form-label text-white">Occupation *</label>
+                                            <label for="occupationSelect" class="form-label text-white">Occupation *</label>
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Countries" id="occupationSelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($occupations as $occupation)

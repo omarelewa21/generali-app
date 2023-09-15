@@ -15,6 +15,8 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $selectedCountry = session('passingArrays.PhoneCode', '60');
+    $selectedCode = session('passingArrays.PhoneCodeHouse', '60');
 @endphp
 
 <div id="basic_details" class="vh-100 overflow-hidden">
@@ -49,7 +51,7 @@
                                     <div class="col-12 py-4">
                                         <div class="row">
                                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
-                                                <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                                                <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
                                                     @foreach ($titles as $title)
@@ -63,14 +65,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $arrayData['FirstName'] ?? '') }}" required>
                                                 @error('firstName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $arrayData['LastName'] ?? '') }}" required>
                                                     @error('lastName')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -81,7 +83,11 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">+60</span>
+                                                    <select name="phoneCodeMobile" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeMobileSelect" required>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCountry === $country->phone_code || (!$selectedCountry && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
+                                                        @endforeach
+                                                    </select>
                                                     <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber', $arrayData['MobileNumber'] ?? '') }}" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -91,7 +97,11 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">+60</span>
+                                                    <select name="phoneCodeHouse" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeHouseSelect" required>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCode === $country->phone_code || (!$selectedCode && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
+                                                        @endforeach
+                                                    </select>
                                                     <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber', $arrayData['HousePhoneNumber'] ?? '') }}">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -102,7 +112,7 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $arrayData['Email'] ?? '') }}">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $arrayData['Email'] ?? '') }}" autocomplete="email">
                                                     @error('email')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -242,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
+
 </script>
 
 @endsection

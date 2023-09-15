@@ -7,12 +7,12 @@ export default defineConfig({
             input: ['resources/js/jquery.min.js', 'resources/css/app.scss', 'resources/js/slick.min.js','resources/js/app.js'],
             refresh: true,
         }),       
-],
-resolve: {
-    alias: {
-        '$':  'jQuery',
+    ],
+    resolve: {
+        alias: {
+            '$':  'jquery',
+        },
     },
-},
 });
 
 

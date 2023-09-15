@@ -13,8 +13,9 @@ class DropdownController extends Controller
 {
     public function titles()
     {
+        $countries = Country::all();
         $titles = Title::all();
-        return view('pages/main/basic-details', compact('titles'));
+        return view('pages/main/basic-details', compact('titles','countries'));
     }
 
     public function identityDetails()
