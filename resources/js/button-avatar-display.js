@@ -240,12 +240,12 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                 if (familyDependant.parents && familyDependant.parents.length > 0) {
 
-                    if (familyDependant.parents.includes("grandfather")) {
+                    if (familyDependant.parents.includes("Father")) {
                         var parentImage = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
 
-                    if (familyDependant.parents.includes("grandmother")) {
+                    if (familyDependant.parents.includes("Mother")) {
                         var parentImage = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
@@ -420,26 +420,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var selectedImages = [];
                 clickedAvatars['parents'] = [];
 
-                // if (selectedValue === "father" || selectedValue === "both") {
-                //     selectedImages.push(parentImages[1]);
-                // }
-
-                // if (selectedValue === "mother" || selectedValue === "both") {
-                //     selectedImages.push(parentImages[0]);
-                // }
-
                 if (selectedValue === "father") {
                     selectedImages.push(parentImages[1]);
-                    clickedAvatars['parents'].push("grandfather");
+                    clickedAvatars['parents'].push("Father");
                 }
                 else if (selectedValue === "mother") {
                     selectedImages.push(parentImages[0]);
-                    clickedAvatars['parents'].push("grandmother");
+                    clickedAvatars['parents'].push("Mother");
                 }
                 else if (selectedValue === "both") {
                     selectedImages.push(parentImages[1]);
                     selectedImages.push(parentImages[0]);
-                    clickedAvatars['parents'].push("grandfather", "grandmother");
+                    clickedAvatars['parents'].push("Father", "Mother");
                 }
 
                 selectedImages.forEach(function (image) {
@@ -489,28 +481,71 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
-        $("#houseButton").on("click", function () {
-            if (houseImageIndex < houseImages.length) {
-                var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
-                $(".imageContainerHouse").html(newImage);
-                houseImageIndex++;
+        var selectedImages = [];
+        const selectedAssets = {
+            house: [],
+            bungalow: [],
+        };
 
-                if (houseImageIndex >= houseImages.length) {
-                    $("#houseButton").parent().removeClass("hover");
-                }
-            }
+        $("#houseButton").on("click", function () {
+
+            selectedImages.push(houseImages[0]);
+            selectedAssets['house'].push("yes");
+
+            assetsButtonInput.value = JSON.stringify(selectedAssets);
+            // if (houseImageIndex < houseImages.length) {
+            //     var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
+            //     $(".imageContainerHouse").html(newImage);
+            //     houseImageIndex++;
+
+            //     if (houseImageIndex >= houseImages.length) {
+            //         $("#houseButton").parent().removeClass("hover");
+            //     }
+            // }
+            selectedImages.forEach(function (image) {
+                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                $(".imageContainerHouse").html(newImage);
+            });
+
+            // if (assetsButtonInput.value == '') {
+            //     assetsButtonInput.value = JSON.stringify(selectedAssets);
+            // }
+            // else {
+            //     assetsButtonInput.value = JSON.stringify({
+            //         ...JSON.parse(assetsButtonInput.value),
+            //         house: selectedAssets.house
+            //     });
+            // }
         });
 
         $("#bungalowButton").on("click", function () {
-            if (bungalowImageIndex < bungalowImages.length) {
-                var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
-                $(".imageContainerHouse").html(newImage);
-                bungalowImageIndex++;
+            selectedImages.push(bungalowImages[0]);
+            selectedAssets['bungalow'].push("yes");
 
-                if (bungalowImageIndex >= bungalowImages.length) {
-                    $("#bungalowButton").parent().removeClass("hover");
-                }
-            }
+            assetsButtonInput.value = JSON.stringify(selectedAssets);
+            // if (bungalowImageIndex < bungalowImages.length) {
+            //     var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
+            //     $(".imageContainerHouse").html(newImage);
+            //     bungalowImageIndex++;
+
+            //     if (bungalowImageIndex >= bungalowImages.length) {
+            //         $("#bungalowButton").parent().removeClass("hover");
+            //     }
+            // }
+            selectedImages.forEach(function (image) {
+                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                $(".imageContainerHouse").html(newImage);
+            });
+
+            // if (assetsButtonInput.value == '') {
+            //     assetsButtonInput.value = JSON.stringify(selectedAssets);
+            // }
+            // else {
+            //     assetsButtonInput.value = JSON.stringify({
+            //         ...JSON.parse(assetsButtonInput.value),
+            //         bungalow: selectedAssets.bungalow
+            //     });
+            // }
         });
 
         $("#condoButton").on("click", function () {

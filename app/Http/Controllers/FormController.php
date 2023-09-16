@@ -310,12 +310,13 @@ class FormController extends Controller {
 
         if (isset($arrayData['FamilyDependant']['parents'])) {
             foreach ($arrayData['FamilyDependant']['parents'] as $key => $parentsName) {
-                $commonRules[$parentsName . 'FirstName'] = 'sometimes|required|max:255';
-                $commonRules[$parentsName . 'LastName'] = 'sometimes|required|max:255';
-                $commonRules[$parentsName . 'YearsOfSupport'] = 'sometimes|required|numeric|max:100';
-                $commonRules[$parentsName . 'day'] = 'sometimes|required';
-                $commonRules[$parentsName . 'month'] = 'sometimes|required';
-                $commonRules[$parentsName . 'year'] = 'sometimes|required';
+                $commonRules[$parentsName . 'FirstName'] = 'required|max:255';
+                $commonRules[$parentsName . 'LastName'] = 'required|max:255';
+                $commonRules[$parentsName . 'GenderBtnradio'] = 'required|in:male,female';
+                $commonRules[$parentsName . 'YearsOfSupport'] = 'required|numeric|max:100';
+                $commonRules[$parentsName . 'day'] = 'required';
+                $commonRules[$parentsName . 'month'] = 'required';
+                $commonRules[$parentsName . 'year'] = 'required';
                 $commonRules[$parentsName . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
             }
         }
@@ -363,6 +364,7 @@ class FormController extends Controller {
                 $parentsData = array(
                     'firstName' => $validatedData[$parentsName . 'FirstName'],
                     'lastName' => $validatedData[$parentsName . 'LastName'],
+                    'gender' => $validatedData[$parentsName . 'GenderBtnradio'],
                     'yearsOfSupport' => $validatedData[$parentsName . 'YearsOfSupport'],
                     'day' => $validatedData[$parentsName . 'day'],
                     'month' => $validatedData[$parentsName . 'month'],

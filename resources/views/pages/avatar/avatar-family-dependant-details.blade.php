@@ -117,7 +117,7 @@
                                                                             @endforeach
                                                                         </select>
                                                                         @error('spouseTitle')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's title field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -126,7 +126,7 @@
                                                                         <label for="spouseFirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $arrayData['FamilyDependant']['spouse']['firstName'] ?? '') }}" required>
                                                                         @error('spouseFirstName')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's first name field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -135,7 +135,7 @@
                                                                         <label for="spouseLastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $arrayData['FamilyDependant']['spouse']['lastName'] ?? '') }}" required>
                                                                         @error('spouseLastName')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's last name field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -156,53 +156,53 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
+                                                                    <div class="col-8 pt-4 @error('spouseIdType') is-invalid @enderror">
                                                                         <label for="spouseIdSelect" class="form-label">ID Type <span class="text-danger">*</span></label>
-                                                                        <select name="spouseIdType" class="form-select @error('spouseIdType') is-invalid @enderror" aria-label="ID Type" id="spouseIdSelect" required>
+                                                                        <select name="spouseIdType" class="form-select" aria-label="ID Type" id="spouseIdSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($idtypes as $idtype)
                                                                                 <option value="{{ $idtype->idtypes }}" {{ old('spouseIdType', $arrayData['FamilyDependant']['spouse']['idType'] ?? '') === $idtype->idtypes ? 'selected' : '' }}>{{ $idtype->idtypes }}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('spouseIdType')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                        @enderror
                                                                     </div>
+                                                                    @error('spouseIdType')
+                                                                        <div class="invalid-feedback text-red">The spouse's id type field is required.</div>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="row py-2" id="groups">
                                                                     <div class="col-12 pt-4" id="newicgroup" style="display: none;">
                                                                         <label for="spouseIdNumber" class="form-label">ID Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseIdNumber" class="form-control @error('spouseIdNumber') is-invalid @enderror" id="spouseIdNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('spouseIdNumber', $arrayData['FamilyDependant']['spouse']['idNumber'] ?? '') }}">
                                                                         @error('spouseIdNumber')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's id number field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="passportgroup" style="display: none;">
                                                                         <label for="spousePassportNumber" class="form-label">Passport Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spousePassportNumber" class="form-control @error('spousePassportNumber') is-invalid @enderror" id="spousePassportNumber" placeholder="A122345" value="{{ old('spousePassportNumber', $arrayData['FamilyDependant']['spouse']['passportNumber'] ?? '') }}">
                                                                         @error('spousePassportNumber')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's passport number field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
                                                                         <label for="spouseBirthCert" class="form-label">Birth Certificate Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseBirthCert" class="form-control @error('spouseBirthCert') is-invalid @enderror" id="spouseBirthCert" placeholder="T122345" value="{{ old('spouseBirthCert', $arrayData['FamilyDependant']['spouse']['birthCert'] ?? '') }}">
                                                                         @error('spouseBirthCert')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's birth certificate field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="policegroup" style="display: none;">
                                                                         <label for="spousePoliceNumber" class="form-label">Police / Army Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spousePoliceNumber" class="form-control @error('spousePoliceNumber') is-invalid @enderror" id="spousePoliceNumber" placeholder="Enter Police / Army Number" value="{{ old('spousePoliceNumber', $arrayData['FamilyDependant']['spouse']['policeNumber'] ?? '') }}">
                                                                         @error('spousePoliceNumber')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's police number field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="registrationgroup" style="display: none;">
                                                                         <label for="spouseRegistrationNumber" class="form-label">Registration Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseRegistrationNumber" class="form-control @error('spouseRegistrationNumber') is-invalid @enderror" id="spouseRegistrationNumber" placeholder="Enter Registration Number" value="{{ old('spouseRegistrationNumber', $arrayData['spouseRegistrationNumber'] ?? '') }}">
                                                                         @error('spouseRegistrationNumber')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's registration number field is required.</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -223,7 +223,7 @@
                                                                             </div>
                                                                             @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
                                                                                 <div class="col-md-12">
-                                                                                    <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
+                                                                                    <div class="invalid-feedback text-red" style="display:block">The spouse's date of birth field is required.</div>
                                                                                 </div>
                                                                             @endif
                                                                         </div>
@@ -245,7 +245,7 @@
                                                                             </label>
                                                                         </div>
                                                                         @error('genderBtnradio')
-                                                                            <div class="invalid-feedback text-red">Please select spouse's gender</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's gender field is required.</div>
                                                                         @enderror  
                                                                     </div>
                                                                 </div>
@@ -265,7 +265,7 @@
                                                                             </label>
                                                                         </div>
                                                                         @error('smokingBtnradio')
-                                                                            <div class="invalid-feedback text-red">Please select your habits</div>
+                                                                            <div class="invalid-feedback text-red">The spouse's habits field is required.</div>
                                                                         @enderror  
                                                                     </div>
                                                                 </div>
@@ -280,7 +280,7 @@
                                                                         </select>
                                                                     </div>
                                                                     @error('spouseOccupation')
-                                                                        <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        <div class="invalid-feedback text-red">The spouse's occupation field is required.</div>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -331,7 +331,7 @@
                                                                                 </label>
                                                                             </div>
                                                                             @error($childName .'GenderBtnradio')
-                                                                                <div class="invalid-feedback text-red">Please select child's gender</div>
+                                                                                <div class="invalid-feedback text-red">The child's gender field is required.</div>
                                                                             @enderror  
                                                                         </div>
                                                                     </div>
@@ -350,34 +350,34 @@
                                                                                 </div>
                                                                                 @if ($errors->has($childName . 'day') || $errors->has($childName . 'month') || $errors->has($childName . 'year'))
                                                                                     <div class="col-md-12">
-                                                                                        <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
+                                                                                        <div class="invalid-feedback text-red" style="display:block">The child's date of birth field is required.</div>
                                                                                     </div>
                                                                                 @endif
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4">
+                                                                        <div class="col-8 pt-4 @error($childName .'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$childName}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$childName}}YearsOfSupport" class="form-control @error($childName .'YearsOfSupport') is-invalid @enderror" id="{{$childName}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($childName . 'YearsOfSupport', $arrayData['FamilyDependant']['children_details'][$childName]['yearsOfSupport'] ?? '') }}" required>
-                                                                            @error($childName . 'YearsOfSupport')
-                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                            @enderror
+                                                                            <input type="number" name="{{$childName}}YearsOfSupport" class="form-control" id="{{$childName}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($childName . 'YearsOfSupport', $arrayData['FamilyDependant']['children_details'][$childName]['yearsOfSupport'] ?? '') }}" required>
                                                                         </div>
+                                                                        @error($childName . 'YearsOfSupport')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4">
+                                                                        <div class="col-8 pt-4 @error($childName . 'MaritalStatus') is-invalid @enderror">
                                                                             <label for="{{$childName}}MaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
-                                                                            <select name="{{$childName}}MaritalStatus" class="form-select @error($childName . 'MaritalStatus') is-invalid @enderror" aria-label="Child Marital Status" id="{{$childName}}MaritalStatusSelect" required>
+                                                                            <select name="{{$childName}}MaritalStatus" class="form-select" aria-label="Child Marital Status" id="{{$childName}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
                                                                                     <option value="{{ $status->maritalStatus }}" {{ old($childName .'MaritalStatus', $arrayData['FamilyDependant']['children_details'][$childName]['maritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            @error($childName . 'MaritalStatus')
-                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                            @enderror
                                                                         </div>
+                                                                        @error($childName . 'MaritalStatus')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -389,14 +389,14 @@
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$parentsName}}">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$parentsName}}" aria-expanded="true" aria-controls="flush-collapse{{$parentsName}}">
-                                                                    Parent {{ $key + 1 }}
+                                                                    Parent ({{ $parentsName }})
                                                                 </button>
                                                             </h2>
                                                             <div id="flush-collapse{{$parentsName}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$parentsName}}" data-bs-parent="#accordionDependantDetails">
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
-                                                                            <label for="{{$parentsName}}FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                                            <label for="{{$parentsName}}FirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$parentsName}}FirstName" class="form-control @error($parentsName . 'FirstName') is-invalid @enderror" id="{{$parentsName}}FirstNameInput" placeholder="Your First Name" value="{{ old($parentsName . 'FirstName', $arrayData['FamilyDependant']['parents_details'][$parentsName]['firstName'] ?? '') }}" required>
                                                                             @error($parentsName . 'FirstName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -405,7 +405,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$parentsName}}LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                                            <label for="{{$parentsName}}LastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$parentsName}}LastName" class="form-control @error($parentsName . 'LastName') is-invalid @enderror" id="{{$parentsName}}LastNameInput" placeholder="Your Last Name" value="{{ old($parentsName . 'LastName', $arrayData['FamilyDependant']['parents_details'][$parentsName]['lastName'] ?? '') }}" required>
                                                                             @error($parentsName . 'LastName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -414,7 +414,27 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$parentsName}}Dob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$parentsName}}Age" class="d-inline-block"></span> )</label>
+                                                                            <label for="{{$parentsName}}GenderInput" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <div class="d-flex btn-group @error($parentsName . 'GenderBtnradio') is-invalid @enderror" role="group">
+                                                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                                                    <input type="radio" class="btn-check" name="{{$parentsName}}GenderBtnradio" id="{{$parentsName}}GenderInput" autocomplete="off" value="male"
+                                                                                    {{ (old($parentsName . 'GenderBtnradio') === 'male' || (isset($arrayData['FamilyDependant']['parents_details'][$parentsName]['gender']) && $arrayData['FamilyDependant']['parents_details'][$parentsName]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
+                                                                                </label>
+                                                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                                                    <input type="radio" class="btn-check" name="{{$parentsName}}GenderBtnradio" id="{{$parentsName}}GenderFemaleInput" autocomplete="off" value="female"
+                                                                                    {{ (old($parentsName . 'GenderBtnradio') === 'female' || (isset($arrayData['FamilyDependant']['parents_details'][$parentsName]['gender']) && $arrayData['FamilyDependant']['parents_details'][$parentsName]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
+                                                                                </label>
+                                                                            </div>
+                                                                            @error($parentsName .'GenderBtnradio')
+                                                                                <div class="invalid-feedback text-red">The parents's gender field is required.</div>
+                                                                            @enderror  
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row py-2">
+                                                                        <div class="col-12 pt-4">
+                                                                            <label for="{{$parentsName}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$parentsName}}Age" class="d-inline-block"></span> )</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                                                     {!! Form::select($parentsName . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($parentsName . 'day', $arrayData['FamilyDependant']['parents_details'][$parentsName]['day'] ?? ''), ['class' => 'form-select' . ($errors->has($parentsName . 'day') ? ' is-invalid' : ''), 'id' => $parentsName . 'day']) !!}
@@ -436,27 +456,27 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4">
-                                                                            <label for="{{$parentsName}}YearsOfSupport" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$parentsName}}YearsOfSupport" class="form-control @error($parentsName . 'YearsOfSupport') is-invalid @enderror" id="{{$parentsName}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($parentsName . 'YearsOfSupport', $arrayData['FamilyDependant']['parents_details'][$parentsName]['yearsOfSupport'] ?? '') }}" required>
-                                                                            @error($parentsName . 'YearsOfSupport')
-                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                            @enderror
+                                                                        <div class="col-8 pt-4 @error($parentsName . 'YearsOfSupport') is-invalid @enderror">
+                                                                            <label for="{{$parentsName}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                            <input type="number" name="{{$parentsName}}YearsOfSupport" class="form-control" id="{{$parentsName}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($parentsName . 'YearsOfSupport', $arrayData['FamilyDependant']['parents_details'][$parentsName]['yearsOfSupport'] ?? '') }}" required>
                                                                         </div>
+                                                                        @error($parentsName . 'YearsOfSupport')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4">
-                                                                            <label for="{{$parentsName}}MaritalStatus" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
-                                                                            <select name="{{$parentsName}}MaritalStatus" class="form-select @error($parentsName . 'MaritalStatus') is-invalid @enderror" aria-label="Child Marital Status" id="{{$parentsName}}MaritalStatusSelect" required>
+                                                                        <div class="col-8 pt-4 @error($parentsName . 'MaritalStatus') is-invalid @enderror">
+                                                                            <label for="{{$parentsName}}MaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                            <select name="{{$parentsName}}MaritalStatus" class="form-select" aria-label="Parents Marital Status" id="{{$parentsName}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
                                                                                     <option value="{{ $status->maritalStatus }}" {{ old($parentsName . 'MaritalStatus', $arrayData['FamilyDependant']['parents_details'][$parentsName]['maritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            @error($parentsName . 'MaritalStatus')
-                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                            @enderror
                                                                         </div>
+                                                                        @error($parentsName . 'MaritalStatus')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -525,7 +545,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
                                                                         <label for="siblingMaritalStatus" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
-                                                                        <select name="siblingMaritalStatus" class="form-select @error('siblingMaritalStatus') is-invalid @enderror" aria-label="Child Marital Status" id="siblingMaritalStatusSelect" required>
+                                                                        <select name="siblingMaritalStatus" class="form-select @error('siblingMaritalStatus') is-invalid @enderror" aria-label="Siblings Marital Status" id="siblingMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
                                                                                 <option value="{{ $status->maritalStatus }}" {{ old('siblingMaritalStatus', $arrayData['FamilyDependant']['siblings']['maritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
@@ -591,12 +611,12 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSelectFieldValidation('spouseyear');
     setupSelectFieldValidation('spouseOccupationSelect');
 
-    setupFieldValidation('siblingFirstNameInput');
-    setupFieldValidation('siblingLastNameInput');
-    setupNumberFieldValidation('spouseYearsOfSupportInput');
-    setupNumberFieldValidation('siblingYearsOfSupportInput');
-    setupSelectFieldValidation('spouseMaritalStatusSelect');
-    setupSelectFieldValidation('siblingMaritalStatusSelect');
+    // setupFieldValidation('siblingFirstNameInput');
+    // setupFieldValidation('siblingLastNameInput');
+    // setupNumberFieldValidation('spouseYearsOfSupportInput');
+    // setupNumberFieldValidation('siblingYearsOfSupportInput');
+    // setupSelectFieldValidation('spouseMaritalStatusSelect');
+    // setupSelectFieldValidation('siblingMaritalStatusSelect');
 
     var childNames = <?php echo json_encode($arrayData['FamilyDependant']['children']); ?>;
     var parentNames = <?php echo json_encode($arrayData['FamilyDependant']['parents']); ?>;
@@ -622,11 +642,17 @@ document.addEventListener('DOMContentLoaded', function() {
     parentNames.forEach(function(parentName) {
         var FirstNameInput = parentName + 'FirstNameInput';
         var LastNameInput = parentName + 'LastNameInput';
+        var DayInput = parentName + 'day';
+        var MonthInput = parentName + 'month';
+        var YearInput = parentName + 'year';
         var YearsOfSupportInput = parentName + 'YearsOfSupportInput';
         var MaritalStatusSelect = parentName + 'MaritalStatusSelect';
 
         setupFieldValidation(FirstNameInput);
         setupFieldValidation(LastNameInput);
+        setupSelectFieldValidation(DayInput);
+        setupSelectFieldValidation(MonthInput);
+        setupSelectFieldValidation(YearInput);
         setupNumberFieldValidation(YearsOfSupportInput);
         setupSelectFieldValidation(MaritalStatusSelect);
     });
@@ -734,9 +760,56 @@ document.addEventListener('DOMContentLoaded', function() {
             setupAgeCalculation(childName);
         });
 
-        // parentNames.forEach(function(parentName) {
-        //     setupAgeCalculation(parentName);
-        // });
+        function setupAgeCalculation(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
+
+            daySelect.addEventListener('change', calculateAge.bind(null, entity));
+            monthSelect.addEventListener('change', calculateAge.bind(null, entity));
+            yearSelect.addEventListener('change', calculateAge.bind(null, entity));
+            
+            // Calculate age on initial load
+            calculateAge(entity);
+        }
+
+        function calculateAge(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
+            
+            var ageDiv = document.getElementById(entity + 'Age');
+            
+            var selectedDay = daySelect.value;
+            var selectedMonth = monthSelect.value;
+            var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+            var selectedYear = selectedYearOption.textContent;
+            
+            if (selectedYear) {
+                if (selectedDay && selectedMonth) {
+                    var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+                    var currentDate = new Date();
+                    
+                    var age = currentDate.getFullYear() - dob.getFullYear();
+                    if (currentDate.getMonth() < dob.getMonth() ||
+                        (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                        age--;
+                    }
+                    
+                    ageDiv.textContent = 'Age: ' + age;
+                } else {
+                    ageDiv.textContent = 'Age:';
+                }
+            } else {
+                ageDiv.textContent = 'Age:';
+            }
+        }
+    }
+
+    if (parentNames) {
+        parentNames.forEach(function(parentName) {
+            setupAgeCalculation(parentName);
+        });
 
         function setupAgeCalculation(entity) {
             var daySelect = document.getElementById(entity + 'day');
