@@ -179,25 +179,17 @@ public function submitRetirementIdeal(Request $request)
         ];
 
         $validatedData = $request->validate([
-            'retirementAllocatedFundsAside' => 'required|string|min:0',
-            'retirementOtherSourceOfIncome' => 'required|string|min:0',
+            'retirementAllocatedFundsAside' => 'required|integer|min:0',
+            'retirementOtherSourceOfIncome' => 'required|integer|min:0',
         ], $customMessages);
 
         $retirementAllocatedFundsAside = $request->input('retirementAllocatedFundsAside');
         $retirementOtherSourceOfIncome = $request->input('retirementOtherSourceOfIncome');
 
-        $retirementAllocatedFundsAside = str_replace(',', '', $request->input('retirementAllocatedFundsAside'));
-        $retirementOtherSourceOfIncome = str_replace(',', '', $request->input('retirementOtherSourceOfIncome'));
-        
-        $retirementAllocatedFundsAside = (int) $retirementAllocatedFundsAside;
-        $retirementOtherSourceOfIncome = (int) $retirementOtherSourceOfIncome;
-
         $retirementAllocatedFundsAsideTotal = $retirementAllocatedFundsAside + $retirementOtherSourceOfIncome ;
         
-        // Get the existing array from the session
-        $arrayDataProtection = session('passingArraysProtection', []);
-        $arrayDataProtection['retirementAllocatedFundsAside'] = $retirementAllocatedFundsAside;
-        $arrayDataProtection['retirementOtherSourceOfIncome'] = $retirementOtherSourceOfIncome;
+        $retirementAllocatedFunds = session('passingArraysRetirement.retirementAllocatedFunds');
+        $retirementYearsTillRetire = session('passingArraysRetirement.retirementYearsTillRetire');
         $TotalRetirementValue = session('passingArraysRetirement.TotalRetirementValue');
 
         if ($retirementAllocatedFundsAsideTotal > $TotalRetirementValue){
@@ -209,24 +201,22 @@ public function submitRetirementIdeal(Request $request)
             $retirementPercentage = intval(($retirementAllocatedFundsAsideTotal / $TotalRetirementValue) * 100);
         }
 
+        // Get the existing array from the session
+        $arrayDataRetirement = session('passingArraysRetirement', []);
 
-
+        //update the array
+        $arrayDataRetirement['retirementAllocatedFunds'] = $retirementAllocatedFunds;
+        $arrayDataRetirement['retirementYearsTillRetire'] = $retirementYearsTillRetire;
+        $arrayDataRetirement['retirementAllocatedFundsAside'] = $retirementAllocatedFundsAside;
+        $arrayDataRetirement['retirementOtherSourceOfIncome'] = $retirementOtherSourceOfIncome;
+        $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] = $retirementAllocatedFundsAsideTotal;
+        $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
+        $arrayDataRetirement['retirementPercentage'] = $retirementPercentage;
+        $arrayDataRetirement['retirementGap'] = $retirementGap;
 
         $formattedTotalRetirementValue = number_format($TotalRetirementValue, 0,'.', ',');
-        $formattedRetirementAllocatedFundsAside = number_format($retirementAllocatedFundsAside, 0,'.', ',');
-        $formattedRetirementOtherSourceOfIncome = number_format($retirementOtherSourceOfIncome, 0,'.', ',');
-
-                //update the array
-                $arrayDataRetirement['retirementAllocatedFundsAside'] = $retirementAllocatedFundsAside;
-                $arrayDataRetirement['retirementOtherSourceOfIncome'] = $retirementOtherSourceOfIncome;
-                $arrayDataRetirement['retirementAllocatedFundsAsideTotal'] = $retirementAllocatedFundsAsideTotal;
-                $arrayDataRetirement['TotalRetirementValue'] = $TotalRetirementValue;
-                $arrayDataRetirement['retirementPercentage'] = $retirementPercentage;
-                $arrayDataRetirement['retirementGap'] = $retirementGap;
 
         $arrayDataRetirement['formattedTotalRetirementValue'] = $formattedTotalRetirementValue;
-        $arrayDataRetirement['formattedRetirementAllocatedFundsAside'] = $formattedRetirementAllocatedFundsAside;
-        $arrayDataRetirement['formattedRetirementOtherSourceOfIncome'] = $formattedRetirementOtherSourceOfIncome;
 
         // Store the updated array back into the session
         session(['passingArraysRetirement' =>  $arrayDataRetirement]);

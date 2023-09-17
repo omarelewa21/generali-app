@@ -35,12 +35,15 @@ class FormController extends Controller {
     {
         // Fetch titles from the database
         $titles = DB::table('titles')->pluck('titles')->toArray();
+        $code = DB::table('countries')->pluck('phone_code')->toArray();
     
         $validatedData = $request->validate([
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'title' => 'required|in:' . implode(',', $titles),
+            'phoneCodeMobile' => 'required|in:' . implode(',', $code),
             'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
+            'phoneCodeHouse' => 'required|in:' . implode(',', $code),
             'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
             'email' => 'required|email|max:255',
         ]);
@@ -52,13 +55,15 @@ class FormController extends Controller {
         $arrayData['Title'] = $validatedData['title'];
         $arrayData['FirstName'] = $validatedData['firstName'];
         $arrayData['LastName'] = $validatedData['lastName'];
+        $arrayData['PhoneCode'] = $validatedData['phoneCodeMobile'];
         $arrayData['MobileNumber'] = $validatedData['mobileNumber'];
+        $arrayData['PhoneCodeHouse'] = $validatedData['phoneCodeHouse'];
         $arrayData['HousePhoneNumber'] = $validatedData['housePhoneNumber'];
         $arrayData['Email'] = $validatedData['email'];
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -146,7 +151,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-        
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }

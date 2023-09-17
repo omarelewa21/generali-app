@@ -23,7 +23,7 @@
                     <section class="content-needs">
                         <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2 py-2 py-md-3 py-lg-5 py-xl-2 mt-4">
                             <img class="z-1 img-fluid" src="{{ asset('images/needs/retirement/retirement-character.svg') }}">
-                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-4 py-3 py-md-3 py-lg-3 justify-content-center needs-grey-bg-mobile">Now let's talk about your plans for Retirement.</h5>
+                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-5 py-3 py-md-3 py-lg-3 justify-content-center needs-grey-bg-mobile needs-text">Now let's talk about your plans for Retirement.</h5>
                         </div>
 
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">

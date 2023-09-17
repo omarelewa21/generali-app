@@ -1,4 +1,4 @@
-{{-- Protection - Home --}} 
+{{-- Protection - Home --}}
 @extends('templates.master')
 
 @section('title')
@@ -16,16 +16,17 @@
                     <h2 class="display-5 font-bold fw-bold">My Priorities</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-9 px-0 bg-needs-main">
+            <div class="col-12 col-md-9 px-0 bg-needs-main vh-100">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block" />
                 
                 <section class="needs-home">
                     <div class="content-needs">
-                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2">
+                        <div class="needs-home-avatar col-12 text-center d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center py-2 py-xl-4">
                             <img class="z-1" src="{{ asset('images/needs/protection/protection-home-avatar.png') }}" alt="Protection">
-                            <h5 class="z-1 d-flex col-12 col-md-8 col-lg-6 col-xl-5 p-3 p-sm-4 justify-content-center needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
+                            <h5 class="z-1 d-flex col-12 col-md-8 col-xl-5 col-xxl-5 justify-content-center needs-text needs-grey-bg-mobile">Let’s figure out what you need for Protection.</h5>
                         </div>
                         <div class="d-flex needs-grey-bg justify-content-center position-absolute w-100 bottom-0">
+                            <div class="col-11 col-md-4 text-center">
                             </div>
                         </div> 
                     </div>
@@ -41,37 +42,54 @@
                         </div>
                     </div>
                 </section>
-
             </div>
         </div>
     </div>
 </div>
+
 <style>
-    /* .footer {
-        display: none;
-    } */
+    /* @media only screen and (width: 414px) and (height: 896px) {
+    .needs-home {
+    grid-template-rows: 14vh 26vh 30vh;
+}
+}
+@media only screen and (width:688px) and (height:1031px) and (orientation:portrait) {
+    .needs-home-avatar img {
+    height: 52vh;
+}
+}
+@media only screen and (width:1024px) and (height:1366px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 23vh 45vh 30vh;
+}
+}
+@media only screen and (width:800px) and (height:1280px) and (orientation:portrait) {
+    .needs-home {
+    grid-template-rows: 22vh 38vh 31vh;
+}
+}
+@media only screen and (width: 1031px) and (height: 688px) and (orientation: landscape) {
+    .needs-home-avatar img {
+    height: 54vh;
+}
+}
+@media only screen and (width: 1366px) and (height: 1024px) and (orientation: landscape) {
+    .needs-grey-bg {
+    padding-top: 300px;
+    }
+}
+@media only screen and (width:1024px) and (max-height:778px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 58vh;
+}
+}
+@media only screen and (max-width:896px) and (max-height:414px) and (orientation:landscape) {
+    .needs-home-avatar img {
+    height: 44vh;
+}
+.needs-grey-bg {
+    padding-top: 170px;
+}
+} */
 </style>
-<script>
-
-    //    $(document).on('touchmove', onScroll); // for mobile
-
-    //    $(window).scroll(function(){
-    //          onScroll();
-    //    });
-    //    function onScroll() {
-    //     if ($(window).height() >= $(document).height() - 150) {
-    //         $('.footer').fadeIn();
-    //         console.log('go down');
-    //     } else {
-    //         console.log('go up');
-    //         // Hide the footer when not at the bottom
-    //         $('.footer').fadeOut();
-    //     }
-    // }
-
-    // console.log('document height: ' + $(document).height());
-    // //get windows height
-    // console.log('window height: ' + $(window).height());
-
-</script>
 @endsection
