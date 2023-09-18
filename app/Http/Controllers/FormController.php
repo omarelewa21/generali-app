@@ -185,7 +185,7 @@ class FormController extends Controller {
             $validator->errors()->add($attribute, $customMessage);
         
             return false;
-        });        
+        });    
         
         $validator = Validator::make($request->all(), [
             'maritalStatusButtonInput' => [

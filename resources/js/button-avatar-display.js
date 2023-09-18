@@ -118,7 +118,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Car",
-                class: "position-absolute",
+                class: "position-absolute car",
                 style: "bottom:150px;right:-200px"
             }
         ];
@@ -129,7 +129,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 width: "auto",
                 height: "100%",
                 alt: "Scooter",
-                class: "position-absolute",
+                class: "position-absolute scooter",
                 style: "bottom:150px;left:0"
             }
         ];
@@ -139,7 +139,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 src: "/images/avatar-my-assets/house-vector.png",
                 width: "auto",
                 height: "100%",
-                alt: "House"
+                alt: "House",
+                class: "house"
             }
         ];
 
@@ -148,7 +149,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 src: "/images/avatar-my-assets/bunglow-vector.png",
                 width: "auto",
                 height: "100%",
-                alt: "Bungalow"
+                alt: "Bungalow",
+                class: "bungalow"
             }
         ];
 
@@ -157,7 +159,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 src: "/images/avatar-my-assets/condo-vector.png",
                 width: "auto",
                 height: "100%",
-                alt: "Bungalow"
+                alt: "Bungalow",
+                class: "condo"
             }
         ];
 
@@ -252,6 +255,38 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
             } else {
                 
+            }
+        }
+        else if (path == '/assets') {
+            var preselect = document.getElementById('assetsButtonInput').value;
+
+            if (preselect.trim() !== "") {
+                var assets = JSON.parse(preselect);
+
+                if (assets.car && assets.car.status.includes("yes")) {
+                    var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
+                    $(".imageContainerCar").append(newImage);
+                }
+
+                if (assets.scooter && assets.scooter.status.includes("yes")) {
+                    var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
+                    $(".imageContainerCar").append(newImage);
+                }
+
+                if (assets.house && assets.house.status.includes("yes")) {
+                    var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
+                    $(".imageContainerHouse").html(newImage);
+                }
+
+                if (assets.bungalow && assets.bungalow.status.includes("yes")) {
+                    var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
+                    $(".imageContainerHouse").html(newImage);
+                }
+
+                if (assets.condo && assets.condo.status.includes("yes")) {
+                    var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
+                    $(".imageContainerHouse").html(newImage);
+                }
             }
         }
 
@@ -455,108 +490,241 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
-        // Car Selection
-        $("#carButton").on("click", function () {
-            if (carImageIndex < carImages.length) {
-                var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
-                $(".imageContainerCar").append(newImage);
-                carImageIndex++;
-
-                if (carImageIndex >= carImages.length) {
-                    $("#carButton").parent().removeClass("hover");
-                }
-            }
-        });
-
-        $("#scooterButton").on("click", function () {
-            if (scooterImageIndex < scooterImages.length) {
-                
-                var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
-                $(".imageContainerCar").append(newImage);
-                scooterImageIndex++;
-
-                if (scooterImageIndex >= scooterImages.length) {
-                    $("#scooterButton").parent().removeClass("hover");
-                }
-            }
-        });
-
         var selectedImages = [];
         const selectedAssets = {
+            car: [],
+            scooter: [],
             house: [],
             bungalow: [],
+            others: []
         };
 
+        // Car Selection
+        $("#carButton").on("click", function () {
+            var $imageContainer = $(".imageContainerCar");
+
+            if ($imageContainer.find("img.car").length > 0) {
+                // If an image exists, remove it
+                $imageContainer.find("img.car").remove();
+                this.removeAttribute('data-required', 'selected');
+                this.closest('.button-bg').classList.remove('selected');
+
+                selectedAssets['car'] = {
+                    'status': 'no',
+                };
+            } else {
+                // If no image exists, create a new one and append it
+                var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
+                $(".imageContainerCar").append(newImage);
+
+                selectedAssets['car'] = {
+                    'status': 'yes',
+                };
+            }
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value), 
+                    car: selectedAssets.car 
+                });
+            }
+        });
+
+        // Scooter Selection
+        $("#scooterButton").on("click", function () {
+            var $imageContainer = $(".imageContainerCar");
+
+            if ($imageContainer.find("img.scooter").length > 0) {
+                // If an image exists, remove it
+                $imageContainer.find("img.scooter").remove();
+                this.removeAttribute('data-required', 'selected');
+                this.closest('.button-bg').classList.remove('selected');
+
+                selectedAssets['scooter'] = {
+                    'status': 'no',
+                };
+            } else {
+                // If no image exists, create a new one and append it
+                var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
+                $(".imageContainerCar").append(newImage);
+
+                selectedAssets['scooter'] = {
+                    'status': 'yes',
+                };
+            }
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value), 
+                    scooter: selectedAssets.scooter 
+                });
+            }
+        });
+
+        // House Selection
         $("#houseButton").on("click", function () {
+            var $imageContainer = $(".imageContainerHouse");
 
-            selectedImages.push(houseImages[0]);
-            selectedAssets['house'].push("yes");
+            if ($imageContainer.find("img.house").length > 0) {
+                // If an image exists, remove it
+                $imageContainer.find("img").remove();
+                this.removeAttribute('data-required', 'selected');
+                this.closest('.button-bg').classList.remove('selected');
 
-            assetsButtonInput.value = JSON.stringify(selectedAssets);
-            // if (houseImageIndex < houseImages.length) {
-            //     var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
-            //     $(".imageContainerHouse").html(newImage);
-            //     houseImageIndex++;
-
-            //     if (houseImageIndex >= houseImages.length) {
-            //         $("#houseButton").parent().removeClass("hover");
-            //     }
-            // }
-            selectedImages.forEach(function (image) {
-                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                selectedAssets['house'] = {
+                    'status': 'no',
+                };
+            } else {
+                // If no image exists, create a new one and append it
+                var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
-            });
 
-            // if (assetsButtonInput.value == '') {
-            //     assetsButtonInput.value = JSON.stringify(selectedAssets);
-            // }
-            // else {
-            //     assetsButtonInput.value = JSON.stringify({
-            //         ...JSON.parse(assetsButtonInput.value),
-            //         house: selectedAssets.house
-            //     });
-            // }
+                selectedAssets['house'] = {
+                    'status': 'yes',
+                };
+
+                selectedAssets['bungalow'] = {
+                    'status': 'no',
+                };
+
+                selectedAssets['condo'] = {
+                    'status': 'no',
+                };
+
+                $("#bungalowButton").closest('.button-bg').removeClass('selected');
+                $("#condoButton").closest('.button-bg').removeClass('selected');
+            }
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value), 
+                    house: selectedAssets.house,
+                    bungalow: selectedAssets.bungalow,
+                    condo: selectedAssets.condo
+                });
+            }
         });
 
+        // Bungalow Selection
         $("#bungalowButton").on("click", function () {
-            selectedImages.push(bungalowImages[0]);
-            selectedAssets['bungalow'].push("yes");
+            var $imageContainer = $(".imageContainerHouse");
 
-            assetsButtonInput.value = JSON.stringify(selectedAssets);
-            // if (bungalowImageIndex < bungalowImages.length) {
-            //     var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
-            //     $(".imageContainerHouse").html(newImage);
-            //     bungalowImageIndex++;
+            if ($imageContainer.find("img.bungalow").length > 0) {
+                // If an image exists, remove it
+                $imageContainer.find("img").remove();
+                this.removeAttribute('data-required', 'selected');
+                this.closest('.button-bg').classList.remove('selected');
 
-            //     if (bungalowImageIndex >= bungalowImages.length) {
-            //         $("#bungalowButton").parent().removeClass("hover");
-            //     }
-            // }
-            selectedImages.forEach(function (image) {
-                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
+                selectedAssets['bungalow'] = {
+                    'status': 'no',
+                };
+            } else {
+                // If no image exists, create a new one and append it
+                var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
-            });
 
-            // if (assetsButtonInput.value == '') {
-            //     assetsButtonInput.value = JSON.stringify(selectedAssets);
-            // }
-            // else {
-            //     assetsButtonInput.value = JSON.stringify({
-            //         ...JSON.parse(assetsButtonInput.value),
-            //         bungalow: selectedAssets.bungalow
-            //     });
-            // }
+                selectedAssets['bungalow'] = {
+                    'status': 'yes',
+                };
+
+                selectedAssets['house'] = {
+                    'status': 'no',
+                };
+
+                selectedAssets['condo'] = {
+                    'status': 'no',
+                };
+
+                $("#houseButton").closest('.button-bg').removeClass('selected');
+                $("#condoButton").closest('.button-bg').removeClass('selected');
+            }
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value), 
+                    bungalow: selectedAssets.bungalow,
+                    house: selectedAssets.house,
+                    condo: selectedAssets.condo
+                });
+            }
         });
 
+        // Condo Selection
         $("#condoButton").on("click", function () {
-            if (condoImageIndex < condoImages.length) {
+            var $imageContainer = $(".imageContainerHouse");
+
+            if ($imageContainer.find("img.condo").length > 0) {
+                // If an image exists, remove it
+                $imageContainer.find("img").remove();
+                this.removeAttribute('data-required', 'selected');
+                this.closest('.button-bg').classList.remove('selected');
+
+                selectedAssets['condo'] = {
+                    'status': 'no',
+                };
+            } else {
+                // If no image exists, create a new one and append it
                 var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
-                condoImageIndex++;
 
-                if (condoImageIndex >= condoImages.length) {
-                    $("#condoButton").parent().removeClass("hover");
-                }
+                selectedAssets['condo'] = {
+                    'status': 'yes',
+                };
+
+                selectedAssets['house'] = {
+                    'status': 'no',
+                };
+
+                selectedAssets['bungalow'] = {
+                    'status': 'no',
+                };
+
+                $("#houseButton").closest('.button-bg').removeClass('selected');
+                $("#bungalowButton").closest('.button-bg').removeClass('selected');
+            }
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value),
+                    bungalow: selectedAssets.bungalow,
+                    condo: selectedAssets.condo,
+                    house: selectedAssets.house
+                });
+            }
+        });
+
+        // Others Selection
+        $(".btn-exit-assetsOthers").on("click", function () {
+            var selectedValue = $("#otherAssetsInput").val();
+
+            selectedAssets['others'] = {
+                'status': 'yes',
+                'assets': selectedValue
+            };
+
+            if (assetsButtonInput.value == '') {
+                assetsButtonInput.value = JSON.stringify(selectedAssets);
+            }
+            else {
+                assetsButtonInput.value = JSON.stringify({
+                    ...JSON.parse(assetsButtonInput.value),
+                    others: selectedAssets.others,
+                });
             }
         });
     });

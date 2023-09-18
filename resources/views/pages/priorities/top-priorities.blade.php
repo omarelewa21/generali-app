@@ -12,6 +12,12 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+    $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
+@endphp
+
 <div id="top_priorities" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
@@ -109,7 +115,7 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="bottom: -60%;">
-                            <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         </div>
                     </div>
                 </section>
