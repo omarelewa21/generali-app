@@ -25,10 +25,7 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-default d-flex justify-content-center">
-                    <div class="col-12 position-relative imageContainerCar">
-                        <!-- <img src="{{ asset('/images/avatar-my-assets/car-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;right:-200px">
-                        <img src="{{ asset('/images/avatar-my-assets/scooter-vector.png') }}" width="auto" height="100%" alt="" class="position-absolute" style="bottom:150px;left:0"> -->
-                    </div>
+                    <div class="col-12 position-relative imageContainerCar"></div>
                     <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="70%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
                 </section>
             </div>
@@ -58,7 +55,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'car' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="car" data-required="" id="carButton">
+                                                <button class="border-0 @if(isset($arrayData['Assets']['car']['status']) && $arrayData['Assets']['car']['status'] === 'yes') default @endif" data-avatar="car" data-required="" id="carButton">
                                                     <img src="{{ asset('images/avatar-my-assets/car-icon-02.png') }}" width="auto" height="100px" alt="Car">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Car</p>
                                                 </button>
@@ -68,7 +65,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'motorcycle' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="motorcycle" data-required="" id="scooterButton">
+                                                <button class="border-0 @if(isset($arrayData['Assets']['scooter']['status']) && $arrayData['Assets']['scooter']['status'] === 'yes') default @endif" data-avatar="motorcycle" data-required="" id="scooterButton">
                                                     <img src="{{ asset('images/avatar-my-assets/motorcycle-icon.png') }}" width="auto" height="100px" alt="Motorcycle">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Motorcycle</p>
                                                 </button>
@@ -78,7 +75,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'house' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="house" data-required="" id="houseButton">
+                                                <button class="border-0 @if(isset($arrayData['Assets']['house']['status']) && $arrayData['Assets']['house']['status'] === 'yes') default @endif" data-avatar="house" data-required="" id="houseButton">
                                                     <img src="{{ asset('images/avatar-my-assets/house-icon.png') }}" width="auto" height="100px" alt="House">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">House</p>
                                                 </button>
@@ -88,7 +85,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'bungalow' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="bungalow" data-required="" id="bungalowButton">
+                                                <button class="border-0 @if(isset($arrayData['Assets']['bungalow']['status']) && $arrayData['Assets']['bungalow']['status'] === 'yes') default @endif" data-avatar="bungalow" data-required="" id="bungalowButton">
                                                     <img src="{{ asset('images/avatar-my-assets/bungalow-icon.png') }}" width="auto" height="100px" alt="Bungalow">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Bungalow</p>
                                                 </button>
@@ -98,7 +95,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'apartment' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="apartment" data-required="" id="condoButton">
+                                                <button class="border-0 @if(isset($arrayData['Assets']['condo']['status']) && $arrayData['Assets']['condo']['status'] === 'yes') default @endif" data-avatar="apartment" data-required="" id="condoButton">
                                                     <img src="{{ asset('images/avatar-my-assets/apartment-icon.png') }}" width="auto" height="100px" alt="Apartment">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Apartment</p>
                                                 </button>
@@ -108,7 +105,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg {{$assets === 'others' ? 'selected' : ''}}">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0" data-avatar="others" data-required="" data-bs-toggle="modal" data-bs-target="#otherAssets">
+                                                <button class="border-0" data-avatar="othersAssets" data-required="" data-bs-toggle="modal" data-bs-target="#otherAssets">
                                                     <img src="{{ asset('images/avatar-my-assets/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                                 </button>
@@ -153,7 +150,7 @@
                 <input type="text" name="otherAssetsInput" class="form-control bg-white @error('otherAssetsInput') is-invalid @enderror" id="otherAssetsInput" placeholder="Add your asset" value="{{ old('otherAssetsInput', $arrayData['otherAssetsInput'] ?? '') }}">
             </div>
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Submit</button>
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar btn-exit-assetsOthers" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>

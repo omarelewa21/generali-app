@@ -30,6 +30,10 @@ class DropdownController extends Controller
     public function familyDependantDetails()
     {
         $maritalstatuses = maritalStatus::all();
-        return view('pages/avatar/avatar-family-dependant-details', compact('maritalstatuses'));
+        $titles = Title::all();
+        $countries = Country::all();
+        $idtypes = IDType::all();
+        $occupations = Occupation::all();
+        return view('pages/avatar/avatar-family-dependant-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
     }
 }
