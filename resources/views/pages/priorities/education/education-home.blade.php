@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 needs-home-text z-1 align-items-end d-grid">
-                                    <div class="col-md-6 d-flex justify-content-center text-center m-auto z-1">
+                                    <div class="col-md-5 d-flex justify-content-center text-center m-auto z-1">
                                         <h4 class="py-3 f-family fw-700">Let's get into your plans for education</h4>
                                     </div>
                                 </div>

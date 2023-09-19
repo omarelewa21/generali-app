@@ -14,7 +14,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $savingsSelectedAvatar = isset($arrayData['savingsSelectedAvatar']) ? $arrayData['savingsSelectedAvatar'] : '';
+    $savingsSelectedAvatar = isset($arrayData['savings']['savingsSelectedAvatar']) ? $arrayData['savings']['savingsSelectedAvatar'] : '';
 @endphp
 
 <div id="savings-coverage" class="vh-100">
