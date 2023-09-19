@@ -4,6 +4,12 @@ $(function() {
 
     var addedNeedsImages = []; // Array to keep track of added needs images
 
+    function createSortingDiv() {
+        var sortingDiv = $("<div class='sorting-div'></div>");
+        $sortable.append(sortingDiv);
+        return sortingDiv;
+    }
+
     // Function to click to drop
     function addImageToSortable(imageName) {
         var droppedContainer = $sortable.find(".dropped:empty:first");
@@ -25,7 +31,7 @@ $(function() {
                     var pathClass = parentSvgContainer.attr("data-svg-class");
 
                     parentSvgContainer.addClass("item-dropped");
-                    parentSvgContainer.append(removeButton);
+                    droppedContainer.append(removeButton);
 
                     // Check if an item has been dropped into the SVG container
                     if (pathClass) {
@@ -64,7 +70,7 @@ $(function() {
     function updateAddedNeedsImages() {
         addedNeedsImages = [];
 
-        $(".dropped img.inner-dropped").each(function() {
+        $(".dropped .sorting-div img.inner-dropped").each(function() {
             addedNeedsImages.push($(this).attr("src"));
         });
     }
@@ -120,18 +126,33 @@ $(function() {
     //     }
     // });
 
-    $(".dropped").sortable({
-        cursor: "move",
-        connectWith: ".dropped", // Allow sorting between all .dropped elements
+    // $(".dropped").sortable({
+    //     cursor: "move",
+    //     connectWith: ".dropped", // Allow sorting between all .dropped elements
+    //     start: function(event, ui) {
+    //         // Code to handle sorting start event
+    //     },
+    //     stop: function(event, ui) {
+    //         // Code to handle sorting stop event
+    //         updateAddedNeedsImages(); // Update the addedNeedsImages array after sorting
+    //     }
+    // });
+    
+    $sortable.find(".svg-button").sortable({
+        // items: ".dropped", // Only allow sorting of images
+        connectWith: ".svg-button",
+        placeholder: "ui-state-highlight",
         start: function(event, ui) {
-            // Code to handle sorting start event
+            // Store the original image source before sorting
+            // $(ui.item.find("img")).data("original-src", $(ui.item.find("img")).attr("src"));
         },
         stop: function(event, ui) {
-            // Code to handle sorting stop event
-            updateAddedNeedsImages(); // Update the addedNeedsImages array after sorting
+            // Update the addedNeedsImages array to reflect the new order
+            addedNeedsImages = $sortable.find(".svg-button").map(function() {
+                return $(this).attr("src");
+            }).get();
         }
-    });
-    
+    });  
     // $(".dropped").on("receive", function(event, ui) {
     //     var $draggedItem = ui.item;
     //     var $targetContainer = $(this);
