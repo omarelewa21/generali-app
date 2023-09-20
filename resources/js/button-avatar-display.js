@@ -146,7 +146,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var bungalowImages = [
             {
-                src: "/images/avatar-my-assets/bunglow-vector.png",
+                src: "/images/avatar-my-assets/bungalow-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "Bungalow",
@@ -263,27 +263,27 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (preselect.trim() !== "") {
                 var assets = JSON.parse(preselect);
 
-                if (assets.car && assets.car.status.includes("yes")) {
+                if (assets.car && assets.car.status && assets.car.status.includes("yes")) {
                     var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
                     $(".imageContainerCar").append(newImage);
                 }
 
-                if (assets.scooter && assets.scooter.status.includes("yes")) {
+                if (assets.scooter && assets.scooter.status && assets.scooter.status.includes("yes")) {
                     var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
                     $(".imageContainerCar").append(newImage);
                 }
 
-                if (assets.house && assets.house.status.includes("yes")) {
+                if (assets.house && assets.house.status && assets.house.status.includes("yes")) {
                     var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
                     $(".imageContainerHouse").html(newImage);
                 }
 
-                if (assets.bungalow && assets.bungalow.status.includes("yes")) {
+                if (assets.bungalow && assets.bungalow.status && assets.bungalow.status.includes("yes")) {
                     var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
                     $(".imageContainerHouse").html(newImage);
                 }
 
-                if (assets.condo && assets.condo.status.includes("yes")) {
+                if (assets.condo && assets.condo.status && assets.condo.status.includes("yes")) {
                     var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
                     $(".imageContainerHouse").html(newImage);
                 }
