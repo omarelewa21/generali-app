@@ -1,17 +1,20 @@
-import $ from 'jquery';
-import 'jquery-ui-dist/jquery-ui';
+// import $ from 'jquery';
+// import 'jquery-ui-dist/jquery-ui';
 import './bootstrap';
-import './drag-drop';
 import './navigation-flow';
 import './height-controller';
 import './button';
 import './button-multiple-select';
 import './avatar';
 import './form-display';
-import './coverage-carousel';
-// $('.toast').toast('show');
-// $('.tooltip').tooltip('show');
 import './button-avatar-display';
+import './drag-drop';
+
+
+
+// // import './coverage-carousel';
+// // $('.toast').toast('show');
+// // $('.tooltip').tooltip('show');
 
 document.getElementById('saveSession').addEventListener('click', function() {
     var clearRoute = this.getAttribute('data-clear-route');

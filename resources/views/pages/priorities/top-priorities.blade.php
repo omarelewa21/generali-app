@@ -15,7 +15,6 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
 @endphp
 
 <div id="top_priorities" class="vh-100 overflow-hidden">
@@ -114,7 +113,7 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                            <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         </div>
                     </div>
                 </section>
@@ -218,7 +217,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-primary flex-fill text-uppercase me-md-2">Back</a>
+                                    <!-- Add a hidden input field to store the selected button -->
+                                    <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="">
+                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                             </div>

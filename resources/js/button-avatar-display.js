@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 const specificPageURLs = [
     'marital-status',
     'family-dependant',
@@ -14,7 +12,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    $(function() {
+    document.addEventListener('DOMContentLoaded', function() {
         
         // Set the avatar images in index
         var spouseMarriedImages = [

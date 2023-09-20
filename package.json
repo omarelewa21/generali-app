@@ -5,7 +5,8 @@
         "build": "vite build",
         "watch": "npm run development -- --watch",
         "development": "mix",
-        "test": "command-to-run-tests"
+        "test": "command-to-run-tests",
+        "preview": "vite preview"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
@@ -21,9 +22,11 @@
     "dependencies": {
         "axios": "^1.4.0",
         "bootstrap-icons": "^1.10.5",
-        "jquery": "^3.7.1",
+        "bootstrap4-toggle": "^3.6.1",
+        "jquery": "^3.7.0",
         "jquery-ui": "^1.13.2",
         "jquery-ui-dist": "^1.13.2",
+        "list": "^2.0.19",
         "slick-carousel": "^1.8.1",
         "sortablejs": "^1.15.0",
         "ui": "^0.2.4"

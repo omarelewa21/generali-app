@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
     var $needs = $("#needs"),
     $sortable = $("#sortable");
 
@@ -138,21 +138,21 @@ $(function() {
     //     }
     // });
     
-    // $sortable.find(".svg-button").sortable({
-    //     // items: ".dropped", // Only allow sorting of images
-    //     connectWith: ".svg-button",
-    //     placeholder: "ui-state-highlight",
-    //     start: function(event, ui) {
-    //         // Store the original image source before sorting
-    //         // $(ui.item.find("img")).data("original-src", $(ui.item.find("img")).attr("src"));
-    //     },
-    //     stop: function(event, ui) {
-    //         // Update the addedNeedsImages array to reflect the new order
-    //         addedNeedsImages = $sortable.find(".svg-button").map(function() {
-    //             return $(this).attr("src");
-    //         }).get();
-    //     }
-    // });  
+    $sortable.find(".svg-button").sortable({
+        // items: ".dropped", // Only allow sorting of images
+        connectWith: ".svg-button",
+        placeholder: "ui-state-highlight",
+        start: function(event, ui) {
+            // Store the original image source before sorting
+            // $(ui.item.find("img")).data("original-src", $(ui.item.find("img")).attr("src"));
+        },
+        stop: function(event, ui) {
+            // Update the addedNeedsImages array to reflect the new order
+            addedNeedsImages = $sortable.find(".svg-button").map(function() {
+                return $(this).attr("src");
+            }).get();
+        }
+    });  
     // $(".dropped").on("receive", function(event, ui) {
     //     var $draggedItem = ui.item;
     //     var $targetContainer = $(this);
