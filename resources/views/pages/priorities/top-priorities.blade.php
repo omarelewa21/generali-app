@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $topPriorities = isset($arrayData['TopPriorities']) ? json_encode($arrayData['TopPriorities']) : '';
 @endphp
 
 <div id="top_priorities" class="vh-100 overflow-hidden">
@@ -27,14 +28,14 @@
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
                         <div id="sortable-main" class="position-relative pt-3">
                             <svg width="100%" height="100%" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path class="second" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="fourth" d="M387.489 151.333C354.661 151.333 323.41 158.078 295.051 170.266L236.951 34.6854C283.175 14.9411 334.052 4 387.477 4V151.333H387.489Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="third" d="M295.051 170.266C265.687 182.865 239.42 201.294 217.691 224.091L110.017 122.74C145.668 85.401 188.783 55.2644 236.951 34.6855L295.051 170.266Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="first" d="M168.769 301.044C158.767 326.802 153.189 354.766 152.949 384L4 376.454C5.31449 331.101 14.4816 287.714 30.2098 247.619L168.769 301.044Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="seventh" d="M744.39 246.625L606.083 300.679C594.961 272.166 578.41 246.351 557.709 224.526L666.104 123.929C699.469 159.165 726.239 200.723 744.39 246.625Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="fifth" d="M539.329 35.2456L480.417 170.472C451.933 158.158 420.511 151.333 387.5 151.333H387.489V4H387.5C441.44 4 492.762 15.1583 539.329 35.2456Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="eight" d="M771 376.42L622.051 383.988C621.811 354.618 616.176 326.528 606.083 300.678L744.39 246.625C760.358 286.982 769.674 330.701 771 376.42Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
-                                <path class="sixth" d="M666.104 123.929L557.71 224.525C536.026 201.649 509.771 183.139 480.417 170.472L539.33 35.2456C587.486 56.0188 630.555 86.3726 666.104 123.929Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="second @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][1])) item-dropped @endif" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="fourth @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][3])) item-dropped @endif" d="M387.489 151.333C354.661 151.333 323.41 158.078 295.051 170.266L236.951 34.6854C283.175 14.9411 334.052 4 387.477 4V151.333H387.489Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="third @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][2])) item-dropped @endif" d="M295.051 170.266C265.687 182.865 239.42 201.294 217.691 224.091L110.017 122.74C145.668 85.401 188.783 55.2644 236.951 34.6855L295.051 170.266Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="first @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][0])) item-dropped @endif" d="M168.769 301.044C158.767 326.802 153.189 354.766 152.949 384L4 376.454C5.31449 331.101 14.4816 287.714 30.2098 247.619L168.769 301.044Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="seventh @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][6])) item-dropped @endif" d="M744.39 246.625L606.083 300.679C594.961 272.166 578.41 246.351 557.709 224.526L666.104 123.929C699.469 159.165 726.239 200.723 744.39 246.625Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="fifth @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][4])) item-dropped @endif" d="M539.329 35.2456L480.417 170.472C451.933 158.158 420.511 151.333 387.5 151.333H387.489V4H387.5C441.44 4 492.762 15.1583 539.329 35.2456Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="eight @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][7])) item-dropped @endif" d="M771 376.42L622.051 383.988C621.811 354.618 616.176 326.528 606.083 300.678L744.39 246.625C760.358 286.982 769.674 330.701 771 376.42Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
+                                <path class="sixth @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][5])) item-dropped @endif" d="M666.104 123.929L557.71 224.525C536.026 201.649 509.771 183.139 480.417 170.472L539.33 35.2456C587.486 56.0188 630.555 86.3726 666.104 123.929Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                 <path opacity="0.5" d="M87.088 350V305.2H79.856C79.6 306.907 79.0667 308.336 78.256 309.488C77.4453 310.64 76.4427 311.579 75.248 312.304C74.096 312.987 72.7733 313.477 71.28 313.776C69.8293 314.032 68.3147 314.139 66.736 314.096V320.944H78V350H87.088Z" fill="#707070"/>
                                 <path opacity="0.5" d="M108.368 214.416H117.072C117.072 213.221 117.179 212.027 117.392 210.832C117.648 209.595 118.053 208.485 118.608 207.504C119.163 206.48 119.888 205.669 120.784 205.072C121.723 204.432 122.853 204.112 124.176 204.112C126.139 204.112 127.739 204.731 128.976 205.968C130.256 207.163 130.896 208.848 130.896 211.024C130.896 212.389 130.576 213.605 129.936 214.672C129.339 215.739 128.571 216.699 127.632 217.552C126.736 218.405 125.733 219.195 124.624 219.92C123.515 220.603 122.469 221.285 121.488 221.968C119.568 223.291 117.733 224.592 115.984 225.872C114.277 227.152 112.784 228.56 111.504 230.096C110.224 231.589 109.2 233.296 108.432 235.216C107.707 237.136 107.344 239.397 107.344 242H140.24V234.192H119.056C120.165 232.656 121.445 231.312 122.896 230.16C124.347 229.008 125.84 227.941 127.376 226.96C128.912 225.936 130.427 224.912 131.92 223.888C133.456 222.864 134.821 221.733 136.016 220.496C137.211 219.216 138.171 217.765 138.896 216.144C139.621 214.523 139.984 212.581 139.984 210.32C139.984 208.144 139.557 206.181 138.704 204.432C137.893 202.683 136.784 201.211 135.376 200.016C133.968 198.821 132.325 197.904 130.448 197.264C128.613 196.624 126.672 196.304 124.624 196.304C121.936 196.304 119.547 196.773 117.456 197.712C115.408 198.608 113.701 199.888 112.336 201.552C110.971 203.173 109.947 205.093 109.264 207.312C108.581 209.488 108.283 211.856 108.368 214.416Z" fill="#707070"/>
                                 <path opacity="0.5" d="M204.592 128.312V134.712C205.701 134.712 206.853 134.755 208.048 134.84C209.285 134.883 210.416 135.117 211.44 135.544C212.464 135.928 213.296 136.568 213.936 137.464C214.619 138.36 214.96 139.661 214.96 141.368C214.96 143.544 214.256 145.272 212.848 146.552C211.44 147.789 209.712 148.408 207.664 148.408C206.341 148.408 205.189 148.173 204.208 147.704C203.269 147.235 202.48 146.616 201.84 145.848C201.2 145.037 200.709 144.099 200.368 143.032C200.027 141.923 199.835 140.771 199.792 139.576H191.152C191.109 142.179 191.472 144.483 192.24 146.488C193.051 148.493 194.181 150.2 195.632 151.608C197.083 152.973 198.832 154.019 200.88 154.744C202.971 155.469 205.275 155.832 207.792 155.832C209.968 155.832 212.059 155.512 214.064 154.872C216.069 154.232 217.84 153.293 219.376 152.056C220.912 150.819 222.128 149.283 223.024 147.448C223.963 145.613 224.432 143.523 224.432 141.176C224.432 138.616 223.728 136.419 222.32 134.584C220.912 132.749 218.971 131.555 216.496 131V130.872C218.587 130.275 220.144 129.144 221.168 127.48C222.235 125.816 222.768 123.896 222.768 121.72C222.768 119.715 222.32 117.944 221.424 116.408C220.528 114.872 219.355 113.571 217.904 112.504C216.496 111.437 214.896 110.648 213.104 110.136C211.312 109.581 209.52 109.304 207.728 109.304C205.424 109.304 203.333 109.688 201.456 110.456C199.579 111.181 197.957 112.227 196.592 113.592C195.269 114.957 194.224 116.6 193.456 118.52C192.731 120.397 192.325 122.488 192.24 124.792H200.88C200.837 122.488 201.392 120.589 202.544 119.096C203.739 117.56 205.488 116.792 207.792 116.792C209.456 116.792 210.928 117.304 212.208 118.328C213.488 119.352 214.128 120.824 214.128 122.744C214.128 124.024 213.808 125.048 213.168 125.816C212.571 126.584 211.781 127.181 210.8 127.608C209.861 127.992 208.837 128.227 207.728 128.312C206.619 128.397 205.573 128.397 204.592 128.312Z" fill="#707070"/>
@@ -46,65 +47,137 @@
                             </svg>
                             
                             <div id="sortable" class="position-absolute pt-3">
-                                <div class="svg-container first example-class d-flex justify-content-center align-items-center position-relative" data-svg-class="first">
+                                <div class="svg-container first d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][0])) item-dropped @endif" data-svg-class="first">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][0]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][0]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][0] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="180" height="100" viewBox="0 0 166 138" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M164.769 55.0442C154.767 80.802 149.189 108.766 148.949 138L0 130.454C1.31449 85.1007 10.4816 41.7136 26.2098 1.61914L164.769 55.0442Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container second example-class d-flex justify-content-center align-items-center position-relative" data-svg-class="second">
+                                <div class="svg-container second d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][1])) item-dropped @endif" data-svg-class="second">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][1]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][1]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][1] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="200" height="125" viewBox="0 0 190 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M188.69 102.091C167.716 124.11 150.97 150.188 139.769 179.045L1.20972 125.62C19.5897 78.8027 46.8854 36.4788 81.0165 0.740234L188.69 102.091Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container third d-flex justify-content-center align-items-center position-relative" data-svg-class="third">
+                                <div class="svg-container third d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][2])) item-dropped @endif" data-svg-class="third">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][2]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][2]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][2] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="200" height="130" viewBox="0 0 187 191" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M186.051 136.266C156.687 148.865 130.42 167.294 108.691 190.091L1.0166 88.7402C36.6679 51.401 79.7832 21.2644 127.951 0.685547L186.051 136.266Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative" data-svg-class="fourth">
+                                <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][3])) item-dropped @endif" data-svg-class="fourth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][3]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][3]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][3] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="152" height="120" viewBox="0 0 152 168" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M151.489 148.333C118.661 148.333 87.4099 155.078 59.0512 167.266L0.950684 31.6854C47.1751 11.9411 98.0516 1 151.477 1V148.333H151.489Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative" data-svg-class="fifth">
+                                <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][4])) item-dropped @endif" data-svg-class="fifth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][4]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][4]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][4] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="154" height="120" viewBox="0 0 154 169" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M153.329 32.2456L94.4173 167.472C65.9329 155.158 34.5108 148.333 1.49997 148.333H1.48853V1H1.49997C55.4398 1 106.762 12.1583 153.329 32.2456Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative" data-svg-class="sixth">
+                                <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][5])) item-dropped @endif" data-svg-class="sixth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][5]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][5]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][5] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="188" height="135" viewBox="0 0 188 192" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M187.104 89.929L78.7096 190.525C57.0262 167.649 30.7706 149.139 1.41748 136.472L60.3296 1.24561C108.486 22.0188 151.555 52.3726 187.104 89.929Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative" data-svg-class="seventh">
+                                <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][6])) item-dropped @endif" data-svg-class="seventh">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][6]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][6]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][6] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="190" height="125" viewBox="0 0 190 179" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M188.39 123.625L50.0827 177.679C38.961 149.166 22.4099 123.351 1.70947 101.526L110.104 0.929199C143.469 36.1648 170.239 77.7226 188.39 123.625Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container eight d-flex justify-content-center align-items-center position-relative" data-svg-class="eight">
+                                <div class="svg-container eight d-flex justify-content-center align-items-center position-relative @if(isset($arrayData['TopPriorities']) && isset($arrayData['TopPriorities'][7])) item-dropped @endif" data-svg-class="eight">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
-                                        <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @if(!isset($arrayData['TopPriorities']) || !isset($arrayData['TopPriorities'][7]))
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
+                                        @else
+                                            <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['TopPriorities'][7]}}">
+                                                <div class='sortable-container'>
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['TopPriorities'][7] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <svg width="167" height="100" viewBox="0 0 167 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M166 131.42L17.051 138.988C16.811 109.618 11.1758 81.5276 1.08276 55.6783L139.39 1.62451C155.358 41.9819 164.674 85.7006 166 131.42Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
@@ -132,7 +205,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'protection') default @endif" data-avatar="protection" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('protection', $arrayData['TopPriorities'])) default @endif" data-avatar="protection" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
                                             </button>
@@ -142,7 +215,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'retirement') default @endif" data-avatar="retirement" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('retirement', $arrayData['TopPriorities'])) default @endif" data-avatar="retirement" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
                                             </button>
@@ -152,7 +225,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'education') default @endif" data-avatar="education" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('education', $arrayData['TopPriorities'])) default @endif" data-avatar="education" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
                                             </button>
@@ -162,7 +235,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'savings') default @endif" data-avatar="savings" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('savings', $arrayData['TopPriorities'])) default @endif" data-avatar="savings" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
                                             </button>
@@ -172,7 +245,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'debt-cancellation') default @endif" data-avatar="debt-cancellation" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('debt-cancellation', $arrayData['TopPriorities'])) default @endif" data-avatar="debt-cancellation" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
                                             </button>
@@ -182,7 +255,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'health-medical') default @endif" data-avatar="health-medical" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('health-medical', $arrayData['TopPriorities'])) default @endif" data-avatar="health-medical" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
                                             </button>
@@ -192,7 +265,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'investments') default @endif" data-avatar="investments" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('investments', $arrayData['TopPriorities'])) default @endif" data-avatar="investments" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Investments">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Investments</p>
                                             </button>
@@ -202,7 +275,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                            <button class="border-0 @if(isset($arrayData['priorities']) && $arrayData['priorities'] === 'others') default @endif" data-avatar="others" data-required="">
+                                            <button class="border-0 @if(isset($arrayData['TopPriorities']) && is_array($arrayData['TopPriorities']) && in_array('othersPriorities', $arrayData['TopPriorities'])) default @endif" data-avatar="othersPriorities" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                             </button>
@@ -212,25 +285,30 @@
                             </div>
                         </div>
                     </section>
-
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <!-- Add a hidden input field to store the selected button -->
-                                    <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="">
-                                    <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('priorities.to.discuss') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                    <form action="{{ route('form.top.priorities') }}" method="post" class="buttonForm">
+                        @csrf
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <!-- Add a hidden input field to store the selected button -->
+                                        <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="{{$topPriorities}}">
+                                        <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    var sessionData = {!! isset($topPriorities) && $topPriorities ? $topPriorities : '[]' !!};
+</script>
 <!-- <script>
     // Get all the path elements inside #sortable-main
 var paths = document.querySelectorAll("#sortable-main path");
