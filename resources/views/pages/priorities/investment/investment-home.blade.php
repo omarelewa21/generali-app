@@ -13,7 +13,7 @@
 <div id="investment-home" class="vh-100 overflow-x-hidden scrollable-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner">
+            <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner z-99">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h4 class="display-5 fw-bold text-white">My Priorities</h4>
@@ -23,21 +23,21 @@
                 <div class="vh-md-100 overflow-y-auto overflow-x-hidden">
                     <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block" />
                     <section class="needs-home-wrapper bg-needs-home">
-                        <div class="container needs-home-contents">
+                        <div class="container needs-home-contents bg-investment-home-element">
                             <div class="row needs-home-avatar-wrapper justify-content-center h-100">
                                 <div class="col-12 needs-home-avatars z-1 align-items-end">
                                     <div class="position-relative h-100 mh-100">
                                     </div>
-                                    <div class="position-relative h-100 mh-100 z-1 d-flex justify-content-center">
-                                        <img src="{{ asset('images/needs/investment/home/coins-left.png') }}" class="position-absolute bottom-33 start-0 mh-90 z-1">
-                                        <img src="{{ asset('images/needs/investment/home/home-avatar.png') }}" class="position-absolute bottom-33 mh-90">
+                                    <div class="position-relative h-100 mh-100 z-1 d-flex justify-content-center align-items-end">
+                                        <img src="{{ asset('images/needs/investment/home/coins-left.png') }}" class="position-absolute bottom-0 start-0 mh-90 z-1">
+                                        <img src="{{ asset('images/needs/investment/home/home-avatar.png') }}" class="position-absolute bottom-0 inv_avatar mh-90 mw-100">
                                         <img src="{{ asset('images/needs/investment/home/coins-right.png') }}" class="position-absolute bottom-0 end-0 mh-90">
                                     </div>
                                     <div class="position-relative h-100 mh-100">
                                     </div>
                                 </div>
                                 <div class="col-12 needs-home-text z-1 align-items-end d-grid">
-                                    <div class="col-md-6 d-flex justify-content-center text-center m-auto z-1">
+                                    <div class="col-md-4 d-flex justify-content-center text-center m-auto z-1">
                                         <h4 class="py-3 f-family fw-700">Now let's plan for your investments.</h4>
                                     </div>
                                 </div>

@@ -41,6 +41,12 @@
 .w-35{
     width: 35%;
 }
+.left-12{
+    left: 12%;
+}
+.right-2{
+    right: 2%;
+}
 
 /* Form Style */
 .form-control.money {
@@ -66,7 +72,7 @@
     grid-gap: 0px;
     grid-template-areas: 
     "needs-home-contents";
-    grid-template-rows: 87vh;
+    grid-template-rows: 85vh;
 }
 .needs-home-contents{
     grid-area: needs-home-contents;
@@ -99,6 +105,7 @@
     grid-area: needs-home-text;
     grid-template-columns: 100%;
 }
+#investment-home .needs-stand-bg,
 #education-home .needs-stand-bg{
     padding: 180px;
 }
@@ -350,6 +357,20 @@
     grid-area: tabung-content;
     grid-template-columns: 100%;
 }
+/* =============================== Investment Home =======================================*/
+#investment-home .needs-home-avatar-wrapper{
+    grid-template-rows: 81% 19%;
+}
+.bg-investment-home-element{
+    background-image: url('/images/needs/investment/home/investment-home-ele.png');
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-position: left 10% top 12%;
+}
+.inv_avatar{
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
@@ -567,6 +588,7 @@
     .needs-home-wrapper{
         grid-template-rows: 90vh;
     }
+    #investment-home .needs-stand-bg,
     #education-home .needs-stand-bg {
         padding: 250px;
     }
@@ -796,6 +818,9 @@
     .needs-home-avatar-wrapper{
         grid-template-rows: 85% 15%;
     }
+    #investment-home .needs-home-avatar-wrapper{
+        grid-template-rows: 85% 15%;
+    }
     #savings-monthly .content-supporting-default {
         grid-template-rows: 90% auto;
     }
@@ -819,6 +844,7 @@
     .needs-home-wrapper{
         grid-template-rows: 90vh;
     }
+    #investment-home .needs-stand-bg,
     #education-home .needs-stand-bg {
         padding: 250px;
     }
