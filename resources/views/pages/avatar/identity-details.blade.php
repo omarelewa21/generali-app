@@ -176,7 +176,7 @@
                                                 </div>
                                                 @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                     <div class="col-md-12">
-                                                        <div class="invalid-feedback" style="display:block">Please select a day, month, and year.</div>
+                                                        <div class="invalid-feedback" style="display:block">The date of birth field is required.</div>
                                                     </div>
                                                 @endif
                                             </div>
@@ -198,7 +198,7 @@
                                                 </label>
                                             </div>
                                             @error('btnradio')
-                                                <div class="invalid-feedback">Please select your habits</div>
+                                                <div class="invalid-feedback">The habits field is required.</div>
                                             @enderror  
                                         </div>
                                     </div>

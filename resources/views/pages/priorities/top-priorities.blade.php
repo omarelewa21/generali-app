@@ -12,17 +12,22 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $arrayData = session('passingArrays');
+    $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
+@endphp
+
 <div id="top_priorities" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 gender-selection-bg vh-100 wrapper-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 1;">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
-                            
                         <div id="sortable-main" class="position-relative pt-3">
-                            <svg width="100%" height="auto" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="100%" height="100%" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path class="second" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                 <path class="fourth" d="M387.489 151.333C354.661 151.333 323.41 158.078 295.051 170.266L236.951 34.6854C283.175 14.9411 334.052 4 387.477 4V151.333H387.489Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
                                 <path class="third" d="M295.051 170.266C265.687 182.865 239.42 201.294 217.691 224.091L110.017 122.74C145.668 85.401 188.783 55.2644 236.951 34.6855L295.051 170.266Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
@@ -42,18 +47,18 @@
                             </svg>
                             
                             <div id="sortable" class="position-absolute pt-3">
-                                <div class="svg-container first d-flex justify-content-center align-items-center position-relative" data-svg-class="first">
+                                <div class="svg-container first example-class d-flex justify-content-center align-items-center position-relative" data-svg-class="first">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="180" height="140" viewBox="0 0 166 138" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="180" height="100" viewBox="0 0 166 138" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M164.769 55.0442C154.767 80.802 149.189 108.766 148.949 138L0 130.454C1.31449 85.1007 10.4816 41.7136 26.2098 1.61914L164.769 55.0442Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container second d-flex justify-content-center align-items-center position-relative" data-svg-class="second">
+                                <div class="svg-container second example-class d-flex justify-content-center align-items-center position-relative" data-svg-class="second">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="200" height="175" viewBox="0 0 190 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="200" height="125" viewBox="0 0 190 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M188.69 102.091C167.716 124.11 150.97 150.188 139.769 179.045L1.20972 125.62C19.5897 78.8027 46.8854 36.4788 81.0165 0.740234L188.69 102.091Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -61,7 +66,7 @@
                                 <div class="svg-container third d-flex justify-content-center align-items-center position-relative" data-svg-class="third">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="200" height="185" viewBox="0 0 187 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="200" height="130" viewBox="0 0 187 191" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M186.051 136.266C156.687 148.865 130.42 167.294 108.691 190.091L1.0166 88.7402C36.6679 51.401 79.7832 21.2644 127.951 0.685547L186.051 136.266Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -69,7 +74,7 @@
                                 <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative" data-svg-class="fourth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="152" height="168" viewBox="0 0 152 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="152" height="120" viewBox="0 0 152 168" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M151.489 148.333C118.661 148.333 87.4099 155.078 59.0512 167.266L0.950684 31.6854C47.1751 11.9411 98.0516 1 151.477 1V148.333H151.489Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -77,7 +82,7 @@
                                 <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative" data-svg-class="fifth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="154" height="169" viewBox="0 0 154 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="154" height="120" viewBox="0 0 154 169" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M153.329 32.2456L94.4173 167.472C65.9329 155.158 34.5108 148.333 1.49997 148.333H1.48853V1H1.49997C55.4398 1 106.762 12.1583 153.329 32.2456Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -85,7 +90,7 @@
                                 <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative" data-svg-class="sixth">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="188" height="192" viewBox="0 0 188 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="188" height="135" viewBox="0 0 188 192" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M187.104 89.929L78.7096 190.525C57.0262 167.649 30.7706 149.139 1.41748 136.472L60.3296 1.24561C108.486 22.0188 151.555 52.3726 187.104 89.929Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -93,7 +98,7 @@
                                 <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative" data-svg-class="seventh">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="190" height="179" viewBox="0 0 190 179" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="190" height="125" viewBox="0 0 190 179" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M188.39 123.625L50.0827 177.679C38.961 149.166 22.4099 123.351 1.70947 101.526L110.104 0.929199C143.469 36.1648 170.239 77.7226 188.39 123.625Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
@@ -101,15 +106,15 @@
                                 <div class="svg-container eight d-flex justify-content-center align-items-center position-relative" data-svg-class="eight">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
-                                        <svg width="167" height="140" viewBox="0 0 167 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="167" height="100" viewBox="0 0 167 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M166 131.42L17.051 138.988C16.811 109.618 11.1758 81.5276 1.08276 55.6783L139.39 1.62451C155.358 41.9819 164.674 85.7006 166 131.42Z" fill="none" stroke="none" stroke-dasharray="none"/>
                                         </svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 position-absolute" style="bottom: -60%;">
-                            <img src="{{ asset('/images/avatar-general/avatar-gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <div class="col-12 position-absolute" style="top: 50%;">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         </div>
                     </div>
                 </section>

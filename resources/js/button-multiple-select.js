@@ -81,12 +81,33 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default behavior of the button click
 
-                // Add the 'selected' attribute to the clicked button
-                this.setAttribute('data-required', 'selected');
-    
-                // Add the 'selected' class to the closest button-bg div of the clicked button
-                this.closest('.button-bg').classList.add('selected');
+                if (this.getAttribute('data-avatar') != 'othersAssets') {
+                    // Add the 'selected' attribute to the clicked button
+                    this.setAttribute('data-required', 'selected');
+        
+                    // Add the 'selected' class to the closest button-bg div of the clicked button
+                    this.closest('.button-bg').classList.toggle('selected');
+                }
             });
+        });
+
+        const otherAssetsButton = document.querySelector('.btn-exit-assetsOthers');
+
+        otherAssetsButton.addEventListener('click', function() {
+            const selectedOthersButton = document.querySelector('[data-avatar="othersAssets"][data-required]');
+            const otherAssetsInput = document.getElementById('otherAssetsInput');
+            const selectedOthers = otherAssetsInput.value;
+
+            if (selectedOthersButton) {
+                if (selectedOthers.length > 0) {
+                    selectedOthersButton.closest('.button-bg').classList.add('selected');
+                    selectedOthersButton.setAttribute('data-required', 'selected');
+                }
+                else {
+                    selectedOthersButton.closest('.button-bg').classList.remove('selected');
+                    selectedOthersButton.setAttribute('data-required', '');
+                }
+            }
         });
     }
     

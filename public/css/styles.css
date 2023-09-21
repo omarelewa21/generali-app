@@ -50,6 +50,7 @@ html {
   color: #fff;
   width: 80px;
   text-align: center;
+  border:none;
 }
 
 /* Headings */
@@ -321,7 +322,7 @@ button[data-required="selected"] img {
 
 .otherModalText {
   font-size: 5rem;
-  line-height: 3.6rem;
+  line-height: 3.5rem;
 }
 
 /* Welcome Page */
