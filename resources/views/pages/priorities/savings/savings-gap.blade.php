@@ -1,19 +1,19 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Gap Summary</title>
+<title>Savings - Gap Summary</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $totalEducationYear = isset($arrayData['education']['totalEducationYear']) ? $arrayData['education']['totalEducationYear'] : '';
-    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
+    $savingsGoalDuration = isset($arrayData['savings']['savingsGoalDuration']) ? $arrayData['savings']['savingsGoalDuration'] : '';
+    $newTotalSavingsNeeded = isset($arrayData['savings']['newTotalSavingsNeeded']) ? $arrayData['savings']['newTotalSavingsNeeded'] : '';
+    $totalAnnualReturn = isset($arrayData['savings']['totalAnnualReturn']) ? $arrayData['savings']['totalAnnualReturn'] : '';
     $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
-    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
+    $totalAmountNeeded = isset($arrayData['savings']['totalAmountNeeded']) ? $arrayData['savings']['totalAmountNeeded'] : '';
+    $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
 @endphp
 
 <div id="education-summary"  class="vh-100 scrollable-content">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.gap')}}" method="POST" class="m-0 content-gap-default">
+                    <form novalidate action="{{route('form.submit.savings.gap')}}" method="POST" class="m-0 content-gap-default">
                         @csrf
                         <section class="row align-items-end mh-100">
                             <div class="col-12 position-relative mh-100 scrollable-content">
@@ -55,7 +55,7 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalEducationFundNeeded ? '100' : number_format(floatval($educationFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalSavingsNeeded ? '100' : number_format(floatval($savingsFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -63,7 +63,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-center py-2 gap-title">
-                                                <h5 class="f-family fw-700">Total Education Fund</h5>
+                                                <h5 class="f-family fw-700">Total Savings Fund</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">After the next</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">{{$totalEducationYear}} years</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{$savingsGoalDuration}} years</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -91,10 +91,10 @@
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to give my child a head start with</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to achieve my goals with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalEducationFundNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalSavingsNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,7 +110,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I have set aside</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($educationSavingAmount))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalAnnualReturn))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -139,7 +139,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('education.other')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('savings.goal.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -152,7 +152,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('education.other')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('savings.goal.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -166,10 +166,10 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var educationSavingAmount =  {{$educationSavingAmount}};
-        var newTotalEducationFundNeeded = {{$newTotalEducationFundNeeded}};
+        var savingsAnnualReturn =  {{$totalAnnualReturn}};
+        var newTotalSavingsNeeded = {{$newTotalSavingsNeeded}};
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (educationSavingAmount / newTotalEducationFundNeeded * 100).toFixed(2);
+        var Covered = (savingsAnnualReturn / newTotalSavingsNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");
 
         circle.style.strokeDasharray = 904.896;
