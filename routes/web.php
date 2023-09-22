@@ -90,7 +90,7 @@ Route::post('/savings-gap', [SavingsController::class, 'submitSavingsGap'])->nam
 /* Priorities - Investment */
 Route::view('/investment-home', 'pages.priorities.investment.investment-home')->name('investment.home');
 Route::view('/investment-coverage', 'pages.priorities.investment.investment-coverage')->name('investment.coverage');
-Route::post('/investment-coverage', [InvestmentController::class, 'validateCoverageSelection'])->name('validate.coverage.selection');
+Route::post('/investment-coverage', [InvestmentController::class, 'validateInvestmentCoverageSelection'])->name('validate.investment.coverage.selection');
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'submitInvestmentSupporting'])->name('form.submit.investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');

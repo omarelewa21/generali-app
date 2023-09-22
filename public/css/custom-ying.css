@@ -675,6 +675,9 @@
         grid-template-columns: 20% 20%;
         grid-template-rows: 65%;
     }
+    #investment-home .mh-90 {
+        max-height: 85%;
+    }
 }
 @media only screen and (max-width: 1024px){
     .p-mb-0{

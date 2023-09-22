@@ -13,6 +13,48 @@ use Illuminate\Support\Facades\Session;
 
 class InvestmentController extends Controller
 {
+    public function validateInvestmentCoverageSelection(Request $request)
+    {
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'investmentSelectedAvatarInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $investmentSelectedAvatarInput = $request->input('investmentSelectedAvatarInput');
+        $investmentSelectedAvatarImage = $request->input('investmentSelectedAvatarImage');
+
+        $arrayData['investment']['investmentSelectedAvatar'] = $investmentSelectedAvatarInput;
+        $arrayData['investment']['investmentSelectedImage'] = $investmentSelectedAvatarImage;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
+        // return redirect()->route('savings.goals');
+        return redirect()->route('investment.supporting');
+    }
+
    public function submitInvestmentSupporting(Request $request){
 
         $customMessages = [
@@ -90,30 +132,6 @@ class InvestmentController extends Controller
         return redirect()->route('investment.gap');
     }
     
-    public function validateCoverageSelection(Request $request)
-    {
-        $selectedCoverage = $request->input('selectedCoverageInput');
-        $dataUrl = $request->input('urlInput');
-        Log::debug($request->all());
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        if ($selectedCoverage !== null) {
-            // If not equal to null, then replace the data in $arrayData['coverageSelection']
-            $arrayData['coverageSelection'] = $selectedCoverage;
-        }
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
-        // Log the session data to the Laravel log file
-        \Log::info('Session Data:', $arrayData);
-
-        // // Process the form data and perform any necessary actions
-        return redirect()->route($dataUrl);
-    }
-
     public function submitInvestmentGap(Request $request){
 
         $customMessages = [
