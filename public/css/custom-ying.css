@@ -371,6 +371,13 @@
     left: 50%;
     transform: translateX(-50%);
 }
+/* =============================== Investment Monthly =======================================*/
+.investment-monthly{
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 55% 20%;
+    grid-template-rows: 100%;
+}
 
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
@@ -391,11 +398,20 @@
         grid-template-columns: 60% 27%;
         grid-template-rows: 90%;
     }
+    .investment-monthly{
+        grid-template-columns: 75% 25%;
+        grid-template-rows: 90%;
+    }
     .bg-master-mob{
         background-image: url('/images/needs/background/bg-master-needs-gap.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position:center top;
+    }
+}
+@media only screen and (min-width: 597px) and (max-width: 767px){
+    .saving-tabung{
+        height: 80% !important;
     }
 }
 @media only screen and (max-width: 767px) and (min-height: 740px) and (max-height: 800px){
@@ -469,6 +485,14 @@
         grid-template-rows: auto 5vh 12vh;
     }
 }
+@media only screen and (max-width: 592px){
+    .saving-tabung{
+        max-height: 100% !important;
+    }
+    .investment-graph{
+        max-width: 150%;
+    }
+}
 @media only screen and (max-width: 700px){
     .pb-7{
         padding-bottom: 80px;
@@ -523,7 +547,7 @@
         grid-template-rows: auto 4vh 11vh !important;
     }
     .wrapper-needs-supporting-default {
-        grid-template-rows: 16vh 73.5vh !important;
+        grid-template-rows: 17vh 72.5vh !important;
     }
     .content-supporting-default{
         grid-template-rows: 94% auto !important;
@@ -537,6 +561,9 @@
     /* .savings-monthly{
         grid-template-rows: 70% !important;
     } */
+    .investment-monthly {
+        grid-template-rows: 80% !important;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1059px) and (max-height: 1199px){
     .content-needs-default {
@@ -595,8 +622,9 @@
     #savings-home .needs-stand-bg{
         padding: 200px;
     }
-    .savings-monthly{
-        grid-template-rows: 90% !important;
+    .savings-monthly,
+    .investment-monthly{
+        grid-template-rows: 90%;
     }
 }
 @media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 700px){
@@ -678,6 +706,14 @@
     #investment-home .mh-90 {
         max-height: 85%;
     }
+    .investment-monthly {
+        grid-template-columns: 30% 17%;
+        grid-template-rows: 100%;
+        height: 65% !important;
+    }
+    .avatar-invest{
+        max-height: 75% !important;
+    }
 }
 @media only screen and (max-width: 1024px){
     .p-mb-0{
@@ -724,6 +760,9 @@
     }
     #savings-home .needs-home-avatars {
         grid-template-columns: repeat(3, 5% 90% auto);
+    }
+    .investment-monthly{
+        grid-template-columns: 75% 25%;
     }
 }
 @media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 840px){
@@ -824,7 +863,8 @@
     #investment-home .needs-home-avatar-wrapper{
         grid-template-rows: 85% 15%;
     }
-    #savings-monthly .content-supporting-default {
+    #savings-monthly .content-supporting-default,
+    #investment-monthly .content-supporting-default{
         grid-template-rows: 90% auto;
     }
 }
@@ -854,7 +894,8 @@
     .needs-home-wrapper{
         grid-template-rows: 90vh;
     }
-    .savings-monthly{
+    .savings-monthly,
+    .investment-monthly{
         grid-template-columns: 42% 20%;
     }
 }
@@ -1762,6 +1803,13 @@ button.choice:focus,
     }
     .second-order{
         order:2;
+    }
+}
+@media only screen and (min-width:1100px) and (max-width: 1199px){
+    .investment-monthly {
+        grid-template-columns: 22% 8%;
+        grid-template-rows: 100%;
+        height: 63%;
     }
 }
 
