@@ -392,4 +392,23 @@ class FormController extends Controller {
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.my.assets');
     }
+
+    public function topPriorities(Request $request)
+    {
+        $topPrioritiesSerialized = $request->input('topPrioritiesButtonInput');
+        $topPrioritiesButtonInput = json_decode($topPrioritiesSerialized, true);
+        
+        // // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // // Add or update the data value in the array
+        $arrayData['TopPriorities'] = $topPrioritiesButtonInput;
+
+        // // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        Log::debug($arrayData);
+        // Process the form data and perform any necessary actions
+        return redirect()->route('priorities.to.discuss');
+    }
 }

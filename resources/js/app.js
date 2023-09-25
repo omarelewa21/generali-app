@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import './bootstrap';
 import './navigation-flow';
 import './height-controller';
@@ -7,13 +6,13 @@ import './button-multiple-select';
 import './avatar';
 import './form-display';
 import './button-avatar-display';
+import './button-avatar-display';
 import './coverage-carousel';
-// import 'jquery-ui-dist/jquery-ui';
+import 'jquery-ui-dist/jquery-ui';
+import './drag-drop';
 
 // $('.toast').toast('show');
 // $('.tooltip').tooltip('show');
-
-import './drag-drop';
 
 document.getElementById('saveSession').addEventListener('click', function() {
     var clearRoute = this.getAttribute('data-clear-route');

@@ -27,7 +27,7 @@
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>

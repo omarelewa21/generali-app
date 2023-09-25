@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import 'slick-carousel';
 
 // Function to initialize Slick carousel

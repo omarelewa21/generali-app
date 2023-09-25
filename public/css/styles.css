@@ -327,7 +327,7 @@ button[data-required="selected"] img {
 
 /* Welcome Page */
 #home {
-  background-image: url(/images/welcome-page/welcome-bg-gradient.png);
+  background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
   background-size: auto 80%;
   background-position: right top;
   background-repeat: no-repeat;
@@ -719,8 +719,19 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   stroke-dasharray:none;
 }
 
+#sortable-main .item-moved {
+  fill:#F2F2F2;
+  stroke: #A0A0A0;
+  stroke-width: inherit;
+  stroke-dasharray:8 6;
+}
+
 .svg-container.item-dropped svg path {
   fill:#fff;
+}
+
+.svg-container.item-moved svg path {
+  fill:none;
 }
 
 .item-dropped svg text {

@@ -1,3 +1,6 @@
+import $ from 'jquery';
+window.jQuery = window.$ = $;
+
 import * as Popper from '@popperjs/core'
 window.Popper = Popper
 import 'bootstrap';
