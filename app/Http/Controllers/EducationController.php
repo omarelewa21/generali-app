@@ -174,7 +174,7 @@ class EducationController extends Controller
 
         // // Process the form data and perform any necessary actions
         // return ($arrayData);
-        return redirect()->route('education.gap.new');
+        return redirect()->route('education.gap');
     }
 
     public function validateEducationCoverageSelection(Request $request)

@@ -137,61 +137,59 @@ class InvestmentController extends Controller
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('investment.annual.return');
-   }
+    }
 
-   public function submitInvestmentAnnualReturn(Request $request){
-
-        $customMessages = [
-            'anuual_percentage.required' => 'You are required to enter an amount.',
-            'anuual_percentage.integer' => 'The amount must be a number',
-        ];
-
-        $validatedData = $request->validate([
-            'anuual_percentage' => 'required|integer',
-
-        ], $customMessages);
+    public function validateInvestmentAnnualReturn(Request $request){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
+
+        $customMessages = [
+            'investment_pa.required' => 'You are required to enter annual return percentage',
+            'investment_pa.integer' => 'The input must be a number',
+            'investment_pa.min' => 'The input must be at least :min.',
+            'investment_pa.max' => 'The input must not more than :max.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'investment_pa' => 'required|integer|min:1|max:100',
+        ], $customMessages);
+        
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $investment_pa = $request->input('investment_pa');
+        $newTotalInvestmentNeeded = $request->input('newTotal_investmentNeeded');
+        $totalPercentage = $request->input('percentage');
+        $totalAnnualReturn = $request->input('total_annualReturn');
+
+        $arrayData['investment']['investmentPA'] = $investment_pa;
+        $arrayData['investment']['newTotalInvestmentNeeded'] = $newTotalInvestmentNeeded;
+        $arrayData['investment']['investmentFundPercentage'] = $totalPercentage;
+        $arrayData['investment']['totalAnnualReturn'] = $totalAnnualReturn;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.expected.return');
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
+
+        return redirect()->route('investment.gap');
     }
     
     public function submitInvestmentGap(Request $request){
 
-        $customMessages = [
-            'investment_years_times.required' => 'Please enter a year',
-            'investment_years_times.integer' => 'The year must be a number',
-            'investment_years_times.min' => 'The year must be at least :min.',
-            'investment_years_times.max' => 'The year must not more than :max.',
-            'investment_annual_return.required' => 'You are required to enter an amount.',
-            'investment_annual_return.integer' => 'The amount must be a number',
-            'investment_aside_amount.required' => 'You are required to enter an amount.',
-            'investment_aside_amount.integer' => 'The amount must be a number',
-            'investment_plan_amount.required' => 'You are required to enter an amount.',
-            'investment_plan_amount.integer' => 'The amount must be a number',
-        ];
-
-        $validatedData = $request->validate([
-            'investment_years_times' => 'required|integer|min:1|max:100',
-            'investment_annual_return' => 'required|integer',
-            'investment_aside_amount' => 'required|integer',
-            'investment_plan_amount' => 'required|integer',
-
-        ], $customMessages);
-
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
+        Log::debug($arrayData);
         // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.home');
+        return redirect()->route('mediacal.home');
     }
 
 }

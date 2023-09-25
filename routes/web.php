@@ -62,8 +62,6 @@ Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 Route::post('/education-coverage', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
-Route::view('/education-coverage-new', 'pages.priorities.education.education-coverage-new')->name('education.coverage.new');
-Route::post('/education-coverage-new', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
 Route::view('/education-monthly-amount', 'pages.priorities.education.education-monthly-amount')->name('education.monthly.amount');
 Route::post('/education-monthly-amount', [EducationController::class, 'submitEducationMonthly'])->name('form.submit.education.monthly');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
@@ -72,8 +70,6 @@ Route::view('/education-other', 'pages.priorities.education.education-other')->n
 Route::post('/education-other', [EducationController::class, 'submitEducationOther'])->name('form.submit.education.other');
 Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
 Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
-Route::view('/education-gap-new', 'pages.priorities.education.education-gap-new')->name('education.gap.new');
-Route::post('/education-gap-new', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 
 /* Priorities - Savings */
 Route::view('/savings-home', 'pages.priorities.savings.savings-home')->name('savings.home');
@@ -97,7 +93,7 @@ Route::post('/investment-monthly-payment', [InvestmentController::class, 'valida
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
-Route::post('/investment-annual-return', [InvestmentController::class, 'submitInvestmentAnnualReturn'])->name('form.submit.investment.annual.return');
+Route::post('/investment-annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 

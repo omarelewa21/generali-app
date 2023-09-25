@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4 z-1 bg-white py-4">
                                     <a href="{{route('retirement.allocated.funds.aside')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
-                                    <a href="{{route('education.coverage.new')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('education.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                                 <div class="col-12 position-absolute bottom-0 show-mobile">
                                     <div class="row">
@@ -71,7 +71,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('retirement.allocated.funds.aside')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
-                                    <a href="{{route('education.coverage.new')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('education.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
                             </div>
                         </div>
