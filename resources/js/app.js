@@ -6,6 +6,7 @@ import './button-multiple-select';
 import './avatar';
 import './form-display';
 import './button-avatar-display';
+import './button-avatar-display';
 import './coverage-carousel';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
