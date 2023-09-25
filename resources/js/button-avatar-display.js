@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const specificPageURLs = [
     'marital-status',
     'family-dependant',
