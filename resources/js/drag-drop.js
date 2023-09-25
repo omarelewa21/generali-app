@@ -1,4 +1,9 @@
-$(function() {
+import $ from 'jquery';
+// import 'jquery-ui-dist/jquery-ui';
+// import("jquery-ui/dist/jquery-ui");
+// import 'jquery-ui/dist/jquery-ui';
+
+$(document).ready(function() {
     var $needs = $("#needs"),
     $sortable = $("#sortable");
 
