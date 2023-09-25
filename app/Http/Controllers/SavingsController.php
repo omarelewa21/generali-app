@@ -44,8 +44,10 @@ class SavingsController extends Controller
 
         // Validation passed, perform any necessary processing.
         $savingsSelectedAvatarInput = $request->input('savingsSelectedAvatarInput');
+        $savingsSelectedAvatarImage = $request->input('savingsSelectedAvatarImage');
 
         $arrayData['savings']['savingsSelectedAvatar'] = $savingsSelectedAvatarInput;
+        $arrayData['savings']['savingsSelectedImage'] = $savingsSelectedAvatarImage;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -142,57 +144,41 @@ class SavingsController extends Controller
         $arrayData = session('passingArrays', []);
 
         $customMessages = [
-            'education_other_savings.required' => 'Please select an option',
-            'education_saving_amount.required_if' => 'You are required to enter an amount.',
-            // 'education_saving_amount.min' => 'Your amount must be at least :min.',
-            'education_saving_amount.regex' => 'The amount must be a number',
+            'savings_goal_pa.required' => 'You are required to enter annual return percentage',
+            'savings_goal_pa.integer' => 'The input must be a number',
+            'savings_goal_pa.min' => 'The input must be at least :min.',
+            'savings_goal_pa.max' => 'The input must not more than :max.',
         ];
 
-        // $validatedData = Validator::make($request->all(), [
-        //     'education_other_savings' => 'required|in:yes,no',
-        //     'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
-
-        // ], $customMessages);
-
         $validatedData = Validator::make($request->all(), [
-            'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => [
-                'nullable',
-                'regex:/^[0-9,]+$/',
-                'required_if:education_other_savings,yes',
-                function ($attribute, $value, $fail) use ($request) {
-                    // Remove commas and check if the value is at least 1
-                    $numericValue = str_replace(',', '', $value);
-                    $min = 1;
-                    if (intval($numericValue) < $min && $request->input('education_other_savings') === 'yes') {
-                        $fail('Your amount must be at least ' .$min. '.');
-                    }
-                },
-            ],
+            'savings_goal_pa' => 'required|integer|min:1|max:100',
         ], $customMessages);
-
+        
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
+
         // Validation passed, perform any necessary processing.
-        $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
-        $education_other_savings = $request->input('education_other_savings');
-        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
+        $savings_goal_pa = $request->input('savings_goal_pa');
+        $newTotalSavingsNeeded = $request->input('newTotal_savingsNeeded');
         $totalAmountNeeded = $request->input('total_amountNeeded');
         $totalPercentage = $request->input('percentage');
+        $totalAnnualReturn = $request->input('total_annualReturn');
 
-        $arrayData['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['edcationSaving'] = $education_other_savings;
-        $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        $arrayData['educationFundPercentage'] = $totalPercentage;
+        $arrayData['savings']['savingsGoalPA'] = $savings_goal_pa;
+        $arrayData['savings']['newTotalSavingsNeeded'] = $newTotalSavingsNeeded;
+        $arrayData['savings']['totalAmountNeeded'] = $totalAmountNeeded;
+        $arrayData['savings']['savingsFundPercentage'] = $totalPercentage;
+        $arrayData['savings']['totalAnnualReturn'] = $totalAnnualReturn;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        // return ($arrayData);
-        return redirect()->route('education.gap.new');
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
+        
+        return redirect()->route('savings.gap');
     }
 
     public function submitSavingsGap(Request $request){

@@ -15,6 +15,7 @@
     // Retrieving values from the session
     $arrayData = session('passingArrays');
     $savingsSelectedAvatar = isset($arrayData['savings']['savingsSelectedAvatar']) ? $arrayData['savings']['savingsSelectedAvatar'] : '';
+    $savingsSelectedImage = isset($arrayData['savings']['savingsSelectedImage']) ? $arrayData['savings']['savingsSelectedImage'] : '';
 @endphp
 
 <div id="savings-coverage" class="vh-100">
@@ -39,19 +40,19 @@
                         </div>
                         <div class="col-11 m-auto selection-content-coverage h-100 savings_coverage z-1">
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savingsSelectedAvatar']) && $arrayData['savingsSelectedAvatar'] === 'self') default @endif" id="self" data-avatar="self" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'self') default @endif" id="self" data-avatar="self" data-required="">
                                     <img src="{{ asset('images/avatar/avatar-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Self</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savingsSelectedAvatar']) && $arrayData['savingsSelectedAvatar'] === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
                                     <img src="{{ asset('images/avatar/avatar-needs-spouse-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Spouse</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savingsSelectedAvatar']) && $arrayData['savingsSelectedAvatar'] === 'child') default @endif" id="child" data-avatar="child" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'child') default @endif" id="child" data-avatar="child" data-required="">
                                     <img src="{{ asset('images/avatar/avatar-child.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child</strong></p>
                                 </button>
@@ -78,6 +79,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <input type="hidden" name="savingsSelectedAvatarInput" id="savingsSelectedAvatarInput" value="{{$savingsSelectedAvatar}}">
+                                    <input type="hidden" name="savingsSelectedAvatarImage" id="savingsSelectedAvatarImage" value="{{$savingsSelectedImage}}">
                                     <a href="{{route('savings.home')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
@@ -91,6 +93,44 @@
 </div>
 
 <script>
+
+    // Add event listener to each button with the 'data-required' attribute
+    const dataButtons = document.querySelectorAll('[data-avatar]');
+
+    dataButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default behavior of the button click
+
+            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+            // Add 'selected' attribute to the clicked button
+            this.setAttribute('data-required', 'selected');
+
+            selectedAvatar = this.getAttribute('data-required');
+
+            dataButtons.forEach(btn => btn.classList.remove('selected'));
+
+            const nextButton = document.getElementById('nextButton');
+
+            // Get the selected data-avatar value
+            const dataAvatar = this.getAttribute('data-avatar');
+            const dataAvatarImg = this.querySelector('img').getAttribute('src');
+
+            // Update the hidden input field value with the selected avatar
+            document.getElementById('savingsSelectedAvatarInput').value = dataAvatar;
+            document.getElementById('savingsSelectedAvatarImage').value = dataAvatarImg;
+        });
+    });
+
+    // Preselect the button on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const defaultBtn = document.querySelectorAll('.default');
+
+        defaultBtn.forEach(defaultBtn => {
+            // Add the 'selected' class to the closest .button-bg div of each default button
+            defaultBtn.classList.add('selected');
+        });
+    });
+
     $(document).ready(function() {
         $('.savings_coverage').slick({
             dots: false,
@@ -128,42 +168,6 @@
                     }
                 }
             ]
-        });
-    });
-
-    // Add event listener to each button with the 'data-required' attribute
-    const dataButtons = document.querySelectorAll('[data-avatar]');
-
-    dataButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default behavior of the button click
-
-            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-            // Add 'selected' attribute to the clicked button
-            this.setAttribute('data-required', 'selected');
-
-            selectedAvatar = this.getAttribute('data-required');
-
-            dataButtons.forEach(btn => btn.classList.remove('selected'));
-
-            const nextButton = document.getElementById('nextButton');
-
-            // Get the selected data-avatar value
-            const dataAvatar = this.getAttribute('data-avatar');
-            const dataAvatarImg = this.querySelector('img').getAttribute('src');
-
-            // Update the hidden input field value with the selected avatar
-            document.getElementById('savingsSelectedAvatarInput').value = dataAvatar;
-        });
-    });
-
-    // Preselect the button on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        const defaultBtn = document.querySelectorAll('.default');
-
-        defaultBtn.forEach(defaultBtn => {
-            // Add the 'selected' class to the closest .button-bg div of each default button
-            defaultBtn.classList.add('selected');
         });
     });
 </script>

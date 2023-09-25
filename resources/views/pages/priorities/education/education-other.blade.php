@@ -147,21 +147,6 @@
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionSavingAmount = parseFloat({{$educationSavingAmount}});
 
-    if (sessionSavingAmount !== '' || sessionSavingAmount !== 0) {
-        var newTotal = oldTotalFund - sessionSavingAmount;
-        var newTotalPercentage = sessionSavingAmount / oldTotalFund * 100;
-        if (newTotal <= 0){
-            totalAmountNeeded.value = 0;
-            totalEducationPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = newTotal;
-            totalEducationPercentage.value = newTotalPercentage;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
-    } 
-
     // if (sessionSavingAmount !== 0 || sessionSavingAmount !== '' || sessionSavingAmount !== null){
     //     var total = oldTotalFund - sessionSavingAmount;
     //     var totalPercentage = sessionSavingAmount / oldTotalFund * 100;\
@@ -260,5 +245,20 @@
             }
         }
     });
+    
+    if (sessionSavingAmount !== '' || sessionSavingAmount !== 0) {
+        var newTotal = oldTotalFund - sessionSavingAmount;
+        var newTotalPercentage = sessionSavingAmount / oldTotalFund * 100;
+        if (newTotal <= 0){
+            totalAmountNeeded.value = 0;
+            totalEducationPercentage.value = 100;
+            $('.retirement-progress-bar').css('width','100%');
+        }
+        else{
+            totalAmountNeeded.value = newTotal;
+            totalEducationPercentage.value = newTotalPercentage;
+            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+        }
+    } 
 </script>
 @endsection

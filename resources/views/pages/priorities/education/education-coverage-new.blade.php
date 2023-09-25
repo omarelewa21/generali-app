@@ -68,7 +68,7 @@
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                     <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['education']['educationSelectedAvatar']) && $arrayData['education']['educationSelectedAvatar'] === 'child4') default @endif" id="child4" data-avatar="child4" data-required="">
                                         <img src="{{ asset('images/avatar/avatar-child.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                        <p class="py-2 m-0 cf-family fw-700 overage-text"><strong>Child 4</strong></p>
+                                        <p class="py-2 m-0 cf-family fw-700 coverage-text"><strong>Child 4</strong></p>
                                     </button>
                                 </div>
                             </div>
@@ -108,7 +108,45 @@
 </div>
 
 <script>
+    // Add event listener to each button with the 'data-required' attribute
+    const dataButtons = document.querySelectorAll('[data-avatar]');
+
+    dataButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default behavior of the button click
+
+            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+            // Add 'selected' attribute to the clicked button
+            this.setAttribute('data-required', 'selected');
+
+            selectedAvatar = this.getAttribute('data-required');
+
+            dataButtons.forEach(btn => btn.classList.remove('selected'));
+
+            const nextButton = document.getElementById('nextButton');
+
+            // Get the selected data-avatar value
+            const dataAvatar = this.getAttribute('data-avatar');
+            const dataAvatarImg = this.querySelector('img').getAttribute('src');
+
+            // Update the hidden input field value with the selected avatar
+            document.getElementById('educationSelectedAvatarInput').value = dataAvatar;
+            document.getElementById('educationSelectedAvatarImage').value = dataAvatarImg;
+        });
+    });
+
+    // Preselect the button on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        const defaultBtn = document.querySelectorAll('.default');
+
+        defaultBtn.forEach(defaultBtn => {
+            // Add the 'selected' class to the closest .button-bg div of each default button
+            defaultBtn.classList.add('selected');
+        });
+    });
+    
     $(document).ready(function() {
+        
         $('.education_coverage').slick({
             dots: false,
             infinite: true,
@@ -153,42 +191,6 @@
         });
     });
 
-    // Add event listener to each button with the 'data-required' attribute
-    const dataButtons = document.querySelectorAll('[data-avatar]');
-
-    dataButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default behavior of the button click
-
-            dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-            // Add 'selected' attribute to the clicked button
-            this.setAttribute('data-required', 'selected');
-
-            selectedAvatar = this.getAttribute('data-required');
-
-            dataButtons.forEach(btn => btn.classList.remove('selected'));
-
-            const nextButton = document.getElementById('nextButton');
-
-            // Get the selected data-avatar value
-            const dataAvatar = this.getAttribute('data-avatar');
-            const dataAvatarImg = this.querySelector('img').getAttribute('src');
-
-            // Update the hidden input field value with the selected avatar
-            document.getElementById('educationSelectedAvatarInput').value = dataAvatar;
-            document.getElementById('educationSelectedAvatarImage').value = dataAvatarImg;
-        });
-    });
-
-    // Preselect the button on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        const defaultBtn = document.querySelectorAll('.default');
-
-        defaultBtn.forEach(defaultBtn => {
-            // Add the 'selected' class to the closest .button-bg div of each default button
-            defaultBtn.classList.add('selected');
-        });
-    });
 </script>
 
 @endsection
