@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 // Get the height of any devices, and set a padding bottom to prevent footer overlay over the main content
 $(document).ready(function() {
     function setMainContentPadding() {

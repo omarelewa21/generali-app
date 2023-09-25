@@ -87,6 +87,14 @@ h4 {
   color: rgb(255, 230, 156);
 }
 
+.toggle {
+  float:right;
+}
+
+.form-check.form-check-reverse {
+  padding-right:0;
+}
+
 /* Works for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
