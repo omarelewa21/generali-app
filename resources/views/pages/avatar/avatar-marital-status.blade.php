@@ -26,7 +26,7 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : 'gender-male' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>

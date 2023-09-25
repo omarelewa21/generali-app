@@ -1,7 +1,8 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'family-dependant',
-    'assets'
+    'assets',
+    'top-priorities'
 ];
 
 const currentURL = window.location.href;
@@ -110,6 +111,43 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
     }
+    // else if (path == '/top-priorities') {
+    //     // Add event listener to each button with the 'data-required' attribute
+    //     const dataButtons = document.querySelectorAll('[data-avatar]');
+
+    //     dataButtons.forEach(button => {
+    //         button.addEventListener('click', function(event) {
+    //             event.preventDefault(); // Prevent the default behavior of the button click
+
+    //             if (this.getAttribute('data-avatar') != 'othersPriorities') {
+    //                 // Add the 'selected' attribute to the clicked button
+    //                 this.setAttribute('data-required', 'selected');
+        
+    //                 // Add the 'selected' class to the closest button-bg div of the clicked button
+    //                 this.closest('.button-bg').classList.toggle('selected');
+    //             }
+    //         });
+    //     });
+
+    //     // const otherAssetsButton = document.querySelector('.btn-exit-assetsOthers');
+
+    //     // otherAssetsButton.addEventListener('click', function() {
+    //     //     const selectedOthersButton = document.querySelector('[data-avatar="othersAssets"][data-required]');
+    //     //     const otherAssetsInput = document.getElementById('otherAssetsInput');
+    //     //     const selectedOthers = otherAssetsInput.value;
+
+    //     //     if (selectedOthersButton) {
+    //     //         if (selectedOthers.length > 0) {
+    //     //             selectedOthersButton.closest('.button-bg').classList.add('selected');
+    //     //             selectedOthersButton.setAttribute('data-required', 'selected');
+    //     //         }
+    //     //         else {
+    //     //             selectedOthersButton.closest('.button-bg').classList.remove('selected');
+    //     //             selectedOthersButton.setAttribute('data-required', '');
+    //     //         }
+    //     //     }
+    //     // });
+    // }
     
     // Preselect the button on page load
     window.addEventListener('DOMContentLoaded', function() {

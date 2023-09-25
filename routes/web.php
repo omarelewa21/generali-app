@@ -39,6 +39,7 @@ Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name
 
 /* Priorities */
 Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
+Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name('top.priorities.new');
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
 
