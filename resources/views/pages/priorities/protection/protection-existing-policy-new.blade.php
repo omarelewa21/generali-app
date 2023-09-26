@@ -1,7 +1,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Education - Other Savings</title>
+<title>Protection - Existing Policy</title>
 
 @section('content')
 

@@ -192,7 +192,7 @@
     position: relative;
     z-index: 1000;
 }
-.education_coverage .slick-slide button,
+.coverage_slick .slick-slide button,
 .savings_coverage .slick-slide button{
     display: grid;
     grid-template-columns: 100%;
@@ -213,6 +213,23 @@
     grid-template-columns: 100%;
     
 }
+/* =============================== Protection Home Page ===============================*/
+#protection-home .needs-stand-bg {
+    padding: 170px;
+}
+#protection-home .needs-home-contents{
+    grid-template-rows: 100%;
+}
+#protection-home .needs-home-avatars{
+    grid-template-rows: 100%;
+}
+/* =============================== Protection Monthly Support Page ===============================*/
+.protection-monthly {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 55% 20%;
+    grid-template-rows: 100%;
+}
 /* =============================== Education Supporting Page ===============================*/
 .wrapper-needs-supporting-default {
     display: grid;
@@ -231,7 +248,7 @@
     grid-template-areas:
     "edu-con"
     "alert-support";
-    grid-template-rows: 92.5% auto;
+    grid-template-rows: 93% auto;
 }
 .edu-con{
     grid-area: edu-con;
@@ -372,11 +389,17 @@
     transform: translateX(-50%);
 }
 /* =============================== Investment Monthly =======================================*/
-.investment-monthly,
-.investment-annual{
+.investment-monthly{
     display: grid;
     grid-gap: 0px;
     grid-template-columns: 55% 20%;
+    grid-template-rows: 100%;
+}
+/* =============================== Investment Annual Return =======================================*/
+.investment-annual{
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 48% 20%;
     grid-template-rows: 100%;
 }
 
@@ -399,7 +422,8 @@
         grid-template-columns: 60% 27%;
         grid-template-rows: 90%;
     }
-    .investment-monthly{
+    .investment-monthly,
+    .protection-monthly{
         grid-template-columns: 75% 25%;
         grid-template-rows: 90%;
     }
@@ -455,7 +479,7 @@
     .content-needs-default {
         grid-template-rows: auto 5.5vh 13vh !important;
     }
-    .education_coverage .slick-slide button{
+    .coverage_slick .slick-slide button{
         grid-template-rows: 92% 8%;
     }
 }
@@ -463,7 +487,7 @@
     .content-needs-default {
         /* grid-template-rows: minmax(66.2vh, 73vh) auto 12.2vh; */
     }
-    .education_coverage .slick-slide button{
+    .coverage_slick .slick-slide button{
         grid-template-rows: 92% 8%;
     }
 }
@@ -580,6 +604,9 @@
     .investment-monthly{
         grid-template-rows: 80% !important;
     }
+    .protection-monthly{
+        grid-template-rows: 68% !important;
+    }
     .investment-annual {
         grid-template-rows: 80% !important;
         grid-template-columns: 40% 29% !important;
@@ -639,14 +666,16 @@
         grid-template-rows: 90vh;
     }
     #investment-home .needs-stand-bg,
-    #education-home .needs-stand-bg {
+    #education-home .needs-stand-bg,
+    #protection-home .needs-stand-bg {
         padding: 250px;
     }
     #savings-home .needs-stand-bg{
         padding: 200px;
     }
     .savings-monthly,
-    .investment-monthly{
+    .investment-monthly,
+    .protection-monthly{
         grid-template-rows: 90%;
     }
     .investment-annual{
@@ -734,7 +763,8 @@
     #investment-home .mh-90 {
         max-height: 85%;
     }
-    .investment-monthly{
+    .investment-monthly,
+    .protection-monthly{
         grid-template-columns: 30% 17%;
         grid-template-rows: 100%;
         height: 65% !important;
@@ -906,6 +936,11 @@
         grid-template-columns: 50% 20%;
     }
 }
+@media screen and (min-width: 1900px) {
+    .investment-annual{
+        grid-template-columns: 47% 20%;
+    }
+}
 @media screen and (min-width: 2000px) {
     .content-needs-default {
         grid-template-rows: auto 5% 8.7%;
@@ -925,15 +960,19 @@
     .needs-home-wrapper{
         grid-template-rows: 90vh;
     }
+    #protection-home .needs-home-wrapper{
+        grid-template-rows: 91.5vh;
+    }
+    #protection-home .needs-home-avatar-wrapper {
+        grid-template-rows: 90% 10%;
+    }
     #investment-home .needs-stand-bg,
     #education-home .needs-stand-bg {
         padding: 250px;
     }
-    .needs-home-wrapper{
-        grid-template-rows: 90vh;
-    }
     .savings-monthly,
-    .investment-monthly{
+    .investment-monthly,
+    .protection-monthly{
         grid-template-columns: 42% 20%;
     }
     .investment-annual{
@@ -1057,14 +1096,14 @@
 .hide-tablet{
     display: block !important;
 }
-.education_coverage .slick-prev{
+.coverage_slick .slick-prev{
     left: 15px;
 }
-.education_coverage .slick-next{
+.coverage_slick .slick-next{
     right: 0;
 }
-.education_coverage .slick-prev:before,
-.education_coverage .slick-next:before{
+.coverage_slick .slick-prev:before,
+.coverage_slick .slick-next:before{
     color: #000;
 }
 .slick-height{
@@ -1850,7 +1889,8 @@ button.choice:focus,
     }
 }
 @media only screen and (min-width:1100px) and (max-width: 1199px){
-    .investment-monthly {
+    .investment-monthly,
+    .protection-monthly {
         grid-template-columns: 22% 8%;
         grid-template-rows: 100%;
         height: 63%;

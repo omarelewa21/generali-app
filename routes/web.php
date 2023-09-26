@@ -6,6 +6,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
+use App\Http\Controllers\ProtectionController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
@@ -56,7 +57,16 @@ Route::post('/protection-existing-policy', [formProtectionController::class, 'su
 Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
 Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
 
-
+/* Priorities - Protection */
+Route::view('/protection-home-new', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
+Route::view('/protection-coverage-new', 'pages.priorities.protection.protection-coverage-new')->name('protection.coverage.new');
+Route::post('/protection-coverage-new', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
+Route::view('/protection-monthly-support-new', 'pages.priorities.protection.protection-monthly-support-new')->name('protection.monthly.support.new');
+Route::post('/protection-monthly-support-new', [ProtectionController::class, 'validateMonthlySupport'])->name('validate.monthly.support');
+Route::view('/protection-supporting-years-new', 'pages.priorities.protection.protection-supporting-years-new')->name('protection.supporting.years.new');
+Route::post('/protection-supporting-years-new', [ProtectionController::class, 'validateProtectionSupporting'])->name('validate.protection.supporting');
+Route::view('/protection-existing-policy-new', 'pages.priorities.protection.protection-existing-policy-new')->name('protection.existing.policy.new');
+Route::post('/protection-existing-policy-new', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');

@@ -84,7 +84,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('investment.supporting')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('investment.supporting')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('investment.supporting')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('investment.supporting')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
