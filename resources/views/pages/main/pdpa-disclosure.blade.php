@@ -12,17 +12,17 @@
 
 @section('content')
 
-<div id="pdpa" class="vh-100 overflow-hidden">
+<div id="pdpa">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
+            <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
-                <div class="vh-100 overflow-y-auto overflow-x-hidden">
+            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey text-dark px-0">
+                <div>
                     <section class="main-content extra-padding">
                         <div class="container">
                             <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
