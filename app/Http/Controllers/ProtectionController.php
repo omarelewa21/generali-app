@@ -130,10 +130,10 @@ class ProtectionController extends Controller
 
         $arrayData['protection']['protectionSupportingYears'] = $protection_supporting_years;
         if ($newProtectionTotalFund === $newTotalProtectionNeeded){
-            $arrayData['protection']['newTotalEducationFundNeeded'] = $newTotalProtectionNeeded;
+            $arrayData['protection']['newTotalProtectionNeeded'] = $newTotalProtectionNeeded;
         }
         else{
-            $arrayData['protection']['newTotalEducationFundNeeded'] = $newProtectionTotalFund;
+            $arrayData['protection']['newTotalProtectionNeeded'] = $newProtectionTotalFund;
         }
 
         // Store the updated array back into the session
@@ -151,22 +151,22 @@ class ProtectionController extends Controller
         $arrayData = session('passingArrays', []);
 
         $customMessages = [
-            'education_other_savings.required' => 'Please select an option',
-            'education_saving_amount.required_if' => 'You are required to enter an amount.',
-            'education_saving_amount.regex' => 'The amount must be a number',
+            'protection_existing_policy.required' => 'Please select an option',
+            'existing_policy_amount.required_if' => 'You are required to enter an amount.',
+            'existing_policy_amount.regex' => 'The amount must be a number',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'education_other_savings' => 'required|in:yes,no',
-            'education_saving_amount' => [
+            'protection_existing_policy' => 'required|in:yes,no',
+            'existing_policy_amount' => [
                 'nullable',
                 'regex:/^[0-9,]+$/',
-                'required_if:education_other_savings,yes',
+                'required_if:protection_existing_policy,yes',
                 function ($attribute, $value, $fail) use ($request) {
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
-                    if (intval($numericValue) < $min && $request->input('education_other_savings') === 'yes') {
+                    if (intval($numericValue) < $min && $request->input('protection_existing_policy') === 'yes') {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
                 },
@@ -177,28 +177,28 @@ class ProtectionController extends Controller
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
         // Validation passed, perform any necessary processing.
-        $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
-        $education_other_savings = $request->input('education_other_savings');
-        $newEducationTotalAmountNeeded = floatval($arrayData['education']['newTotalEducationFundNeeded'] - $education_saving_amount);
+        $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
+        $protection_existing_policy = $request->input('protection_existing_policy');
+        $newProtectionTotalAmountNeeded = floatval($arrayData['protection']['newTotalProtectionNeeded'] - $existing_policy_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newEducationPercentage = floatval($education_saving_amount / $arrayData['education']['newTotalEducationFundNeeded'] * 100);
+        $newProtectionPercentage = floatval($existing_policy_amount / $arrayData['protection']['newTotalProtectionNeeded'] * 100);
 
-        $arrayData['education']['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['education']['edcationSaving'] = $education_other_savings;
-        if ($newEducationTotalAmountNeeded === $totalAmountNeeded && $newEducationPercentage === $totalPercentage){
-            if ($newEducationTotalAmountNeeded <= 0){
-                $arrayData['education']['totalAmountNeeded'] = 0;
-                $arrayData['education']['educationFundPercentage'] = 100;
+        $arrayData['protection']['existingPolicyAmount'] = $existing_policy_amount;
+        $arrayData['protection']['existingPolicy'] = $protection_existing_policy;
+        if ($newProtectionTotalAmountNeeded === $totalAmountNeeded && $newProtectionPercentage === $totalPercentage){
+            if ($newProtectionTotalAmountNeeded <= 0){
+                $arrayData['protection']['totalAmountNeeded'] = 0;
+                $arrayData['protection']['protectionFundPercentage'] = 100;
             }
             else{
-                $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
-                $arrayData['education']['educationFundPercentage'] = $totalPercentage;
+                $arrayData['protection']['totalAmountNeeded'] = $totalAmountNeeded;
+                $arrayData['protection']['protectionFundPercentage'] = $totalPercentage;
             }
         }
         else{
-            $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
-            $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+            $arrayData['protection']['totalAmountNeeded'] = $newProtectionTotalAmountNeeded;
+            $arrayData['protection']['protectionFundPercentage'] = $newProtectionPercentage;
         }
 
         // Store the updated array back into the session
@@ -207,7 +207,7 @@ class ProtectionController extends Controller
         // // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('education.gap');
+        return redirect()->route('protection.gap.new');
     }
 
     public function submitEducationGap(Request $request){

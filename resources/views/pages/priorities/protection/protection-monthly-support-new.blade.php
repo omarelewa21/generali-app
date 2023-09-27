@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-needs-desktop bg-half wrapper-needs-supporting-default">
+                <div class="row h-100 bg-protection bg-half wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -47,20 +47,20 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('validate.monthly.support')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('protection_monthly_payment')) pb-7 @endif h-100">
+                    <form novalidate action="{{route('validate.monthly.support')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('protection_monthly_support')) pb-7 @endif h-100">
                         @csrf
                         <section class="row edu-con align-items-end mh-100">
                             <div class="col-12 position-relative mh-100">
-                                <div class="row h-100" id="protection-monthly-content">
-                                    <div class="col-12 col-xl-6 align-items-end justify-content-center z-1 mh-100 second-order protection-monthly">
-                                        <img src="{{ asset('images/needs/protection/protection-monthly.png') }}" class="mh-100 z-1 p-2">
+                                <div class="row h-100" id="needs-content">
+                                    <div class="col-12 col-xl-6 align-items-end justify-content-center z-1 mh-100 second-order protection-monthly mt-auto">
+                                        <img src="{{ asset('images/needs/protection/protection-monthly.png') }}" class="mh-100 z-1 p-2 mw-mob h-100 m-auto">
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
-                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('protection_monthly_payment') ? 'error-padding' : '' }}"></div>
+                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('protection_monthly_support') ? 'error-padding' : '' }}"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
+                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1 mob-align-top">
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
                                                 <p class="f-34"><strong>If anything should happen to me, I'd like to support my family with</strong><br>

@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 wrapper-needs-supporting-default">
+                <div class="row h-100 wrapper-needs-supporting-default bg-education-gap">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('validate.protection.supporting')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('protection_supporting_years')) pb-7 @endif">
+                    <form novalidate action="{{route('validate.protection.supporting')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('protection_supporting_years')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
                             <div class="col-12">
@@ -85,7 +85,7 @@
                             </div>
                         </section>
                         @if ($errors->has('protection_supporting_years'))
-                            <section class="row alert-support z-1 hide-mobile">
+                            <section class="row alert-support z-99 hide-mobile">
                                 <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>

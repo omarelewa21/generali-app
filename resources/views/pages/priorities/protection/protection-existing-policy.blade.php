@@ -77,7 +77,6 @@ $arrayDataProtection['formattedTotalProtectionValue'] : 0;
                         <div class="row">
                             <div
                                 class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
-                                class="col-12 col-lg-6 col-xl-6 bg-needs-1 d-flex flex-column justify-content-start justify-content-md-center justify-content-lg-center align-items-center order-1 order-lg-0">
                                 <img class="position-relative protection-existing-policy-asset"
                                     src="{{ asset('images/needs/protection/protection-existing.png') }}" alt="avatar">
                             </div>

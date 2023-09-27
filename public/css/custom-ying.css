@@ -227,8 +227,12 @@
 .protection-monthly {
     display: grid;
     grid-gap: 0px;
-    grid-template-columns: 55% 20%;
+    grid-template-columns: auto;
     grid-template-rows: 100%;
+}
+/* =============================== Protection Existing Policy Page ===============================*/
+#protection-existing-policy .education-support{
+    grid-template-rows: 5% 93%;
 }
 /* =============================== Education Supporting Page ===============================*/
 .wrapper-needs-supporting-default {
@@ -238,7 +242,7 @@
     grid-template-areas:
         "header-needs-default"
         "content-supporting-default";
-    grid-template-rows: 19vh 67vh;
+    grid-template-rows: 19vh 67.5vh;
 }
 .content-supporting-default{
     grid-area: content-supporting-default;
@@ -422,22 +426,21 @@
         grid-template-columns: 60% 27%;
         grid-template-rows: 90%;
     }
-    .investment-monthly,
-    .protection-monthly{
+    .investment-monthly{
         grid-template-columns: 75% 25%;
         grid-template-rows: 90%;
     }
-    .bg-master-mob{
-        background-image: url('/images/needs/background/bg-master-needs-gap.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center top;
+    .protection-monthly{
+        grid-template-rows: 90%;
     }
     .investment-tree{
         max-width: 180% !important;
     }
     .avatar-investment-pa{
         max-width: 100% !important;
+    }
+    .mob-align-top{
+        align-items: start !important;
     }
 }
 @media only screen and (min-width: 597px) and (max-width: 767px){
@@ -529,10 +532,13 @@
     .investment-annual{
         max-height: 55% !important;
     }
+    .mw-mob{
+        max-width: 100% !important;
+    }
 }
 @media only screen and (max-width: 700px){
     .pb-7{
-        padding-bottom: 80px;
+        padding-bottom: 90px;
     }
 }
 
@@ -660,7 +666,7 @@
         grid-template-rows: 11vh 81vh;
     }
     .content-supporting-default{
-        grid-template-rows: 96% auto;
+        grid-template-rows: 96.5% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 90vh;
@@ -694,22 +700,25 @@
     .content-needs-default {
         grid-template-rows: auto 8vh 18vh !important;
     }
-    #education-monthly-content .col-12.col-xl-6{    
+    #education-monthly-content .col-12.col-xl-6,
+    #needs-content .col-12.col-xl-6{    
         flex: 0 0 auto;
         width: 50%;
     }
-    #education-monthly-content .first-order{
+    #education-monthly-content .first-order,
+    #needs-content .first-order{
         order: 2;
     }
-    #education-monthly-content .second-order{
+    #education-monthly-content .second-order,
+    #needs-content .second-order{
         order: 1;
     }
     .wrapper-needs-supporting-default {
         grid-template-rows: 23vh 54vh;
     }
-    .education-support {
+    /* .education-support {
         grid-template-rows: 80% 10%;
-    }
+    } */
     .needs-home-wrapper{
         grid-template-rows: 80vh;
     }
@@ -730,14 +739,17 @@
     .wrapper-needs-supporting-default {
         grid-template-rows: 18vh 68.5vh;
     }
-    #education-monthly-content .col-12.col-xl-6{    
+    #education-monthly-content .col-12.col-xl-6,
+    #needs-content .col-12.col-xl-6{    
         flex: 0 0 auto;
         width: 50%;
     }
-    #education-monthly-content .first-order{
+    #education-monthly-content .first-order,
+    #needs-content .first-order{
         order: 2;
     }
-    #education-monthly-content .second-order{
+    #education-monthly-content .second-order,
+    #needs-content .second-order{
         order: 1;
     }
     .content-supporting-default {
@@ -763,9 +775,12 @@
     #investment-home .mh-90 {
         max-height: 85%;
     }
-    .investment-monthly,
-    .protection-monthly{
+    .investment-monthly{
         grid-template-columns: 30% 17%;
+        grid-template-rows: 100%;
+        height: 65% !important;
+    }
+    .protection-monthly{
         grid-template-rows: 100%;
         height: 65% !important;
     }
@@ -794,15 +809,6 @@
         height: 100%;
     }
 }
-@media only screen and (min-width: 768px){
-    .bg-education-gap{
-        background-image: url('/images/needs/background/bg-master-needs-gap.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center top;
-    }
-}
-
 
 /* Media Query - Large device (screen size max 1500px) */
 @media only screen and (min-width: 1025px) and (max-width: 1280px) and (min-height: 900px){
@@ -832,18 +838,21 @@
     .content-needs-default {
         grid-template-rows: auto 5.5vh 13.5vh;
     }
-    #education-monthly-content .col-12.col-xl-6{    
+    #education-monthly-content .col-12.col-xl-6,    
+    #needs-content .col-12.col-xl-6{    
         flex: 0 0 auto;
         width: 50%;
     }
-    #education-monthly-content .first-order{
+    #education-monthly-content .first-order,
+    #needs-content .first-order{
         order: 2;
     }
-    #education-monthly-content .second-order{
+    #education-monthly-content .second-order,
+    #needs-content .second-order{
         order: 1;
     }
     .content-supporting-default{
-        grid-template-rows: 92.5% auto;
+        grid-template-rows: 93% auto;
     }
     .needs-home-avatars {
         grid-template-columns: repeat(3, 10% 75% auto);
@@ -882,14 +891,14 @@
         grid-template-rows: 19vh 70.5vh !important;
     }
     .content-supporting-default{
-        grid-template-rows: 93.5% auto !important;
+        grid-template-rows: 94% auto !important;
     }
 }
 @media screen and (max-width: 1200px) {
     .bg-half{
         background-image: url('/images/needs/background/bg-half-master-mob.png');
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
         background-position: left center;
     }
     .bg-education-others-mob{
@@ -898,6 +907,12 @@
         background-size: containxs;
         background-position:left center;
     }
+    .bg-master-mob{
+        background-image: url('/images/needs/background/bg-master-needs-gap.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center top;
+    }
 }
 @media screen and (min-width: 1250px) {
     .bg-education-others{
@@ -905,6 +920,12 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position:left bottom 28%;;
+    }
+    .bg-education-gap{
+        background-image: url('/images/needs/background/bg-master-needs-gap.png');
+        background-repeat: no-repeat;
+        background-size: 85%;
+        background-position:center top 40%;
     }
 }
 @media screen and (min-width: 1600px) {
@@ -915,7 +936,7 @@
         grid-template-rows: 19% 71%;
     }
     .content-supporting-default {
-        grid-template-rows:94.5% auto;
+        grid-template-rows:95% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 88vh;
@@ -971,8 +992,7 @@
         padding: 250px;
     }
     .savings-monthly,
-    .investment-monthly,
-    .protection-monthly{
+    .investment-monthly{
         grid-template-columns: 42% 20%;
     }
     .investment-annual{
@@ -1873,6 +1893,12 @@ button.choice:focus,
         background-size: cover;
         background-position:left center;
     }
+    .bg-protection{
+        background-image: url('/images/needs/background/bg-protection.png');
+        background-repeat: no-repeat;
+        background-size: 95%;
+        background-position: bottom left;
+    }
     .show-desktop{
         display: block !important;
     }
@@ -1889,9 +1915,12 @@ button.choice:focus,
     }
 }
 @media only screen and (min-width:1100px) and (max-width: 1199px){
-    .investment-monthly,
-    .protection-monthly {
+    .investment-monthly{
         grid-template-columns: 22% 8%;
+        grid-template-rows: 100%;
+        height: 63%;
+    }
+    .protection-monthly {
         grid-template-rows: 100%;
         height: 63%;
     }
