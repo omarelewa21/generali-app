@@ -51,7 +51,7 @@ class ProtectionController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
-        return redirect()->route('protection.monthly.support.new');
+        return redirect()->route('protection.monthly.support');
     }
 
     public function validateMonthlySupport(Request $request){
@@ -101,7 +101,7 @@ class ProtectionController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
-        return redirect()->route('protection.supporting.years.new');
+        return redirect()->route('protection.supporting.years');
     }
     public function validateProtectionSupporting(Request $request){
 
@@ -142,7 +142,7 @@ class ProtectionController extends Controller
         // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.existing.policy.new');
+        return redirect()->route('protection.existing.policy');
     }
 
     public function validateProtectionExistingPolicy(Request $request){
@@ -213,7 +213,7 @@ class ProtectionController extends Controller
         // // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.gap.new');
+        return redirect()->route('protection.gap');
     }
 
     public function submitProtectionGap(Request $request){

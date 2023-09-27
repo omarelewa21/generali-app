@@ -36,7 +36,7 @@ class formProtectionController extends Controller
         // dd(Session::all()); // Debug to see all session data
         Log::info('Session Data:', Session::all());
 
-        return redirect()->route('protection.monthly.support')
+        return redirect()->route('protection.monthly.support.archived')
             ->withInput();
     }
     public function submitProtectionMonthlySupport(Request $request)
@@ -81,7 +81,7 @@ class formProtectionController extends Controller
         session(['passingArraysProtection' => $arrayDataProtection]);
         Log::info('Session Data:', Session::all());
         // dd(Session::all()); // Debug to see all session data
-        return redirect()->route('protection.supporting.years')
+        return redirect()->route('protection.supporting.years.archived')
             ->withInput();
     }
     public function submitProtectionSupportingYears(Request $request)
@@ -117,7 +117,7 @@ class formProtectionController extends Controller
         session(['passingArraysProtection' =>  $arrayDataProtection]);
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('protection.existing.policy')
+        return redirect()->route('protection.existing.policy.archived')
             ->withInput();
     }
 
@@ -171,7 +171,7 @@ class formProtectionController extends Controller
 
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('protection.gap')
+        return redirect()->route('protection.gap.archived')
             ->withInput();
     }
 
