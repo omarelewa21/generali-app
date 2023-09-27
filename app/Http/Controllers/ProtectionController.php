@@ -197,8 +197,14 @@ class ProtectionController extends Controller
             }
         }
         else{
-            $arrayData['protection']['totalAmountNeeded'] = $newProtectionTotalAmountNeeded;
-            $arrayData['protection']['protectionFundPercentage'] = $newProtectionPercentage;
+            if ($newProtectionTotalAmountNeeded <= 0){
+                $arrayData['protection']['totalAmountNeeded'] = 0;
+                $arrayData['protection']['protectionFundPercentage'] = 100;
+            }
+            else{
+                $arrayData['protection']['totalAmountNeeded'] = $newProtectionTotalAmountNeeded;
+                $arrayData['protection']['protectionFundPercentage'] = $newProtectionPercentage;
+            }
         }
 
         // Store the updated array back into the session
@@ -210,7 +216,7 @@ class ProtectionController extends Controller
         return redirect()->route('protection.gap.new');
     }
 
-    public function submitEducationGap(Request $request){
+    public function submitProtectionGap(Request $request){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
@@ -219,7 +225,9 @@ class ProtectionController extends Controller
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('savings.home');
+        //  $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('retirement.home');
     }
 
 }

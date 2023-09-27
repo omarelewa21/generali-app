@@ -553,6 +553,9 @@
     .investment-annual{
         grid-template-columns: 55% 30%;
     }
+    .slick-slide{
+        max-height: 100%;
+    }
 }
 @media only screen and (max-width: 992px){
     .start-20{

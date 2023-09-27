@@ -204,8 +204,14 @@ class EducationController extends Controller
             }
         }
         else{
-            $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
-            $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+            if ($newEducationTotalAmountNeeded <= 0){
+                $arrayData['education']['totalAmountNeeded'] = 0;
+                $arrayData['education']['educationFundPercentage'] = 100;
+            }
+            else{
+                $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
+                $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+            }
         }
 
         // Store the updated array back into the session

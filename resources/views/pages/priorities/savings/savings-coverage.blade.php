@@ -41,19 +41,19 @@
                         <div class="col-11 m-auto selection-content-coverage h-100 coverage_slick z-1">
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                 <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'self') default @endif" id="self" data-avatar="self" data-required="">
-                                    <img src="{{ asset('images/avatar/avatar-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Self</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                 <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
-                                    <img src="{{ asset('images/avatar/avatar-needs-spouse-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Spouse</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                 <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['savings']['savingsSelectedAvatar']) && $arrayData['savings']['savingsSelectedAvatar'] === 'child') default @endif" id="child" data-avatar="child" data-required="">
-                                    <img src="{{ asset('images/avatar/avatar-child.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-children.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child</strong></p>
                                 </button>
                             </div>

@@ -67,6 +67,8 @@ Route::view('/protection-supporting-years-new', 'pages.priorities.protection.pro
 Route::post('/protection-supporting-years-new', [ProtectionController::class, 'validateProtectionSupporting'])->name('validate.protection.supporting');
 Route::view('/protection-existing-policy-new', 'pages.priorities.protection.protection-existing-policy-new')->name('protection.existing.policy.new');
 Route::post('/protection-existing-policy-new', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
+Route::view('/protection-gap-new', 'pages.priorities.protection.protection-gap-new')->name('protection.gap.new');
+Route::post('/protection-gap-new', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
