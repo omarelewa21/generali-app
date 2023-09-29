@@ -71,12 +71,7 @@
                                             <input type="text" name="tertiary_education_years" class="form-control d-inline-block money text-center f-64 w-75" id="tertiary_education_years" value="{{$totalEducationYear}}" required>
                                             <h4 class="mt-4">years</h4>
                                         </div>
-                                        <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
                                         <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
-                                        <!-- <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                        <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
-                                        <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
-                                        <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}"> -->
                                     </div>
                                     <div class="col-12 col-xl-3 col-lg-2 d-flex align-items-center calendar-text2">
                                         <h4 class="">to build this fund.</h4>
@@ -87,7 +82,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('education.monthly.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('education.monthly.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -116,7 +111,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('education.monthly.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('education.monthly.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

@@ -11,12 +11,11 @@
     $savingsGoalDuration = isset($arrayData['savings']['savingsGoalDuration']) ? $arrayData['savings']['savingsGoalDuration'] : '';
     $newTotalSavingsNeeded = isset($arrayData['savings']['newTotalSavingsNeeded']) ? $arrayData['savings']['newTotalSavingsNeeded'] : '';
     $totalAnnualReturn = isset($arrayData['savings']['totalAnnualReturn']) ? $arrayData['savings']['totalAnnualReturn'] : '';
-    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
     $totalAmountNeeded = isset($arrayData['savings']['totalAmountNeeded']) ? $arrayData['savings']['totalAmountNeeded'] : '';
     $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
 @endphp
 
-<div id="education-summary"  class="vh-100 scrollable-content">
+<div id="savings-summary"  class="vh-100 scrollable-content">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
@@ -139,7 +138,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('savings.goal.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('savings.goal.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -152,7 +151,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('savings.goal.amount')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('savings.goal.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

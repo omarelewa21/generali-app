@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
-                                            <div class="col-10 col-md-8 d-flex align-items-center">
+                                            <div class="col-10 col-md-8 justify-content-center d-flex align-items-center">
                                                 <p class="f-34"><strong>Right now, I can invest</strong><br>
                                                     <span class="currencyinput f-34">RM<input type="text" name="investment_monthly_payment" class="form-control d-inline-block w-50 money f-34 @error('investment_monthly_payment') is-invalid @enderror" id="investment_monthly_payment" value="{{ $investmentMonthlyPayment !== null ? number_format(floatval($investmentMonthlyPayment)) : $investmentMonthlyPayment }}" required></span>
                                                     <strong>/month for my expected returns.</strong>
@@ -78,7 +78,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('investment.coverage')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('investment.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('investment.coverage')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('investment.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

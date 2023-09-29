@@ -13,6 +13,47 @@ use Illuminate\Support\Facades\Session;
 
 class EducationController extends Controller
 {
+    public function validateEducationCoverageSelection(Request $request)
+    {
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'educationSelectedAvatarInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+        $educationSelectedImage = $request->input('educationSelectedAvatarImage');
+        
+        $arrayData['education']['educationSelectedAvatar'] = $educationSelectedAvatarInput;
+        $arrayData['education']['educationSelectedImage'] = $educationSelectedImage;
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
+        return redirect()->route('education.monthly.amount');
+    }
+
     public function submitEducationMonthly(Request $request){
 
         // Get the existing array from the session
@@ -49,31 +90,27 @@ class EducationController extends Controller
 
         // Validation passed, perform any necessary processing.
         $monthly_education_amount = str_replace(',','',$request->input('monthly_education_amount'));
-        $totalEducationFund = $request->input('total_educationFund');
-        // $tertiary_education_years = $request->input('tertiary_education_years');
-        // $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
-        // $totalAmountNeeded = $request->input('total_amountNeeded');
-        // $totalPercentage = $request->input('percentage');
-        // $education_saving_amount = $request->input('education_saving_amount');
-        // $education_other_savings = $request->input('education_other_savings');
+        $educationTotalFund = floatval($monthly_education_amount * 12);
+        $totalEducationFund = floatval($request->input('total_educationFund'));
+
+        if ($totalEducationFund === $educationTotalFund){
+            $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
+        }
+        else{
+            $arrayData['education']['totalEducationFundNeeded'] = $educationTotalFund;
+        }
 
         $arrayData['education']['educationMonthlyAmount'] = $monthly_education_amount;
-        $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
-        // $arrayData['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        // $arrayData['totalEducationYear'] = $tertiary_education_years;
-        // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        // $arrayData['educationFundPercentage'] = $totalPercentage;
-        // $arrayData['educationSavingAmount'] = $education_saving_amount;
-        // $arrayData['edcationSaving'] = $education_other_savings;
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayData;
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('education.supporting.years');
-   }
-   public function submitEducationSupporting(Request $request){
+    }
+    public function submitEducationSupporting(Request $request){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
@@ -95,28 +132,25 @@ class EducationController extends Controller
 
         // Validation passed, perform any necessary processing.
         $tertiary_education_years = $request->input('tertiary_education_years');
-        $totalEducationFund = $request->input('total_educationFund');
-        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
-        // $totalAmountNeeded = $request->input('total_amountNeeded');
-        // $totalPercentage = $request->input('percentage');
-        // $education_saving_amount = $request->input('education_saving_amount');
-        // $education_other_savings = $request->input('education_other_savings');
+        $newEducationTotalFund = floatval($tertiary_education_years * $arrayData['education']['totalEducationFundNeeded']);
+        $newTotalEducationFundNeeded = floatval($request->input('newTotal_educationFund'));
 
         $arrayData['education']['totalEducationYear'] = $tertiary_education_years;
-        $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
-        $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        // $arrayData['totalAmountNeeded'] = $totalAmountNeeded;
-        // $arrayData['educationFundPercentage'] = $totalPercentage;
-        // $arrayData['educationSavingAmount'] = $education_saving_amount;
-        // $arrayData['edcationSaving'] = $education_other_savings;
+        if ($newEducationTotalFund === $newTotalEducationFundNeeded){
+            $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
+        }
+        else{
+            $arrayData['education']['newTotalEducationFundNeeded'] = $newEducationTotalFund;
+        }
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // Process the form data and perform any necessary actions
-        // return $arrayData;
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('education.other');
-   }
+    }
 
     public function submitEducationOther(Request $request){
 
@@ -126,15 +160,8 @@ class EducationController extends Controller
         $customMessages = [
             'education_other_savings.required' => 'Please select an option',
             'education_saving_amount.required_if' => 'You are required to enter an amount.',
-            // 'education_saving_amount.min' => 'Your amount must be at least :min.',
             'education_saving_amount.regex' => 'The amount must be a number',
         ];
-
-        // $validatedData = Validator::make($request->all(), [
-        //     'education_other_savings' => 'required|in:yes,no',
-        //     'education_saving_amount' => 'required_if:education_other_savings,yes|nullable|regex:/^[0-9,]+$/|min:1',
-
-        // ], $customMessages);
 
         $validatedData = Validator::make($request->all(), [
             'education_other_savings' => 'required|in:yes,no',
@@ -159,66 +186,41 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $newTotalEducationFundNeeded = $request->input('newTotal_educationFund');
-        $totalAmountNeeded = $request->input('total_amountNeeded');
-        $totalPercentage = $request->input('percentage');
+        $newEducationTotalAmountNeeded = floatval($arrayData['education']['newTotalEducationFundNeeded'] - $education_saving_amount);
+        $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
+        $totalPercentage = floatval($request->input('percentage'));
+        $newEducationPercentage = floatval($education_saving_amount / $arrayData['education']['newTotalEducationFundNeeded'] * 100);
 
         $arrayData['education']['educationSavingAmount'] = $education_saving_amount;
         $arrayData['education']['edcationSaving'] = $education_other_savings;
-        $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
-        $arrayData['education']['educationFundPercentage'] = $totalPercentage;
+        if ($newEducationTotalAmountNeeded === $totalAmountNeeded && $newEducationPercentage === $totalPercentage){
+            if ($newEducationTotalAmountNeeded <= 0){
+                $arrayData['education']['totalAmountNeeded'] = 0;
+                $arrayData['education']['educationFundPercentage'] = 100;
+            }
+            else{
+                $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
+                $arrayData['education']['educationFundPercentage'] = $totalPercentage;
+            }
+        }
+        else{
+            if ($newEducationTotalAmountNeeded <= 0){
+                $arrayData['education']['totalAmountNeeded'] = 0;
+                $arrayData['education']['educationFundPercentage'] = 100;
+            }
+            else{
+                $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
+                $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+            }
+        }
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
 
         // // Process the form data and perform any necessary actions
-        // return ($arrayData);
-        return redirect()->route('education.gap.new');
-    }
-
-    public function validateEducationCoverageSelection(Request $request)
-    {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
-        // Define custom validation rule for button selection
-        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-            if ($value !== null) {
-                return true;
-            }
-            
-            $customMessage = "Please select at least one.";
-            $validator->errors()->add($attribute, $customMessage);
-    
-            return false;
-        });
-
-        $validator = Validator::make($request->all(), [
-            'educationSelectedAvatarInput' => [
-                'at_least_one_selected',
-            ],
-        ]);
-
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        // Validation passed, perform any necessary processing.
-        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
-        $educationSelectedImage = $request->input('educationSelectedAvatarImage');
-
-        // Add or update the data value in the array
-        // if ($educationSelectedAvatarInput) { 
-        // }
-        $arrayData['education']['educationSelectedAvatar'] = $educationSelectedAvatarInput;
-        $arrayData['education']['educationSelectedImage'] = $educationSelectedImage;
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        return redirect()->route('education.monthly.amount');
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('education.gap');
     }
 
     public function submitEducationGap(Request $request){

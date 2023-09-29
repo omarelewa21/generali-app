@@ -80,7 +80,6 @@
                                                 </p>
                                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                                 <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
-                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +89,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('education.supporting.years')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('education.supporting.years')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -124,7 +123,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('education.supporting.years')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('education.supporting.years')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -146,21 +145,6 @@
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionSavingAmount = parseFloat({{$educationSavingAmount}});
-
-    // if (sessionSavingAmount !== 0 || sessionSavingAmount !== '' || sessionSavingAmount !== null){
-    //     var total = oldTotalFund - sessionSavingAmount;
-    //     var totalPercentage = sessionSavingAmount / oldTotalFund * 100;\
-    //     if (total <= 0){
-    //         totalAmountNeeded.value = 0;
-    //         totalEducationPercentage.value = 100;
-    //         $('.retirement-progress-bar').css('width','100%');
-    //     }
-    //     else{
-    //         totalAmountNeeded.value = total;
-    //         totalEducationPercentage.value = totalPercentage;
-    //         $('.retirement-progress-bar').css('width', totalPercentage + '%');
-    //     }
-    // } 
 
     education_saving.addEventListener("input", function() {
 

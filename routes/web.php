@@ -6,6 +6,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\formProtectionController;
 use App\Http\Controllers\formRetirementController;
+use App\Http\Controllers\ProtectionController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
@@ -44,26 +45,35 @@ Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name(
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
 
 /* Priorities - Protection */
-Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
-Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
-Route::post('/protection-coverage', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
-Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
-Route::post('/protection-monthly-support', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
-Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
-Route::post('/protection-supporting-years', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
-Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
-Route::post('/protection-existing-policy', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
-Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
+Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
+Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
+Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
+Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
+Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
+Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
+Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
+Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
+Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
+Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
 Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
 
-
+/* Priorities - Protection */
+Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
+Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
+Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
+Route::post('/protection-monthly-support', [ProtectionController::class, 'validateMonthlySupport'])->name('validate.monthly.support');
+Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
+Route::post('/protection-supporting-years', [ProtectionController::class, 'validateProtectionSupporting'])->name('validate.protection.supporting');
+Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
+Route::post('/protection-existing-policy', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
+Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
+Route::post('/protection-gap', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 Route::post('/education-coverage', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
-Route::view('/education-coverage-new', 'pages.priorities.education.education-coverage-new')->name('education.coverage.new');
-Route::post('/education-coverage-new', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
 Route::view('/education-monthly-amount', 'pages.priorities.education.education-monthly-amount')->name('education.monthly.amount');
 Route::post('/education-monthly-amount', [EducationController::class, 'submitEducationMonthly'])->name('form.submit.education.monthly');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
@@ -72,8 +82,6 @@ Route::view('/education-other', 'pages.priorities.education.education-other')->n
 Route::post('/education-other', [EducationController::class, 'submitEducationOther'])->name('form.submit.education.other');
 Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
 Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
-Route::view('/education-gap-new', 'pages.priorities.education.education-gap-new')->name('education.gap.new');
-Route::post('/education-gap-new', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 
 /* Priorities - Savings */
 Route::view('/savings-home', 'pages.priorities.savings.savings-home')->name('savings.home');
@@ -97,7 +105,7 @@ Route::post('/investment-monthly-payment', [InvestmentController::class, 'valida
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
-Route::post('/investment-annual-return', [InvestmentController::class, 'submitInvestmentAnnualReturn'])->name('form.submit.investment.annual.return');
+Route::post('/investment-annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
