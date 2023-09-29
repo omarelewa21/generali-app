@@ -23,6 +23,7 @@
         "axios": "^1.4.0",
         "bootstrap-icons": "^1.10.5",
         "bootstrap5-toggle": "^5.0.4",
+        "crypto-js": "^4.1.1",
         "jquery": "^3.7.0",
         "jquery-ui": "^1.13.2",
         "jquery-ui-dist": "^1.13.2",

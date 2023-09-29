@@ -13,21 +13,20 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
-        
+
         // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        $arrayData = session('customer_details', []);
 
         // Add or update the data value in the array
-        $arrayData['PDPA'] = $decision;
+        $arrayData['pdpa'] = $decision;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]); 
+        session(['customer_details' => $arrayData]);        
 
         return response()->json(['message' => 'Button click saved successfully']);
     }
@@ -49,25 +48,24 @@ class FormController extends Controller {
             'email' => 'required|email|max:255',
         ]);
 
-        $value = $request->session()->get('passingArrays');
-        $data = $request->session()->all();
-        $request->session()->put('Testing', 'value');
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Add or update the data value in the array
-        $arrayData['Title'] = $validatedData['title'];
-        $arrayData['FirstName'] = $validatedData['firstName'];
-        $arrayData['LastName'] = $validatedData['lastName'];
-        $arrayData['PhoneCode'] = $validatedData['phoneCodeMobile'];
-        $arrayData['MobileNumber'] = $validatedData['mobileNumber'];
-        $arrayData['PhoneCodeHouse'] = $validatedData['phoneCodeHouse'];
-        $arrayData['HousePhoneNumber'] = $validatedData['housePhoneNumber'];
-        $arrayData['Email'] = $validatedData['email'];
+        // Add the new array inside the customer_details array
+        $customerDetails['basic_details'] = [
+            'title' => $validatedData['title'],
+            'first_name' => $validatedData['firstName'],
+            'last_name' => $validatedData['lastName'],
+            'phone_code_mobile' => $validatedData['phoneCodeMobile'],
+            'mobile_number' => $validatedData['mobileNumber'],
+            'phone_code_house' => $validatedData['phoneCodeHouse'],
+            'house_phone_number' => $validatedData['housePhoneNumber'],
+            'email' => $validatedData['email']
+        ];
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-\Log::info($data);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -135,27 +133,31 @@ class FormController extends Controller {
             'occupation' => 'required|in:' . implode(',', $occupation),
         ], $customMessages);
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Add or update the data value in the array
-        $arrayData['Country'] = $validatedData['country'];
-        $arrayData['IdType'] = $validatedData['idType'];
-        $arrayData['IdNumber'] = $validatedData['idNumber'];
-        $arrayData['PassportNumber'] = $validatedData['passportNumber'];
-        $arrayData['BirthCert'] = $validatedData['birthCert'];
-        $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
-        $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
-        $arrayData['DobDay'] = $validatedData['day'];
-        $arrayData['DobMonth'] = $validatedData['month'];
-        $arrayData['DobYear'] = $validatedData['year'];
-        $arrayData['Habits'] = $validatedData['btnradio'];
-        $arrayData['EducationLevel'] = $validatedData['educationLevel'];
-        $arrayData['Occupation'] = $validatedData['occupation'];
+        // Add the new array inside the customer_details array
+        $customerDetails['identity_details'] = [
+            'country' => $validatedData['country'],
+            'id_type' => $validatedData['idType'],
+            'id_number' => $validatedData['idNumber'],
+            'passport_number' => $validatedData['passportNumber'],
+            'birth_cert' => $validatedData['birthCert'],
+            'police_number' => $validatedData['policeNumber'],
+            'registration_number' => $validatedData['registrationNumber'],
+            'dob_day' => $validatedData['day'],
+            'dob_month' => $validatedData['month'],
+            'dob_year' => $validatedData['year'],
+            'habits' => $validatedData['btnradio'],
+            'education_level' => $validatedData['educationLevel'],
+            'occupation' => $validatedData['occupation']
+        ];
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
 
+        // $data = $request->session()->all();
+        // Log::debug($data);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }

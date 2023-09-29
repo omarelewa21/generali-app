@@ -25,8 +25,9 @@
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script> -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 </head>
 
