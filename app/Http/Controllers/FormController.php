@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -26,8 +27,8 @@ class FormController extends Controller {
         $arrayData['PDPA'] = $decision;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);        
-        
+        session(['passingArrays' => $arrayData]); 
+
         return response()->json(['message' => 'Button click saved successfully']);
     }
 
@@ -48,6 +49,9 @@ class FormController extends Controller {
             'email' => 'required|email|max:255',
         ]);
 
+        $value = $request->session()->get('passingArrays');
+        $data = $request->session()->all();
+        $request->session()->put('Testing', 'value');
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
@@ -63,7 +67,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
-
+\Log::info($data);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }

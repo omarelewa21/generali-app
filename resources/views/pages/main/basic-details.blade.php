@@ -19,20 +19,20 @@
     $selectedCode = session('passingArrays.PhoneCodeHouse', '60');
 @endphp
 
-<div id="basic_details" class="vh-100 overflow-hidden">
+<div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
+            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-xl-5 py-md-5 py-3">
                     <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
-                <div class="vh-100 overflow-y-auto overflow-x-hidden">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0 content-section">
+                <div>
                     <form novalidate action="{{ route('form.submit') }}" method="POST">
                         @csrf
-                        <section class="main-content extra-padding">
+                        <section class="main-content">
                             <div class="container">
                                 <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
@@ -123,7 +123,7 @@
                             </div>
                         </section>
                     
-                        <section class="footer bg-white py-4 fixed-bottom">
+                        <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -252,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
-
 </script>
 
 @endsection

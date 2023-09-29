@@ -19,11 +19,11 @@
     $skintone = isset($arrayData['SkinTone']) ? $arrayData['SkinTone'] : '';
 @endphp
 
-<div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="avatar_gender_selection">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar">
-                <div class="header-avatar">@include('templates.nav.nav-red-menu')</div>
+            @include('templates.nav.nav-red-menu')
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar order-md-1 order-sm-2 order-2">
                 <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
                         <div class="row">
@@ -73,7 +73,7 @@
                     </button>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
@@ -124,7 +124,7 @@
                             </div>
                         </section>
 
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -132,7 +132,7 @@
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
                                         <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" id="nextBtn" type="submit">Next</button>
+                                        <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>

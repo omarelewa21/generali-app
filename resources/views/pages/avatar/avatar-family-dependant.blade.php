@@ -19,12 +19,12 @@
     $gender = isset($arrayData['Gender']) ? ($arrayData['Gender'] === 'Male' ? 'Female' : 'Male') : '';
 @endphp
 
-<div id="avatar_family_dependant" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="avatar_family_dependant">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-                <section class="avatar-design-placeholder content-avatar-default overflow-auto overflow-hidden">
+                <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
                         <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
@@ -99,7 +99,7 @@
                             </div>
                         </section>
                         
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -205,34 +205,6 @@ if (maritalStatus === 'single') {
     const spouseImg = spouseButton.querySelector('img');
     spouseImg.style.opacity = '0.5'; 
 }
-
-// siblingButton.addEventListener('click', function(event) {
-//     event.preventDefault();
-
-//     const dataAvatar = 'siblings';
-//     var isSelected = this.closest('.button-bg').classList.contains('selected');
-    
-//     if (isSelected) {
-//         clickedAvatars[dataAvatar] = {
-//             'status': 'no',
-//         };
-//     }
-//     else {
-//         clickedAvatars[dataAvatar] = {
-//             'status': 'yes',
-//         };
-//     }
-
-//     if (familyDependantButtonInput.value == '') {
-//         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-//     }
-//     else {
-//         familyDependantButtonInput.value = JSON.stringify({
-//             ...JSON.parse(familyDependantButtonInput.value), 
-//             siblings: clickedAvatars.siblings 
-//         });
-//     }
-// });
 </script>
 
 @endsection

@@ -4,8 +4,8 @@
  */
 ?>
 
-<header id="wrapper-navbar" class="fixed-top">
-    <nav class="navbar navbar-default navbar-scroll">
+<header id="wrapper-navbar">
+    <nav class="navbar navbar-default">
         <div class="container px-5">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
