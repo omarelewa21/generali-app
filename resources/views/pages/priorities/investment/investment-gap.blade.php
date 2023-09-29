@@ -48,8 +48,11 @@
                                                                     <stop offset="100%" stop-color="#C1210D"/>
                                                                 </linearGradient >
                                                                 </defs>
-                                                                <circle cx="90" cy="90" r="144" stroke="url(#gradient)" id="circle"></circle>
-                                                                {{-- <circle cx="-55" cy="90" r="10" style="fill:white" id="dotCircle"></circle> --}}
+                                                                <g id="circle">
+                                                                    <circle cx="90" cy="90" r="144" stroke="url(#gradient)">
+                                                                    </circle>
+                                                                    <circle cx="" cy="" r="15" style="fill:white" id="dotCircle"></circle>
+                                                                </g>
                                                             </svg>
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
