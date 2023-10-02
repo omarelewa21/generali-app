@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
+                                    <div class="col-12 col-xl-6 d-flex align-items-start first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center align-items-center">
                                             <div class="col-10 col-md-9 py-xl-5 my-xl-5">
                                                 <p class="f-34 m-0 fw-700">Luckily, I do have funds saved up for my child’s education.<br>

@@ -326,26 +326,72 @@
                     dotCircle.setAttribute("cy", y);
                 }
                 else if (percent >= 68 && percent <= 69){
-                    startX = -650;
-                    startY = 299;
-                    var x = startX += 10 * percent;
-                    var y = startY -= 5 * percent;
+                    startX = -318;
+                    startY = 166;
+                    var x = startX += 5 * percent;
+                    var y = startY -= 3 * percent;
                     dotCircle.setAttribute("cx", x);
-                    dotCircle.setAttribute("cy", y);
+                    dotCircle.setAttribute("cy", y); -38
                 }
                 else if (percent === 70 ){
                     dotCircle.setAttribute("cx", "46");
                     dotCircle.setAttribute("cy", "-47");
                 }
-
-                //Stop here haven't edit
-                else if (percent >= 71 && percent <= 80){
-                    startX = -650;
-                    startY = 299;
-                    var x = startX += 10 * percent;
-                    var y = startY -= 5 * percent;
+                else if (percent >= 71 && percent <= 77){
+                    startX = -518;
+                    startY = 22;
+                    var x = startX += 8 * percent; 
+                    var y = startY - percent;
                     dotCircle.setAttribute("cx", x);
                     dotCircle.setAttribute("cy", y);
+                }
+                else if (percent >= 78 && percent <= 80){
+                    startX = -670;
+                    startY = -209;
+                    var x = startX += 10 * percent; 
+                    var y = startY += 2 * percent;
+                    dotCircle.setAttribute("cx", x);
+                    dotCircle.setAttribute("cy", y);
+                }
+                else if (percent >= 81 && percent <= 85){
+                    startX = -508;
+                    startY = -370;
+                    var x = startX += 8 * percent; 
+                    var y = startY += 4 * percent;
+                    dotCircle.setAttribute("cx", x);
+                    dotCircle.setAttribute("cy", y);
+                }
+                else if (percent >= 86 && percent <= 90){
+                    startX = -336;
+                    startY = -539;
+                    var x = startX += 6 * percent; 
+                    var y = startY += 6 * percent;
+                    dotCircle.setAttribute("cx", x);
+                    dotCircle.setAttribute("cy", y);
+                }
+                else if (percent >= 91 && percent <= 93){
+                    startX = -245;
+                    startY = -718;
+                    var x = startX += 5 * percent; 
+                    var y = startY += 8 * percent;
+                    dotCircle.setAttribute("cx", x);
+                    dotCircle.setAttribute("cy", y);
+                }
+                else if (percent >= 94 && percent <= 97){
+                    startX = 37;
+                    startY = -620;
+                    var x = startX += 2 * percent; 
+                    var y = startY += 7 * percent;
+                    dotCircle.setAttribute("cx", x);
+                    dotCircle.setAttribute("cy", y);
+                }
+                else if (percent === 98){
+                    dotCircle.setAttribute("cx", "231");
+                    dotCircle.setAttribute("cy", "59");
+                }
+                else if (percent === 99){
+                    dotCircle.setAttribute("cx", "235");
+                    dotCircle.setAttribute("cy", "90");
                 }
             }
         }
