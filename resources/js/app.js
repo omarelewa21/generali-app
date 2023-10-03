@@ -9,6 +9,10 @@ import './button-avatar-display';
 import './button-avatar-display';
 import './coverage-carousel';
 import './carousel-needs';
+import './protection-validation';
+import './education-validation';
+import './savings-validation';
+import './investment-validation';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 

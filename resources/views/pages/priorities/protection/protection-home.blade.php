@@ -1,12 +1,12 @@
 <?php
  /**
- * Template Name: Education Homepage
+ * Template Name: Protection Homepage
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Education - Home</title>
+<title>Protection - Home</title>
 
 @section('content')
 

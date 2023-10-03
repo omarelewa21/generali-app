@@ -8,9 +8,7 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $educationSelectedImage = isset($arrayData['education']['educationSelectedImage']) ? $arrayData['education']['educationSelectedImage'] : '';
     $edcationSaving = isset($arrayData['education']['edcationSaving']) ? $arrayData['education']['edcationSaving'] : '';
-    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
     $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
     $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
@@ -136,113 +134,9 @@
     </div>
 </div>
 <script>
-    var education_saving = document.getElementById('education_saving_amount');
-    var yesRadio = document.getElementById('yes');
-    var noRadio = document.getElementById('no');
-    var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    var totalEducationPercentage = document.getElementById("percentage");
     var oldTotalFund = parseFloat({{ $newTotalEducationFundNeeded }});
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
-    var sessionSavingAmount = parseFloat({{$educationSavingAmount}});
-
-    education_saving.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var educationSavingValue = education_saving.value;
-
-        // Remove non-digit characters
-        const cleanedValue = parseFloat(educationSavingValue.replace(/\D/g, ''));
-
-        // Attempt to parse the cleaned value as a float
-        const parsedValue = parseFloat(cleanedValue);
-
-        // Check if the parsed value is a valid number
-        if (!isNaN(parsedValue)) {
-        // If it's a valid number, format it with commas
-            const formattedValue = parsedValue.toLocaleString('en-MY');
-            this.value = formattedValue;
-        } else {
-        // If it's not a valid number, display the cleaned value as is
-            this.value = educationSavingValue;
-        }
-
-        var savingAmount = parseInt(cleanedValue);
-
-        var total = oldTotalFund - savingAmount;
-        var totalPercentage = savingAmount / oldTotalFund * 100;
-        
-        $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        if (total <= 0){
-            totalAmountNeeded.value = 0;
-            totalEducationPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = total;
-            totalEducationPercentage.value = totalPercentage;
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        }
-
-    });
-    // Add event listeners to the radio buttons
-    yesRadio.addEventListener('change', function () {
-        jQuery('.hide-content').css('display','block');
-        // education_saving.value = ''; // Clear the money input
-        // totalAmountNeeded.value = '';
-        // totalEducationPercentage.value = '';
-    });
-
-    noRadio.addEventListener('change', function () {
-        jQuery('.hide-content').css('display','none');
-        education_saving.value = 0; // Clear the money input
-        totalAmountNeeded.value = oldTotalFund;
-        var totalPercentage = 0 / oldTotalFund * 100;
-        totalEducationPercentage.value = totalPercentage;
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        education_saving.addEventListener('blur', function() {
-            validateNumberField(education_saving);
-            // passValue(education_saving);
-        });
-
-        if (yesRadio.classList.contains('checked-yes')) {
-            jQuery('.hide-content').css('display','block');
-        }
-        
-        function validateNumberField(field) {
-
-            const value = field.value.trim();
-            var pattern = /^[0-9,]+$/;
-
-            if (value === '' || isNaN(value)) {
-                // field.classList.remove('is-valid');
-                field.classList.add('is-invalid');
-            } else {
-                // field.classList.add('is-valid');
-                field.classList.remove('is-invalid');
-            }
-            if (pattern.test(value)){
-                document.getElementById("education_saving_amount").classList.remove("is-invalid");
-            }
-        }
-    });
-    
-    if (sessionSavingAmount !== '' || sessionSavingAmount !== 0) {
-        var newTotal = oldTotalFund - sessionSavingAmount;
-        var newTotalPercentage = sessionSavingAmount / oldTotalFund * 100;
-        if (newTotal <= 0){
-            totalAmountNeeded.value = 0;
-            totalEducationPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = newTotal;
-            totalEducationPercentage.value = newTotalPercentage;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
-    } 
+    var sessionSavingAmount = parseFloat({{$educationSavingAmount}}); 
 </script>
 @endsection

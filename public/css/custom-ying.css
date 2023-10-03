@@ -357,29 +357,46 @@
 }
 
 /* =============================== Savings Goal =======================================*/
-#savings-goals #sortable{
-    height: 70%;
+#savings-goals #sortable .first {
+    grid-column: 22 / span 8;
+    grid-row: 23 / 71;
 }
-#savings-goals #sortable .first{
-    grid-row: 20 / 63;
-    grid-column: 17 / span 7;
+#savings-goals .first .remove-button {
+    right: 17%;
+    bottom: 30%;
 }
 #savings-goals #sortable .second {
-    grid-column: 16 / span 11;
-    grid-row: 30 / 54;
-    transform: translate(47%, -26%);
-    width: 96%;
+    grid-column: 22 / span 11;
+    grid-row: 22 / 49;
+    transform: translate(-50%,-50%);
+    left: 90%;
+    top: -13%;
+}
+#savings-goals .second .remove-button {
+    bottom: -5%;
+    right: 40%;
 }
 #savings-goals #sortable .third {
-    grid-column: 29 / span 11;
-    grid-row: 25 / 51;
-    transform: translate(42%, -5%);
-    width: 96%;
+    grid-column: 35 / span 15;
+    grid-row: 2 / 33;
 }
-#savings-goals #sortable .fourth{
-    grid-column: 37 / span 9;
+#savings-goals .third .remove-button {
+    right: 50%;
+    bottom: 0%;
 }
-
+#savings-goals #sortable .fourth {
+    grid-column: 45 / span 8;
+    grid-row: 23 / 69;
+}
+#savings-goals .fourth .dropped img:not(.close) {
+    margin-left: 15px;
+    margin-top: 15%;
+}
+#savings-goals .fourth .remove-button {
+    bottom: 27%;
+    right: 0%;
+    left: 18%;
+}
 /* =============================== Savings Monthly Payment =======================================*/
 .savings-monthly{
     display: grid;

@@ -46,7 +46,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['savings']['savingsGoals'][0]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['savings']['savingsGoals'][0] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $arrayData['savings']['savingsGoals'][0] . '.png') }}" style="width: 100px;">
                                                     <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
@@ -63,7 +63,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['savings']['savingsGoals'][1]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['savings']['savingsGoals'][1] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $arrayData['savings']['savingsGoals'][1] . '.png') }}" style="width: 100px;">
                                                     <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$arrayData['savings']['savingsGoals'][2]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $arrayData['savings']['savingsGoals'][2] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $arrayData['savings']['savingsGoals'][2] . '.png') }}" style="width: 100px;">
                                                     <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
@@ -128,8 +128,8 @@
                                 <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('protection', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="protection" data-required="">
-                                                <div class="col-4 px-5">
+                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-travel', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-travel" data-required="">
+                                                <div class="col-4">
                                                     <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-travel.png') }}" width="auto" height="110px" alt="Protection">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
@@ -142,8 +142,8 @@
                                 <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('protection', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="protection" data-required="">
-                                                <div class="col-4 px-5">
+                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-wedding', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-wedding" data-required="">
+                                                <div class="col-4">
                                                     <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-wedding.png') }}" width="auto" height="100px" alt="Protection">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
@@ -156,8 +156,8 @@
                                 <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('protection', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="protection" data-required="">
-                                                <div class="col-4 px-5">
+                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-home', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-home" data-required="">
+                                                <div class="col-4">
                                                     <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-home.png') }}" width="auto" height="100px" alt="Protection">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
@@ -170,8 +170,8 @@
                                 <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                     <div class="col-12 button-bg">
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('protection', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="protection" data-required="">
-                                                <div class="col-4 px-5">
+                                            <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-other', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-other" data-required="">
+                                                <div class="col-4">
                                                     <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
@@ -192,7 +192,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="savingsGoalsBtnInput" id="savingsGoalsBtnInput" value="{{$savingsGoals}}">
-                                        <a href="{{route('savings.monthly.payment')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('savings.coverage')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

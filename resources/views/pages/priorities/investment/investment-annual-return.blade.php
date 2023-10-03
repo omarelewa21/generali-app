@@ -131,71 +131,8 @@
     </div>
 </div>
 <script>
-    // Get the input value
-    var investmentPA = document.getElementById("investment_pa");
-    var totalInvestmentNeeded = document.getElementById("total_investmentNeeded");
-    var totalInvestmentPercentage = document.getElementById("percentage");
     var oldTotalFund = parseFloat({{ $newTotalInvestmentNeeded }});
     var investmentFundPercentage = parseFloat({{ $investmentFundPercentage }});
     var sessionInvestmentPA = parseFloat({{$investmentPA}});
-    var totalAnnualReturn = document.getElementById("total_annualReturn");
-
-    investmentPA.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var investmentPAValue = investmentPA.value;
-
-        var annualReturn = parseInt(investmentPAValue);
-
-        // Calculate annual return
-        var totalPA = annualReturn / 100 * oldTotalFund;
-        var totalPercentage = totalPA / oldTotalFund * 100;
-        var total = oldTotalFund - totalPA;
-
-        $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        if (total <= 0){
-            totalAnnualReturn.value = totalPA;
-            totalInvestmentPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAnnualReturn.value = totalPA;
-            totalInvestmentPercentage.value = totalPercentage;
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        }
-
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        investmentPA.addEventListener("blur", function() {
-            validateNumberField(investmentPA);
-        });
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            field.classList.add("is-invalid");
-        } else {
-            field.classList.remove("is-invalid");
-        }
-    }
-
-    if (sessionInvestmentPA !== '' || sessionInvestmentPA !== 0) {
-        var newTotalPA = sessionInvestmentPA / 100 * oldTotalFund;
-        var newTotal = oldTotalFund - newTotalPA;
-        var newTotalPercentage = newTotalPA / oldTotalFund * 100;
-        totalAnnualReturn.value = newTotalPA;
-        if (newTotal <= 0){
-            totalInvestmentPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalInvestmentPercentage.value = newTotalPercentage;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
-    }
-
 </script>
 @endsection
