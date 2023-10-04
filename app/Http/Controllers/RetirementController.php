@@ -149,14 +149,14 @@ class RetirementController extends Controller
         $arrayData = session('passingArrays', []);
 
         $customMessages = [
-            'protection_supporting_years.required' => 'You are required to enter a year.',
-            'protection_supporting_years.integer' => 'The year must be a number',
-            'protection_supporting_years.min' => 'The year must be at least :min.',
-            'protection_supporting_years.max' => 'The year must not more than :max.',
+            'retirement_age.required' => 'You are required to enter a year.',
+            'retirement_age.integer' => 'The year must be a number',
+            'retirement_age.min' => 'The year must be at least :min.',
+            'retirement_age.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'protection_supporting_years' => 'required|integer|min:1|max:100',
+            'retirement_age' => 'required|integer|min:1|max:100',
         ], $customMessages);
         
         if ($validatedData->fails()) {
@@ -164,16 +164,16 @@ class RetirementController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $protection_supporting_years = $request->input('protection_supporting_years');
-        $newProtectionTotalFund = floatval($protection_supporting_years * $arrayData['protection']['totalProtectionNeeded']);
-        $newTotalProtectionNeeded = floatval($request->input('newTotal_protectionNeeded'));
+        $retirement_age = $request->input('retirement_age');
+        $newRetirementTotalFund = floatval($retirement_age * $arrayData['retirement']['totalRetirementNeeded']);
+        $newTotalRetirementNeeded = floatval($request->input('newTotal_retirementNeeded'));
 
-        $arrayData['protection']['protectionSupportingYears'] = $protection_supporting_years;
-        if ($newProtectionTotalFund === $newTotalProtectionNeeded){
-            $arrayData['protection']['newTotalProtectionNeeded'] = $newTotalProtectionNeeded;
+        $arrayData['retirement']['retirementAge'] = $retirement_age;
+        if ($newRetirementTotalFund === $newTotalRetirementNeeded){
+            $arrayData['retirement']['newTotalRetirementNeeded'] = $newTotalRetirementNeeded;
         }
         else{
-            $arrayData['protection']['newTotalProtectionNeeded'] = $newProtectionTotalFund;
+            $arrayData['retirement']['newTotalRetirementNeeded'] = $newRetirementTotalFund;
         }
 
         // Store the updated array back into the session
@@ -182,7 +182,7 @@ class RetirementController extends Controller
         // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.existing.policy');
+        return redirect()->route('retirement.years');
     }
 
     public function validateProtectionExistingPolicy(Request $request){

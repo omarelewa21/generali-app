@@ -152,38 +152,38 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/protection-supporting-years') {
+    else if (path == '/retirement-retire-age') {
         // Get the input value
 
-        var supportingYears = document.getElementById("protection_supporting_years");
-        var newTotalFund = document.getElementById("newTotal_protectionNeeded");
+        var retirementAge = document.getElementById("retirement_age");
+        var newTotalFund = document.getElementById("newTotal_retirementNeeded");
         
-        var totalProtectionFund = document.getElementById("TotalProtectionFund");
+        var totalRetirementFund = document.getElementById("TotalRetirementFund");
 
-        if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
-                newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
+        if (retirementAgeSessionValue !== '' || retirementAgeSessionValue !== 0 && oldTotalFund !== '') {
+                newTotalFund.value = retirementAgeSessionValue * oldTotalFund;
         } 
         
 
-        supportingYears.addEventListener("input", function() {
+        retirementAge.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var supportingYearsValue = supportingYears.value;
+            var retirementAgeValue = retirementAge.value;
 
-            var Year = parseInt(supportingYearsValue);
+            var Year = parseInt(retirementAgeValue);
 
             // Calculate months
             var totalAmount = Year * oldTotalFund;
 
             if (isNaN(Year)) {
                 // Input is not a valid number
-                totalProtectionFund.innerText = "RM 0";
+                totalRetirementFund.innerText = "RM 0";
             } else {
                 // Input is a valid number, perform the calculation
                 // Display the result
                 var result = totalAmount.toLocaleString();
 
-                totalProtectionFund.innerText = "RM " + result;
+                totalRetirementFund.innerText = "RM " + result;
             }
             
             newTotalFund.value = Year * oldTotalFund;
@@ -191,8 +191,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         });
     
         document.addEventListener("DOMContentLoaded", function() {
-            supportingYears.addEventListener("blur", function() {
-                validateNumberField(supportingYears);
+            retirementAge.addEventListener("blur", function() {
+                validateNumberField(retirementAge);
             });
         });
 
