@@ -47,6 +47,9 @@
 .right-2{
     right: 2%;
 }
+.lh-normal{
+    line-height: normal;
+}
 
 /* Form Style */
 .form-control.money {
@@ -351,6 +354,30 @@
 }
 #education-summary #gap .circle__small{
     filter: none;
+}
+
+/* =============================== Savings Goal =======================================*/
+#savings-goals #sortable{
+    height: 70%;
+}
+#savings-goals #sortable .first{
+    grid-row: 20 / 63;
+    grid-column: 17 / span 7;
+}
+#savings-goals #sortable .second {
+    grid-column: 16 / span 11;
+    grid-row: 30 / 54;
+    transform: translate(47%, -26%);
+    width: 96%;
+}
+#savings-goals #sortable .third {
+    grid-column: 29 / span 11;
+    grid-row: 25 / 51;
+    transform: translate(42%, -5%);
+    width: 96%;
+}
+#savings-goals #sortable .fourth{
+    grid-column: 37 / span 9;
 }
 
 /* =============================== Savings Monthly Payment =======================================*/

@@ -53,6 +53,25 @@ class SavingsController extends Controller
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
         // return redirect()->route('savings.goals');
+        return redirect()->route('savings.goals');
+    }
+
+    public function goals(Request $request)
+    {
+        $goalsSerialized = $request->input('savingsGoalsBtnInput');
+        $savingsGoalsBtnInput = json_decode($goalsSerialized, true);
+        
+        // // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        // // Add or update the data value in the array
+        $arrayData['Goals'] = $savingsGoalsBtnInput;
+
+        // // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+
+        Log::debug($arrayData);
+        // Process the form data and perform any necessary actions
         return redirect()->route('savings.monthly.payment');
     }
 
