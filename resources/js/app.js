@@ -10,6 +10,7 @@ import './button-avatar-display';
 import './coverage-carousel';
 import './carousel-needs';
 import './protection-validation';
+import './retirement-validation';
 import './education-validation';
 import './savings-validation';
 import './investment-validation';

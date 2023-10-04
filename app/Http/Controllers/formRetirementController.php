@@ -34,7 +34,7 @@ class formRetirementController extends Controller
         
         Log::info('Session Data:', Session::all());
 
-        return redirect()->route('retirement.ideal')
+        return redirect()->route('retirement.ideal.archived')
             ->withInput();
     }
 
@@ -58,7 +58,7 @@ public function submitRetirementIdeal(Request $request)
         // Store the updated array back into the session
         session(['passingArraysRetirement' =>  $arrayDataRetirement]);
 
-        return redirect()->route('retirement.age.to.retire')
+        return redirect()->route('retirement.age.to.retire.archived')
             ->withInput();
     }
     public function submitRetirementAgeToRetire(Request $request)
@@ -84,7 +84,7 @@ public function submitRetirementIdeal(Request $request)
         // Store the updated array back into the session
         session(['passingArraysRetirement' =>  $arrayDataRetirement]);
 
-        return redirect()->route('retirement.allocated.funds')
+        return redirect()->route('retirement.allocated.funds.archived')
         ->withInput(); 
     }
     public function submitRetirementAllocatedFunds(Request $request)
@@ -124,7 +124,7 @@ public function submitRetirementIdeal(Request $request)
         session(['passingArraysRetirement' =>  $arrayDataRetirement]);
         Log::info('Session Data:', Session::all());
 
-        return redirect()->route('retirement.years.till.retire')    
+        return redirect()->route('retirement.years.till.retire.archived')    
                 ->withInput(); 
     }
     public function submitRetirementYearsTillRetire(Request $request)
@@ -163,7 +163,7 @@ public function submitRetirementIdeal(Request $request)
         Log::info('Session Data:', Session::all());
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('retirement.allocated.funds.aside')
+        return redirect()->route('retirement.allocated.funds.aside.archived')
         ->withInput(); 
     }
 
@@ -222,7 +222,7 @@ public function submitRetirementIdeal(Request $request)
         session(['passingArraysRetirement' =>  $arrayDataRetirement]);
         Log::info('Session Data:', Session::all());
 
-        return redirect()->route('retirement.gap')    
+        return redirect()->route('retirement.gap.archived')    
                 ->withInput(); 
     }
 

@@ -111,7 +111,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('retirement.allocated.funds.aside')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('retirement.allocated.funds.aside.archived')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase">Next</button>
                                     </div>
                                 </div>
