@@ -121,5 +121,3 @@ Route::get('/files/{filename}', function($filename){
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
-
-

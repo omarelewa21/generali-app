@@ -106,11 +106,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     document.getElementById("declineButton").addEventListener("click", function() {
-        pdpa("Declined");
+        pdpa("declined");
     });
 
     document.getElementById("acceptButton").addEventListener("click", function() {
-        pdpa("Accepted");
+        pdpa("accepted");
     });
 
     function pdpa(decision, route) {

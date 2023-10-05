@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $familyDependant = isset($arrayData['FamilyDependant']) ? json_encode($arrayData['FamilyDependant']) : '';
     $gender = isset($arrayData['Gender']) ? ($arrayData['Gender'] === 'Male' ? 'Female' : 'Male') : '';
 @endphp
@@ -27,7 +27,7 @@
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
@@ -106,7 +106,6 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{$familyDependant}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant.details">
-                                        <input type="hidden" name="spouseGenderInput" id="spouseGenderInput" value="{{$gender}}">
                                         <a href="{{route('avatar.marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
@@ -171,10 +170,10 @@
 
 <script>
 // Manually convert the PHP array to JSON
-var passingArrays = {!! json_encode(session('passingArrays')) !!};
+var customer_details = {!! json_encode(session('customer_details')) !!};
 
 // Access the elements of the array in JavaScript
-var maritalStatus = passingArrays.MaritalStatus;
+var maritalStatus = customer_details.identity_details.marital_status;
 
 // Disable the 'Spouse' button if maritalStatus is 'single'
 if (maritalStatus === 'single') {

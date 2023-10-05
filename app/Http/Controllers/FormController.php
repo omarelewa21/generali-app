@@ -27,7 +27,7 @@ class FormController extends Controller {
 
         // Store the updated array back into the session
         session(['customer_details' => $arrayData]);        
-
+        
         return response()->json(['message' => 'Button click saved successfully']);
     }
 
@@ -65,7 +65,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-
+        
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -137,7 +137,7 @@ class FormController extends Controller {
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Add the new array inside the customer_details array
-        $customerDetails['identity_details'] = [
+        $newData = [
             'country' => $validatedData['country'],
             'id_type' => $validatedData['idType'],
             'id_number' => $validatedData['idNumber'],
@@ -153,20 +153,23 @@ class FormController extends Controller {
             'occupation' => $validatedData['occupation']
         ];
 
+        if ($request->session()->has('identity_details')) {
+            $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
+        } else {
+            $customerDetails['identity_details'] = $newData;
+        }
+        
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        // $data = $request->session()->all();
-        // Log::debug($data);
+        $data = $request->session()->all();
+        Log::debug($data);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
 
     public function handleAvatarSelection(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -182,7 +185,7 @@ class FormController extends Controller {
         Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
             $decodedValue = json_decode($value, true);
 
-            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents'])) {
+            if (isset($decodedValue['spouse']) || !empty($decodedValue['children']) || !empty($decodedValue['parents'])) {
                 return true;
             }
         
@@ -215,20 +218,32 @@ class FormController extends Controller {
         $assetsButtonInput = json_decode($assetsSerialized, true);
         $dataUrl = $request->input('urlInput');
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
         // Add or update the data value in the array
         if ($maritalStatusButtonInput) {
-            $arrayData['MaritalStatus'] = $maritalStatusButtonInput;
+            $newData = [
+                'marital_status' => $maritalStatusButtonInput
+            ];
+
+            $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
         }
         elseif ($familyDependantButtonInput) {
-            $arrayData['FamilyDependant'] = $familyDependantButtonInput;
+            $customerDetails['family_details'] = [
+                'dependant' => $familyDependantButtonInput
+            ];
         }
         elseif ($assetsButtonInput) {
-            $arrayData['Assets'] = $assetsButtonInput;
+            // $arrayData['Assets'] = $assetsButtonInput;
         }
 
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        $data = $request->session()->all();
+        Log::debug($data);
+
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
         return redirect()->route($dataUrl);
     }
 

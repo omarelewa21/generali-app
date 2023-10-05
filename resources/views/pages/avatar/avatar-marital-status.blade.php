@@ -14,9 +14,8 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $maritalStatus = isset($arrayData['MaritalStatus']) ? $arrayData['MaritalStatus'] : '';
-    $gender = isset($arrayData['Gender']) ? ($arrayData['Gender'] === 'Male' ? 'Female' : 'Male') : '';
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $maritalStatus = session('customer_details.identity_details.marital_status');
 @endphp
 
 <div id="avatar_marital_status">
@@ -26,7 +25,7 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>
@@ -57,7 +56,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['MaritalStatus']) && $arrayData['MaritalStatus'] === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
+                                                <button class="border-0 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
                                                     <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
@@ -67,7 +66,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['MaritalStatus']) && $arrayData['MaritalStatus'] === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
+                                                <button class="border-0 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
@@ -77,7 +76,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['MaritalStatus']) && $arrayData['MaritalStatus'] === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
+                                                <button class="border-0 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
@@ -87,7 +86,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['MaritalStatus']) && $arrayData['MaritalStatus'] === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
+                                                <button class="border-0 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
@@ -104,7 +103,6 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="spouseGenderInput" id="spouseGenderInput" value="{{$gender}}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependant">
                                         <a href="{{route('identity.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
@@ -119,4 +117,7 @@
     </div>
 </div>
 
+<script>
+    var sessionData = {!! json_encode(session('customer_details')) !!};
+</script>
 @endsection
