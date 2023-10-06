@@ -201,10 +201,11 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         else if (path == '/family-dependant' || path == '/family-dependant-details') {
             // Set the spouseImageIndex based on gender
             var gender = customer_details.avatar.gender;
+
             var spouseImageIndex = 0; // Default to male avatar
             var spouseWidowedImageIndex = 0;
             
-            if (gender === 'Female') {
+            if (gender === 'Male') {
                 spouseImageIndex = 1; // Index for female avatar
                 spouseWidowedImageIndex = 1;
             }
@@ -213,21 +214,25 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var $imageContainer = $(".imageContainerSpouse");
             var $existingImage = $imageContainer.find("img.appended-image");
 
-            if (familyDependantInputValue.trim() !== "") {
+            if (familyDependantInputValue.trim() !== 'null') {
+                
                 var familyDependant = JSON.parse(familyDependantInputValue);
 
-                if (familyDependant.spouse && familyDependant.spouse.status.includes("yes")) {
+                if (familyDependant.spouse && familyDependant.spouse === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
                     $(".imageContainerSpouse").append(newImage);
                 } else {
                     $existingImage.remove();
                 }
 
-                if (familyDependant.children && familyDependant.children.length > 0) {
+                if (familyDependant.children_data) {
+                    
                     var childImages = []; // An array to store child image HTML
 
-                    // Loop through familyDependant.children
-                    for (var i = 0; i < familyDependant.children.length; i++) {
+                    // Loop through familyDependant.children_data
+                    var numberOfChildren = Object.keys(familyDependant.children_data).length;
+
+                    for (var i = 0; i < numberOfChildren; i++) {
                         var childIndex = i % childrenImages.length; // Get the index within childrenImages
                         var childImage = '<img src="' + childrenImages[childIndex].src + '" width="' + childrenImages[childIndex].width + '" height="' + childrenImages[childIndex].height + '" alt="' + childrenImages[childIndex].alt + '" class="' + childrenImages[childIndex].class + '" style="' + childrenImages[childIndex].style + '">';
                         childImages.push(childImage);
@@ -236,18 +241,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     // Append child images to the container
                     $(".imageContainerChildren").append(childImages.join(''));
 
-                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + familyDependant.children.length + '</div>';
+                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + numberOfChildren + '</div>';
                     $(".imageContainerChildren").append(newButton);
                 }
 
-                if (familyDependant.parents && familyDependant.parents.length > 0) {
+                if (familyDependant.parents_data) {
 
-                    if (familyDependant.parents.includes("Father")) {
+                    if (familyDependant.parents_data.hasOwnProperty("father")) {
                         var parentImage = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
 
-                    if (familyDependant.parents.includes("Mother")) {
+                    if (familyDependant.parents_data.hasOwnProperty("mother")) {
                         var parentImage = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
@@ -336,13 +341,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             $imageContainer.empty();
         });
 
-        // const clickedAvatars = {
-        //     spouse: null,
-        //     children: [],
-        //     children_details: [],
-        //     parents: [],
-        //     parents_details: [],
-        // };
         const clickedAvatars = {
             spouse: false,
             children: false,
@@ -371,18 +369,24 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             
             if (isSelected == true) {
                 clickedAvatars['spouse'] = true;
+
+                // Create a new array under 'children_data'
+                clickedAvatars['spouse_data'] = {
+                    relation: 'Spouse'
+                };
             }
             else {
                 clickedAvatars['spouse'] = false;
             }
 
-            if (familyDependantButtonInput.value == '') {
+            if (familyDependantButtonInput.value === 'null') {
                 familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
             }
             else {
                 familyDependantButtonInput.value = JSON.stringify({
                     ...JSON.parse(familyDependantButtonInput.value), 
-                    spouse: clickedAvatars.spouse
+                    spouse: clickedAvatars.spouse,
+                    spouse_data: clickedAvatars.spouse_data
                 });
             }
         });
@@ -421,12 +425,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (selectedChildren > 0) {
                 clickedAvatars['children'] = true;
 
-                // Create a new array under 'children'
-                clickedAvatars['children_data'] = [];
+                // Create a new array under 'children_data'
+                clickedAvatars['children_data'] = {};
 
                 for (let i = 1; i <= selectedChildren; i++) {
-                    const dataAvatarval = `child_${i}`;
-                    clickedAvatars['children_data'].push(dataAvatarval);
+                    const childKey = `child_${i}`;
+                    
+                    const dataAvatarval = {
+                        relation: `Child ${i}`
+                    };
+                    clickedAvatars['children_data'][childKey] = dataAvatarval;
                 }
             }
             else if(selectedChildren == 'noChildren') {
@@ -439,7 +447,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             else {
                 familyDependantButtonInput.value = JSON.stringify({
                     ...JSON.parse(familyDependantButtonInput.value),
-                    children: clickedAvatars.children
+                    children: clickedAvatars.children,
+                    children_data: clickedAvatars.children_data
                 });
             }
         });
@@ -456,29 +465,41 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 clickedAvatars['parents'] = true;
 
                 var selectedImages = [];
-                // clickedAvatars['parents'] = [];
+
+                // Create a new array under 'parents_data'
+                clickedAvatars['parents_data'] = {};
 
                 if (selectedValue === "father") {
                     selectedImages.push(parentImages[1]);
-
-                    // Create a new array under 'parents'
-                    clickedAvatars['parents_data'] = [];
-                    clickedAvatars['parents_data'].push("Father");
+                    const parentKey = 'father';
+                    const dataAvatarval = {
+                        relation: 'father'
+                    };
+                    clickedAvatars['parents_data'][parentKey] = dataAvatarval;
                 }
                 else if (selectedValue === "mother") {
                     selectedImages.push(parentImages[0]);
-
-                    // Create a new array under 'parents'
-                    clickedAvatars['parents_data'] = [];
-                    clickedAvatars['parents_data'].push("Mother");
+                    const parentKey = 'mother';
+                    const dataAvatarval = {
+                        relation: 'mother'
+                    };
+                    clickedAvatars['parents_data'][parentKey] = dataAvatarval;
                 }
                 else if (selectedValue === "both") {
                     selectedImages.push(parentImages[1]);
                     selectedImages.push(parentImages[0]);
+                    const parentKey1 = 'father';
+                    const parentKey2 = 'mother';
 
-                    // Create a new array under 'parents'
-                    clickedAvatars['parents_data'] = [];
-                    clickedAvatars['parents_data'].push("Father", "Mother");
+                    const fatherdata = {
+                        relation: 'father'
+                    };
+                    const motherData = {
+                        relation: 'mother'
+                    };
+
+                    clickedAvatars['parents_data'][parentKey1] = fatherdata;
+                    clickedAvatars['parents_data'][parentKey2] = motherData;
                 }
 
                 selectedImages.forEach(function (image) {
@@ -497,7 +518,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             else {
                 familyDependantButtonInput.value = JSON.stringify({
                     ...JSON.parse(familyDependantButtonInput.value),
-                    parents: clickedAvatars.parents
+                    parents: clickedAvatars.parents,
+                    parents_data: clickedAvatars.parents_data
                 });
             }
         });

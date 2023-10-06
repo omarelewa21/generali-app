@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Identity Details Page
+ * Template Name: Identity Details Page 
  */
 ?>
 
