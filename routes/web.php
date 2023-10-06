@@ -79,13 +79,14 @@ Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')
 Route::Post('/retirement-ideal', [RetirementController::class, 'validateIdeal'])->name('validate.retirement.ideal');
 Route::view('/retirement-monthly-support', 'pages.priorities.retirement.retirement-monthly-support')->name('retirement.monthly.support');
 Route::Post('/retirement-monthly-support', [RetirementController::class, 'validateMonthlySupport'])->name('validate.retirement.monthly.support');
+Route::view('/retirement-supporting-years', 'pages.priorities.retirement.retirement-supporting-years')->name('retirement.supporting.years');
+Route::Post('/retirement-supporting-years', [RetirementController::class, 'validateSupportingYears'])->name('validate.supporting.years');
 Route::view('/retirement-retire-age', 'pages.priorities.retirement.retirement-retire-age')->name('retirement.retire.age');
 Route::Post('/retirement-retire-age', [RetirementController::class, 'validateRetireAge'])->name('validate.retire.age');
-// Route::view('/retirement-years-till-retire', 'pages.priorities.retirement.retirement-years-till-retire')->name('retirement.years.till.retire');
-// Route::Post('/retirement-years-till-retire', [RetirementController::class, 'submitRetirementYearsTillRetire'])->name('form.retirement.years.till.retire');
-// Route::view('/retirement-allocated-funds-aside', 'pages.priorities.retirement.retirement-allocated-funds-aside')->name('retirement.allocated.funds.aside');
-// Route::Post('/retirement-allocated-funds-aside', [RetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
-// Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
+Route::view('/retirement-others', 'pages.priorities.retirement.retirement-others')->name('retirement.others');
+Route::Post('/retirement-others', [RetirementController::class, 'validateOthers'])->name('validate.others');
+Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
+Route::post('/retirement-gap', [RetirementController::class, 'submitRetirementGap'])->name('form.submit.retirement.gap');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');

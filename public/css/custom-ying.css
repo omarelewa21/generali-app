@@ -263,6 +263,13 @@
 #retirement-ideal .button-needs.selected{
     background-position: center bottom;
 }
+/* =============================== Retirement Retire Age Page ===============================*/
+.bg-retire-age{
+    background-image: url('/images/needs/retirement/retire-age/bg-retire-age.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position:left top;
+}
 /* =============================== Education Supporting Page ===============================*/
 .wrapper-needs-supporting-default {
     display: grid;
@@ -809,6 +816,10 @@
     .needs-home-wrapper{
         grid-template-rows: 80vh;
     }
+    #retirement-age .col-10 .col-sm-6{
+        width: 83.3333%;
+        flex: 0 0 auto;
+    }
 }
 @media only screen and (min-width: 992px) and (max-width: 1200px){
     .show-tablet{
@@ -892,6 +903,9 @@
     }
     .start-25{
         left: 0px;
+    }
+    .bg-retire-age{
+        background-size: cover;
     }
 }
 @media only screen and (min-width: 1024px){
@@ -1043,6 +1057,10 @@
     }
     #retirement-home .needs-stand-bg{
         padding: 200px;
+    }
+    .col-xxxl-5 {
+        flex: 0 0 auto;
+        width: 41.66666667%;
     }
 }
 @media screen and (min-width: 1800px) {

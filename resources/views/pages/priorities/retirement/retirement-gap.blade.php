@@ -1,21 +1,21 @@
 @extends('templates.master')
 
 @section('title')
-<title>Protection - Gap Summary</title>
+<title>Retirement - Gap Summary</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $protectionSupportingYears = isset($arrayData['protection']['protectionSupportingYears']) ? $arrayData['protection']['protectionSupportingYears'] : '';
-    $existingPolicyAmount = isset($arrayData['protection']['existingPolicyAmount']) ? $arrayData['protection']['existingPolicyAmount'] : '';
-    $newTotalProtectionNeeded = isset($arrayData['protection']['newTotalProtectionNeeded']) ? $arrayData['protection']['newTotalProtectionNeeded'] : '';
-    $totalAmountNeeded = isset($arrayData['protection']['totalAmountNeeded']) ? $arrayData['protection']['totalAmountNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
+    $supportingYears = isset($arrayData['retirement']['supportingYears']) ? $arrayData['retirement']['supportingYears'] : '';
+    $retirementSavings = isset($arrayData['retirement']['retirementSavings']) ? $arrayData['retirement']['retirementSavings'] : '';
+    $newTotalRetirementNeeded = isset($arrayData['retirement']['newTotalRetirementNeeded']) ? $arrayData['retirement']['newTotalRetirementNeeded'] : '';
+    $retirementFundPercentage = isset($arrayData['retirement']['retirementFundPercentage']) ? $arrayData['retirement']['retirementFundPercentage'] : 0;
+    $totalAmountNeeded = isset($arrayData['retirement']['totalAmountNeeded']) ? $arrayData['retirement']['totalAmountNeeded'] : '';
 @endphp
 
-<div id="protection-summary"  class="vh-100 scrollable-content">
+<div id="retirement-summary"  class="vh-100 scrollable-content">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.protection.gap')}}" method="POST" class="m-0 content-gap-default">
+                    <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="m-0 content-gap-default">
                         @csrf
                         <section class="row align-items-end mh-100">
                             <div class="col-12 position-relative mh-100 scrollable-content">
@@ -44,8 +44,8 @@
                                                             <svg>
                                                                 <defs>
                                                                     <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
-                                                                        <stop offset="10%"   stop-color="{{ $protectionFundPercentage === 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
-                                                                        <stop offset="100%" stop-color="{{ $protectionFundPercentage === 100 ? '#14A38B' : '#C1210D' }}"/>
+                                                                        <stop offset="10%"   stop-color="{{ $retirementFundPercentage === 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
+                                                                        <stop offset="100%" stop-color="{{ $retirementFundPercentage === 100 ? '#14A38B' : '#C1210D' }}"/>
                                                                     </linearGradient >
                                                                 </defs>
                                                                 <g id="circle">
@@ -56,7 +56,7 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalProtectionNeeded ? '100' : number_format(floatval($protectionFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalRetirementNeeded ? '100' : number_format(floatval($retirementFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-center py-2 gap-title">
-                                                <h5 class="f-family fw-700">Total Protection Fund</h5>
+                                                <h5 class="f-family fw-700">Total Retirement Fund</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">After the next</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">{{$protectionSupportingYears}} years</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{$supportingYears}} years</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,7 +95,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I want to achieve my goals with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalProtectionNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalRetirementNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,7 +111,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I have set aside</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($existingPolicyAmount))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($retirementSavings))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,7 +140,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('protection.existing.policy')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('retirement.others')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -153,7 +153,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('protection.existing.policy')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('retirement.others')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -166,9 +166,9 @@
     </div>
 </div>
 <script>
-    var existingPolicyAmount =  {{$existingPolicyAmount}};
-    var percentage = {{$protectionFundPercentage}};
-    var newTotalProtectionNeeded = {{$newTotalProtectionNeeded}};
+    var retirementSavings =  {{$retirementSavings}};
+    var percentage = {{$retirementFundPercentage}};
+    var newTotalRetirementNeeded = {{$newTotalRetirementNeeded}};
 </script>
 
 @endsection

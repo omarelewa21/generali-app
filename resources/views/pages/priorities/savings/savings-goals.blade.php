@@ -130,7 +130,7 @@
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                             <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-travel', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-travel" data-required="">
                                                 <div class="col-4">
-                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-travel.png') }}" width="auto" height="110px" alt="Protection">
+                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-travel.png') }}" width="auto" height="110px" alt="goal-travel">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
                                                     <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to travel around the world</p>
@@ -144,7 +144,7 @@
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                             <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-wedding', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-wedding" data-required="">
                                                 <div class="col-4">
-                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-wedding.png') }}" width="auto" height="100px" alt="Protection">
+                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-wedding.png') }}" width="auto" height="100px" alt="goal-wedding">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
                                                     <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to have my dream wedding</p>
@@ -158,7 +158,7 @@
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                             <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-home', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-home" data-required="">
                                                 <div class="col-4">
-                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-home.png') }}" width="auto" height="100px" alt="Protection">
+                                                    <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-home.png') }}" width="auto" height="100px" alt="goal-home">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
                                                     <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to upgrade my car and home</p>
@@ -172,7 +172,7 @@
                                         <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                             <button class="border-0 w-100 d-flex align-items-center @if(isset($arrayData['savings']['savingsGoals']) && is_array($arrayData['savings']['savingsGoals']) && in_array('goal-other', $arrayData['savings']['savingsGoals'])) default @endif" data-avatar="goal-other" data-required="">
                                                 <div class="col-4">
-                                                    <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Protection">
+                                                    <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="goal-other">
                                                 </div>
                                                 <div class="col-8 d-flex justify-content-center">
                                                     <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">Others</p>

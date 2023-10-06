@@ -140,6 +140,48 @@ class RetirementController extends Controller
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
         Log::debug($arrayData);
+        return redirect()->route('retirement.supporting.years');
+    }
+
+    public function validateSupportingYears(Request $request){
+
+        // Get the existing array from the session
+        $arrayData = session('passingArrays', []);
+
+        $customMessages = [
+            'supporting_years.required' => 'You are required to enter a year.',
+            'supporting_years.integer' => 'The year must be a number',
+            'supporting_years.min' => 'The year must be at least :min.',
+            'supporting_years.max' => 'The year must not more than :max.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'supporting_years' => 'required|integer|min:1|max:100',
+        ], $customMessages);
+        
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $supporting_years = $request->input('supporting_years');
+        $newRetirementTotalFund = floatval($supporting_years * $arrayData['retirement']['totalRetirementNeeded']);
+        $newTotalRetirementNeeded = floatval($request->input('newTotal_retirementNeeded'));
+
+        $arrayData['retirement']['supportingYears'] = $supporting_years;
+        if ($newRetirementTotalFund === $newTotalRetirementNeeded){
+            $arrayData['retirement']['newTotalRetirementNeeded'] = $newTotalRetirementNeeded;
+        }
+        else{
+            $arrayData['retirement']['newTotalRetirementNeeded'] = $newRetirementTotalFund;
+        }
+
+        // Store the updated array back into the session
+        session(['passingArrays' => $arrayData]);
+        Log::debug($arrayData);
+        // Process the form data and perform any necessary actions
+        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('retirement.retire.age');
     }
 
@@ -165,16 +207,8 @@ class RetirementController extends Controller
 
         // Validation passed, perform any necessary processing.
         $retirement_age = $request->input('retirement_age');
-        $newRetirementTotalFund = floatval($retirement_age * $arrayData['retirement']['totalRetirementNeeded']);
-        $newTotalRetirementNeeded = floatval($request->input('newTotal_retirementNeeded'));
 
         $arrayData['retirement']['retirementAge'] = $retirement_age;
-        if ($newRetirementTotalFund === $newTotalRetirementNeeded){
-            $arrayData['retirement']['newTotalRetirementNeeded'] = $newTotalRetirementNeeded;
-        }
-        else{
-            $arrayData['retirement']['newTotalRetirementNeeded'] = $newRetirementTotalFund;
-        }
 
         // Store the updated array back into the session
         session(['passingArrays' => $arrayData]);
@@ -182,31 +216,29 @@ class RetirementController extends Controller
         // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('retirement.years');
+        return redirect()->route('retirement.others');
     }
 
-    public function validateProtectionExistingPolicy(Request $request){
+    public function validateOthers(Request $request){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
 
         $customMessages = [
-            'protection_existing_policy.required' => 'Please select an option',
-            'existing_policy_amount.required_if' => 'You are required to enter an amount.',
-            'existing_policy_amount.regex' => 'The amount must be a number',
+            'other_income_sources.required' => 'Please enter a source of income',
+            'retirement_savings.regex' => 'The amount must be a number',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'protection_existing_policy' => 'required|in:yes,no',
-            'existing_policy_amount' => [
-                'nullable',
+            'other_income_sources' => 'required|max:255',
+            'retirement_savings' => [
                 'regex:/^[0-9,]+$/',
-                'required_if:protection_existing_policy,yes',
+                'nullable',
                 function ($attribute, $value, $fail) use ($request) {
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
-                    if (intval($numericValue) < $min && $request->input('protection_existing_policy') === 'yes') {
+                    if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
                 },
@@ -217,33 +249,33 @@ class RetirementController extends Controller
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
         // Validation passed, perform any necessary processing.
-        $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
-        $protection_existing_policy = $request->input('protection_existing_policy');
-        $newProtectionTotalAmountNeeded = floatval($arrayData['protection']['newTotalProtectionNeeded'] - $existing_policy_amount);
+        $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
+        $other_income_sources = $request->input('other_income_sources');
+        $newRetirementTotalAmountNeeded = floatval($arrayData['retirement']['newTotalRetirementNeeded'] - $retirement_savings);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newProtectionPercentage = floatval($existing_policy_amount / $arrayData['protection']['newTotalProtectionNeeded'] * 100);
+        $newRetirementPercentage = floatval($retirement_savings / $arrayData['retirement']['newTotalRetirementNeeded'] * 100);
 
-        $arrayData['protection']['existingPolicyAmount'] = $existing_policy_amount;
-        $arrayData['protection']['existingPolicy'] = $protection_existing_policy;
-        if ($newProtectionTotalAmountNeeded === $totalAmountNeeded && $newProtectionPercentage === $totalPercentage){
-            if ($newProtectionTotalAmountNeeded <= 0){
-                $arrayData['protection']['totalAmountNeeded'] = 0;
-                $arrayData['protection']['protectionFundPercentage'] = 100;
+        $arrayData['retirement']['retirementSavings'] = $retirement_savings;
+        $arrayData['retirement']['otherIncomeResources'] = $other_income_sources;
+        if ($newRetirementTotalAmountNeeded === $totalAmountNeeded && $newRetirementPercentage === $totalPercentage){
+            if ($newRetirementTotalAmountNeeded <= 0){
+                $arrayData['retirement']['totalAmountNeeded'] = 0;
+                $arrayData['retirement']['retirementFundPercentage'] = 100;
             }
             else{
-                $arrayData['protection']['totalAmountNeeded'] = $totalAmountNeeded;
-                $arrayData['protection']['protectionFundPercentage'] = $totalPercentage;
+                $arrayData['retirement']['totalAmountNeeded'] = $totalAmountNeeded;
+                $arrayData['retirement']['retirementFundPercentage'] = $totalPercentage;
             }
         }
         else{
-            if ($newProtectionTotalAmountNeeded <= 0){
-                $arrayData['protection']['totalAmountNeeded'] = 0;
-                $arrayData['protection']['protectionFundPercentage'] = 100;
+            if ($newRetirementTotalAmountNeeded <= 0){
+                $arrayData['retirement']['totalAmountNeeded'] = 0;
+                $arrayData['retirement']['retirementFundPercentage'] = 100;
             }
             else{
-                $arrayData['protection']['totalAmountNeeded'] = $newProtectionTotalAmountNeeded;
-                $arrayData['protection']['protectionFundPercentage'] = $newProtectionPercentage;
+                $arrayData['retirement']['totalAmountNeeded'] = $newRetirementTotalAmountNeeded;
+                $arrayData['retirement']['retirementFundPercentage'] = $newRetirementPercentage;
             }
         }
 
@@ -253,10 +285,10 @@ class RetirementController extends Controller
         // // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.gap');
+        return redirect()->route('retirement.gap');
     }
 
-    public function submitProtectionGap(Request $request){
+    public function submitRetirementGap(Request $request){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
@@ -267,7 +299,7 @@ class RetirementController extends Controller
         // // Process the form data and perform any necessary actions
         //  $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('retirement.home');
+        return redirect()->route('education.home');
     }
 
 }

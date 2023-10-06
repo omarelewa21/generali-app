@@ -12,6 +12,7 @@
     $investmentSupportingYears = isset($arrayData['investment']['investmentSupportingYears']) ? $arrayData['investment']['investmentSupportingYears'] : '';
     $newTotalInvestmentNeeded = isset($arrayData['investment']['newTotalInvestmentNeeded']) ? $arrayData['investment']['newTotalInvestmentNeeded'] : '';
     $totalAnnualReturn = isset($arrayData['investment']['totalAnnualReturn']) ? $arrayData['investment']['totalAnnualReturn'] : '';
+    $investmentPA = isset($arrayData['investment']['investmentPA']) ? $arrayData['investment']['investmentPA'] : '';
     $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
 @endphp
 
@@ -93,10 +94,10 @@
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to achieve my goals with</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I expected to have an annual return of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalInvestmentNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{($investmentPA)}}% p.a</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,7 +113,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I have set aside</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalAnnualReturn))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalInvestmentNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>

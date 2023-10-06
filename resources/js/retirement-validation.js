@@ -120,7 +120,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             if (isNaN(monthlyAmount)) {
                 // Input is not a valid number
-                totalProtectionFund.innerText = "RM 0";
+                totalRetirementFund.innerText = "RM 0";
                 displayAvatar.innerText = "RM 0";
             } else {
                 // Input is a valid number, perform the calculation
@@ -152,25 +152,25 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/retirement-retire-age') {
+    else if (path == '/retirement-supporting-years') {
         // Get the input value
 
-        var retirementAge = document.getElementById("retirement_age");
+        var supportingYears = document.getElementById("supporting_years");
         var newTotalFund = document.getElementById("newTotal_retirementNeeded");
         
         var totalRetirementFund = document.getElementById("TotalRetirementFund");
 
-        if (retirementAgeSessionValue !== '' || retirementAgeSessionValue !== 0 && oldTotalFund !== '') {
-                newTotalFund.value = retirementAgeSessionValue * oldTotalFund;
+        if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
+                newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
         } 
         
 
-        retirementAge.addEventListener("input", function() {
+        supportingYears.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var retirementAgeValue = retirementAge.value;
+            var supportingYearsValue = supportingYears.value;
 
-            var Year = parseInt(retirementAgeValue);
+            var Year = parseInt(supportingYearsValue);
 
             // Calculate months
             var totalAmount = Year * oldTotalFund;
@@ -191,6 +191,49 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         });
     
         document.addEventListener("DOMContentLoaded", function() {
+            supportingYears.addEventListener("blur", function() {
+                validateNumberField(supportingYears);
+            });
+        });
+
+        function validateNumberField(field) {
+            const value = field.value.trim();
+
+            if (value === "" || isNaN(value)) {
+                field.classList.add("is-invalid");
+            } else {
+                field.classList.remove("is-invalid");
+            }
+        }
+    }
+
+    else if (path == '/retirement-retire-age') {
+        // Get the input value
+
+        var retirementAge = document.getElementById("retirement_age");
+        
+
+        retirementAge.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var retirementAgeValue = retirementAge.value;
+
+            var Year = parseInt(retirementAgeValue);
+
+            if (isNaN(Year)) {
+                // Input is not a valid number
+                totalRetirementFund.innerText = "RM 0";
+            } else {
+                // Input is a valid number, perform the calculation
+                // Display the result
+                var result = newTotalFund.toLocaleString();
+
+                totalRetirementFund.innerText = "RM " + result;
+            }
+            
+        });
+    
+        document.addEventListener("DOMContentLoaded", function() {
             retirementAge.addEventListener("blur", function() {
                 validateNumberField(retirementAge);
             });
@@ -206,20 +249,31 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/protection-existing-policy') {
-        var existing_policy_amount = document.getElementById('existing_policy_amount');
-        var yesRadio = document.getElementById('yes');
-        var noRadio = document.getElementById('no');
+    else if (path == '/retirement-others') {
+        var retirement_savings = document.getElementById('retirement_savings');
+        var other_income_sources = document.getElementById('other_income_sources');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
-        var totalProtectionPercentage = document.getElementById("percentage");
+        var totalRetirementPercentage = document.getElementById("percentage");
 
-        existing_policy_amount.addEventListener("input", function() {
+        other_income_sources.addEventListener('blur', function() {
+            validateInputField(other_income_sources);
+        });
+
+        function validateInputField(field) {
+            if (field.value) {
+                field.classList.remove('is-invalid');
+            } else {
+                field.classList.add('is-invalid');
+            }
+        }
+
+        retirement_savings.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var existingPolicyAmountValue = existing_policy_amount.value;
+            var retirementSavingsValue = retirement_savings.value;
     
             // Remove non-digit characters
-            const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
+            const cleanedValue = parseFloat(retirementSavingsValue.replace(/\D/g, ''));
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
@@ -228,49 +282,33 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 this.value = formattedValue;
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = existingPolicyAmountValue;
+                this.value = retirementSavingsValue;
             }
     
-            var existingAmount = parseInt(cleanedValue);
+            var retirementSavings = parseInt(cleanedValue);
     
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
+            var total = oldTotalFund - retirementSavings;
+            var totalPercentage = retirementSavings / oldTotalFund * 100;
             
             $('.retirement-progress-bar').css('width', totalPercentage + '%');
             if (total <= 0){
                 totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
+                totalRetirementPercentage.value = 100;
                 $('.retirement-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = total;
-                totalProtectionPercentage.value = totalPercentage;
+                totalRetirementPercentage.value = totalPercentage;
                 $('.retirement-progress-bar').css('width', totalPercentage + '%');
             }
     
         });
-        // Add event listeners to the radio buttons
-        yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
-        });
-    
-        noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
-            existing_policy_amount.value = 0; // Clear the money input
-            totalAmountNeeded.value = oldTotalFund;
-            var totalPercentage = 0 / oldTotalFund * 100;
-            totalProtectionPercentage.value = totalPercentage;
-        });
     
         document.addEventListener('DOMContentLoaded', function() {
     
-            existing_policy_amount.addEventListener('blur', function() {
-                validateNumberField(existing_policy_amount);
+            retirement_savings.addEventListener('blur', function() {
+                validateNumberField(retirement_savings);
             });
-    
-            if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
-            }
             
             function validateNumberField(field) {
     
@@ -278,36 +316,34 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var pattern = /^[0-9,]+$/;
     
                 if (value === '' || isNaN(value)) {
-                    // field.classList.remove('is-valid');
                     field.classList.add('is-invalid');
                 } else {
-                    // field.classList.add('is-valid');
                     field.classList.remove('is-invalid');
                 }
                 if (pattern.test(value)){
-                    document.getElementById("existing_policy_amount").classList.remove("is-invalid");
+                    document.getElementById("retirement_savings").classList.remove("is-invalid");
                 }
             }
         });
         
-        if (sessionExistingPolicyAmount !== '' || sessionExistingPolicyAmount !== 0) {
-            var newTotal = oldTotalFund - sessionExistingPolicyAmount;
-            var newTotalPercentage = sessionExistingPolicyAmount / oldTotalFund * 100;
+        if (sessionRetirementSavings !== '' || sessionRetirementSavings !== 0) {
+            var newTotal = oldTotalFund - sessionRetirementSavings;
+            var newTotalPercentage = sessionRetirementSavings / oldTotalFund * 100;
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
+                totalRetirementPercentage.value = 100;
                 $('.retirement-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
-                totalProtectionPercentage.value = newTotalPercentage;
+                totalRetirementPercentage.value = newTotalPercentage;
                 $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/protection-gap') {
+    else if (path == '/retirement-gap') {
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (existingPolicyAmount / newTotalProtectionNeeded * 100).toFixed(2);
+        var Covered = (retirementSavings / newTotalRetirementNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");
         var dotCircle = document.getElementById("dotCircle");
 
