@@ -239,8 +239,6 @@ class FormController extends Controller {
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         
-        Log::debug($customerDetails);
-
         // Store the updated array back into the session
         return redirect()->route($dataUrl);
     }
@@ -403,15 +401,23 @@ class FormController extends Controller {
         $topPrioritiesButtonInput = json_decode($topPrioritiesSerialized, true);
         
         // // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        //$arrayData = session('passingArrays', []);
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
         // // Add or update the data value in the array
-        $arrayData['TopPriorities'] = $topPrioritiesButtonInput;
+        //$arrayData['TopPriorities'] = $topPrioritiesButtonInput;
+
+        $customerDetails['financial_priorities'] = $topPrioritiesButtonInput;
 
         // // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        //session(['passingArrays' => $arrayData]);
 
-        Log::debug($arrayData);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('priorities.to.discuss');
     }

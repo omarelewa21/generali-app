@@ -143,9 +143,9 @@ h4 {
   padding-right:0;
 }
 
-/* .accordion-collapse.collapse .toggle>.toggle-group>.toggle-on {
-  padding-top: 3px;
-} */
+#accordionPriorities .form-check-reverse {
+  text-align:left;
+}
 
 /* Works for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
