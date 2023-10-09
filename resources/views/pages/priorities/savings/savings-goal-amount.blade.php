@@ -18,6 +18,9 @@
     $newTotalSavingsNeeded = isset($arrayData['savings']['newTotalSavingsNeeded']) ? $arrayData['savings']['newTotalSavingsNeeded'] : '';
     $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
     $savingsGoalDuration = isset($arrayData['savings']['savingsGoalDuration']) ? $arrayData['savings']['savingsGoalDuration'] : '';
+    $savingsGoalPA = isset($arrayData['savings']['savingsGoalPA']) ? $arrayData['savings']['savingsGoalPA'] : '';
+    $totalAmountNeeded = isset($arrayData['savings']['totalAmountNeeded']) ? $arrayData['savings']['totalAmountNeeded'] : '';
+    $totalAnnualReturn = isset($arrayData['savings']['totalAnnualReturn']) ? $arrayData['savings']['totalAnnualReturn'] : '';
 @endphp
 
 
@@ -51,22 +54,30 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('validate.goal.duration')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('savings_goal_duration')) pb-7 @endif">
+                    <form novalidate action="{{route('validate.goal.amount')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('savings_goal_pa')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
-                            <div class="col-12 z-1">
-                                <div class="row justify-content-center align-items-center h-100 tabung-wrapper">
-                                    <div class="col-12 col-md-4 text-center tabung-title py-4">
-                                        <h4 class="f-34 fw-700">Ultimately, I’m expecting annual returns of:</h4>
+                            <div class="col-12">
+                                <div class="row justify-content-center align-items-center tabung-wrapper h-100">
+                                    <div class="col-12 tabung-title align-items-center d-grid">
+                                        <div class="col-md-4 d-flex justify-content-center text-center m-auto">
+                                            <h4 class="f-34 fw-700 py-2 m-0">Ultimately, I’m expecting annual returns of:</h4>
+                                        </div>
                                     </div>
-                                    <div class="col-12 mh-100 h-100 position-relative tabung-content">
-                                        <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" class="m-auto mh-100 p-lg-3 mx-100">
-                                        <!-- <div class="position-absolute center text-center">
-                                            <input type="text" name="savings_goal_duration" class="form-control d-inline-block money text-center f-64 w-75" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required>
-                                            <h4 class="mt-4">years</h4>
-                                        </div> -->
-                                        <input type="hidden" name="total_savingsNeeded" id="total_savingsNeeded" value="{{$totalSavingsNeeded}}">
+                                    <div class="col-12 tabung-content d-flex align-items-center mh-100 h-100 z-1 justify-content-center">
+                                        <div class="mh-100 h-100 position-relative d-flex align-items-end">
+                                            <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" class="m-auto mh-100 p-lg-3 mx-100 mw-100 saving-tabung">
+                                            <div class="position-absolute center col-12 text-center">
+                                                <p class="f-45">
+                                                    <input type="text" name="savings_goal_pa" class="form-control d-inline-block money text-center f-64 w-35" id="savings_goal_pa" value="{{$savingsGoalPA}}" required>
+                                                    % p.a.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="total_annualReturn" id="total_annualReturn" value="{{$totalAnnualReturn}}">
                                         <input type="hidden" name="newTotal_savingsNeeded" id="newTotal_savingsNeeded" value="{{$newTotalSavingsNeeded}}">
+                                        <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                        <input type="hidden" name="percentage" id="percentage" value="{{$savingsFundPercentage}}">
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +85,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('savings.goal.duration')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('savings.goal.duration')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -82,17 +93,17 @@
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('savingsSelectedAvatarInput') ? 'error-padding' : '' }}"></div>
+                                    <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('savings_goal_pa') ? 'error-padding' : '' }}"></div>
                                 </div>
                             </div>
                         </section>
-                        @if ($errors->has('savings_goal_duration'))
+                        @if ($errors->has('savings_goal_pa'))
                             <section class="row alert-support z-1 hide-mobile">
                                 <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('savings_goal_duration') }}</div>
+                                    <div class="text">{{ $errors->first('savings_goal_pa') }}</div>
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
@@ -100,7 +111,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('savings_goal_duration') }}</div>
+                                    <div class="text">{{ $errors->first('savings_goal_pa') }}</div>
                                 </div>
                             </section>
                         @endif
@@ -108,7 +119,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('savings.goal.duration')}}" class="btn btn-primary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('savings.goal.duration')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -122,46 +133,46 @@
 </div>
 <script>
     // Get the input value
-    var goalDuration = document.getElementById("savings_goal_duration");
-    var goalDurationSessionValue = parseFloat({{$savingsGoalDuration}});
-    var oldTotalFund = parseFloat({{ $totalSavingsNeeded }});
-    var newTotalFund = document.getElementById("newTotal_savingsNeeded");
-    
-    var totalSavingsFund = document.getElementById("TotalSavingsFund");
+    var savingsGoalPA = document.getElementById('savings_goal_pa');
+    var totalAmountNeeded = document.getElementById("total_amountNeeded");
+    var totalsavingsPercentage = document.getElementById("percentage");
+    var oldTotalFund = parseFloat({{ $newTotalSavingsNeeded }});
+    var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
+    var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
+    var sessionGoalPA = parseFloat({{$savingsGoalPA}});
+    var totalAnnualReturn = document.getElementById("total_annualReturn");
 
-    if (goalDurationSessionValue !== '' || goalDurationSessionValue !== 0 && oldTotalFund !== '') {
-            newTotalFund.value = goalDurationSessionValue * oldTotalFund;
-    } 
-    
-
-    goalDuration.addEventListener("input", function() {
+    savingsGoalPA.addEventListener("input", function() {
 
         // Retrieve the current input value
-        var goalDurationValue = goalDuration.value;
+        var savingsGoalPAValue = savingsGoalPA.value;
 
-        var Year = parseInt(goalDurationValue);
+        var annualReturn = parseInt(savingsGoalPAValue);
 
-        // Calculate months
-        var totalAmount = Year * oldTotalFund;
+        // Calculate annual return
+        var totalPA = annualReturn / 100 * oldTotalFund;
+        var totalPercentage = totalPA / oldTotalFund * 100;
+        var total = oldTotalFund - totalPA;
 
-        if (isNaN(Year)) {
-            // Input is not a valid number
-            totalSavingsFund.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = totalAmount.toLocaleString();
-
-            totalSavingsFund.innerText = "RM " + result;
+        $('.retirement-progress-bar').css('width', totalPercentage + '%');
+        if (total <= 0){
+            totalAnnualReturn.value = totalPA;
+            totalAmountNeeded.value = 0;
+            totalsavingsPercentage.value = 100;
+            $('.retirement-progress-bar').css('width','100%');
         }
-        
-        newTotalFund.value = Year * oldTotalFund;
+        else{
+            totalAnnualReturn.value = totalPA;
+            totalAmountNeeded.value = total;
+            totalsavingsPercentage.value = totalPercentage;
+            $('.retirement-progress-bar').css('width', totalPercentage + '%');
+        }
         
     });
    
     document.addEventListener("DOMContentLoaded", function() {
-        goalDuration.addEventListener("blur", function() {
-            validateNumberField(goalDuration);
+        savingsGoalPA.addEventListener("blur", function() {
+            validateNumberField(savingsGoalPA);
         });
     });
 
@@ -172,6 +183,23 @@
             field.classList.add("is-invalid");
         } else {
             field.classList.remove("is-invalid");
+        }
+    }
+
+    if (sessionGoalPA !== '' || sessionGoalPA !== 0) {
+        var newTotalPA = sessionGoalPA / 100 * oldTotalFund;
+        var newTotal = oldTotalFund - newTotalPA;
+        var newTotalPercentage = newTotalPA / oldTotalFund * 100;
+        totalAnnualReturn.value = newTotalPA;
+        if (newTotal <= 0){
+            totalAmountNeeded.value = 0;
+            totalsavingsPercentage.value = 100;
+            $('.retirement-progress-bar').css('width','100%');
+        }
+        else{
+            totalAmountNeeded.value = newTotal;
+            totalsavingsPercentage.value = newTotalPercentage;
+            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
         }
     }
     

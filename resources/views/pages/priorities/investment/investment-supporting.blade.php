@@ -1,3 +1,8 @@
+<?php
+ /**
+ * Template Name: Investment Supporting Years
+ */
+?>
 @extends('templates.master')
 
 @section('title')
@@ -8,134 +13,167 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
+    $totalInvestmentNeeded = isset($arrayData['investment']['totalInvestmentNeeded']) ? $arrayData['investment']['totalInvestmentNeeded'] : '';
+    $newTotalInvestmentNeeded = isset($arrayData['investment']['newTotalInvestmentNeeded']) ? $arrayData['investment']['newTotalInvestmentNeeded'] : '';
+    $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
+    $investmentSupportingYears = isset($arrayData['investment']['investmentSupportingYears']) ? $arrayData['investment']['investmentSupportingYears'] : '';
 @endphp
 
-<div id="investment-supporting">
-    <div class="container-fluid overflow-hidden font-color-default text-center">
-        <div class="row bg-investment-supporting vh-100">
-            <section class="col-12 d-flex needs-nav-mob">
-                <div class="col-6 col-md-2 col-lg-2 col-xl-3">
-                    @include('templates.nav.nav-red-menu')
-                </div>
-                <div class="col-md-7 col-xl-6 hide-mobile">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-6 bg-primary container fund-nav-rad">
-                            <div class="col-12 fund-progress mt-4 d-flex justify-content-enter align-items-center">
-                                <div class="px-2 fund-progress-bar" style="width:75%;"></div>
+
+<div id="investment-duration" class="vh-100 scroll-content bg-master-mob">
+    <div class="container-fluid">
+        <div class="row h-100">
+            <div class="col-12">
+                <div class="row h-100 wrapper-needs-supporting-default">
+                    <section class="header-needs-default">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
+                                @include('templates.nav.nav-red-menu')
                             </div>
-                            <h3 class="font-color-white" id="investment_fund_needed"></h3>
-                            <p class="font-color-white">Total Investment Fund Needed</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 col-lg-3 col-xl-3">
-                    @include ('templates.nav.nav-sidebar-needs')
-                </div> 
-            </section>
-            <form novalidate action="{{route('form.submit.investment.supporting')}}" method="POST">
-                @csrf
-                <section class="needs-master-content">
-                    <div class="col-12">
-                        <div class="row h-100 overflow-y-auto overflow-x-hidden">
-                            <div class="col-12 show-mobile">
-                                <div class="row d-flex justify-content-center align-items-center bg-primary">
-                                    <div class="col-9 p-0 fund-progress my-3 d-flex justify-content-start align-items-center">
-                                        <div class="px-2 fund-progress-bar" style="width:75%;"></div>
+                            <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
+                                        <div
+                                            class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
+                                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$investmentFundPercentage}}%;"
+                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM 
+                                            {{$investmentSupportingYears !== '' && $totalInvestmentNeeded !== '' ? 
+                                            number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : 
+                                            number_format(floatval($totalInvestmentNeeded)) }}
+                                        </h3>
+                                        <p class="text-light text-center">Total Investment Fund Needed</p>
                                     </div>
-                                    <h3 class="font-color-white" id="investment_fund_needed"></h3>
-                                    <p class="font-color-white">Total Investment Fund Needed</p>
                                 </div>
                             </div>
-                            <div class="col-12 d-flex justify-content-center">
-                                <div class="row">
-                                    <div class="d-flex justify-content-center align-items-end">
-                                        <h5 class="m-0 mt-4">I expect to keep investing for the next:</h5>
+                            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                                @include('templates.nav.nav-sidebar-needs')
+                            </div>
+                        </div>
+                    </section>
+                    <form novalidate action="{{route('validate.investment.supporting')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('investment_supporting_years')) pb-7 @endif">
+                        @csrf
+                        <section class="row edu-con">
+                            <div class="col-12">
+                                <div class="row justify-content-center align-items-center h-100 tabung-wrapper">
+                                    <div class="col-12 tabung-title align-items-center d-grid">
+                                        <div class="col-md-12 d-flex justify-content-center text-center m-auto">
+                                            <h4 class="f-34 fw-700 py-2 m-0">I expect to keep investment for the next:</h4>
+                                        </div>
                                     </div>
-                                    <!-- <div class="col-12 position-relative mt-4 h-100 calender"> -->
-                                        <div class="position-relative py-4 d-flex justify-content-center align-items-center">
-                                            <img src="{{ asset('images/needs/investment/Calendar.png') }}" class="m-auto calendar">
-                                            <div class="position-absolute center w-100">
-                                                <input type="text" name="invest_year" class="form-control d-inline-block w-25 f-64 text-center @error('invest_year') is-invalid @enderror" id="invest_year" required>
-                                                <p class="f-34" class="mt-4"><strong>years</strong></p>
-                                                @if ($errors->has('invest_year'))
-                                                    <div class="invalid-feedback">{{ $errors->first('invest_year') }}</div>
-                                                @endif
+                                    <div class="col-12 tabung-content d-flex align-items-center mh-100 h-100 z-1 justify-content-center">
+                                        <div class="mh-100 h-100 position-relative d-flex align-items-end">
+                                            <!-- <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" class="m-auto mh-100 p-lg-3 mx-100 mw-100 saving-tabung"> -->
+                                            <img src="{{ asset('images/needs/background/Calendar.png') }}" class="m-auto mh-100 p-lg-3 mx-100 mw-100">
+                                            <div class="position-absolute center text-center">
+                                                <input type="text" name="investment_supporting_years" class="form-control d-inline-block money text-center f-64" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required>
+                                                <h4 class="mt-4">years</h4>
                                             </div>
                                         </div>
-                                    <!-- </div> -->
-                                </div>
-                            </div>
-                            <div class="col-12 show-mobile bg-btn_bar">
-                                <div class="py-4 px-2">
-                                    <div class="col-12 d-grid gap-2 d-md-block text-end">
-                                        <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                                        <button class="btn btn-primary text-uppercase" type="submit">Next</button>
+                                        <input type="hidden" name="total_investmentNeeded" id="total_investmentNeeded" value="{{$totalInvestmentNeeded}}">
+                                        <input type="hidden" name="newTotal_investmentNeeded" id="newTotal_investmentNeeded" value="{{$newTotalInvestmentNeeded}}">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="needs-master-footer footer bg-btn_bar hide-mobile row">
-                    <div class="py-4 px-2">
-                        <div class="col-12 d-grid gap-2 d-md-block text-end">
-                            <input type="hidden" name="total_investment_fund_needed" id="total_investment_fund_needed" value="">
-                            <a href="{{route('investment.coverage')}}" class="btn btn-primary text-uppercase">Back</a>
-                            <button class="btn btn-primary text-uppercase" type="submit">Next</button>
-                        </div>
-                    </div>
-                </section>
-            </form>
+                            <div class="col-12 show-mobile footer bg-white py-4 z-1">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                            <a href="{{route('investment.monthly.payment')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @if ($errors->has('investment_supporting_years'))
+                            <section class="row alert-support z-1 hide-mobile">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    <div class="text">{{ $errors->first('investment_supporting_years') }}</div>
+                                </div>
+                            </section>
+                            <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
+                                <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    <div class="text">{{ $errors->first('investment_supporting_years') }}</div>
+                                </div>
+                            </section>
+                        @endif
+                        <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <a href="{{route('investment.monthly.payment')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <script>
-    function calculateInvestmentFund() {
-        // Get the input value
-        var yearsInput = document.getElementById("invest_year").value;
+    // Get the input value
+    var supportingYears = document.getElementById("investment_supporting_years");
+    var supportingYearsSessionValue = parseFloat({{$investmentSupportingYears}});
+    var oldTotalFund = parseFloat({{ $totalInvestmentNeeded }});
+    var newTotalFund = document.getElementById("newTotal_investmentNeeded");
+    
+    var totalInvestmentFund = document.getElementById("TotalInvestmentFund");
 
-        var years = parseInt(yearsInput);
+    if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
+            newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
+    } 
+
+    supportingYears.addEventListener("input", function() {
+
+        // Retrieve the current input value
+        var supportingYearsValue = supportingYears.value;
+
+        var Year = parseInt(supportingYearsValue);
 
         // Calculate months
-        var amount = years * 12 * 1000;
+        var totalAmount = Year * oldTotalFund;
 
-        // Display the result
-        var result = amount.toLocaleString();
-        document.getElementById("investment_fund_needed").innerText = "RM " + result;
+        if (isNaN(Year)) {
+            // Input is not a valid number
+            totalInvestmentFund.innerText = "RM 0";
+        } else {
+            // Input is a valid number, perform the calculation
+            // Display the result
+            var result = totalAmount.toLocaleString();
 
-        // Set the value of the hidden input field
-        document.getElementById("total_investment_fund_needed").value = amount;
-
-    }
-
-    // Add an event listener to the input field
-    document.getElementById("invest_year").addEventListener("input", function() {
-        calculateInvestmentFund();
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var invest_year = document.getElementById('invest_year');
-
-        invest_year.addEventListener('blur', function() {
-            validateYearsNumberField(invest_year);
-        });
-
-        function validateYearsNumberField(field) {
-            var minAge = 1;
-            var maxAge = 100;
-
-            var value = parseInt(field.value);
-
-            if (!isNaN(value) && value >= minAge && value <= maxAge) {
-                field.classList.add('is-valid');
-                field.classList.remove('is-invalid');
-            } else {
-                field.classList.remove('is-valid');
-                field.classList.add('is-invalid');
-            }
+            totalInvestmentFund.innerText = "RM " + result;
         }
+        
+        newTotalFund.value = Year * oldTotalFund;
+        
     });
-</script>
+   
+    document.addEventListener("DOMContentLoaded", function() {
+        supportingYears.addEventListener("blur", function() {
+            validateNumberField(supportingYears);
+        });
+    });
 
+    function validateNumberField(field) {
+        const value = field.value.trim();
+
+        if (value === "" || isNaN(value)) {
+            field.classList.add("is-invalid");
+        } else {
+            field.classList.remove("is-invalid");
+        }
+    }
+    
+</script>
 @endsection

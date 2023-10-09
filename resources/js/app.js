@@ -7,6 +7,7 @@ import './avatar';
 import './form-display';
 import './button-avatar-display';
 import './coverage-carousel';
+import './carousel-needs';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';
