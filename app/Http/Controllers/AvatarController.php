@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class AvatarController extends Controller
 {
     public function changeImage(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -40,20 +38,18 @@ class AvatarController extends Controller
         $genderImage = $request->input('genderImage');
         $skintone = $request->input('skinSelection');
 
-        if ($genderSelection) {
-            $arrayData['Gender'] = $genderSelection;
-        }
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);        
 
-        if ($genderImage !== null) {
-            $arrayData['AvatarImage'] = $genderImage; 
-        }
+        // Add the new array inside the customer_details array
+        $customerDetails['avatar'] = [
+            'gender' => $genderSelection,
+            'image' => $genderImage,
+            'skin_tone' => $skintone
+        ];
 
-        if ($skintone !== null) {
-            $arrayData['SkinTone'] = $skintone; 
-        }
-
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
         
         return redirect()->route('identity.details');
     } 

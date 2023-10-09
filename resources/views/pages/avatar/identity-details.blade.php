@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Identity Details Page
+ * Template Name: Identity Details Page 
  */
 ?>
 
@@ -14,18 +14,19 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $selectedCountry = session('passingArrays.Country', 'Malaysia');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $identityDetails = session('customer_details.identity_details');
+    $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
 @endphp
 
-<div id="identity_details" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="identity_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? $arrayData['AvatarImage'] : '/images/avatar-general/gender-male.svg' }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
@@ -76,7 +77,7 @@
                                             <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($idtypes as $idtype)
-                                                    <option value="{{ $idtype->idtypes }}" {{ old('idType', $arrayData['IdType'] ?? '') === $idtype->idtypes ? 'selected' : '' }}>{{ $idtype->idtypes }}</option>
+                                                    <option value="{{ $idtype->idtypes }}" {{ old('idType', $identityDetails['id_type'] ?? '') === $idtype->idtypes ? 'selected' : '' }}>{{ $idtype->idtypes }}</option>
                                                 @endforeach
                                             </select>
                                             @error('idType')
@@ -87,28 +88,28 @@
                                     <div class="row px-4 pb-2 px-sm-5" id="groups">
                                         <div class="col-12 pt-4" id="newicgroup" style="display: none;">
                                             <label for="idNumber" class="form-label text-white">ID Number *</label>
-                                            <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber', $arrayData['IdNumber'] ?? '') }}">
+                                            <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber', $identityDetails['id_number'] ?? '') }}">
                                             @error('idNumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="passportgroup" style="display: none;">
                                             <label for="passportNumber" class="form-label text-white">Passport Number *</label>
-                                            <input type="text" name="passportNumber" class="form-control bg-white @error('passportNumber') is-invalid @enderror" id="passportNumber" placeholder="A122345" value="{{ old('passportNumber', $arrayData['PassportNumber'] ?? '') }}">
+                                            <input type="text" name="passportNumber" class="form-control bg-white @error('passportNumber') is-invalid @enderror" id="passportNumber" placeholder="A122345" value="{{ old('passportNumber', $identityDetails['passport_number'] ?? '') }}">
                                             @error('passportNumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
                                             <label for="birthCert" class="form-label text-white">Birth Certificate Number *</label>
-                                            <input type="text" name="birthCert" class="form-control bg-white @error('birthCert') is-invalid @enderror" id="birthCert" placeholder="T122345" value="{{ old('birthCert', $arrayData['BirthCert'] ?? '') }}">
+                                            <input type="text" name="birthCert" class="form-control bg-white @error('birthCert') is-invalid @enderror" id="birthCert" placeholder="T122345" value="{{ old('birthCert', $identityDetails['birth_cert'] ?? '') }}">
                                             @error('birthCert')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="policegroup" style="display: none;">
                                             <label for="policeNumber" class="form-label text-white">Police / Army Number *</label>
-                                            <input type="text" name="policeNumber" class="form-control bg-white @error('policeNumber') is-invalid @enderror" id="policeNumber" placeholder="Enter Police / Army Number" value="{{ old('policeNumber', $arrayData['PoliceNumber'] ?? '') }}">
+                                            <input type="text" name="policeNumber" class="form-control bg-white @error('policeNumber') is-invalid @enderror" id="policeNumber" placeholder="Enter Police / Army Number" value="{{ old('policeNumber', $identityDetails['police_number'] ?? '') }}">
                                             @error('policeNumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -116,7 +117,7 @@
 
                                         <div class="col-12 pt-4" id="registrationgroup" style="display: none;">
                                             <label for="registrationNumber" class="form-label text-white">Registration Number *</label>
-                                            <input type="text" name="registrationNumber" class="form-control bg-white @error('registrationNumber') is-invalid @enderror" id="registrationNumber" placeholder="Enter Registration Number" value="{{ old('registrationNumber', $arrayData['RegistrationNumber'] ?? '') }}">
+                                            <input type="text" name="registrationNumber" class="form-control bg-white @error('registrationNumber') is-invalid @enderror" id="registrationNumber" placeholder="Enter Registration Number" value="{{ old('registrationNumber', $identityDetails['registration_number'] ?? '') }}">
                                             @error('registrationNumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -164,15 +165,15 @@
                                             <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $arrayData['DobDay'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $identityDetails['dob_day'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $arrayData['DobMonth'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $identityDetails['dob_month'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                     {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                         return substr($year, -2);
-                                                    }, $yearRange), $yearRange), old('year', $arrayData['DobYear'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    }, $yearRange), $yearRange), old('year', $identityDetails['dob_year'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
                                                 </div>
                                                 @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                     <div class="col-md-12">
@@ -188,12 +189,12 @@
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker"
-                                                    {{ (old('btnradio') === 'smoker' || (isset($arrayData['Habits']) && $arrayData['Habits'] === 'smoker')) ? 'checked' : '' }}>
+                                                    {{ (old('btnradio') === 'smoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'smoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                 </label>
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker"
-                                                    {{ (old('btnradio') === 'nonSmoker' || (isset($arrayData['Habits']) && $arrayData['Habits'] === 'nonSmoker')) ? 'checked' : '' }}>
+                                                    {{ (old('btnradio') === 'nonSmoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'nonSmoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
                                                 </label>
                                             </div>
@@ -208,7 +209,7 @@
                                             <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Countries" id="educationLevelSelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($educationLevels as $educationLevel)
-                                                    <option value="{{ $educationLevel->level }}" {{ old('educationLevel', $arrayData['EducationLevel'] ?? '') === $educationLevel->level ? 'selected' : '' }}>{{ $educationLevel->level }}</option>
+                                                    <option value="{{ $educationLevel->level }}" {{ old('educationLevel', $identityDetails['education_level'] ?? '') === $educationLevel->level ? 'selected' : '' }}>{{ $educationLevel->level }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -226,7 +227,7 @@
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Countries" id="occupationSelect" required>
                                                 <option value="" selected disabled>Please Select</option>
                                                 @foreach ($occupations as $occupation)
-                                                    <option value="{{ $occupation->name }}" {{ old('occupation', $arrayData['Occupation'] ?? '') === $occupation->name ? 'selected' : '' }}>{{ $occupation->name }}</option>
+                                                    <option value="{{ $occupation->name }}" {{ old('occupation', $identityDetails['occupation'] ?? '') === $occupation->name ? 'selected' : '' }}>{{ $occupation->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('occupation')
@@ -238,7 +239,7 @@
                             </div>
                         </section>
 
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

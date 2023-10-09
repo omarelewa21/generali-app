@@ -18,15 +18,15 @@ class FormController extends Controller {
     public function pdpa(Request $request)
     {
         $decision = $request->input('decision');
-        
+
         // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        $arrayData = session('customer_details', []);
 
         // Add or update the data value in the array
-        $arrayData['PDPA'] = $decision;
+        $arrayData['pdpa'] = $decision;
 
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);        
+        session(['customer_details' => $arrayData]);        
         
         return response()->json(['message' => 'Button click saved successfully']);
     }
@@ -48,22 +48,24 @@ class FormController extends Controller {
             'email' => 'required|email|max:255',
         ]);
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Add or update the data value in the array
-        $arrayData['Title'] = $validatedData['title'];
-        $arrayData['FirstName'] = $validatedData['firstName'];
-        $arrayData['LastName'] = $validatedData['lastName'];
-        $arrayData['PhoneCode'] = $validatedData['phoneCodeMobile'];
-        $arrayData['MobileNumber'] = $validatedData['mobileNumber'];
-        $arrayData['PhoneCodeHouse'] = $validatedData['phoneCodeHouse'];
-        $arrayData['HousePhoneNumber'] = $validatedData['housePhoneNumber'];
-        $arrayData['Email'] = $validatedData['email'];
+        // Add the new array inside the customer_details array
+        $customerDetails['basic_details'] = [
+            'title' => $validatedData['title'],
+            'first_name' => $validatedData['firstName'],
+            'last_name' => $validatedData['lastName'],
+            'phone_code_mobile' => $validatedData['phoneCodeMobile'],
+            'mobile_number' => $validatedData['mobileNumber'],
+            'phone_code_house' => $validatedData['phoneCodeHouse'],
+            'house_phone_number' => $validatedData['housePhoneNumber'],
+            'email' => $validatedData['email']
+        ];
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -131,26 +133,34 @@ class FormController extends Controller {
             'occupation' => 'required|in:' . implode(',', $occupation),
         ], $customMessages);
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Add or update the data value in the array
-        $arrayData['Country'] = $validatedData['country'];
-        $arrayData['IdType'] = $validatedData['idType'];
-        $arrayData['IdNumber'] = $validatedData['idNumber'];
-        $arrayData['PassportNumber'] = $validatedData['passportNumber'];
-        $arrayData['BirthCert'] = $validatedData['birthCert'];
-        $arrayData['PoliceNumber'] = $validatedData['policeNumber'];
-        $arrayData['RegistrationNumber'] = $validatedData['registrationNumber'];
-        $arrayData['DobDay'] = $validatedData['day'];
-        $arrayData['DobMonth'] = $validatedData['month'];
-        $arrayData['DobYear'] = $validatedData['year'];
-        $arrayData['Habits'] = $validatedData['btnradio'];
-        $arrayData['EducationLevel'] = $validatedData['educationLevel'];
-        $arrayData['Occupation'] = $validatedData['occupation'];
+        // Get existing identity_details from the session
+        $identityDetails = $customerDetails['identity_details'] ?? [];
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Update specific keys with new values
+        $identityDetails = array_merge($identityDetails, [
+            'country' => $validatedData['country'],
+            'id_type' => $validatedData['idType'],
+            'id_number' => $validatedData['idNumber'],
+            'passport_number' => $validatedData['passportNumber'],
+            'birth_cert' => $validatedData['birthCert'],
+            'police_number' => $validatedData['policeNumber'],
+            'registration_number' => $validatedData['registrationNumber'],
+            'dob_day' => $validatedData['day'],
+            'dob_month' => $validatedData['month'],
+            'dob_year' => $validatedData['year'],
+            'habits' => $validatedData['btnradio'],
+            'education_level' => $validatedData['educationLevel'],
+            'occupation' => $validatedData['occupation']
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['identity_details'] = $identityDetails;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
 
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
@@ -158,9 +168,6 @@ class FormController extends Controller {
 
     public function handleAvatarSelection(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -174,9 +181,10 @@ class FormController extends Controller {
         });
 
         Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
+
             $decodedValue = json_decode($value, true);
 
-            if (isset($decodedValue['spouse']['status']) && $decodedValue['spouse']['status'] === 'yes' || !empty($decodedValue['children']) || !empty($decodedValue['parents'])) {
+            if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true)) {
                 return true;
             }
         
@@ -196,7 +204,6 @@ class FormController extends Controller {
             ],
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -209,20 +216,33 @@ class FormController extends Controller {
         $assetsButtonInput = json_decode($assetsSerialized, true);
         $dataUrl = $request->input('urlInput');
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+        
         // Add or update the data value in the array
         if ($maritalStatusButtonInput) {
-            $arrayData['MaritalStatus'] = $maritalStatusButtonInput;
+            $newData = [
+                'marital_status' => $maritalStatusButtonInput
+            ];
+
+            $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
         }
         elseif ($familyDependantButtonInput) {
-            $arrayData['FamilyDependant'] = $familyDependantButtonInput;
+            $customerDetails['family_details'] = [
+                'dependant' => $familyDependantButtonInput
+            ];
         }
         elseif ($assetsButtonInput) {
-            $arrayData['Assets'] = $assetsButtonInput;
+            // $arrayData['Assets'] = $assetsButtonInput;
+            $customerDetails['assets'] = $assetsButtonInput;
         }
 
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        
+        Log::debug($customerDetails);
+
         // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
         return redirect()->route($dataUrl);
     }
 
@@ -235,9 +255,9 @@ class FormController extends Controller {
         $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
         $occupation = DB::table('occupations')->pluck('name')->toArray();
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []); 
+        
         // Define the common validation rules for spouse
         $commonRules = [
             'spouseTitle' => 'required|in:' . implode(',', $titles),
@@ -286,109 +306,94 @@ class FormController extends Controller {
             'spousemonth' => 'required',
             'spouseyear' => 'required',
             'spouseOccupation' => 'required|in:' . implode(',', $occupation),
-            // 'siblingFirstName' => 'required|max:255',
-            // 'siblingLastName' => 'required|max:255',
-            // 'siblingYearsOfSupport' => 'required|numeric|max:100',
-            // 'siblingday' => 'required',
-            // 'siblingmonth' => 'required',
-            // 'siblingyear' => 'required',
-            // 'siblingMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
         ];
 
-        if (isset($arrayData['FamilyDependant']['children'])) {
-            foreach ($arrayData['FamilyDependant']['children'] as $key => $childName) {
-                $commonRules[$childName . 'FirstName'] = 'required|max:255';
-                $commonRules[$childName . 'LastName'] = 'required|max:255';
-                $commonRules[$childName . 'GenderBtnradio'] = 'required|in:male,female';
-                $commonRules[$childName . 'YearsOfSupport'] = 'required|numeric|max:100';
-                $commonRules[$childName . 'day'] = 'required';
-                $commonRules[$childName . 'month'] = 'required';
-                $commonRules[$childName . 'year'] = 'required';
-                $commonRules[$childName . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
+        if ($customerDetails['family_details']['dependant']['children'] === true) {
+            foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
+                $commonRulesChild[$childKey . 'FirstName'] = 'required|max:255';
+                $commonRulesChild[$childKey . 'LastName'] = 'required|max:255';
+                $commonRulesChild[$childKey . 'GenderBtnradio'] = 'required|in:male,female';
+                $commonRulesChild[$childKey . 'YearsOfSupport'] = 'required|numeric|max:100';
+                $commonRulesChild[$childKey . 'day'] = 'required';
+                $commonRulesChild[$childKey . 'month'] = 'required';
+                $commonRulesChild[$childKey . 'year'] = 'required';
+                $commonRulesChild[$childKey . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
             }
         }
 
-        if (isset($arrayData['FamilyDependant']['parents'])) {
-            foreach ($arrayData['FamilyDependant']['parents'] as $key => $parentsName) {
-                $commonRules[$parentsName . 'FirstName'] = 'required|max:255';
-                $commonRules[$parentsName . 'LastName'] = 'required|max:255';
-                $commonRules[$parentsName . 'GenderBtnradio'] = 'required|in:male,female';
-                $commonRules[$parentsName . 'YearsOfSupport'] = 'required|numeric|max:100';
-                $commonRules[$parentsName . 'day'] = 'required';
-                $commonRules[$parentsName . 'month'] = 'required';
-                $commonRules[$parentsName . 'year'] = 'required';
-                $commonRules[$parentsName . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
+        if ($customerDetails['family_details']['dependant']['parents'] === true) {
+            foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
+                $commonRulesParents[$parentkey . 'FirstName'] = 'required|max:255';
+                $commonRulesParents[$parentkey . 'LastName'] = 'required|max:255';
+                $commonRulesParents[$parentkey . 'GenderBtnradio'] = 'required|in:male,female';
+                $commonRulesParents[$parentkey . 'YearsOfSupport'] = 'required|numeric|max:100';
+                $commonRulesParents[$parentkey . 'day'] = 'required';
+                $commonRulesParents[$parentkey . 'month'] = 'required';
+                $commonRulesParents[$parentkey . 'year'] = 'required';
+                $commonRulesParents[$parentkey . 'MaritalStatus'] = 'required|in:' . implode(',', $maritalStatus);
             }
-        }
-
-        $validatedData = $request->validate($commonRules);
-
-        if (isset($arrayData['FamilyDependant']['spouse']) && $arrayData['FamilyDependant']['spouse']['status'] === 'yes') {
-            $arrayData['FamilyDependant']['spouse']['title'] = $validatedData['spouseTitle'];
-            $arrayData['FamilyDependant']['spouse']['firstName'] = $validatedData['spouseFirstName'];
-            $arrayData['FamilyDependant']['spouse']['lastName'] = $validatedData['spouseLastName'];
-            $arrayData['FamilyDependant']['spouse']['country'] = $validatedData['spouseCountry'];
-            $arrayData['FamilyDependant']['spouse']['idType'] = $validatedData['spouseIdType'];
-            $arrayData['FamilyDependant']['spouse']['idNumber'] = $validatedData['spouseIdNumber'];
-            $arrayData['FamilyDependant']['spouse']['passportNumber'] = $validatedData['spousePassportNumber'];
-            $arrayData['FamilyDependant']['spouse']['birthCert'] = $validatedData['spouseBirthCert'];
-            $arrayData['FamilyDependant']['spouse']['policeNumber'] = $validatedData['spousePoliceNumber'];
-            $arrayData['FamilyDependant']['spouse']['registrationNumber'] = $validatedData['spouseRegistrationNumber'];
-            $arrayData['FamilyDependant']['spouse']['gender'] = $validatedData['genderBtnradio'];
-            $arrayData['FamilyDependant']['spouse']['habits'] = $validatedData['smokingBtnradio'];
-            $arrayData['FamilyDependant']['spouse']['day'] = $validatedData['spouseday'];
-            $arrayData['FamilyDependant']['spouse']['month'] = $validatedData['spousemonth'];
-            $arrayData['FamilyDependant']['spouse']['year'] = $validatedData['spouseyear'];
-            $arrayData['FamilyDependant']['spouse']['occupation'] = $validatedData['spouseOccupation'];
         }
         
-        if (isset($arrayData['FamilyDependant']['children'])) {
-            foreach ($arrayData['FamilyDependant']['children'] as $key => $childName) {
-                $childData = array(
-                    'firstName' => $validatedData[$childName . 'FirstName'],
-                    'lastName' => $validatedData[$childName . 'LastName'],
-                    'gender' => $validatedData[$childName . 'GenderBtnradio'],
-                    'yearsOfSupport' => $validatedData[$childName . 'YearsOfSupport'],
-                    'day' => $validatedData[$childName . 'day'],
-                    'month' => $validatedData[$childName . 'month'],
-                    'year' => $validatedData[$childName . 'year'],
-                    'maritalStatus' => $validatedData[$childName . 'MaritalStatus']
-                );
-                
-                $arrayData['FamilyDependant']['children_details'][$childName] = $childData;
-            }
-        }
+        if ($customerDetails['family_details']['dependant']['spouse'] === true) {
+            $validatedData = $request->validate($commonRules);
 
-        if (isset($arrayData['FamilyDependant']['parents'])) {
-            foreach ($arrayData['FamilyDependant']['parents'] as $key => $parentsName) {
-                $parentsData = array(
-                    'firstName' => $validatedData[$parentsName . 'FirstName'],
-                    'lastName' => $validatedData[$parentsName . 'LastName'],
-                    'gender' => $validatedData[$parentsName . 'GenderBtnradio'],
-                    'yearsOfSupport' => $validatedData[$parentsName . 'YearsOfSupport'],
-                    'day' => $validatedData[$parentsName . 'day'],
-                    'month' => $validatedData[$parentsName . 'month'],
-                    'year' => $validatedData[$parentsName . 'year'],
-                    'maritalStatus' => $validatedData[$parentsName . 'MaritalStatus'],
-                );
-                $arrayData['FamilyDependant']['parents_details'][$parentsName] = $parentsData;
-            }
-        }
-
-        if (isset($arrayData['FamilyDependant']['siblings']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') {
-            $arrayData['FamilyDependant']['siblings']['firstName'] = $validatedData['siblingFirstName'];
-            $arrayData['FamilyDependant']['siblings']['lastName'] = $validatedData['siblingLastName'];
-            $arrayData['FamilyDependant']['siblings']['yearsOfSupport'] = $validatedData['siblingYearsOfSupport'];
-            $arrayData['FamilyDependant']['siblings']['day'] = $validatedData['siblingday'];
-            $arrayData['FamilyDependant']['siblings']['month'] = $validatedData['siblingmonth'];
-            $arrayData['FamilyDependant']['siblings']['year'] = $validatedData['siblingyear'];
-            $arrayData['FamilyDependant']['siblings']['maritalStatus'] = $validatedData['siblingMaritalStatus'];
+            $newData = [
+                'title' => $validatedData['spouseTitle'],
+                'first_name' => $validatedData['spouseFirstName'],
+                'last_name' => $validatedData['spouseLastName'],
+                'country' => $validatedData['spouseCountry'],
+                'id_type' => $validatedData['spouseIdType'],
+                'id_number' => $validatedData['spouseIdNumber'],
+                'passport_number' => $validatedData['spousePassportNumber'],
+                'birth_cert' => $validatedData['spouseBirthCert'],
+                'police_number' => $validatedData['spousePoliceNumber'],
+                'registration_number' => $validatedData['spouseRegistrationNumber'],
+                'gender' => $validatedData['genderBtnradio'],
+                'habits' => $validatedData['smokingBtnradio'],
+                'day' => $validatedData['spouseday'],
+                'month' => $validatedData['spousemonth'],
+                'year' => $validatedData['spouseyear'],
+                'occupation' => $validatedData['spouseOccupation']
+            ];
+            $customerDetails['family_details']['dependant']['spouse_data'] = array_merge($customerDetails['family_details']['dependant']['spouse_data'], $newData);
         }
         
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        if ($customerDetails['family_details']['dependant']['children'] === true) {
+            $validatedData = $request->validate($commonRulesChild);
 
-        Log::debug($arrayData);
+            $childData = [
+                'first_name' => $validatedData[$childKey . 'FirstName'],
+                'last_name' => $validatedData[$childKey . 'LastName'],
+                'gender' => $validatedData[$childKey . 'GenderBtnradio'],
+                'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
+                'day' => $validatedData[$childKey . 'day'],
+                'month' => $validatedData[$childKey . 'month'],
+                'year' => $validatedData[$childKey . 'year'],
+                'marital_status' => $validatedData[$childKey . 'MaritalStatus']
+            ];
+            $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
+        }
+
+        if ($customerDetails['family_details']['dependant']['parents'] === true) {
+            $validatedData = $request->validate($commonRulesParents);
+
+            $parentsData = [
+                'first_name' => $validatedData[$parentkey . 'FirstName'],
+                'last_name' => $validatedData[$parentkey . 'LastName'],
+                'gender' => $validatedData[$parentkey . 'GenderBtnradio'],
+                'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
+                'day' => $validatedData[$parentkey . 'day'],
+                'month' => $validatedData[$parentkey . 'month'],
+                'year' => $validatedData[$parentkey . 'year'],
+                'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
+            ];
+            $customerDetails['family_details']['dependant']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['dependant']['parents_data'][$parentkey], $parentsData);
+        }
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.my.assets');
     }

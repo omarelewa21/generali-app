@@ -145,11 +145,9 @@ Route::view('/retirement-allocated-funds-aside-archived', 'pages.priorities.reti
 Route::Post('/retirement-allocated-funds-aside-archived', [formRetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
 Route::view('/retirement-gap-archived', 'pages.priorities.retirement.retirement-gap-archived')->name('retirement.gap.archived');
 
-Route::get('/files/{filename}', function($filename){
-    return \Storage::download($filename); // assuming default disk is set to 'public'
-});
+// Route::get('/files/{filename}', function($filename){
+//     return \Storage::download($filename); // assuming default disk is set to 'public'
+// });
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
-
-
