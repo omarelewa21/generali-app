@@ -7,12 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $existingPolicy = isset($arrayData['protection']['existingPolicy']) ? $arrayData['protection']['existingPolicy'] : '';
-    $existingPolicyAmount = isset($arrayData['protection']['existingPolicyAmount']) ? $arrayData['protection']['existingPolicyAmount'] : '';
-    $newTotalProtectionNeeded = isset($arrayData['protection']['newTotalProtectionNeeded']) ? $arrayData['protection']['newTotalProtectionNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
-    $totalAmountNeeded = isset($arrayData['protection']['totalAmountNeeded']) ? $arrayData['protection']['totalAmountNeeded'] : '';
+    $protection = session('customer_details.protection_needs');
+    $existingPolicy = session('customer_details.protection_needs.existingPolicy');
+    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
+    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
 <div id="protection-existing-policy"  class="vh-100 scroll-content">
@@ -64,12 +64,12 @@
                                                 <p class="f-34 m-0 fw-700">Luckily, I do have an existing life insurance policy.<br>
                                                     <span class="me-5">
                                                         <input type="radio" class="needs-radio @error('existing_policy_amount') checked-yes @enderror {{$existingPolicy === 'yes' ? 'checked-yes' : ''}}" id="yes" name="protection_existing_policy" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#existing_policy_amount').attr('required',true);"
-                                                        {{ (isset($arrayData['protection']['existingPolicy']) && $arrayData['protection']['existingPolicy'] === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
+                                                        {{ ($existingPolicy && $existingPolicy === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
                                                         <label for="yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
                                                         <input type="radio" class="needs-radio" id="no" name="protection_existing_policy" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('display','none');jQuery('#existing_policy_amount').removeAttr('required',false);"
-                                                        {{ (isset($arrayData['protection']['existingPolicy']) && $arrayData['protection']['existingPolicy'] === 'no' && !$errors->has('existing_policy_amount') ? 'checked' : '') }} >
+                                                        {{ ($existingPolicy && $existingPolicy === 'no' && !$errors->has('existing_policy_amount') ? 'checked' : '') }} >
                                                         <label for="no" class="form-label">No</label>
                                                     </span>
                                                 </p>

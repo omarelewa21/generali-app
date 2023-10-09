@@ -12,11 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $totalProtectionNeeded = isset($arrayData['protection']['totalProtectionNeeded']) ? $arrayData['protection']['totalProtectionNeeded'] : '';
-    $newTotalProtectionNeeded = isset($arrayData['protection']['newTotalProtectionNeeded']) ? $arrayData['protection']['newTotalProtectionNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
-    $protectionSupportingYears = isset($arrayData['protection']['protectionSupportingYears']) ? $arrayData['protection']['protectionSupportingYears'] : '';
+    $protection = session('customer_details.protection_needs');
+    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
+    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
+    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+
 @endphp
 
 
@@ -38,10 +39,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center">RM 
-                                            {{$protectionSupportingYears !== '' && $totalProtectionNeeded !== '' ? 
-                                            number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) : 
-                                            number_format(floatval($totalProtectionNeeded)) }}
+                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center">RM {{ $protectionSupportingYears !== null && $totalProtectionNeeded !== '' ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) : number_format(floatval($totalProtectionNeeded))}}
                                         </h3>
                                         <p class="text-light text-center">Total Protection Fund Needed</p>
                                     </div>

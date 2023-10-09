@@ -7,12 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $protectionSupportingYears = isset($arrayData['protection']['protectionSupportingYears']) ? $arrayData['protection']['protectionSupportingYears'] : '';
-    $existingPolicyAmount = isset($arrayData['protection']['existingPolicyAmount']) ? $arrayData['protection']['existingPolicyAmount'] : '';
-    $newTotalProtectionNeeded = isset($arrayData['protection']['newTotalProtectionNeeded']) ? $arrayData['protection']['newTotalProtectionNeeded'] : '';
-    $totalAmountNeeded = isset($arrayData['protection']['totalAmountNeeded']) ? $arrayData['protection']['totalAmountNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
+    $protection = session('customer_details.protection_needs');
+    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
+    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
+    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
 <div id="protection-summary"  class="vh-100 scrollable-content">

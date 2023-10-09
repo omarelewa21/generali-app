@@ -12,10 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $protectionMonthlySupport = isset($arrayData['protection']['protectionMonthlySupport']) ? $arrayData['protection']['protectionMonthlySupport'] : '';
-    $totalProtectionNeeded = isset($arrayData['protection']['totalProtectionNeeded']) ? $arrayData['protection']['totalProtectionNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
+    $protection = session('customer_details.protection_needs');
+    $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
+    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    
 @endphp
 
 
