@@ -1,5 +1,4 @@
-import $ from 'jquery';
-
+// Left Offcanvas Navigation
 $(document).ready(function () {
     // Get the current URL path
     var currentPath = window.location.pathname;
@@ -47,6 +46,5 @@ $(document).ready(function () {
         }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant-details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
             $(this).addClass('active');
         }
-
     });
 });

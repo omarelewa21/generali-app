@@ -14,16 +14,17 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $gender = isset($arrayData['Gender']) ? $arrayData['Gender'] : '';
-    $skintone = isset($arrayData['SkinTone']) ? $arrayData['SkinTone'] : '';
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $firstName = session('customer_details.basic_details.first_name');
 @endphp
 
-<div id="avatar_gender_selection" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="avatar_gender_selection">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar">
-                <div class="header-avatar">@include('templates.nav.nav-red-menu')</div>
+            @include('templates.nav.nav-red-menu')
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar order-md-1 order-sm-2 order-2">
                 <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
                         <div class="row">
@@ -63,7 +64,7 @@
                     </button>
 
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ isset($arrayData['AvatarImage']) ? asset($arrayData['AvatarImage']) : asset('images/avatar-general/gender-male.svg') }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes">
                     </div>
                     
                     <button type="button" class="btn btn-outline-primary slide-button right-center position-absolute" id="avatar-right" disabled>
@@ -73,7 +74,7 @@
                     </button>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
@@ -81,8 +82,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
                                     <div class="col-12">
-                                        @if(isset($arrayData['FirstName']))
-                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you, {{ $arrayData['FirstName'] }}</h1>
+                                        @if(isset($firstName))
+                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you, {{ $firstName }}</h1>
                                         @else 
                                             <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h1>
                                         @endif
@@ -101,9 +102,9 @@
                                         </div>
                                     @endif
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
-                                        <div class="col-12 button-bg {{$gender === 'male' ? 'selected' : ''}}">
+                                        <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['Gender']) && $arrayData['Gender'] === 'Male') default @endif" data-avatar="Male" data-required="" id="gendermale">
+                                                <button class="border-0 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
                                                     <img src="{{ asset('images/gender-selection/button-gender-male.png') }}" width="140" alt="Gender Male">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
                                                 </button>
@@ -111,9 +112,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
-                                        <div class="col-12 button-bg {{$gender === 'female' ? 'selected' : ''}}">
+                                        <div class="col-12 button-bg">
                                             <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if(isset($arrayData['Gender']) && $arrayData['Gender'] === 'Female') default @endif" data-avatar="Female" data-required="" id="genderfemale">
+                                                <button class="border-0 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
                                                     <img src="{{ asset('images/gender-selection/button-gender-female.png') }}" width="117.5" alt="Gender Female">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                                 </button>
@@ -124,15 +125,15 @@
                             </div>
                         </section>
 
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <input type="hidden" name="genderImage" id="genderImage" value="">
+                                        <input type="hidden" name="genderImage" id="genderImage" value="{{$image}}">
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
                                         <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase" id="nextBtn" type="submit">Next</button>
+                                        <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -143,5 +144,4 @@
         </div>
     </div>
 </div>
-
 @endsection

@@ -136,17 +136,15 @@
                                             <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionPriorities">
                                                 <div class="accordion-body">
                                                     <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultCovered">I've got this covered</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
-                                                            <input id="chkToggle1" type="checkbox" data-toggle="toggle" checked>
+                                                        <div class="col-12 form-check form-check-reverse">
+                                                            <label class="form-check-label display-6" for="protection">I've got this covered</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protection">
                                                         </div>
-                                                        
                                                     </div>
                                                     <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultDiscuss">I'd like to discuss this</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultDiscuss">
+                                                        <div class="col-12 form-check form-check-reverse">
+                                                            <label class="form-check-label display-6" for="protectionDiscuss">I'd like to discuss this</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protectionDiscuss">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -161,15 +159,15 @@
                                             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionPriorities">
                                                 <div class="accordion-body">
                                                     <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultCovered">I've got this covered</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
+                                                        <div class="col-12 form-check form-check-reverse">
+                                                            <label class="form-check-label display-6" for="retirement">I've got this covered</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="retirement">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultDiscuss">I'd like to discuss this</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultDiscuss">
+                                                        <div class="col-12 form-check form-check-reverse">
+                                                            <label class="form-check-label display-6" for="retirementDiscuss">I'd like to discuss this</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="retirementDiscuss">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,14 +183,14 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2 px-3">
                                                         <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultCovered">I've got this covered</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
+                                                            <label class="form-check-label display-6" for="education">I've got this covered</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="education">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 px-3">
                                                         <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultDiscuss">I'd like to discuss this</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultDiscuss">
+                                                            <label class="form-check-label display-6" for="educationDiscuss">I'd like to discuss this</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="educationDiscuss">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -208,14 +206,14 @@
                                                 <div class="accordion-body">
                                                     <div class="row py-2 px-3">
                                                         <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultCovered">I've got this covered</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultCovered">
+                                                            <label class="form-check-label display-6" for="savings">I've got this covered</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="savings">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 px-3">
                                                         <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="flexSwitchCheckDefaultDiscuss">I'd like to discuss this</label>
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultDiscuss">
+                                                            <label class="form-check-label display-6" for="savingsDiscuss">I'd like to discuss this</label>
+                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="savingsDiscuss">
                                                         </div>
                                                     </div>
                                                 </div>

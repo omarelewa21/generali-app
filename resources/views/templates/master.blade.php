@@ -25,25 +25,16 @@
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/css/bootstrap5-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@5.0.4/js/bootstrap5-toggle.jquery.min.js"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" defer></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script> -->
 
-    <!-- {{-- @vite(['resources/js/custom-ying.js']) --}}
-    {{-- @vite(['resources/js/slick.min.js']) --}} -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
 </head>
 
 <body>
     <main>
         @yield('content')
     </main>
-    
-    <!-- {{-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> --}} -->
-
 </body>
 
 <!-- Modal -->

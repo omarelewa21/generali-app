@@ -18,10 +18,10 @@
     $assets = isset($arrayData['Assets']) ? json_encode($arrayData['Assets']) : '';
 @endphp
 
-<div id="avatar_my_assets" class="vh-100 overflow-y-auto overflow-x-hidden">
+<div id="avatar_my_assets">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg vh-100 wrapper-avatar-default assets-overlay overflow-hidden px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default assets-overlay overflow-hidden px-0">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
                 <section class="avatar-design-placeholder content-avatar-default position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-default d-flex justify-content-center">
@@ -116,7 +116,7 @@
                             </div>
                         </section>
 
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -155,29 +155,4 @@
         </div>
     </div>
 </div>
-
-<script>
-// const carButton = document.getElementById('carButton');
-
-// const clickedAssets = {
-//     Assets: []
-// };
-
-// carButton.addEventListener('click', function(event) {
-//     event.preventDefault();
-
-//     const dataAvatar = 'car';
-//     assetsButtonInput.value = JSON.stringify(dataAvatar);
-
-//     if (assetsButtonInput.value == '') {
-//         assetsButtonInput.value = JSON.stringify(clickedAssets);
-//     }
-//     else {
-//         assetsButtonInput.value = JSON.stringify({
-//             ...JSON.parse(assetsButtonInput.value), 
-//             Assets: clickedAssets.Assets 
-//         });
-//     }
-// });
-</script>
 @endsection

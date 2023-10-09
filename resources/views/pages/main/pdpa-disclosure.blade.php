@@ -12,18 +12,18 @@
 
 @section('content')
 
-<div id="pdpa" class="vh-100 overflow-hidden">
+<div id="pdpa">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
+            <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0">
-                <div class="vh-100 overflow-y-auto overflow-x-hidden">
-                    <section class="main-content extra-padding">
+            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey text-dark px-0 content-section">
+                <div>
+                    <section class="main-content">
                         <div class="container">
                             <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                 <div class="col-12">
@@ -85,7 +85,7 @@
                         </div>
                     </section>
 
-                    <section class="footer bg-white py-4 fixed-bottom">
+                    <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -106,11 +106,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     document.getElementById("declineButton").addEventListener("click", function() {
-        pdpa("Declined");
+        pdpa("declined");
     });
 
     document.getElementById("acceptButton").addEventListener("click", function() {
-        pdpa("Accepted");
+        pdpa("accepted");
     });
 
     function pdpa(decision, route) {

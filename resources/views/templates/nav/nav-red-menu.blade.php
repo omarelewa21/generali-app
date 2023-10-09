@@ -8,7 +8,7 @@
 @include('templates.nav.nav-links')
 {{--end of nav links --}}
 
-<header id="wrapper-navbar">
+<header id="wrapper-navbar" class="fixed-top navbar-scroll">
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-4 px-md-5 pt-4 pt-md-5 pb-4">
             <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
