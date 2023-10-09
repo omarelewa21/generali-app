@@ -45,7 +45,7 @@ class FormController extends Controller {
             'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
             'phoneCodeHouse' => 'required|in:' . implode(',', $code),
             'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email:rfc,dns|max:255',
         ]);
 
         // Get the existing customer_details array from the session
