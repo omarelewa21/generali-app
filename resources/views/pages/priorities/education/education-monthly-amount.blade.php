@@ -13,15 +13,9 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $educationSelectedImage = isset($arrayData['education']['educationSelectedImage']) ? $arrayData['education']['educationSelectedImage'] : '';
     $educationMonthlyAmount = isset($arrayData['education']['educationMonthlyAmount']) ? $arrayData['education']['educationMonthlyAmount'] : '';
     $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
-    $totalEducationYear = isset($arrayData['education']['totalEducationYear']) ? $arrayData['education']['totalEducationYear'] : '';
-    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
-    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
-    $edcationSaving = isset($arrayData['education']['edcationSaving']) ? $arrayData['education']['edcationSaving'] : '';
 @endphp
 
 
@@ -78,12 +72,6 @@
                                                     <strong>/month.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
-                                                <!-- <input type="hidden" name="tertiary_education_years" id="tertiary_education_years" value="{{$totalEducationYear}}">
-                                                <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
-                                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                                <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
-                                                <input type="hidden" name="education_saving_amount" id="education_saving_amount" value="{{$educationSavingAmount}}">
-                                                <input type="hidden" name="education_other_savings" id="education_other_savings" value="{{$edcationSaving}}"> -->
                                             </div>
                                         </div>
                                     </div>
@@ -139,108 +127,5 @@
         </div>
     </div>
 </div>
-<script>
-    // Get the input value
-    var monthlyInput = document.getElementById("monthly_education_amount");
 
-    // var totalEducationYear = document.getElementById("tertiary_education_years");
-    var totalEducationFund = document.getElementById("TotalEducationFund");
-    var totalEducationFundNeeded = document.getElementById("total_educationFund");
-    // var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    // var totalEducationPercentage = document.getElementById("percentage");
-    // var education_saving_amount = document.getElementById('education_saving_amount');
-    // var education_saving = document.getElementById('education_other_savings');
-    
-    // var newTotalFund = document.getElementById("newTotal_educationFund");
-    // var displayAvatar = document.getElementById("displayFund");
-
-    monthlyInput.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var monthlyInputValue = monthlyInput.value;
-
-        // Remove non-digit characters
-        const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-
-        // Attempt to parse the cleaned value as a float
-        const parsedValue = parseFloat(cleanedValue);
-
-        // Check if the parsed value is a valid number
-        if (!isNaN(parsedValue)) {
-        // If it's a valid number, format it with commas
-            const formattedValue = parsedValue.toLocaleString('en-MY');
-            this.value = formattedValue;
-        } else {
-        // If it's not a valid number, display the cleaned value as is
-            this.value = monthlyInputValue;
-        }
-
-        var monthlyAmount = parseInt(cleanedValue);
-
-        // Calculate months
-        var amountPerYear = monthlyAmount * 12;
-
-        if (isNaN(monthlyAmount)) {
-            // Input is not a valid number
-            totalEducationFund.innerText = "RM 0";
-            // displayAvatar.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = amountPerYear.toLocaleString();
-
-            totalEducationFund.innerText = "RM " + result;
-            // displayAvatar.innerText = "RM " + result;
-        }
-
-        // Set the value of the hidden input field
-        totalEducationFundNeeded.value = amountPerYear;
-        // If type new value, clear the session year and pass again
-        // totalEducationYear.value = '';
-        // newTotalFund.value = '';
-        // totalAmountNeeded.value = '';
-        // totalEducationPercentage.value = '';
-        // education_saving_amount.value = '';
-        // education_saving.value = '';
-        // $('.retirement-progress-bar').css('width', '0%');
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        monthlyInput.addEventListener("blur", function() {
-            validateNumberField(monthlyInput);
-    });
-
-    // function validateNumberField(field) {
-    //     const value = field.value.trim();
-
-    //     var pattern = /^[0-9,]+$/;
-
-    //     if (value === "" || isNaN(value)) {
-    //         // field.classList.remove("is-valid");
-    //         field.classList.add("is-invalid");
-    //     }else{
-    //         // field.classList.add("is-valid");
-    //         field.classList.remove("is-invalid");
-    //     }
-    //     if (pattern.test(value)){
-    //         document.getElementById("monthly_education_amount").classList.remove("is-invalid");
-    //     }
-    // } 
-    function validateNumberField(field) {
-        var value = field.value.replace(/,/g, ''); // Remove commas
-        var numericValue = parseFloat(value);
-
-        if (isNaN(numericValue)) {
-            // field.classList.remove("is-valid");
-            field.classList.add("is-invalid");
-
-        } else {
-            // field.classList.add("is-valid");
-            field.classList.remove("is-invalid");
-        }
-    }
-
-});
-
-</script>
 @endsection

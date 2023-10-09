@@ -7,12 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $existingPolicy = isset($arrayData['protection']['existingPolicy']) ? $arrayData['protection']['existingPolicy'] : '';
-    $existingPolicyAmount = isset($arrayData['protection']['existingPolicyAmount']) ? $arrayData['protection']['existingPolicyAmount'] : '';
-    $newTotalProtectionNeeded = isset($arrayData['protection']['newTotalProtectionNeeded']) ? $arrayData['protection']['newTotalProtectionNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
-    $totalAmountNeeded = isset($arrayData['protection']['totalAmountNeeded']) ? $arrayData['protection']['totalAmountNeeded'] : '';
+    $protection = session('customer_details.protection_needs');
+    $existingPolicy = session('customer_details.protection_needs.existingPolicy');
+    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
+    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
 <div id="protection-existing-policy"  class="vh-100 scroll-content">
@@ -64,12 +64,12 @@
                                                 <p class="f-34 m-0 fw-700">Luckily, I do have an existing life insurance policy.<br>
                                                     <span class="me-5">
                                                         <input type="radio" class="needs-radio @error('existing_policy_amount') checked-yes @enderror {{$existingPolicy === 'yes' ? 'checked-yes' : ''}}" id="yes" name="protection_existing_policy" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#existing_policy_amount').attr('required',true);"
-                                                        {{ (isset($arrayData['protection']['existingPolicy']) && $arrayData['protection']['existingPolicy'] === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
+                                                        {{ ($existingPolicy && $existingPolicy === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
                                                         <label for="yes" class="form-label">Yes</label>
                                                     </span>
                                                     <span>
                                                         <input type="radio" class="needs-radio" id="no" name="protection_existing_policy" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('display','none');jQuery('#existing_policy_amount').removeAttr('required',false);"
-                                                        {{ (isset($arrayData['protection']['existingPolicy']) && $arrayData['protection']['existingPolicy'] === 'no' && !$errors->has('existing_policy_amount') ? 'checked' : '') }} >
+                                                        {{ ($existingPolicy && $existingPolicy === 'no' && !$errors->has('existing_policy_amount') ? 'checked' : '') }} >
                                                         <label for="no" class="form-label">No</label>
                                                     </span>
                                                 </p>
@@ -134,105 +134,8 @@
     </div>
 </div>
 <script>
-    var existing_policy_amount = document.getElementById('existing_policy_amount');
-    var yesRadio = document.getElementById('yes');
-    var noRadio = document.getElementById('no');
-    var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    var totalProtectionPercentage = document.getElementById("percentage");
     var oldTotalFund = parseFloat({{ $newTotalProtectionNeeded }});
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
-
-    existing_policy_amount.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var existingPolicyAmountValue = existing_policy_amount.value;
-
-        // Remove non-digit characters
-        const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
-
-        // Check if the parsed value is a valid number
-        if (!isNaN(cleanedValue)) {
-        // If it's a valid number, format it with commas
-            const formattedValue = cleanedValue.toLocaleString('en-MY');
-            this.value = formattedValue;
-        } else {
-        // If it's not a valid number, display the cleaned value as is
-            this.value = existingPolicyAmountValue;
-        }
-
-        var existingAmount = parseInt(cleanedValue);
-
-        var total = oldTotalFund - existingAmount;
-        var totalPercentage = existingAmount / oldTotalFund * 100;
-        
-        $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        if (total <= 0){
-            totalAmountNeeded.value = 0;
-            totalProtectionPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = total;
-            totalProtectionPercentage.value = totalPercentage;
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        }
-
-    });
-    // Add event listeners to the radio buttons
-    yesRadio.addEventListener('change', function () {
-        jQuery('.hide-content').css('display','block');
-    });
-
-    noRadio.addEventListener('change', function () {
-        jQuery('.hide-content').css('display','none');
-        existing_policy_amount.value = 0; // Clear the money input
-        totalAmountNeeded.value = oldTotalFund;
-        var totalPercentage = 0 / oldTotalFund * 100;
-        totalProtectionPercentage.value = totalPercentage;
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        existing_policy_amount.addEventListener('blur', function() {
-            validateNumberField(existing_policy_amount);
-        });
-
-        if (yesRadio.classList.contains('checked-yes')) {
-            jQuery('.hide-content').css('display','block');
-        }
-        
-        function validateNumberField(field) {
-
-            const value = field.value.trim();
-            var pattern = /^[0-9,]+$/;
-
-            if (value === '' || isNaN(value)) {
-                // field.classList.remove('is-valid');
-                field.classList.add('is-invalid');
-            } else {
-                // field.classList.add('is-valid');
-                field.classList.remove('is-invalid');
-            }
-            if (pattern.test(value)){
-                document.getElementById("existing_policy_amount").classList.remove("is-invalid");
-            }
-        }
-    });
-    
-    if (sessionExistingPolicyAmount !== '' || sessionExistingPolicyAmount !== 0) {
-        var newTotal = oldTotalFund - sessionExistingPolicyAmount;
-        var newTotalPercentage = sessionExistingPolicyAmount / oldTotalFund * 100;
-        if (newTotal <= 0){
-            totalAmountNeeded.value = 0;
-            totalProtectionPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = newTotal;
-            totalProtectionPercentage.value = newTotalPercentage;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
-    } 
 </script>
 @endsection

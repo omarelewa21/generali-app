@@ -122,58 +122,7 @@
     </div>
 </div>
 <script>
-    // Get the input value
-    var supportingYears = document.getElementById("investment_supporting_years");
     var supportingYearsSessionValue = parseFloat({{$investmentSupportingYears}});
     var oldTotalFund = parseFloat({{ $totalInvestmentNeeded }});
-    var newTotalFund = document.getElementById("newTotal_investmentNeeded");
-    
-    var totalInvestmentFund = document.getElementById("TotalInvestmentFund");
-
-    if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
-            newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
-    } 
-
-    supportingYears.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var supportingYearsValue = supportingYears.value;
-
-        var Year = parseInt(supportingYearsValue);
-
-        // Calculate months
-        var totalAmount = Year * oldTotalFund;
-
-        if (isNaN(Year)) {
-            // Input is not a valid number
-            totalInvestmentFund.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = totalAmount.toLocaleString();
-
-            totalInvestmentFund.innerText = "RM " + result;
-        }
-        
-        newTotalFund.value = Year * oldTotalFund;
-        
-    });
-   
-    document.addEventListener("DOMContentLoaded", function() {
-        supportingYears.addEventListener("blur", function() {
-            validateNumberField(supportingYears);
-        });
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            field.classList.add("is-invalid");
-        } else {
-            field.classList.remove("is-invalid");
-        }
-    }
-    
 </script>
 @endsection

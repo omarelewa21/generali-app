@@ -12,10 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $protectionMonthlySupport = isset($arrayData['protection']['protectionMonthlySupport']) ? $arrayData['protection']['protectionMonthlySupport'] : '';
-    $totalProtectionNeeded = isset($arrayData['protection']['totalProtectionNeeded']) ? $arrayData['protection']['totalProtectionNeeded'] : '';
-    $protectionFundPercentage = isset($arrayData['protection']['protectionFundPercentage']) ? $arrayData['protection']['protectionFundPercentage'] : 0;
+    $protection = session('customer_details.protection_needs');
+    $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
+    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    
 @endphp
 
 
@@ -123,75 +124,5 @@
         </div>
     </div>
 </div>
-<script>
-    // Get the input value
-    var monthlyInput = document.getElementById("protection_monthly_support");
-    var totalProtectionNeeded = document.getElementById("total_protectionNeeded");
 
-    var totalProtectionFund = document.getElementById("TotalProtectionFund");
-
-    monthlyInput.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var monthlyInputValue = monthlyInput.value;
-
-        // Remove non-digit characters
-        const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-
-        // Attempt to parse the cleaned value as a float
-        const parsedValue = parseFloat(cleanedValue);
-
-        // Check if the parsed value is a valid number
-        if (!isNaN(parsedValue)) {
-        // If it's a valid number, format it with commas
-            const formattedValue = parsedValue.toLocaleString('en-MY');
-            this.value = formattedValue;
-        } else {
-        // If it's not a valid number, display the cleaned value as is
-            this.value = monthlyInputValue;
-        }
-
-        var monthlyAmount = parseInt(cleanedValue);
-
-        // Calculate months
-        var amountPerYear = monthlyAmount * 12;
-
-        if (isNaN(monthlyAmount)) {
-            // Input is not a valid number
-            totalProtectionFund.innerText = "RM 0";
-            displayAvatar.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = amountPerYear.toLocaleString();
-
-            totalProtectionFund.innerText = "RM " + result;
-        }
-
-        // Set the value of the hidden input field
-        totalProtectionNeeded.value = amountPerYear;
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        monthlyInput.addEventListener("blur", function() {
-            validateNumberField(monthlyInput);
-    });
-
-    function validateNumberField(field) {
-        var value = field.value.replace(/,/g, ''); // Remove commas
-        var numericValue = parseFloat(value);
-
-        if (isNaN(numericValue)) {
-            // field.classList.remove("is-valid");
-            field.classList.add("is-invalid");
-
-        } else {
-            // field.classList.add("is-valid");
-            field.classList.remove("is-invalid");
-        }
-    }
-
-});
-
-</script>
 @endsection

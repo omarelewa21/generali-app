@@ -13,15 +13,10 @@
 @php
     // Retrieving values from the session
     $arrayData = session('passingArrays');
-    $educationSelectedImage = isset($arrayData['education']['educationSelectedImage']) ? $arrayData['education']['educationSelectedImage'] : '';
-    $educationMonthlyAmount = isset($arrayData['education']['educationMonthlyAmount']) ? $arrayData['education']['educationMonthlyAmount'] : '';
     $totalEducationYear = isset($arrayData['education']['totalEducationYear']) ? $arrayData['education']['totalEducationYear'] : '';
     $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
     $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
     $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
-    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
-    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
-    $edcationSaving = isset($arrayData['education']['edcationSaving']) ? $arrayData['education']['edcationSaving'] : '';
 @endphp
 
 
@@ -124,94 +119,8 @@
     </div>
 </div>
 <script>
-    // Get the input value
-    var educationYear = document.getElementById("tertiary_education_years");
     var educationYearSessionValue = parseFloat({{$totalEducationYear}});
     var oldTotalFund = parseFloat({{ $totalEducationFundNeeded }});
-    var newTotalFund = document.getElementById("newTotal_educationFund");
-
-    // var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    // var totalEducationPercentage = document.getElementById("percentage");
-    // var education_saving_amount = document.getElementById('education_saving_amount');
-    // var education_saving = document.getElementById('education_other_savings');
-    
-    var totalEducationFund = document.getElementById("TotalEducationFund");
-
-    if (educationYearSessionValue !== '' || educationYearSessionValue !== 0 && oldTotalFund !== '') {
-            newTotalFund.value = educationYearSessionValue * oldTotalFund;
-    } 
-    
-
-    educationYear.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var educationYearValue = educationYear.value;
-
-        var Year = parseInt(educationYearValue);
-
-        // Calculate months
-        var totalAmount = Year * oldTotalFund;
-
-        if (isNaN(Year)) {
-            // Input is not a valid number
-            totalEducationFund.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = totalAmount.toLocaleString();
-
-            totalEducationFund.innerText = "RM " + result;
-        }
-        
-        newTotalFund.value = Year * oldTotalFund;
-
-        // Display the result
-        // var result = totalAmount.toLocaleString();
-
-        // document.getElementById("TotalEducationFund").innerText = "RM " + result;
-        // document.getElementById("displayFund").innerText = "RM " + result;
-        // totalEducationFund.value = totalAmount;
-
-        // Set the value of the hidden input field
-        // Check if educationYearSessionValue and oldTotalFund are stored in sessions
-        // if (educationYearSessionValue !== '' || educationYearSessionValue !== 0 && oldTotalFund !== '') {
-        //         newTotalFund.value = educationYear.value * oldTotalFund;
-        // } else {
-        //     newTotalFund.value = educationYearSessionValue * oldTotalFund;
-        // }
-        // if (educationYearSessionValue !== '') {
-                
-        //         newTotalFund.value = educationYearSessionValue * oldTotalFund;
-        // } else {
-        //     
-        // }
-        // newTotalFund.value = totalAmount;
-        // totalAmountNeeded.value = '';
-        // totalEducationPercentage = '';
-        // education_saving.value = '';
-        // education_saving_amount.value = '';
-        // education_saving.value = '';
-        // $('.retirement-progress-bar').css('width', '0%');
-        
-    });
-   
-    document.addEventListener("DOMContentLoaded", function() {
-        educationYear.addEventListener("blur", function() {
-            validateNumberField(educationYear);
-        });
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            // field.classList.remove("is-valid");
-            field.classList.add("is-invalid");
-        } else {
-            // field.classList.add("is-valid");
-            field.classList.remove("is-invalid");
-        }
-    }
     
 </script>
 @endsection
