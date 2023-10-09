@@ -58,7 +58,7 @@
                             <div class="col-12 position-relative mh-100">
                                 <div class="row h-100" id="needs-content">
                                     <div class="col-12 col-xl-6 align-items-end justify-content-center z-1 mh-100 second-order protection-monthly mt-auto">
-                                        <img src="{{ asset('images/needs/retirement/supporting-years/avatar.png') }}" class="mt-auto mh-100 w-auto mw-100 mx-auto">
+                                        <img src="{{ asset('images/needs/retirement/supporting-years/avatar.png') }}" class="mt-auto mh-100 w-auto mw-100 mx-auto z-1">
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
                                                 <div class="needs-stand-bg bg-btn_bar {{ $errors->has('supporting_years') ? 'error-padding' : '' }}"></div>
