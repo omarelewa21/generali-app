@@ -401,7 +401,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
                                                                             <label for="{{$key}}FirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="{{$key}}FirstName" class="form-control @error($key . 'FirstName') is-invalid @enderror" id="{{$key}}FirstNameInput" placeholder="Your First Name" value="{{ old($key . 'FirstName', $arrayData['FamilyDependant']['parents_details'][$key]['firstName'] ?? '') }}" required>
+                                                                            <input type="text" name="{{$key}}FirstName" class="form-control @error($key . 'FirstName') is-invalid @enderror" id="{{$key}}FirstNameInput" placeholder="Your First Name" value="{{ old($key . 'FirstName', $parentsData[$key]['first_name'] ?? '') }}" required>
                                                                             @error($key . 'FirstName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
@@ -410,7 +410,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}LastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="{{$key}}LastName" class="form-control @error($key . 'LastName') is-invalid @enderror" id="{{$key}}LastNameInput" placeholder="Your Last Name" value="{{ old($key . 'LastName', $arrayData['FamilyDependant']['parents_details'][$key]['lastName'] ?? '') }}" required>
+                                                                            <input type="text" name="{{$key}}LastName" class="form-control @error($key . 'LastName') is-invalid @enderror" id="{{$key}}LastNameInput" placeholder="Your Last Name" value="{{ old($key . 'LastName', $parentsData[$key]['last_name'] ?? '') }}" required>
                                                                             @error($key . 'LastName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
@@ -422,12 +422,12 @@
                                                                             <div class="d-flex btn-group @error($key . 'GenderBtnradio') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'male' || (isset($arrayData['FamilyDependant']['parents_details'][$key]['gender']) && $arrayData['FamilyDependant']['parents_details'][$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'GenderBtnradio') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'female' || (isset($arrayData['FamilyDependant']['parents_details'][$key]['gender']) && $arrayData['FamilyDependant']['parents_details'][$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'GenderBtnradio') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
@@ -441,15 +441,15 @@
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$key}}Age" class="d-inline-block"></span> )</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', $arrayData['FamilyDependant']['parents_details'][$key]['day'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
+                                                                                    {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', $parentsData[$key]['day'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', $arrayData['FamilyDependant']['parents_details'][$key]['month'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
+                                                                                    {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', $parentsData[$key]['month'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                                                     {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                         return substr($year, -2);
-                                                                                    }, $yearRange), $yearRange), old($key . 'year', $arrayData['FamilyDependant']['parents_details'][$key]['year'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
+                                                                                    }, $yearRange), $yearRange), old($key . 'year', $parentsData[$key]['year'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
                                                                                 </div>
                                                                                 @if ($errors->has($key . 'day') || $errors->has($key . 'month') || $errors->has($key . 'year'))
                                                                                     <div class="col-md-12">
@@ -462,7 +462,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-8 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $arrayData['FamilyDependant']['parents_details'][$key]['yearsOfSupport'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -474,7 +474,7 @@
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Parents Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
-                                                                                    <option value="{{ $status->maritalStatus }}" {{ old($key . 'MaritalStatus', $arrayData['FamilyDependant']['parents_details'][$key]['maritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                                    <option value="{{ $status->maritalStatus }}" {{ old($key . 'MaritalStatus', $parentsData[$key]['marital_status'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -487,7 +487,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes')
+                                                <!-- @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes')
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingSix">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="true" aria-controls="flush-collapseSix">
@@ -563,7 +563,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                @endif -->
                                             </div>
                                         </div>
                                     </div>
@@ -761,107 +761,107 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Add event listeners to detect changes in the selected values for each entity
-    // if (childNames) {
-    //     childNames.forEach(function(childName) {
-    //         setupAgeCalculation(childName);
-    //     });
+    if (childNames) {
+        childNames.forEach(function(childName) {
+            setupAgeCalculation(childName);
+        });
 
-    //     function setupAgeCalculation(entity) {
-    //         var daySelect = document.getElementById(entity + 'day');
-    //         var monthSelect = document.getElementById(entity + 'month');
-    //         var yearSelect = document.getElementById(entity + 'year');
+        function setupAgeCalculation(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
 
-    //         daySelect.addEventListener('change', calculateAge.bind(null, entity));
-    //         monthSelect.addEventListener('change', calculateAge.bind(null, entity));
-    //         yearSelect.addEventListener('change', calculateAge.bind(null, entity));
+            daySelect.addEventListener('change', calculateAge.bind(null, entity));
+            monthSelect.addEventListener('change', calculateAge.bind(null, entity));
+            yearSelect.addEventListener('change', calculateAge.bind(null, entity));
             
-    //         // Calculate age on initial load
-    //         calculateAge(entity);
-    //     }
+            // Calculate age on initial load
+            calculateAge(entity);
+        }
 
-    //     function calculateAge(entity) {
-    //         var daySelect = document.getElementById(entity + 'day');
-    //         var monthSelect = document.getElementById(entity + 'month');
-    //         var yearSelect = document.getElementById(entity + 'year');
+        function calculateAge(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
             
-    //         var ageDiv = document.getElementById(entity + 'Age');
+            var ageDiv = document.getElementById(entity + 'Age');
             
-    //         var selectedDay = daySelect.value;
-    //         var selectedMonth = monthSelect.value;
-    //         var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
-    //         var selectedYear = selectedYearOption.textContent;
+            var selectedDay = daySelect.value;
+            var selectedMonth = monthSelect.value;
+            var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+            var selectedYear = selectedYearOption.textContent;
             
-    //         if (selectedYear) {
-    //             if (selectedDay && selectedMonth) {
-    //                 var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
-    //                 var currentDate = new Date();
+            if (selectedYear) {
+                if (selectedDay && selectedMonth) {
+                    var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+                    var currentDate = new Date();
                     
-    //                 var age = currentDate.getFullYear() - dob.getFullYear();
-    //                 if (currentDate.getMonth() < dob.getMonth() ||
-    //                     (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
-    //                     age--;
-    //                 }
+                    var age = currentDate.getFullYear() - dob.getFullYear();
+                    if (currentDate.getMonth() < dob.getMonth() ||
+                        (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                        age--;
+                    }
                     
-    //                 ageDiv.textContent = 'Age: ' + age;
-    //             } else {
-    //                 ageDiv.textContent = 'Age:';
-    //             }
-    //         } else {
-    //             ageDiv.textContent = 'Age:';
-    //         }
-    //     }
-    // }
+                    ageDiv.textContent = 'Age: ' + age;
+                } else {
+                    ageDiv.textContent = 'Age:';
+                }
+            } else {
+                ageDiv.textContent = 'Age:';
+            }
+        }
+    }
 
-    // if (parentNames) {
-    //     parentNames.forEach(function(parentName) {
-    //         setupAgeCalculation(parentName);
-    //     });
+    if (parentNames) {
+        parentNames.forEach(function(parentName) {
+            setupAgeCalculation(parentName);
+        });
 
-    //     function setupAgeCalculation(entity) {
-    //         var daySelect = document.getElementById(entity + 'day');
-    //         var monthSelect = document.getElementById(entity + 'month');
-    //         var yearSelect = document.getElementById(entity + 'year');
+        function setupAgeCalculation(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
 
-    //         daySelect.addEventListener('change', calculateAge.bind(null, entity));
-    //         monthSelect.addEventListener('change', calculateAge.bind(null, entity));
-    //         yearSelect.addEventListener('change', calculateAge.bind(null, entity));
+            daySelect.addEventListener('change', calculateAge.bind(null, entity));
+            monthSelect.addEventListener('change', calculateAge.bind(null, entity));
+            yearSelect.addEventListener('change', calculateAge.bind(null, entity));
             
-    //         // Calculate age on initial load
-    //         calculateAge(entity);
-    //     }
+            // Calculate age on initial load
+            calculateAge(entity);
+        }
 
-    //     function calculateAge(entity) {
-    //         var daySelect = document.getElementById(entity + 'day');
-    //         var monthSelect = document.getElementById(entity + 'month');
-    //         var yearSelect = document.getElementById(entity + 'year');
+        function calculateAge(entity) {
+            var daySelect = document.getElementById(entity + 'day');
+            var monthSelect = document.getElementById(entity + 'month');
+            var yearSelect = document.getElementById(entity + 'year');
             
-    //         var ageDiv = document.getElementById(entity + 'Age');
+            var ageDiv = document.getElementById(entity + 'Age');
             
-    //         var selectedDay = daySelect.value;
-    //         var selectedMonth = monthSelect.value;
-    //         var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
-    //         var selectedYear = selectedYearOption.textContent;
+            var selectedDay = daySelect.value;
+            var selectedMonth = monthSelect.value;
+            var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+            var selectedYear = selectedYearOption.textContent;
             
-    //         if (selectedYear) {
-    //             if (selectedDay && selectedMonth) {
-    //                 var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
-    //                 var currentDate = new Date();
+            if (selectedYear) {
+                if (selectedDay && selectedMonth) {
+                    var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+                    var currentDate = new Date();
                     
-    //                 var age = currentDate.getFullYear() - dob.getFullYear();
-    //                 if (currentDate.getMonth() < dob.getMonth() ||
-    //                     (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
-    //                     age--;
-    //                 }
+                    var age = currentDate.getFullYear() - dob.getFullYear();
+                    if (currentDate.getMonth() < dob.getMonth() ||
+                        (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                        age--;
+                    }
                     
-    //                 ageDiv.textContent = 'Age: ' + age;
-    //             } else {
-    //                 ageDiv.textContent = 'Age:';
-    //             }
-    //         } else {
-    //             ageDiv.textContent = 'Age:';
-    //         }
-    //     }
-    // }
+                    ageDiv.textContent = 'Age: ' + age;
+                } else {
+                    ageDiv.textContent = 'Age:';
+                }
+            } else {
+                ageDiv.textContent = 'Age:';
+            }
+        }
+    }
 });
 </script>
 @endsection

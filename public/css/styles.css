@@ -555,7 +555,7 @@ button[data-required="selected"] img {
 
 .btn-check+.btn {
   border-radius: 0;
-  background-color: #fff;
+  background-color: #fff!important;
   color: rgba(10, 4, 60, 0.50);
   width: 100%;
   border-color: #A0A0A0;

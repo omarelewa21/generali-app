@@ -508,8 +508,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 });
             }
             else if(selectedValue == 'noParents') {
-                // Clear the parents array
-                clickedAvatars['parents'] = [];
+                clickedAvatars['parents'] = false;
             }
 
             if (familyDependantButtonInput.value == '') {
@@ -524,13 +523,12 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
-        var selectedImages = [];
         const selectedAssets = {
-            car: [],
-            scooter: [],
-            house: [],
-            bungalow: [],
-            others: []
+            car: false,
+            scooter: false,
+            house: false,
+            bungalow: false,
+            others: false
         };
 
         // Car Selection
@@ -543,17 +541,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
-                selectedAssets['car'] = {
-                    'status': 'no',
-                };
+                selectedAssets['car'] = false;
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
                 $(".imageContainerCar").append(newImage);
 
-                selectedAssets['car'] = {
-                    'status': 'yes',
-                };
+                selectedAssets['car'] = true;
             }
 
             if (assetsButtonInput.value == '') {
@@ -577,17 +571,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
-                selectedAssets['scooter'] = {
-                    'status': 'no',
-                };
+                selectedAssets['scooter'] = false;
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + scooterImages[scooterImageIndex].src + '" width="' + scooterImages[scooterImageIndex].width + '" height="' + scooterImages[scooterImageIndex].height + '" alt="' + scooterImages[scooterImageIndex].alt + '" class="' + scooterImages[scooterImageIndex].class + '" style="' + scooterImages[scooterImageIndex].style + '">';
                 $(".imageContainerCar").append(newImage);
 
-                selectedAssets['scooter'] = {
-                    'status': 'yes',
-                };
+                selectedAssets['scooter'] = true;
             }
 
             if (assetsButtonInput.value == '') {
@@ -611,25 +601,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
-                selectedAssets['house'] = {
-                    'status': 'no',
-                };
+                selectedAssets['house'] = false;
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
 
-                selectedAssets['house'] = {
-                    'status': 'yes',
-                };
-
-                selectedAssets['bungalow'] = {
-                    'status': 'no',
-                };
-
-                selectedAssets['condo'] = {
-                    'status': 'no',
-                };
+                selectedAssets['house'] = true;
+                selectedAssets['bungalow'] = false;
+                selectedAssets['condo'] = false;
 
                 $("#bungalowButton").closest('.button-bg').removeClass('selected');
                 $("#condoButton").closest('.button-bg').removeClass('selected');
@@ -658,25 +638,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
-                selectedAssets['bungalow'] = {
-                    'status': 'no',
-                };
+                selectedAssets['bungalow'] = false;
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
 
-                selectedAssets['bungalow'] = {
-                    'status': 'yes',
-                };
-
-                selectedAssets['house'] = {
-                    'status': 'no',
-                };
-
-                selectedAssets['condo'] = {
-                    'status': 'no',
-                };
+                selectedAssets['bungalow'] = true;
+                selectedAssets['house'] = false;
+                selectedAssets['condo'] = false;
 
                 $("#houseButton").closest('.button-bg').removeClass('selected');
                 $("#condoButton").closest('.button-bg').removeClass('selected');
@@ -705,25 +675,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
-                selectedAssets['condo'] = {
-                    'status': 'no',
-                };
+                selectedAssets['condo'] = false;
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
                 $(".imageContainerHouse").html(newImage);
 
-                selectedAssets['condo'] = {
-                    'status': 'yes',
-                };
-
-                selectedAssets['house'] = {
-                    'status': 'no',
-                };
-
-                selectedAssets['bungalow'] = {
-                    'status': 'no',
-                };
+                selectedAssets['condo'] = true;
+                selectedAssets['house'] = false;
+                selectedAssets['bungalow'] = false;
 
                 $("#houseButton").closest('.button-bg').removeClass('selected');
                 $("#bungalowButton").closest('.button-bg').removeClass('selected');
@@ -746,10 +706,11 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $(".btn-exit-assetsOthers").on("click", function () {
             var selectedValue = $("#otherAssetsInput").val();
 
-            selectedAssets['others'] = {
-                'status': 'yes',
-                'assets': selectedValue
-            };
+            // Create a new array under 'others_data'
+            selectedAssets['others_data'] = {};
+
+            selectedAssets['others'] = true;
+            selectedAssets['others_data'] = selectedValue;
 
             if (assetsButtonInput.value == '') {
                 assetsButtonInput.value = JSON.stringify(selectedAssets);
