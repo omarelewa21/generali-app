@@ -233,7 +233,6 @@ class FormController extends Controller {
             ];
         }
         elseif ($assetsButtonInput) {
-            // $arrayData['Assets'] = $assetsButtonInput;
             $customerDetails['assets'] = $assetsButtonInput;
         }
 
@@ -308,7 +307,7 @@ class FormController extends Controller {
             'spouseOccupation' => 'required|in:' . implode(',', $occupation),
         ];
 
-        if ($customerDetails['family_details']['dependant']['children'] === true) {
+        if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
             foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
                 $commonRulesChild[$childKey . 'FirstName'] = 'required|max:255';
                 $commonRulesChild[$childKey . 'LastName'] = 'required|max:255';
@@ -321,7 +320,7 @@ class FormController extends Controller {
             }
         }
 
-        if ($customerDetails['family_details']['dependant']['parents'] === true) {
+        if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
             foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
                 $commonRulesParents[$parentkey . 'FirstName'] = 'required|max:255';
                 $commonRulesParents[$parentkey . 'LastName'] = 'required|max:255';
@@ -334,7 +333,7 @@ class FormController extends Controller {
             }
         }
         
-        if ($customerDetails['family_details']['dependant']['spouse'] === true) {
+        if (isset ($customerDetails['family_details']['dependant']['spouse']) && $customerDetails['family_details']['dependant']['spouse'] === true) {
             $validatedData = $request->validate($commonRules);
 
             $newData = [
@@ -358,7 +357,7 @@ class FormController extends Controller {
             $customerDetails['family_details']['dependant']['spouse_data'] = array_merge($customerDetails['family_details']['dependant']['spouse_data'], $newData);
         }
         
-        if ($customerDetails['family_details']['dependant']['children'] === true) {
+        if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
             $validatedData = $request->validate($commonRulesChild);
 
             $childData = [
@@ -374,7 +373,7 @@ class FormController extends Controller {
             $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
         }
 
-        if ($customerDetails['family_details']['dependant']['parents'] === true) {
+        if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
             $validatedData = $request->validate($commonRulesParents);
 
             $parentsData = [

@@ -174,8 +174,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         // Pre-select the options if sessions exist
         if (path == '/marital-status') {
             // Set the spouseImageIndex based on gender
-            var gender = sessionData.avatar.gender;
-
+            var gender;
+            if (sessionData.avatar && sessionData.avatar.gender) {
+                gender = sessionData.avatar.gender;
+            } else {
+                gender = 'Male'; // Set your default gender here
+            }
+            
             var spouseImageIndex = 0; // Default to male avatar
             var spouseWidowedImageIndex = 0;
             
@@ -199,9 +204,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         }
         else if (path == '/family-dependant' || path == '/family-dependant-details') {
+            
             // Set the spouseImageIndex based on gender
-            var gender = customer_details.avatar.gender;
-
+            var gender;
+            if (customer_details.avatar && customer_details.avatar.gender) {
+                gender = customer_details.avatar.gender;
+            } else {
+                gender = 'Male'; // Set your default gender here
+            }
+            
             var spouseImageIndex = 0; // Default to male avatar
             var spouseWidowedImageIndex = 0;
             
@@ -266,8 +277,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             if (preselect.trim() !== "") {
                 var assets = JSON.parse(preselect);
-
-                if (assets.car && assets.car.status && assets.car.status.includes("yes")) {
+console.log(assets);
+                if (assets.car === true) {
                     var newImage = '<img src="' + carImages[carImageIndex].src + '" width="' + carImages[carImageIndex].width + '" height="' + carImages[carImageIndex].height + '" alt="' + carImages[carImageIndex].alt + '" class="' + carImages[carImageIndex].class + '" style="' + carImages[carImageIndex].style + '">';
                     $(".imageContainerCar").append(newImage);
                 }
