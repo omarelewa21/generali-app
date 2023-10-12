@@ -14,7 +14,9 @@
     // Retrieving values from the session
     $protection = session('customer_details.protection_needs');
     $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
+    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
     $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
+    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
     $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
     
 @endphp
@@ -38,7 +40,10 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center">RM {{ $totalProtectionNeeded !== null ? number_format(floatval($totalProtectionNeeded)) : $totalProtectionNeeded }}</h3>
+                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center">RM 
+                                            <!-- {{ $totalProtectionNeeded !== null ? number_format(floatval($totalProtectionNeeded)) : $totalProtectionNeeded }} -->
+                                            {{ $newTotalProtectionNeeded !== null || $newTotalProtectionNeeded !== '' &&  $protectionSupportingYears !== null && $totalProtectionNeeded !== '' ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) : $totalProtectionNeeded }}
+                                        </h3>
                                         <p class="text-light text-center">Total Protection Needed</p>
                                     </div>
                                 </div>

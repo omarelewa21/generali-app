@@ -359,13 +359,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
             
             // // Calculate the position for the dotCircle based on the end point of the graph
-            const percent = Math.round(percentage);
             var startX, startY;
+            const percent = Math.floor(percentage);
 
-            if (percent === 100 || percent === 0){
-                dotCircle.style.display = "none";
+            if ( percent === 0 || percent >= 100){
             }
             else{
+                dotCircle.style.display = "block";
                 if (percent === 1 || percent === 2){
                     startX = 234;
                     startY = 90;

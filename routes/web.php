@@ -92,10 +92,10 @@ Route::post('/retirement-gap', [RetirementController::class, 'submitRetirementGa
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
 Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
 Route::post('/education-coverage', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
-Route::view('/education-monthly-amount', 'pages.priorities.education.education-monthly-amount')->name('education.monthly.amount');
-Route::post('/education-monthly-amount', [EducationController::class, 'submitEducationMonthly'])->name('form.submit.education.monthly');
+Route::view('/education-amount', 'pages.priorities.education.education-amount')->name('education.amount');
+Route::post('/education-amount', [EducationController::class, 'validateEducationAmount'])->name('validate.education.amount');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
-Route::post('/education-supporting-years', [EducationController::class, 'submitEducationSupporting'])->name('form.submit.education.supporting');
+Route::post('/education-supporting-years', [EducationController::class, 'validateEducationSupportingYears'])->name('validate.education.supporting');
 Route::view('/education-other', 'pages.priorities.education.education-other')->name('education.other');
 Route::post('/education-other', [EducationController::class, 'submitEducationOther'])->name('form.submit.education.other');
 Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');

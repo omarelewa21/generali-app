@@ -1,21 +1,21 @@
 <?php
  /**
- * Template Name: Education Monthly Needed Amount
+ * Template Name: Education Tertiary Education Amount
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Education - Monthly Needed Amount</title>
+<title>Education - Tertiary Education Amount</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $educationMonthlyAmount = isset($arrayData['education']['educationMonthlyAmount']) ? $arrayData['education']['educationMonthlyAmount'] : '';
-    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
+    $education = session('customer_details.education_needs');
+    $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
+    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
+    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
 @endphp
 
 
@@ -37,7 +37,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $totalEducationNeeded !== null ? number_format(floatval($totalEducationNeeded)) : $totalEducationNeeded }}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.monthly')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('monthly_education_amount')) pb-7 @endif h-100">
+                    <form novalidate action="{{route('validate.education.amount')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('tertiary_education_amount')) pb-7 @endif h-100">
                         @csrf
                         <section class="row edu-con align-items-end mh-100">
                             <div class="col-12 position-relative mh-100">
@@ -55,23 +55,20 @@
                                     <div class="col-12 col-xl-6 avatar-supporting-wrapper align-items-end justify-content-center z-1 mh-100 second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
                                             <img src="{{ asset('images/needs/education/monthly-amount/education-monthly-avatar.png') }}" class="mt-auto mh-100 w-auto mw-100 mx-auto avatar-img">
-                                            <!-- <p class="py-2 m-0 avatar-text" id="displayFund">RM {{ $totalEducationFundNeeded !== null ? number_format(floatval($totalEducationFundNeeded)) : $totalEducationFundNeeded }}</p> -->
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
-                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('educationMonthlyAmount') ? 'error-padding' : '' }}"></div>
+                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('tertiary_education_amount') ? 'error-padding' : '' }}"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
                                             <div class="col-10 col-md-8 d-flex align-items-center">
-                                                <p class="f-34"><strong>I plan to fund my child’s education with a total of</strong><br>
-                                                    <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{ $educationMonthlyAmount !== null ? number_format(floatval($educationMonthlyAmount)) : $educationMonthlyAmount }}" required></span>
-                                                    <!-- <span class="currencyinput f-34">RM<input type="text" name="monthly_education_amount" class="form-control d-inline-block w-50 money f-34 @error('monthly_education_amount') is-invalid @enderror" id="monthly_education_amount" value="{{$educationMonthlyAmount}}" required></span> -->
-                                                    <strong>/month.</strong>
-                                                </p>
-                                                <input type="hidden" name="total_educationFund" id="total_educationFund" value="{{$totalEducationFundNeeded}}">
+                                                <h5 class="f-34 f-family fw-700">I plan to fund my child’s education with a total of<br>
+                                                    <span class="currencyinput f-34">RM<input type="text" name="tertiary_education_amount" class="form-control d-inline-block w-50 money f-34 @error('tertiary_education_amount') is-invalid @enderror" id="tertiary_education_amount" value="{{ $tertiaryEducationAmount !== null ? number_format(floatval($tertiaryEducationAmount)) : $tertiaryEducationAmount }}" required></span>
+                                                </h5>
+                                                <input type="hidden" name="total_educationNeeded" id="total_educationNeeded" value="{{$totalEducationNeeded}}">
                                             </div>
                                         </div>
                                     </div>
@@ -88,13 +85,13 @@
                                 </div>
                             </div>
                         </section>
-                        @if ($errors->has('monthly_education_amount'))
+                        @if ($errors->has('tertiary_education_amount'))
                             <section class="row alert-support z-1 hide-mobile">
                                 <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('monthly_education_amount') }}</div>
+                                    <div class="text">{{ $errors->first('tertiary_education_amount') }}</div>
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
@@ -102,13 +99,13 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('monthly_education_amount') }}</div>
+                                    <div class="text">{{ $errors->first('tertiary_education_amount') }}</div>
                                 </div>
                             </section>
                         @endif
                         <div class="col-12 hide-mobile">
                             <div class="row">
-                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('monthly_education_amount') ? 'error-padding' : '' }}"></div>
+                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('tertiary_education_amount') ? 'error-padding' : '' }}"></div>
                             </div>
                         </div>
                         <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">

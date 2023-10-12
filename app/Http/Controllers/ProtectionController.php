@@ -50,7 +50,7 @@ class ProtectionController extends Controller
 
         // Update specific keys with new values
         $protection = array_merge($protection, [
-            'coveragePerson' => $protectionSelectedAvatarInput,
+            'coveragePerson' => $protectionSelectedAvatarInput
         ]);
 
         // Add the new array inside the customer_details array
@@ -63,6 +63,7 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
     
         return redirect()->route('protection.monthly.support');
     }
