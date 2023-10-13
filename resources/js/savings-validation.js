@@ -29,11 +29,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
                 // Get the selected data-avatar value
                 const dataAvatar = this.getAttribute('data-avatar');
-                const dataAvatarImg = this.querySelector('img').getAttribute('src');
 
                 // Update the hidden input field value with the selected avatar
                 document.getElementById('savingsSelectedAvatarInput').value = dataAvatar;
-                document.getElementById('savingsSelectedAvatarImage').value = dataAvatarImg;
             });
         });
 
@@ -168,10 +166,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/savings-goal-amount') {
+    else if (path == '/savings-annual-return') {
         // Get the input value
         var savingsGoalPA = document.getElementById('savings_goal_pa');
-        var totalAmountNeeded = document.getElementById("total_amountNeeded");
         var totalsavingsPercentage = document.getElementById("percentage");
         var totalAnnualReturn = document.getElementById("total_annualReturn");
 
@@ -183,23 +180,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             var annualReturn = parseInt(savingsGoalPAValue);
 
             // Calculate annual return
-            var totalPA = annualReturn / 100 * oldTotalFund;
-            var totalPercentage = totalPA / oldTotalFund * 100;
-            var total = oldTotalFund - totalPA;
+            var total_AR_amount = oldTotalFund * annualReturn / 100;
+            var totalPercentage = total_AR_amount / oldTotalFund * 100;
 
+            totalAnnualReturn.value = total_AR_amount;
             $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            if (total <= 0){
-                totalAnnualReturn.value = totalPA;
-                totalAmountNeeded.value = 0;
-                totalsavingsPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
-            }
-            else{
-                totalAnnualReturn.value = totalPA;
-                totalAmountNeeded.value = total;
-                totalsavingsPercentage.value = totalPercentage;
-                $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            }
             
         });
     
@@ -220,20 +205,74 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         }
 
         if (sessionGoalPA !== '' || sessionGoalPA !== 0) {
-            var newTotalPA = sessionGoalPA / 100 * oldTotalFund;
-            var newTotal = oldTotalFund - newTotalPA;
-            var newTotalPercentage = newTotalPA / oldTotalFund * 100;
-            totalAnnualReturn.value = newTotalPA;
-            if (newTotal <= 0){
-                totalAmountNeeded.value = 0;
-                totalsavingsPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
+            var newTotal_AR_amount = oldTotalFund * sessionTotalAnnualReturn / 100;
+            var newTotalPercentage = newTotal_AR_amount / oldTotalFund * 100;
+            totalAnnualReturn.value = newTotal_AR_amount;
+            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+        }
+    }
+    else if (path == '/savings-risk-profile') {
+
+        // Add event listener to each button with the 'data-required' attribute
+        const dataButtons = document.querySelectorAll('[data-avatar]');
+
+        dataButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of the button click
+
+                dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+                // Add 'selected' attribute to the clicked button
+                this.setAttribute('data-required', 'selected');
+
+                dataButtons.forEach(btn => btn.classList.remove('selected'));
+
+                const nextButton = document.getElementById('nextButton');
+
+                // Get the selected data-avatar value
+                const dataAvatar = this.getAttribute('data-avatar');
+
+                // Update the hidden input field value with the selected avatar
+                document.getElementById('savingsRiskProfileInput').value = dataAvatar;
+            });
+        });
+
+        // Preselect the button on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const defaultBtn = document.querySelectorAll('.default');
+
+            defaultBtn.forEach(defaultBtn => {
+                // Add the 'selected' class to the closest .button-bg div of each default button
+                defaultBtn.classList.add('selected');
+            });
+        });
+
+        var highRisk = document.getElementById("high-risk");
+        var mediumRisk = document.getElementById("medium-risk");
+        var lowRisk = document.getElementById("low-risk");
+        var highRiskImg = document.getElementById("high-risk-img");
+        var mediumRiskImg = document.getElementById("medium-risk-img");
+        var lowRiskImg = document.getElementById("low-risk-img");
+        $(document).ready(function () {
+            if ($('.risk-btn.selected')){
+                var selectedId = $('.risk-btn.selected').attr('id');
+                document.getElementById(selectedId + "-img").style.display = "block";
             }
-            else{
-                totalAmountNeeded.value = newTotal;
-                totalsavingsPercentage.value = newTotalPercentage;
-                $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-            }
+        });
+
+        highRisk.onclick = function(){
+            highRiskImg.style.display = "block";
+            mediumRiskImg.style.display = "none";
+            lowRiskImg.style.display = "none";
+        }
+        mediumRisk.onclick = function(){
+            mediumRiskImg.style.display = "block";
+            highRiskImg.style.display = "none";
+            lowRiskImg.style.display = "none";
+        }
+        lowRisk.onclick = function(){
+            lowRiskImg.style.display = "block";
+            highRiskImg.style.display = "none";
+            mediumRiskImg.style.display = "none";
         }
     }
     else if (path == '/savings-gap') {
@@ -253,13 +292,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
 
             // // Calculate the position for the dotCircle based on the end point of the graph
-            const percent = Math.round(percentage);
+            const percent = Math.floor(percentage);
             var startX, startY;
             
-            if (percent === 100 || percent === 0){
-                dotCircle.style.display = "none";
+            if ( percent === 0 || percent >= 100){
             }
             else{
+                dotCircle.style.display = "block";
                 if (percent === 1 || percent === 2){
                     startX = 234;
                     startY = 90;

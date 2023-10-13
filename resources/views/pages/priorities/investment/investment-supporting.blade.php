@@ -12,11 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $totalInvestmentNeeded = isset($arrayData['investment']['totalInvestmentNeeded']) ? $arrayData['investment']['totalInvestmentNeeded'] : '';
-    $newTotalInvestmentNeeded = isset($arrayData['investment']['newTotalInvestmentNeeded']) ? $arrayData['investment']['newTotalInvestmentNeeded'] : '';
-    $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
-    $investmentSupportingYears = isset($arrayData['investment']['investmentSupportingYears']) ? $arrayData['investment']['investmentSupportingYears'] : '';
+    $investment = session('customer_details.investment_needs');
+    $investmentSupportingYears = session('customer_details.investment_needs.investmentTimeFrame');
+    $totalInvestmentNeeded = session('customer_details.investment_needs.totalInvestmentNeeded', '0');
+    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
+    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
 @endphp
 
 
@@ -39,9 +39,7 @@
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM 
-                                            {{$investmentSupportingYears !== '' && $totalInvestmentNeeded !== '' ? 
-                                            number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : 
-                                            number_format(floatval($totalInvestmentNeeded)) }}
+                                            {{ $investmentSupportingYears !== null && $totalInvestmentNeeded !== '' ? number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : number_format(floatval($totalInvestmentNeeded))}}
                                         </h3>
                                         <p class="text-light text-center">Total Investment Fund Needed</p>
                                     </div>
@@ -71,7 +69,6 @@
                                                 <h4 class="mt-4">years</h4>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="total_investmentNeeded" id="total_investmentNeeded" value="{{$totalInvestmentNeeded}}">
                                         <input type="hidden" name="newTotal_investmentNeeded" id="newTotal_investmentNeeded" value="{{$newTotalInvestmentNeeded}}">
                                     </div>
                                 </div>

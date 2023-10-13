@@ -96,8 +96,8 @@ Route::view('/education-amount', 'pages.priorities.education.education-amount')-
 Route::post('/education-amount', [EducationController::class, 'validateEducationAmount'])->name('validate.education.amount');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
 Route::post('/education-supporting-years', [EducationController::class, 'validateEducationSupportingYears'])->name('validate.education.supporting');
-Route::view('/education-other', 'pages.priorities.education.education-other')->name('education.other');
-Route::post('/education-other', [EducationController::class, 'submitEducationOther'])->name('form.submit.education.other');
+Route::view('/education-existing-fund', 'pages.priorities.education.education-existing-fund')->name('education.existing.fund');
+Route::post('/education-existing-fund', [EducationController::class, 'validateEducationExistingFund'])->name('validate.education.existing.fund');
 Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
 Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 
@@ -111,8 +111,10 @@ Route::view('/savings-goals', 'pages.priorities.savings.savings-goals')->name('s
 Route::post('/savings-goals', [SavingsController::class, 'goals'])->name('form.goals');
 Route::view('/savings-goal-duration', 'pages.priorities.savings.savings-goal-duration')->name('savings.goal.duration');
 Route::post('/savings-goal-duration', [SavingsController::class, 'validateGoalDuration'])->name('validate.goal.duration');
-Route::view('/savings-goal-amount', 'pages.priorities.savings.savings-goal-amount')->name('savings.goal.amount');
-Route::post('/savings-goal-amount', [SavingsController::class, 'validateGoalAmount'])->name('validate.goal.amount');
+Route::view('/savings-annual-return', 'pages.priorities.savings.savings-annual-return')->name('savings.annual.return');
+Route::post('/savings-annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
+Route::view('/savings-risk-profile', 'pages.priorities.savings.savings-risk-profile')->name('savings.risk.profile');
+Route::post('/savings-risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
 Route::view('/savings-gap', 'pages.priorities.savings.savings-gap')->name('savings.gap');
 Route::post('/savings-gap', [SavingsController::class, 'submitSavingsGap'])->name('form.submit.savings.gap');
 
@@ -126,6 +128,8 @@ Route::view('/investment-supporting', 'pages.priorities.investment.investment-su
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
 Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
 Route::post('/investment-annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
+Route::view('/investment-risk-profile', 'pages.priorities.investment.investment-risk-profile')->name('investment.risk.profile');
+Route::post('/investment-risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 

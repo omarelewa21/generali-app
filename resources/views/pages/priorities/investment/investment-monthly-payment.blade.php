@@ -12,10 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $investmentMonthlyPayment = isset($arrayData['investment']['investmentMonthlyPayment']) ? $arrayData['investment']['investmentMonthlyPayment'] : '';
-    $totalInvestmentNeeded = isset($arrayData['investment']['totalInvestmentNeeded']) ? $arrayData['investment']['totalInvestmentNeeded'] : '';
-    $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
+    $investment = session('customer_details.investment_needs');
+    $investmentMonthlyPayment = session('customer_details.investment_needs.monthlyInvestmentAmount');
+    $investmentSupportingYears = session('customer_details.investment_needs.investmentTimeFrame');
+    $totalInvestmentNeeded = session('customer_details.investment_needs.totalInvestmentNeeded', '0');
+    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
+    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
 @endphp
 
 
@@ -37,7 +39,10 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$investmentFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM {{ $totalInvestmentNeeded !== null ? number_format(floatval($totalInvestmentNeeded)) : $totalInvestmentNeeded }}</h3>
+                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM 
+                                            <!-- {{ $totalInvestmentNeeded !== null ? number_format(floatval($totalInvestmentNeeded)) : $totalInvestmentNeeded }} -->
+                                            {{ $newTotalInvestmentNeeded !== null || $newTotalInvestmentNeeded !== '' &&  $investmentSupportingYears !== null && $totalInvestmentNeeded !== '' ? number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : number_format(floatval($totalInvestmentNeeded)) }}
+                                        </h3>
                                         <p class="text-light text-center">Total Investment Fund Needed</p>
                                     </div>
                                 </div>

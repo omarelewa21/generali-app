@@ -15,7 +15,7 @@
     $retirement = session('customer_details.retirement_needs');
     $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
     $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded');
+    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
     $newTotalRetirementNeeded = session('customer_details.retirement_needs.newTotalRetirementNeeded');
     $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
@@ -41,7 +41,7 @@
                                         </div>
                                         <h3 id="TotalRetirementFund" class="m-1 text-light text-center">RM 
                                             <!-- {{ $totalRetirementNeeded !== null ? number_format(floatval($totalRetirementNeeded)) : $totalRetirementNeeded }} -->
-                                            {{ $newTotalRetirementNeeded !== null || $newTotalRetirementNeeded !== '' &&  $supportingYears !== null && $totalRetirementNeeded !== '' ? number_format(floatval($totalRetirementNeeded) * floatval($supportingYears)) : $totalRetirementNeeded }}
+                                            {{ $newTotalRetirementNeeded !== null || $newTotalRetirementNeeded !== '' &&  $supportingYears !== null && $totalRetirementNeeded !== '' ? number_format(floatval($totalRetirementNeeded) * floatval($supportingYears)) : number_format(floatval($totalRetirementNeeded)) }}
                                         </h3>
                                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                                     </div>

@@ -163,16 +163,13 @@ class EducationController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
 
-        // return redirect()->route('education.other');
+        return redirect()->route('education.existing.fund');
     }
 
-    public function submitEducationOther(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+    public function validateEducationExistingFund(Request $request){
 
         $customMessages = [
             'education_other_savings.required' => 'Please select an option',
@@ -200,52 +197,84 @@ class EducationController extends Controller
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $newEducationTotalAmountNeeded = floatval($arrayData['education']['newTotalEducationFundNeeded'] - $education_saving_amount);
+        $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newEducationPercentage = floatval($education_saving_amount / $arrayData['education']['newTotalEducationFundNeeded'] * 100);
+        $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
 
-        $arrayData['education']['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['education']['edcationSaving'] = $education_other_savings;
+        // Update specific keys with new values
+        $education = array_merge($education, [
+            'existingFund' => $education_other_savings,
+            'existingFundAmount' => $education_saving_amount
+        ]);
+
         if ($newEducationTotalAmountNeeded === $totalAmountNeeded && $newEducationPercentage === $totalPercentage){
             if ($newEducationTotalAmountNeeded <= 0){
-                $arrayData['education']['totalAmountNeeded'] = 0;
-                $arrayData['education']['educationFundPercentage'] = 100;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
-                $arrayData['education']['educationFundPercentage'] = $totalPercentage;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => $totalAmountNeeded,
+                    'fundPercentage' => $totalPercentage
+                ]);
             }
         }
         else{
             if ($newEducationTotalAmountNeeded <= 0){
-                $arrayData['education']['totalAmountNeeded'] = 0;
-                $arrayData['education']['educationFundPercentage'] = 100;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
-                $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => $newEducationTotalAmountNeeded,
+                    'fundPercentage' => $newEducationPercentage
+                ]);
             }
         }
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
 
         return redirect()->route('education.gap');
     }
 
     public function submitEducationGap(Request $request){
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
 
-        // // Process the form data and perform any necessary actions
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
+        // Process the form data and perform any necessary actions
+        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('savings.home');
     }
 

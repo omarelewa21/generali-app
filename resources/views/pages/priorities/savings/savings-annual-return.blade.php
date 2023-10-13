@@ -1,30 +1,26 @@
 <?php
  /**
- * Template Name: Savings Goal Amount
+ * Template Name: Savings Annual Return
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Savings - Goal Amount</title>
+<title>Savings - Annual Return</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $savingsMonthlyPayment = isset($arrayData['savings']['savingsMonthlyPayment']) ? $arrayData['savings']['savingsMonthlyPayment'] : '';
-    $totalSavingsNeeded = isset($arrayData['savings']['totalSavingsNeeded']) ? $arrayData['savings']['totalSavingsNeeded'] : '';
-    $newTotalSavingsNeeded = isset($arrayData['savings']['newTotalSavingsNeeded']) ? $arrayData['savings']['newTotalSavingsNeeded'] : '';
-    $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
-    $savingsGoalDuration = isset($arrayData['savings']['savingsGoalDuration']) ? $arrayData['savings']['savingsGoalDuration'] : '';
-    $savingsGoalPA = isset($arrayData['savings']['savingsGoalPA']) ? $arrayData['savings']['savingsGoalPA'] : '';
-    $totalAmountNeeded = isset($arrayData['savings']['totalAmountNeeded']) ? $arrayData['savings']['totalAmountNeeded'] : '';
-    $totalAnnualReturn = isset($arrayData['savings']['totalAnnualReturn']) ? $arrayData['savings']['totalAnnualReturn'] : '';
+    $savings = session('customer_details.savings_needs');
+    $savingsGoalPA = session('customer_details.savings_needs.annualReturn');
+    $totalAnnualReturn = session('customer_details.savings_needs.annualReturnAmount');
+    $newTotalSavingsNeeded = session('customer_details.savings_needs.newTotalSavingsNeeded');
+    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
 @endphp
 
 
-<div id="savings-duration" class="vh-100 scroll-content bg-master-mob">
+<div id="savings-annual-return" class="vh-100 scroll-content bg-master-mob">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
@@ -43,7 +39,7 @@
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <h3 id="TotalSavingsFund" class="m-1 text-light text-center">RM 
-                                            {{ $newTotalSavingsNeeded === null || $newTotalSavingsNeeded === '' ? number_format(floatval($newTotalSavingsNeeded)) : number_format(floatval($newTotalSavingsNeeded))}}
+                                            {{ number_format(floatval($newTotalSavingsNeeded)) }}
                                         </h3>
                                         <p class="text-light text-center">Total Savings Fund Needed</p>
                                     </div>
@@ -54,7 +50,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('validate.goal.amount')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('savings_goal_pa')) pb-7 @endif">
+                    <form novalidate action="{{route('validate.savings.annual.return')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('savings_goal_pa')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
                             <div class="col-12">
@@ -68,15 +64,13 @@
                                         <div class="mh-100 h-100 position-relative d-flex align-items-end">
                                             <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" class="m-auto mh-100 p-lg-3 mx-100 mw-100 saving-tabung">
                                             <div class="position-absolute center col-12 text-center">
-                                                <p class="f-45">
-                                                    <input type="text" name="savings_goal_pa" class="form-control d-inline-block money text-center f-64 w-35" id="savings_goal_pa" value="{{$savingsGoalPA}}" required>
+                                                <p class="f-45 fw-700">
+                                                    <input type="text" name="savings_goal_pa" class="form-control d-inline-block money text-center f-64 w-45" id="savings_goal_pa" value="{{$savingsGoalPA}}" required>
                                                     % p.a.
                                                 </p>
                                             </div>
                                         </div>
                                         <input type="hidden" name="total_annualReturn" id="total_annualReturn" value="{{$totalAnnualReturn}}">
-                                        <input type="hidden" name="newTotal_savingsNeeded" id="newTotal_savingsNeeded" value="{{$newTotalSavingsNeeded}}">
-                                        <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                         <input type="hidden" name="percentage" id="percentage" value="{{$savingsFundPercentage}}">
                                     </div>
                                 </div>
@@ -134,7 +128,6 @@
 <script>
     var oldTotalFund = parseFloat({{ $newTotalSavingsNeeded }});
     var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
-    var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
-    var sessionGoalPA = parseFloat({{$savingsGoalPA}});
+    var sessionTotalAnnualReturn = parseFloat({{ $totalAnnualReturn }});
 </script>
 @endsection

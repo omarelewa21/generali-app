@@ -12,10 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $savingsMonthlyPayment = isset($arrayData['savings']['savingsMonthlyPayment']) ? $arrayData['savings']['savingsMonthlyPayment'] : '';
-    $totalSavingsNeeded = isset($arrayData['savings']['totalSavingsNeeded']) ? $arrayData['savings']['totalSavingsNeeded'] : '';
-    $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
+    $savings = session('customer_details.savings_needs');
+    $savingsMonthlyPayment = session('customer_details.savings_needs.monthlyInvestmentAmount');
+    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
+    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
+    $newTotalSavingsNeeded = session('customer_details.savings_needs.newTotalSavingsNeeded');
+    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
 @endphp
 
 
@@ -37,7 +39,10 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$savingsFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalSavingsFund" class="m-1 text-light text-center">RM {{ $totalSavingsNeeded !== null ? number_format(floatval($totalSavingsNeeded)) : $totalSavingsNeeded }}</h3>
+                                        <h3 id="TotalSavingsFund" class="m-1 text-light text-center">RM 
+                                            <!-- {{ $totalSavingsNeeded !== null ? number_format(floatval($totalSavingsNeeded)) : $totalSavingsNeeded }} -->
+                                            {{ $newTotalSavingsNeeded !== null || $newTotalSavingsNeeded !== '' &&  $savingsGoalDuration !== null && $totalSavingsNeeded !== '' ? number_format(floatval($totalSavingsNeeded) * floatval($savingsGoalDuration)) : number_format(floatval($totalSavingsNeeded)) }}
+                                        </h3>
                                         <p class="text-light text-center">Total Savings Needed</p>
                                     </div>
                                 </div>

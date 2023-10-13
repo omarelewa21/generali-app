@@ -290,7 +290,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             const percent = Math.floor(percentage);
             var startX, startY;
 
-            if (percent === 100 || percent === 0){
+            if ( percent === 0 || percent >= 100){
             }
             else{
                 dotCircle.style.display = "block";

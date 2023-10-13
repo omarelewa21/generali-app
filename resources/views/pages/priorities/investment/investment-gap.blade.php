@@ -7,13 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $investmentMonthlyPayment = isset($arrayData['investment']['investmentMonthlyPayment']) ? $arrayData['investment']['investmentMonthlyPayment'] : '';
-    $investmentSupportingYears = isset($arrayData['investment']['investmentSupportingYears']) ? $arrayData['investment']['investmentSupportingYears'] : '';
-    $newTotalInvestmentNeeded = isset($arrayData['investment']['newTotalInvestmentNeeded']) ? $arrayData['investment']['newTotalInvestmentNeeded'] : '';
-    $totalAnnualReturn = isset($arrayData['investment']['totalAnnualReturn']) ? $arrayData['investment']['totalAnnualReturn'] : '';
-    $investmentPA = isset($arrayData['investment']['investmentPA']) ? $arrayData['investment']['investmentPA'] : '';
-    $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
+    $investment = session('customer_details.investment_needs');
+    $investmentSupportingYears = session('customer_details.investment_needs.investmentTimeFrame');
+    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
+    $investmentPA = session('customer_details.investment_needs.annualReturn');
+    $totalAnnualReturn = session('customer_details.investment_needs.annualReturnAmount');
+    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
 @endphp
 
 <div id="investment-summary"  class="vh-100 scrollable-content">
@@ -45,20 +44,19 @@
                                                             <svg>
                                                                 <defs>
                                                                 <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
-                                                                    <stop offset="10%"   stop-color="#FF7D7A"/>
-                                                                    <stop offset="100%" stop-color="#C1210D"/>
+                                                                    <stop offset="10%"   stop-color="{{ $investmentFundPercentage >= 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
+                                                                    <stop offset="100%" stop-color="{{ $investmentFundPercentage >= 100 ? '#14A38B' : '#C1210D' }}"/>
                                                                 </linearGradient >
                                                                 </defs>
                                                                 <g id="circle">
-                                                                    <circle cx="90" cy="90" r="144" stroke="url(#gradient)">
-                                                                    </circle>
-                                                                    <circle cx="" cy="" r="15" style="fill:white" id="dotCircle"></circle>
+                                                                    <circle cx="90" cy="90" r="144" stroke="url(#gradient)"></circle>
+                                                                    <circle r="15" style="fill:white;display:none;" id="dotCircle"></circle>
                                                                 </g>
                                                             </svg>
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{number_format(floatval($investmentFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{floor(floatval($investmentFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -93,11 +91,11 @@
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
-                                                                <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I expected to have an annual return of</h6>
+                                                                <img src="{{ asset('images/needs/icon/saving.png') }}">
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to archieve my goals with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">{{($investmentPA)}}% p.a</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalInvestmentNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -109,11 +107,11 @@
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
-                                                                <img src="{{ asset('images/needs/icon/saving.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I have set aside</h6>
+                                                                <img src="{{ asset('images/needs/icon/umbrella.png') }}">
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I expected to have an annual return of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalInvestmentNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{($investmentPA)}}% p.a</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -126,7 +124,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('investment.annual.return')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('investment.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -139,7 +137,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('investment.annual.return')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('investment.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

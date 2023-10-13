@@ -133,7 +133,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         }
 
     }
-    else if (path == '/education-other') {
+    else if (path == '/education-existing-fund') {
         var education_saving = document.getElementById('education_saving_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
@@ -250,12 +250,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
 
             // // Calculate the position for the dotCircle based on the end point of the graph
-            const percent = Math.round(percentage);
+            const percent = Math.floor(percentage);
             var startX,startY;
-            if (percent === 100 || percent === 0){
-                dotCircle.style.display = "none";
+
+            if ( percent === 0 || percent >= 100){
             }
             else{
+                dotCircle.style.display = "block";
                 if (percent === 1 || percent === 2){
                     startX = 234;
                     startY = 90;
