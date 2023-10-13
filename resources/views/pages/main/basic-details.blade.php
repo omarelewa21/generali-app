@@ -83,28 +83,18 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <select name="phoneCodeMobile" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeMobileSelect" required>
-                                                        @foreach ($countries as $country)
-                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCountry === $country->phone_code || (!$selectedCountry && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumber" placeholder="1234567890" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
+                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
                                                     @error('mobileNumber')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback" id="errorMsg">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="housePhoneNumber" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
-                                                    <select name="phoneCodeHouse" class="form-select input-group-text" aria-label="Phone Code" id="phoneCodeHouseSelect" required>
-                                                        @foreach ($countries as $country)
-                                                            <option value="{{ $country->phone_code }}" {{ ($selectedCode === $country->phone_code || (!$selectedCode && $country->phone_code === '60')) ? 'selected' : '' }}>{{ $country->countries }} (+{{ $country->phone_code }})</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="housePhoneNumber" placeholder="1234567890" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
                                                     @error('housePhoneNumber')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback" id="errorMsgHouse">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -122,7 +112,7 @@
                                 </div>
                             </div>
                         </section>
-                    
+                        
                         <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
@@ -145,8 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
     var firstNameInput = document.getElementById('firstNameInput');
     var lastNameInput = document.getElementById('lastNameInput');
-    var mobileNumberInput = document.getElementById('mobileNumber');
-    var housePhoneNumberInput = document.getElementById('housePhoneNumber');
     var emailInput = document.getElementById('email');
 
     titleSelect.addEventListener('blur', function() {
@@ -159,14 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     lastNameInput.addEventListener('blur', function() {
         validateInputField(lastNameInput);
-    });
-
-    mobileNumberInput.addEventListener('blur', function() {
-        validateMobileNumberField(mobileNumberInput);
-    });
-
-    housePhoneNumberInput.addEventListener('blur', function() {
-        validateHousePhoneNumberField(housePhoneNumberInput);
     });
 
     emailInput.addEventListener('blur', function() {
@@ -193,26 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function validateMobileNumberField(field) {
-        if (field.value && isValidMobileNumber(field.value)) {
-            field.classList.add('is-valid');
-            field.classList.remove('is-invalid');
-        } else {
-            field.classList.remove('is-valid');
-            field.classList.add('is-invalid');
-        }
-    }
-
-    function validateHousePhoneNumberField(field) {
-        if (field.value && isValidHousePhoneNumber(field.value)) {
-            field.classList.add('is-valid');
-            field.classList.remove('is-invalid');
-        } else {
-            field.classList.remove('is-valid');
-            field.classList.add('is-invalid');
-        }
-    }
-
     function validateEmailField(field) {
         if (field.value && isValidEmail(field.value)) {
             field.classList.add('is-valid');
@@ -221,26 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
             field.classList.remove('is-valid');
             field.classList.add('is-invalid');
         }
-    }
-
-    function isValidMobileNumber(mobileNumber) {
-        // Regular expression pattern to validate mobile number format
-        var mobileNumberRegex = /^[1-9]\d{8,9}$/;
-
-        // Test the mobile number against the regex pattern
-        var isValid = mobileNumberRegex.test(mobileNumber);
-
-        return isValid;
-    }
-
-    function isValidHousePhoneNumber(phoneNumber) {
-        // Regular expression pattern to validate house phone number format
-        var phoneNumberRegex = /^[1-9]\d{8,9}$/;
-
-        // Test the phone number against the regex pattern
-        var isValid = phoneNumberRegex.test(phoneNumber);
-
-        return isValid;
     }
 
     function isValidEmail(email) {
