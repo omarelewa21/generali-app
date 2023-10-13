@@ -16,6 +16,7 @@ import './investment-validation';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';
+import './phoneValidation';
 
 // $('.toast').toast('show');
 // $('.tooltip').tooltip('show');

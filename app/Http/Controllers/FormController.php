@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberType;
+use libphonenumber\NumberParseException;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -36,17 +40,43 @@ class FormController extends Controller {
         // Fetch titles from the database
         $titles = DB::table('titles')->pluck('titles')->toArray();
         $code = DB::table('countries')->pluck('phone_code')->toArray();
-    
+        $full_number = $request->input('full_number');
+        $full_number_house = $request->input('full_number_house');
+
         $validatedData = $request->validate([
             'firstName' => 'required|max:255',
             'lastName' => 'required|max:255',
             'title' => 'required|in:' . implode(',', $titles),
-            'phoneCodeMobile' => 'required|in:' . implode(',', $code),
-            'mobileNumber' => 'required|regex:/^[1-9]\d{8,9}$/',
-            'phoneCodeHouse' => 'required|in:' . implode(',', $code),
-            'housePhoneNumber' => 'nullable|regex:/^[1-9]\d{8,9}$/',
-            'email' => 'required|email|max:255',
+            'mobileNumber' => 'required',
+            'email' => 'required|email:rfc,dns|max:255',
         ]);
+
+        // Parse the phone number
+        $phoneNumberUtil = PhoneNumberUtil::getInstance();
+
+        try {
+            $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
+
+            if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
+                // Invalid phone number
+                return redirect()->back()->withErrors(['mobileNumber' => 'Invalid phone number format.'])->withInput();
+            }
+        } catch (NumberParseException $e) {
+            // Invalid phone number format
+            return redirect()->back()->withErrors(['mobileNumber' => 'Invalid phone number format.'])->withInput();
+        }
+
+        try {
+            $parsedPhoneNumberHouse = $phoneNumberUtil->parse($full_number_house, null);
+
+            if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumberHouse)) {
+                // Invalid phone number
+                return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
+            }
+        } catch (NumberParseException $e) {
+            // Invalid phone number format
+            return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
+        }
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -56,16 +86,14 @@ class FormController extends Controller {
             'title' => $validatedData['title'],
             'first_name' => $validatedData['firstName'],
             'last_name' => $validatedData['lastName'],
-            'phone_code_mobile' => $validatedData['phoneCodeMobile'],
-            'mobile_number' => $validatedData['mobileNumber'],
-            'phone_code_house' => $validatedData['phoneCodeHouse'],
-            'house_phone_number' => $validatedData['housePhoneNumber'],
+            'mobile_number' => $full_number,
+            'house_phone_number' => $full_number_house,
             'email' => $validatedData['email']
         ];
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -390,7 +418,6 @@ class FormController extends Controller {
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.my.assets');
     }
@@ -417,7 +444,6 @@ class FormController extends Controller {
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('priorities.to.discuss');
     }
