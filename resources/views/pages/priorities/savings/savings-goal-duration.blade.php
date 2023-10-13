@@ -121,59 +121,7 @@
     </div>
 </div>
 <script>
-    // Get the input value
-    var goalDuration = document.getElementById("savings_goal_duration");
     var goalDurationSessionValue = parseFloat({{$savingsGoalDuration}});
     var oldTotalFund = parseFloat({{ $totalSavingsNeeded }});
-    var newTotalFund = document.getElementById("newTotal_savingsNeeded");
-    
-    var totalSavingsFund = document.getElementById("TotalSavingsFund");
-
-    if (goalDurationSessionValue !== '' || goalDurationSessionValue !== 0 && oldTotalFund !== '') {
-            newTotalFund.value = goalDurationSessionValue * oldTotalFund;
-    } 
-    
-
-    goalDuration.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var goalDurationValue = goalDuration.value;
-
-        var Year = parseInt(goalDurationValue);
-
-        // Calculate months
-        var totalAmount = Year * oldTotalFund;
-
-        if (isNaN(Year)) {
-            // Input is not a valid number
-            totalSavingsFund.innerText = "RM 0";
-        } else {
-            // Input is a valid number, perform the calculation
-            // Display the result
-            var result = totalAmount.toLocaleString();
-
-            totalSavingsFund.innerText = "RM " + result;
-        }
-        
-        newTotalFund.value = Year * oldTotalFund;
-        
-    });
-   
-    document.addEventListener("DOMContentLoaded", function() {
-        goalDuration.addEventListener("blur", function() {
-            validateNumberField(goalDuration);
-        });
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            field.classList.add("is-invalid");
-        } else {
-            field.classList.remove("is-invalid");
-        }
-    }
-    
 </script>
 @endsection

@@ -132,76 +132,9 @@
     </div>
 </div>
 <script>
-    // Get the input value
-    var savingsGoalPA = document.getElementById('savings_goal_pa');
-    var totalAmountNeeded = document.getElementById("total_amountNeeded");
-    var totalsavingsPercentage = document.getElementById("percentage");
     var oldTotalFund = parseFloat({{ $newTotalSavingsNeeded }});
     var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionGoalPA = parseFloat({{$savingsGoalPA}});
-    var totalAnnualReturn = document.getElementById("total_annualReturn");
-
-    savingsGoalPA.addEventListener("input", function() {
-
-        // Retrieve the current input value
-        var savingsGoalPAValue = savingsGoalPA.value;
-
-        var annualReturn = parseInt(savingsGoalPAValue);
-
-        // Calculate annual return
-        var totalPA = annualReturn / 100 * oldTotalFund;
-        var totalPercentage = totalPA / oldTotalFund * 100;
-        var total = oldTotalFund - totalPA;
-
-        $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        if (total <= 0){
-            totalAnnualReturn.value = totalPA;
-            totalAmountNeeded.value = 0;
-            totalsavingsPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAnnualReturn.value = totalPA;
-            totalAmountNeeded.value = total;
-            totalsavingsPercentage.value = totalPercentage;
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-        }
-        
-    });
-   
-    document.addEventListener("DOMContentLoaded", function() {
-        savingsGoalPA.addEventListener("blur", function() {
-            validateNumberField(savingsGoalPA);
-        });
-    });
-
-    function validateNumberField(field) {
-        const value = field.value.trim();
-
-        if (value === "" || isNaN(value)) {
-            field.classList.add("is-invalid");
-        } else {
-            field.classList.remove("is-invalid");
-        }
-    }
-
-    if (sessionGoalPA !== '' || sessionGoalPA !== 0) {
-        var newTotalPA = sessionGoalPA / 100 * oldTotalFund;
-        var newTotal = oldTotalFund - newTotalPA;
-        var newTotalPercentage = newTotalPA / oldTotalFund * 100;
-        totalAnnualReturn.value = newTotalPA;
-        if (newTotal <= 0){
-            totalAmountNeeded.value = 0;
-            totalsavingsPercentage.value = 100;
-            $('.retirement-progress-bar').css('width','100%');
-        }
-        else{
-            totalAmountNeeded.value = newTotal;
-            totalsavingsPercentage.value = newTotalPercentage;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
-    }
-    
 </script>
 @endsection
