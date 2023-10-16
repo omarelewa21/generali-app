@@ -71,8 +71,8 @@
                             'education' => 3,
                             'savings' => 4,
                             'investment' => 5,
-                            'debt cancellation' => 6,
-                            'Health and Medical' => 7,
+                            'health-and-medical' => 6,
+                            'debt cancellation' => 7,
                             // 'Others' => 8,
                             ];
 

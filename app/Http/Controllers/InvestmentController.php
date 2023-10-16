@@ -329,7 +329,7 @@ class InvestmentController extends Controller
 
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('mediacal.home');
+        return redirect()->route('health.medical.home');
     }
 
 }

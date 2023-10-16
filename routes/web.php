@@ -11,6 +11,7 @@ use App\Http\Controllers\RetirementController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\HealthMedicalController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
@@ -44,19 +45,6 @@ Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.pri
 Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name('top.priorities.new');
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
-
-/* Priorities - Protection */
-Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
-Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
-Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
-Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
-Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
-Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
-Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
-Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
-Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
-Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
-Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
@@ -132,6 +120,23 @@ Route::view('/investment-risk-profile', 'pages.priorities.investment.investment-
 Route::post('/investment-risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
+
+/* Priorities - Health and Medical */
+Route::view('/health-medical-home', 'pages.priorities.health-and-medical.health-medical-home')->name('health.medical.home');
+Route::view('/health-medical-selection', 'pages.priorities.health-and-medical.health-medical-selection')->name('health.medical.selection');
+
+/* Priorities - Protection */
+Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
+Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
+Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
+Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
+Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
+Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
+Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
+Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
+Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
+Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
+Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
 
 /* Priorities - Retirement */
 Route::view('/retirement-home-archived', 'pages.priorities.retirement.retirement-home-archived')->name('retirement.home.archived');
