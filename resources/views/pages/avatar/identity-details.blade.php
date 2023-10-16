@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Identity Details Page 
+ * Template Name: Identity Details Page
  */
 ?>
 
@@ -165,21 +165,36 @@
                                             <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $identityDetails['dob_day'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], 0, 2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @else
+                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $identityDetails['dob_month'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 3, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @else
+                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                        return substr($year, -2);
-                                                    }, $yearRange), $yearRange), old('year', $identityDetails['dob_year'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                            return substr($year, -4);
+                                                        }, $yearRange), $yearRange), old('year', substr($identityDetails['dob'], -4)), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    @else
+                                                        {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                            return substr($year, -4);
+                                                        }, $yearRange), $yearRange), old('year'), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    @endif
                                                 </div>
                                                 @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                     <div class="col-md-12">
                                                         <div class="invalid-feedback" style="display:block">The date of birth field is required.</div>
                                                     </div>
                                                 @endif
+                                                <input type="hidden" name="dateOfBirth" id="dateOfBirth">
                                             </div>
                                         </div>
                                     </div>
@@ -257,6 +272,8 @@
 </div>
 
 <script>
+var sessionData = {!! json_encode(session('customer_details')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
@@ -326,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidIDNumber(idNumber) {
         // Regular expression pattern to validate mobile number format
-        var IDNumberRegex = /^\d{6}-\d{2}-\d{4}$/;
+        var IDNumberRegex = /^[0-9]{6}-[0-9]{2}-[0-9]{4}$/;
 
         // Test the mobile number against the regex pattern
         var isValid = IDNumberRegex.test(idNumber);
