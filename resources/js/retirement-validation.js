@@ -127,7 +127,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = amountPerYear.toLocaleString();
 
-                totalRetirementFund.innerText = "RM " + result;
+                totalRetirementFund.innerText = "RM" + result;
             }
 
             // Set the value of the hidden input field
@@ -183,7 +183,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = totalAmount.toLocaleString();
 
-                totalRetirementFund.innerText = "RM " + result;
+                totalRetirementFund.innerText = "RM" + result;
             }
             
             newTotalFund.value = Year * oldTotalFund;
@@ -228,7 +228,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = newTotalFund.toLocaleString();
 
-                totalRetirementFund.innerText = "RM " + result;
+                totalRetirementFund.innerText = "RM" + result;
             }
             
         });

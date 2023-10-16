@@ -14,6 +14,7 @@
 @php
     // Retrieving values from the session
     $education = session('customer_details.education_needs');
+    $childData = session('customer_details.family_details.dependant.children_data');
     $educationSelectedAvatar = session('customer_details.education_needs.coveragePerson');
 @endphp
 
@@ -38,34 +39,31 @@
                             </div>
                         </div>
                         <div class="col-11 m-auto selection-content-coverage h-100 coverage_slick z-1">
-                            <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === 'child1') default @endif" id="child1" data-avatar="child1" data-required="">
-                                    <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:</p>
-                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                    <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 1</strong></p>
-                                </button>
-                            </div>
-                            <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === 'child2') default @endif" id="child2" data-avatar="child2" data-required="">
-                                    <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:</p>
-                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                    <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 2</strong></p>
-                                </button>
-                            </div>
-                            <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === 'child3') default @endif" id="child3" data-avatar="child3" data-required="">
-                                    <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:</p>
-                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-male.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                    <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 3</strong></p>
-                                </button>
-                            </div>
-                            <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === 'child4') default @endif" id="child4" data-avatar="child4" data-required="">
-                                    <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:</p>
-                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-female.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                    <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Child 4</strong></p>
-                                </button>
-                            </div>
+                            @if ($childData)
+                                @foreach($childData as $child)
+                                    <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
+                                        <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === $child['first_name'].''.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
+                                            @php
+                                            $birthdate = '04-06-2005';
+
+                                            // Convert DOB to DateTime object
+                                            $dobDate = \DateTime::createFromFormat('d-m-Y', $birthdate);
+
+                                            //Get current Date
+                                            $currentDate = new \DateTime();
+
+                                            // Calculate the difference between the two dates
+                                            $ageInterval = $currentDate->diff($dobDate);
+                                            $age = $ageInterval->y; // Access the years property of the interval
+
+                                            @endphp
+                                            <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:{{$age}}</p>
+                                            <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                            <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>{{ $child['first_name'] }} {{ $child['last_name'] }}</strong></p>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="col-12">
                             <div class="row">

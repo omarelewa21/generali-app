@@ -80,8 +80,12 @@ class InvestmentController extends Controller
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
+                    $max = 20000000;
                     if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
+                    }
+                    if (intval($numericValue) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
                     }
                 },
             ],
@@ -138,7 +142,7 @@ class InvestmentController extends Controller
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'investment_supporting_years' => 'required|integer|min:1|max:100',
+            'investment_supporting_years' => 'required|integer|min:1|max:99',
         ], $customMessages);
         
         if ($validatedData->fails()) {
@@ -323,6 +327,8 @@ class InvestmentController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('mediacal.home');
     }
 

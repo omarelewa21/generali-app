@@ -86,7 +86,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = monthlyAmount.toLocaleString();
 
-                totalEducationFund.innerText = "RM " + result;
+                totalEducationFund.innerText = "RM" + result;
             }
 
             // Set the value of the hidden input field

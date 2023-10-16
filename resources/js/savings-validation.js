@@ -87,7 +87,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = amountPerYear.toLocaleString();
 
-                totalSavingsFund.innerText = "RM " + result;
+                totalSavingsFund.innerText = "RM" + result;
             }
 
             // Set the value of the hidden input field
@@ -143,7 +143,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = totalAmount.toLocaleString();
 
-                totalSavingsFund.innerText = "RM " + result;
+                totalSavingsFund.innerText = "RM" + result;
+            }
+            if(totalAmount >= 10000000000){
+                totalSavingsFund.classList.add('f-40');
+                totalSavingsFund.classList.remove('f-50');
+            }
+            else{
+                totalSavingsFund.classList.add('f-50');
+                totalSavingsFund.classList.remove('f-40');
             }
             
             newTotalFund.value = Year * oldTotalFund;
