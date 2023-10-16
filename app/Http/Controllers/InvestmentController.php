@@ -43,24 +43,29 @@ class InvestmentController extends Controller
 
         // Validation passed, perform any necessary processing.
         $investmentSelectedAvatarInput = $request->input('investmentSelectedAvatarInput');
-        $investmentSelectedAvatarImage = $request->input('investmentSelectedAvatarImage');
 
-        $arrayData['investment']['investmentSelectedAvatar'] = $investmentSelectedAvatarInput;
-        $arrayData['investment']['investmentSelectedImage'] = $investmentSelectedAvatarImage;
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
 
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Update specific keys with new values
+        $investment = array_merge($investment, [
+            'coveragePerson' => $investmentSelectedAvatarInput
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('investment.monthly.payment');
     }
 
     public function validateInvestmentMonthlyPayment(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'investment_monthly_payment.required' => 'You are required to enter an amount.',
@@ -88,23 +93,42 @@ class InvestmentController extends Controller
 
         // Validation passed, perform any necessary processing.
         $investment_monthly_payment = str_replace(',','',$request->input('investment_monthly_payment'));
+        $investmentTotalFund = floatval($investment_monthly_payment * 12);
         $totalInvestmentNeeded = $request->input('total_investmentNeeded');
 
-        $arrayData['investment']['investmentMonthlyPayment'] = $investment_monthly_payment;
-        $arrayData['investment']['totalInvestmentNeeded'] = $totalInvestmentNeeded;
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
+
+        // Update specific keys with new values
+        $investment = array_merge($investment, [
+            'monthlyInvestmentAmount' => $investment_monthly_payment
+        ]);
+
+        if ($totalInvestmentNeeded === $investmentTotalFund){
+            $investment = array_merge($investment, [
+                'totalInvestmentNeeded' => $totalInvestmentNeeded
+            ]);
+        }
+        else{
+            $investment = array_merge($investment, [
+                'totalInvestmentNeeded' => $investmentTotalFund
+            ]);
+        }
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('investment.supporting');
     }
 
     public function validateInvestmentSupporting(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'investment_supporting_years.required' => 'You are required to enter a year.',
@@ -121,21 +145,39 @@ class InvestmentController extends Controller
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $investment_supporting_years = $request->input('investment_supporting_years');
-        $totalInvestmentNeeded = $request->input('total_investmentNeeded');
+        $newInvestmentTotalFund = floatval($investment_supporting_years * $customerDetails['investment_needs']['totalInvestmentNeeded']);
         $newTotalInvestmentNeeded = $request->input('newTotal_investmentNeeded');
 
-        $arrayData['investment']['investmentSupportingYears'] = $investment_supporting_years;
-        $arrayData['investment']['totalInvestmentNeeded'] = $totalInvestmentNeeded;
-        $arrayData['investment']['newTotalInvestmentNeeded'] = $newTotalInvestmentNeeded;
+        $investment = array_merge($investment, [
+            'investmentTimeFrame' => $investment_supporting_years
+        ]);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        if ($newInvestmentTotalFund === $newTotalInvestmentNeeded){
+            $investment = array_merge($investment, [
+                'newTotalInvestmentNeeded' => $newTotalInvestmentNeeded
+            ]);
+        }
+        else{
+            $investment = array_merge($investment, [
+                'newTotalInvestmentNeeded' => $newInvestmentTotalFund
+            ]);
+        }
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('investment.annual.return');
     }
 
@@ -146,49 +188,141 @@ class InvestmentController extends Controller
 
         $customMessages = [
             'investment_pa.required' => 'You are required to enter annual return percentage',
-            'investment_pa.integer' => 'The input must be a number',
+            'investment_pa.numeric' => 'The input must be a number',
             'investment_pa.min' => 'The input must be at least :min.',
             'investment_pa.max' => 'The input must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'investment_pa' => 'required|integer|min:1|max:100',
+            'investment_pa' => 'required|numeric|min:1|max:100',
         ], $customMessages);
         
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $investment_pa = $request->input('investment_pa');
-        $newTotalInvestmentNeeded = $request->input('newTotal_investmentNeeded');
-        $totalPercentage = $request->input('percentage');
         $totalAnnualReturn = $request->input('total_annualReturn');
+        $newTotalAnnualReturn = $customerDetails['investment_needs']['newTotalInvestmentNeeded'] * $investment_pa / 100;
+        $totalPercentage = $request->input('percentage');
+        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['investment_needs']['newTotalInvestmentNeeded'] * 100);
 
-        $arrayData['investment']['investmentPA'] = $investment_pa;
-        $arrayData['investment']['newTotalInvestmentNeeded'] = $newTotalInvestmentNeeded;
-        $arrayData['investment']['investmentFundPercentage'] = $totalPercentage;
-        $arrayData['investment']['totalAnnualReturn'] = $totalAnnualReturn;
+        // Update specific keys with new values
+        $investment = array_merge($investment, [
+            'annualReturn' => $investment_pa
+        ]);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        if ($newTotalAnnualReturn === $totalAnnualReturn && $newInvestmentPercentage === $totalPercentage){
+            if ($newTotalAnnualReturn <= 0){
+                $investment = array_merge($investment, [
+                    'annualReturnAmount' => '0',
+                    'fundPercentage' => '100'
+                ]);
+            }
+            else{
+                $investment = array_merge($investment, [
+                    'annualReturnAmount' => $totalAnnualReturn,
+                    'fundPercentage' => $totalPercentage
+                ]);
+            }
+        }
+        else{
+            if ($newTotalAnnualReturn <= 0){
+                $investment = array_merge($investment, [
+                    'annualReturnAmount' => '0',
+                    'fundPercentage' => '100'
+                ]);
+            }
+            else{
+                $investment = array_merge($investment, [
+                    'annualReturnAmount' => $newTotalAnnualReturn,
+                    'fundPercentage' => $newInvestmentPercentage
+                ]);
+            }
+        }
 
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
+        return redirect()->route('investment.risk.profile');
+    }
+
+    public function validateInvestmentRiskProfile(Request $request){
+
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one risk.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'investmentRiskProfileInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $investmentRiskProfileInput = $request->input('investmentRiskProfileInput');
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
+
+        // Update specific keys with new values
+        $investment = array_merge($investment, [
+            'riskProfile' => $investmentRiskProfileInput
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+        
         // // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
-
         return redirect()->route('investment.gap');
     }
     
     public function submitInvestmentGap(Request $request){
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // // Process the form data and perform any necessary actions
+        // Get existing investment_needs from the session
+        $investment = $customerDetails['investment_needs'] ?? [];
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['investment_needs'] = $investment;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('mediacal.home');
     }
 

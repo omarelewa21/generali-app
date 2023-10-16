@@ -124,7 +124,7 @@
     background-position: center top 15%;
     background-size: 80%;
 }
-/* =============================== Education Coverage Page ===============================*/
+/* =============================== Needs Coverage Page ===============================*/
 .wrapper-needs-coverage-default {
     display: grid;
     grid-gap: 0px;
@@ -132,12 +132,7 @@
     grid-template-areas:
         "header-needs-default"
         "content-needs-default";
-        /* "warning"
-        "footer-needs-default"; */
-    /* grid-template-rows: 15% minmax(66%,73%) auto 12%; */
-    /* grid-template-rows: 15% minmax(63.2%,71%) auto 14%; */
     grid-template-rows: 15% 85%;
-    /* grid-template-rows: 15% auto auto 14.5%; */
 }
 .header-needs-default {
     grid-area: header-needs-default;
@@ -150,7 +145,6 @@
         "content-block"
         "warning"
         "footer-needs-default";
-    /* grid-template-rows: 100%; */
     grid-template-rows:  auto 5.5vh 13vh;
 }
 .content-block{
@@ -269,6 +263,28 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position:left top;
+}
+/* =============================== Education Coverage Page ===============================*/
+#education-coverage .coverage_slick .slick-slide button{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas:
+        "coverage-age"
+        "coverage-image"
+        "coverage-text";
+    grid-gap: 0px;
+    align-items: end;
+}
+.coverage-age{
+    grid-area: coverage-age;
+    grid-template-columns: 100%;
+    font-size: 20px;
+    border-radius: 17.5px;
+    background:linear-gradient(90deg, #66B560 0%, #2272B6 100%);
+    width: 100px;
+    height: 35px;
+
 }
 /* =============================== Education Supporting Page ===============================*/
 .wrapper-needs-supporting-default {
@@ -455,6 +471,46 @@
     grid-area: tabung-content;
     grid-template-columns: 100%;
 }
+/* ===============================  Risk Profile =======================================*/
+#savings-risk-profile .content-block,
+#investment-risk-profile .content-block{
+    grid-template-areas:
+        "risk-header"
+        "risk-selection"
+        "risk-content";
+    grid-template-rows: 10% 20% 70%;
+}
+.risk-header{
+    grid-area: risk-header;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-selection{
+    grid-area: risk-selection;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-content{
+    grid-area: risk-content;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-btn{
+    background:rgba(238, 238, 238, 1);
+    height:85px; 
+    border:1px solid rgba(240, 240, 240, 1);
+    color:rgba(10, 4, 60, 0.50);
+    font-size: 22px;
+    font-weight: 700;
+}
+.risk-btn:hover,
+.risk-btn[data-required="selected"],
+.risk-btn.selected{
+    background: #C0232C;
+    border: 1px solid #A0A0A0;
+    color: #fff;
+}
+
 /* =============================== Investment Home =======================================*/
 #investment-home .needs-home-avatar-wrapper{
     grid-template-rows: 81% 19%;
@@ -984,7 +1040,7 @@
         grid-template-rows:93% auto;
     }
     .wrapper-needs-supporting-default {
-        grid-template-rows: 19vh 69vh;
+        grid-template-rows: 19vh 69.5vh;
     }
 }
 @media only screen and (min-width: 1366px) and (max-width: 1399px) and (min-height: 1000px){
@@ -1031,13 +1087,16 @@
         background-size: 85%;
         background-position:center top 40%;
     }
+    #savings-risk-profile .bg-education-gap{
+        background-size: 75%;
+    }
 }
 @media screen and (min-width: 1600px) {
     .content-needs-default {
         grid-template-rows: auto 4.5vh 11.2vh;
     }
     .wrapper-needs-supporting-default {
-        grid-template-rows: 19% 71%;
+        grid-template-rows: 16vh 72.5vh;
     }
     .content-supporting-default {
         grid-template-rows:95% auto;
@@ -1056,7 +1115,7 @@
     }
     #savings-monthly .content-supporting-default,
     #investment-monthly .content-supporting-default{
-        grid-template-rows: 90% auto;
+        grid-template-rows: 93.5% auto;
     }
     #retirement-home .needs-stand-bg{
         padding: 200px;
@@ -1502,6 +1561,9 @@ button.choice:focus,
     position: relative;
     padding-left: 40px; /* Space for the custom radio button */
     cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
 }
   
 .needs-radio + label::before {

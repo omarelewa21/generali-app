@@ -60,18 +60,21 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             const selectedParentButton = document.querySelector('[data-avatar="parents"][data-required]');
             const parentsSelect = document.getElementById('parentsSelect');
             const selectedParents = parentsSelect.value;
+
+            selectedParentButton.closest('.button-bg').classList.add('selected');
+            selectedParentButton.setAttribute('data-required', 'selected');
             
-            if (selectedParentButton) {
-                if (selectedParents == 'mother' || selectedParents == 'father' || selectedParents == 'both') {
-                    selectedParentButton.closest('.button-bg').classList.add('selected');
-                    selectedParentButton.setAttribute('data-required', 'selected');
-                }
+            // if (selectedParentButton) {
+            //     if (selectedParents == 'mother' || selectedParents == 'father' || selectedParents == 'both') {
+            //         selectedParentButton.closest('.button-bg').classList.add('selected');
+            //         selectedParentButton.setAttribute('data-required', 'selected');
+            //     }
                 
-                if(selectedParents == 'noParents') {
-                    selectedParentButton.closest('.button-bg').classList.remove('selected');
-                    selectedParentButton.setAttribute('data-required', '');
-                }
-            }
+            //     if(selectedParents == 'noParents') {
+            //         selectedParentButton.closest('.button-bg').classList.remove('selected');
+            //         selectedParentButton.setAttribute('data-required', '');
+            //     }
+            // }
         });
     }
     else if (path == '/assets') {

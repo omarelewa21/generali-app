@@ -15,9 +15,6 @@ class RetirementController extends Controller
 {
     public function validateRetirementCoverageSelection(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -44,21 +41,30 @@ class RetirementController extends Controller
         // Validation passed, perform any necessary processing.
         $retirementSelectedAvatarInput = $request->input('retirementSelectedAvatarInput');
         $retirementSelectedImage = $request->input('retirementSelectedAvatarImage');
-        
-        $arrayData['retirement']['retirementSelectedAvatar'] = $retirementSelectedAvatarInput;
-        $arrayData['retirement']['retirementSelectedImage'] = $retirementSelectedImage;
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+        
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'coveragePerson' => $retirementSelectedAvatarInput
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('retirement.ideal');
     }
 
     public function validateIdeal(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -85,18 +91,28 @@ class RetirementController extends Controller
         // Validation passed, perform any necessary processing.
         $retirementIdealInput = $request->input('retirementIdealInput');
         
-        $arrayData['retirement']['retirementIdeal'] = $retirementIdealInput;
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'idealRetirement' => $retirementIdealInput
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('retirement.monthly.support');
     }
 
     public function validateMonthlySupport(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'retirement_monthly_support.required' => 'You are required to enter an amount.',
@@ -127,26 +143,40 @@ class RetirementController extends Controller
         $retirement_monthly_support = str_replace(',','',$request->input('retirement_monthly_support'));
         $retirementTotalFund = floatval($retirement_monthly_support * 12);
         $totalRetirementFund = floatval($request->input('total_retirementFund'));
+        
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'monthlySupportAmount' => $retirement_monthly_support
+        ]);
 
         if ($totalRetirementFund === $retirementTotalFund){
-            $arrayData['retirement']['totalRetirementNeeded'] = $totalRetirementFund;
+            $retirement = array_merge($retirement, [
+                'totalRetirementNeeded' => $totalRetirementFund
+            ]);
         }
         else{
-            $arrayData['retirement']['totalRetirementNeeded'] = $retirementTotalFund;
+            $retirement = array_merge($retirement, [
+                'totalRetirementNeeded' => $retirementTotalFund
+            ]);
         }
 
-        $arrayData['retirement']['retirementMonthlySupport'] = $retirement_monthly_support;
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('retirement.supporting.years');
     }
 
     public function validateSupportingYears(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'supporting_years.required' => 'You are required to enter a year.',
@@ -163,32 +193,44 @@ class RetirementController extends Controller
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $supporting_years = $request->input('supporting_years');
-        $newRetirementTotalFund = floatval($supporting_years * $arrayData['retirement']['totalRetirementNeeded']);
+        $newRetirementTotalFund = floatval($supporting_years * $customerDetails['retirement_needs']['totalRetirementNeeded']);
         $newTotalRetirementNeeded = floatval($request->input('newTotal_retirementNeeded'));
 
-        $arrayData['retirement']['supportingYears'] = $supporting_years;
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'supportingYears' => $supporting_years
+        ]);
+
         if ($newRetirementTotalFund === $newTotalRetirementNeeded){
-            $arrayData['retirement']['newTotalRetirementNeeded'] = $newTotalRetirementNeeded;
+            $retirement = array_merge($retirement, [
+                'newTotalRetirementNeeded' => $newTotalRetirementNeeded
+            ]);
         }
         else{
-            $arrayData['retirement']['newTotalRetirementNeeded'] = $newRetirementTotalFund;
+            $retirement = array_merge($retirement, [
+                'newTotalRetirementNeeded' => $newRetirementTotalFund
+            ]);
         }
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Set the updated retirement back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('retirement.retire.age');
     }
 
     public function validateRetireAge(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'retirement_age.required' => 'You are required to enter a year.',
@@ -208,21 +250,28 @@ class RetirementController extends Controller
         // Validation passed, perform any necessary processing.
         $retirement_age = $request->input('retirement_age');
 
-        $arrayData['retirement']['retirementAge'] = $retirement_age;
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'retirementAge' => $retirement_age
+        ]);
+
+        // Set the updated retirement back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('retirement.others');
     }
 
     public function validateOthers(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         $customMessages = [
             'other_income_sources.required' => 'Please enter a source of income',
@@ -234,70 +283,105 @@ class RetirementController extends Controller
             'retirement_savings' => [
                 'regex:/^[0-9,]+$/',
                 'nullable',
-                function ($attribute, $value, $fail) use ($request) {
-                    // Remove commas and check if the value is at least 1
-                    $numericValue = str_replace(',', '', $value);
-                    $min = 1;
-                    if (intval($numericValue) < $min) {
-                        $fail('Your amount must be at least ' .$min. '.');
-                    }
-                },
+                // function ($attribute, $value, $fail) use ($request) {
+                //     // Remove commas and check if the value is at least 1
+                //     $numericValue = str_replace(',', '', $value);
+                //     $min = 1;
+                //     if (intval($numericValue) < $min) {
+                //         $fail('Your amount must be at least ' .$min. '.');
+                //     }
+                // },
             ],
         ], $customMessages);
 
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
-        $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
         $other_income_sources = $request->input('other_income_sources');
-        $newRetirementTotalAmountNeeded = floatval($arrayData['retirement']['newTotalRetirementNeeded'] - $retirement_savings);
+        $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
+        if ($retirement_savings === '' || $retirement_savings === 0){
+            $retirement_savings = 0;
+        }
+        else{
+            $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
+        }
+        $newRetirementTotalAmountNeeded = floatval($customerDetails['retirement_needs']['newTotalRetirementNeeded'] - $retirement_savings);
+        $newRetirementPercentage = floatval($retirement_savings / $customerDetails['retirement_needs']['newTotalRetirementNeeded'] * 100);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newRetirementPercentage = floatval($retirement_savings / $arrayData['retirement']['newTotalRetirementNeeded'] * 100);
+        
 
-        $arrayData['retirement']['retirementSavings'] = $retirement_savings;
-        $arrayData['retirement']['otherIncomeResources'] = $other_income_sources;
+        // Update specific keys with new values
+        $retirement = array_merge($retirement, [
+            'retirementSavingsAmount' => $retirement_savings,
+            'otherIncomeResources' => $other_income_sources
+        ]);
+
         if ($newRetirementTotalAmountNeeded === $totalAmountNeeded && $newRetirementPercentage === $totalPercentage){
             if ($newRetirementTotalAmountNeeded <= 0){
-                $arrayData['retirement']['totalAmountNeeded'] = 0;
-                $arrayData['retirement']['retirementFundPercentage'] = 100;
+                $retirement = array_merge($retirement, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['retirement']['totalAmountNeeded'] = $totalAmountNeeded;
-                $arrayData['retirement']['retirementFundPercentage'] = $totalPercentage;
+                $retirement = array_merge($retirement, [
+                    'totalAmountNeeded' => $totalAmountNeeded,
+                    'fundPercentage' => $totalPercentage
+                ]);
             }
         }
         else{
             if ($newRetirementTotalAmountNeeded <= 0){
-                $arrayData['retirement']['totalAmountNeeded'] = 0;
-                $arrayData['retirement']['retirementFundPercentage'] = 100;
+                $retirement = array_merge($retirement, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['retirement']['totalAmountNeeded'] = $newRetirementTotalAmountNeeded;
-                $arrayData['retirement']['retirementFundPercentage'] = $newRetirementPercentage;
+                $retirement = array_merge($retirement, [
+                    'totalAmountNeeded' => $newRetirementTotalAmountNeeded,
+                    'fundPercentage' => $newRetirementPercentage
+                ]);
             }
         }
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Set the updated retirement back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
 
-        // // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('retirement.gap');
     }
 
     public function submitRetirementGap(Request $request){
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Get existing retirement_needs from the session
+        $retirement = $customerDetails['retirement_needs'] ?? [];
+
+        // Set the updated retirement back to the customer_details session
+        $customerDetails['retirement_needs'] = $retirement;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('education.home');
     }

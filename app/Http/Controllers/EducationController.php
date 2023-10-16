@@ -15,8 +15,6 @@ class EducationController extends Controller
 {
     public function validateEducationCoverageSelection(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -43,33 +41,37 @@ class EducationController extends Controller
 
         // Validation passed, perform any necessary processing.
         $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
-        $educationSelectedImage = $request->input('educationSelectedAvatarImage');
-        
-        $arrayData['education']['educationSelectedAvatar'] = $educationSelectedAvatarInput;
-        $arrayData['education']['educationSelectedImage'] = $educationSelectedImage;
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        return redirect()->route('education.monthly.amount');
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
+
+        // Update specific keys with new values
+        $education = array_merge($education, [
+            'coveragePerson' => $educationSelectedAvatarInput
+        ]);
+
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
+        return redirect()->route('education.amount');
     }
 
-    public function submitEducationMonthly(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+    public function validateEducationAmount(Request $request){
 
         $customMessages = [
-            'monthly_education_amount.required' => 'You are required to enter an amount.',
-            // 'monthly_education_amount.min' => 'Your amount must be at least :min.',
-            'monthly_education_amount.regex' => 'You must enter number',
+            'tertiary_education_amount.required' => 'You are required to enter an amount.',
+            'tertiary_education_amount.regex' => 'You must enter number',
         ];
 
-        // $validatedData = Validator::make($request->all(), [
-        //     'monthly_education_amount' => 'required|min:1|regex:/^[0-9,]+$/',
-        // ], $customMessages);
         $validatedData = Validator::make($request->all(), [
-            'monthly_education_amount' => [
+            'tertiary_education_amount' => [
                 'required',
                 'regex:/^[0-9,]+$/',
                 function ($attribute, $value, $fail) {
@@ -89,31 +91,42 @@ class EducationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $monthly_education_amount = str_replace(',','',$request->input('monthly_education_amount'));
-        $educationTotalFund = floatval($monthly_education_amount * 12);
+        $tertiary_education_amount = str_replace(',','',$request->input('tertiary_education_amount'));
+        $educationTotalFund = floatval($tertiary_education_amount);
         $totalEducationFund = floatval($request->input('total_educationFund'));
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
+
+        // Update specific keys with new values
+        $education = array_merge($education, [
+            'tertiaryEducationAmount' => $tertiary_education_amount
+        ]);
+
         if ($totalEducationFund === $educationTotalFund){
-            $arrayData['education']['totalEducationFundNeeded'] = $totalEducationFund;
+            $education = array_merge($education, [
+                'totalEducationNeeded' => $totalEducationFund
+            ]);
         }
         else{
-            $arrayData['education']['totalEducationFundNeeded'] = $educationTotalFund;
+            $education = array_merge($education, [
+                'totalEducationNeeded' => $educationTotalFund
+            ]);
         }
 
-        $arrayData['education']['educationMonthlyAmount'] = $monthly_education_amount;
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('education.supporting.years');
     }
-    public function submitEducationSupporting(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+    public function validateEducationSupportingYears(Request $request){
 
         $customMessages = [
             'tertiary_education_years.required' => 'You are required to enter a year.',
@@ -130,32 +143,33 @@ class EducationController extends Controller
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $tertiary_education_years = $request->input('tertiary_education_years');
-        $newEducationTotalFund = floatval($tertiary_education_years * $arrayData['education']['totalEducationFundNeeded']);
-        $newTotalEducationFundNeeded = floatval($request->input('newTotal_educationFund'));
 
-        $arrayData['education']['totalEducationYear'] = $tertiary_education_years;
-        if ($newEducationTotalFund === $newTotalEducationFundNeeded){
-            $arrayData['education']['newTotalEducationFundNeeded'] = $newTotalEducationFundNeeded;
-        }
-        else{
-            $arrayData['education']['newTotalEducationFundNeeded'] = $newEducationTotalFund;
-        }
+        // Update specific keys with new values
+        $education = array_merge($education, [
+            'tertiaryEducationYear' => $tertiary_education_years
+        ]);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('education.other');
+
+        return redirect()->route('education.existing.fund');
     }
 
-    public function submitEducationOther(Request $request){
-
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+    public function validateEducationExistingFund(Request $request){
 
         $customMessages = [
             'education_other_savings.required' => 'Please select an option',
@@ -183,55 +197,84 @@ class EducationController extends Controller
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
+
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $newEducationTotalAmountNeeded = floatval($arrayData['education']['newTotalEducationFundNeeded'] - $education_saving_amount);
+        $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newEducationPercentage = floatval($education_saving_amount / $arrayData['education']['newTotalEducationFundNeeded'] * 100);
+        $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
 
-        $arrayData['education']['educationSavingAmount'] = $education_saving_amount;
-        $arrayData['education']['edcationSaving'] = $education_other_savings;
+        // Update specific keys with new values
+        $education = array_merge($education, [
+            'existingFund' => $education_other_savings,
+            'existingFundAmount' => $education_saving_amount
+        ]);
+
         if ($newEducationTotalAmountNeeded === $totalAmountNeeded && $newEducationPercentage === $totalPercentage){
             if ($newEducationTotalAmountNeeded <= 0){
-                $arrayData['education']['totalAmountNeeded'] = 0;
-                $arrayData['education']['educationFundPercentage'] = 100;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['education']['totalAmountNeeded'] = $totalAmountNeeded;
-                $arrayData['education']['educationFundPercentage'] = $totalPercentage;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => $totalAmountNeeded,
+                    'fundPercentage' => $totalPercentage
+                ]);
             }
         }
         else{
             if ($newEducationTotalAmountNeeded <= 0){
-                $arrayData['education']['totalAmountNeeded'] = 0;
-                $arrayData['education']['educationFundPercentage'] = 100;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => '0',
+                    'fundPercentage' => '100'
+                ]);
             }
             else{
-                $arrayData['education']['totalAmountNeeded'] = $newEducationTotalAmountNeeded;
-                $arrayData['education']['educationFundPercentage'] = $newEducationPercentage;
+                $education = array_merge($education, [
+                    'totalAmountNeeded' => $newEducationTotalAmountNeeded,
+                    'fundPercentage' => $newEducationPercentage
+                ]);
             }
         }
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
 
-        // // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($arrayData, true) . "</pre>";
-        // return ($formattedArray);
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
         return redirect()->route('education.gap');
     }
 
     public function submitEducationGap(Request $request){
 
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
-        // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+        // Get existing education_needs from the session
+        $education = $customerDetails['education_needs'] ?? [];
 
-        // // Process the form data and perform any necessary actions
+        // Set the updated identity_details back to the customer_details session
+        $customerDetails['education_needs'] = $education;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
+        // Process the form data and perform any necessary actions
+        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('savings.home');
     }
 

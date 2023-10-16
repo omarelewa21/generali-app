@@ -12,14 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $investmentMonthlyPayment = isset($arrayData['investment']['investmentMonthlyPayment']) ? $arrayData['investment']['investmentMonthlyPayment'] : '';
-    $totalInvestmentNeeded = isset($arrayData['investment']['totalInvestmentNeeded']) ? $arrayData['investment']['totalInvestmentNeeded'] : '';
-    $newTotalInvestmentNeeded = isset($arrayData['investment']['newTotalInvestmentNeeded']) ? $arrayData['investment']['newTotalInvestmentNeeded'] : '';
-    $investmentFundPercentage = isset($arrayData['investment']['investmentFundPercentage']) ? $arrayData['investment']['investmentFundPercentage'] : 0;
-    $investmentSupportingYears = isset($arrayData['investment']['investmentSupportingYears']) ? $arrayData['investment']['investmentSupportingYears'] : '';
-    $investmentPA = isset($arrayData['investment']['investmentPA']) ? $arrayData['investment']['investmentPA'] : '';
-    $totalAnnualReturn = isset($arrayData['investment']['totalAnnualReturn']) ? $arrayData['investment']['totalAnnualReturn'] : '';
+    $investment = session('customer_details.investment_needs');
+    $investmentPA = session('customer_details.investment_needs.annualReturn');
+    $totalAnnualReturn = session('customer_details.investment_needs.annualReturnAmount');
+    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
+    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
 @endphp
 
 
@@ -41,7 +38,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$investmentFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM {{ $newTotalInvestmentNeeded === null || $newTotalInvestmentNeeded === '' ? number_format(floatval($newTotalInvestmentNeeded)) : number_format(floatval($newTotalInvestmentNeeded))}}</h3>
+                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM {{ number_format(floatval($newTotalInvestmentNeeded)) }}</h3>
                                         <p class="text-light text-center">Total Investment Fund Needed</p>
                                     </div>
                                 </div>
@@ -67,13 +64,12 @@
                                     </div>
                                     <div class="col-12 col-xl-6 justify-content-center d-flex align-items-center first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center">
-                                            <div class="col-10 col-md-8 col-xl-6 d-flex justify-content-center align-items-center">
-                                                <p class="f-34"><strong>Of course, ideally I'd like to see</strong><br>
+                                            <div class="col-10 col-md-8 col-xl-7 d-flex justify-content-center align-items-center">
+                                                <p class="f-34"><strong>Of course, ideally I'd like to see annual returns of</strong>
                                                     <span class="currencyinput f-34"><input type="text" name="investment_pa" class="form-control d-inline-block w-50 money f-34 @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{$investmentPA}}" required></span>
-                                                    <strong>% p.a. in annual returns.</strong>
+                                                    <strong>% p.a.</strong>
                                                 </p>
                                                 <input type="hidden" name="total_annualReturn" id="total_annualReturn" value="{{$totalAnnualReturn}}">
-                                                <input type="hidden" name="newTotal_investmentNeeded" id="newTotal_investmentNeeded" value="{{$newTotalInvestmentNeeded}}">
                                                 <input type="hidden" name="percentage" id="percentage" value="{{$investmentFundPercentage}}">
                                             </div>
                                         </div>
@@ -133,6 +129,6 @@
 <script>
     var oldTotalFund = parseFloat({{ $newTotalInvestmentNeeded }});
     var investmentFundPercentage = parseFloat({{ $investmentFundPercentage }});
-    var sessionInvestmentPA = parseFloat({{$investmentPA}});
+    var sessionTotalAnnualReturn = parseFloat({{$totalAnnualReturn}});
 </script>
 @endsection

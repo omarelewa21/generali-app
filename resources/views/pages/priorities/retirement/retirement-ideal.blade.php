@@ -13,8 +13,8 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $retirementIdeal = isset($arrayData['retirement']['retirementIdeal']) ? $arrayData['retirement']['retirementIdeal'] : '';
+    $retirement = session('customer_details.retirement_needs');
+    $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
 @endphp
 
 <div id="retirement-ideal" class="vh-100">
@@ -39,25 +39,25 @@
                         </div>
                         <div class="col-11 m-auto selection-content-coverage h-100 coverage_slick z-1">
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['retirement']['retirementIdeal']) && $arrayData['retirement']['retirementIdeal'] === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal/Travel.png') }}" class="mh-100 m-auto coverage-image mw-100">
                                     <p class="py-2 my-0 mx-auto f-family fw-700 coverage-text w-75"><strong>Visiting destinations on my bucket list</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['retirement']['retirementIdeal']) && $arrayData['retirement']['retirementIdeal'] === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal/Lifestyle.png') }}" class="mh-100 m-auto coverage-image mw-100">
                                     <p class="py-2 my-0 mx-auto f-family fw-700 coverage-text w-75"><strong>Maintaining a comfortable lifestyle</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['retirement']['retirementIdeal']) && $arrayData['retirement']['retirementIdeal'] === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal/Retire.png') }}" class="mh-100 m-auto coverage-image mw-100">
                                     <p class="py-2 my-0 mx-auto f-family fw-700 coverage-text w-75"><strong>Retiring early with secure finances</strong></p>
                                 </button>
                             </div>
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if(isset($arrayData['retirement']['retirementIdeal']) && $arrayData['retirement']['retirementIdeal'] === 'retirement-others') default @endif" id="retirement-others" data-avatar="retirement-others" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 w-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($retirementIdeal === 'retirement-others') default @endif" id="retirement-others" data-avatar="retirement-others" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal/Others.png') }}" class="mh-100 m-auto coverage-image mw-100">
                                 </button>
                             </div>

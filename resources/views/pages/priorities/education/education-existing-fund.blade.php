@@ -7,12 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $edcationSaving = isset($arrayData['education']['edcationSaving']) ? $arrayData['education']['edcationSaving'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
-    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
-    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
+    $education = session('customer_details.education_needs');
+    $edcationSaving = session('customer_details.education_needs.existingFund');
+    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
+    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
+    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
 @endphp
 
 <div id="education-content"  class="vh-100 scroll-content">
@@ -33,7 +33,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$educationFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{ $newTotalEducationFundNeeded === null || $newTotalEducationFundNeeded === '' ? number_format(floatval($newTotalEducationFundNeeded)) : number_format(floatval($newTotalEducationFundNeeded))}}</h3>
+                                        <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM {{number_format(floatval($totalEducationNeeded)) }}</h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.other')}}" method="POST" id="children_education" class="m-0 content-supporting-default @if ($errors->has('education_saving_amount')) pb-7 @endif">
+                    <form novalidate action="{{route('validate.education.existing.fund')}}" method="POST" id="children_education" class="m-0 content-supporting-default @if ($errors->has('education_saving_amount')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con align-items-end mh-100">
                             <div class="col-12 position-relative mh-100">
@@ -61,18 +61,18 @@
                                     <div class="col-12 col-xl-6 d-flex align-items-start first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center align-items-center">
                                             <div class="col-10 col-md-9 py-xl-5 my-xl-5">
-                                                <p class="f-34 m-0 fw-700">Luckily, I do have funds saved up for my child’s education.<br>
+                                                <h5 class="f-34 m-0 fw-700 f-family">Luckily, I do have funds saved up for my child’s education.<br>
                                                     <span class="me-5">
                                                         <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#education_saving_amount').attr('required',true);"
-                                                        {{ (isset($arrayData['education']['edcationSaving']) && $arrayData['education']['edcationSaving'] === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
-                                                        <label for="yes" class="form-label">Yes</label>
+                                                        {{ ($edcationSaving === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
+                                                        <label for="yes" class="form-label fw-400">Yes</label>
                                                     </span>
                                                     <span>
                                                         <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('display','none');jQuery('#education_saving_amount').removeAttr('required',false);"
-                                                        {{ (isset($arrayData['education']['edcationSaving']) && $arrayData['education']['edcationSaving'] === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
+                                                        {{ ($edcationSaving === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
                                                         <label for="no" class="form-label">No</label>
                                                     </span>
-                                                </p>
+                                                </h5>
                                                 <p class="hide-content">Current savings amount:
                                                     <span class="currencyinput f-34">RM<input type="text" name="education_saving_amount" class="form-control d-inline-block w-45 money f-34 @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" value="{{ $educationSavingAmount !== null ? number_format(floatval($educationSavingAmount)) : $educationSavingAmount }}" required></span>
                                                 </p>
@@ -134,7 +134,7 @@
     </div>
 </div>
 <script>
-    var oldTotalFund = parseFloat({{ $newTotalEducationFundNeeded }});
+    var oldTotalFund = parseFloat({{ $totalEducationNeeded }});
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionSavingAmount = parseFloat({{$educationSavingAmount}}); 

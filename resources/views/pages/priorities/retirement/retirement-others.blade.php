@@ -12,12 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $retirementSavings = isset($arrayData['retirement']['retirementSavings']) ? $arrayData['retirement']['retirementSavings'] : '';
-    $otherIncomeResources = isset($arrayData['retirement']['otherIncomeResources']) ? $arrayData['retirement']['otherIncomeResources'] : '';
-    $newTotalRetirementNeeded = isset($arrayData['retirement']['newTotalRetirementNeeded']) ? $arrayData['retirement']['newTotalRetirementNeeded'] : '';
-    $retirementFundPercentage = isset($arrayData['retirement']['retirementFundPercentage']) ? $arrayData['retirement']['retirementFundPercentage'] : 0;
-    $totalAmountNeeded = isset($arrayData['retirement']['totalAmountNeeded']) ? $arrayData['retirement']['totalAmountNeeded'] : '';
+    $retirement = session('customer_details.retirement_needs');
+    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
+    $otherIncomeResources = session('customer_details.retirement_needs.otherIncomeResources');
+    $newTotalRetirementNeeded = session('customer_details.retirement_needs.newTotalRetirementNeeded');
+    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
 @endphp
 
 

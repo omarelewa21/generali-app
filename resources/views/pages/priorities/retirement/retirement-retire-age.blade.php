@@ -12,10 +12,10 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $retirementAge = isset($arrayData['retirement']['retirementAge']) ? $arrayData['retirement']['retirementAge'] : '';
-    $newTotalRetirementNeeded = isset($arrayData['retirement']['newTotalRetirementNeeded']) ? $arrayData['retirement']['newTotalRetirementNeeded'] : '';
-    $retirementFundPercentage = isset($arrayData['retirement']['retirementFundPercentage']) ? $arrayData['retirement']['retirementFundPercentage'] : 0;
+    $retirement = session('customer_details.retirement_needs');
+    $retirementAge = session('customer_details.retirement_needs.retirementAge');
+    $newTotalRetirementNeeded = session('customer_details.retirement_needs.newTotalRetirementNeeded');
+    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
 
 
