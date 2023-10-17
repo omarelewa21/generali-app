@@ -158,9 +158,27 @@ class FormController extends Controller {
                 }),
                 'max:15',
             ],
-            // 'day' => 'required',
-            // 'month' => 'required',
-            // 'year' => 'required',
+            'day' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
+            'month' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
+            'year' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
             'btnradio' => 'required|in:smoker,nonSmoker',
             'educationLevel' => 'required|in:' . implode(',', $educationLevel),
             'occupation' => 'required|in:' . implode(',', $occupation),

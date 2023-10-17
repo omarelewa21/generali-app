@@ -122,6 +122,24 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="col-12 pt-4" id="gendergroup">
+                                            <label for="gender" class="form-label text-white">Gender *</label>
+                                            <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                    <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
+                                                    {{ (old('gender') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
+                                                </label>
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                    <input type="radio" class="btn-check" name="gender" id="identityFemaleInput" autocomplete="off" value="female"
+                                                    {{ (old('gender') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
+                                                </label>
+                                            </div>
+                                            @error('gender')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4">

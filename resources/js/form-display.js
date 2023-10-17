@@ -88,6 +88,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = true;
                     document.getElementById('month').disabled = true;
                     document.getElementById('year').disabled = true;
+                    document.getElementById('identityrMaleInput').disabled = true;
+                    document.getElementById('identityFemaleInput').disabled = true;
 
                 } else if (selectedOption === 'Passport') {
                     passportgroup.style.display = 'block';
@@ -100,6 +102,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Birth Certificate') {
                     birthcertgroup.style.display = 'block';
@@ -112,6 +116,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Police / Army') {
                     policegroup.style.display = 'block';
@@ -124,6 +130,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Registration') {
                     registrationgroup.style.display = 'block';
@@ -136,6 +144,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
                 }
 
                 // Store the selected option in local storage
