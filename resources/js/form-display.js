@@ -202,27 +202,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             const event = new Event('change');
             yearField.dispatchEvent(event);
         });        
-        
-        // Extract the first 6 numbers from ID Number and auto-select the date of birth dropdown
-        // const idNumberFieldExtract = document.getElementById('idNumber');
-        // const dayFieldExtract = document.getElementById('day');
-        // const monthFieldExtract = document.getElementById('month');
-        // const yearFieldExtract = document.getElementById('year');
-
-        // // Listen for changes in the ID Number field
-        // idNumberFieldExtract.addEventListener('input', function() {
-        //     const idNumber = idNumberFieldExtract.value;
-
-        //     // Extract the first 6 digits as the date, month, and year
-        //     const yearDigits = idNumber.substring(0, 2);
-        //     const monthDigits = idNumber.substring(2, 4);
-        //     const dateDigits = idNumber.substring(4, 6);
-
-        //     // Set the extracted values in the date of birth fields
-        //     dayFieldExtract.value = dateDigits;
-        //     monthFieldExtract.value = monthDigits;
-        //     yearFieldExtract.value = yearDigits;
-        // });
 
         // Function to calculate age
         function calculateAge() {
