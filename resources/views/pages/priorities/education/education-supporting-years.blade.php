@@ -12,11 +12,10 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $totalEducationYear = isset($arrayData['education']['totalEducationYear']) ? $arrayData['education']['totalEducationYear'] : '';
-    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
+    $education = session('customer_details.education_needs');
+    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
+    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
 @endphp
 
 
@@ -39,9 +38,7 @@
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <h3 id="TotalEducationFund" class="m-1 text-light text-center">RM 
-                                            {{$totalEducationYear !== '' && $totalEducationFundNeeded !== '' ? 
-                                            number_format(floatval($totalEducationFundNeeded) * floatval($totalEducationYear)) : 
-                                            number_format(floatval($totalEducationFundNeeded)) }}
+                                            {{number_format(floatval($totalEducationNeeded)) }}
                                         </h3>
                                         <p class="text-light text-center">Total Education Fund Needed</p>
                                     </div>
@@ -52,7 +49,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.education.supporting')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('tertiary_education_years')) pb-7 @endif">
+                    <form novalidate action="{{route('validate.education.supporting')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('tertiary_education_years')) pb-7 @endif">
                         @csrf
                         <section class="row edu-con">
                             <div class="col-12">
@@ -66,7 +63,6 @@
                                             <input type="text" name="tertiary_education_years" class="form-control d-inline-block money text-center f-64 w-75" id="tertiary_education_years" value="{{$totalEducationYear}}" required>
                                             <h4 class="mt-4">years</h4>
                                         </div>
-                                        <input type="hidden" name="newTotal_educationFund" id="newTotal_educationFund" value="{{$newTotalEducationFundNeeded}}">
                                     </div>
                                     <div class="col-12 col-xl-3 col-lg-2 d-flex align-items-center calendar-text2">
                                         <h4 class="">to build this fund.</h4>
@@ -77,7 +73,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('education.monthly.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('education.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
@@ -106,7 +102,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('education.monthly.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('education.amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -118,9 +114,4 @@
         </div>
     </div>
 </div>
-<script>
-    var educationYearSessionValue = parseFloat({{$totalEducationYear}});
-    var oldTotalFund = parseFloat({{ $totalEducationFundNeeded }});
-    
-</script>
 @endsection

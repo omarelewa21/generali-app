@@ -12,10 +12,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $retirementMonthlySupport = isset($arrayData['retirement']['retirementMonthlySupport']) ? $arrayData['retirement']['retirementMonthlySupport'] : '';
-    $totalRetirementNeeded = isset($arrayData['retirement']['totalRetirementNeeded']) ? $arrayData['retirement']['totalRetirementNeeded'] : '';
-    $retirementFundPercentage = isset($arrayData['retirement']['retirementFundPercentage']) ? $arrayData['retirement']['retirementFundPercentage'] : 0;
+    $retirement = session('customer_details.retirement_needs');
+    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
+    $supportingYears = session('customer_details.retirement_needs.supportingYears');
+    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
+    $newTotalRetirementNeeded = session('customer_details.retirement_needs.newTotalRetirementNeeded');
+    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
 
 
@@ -37,7 +39,10 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$retirementFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalRetirementFund" class="m-1 text-light text-center">RM {{ $totalRetirementNeeded !== null ? number_format(floatval($totalRetirementNeeded)) : $totalRetirementNeeded }}</h3>
+                                        <h3 id="TotalRetirementFund" class="m-1 text-light text-center">RM 
+                                            <!-- {{ $totalRetirementNeeded !== null ? number_format(floatval($totalRetirementNeeded)) : $totalRetirementNeeded }} -->
+                                            {{ $newTotalRetirementNeeded !== null || $newTotalRetirementNeeded !== '' &&  $supportingYears !== null && $totalRetirementNeeded !== '' ? number_format(floatval($totalRetirementNeeded) * floatval($supportingYears)) : number_format(floatval($totalRetirementNeeded)) }}
+                                        </h3>
                                         <p class="text-light text-center">Total Retirement Fund Needed</p>
                                     </div>
                                 </div>

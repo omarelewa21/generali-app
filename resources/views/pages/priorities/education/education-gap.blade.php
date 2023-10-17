@@ -7,13 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $totalEducationYear = isset($arrayData['education']['totalEducationYear']) ? $arrayData['education']['totalEducationYear'] : '';
-    $totalEducationFundNeeded = isset($arrayData['education']['totalEducationFundNeeded']) ? $arrayData['education']['totalEducationFundNeeded'] : '';
-    $newTotalEducationFundNeeded = isset($arrayData['education']['newTotalEducationFundNeeded']) ? $arrayData['education']['newTotalEducationFundNeeded'] : '';
-    $educationSavingAmount = isset($arrayData['education']['educationSavingAmount']) ? $arrayData['education']['educationSavingAmount'] : '';
-    $totalAmountNeeded = isset($arrayData['education']['totalAmountNeeded']) ? $arrayData['education']['totalAmountNeeded'] : '';
-    $educationFundPercentage = isset($arrayData['education']['educationFundPercentage']) ? $arrayData['education']['educationFundPercentage'] : 0;
+    $education = session('customer_details.education_needs');
+    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
+    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded');
+    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
 @endphp
 
 <div id="education-summary"  class="vh-100 scrollable-content">
@@ -45,20 +44,19 @@
                                                             <svg>
                                                                 <defs>
                                                                 <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
-                                                                    <stop offset="10%"   stop-color="#FF7D7A"/>
-                                                                    <stop offset="100%" stop-color="#C1210D"/>
+                                                                    <stop offset="10%"   stop-color="{{ $educationFundPercentage >= 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
+                                                                    <stop offset="100%" stop-color="{{ $educationFundPercentage >= 100 ? '#14A38B' : '#C1210D' }}"/>
                                                                 </linearGradient >
                                                                 </defs>
                                                                 <g id="circle">
-                                                                    <circle cx="90" cy="90" r="144" stroke="url(#gradient)">
-                                                                    </circle>
-                                                                    <circle cx="" cy="" r="15" style="fill:white" id="dotCircle"></circle>
+                                                                    <circle cx="90" cy="90" r="144" stroke="url(#gradient)"></circle>
+                                                                    <circle r="15" style="fill:white;display:none;" id="dotCircle"></circle>
                                                                 </g>
                                                             </svg>
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalEducationFundNeeded ? '100' : number_format(floatval($educationFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -97,7 +95,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I want to give my child a head start with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalEducationFundNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalEducationNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -120,7 +118,7 @@
                                                     <span class="align-self-center green-tick"></span>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mb-3 justify-content-center">
+                                            <!-- <div class="col-12 mb-3 justify-content-center">
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -135,14 +133,14 @@
                                                     </div>
                                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="col-12 show-mobile footer bg-white py-4 z-1">
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('education.other')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('education.existing.fund')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -155,7 +153,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('education.other')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('education.existing.fund')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -169,7 +167,7 @@
 </div>
 <script>
     var educationSavingAmount =  {{$educationSavingAmount}};
-    var newTotalEducationFundNeeded = {{$newTotalEducationFundNeeded}};
+    var newTotalEducationFundNeeded = {{$totalEducationNeeded}};
     var percentage = {{$educationFundPercentage}};
 </script>
 

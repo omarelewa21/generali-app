@@ -44,19 +44,19 @@
                                                             <svg>
                                                                 <defs>
                                                                     <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
-                                                                        <stop offset="10%"   stop-color="{{ $protectionFundPercentage === 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
-                                                                        <stop offset="100%" stop-color="{{ $protectionFundPercentage === 100 ? '#14A38B' : '#C1210D' }}"/>
+                                                                        <stop offset="10%"   stop-color="{{ $protectionFundPercentage >= 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
+                                                                        <stop offset="100%" stop-color="{{ $protectionFundPercentage >= 100 ? '#14A38B' : '#C1210D' }}"/>
                                                                     </linearGradient >
                                                                 </defs>
                                                                 <g id="circle">
                                                                     <circle cx="90" cy="90" r="144" stroke="url(#gradient)"></circle>
-                                                                    <circle r="15" style="fill:white" id="dotCircle"></circle>
+                                                                    <circle r="15" style="fill:white;display:none;" id="dotCircle"></circle>
                                                                 </g>
                                                             </svg>
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalProtectionNeeded ? '100' : number_format(floatval($protectionFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -92,7 +92,7 @@
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to achieve my goals with</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I should have a fund of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
                                                                 <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalProtectionNeeded))}}</h4>

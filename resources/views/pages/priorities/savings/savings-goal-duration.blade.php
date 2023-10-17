@@ -12,12 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $arrayData = session('passingArrays');
-    $savingsMonthlyPayment = isset($arrayData['savings']['savingsMonthlyPayment']) ? $arrayData['savings']['savingsMonthlyPayment'] : '';
-    $totalSavingsNeeded = isset($arrayData['savings']['totalSavingsNeeded']) ? $arrayData['savings']['totalSavingsNeeded'] : '';
-    $newTotalSavingsNeeded = isset($arrayData['savings']['newTotalSavingsNeeded']) ? $arrayData['savings']['newTotalSavingsNeeded'] : '';
-    $savingsFundPercentage = isset($arrayData['savings']['savingsFundPercentage']) ? $arrayData['savings']['savingsFundPercentage'] : 0;
-    $savingsGoalDuration = isset($arrayData['savings']['savingsGoalDuration']) ? $arrayData['savings']['savingsGoalDuration'] : '';
+    $savings = session('customer_details.savings_needs');
+    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
+    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
+    $newTotalSavingsNeeded = session('customer_details.savings_needs.newTotalSavingsNeeded');
+    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
 @endphp
 
 
@@ -40,9 +39,7 @@
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                         <h3 id="TotalSavingsFund" class="m-1 text-light text-center">RM 
-                                            {{$savingsGoalDuration !== '' && $totalSavingsNeeded !== '' ? 
-                                            number_format(floatval($totalSavingsNeeded) * floatval($savingsGoalDuration)) : 
-                                            number_format(floatval($totalSavingsNeeded)) }}
+                                            {{ $savingsGoalDuration !== null && $totalSavingsNeeded !== '' ? number_format(floatval($totalSavingsNeeded) * floatval($savingsGoalDuration)) : number_format(floatval($totalSavingsNeeded))}}
                                         </h3>
                                         <p class="text-light text-center">Total Savings Fund Needed</p>
                                     </div>
@@ -67,7 +64,6 @@
                                             <input type="text" name="savings_goal_duration" class="form-control d-inline-block money text-center f-64 w-75" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required>
                                             <h4 class="mt-4">years</h4>
                                         </div>
-                                        <input type="hidden" name="total_savingsNeeded" id="total_savingsNeeded" value="{{$totalSavingsNeeded}}">
                                         <input type="hidden" name="newTotal_savingsNeeded" id="newTotal_savingsNeeded" value="{{$newTotalSavingsNeeded}}">
                                     </div>
                                     <div class="col-12 col-xl-3 col-lg-2 d-flex align-items-center calendar-text2">
