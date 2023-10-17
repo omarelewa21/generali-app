@@ -932,13 +932,8 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     overflow-y: auto;
     height: 100vh;
   }
-  /* .scrollable-content {
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-  } */
   .main-default-bg {
-    z-index: 1;
+    z-index: 2;
   }
   .progress-main {
     position: fixed;

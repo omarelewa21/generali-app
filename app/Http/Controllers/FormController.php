@@ -39,7 +39,6 @@ class FormController extends Controller {
     {
         // Fetch titles from the database
         $titles = DB::table('titles')->pluck('titles')->toArray();
-        $code = DB::table('countries')->pluck('phone_code')->toArray();
         $full_number = $request->input('full_number');
         $full_number_house = $request->input('full_number_house');
 
@@ -66,16 +65,18 @@ class FormController extends Controller {
             return redirect()->back()->withErrors(['mobileNumber' => 'Invalid phone number format.'])->withInput();
         }
 
-        try {
-            $parsedPhoneNumberHouse = $phoneNumberUtil->parse($full_number_house, null);
-
-            if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumberHouse)) {
-                // Invalid phone number
+        if (!empty($full_number_house)) {
+            try {
+                $parsedPhoneNumberHouse = $phoneNumberUtil->parse($full_number_house, null);
+        
+                if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumberHouse)) {
+                    // Invalid phone number
+                    return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
+                }
+            } catch (NumberParseException $e) {
+                // Invalid phone number format
                 return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
             }
-        } catch (NumberParseException $e) {
-            // Invalid phone number format
-            return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
         }
 
         // Get the existing customer_details array from the session
@@ -93,7 +94,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.welcome');
     }
@@ -105,6 +106,10 @@ class FormController extends Controller {
         $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
         $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
         $occupation = DB::table('occupations')->pluck('name')->toArray();
+        $dateOfBirth = $request->input('dateOfBirth');
+        $day = $request->input('day');
+        $month = $request->input('month');
+        $year = $request->input('year');
 
         $customMessages = [
             'idNumber.regex' => 'The id number field must match the format 123456-78-9012.',
@@ -123,7 +128,7 @@ class FormController extends Controller {
                 Rule::requiredIf(function () use ($request) {
                     return !$request->input('passportNumber') && !$request->input('birthCert') && !$request->input('policeNumber') && !$request->input('registrationNumber');
                 }),
-                'regex:/^\d{6}-\d{2}-\d{4}$/',
+                'regex:/^[0-9]{6}-[0-9]{2}-[0-9]{4}$/',
             ],
             'passportNumber' => [
                 'nullable',
@@ -153,9 +158,9 @@ class FormController extends Controller {
                 }),
                 'max:15',
             ],
-            'day' => 'required',
-            'month' => 'required',
-            'year' => 'required',
+            // 'day' => 'required',
+            // 'month' => 'required',
+            // 'year' => 'required',
             'btnradio' => 'required|in:smoker,nonSmoker',
             'educationLevel' => 'required|in:' . implode(',', $educationLevel),
             'occupation' => 'required|in:' . implode(',', $occupation),
@@ -167,6 +172,13 @@ class FormController extends Controller {
         // Get existing identity_details from the session
         $identityDetails = $customerDetails['identity_details'] ?? [];
 
+        if ($day !== NULL && $day !== '') {
+            $dob = $day . '-' . $month . '-' . $year;
+        }
+        else {
+            $dob = substr($dateOfBirth, 0, 2) . '-' . substr($dateOfBirth, 3, 2) . '-' . substr($dateOfBirth, 6, 4);
+        }
+
         // Update specific keys with new values
         $identityDetails = array_merge($identityDetails, [
             'country' => $validatedData['country'],
@@ -176,9 +188,7 @@ class FormController extends Controller {
             'birth_cert' => $validatedData['birthCert'],
             'police_number' => $validatedData['policeNumber'],
             'registration_number' => $validatedData['registrationNumber'],
-            'dob_day' => $validatedData['day'],
-            'dob_month' => $validatedData['month'],
-            'dob_year' => $validatedData['year'],
+            'dob' => $dob,
             'habits' => $validatedData['btnradio'],
             'education_level' => $validatedData['educationLevel'],
             'occupation' => $validatedData['occupation']
@@ -189,7 +199,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.marital.status');
     }
@@ -266,7 +276,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        
+        Log::debug($customerDetails);
         // Store the updated array back into the session
         return redirect()->route($dataUrl);
     }
@@ -417,7 +427,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('avatar.my.assets');
     }

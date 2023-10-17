@@ -1,3 +1,4 @@
+import 'intl-tel-input';
 import intlTelInput from 'intl-tel-input';
 
 const specificPageURLs = [
@@ -7,7 +8,7 @@ const specificPageURLs = [
 const currentURL = window.location.href;
 
 if (specificPageURLs.some(url => currentURL.endsWith(url))) {
-    
+
     // Add phone code library
     document.addEventListener("DOMContentLoaded", function() {
         const input = document.querySelector("#mobileNumberInput");
