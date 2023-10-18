@@ -31,6 +31,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         
             // Function to show the selected group
             function showSelectedGroup(selectedOption) {
+
                 // Hide all groups and remove the required attribute from all of them
                 newicgroup.style.display = 'none';
                 idNumber.removeAttribute('required');
@@ -51,43 +52,23 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     policeNumber.value = '';
                     registrationNumber.value = '';
 
-                    const yearField = document.getElementById('year');
-                    const idNumberField = document.getElementById('idNumber');
-                    const hiddenField = document.getElementById('dateOfBirth');
-                    
-                    if (sessionData && sessionData.identity_details && sessionData.identity_details.dob !== '') {
-                        hiddenField.value = sessionData.identity_details.dob;
-                    }
-                    else {
-                        hiddenField.value = '';
-                    }
+                    const form = document.getElementById("identityForm");
 
-                    idNumberField.addEventListener('input', function() {
-                        const idNumber = idNumberField.value;
-            
-                        // Extract the first 6 digits as the date, month, and year
-                        const yearDigits = idNumber.substring(0, 2);
-                        const monthDigits = idNumber.substring(2, 4);
-                        const dateDigits = idNumber.substring(4, 6);
-                        
-                        // Find the matching option in the year dropdown based on the last 2 digits of ID
-                        const matchingOption = Array.from(yearField.options).find(option => {
-                            return option.value.substring(2, 4) === yearDigits;
-                        });
-
-                        // Set the selected option in the year dropdown
-                        if (matchingOption) {
-                            matchingOption.selected = true;
-                        }
-
-                        // Set the extracted values in the date of birth fields
-                        hiddenField.value = dateDigits + '-' + monthDigits + '-' + matchingOption.value;
+                    form.addEventListener("submit", function(event) {
+                        // Enable the inputs before form submission
+                        genderRadioMaleInput.disabled = false;
+                        genderRadioFemaleInput.disabled = false;
+                        document.getElementById('day').disabled = false;
+                        document.getElementById('month').disabled = false;
+                        document.getElementById('year').disabled = false;
                     });
-
+                    
                     // Disable day, month, and year select options
                     document.getElementById('day').disabled = true;
                     document.getElementById('month').disabled = true;
                     document.getElementById('year').disabled = true;
+                    document.getElementById('identityrMaleInput').disabled = true;
+                    document.getElementById('identityFemaleInput').disabled = true;
 
                 } else if (selectedOption === 'Passport') {
                     passportgroup.style.display = 'block';
@@ -100,6 +81,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Birth Certificate') {
                     birthcertgroup.style.display = 'block';
@@ -112,6 +95,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Police / Army') {
                     policegroup.style.display = 'block';
@@ -124,6 +109,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
 
                 } else if (selectedOption === 'Registration') {
                     registrationgroup.style.display = 'block';
@@ -136,6 +123,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     document.getElementById('day').disabled = false;
                     document.getElementById('month').disabled = false;
                     document.getElementById('year').disabled = false;
+                    document.getElementById('identityrMaleInput').disabled = false;
+                    document.getElementById('identityFemaleInput').disabled = false;
                 }
 
                 // Store the selected option in local storage
@@ -174,9 +163,29 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         const monthField = document.getElementById('month');
         const yearField = document.getElementById('year');
         const ageField = document.getElementById('age');
-        
+        const genderRegex = /[13579]/;
+        const genderRadioMaleInput = document.getElementById("identityrMaleInput");
+        const genderRadioFemaleInput = document.getElementById("identityFemaleInput");
+
         // Listen for changes in the ID Number field
         idNumberField.addEventListener('input', function() {
+
+            // Logics for gender field
+            const lastDigit = idNumberField.value.substring(13, 14);
+                        
+            if(idNumberField.value === '') {
+                genderRadioMaleInput.checked = false;
+                genderRadioFemaleInput.checked = false;
+            }
+            else if (genderRegex.test(lastDigit.toString())){
+                genderRadioMaleInput.checked = true;
+                genderRadioFemaleInput.checked = false;
+            }
+            else {
+                genderRadioFemaleInput.checked = true;
+                genderRadioMaleInput.checked = false;
+            }
+
             const idNumber = idNumberField.value;
 
             // Extract the first 6 digits as the date, month, and year

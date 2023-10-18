@@ -158,9 +158,34 @@ class FormController extends Controller {
                 }),
                 'max:15',
             ],
-            // 'day' => 'required',
-            // 'month' => 'required',
-            // 'year' => 'required',
+            'gender' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
+            'day' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
+            'month' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
+            'year' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
             'btnradio' => 'required|in:smoker,nonSmoker',
             'educationLevel' => 'required|in:' . implode(',', $educationLevel),
             'occupation' => 'required|in:' . implode(',', $occupation),
@@ -188,6 +213,7 @@ class FormController extends Controller {
             'birth_cert' => $validatedData['birthCert'],
             'police_number' => $validatedData['policeNumber'],
             'registration_number' => $validatedData['registrationNumber'],
+            'gender' => $validatedData['gender'],
             'dob' => $dob,
             'habits' => $validatedData['btnradio'],
             'education_level' => $validatedData['educationLevel'],
