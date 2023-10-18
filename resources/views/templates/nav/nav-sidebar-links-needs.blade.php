@@ -49,7 +49,7 @@
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{route('health.medical.home') }}">
-                <div class="timeline-item-needs {{ $folderName == 'health-and-medical' ? 'active' : '' }}" data-folder-name="health-and-medical">
+                <div class="timeline-item-needs {{ $folderName == 'health and medical' ? 'active' : '' }}" data-folder-name="health and medical">
                     <p class="nav-text text-uppercase {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">Health and Medical</p>
                 </div>
             </a>

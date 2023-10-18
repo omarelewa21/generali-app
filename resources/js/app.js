@@ -13,6 +13,7 @@ import './retirement-validation';
 import './education-validation';
 import './savings-validation';
 import './investment-validation';
+import './health-medical-validation';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';

@@ -1,16 +1,16 @@
 <?php
  /**
- * Template Name: Investment Homepage
+ * Template Name: Health and Medical Homepage
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Investment - Home</title>
+<title>Health and Medical - Home</title>
 
 @section('content')
 
-<div id="investment-home" class="vh-100 overflow-x-hidden scrollable-content">
+<div id="health-medical-home" class="vh-100 overflow-x-hidden scrollable-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner z-99">
@@ -23,19 +23,15 @@
                 <div class="vh-md-100 overflow-y-auto overflow-x-hidden">
                     <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block" />
                     <section class="needs-home-wrapper bg-needs-home">
-                        <div class="container needs-home-contents bg-investment-home-element">
+                        <div class="container needs-home-contents bg-hm-home-element">
                             <div class="row needs-home-avatar-wrapper justify-content-center h-100">
                                 <div class="col-12 needs-home-avatars z-1 align-items-end">
-                                    <div class="position-relative h-100 mh-100">
-                                    </div>
-                                    <div class="h-100 mh-100 z-1 d-flex justify-content-center align-items-end">
+                                    <div class="position-relative h-100 mh-100 z-1 d-flex justify-content-center align-items-end">
                                         <img src="{{ asset('images/needs/health-medical/home/health-medical-home-avatar.png') }}" class="mh-90 z-1 mw-100">
-                                    </div>
-                                    <div class="position-relative h-100 mh-100">
                                     </div>
                                 </div>
                                 <div class="col-12 needs-home-text z-1 align-items-end d-grid">
-                                    <div class="col-md-6 d-flex justify-content-center text-center m-auto z-1">
+                                    <div class="col-md-10 col-xl-6 col-12 d-flex justify-content-center text-center m-auto z-1">
                                         <h4 class="py-3 f-family fw-700">Let's get you covered on the Health & Medical front.</h4>
                                     </div>
                                 </div>

@@ -121,7 +121,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (isNaN(monthlyAmount)) {
                 // Input is not a valid number
                 totalRetirementFund.innerText = "RM 0";
-                displayAvatar.innerText = "RM 0";
             } else {
                 // Input is a valid number, perform the calculation
                 // Display the result
