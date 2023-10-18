@@ -32,7 +32,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('form.submit.identity') }}" method="POST">
+                    <form novalidate action="{{ route('form.submit.identity') }}" method="POST" id="identityForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -127,12 +127,12 @@
                                             <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
-                                                    {{ (old('gender') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                    {{ (old('gender') === 'male' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                 </label>
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="gender" id="identityFemaleInput" autocomplete="off" value="female"
-                                                    {{ (old('gender') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                    {{ (old('gender') === 'female' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                 </label>
                                             </div>
@@ -201,7 +201,7 @@
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                             return substr($year, -4);
                                                         }, $yearRange), $yearRange), old('year', substr($identityDetails['dob'], -4)), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
-                                                    @else
+                                                        @else
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                             return substr($year, -4);
                                                         }, $yearRange), $yearRange), old('year'), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
@@ -212,7 +212,6 @@
                                                         <div class="invalid-feedback" style="display:block">The date of birth field is required.</div>
                                                     </div>
                                                 @endif
-                                                <input type="hidden" name="dateOfBirth" id="dateOfBirth">
                                             </div>
                                         </div>
                                     </div>

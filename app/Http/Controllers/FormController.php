@@ -158,6 +158,13 @@ class FormController extends Controller {
                 }),
                 'max:15',
             ],
+            'gender' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->input('idType') !== 'New IC';
+                }),
+                'max:15',
+            ],
             'day' => [
                 'nullable',
                 Rule::requiredIf(function () use ($request) {
@@ -206,6 +213,7 @@ class FormController extends Controller {
             'birth_cert' => $validatedData['birthCert'],
             'police_number' => $validatedData['policeNumber'],
             'registration_number' => $validatedData['registrationNumber'],
+            'gender' => $validatedData['gender'],
             'dob' => $dob,
             'habits' => $validatedData['btnradio'],
             'education_level' => $validatedData['educationLevel'],
