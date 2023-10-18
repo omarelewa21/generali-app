@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center d-md-none d-xl-block pt-xl-0 pt-sm-5 pt-5">
-                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" style="width: 100%;max-width:400px;z-index:1" alt="Footer Vector">
+                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" style="width: 100%;max-width:550px;margin-top: -80px;" alt="Footer Vector">
                 </div>
             </div>
         </div>
