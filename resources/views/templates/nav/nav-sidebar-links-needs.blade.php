@@ -54,7 +54,7 @@
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{ url('#')}}">
+            <a class="nav-item text-decoration-none text-dark" href="{{ route('debt.cancellation.home')}}">
                 <div class="timeline-item-needs {{ $folderName == 'debt cancellation' ? 'active' : '' }}" data-folder-name="debt cancellation">
                     <p class="nav-text text-uppercase {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">Debt Cancellation</p>
                 </div>

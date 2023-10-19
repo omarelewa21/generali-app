@@ -1,6 +1,6 @@
 // Array of specific folder names where the script should run
 const specificPageURLs = [
-    'health-medical',
+    'debt-cancellation',
 ];
 
 // Get the current URL
@@ -11,8 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-
-    if (path === '/health-medical-selection' || path === '/health-medical/critical-illness/coverage' || path === '/health-medical/medical-planning/coverage' || path === '/health-medical/medical-planning/hospital-selection') {
+    if (path === '/debt-cancellation-coverage') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -20,9 +19,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default behavior of the button click
 
-                // Remove 'selected' class from all elements
                 dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                
                 // Add 'selected' attribute to the clicked button
                 this.setAttribute('data-required', 'selected');
 
@@ -32,7 +29,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 const dataAvatar = this.getAttribute('data-avatar');
 
                 // Update the hidden input field value with the selected avatar
-                selectionInput.value = dataAvatar;
+                document.getElementById('debtSelectedAvatarInput').value = dataAvatar;
             });
         });
 
@@ -45,83 +42,44 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 defaultBtn.classList.add('selected');
             });
         });
-    }
-    else if (path === '/health-medical/medical-planning/room-selection') {
-        // Add event listener to each button with the 'data-required' attribute
-        const dataButtons = document.querySelectorAll('[data-avatar]');
-
-        dataButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default behavior of the button click
-
-                // Remove 'selected' class from all elements
-                dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                dataButtons.forEach(btn => btn.closest('.button-bg').classList.remove('selected'));
-                
-                // Add 'selected' attribute to the clicked button
-                this.setAttribute('data-required', 'selected');
-                this.closest('.button-bg').classList.add('selected');
-
-                dataButtons.forEach(btn => btn.classList.remove('selected'));
-
-                // Get the selected data-avatar value
-                const dataAvatar = this.getAttribute('data-avatar');
-
-                // Update the hidden input field value with the selected avatar
-                selectionInput.value = dataAvatar;
-            });
-        });
-
-        // Preselect the button on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            const defaultBtn = document.querySelectorAll('.default');
-
-            defaultBtn.forEach(defaultBtn => {
-                // Add the 'selected' class to the closest .button-bg div of each default button
-                defaultBtn.classList.add('selected');
-            });
-        });
-    }
-    else if (path == '/health-medical/critical-illness/amount-needed' || path == '/health-medical/medical-planning/amount-needed') {
-
-        var totalFundNeeded = document.getElementById("total_healthMedicalNeeded");
-        var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
-
+    } 
+    else if (path == '/debt-cancellation-outstanding-loan') {
         // Get the input value
-        amountNeeded.addEventListener("input", function() {
+        var outstandingLoan = document.getElementById("debt_outstanding_loan");
+        var totalDebtNeeded = document.getElementById("total_debtFund");
+        var totalDebtFund = document.getElementById("TotalDebtCancellationFund");
+
+        outstandingLoan.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var amountNeededValue = amountNeeded.value;
+            var outstandingLoanValue = outstandingLoan.value;
 
             // Remove non-digit characters
-            const cleanedValue = parseFloat(amountNeededValue.replace(/\D/g, ''));
+            const cleanedValue = parseFloat(outstandingLoanValue.replace(/\D/g, ''));
 
             // Attempt to parse the cleaned value as a float
             const parsedValue = parseFloat(cleanedValue);
 
             // Check if the parsed value is a valid number
             if (!isNaN(parsedValue)) {
-                // If it's a valid number, format it with commas
+            // If it's a valid number, format it with commas
                 const formattedValue = parsedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
                 // Display the result
-                var result = parsedValue.toLocaleString();
-                totalDisplayFund.innerText = "RM" + result;
-                
+                totalDebtFund.innerText = "RM" + formattedValue;
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = amountNeededValue;
-                // Input is not a valid number
-                totalDisplayFund.innerText = "RM 0";
-                
+                this.value = outstandingLoanValue;
+                totalDebtFund.innerText = "RM 0";
             }
+
             // Set the value of the hidden input field
-            totalFundNeeded.value = parsedValue;
+            totalDebtNeeded.value = parsedValue;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            amountNeeded.addEventListener("blur", function() {
-                validateNumberField(amountNeeded);
+            outstandingLoan.addEventListener("blur", function() {
+                validateNumberField(outstandingLoan);
             });
         });
 
@@ -137,50 +95,73 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/health-medical/critical-illness/existing-protection' || path == '/health-medical/medical-planning/existing-protection') {
-        var existing_protection_amount = document.getElementById('existing_protection_amount');
+    else if (path == '/debt-cancellation-settlement-years') {
+
+        // Get the input value
+        var debtSettlementYears = document.getElementById("debt_settlement_years");
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            debtSettlementYears.addEventListener("blur", function() {
+                validateNumberField(debtSettlementYears);
+            });
+        });
+
+        function validateNumberField(field) {
+            const value = field.value.trim();
+
+            if (value === "" || isNaN(value)) {
+                field.classList.add("is-invalid");
+            } else {
+                var Year = parseInt(value);
+                if(Year > 99 || Year < 1){
+                    field.classList.add("is-invalid");
+                }
+                else{
+                    field.classList.remove("is-invalid");
+                }
+            }
+        }
+    }
+    else if (path == '/protection-existing-policy') {
+        var existing_policy_amount = document.getElementById('existing_policy_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
-        var totalHealthMedicalPercentage = document.getElementById("percentage");
-        var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
+        var totalProtectionPercentage = document.getElementById("percentage");
 
-        existing_protection_amount.addEventListener("input", function() {
+        existing_policy_amount.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var existingProtectionAmountValue = existing_protection_amount.value;
+            var existingPolicyAmountValue = existing_policy_amount.value;
     
             // Remove non-digit characters
-            const cleanedValue = parseFloat(existingProtectionAmountValue.replace(/\D/g, ''));
-
-            var existingAmount = parseInt(cleanedValue);
-    
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
+            const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
             // If it's a valid number, format it with commas
                 const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
-                var result = total.toLocaleString();
-                if (total <= 0){
-                    totalAmountNeeded.value = 0;
-                    totalHealthMedicalPercentage.value = 100;
-                    $('.retirement-progress-bar').css('width','100%');
-                    totalDisplayFund.innerText = "RM 0";
-                }
-                else{
-                    totalAmountNeeded.value = total;
-                    totalHealthMedicalPercentage.value = totalPercentage;
-                    $('.retirement-progress-bar').css('width', totalPercentage + '%');
-                    totalDisplayFund.innerText = "RM" + result;
-                }
-
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = existingProtectionAmountValue;
-                totalDisplayFund.innerText = "RM 0";
+                this.value = existingPolicyAmountValue;
+            }
+    
+            var existingAmount = parseInt(cleanedValue);
+    
+            var total = oldTotalFund - existingAmount;
+            var totalPercentage = existingAmount / oldTotalFund * 100;
+            
+            $('.retirement-progress-bar').css('width', totalPercentage + '%');
+            if (total <= 0){
+                totalAmountNeeded.value = 0;
+                totalProtectionPercentage.value = 100;
+                $('.retirement-progress-bar').css('width','100%');
+            }
+            else{
+                totalAmountNeeded.value = total;
+                totalProtectionPercentage.value = totalPercentage;
+                $('.retirement-progress-bar').css('width', totalPercentage + '%');
             }
     
         });
@@ -191,16 +172,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
         noRadio.addEventListener('change', function () {
             jQuery('.hide-content').css('display','none');
-            existing_protection_amount.value = 0; // Clear the money input
+            existing_policy_amount.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
-            totalHealthMedicalPercentage.value = totalPercentage;
+            totalProtectionPercentage.value = totalPercentage;
         });
     
         document.addEventListener('DOMContentLoaded', function() {
     
-            existing_protection_amount.addEventListener('blur', function() {
-                validateNumberField(existing_protection_amount);
+            existing_policy_amount.addEventListener('blur', function() {
+                validateNumberField(existing_policy_amount);
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
@@ -220,29 +201,29 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     field.classList.remove('is-invalid');
                 }
                 if (pattern.test(value)){
-                    document.getElementById("existing_protection_amount").classList.remove("is-invalid");
+                    document.getElementById("existing_policy_amount").classList.remove("is-invalid");
                 }
             }
         });
         
-        if (sessionExistingProtectionAmount !== '' || sessionExistingProtectionAmount !== 0) {
-            var newTotal = oldTotalFund - sessionExistingProtectionAmount;
-            var newTotalPercentage = sessionExistingProtectionAmount / oldTotalFund * 100;
+        if (sessionExistingPolicyAmount !== '' || sessionExistingPolicyAmount !== 0) {
+            var newTotal = oldTotalFund - sessionExistingPolicyAmount;
+            var newTotalPercentage = sessionExistingPolicyAmount / oldTotalFund * 100;
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
-                totalHealthMedicalPercentage.value = 100;
+                totalProtectionPercentage.value = 100;
                 $('.retirement-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
-                totalHealthMedicalPercentage.value = newTotalPercentage;
+                totalProtectionPercentage.value = newTotalPercentage;
                 $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/health-medical/critical-illness/gap' || path == '/health-medical/medical-planning/gap') {
+    else if (path == '/protection-gap') {
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (existingProtectionAmount / totalHealthMedicalNeeded * 100).toFixed(2);
+        var Covered = (existingPolicyAmount / newTotalProtectionNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");
         var dotCircle = document.getElementById("dotCircle");
 

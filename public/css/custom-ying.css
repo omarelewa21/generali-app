@@ -32,6 +32,9 @@
 .start-20{
     left: 20%;
 }
+.left-20{
+    left: 20%;
+}
 .f-55{
     font-size: 55px;
 }
@@ -591,6 +594,15 @@
 #medical-hospital-selection .content-block {
     grid-template-rows: 15% 85%;
 }
+
+/* =============================== Debt Cancellation Home =======================================*/
+#debt-cancellation-home .needs-stand-bg{
+    padding: 180px;
+}
+#debt-cancellation-home .needs-home-avatars{
+    grid-template-columns: 100%;
+}
+
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
     .col-xs-10{
@@ -754,6 +766,9 @@
     .slick-slide{
         max-height: 100%;
     }
+    #debt-cancellation-home .needs-stand-bg {
+        padding: 210px;
+    }
 }
 @media only screen and (max-width: 992px){
     .start-20{
@@ -873,7 +888,7 @@
         grid-template-rows: 11vh 81vh;
     }
     .content-supporting-default{
-        grid-template-rows: 96.5% auto;
+        grid-template-rows: 96% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 90vh;
@@ -1039,6 +1054,12 @@
         background-repeat: no-repeat;
         background: linear-gradient(rgba(0, 0, 0, 0.03) 100%, rgba(255, 255, 255, 0) 0%),url(/images/needs/health-medical/critical-illness/monthly-support/bg-critical-monthly-support.png);
     }
+    #debt-cancellation-home .left-20{
+        left: 3%;
+    }
+    #debt-cancellation-home .coins{
+        width: 35%;
+    }
 }
 @media only screen and (min-width: 1024px){
     .hide-h-100{
@@ -1175,13 +1196,13 @@
         grid-template-rows: auto 4.5vh 11.2vh;
     }
     .wrapper-needs-supporting-default {
-        grid-template-rows: 16vh 72.5vh;
+        grid-template-rows: 16vh 73.5vh;
     }
     .content-supporting-default {
-        grid-template-rows:95% auto;
+        grid-template-rows:94.5% auto;
     }
     .needs-home-wrapper{
-        grid-template-rows: 87vh;
+        grid-template-rows: 88vh;
     }
     #protection-home .needs-home-wrapper {
         grid-template-rows: 86vh;
@@ -1234,7 +1255,7 @@
         grid-template-rows: 19% 74%;
     }
     .content-supporting-default {
-        grid-template-rows:96% auto;
+        grid-template-rows:95.5% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 90vh;
@@ -1264,6 +1285,9 @@
     }
     .hospital .position-absolute.center {
         top: 68%;
+    }
+    #debt-cancellation-home .needs-stand-bg{
+        padding: 250px;
     }
 }
 

@@ -402,6 +402,55 @@ class HealthMedicalController extends Controller
 
     public function validateMedicalPlanningRoomSelection(Request $request)
     {
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing healthMedical_needs from the session
+        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+
+        // Get existing medical_planning from the session
+        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+
+        // Define custom validation rule for button selection
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true;
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+    
+            return false;
+        });
+
+        $validator = Validator::make($request->all(), [
+            'roomTypeInput' => [
+                'at_least_one_selected',
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Validation passed, perform any necessary processing.
+        $roomTypeInput = $request->input('roomTypeInput');
+
+        // Update specific keys with new values
+        $medicalPlanning = array_merge($medicalPlanning, [
+            'roomOption' => $roomTypeInput
+        ]);
+
+        // Set the updated medical_planning back to the customer_details session
+        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('health.medical.planning.amount.needed');
     }
 
     public function validateMedicalPlanningAmountNeeded(Request $request)

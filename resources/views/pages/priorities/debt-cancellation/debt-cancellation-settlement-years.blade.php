@@ -1,30 +1,29 @@
 <?php
  /**
- * Template Name: Health Medical - Critical Illness Amount Needed
+ * Template Name: Debt Cancellation - Settlement Years
  */
 ?>
 @extends('templates.master')
 
 @section('title')
-<title>Health Medical - Critical Illness Amount Needed</title>
+<title>Debt Cancellation - Settlement Years</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
-    $criticalAmountNeeded = session('customer_details.health_medical_needs.critical_illness.neededAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health_medical_needs.critical_illness.totalHealthMedicalNeeded', '0');
-    $healthMedicalFundPercentage = session('customer_details.health_medical_needs.critical_illness.fundPercentage', '0');
-    
+    $debtCancellation = session('customer_details.debt_cancellation_needs');
+    $settlementYears = session('customer_details.debt_cancellation_needs.remainingYearsOfSettlement');
+    $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
+    $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
 @endphp
 
 
-<div id="critical-amount-needed" class="vh-100 scroll-content">
+<div id="debt-settlement-years" class="vh-100 scroll-content bg-master-mob">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-hnm wrapper-needs-supporting-default">
+                <div class="row h-100 wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -35,11 +34,11 @@
                                     <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
                                         <div
                                             class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
-                                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;"
+                                            <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalHealthMedicalFund" class="m-1 text-light text-center f-50">RM{{ number_format(floatval($totalHealthMedicalNeeded)) }}</h3>
-                                        <p class="text-light text-center">Total Health & Medical Fund Needed</p>
+                                        <h3 id="TotalDebtCancellationFund" class="m-1 text-light text-center {{ $totalDebtNeeded === null || $totalDebtNeeded === '' ? 'f-50' : ''}}">RM{{ number_format(floatval($totalDebtNeeded)) }}</h3>
+                                        <p class="text-light text-center">Total Debt Cancellation</p>
                                     </div>
                                 </div>
                             </div>
@@ -48,27 +47,22 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('validate.critical.illness.amount.needed')}}" method="POST" class="m-0 content-supporting-default @if ($errors->has('critical_amount_needed')) pb-7 @endif h-100">
+                    <form novalidate action="{{route('validate.debt.settlement.years')}}" method="POST" class="m-0 bg-education-gap content-supporting-default @if ($errors->has('debt_settlement_years')) pb-7 @endif">
                         @csrf
-                        <section class="row edu-con align-items-end mh-100">
-                            <div class="col-12 position-relative mh-100">
-                                <div class="row h-100" id="needs-content">
-                                    <div class="col-12 col-xl-6 align-items-end justify-content-center z-1 mh-100 second-order protection-monthly mt-auto">
-                                        <img src="{{ asset('images/needs/health-medical/critical-illness/amount-needed/avatar.png') }}" class="mh-100 z-1 p-2 mw-mob h-100 m-auto">
-                                        <div class="col-12 position-absolute bottom-0 show-mobile">
-                                            <div class="row">
-                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('critical_amount_needed') ? 'error-padding' : '' }}"></div>
-                                            </div>
+                        <section class="row edu-con">
+                            <div class="col-12">
+                                <div class="row justify-content-center align-items-center h-100 tabung-wrapper">
+                                    <div class="col-12 tabung-title align-items-center d-grid">
+                                        <div class="col-md-12 d-flex justify-content-center text-center m-auto">
+                                            <h4 class="f-34 fw-700 py-2 m-0">I plan to be debt-free in:</h4>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-6 d-flex align-items-center first-order pt-4 pt-lg-0 z-1 mob-align-top">
-                                        <div class="row justify-content-center">
-                                            <div class="col-10 col-md-8 d-flex align-items-center">
-                                                <p class="f-34"><strong>In case of any Critical Illness, I would need</strong><br>
-                                                    <span class="currencyinput f-34">RM<input type="text" name="critical_amount_needed" class="form-control d-inline-block w-50 money f-34 @error('critical_amount_needed') is-invalid @enderror" id="critical_amount_needed" value="{{ $criticalAmountNeeded !== null ? number_format(floatval($criticalAmountNeeded)) : $criticalAmountNeeded }}" required></span>
-                                                    <strong>/month to take care of myself and my family.</strong>
-                                                </p>
-                                                <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
+                                    <div class="col-12 tabung-content d-flex align-items-center mh-100 h-100 z-1 justify-content-center">
+                                        <div class="mh-100 h-100 position-relative d-flex align-items-end">
+                                            <img src="{{ asset('images/needs/background/Calendar.png') }}" class="m-auto mh-100 p-lg-3 mx-100 mw-100">
+                                            <div class="position-absolute center text-center">
+                                                <input type="text" name="debt_settlement_years" class="form-control d-inline-block money text-center f-64" id="debt_settlement_years" value="{{$settlementYears}}" required>
+                                                <h4 class="mt-4">years</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -78,20 +72,20 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('health.medical.critical.illness.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                            <a href="{{route('debt.cancellation.outstanding.loan')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        @if ($errors->has('critical_amount_needed'))
-                            <section class="row alert-support z-99 hide-mobile">
+                        @if ($errors->has('debt_settlement_years'))
+                            <section class="row alert-support z-1 hide-mobile">
                                 <div class="col-12 alert alert-danger d-flex align-items-center justify-content-center m-0 py-2 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('critical_amount_needed') }}</div>
+                                    <div class="text">{{ $errors->first('debt_settlement_years') }}</div>
                                 </div>
                             </section>
                             <section class="col-12 alert-support z-1 show-mobile fixed-bottom">
@@ -99,20 +93,15 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('critical_amount_needed') }}</div>
+                                    <div class="text">{{ $errors->first('debt_settlement_years') }}</div>
                                 </div>
                             </section>
                         @endif
-                        <div class="col-12 hide-mobile">
-                            <div class="row">
-                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('critical_amount_needed') ? 'error-padding' : '' }}"></div>
-                            </div>
-                        </div>
                         <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('health.medical.critical.illness.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('debt.cancellation.outstanding.loan')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -125,8 +114,6 @@
     </div>
 </div>
 <script>
-    var amountNeeded = document.getElementById("critical_amount_needed");
-    var totalFundNeeded = document.getElementById("total_healthMedicalNeeded");
-    var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
+    var settlementYearsSessionValue = parseFloat({{$settlementYears}});
 </script>
 @endsection
