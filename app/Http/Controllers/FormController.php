@@ -420,35 +420,39 @@ class FormController extends Controller {
         }
         
         if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
-            $validatedData = $request->validate($commonRulesChild);
+            foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
+                $validatedData = $request->validate($commonRulesChild);
 
-            $childData = [
-                'first_name' => $validatedData[$childKey . 'FirstName'],
-                'last_name' => $validatedData[$childKey . 'LastName'],
-                'gender' => $validatedData[$childKey . 'GenderBtnradio'],
-                'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
-                'day' => $validatedData[$childKey . 'day'],
-                'month' => $validatedData[$childKey . 'month'],
-                'year' => $validatedData[$childKey . 'year'],
-                'marital_status' => $validatedData[$childKey . 'MaritalStatus']
-            ];
-            $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
+                $childData = [
+                    'first_name' => $validatedData[$childKey . 'FirstName'],
+                    'last_name' => $validatedData[$childKey . 'LastName'],
+                    'gender' => $validatedData[$childKey . 'GenderBtnradio'],
+                    'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
+                    'day' => $validatedData[$childKey . 'day'],
+                    'month' => $validatedData[$childKey . 'month'],
+                    'year' => $validatedData[$childKey . 'year'],
+                    'marital_status' => $validatedData[$childKey . 'MaritalStatus']
+                ];
+                $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
+            }
         }
 
         if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
-            $validatedData = $request->validate($commonRulesParents);
+            foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
+                $validatedData = $request->validate($commonRulesParents);
 
-            $parentsData = [
-                'first_name' => $validatedData[$parentkey . 'FirstName'],
-                'last_name' => $validatedData[$parentkey . 'LastName'],
-                'gender' => $validatedData[$parentkey . 'GenderBtnradio'],
-                'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
-                'day' => $validatedData[$parentkey . 'day'],
-                'month' => $validatedData[$parentkey . 'month'],
-                'year' => $validatedData[$parentkey . 'year'],
-                'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
-            ];
-            $customerDetails['family_details']['dependant']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['dependant']['parents_data'][$parentkey], $parentsData);
+                $parentsData = [
+                    'first_name' => $validatedData[$parentkey . 'FirstName'],
+                    'last_name' => $validatedData[$parentkey . 'LastName'],
+                    'gender' => $validatedData[$parentkey . 'GenderBtnradio'],
+                    'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
+                    'day' => $validatedData[$parentkey . 'day'],
+                    'month' => $validatedData[$parentkey . 'month'],
+                    'year' => $validatedData[$parentkey . 'year'],
+                    'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
+                ];
+                $customerDetails['family_details']['dependant']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['dependant']['parents_data'][$parentkey], $parentsData);
+            }
         }
 
         // Store the updated customer_details array back into the session
