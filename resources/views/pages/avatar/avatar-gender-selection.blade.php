@@ -103,8 +103,8 @@
                                     @endif
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
                                                     <img src="{{ asset('images/gender-selection/button-gender-male.png') }}" width="140" alt="Gender Male">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
                                                 </button>
@@ -113,8 +113,8 @@
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
                                                     <img src="{{ asset('images/gender-selection/button-gender-female.png') }}" width="117.5" alt="Gender Female">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                                 </button>

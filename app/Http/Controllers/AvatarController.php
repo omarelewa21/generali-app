@@ -12,7 +12,7 @@ class AvatarController extends Controller
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-            if ($value !== null) {
+            if ($value !== null && $value === 'Male' || $value === 'Female') {
                 return true;
             }
             
@@ -50,7 +50,7 @@ class AvatarController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        
+        Log::debug($customerDetails);
         return redirect()->route('identity.details');
     } 
 }

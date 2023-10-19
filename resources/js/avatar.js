@@ -9,6 +9,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
         var btnLeft = document.getElementById('avatar-left');
         var btnRight = document.getElementById('avatar-right');
         var genderSelection = document.getElementById('genderSelection');
+        var genderImage = document.getElementById('genderImage');
         const links = document.querySelectorAll('.skin-tone');
 
         // Declare variable
@@ -57,8 +58,8 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             avatar.setAttribute('src', newImageSrc);
 
             // Update the hidden input field value with the selected avatar
+            genderImage.value = avatar.getAttribute('src');
             genderSelection.value = selectedGenderValue;
-            document.getElementById('genderImage').value = avatar.getAttribute('src');
         }
 
         // Add Click Event Listeners to Links
@@ -83,7 +84,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 avatar.setAttribute('src', newImageSrc);
 
                 // Update the hidden input field value with the selected avatar
-                document.getElementById('genderImage').value = avatar.getAttribute('src');
+                genderImage.value = avatar.getAttribute('src');
                 document.getElementById('skinSelection').value = dataColor;
             });
         });

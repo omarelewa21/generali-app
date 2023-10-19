@@ -186,7 +186,7 @@ input[type="number"] {
 } */
 
 #wrapper-navbar.fixed-top {
-  z-index: 2;
+  z-index: 3;
 }
 
 .main-logo {
@@ -236,7 +236,6 @@ input[type="number"] {
   position: relative;
   margin-bottom: 40px;
   padding-left: 73px;
-  /* Adjust the left padding as needed */
 }
 
 .timeline-item:first-child {
@@ -289,7 +288,6 @@ p.nav-text {
   content: '';
   position: absolute;
   right: 37px;
-  /* Adjust the right position as needed */
   top: 10px;
   bottom: 15px;
   width: 2px;
@@ -390,6 +388,10 @@ button[data-required="selected"] img {
   border: 10px solid transparent;
 }
 
+.btn-avatar {
+  width: 100%;
+}
+
 /* Right Sidebar */
 .right-sidebar h1 {
   font-family: 'Helvetica Neue', sans-serif;
@@ -423,6 +425,11 @@ button[data-required="selected"] img {
   background-size: auto 90%;
   background-position: right top;
   background-repeat: no-repeat;
+}
+
+.homeVector {
+  width: 100%;
+  max-width:550px;
 }
 
 /* Avatar Welcome Page */
@@ -585,7 +592,7 @@ button[data-required="selected"] img {
 }
 
 /* Marital Status Page */
-#avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder {
+#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
   background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
   background-size: 25%,20%;
   background-position: top left, bottom right;
@@ -931,6 +938,25 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 /* Mobile / Tab Responsive */
+@media only screen and (min-width: 1200px) {
+  .homeVector {
+    margin-top: -80px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  #home {
+    overflow: auto;
+  }
+  .footerVector {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  
+}
+
 @media only screen and (min-width: 768px) {
   .main-content {
     overflow-y: auto;
@@ -1004,6 +1030,16 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   .bg-primary {
     z-index: 1;
   }
+  #home {
+    background-position: right bottom;
+    background-size: contain;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .btn-primary {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (max-width: 320px) {
@@ -1011,6 +1047,14 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     padding-top: inherit!important;
   }
 }
+
+
+
+
+
+
+
+
 
 
 

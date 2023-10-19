@@ -406,7 +406,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $(".btn-exit-children").on("click", function () {
             // Get the selected value from the dropdown
             var selectedValue = parseInt($("#childrenSelect").val());
-        
+            
             // Clear the existing images
             $(".imageContainerChildren").empty();
         
@@ -418,6 +418,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         
             if (selectedValue >= 2) {
                 selectedImages.push(childrenImages[1]);
+            }
+
+            // var $imageContainerSpouse = $(".imageContainerSpouse");
+            var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+            var $imageContainerSpouseDom = $('.imageContainerSpouse');
+            var $appended = $imageContainerSpouseDom.find('.appended-image');
+
+            if ($appended.length == '0') {
+                var $childrenContainer = document.querySelector('.imageContainerChildren');
+                $imageContainerSpouse.append($childrenContainer);
             }
         
             selectedImages.forEach(function (image) {
@@ -432,7 +442,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             const childrenSelect = document.getElementById('childrenSelect');
             const selectedChildren = childrenSelect.value;
-
+            
             if (selectedChildren > 0) {
                 clickedAvatars['children'] = true;
 
@@ -450,6 +460,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
             else if(selectedChildren == 'noChildren') {
                 clickedAvatars['children'] = false;
+                delete clickedAvatars['children_data'];
             }
 
             if (familyDependantButtonInput.value == '') {
@@ -520,6 +531,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
             else if(selectedValue == 'noParents') {
                 clickedAvatars['parents'] = false;
+                delete clickedAvatars['parents_data'];
             }
 
             if (familyDependantButtonInput.value == '') {

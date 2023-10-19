@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validateInputField(field) {
-        if (field.value) {
+        if (field.value && isValidName(field.value)) {
             field.classList.add('is-valid');
             field.classList.remove('is-invalid');
         } else {
@@ -181,6 +181,15 @@ document.addEventListener('DOMContentLoaded', function() {
             field.classList.remove('is-valid');
             field.classList.add('is-invalid');
         }
+    }
+
+    function isValidName(name) {
+        // Return true if the email is valid, false otherwise
+        var nameRegex = /^[A-Za-z\s]{1,30}$/;
+
+        var isValid = nameRegex.test(name);
+
+        return isValid;
     }
 
     function isValidEmail(email) {
