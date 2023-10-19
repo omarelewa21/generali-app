@@ -161,26 +161,30 @@ class DebtCancellationController extends Controller
         return redirect()->route('debt.cancellation.existing.debt');
     }
 
-    public function validateProtectionExistingPolicy(Request $request){
+    public function validateDebtCancellationExistingDebt(Request $request){
 
         $customMessages = [
-            'protection_existing_policy.required' => 'Please select an option',
-            'existing_policy_amount.required_if' => 'You are required to enter an amount.',
-            'existing_policy_amount.regex' => 'The amount must be a number',
+            'existing_debt.required' => 'Please select an option',
+            'existing_debt_amount.required_if' => 'You are required to enter an amount.',
+            'existing_debt_amount.regex' => 'The amount must be a number',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'protection_existing_policy' => 'required|in:yes,no',
-            'existing_policy_amount' => [
+            'existing_debt' => 'required|in:yes,no',
+            'existing_debt_amount' => [
                 'nullable',
                 'regex:/^[0-9,]+$/',
-                'required_if:protection_existing_policy,yes',
+                'required_if:existing_debt,yes',
                 function ($attribute, $value, $fail) use ($request) {
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
-                    if (intval($numericValue) < $min && $request->input('protection_existing_policy') === 'yes') {
+                    $max = 20000000;
+                    if (intval($numericValue) < $min && $request->input('existing_debt') === 'yes') {
                         $fail('Your amount must be at least ' .$min. '.');
+                    }
+                    if (intval($numericValue) > $max && $request->input('existing_debt') === 'yes') {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
                     }
                 },
             ],
@@ -193,84 +197,139 @@ class DebtCancellationController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
+        // Get existing protection_needs from the session
+        $debtCancellation = $customerDetails['debt_cancellation_needs'] ?? [];
 
         // Validation passed, perform any necessary processing.
-        $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
-        $protection_existing_policy = $request->input('protection_existing_policy');
-        $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['newTotalProtectionNeeded'] - $existing_policy_amount);
+        $existing_debt_amount = str_replace(',','',$request->input('existing_debt_amount'));
+        $existing_debt = $request->input('existing_debt');
+        $newTotalAmountNeeded = floatval($customerDetails['debt_cancellation_needs']['totalDebtCancellationFund'] - $existing_debt_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['newTotalProtectionNeeded'] * 100);
+        $newPercentage = floatval($existing_debt_amount / $customerDetails['debt_cancellation_needs']['totalDebtCancellationFund'] * 100);
 
         // Update specific keys with new values
-        $protection = array_merge($protection, [
-            'existingPolicyAmount' => $existing_policy_amount,
-            'existingPolicy' => $protection_existing_policy
+        $debtCancellation = array_merge($debtCancellation, [
+            'existingDebt' => $existing_debt,
+            'existingDebtAmount' => $existing_debt_amount
         ]);
 
-        if ($newProtectionTotalAmountNeeded === $totalAmountNeeded && $newProtectionPercentage === $totalPercentage){
-            if ($newProtectionTotalAmountNeeded <= 0){
-                $protection = array_merge($protection, [
+        if ($newTotalAmountNeeded === $totalAmountNeeded && $newPercentage === $totalPercentage){
+            if ($newTotalAmountNeeded <= 0){
+                $debtCancellation = array_merge($debtCancellation, [
                     'totalAmountNeeded' => '0',
                     'fundPercentage' => '100'
                 ]);
             }
             else{
-                $protection = array_merge($protection, [
+                $debtCancellation = array_merge($debtCancellation, [
                     'totalAmountNeeded' => $totalAmountNeeded,
                     'fundPercentage' => $totalPercentage
                 ]);
             }
         }
         else{
-            if ($newProtectionTotalAmountNeeded <= 0){
-                $protection = array_merge($protection, [
+            if ($newTotalAmountNeeded <= 0){
+                $debtCancellation = array_merge($debtCancellation, [
                     'totalAmountNeeded' => '0',
                     'fundPercentage' => '100'
                 ]);
             }
             else{
-                $protection = array_merge($protection, [
-                    'totalAmountNeeded' => $newProtectionTotalAmountNeeded,
-                    'fundPercentage' => $newProtectionPercentage
+                $debtCancellation = array_merge($debtCancellation, [
+                    'totalAmountNeeded' => $newTotalAmountNeeded,
+                    'fundPercentage' => $newPercentage
                 ]);
             }
         }
 
         // Set the updated protection back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['debt_cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('protection.gap');
+        return redirect()->route('debt.cancellation.critical.illness');
     }
 
-    public function submitProtectionGap(Request $request){
+    public function validateDebtCancellationCriticalIllness(Request $request){
+
+        $customMessages = [
+            'critical_coverage.required' => 'Please select an option',
+            'critical_coverage_amount.required_if' => 'You are required to enter an amount.',
+            'critical_coverage_amount.regex' => 'The amount must be a number',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'critical_coverage' => 'required|in:yes,no',
+            'critical_coverage_amount' => [
+                'nullable',
+                'regex:/^[0-9,]+$/',
+                'required_if:critical_coverage,yes',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Remove commas and check if the value is at least 1
+                    $numericValue = str_replace(',', '', $value);
+                    $min = 1;
+                    $max = 20000000;
+                    if (intval($numericValue) < $min && $request->input('critical_coverage') === 'yes') {
+                        $fail('Your amount must be at least ' .$min. '.');
+                    }
+                    if (intval($numericValue) > $max && $request->input('critical_coverage') === 'yes') {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                    }
+                },
+            ],
+        ], $customMessages);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
+        // Get existing protection_needs from the session
+        $debtCancellation = $customerDetails['debt_cancellation_needs'] ?? [];
+
+        // Validation passed, perform any necessary processing.
+        $critical_coverage_amount = str_replace(',','',$request->input('critical_coverage_amount'));
+        $critical_coverage = $request->input('critical_coverage');
+
+        // Update specific keys with new values
+        $debtCancellation = array_merge($debtCancellation, [
+            'criticalIllnessCoverage' => $critical_coverage,
+            'criticalIllnessCoverageAmount' => $critical_coverage_amount
+        ]);
 
         // Set the updated protection back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['debt_cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('retirement.home');
+        return redirect()->route('debt.cancellation.gap');
+    }
+
+    public function submitDebtCancellationGap(Request $request){
+
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing protection_needs from the session
+        $debtCancellation = $customerDetails['debt_cancellation_needs'] ?? [];
+
+        // Store the updated customer_details array back into the session
+        $request->session()->put('customer_details', $customerDetails);
+        Log::debug($customerDetails);
+
+        // // Process the form data and perform any necessary actions
+         $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('existing.policy');
     }
 
 }

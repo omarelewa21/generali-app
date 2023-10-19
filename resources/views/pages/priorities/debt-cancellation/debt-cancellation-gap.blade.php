@@ -1,21 +1,22 @@
 @extends('templates.master')
 
 @section('title')
-<title>Investment - Gap Summary</title>
+<title>Debt Cancellation - Gap Summary</title>
 
 @section('content')
 
 @php
     // Retrieving values from the session
-    $investment = session('customer_details.investment_needs');
-    $investmentSupportingYears = session('customer_details.investment_needs.investmentTimeFrame');
-    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
-    $investmentPA = session('customer_details.investment_needs.annualReturn');
-    $totalAnnualReturn = session('customer_details.investment_needs.annualReturnAmount');
-    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
+    $debtCancellation = session('customer_details.debt_cancellation_needs');
+    $settlementYears = session('customer_details.debt_cancellation_needs.remainingYearsOfSettlement');
+    $debtOutstandingLoan = session('customer_details.debt_cancellation_needs.outstandingLoan');
+    $existingDebtAmount = session('customer_details.debt_cancellation_needs.existingDebtAmount');
+    $totalAmountNeeded = session('customer_details.debt_cancellation_needs.totalAmountNeeded');
+    $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
+    $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
 @endphp
 
-<div id="investment-summary"  class="vh-100 scrollable-content">
+<div id="debt-cancellation-summary"  class="vh-100 scrollable-content">
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
@@ -30,7 +31,7 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.investment.gap')}}" method="POST" class="m-0 content-gap-default">
+                    <form novalidate action="{{route('form.submit.debt.cancellation.gap')}}" method="POST" class="m-0 content-gap-default">
                         @csrf
                         <section class="row align-items-end mh-100">
                             <div class="col-12 position-relative mh-100 scrollable-content">
@@ -43,10 +44,10 @@
                                                         <div class="card-gap__percent">
                                                             <svg>
                                                                 <defs>
-                                                                <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
-                                                                    <stop offset="10%"   stop-color="{{ $investmentFundPercentage >= 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
-                                                                    <stop offset="100%" stop-color="{{ $investmentFundPercentage >= 100 ? '#14A38B' : '#C1210D' }}"/>
-                                                                </linearGradient >
+                                                                    <linearGradient  id="gradient" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
+                                                                        <stop offset="10%"   stop-color="{{ $debtFundPercentage >= 100 ? 'rgba(100, 238, 215)' : '#FF7D7A' }}"/>
+                                                                        <stop offset="100%" stop-color="{{ $debtFundPercentage >= 100 ? '#14A38B' : '#C1210D' }}"/>
+                                                                    </linearGradient >
                                                                 </defs>
                                                                 <g id="circle">
                                                                     <circle cx="90" cy="90" r="144" stroke="url(#gradient)"></circle>
@@ -56,7 +57,7 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{floor(floatval($investmentFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalDebtNeeded ? '100' : floor(floatval($debtFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -64,7 +65,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-center py-2 gap-title">
-                                                <h5 class="f-family fw-700">Total Investment Fund</h5>
+                                                <h5 class="f-family fw-700">Total Debt Cancellation</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +80,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">After the next</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">{{$investmentSupportingYears}} years</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{$settlementYears}} years</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -92,10 +93,10 @@
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/umbrella.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I want to archieve my goals with</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I would like to clear my debt of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalInvestmentNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($debtOutstandingLoan))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -108,14 +109,30 @@
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
                                                                 <img src="{{ asset('images/needs/icon/saving.png') }}">
-                                                                <h6 class="f-family fw-700 m-0 ps-3">I expected to have an annual return of</h6>
+                                                                <h6 class="f-family fw-700 m-0 ps-3">I have put aside</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">{{($investmentPA)}}% p.a</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{$existingDebtAmount === '' ? '0' : number_format(floatval($existingDebtAmount))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <span class="align-self-center green-tick"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-3 justify-content-center">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
+                                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
+                                                                <img src="{{ asset('images/needs/icon/summary.png') }}">
+                                                                <h6 class="f-family fw-700 m-0 ps-3">So I need a plan for</h6>
+                                                            </div>
+                                                            <div class="m-0 ml-auto">
+                                                                <h4 class="f-family fw-700 summary-value m-0 {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded))}}</h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +141,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                                    <a href="{{route('investment.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                                    <a href="{{route('debt.cancellation.critical.illness')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                                 </div>
                                             </div>
@@ -137,7 +154,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('investment.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('debt.cancellation.critical.illness')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -150,9 +167,9 @@
     </div>
 </div>
 <script>
-    var investmentAnnualReturn =  {{$totalAnnualReturn}};
-    var newTotalInvestmentNeeded = {{$newTotalInvestmentNeeded}};
-    var percentage = {{$investmentFundPercentage}};
+    var existingDebtAmount =  {{$existingDebtAmount}};
+    var percentage = {{$debtFundPercentage}};
+    var totalDebtFundNeeded = {{$totalDebtNeeded}}
 </script>
 
 @endsection

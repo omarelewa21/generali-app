@@ -122,46 +122,50 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/protection-existing-policy') {
-        var existing_policy_amount = document.getElementById('existing_policy_amount');
+    else if (path == '/debt-cancellation-existing-debt') {
+        var existing_debt_amount = document.getElementById('existing_debt_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
-        var totalProtectionPercentage = document.getElementById("percentage");
+        var totalDebtPercentage = document.getElementById("percentage");
+        var totalDisplayFund = document.getElementById("TotalDebtCancellationFund");
 
-        existing_policy_amount.addEventListener("input", function() {
+        existing_debt_amount.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var existingPolicyAmountValue = existing_policy_amount.value;
+            var existingDebtAmountValue = existing_debt_amount.value;
     
             // Remove non-digit characters
-            const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
+            const cleanedValue = parseFloat(existingDebtAmountValue.replace(/\D/g, ''));
+
+            var existingAmount = parseInt(cleanedValue);
+    
+            var total = oldTotalFund - existingAmount;
+            var totalPercentage = existingAmount / oldTotalFund * 100;
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
             // If it's a valid number, format it with commas
                 const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                var result = total.toLocaleString();
+                if (total <= 0){
+                    totalAmountNeeded.value = 0;
+                    totalDebtPercentage.value = 100;
+                    $('.retirement-progress-bar').css('width','100%');
+                    totalDisplayFund.innerText = "RM 0";
+                }
+                else{
+                    totalAmountNeeded.value = total;
+                    totalDebtPercentage.value = totalPercentage;
+                    $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                    totalDisplayFund.innerText = "RM" + result;
+                }
+
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = existingPolicyAmountValue;
-            }
-    
-            var existingAmount = parseInt(cleanedValue);
-    
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
-            
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            if (total <= 0){
-                totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
-            }
-            else{
-                totalAmountNeeded.value = total;
-                totalProtectionPercentage.value = totalPercentage;
-                $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                this.value = existingDebtAmountValue;
+                totalDisplayFund.innerText = "RM 0";
             }
     
         });
@@ -172,16 +176,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
         noRadio.addEventListener('change', function () {
             jQuery('.hide-content').css('display','none');
-            existing_policy_amount.value = 0; // Clear the money input
+            existing_debt_amount.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
-            totalProtectionPercentage.value = totalPercentage;
+            totalDebtPercentage.value = totalPercentage;
         });
     
         document.addEventListener('DOMContentLoaded', function() {
     
-            existing_policy_amount.addEventListener('blur', function() {
-                validateNumberField(existing_policy_amount);
+            existing_debt_amount.addEventListener('blur', function() {
+                validateNumberField(existing_debt_amount);
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
@@ -201,35 +205,96 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     field.classList.remove('is-invalid');
                 }
                 if (pattern.test(value)){
-                    document.getElementById("existing_policy_amount").classList.remove("is-invalid");
+                    document.getElementById("existing_debt_amount").classList.remove("is-invalid");
                 }
             }
         });
         
-        if (sessionExistingPolicyAmount !== '' || sessionExistingPolicyAmount !== 0) {
-            var newTotal = oldTotalFund - sessionExistingPolicyAmount;
-            var newTotalPercentage = sessionExistingPolicyAmount / oldTotalFund * 100;
+        if (sessionExistingDebtAmount !== '' || sessionExistingDebtAmount !== 0) {
+            var newTotal = oldTotalFund - sessionExistingDebtAmount;
+            var newTotalPercentage = sessionExistingDebtAmount / oldTotalFund * 100;
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
+                totalDebtPercentage.value = 100;
                 $('.retirement-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
-                totalProtectionPercentage.value = newTotalPercentage;
+                totalDebtPercentage.value = newTotalPercentage;
                 $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/protection-gap') {
+    else if (path == '/debt-cancellation-critical-illness') {
+        var critical_coverage_amount = document.getElementById('critical_coverage_amount');
+        var yesRadio = document.getElementById('yes');
+        var noRadio = document.getElementById('no');
+
+        critical_coverage_amount.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var criticalCoverageAmountValue = critical_coverage_amount.value;
+    
+            // Remove non-digit characters
+            const cleanedValue = parseFloat(criticalCoverageAmountValue.replace(/\D/g, ''));
+    
+            // Check if the parsed value is a valid number
+            if (!isNaN(cleanedValue)) {
+            // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
+                this.value = formattedValue;
+
+            } else {
+            // If it's not a valid number, display the cleaned value as is
+                this.value = criticalCoverageAmountValue;
+            }
+    
+        });
+
+        // Add event listeners to the radio buttons
+        yesRadio.addEventListener('change', function () {
+            jQuery('.hide-content').css('display','block');
+        });
+    
+        noRadio.addEventListener('change', function () {
+            jQuery('.hide-content').css('display','none');
+            critical_coverage_amount.value = 0; // Clear the money input
+        });
+    
+        document.addEventListener('DOMContentLoaded', function() {
+    
+            critical_coverage_amount.addEventListener('blur', function() {
+                validateNumberField(critical_coverage_amount);
+            });
+    
+            if (yesRadio.classList.contains('checked-yes')) {
+                jQuery('.hide-content').css('display','block');
+            }
+            
+            function validateNumberField(field) {
+    
+                const value = field.value.trim();
+                var pattern = /^[0-9,]+$/;
+    
+                if (value === '' || isNaN(value)) {
+                    field.classList.add('is-invalid');
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+                if (pattern.test(value)){
+                    document.getElementById("critical_coverage_amount").classList.remove("is-invalid");
+                }
+            }
+        });
+    }
+    else if (path == '/debt-cancellation-gap') {
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (existingPolicyAmount / newTotalProtectionNeeded * 100).toFixed(2);
+        var Covered = (existingDebtAmount / totalDebtFundNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");
         var dotCircle = document.getElementById("dotCircle");
-
+        
         circle.style.strokeDasharray = 904.896;
         let change = 904.896 - (904.896 * Covered) / 100; 
-
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;

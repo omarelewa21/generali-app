@@ -33,7 +33,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalDebtCancellationFund" class="m-1 text-light text-center {{ $totalDebtNeeded === null || $totalDebtNeeded === '' ? 'f-50' : ''}} ">RM{{ $existingDebtAmount !== null && $totalDebtNeeded !== '' ? number_format(floatval($totalDebtNeeded) - floatval($existingDebtAmount)) : number_format(floatval($totalDebtNeeded))}}</h3>
+                                        <h3 id="TotalDebtCancellationFund" class="m-1 text-light text-center {{ $totalDebtNeeded >= 1000000000 ? 'f-50' : ''}}">RM{{ $existingDebtAmount !== null && $totalDebtNeeded !== '' ? number_format(floatval($totalDebtNeeded) - floatval($existingDebtAmount)) : number_format(floatval($totalDebtNeeded))}}</h3>
                                         <p class="text-light text-center">Total Debt Cancellation</p>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="row h-100" id="needs-content">
                                     <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 second-order">
                                         <div class="text-center education-support mh-100 z-1 h-100">
-                                            <img src="{{ asset('images/needs/health-medical/critical-illness/existing-protection/avatar.png') }}" class="mt-auto mh-100 h-100 mw-100 w-auto avatar-img mx-auto">
+                                            <img src="{{ asset('images/needs/debt-cancellation/existing-debt/avatar.png') }}" class="mt-auto mh-100 h-100 mw-100 w-auto avatar-img mx-auto">
                                         </div>
                                         <div class="col-12 position-absolute bottom-0 show-mobile">
                                             <div class="row">
@@ -60,8 +60,8 @@
                                     </div>
                                     <div class="col-12 col-xl-6 d-flex align-items-start first-order pt-4 pt-lg-0 z-1">
                                         <div class="row justify-content-center align-items-center">
-                                            <div class="col-10 col-md-9 py-xl-5 my-xl-5">
-                                                <p class="f-34 m-0 fw-700">I already have Debt Cancellation coverage.<br>
+                                            <div class="col-10 col-md-10 py-xl-5 my-xl-5">
+                                                <p class="f-34 m-0 fw-700 w-75">I already have Debt Cancellation coverage.<br>
                                                     <span class="me-5">
                                                         <input type="radio" class="needs-radio @error('existing_debt_amount') checked-yes @enderror {{$existingDebt === 'yes' ? 'checked-yes' : ''}}" id="yes" name="existing_debt" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('display','block');jQuery('#existing_debt_amount').attr('required',true);"
                                                         {{ ($existingDebt && $existingDebt === 'yes' || $errors->has('existing_debt_amount') ? 'checked' : '')  }} >

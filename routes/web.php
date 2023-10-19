@@ -157,6 +157,10 @@ Route::view('/debt-cancellation-settlement-years', 'pages.priorities.debt-cancel
 Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::class, 'validateDebtCancellationSettlementYears'])->name('validate.debt.settlement.years');
 Route::view('/debt-cancellation-existing-debt', 'pages.priorities.debt-cancellation.debt-cancellation-existing-debt')->name('debt.cancellation.existing.debt');
 Route::post('/debt-cancellation-existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
+Route::view('/debt-cancellation-critical-illness', 'pages.priorities.debt-cancellation.debt-cancellation-critical-illness')->name('debt.cancellation.critical.illness');
+Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
+Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
+Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 /* Priorities - Protection Old */
 Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');

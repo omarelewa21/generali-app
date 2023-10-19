@@ -37,7 +37,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalDebtCancellationFund" class="m-1 text-light text-center {{ $totalDebtNeeded === null || $totalDebtNeeded === '' ? 'f-50' : ''}}">RM{{ number_format(floatval($totalDebtNeeded)) }}</h3>
+                                        <h3 id="TotalDebtCancellationFund" class="m-1 text-light text-center {{ $totalDebtNeeded >= 1000000000 ? 'f-50' : ''}}">RM{{ number_format(floatval($totalDebtNeeded)) }}</h3>
                                         <p class="text-light text-center">Total Debt Cancellation</p>
                                     </div>
                                 </div>
