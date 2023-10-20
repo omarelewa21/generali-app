@@ -377,8 +377,13 @@ class FormController extends Controller {
                     'marital_status' => $maritalStatusButtonInput
                 ];
 
-                $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
-
+                if ($customerDetails['identity_details']) {
+                    $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
+                }
+                else {
+                    $customerDetails['identity_details'] = $newData;
+                }
+                
                 if ($maritalStatusButtonInput === 'single') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
                     $customerDetails['family_details']['dependant']['children'] = false;
