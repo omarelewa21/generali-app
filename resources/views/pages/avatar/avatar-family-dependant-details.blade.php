@@ -39,7 +39,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST">
+                    <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -130,7 +130,7 @@
                                                                         <label for="spouseFirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $spouseData['first_name'] ?? '') }}" required>
                                                                         @error('spouseFirstName')
-                                                                            <div class="invalid-feedback text-red">The spouse's first name field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -139,7 +139,7 @@
                                                                         <label for="spouseLastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $spouseData['last_name'] ?? '') }}" required>
                                                                         @error('spouseLastName')
-                                                                            <div class="invalid-feedback text-red">The spouse's last name field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -700,7 +700,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validateInputField(field) {
-        if (field.value) {
+        if (field.value && isValidName(field.value)) {
             field.classList.add('is-valid');
             field.classList.remove('is-invalid');
         } else {
@@ -739,8 +739,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function isValidName(name) {
+        // Return true if the email is valid, false otherwise
+        var nameRegex = /^[A-Za-z\s]{1,30}$/;
+
+        var isValid = nameRegex.test(name);
+
+        return isValid;
+    }
+
     function isValidIdNumber(spouseIdNumber) {
-        var idNumberRegex = /^\d{6}-\d{2}-\d{4}$/;  // Regular expression to match only digits
+        var idNumberRegex = /^[0-9]{6}-[0-9]{2}-[0-9]{4}$/;  // Regular expression to match only digits
 
         // Test the mobile number against the regex pattern
         var isValid = idNumberRegex.test(spouseIdNumber);

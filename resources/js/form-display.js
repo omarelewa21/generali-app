@@ -253,6 +253,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/family-dependant-details') {
         var spouse = customer_details.family_details.dependant.spouse;
+
         if (spouse === true) {
             // Show the selected groups based on the dropdown selected
             document.addEventListener('DOMContentLoaded', function() {
@@ -272,6 +273,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             
                 // Function to show the selected group
                 function showSelectedGroup(selectedOption) {
+
                     // Hide all groups and remove the required attribute from all of them
                     newicgroup.style.display = 'none';
                     spouseIdNumber.removeAttribute('required');
@@ -291,6 +293,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         spouseBirthCert.value = '';
                         spousePoliceNumber.value = '';
                         spouseRegistrationNumber.value = '';
+
+                        const form = document.getElementById("familyDetailsForm");
+
+                        form.addEventListener("submit", function(event) {
+                            // Enable the inputs before form submission
+                            genderRadioMaleInput.disabled = false;
+                            genderRadioFemaleInput.disabled = false;
+                            document.getElementById('day').disabled = false;
+                            document.getElementById('month').disabled = false;
+                            document.getElementById('year').disabled = false;
+                        });
+
                     } else if (selectedOption === 'Passport') {
                         passportgroup.style.display = 'block';
                         spouseIdNumber.value = '';
