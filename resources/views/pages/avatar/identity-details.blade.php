@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-                <section class="avatar-design-placeholder content-avatar-default">
+                <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
@@ -144,6 +144,9 @@
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4">
                                             @php
+                                                // Get the current year, month, and day
+                                                $currentYear = date('Y');
+
                                                 // Generate arrays for the date, month, and year ranges
                                                 $dateRange = range(1, 31);
                                                 $dateRange = array_map(function ($day) {
@@ -165,11 +168,11 @@
                                                     '12' => 'December',
                                                 ];
 
-                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+                                                $yearRange = range($currentYear - 100, 2024);
 
                                                 // Set the selected values
                                                 $selectedDay = old('day', null); 
-                                                $selectedMonth = old('month', null); 
+                                                $selectedMonth = old('month', null);
                                                 $selectedYear = old('year', null);
 
                                                 // Adjust the selected month value to "01" format
@@ -209,7 +212,13 @@
                                                 </div>
                                                 @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                     <div class="col-md-12">
-                                                        <div class="invalid-feedback" style="display:block">The date of birth field is required.</div>
+                                                        @if ($errors->has('year'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('year') }}</div>
+                                                        @elseif ($errors->has('month'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('month') }}</div>
+                                                        @elseif ($errors->has('day'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('day') }}</div>
+                                                        @endif
                                                     </div>
                                                 @endif
                                             </div>
@@ -368,6 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
+
 </script>
 
 @endsection

@@ -27,10 +27,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
 
                 // For Spouse and Sibling(s) buttons, toggle the 'selected' class
-                if (this.getAttribute('data-avatar') === 'spouse' || this.getAttribute('data-avatar') === 'siblings') {
-                    this.setAttribute('data-required', 'selected');
-                    this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
-                }
+                // if (this.getAttribute('data-avatar') === 'spouse' || this.getAttribute('data-avatar') === 'siblings') {
+                //     this.setAttribute('data-required', 'selected');
+                //     this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
+                // }
             });
         });
 
@@ -60,21 +60,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             const selectedParentButton = document.querySelector('[data-avatar="parents"][data-required]');
             const parentsSelect = document.getElementById('parentsSelect');
             const selectedParents = parentsSelect.value;
-
-            selectedParentButton.closest('.button-bg').classList.add('selected');
-            selectedParentButton.setAttribute('data-required', 'selected');
             
-            // if (selectedParentButton) {
-            //     if (selectedParents == 'mother' || selectedParents == 'father' || selectedParents == 'both') {
-            //         selectedParentButton.closest('.button-bg').classList.add('selected');
-            //         selectedParentButton.setAttribute('data-required', 'selected');
-            //     }
+            if (selectedParentButton) {
+                if (selectedParents == 'mother' || selectedParents == 'father' || selectedParents == 'both') {
+                    selectedParentButton.closest('.button-bg').classList.add('selected');
+                    selectedParentButton.setAttribute('data-required', 'selected');
+                }
                 
-            //     if(selectedParents == 'noParents') {
-            //         selectedParentButton.closest('.button-bg').classList.remove('selected');
-            //         selectedParentButton.setAttribute('data-required', '');
-            //     }
-            // }
+                if(selectedParents == 'noParents') {
+                    selectedParentButton.closest('.button-bg').classList.remove('selected');
+                    selectedParentButton.setAttribute('data-required', '');
+                }
+            }
         });
     }
     else if (path == '/assets') {

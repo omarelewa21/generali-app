@@ -55,8 +55,8 @@
                                     @endif
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
                                                     <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
@@ -65,8 +65,8 @@
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
@@ -75,8 +75,8 @@
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
@@ -85,8 +85,8 @@
                                     </div>
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
