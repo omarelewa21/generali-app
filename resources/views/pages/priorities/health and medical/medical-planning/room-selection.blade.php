@@ -18,16 +18,37 @@
     $selectedRoom = session('customer_details.health_medical_needs.medical_planning.roomOption');
 @endphp
 
-<div id="savings-goals" class="vh-100 overflow-hidden">
+<div id="hospital-room-selection" class="vh-100 overflow-hidden">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row scrollable-content">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white" style="z-index: 1;">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
-                    <div class="col-12 text-center">
-                        <div class="row justify-content-center">
-                            <div class="col-8 col-md-5">
+                    <div class="col-12 text-center wrapper-room-selection">
+                        <div class="row justify-content-center room-selection-title">
+                            <div class="col-8 col-xxl-6 m-auto">
                                 <h4 class="fw-bold">If I had to stay, I would rather have:</h4>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center single room-selection-content">
+                            <div class="col-12 z-1 mt-auto single-patient position-relative" id="room-first-col">
+                                <img class="pb-5 ml-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/Plant.png') }}">
+                                <div class="windows couple-room"></div>
+                                <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-avatar.png') }}">
+                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/first-roommate.png') }}">
+                            </div>
+                            <div class="col-12 z-99 mt-auto mx-auto mh-100 patient position-relative" id="room-center-col">
+                                <img class="ml-auto windows own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
+                                <img class="mw-100 mh-100 row mx-auto avatar-patient mt-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-avatar.png') }}">
+                                <img class="windows mw-100 w-75 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
+                                <img class="mw-100 row avatar-patient mt-auto ms-auto pb-3 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-counter.png') }}">
+                                <img class="position-absolute w-75 roommate more-rooms" style="left:10%;" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/beside-counter.png') }}">
+                            </div>
+                            <div class="col-12 z-1 mt-auto single-patient-2 position-relative" id="room-last-col">
+                                <img class="pb-3 mr-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-counter.png') }}">
+                                <img class="ml-auto windows pt-4 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/clock.png') }}">
+                                <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/campanion-avatar.png') }}">
+                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/second-roommate.png') }}">
                             </div>
                         </div>
                     </div>
@@ -65,7 +86,7 @@
                                     <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg @if($selectedRoom === 'my own space') default @endif">
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
-                                                <button class="border-0 w-100 d-flex align-items-center py-4" data-avatar="my own space" data-required="">
+                                                <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="110px" alt="own-space">
                                                     </div>
@@ -79,7 +100,7 @@
                                     <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg @if($selectedRoom === 'a companion') default @endif">
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
-                                                <button class="border-0 w-100 d-flex align-items-center py-4" data-avatar="a companion" data-required="">
+                                                <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion">
                                                     </div>
@@ -93,7 +114,7 @@
                                     <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg @if($selectedRoom === 'more roommates') default @endif">
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
-                                                <button class="border-0 w-100 d-flex align-items-center py-4" data-avatar="more roommates" data-required="">
+                                                <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates">
                                                     </div>

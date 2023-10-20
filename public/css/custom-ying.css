@@ -595,6 +595,89 @@
     grid-template-rows: 15% 85%;
 }
 
+/* =============================== Health and Medical Planning Room Selection =======================================*/
+.wrapper-room-selection{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 75%;
+    grid-template-areas:
+        "room-selection-title"
+        "room-selection-content";
+    grid-gap: 0px;
+}
+.room-selection-title{
+    grid-area: room-selection-title;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    display: grid;
+}
+.room-selection-content{
+    grid-area: room-selection-content;
+    display: grid;
+    
+    grid-template-rows: 100%;
+}
+.single.room-selection-content {
+    grid-template-columns: 20% 55% 25%;
+}
+.couple.room-selection-content {
+    grid-template-columns: 38% 24% 38%;
+}
+.roommate{
+    padding: 0 12px;
+    width: 100%;
+    max-width: 100%;
+    bottom: -22%;
+}
+/* .room-selection-center{
+    grid-area: room-selection-center;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.room-selection-right{
+    grid-area: room-selection-right;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.room-selection-left{
+    grid-area: room-selection-left;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+} */
+#hospital-room-selection .needs-stand-bg{
+    padding: 100px;
+}
+.patient,
+.patient-2 {
+    grid-template-areas:
+        "windows"
+        "avatar-patient";
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+}
+.windows{
+    grid-area: windows;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.avatar-patient{
+    grid-area: avatar-patient;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.single-patient,
+.single-patient-2{
+    display: flex;
+    padding: 0;
+}
+.single-patient{
+    justify-content: start;
+}
+.single-patient-2{
+    justify-content: end;
+}
+
 /* =============================== Debt Cancellation Home =======================================*/
 #debt-cancellation-home .needs-stand-bg{
     padding: 180px;
@@ -1191,6 +1274,11 @@
         padding: 155px;
     }
 }
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .single.room-selection-content{
+        grid-template-columns: 20% 50% 30%;
+    }
+}
 @media screen and (min-width: 1600px) {
     .content-needs-default {
         grid-template-rows: auto 4.5vh 11.2vh;
@@ -1229,6 +1317,9 @@
     }
     .plant .position-absolute.center{
         top:70%;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 17% 60% 23%
     }
 }
 @media screen and (min-width: 1800px) {
@@ -1288,6 +1379,32 @@
     }
     #debt-cancellation-home .needs-stand-bg{
         padding: 250px;
+    }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 180px;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 15% 65% 20%;
+    }
+    .room-selection-content img{
+        width:100%;
+        height:100%;
+    }
+    img.windows{
+        width: 30%;
+        height: auto;
+    }
+    .patient img.avatar-patient{
+        width: 73%;
+        height: auto;
+    }
+    .patient-2 img.avatar-patient{
+        width: 100%;
+        height: auto;
+    }
+    img.roommate{
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1504,6 +1621,9 @@ svg.slide-button.slick-arrow:hover {
 }
 .bg-btn_bar{
     background-color: #E9E9E9;
+}
+#hospital-room-selection .bg-btn_bar{
+    background-color: #D9D9D9;
 }
 .bg-needs_text{
     background-color: #d3d3d3;
@@ -1879,6 +1999,12 @@ button.choice:focus,
     }
     .bg-education-book{
         background-size: cover;
+    }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 140px;
+    }
+    .single.room-selection-content {
+        grid-template-columns: 0% 100% 0%;
     }
 }
 @media only screen and (min-width: 1024px){
