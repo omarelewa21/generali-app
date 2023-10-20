@@ -50,7 +50,7 @@ class AvatarController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+
         return redirect()->route('identity.details');
     } 
 }

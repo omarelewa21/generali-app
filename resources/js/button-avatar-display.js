@@ -87,7 +87,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 height: "60%",
                 alt: "Children",
                 class: "position-absolute end-0",
-                style: "bottom:0"
+                style: "bottom:0;z-index: 1"
             }
         ];
 
@@ -96,7 +96,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 src: "/images/avatar-general/grandma.png",
                 width: "auto",
                 height: "90%",
-                alt: "Parent",
+                alt: "Grandmother",
                 class: "position-absolute bottom-0 pb-2",
                 style: "right: -80px;z-index: 1"
             },
@@ -104,7 +104,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 src: "/images/avatar-general/grandpa.png",
                 width: "auto",
                 height: "100%",
-                alt: "Parent",
+                alt: "Grandfather",
                 class: "pb-2",
                 style: ""
             }
@@ -223,17 +223,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             var familyDependantInputValue = document.getElementById('familyDependantButtonInput').value;
             var $imageContainer = $(".imageContainerSpouse");
-            var $existingImage = $imageContainer.find("img.appended-image");
 
             if (familyDependantInputValue.trim() !== 'null') {
                 
                 var familyDependant = JSON.parse(familyDependantInputValue);
-
-                if (familyDependant.spouse && familyDependant.spouse === true) {
+                if (customer_details.family_details.dependant.spouse && customer_details.family_details.dependant.spouse === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                    $(".imageContainerSpouse").append(newImage);
-                } else {
-                    $existingImage.remove();
+                    $imageContainer.append(newImage);
                 }
 
                 if (familyDependant.children_data) {
@@ -254,16 +250,43 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                     var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + numberOfChildren + '</div>';
                     $(".imageContainerChildren").append(newButton);
+
+                    // Move the avatar closer based on selections
+                    var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+                    var $imageContainerSpouseDom = $('.imageContainerSpouse');
+                    var $appended = $imageContainerSpouseDom.find('.appended-image');
+
+                    if ($appended.length == '0') {
+                        var $childrenContainer = document.querySelector('.imageContainerChildren');
+                        var imageElement = $childrenContainer.querySelector('.end-0');
+                        if (imageElement) {
+                            imageElement.className = 'position-absolute start-0';
+                        }
+                        $imageContainerSpouse.append($childrenContainer);
+                    }
                 }
 
                 if (familyDependant.parents_data) {
 
-                    if (familyDependant.parents_data.hasOwnProperty("father")) {
-                        var parentImage = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
-                        $(".imageContainerParents").append(parentImage);
-                    }
+                    if (familyDependant.parents_data.hasOwnProperty("father") && familyDependant.parents_data.hasOwnProperty("mother")) {
+                        var parentImage1 = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
+                        var parentImage2 = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
+                        
+                        $(".imageContainerParents").append(parentImage1);
+                        $(".imageContainerParents").append(parentImage2);
 
-                    if (familyDependant.parents_data.hasOwnProperty("mother")) {
+                    } else if (familyDependant.parents_data.hasOwnProperty("father")) {
+                        if (!parentImages[1].class.includes('position-absolute')) {
+                            parentImages[1].class = 'pb-2 position-absolute';
+                        }
+                        if (!parentImages[1].style.includes('right:-80px')) {
+                            parentImages[1].style = 'right:-80px';
+                        }
+                        var parentImage = '<img src="' + parentImages[1].src + '" width="' + parentImages[1].width + '" height="' + parentImages[1].height + '" alt="' + parentImages[1].alt + '" class="' + parentImages[1].class + '" style="' + parentImages[1].style + '">';
+                        
+                        $(".imageContainerParents").append(parentImage);
+
+                    } else if (familyDependant.parents_data.hasOwnProperty("mother")) {
                         var parentImage = '<img src="' + parentImages[0].src + '" width="' + parentImages[0].width + '" height="' + parentImages[0].height + '" alt="' + parentImages[0].alt + '" class="' + parentImages[0].class + '" style="' + parentImages[0].style + '">';
                         $(".imageContainerParents").append(parentImage);
                     }
@@ -361,46 +384,72 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         var familyDependantButtonInput = document.getElementById('familyDependantButtonInput');
 
         // Spouse selection
-        $("#spouseButton").on("click", function () {
-            var $imageContainer = $(".imageContainerSpouse");
+        // $("#spouseButton").on("click", function () {
+        //     var $imageContainer = $(".imageContainerSpouse");
 
-            // Check if an image already exists
-            if ($imageContainer.find("img.appended-image").length > 0) {
-                // If an image exists, remove it
-                $imageContainer.find("img.appended-image").remove();
-                this.removeAttribute('data-required', 'selected');
-                this.closest('.button-bg').classList.remove('selected');
-            } else {
-                // If no image exists, create a new one and append it
-                var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                $imageContainer.append(newImage);
-            }
+        //     // Check if an image already exists
+        //     if ($imageContainer.find("img.appended-image").length > 0) {
+        //         // If an image exists, remove it
+        //         $imageContainer.find("img.appended-image").remove();
+        //         this.removeAttribute('data-required', 'selected');
+        //         this.closest('.button-bg').classList.remove('selected');
+        //     } else {
+        //         // If no image exists, create a new one and append it
+        //         var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
+        //         $imageContainer.append(newImage);
+        //     }
 
-            var isSelected = this.closest('.button-bg').classList.contains('selected');
+        //     var isSelected = this.closest('.button-bg').classList.contains('selected');
             
-            if (isSelected == true) {
-                clickedAvatars['spouse'] = true;
+        //     // Move the avatar closer based on selections
+        //     var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+        //     var $imageContainerSpouseDom = $('.imageContainerSpouse');
+        //     var $div = $imageContainerSpouseDom.find('.imageContainerChildren');
+        //     var $placeholder = document.querySelector('.avatar-design-placeholder');
 
-                // Create a new array under 'children_data'
-                clickedAvatars['spouse_data'] = {
-                    relation: 'Spouse'
-                };
-            }
-            else {
-                clickedAvatars['spouse'] = false;
-            }
+        //     if ($div.length == '1') {
+        //         var $childrenContainer = document.querySelector('.imageContainerChildren');
+        //         $childrenContainer.remove();
+        //         var imageElement = $childrenContainer.querySelector('.start-0');
+        //         if (imageElement) {
+        //             imageElement.className = 'position-absolute end-0';
+        //         }
+        //         $placeholder.append($childrenContainer);
+        //     }
+        //     else {
+        //         if(isSelected == false) {
+        //             var $childrenContainer = document.querySelector('.imageContainerChildren');
+        //             var imageElement = $childrenContainer.querySelector('.end-0');
+        //             if (imageElement) {
+        //                 imageElement.className = 'position-absolute start-0';
+        //             }
+        //             $imageContainerSpouse.append($childrenContainer);
+        //         }
+        //     }
 
-            if (familyDependantButtonInput.value === 'null') {
-                familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
-            }
-            else {
-                familyDependantButtonInput.value = JSON.stringify({
-                    ...JSON.parse(familyDependantButtonInput.value), 
-                    spouse: clickedAvatars.spouse,
-                    spouse_data: clickedAvatars.spouse_data
-                });
-            }
-        });
+        //     if (isSelected == true) {
+        //         clickedAvatars['spouse'] = true;
+
+        //         // Create a new array under 'children_data'
+        //         clickedAvatars['spouse_data'] = {
+        //             relation: 'Spouse'
+        //         };
+        //     }
+        //     else {
+        //         clickedAvatars['spouse'] = false;
+        //     }
+
+        //     if (familyDependantButtonInput.value === 'null') {
+        //         familyDependantButtonInput.value = JSON.stringify(clickedAvatars);
+        //     }
+        //     else {
+        //         familyDependantButtonInput.value = JSON.stringify({
+        //             ...JSON.parse(familyDependantButtonInput.value), 
+        //             spouse: clickedAvatars.spouse,
+        //             spouse_data: clickedAvatars.spouse_data
+        //         });
+        //     }
+        // });
 
         // Children selection
         $(".btn-exit-children").on("click", function () {
@@ -419,16 +468,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (selectedValue >= 2) {
                 selectedImages.push(childrenImages[1]);
             }
-
-            // var $imageContainerSpouse = $(".imageContainerSpouse");
-            var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
-            var $imageContainerSpouseDom = $('.imageContainerSpouse');
-            var $appended = $imageContainerSpouseDom.find('.appended-image');
-
-            if ($appended.length == '0') {
-                var $childrenContainer = document.querySelector('.imageContainerChildren');
-                $imageContainerSpouse.append($childrenContainer);
-            }
         
             selectedImages.forEach(function (image) {
                 var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
@@ -438,6 +477,20 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (selectedValue) {
                 var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + selectedValue + '</div>';
                 $(".imageContainerChildren").append(newButton);
+            }
+
+            // Move the avatar closer based on selections
+            var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+            var $imageContainerSpouseDom = $('.imageContainerSpouse');
+            var $appended = $imageContainerSpouseDom.find('.appended-image');
+            
+            if ($appended.length == '0') {
+                var $childrenContainer = document.querySelector('.imageContainerChildren');
+                var imageElement = $childrenContainer.querySelector('.end-0');
+                if (imageElement) {
+                    imageElement.className = 'position-absolute start-0';
+                }
+                $imageContainerSpouse.append($childrenContainer);
             }
 
             const childrenSelect = document.getElementById('childrenSelect');
@@ -524,6 +577,22 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     clickedAvatars['parents_data'][parentKey2] = motherData;
                 }
 
+                // Move the avatar closer based on selections
+                if (selectedImages.length === 1 && selectedImages[0].alt === 'Grandfather') {
+                    if (!selectedImages[0].class.includes('position-absolute')) {
+                        selectedImages[0].class += ' position-absolute';
+                    }
+                    if (!selectedImages[0].style.includes('right:-80px')) {
+                        selectedImages[0].style = 'right:-80px';
+                    }
+                }
+                else if (selectedImages.length === 2) {
+                    if (!selectedImages[0].class.includes('pb-2')) {
+                        selectedImages[0].class += 'pb-2';
+                    }
+                    selectedImages[0].style = '';
+                }
+                
                 selectedImages.forEach(function (image) {
                     var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
                     $(".imageContainerParents").append(newImage);

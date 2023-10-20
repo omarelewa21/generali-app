@@ -300,7 +300,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status');
         } else {
@@ -310,89 +310,109 @@ class FormController extends Controller {
 
     public function handleAvatarSelection(Request $request)
     {
-        // Define custom validation rule for button selection
-        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-            if ($value !== null && $value === 'single' || $value === 'married' || $value === 'married' || $value === 'divorced' || $value === 'widowed') {
-                return true;
+        // Validate CSRF token
+        if ($request->ajax() || $request->wantsJson()) {
+            // For AJAX requests, check the CSRF token without throwing an exception
+            $validToken = csrf_token() === $request->header('X-CSRF-TOKEN');
+        } else {
+            // For non-AJAX requests, use the normal CSRF token verification
+            $validToken = $request->session()->token() === $request->input('_token');
+        }
+        
+        if ($validToken) {
+            // Define custom validation rule for button selection
+            Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+                if ($value !== null && $value === 'single' || $value === 'married' || $value === 'married' || $value === 'divorced' || $value === 'widowed') {
+                    return true;
+                }
+                
+                $customMessage = "Please select at least one.";
+                $validator->errors()->add($attribute, $customMessage);
+
+                return false;
+            });
+
+            Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
+
+                $decodedValue = json_decode($value, true);
+
+                if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true)) {
+                    return true;
+                }
+
+                // If any of the conditions are not met, add a different error message
+                $customMessage = "Please select at least one.";
+                $validator->errors()->add($attribute, $customMessage);
+
+                return false;
+            });    
+
+            $validator = Validator::make($request->all(), [
+                'maritalStatusButtonInput' => [
+                    'at_least_one_selected',
+                ],
+                'familyDependantButtonInput' => [
+                    'at_least_one_selected_family',
+                ],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
             }
-            
-            $customMessage = "Please select at least one.";
-            $validator->errors()->add($attribute, $customMessage);
-    
-            return false;
-        });
 
-        Validator::extend('at_least_one_selected_family', function ($attribute, $value, $fail, $validator) {
+            // Validation passed, perform any necessary processing.
+            $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
+            $familyDependantSerialized = $request->input('familyDependantButtonInput');
+            $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
+            $assetsSerialized = $request->input('assetsButtonInput');
+            $assetsButtonInput = json_decode($assetsSerialized, true);
+            $dataUrl = $request->input('urlInput');
 
-            $decodedValue = json_decode($value, true);
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
 
-            if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true)) {
-                return true;
+            // Add or update the data value in the array
+            if ($maritalStatusButtonInput) {
+                $newData = [
+                    'marital_status' => $maritalStatusButtonInput
+                ];
+
+                $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
+
+                if ($maritalStatusButtonInput === 'single') {
+                    $customerDetails['family_details']['dependant']['spouse'] = false;
+                    $customerDetails['family_details']['dependant']['children'] = false;
+                    unset($customerDetails['family_details']['dependant']['spouse_data']);
+                    unset($customerDetails['family_details']['dependant']['children_data']);
+
+                } else if ($maritalStatusButtonInput === 'married') {
+                    $customerDetails['family_details']['dependant']['spouse'] = true;
+                    $customerDetails['family_details']['dependant']['spouse_data'] = [
+                        'relation' => 'Spouse'
+                    ];
+                    
+                } else if ($maritalStatusButtonInput === 'divorced' || $maritalStatusButtonInput === 'widowed') {
+                    $customerDetails['family_details']['dependant']['spouse'] = false;
+                    unset($customerDetails['family_details']['dependant']['spouse_data']);
+                }
             }
-        
-            // If any of the conditions are not met, add a different error message
-            $customMessage = "Please select at least one.";
-            $validator->errors()->add($attribute, $customMessage);
-        
-            return false;
-        });    
-        
-        $validator = Validator::make($request->all(), [
-            'maritalStatusButtonInput' => [
-                'at_least_one_selected',
-            ],
-            'familyDependantButtonInput' => [
-                'at_least_one_selected_family',
-            ],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        // Validation passed, perform any necessary processing.
-        $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
-        $familyDependantSerialized = $request->input('familyDependantButtonInput');
-        $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
-        $assetsSerialized = $request->input('assetsButtonInput');
-        $assetsButtonInput = json_decode($assetsSerialized, true);
-        $dataUrl = $request->input('urlInput');
-
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
-        
-        // Add or update the data value in the array
-        if ($maritalStatusButtonInput) {
-            $newData = [
-                'marital_status' => $maritalStatusButtonInput
-            ];
-
-            $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
-
-            if ($maritalStatusButtonInput === 'single') {
-                $customerDetails['family_details']['dependant']['spouse'] = false;
-                $customerDetails['family_details']['dependant']['children'] = false;
-                unset($customerDetails['family_details']['dependant']['spouse_data']);
-                unset($customerDetails['family_details']['dependant']['children_data']);
-            } else if ($maritalStatusButtonInput === 'divorced' || $maritalStatusButtonInput === 'widowed') {
-                $customerDetails['family_details']['dependant']['spouse'] = false;
-                unset($customerDetails['family_details']['dependant']['spouse_data']);
+            elseif ($familyDependantButtonInput) {
+                $customerDetails['family_details'] = [
+                    'dependant' => $familyDependantButtonInput
+                ];
             }
-        }
-        elseif ($familyDependantButtonInput) {
-            $customerDetails['family_details'] = [
-                'dependant' => $familyDependantButtonInput
-            ];
-        }
-        elseif ($assetsButtonInput) {
-            $customerDetails['assets'] = $assetsButtonInput;
-        }
+            elseif ($assetsButtonInput) {
+                $customerDetails['assets'] = $assetsButtonInput;
+            }
 
-        // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-        // Store the updated array back into the session
-        return redirect()->route($dataUrl);
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+            // Store the updated array back into the session
+            return redirect()->route($dataUrl);
+        } else {
+            return response()->json(['error' => 'Invalid CSRF token'], 403);
+        }
     }
 
     public function familyDependantDetails(Request $request)
