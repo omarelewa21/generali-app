@@ -259,12 +259,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         var highRiskImg = document.getElementById("high-risk-img");
         var mediumRiskImg = document.getElementById("medium-risk-img");
         var lowRiskImg = document.getElementById("low-risk-img");
+        const dataSelected = document.querySelectorAll('.default');
         $(document).ready(function () {
             if ($('.risk-btn.selected')){
                 var selectedId = $('.risk-btn.selected').attr('id');
                 document.getElementById(selectedId + "-img").style.display = "block";
             }
         });
+
+        highRiskImg.style.display = "block";
+        mediumRiskImg.style.display = "none";
+        lowRiskImg.style.display = "none";
 
         highRisk.onclick = function(){
             highRiskImg.style.display = "block";
@@ -281,6 +286,23 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             highRiskImg.style.display = "none";
             mediumRiskImg.style.display = "none";
         }
+
+        dataSelected.forEach(btnSelected => {
+            highRiskImg.style.display = "none";
+            mediumRiskImg.style.display = "none";
+            lowRiskImg.style.display = "none";
+
+            const defaultSelection = btnSelected.getAttribute('data-avatar');
+            console.log(defaultSelected);
+            if (defaultSelection === 'high-risk') {
+                highRiskImg.style.display = "block";
+            } else if (defaultSelected === 'medium-risk'){
+                mediumRiskImg.style.display = "block";
+            }
+            else{
+                lowRiskImg.style.display = "block";
+            }
+        });
     }
     else if (path == '/savings-gap') {
         var Uncovered = (100 - Covered).toFixed(2);

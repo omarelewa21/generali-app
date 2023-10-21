@@ -89,7 +89,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 document.getElementById("room-first-col").classList.remove('single-patient'); 
                 document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
                 document.getElementById("room-center-col").classList.remove('z-99'); 
-                document.getElementById("room-center-col").classList.add('h-100'); 
+                document.getElementById("room-center-col").classList.add('h-100', 'z-1'); 
                 document.getElementById("room-last-col").classList.remove('single-patient-2'); 
                 document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
                 if (defaultSelection === 'a companion') {
