@@ -27,14 +27,14 @@
                         <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center d-md-none d-xl-block pt-xl-0 pt-sm-5 pt-5">
-                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" style="width: 100%;max-width:400px;z-index:1" alt="Footer Vector">
+                <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center pt-xl-0 pt-sm-5 pt-5">
+                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector">
                 </div>
             </div>
         </div>
     </section>
     <section class="footer footer-home position-absolute bottom-0 start-0">
-        <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector">
+        <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector" class="footerVector">
     </section>
 </div>
 

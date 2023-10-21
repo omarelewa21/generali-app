@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Identity Details Page 
+ * Template Name: Identity Details Page
  */
 ?>
 
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-                <section class="avatar-design-placeholder content-avatar-default">
+                <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('form.submit.identity') }}" method="POST">
+                    <form novalidate action="{{ route('form.submit.identity') }}" method="POST" id="identityForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -122,10 +122,31 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="col-12 pt-4" id="gendergroup">
+                                            <label for="gender" class="form-label text-white">Gender *</label>
+                                            <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                    <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
+                                                    {{ (old('gender') === 'male' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
+                                                </label>
+                                                <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                    <input type="radio" class="btn-check" name="gender" id="identityFemaleInput" autocomplete="off" value="female"
+                                                    {{ (old('gender') === 'female' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                    <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
+                                                </label>
+                                            </div>
+                                            @error('gender')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="row px-4 pb-2 px-sm-5">
                                         <div class="col-12 pt-4">
                                             @php
+                                                // Get the current year, month, and day
+                                                $currentYear = date('Y');
+
                                                 // Generate arrays for the date, month, and year ranges
                                                 $dateRange = range(1, 31);
                                                 $dateRange = array_map(function ($day) {
@@ -147,11 +168,11 @@
                                                     '12' => 'December',
                                                 ];
 
-                                                $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+                                                $yearRange = range($currentYear - 100, 2024);
 
                                                 // Set the selected values
                                                 $selectedDay = old('day', null); 
-                                                $selectedMonth = old('month', null); 
+                                                $selectedMonth = old('month', null);
                                                 $selectedYear = old('year', null);
 
                                                 // Adjust the selected month value to "01" format
@@ -165,19 +186,39 @@
                                             <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', $identityDetails['dob_day'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], 0, 2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @else
+                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', $identityDetails['dob_month'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 3, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @else
+                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                    {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                        return substr($year, -2);
-                                                    }, $yearRange), $yearRange), old('year', $identityDetails['dob_year'] ?? ''), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    @if(isset($identityDetails['dob']))
+                                                        {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                            return substr($year, -4);
+                                                        }, $yearRange), $yearRange), old('year', substr($identityDetails['dob'], -4)), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                        @else
+                                                        {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                            return substr($year, -4);
+                                                        }, $yearRange), $yearRange), old('year'), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                    @endif
                                                 </div>
                                                 @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                     <div class="col-md-12">
-                                                        <div class="invalid-feedback" style="display:block">The date of birth field is required.</div>
+                                                        @if ($errors->has('year'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('year') }}</div>
+                                                        @elseif ($errors->has('month'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('month') }}</div>
+                                                        @elseif ($errors->has('day'))
+                                                            <div class="invalid-feedback" style="display:block">{{ $errors->first('day') }}</div>
+                                                        @endif
                                                     </div>
                                                 @endif
                                             </div>
@@ -257,6 +298,8 @@
 </div>
 
 <script>
+var sessionData = {!! json_encode(session('customer_details')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
@@ -326,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidIDNumber(idNumber) {
         // Regular expression pattern to validate mobile number format
-        var IDNumberRegex = /^\d{6}-\d{2}-\d{4}$/;
+        var IDNumberRegex = /^[0-9]{6}-[0-9]{2}-[0-9]{4}$/;
 
         // Test the mobile number against the regex pattern
         var isValid = IDNumberRegex.test(idNumber);
@@ -334,6 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
+
 </script>
 
 @endsection
