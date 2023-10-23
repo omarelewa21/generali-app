@@ -133,6 +133,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             // Get the stored selected option from local storage
             var storedOption = localStorage.getItem('selectedOption');
+
             if (storedOption) {
                 selectedOption = storedOption;
                 idTypeSelect.value = selectedOption;
@@ -172,7 +173,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             // Logics for gender field
             const lastDigit = idNumberField.value.substring(13, 14);
-                        
+
             if(idNumberField.value === '') {
                 genderRadioMaleInput.checked = false;
                 genderRadioFemaleInput.checked = false;
@@ -298,12 +299,19 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                         form.addEventListener("submit", function(event) {
                             // Enable the inputs before form submission
-                            genderRadioMaleInput.disabled = false;
-                            genderRadioFemaleInput.disabled = false;
-                            document.getElementById('day').disabled = false;
-                            document.getElementById('month').disabled = false;
-                            document.getElementById('year').disabled = false;
+                            document.getElementById('spouseMaleInput').disabled = false;
+                            document.getElementById('spouseFemaleInput').disabled = false;
+                            document.getElementById('spouseday').disabled = false;
+                            document.getElementById('spousemonth').disabled = false;
+                            document.getElementById('spouseyear').disabled = false;
                         });
+
+                        // Disable day, month, and year select options
+                        document.getElementById('spouseday').disabled = true;
+                        document.getElementById('spousemonth').disabled = true;
+                        document.getElementById('spouseyear').disabled = true;
+                        document.getElementById('spouseMaleInput').disabled = true;
+                        document.getElementById('spouseFemaleInput').disabled = true;
 
                     } else if (selectedOption === 'Passport') {
                         passportgroup.style.display = 'block';
@@ -311,24 +319,55 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         spouseBirthCert.value = '';
                         spousePoliceNumber.value = '';
                         spouseRegistrationNumber.value = '';
+
+                        // Enable day, month, and year select options for other options
+                        document.getElementById('spouseday').disabled = false;
+                        document.getElementById('spousemonth').disabled = false;
+                        document.getElementById('spouseyear').disabled = false;
+                        document.getElementById('spouseMaleInput').disabled = false;
+                        document.getElementById('spouseFemaleInput').disabled = false;
+
                     } else if (selectedOption === 'Birth Certificate') {
                         birthcertgroup.style.display = 'block';
                         spouseIdNumber.value = '';
                         spousePassportNumber.value = '';
                         spousePoliceNumber.value = '';
                         spouseRegistrationNumber.value = '';
+
+                        // Enable day, month, and year select options for other options
+                        document.getElementById('spouseday').disabled = false;
+                        document.getElementById('spousemonth').disabled = false;
+                        document.getElementById('spouseyear').disabled = false;
+                        document.getElementById('spouseMaleInput').disabled = false;
+                        document.getElementById('spouseFemaleInput').disabled = false;
+
                     } else if (selectedOption === 'Police / Army') {
                         policegroup.style.display = 'block';
                         spouseIdNumber.value = '';
                         spousePassportNumber.value = '';
                         spouseBirthCert.value = '';
                         spouseRegistrationNumber.value = '';
+
+                        // Enable day, month, and year select options for other options
+                        document.getElementById('spouseday').disabled = false;
+                        document.getElementById('spousemonth').disabled = false;
+                        document.getElementById('spouseyear').disabled = false;
+                        document.getElementById('spouseMaleInput').disabled = false;
+                        document.getElementById('spouseFemaleInput').disabled = false;
+
                     } else if (selectedOption === 'Registration') {
                         registrationgroup.style.display = 'block';
                         spouseIdNumber.value = '';
                         spousePassportNumber.value = '';
                         spouseBirthCert.value = '';
                         spousePoliceNumber.value = '';
+
+                        // Enable day, month, and year select options for other options
+                        document.getElementById('spouseday').disabled = false;
+                        document.getElementById('spousemonth').disabled = false;
+                        document.getElementById('spouseyear').disabled = false;
+                        document.getElementById('spouseMaleInput').disabled = false;
+                        document.getElementById('spouseFemaleInput').disabled = false;
                     }
 
                     // Store the selected option in local storage
@@ -367,9 +406,29 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             const monthField = document.getElementById('spousemonth');
             const yearField = document.getElementById('spouseyear');
             const ageField = document.getElementById('spouseAge');
+            const genderRegex = /[13579]/;
+            const genderRadioMaleInput = document.getElementById("spouseMaleInput");
+            const genderRadioFemaleInput = document.getElementById("spouseFemaleInput");
 
             // Listen for changes in the ID Number field
             idNumberField.addEventListener('input', function() {
+                
+                // Logics for gender field
+                const lastDigit = idNumberField.value.substring(13, 14);
+                
+                if(idNumberField.value === '') {
+                    genderRadioMaleInput.checked = false;
+                    genderRadioFemaleInput.checked = false;
+                }
+                else if (genderRegex.test(lastDigit.toString())){
+                    genderRadioMaleInput.checked = true;
+                    genderRadioFemaleInput.checked = false;
+                }
+                else {
+                    genderRadioFemaleInput.checked = true;
+                    genderRadioMaleInput.checked = false;
+                }
+
                 const idNumber = idNumberField.value;
 
                 // Extract the first 6 digits as the date, month, and year
@@ -380,39 +439,27 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 // Set the extracted values in the date of birth fields
                 dayField.value = dateDigits;
                 monthField.value = monthDigits;
-                yearField.value = yearDigits;
+
+                // Find the matching option in the year dropdown based on the last 2 digits of ID
+                const matchingOption = Array.from(yearField.options).find(option => {
+                    return option.value.substring(2, 4) === yearDigits;
+                });
+
+                // Set the selected option in the year dropdown
+                if (matchingOption) {
+                    matchingOption.selected = true;
+                }
 
                 // Trigger the change event on the year field to recalculate the age
                 const event = new Event('change');
                 yearField.dispatchEvent(event);
             });
 
-            // Extract the first 6 numbers from ID Number and auto-select the date of birth dropdown
-            const idNumberFieldExtract = document.getElementById('spouseIdNumber');
-            const dayFieldExtract = document.getElementById('spouseday');
-            const monthFieldExtract = document.getElementById('spousemonth');
-            const yearFieldExtract = document.getElementById('spouseyear');
-
-            // Listen for changes in the ID Number field
-            idNumberFieldExtract.addEventListener('input', function() {
-                const idNumber = idNumberFieldExtract.value;
-
-                // Extract the first 6 digits as the date, month, and year
-                const yearDigits = idNumber.substring(0, 2);
-                const monthDigits = idNumber.substring(2, 4);
-                const dateDigits = idNumber.substring(4, 6);
-
-                // Set the extracted values in the date of birth fields
-                dayFieldExtract.value = dateDigits;
-                monthFieldExtract.value = monthDigits;
-                yearFieldExtract.value = yearDigits;
-            });
-
             // Function to calculate age
             function calculateAge() {
-                const selectedDay = parseInt(dayFieldExtract.value);
-                const selectedMonth = parseInt(monthFieldExtract.value);
-                const selectedYearOption = yearFieldExtract.options[yearFieldExtract.selectedIndex];
+                const selectedDay = parseInt(dayField.value);
+                const selectedMonth = parseInt(monthField.value);
+                const selectedYearOption = yearField.options[yearField.selectedIndex];
                 const selectedYear = selectedYearOption.textContent;
                 
                 if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
@@ -438,13 +485,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 ageField.textContent = 'Age: ' + age;
             }
 
-            // Calculate age on initial load
+            // // Calculate age on initial load
             calculateAge();
 
             // Calculate age whenever the date fields are changed
-            dayFieldExtract.addEventListener('change', calculateAge);
-            monthFieldExtract.addEventListener('change', calculateAge);
-            yearFieldExtract.addEventListener('change', calculateAge);
+            dayField.addEventListener('change', calculateAge);
+            monthField.addEventListener('change', calculateAge);
+            yearField.addEventListener('change', calculateAge);
         }
     }
 }

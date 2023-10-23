@@ -168,7 +168,7 @@
                                                     '12' => 'December',
                                                 ];
 
-                                                $yearRange = range($currentYear - 100, 2024);
+                                                $yearRange = range($currentYear - 100, $currentYear);
 
                                                 // Set the selected values
                                                 $selectedDay = old('day', null); 

@@ -66,6 +66,9 @@
                                         <div class="col-12">
                                             <div class="accordion accordion-flush" id="accordionDependantDetails">
                                                 @php
+                                                    // Get the current year, month, and day
+                                                    $currentYear = date('Y');
+
                                                     // Generate arrays for the date, month, and year ranges
                                                     $dateRange = range(1, 31);
                                                     $dateRange = array_map(function ($day) {
@@ -87,7 +90,7 @@
                                                         '12' => 'December',
                                                     ];
 
-                                                    $yearRange = range(date('Y') - 100, date('Y') - 18); // Assuming minimum age is 18
+                                                    $yearRange = range($currentYear - 100, $currentYear);
 
                                                     // Set the selected values
                                                     $selectedDay = old('day', null); 
@@ -222,7 +225,7 @@
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 {!! Form::select('spouseyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
+                                                                                    return substr($year, -4);
                                                                                 }, $yearRange), $yearRange), old('spouseyear', $spouseData['year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                             </div>
                                                                             @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
@@ -238,12 +241,12 @@
                                                                         <label for="genderInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('genderBtnradio') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="genderInput" autocomplete="off" value="male"
+                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="spouseMaleInput" autocomplete="off" value="male"
                                                                                 {{ (old('genderBtnradio') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="genderFemaleInput" autocomplete="off" value="female"
+                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="spouseFemaleInput" autocomplete="off" value="female"
                                                                                 {{ (old('genderBtnradio') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                             </label>
