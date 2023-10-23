@@ -87,7 +87,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = amountPerYear.toLocaleString();
 
-                totalInvestmentFund.innerText = "RM " + result;
+                totalInvestmentFund.innerText = "RM" + result;
             }
 
             // Set the value of the hidden input field
@@ -140,7 +140,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = totalAmount.toLocaleString();
 
-                totalInvestmentFund.innerText = "RM " + result;
+                totalInvestmentFund.innerText = "RM" + result;
+            }
+            if(totalAmount >= 10000000000){
+                totalInvestmentFund.classList.add('f-40');
+                totalInvestmentFund.classList.remove('f-50');
+            }
+            else{
+                totalInvestmentFund.classList.add('f-50');
+                totalInvestmentFund.classList.remove('f-40');
             }
             
             newTotalFund.value = Year * oldTotalFund;
@@ -249,12 +257,18 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         var highRiskImg = document.getElementById("high-risk-img");
         var mediumRiskImg = document.getElementById("medium-risk-img");
         var lowRiskImg = document.getElementById("low-risk-img");
+        const dataSelected = document.querySelectorAll('.default');
+
         $(document).ready(function () {
             if ($('.risk-btn.selected')){
                 var selectedId = $('.risk-btn.selected').attr('id');
                 document.getElementById(selectedId + "-img").style.display = "block";
             }
         });
+
+        highRiskImg.style.display = "block";
+        mediumRiskImg.style.display = "none";
+        lowRiskImg.style.display = "none";
 
         highRisk.onclick = function(){
             highRiskImg.style.display = "block";
@@ -271,6 +285,23 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             highRiskImg.style.display = "none";
             mediumRiskImg.style.display = "none";
         }
+
+        dataSelected.forEach(btnSelected => {
+            highRiskImg.style.display = "none";
+            mediumRiskImg.style.display = "none";
+            lowRiskImg.style.display = "none";
+
+            const defaultSelection = btnSelected.getAttribute('data-avatar');
+            console.log(defaultSelected);
+            if (defaultSelection === 'high-risk') {
+                highRiskImg.style.display = "block";
+            } else if (defaultSelected === 'medium-risk'){
+                mediumRiskImg.style.display = "block";
+            }
+            else{
+                lowRiskImg.style.display = "block";
+            }
+        });
     }
     else if (path == '/investment-gap') {
         var Uncovered = (100 - Covered).toFixed(2);

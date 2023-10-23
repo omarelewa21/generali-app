@@ -39,9 +39,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$investmentFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center">RM 
-                                            <!-- {{ $totalInvestmentNeeded !== null ? number_format(floatval($totalInvestmentNeeded)) : $totalInvestmentNeeded }} -->
-                                            {{ $newTotalInvestmentNeeded !== null || $newTotalInvestmentNeeded !== '' &&  $investmentSupportingYears !== null && $totalInvestmentNeeded !== '' ? number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : number_format(floatval($totalInvestmentNeeded)) }}
+                                        <h3 id="TotalInvestmentFund" class="m-1 text-light text-center {{$investmentSupportingYears !== null && $totalInvestmentNeeded !== '' && number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) >= '10000000000' ? 'f-40' : 'f-50' }}">RM{{ $newTotalInvestmentNeeded !== null || $newTotalInvestmentNeeded !== '' &&  $investmentSupportingYears !== null && $totalInvestmentNeeded !== '' ? number_format(floatval($totalInvestmentNeeded) * floatval($investmentSupportingYears)) : number_format(floatval($totalInvestmentNeeded)) }}
                                         </h3>
                                         <p class="text-light text-center">Total Investment Fund Needed</p>
                                     </div>

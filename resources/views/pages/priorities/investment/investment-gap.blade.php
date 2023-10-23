@@ -91,7 +91,7 @@
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
-                                                                <img src="{{ asset('images/needs/icon/saving.png') }}">
+                                                                <img src="{{ asset('images/needs/icon/umbrella.png') }}">
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I want to archieve my goals with</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
@@ -107,7 +107,7 @@
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                                             <div class="m-0 d-flex align-items-center w-md-50">
-                                                                <img src="{{ asset('images/needs/icon/umbrella.png') }}">
+                                                                <img src="{{ asset('images/needs/icon/saving.png') }}">
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I expected to have an annual return of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">

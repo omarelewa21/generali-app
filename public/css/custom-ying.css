@@ -32,11 +32,20 @@
 .start-20{
     left: 20%;
 }
+.left-20{
+    left: 20%;
+}
 .f-55{
     font-size: 55px;
 }
+.f-50{
+    font-size: 50px;
+}
 .f-45{
     font-size: 45px;
+}
+.f-40{
+    font-size: 40px;
 }
 .w-35{
     width: 35%;
@@ -49,6 +58,9 @@
 }
 .lh-normal{
     line-height: normal;
+}
+.mh-55{
+    max-height: 55%;
 }
 
 /* Form Style */
@@ -82,6 +94,7 @@
     grid-template-columns: 100%;
     /* test */
     display: grid;
+    grid-template-rows: 100%;
     /* grid-template-areas: 
     "needs-home-avatars"
     "needs-home-text";
@@ -102,7 +115,7 @@
     grid-area: needs-home-avatars;
     display: grid;
     grid-template-columns: repeat(3, 15% 70% auto);
-    /* grid-template-columns: repeat(3, minmax(250px, 1fr)); */
+    grid-template-rows: 100%;
 }
 .needs-home-text{
     grid-area: needs-home-text;
@@ -172,6 +185,7 @@
     grid-area: selection-content-coverage;
     grid-template-columns: 100%;
     display: grid;
+    grid-template-rows: 100%;
 }
 .bg-education-coverage{
     background-image: url(/images/needs/education/education-coverage-vector.png);
@@ -539,12 +553,149 @@
     grid-template-columns: 48% 20%;
     grid-template-rows: 100%;
 }
+/* =============================== Health and Medical Home =======================================*/
+.bg-hm-home-element{
+    background-image: url('/images/needs/health-medical/home/hnm-home-ele.png');
+    background-repeat: no-repeat;
+    background-size: 65%;
+    background-position: center top 10%;
+}
+#health-medical-home .needs-home-avatars{
+    grid-template-columns:100%;
+    grid-template-rows: 100%;
+}
+#health-medical-home .needs-stand-bg{
+    padding: 155px;
+}
+/* =============================== Health and Medical Selection =======================================*/
+.hnm-selection button{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-template-areas:
+        "coverage-image"
+        "coverage-text";
+    grid-gap: 0px;
+}
+.plant .position-absolute.center{
+    top:60%;
+}
+/* =============================== Health and Medical Critical Monthly Support =======================================*/
+.bg-hnm {
+    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top left;
+}
+/* =============================== Health and Medical Planning Hospital Selection =======================================*/
+.hospital .position-absolute.center {
+    top: 58%;
+}
+#medical-hospital-selection .content-block {
+    grid-template-rows: 15% 85%;
+}
+
+/* =============================== Health and Medical Planning Room Selection =======================================*/
+.wrapper-room-selection{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 75%;
+    grid-template-areas:
+        "room-selection-title"
+        "room-selection-content";
+    grid-gap: 0px;
+}
+.room-selection-title{
+    grid-area: room-selection-title;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    display: grid;
+}
+.room-selection-content{
+    grid-area: room-selection-content;
+    display: grid;
+    
+    grid-template-rows: 100%;
+}
+.single.room-selection-content {
+    grid-template-columns: 20% 55% 25%;
+}
+.couple.room-selection-content {
+    grid-template-columns: 38% 24% 38%;
+}
+.roommate{
+    padding: 0 12px;
+    width: 100%;
+    max-width: 100%;
+    bottom: -22%;
+}
+/* .room-selection-center{
+    grid-area: room-selection-center;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.room-selection-right{
+    grid-area: room-selection-right;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.room-selection-left{
+    grid-area: room-selection-left;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+} */
+#hospital-room-selection .needs-stand-bg{
+    padding: 100px;
+}
+.patient,
+.patient-2 {
+    grid-template-areas:
+        "windows"
+        "avatar-patient";
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+}
+.windows{
+    grid-area: windows;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.avatar-patient{
+    grid-area: avatar-patient;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.single-patient,
+.single-patient-2{
+    display: flex;
+    padding: 0;
+}
+.single-patient{
+    justify-content: start;
+}
+.single-patient-2{
+    justify-content: end;
+}
+
+/* =============================== Debt Cancellation Home =======================================*/
+#debt-cancellation-home .needs-stand-bg{
+    padding: 180px;
+}
+#debt-cancellation-home .needs-home-avatars{
+    grid-template-columns: 100%;
+}
 
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
     .col-xs-10{
         flex: 0 0 auto;
         width: 83.33333333%;
+    }
+}
+@media only screen and (max-width: 400px){
+    #health-medical-home .needs-home-avatar-wrapper{
+        grid-template-rows: 75% 25%;
     }
 }
 
@@ -574,6 +725,9 @@
     }
     .mob-align-top{
         align-items: start !important;
+    }
+    #health-medical-home .needs-stand-bg{
+        padding: 180px;
     }
 }
 @media only screen and (min-width: 597px) and (max-width: 767px){
@@ -654,6 +808,9 @@
     .content-needs-default{
         grid-template-rows: auto 5vh 12vh;
     }
+    #health-medical-selection .slick-padding{
+        padding: 15px 15px 0px 15px;
+    }
 }
 @media only screen and (max-width: 592px){
     .saving-tabung{
@@ -691,6 +848,9 @@
     }
     .slick-slide{
         max-height: 100%;
+    }
+    #debt-cancellation-home .needs-stand-bg {
+        padding: 210px;
     }
 }
 @media only screen and (max-width: 992px){
@@ -811,7 +971,7 @@
         grid-template-rows: 11vh 81vh;
     }
     .content-supporting-default{
-        grid-template-rows: 96.5% auto;
+        grid-template-rows: 96% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 90vh;
@@ -837,6 +997,7 @@
     #retirement-home .needs-home-wrapper{
         grid-template-rows: 92vh;
     }
+    
 }
 @media only screen and (min-width: 900px) and (max-width: 1100px) and (min-height: 1200px){
     #retirement-home .needs-home-avatar-wrapper{
@@ -912,6 +1073,9 @@
     .needs-stand-bg{
         padding: 130px;
     }
+    #health-medical-selection .needs-stand-bg{
+        padding: 180px;
+    }
     
     .needs-stand-bg.error-padding{
         padding: 140px;
@@ -962,6 +1126,22 @@
     }
     .bg-retire-age{
         background-size: cover;
+    }
+    .bg-hm-home-element{
+        background-size: 100%;
+        background-position: center top 40%;
+    }
+    .bg-hnm{
+        background-size: cover;
+        background-position: top left 15%;
+        background-repeat: no-repeat;
+        background: linear-gradient(rgba(0, 0, 0, 0.03) 100%, rgba(255, 255, 255, 0) 0%),url(/images/needs/health-medical/critical-illness/monthly-support/bg-critical-monthly-support.png);
+    }
+    #debt-cancellation-home .left-20{
+        left: 3%;
+    }
+    #debt-cancellation-home .coins{
+        width: 35%;
     }
 }
 @media only screen and (min-width: 1024px){
@@ -1090,19 +1270,27 @@
     #savings-risk-profile .bg-education-gap{
         background-size: 75%;
     }
+    #health-medical-selection .needs-stand-bg{
+        padding: 155px;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .single.room-selection-content{
+        grid-template-columns: 20% 50% 30%;
+    }
 }
 @media screen and (min-width: 1600px) {
     .content-needs-default {
         grid-template-rows: auto 4.5vh 11.2vh;
     }
     .wrapper-needs-supporting-default {
-        grid-template-rows: 16vh 72.5vh;
+        grid-template-rows: 16vh 73.5vh;
     }
     .content-supporting-default {
-        grid-template-rows:95% auto;
+        grid-template-rows:94.5% auto;
     }
     .needs-home-wrapper{
-        grid-template-rows: 87vh;
+        grid-template-rows: 88vh;
     }
     #protection-home .needs-home-wrapper {
         grid-template-rows: 86vh;
@@ -1123,6 +1311,15 @@
     .col-xxxl-5 {
         flex: 0 0 auto;
         width: 41.66666667%;
+    }
+    #health-medical-home .needs-stand-bg{
+        padding: 190px;
+    }
+    .plant .position-absolute.center{
+        top:70%;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 17% 60% 23%
     }
 }
 @media screen and (min-width: 1800px) {
@@ -1149,7 +1346,7 @@
         grid-template-rows: 19% 74%;
     }
     .content-supporting-default {
-        grid-template-rows:96% auto;
+        grid-template-rows:95.5% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 90vh;
@@ -1173,6 +1370,41 @@
     }
     #retirement-home .needs-stand-bg{
         padding: 250px;
+    }
+    .plant .position-absolute.center{
+        top:80%;
+    }
+    .hospital .position-absolute.center {
+        top: 68%;
+    }
+    #debt-cancellation-home .needs-stand-bg{
+        padding: 250px;
+    }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 180px;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 15% 65% 20%;
+    }
+    .room-selection-content img{
+        width:100%;
+        height:100%;
+    }
+    img.windows{
+        width: 30%;
+        height: auto;
+    }
+    .patient img.avatar-patient{
+        width: 73%;
+        height: auto;
+    }
+    .patient-2 img.avatar-patient{
+        width: 100%;
+        height: auto;
+    }
+    img.roommate{
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -1389,6 +1621,9 @@ svg.slide-button.slick-arrow:hover {
 }
 .bg-btn_bar{
     background-color: #E9E9E9;
+}
+#hospital-room-selection .bg-btn_bar{
+    background-color: #D9D9D9;
 }
 .bg-needs_text{
     background-color: #d3d3d3;
@@ -1765,6 +2000,12 @@ button.choice:focus,
     .bg-education-book{
         background-size: cover;
     }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 140px;
+    }
+    .single.room-selection-content {
+        grid-template-columns: 0% 100% 0%;
+    }
 }
 @media only screen and (min-width: 1024px){
     .needs-home-nav {
@@ -1839,6 +2080,9 @@ button.choice:focus,
     .h-88{
         height: 80% !important;
     }
+    #health-medical-home .needs-stand-bg{
+        padding: 250px;
+    }
 }
 @media only screen and (min-width: 768px) and (max-height: 1024px) {
     .needs-home-nav{
@@ -1862,7 +2106,6 @@ button.choice:focus,
     .needs-home-content{
         height:82vh;
     }
-
 }
 @media only screen and (min-width: 768px){
     .w-md-50{

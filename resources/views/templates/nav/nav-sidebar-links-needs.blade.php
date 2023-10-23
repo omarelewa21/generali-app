@@ -36,25 +36,25 @@
                     <p class="nav-text text-uppercase {{ $folderName == 'education' ? 'text-primary' : '' }}">Education</p>
                 </div>
             </a>
-            <a class="nav-item text-decoration-none text-dark" href="{{url('#')}}">
+            <a class="nav-item text-decoration-none text-dark" href="{{route('savings.home')}}">
                 <div class="timeline-item-needs {{ $folderName == 'savings' ? 'active' : '' }}" data-folder-name="savings">
                     <p class="nav-text text-uppercase {{ $folderName == 'savings' ? 'text-primary' : '' }}">Savings</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{url('investment-home')}}">
+            <a class="nav-item text-decoration-none text-dark" href="{{route('investment.home')}}">
                 <div class="timeline-item-needs {{ $folderName == 'investment' ? 'active' : '' }}" data-folder-name="investment">
                     <p class="nav-text text-uppercase {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investments</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{url('#') }}">
+            <a class="nav-item text-decoration-none text-dark" href="{{route('health.medical.home') }}">
                 <div class="timeline-item-needs {{ $folderName == 'health and medical' ? 'active' : '' }}" data-folder-name="health and medical">
                     <p class="nav-text text-uppercase {{ $folderName == 'Health and Medical' ? 'text-primary' : '' }}">Health and Medical</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{ url('#')}}">
+            <a class="nav-item text-decoration-none text-dark" href="{{ route('debt.cancellation.home')}}">
                 <div class="timeline-item-needs {{ $folderName == 'debt cancellation' ? 'active' : '' }}" data-folder-name="debt cancellation">
                     <p class="nav-text text-uppercase {{ $folderName == 'debt cancellation' ? 'text-primary' : '' }}">Debt Cancellation</p>
                 </div>
