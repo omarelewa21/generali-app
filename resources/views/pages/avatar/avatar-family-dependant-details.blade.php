@@ -124,7 +124,7 @@
                                                                             @endforeach
                                                                         </select>
                                                                         @error('spouseTitle')
-                                                                            <div class="invalid-feedback text-red">The spouse's title field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
@@ -173,7 +173,7 @@
                                                                         </select>
                                                                     </div>
                                                                     @error('spouseIdType')
-                                                                        <div class="invalid-feedback text-red">The spouse's id type field is required.</div>
+                                                                        <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="row py-2" id="groups">
@@ -181,56 +181,76 @@
                                                                         <label for="spouseIdNumber" class="form-label">ID Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseIdNumber" class="form-control @error('spouseIdNumber') is-invalid @enderror" id="spouseIdNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('spouseIdNumber', $spouseData['id_number'] ?? '') }}">
                                                                         @error('spouseIdNumber')
-                                                                            <div class="invalid-feedback text-red">The spouse's id number field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="passportgroup" style="display: none;">
                                                                         <label for="spousePassportNumber" class="form-label">Passport Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spousePassportNumber" class="form-control @error('spousePassportNumber') is-invalid @enderror" id="spousePassportNumber" placeholder="A122345" value="{{ old('spousePassportNumber', $spouseData['passport_number'] ?? '') }}">
                                                                         @error('spousePassportNumber')
-                                                                            <div class="invalid-feedback text-red">The spouse's passport number field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="birthcertgroup" style="display: none;">
                                                                         <label for="spouseBirthCert" class="form-label">Birth Certificate Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseBirthCert" class="form-control @error('spouseBirthCert') is-invalid @enderror" id="spouseBirthCert" placeholder="T122345" value="{{ old('spouseBirthCert', $spouseData['birth_cert'] ?? '') }}">
                                                                         @error('spouseBirthCert')
-                                                                            <div class="invalid-feedback text-red">The spouse's birth certificate field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="policegroup" style="display: none;">
                                                                         <label for="spousePoliceNumber" class="form-label">Police / Army Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spousePoliceNumber" class="form-control @error('spousePoliceNumber') is-invalid @enderror" id="spousePoliceNumber" placeholder="Enter Police / Army Number" value="{{ old('spousePoliceNumber', $spouseData['police_number'] ?? '') }}">
                                                                         @error('spousePoliceNumber')
-                                                                            <div class="invalid-feedback text-red">The spouse's police number field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col-12 pt-4" id="registrationgroup" style="display: none;">
                                                                         <label for="spouseRegistrationNumber" class="form-label">Registration Number <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseRegistrationNumber" class="form-control @error('spouseRegistrationNumber') is-invalid @enderror" id="spouseRegistrationNumber" placeholder="Enter Registration Number" value="{{ old('spouseRegistrationNumber', $spouseData['registration_number'] ?? '') }}">
                                                                         @error('spouseRegistrationNumber')
-                                                                            <div class="invalid-feedback text-red">The spouse's registration number field is required.</div>
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">                                                                        
-                                                                        <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
+                                                                        <label for="day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('spouseday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('spouseday', $spouseData['day'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseday') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
-                                                                            </div>
+                                                                                @if(isset($spouseData['dob']))
+                                                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($spouseData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
+                                                                                @endif
+                                                                                </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('spousemonth', ['' => 'Select'] + $monthNames, old('spousemonth', $spouseData['month'] ?? ''), ['class' => 'form-select' . ($errors->has('spousemonth') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
-                                                                            </div>
+                                                                                @if(isset($spouseData['dob']))
+                                                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($spouseData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
+                                                                                @endif
+                                                                                </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('spouseyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -4);
-                                                                                }, $yearRange), $yearRange), old('spouseyear', $spouseData['year'] ?? ''), ['class' => 'form-select' . ($errors->has('spouseyear') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
-                                                                            </div>
-                                                                            @if ($errors->has('spouseday') || $errors->has('spousemonth') || $errors->has('spouseyear'))
+                                                                                @if(isset($spouseData['dob']))
+                                                                                    {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                        return substr($year, -4);
+                                                                                    }, $yearRange), $yearRange), old('year', substr($spouseData['dob'], -4)), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                        return substr($year, -4);
+                                                                                    }, $yearRange), $yearRange), old('year'), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
+                                                                                @endif
+                                                                                </div>
+                                                                            @if ($errors->has('day') || $errors->has('month') || $errors->has('year'))
                                                                                 <div class="col-md-12">
-                                                                                    <div class="invalid-feedback text-red" style="display:block">The spouse's date of birth field is required.</div>
+                                                                                    @if ($errors->has('year'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('year') }}</div>
+                                                                                    @elseif ($errors->has('month'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('month') }}</div>
+                                                                                    @elseif ($errors->has('day'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('day') }}</div>
+                                                                                    @endif
                                                                                 </div>
                                                                             @endif
                                                                         </div>
@@ -238,41 +258,41 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="genderInput" class="form-label">Gender <span class="text-danger">*</span></label>
-                                                                        <div class="d-flex btn-group @error('genderBtnradio') is-invalid @enderror" role="group">
+                                                                        <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                        <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="spouseMaleInput" autocomplete="off" value="male"
-                                                                                {{ (old('genderBtnradio') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="gender" id="spouseMaleInput" autocomplete="off" value="male"
+                                                                                {{ (old('gender') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="genderBtnradio" id="spouseFemaleInput" autocomplete="off" value="female"
-                                                                                {{ (old('genderBtnradio') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="gender" id="spouseFemaleInput" autocomplete="off" value="female"
+                                                                                {{ (old('gender') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                             </label>
                                                                         </div>
-                                                                        @error('genderBtnradio')
-                                                                            <div class="invalid-feedback text-red">The spouse's gender field is required.</div>
+                                                                        @error('gender')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror  
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="smoker" class="form-label">Your Habits <span class="text-danger">*</span></label>
-                                                                        <div class="d-flex btn-group @error('smokingBtnradio') is-invalid @enderror" role="group">
+                                                                        <label for="habits" class="form-label">Your Habits <span class="text-danger">*</span></label>
+                                                                        <div class="d-flex btn-group @error('habits') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="smokingBtnradio" id="smoker" autocomplete="off" value="smoker"
-                                                                                {{ (old('smokingBtnradio') === 'smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'smoker')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="smoker"
+                                                                                {{ (old('habits') === 'smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'smoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="smokingBtnradio" id="nonSmoker" autocomplete="off" value="nonSmoker"
-                                                                                {{ (old('smokingBtnradio') === 'nonSmoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'nonSmoker')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="habits" id="nonSmoker" autocomplete="off" value="nonSmoker"
+                                                                                {{ (old('habits') === 'nonSmoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'nonSmoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
                                                                             </label>
                                                                         </div>
-                                                                        @error('smokingBtnradio')
-                                                                            <div class="invalid-feedback text-red">The spouse's habits field is required.</div>
+                                                                        @error('habits')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror  
                                                                     </div>
                                                                 </div>
@@ -287,7 +307,7 @@
                                                                         </select>
                                                                     </div>
                                                                     @error('spouseOccupation')
-                                                                        <div class="invalid-feedback text-red">The spouse's occupation field is required.</div>
+                                                                        <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -324,21 +344,21 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}GenderInput" class="form-label">Gender <span class="text-danger">*</span></label>
-                                                                            <div class="d-flex btn-group @error($key . 'GenderBtnradio') is-invalid @enderror" role="group">
+                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'male' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
+                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'female' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
+                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
-                                                                            @error($key .'GenderBtnradio')
-                                                                                <div class="invalid-feedback text-red">The child's gender field is required.</div>
+                                                                            @error($key .'Gender')
+                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror  
                                                                         </div>
                                                                     </div>
@@ -347,17 +367,35 @@
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$key}}Age" class="d-inline-block"></span> )</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', $childrenData[$key]['day'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
+                                                                                    @if(isset($childrenData[$key]['dob']))
+                                                                                        {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($childrenData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
+                                                                                    @else
+                                                                                        {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
+                                                                                    @endif
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month', $childrenData[$key]['month'] ?? ''), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
+                                                                                    @if(isset($childrenData[$key]['dob']))
+                                                                                        {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month', substr($childrenData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
+                                                                                    @else
+                                                                                        {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month'), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
+                                                                                    @endif
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -2); }, $yearRange), $yearRange), old($key . 'year', $childrenData[$key]['year'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
+                                                                                    @if(isset($childrenData[$key]['dob']))
+                                                                                        {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -4); }, $yearRange), $yearRange), old($key . 'year', substr($childrenData[$key]['dob'], -4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
+                                                                                    @else
+                                                                                    {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -4); }, $yearRange), $yearRange), old($key . 'year'), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
+                                                                                    @endif
                                                                                 </div>
                                                                                 @if ($errors->has($key . 'day') || $errors->has($key . 'month') || $errors->has($key . 'year'))
                                                                                     <div class="col-md-12">
-                                                                                        <div class="invalid-feedback text-red" style="display:block">The child's date of birth field is required.</div>
+                                                                                        @if ($errors->has($key . 'year'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'year') }}</div>
+                                                                                        @elseif ($errors->has($key . 'month'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'month') }}</div>
+                                                                                        @elseif ($errors->has($key . 'day'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'day') }}</div>
+                                                                                        @endif
                                                                                     </div>
                                                                                 @endif
                                                                             </div>
@@ -421,21 +459,21 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}GenderInput" class="form-label">Gender <span class="text-danger">*</span></label>
-                                                                            <div class="d-flex btn-group @error($key . 'GenderBtnradio') is-invalid @enderror" role="group">
+                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
+                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}GenderBtnradio" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'GenderBtnradio') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
+                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
-                                                                            @error($key .'GenderBtnradio')
-                                                                                <div class="invalid-feedback text-red">The parents's gender field is required.</div>
+                                                                            @error($key .'Gender')
+                                                                                <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror  
                                                                         </div>
                                                                     </div>
@@ -444,19 +482,39 @@
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$key}}Age" class="d-inline-block"></span> )</label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', $parentsData[$key]['day'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
+                                                                                    @if(isset($parentsData[$key]['dob']))
+                                                                                        {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($parentsData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
+                                                                                    @else
+                                                                                        {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
+                                                                                    @endif
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', $parentsData[$key]['month'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
+                                                                                    @if(isset($parentsData[$key]['dob']))
+                                                                                        {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', substr($parentsData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
+                                                                                    @else
+                                                                                        {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month'), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
+                                                                                    @endif
                                                                                 </div>
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
-                                                                                    {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                        return substr($year, -2);
-                                                                                    }, $yearRange), $yearRange), old($key . 'year', $parentsData[$key]['year'] ?? ''), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
+                                                                                    @if(isset($parentsData[$key]['dob']))
+                                                                                        {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                            return substr($year, -4);
+                                                                                        }, $yearRange), $yearRange), old($key . 'year', substr($parentsData[$key]['dob'], -4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
+                                                                                    @else
+                                                                                        {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                            return substr($year, -4);
+                                                                                        }, $yearRange), $yearRange), old($key . 'year'), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
+                                                                                    @endif
                                                                                 </div>
                                                                                 @if ($errors->has($key . 'day') || $errors->has($key . 'month') || $errors->has($key . 'year'))
                                                                                     <div class="col-md-12">
-                                                                                        <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
+                                                                                        @if ($errors->has($key . 'year'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'year') }}</div>
+                                                                                        @elseif ($errors->has($key . 'month'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'month') }}</div>
+                                                                                        @elseif ($errors->has($key . 'day'))
+                                                                                            <div class="invalid-feedback text-red" style="display:block">{{ $errors->first($key . 'day') }}</div>
+                                                                                        @endif
                                                                                     </div>
                                                                                 @endif
                                                                             </div>

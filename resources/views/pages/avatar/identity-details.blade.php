@@ -240,7 +240,7 @@
                                                 </label>
                                             </div>
                                             @error('btnradio')
-                                                <div class="invalid-feedback">The habits field is required.</div>
+                                                <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror  
                                         </div>
                                     </div>
