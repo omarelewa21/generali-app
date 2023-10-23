@@ -218,7 +218,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
         }
     }
-    else if (path == '/savings-risk-profile' || path == '/savings-risk-profile-new') {
+    else if (path == '/savings-risk-profile') {
 
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');

@@ -494,11 +494,13 @@
         "risk-content";
     grid-template-rows: 10% 20% 70%;
 }
-#savings-risk-profile .wrapper-needs-supporting-default{
+#savings-risk-profile .wrapper-needs-supporting-default,
+#investment-risk-profile .wrapper-needs-supporting-default{
     grid-template-rows: 15vh 71.5vh;
 }
-#savings-risk-profile .content-supporting-default{
-    grid-template-rows: 92% auto;
+#savings-risk-profile .content-supporting-default,
+#investment-risk-profile .content-supporting-default{
+    grid-template-rows: 90% auto;
 }
 .risk-header{
     grid-area: risk-header;
@@ -1319,7 +1321,8 @@
     .content-supporting-default {
         grid-template-rows:94.5% auto;
     }
-    #savings-risk-profile .content-supporting-default {
+    #savings-risk-profile .content-supporting-default, 
+    #investment-risk-profile .content-supporting-default {
         grid-template-rows: 97% auto;
     }
     .needs-home-wrapper{

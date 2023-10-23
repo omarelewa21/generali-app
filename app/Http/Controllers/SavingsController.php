@@ -358,9 +358,9 @@ class SavingsController extends Controller
         Log::debug($customerDetails);
         
         // // Process the form data and perform any necessary actions
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('savings.gap');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('savings.gap');
     }
 
     public function submitSavingsGap(Request $request){
