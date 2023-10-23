@@ -388,9 +388,11 @@ class FormController extends Controller {
 
                 } else if ($maritalStatusButtonInput === 'married') {
                     $customerDetails['family_details']['dependant']['spouse'] = true;
-                    $customerDetails['family_details']['dependant']['spouse_data'] = [
-                        'relation' => 'Spouse'
-                    ];
+                    if (!isset($customerDetails['family_details']['dependant']['spouse_data'])) {
+                        $customerDetails['family_details']['dependant']['spouse_data'] = [
+                            'relation' => 'Spouse'
+                        ];
+                    }
                     
                 } else if ($maritalStatusButtonInput === 'divorced' || $maritalStatusButtonInput === 'widowed') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
@@ -408,7 +410,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
+            Log::debug($customerDetails);
             // Store the updated array back into the session
             return redirect()->route($dataUrl);
         } else {
