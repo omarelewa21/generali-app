@@ -104,6 +104,8 @@ Route::view('/savings-annual-return', 'pages.priorities.savings.savings-annual-r
 Route::post('/savings-annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
 Route::view('/savings-risk-profile', 'pages.priorities.savings.savings-risk-profile')->name('savings.risk.profile');
 Route::post('/savings-risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
+Route::view('/savings-risk-profile-new', 'pages.priorities.savings.savings-risk-profile-new')->name('savings.risk.profile.new');
+Route::post('/savings-risk-profile-new', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
 Route::view('/savings-gap', 'pages.priorities.savings.savings-gap')->name('savings.gap');
 Route::post('/savings-gap', [SavingsController::class, 'submitSavingsGap'])->name('form.submit.savings.gap');
 

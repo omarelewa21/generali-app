@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="row h-100">
             <div class="col-12">
-                <div class="row h-100 bg-protection bg-half wrapper-needs-supporting-default">
+                <div class="row h-100 bg-needs-desktop bg-half wrapper-needs-supporting-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
