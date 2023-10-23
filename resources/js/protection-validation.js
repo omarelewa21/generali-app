@@ -85,13 +85,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (isNaN(monthlyAmount)) {
                 // Input is not a valid number
                 totalProtectionFund.innerText = "RM 0";
-                displayAvatar.innerText = "RM 0";
             } else {
                 // Input is a valid number, perform the calculation
                 // Display the result
                 var result = amountPerYear.toLocaleString();
 
-                totalProtectionFund.innerText = "RM " + result;
+                totalProtectionFund.innerText = "RM" + result;
             }
 
             // Set the value of the hidden input field
@@ -147,7 +146,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Display the result
                 var result = totalAmount.toLocaleString();
 
-                totalProtectionFund.innerText = "RM " + result;
+                totalProtectionFund.innerText = "RM" + result;
             }
             
             newTotalFund.value = Year * oldTotalFund;

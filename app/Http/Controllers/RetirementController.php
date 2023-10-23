@@ -127,8 +127,12 @@ class RetirementController extends Controller
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
+                    $max = 20000000;
                     if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
+                    }
+                    if (intval($numericValue * 12) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). ' per annual.');
                     }
                 },
             ],
@@ -186,7 +190,7 @@ class RetirementController extends Controller
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'supporting_years' => 'required|integer|min:1|max:100',
+            'supporting_years' => 'required|integer|min:1|max:99',
         ], $customMessages);
         
         if ($validatedData->fails()) {
@@ -240,7 +244,7 @@ class RetirementController extends Controller
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'retirement_age' => 'required|integer|min:1|max:100',
+            'retirement_age' => 'required|integer|min:1|max:99',
         ], $customMessages);
         
         if ($validatedData->fails()) {
@@ -279,18 +283,18 @@ class RetirementController extends Controller
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'other_income_sources' => 'required|max:255',
+            'other_income_sources' => 'required|max:60',
             'retirement_savings' => [
                 'regex:/^[0-9,]+$/',
                 'nullable',
-                // function ($attribute, $value, $fail) use ($request) {
-                //     // Remove commas and check if the value is at least 1
-                //     $numericValue = str_replace(',', '', $value);
-                //     $min = 1;
-                //     if (intval($numericValue) < $min) {
-                //         $fail('Your amount must be at least ' .$min. '.');
-                //     }
-                // },
+                function ($attribute, $value, $fail) use ($request) {
+                    // Remove commas and check if the value is at least 1
+                    $numericValue = str_replace(',', '', $value);
+                    $max = 20000000;
+                    if (intval($numericValue) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                    }
+                },
             ],
         ], $customMessages);
 

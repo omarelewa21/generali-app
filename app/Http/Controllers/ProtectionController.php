@@ -15,6 +15,15 @@ class ProtectionController extends Controller
 {
     public function validateProtectionCoverageSelection(Request $request)
     {
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing identity_details from the session
+        // $identityDetails = $customerDetails['identity_details'] ?? [];
+
+        // Get existing protection_needs from the session
+        $protection = $customerDetails['protection_needs'] ?? [];
+
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -40,13 +49,6 @@ class ProtectionController extends Controller
 
         // Validation passed, perform any necessary processing.
         $protectionSelectedAvatarInput = $request->input('protectionSelectedAvatarInput');
-        $protectionSelectedImage = $request->input('protectionSelectedAvatarImage');
-
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
-
-        // Get existing protection_needs from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
 
         // Update specific keys with new values
         $protection = array_merge($protection, [
@@ -65,6 +67,8 @@ class ProtectionController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
     
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('protection.monthly.support');
     }
 
@@ -83,8 +87,12 @@ class ProtectionController extends Controller
                     // Remove commas and check if the value is at least 1
                     $numericValue = str_replace(',', '', $value);
                     $min = 1;
+                    $max = 20000000;
                     if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
+                    }
+                    if (intval($numericValue * 12) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). ' per annual.');
                     }
                 },
             ],

@@ -40,10 +40,7 @@
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center">RM 
-                                            <!-- {{ $totalProtectionNeeded !== null ? number_format(floatval($totalProtectionNeeded)) : $totalProtectionNeeded }} -->
-                                            {{ $newTotalProtectionNeeded !== null || $newTotalProtectionNeeded !== '' &&  $protectionSupportingYears !== null && $totalProtectionNeeded !== '' ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) : number_format(floatval($totalProtectionNeeded)) }}
-                                        </h3>
+                                        <h3 id="TotalProtectionFund" class="m-1 text-light text-center f-50">RM{{ $newTotalProtectionNeeded !== null || $newTotalProtectionNeeded !== '' &&  $protectionSupportingYears !== null && $totalProtectionNeeded !== '' ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) : number_format(floatval($totalProtectionNeeded)) }}</h3>
                                         <p class="text-light text-center">Total Protection Needed</p>
                                     </div>
                                 </div>

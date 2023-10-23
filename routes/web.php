@@ -11,6 +11,8 @@ use App\Http\Controllers\RetirementController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\HealthMedicalController;
+use App\Http\Controllers\DebtCancellationController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
@@ -44,19 +46,6 @@ Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.pri
 Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name('top.priorities.new');
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
-
-/* Priorities - Protection */
-Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
-Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
-Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
-Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
-Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
-Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
-Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
-Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
-Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
-Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
-Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
@@ -133,7 +122,60 @@ Route::post('/investment-risk-profile', [InvestmentController::class, 'validateI
 Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
 Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
-/* Priorities - Retirement */
+/* Priorities - Health and Medical */
+Route::view('/health-medical-home', 'pages.priorities.health and medical.health-medical-home')->name('health.medical.home');
+Route::view('/health-medical-selection', 'pages.priorities.health and medical.health-medical-selection')->name('health.medical.selection');
+Route::post('/health-medical-selection', [HealthMedicalController::class, 'validateHealthMedicalSelection'])->name('validate.health.medical.selection');
+Route::view('/health-medical/critical-illness/coverage', 'pages.priorities.health and medical.critical-illness.coverage')->name('health.medical.critical.illness.coverage');
+Route::post('/health-medical/critical-illness/coverage', [HealthMedicalController::class, 'validateCriticalIllnessCoverageSelection'])->name('validate.critical.illness.coverage.selection');
+Route::view('/health-medical/critical-illness/amount-needed', 'pages.priorities.health and medical.critical-illness.amount-needed')->name('health.medical.critical.amount.needed');
+Route::post('/health-medical/critical-illness/amount-needed', [HealthMedicalController::class, 'validateCriticalIllnessAmountNeeded'])->name('validate.critical.illness.amount.needed');
+Route::view('/health-medical/critical-illness/existing-protection', 'pages.priorities.health and medical.critical-illness.existing-protection')->name('health.medical.critical.existing.protection');
+Route::post('/health-medical/critical-illness/existing-protection', [HealthMedicalController::class, 'validateCriticalIllnessExistingProtection'])->name('validate.critical.illness.existing.protection');
+Route::view('/health-medical/critical-illness/gap', 'pages.priorities.health and medical.critical-illness.gap')->name('health.medical.critical.gap');
+Route::post('/health-medical/critical-illness/gap', [HealthMedicalController::class, 'submitCriticalIllnessGap'])->name('form.submit.critical.illness.gap');
+Route::view('/health-medical/medical-planning/coverage', 'pages.priorities.health and medical.medical-planning.coverage')->name('health.medical.medical.planning.coverage');
+Route::post('/health-medical/medical-planning/coverage', [HealthMedicalController::class, 'validateMedicalPlanningCoverageSelection'])->name('validate.medical.planning.coverage.selection');
+Route::view('/health-medical/medical-planning/hospital-selection', 'pages.priorities.health and medical.medical-planning.hospital-selection')->name('health.medical.planning.hospital.selection');
+Route::post('/health-medical/medical-planning/hospital-selection', [HealthMedicalController::class, 'validateMedicalPlanningHospitalSelection'])->name('validate.medical.planning.hospital.selection');
+Route::view('/health-medical/medical-planning/room-selection', 'pages.priorities.health and medical.medical-planning.room-selection')->name('health.medical.planning.room.selection');
+Route::post('/health-medical/medical-planning/room-selection', [HealthMedicalController::class, 'validateMedicalPlanningRoomSelection'])->name('validate.medical.planning.room.selection');
+Route::view('/health-medical/medical-planning/amount-needed', 'pages.priorities.health and medical.medical-planning.amount-needed')->name('health.medical.planning.amount.needed');
+Route::post('/health-medical/medical-planning/amount-needed', [HealthMedicalController::class, 'validateMedicalPlanningAmountNeeded'])->name('validate.medical.planning.amount.needed');
+Route::view('/health-medical/medical-planning/existing-protection', 'pages.priorities.health and medical.medical-planning.existing-protection')->name('health.medical.planning.existing.protection');
+Route::post('/health-medical/medical-planning/existing-protection', [HealthMedicalController::class, 'validateMedicalPlanningExistingProtection'])->name('validate.medical.planning.existing.protection');
+Route::view('/health-medical/medical-planning/gap', 'pages.priorities.health and medical.medical-planning.gap')->name('health.medical.planning.gap');
+Route::post('/health-medical/medical-planning/gap', [HealthMedicalController::class, 'submitMedicalPlanningGap'])->name('form.submit.medical.planning.gap');
+
+/* Priorities - Debt Cancellation */
+Route::view('/debt-cancellation-home', 'pages.priorities.debt-cancellation.debt-cancellation-home')->name('debt.cancellation.home');
+Route::view('/debt-cancellation-coverage', 'pages.priorities.debt-cancellation.debt-cancellation-coverage')->name('debt.cancellation.coverage');
+Route::post('/debt-cancellation-coverage', [DebtCancellationController::class, 'validateDebtCancellationCoverage'])->name('validate.debt.cancellation.coverage');
+Route::view('/debt-cancellation-outstanding-loan', 'pages.priorities.debt-cancellation.debt-cancellation-outstanding-loan')->name('debt.cancellation.outstanding.loan');
+Route::post('/debt-cancellation-outstanding-loan', [DebtCancellationController::class, 'validateDebtCancellationOutstandingLoan'])->name('validate.debt.outstanding.loan');
+Route::view('/debt-cancellation-settlement-years', 'pages.priorities.debt-cancellation.debt-cancellation-settlement-years')->name('debt.cancellation.settlement.years');
+Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::class, 'validateDebtCancellationSettlementYears'])->name('validate.debt.settlement.years');
+Route::view('/debt-cancellation-existing-debt', 'pages.priorities.debt-cancellation.debt-cancellation-existing-debt')->name('debt.cancellation.existing.debt');
+Route::post('/debt-cancellation-existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
+Route::view('/debt-cancellation-critical-illness', 'pages.priorities.debt-cancellation.debt-cancellation-critical-illness')->name('debt.cancellation.critical.illness');
+Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
+Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
+Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
+
+/* Priorities - Protection Old */
+Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
+Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
+Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
+Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
+Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
+Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
+Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
+Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
+Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
+Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
+Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
+
+/* Priorities - Retirement Old */
 Route::view('/retirement-home-archived', 'pages.priorities.retirement.retirement-home-archived')->name('retirement.home.archived');
 Route::view('/retirement-coverage-archived', 'pages.priorities.retirement.retirement-coverage-archived')->name('retirement.coverage.archived');
 Route::Post('/retirement-coverage-archived', [formRetirementController::class, 'submitRetirementCoverage'])->name('form.retirement.coverage');

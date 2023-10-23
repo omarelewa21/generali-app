@@ -25,7 +25,7 @@
                     // Get all routes matching the current folder name (prefix)
                     $folderRoutes = collect(Route::getRoutes()->getRoutesByName())
                     ->filter(function ($value, $key) use ($folderName) {
-                    return strpos($key, $folderName . '.') === 0;
+                    return $key === $folderName || strpos($key, $folderName . '.') === 0;
                     });
 
                     $routeKeys = $folderRoutes->keys()->all();
@@ -71,8 +71,8 @@
                             'education' => 3,
                             'savings' => 4,
                             'investment' => 5,
-                            'debt cancellation' => 6,
-                            'Health and Medical' => 7,
+                            'health' => 6,
+                            'debt' => 7,
                             // 'Others' => 8,
                             ];
 
