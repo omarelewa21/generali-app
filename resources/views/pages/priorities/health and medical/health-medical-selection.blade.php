@@ -41,13 +41,13 @@
                             <div class="row justify-content-center align-items-end position-relative" id="hnm-selection">
                                 <div class="col-xl-5 col-12 hnm-selection">
                                     <button class="border-0 bg-transparent choice h-100 mx-auto slick-padding mt-auto button-needs justify-content-center align-items-center @if($selectedHealthMedical === 'critical illness') default @endif" id="critical_illness" data-avatar="critical illness" data-required="">
-                                        <img src="{{ asset('images/needs/health-medical/selection/critical-illness.png') }}" class="mt-auto mw-100 mh-100">
+                                        <img src="{{ asset('images/needs/health-medical/selection/critical-illness.png') }}" class="mt-auto mw-100 mh-100 mx-auto">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Critical Illness</strong></p>
                                     </button>
                                 </div>
                                 <div class="col-xl-5 col-12 hnm-selection">
                                     <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto mx-auto button-needs justify-content-center align-items-center @if($selectedHealthMedical === 'medical planning') default @endif" id="medical_planning" data-avatar="medical planning" data-required="">
-                                        <img src="{{ asset('images/needs/health-medical/selection/hospital.png') }}" class="mt-auto mw-100 mh-100">
+                                        <img src="{{ asset('images/needs/health-medical/selection/hospital.png') }}" class="mt-auto mw-100 mh-100 mx-auto">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Hospitalisation</strong></p>
                                     </button>
                                 </div>

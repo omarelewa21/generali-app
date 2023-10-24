@@ -44,7 +44,7 @@
                                     <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                         <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === $child['first_name'].''.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
                                             @php
-                                            $birthdate = '04-06-2005';
+                                            $birthdate = $child['dob'];
 
                                             // Convert DOB to DateTime object
                                             $dobDate = \DateTime::createFromFormat('d-m-Y', $birthdate);
@@ -57,7 +57,7 @@
                                             $age = $ageInterval->y; // Access the years property of the interval
 
                                             @endphp
-                                            <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age:{{$age}}</p>
+                                            <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
                                             <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                             <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>{{ $child['first_name'] }} {{ $child['last_name'] }}</strong></p>
                                         </button>

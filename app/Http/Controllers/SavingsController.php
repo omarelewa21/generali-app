@@ -277,34 +277,66 @@ class SavingsController extends Controller
         
         return redirect()->route('savings.risk.profile');
     }
+    
 
     public function validateSavingsRiskProfile(Request $request){
 
         // Define custom validation rule for button selection
-        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-            if ($value !== null) {
-                return true;
-            }
+        // Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+        //     if ($value !== null) {
+        //         return true;
+        //     }
             
-            $customMessage = "Please select at least one risk.";
-            $validator->errors()->add($attribute, $customMessage);
+        //     $customMessage = "Please select at least one risk.";
+        //     $validator->errors()->add($attribute, $customMessage);
     
-            return false;
-        });
+        //     return false;
+        // });
 
-        $validator = Validator::make($request->all(), [
-            'savingsRiskProfileInput' => [
-                'at_least_one_selected',
-            ],
-        ]);
+        // Validator::extend('at_least_one_potential_selected', function ($attribute, $value, $parameters, $validator) {
+        //     if ($value !== null) {
+        //         return true;
+        //     }
+            
+        //     $customMessage = "Please select at least one potential return.";
+        //     $validator->errors()->add($attribute, $customMessage);
+    
+        //     return false;
+        // });
+
+        // $validator = Validator::make($request->all(), [
+        //     'savingsRiskProfileInput' => [
+        //         'at_least_one_selected',
+        //     ],
+        //     'savingsPotentialReturnInput' => [
+        //         'at_least_one_potential_selected',
+        //     ],
+        // ]);
 
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        $customMessages = [
+            'savingsRiskProfileInput.required' => 'Please select a risk level.',
+            'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
+            'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+            // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+            'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
+            
+        ], $customMessages);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
         // Validation passed, perform any necessary processing.
         $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
+        $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -314,7 +346,8 @@ class SavingsController extends Controller
 
         // Update specific keys with new values
         $savings = array_merge($savings, [
-            'riskProfile' => $savingsRiskProfileInput
+            'riskProfile' => $savingsRiskProfileInput,
+            'potentialReturn' => $savingsPotentialReturnInput
         ]);
 
         // Set the updated identity_details back to the customer_details session
@@ -325,6 +358,8 @@ class SavingsController extends Controller
         Log::debug($customerDetails);
         
         // // Process the form data and perform any necessary actions
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('savings.gap');
     }
 

@@ -15,7 +15,6 @@
     // Retrieving values from the session
     $healthMedical = session('customer_details.health_medical_needs');
     $selfGender = session('customer_details.identity_details.gender');
-    $temporaryGender = session('customer_details.avatar.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $medicalPlanningSelectedAvatar = session('customer_details.health_medical_needs.medical_planning.coveragePerson');
@@ -44,14 +43,14 @@
                         <div class="col-11 m-auto selection-content-coverage h-100 coverage_slick z-1">
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                 <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === 'self') default @endif" id="self" data-avatar="self" data-required="">
-                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($temporaryGender === 'Female' ? 'female' : 'male').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                    <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Self</strong></p>
                                 </button>
                             </div>
                             @if ($spouseData)
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
                                     <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
-                                        <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-'.($temporaryGender === 'Female' ? 'male' : 'female').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
+                                        <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                         <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Spouse</strong></p>
                                     </button>
                                 </div>

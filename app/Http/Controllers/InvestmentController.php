@@ -264,31 +264,25 @@ class InvestmentController extends Controller
 
     public function validateInvestmentRiskProfile(Request $request){
 
-        // Define custom validation rule for button selection
-        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-            if ($value !== null) {
-                return true;
-            }
+        $customMessages = [
+            'investmentRiskProfileInput.required' => 'Please select a risk level.',
+            'investmentRiskProfileInput.in' => 'Invalid risk level selected.',
+            'investmentPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
+        ];
+
+        $validatedData = Validator::make($request->all(), [
+            'investmentRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+            'investmentPotentialReturnInput' => 'required_if:investmentRiskProfileInput,High Risk,Medium Risk,Low Risk',
             
-            $customMessage = "Please select at least one risk.";
-            $validator->errors()->add($attribute, $customMessage);
-    
-            return false;
-        });
+        ], $customMessages);
 
-        $validator = Validator::make($request->all(), [
-            'investmentRiskProfileInput' => [
-                'at_least_one_selected',
-            ],
-        ]);
-
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
         // Validation passed, perform any necessary processing.
         $investmentRiskProfileInput = $request->input('investmentRiskProfileInput');
+        $investmentPotentialReturnInput = $request->input('investmentPotentialReturnInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -298,7 +292,8 @@ class InvestmentController extends Controller
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
-            'riskProfile' => $investmentRiskProfileInput
+            'riskProfile' => $investmentRiskProfileInput,
+            'potentialReturn' => $investmentPotentialReturnInput
         ]);
 
         // Set the updated identity_details back to the customer_details session

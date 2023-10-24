@@ -218,12 +218,27 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     }
     else if (path == '/investment-risk-profile') {
 
-        // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
+        const dataPotentialBtns = document.querySelectorAll('[data-risk]');
+        var highRisk = document.getElementById("high-risk");
+        var mediumRisk = document.getElementById("medium-risk");
+        var lowRisk = document.getElementById("low-risk");
+        var highRiskImg = document.getElementById("high-risk-img");
+        var mediumRiskImg = document.getElementById("medium-risk-img");
+        var lowRiskImg = document.getElementById("low-risk-img");
+        var highPotentialReturn = document.getElementById("high-risk-potential-content");
+        var mediumPotentialReturn = document.getElementById("medium-risk-potential-content");
+        var lowPotentialReturn = document.getElementById("low-risk-potential-content");
+        const dataSelected = document.querySelectorAll('.default');
 
         dataButtons.forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default behavior of the button click
+
+                // Remove 'data-required' from all elements with the class 'risk-profile-content'
+                dataPotentialBtns.forEach(btn => {
+                    btn.removeAttribute('data-required');
+                });
 
                 dataButtons.forEach(btn => btn.removeAttribute('data-required'));
                 // Add 'selected' attribute to the clicked button
@@ -231,59 +246,76 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
                 dataButtons.forEach(btn => btn.classList.remove('selected'));
 
-                const nextButton = document.getElementById('nextButton');
-
                 // Get the selected data-avatar value
                 const dataAvatar = this.getAttribute('data-avatar');
 
                 // Update the hidden input field value with the selected avatar
                 document.getElementById('investmentRiskProfileInput').value = dataAvatar;
+
+                const selectedPotential = document.getElementById('investmentPotentialReturnInput');
+                // Check if the user selected a risk and remove the potential value if not
+                selectedPotential.value = '';
             });
         });
+
+        dataPotentialBtns.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of the button click
+
+                dataPotentialBtns.forEach(btn => btn.removeAttribute('data-required'));
+                // Add 'selected' attribute to the clicked button
+                this.setAttribute('data-required', 'selected');
+
+                dataPotentialBtns.forEach(btn => btn.classList.remove('selected'));
+
+                // Get the selected data-avatar value
+                const dataPotential = this.getAttribute('data-risk');
+
+                // Update the hidden input field value with the selected avatar
+                document.getElementById('investmentPotentialReturnInput').value = dataPotential;
+            });
+        });       
 
         // Preselect the button on page load
         window.addEventListener('DOMContentLoaded', function() {
             const defaultBtn = document.querySelectorAll('.default');
 
             defaultBtn.forEach(defaultBtn => {
-                // Add the 'selected' class to the closest .button-bg div of each default button
                 defaultBtn.classList.add('selected');
             });
         });
-
-        var highRisk = document.getElementById("high-risk");
-        var mediumRisk = document.getElementById("medium-risk");
-        var lowRisk = document.getElementById("low-risk");
-        var highRiskImg = document.getElementById("high-risk-img");
-        var mediumRiskImg = document.getElementById("medium-risk-img");
-        var lowRiskImg = document.getElementById("low-risk-img");
-        const dataSelected = document.querySelectorAll('.default');
 
         $(document).ready(function () {
             if ($('.risk-btn.selected')){
                 var selectedId = $('.risk-btn.selected').attr('id');
                 document.getElementById(selectedId + "-img").style.display = "block";
+                document.getElementById(selectedId + "-potential-content").style.display = "block";
             }
         });
-
-        highRiskImg.style.display = "block";
-        mediumRiskImg.style.display = "none";
-        lowRiskImg.style.display = "none";
 
         highRisk.onclick = function(){
             highRiskImg.style.display = "block";
             mediumRiskImg.style.display = "none";
             lowRiskImg.style.display = "none";
+            highPotentialReturn.style.display ="block";
+            mediumPotentialReturn.style.display = "none";
+            lowPotentialReturn.style.display = "none";
         }
         mediumRisk.onclick = function(){
             mediumRiskImg.style.display = "block";
             highRiskImg.style.display = "none";
             lowRiskImg.style.display = "none";
+            mediumPotentialReturn.style.display = "block";
+            highPotentialReturn.style.display = "none";
+            lowPotentialReturn.style.display = "none";
         }
         lowRisk.onclick = function(){
             lowRiskImg.style.display = "block";
             highRiskImg.style.display = "none";
             mediumRiskImg.style.display = "none";
+            lowPotentialReturn.style.display = "block";
+            highPotentialReturn.style.display = "none";
+            mediumPotentialReturn.style.display = "none";
         }
 
         dataSelected.forEach(btnSelected => {
@@ -292,16 +324,25 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             lowRiskImg.style.display = "none";
 
             const defaultSelection = btnSelected.getAttribute('data-avatar');
-            console.log(defaultSelected);
-            if (defaultSelection === 'high-risk') {
-                highRiskImg.style.display = "block";
-            } else if (defaultSelected === 'medium-risk'){
-                mediumRiskImg.style.display = "block";
+            if (defaultSelection === 'High Risk') {
+                highPotentialReturn.style.display = "block";
+            } else if (defaultSelected === 'Medium Risk'){
+                mediumPotentialReturn.style.display = "block";
             }
-            else{
+            else if (defaultSelected === 'Low Risk'){
                 lowRiskImg.style.display = "block";
             }
         });
+
+        const oldRiskLevel = document.getElementById('investmentRiskProfileInput').value;
+        if (oldRiskLevel === 'High Risk') {
+            highPotentialReturn.style.display = "block";
+        } else if (oldRiskLevel === 'Medium Risk'){
+            mediumPotentialReturn.style.display = "block";
+        }
+        else if (oldRiskLevel === 'Low Risk'){
+            lowPotentialReturn.style.display = "block";
+        }
     }
     else if (path == '/investment-gap') {
         var Uncovered = (100 - Covered).toFixed(2);
