@@ -74,9 +74,9 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
-                                                    @error('lastName')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                @error('lastName')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row">
