@@ -38,27 +38,34 @@
                         <section class="row edu-con mh-100">
                             <div class="col-12 position-relative mh-100">
                                 <div class="row h-100" id="needs-content">
-                                    <div class="col-12 col-xl-6 d-flex align-items-end justify-content-center z-1 mh-100 second-order">
-                                        <div class="text-center education-support mh-100 z-1 h-100 align-items-end d-flex">
-                                            <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" class="mt-auto mh-100 mw-100 mx-auto w-auto avatar-img" style="display:block;">
-                                            <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" class="mt-auto mh-100 mx-auto w-auto avatar-img" style="display:none;">
-                                            <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" class="mt-auto mh-100 mx-auto w-auto avatar-img" style="display:none;">
-                                        </div>
-                                        <div class="col-12 position-absolute bottom-0 show-mobile">
-                                            <div class="row">
-                                                <div class="needs-stand-bg bg-btn_bar {{ $errors->has('investmentPotentialReturnInput') ? 'error-padding' : '' }}"></div>
+                                    <div class="col-12 col-xl-6 z-1 mh-100 second-order mt-auto">
+                                        <div class="row align-items-end justify-content-center">
+                                            <div class="text-center education-support mh-100 z-1 h-100 align-items-end">
+                                                <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" class="mt-auto mh-100 mw-100 mx-auto w-auto avatar-img" style="display:block;">
+                                                <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" class="mt-auto mh-100 mx-auto w-auto avatar-img" style="display:none;">
+                                                <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" class="mt-auto mh-100 mx-auto w-auto avatar-img" style="display:none;">
+                                            </div>
+                                            <div class="col-12 show-mobile footer bg-white py-4 z-1">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                                            <a href="{{route('investment.annual.return')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                                            <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-xl-6 first-order pt-4 pt-lg-0 z-1">
-                                        <div class="row justify-content-center align-items-center h-100">
-                                            <div class="col-12 col-md-8">
+                                        <div class="row justify-content-center align-items-center">
+                                            <div class="col-9 col-sm-6 col-md-5 col-lg-4 col-xl-8">
                                                 <div class="row justify-content-start align-items-center">
                                                     <h4 class="f-34 f-family fw-700 mb-5">I am willing to take</h4>
                                                     <div class="col-12 mb-3">
                                                         <button class="border-0 risk-btn f-family @if($investmentRiskProfile === 'High Risk') default @endif" id="high-risk" data-avatar="High Risk" data-required="{{old('investmentRiskProfileInput') === 'High Risk' ? 'selected' : ''}}">High Risk</button>
                                                     </div>
-                                                    <div class="col-12 mb-3" id="high-risk-potential-content" style="display:none;">
+                                                    <div class="col-12 mb-3 z-1" id="high-risk-potential-content" style="display:none;">
                                                         <p class="risk-potential-title px-3">Potential Return:</p>
                                                         <div class="row">
                                                             <div class="col-12 d-flex">
@@ -68,10 +75,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 mb-3">
+                                                    <div class="col-12 mb-3 z-1">
                                                         <button class="border-0 risk-btn f-family @if($investmentRiskProfile === 'Medium Risk') default @endif" id="medium-risk" data-avatar="Medium Risk" data-required="{{old('investmentRiskProfileInput') === 'Medium Risk' ? 'selected' : ''}}">Medium Risk</button>
                                                     </div>
-                                                    <div class="col-12 mb-3" id="medium-risk-potential-content" style="display:none;">
+                                                    <div class="col-12 mb-3 z-1" id="medium-risk-potential-content" style="display:none;">
                                                         <p class="risk-potential-title px-3">Potential Return:</p>
                                                         <div class="row">
                                                             <div class="col-12 d-flex">
@@ -81,10 +88,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 mb-3">
+                                                    <div class="col-12 mb-3 z-1">
                                                         <button class="border-0 risk-btn f-family @if($investmentRiskProfile === 'Low Risk') default @endif" id="low-risk" data-avatar="Low Risk" data-required="{{old('investmentRiskProfileInput') === 'Low Risk' ? 'selected' : ''}}">Low Risk</button>
                                                     </div>
-                                                    <div class="col-12 mb-3 risk-potential-content" id="low-risk-potential-content" style="display:none;">
+                                                    <div class="col-12 mb-3 risk-potential-content z-1" id="low-risk-potential-content" style="display:none;">
                                                         <p class="risk-potential-title px-3">Potential Return:</p>
                                                         <div class="row">
                                                             <div class="col-12 d-flex">
@@ -98,16 +105,6 @@
                                                     <input type="hidden" name="investmentPotentialReturnInput" id="investmentPotentialReturnInput" value="{{$investmentPotentialReturn}}">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 show-mobile footer bg-white py-4 z-1">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                            <a href="{{route('investment.annual.return')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
-                                            <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>
                                 </div>
@@ -131,9 +128,9 @@
                                 </div>
                             </section>
                         @endif
-                        <div class="col-12 hide-mobile">
+                        <div class="col-12">
                             <div class="row">
-                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('investmentRiskProfileInput') || $errors->has('investmentPotentialReturnInput') ? 'error-padding' : '' }}"></div>
+                                <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg {{ $errors->has('savingsRiskProfileInput') || $errors->has('savingsPotentialReturnInput') ? 'error-padding' : '' }}"></div>
                             </div>
                         </div>
                         <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">

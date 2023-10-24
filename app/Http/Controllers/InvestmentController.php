@@ -292,7 +292,7 @@ class InvestmentController extends Controller
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
-            'riskProfile' => $investmentRiskProfileInput
+            'riskProfile' => $investmentRiskProfileInput,
             'potentialReturn' => $investmentPotentialReturnInput
         ]);
 

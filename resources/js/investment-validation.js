@@ -250,9 +250,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 const dataAvatar = this.getAttribute('data-avatar');
 
                 // Update the hidden input field value with the selected avatar
-                document.getElementById('savingsRiskProfileInput').value = dataAvatar;
+                document.getElementById('investmentRiskProfileInput').value = dataAvatar;
 
-                const selectedPotential = document.getElementById('savingsPotentialReturnInput');
+                const selectedPotential = document.getElementById('investmentPotentialReturnInput');
                 // Check if the user selected a risk and remove the potential value if not
                 selectedPotential.value = '';
             });
@@ -272,7 +272,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 const dataPotential = this.getAttribute('data-risk');
 
                 // Update the hidden input field value with the selected avatar
-                document.getElementById('savingsPotentialReturnInput').value = dataPotential;
+                document.getElementById('investmentPotentialReturnInput').value = dataPotential;
             });
         });       
 
@@ -334,7 +334,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         });
 
-        const oldRiskLevel = document.getElementById('savingsRiskProfileInput').value;
+        const oldRiskLevel = document.getElementById('investmentRiskProfileInput').value;
         if (oldRiskLevel === 'High Risk') {
             highPotentialReturn.style.display = "block";
         } else if (oldRiskLevel === 'Medium Risk'){
