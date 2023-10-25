@@ -117,7 +117,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.welcome');
         } else {
@@ -296,7 +296,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status');
         } else {
@@ -798,7 +798,7 @@ class FormController extends Controller {
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-
+        Log::debug($customerDetails);
         // Process the form data and perform any necessary actions
         return redirect()->route('priorities.to.discuss');
     }

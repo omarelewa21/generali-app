@@ -162,35 +162,6 @@ Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::
 Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
 Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
-/* Priorities - Protection Old */
-Route::view('/protection-home-archived', 'pages.priorities.protection.protection-home-archived')->name('protection.home.archived');
-Route::view('/protection-coverage-archived', 'pages.priorities.protection.protection-coverage-archived')->name('protection.coverage.archived');
-Route::post('/protection-coverage-archived', [formProtectionController::class, 'submitProtectionCoverage'])->name('form.protection.coverage');
-Route::view('/protection-monthly-support-archived', 'pages.priorities.protection.protection-monthly-support-archived')->name('protection.monthly.support.archived');
-Route::post('/protection-monthly-support-archived', [formProtectionController::class, 'submitProtectionMonthlySupport'])->name('form.protection.monthly.support');
-Route::view('/protection-supporting-years-archived', 'pages.priorities.protection.protection-supporting-years-archived')->name('protection.supporting.years.archived');
-Route::post('/protection-supporting-years-archived', [formProtectionController::class, 'submitProtectionSupportingYears'])->name('form.protection.supporting.years');
-Route::view('/protection-existing-policy-archived', 'pages.priorities.protection.protection-existing-policy-archived')->name('protection.existing.policy.archived');
-Route::post('/protection-existing-policy-archived', [formProtectionController::class, 'submitProtectionExistingPolicy'])->name('form.protection.existing.policy');
-Route::view('/protection-gap-archived', 'pages.priorities.protection.protection-gap-archived')->name('protection.gap.archived');
-Route::view('/protection-gap2', 'pages.priorities.protection.protection-gap2')->name('protection.gap2');
-
-/* Priorities - Retirement Old */
-Route::view('/retirement-home-archived', 'pages.priorities.retirement.retirement-home-archived')->name('retirement.home.archived');
-Route::view('/retirement-coverage-archived', 'pages.priorities.retirement.retirement-coverage-archived')->name('retirement.coverage.archived');
-Route::Post('/retirement-coverage-archived', [formRetirementController::class, 'submitRetirementCoverage'])->name('form.retirement.coverage');
-Route::view('/retirement-ideal-archived', 'pages.priorities.retirement.retirement-ideal-archived')->name('retirement.ideal.archived');
-Route::Post('/retirement-ideal-archived', [formRetirementController::class, 'submitRetirementIdeal'])->name('form.retirement.ideal');
-Route::view('/retirement-age-to-retire-archived', 'pages.priorities.retirement.retirement-age-to-retire-archived')->name('retirement.age.to.retire.archived');
-Route::Post('/retirement-age-to-retire-archived', [formRetirementController::class, 'submitRetirementAgeToRetire'])->name('form.age.to.retire');
-Route::view('/retirement-allocated-funds-archived', 'pages.priorities.retirement.retirement-allocated-funds-archived ')->name('retirement.allocated.funds.archived');
-Route::Post('/retirement-allocated-funds-archived', [formRetirementController::class, 'submitRetirementAllocatedFunds'])->name('form.retirement.allocated.funds');
-Route::view('/retirement-years-till-retire-archived', 'pages.priorities.retirement.retirement-years-till-retire-archived')->name('retirement.years.till.retire.archived');
-Route::Post('/retirement-years-till-retire-archived', [formRetirementController::class, 'submitRetirementYearsTillRetire'])->name('form.retirement.years.till.retire');
-Route::view('/retirement-allocated-funds-aside-archived', 'pages.priorities.retirement.retirement-allocated-funds-aside-archived')->name('retirement.allocated.funds.aside.archived');
-Route::Post('/retirement-allocated-funds-aside-archived', [formRetirementController::class, 'submitRetirementAllocatedFundsAside'])->name('form.retirement.allocated.funds.aside');
-Route::view('/retirement-gap-archived', 'pages.priorities.retirement.retirement-gap-archived')->name('retirement.gap.archived');
-
 // Route::get('/files/{filename}', function($filename){
 //     return \Storage::download($filename); // assuming default disk is set to 'public'
 // });
