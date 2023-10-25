@@ -158,7 +158,7 @@
         "content-block"
         "warning"
         "footer-needs-default";
-    grid-template-rows:  auto 5.5vh 13vh;
+    grid-template-rows:  auto 5.5vh 15vh;
 }
 .content-block{
     grid-area: content-block;
@@ -207,7 +207,7 @@
 .savings_coverage .slick-slide button{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 90% 10%;
+    grid-template-rows: 88% 12%;
     grid-template-areas:
         "coverage-image"
         "coverage-text";
@@ -221,8 +221,10 @@
 }
 .coverage-text {
     grid-area: coverage-text;
-    grid-template-columns: 100%;
-    
+    grid-template-columns: 100%;   
+}
+.coverage-text strong{
+    line-height:1;
 }
 /* =============================== Protection Home Page ===============================*/
 #protection-home .needs-stand-bg {
@@ -494,6 +496,18 @@
         "risk-content";
     grid-template-rows: 10% 20% 70%;
 }
+#savings-risk-profile .wrapper-needs-supporting-default,
+#investment-risk-profile .wrapper-needs-supporting-default{
+    grid-template-rows: 15vh 71.5vh;
+}
+#savings-risk-profile .education-support,
+#investment-risk-profile .education-support{
+    grid-template-rows: 5% 95%;
+}
+#savings-risk-profile .content-supporting-default,
+#investment-risk-profile .content-supporting-default{
+    grid-template-rows: 90% auto;
+}
 .risk-header{
     grid-area: risk-header;
     grid-template-columns: 100%;
@@ -510,12 +524,13 @@
     display: grid;
 }
 .risk-btn{
-    background:rgba(238, 238, 238, 1);
-    height:85px; 
+    /* background:rgba(238, 238, 238, 1); */
     border:1px solid rgba(240, 240, 240, 1);
     color:rgba(10, 4, 60, 0.50);
     font-size: 22px;
     font-weight: 700;
+    width: 301px;
+    height: 85px;
 }
 .risk-btn:hover,
 .risk-btn[data-required="selected"],
@@ -523,6 +538,29 @@
     background: #C0232C;
     border: 1px solid #A0A0A0;
     color: #fff;
+}
+.risk-potential-title{
+    font-size: 18px;
+    font-family: 'Helvetica Neue';
+    line-height: 22px;
+}
+.potential-btn{
+    background-color: #fff;
+    border: 1px solid #A0A0A0;
+    width: 100px;
+    height: 57px;
+    font-size: 22px;
+}
+.potential-btn:hover,
+.potential-btn[data-required="selected"],
+.potential-btn.selected{
+    border: 1px solid #C0232C;
+}
+.potential-btn.border-start-0.border-end-0:hover,
+.potential-btn.border-start-0.border-end-0[data-required="selected"],
+.potential-btn.border-start-0.border-end-0.selected{
+    border-left: 1px solid #C0232C !important;
+    border-right: 1px solid #C0232C !important;
 }
 
 /* =============================== Investment Home =======================================*/
@@ -956,6 +994,10 @@
     #savings-home .needs-stand-bg {
         padding: 250px !important;
     }
+    #savings-risk-profile .content-supporting-default,
+    #investment-risk-profile .content-supporting-default{
+        grid-template-rows: 94.6% auto;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px){
     .needs-stand-bg.error-padding {
@@ -1288,6 +1330,10 @@
     }
     .content-supporting-default {
         grid-template-rows:94.5% auto;
+    }
+    #savings-risk-profile .content-supporting-default, 
+    #investment-risk-profile .content-supporting-default {
+        grid-template-rows: 97% auto;
     }
     .needs-home-wrapper{
         grid-template-rows: 88vh;
