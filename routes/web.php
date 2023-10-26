@@ -46,6 +46,7 @@ Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.pri
 Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name('top.priorities.new');
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
+Route::post('/priorities-to-discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');

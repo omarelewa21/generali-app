@@ -10,7 +10,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $sortable = $("#sortable");
 
         var addedNeedsImages = sessionData ? sessionData : [];
-
+        
         // Function to click to drop
         function addImageToSortable(imageName, dataAvatar) {
             // Check if dataAvatar already exists in the array
@@ -55,6 +55,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         
                 parentSvgContainer.addClass("item-dropped");
                 droppedContainer.attr("data-identifier", dataAvatar);
+                removeButton.attr("data-identifier", dataAvatar);
 
                 // Check if an item has been dropped into the SVG container
                 if (pathClass) {
@@ -65,7 +66,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         path.classList.add("item-dropped");
                     });
                 }
-        
+
                 removeButton.click(function() {
                     parentSvgContainer.removeClass("item-dropped");
 
@@ -83,7 +84,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                     // Clear the position in the imagePositions array
                     addedNeedsImages[position] = null;
-        
+
                     updateHiddenInputValue();
                 });
             };
@@ -93,7 +94,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         // Do this when the priorities needed to be removed on pre-select
         var removeButtons = document.querySelectorAll('.remove-button');
-
+        
         if (removeButtons.length > 0) {
             removeButtons.forEach(function(removeButtonSession) {
                 removeButtonSession.addEventListener('click', function() {
@@ -121,7 +122,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     parentSvgContainer.removeClass("item-dropped");
                     sortableContainer.remove();
                     droppedDiv.removeAttr("data-identifier");
-
                     updateHiddenInputValue();
                 });
             });
@@ -222,7 +222,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 // Update addedNeedsImages with the new order
                 addedNeedsImages = updatedImages;
 
-                // console.log(addedNeedsImages);
                 updateHiddenInputValue();
             }
         });
@@ -393,10 +392,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         //     // Trigger the stop event to update any necessary data
         //     $targetContainer.sortable("option", "stop").call($targetContainer[0], event, ui);
         // });
-        
-        
 
         // Function to drag and drop
+        var draggedItem = null;
+
         $("button img", $needs).draggable({
             cancel: "a.ui-icon",
             revert: "invalid",
@@ -407,6 +406,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 if ($(this).hasClass("item-dropped")) {
                     ui.helper.addClass("item-dropped");
                 }
+                draggedItem = $(this);
             }
         });
 
@@ -419,25 +419,41 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             drop: function(event, ui) {
                 var droppedItem = ui.draggable.clone();
                 var droppedContainer = $(this).find(".dropped:empty:first");
-                
+                var droppedContainerSortable = $sortable.find(".dropped");
+
+                if (draggedItem) {
+                    var button = draggedItem.closest('button');
+                    var dataAvatar = button.attr("data-avatar");
+                }
+
                 if (droppedContainer.length > 0) {
                     // Check if the needs image has already been added
                     var imageName = droppedItem.attr("src");
-                    
-                    if (addedNeedsImages.indexOf(imageName) === -1) {
-                        addedNeedsImages.push(imageName);
-                        droppedContainer.append(droppedItem);
+
+                    if (addedNeedsImages.indexOf(dataAvatar) === -1) {
+                        var position = addedNeedsImages.findIndex(item => item === null); // Find the first empty slot
+        
+                        if (position === -1) {
+                            // If no empty slot found, add to the end of the array
+                            position = addedNeedsImages.length;
+                        }
+                        
+                        addedNeedsImages[position] = dataAvatar;
+                        var container = droppedContainerSortable.eq(position);
+                        container.append(droppedItem);
                         var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
 
                         droppedItem.animate({ width: "100px" }, function() {
                             droppedItem.find("img").animate({ height: "auto" });
                         });
                         
-                        var parentSvgContainer = droppedContainer.closest(".svg-container");
+                        var parentSvgContainer = container.closest(".svg-container");
                         var pathClass = parentSvgContainer.attr("data-svg-class");
 
                         parentSvgContainer.addClass("item-dropped");
                         parentSvgContainer.append(removeButton);
+                        container.attr("data-identifier", dataAvatar);
+                        removeButton.attr("data-identifier", dataAvatar);
 
                         // Check if an item has been dropped into the SVG container
                         if (pathClass) {
@@ -471,6 +487,9 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                                 addedNeedsImages.splice(index, 1);
                             }
 
+                            // Clear the position in the imagePositions array
+                            addedNeedsImages[position] = null;
+
                             updateHiddenInputValue();
                         });
                         updateHiddenInputValue();
@@ -485,8 +504,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var button = $(this).closest('button');
             var dataAvatar = button.attr("data-avatar");
             addImageToSortable(imageName, dataAvatar);
-
-            // $(this).closest('.button-bg').addClass('selected');
         });
     });
 }
