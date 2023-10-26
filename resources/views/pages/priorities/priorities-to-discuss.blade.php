@@ -21,7 +21,7 @@
 <div id="priorities_to_discuss" class="vh-100 overflow-hidden">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 1;">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 2;">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
@@ -203,31 +203,66 @@
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12">
                                     <div class="accordion accordion-flush" id="accordionPriorities">
-                                        @foreach($topPriorities as $priority)
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="flush-heading{{$priority}}">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                        <img src="{{ asset('images/top-priorities/'.$priority.'-icon.svg') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$priority}}
-                                                    </button>
-                                                </h2>
-                                                <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
-                                                    <div class="accordion-body">
-                                                        <div class="row py-2 px-3">
-                                                            <div class="col-12 form-check form-check-reverse">
-                                                                <label class="form-check-label display-6" for="protection">I've got this covered</label>
-                                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protection">
+                                        @php
+                                            if (isset($topPriorities)) {
+                                                foreach($topPriorities as $priority) {
+                                                    if ($priority === 'protection') {
+                                                        $title = 'Protection';
+                                                    }
+                                                    else if ($priority === 'retirement') {
+                                                        $title = 'Retirement';
+                                                    }
+                                                    else if ($priority === 'education') {
+                                                        $title = 'Education';
+                                                    }
+                                                    else if ($priority === 'savings') {
+                                                        $title = 'Savings';
+                                                    }
+                                                    else if ($priority === 'debt-cancellation') {
+                                                        $title = 'Debt Cancellation';
+                                                    }
+                                                    else if ($priority === 'health-medical') {
+                                                        $title = 'Health Medical';
+                                                    }
+                                                    else if ($priority === 'investments') {
+                                                        $title = 'Investments';
+                                                    }
+                                                    else if ($priority === 'others') {
+                                                        $title = 'Others';
+                                                    }
+                                                    else {
+                                                        $title = '';
+                                                    }
+
+                                                    if ($priority) { @endphp
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="flush-heading{{$priority}}">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
+                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
+                                                                <div class="accordion-body">
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="protection">I've got this covered</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protection">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="protectionDiscuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protectionDiscuss">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row py-2 px-3">
-                                                            <div class="col-12 form-check form-check-reverse">
-                                                                <label class="form-check-label display-6" for="protectionDiscuss">I'd like to discuss this</label>
-                                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protectionDiscuss">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                                    @php } 
+                                                }
+                                            }
+                                        @endphp
+                                        
                                         
                                         <!-- <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingTwo">

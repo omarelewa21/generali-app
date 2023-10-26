@@ -480,8 +480,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
         
         // Add click functionality to #needs button images
-        $("button img", $needs).click(function() {
-            var imageName = $(this).attr("src");
+        $("button", $needs).click(function() {
+            var imageName = $(this).find('img').attr("src");
             var button = $(this).closest('button');
             var dataAvatar = button.attr("data-avatar");
             addImageToSortable(imageName, dataAvatar);

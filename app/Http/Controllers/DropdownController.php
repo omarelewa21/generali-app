@@ -21,7 +21,7 @@ class DropdownController extends Controller
     public function identityDetails()
     {
         $countries = Country::all();
-        $idtypes = IDType::all();
+        $idtypes = idtype::all();
         $occupations = Occupation::all();
         $educationLevels = educationLevel::all();
         return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
@@ -32,7 +32,7 @@ class DropdownController extends Controller
         $maritalstatuses = maritalStatus::all();
         $titles = Title::all();
         $countries = Country::all();
-        $idtypes = IDType::all();
+        $idtypes = idtype::all();
         $occupations = Occupation::all();
         return view('pages/avatar/avatar-family-dependant-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
     }

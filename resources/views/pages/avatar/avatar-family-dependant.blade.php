@@ -57,7 +57,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 btn-avatar py-4 @if(isset($familyDependant['spouse']) && $familyDependant['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <button class="border-0 w-100 py-4 @if(isset($familyDependant['spouse']) && $familyDependant['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
                                                 </button>
@@ -67,7 +67,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 btn-avatar py-4 @if(isset($familyDependant['children']) && $familyDependant['children'] === true) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
+                                                <button class="border-0 w-100 py-4 @if(isset($familyDependant['children']) && $familyDependant['children'] === true) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
                                                     <img src="{{ asset('images/avatar-family-dependant/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
                                                 </button>
@@ -77,7 +77,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 btn-avatar py-4 @if(isset($familyDependant['parents']) && $familyDependant['parents'] === true) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
+                                                <button class="border-0 w-100 py-4 @if(isset($familyDependant['parents']) && $familyDependant['parents'] === true) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
                                                     <img src="{{ asset('images/avatar-family-dependant/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
                                                 </button>
