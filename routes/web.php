@@ -163,9 +163,8 @@ Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::
 Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
 Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
-// Route::get('/files/{filename}', function($filename){
-//     return \Storage::download($filename); // assuming default disk is set to 'public'
-// });
+// Summary
+Route::view('/existing-policy', 'pages.summary.existing-policy')->name('existing.policy');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

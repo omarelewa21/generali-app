@@ -472,7 +472,7 @@ button[data-required="selected"] img {
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas: "header-avatar" "top-avatar" "bottom-avatar";
-  grid-template-rows: 15vh 20vh 60vh;
+  grid-template-rows: 20vh 15vh 60vh;
 }
 
 .header-avatar {
@@ -576,7 +576,7 @@ button[data-required="selected"] img {
   display: grid;
   grid-template-columns: 100%;
   grid-template-areas: "header-avatar-default" "content-avatar-default";
-  grid-template-rows: 15vh 80vh;
+  grid-template-rows: 20vh 75vh;
 }
 
 .content-avatar-default {
@@ -996,7 +996,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
     box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
     background: #fff;
   } */
-  .white-logo {
+  .white-logo, .red-logo {
     width: 150px;
   }
   .display-5, p.nav-text {
@@ -1027,9 +1027,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   #identity_details .bg-primary, #avatar_marital_status .bg-primary, #avatar_family_dependant .bg-primary, #avatar_family_dependant_details .bg-primary, #avatar_my_assets .bg-primary {
     margin-top: -300px;
   }
-  .bg-primary {
+  /* .bg-primary {
     z-index: 1;
-  }
+  } */
   #home {
     background-position: right bottom;
     background-size: contain;
