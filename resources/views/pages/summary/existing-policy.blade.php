@@ -49,7 +49,7 @@
                                         </div>
                                     @endif
                                     <div class="col-12 py-4">
-                                        <h3>Policy 1</h3>
+                                        <h5>Policy 1</h5>
                                         <div class="row">
                                             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
                                                 <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
@@ -62,7 +62,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" required>
@@ -106,7 +106,7 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
