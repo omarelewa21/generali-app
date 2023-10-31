@@ -18,10 +18,10 @@
             <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
-                    <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
+                    <h2 class="display-5 fw-bold">To begin, may we have permission to share or use your personal details?</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey text-dark px-0 content-section">
+            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey px-0 content-section">
                 <div>
                     <section class="main-content">
                         <div class="container">

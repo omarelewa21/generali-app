@@ -29,7 +29,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="text-dark pb-3 display-6 fw-bold">Pick the skin colour that’s closest to yours.</p>
+                                <p class="pb-3 display-6 fw-bold">Pick the skin colour that’s closest to yours.</p>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">

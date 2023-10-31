@@ -14,9 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $basicDetails = session('customer_details.basic_details');
-    $selectedCountry = session('customer_details.basic_details.phone_code_mobile', '60');
-    $selectedCode = session('customer_details.basic_details.phone_code_house', '60');
+    $existingPolicy = session('customer_details.existing_policy');
 @endphp
 
 <div id="basic_details">
@@ -49,64 +47,138 @@
                                         </div>
                                     @endif
                                     <div class="col-12 py-4">
-                                        <h5>Policy 1</h5>
+                                        <h4 class="display-7 text-gray pb-4">Policy 1</h4>
                                         <div class="row">
-                                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
-                                                <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
-                                                <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
+                                            <div class="col-md-12 pb-5">
+                                                <p class="text-gray">What is your role in this policy?</p>
+                                                <div class="d-flex btn-group @error('policyRole') is-invalid @enderror" role="group">
+                                                    <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                        <input type="radio" class="btn-check" name="policyRole" id="policyOwnerInput" autocomplete="off" value="owner"
+                                                        {{ (old('policyRole') === 'owner' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
+                                                        <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The policy owner</span>
+                                                    </label>
+                                                    <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                        <input type="radio" class="btn-check" name="policyRole" id="policyInsuredInput" autocomplete="off" value="life insured"
+                                                        {{ (old('policyRole') === 'life insured' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                        <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The life insured</span>
+                                                    </label>
+                                                    <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                        <input type="radio" class="btn-check" name="policyRole" id="policyBothInput" autocomplete="off" value="both"
+                                                        {{ (old('policyRole') === 'both' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                        <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Both</span>
+                                                    </label>
+                                                </div>
+                                                @error('policyRole')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <h4 class="display-7 text-gray">Policy Details</h4>
+                                        <div class="row">
+                                            <div class="pt-4 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="policyFirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" name="policyFirstName" class="form-control @error('policyFirstName') is-invalid @enderror" id="policyFirstNameInput" placeholder="First Name" value="{{ old('policyFirstName', $basicDetails['first_name'] ?? '') }}" required>
+                                                @error('policyFirstName')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="pt-4 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="policyLastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" name="policyLastName" class="form-control @error('policyLastName') is-invalid @enderror" id="policyLastNameInput" placeholder="Last Name" value="{{ old('policyLastName', $basicDetails['last_name'] ?? '') }}" required>
+                                                @error('policyLastName')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="companySelect" class="form-label">Company Name <span class="text-danger">*</span></label>
+                                                <select name="company" class="form-select @error('company') is-invalid @enderror" aria-label="Company" id="companySelect" autocomplete="off" required>
                                                     <option value="" selected disabled>Please Select</option>
-                                                    
+                                                    @foreach ($companies as $company)
+                                                        <option value="{{ $company->companies }}" {{ old('company', $existingPolicy['company'] ?? '') === $company->companies ? 'selected' : '' }}>{{ $company->companies }}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('title')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <!-- <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" required>
-                                                @error('firstName')
+                                                @error('company')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
-                                                @error('lastName')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                                <label for="inceptionYearInput" class="form-label">Policy Inception Year <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
-                                                    @error('mobileNumber')
-                                                        <div class="invalid-feedback" id="errorMsg">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="housePhoneNumber" class="form-label">House Phone Number</label>
-                                                <div class="input-group">
-                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
-                                                    @error('housePhoneNumber')
-                                                        <div class="invalid-feedback" id="errorMsgHouse">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}" autocomplete="email">
-                                                    @error('email')
+                                                    <input type="number" name="inceptionYear" class="form-control @error('inceptionYear') is-invalid @enderror" id="inceptionYearInput" placeholder="Year" value="{{ old('inceptionYear', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    @error('inceptionYear')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
+                                                </div>
                                             </div>
-                                        </div> -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="policyPlanSelect" class="form-label">Type of Plan <span class="text-danger">*</span></label>
+                                                <select name="policyPlan" class="form-select @error('policyPlan') is-invalid @enderror" aria-label="Policy Plan" id="policyPlanSelect" required>
+                                                    <option value="" selected disabled>Please Select</option>
+                                                    @foreach ($policyPlans as $plan)
+                                                        <option value="{{ $plan->policy_plans }}" {{ old('policyPlan', $existingPolicy['company'] ?? '') === $plan->policy_plans ? 'selected' : '' }}>{{ $plan->policy_plans }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('policyPlan')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="maturityYearInput" class="form-label">Year of Maturity <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <input type="number" name="maturityYear" class="form-control @error('maturityYear') is-invalid @enderror" id="maturityYearInput" placeholder="Year" value="{{ old('maturityYear', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    @error('maturityYear')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="premiumModeSelect" class="form-label">Premium Mode <span class="text-danger">*</span></label>
+                                                <select name="premiumMode" class="form-select @error('premiumMode') is-invalid @enderror" aria-label="Premium Mode" id="premiumModeSelect" required>
+                                                    <option value="" selected disabled>Please Select</option>
+                                                    @foreach ($premiumModes as $mode)
+                                                        <option value="{{ $mode->Modes }}" {{ old('policyPlan', $existingPolicy['company'] ?? '') === $mode->Modes ? 'selected' : '' }}>{{ $mode->Modes }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('policyPlan')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="premiumContributionInput" class="form-label">Premium Contribution <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">RM</span><input type="number" name="premiumContribution" class="form-control @error('premiumContribution') is-invalid @enderror" id="premiumContributionInput" value="{{ old('premiumContribution', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    @error('premiumContribution')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="lifeCoverageInput" class="form-label">Life Coverage <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">RM</span><input type="number" name="lifeCoverage" class="form-control @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ old('lifeCoverage', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    @error('lifeCoverage')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                                <label for="criticalIllnessInput" class="form-label">Critical Illness Benefit <span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">RM</span><input type="number" name="criticalIllness" class="form-control @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ old('criticalIllness', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    @error('criticalIllness')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,25 +203,55 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var titleSelect = document.getElementById('titleSelect');
-    var firstNameInput = document.getElementById('firstNameInput');
-    var lastNameInput = document.getElementById('lastNameInput');
-    var emailInput = document.getElementById('email');
+    var policyFirstNameInput = document.getElementById('policyFirstNameInput');
+    var policyLastNameInput = document.getElementById('policyLastNameInput');
+    var companySelect = document.getElementById('companySelect');
+    var inceptionYearInput = document.getElementById('inceptionYearInput');
+    var policyPlanSelect = document.getElementById('policyPlanSelect');
+    var maturityYearInput = document.getElementById('maturityYearInput');
+    var premiumModeSelect = document.getElementById('premiumModeSelect');
+    var premiumContributionInput = document.getElementById('premiumContributionInput');
+    var lifeCoverageInput = document.getElementById('lifeCoverageInput');
+    var criticalIllnessInput = document.getElementById('criticalIllnessInput');
 
-    titleSelect.addEventListener('blur', function() {
-        validateSelectField(titleSelect);
+    companySelect.addEventListener('blur', function() {
+        validateSelectField(companySelect);
     });
 
-    firstNameInput.addEventListener('blur', function() {
-        validateInputField(firstNameInput);
+    policyFirstNameInput.addEventListener('blur', function() {
+        validateInputField(policyFirstNameInput);
     });
 
-    lastNameInput.addEventListener('blur', function() {
-        validateInputField(lastNameInput);
+    policyLastNameInput.addEventListener('blur', function() {
+        validateInputField(policyLastNameInput);
     });
 
-    emailInput.addEventListener('blur', function() {
-        validateEmailField(emailInput);
+    inceptionYearInput.addEventListener('blur', function() {
+        validateNumberField(inceptionYearInput);
+    });
+
+    policyPlanSelect.addEventListener('blur', function() {
+        validateSelectField(policyPlanSelect);
+    });
+
+    maturityYearInput.addEventListener('blur', function() {
+        validateNumberField(maturityYearInput);
+    });
+
+    premiumModeSelect.addEventListener('blur', function() {
+        validateSelectField(premiumModeSelect);
+    });
+
+    premiumContributionInput.addEventListener('blur', function() {
+        validateCurrencyField(premiumContributionInput);
+    });
+
+    lifeCoverageInput.addEventListener('blur', function() {
+        validateCurrencyField(lifeCoverageInput);
+    });
+
+    criticalIllnessInput.addEventListener('blur', function() {
+        validateCurrencyField(criticalIllnessInput);
     });
 
     function validateSelectField(field) {
@@ -172,8 +274,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function validateEmailField(field) {
-        if (field.value && isValidEmail(field.value)) {
+    function validateNumberField(field) {
+        if (field.value && isValidYear(field.value)) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
+
+    function validateCurrencyField(field) {
+        if (field.value && isValidCurrency(field.value)) {
             field.classList.add('is-valid');
             field.classList.remove('is-invalid');
         } else {
@@ -183,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isValidName(name) {
-        // Return true if the email is valid, false otherwise
+        // Return true if the wording is 30 characters, false otherwise
         var nameRegex = /^[A-Za-z\s]{1,30}$/;
 
         var isValid = nameRegex.test(name);
@@ -191,11 +303,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
-    function isValidEmail(email) {
-        // Return true if the email is valid, false otherwise
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function isValidYear(year) {
+        // Return true if the year is valid (1900 to 2099), false otherwise
+        var yearRegex = /^(19\d{2}|20\d{2})$/;
 
-        var isValid = emailRegex.test(email);
+        var isValid = yearRegex.test(year);
+
+        return isValid;
+    }
+
+    function isValidCurrency(currency) {
+        // Return true if the currency is valid, false otherwise
+        var currencyRegex = /^\$?\d+(\.\d{2})?$/;
+
+        var isValid = currencyRegex.test(currency);
 
         return isValid;
     }

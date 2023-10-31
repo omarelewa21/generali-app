@@ -63,8 +63,16 @@ body.overflow {
   color: #C0232C!important;
 }
 
+.text-gray {
+  color: #707070;
+}
+
 .flex-1 {
   flex: 1;
+}
+
+.bg-accent-bg-grey {
+  background-color: #F8F8F8;
 }
 
 .popover {
@@ -81,6 +89,13 @@ body.overflow {
 /* Headings */
 h4 {
   font-family: 'Helvetica Neue', sans-serif;
+}
+
+.display-7 {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 /* Forms */
@@ -149,6 +164,14 @@ h4 {
 
 #day:disabled, #month:disabled, #year:disabled {
   background-color: rgb(253 252 252 / 67%)!important;
+}
+
+.radio-container span {
+  background-color: #EEE;
+}
+
+.btn-check + .btn:hover {
+  background-color: #ffffff;
 }
 
 /* Works for Chrome, Safari, Edge, Opera */
@@ -558,7 +581,7 @@ button[data-required="selected"] img {
 /* Identity Details Page */
 .btn-check:checked+.btn {
   border-radius: 0;
-  background-color: #d3d4d5;
+  background-color: #ffffff;
   color: inherit;
   width: 100%;
   border-color: #A0A0A0;
@@ -566,7 +589,7 @@ button[data-required="selected"] img {
 
 .btn-check+.btn {
   border-radius: 0;
-  background-color: #fff!important;
+  /* background-color: #fff!important; */
   color: rgba(10, 4, 60, 0.50);
   width: 100%;
   border-color: #A0A0A0;

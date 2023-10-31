@@ -165,6 +165,7 @@ Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submi
 
 // Summary
 Route::view('/existing-policy', 'pages.summary.existing-policy')->name('existing.policy');
+Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('form.existing.policy');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
