@@ -123,7 +123,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="gendergroup">
-                                            <label for="gender" class="form-label text-white">Gender *</label>
+                                            <label for="identityrMaleInput" class="form-label text-white">Gender *</label>
                                             <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"

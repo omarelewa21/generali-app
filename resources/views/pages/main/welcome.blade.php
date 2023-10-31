@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <h1 class="text-uppercase text-primary">Welcome!</h1>
                         <h2 class="text-uppercase text-primary">Your Future Awaits.</h2>
-                        <p class="text-dark py-4">We’re glad you’re looking to secure your future with us.<br>
+                        <p class="py-4">We’re glad you’re looking to secure your future with us.<br>
                             Let’s begin by getting to know you
                             better.</p>
                         <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>

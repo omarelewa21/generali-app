@@ -55,7 +55,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -72,7 +71,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -89,7 +87,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -106,7 +103,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -123,7 +119,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -140,7 +135,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -157,7 +151,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -174,7 +167,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -245,14 +237,14 @@
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2 px-3">
                                                                         <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="protection">I've got this covered</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protection">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2 px-3">
                                                                         <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="protectionDiscuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protectionDiscuss">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -344,7 +336,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -356,14 +348,49 @@
 </div>
 
 <script>
-// Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure the first accordion item is always open
     const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     if (firstAccordionItem) {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');
     }
+
+    // Sent checkbox value to controller
+    var checkboxValues = {};
+
+    // First set all to true
+    $('input[type="checkbox"]').each(function() {
+        var checkboxId = $(this).attr('id');
+        checkboxValues[checkboxId] = true;
+        $(this).prop('checked', true); // Check the checkboxes initially
+    });
+
+    // Update checkboxValues object when any checkbox is changed
+    $('input[type="checkbox"]').on('change', function() {
+        var checkboxId = $(this).attr('id');
+        var isChecked = $(this).prop('checked');
+        checkboxValues[checkboxId] = isChecked;
+    });
+
+    $('#priorityNext').on('click', function(event) {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('priorities.redirect') }}",
+            data: checkboxValues,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                // Handle success, if needed
+            },
+            error: function(xhr, status, error) {
+                // Handle error, if needed
+            }
+        });
+    });
 });
 </script>
 @endsection

@@ -215,7 +215,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">                                                                        
-                                                                        <label for="day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
+                                                                        <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 @if(isset($spouseData['dob']))
@@ -258,7 +258,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                        <label for="spouseMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                 <input type="radio" class="btn-check" name="gender" id="spouseMaleInput" autocomplete="off" value="male"
@@ -278,7 +278,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="habits" class="form-label">Your Habits <span class="text-danger">*</span></label>
+                                                                        <label for="smoker" class="form-label">Your Habits <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('habits') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                 <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="smoker"
@@ -344,7 +344,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
@@ -459,7 +459,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"

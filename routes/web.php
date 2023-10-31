@@ -46,6 +46,7 @@ Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.pri
 Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/top-priorities-new', 'pages.priorities.top-priorities-new')->name('top.priorities.new');
 Route::view('/priorities-to-discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
+Route::post('/priorities-to-discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
@@ -162,9 +163,9 @@ Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::
 Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
 Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
-// Route::get('/files/{filename}', function($filename){
-//     return \Storage::download($filename); // assuming default disk is set to 'public'
-// });
+// Summary
+Route::view('/existing-policy', 'pages.summary.existing-policy')->name('existing.policy');
+Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('form.existing.policy');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

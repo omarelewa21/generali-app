@@ -34,13 +34,13 @@ class FormController extends Controller {
             $decision = $request->input('decision');
 
             // Get the existing array from the session
-            $arrayData = session('customer_details', []);
-
+            $customerDetails = $request->session()->get('customer_details', []);
+                        
             // Add or update the data value in the array
-            $arrayData['pdpa'] = $decision;
+            $customerDetails['pdpa'] = $decision;
 
             // Store the updated array back into the session
-            session(['customer_details' => $arrayData]);        
+            $request->session()->put('customer_details', $customerDetails);
             
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
@@ -117,7 +117,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.welcome');
         } else {
@@ -296,7 +296,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status');
         } else {
@@ -410,7 +410,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+
             // Store the updated array back into the session
             return redirect()->route($dataUrl);
         } else {
@@ -769,7 +769,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.my.assets');
         } else {
@@ -779,27 +779,93 @@ class FormController extends Controller {
 
     public function topPriorities(Request $request)
     {
-        $topPrioritiesSerialized = $request->input('topPrioritiesButtonInput');
-        $topPrioritiesButtonInput = json_decode($topPrioritiesSerialized, true);
+        // Validate CSRF token
+        if ($request->ajax() || $request->wantsJson()) {
+            // For AJAX requests, check the CSRF token without throwing an exception
+            $validToken = csrf_token() === $request->header('X-CSRF-TOKEN');
+        } else {
+            // For non-AJAX requests, use the normal CSRF token verification
+            $validToken = $request->session()->token() === $request->input('_token');
+        }
         
-        // // Get the existing array from the session
-        //$arrayData = session('passingArrays', []);
+        if ($validToken) {
+            Validator::extend('at_least_one_selected', function ($attribute, $value, $fail, $validator) {
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+                $decodedValue = json_decode($value, true);
 
-        // // Add or update the data value in the array
-        //$arrayData['TopPriorities'] = $topPrioritiesButtonInput;
+                if (is_array($decodedValue) && count(array_filter($decodedValue, function ($element) {
+                    return $element !== NULL;
+                })) > 0) {
+                    // At least one non-NULL element exists, validation passes
+                    return true;
+                }
 
-        $customerDetails['financial_priorities'] = $topPrioritiesButtonInput;
+                // If any of the conditions are not met, add a different error message
+                $customMessage = "Please select at least one.";
+                $validator->errors()->add($attribute, $customMessage);
 
-        // // Store the updated array back into the session
-        //session(['passingArrays' => $arrayData]);
+                return false;
+            });    
 
-        // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-        // Process the form data and perform any necessary actions
-        return redirect()->route('priorities.to.discuss');
+            $validator = Validator::make($request->all(), [
+                'topPrioritiesButtonInput' => [
+                    'at_least_one_selected',
+                ],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $topPrioritiesSerialized = $request->input('topPrioritiesButtonInput');
+            $topPrioritiesButtonInput = json_decode($topPrioritiesSerialized, true);
+            
+            $topPrioritiesButtonInput = array_filter($topPrioritiesButtonInput, function($value) {
+                return $value !== null;
+            });
+            $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
+
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
+
+            $customerDetails['financial_priorities'] = $topPrioritiesButtonInput;
+
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+
+            // Process the form data and perform any necessary actions
+            return redirect()->route('priorities.to.discuss');
+        } else {
+            return response()->json(['error' => 'Invalid CSRF token'], 403);
+        }
+    }
+
+    public function priorities(Request $request)
+    {
+        // Validate CSRF token
+        if ($request->ajax() || $request->wantsJson()) {
+            // For AJAX requests, check the CSRF token without throwing an exception
+            $validToken = csrf_token() === $request->header('X-CSRF-TOKEN');
+        } else {
+            // For non-AJAX requests, use the normal CSRF token verification
+            $validToken = $request->session()->token() === $request->input('_token');
+        }
+        
+        if ($validToken) {
+            $checkboxValues = $request->all();
+
+            // Get the existing array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
+            
+            // Add or update the data value in the array
+            $customerDetails['priorities'] = $checkboxValues;
+
+            // Store the updated array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+            return response()->json(['message' => 'Button click saved successfully']);
+        } else {
+            return response()->json(['error' => 'Invalid CSRF token'], 403);
+        }
     }
 }

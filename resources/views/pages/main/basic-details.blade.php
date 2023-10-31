@@ -25,10 +25,10 @@
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-xl-5 py-md-5 py-3">
-                    <h2 class="display-5 font-bold fw-bold">Hello! Let's get to know you better.</h2>
+                    <h2 class="display-5 fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0 content-section">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
                 <div>
                     <form novalidate action="{{ route('form.submit') }}" method="POST">
                         @csrf
@@ -66,14 +66,14 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" required>
+                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" autocomplete="on" required>
                                                 @error('firstName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
+                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" autocomplete="on" required>
                                                 @error('lastName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -81,18 +81,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                                <label for="mobileNumberInput" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
+                                                    <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" autocomplete="on" required>
                                                     @error('mobileNumber')
                                                         <div class="invalid-feedback" id="errorMsg">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="housePhoneNumber" class="form-label">House Phone Number</label>
+                                                <label for="houseNumberInput" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
-                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
+                                                    <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}" autocomplete="on">
                                                     @error('housePhoneNumber')
                                                         <div class="invalid-feedback" id="errorMsgHouse">{{ $message }}</div>
                                                     @enderror
@@ -102,10 +102,10 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}" autocomplete="email">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}" autocomplete="on">
+                                                @error('email')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isValidName(name) {
-        // Return true if the email is valid, false otherwise
+        // Return true if the wording is 30 characters, false otherwise
         var nameRegex = /^[A-Za-z\s]{1,30}$/;
 
         var isValid = nameRegex.test(name);
