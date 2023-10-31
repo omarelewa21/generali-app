@@ -308,6 +308,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var birthCert = document.getElementById('birthCert');
     var policeNumber = document.getElementById('policeNumber');
     var registrationNumber = document.getElementById('registrationNumber');
+    var educationLevelSelect = document.getElementById('educationLevelSelect');
+    var occupationSelect = document.getElementById('occupationSelect');
 
     countrySelect.addEventListener('blur', function() {
         validateSelectField(countrySelect);
@@ -335,6 +337,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     registrationNumber.addEventListener('blur', function() {
         validateInputField(registrationNumber);
+    });
+
+    educationLevelSelect.addEventListener('blur', function() {
+        validateSelectField(educationLevelSelect);
+    });
+
+    occupationSelect.addEventListener('blur', function() {
+        validateSelectField(occupationSelect);
     });
 
     function validateSelectField(field) {

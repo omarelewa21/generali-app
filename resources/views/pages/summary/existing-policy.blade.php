@@ -28,7 +28,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0 content-section">
                 <div>
-                    <form novalidate action="{{ route('form.submit') }}" method="POST">
+                    <form novalidate action="{{ route('form.existing.policy') }}" method="POST">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -179,6 +179,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12" id="addFields">
+
+                                            </div>
+                                        </div>
+                                        <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits">Add Benefits</a>
                                     </div>
                                 </div>
                             </div>

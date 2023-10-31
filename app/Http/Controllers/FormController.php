@@ -868,4 +868,33 @@ class FormController extends Controller {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
+
+    public function existingPolicy(Request $request)
+    {
+        // Validate CSRF token
+        if ($request->ajax() || $request->wantsJson()) {
+            // For AJAX requests, check the CSRF token without throwing an exception
+            $validToken = csrf_token() === $request->header('X-CSRF-TOKEN');
+        } else {
+            // For non-AJAX requests, use the normal CSRF token verification
+            $validToken = $request->session()->token() === $request->input('_token');
+        }
+
+        if ($validToken) {
+            // $decision = $request->input('decision');
+
+            // // Get the existing array from the session
+            // $customerDetails = $request->session()->get('customer_details', []);
+                        
+            // // Add or update the data value in the array
+            // $customerDetails['pdpa'] = $decision;
+
+            // // Store the updated array back into the session
+            // $request->session()->put('customer_details', $customerDetails);
+            
+            // return response()->json(['message' => 'Button click saved successfully']);
+        } else {
+            return response()->json(['error' => 'Invalid CSRF token'], 403);
+        }
+    }
 }

@@ -164,8 +164,8 @@ Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-c
 Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 // Summary
-Route::view('/existing-policy', 'pages.summary.existing-policy')->name('existing.policy');
-Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('form.existing.policy');
+Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
+Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('existing.policy');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
