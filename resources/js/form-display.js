@@ -1,7 +1,8 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'identity-details',
-    'family-dependant-details'
+    'family-dependant-details',
+    'existing-policy'
 ];
 
 const currentURL = window.location.href;
@@ -493,5 +494,24 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             monthField.addEventListener('change', calculateAge);
             yearField.addEventListener('change', calculateAge);
         }
+    }
+
+    if (path == '/existing-policy') {
+        document.addEventListener('DOMContentLoaded', function() {
+            $("#addFieldsBtn").click(function() {
+                event.preventDefault();
+                // Create a new label element
+                var label = $("<label>").text("New Label:");
+        
+                // Create a new text input element
+                var input = $("<input>").attr({
+                    type: "text",
+                    name: "newTextField"
+                });
+        
+                // Append the label and text input to the container div
+                $("#addFields").append(label, input);
+            });
+        });
     }
 }
