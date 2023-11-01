@@ -179,12 +179,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row" id="addFields"></div>
                                         <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12" id="addFields">
-
+                                            <div class="col-md-12 py-5">
+                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="me-2 py-5">Add Benefits</a>
                                             </div>
                                         </div>
-                                        <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits">Add Benefits</a>
                                     </div>
                                 </div>
                             </div>
@@ -202,6 +202,26 @@
                         </section>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addBenefits" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBenefitsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="d-flex justify-content-end px-3 py-3">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="addBenefitsLabel">I Have</h3>
+            </div>
+            <div class="modal-body text-white text-center px-5 pt-5 bg-primary">
+                <input type="text" name="addBenefitsInput" class="form-control bg-white @error('addBenefitsInput') is-invalid @enderror" id="addBenefitsInput" placeholder="Add your asset" value="{{ old('addBenefitsInput', $assets['others_data'] ?? '') }}">
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar btn-exit-assetsOthers" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>

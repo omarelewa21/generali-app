@@ -498,19 +498,19 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/existing-policy') {
         document.addEventListener('DOMContentLoaded', function() {
-            $("#addFieldsBtn").click(function() {
+            $("#addFieldsBtn").click(function(event) {
                 event.preventDefault();
+                
                 // Create a new label element
-                var label = $("<label>").text("New Label:");
+                var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12'>");
+                var label = '<label for="benefitsInput" class="form-label">Life Coverage</label>';
         
                 // Create a new text input element
-                var input = $("<input>").attr({
-                    type: "text",
-                    name: "newTextField"
-                });
+                var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="lifeCoverage" class="form-control @error("lifeCoverage") is-invalid @enderror" id="lifeCoverageInput" value="{{ old("lifeCoverage", $basicDetails["house_phone_number"] ?? "") }}"></div>';
         
                 // Append the label and text input to the container div
-                $("#addFields").append(label, input);
+                div.append(label, input);
+                $("#addFields").append(div);
             });
         });
     }
