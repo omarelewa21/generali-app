@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Occupation;
 use App\Models\Country;
 use App\Models\Title;
-use App\Models\IDType;
+use App\Models\idtype;
 use App\Models\educationLevel;
 use App\Models\maritalStatus;
 use App\Models\Company;
