@@ -17,7 +17,7 @@
     $existingPolicy = session('customer_details.existing_policy');
 @endphp
 
-<div id="basic_details">
+<div id="existing_policy">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
@@ -28,16 +28,16 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey text-dark px-0 content-section">
                 <div>
-                    <form novalidate action="{{ route('form.existing.policy') }}" method="POST">
-                        @csrf
-                        <section class="main-content">
-                            <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
-                                    <div class="col-12">
-                                        <h1 class="display-3 text-uppercase">Please fill in your existing policies.</h1>
-                                    </div>
+                    <section class="main-content">
+                        <div class="container">
+                            <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                                <div class="col-12">
+                                    <h1 class="display-3 text-uppercase">Please fill in your existing policies.</h1>
                                 </div>
-                                <div class="row px-4">
+                            </div>
+                            <form novalidate action="{{ route('form.existing.policy') }}" method="POST">
+                                @csrf
+                                <div class="row px-4" id="formContainer">
                                     @if ($errors->any())
                                         <div class="alert alert-danger d-flex align-items-center" role="alert">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -46,7 +46,8 @@
                                             <div class="text">There was a problem with your submission. Errors are marked below.</div>
                                         </div>
                                     @endif
-                                    <div class="col-12 py-4">
+                                    <div class="custom-alert"></div>
+                                    <div class="col-12 py-4 customForm" id="form" data-index="1">
                                         <h4 class="display-7 text-gray pb-4">Policy 1</h4>
                                         <div class="row">
                                             <div class="col-md-12 pb-5">
@@ -182,46 +183,52 @@
                                         <div class="row" id="addFields"></div>
                                         <div class="row">
                                             <div class="col-md-12 py-5">
-                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="me-2 py-5">Add Benefits</a>
+                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-                        
-                        <section class="footer bg-white py-4 fixed-bottom footer-scroll">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                        <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
-                                    </div>
+                            </form>
+                            <div class="row customAddBtn pb-5">
+                                <div class="col-md-12">
+                                    <fieldset class="border-top border-dark">
+                                        <legend><a id="addFormsBtn"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="mx-3"></a></legend>
+                                    </fieldset>
                                 </div>
                             </div>
-                        </section>
-                    </form>
+                        </div>
+                    </section>
+                    
+                    <section class="footer bg-white py-4 fixed-bottom footer-scroll">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                    <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="addBenefits" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBenefitsLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="d-flex justify-content-end px-3 py-3">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-header px-5 pt-2 pb-0">
-                <h3 class="modal-title text-center text-uppercase otherModalText" id="addBenefitsLabel">I Have</h3>
-            </div>
-            <div class="modal-body text-white text-center px-5 pt-5 bg-primary">
-                <input type="text" name="addBenefitsInput" class="form-control bg-white @error('addBenefitsInput') is-invalid @enderror" id="addBenefitsInput" placeholder="Add your asset" value="{{ old('addBenefitsInput', $assets['others_data'] ?? '') }}">
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar btn-exit-assetsOthers" data-bs-dismiss="modal">Submit</button>
+    <!-- Modal -->
+    <div class="modal fade" id="addBenefits" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addBenefitsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="d-flex justify-content-end px-3 py-3">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-header px-5 pt-2 pb-0">
+                    <h3 class="modal-title text-center text-uppercase otherModalText" id="addBenefitsLabel">Benefits</h3>
+                </div>
+                <div class="modal-body text-white text-center px-5 pt-5 bg-primary">
+                    <input type="text" name="addBenefitsInput" class="form-control bg-white @error('addBenefitsInput') is-invalid @enderror" id="addBenefitsInput" placeholder="Add your benefits" value="{{ old('addBenefitsInput', $assets['others_data'] ?? '') }}">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar btn-exit-benefits" data-bs-dismiss="modal" data-index="1">Submit</button>
+                </div>
             </div>
         </div>
     </div>

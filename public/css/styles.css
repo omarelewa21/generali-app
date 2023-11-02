@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C0232C;
+  background: #C21B17;
   border-radius: 10px;
 }
 
@@ -20,7 +20,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C0232C;
+  background: #C21B17;
 }
 
 /* For Firefox */
@@ -32,12 +32,12 @@ scrollbar {
 }
 
 scrollbar-thumb {
-  background-color: #C0232C;
+  background-color: #C21B17;
   border-radius: 10px;
 }
 
 scrollbar-thumb:hover {
-  background-color: #C0232C;
+  background-color: #C21B17;
 }
 
 /* Body */
@@ -60,7 +60,7 @@ body.overflow {
 }
 
 .text-red {
-  color: #C0232C!important;
+  color: #C21B17!important;
 }
 
 .text-gray {
@@ -172,10 +172,6 @@ h4 {
 
 .btn-check + .btn:hover {
   background-color: #ffffff;
-}
-
-#addFieldsBtn {
-
 }
 
 /* Works for Chrome, Safari, Edge, Opera */
@@ -338,7 +334,7 @@ p.nav-text {
 
 .btn-exit:hover {
   background-color: #ffffff;
-  color: #C0232C;
+  color: #C21B17;
 }
 
 .btn-exit:before {
@@ -369,7 +365,7 @@ p.nav-text {
 
 .btn-secondary {
   background-color: #ffffff;
-  color: #C0232C;
+  color: #C21B17;
 }
 
 .btn-secondary:hover {
@@ -531,7 +527,7 @@ button[data-required="selected"] img {
   height: 77.94px;
   flex-shrink: 0;
   border-radius: 5px;
-  border: 1px solid var(--primary-red, #C0232C);
+  border: 1px solid var(--primary-red, #C21B17);
   background: var(--primary-white, #FFF);
   box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
 }
@@ -963,6 +959,13 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   height: 100%;
 }
 
+/* Existing Policy */
+fieldset legend {
+  margin: auto;
+  float: none;
+  width: inherit;
+}
+
 /* Mobile / Tab Responsive */
 @media only screen and (min-width: 1200px) {
   .homeVector {
@@ -1358,7 +1361,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
   .btn-exit:hover {
     background-color: #ffffff;
-    color: #C0232C;
+    color: #C21B17;
   }
 
 
@@ -1448,7 +1451,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   }
 
   .timeline-item-needs.active::after {
-    background: #C0232C;
+    background: #C21B17;
     border: 0;
   }
 
