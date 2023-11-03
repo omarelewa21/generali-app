@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Gender Selection</title>
+<title>Gender Selection</title>
 @endsection
 
 @section('content')

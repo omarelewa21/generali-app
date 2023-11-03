@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>My Assets</title>
+<title>Assets</title>
 @endsection
 
 @section('content')

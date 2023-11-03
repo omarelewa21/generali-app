@@ -16,11 +16,11 @@
     <div class="container-fluid">
         <div class="row wrapper">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
-            <section class="content position-relative d-flex justify-content-center align-items-start h-100">
+            <section class="content">
                 <div class="container">
-                    <div class="row d-flex text-center justify-content-center">
+                    <div class="row text-center justify-content-center">
                         <div class="col-xxl-6 col-xl-6 col-lg-6">
-                            <h1 class="display-3 headline1 text-uppercase text-dark">Now, shall we build your signature look?</h1>
+                            <h1 class="display-3 text-uppercase text-dark">Now, shall we build your signature look?</h1>
                             <div class="d-grid gap-2 col-6 mx-auto pt-4">
                                 <a href="{{ route('avatar.gender.selection') }}" class="btn btn-primary text-uppercase">Create</a>
                                 <a href="{{ route('identity.details') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>

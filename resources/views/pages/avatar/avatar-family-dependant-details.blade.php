@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Family Dependant Details</title>
+<title>Family Dependant Details</title>
 @endsection
 
 @section('content')
@@ -37,7 +37,7 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
                         @csrf

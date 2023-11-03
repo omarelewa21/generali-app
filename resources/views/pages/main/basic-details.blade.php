@@ -15,8 +15,6 @@
 @php
     // Retrieving values from the session
     $basicDetails = session('customer_details.basic_details');
-    $selectedCountry = session('customer_details.basic_details.phone_code_mobile', '60');
-    $selectedCode = session('customer_details.basic_details.phone_code_house', '60');
 @endphp
 
 <div id="basic_details">
@@ -112,7 +110,6 @@
                                 </div>
                             </div>
                         </section>
-                        
                         <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">

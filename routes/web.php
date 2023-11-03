@@ -168,6 +168,7 @@ Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->n
 Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('pages.summary.monthly-goals');
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('pages.summary.expected-income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('pages.summary.increment-amount');
+Route::view('/summary', 'pages.summary.summary')->name('pages.summary.summary');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

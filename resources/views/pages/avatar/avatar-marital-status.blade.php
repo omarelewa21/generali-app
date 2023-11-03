@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Marital Status</title>
+<title>Marital Status</title>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                         @csrf

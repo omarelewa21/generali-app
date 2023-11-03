@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Priorities To Discuss Page
+ * Template Name: Summary Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Priorities To Discuss</title>
+<title>Summary</title>
 @endsection
 
 @section('content')
@@ -18,12 +18,17 @@
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
-<div id="priorities_to_discuss" class="vh-100 overflow-hidden">
+<div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 2;">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>    
-                <section class="avatar-design-placeholder content-avatar-default">
+            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
+                @include('templates.nav.nav-white-menu')
+                <div class="text-white px-4 px-xl-5 py-3">
+                    <h2 class="display-5 fw-bold">Summary</h2>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
+                <section class="avatar-design-placeholder content-avatar-default main-content">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
                         <div id="sortable-main" class="position-relative pt-3">
@@ -182,95 +187,17 @@
                         </div>
                     </div>
                 </section>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
-                <div class="scrollable-content">
-                    <section class="main-content">
-                        <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
-                                <div class="col-12">
-                                    <h1 class="display-4 text-white fw-bold pb-3">Let's go through what you'd like to discuss.</h1>
-                                </div>
-                            </div>
-                            <div class="row px-4 pb-4 px-sm-5">
-                                <div class="col-12">
-                                    <div class="accordion accordion-flush" id="accordionPriorities">
-                                        @php
-                                            if (isset($topPriorities)) {
-                                                foreach($topPriorities as $priority) {
-                                                    if ($priority === 'protection') {
-                                                        $title = 'Protection';
-                                                    }
-                                                    else if ($priority === 'retirement') {
-                                                        $title = 'Retirement';
-                                                    }
-                                                    else if ($priority === 'education') {
-                                                        $title = 'Education';
-                                                    }
-                                                    else if ($priority === 'savings') {
-                                                        $title = 'Savings';
-                                                    }
-                                                    else if ($priority === 'debt-cancellation') {
-                                                        $title = 'Debt Cancellation';
-                                                    }
-                                                    else if ($priority === 'health-medical') {
-                                                        $title = 'Health Medical';
-                                                    }
-                                                    else if ($priority === 'investments') {
-                                                        $title = 'Investments';
-                                                    }
-                                                    else if ($priority === 'others') {
-                                                        $title = 'Others';
-                                                    }
-                                                    else {
-                                                        $title = '';
-                                                    }
-
-                                                    if ($priority) { @endphp
-                                                        <div class="accordion-item">
-                                                            <h2 class="accordion-header" id="flush-heading{{$priority}}">
-                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
-                                                                </button>
-                                                            </h2>
-                                                            <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
-                                                                <div class="accordion-body">
-                                                                    <div class="row py-2 px-3">
-                                                                        <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row py-2 px-3">
-                                                                        <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @php } 
-                                                }
-                                            }
-                                        @endphp
-                                    </div>
-                                </div>
+                
+                <section class="footer bg-white py-4 fixed-bottom footer-scroll">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                             </div>
                         </div>
-                    </section>
-
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -278,48 +205,75 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Ensure the first accordion item is always open
-    const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var titleSelect = document.getElementById('titleSelect');
+    var firstNameInput = document.getElementById('firstNameInput');
+    var lastNameInput = document.getElementById('lastNameInput');
+    var emailInput = document.getElementById('email');
 
-    if (firstAccordionItem) {
-        const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
-        firstCollapse.classList.add('show');
+    titleSelect.addEventListener('blur', function() {
+        validateSelectField(titleSelect);
+    });
+
+    firstNameInput.addEventListener('blur', function() {
+        validateInputField(firstNameInput);
+    });
+
+    lastNameInput.addEventListener('blur', function() {
+        validateInputField(lastNameInput);
+    });
+
+    emailInput.addEventListener('blur', function() {
+        validateEmailField(emailInput);
+    });
+
+    function validateSelectField(field) {
+        if (field.value) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
     }
 
-    // Sent checkbox value to controller
-    var checkboxValues = {};
+    function validateInputField(field) {
+        if (field.value && isValidName(field.value)) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
 
-    // First set all to true
-    $('input[type="checkbox"]').each(function() {
-        var checkboxId = $(this).attr('id');
-        checkboxValues[checkboxId] = true;
-        $(this).prop('checked', true); // Check the checkboxes initially
-    });
+    function validateEmailField(field) {
+        if (field.value && isValidEmail(field.value)) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
 
-    // Update checkboxValues object when any checkbox is changed
-    $('input[type="checkbox"]').on('change', function() {
-        var checkboxId = $(this).attr('id');
-        var isChecked = $(this).prop('checked');
-        checkboxValues[checkboxId] = isChecked;
-    });
+    function isValidName(name) {
+        // Return true if the wording is 30 characters, false otherwise
+        var nameRegex = /^[A-Za-z\s]{1,30}$/;
 
-    $('#priorityNext').on('click', function(event) {
-        $.ajax({
-            type: "POST",
-            url: "{{ route('priorities.redirect') }}",
-            data: checkboxValues,
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                // Handle success, if needed
-            },
-            error: function(xhr, status, error) {
-                // Handle error, if needed
-            }
-        });
-    });
+        var isValid = nameRegex.test(name);
+
+        return isValid;
+    }
+
+    function isValidEmail(email) {
+        // Return true if the email is valid, false otherwise
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        var isValid = emailRegex.test(email);
+
+        return isValid;
+    }
 });
 </script>
+
 @endsection

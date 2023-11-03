@@ -1,7 +1,7 @@
 const specificPageURLs = [
     'marital-status',
     'family-dependant',
-    'family-dependant-details',
+    '/family-dependant/details',
     'assets',
 ];
 
@@ -203,7 +203,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 $(".imageContainerMarried").empty;
             }
         }
-        else if (path == '/family-dependant' || path == '/family-dependant-details') {
+        else if (path == '/family-dependant' || path == '/family-dependant/details') {
             
             // Set the spouseImageIndex based on gender
             var gender;
@@ -248,7 +248,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     // Append child images to the container
                     $(".imageContainerChildren").append(childImages.join(''));
 
-                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + numberOfChildren + '</div>';
+                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + numberOfChildren + '</div>';
                     $(".imageContainerChildren").append(newButton);
 
                     // Move the avatar closer based on selections
@@ -475,7 +475,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             });
             
             if (selectedValue) {
-                var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + selectedValue + '</div>';
+                var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + selectedValue + '</div>';
                 $(".imageContainerChildren").append(newButton);
             }
 
