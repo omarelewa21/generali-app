@@ -50,6 +50,10 @@ body.overflow {
   overflow-y: auto;
 }
 
+body.overflow #top_priorities, body.overflow #priorities_to_discuss {
+  overflow-y: hidden;
+}
+
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -470,6 +474,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-needs-grey {
+  grid-template-areas:
+      "header"
+      "content-needs"
+      "footer-avatar-grey";
+  grid-template-rows: 9vh 56vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .wrapper-avatar {
   display: grid;
   grid-template-columns: 100%;
@@ -496,6 +510,13 @@ h2.display-5, .currencyField {
 
 .content {
   grid-area: content;
+}
+
+.content-needs {
+  grid-area: content-needs;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
 }
 
 .footer-main {
@@ -959,13 +980,8 @@ fieldset legend {
     overflow-y: auto;
     height: 100vh;
   }
-  .main-default-bg {
+  .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     z-index: 2;
-  }
-  .progress-main {
-    position: fixed;
-    top: 0;
-    right: 0;
   }
   .wrapper-home {
     display: grid;

@@ -27,7 +27,7 @@
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body class="overflow">
     <main>
         @yield('content')
     </main>

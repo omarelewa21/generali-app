@@ -30,7 +30,7 @@ $(document).ready(function () {
         } else if(currentPath === '/marital-status' && myDetails.includes(itemPath)) {
             $(this).addClass('active');
 
-        } else if(currentPath === '/family-dependant-details' && myFamily.includes(itemPath)) {
+        } else if(currentPath === '/family-dependant/details' && myFamily.includes(itemPath)) {
             $(this).addClass('active');
 
         } else if(currentPath === '/priorities-to-discuss' && myPriorities.includes(itemPath)) {
@@ -43,7 +43,7 @@ $(document).ready(function () {
             for (var i = 0; i < index; i++) {
                 $('.timeline-item:eq(' + i + ')').addClass('active');
             }
-        }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant-details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
+        }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant/details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
             $(this).addClass('active');
         }
     });

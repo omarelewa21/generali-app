@@ -18,12 +18,12 @@
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
-<div id="top_priorities" class="vh-100 overflow-hidden">
+<div id="top_priorities">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 2;">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>    
-                <section class="avatar-design-placeholder content-avatar-default">
+                <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
                         <div id="sortable-main" class="position-relative pt-3">
@@ -191,7 +191,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -297,7 +297,7 @@
                     </section>
                     <form action="{{ route('form.top.priorities') }}" method="post" class="buttonForm">
                         @csrf
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

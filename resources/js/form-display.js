@@ -1,7 +1,7 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'identity-details',
-    'family-dependant-details',
+    '/family-dependant/details',
     'existing-policy'
 ];
 
@@ -253,7 +253,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         yearField.addEventListener('change', calculateAge);
     }
 
-    if (path == '/family-dependant-details') {
+    if (path == '/family-dependant/details') {
         var spouse = customer_details.family_details.dependant.spouse;
 
         if (spouse === true) {

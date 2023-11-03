@@ -34,7 +34,6 @@ Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets'
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
 Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
-// Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
@@ -49,6 +48,8 @@ Route::post('/top-priorities/discuss', [FormController::class, 'priorities'])->n
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+// this is for testing
+Route::view('/protection-home-new', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
 Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
