@@ -421,7 +421,7 @@ button[data-required="selected"] img {
 }
 
 /* Left Sidebar */
-.sidebanner h2 {
+h2.display-5, .currencyField {
   font-family: 'Helvetica Neue', sans-serif;
 }
 .sidebanner {
@@ -440,6 +440,88 @@ button[data-required="selected"] img {
 .otherModalText {
   font-size: 5rem;
   line-height: 3.5rem;
+}
+
+/* Grid System */
+.wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "content" "footer-main";
+  grid-template-rows: 20vh 38vh 40vh;
+}
+
+.wrapper-avatar-default {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "content-avatar-default";
+  grid-template-rows: 20vh 75vh;
+}
+
+.wrapper-grey {
+  grid-template-areas:
+      "header"
+      "content"
+      "footer-avatar-grey";
+  grid-template-rows: 20vh 45vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.wrapper-avatar {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: "header" "top-avatar" "bottom-avatar";
+  grid-template-rows: 20vh 20vh 58vh;
+}
+
+.wrapper-avatar-grey {
+  grid-template-areas:
+      "header"
+      "content"
+      "footer-avatar-grey";
+  grid-template-rows: 20vh 55vh 25vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.content-avatar-default {
+  grid-area: content-avatar-default;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer-main {
+  grid-area: footer-main;
+  grid-gap: 20px;
+  grid-template-columns: 50% 50%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+
+.header {
+  grid-area: header;
+}
+
+.top-avatar {
+  grid-area: top-avatar;
+}
+
+.bottom-avatar {
+  grid-area: bottom-avatar;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
+  display: grid;
+  grid-auto-rows: 100%;
+}
+
+.footer-avatar-grey {
+  grid-area: footer-avatar-grey;
+  background-color:rgba(233, 233, 233, 1);
 }
 
 /* Welcome Page */
@@ -463,57 +545,7 @@ button[data-required="selected"] img {
   background-repeat: no-repeat;
 }
 
-.wrapper {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  grid-template-areas: "header" "content" "footer-main";
-  grid-template-rows: 15vh 38vh 40vh;
-}
-
-.header {
-  grid-area: header;
-  /* grid-gap: 20px;
-  grid-template-columns: 100%;
-  display: grid; */
-}
-
-.content {
-  grid-area: content;
-}
-
-.footer-main {
-  grid-area: footer-main;
-  grid-gap: 20px;
-  grid-template-columns: 50% 50%;
-  display: grid;
-  grid-auto-rows: 100%;
-}
-
 /* Avatar Gender Page */
-.wrapper-avatar {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-areas: "header-avatar" "top-avatar" "bottom-avatar";
-  grid-template-rows: 20vh 15vh 60vh;
-}
-
-.header-avatar {
-  grid-area: header-avatar;
-}
-
-.top-avatar {
-  grid-area: top-avatar;
-}
-
-.bottom-avatar {
-  grid-area: bottom-avatar;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  display: grid;
-  grid-auto-rows: 100%;
-}
-
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
   background-size: auto 70%;
@@ -594,25 +626,6 @@ button[data-required="selected"] img {
   border-color: #A0A0A0;
 }
 
-.wrapper-avatar-default {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-areas: "header-avatar-default" "content-avatar-default";
-  grid-template-rows: 20vh 75vh;
-}
-
-.content-avatar-default {
-  grid-area: content-avatar-default;
-  grid-gap: 20px;
-  grid-template-columns: 100%;
-  display: grid;
-  grid-auto-rows: 100%;
-}
-
-.header-avatar-default {
-  grid-area: header-avatar-default;
-}
-
 /* Marital Status Page */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
   background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
@@ -634,19 +647,6 @@ button[data-required="selected"] img {
 /* Assets Page */
 .assets-overlay {
   position: relative;
-}
-
-#avatar_my_assets .wrapper-avatar-default {
-  grid-template-areas:
-      "header-avatar-default"
-      "content-avatar-default"
-      "footer-avatar-default";
-  grid-template-rows: 15vh 55vh 30vh;
-  grid-gap:0;
-}
-#avatar_my_assets .footer-avatar-default {
-  grid-area: footer-avatar-default;
-  background-color:rgba(233, 233, 233, 1);
 }
 
 /* Skin Tone */
@@ -964,6 +964,24 @@ fieldset legend {
   margin: auto;
   float: none;
   width: inherit;
+}
+
+/* Financial Statements */
+.currencyField input {
+  font-size: 3.5rem;
+  z-index: 1;
+}
+
+#increment .currencyField input {
+  font-size: 2.125rem;
+}
+
+.secondary-default-bg {
+  background-image: url(/images/general/secondary-default-bg.png);
+  background-size: auto 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
 
 /* Mobile / Tab Responsive */

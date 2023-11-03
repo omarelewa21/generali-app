@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white-menu')
-                <div class="text-white px-4 px-xl-5 py-md-5 py-3">
+                <div class="text-white px-4 px-xl-5 py-3">
                     <h2 class="display-5 fw-bold">Hello! Let's get to know you better.</h2>
                 </div>
             </div>

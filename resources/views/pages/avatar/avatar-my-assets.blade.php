@@ -21,10 +21,10 @@
 <div id="avatar_my_assets">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default assets-overlay overflow-hidden px-0">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
-                <section class="avatar-design-placeholder content-avatar-default position-relative imageContainerHouse"></section>
-                <section class="footer-avatar-default d-flex justify-content-center">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-grey assets-overlay overflow-hidden px-0">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
+                <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
+                <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
                     <img src="{{ asset($image) }}" width="auto" height="70%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
                 </section>
