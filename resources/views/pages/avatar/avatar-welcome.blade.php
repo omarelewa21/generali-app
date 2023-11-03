@@ -15,7 +15,7 @@
 <div id="avatar_welcome" class="vh-100 overflow-y-auto overflow-x-hidden">
     <div class="container-fluid">
         <div class="row wrapper">
-            <div class="header">@include('templates.nav.nav-red-menu')</div>
+            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
             <section class="content position-relative d-flex justify-content-center align-items-start h-100">
                 <div class="container">
                     <div class="row d-flex text-center justify-content-center">

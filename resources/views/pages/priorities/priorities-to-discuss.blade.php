@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 2;">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>

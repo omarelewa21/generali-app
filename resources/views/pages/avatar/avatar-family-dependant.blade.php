@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
