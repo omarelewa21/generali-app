@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="timeline-item">
-                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('gender') }}">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('avatar') }}">
                     <p class="nav-text">My Avatar</p>
                 </a>
             </div>
@@ -30,18 +30,18 @@
                     <p class="nav-text">My Family</p>
                 </a>
             </div>
-            <div class="timeline-item">
+            <div id="assets" class="timeline-item">
                 <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('assets') }}">
                     <p class="nav-text">My Assets</p>
                 </a>
             </div>
             <div class="timeline-item">
-                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('top-priorities') }}">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('financial-priorities') }}">
                     <p class="nav-text">MY PRIORITIES</p>
                 </a>
             </div>
             <div class="timeline-item">
-                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('existing-policies') }}">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('existing-policy') }}">
                     <p class="nav-text">Existing Policies</p>
                 </a>
             </div>

@@ -3,48 +3,97 @@ $(document).ready(function () {
     // Get the current URL path
     var currentPath = window.location.pathname;
 
-    // Define an array of step paths that should be marked as active with /gender
-    var myAvatar = ['/basic-details', '/gender'];
-    var myDetails = ['/basic-details', '/gender' , '/identity-details'];
-    var myFamily = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant'];
-    var myAssets = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets'];
-    var myPriorities = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities'];
-    var existingPolicies = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities' , 'existing-policies'];
-    var summary = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities' , 'existing-policies' , 'summary'];
+    // Define an array of step paths that should be marked as active
+    var allFieldsFilled = allFieldsFilled || [];
 
-    // Find all the timeline items and iterate through them
     $('.timeline-item').each(function (index) {
+
         // Get the URL of the timeline item
         var itemURL = $(this).find('a').attr('href');
-
-        // Create a URL object to parse the full URL
         var urlObject = new URL(itemURL);
-
-        // Get only the path from the URL object
         var itemPath = urlObject.pathname;
 
-        // Check if the current page is /welcome and if the item is in the genderSteps array
-        if (currentPath === '/welcome' && myAvatar.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if(currentPath === '/marital-status' && myDetails.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if(currentPath === '/family-dependant/details' && myFamily.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if(currentPath === '/priorities-to-discuss' && myPriorities.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if (itemPath === currentPath) {
-            $(this).addClass('active');
-
-            // Also mark all previous steps as active
-            for (var i = 0; i < index; i++) {
-                $('.timeline-item:eq(' + i + ')').addClass('active');
+        if (customer_details && customer_details.basic_details) {
+            var fields = customer_details.basic_details
+            
+            if (fields) {
+                allFieldsFilled.push('/basic-details');
             }
-        }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant/details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
+        }
+
+        if (customer_details && customer_details.avatar) {
+            var fields = customer_details.avatar
+            
+            if (fields) {
+                allFieldsFilled.push('/avatar');
+            }
+        }
+
+        if (customer_details && customer_details.identity_details) {
+            var fields = customer_details.identity_details
+            var filled = false;
+            
+            for (var key in fields) {
+                if (fields.hasOwnProperty(key) && key !== 'marital_status' && (fields[key] === null || fields[key] === '')) {
+                    filled = true;
+                    break;
+                }
+            }
+
+            if (fields && filled == true) {
+                allFieldsFilled.push('/identity-details');
+            }
+        }
+
+        if (customer_details && customer_details.family_details) {
+            var spouse_data = customer_details.family_details.dependant.spouse_data
+            var children_data = customer_details.family_details.dependant.children_data
+            var parents_data = customer_details.family_details.dependant.parents_data
+            
+            if (spouse_data || children_data || parents_data) {
+                allFieldsFilled.push('/family-dependant');
+            }
+        }
+
+        if (customer_details && customer_details.financial_priorities) {
+            var fields = customer_details.financial_priorities
+            
+            if (fields) {
+                allFieldsFilled.push('/financial-priorities');
+            }
+        }
+
+        if (allFieldsFilled.includes(itemPath)) {
             $(this).addClass('active');
         }
+        else {
+            $('#assets.timeline-item').addClass('active');
+        }
+        // Check if the current page is /welcome and if the item is in the genderSteps array
+        // if (currentPath === '/basic-details') {
+            
+        // }
+        // else if(currentPath === '/marital-status' && myDetails.includes(itemPath)) {
+        //     console.log('yes');
+        //     $(this).addClass('active');
+
+        // } else if(currentPath === '/family-dependant/details' && myFamily.includes(itemPath)) {
+        //     $(this).addClass('active');
+
+        // } else if(currentPath === '/priorities-to-discuss' && myPriorities.includes(itemPath)) {
+        //     $(this).addClass('active');
+
+        // } 
+        // else if (itemPath === currentPath) {
+        //     $(this).addClass('active');
+
+        //     // Also mark all previous steps as active
+        //     for (var i = 0; i < index; i++) {
+        //         $('.timeline-item:eq(' + i + ')').addClass('active');
+        //     }
+        // }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant/details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
+        //     $(this).addClass('active');
+        // }
     });
+    
 });

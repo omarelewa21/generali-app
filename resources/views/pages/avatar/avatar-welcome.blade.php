@@ -41,4 +41,7 @@
     </div>
 </div>
 
+<script>
+    var customer_details = {!! json_encode(session('customer_details')) !!};
+</script>
 @endsection

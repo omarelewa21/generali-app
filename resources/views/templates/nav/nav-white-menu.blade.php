@@ -9,7 +9,7 @@
 {{--end of nav links --}}
 
 @php
-    $needsPages = ['protection-home', 'protection-home-new', 'retirement-home', 'education-home' , 'savings-home' , 'investment-home', 'health-medical-home', 'debt-cancellation-home']; // Add your needs page slugs here
+    $needsPages = ['protection-home', 'protection', 'retirement-home', 'education-home' , 'savings-home' , 'investment-home', 'health-medical-home', 'debt-cancellation-home']; // Add your needs page slugs here
 @endphp
 
 @if(in_array(request()->path(), $needsPages))

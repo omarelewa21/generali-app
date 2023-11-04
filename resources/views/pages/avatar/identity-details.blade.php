@@ -42,7 +42,7 @@
                                         <p class="text-white display-6 lh-base">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                     </div>
                                 </div>
-                                <div class="form-container pb-5">
+                                <div class="form-container pb-0 pb-md-5">
                                     @if ($errors->any())
                                         <div class="row px-4 pb-3 px-sm-5">
                                             <div class="col-12">
@@ -298,7 +298,8 @@
 </div>
 
 <script>
-var sessionData = {!! json_encode(session('customer_details')) !!};
+// var sessionData = {!! json_encode(session('customer_details')) !!};
+var customer_details = {!! json_encode(session('customer_details')) !!};
 
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');

@@ -318,6 +318,7 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
+    var customer_details = {!! json_encode(session('customer_details')) !!};
 </script>
 <!-- <script>
     // Get all the path elements inside #sortable-main

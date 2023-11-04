@@ -50,7 +50,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities, body.overflow #priorities_to_discuss {
+body.overflow #top_priorities, body.overflow #priorities_to_discuss, body.overflow #home {
   overflow-y: hidden;
 }
 

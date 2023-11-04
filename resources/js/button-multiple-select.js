@@ -2,7 +2,7 @@
 const specificPageURLs = [
     'family-dependant',
     'assets',
-    'top-priorities'
+    'financial-priorities'
 ];
 
 const currentURL = window.location.href;
@@ -111,7 +111,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
     }
-    else if (path == '/top-priorities') {
+    else if (path == '/financial-priorities') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 

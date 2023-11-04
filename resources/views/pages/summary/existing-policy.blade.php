@@ -235,6 +235,8 @@
 </div>
 
 <script>
+var customer_details = {!! json_encode(session('customer_details')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var policyFirstNameInput = document.getElementById('policyFirstNameInput');
     var policyLastNameInput = document.getElementById('policyLastNameInput');

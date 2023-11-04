@@ -37,5 +37,4 @@
         <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector" class="footerVector">
     </section>
 </div>
-
 @endsection
