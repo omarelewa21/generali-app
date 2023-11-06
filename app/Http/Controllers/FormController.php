@@ -41,7 +41,7 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
+            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);

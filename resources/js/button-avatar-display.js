@@ -175,8 +175,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         if (path == '/marital-status') {
             // Set the spouseImageIndex based on gender
             var gender;
-            if (customer_details && customer_details.avatar && customer_details.avatar.gender) {
-                gender = customer_details.avatar.gender;
+            if (gender_session) {
+                gender = gender_session;
             } else {
                 gender = 'Male'; // Set your default gender here
             }
@@ -207,8 +207,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             
             // Set the spouseImageIndex based on gender
             var gender;
-            if (customer_details && customer_details.avatar && customer_details.avatar.gender) {
-                gender = customer_details.avatar.gender;
+            if (gender_session) {
+                gender = gender_session;
             } else {
                 gender = 'Male'; // Set your default gender here
             }
@@ -227,7 +227,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (familyDependantInputValue.trim() !== 'null') {
                 
                 var familyDependant = JSON.parse(familyDependantInputValue);
-                if (customer_details.family_details.dependant.spouse && customer_details.family_details.dependant.spouse === true) {
+                if (spouse_session === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
                     $imageContainer.append(newImage);
                 }

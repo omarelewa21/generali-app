@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function pdpa(decision, route) {
         $.ajax({
             type: "POST",
-            url: "{{ route('save.button.click') }}",
+            url: "{{ route('pdpa.disclosure') }}",
             data: { decision: decision, route: route },
             headers: {
                 'X-CSRF-TOKEN': csrfToken

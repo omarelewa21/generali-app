@@ -16,15 +16,15 @@ use App\Http\Controllers\DebtCancellationController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
-/* main pages */
-Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
+/* Main pages */
+// Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
-Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.submit');
+Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
+Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
-Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.button.click');
 
-/* avatar pages */
+/* Avatar pages */
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');

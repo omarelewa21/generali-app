@@ -256,9 +256,9 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/family-dependant') {
         document.addEventListener('DOMContentLoaded', function() {
-            if (customer_details && customer_details.identity_details && customer_details.identity_details.marital_status) {
-                var maritalStatus = customer_details.identity_details.marital_status;
-        
+            if (marital_status) {
+                var maritalStatus = marital_status;
+
                 // Disable the 'Spouse' button if maritalStatus is 'single'
                 if (maritalStatus === 'single') {
                     const spouseButton = document.getElementById('spouseButton');
@@ -323,9 +323,9 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/family-dependant/details') {
         document.addEventListener('DOMContentLoaded', function() {
-            if (customer_details && customer_details.family_details && customer_details.family_details.dependant) {
-                var dependant = customer_details.family_details.dependant;
-                var spouse = customer_details.family_details.dependant.spouse;
+            if (family_details) {
+                var dependant = family_details;
+                var spouse = spouse_session;
                 
                 if (spouse === true) {
                     // Show the selected groups based on the dropdown selected
