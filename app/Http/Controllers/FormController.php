@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\AvatarSelectionRequest;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\DB;
 use libphonenumber\PhoneNumberUtil;
-use libphonenumber\PhoneNumberFormat;
-use libphonenumber\PhoneNumberType;
 use libphonenumber\NumberParseException;
+// use App\Http\Requests\AvatarSelectionRequest;
+// use Illuminate\Support\Facades\Response;
+// use SebastianBergmann\Environment\Console;
+// use Illuminate\Support\Facades\View;
+// use Illuminate\Support\Facades\Session;
+// use libphonenumber\PhoneNumberFormat;
+// use libphonenumber\PhoneNumberType;
+
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -41,7 +41,7 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
+            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -117,7 +117,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.welcome');
         } else {
@@ -296,7 +296,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status');
         } else {
@@ -410,7 +410,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Store the updated array back into the session
             return redirect()->route($dataUrl);
         } else {
@@ -769,7 +769,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.my.assets');
         } else {
@@ -832,7 +832,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('priorities.to.discuss');
         } else {
@@ -862,7 +862,7 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -892,7 +892,8 @@ class FormController extends Controller {
             // // Store the updated array back into the session
             // $request->session()->put('customer_details', $customerDetails);
             
-            // return response()->json(['message' => 'Button click saved successfully']);
+            // Process the form data and perform any necessary actions
+            return redirect()->route('priorities.to.discuss');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

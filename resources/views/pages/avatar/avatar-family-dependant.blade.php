@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Family Dependant</title>
+<title>Family Dependant</title>
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
@@ -167,42 +167,30 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Marital status is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to fill up the form in Marital Status page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-// Manually convert the PHP array to JSON
-var customer_details = {!! json_encode(session('customer_details')) !!};
-
-// Access the elements of the array in JavaScript
-var maritalStatus = customer_details.identity_details.marital_status;
-
-// Disable the 'Spouse' button if maritalStatus is 'single'
-if (maritalStatus === 'single') {
-    const spouseButton = document.getElementById('spouseButton');
-    const childButton = document.getElementById('childButton');
-    spouseButton.disabled = true;
-    childButton.disabled = true;
-
-    // Remove hover effect if it is disabled
-    const spouseParentDiv = spouseButton.parentElement;
-    const childParentDiv = childButton.parentElement;
-    spouseParentDiv.classList.remove('hover');
-    childParentDiv.classList.remove('hover');
-
-    const spouseImg = spouseButton.querySelector('img');
-    const childImg = childButton.querySelector('img');
-    spouseImg.style.opacity = '0.5'; 
-    childImg.style.opacity = '0.5'; 
-
-} else if (maritalStatus === 'divorced' || maritalStatus === 'widowed') {
-    const spouseButton = document.getElementById('spouseButton');
-    spouseButton.disabled = true;
-
-    // Remove hover effect if it is disabled
-    const spouseParentDiv = spouseButton.parentElement;
-    spouseParentDiv.classList.remove('hover');
-
-    const spouseImg = spouseButton.querySelector('img');
-    spouseImg.style.opacity = '0.5'; 
-}
+    var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
+    var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+    var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+    var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+    var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+    var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
 </script>
 
 @endsection

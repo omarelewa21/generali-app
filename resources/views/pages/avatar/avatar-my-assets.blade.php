@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>My Assets</title>
+<title>Assets</title>
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                     <img src="{{ asset($image) }}" width="auto" height="70%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                 <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
@@ -155,4 +155,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+    var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+    var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+    var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+</script>
 @endsection

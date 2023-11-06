@@ -1,7 +1,8 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'identity-details',
-    'family-dependant-details',
+    '/family-dependant',
+    '/family-dependant/details',
     'existing-policy'
 ];
 
@@ -253,247 +254,346 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         yearField.addEventListener('change', calculateAge);
     }
 
-    if (path == '/family-dependant-details') {
-        var spouse = customer_details.family_details.dependant.spouse;
+    if (path == '/family-dependant') {
+        document.addEventListener('DOMContentLoaded', function() {
+            if (marital_status) {
+                var maritalStatus = marital_status;
 
-        if (spouse === true) {
-            // Show the selected groups based on the dropdown selected
-            document.addEventListener('DOMContentLoaded', function() {
-                var idTypeSelect = document.getElementById('spouseIdSelect');
-                var newicgroup = document.getElementById('newicgroup');
-                var passportgroup = document.getElementById('passportgroup');
-                var birthcertgroup = document.getElementById('birthcertgroup');
-                var policegroup = document.getElementById('policegroup');
-                var registrationgroup = document.getElementById('registrationgroup');
+                // Disable the 'Spouse' button if maritalStatus is 'single'
+                if (maritalStatus === 'single') {
+                    const spouseButton = document.getElementById('spouseButton');
+                    const childButton = document.getElementById('childButton');
+                    spouseButton.disabled = true;
+                    childButton.disabled = true;
+        
+                    // Remove hover effect if it is disabled
+                    const spouseParentDiv = spouseButton.parentElement;
+                    const childParentDiv = childButton.parentElement;
+                    spouseParentDiv.classList.remove('hover');
+                    childParentDiv.classList.remove('hover');
+        
+                    const spouseImg = spouseButton.querySelector('img');
+                    const childImg = childButton.querySelector('img');
+                    spouseImg.style.opacity = '0.5'; 
+                    childImg.style.opacity = '0.5'; 
+        
+                } else if (maritalStatus === 'divorced' || maritalStatus === 'widowed') {
+                    const spouseButton = document.getElementById('spouseButton');
+                    spouseButton.disabled = true;
+        
+                    // Remove hover effect if it is disabled
+                    const spouseParentDiv = spouseButton.parentElement;
+                    spouseParentDiv.classList.remove('hover');
+        
+                    const spouseImg = spouseButton.querySelector('img');
+                    spouseImg.style.opacity = '0.5'; 
+                }
+            }
+            else {
+                if (maritalStatus == null || maritalStatus == undefined || maritalStatus == '') {
+                    var myModal = document.getElementById('missingFields');
+                    myModal.classList.add('show');
+                    myModal.style.display = 'block';
+                    document.querySelector('body').style.paddingRight = '0px';
+                    document.querySelector('body').style.overflow = 'hidden';
+                    document.querySelector('body').classList.add('modal-open');
 
-                var selectedOption;
+                    var modalBackdrop = document.createElement('div');
+                    modalBackdrop.className = 'modal-backdrop fade show';
+                    document.querySelector('body.modal-open').append(modalBackdrop);
 
-                idTypeSelect.addEventListener('change', function() {
-                    selectedOption = this.value;
-                    showSelectedGroup(selectedOption);
-                });
-            
-                // Function to show the selected group
-                function showSelectedGroup(selectedOption) {
+                    // Close the modal
+                    var closeButton = document.querySelector('#missingFields .btn-exit-sidebar');
+                    closeButton.addEventListener('click', function() {
+                        myModal.classList.remove('show');
+                        myModal.style.display = 'none';
+                        document.querySelector('body').style.paddingRight = '';
+                        document.querySelector('body').style.overflow = '';
+                        document.querySelector('body').classList.remove('modal-open');
+                        var modalBackdrop = document.querySelector('.modal-backdrop');
+                        if (modalBackdrop) {
+                            modalBackdrop.remove();
+                        }
+                        window.location.href = '/marital-status';
+                    });
+                }
+            }
+        });
+    }
 
-                    // Hide all groups and remove the required attribute from all of them
-                    newicgroup.style.display = 'none';
-                    spouseIdNumber.removeAttribute('required');
-                    passportgroup.style.display = 'none';
-                    spousePassportNumber.removeAttribute('required');
-                    birthcertgroup.style.display = 'none';
-                    spouseBirthCert.removeAttribute('required');
-                    policegroup.style.display = 'none';
-                    spousePoliceNumber.removeAttribute('required');
-                    registrationgroup.style.display = 'none';
-                    spouseRegistrationNumber.removeAttribute('required');
-
-                    // Show the relevant group based on the selected option and add the required attribute
-                    if (selectedOption === 'New IC') {
-                        newicgroup.style.display = 'block';
-                        spousePassportNumber.value = '';
-                        spouseBirthCert.value = '';
-                        spousePoliceNumber.value = '';
-                        spouseRegistrationNumber.value = '';
-
-                        const form = document.getElementById("familyDetailsForm");
-
-                        form.addEventListener("submit", function(event) {
-                            // Enable the inputs before form submission
-                            document.getElementById('spouseMaleInput').disabled = false;
-                            document.getElementById('spouseFemaleInput').disabled = false;
+    if (path == '/family-dependant/details') {
+        document.addEventListener('DOMContentLoaded', function() {
+            if (family_details) {
+                var dependant = family_details;
+                var spouse = spouse_session;
+                
+                if (spouse === true) {
+                    // Show the selected groups based on the dropdown selected
+                    var idTypeSelect = document.getElementById('spouseIdSelect');
+                    var newicgroup = document.getElementById('newicgroup');
+                    var passportgroup = document.getElementById('passportgroup');
+                    var birthcertgroup = document.getElementById('birthcertgroup');
+                    var policegroup = document.getElementById('policegroup');
+                    var registrationgroup = document.getElementById('registrationgroup');
+    
+                    var selectedOption;
+    
+                    idTypeSelect.addEventListener('change', function() {
+                        selectedOption = this.value;
+                        showSelectedGroup(selectedOption);
+                    });
+                
+                    // Function to show the selected group
+                    function showSelectedGroup(selectedOption) {
+    
+                        // Hide all groups and remove the required attribute from all of them
+                        newicgroup.style.display = 'none';
+                        spouseIdNumber.removeAttribute('required');
+                        passportgroup.style.display = 'none';
+                        spousePassportNumber.removeAttribute('required');
+                        birthcertgroup.style.display = 'none';
+                        spouseBirthCert.removeAttribute('required');
+                        policegroup.style.display = 'none';
+                        spousePoliceNumber.removeAttribute('required');
+                        registrationgroup.style.display = 'none';
+                        spouseRegistrationNumber.removeAttribute('required');
+    
+                        // Show the relevant group based on the selected option and add the required attribute
+                        if (selectedOption === 'New IC') {
+                            newicgroup.style.display = 'block';
+                            spousePassportNumber.value = '';
+                            spouseBirthCert.value = '';
+                            spousePoliceNumber.value = '';
+                            spouseRegistrationNumber.value = '';
+    
+                            const form = document.getElementById("familyDetailsForm");
+    
+                            form.addEventListener("submit", function(event) {
+                                // Enable the inputs before form submission
+                                document.getElementById('spouseMaleInput').disabled = false;
+                                document.getElementById('spouseFemaleInput').disabled = false;
+                                document.getElementById('spouseday').disabled = false;
+                                document.getElementById('spousemonth').disabled = false;
+                                document.getElementById('spouseyear').disabled = false;
+                            });
+    
+                            // Disable day, month, and year select options
+                            document.getElementById('spouseday').disabled = true;
+                            document.getElementById('spousemonth').disabled = true;
+                            document.getElementById('spouseyear').disabled = true;
+                            document.getElementById('spouseMaleInput').disabled = true;
+                            document.getElementById('spouseFemaleInput').disabled = true;
+    
+                        } else if (selectedOption === 'Passport') {
+                            passportgroup.style.display = 'block';
+                            spouseIdNumber.value = '';
+                            spouseBirthCert.value = '';
+                            spousePoliceNumber.value = '';
+                            spouseRegistrationNumber.value = '';
+    
+                            // Enable day, month, and year select options for other options
                             document.getElementById('spouseday').disabled = false;
                             document.getElementById('spousemonth').disabled = false;
                             document.getElementById('spouseyear').disabled = false;
-                        });
-
-                        // Disable day, month, and year select options
-                        document.getElementById('spouseday').disabled = true;
-                        document.getElementById('spousemonth').disabled = true;
-                        document.getElementById('spouseyear').disabled = true;
-                        document.getElementById('spouseMaleInput').disabled = true;
-                        document.getElementById('spouseFemaleInput').disabled = true;
-
-                    } else if (selectedOption === 'Passport') {
-                        passportgroup.style.display = 'block';
-                        spouseIdNumber.value = '';
-                        spouseBirthCert.value = '';
-                        spousePoliceNumber.value = '';
-                        spouseRegistrationNumber.value = '';
-
-                        // Enable day, month, and year select options for other options
-                        document.getElementById('spouseday').disabled = false;
-                        document.getElementById('spousemonth').disabled = false;
-                        document.getElementById('spouseyear').disabled = false;
-                        document.getElementById('spouseMaleInput').disabled = false;
-                        document.getElementById('spouseFemaleInput').disabled = false;
-
-                    } else if (selectedOption === 'Birth Certificate') {
-                        birthcertgroup.style.display = 'block';
-                        spouseIdNumber.value = '';
-                        spousePassportNumber.value = '';
-                        spousePoliceNumber.value = '';
-                        spouseRegistrationNumber.value = '';
-
-                        // Enable day, month, and year select options for other options
-                        document.getElementById('spouseday').disabled = false;
-                        document.getElementById('spousemonth').disabled = false;
-                        document.getElementById('spouseyear').disabled = false;
-                        document.getElementById('spouseMaleInput').disabled = false;
-                        document.getElementById('spouseFemaleInput').disabled = false;
-
-                    } else if (selectedOption === 'Police / Army') {
-                        policegroup.style.display = 'block';
-                        spouseIdNumber.value = '';
-                        spousePassportNumber.value = '';
-                        spouseBirthCert.value = '';
-                        spouseRegistrationNumber.value = '';
-
-                        // Enable day, month, and year select options for other options
-                        document.getElementById('spouseday').disabled = false;
-                        document.getElementById('spousemonth').disabled = false;
-                        document.getElementById('spouseyear').disabled = false;
-                        document.getElementById('spouseMaleInput').disabled = false;
-                        document.getElementById('spouseFemaleInput').disabled = false;
-
-                    } else if (selectedOption === 'Registration') {
-                        registrationgroup.style.display = 'block';
-                        spouseIdNumber.value = '';
-                        spousePassportNumber.value = '';
-                        spouseBirthCert.value = '';
-                        spousePoliceNumber.value = '';
-
-                        // Enable day, month, and year select options for other options
-                        document.getElementById('spouseday').disabled = false;
-                        document.getElementById('spousemonth').disabled = false;
-                        document.getElementById('spouseyear').disabled = false;
-                        document.getElementById('spouseMaleInput').disabled = false;
-                        document.getElementById('spouseFemaleInput').disabled = false;
+                            document.getElementById('spouseMaleInput').disabled = false;
+                            document.getElementById('spouseFemaleInput').disabled = false;
+    
+                        } else if (selectedOption === 'Birth Certificate') {
+                            birthcertgroup.style.display = 'block';
+                            spouseIdNumber.value = '';
+                            spousePassportNumber.value = '';
+                            spousePoliceNumber.value = '';
+                            spouseRegistrationNumber.value = '';
+    
+                            // Enable day, month, and year select options for other options
+                            document.getElementById('spouseday').disabled = false;
+                            document.getElementById('spousemonth').disabled = false;
+                            document.getElementById('spouseyear').disabled = false;
+                            document.getElementById('spouseMaleInput').disabled = false;
+                            document.getElementById('spouseFemaleInput').disabled = false;
+    
+                        } else if (selectedOption === 'Police / Army') {
+                            policegroup.style.display = 'block';
+                            spouseIdNumber.value = '';
+                            spousePassportNumber.value = '';
+                            spouseBirthCert.value = '';
+                            spouseRegistrationNumber.value = '';
+    
+                            // Enable day, month, and year select options for other options
+                            document.getElementById('spouseday').disabled = false;
+                            document.getElementById('spousemonth').disabled = false;
+                            document.getElementById('spouseyear').disabled = false;
+                            document.getElementById('spouseMaleInput').disabled = false;
+                            document.getElementById('spouseFemaleInput').disabled = false;
+    
+                        } else if (selectedOption === 'Registration') {
+                            registrationgroup.style.display = 'block';
+                            spouseIdNumber.value = '';
+                            spousePassportNumber.value = '';
+                            spouseBirthCert.value = '';
+                            spousePoliceNumber.value = '';
+    
+                            // Enable day, month, and year select options for other options
+                            document.getElementById('spouseday').disabled = false;
+                            document.getElementById('spousemonth').disabled = false;
+                            document.getElementById('spouseyear').disabled = false;
+                            document.getElementById('spouseMaleInput').disabled = false;
+                            document.getElementById('spouseFemaleInput').disabled = false;
+                        }
+    
+                        // Store the selected option in local storage
+                        localStorage.setItem('selectedOption', selectedOption);
                     }
-
-                    // Store the selected option in local storage
-                    localStorage.setItem('selectedOption', selectedOption);
-                }
-
-                // Get the stored selected option from local storage
-                var storedOption = localStorage.getItem('selectedOption');
-                if (storedOption) {
-                    selectedOption = storedOption;
-                    idTypeSelect.value = selectedOption;
-                    showSelectedGroup(selectedOption);
-                }
-            });
-
-            // Logics to validate idNumber
-            // Add event listener to the input field
-            document.getElementById('spouseIdNumber').addEventListener('input', function (e) {
-                // Get the input value and remove any non-numeric characters
-                var inputValue = this.value.replace(/\D/g, '');
     
-                // Truncate the input value to a maximum length of 12 characters
-                inputValue = inputValue.slice(0, 12);
-    
-                // Format the value with dashes
-                var formattedValue = inputValue.replace(/^(\d{6})(\d{2})(\d{4})$/, '$1-$2-$3');
-    
-                // Set the formatted value back to the input field
-                this.value = formattedValue;
-            });
-
-            // Logics to calculate age
-            // Get the ID Number field and the date of birth fields
-            const idNumberField = document.getElementById('spouseIdNumber');
-            const dayField = document.getElementById('spouseday');
-            const monthField = document.getElementById('spousemonth');
-            const yearField = document.getElementById('spouseyear');
-            const ageField = document.getElementById('spouseAge');
-            const genderRegex = /[13579]/;
-            const genderRadioMaleInput = document.getElementById("spouseMaleInput");
-            const genderRadioFemaleInput = document.getElementById("spouseFemaleInput");
-
-            // Listen for changes in the ID Number field
-            idNumberField.addEventListener('input', function() {
-                
-                // Logics for gender field
-                const lastDigit = idNumberField.value.substring(13, 14);
-                
-                if(idNumberField.value === '') {
-                    genderRadioMaleInput.checked = false;
-                    genderRadioFemaleInput.checked = false;
+                    // Get the stored selected option from local storage
+                    var storedOption = localStorage.getItem('selectedOption');
+                    if (storedOption) {
+                        selectedOption = storedOption;
+                        idTypeSelect.value = selectedOption;
+                        showSelectedGroup(selectedOption);
+                    }
+        
+                    // Logics to validate idNumber
+                    // Add event listener to the input field
+                    document.getElementById('spouseIdNumber').addEventListener('input', function (e) {
+                        // Get the input value and remove any non-numeric characters
+                        var inputValue = this.value.replace(/\D/g, '');
+            
+                        // Truncate the input value to a maximum length of 12 characters
+                        inputValue = inputValue.slice(0, 12);
+            
+                        // Format the value with dashes
+                        var formattedValue = inputValue.replace(/^(\d{6})(\d{2})(\d{4})$/, '$1-$2-$3');
+            
+                        // Set the formatted value back to the input field
+                        this.value = formattedValue;
+                    });
+        
+                    // Logics to calculate age
+                    // Get the ID Number field and the date of birth fields
+                    const idNumberField = document.getElementById('spouseIdNumber');
+                    const dayField = document.getElementById('spouseday');
+                    const monthField = document.getElementById('spousemonth');
+                    const yearField = document.getElementById('spouseyear');
+                    const ageField = document.getElementById('spouseAge');
+                    const genderRegex = /[13579]/;
+                    const genderRadioMaleInput = document.getElementById("spouseMaleInput");
+                    const genderRadioFemaleInput = document.getElementById("spouseFemaleInput");
+        
+                    // Listen for changes in the ID Number field
+                    idNumberField.addEventListener('input', function() {
+                        
+                        // Logics for gender field
+                        const lastDigit = idNumberField.value.substring(13, 14);
+                        
+                        if(idNumberField.value === '') {
+                            genderRadioMaleInput.checked = false;
+                            genderRadioFemaleInput.checked = false;
+                        }
+                        else if (genderRegex.test(lastDigit.toString())){
+                            genderRadioMaleInput.checked = true;
+                            genderRadioFemaleInput.checked = false;
+                        }
+                        else {
+                            genderRadioFemaleInput.checked = true;
+                            genderRadioMaleInput.checked = false;
+                        }
+        
+                        const idNumber = idNumberField.value;
+        
+                        // Extract the first 6 digits as the date, month, and year
+                        const yearDigits = idNumber.substring(0, 2);
+                        const monthDigits = idNumber.substring(2, 4);
+                        const dateDigits = idNumber.substring(4, 6);
+        
+                        // Set the extracted values in the date of birth fields
+                        dayField.value = dateDigits;
+                        monthField.value = monthDigits;
+        
+                        // Find the matching option in the year dropdown based on the last 2 digits of ID
+                        const matchingOption = Array.from(yearField.options).find(option => {
+                            return option.value.substring(2, 4) === yearDigits;
+                        });
+        
+                        // Set the selected option in the year dropdown
+                        if (matchingOption) {
+                            matchingOption.selected = true;
+                        }
+        
+                        // Trigger the change event on the year field to recalculate the age
+                        const event = new Event('change');
+                        yearField.dispatchEvent(event);
+                    });
+        
+                    // Function to calculate age
+                    function calculateAge() {
+                        const selectedDay = parseInt(dayField.value);
+                        const selectedMonth = parseInt(monthField.value);
+                        const selectedYearOption = yearField.options[yearField.selectedIndex];
+                        const selectedYear = selectedYearOption.textContent;
+                        
+                        if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
+                            ageField.textContent = 'Invalid ID number entered';
+                            return;
+                        }
+        
+                        const currentDate = new Date();
+                        const selectedDate = new Date(selectedYear, selectedMonth - 1, selectedDay);
+        
+                        if (isNaN(selectedDate.getTime())) {
+                            ageField.textContent = 'Invalid date';
+                            return;
+                        }
+        
+                        let age = currentDate.getFullYear() - selectedDate.getFullYear();
+                        const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
+        
+                        if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {
+                        age--;
+                        }
+        
+                        ageField.textContent = 'Age: ' + age;
+                    }
+        
+                    // // Calculate age on initial load
+                    calculateAge();
+        
+                    // Calculate age whenever the date fields are changed
+                    dayField.addEventListener('change', calculateAge);
+                    monthField.addEventListener('change', calculateAge);
+                    yearField.addEventListener('change', calculateAge);
                 }
-                else if (genderRegex.test(lastDigit.toString())){
-                    genderRadioMaleInput.checked = true;
-                    genderRadioFemaleInput.checked = false;
-                }
-                else {
-                    genderRadioFemaleInput.checked = true;
-                    genderRadioMaleInput.checked = false;
-                }
-
-                const idNumber = idNumberField.value;
-
-                // Extract the first 6 digits as the date, month, and year
-                const yearDigits = idNumber.substring(0, 2);
-                const monthDigits = idNumber.substring(2, 4);
-                const dateDigits = idNumber.substring(4, 6);
-
-                // Set the extracted values in the date of birth fields
-                dayField.value = dateDigits;
-                monthField.value = monthDigits;
-
-                // Find the matching option in the year dropdown based on the last 2 digits of ID
-                const matchingOption = Array.from(yearField.options).find(option => {
-                    return option.value.substring(2, 4) === yearDigits;
-                });
-
-                // Set the selected option in the year dropdown
-                if (matchingOption) {
-                    matchingOption.selected = true;
-                }
-
-                // Trigger the change event on the year field to recalculate the age
-                const event = new Event('change');
-                yearField.dispatchEvent(event);
-            });
-
-            // Function to calculate age
-            function calculateAge() {
-                const selectedDay = parseInt(dayField.value);
-                const selectedMonth = parseInt(monthField.value);
-                const selectedYearOption = yearField.options[yearField.selectedIndex];
-                const selectedYear = selectedYearOption.textContent;
-                
-                if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
-                    ageField.textContent = 'Invalid ID number entered';
-                    return;
-                }
-
-                const currentDate = new Date();
-                const selectedDate = new Date(selectedYear, selectedMonth - 1, selectedDay);
-
-                if (isNaN(selectedDate.getTime())) {
-                    ageField.textContent = 'Invalid date';
-                    return;
-                }
-
-                let age = currentDate.getFullYear() - selectedDate.getFullYear();
-                const monthDiff = currentDate.getMonth() - selectedDate.getMonth();
-
-                if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {
-                age--;
-                }
-
-                ageField.textContent = 'Age: ' + age;
             }
-
-            // // Calculate age on initial load
-            calculateAge();
-
-            // Calculate age whenever the date fields are changed
-            dayField.addEventListener('change', calculateAge);
-            monthField.addEventListener('change', calculateAge);
-            yearField.addEventListener('change', calculateAge);
-        }
+            else {
+                if (dependant == null || dependant == undefined || dependant == '') {
+                    var myModal = document.getElementById('missingFields');
+                    myModal.classList.add('show');
+                    myModal.style.display = 'block';
+                    document.querySelector('body').style.paddingRight = '0px';
+                    document.querySelector('body').style.overflow = 'hidden';
+                    document.querySelector('body').classList.add('modal-open');
+        
+                    var modalBackdrop = document.createElement('div');
+                    modalBackdrop.className = 'modal-backdrop fade show';
+                    document.querySelector('body.modal-open').append(modalBackdrop);
+        
+                    // Close the modal
+                    var closeButton = document.querySelector('#missingFields .btn-exit-sidebar');
+                    closeButton.addEventListener('click', function() {
+                        myModal.classList.remove('show');
+                        myModal.style.display = 'none';
+                        document.querySelector('body').style.paddingRight = '';
+                        document.querySelector('body').style.overflow = '';
+                        document.querySelector('body').classList.remove('modal-open');
+                        var modalBackdrop = document.querySelector('.modal-backdrop');
+                        if (modalBackdrop) {
+                            modalBackdrop.remove();
+                        }
+                        window.location.href = '/family-dependant';
+                    });
+                }
+            }
+        });
     }
 
     if (path == '/existing-policy') {

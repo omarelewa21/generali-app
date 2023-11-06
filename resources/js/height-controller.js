@@ -2,15 +2,16 @@
 $(document).ready(function() {
     function setMainContentPadding() {
         const windowWidth = $(window).width();
+        const footerHeight = $(".footer").outerHeight();
+        const mainContentPadding = footerHeight + 10; // Adding 10 pixels
 
         // Check if the window width is more than 767px
         if (windowWidth > 767) {
-            const footerHeight = $(".footer").outerHeight();
-            const mainContentPadding = footerHeight + 10; // Adding 10 pixels
             $(".main-content").css("padding-bottom", mainContentPadding + "px");
         } else {
             // Reset padding if window width is 767px or less
             $(".main-content").css("padding-bottom", 0);
+            $("#pdpa .main-content, #basic_details .main-content, #identity_details .main-content, #avatar_marital_status .main-content").css("padding-bottom", mainContentPadding + "px");            
         }
     }
   

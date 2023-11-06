@@ -15,8 +15,6 @@
 @php
     // Retrieving values from the session
     $basicDetails = session('customer_details.basic_details');
-    $selectedCountry = session('customer_details.basic_details.phone_code_mobile', '60');
-    $selectedCode = session('customer_details.basic_details.phone_code_house', '60');
 @endphp
 
 <div id="basic_details">
@@ -30,7 +28,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
                 <div>
-                    <form novalidate action="{{ route('form.submit') }}" method="POST">
+                    <form novalidate action="{{ route('form.basic.details') }}" method="POST">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -112,7 +110,6 @@
                                 </div>
                             </div>
                         </section>
-                        
                         <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
@@ -131,6 +128,12 @@
 </div>
 
 <script>
+// Manually convert the PHP array to JSON
+var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
     var firstNameInput = document.getElementById('firstNameInput');

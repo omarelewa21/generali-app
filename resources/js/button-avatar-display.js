@@ -1,7 +1,7 @@
 const specificPageURLs = [
     'marital-status',
     'family-dependant',
-    'family-dependant-details',
+    '/family-dependant/details',
     'assets',
 ];
 
@@ -175,8 +175,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         if (path == '/marital-status') {
             // Set the spouseImageIndex based on gender
             var gender;
-            if (sessionData.avatar && sessionData.avatar.gender) {
-                gender = sessionData.avatar.gender;
+            if (gender_session) {
+                gender = gender_session;
             } else {
                 gender = 'Male'; // Set your default gender here
             }
@@ -203,12 +203,12 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 $(".imageContainerMarried").empty;
             }
         }
-        else if (path == '/family-dependant' || path == '/family-dependant-details') {
+        else if (path == '/family-dependant' || path == '/family-dependant/details') {
             
             // Set the spouseImageIndex based on gender
             var gender;
-            if (customer_details.avatar && customer_details.avatar.gender) {
-                gender = customer_details.avatar.gender;
+            if (gender_session) {
+                gender = gender_session;
             } else {
                 gender = 'Male'; // Set your default gender here
             }
@@ -227,7 +227,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (familyDependantInputValue.trim() !== 'null') {
                 
                 var familyDependant = JSON.parse(familyDependantInputValue);
-                if (customer_details.family_details.dependant.spouse && customer_details.family_details.dependant.spouse === true) {
+                if (spouse_session === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
                     $imageContainer.append(newImage);
                 }
@@ -248,7 +248,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     // Append child images to the container
                     $(".imageContainerChildren").append(childImages.join(''));
 
-                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + numberOfChildren + '</div>';
+                    var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + numberOfChildren + '</div>';
                     $(".imageContainerChildren").append(newButton);
 
                     // Move the avatar closer based on selections
@@ -475,7 +475,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             });
             
             if (selectedValue) {
-                var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:20%"> x' + selectedValue + '</div>';
+                var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + selectedValue + '</div>';
                 $(".imageContainerChildren").append(newButton);
             }
 

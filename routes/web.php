@@ -16,25 +16,25 @@ use App\Http\Controllers\DebtCancellationController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
-/* main pages */
-Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
+/* Main pages */
+// Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
-Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.submit');
+Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
+Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
-Route::post('/save-button-click', [FormController::class, 'pdpa'])->name('save.button.click');
 
-/* avatar pages */
+/* Avatar pages */
 Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
 Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
+// Route::get('/family-dependant', [SessionController::class, 'getSession'])->name('get.session');
 Route::get('/family-dependant/details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
 Route::post('/family-dependant/details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
 Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
-Route::view('/gender', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
-Route::post('/gender', [AvatarController::class, 'changeImage'])->name('change.image');
-// Route::get('/avatar-gender-selection', [FormController::class, 'formSession'])->name('avatar.gender.selection');
+Route::view('/avatar', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
+Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
 Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
@@ -42,13 +42,15 @@ Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSel
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
 
 /* Priorities */
-Route::view('/top-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
-Route::post('/top-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
-Route::view('/top-priorities/discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
-Route::post('/top-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
+Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
+Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
+Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
+Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
 Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+// this is for testing
+Route::view('/protection', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
 Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
@@ -168,6 +170,7 @@ Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->n
 Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('pages.summary.monthly-goals');
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('pages.summary.expected-income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('pages.summary.increment-amount');
+Route::view('/summary', 'pages.summary.summary')->name('pages.summary.summary');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

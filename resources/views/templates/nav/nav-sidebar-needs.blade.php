@@ -10,8 +10,8 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
-<section class="progress-main">
-    <div class="row justify-content-end align-items-center px-4 px-md-5 pt-4 pt-md-5 pb-0">
+<section class="position-fixed top-0 end-0">
+    <div class="row align-items-center px-4 py-4">
         <div class="col-auto">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">
                 <p class="display-6 text-dark m-1">
