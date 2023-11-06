@@ -167,10 +167,11 @@ Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submi
 // Summary
 Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
 Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('existing.policy');
-Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('pages.summary.monthly-goals');
-Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('pages.summary.expected-income');
-Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('pages.summary.increment-amount');
-Route::view('/summary', 'pages.summary.summary')->name('pages.summary.summary');
+Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('summary.monthly-goals');
+Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
+Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
+Route::view('/summary', 'pages.summary.summary')->name('summary');
+Route::view('/overview', 'pages.summary.overview')->name('overview');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

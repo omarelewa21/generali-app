@@ -871,6 +871,7 @@ class FormController extends Controller {
 
     public function existingPolicy(Request $request)
     {
+        Log::debug('yes');
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
             // For AJAX requests, check the CSRF token without throwing an exception
@@ -881,19 +882,23 @@ class FormController extends Controller {
         }
 
         if ($validToken) {
-            // $decision = $request->input('decision');
-
-            // // Get the existing array from the session
-            // $customerDetails = $request->session()->get('customer_details', []);
-                        
-            // // Add or update the data value in the array
-            // $customerDetails['pdpa'] = $decision;
-
-            // // Store the updated array back into the session
-            // $request->session()->put('customer_details', $customerDetails);
             
-            // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss');
+            $validatedData = $request->validate([
+                'policyRole' => 'required',
+            ]);
+
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
+
+            // Add the new array inside the customer_details array
+            $customerDetails['existing_policy'] = [
+                'role' => $validatedData['policyRole']
+            ];
+
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+            return redirect()->route('summary.monthly-goals');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

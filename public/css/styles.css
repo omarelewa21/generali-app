@@ -501,6 +501,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-overview {
+  grid-template-areas:
+      "header"
+      "content"
+      "footer";
+  grid-template-rows: 20vh 55vh 25vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .content-avatar-default {
   grid-area: content-avatar-default;
   grid-template-columns: 100%;
@@ -529,6 +539,10 @@ h2.display-5, .currencyField {
 
 .header {
   grid-area: header;
+}
+
+.footer {
+  grid-area: footer;
 }
 
 .top-avatar {
@@ -980,6 +994,9 @@ fieldset legend {
     overflow-y: auto;
     height: 100vh;
   }
+  body.overflow #summary .main-content {
+    overflow-y: hidden;
+  }
   .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     z-index: 2;
   }
@@ -1005,8 +1022,11 @@ fieldset legend {
   .white-logo, .red-logo {
     width: 150px;
   }
-  .display-5, p.nav-text {
+  .sidebanner .display-5, p.nav-text {
     font-size: 20px;
+  }
+  .mobileImg {
+    padding-top:100px;
   }
   .timeline-item {
     margin-bottom: 35px;

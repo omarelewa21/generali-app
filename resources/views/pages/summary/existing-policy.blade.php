@@ -47,7 +47,7 @@
                                         </div>
                                     @endif
                                     <div class="custom-alert"></div>
-                                    <div class="col-12 py-4 customForm" id="form" data-index="1">
+                                    <div class="col-12 py-4" id="form" data-index="1">
                                         <h4 class="display-7 text-gray pb-4">Policy 1</h4>
                                         <div class="row">
                                             <div class="col-md-12 pb-5">
@@ -55,17 +55,17 @@
                                                 <div class="d-flex btn-group @error('policyRole') is-invalid @enderror" role="group">
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                         <input type="radio" class="btn-check" name="policyRole" id="policyOwnerInput" autocomplete="off" value="owner"
-                                                        {{ (old('policyRole') === 'owner' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
+                                                        {{ (old('policyRole') === 'owner' || (isset($existingPolicy['role']) && $existingPolicy['role'] === 'owner')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The policy owner</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                         <input type="radio" class="btn-check" name="policyRole" id="policyInsuredInput" autocomplete="off" value="life insured"
-                                                        {{ (old('policyRole') === 'life insured' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                        {{ (old('policyRole') === 'life insured' || (isset($existingPolicy['role']) && $existingPolicy['role'] === 'life insured')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The life insured</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                         <input type="radio" class="btn-check" name="policyRole" id="policyBothInput" autocomplete="off" value="both"
-                                                        {{ (old('policyRole') === 'both' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                        {{ (old('policyRole') === 'both' || (isset($existingPolicy['role']) && $existingPolicy['role'] === 'both')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Both</span>
                                                     </label>
                                                 </div>
@@ -204,7 +204,8 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                    <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
+                                    <!-- <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Next</a> -->
+                                    <button class="btn btn-primary text-uppercase flex-fill" type="submit" id="submitButton">Next</button>
                                 </div>
                             </div>
                         </div>
