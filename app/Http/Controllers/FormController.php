@@ -881,8 +881,10 @@ class FormController extends Controller {
         }
 
         if ($validToken) {
-            $policy1 = $request->input('policy');
+            $policy = $request->input('policy');
             $policy2 = $request->input('policy2');
+            $policy3 = $request->input('policy3');
+            $policy4 = $request->input('policy4');
 
             $validatedData = $request->validate([
                 'policyRole' => 'required',
@@ -892,12 +894,20 @@ class FormController extends Controller {
             $customerDetails = $request->session()->get('customer_details', []);
 
             // Add the new array inside the customer_details array
-            if ($policy1) {
+            if ($policy) {
                 $form = 'policy_1';
             }
             
             if ($policy2) {
                 $form = 'policy_2';
+            }
+
+            if ($policy3) {
+                $form = 'policy_3';
+            }
+
+            if ($policy4) {
+                $form = 'policy_4';
             }
 
             $customerDetails['existing_policy'][$form] = [
