@@ -871,7 +871,6 @@ class FormController extends Controller {
 
     public function existingPolicy(Request $request)
     {
-        Log::debug('yes');
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
             // For AJAX requests, check the CSRF token without throwing an exception
@@ -882,7 +881,9 @@ class FormController extends Controller {
         }
 
         if ($validToken) {
-            
+            $policy1 = $request->input('policy');
+            $policy2 = $request->input('policy2');
+
             $validatedData = $request->validate([
                 'policyRole' => 'required',
             ]);
@@ -891,7 +892,15 @@ class FormController extends Controller {
             $customerDetails = $request->session()->get('customer_details', []);
 
             // Add the new array inside the customer_details array
-            $customerDetails['existing_policy'] = [
+            if ($policy1) {
+                $form = 'policy_1';
+            }
+            
+            if ($policy2) {
+                $form = 'policy_2';
+            }
+
+            $customerDetails['existing_policy'][$form] = [
                 'role' => $validatedData['policyRole']
             ];
 

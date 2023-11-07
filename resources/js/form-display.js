@@ -607,6 +607,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             document.getElementById('addFormsBtn').addEventListener('click', function() {
                 if (i <= 4) {
+
                     // Clone the form template
                     var clonedForm = formTemplate.cloneNode(true);
                     var clonedModal = modalTemplate.cloneNode(true);
@@ -621,11 +622,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     const newTitle = 'Policy ' + i;
                     oriTitle.innerHTML = newTitle;
 
-                    clonedForm.querySelectorAll('input').forEach(input => {
+                    clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
                         const originalId = input.getAttribute('id');
                         const newId = originalId + i;
                         input.setAttribute('name', newId);
                         input.value = '';
+                    });
+
+                    clonedForm.querySelectorAll('input.policy').forEach(input => {
+                        const originalHidden = input.getAttribute('id');
+                        const newHidden = originalHidden + i;
+                        input.setAttribute('name', newHidden);
+                        input.value = newHidden;
                     });
 
                     clonedForm.querySelectorAll('*').forEach(elementForm => {
@@ -633,6 +641,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                             elementForm.id = elementForm.id + i;
                         }
                     });
+
+                    var policyRoleInput = clonedForm.querySelector('input[name="policyRole' + i + '"]');
+                    console.log(policyRoleInput);
+                    // policyRoleInput.value = "{{ old('policyRole" + i + "') }}";
 
                     var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
                     var modalTarget = modalLink.getAttribute('data-bs-target');
@@ -646,11 +658,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     var modalButton = clonedModal.querySelector('.btn-exit-benefits');
                     modalButton.setAttribute('data-index', i);
 
-                    // clonedModal.querySelectorAll('*').forEach(element => {
-                    //     if (element.id) {
-                    //         element.id = element.id + i;
-                    //     }
-                    // });
                     clonedModal.querySelectorAll('input').forEach(input => {
                         const originalInput = input.getAttribute('id');
                         const newInput = originalInput + i;
@@ -667,7 +674,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     // Append the cloned form to the container
                     formContainer.appendChild(clonedForm);
                     existingpolicy.appendChild(clonedModal);
-
+                    
                     if (i === 4) {
                         $('.customAddBtn').hide();
                     }
@@ -699,24 +706,24 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 // Create a new label element
                 var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12 remove-div'>");
                 var label = '<label for="benefitsInput" class="form-label">' + capitalizedTitle + '</label>';
-                var alert = '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><div class="text">There was a problem with your submission. You can only add up to 4 benefits.</div>';
+                // var alert = '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><div class="text">There was a problem with your submission. You can only add up to 4 benefits.</div>';
     
                 // Create a new text input element
                 var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="' + formattedTitle + '" class="form-control @error("' + formattedTitle + '") is-invalid @enderror" id="benefitsInput" value="{{ old("' + formattedTitle + '", $basicDetails["house_phone_number"] ?? "") }}"><a class="remove-field"><i class="bi bi-trash3-fill" style="color:#C21B17"></i></a></div>';
 
                 // Append the label and text input to the container div
-                if (fieldCount < 4) {
+                if (fieldCount < 5) {
                     div.append(label, input);
                     $(addFields).append(div);
                     fieldCount++;
 
-                    // if (fieldCount === 4) {
+                    // if (fieldCount === 5) {
                     //     $('#addFieldsBtn').hide();
                     // }
                 }
                 else {
-                    var alertDiv = $('.custom-alert');
-                    alertDiv.append(alert);
+                    // var alertDiv = $('.custom-alert');
+                    // alertDiv.append(alert);
                 }
 
                 // Add event listener to the trash icon for removal
@@ -725,6 +732,21 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     fieldCount--;
                     $('#addFieldsBtn').show();
                 });
+            });
+
+            // Show text field when others selected in company field
+            var companySelect = document.getElementById('companySelect');
+            var companyOthers = document.getElementById('companyOthers');
+
+            companySelect.addEventListener('change', function() {
+               var companyValue = this.value;
+
+                if (companyValue == 'Others') {
+                    companyOthers.style = 'display:block';
+                }
+                else {
+                    companyOthers.style = 'display:none';
+                }
             });
         });
     }
