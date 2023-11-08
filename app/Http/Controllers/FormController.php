@@ -895,24 +895,28 @@ class FormController extends Controller {
 
             // Add the new array inside the customer_details array
             if ($policy) {
-                $form = 'policy_1';
+                $customerDetails['existing_policy']['policy_1'] = [
+                    'role' => $validatedData['policyRole']
+                ];
             }
             
             if ($policy2) {
-                $form = 'policy_2';
+                $customerDetails['existing_policy']['policy_2'] = [
+                    'role' => $validatedData['policyRole']
+                ];
             }
 
             if ($policy3) {
-                $form = 'policy_3';
+                $customerDetails['existing_policy']['policy_3'] = [
+                    'role' => $validatedData['policyRole']
+                ];
             }
 
             if ($policy4) {
-                $form = 'policy_4';
+                $customerDetails['existing_policy']['policy_4'] = [
+                    'role' => $validatedData['policyRole']
+                ];
             }
-
-            $customerDetails['existing_policy'][$form] = [
-                'role' => $validatedData['policyRole']
-            ];
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);

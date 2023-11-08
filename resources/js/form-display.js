@@ -598,330 +598,157 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/existing-policy') {
         document.addEventListener('DOMContentLoaded', function() {
-            // // Add more form
-            // let i = 2;
-            // var formContainer = document.getElementById('formContainer');
-            // var existingpolicy = document.getElementById('existing_policy');
-            // var formTemplate = document.getElementById('form');
-            // var modalTemplate = document.getElementById('addBenefits');
+            let i = 2;
 
-            // document.getElementById('addFormsBtn').addEventListener('click', function() {
-            //     if (i <= 4) {
-
-            //         // Clone the form template
-            //         var clonedForm = formTemplate.cloneNode(true);
-            //         var clonedModal = modalTemplate.cloneNode(true);
-
-            //         // Generate unique IDs for input fields within the cloned form
-            //         const originalForm = clonedForm.getAttribute('id');
-            //         const newForm = originalForm + i;
-            //         clonedForm.setAttribute('id', newForm);
-
-            //         // Get the title
-            //         const oriTitle = clonedForm.querySelector('h4');
-            //         const newTitle = 'Policy ' + i;
-            //         oriTitle.innerHTML = newTitle;
-
-            //         clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
-            //             const originalId = input.getAttribute('id');
-            //             const newId = originalId + i;
-            //             input.setAttribute('name', newId);
-            //             input.value = existing_policy[newId] || '';
-            //         });
-
-            //         clonedForm.querySelectorAll('input.policy').forEach(input => {
-            //             const originalHidden = input.getAttribute('id');
-            //             const newHidden = originalHidden + i;
-            //             input.setAttribute('name', newHidden);
-            //             input.value = newHidden;
-            //         });
-
-            //         clonedForm.querySelectorAll('*').forEach(elementForm => {
-            //             if (elementForm.id) {
-            //                 elementForm.id = elementForm.id + i;
-            //             }
-            //         });
-
-            //         var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
-            //         var modalTarget = modalLink.getAttribute('data-bs-target');
-            //         const newModalTarget = modalTarget + i;
-            //         modalLink.setAttribute('data-bs-target', newModalTarget);
-            //         clonedForm.setAttribute('data-index', i);
-
-            //         const modalId = clonedModal.getAttribute('id');
-            //         const newModalId = modalId + i;
-            //         clonedModal.setAttribute('id', newModalId);
-            //         var modalButton = clonedModal.querySelector('.btn-exit-benefits');
-            //         modalButton.setAttribute('data-index', i);
-
-            //         clonedModal.querySelectorAll('input').forEach(input => {
-            //             const originalInput = input.getAttribute('id');
-            //             const newInput = originalInput + i;
-            //             input.setAttribute('id', newInput);
-            //             input.setAttribute('name', newInput);
-            //             input.value = '';
-            //         });
-
-            //         var removeField = clonedForm.querySelectorAll('.remove-div');
-            //         removeField.forEach(function(removeFields) {
-            //             removeFields.remove();
-            //         });
-
-            //         // Append the cloned form to the container
-            //         formContainer.appendChild(clonedForm);
-            //         existingpolicy.appendChild(clonedModal);
-                    
-            //         if (i === 4) {
-            //             $('.customAddBtn').hide();
-            //         }
-            //         i++;
-            //     }
-            // });
-
-            // // Add more fields
-            // var fieldCount = 0;
-            // $(document).on('click', '.btn-exit-benefits', function(event) {
-            //     event.preventDefault();
-
-            //     var addBenefitsInput;
-            //     var addFields;
-            //     var dataIndex = $(this).data('index');
-                
-            //     if (dataIndex == '1') {
-            //         addBenefitsInput = 'addBenefitsInput';
-            //         addFields = '#addFields';
-            //     }
-            //     else {
-            //         addBenefitsInput = 'addBenefitsInput' + dataIndex;
-            //         addFields = '#addFields' + dataIndex;
-            //     }
-            //     const title = document.getElementById(addBenefitsInput);
-            //     var capitalizedTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
-            //     var formattedTitle = title.value.replace(/\s+/g, '').toLowerCase();
-
-            //     // Create a new label element
-            //     var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12 remove-div'>");
-            //     var label = '<label for="benefitsInput" class="form-label">' + capitalizedTitle + '</label>';
-            //     // var alert = '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><div class="text">There was a problem with your submission. You can only add up to 4 benefits.</div>';
-    
-            //     // Create a new text input element
-            //     var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="' + formattedTitle + '" class="form-control @error("' + formattedTitle + '") is-invalid @enderror" id="benefitsInput" value="{{ old("' + formattedTitle + '", $basicDetails["house_phone_number"] ?? "") }}"><a class="remove-field"><i class="bi bi-trash3-fill" style="color:#C21B17"></i></a></div>';
-
-            //     // Append the label and text input to the container div
-            //     if (fieldCount < 5) {
-            //         div.append(label, input);
-            //         $(addFields).append(div);
-            //         fieldCount++;
-
-            //         // if (fieldCount === 5) {
-            //         //     $('#addFieldsBtn').hide();
-            //         // }
-            //     }
-            //     else {
-            //         // var alertDiv = $('.custom-alert');
-            //         // alertDiv.append(alert);
-            //     }
-
-            //     // Add event listener to the trash icon for removal
-            //     div.find('.remove-field').on('click', function() {
-            //         $(this).closest('.remove-div').remove();
-            //         fieldCount--;
-            //         $('#addFieldsBtn').show();
-            //     });
-            // });
-
-            // // Show text field when others selected in company field
-            // var companySelect = document.getElementById('companySelect');
-            // var companyOthers = document.getElementById('companyOthers');
-
-            // companySelect.addEventListener('change', function() {
-            //    var companyValue = this.value;
-
-            //     if (companyValue == 'Others') {
-            //         companyOthers.style = 'display:block';
-            //     }
-            //     else {
-            //         companyOthers.style = 'display:none';
-            //     }
-            // });
-
-            if(existingPolicy) {
-                let existingPoliciesCount = Object.keys(existingPolicy).length;
-                let i = 0;
-
-                // Check if there is more than one policy
-                if (existingPoliciesCount >= 1) {
-                    i = 2; // Start i from 2 for subsequent forms
-                }
-
+            // Function to add a new form
+            function addForm() {
                 var formContainer = document.getElementById('formContainer');
                 var existingpolicy = document.getElementById('existing_policy');
                 var formTemplate = document.getElementById('form');
                 var modalTemplate = document.getElementById('addBenefits');
 
-                // Function to add a new form
-                function addForm() {
-                    // Clone the form template
-                    var clonedForm = formTemplate.cloneNode(true);
-                    var clonedModal = modalTemplate.cloneNode(true);
+                // Clone the form template
+                var clonedForm = formTemplate.cloneNode(true);
+                var clonedModal = modalTemplate.cloneNode(true);
 
-                    // Generate unique IDs for input fields within the cloned form
-                    const originalForm = clonedForm.getAttribute('id');
-                    const newForm = originalForm + i;
-                    clonedForm.setAttribute('id', newForm);
+                // Generate unique IDs for input fields within the cloned form
+                const originalForm = clonedForm.getAttribute('id');
+                const newForm = originalForm + i;
+                clonedForm.setAttribute('id', newForm);
 
-                    // Get the title
-                    const oriTitle = clonedForm.querySelector('h4');
-                    const newTitle = 'Policy ' + i;
-                    oriTitle.innerHTML = newTitle;
+                // Get the title
+                const oriTitle = clonedForm.querySelector('h4');
+                const newTitle = 'Policy ' + i;
+                oriTitle.innerHTML = newTitle;
 
-                    clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
-                        const originalId = input.getAttribute('id');
-                        const newId = originalId + i;
-                        input.setAttribute('name', newId);
-                        // input.value = existing_policy[newId] || '';
-                    });
-
-                    clonedForm.querySelectorAll('input.policy').forEach(input => {
-                        const originalHidden = input.getAttribute('id');
-                        const newHidden = originalHidden + i;
-                        input.setAttribute('name', newHidden);
-                        input.value = newHidden;
-                    });
-
-                    clonedForm.querySelectorAll('*').forEach(elementForm => {
-                        if (elementForm.id) {
-                            elementForm.id = elementForm.id + i;
-                        }
-                    });
-
-                    var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
-                    var modalTarget = modalLink.getAttribute('data-bs-target');
-                    const newModalTarget = modalTarget + i;
-                    modalLink.setAttribute('data-bs-target', newModalTarget);
-                    clonedForm.setAttribute('data-index', i);
-
-                    const modalId = clonedModal.getAttribute('id');
-                    const newModalId = modalId + i;
-                    clonedModal.setAttribute('id', newModalId);
-                    var modalButton = clonedModal.querySelector('.btn-exit-benefits');
-                    modalButton.setAttribute('data-index', i);
-
-                    clonedModal.querySelectorAll('input').forEach(input => {
-                        const originalInput = input.getAttribute('id');
-                        const newInput = originalInput + i;
-                        input.setAttribute('id', newInput);
-                        input.setAttribute('name', newInput);
-                        input.value = '';
-                    });
-
-                    var removeField = clonedForm.querySelectorAll('.remove-div');
-                    removeField.forEach(function(removeFields) {
-                        removeFields.remove();
-                    });
-
-                    // Append the cloned form to the container
-                    formContainer.appendChild(clonedForm);
-                    existingpolicy.appendChild(clonedModal);
-
-                    if (i === 4) {
-                        $('.customAddBtn').hide();
-                    }
-                    i++;
-                }
-
-                 // Call addForm() on button click
-                document.getElementById('addFormsBtn').addEventListener('click', function() {
-                    addForm();
+                var clonedRadioButtons = clonedForm.querySelectorAll('input[type="radio"]');
+                clonedRadioButtons.forEach(function(radioButton) {
+                    radioButton.checked = false;
                 });
+
+                clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
+                    const originalId = input.getAttribute('id');
+                    const newId = originalId + i;
+                    input.setAttribute('name', newId);
+                    input.value = existing_policy['policy_' + i] || '';
+                });
+
+                clonedForm.querySelectorAll('input.policy').forEach(input => {
+                    const originalHidden = input.getAttribute('id');
+                    const newHidden = originalHidden + i;
+                    input.setAttribute('name', newHidden);
+                    input.value = newHidden;
+                });
+
+                clonedForm.querySelectorAll('*').forEach(elementForm => {
+                    if (elementForm.id) {
+                        elementForm.id = elementForm.id + i;
+                    }
+                });
+
+                var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
+                var modalTarget = modalLink.getAttribute('data-bs-target');
+                const newModalTarget = modalTarget + i;
+                modalLink.setAttribute('data-bs-target', newModalTarget);
+                clonedForm.setAttribute('data-index', i);
+
+                const modalId = clonedModal.getAttribute('id');
+                const newModalId = modalId + i;
+                clonedModal.setAttribute('id', newModalId);
+                var modalButton = clonedModal.querySelector('.btn-exit-benefits');
+                modalButton.setAttribute('data-index', i);
+
+                clonedModal.querySelectorAll('input').forEach(input => {
+                    const originalInput = input.getAttribute('id');
+                    const newInput = originalInput + i;
+                    input.setAttribute('id', newInput);
+                    input.setAttribute('name', newInput);
+                    input.value = '';
+                });
+
+                var removeField = clonedForm.querySelectorAll('.remove-div');
+                removeField.forEach(function(removeFields) {
+                    removeFields.remove();
+                });
+
+                // Append the cloned form to the container
+                formContainer.appendChild(clonedForm);
+                existingpolicy.appendChild(clonedModal);
+
+                if (i === 4) {
+                    $('.customAddBtn').hide();
+                }
+                i++;
+            }
+
+            var fieldCount = 0;
+            function addFields() {
+                // Add more fields
+                var modal = document.getElementById('addBenefits');
+                var input = modal.querySelector('input#addBenefitsInput');
+                
+                $(document).off('click', '.btn-exit-benefits').on('click', '.btn-exit-benefits', function(event) {
+                    event.preventDefault();
+                    
+                    if (fieldCount < 5) {
+                        var dataIndex = $(this).data('index');
+    
+                        if(dataIndex == 1) {
+                            var dataIndexPass = 'addBenefitsInput';
+                            var addFields = '#addFields';
+                        }
+                        else {
+                            var dataIndexPass = 'addBenefitsInput' + dataIndex;
+                            var addFields = '#addFields' + dataIndex;
+                        }
+
+                        fieldTemplate(dataIndex, dataIndexPass, addFields);
+
+                        fieldCount++;
+                    }
+                    else {
+                        alert('yes');
+                    }                    
+                });
+        
+                function fieldTemplate(dataIndex, dataIndexPass, addFields) {
+                    const title = document.getElementById(dataIndexPass);
+                    var capitalizedTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
+                    var formattedTitle = title.value.replace(/\s+/g, '').toLowerCase();
+                    
+                    var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12 remove-div'>");
+                    var label = '<label for="label'+ formattedTitle + '" class="form-label">' + capitalizedTitle + '</label>';
+                    var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="input' + formattedTitle + '" class="form-control @error("input' + formattedTitle + '") is-invalid @enderror" id="label'+ formattedTitle + '" value="{{ old("input' + formattedTitle + '", $basicDetails["house_phone_number"] ?? "") }}"><a class="remove-field"><i class="bi bi-trash3-fill" style="color:#C21B17"></i></a></div>';
+                    
+                    div.append(label, input);
+                    $(addFields).append(div);
+
+                   // Add event listener to the trash icon for removal
+                    div.find('.remove-field').on('click', function() {
+                        $(this).closest('.remove-div').remove();
+                        fieldCount--;
+                        $('#addFieldsBtn').show();
+                    });
+                }
+            }
+            
+            document.getElementById('addFormsBtn').addEventListener('click', function() {
+                if (i <= 4) {
+                    addForm();
+                }
+            });
+            
+            document.getElementById('addFieldsBtn').addEventListener('click', function() {
+                addFields();
+            });
+
+            if(existingPolicy) {
+                let existingPoliciesCount = Object.keys(existingPolicy).length;
 
                 // Add forms based on the existing policies count on page load
                 for (let count = 1; count < existingPoliciesCount; count++) {
                     addForm();
                 }
-            }
-            else {
-                let i = 2;
-                var formContainer = document.getElementById('formContainer');
-                var existingpolicy = document.getElementById('existing_policy');
-                var formTemplate = document.getElementById('form');
-                var modalTemplate = document.getElementById('addBenefits');
-
-                // Function to add a new form
-                function addForm() {
-                    // Clone the form template
-                    var clonedForm = formTemplate.cloneNode(true);
-                    var clonedModal = modalTemplate.cloneNode(true);
-
-                    // Generate unique IDs for input fields within the cloned form
-                    const originalForm = clonedForm.getAttribute('id');
-                    const newForm = originalForm + i;
-                    clonedForm.setAttribute('id', newForm);
-
-                    // Get the title
-                    const oriTitle = clonedForm.querySelector('h4');
-                    const newTitle = 'Policy ' + i;
-                    oriTitle.innerHTML = newTitle;
-
-                    clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
-                        const originalId = input.getAttribute('id');
-                        const newId = originalId + i;
-                        input.setAttribute('name', newId);
-                        // input.value = existing_policy[newId] || '';
-                    });
-
-                    clonedForm.querySelectorAll('input.policy').forEach(input => {
-                        const originalHidden = input.getAttribute('id');
-                        const newHidden = originalHidden + i;
-                        input.setAttribute('name', newHidden);
-                        input.value = newHidden;
-                    });
-
-                    clonedForm.querySelectorAll('*').forEach(elementForm => {
-                        if (elementForm.id) {
-                            elementForm.id = elementForm.id + i;
-                        }
-                    });
-
-                    var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
-                    var modalTarget = modalLink.getAttribute('data-bs-target');
-                    const newModalTarget = modalTarget + i;
-                    modalLink.setAttribute('data-bs-target', newModalTarget);
-                    clonedForm.setAttribute('data-index', i);
-
-                    const modalId = clonedModal.getAttribute('id');
-                    const newModalId = modalId + i;
-                    clonedModal.setAttribute('id', newModalId);
-                    var modalButton = clonedModal.querySelector('.btn-exit-benefits');
-                    modalButton.setAttribute('data-index', i);
-
-                    clonedModal.querySelectorAll('input').forEach(input => {
-                        const originalInput = input.getAttribute('id');
-                        const newInput = originalInput + i;
-                        input.setAttribute('id', newInput);
-                        input.setAttribute('name', newInput);
-                        input.value = '';
-                    });
-
-                    var removeField = clonedForm.querySelectorAll('.remove-div');
-                    removeField.forEach(function(removeFields) {
-                        removeFields.remove();
-                    });
-
-                    // Append the cloned form to the container
-                    formContainer.appendChild(clonedForm);
-                    existingpolicy.appendChild(clonedModal);
-
-                    if (i === 4) {
-                        $('.customAddBtn').hide();
-                    }
-                    i++;
-                }
-
-                 // Call addForm() on button click
-                document.getElementById('addFormsBtn').addEventListener('click', function() {
-                    addForm();
-                });
             }
         });
     }

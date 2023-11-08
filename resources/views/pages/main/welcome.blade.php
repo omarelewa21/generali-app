@@ -29,6 +29,7 @@
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center pt-xl-0 pt-sm-5 pt-5">
                     <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector">
+                    <!-- <div id="lottie-animation" class="homeVector"></div> -->
                 </div>
             </div>
         </div>
@@ -37,4 +38,15 @@
         <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector" class="footerVector">
     </section>
 </div>
+
+<script>
+    // Load the animation using Lottie
+    const animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/welcome-page/welcome-avatar.json') }}'
+    });
+</script>
 @endsection
