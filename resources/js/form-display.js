@@ -598,6 +598,247 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/existing-policy') {
         document.addEventListener('DOMContentLoaded', function() {
+            // Show dropdown based on selected radio buttons
+            var ownerRadioButton = document.querySelector('input[name="policyRole"][value="owner"]');
+            var dependantRadioButton = document.querySelector('input[name="policyRole"][value="life insured"]');
+            var bothRadioButton = document.querySelector('input[name="policyRole"][value="both"]');
+            var first_name_dropdown = document.getElementById('policyFirstNameSelect');
+            var last_name_dropdown = document.getElementById('policyLastNameSelect');
+
+            // Pre-select the options
+            if (existingPolicy && existingPolicy['policy_1']) {
+                var sessionRole = existingPolicy['policy_1']['role'];
+                var sessionFirstName = existingPolicy['policy_1']['first_name'];
+                var sessionLastName = existingPolicy['policy_1']['last_name'];
+            }
+
+            if (sessionRole === 'owner') {
+                var first_name_option = document.createElement('option');
+                first_name_option.value = first_name;
+                first_name_option.text = first_name;
+                var last_name_option = document.createElement('option');
+                last_name_option.value = last_name;
+                last_name_option.text = last_name;
+
+                first_name_dropdown.add(first_name_option);
+                last_name_dropdown.add(last_name_option);
+                first_name_dropdown.value = sessionFirstName;
+                last_name_dropdown.value = sessionLastName;
+            }
+            else if (sessionRole === 'life insured') {
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+
+                        if (family_details[key]['first_name'] === sessionFirstName) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = family_details[key]['last_name'];
+                            last_name_option.text = family_details[key]['last_name'];
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        
+                        first_name_dropdown.add(first_name_option);
+                        first_name_dropdown.value = sessionFirstName;
+                        last_name_dropdown.value = sessionLastName;
+
+                        last_name_auto_dropdown();
+                    }
+                }
+            }
+            else if (sessionRole === 'both') {
+                var first_name_option_self = document.createElement('option');
+                first_name_option_self.value = first_name;
+                first_name_option_self.text = first_name;
+
+                first_name_dropdown.add(first_name_option_self);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+
+                        if (family_details[key]['first_name'] === sessionFirstName) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = family_details[key]['last_name'];
+                            last_name_option.text = family_details[key]['last_name'];
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        else {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = last_name;
+                            last_name_option.text = last_name;
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        
+                        first_name_dropdown.add(first_name_option);
+                        first_name_dropdown.value = sessionFirstName;
+                        last_name_dropdown.value = sessionLastName;
+
+                        last_name_auto_dropdown_both();
+                    }
+                }
+            }
+            else {
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                last_name_dropdown.add(defaultOption);
+            }
+
+            // Show options based on selected radio button
+            ownerRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
+
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                // first_name_dropdown.add(defaultOption.cloneNode(true));
+                first_name_dropdown.add(defaultOption);
+
+                var first_name_option = document.createElement('option');
+                first_name_option.value = first_name;
+                first_name_option.text = first_name;
+                var last_name_option = document.createElement('option');
+                last_name_option.value = last_name;
+                last_name_option.text = last_name;
+
+                first_name_dropdown.add(first_name_option);
+                last_name_dropdown.add(last_name_option);
+            });
+
+            dependantRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
+
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                first_name_dropdown.add(defaultOption);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+                        
+                        first_name_dropdown.add(first_name_option);
+                    }
+                }
+                
+                last_name_auto_dropdown();
+
+                var changeEvent = new Event('change');
+                first_name_dropdown.dispatchEvent(changeEvent);
+            });
+
+            function last_name_auto_dropdown() {
+                first_name_dropdown.addEventListener('change', function() {
+                    var selectedFirstName = first_name_dropdown.value;
+
+                    if (selectedFirstName) {
+                        var selectedLastName = '';
+                        for (var key in family_details) {
+                            if (family_details.hasOwnProperty(key)) {
+                                if (family_details[key]['first_name'] === selectedFirstName) {
+                                    selectedLastName = family_details[key]['last_name'];
+                                    break;
+                                }
+                            }
+                        }
+    
+                        var last_name_option = document.createElement('option');
+                        last_name_option.value = selectedLastName;
+                        last_name_option.text = selectedLastName;
+                        last_name_dropdown.innerHTML = '';
+                        last_name_dropdown.add(last_name_option);
+                    }
+                    else {
+                        last_name_dropdown.innerHTML = '';
+                    }
+                });
+            }
+            
+            bothRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
+
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                first_name_dropdown.add(defaultOption);
+
+                var first_name_option_self = document.createElement('option');
+                first_name_option_self.value = first_name;
+                first_name_option_self.text = first_name;
+
+                first_name_dropdown.add(first_name_option_self);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+                        
+                        first_name_dropdown.add(first_name_option);
+                    }
+                }
+
+                last_name_auto_dropdown_both();
+
+                var changeEvent = new Event('change');
+                first_name_dropdown.dispatchEvent(changeEvent);
+            });
+
+            function last_name_auto_dropdown_both() {
+                first_name_dropdown.addEventListener('change', function() {
+                    var selectedFirstName = first_name_dropdown.value;
+                    last_name_dropdown.innerHTML = '';
+
+                    if (selectedFirstName) {
+                        var selectedLastName = '';
+                        var foundMatch = false;
+
+                        for (var key in family_details) {
+                            if (family_details.hasOwnProperty(key)) {
+                                if (family_details[key]['first_name'] === selectedFirstName) {
+                                    selectedLastName = family_details[key]['last_name'];
+                                    foundMatch = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (foundMatch) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = selectedLastName;
+                            last_name_option.text = selectedLastName;
+                            last_name_dropdown.innerHTML = '';
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        else {
+                            var last_name_option_self = document.createElement('option');
+                            last_name_option_self.value = last_name;
+                            last_name_option_self.text = last_name;
+                            last_name_dropdown.add(last_name_option_self);
+                        }
+                    }
+                    else {
+                        last_name_dropdown.innerHTML = '';
+                    }
+                });
+            }
+            
             let i = 2;
 
             // Function to add a new form
@@ -611,28 +852,44 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var clonedForm = formTemplate.cloneNode(true);
                 var clonedModal = modalTemplate.cloneNode(true);
 
-                // Generate unique IDs for input fields within the cloned form
+                // Generate unique IDs for cloned form
                 const originalForm = clonedForm.getAttribute('id');
                 const newForm = originalForm + i;
                 clonedForm.setAttribute('id', newForm);
 
-                // Get the title
+                // Generate unique title for cloned form
                 const oriTitle = clonedForm.querySelector('h4');
                 const newTitle = 'Policy ' + i;
                 oriTitle.innerHTML = newTitle;
 
-                var clonedRadioButtons = clonedForm.querySelectorAll('input[type="radio"]');
-                clonedRadioButtons.forEach(function(radioButton) {
-                    radioButton.checked = false;
+                // Generate unique labels for cloned form
+                clonedForm.querySelectorAll('label.form-label').forEach(input => {
+                    const originalLabel = input.getAttribute('for');
+                    const newLabel = originalLabel + i;
+                    input.setAttribute('for', newLabel);
                 });
 
-                clonedForm.querySelectorAll('input:not(.policy)').forEach(input => {
-                    const originalId = input.getAttribute('id');
-                    const newId = originalId + i;
-                    input.setAttribute('name', newId);
-                    input.value = existing_policy['policy_' + i] || '';
+                // Generate unique IDs for inputs within cloned form
+                clonedForm.querySelectorAll('input:not(.policy):not(.role)').forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    const newName = originalName + i;
+                    input.setAttribute('name', newName);
+                    if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['name'] && input.getAttribute('name') == 'policyFirstName' + i) {
+                        input.value = existingPolicy['policy_' + i]['name'] || '';
+                    }
+                    else {
+                        input.value = '';
+                        input.classList.remove('is-valid');
+                    }
                 });
 
+                clonedForm.querySelectorAll('input.role').forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    const newName = originalName + i;
+                    input.setAttribute('name', newName);
+                });
+
+                // Generate unique inputs for cloned form
                 clonedForm.querySelectorAll('input.policy').forEach(input => {
                     const originalHidden = input.getAttribute('id');
                     const newHidden = originalHidden + i;
@@ -640,12 +897,23 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     input.value = newHidden;
                 });
 
+                // Generate unique IDs for all elements within cloned form
                 clonedForm.querySelectorAll('*').forEach(elementForm => {
                     if (elementForm.id) {
                         elementForm.id = elementForm.id + i;
                     }
+                    if (elementForm.tagName.toLowerCase() === 'select') {
+                        elementForm.classList.remove('is-valid');
+                        elementForm.classList.remove('is-invalid');
+                    }
                 });
 
+                // Empty all radio button fields when cloned.
+                var clonedRadioButtons = clonedForm.querySelectorAll('input[type="radio"]');
+                clonedRadioButtons.forEach(function(radioButton) {
+                    radioButton.checked = false;
+                });
+            
                 var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
                 var modalTarget = modalLink.getAttribute('data-bs-target');
                 const newModalTarget = modalTarget + i;
@@ -679,6 +947,160 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     $('.customAddBtn').hide();
                 }
                 i++;
+
+                var ownerRadioButton2 = document.querySelector('input[name="policyRole2"][value="owner"]');
+                var dependantRadioButton2 = document.querySelector('input[name="policyRole2"][value="life insured"]');
+                var bothRadioButton2 = document.querySelector('input[name="policyRole2"][value="both"]');
+                var first_name_dropdown2 = document.getElementById('policyFirstNameSelect2');
+                var last_name_dropdown2 = document.getElementById('policyLastNameSelect2');
+            
+                ownerRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    var first_name_option = document.createElement('option');
+                    first_name_option.value = first_name;
+                    first_name_option.text = first_name;
+                    var last_name_option = document.createElement('option');
+                    last_name_option.value = last_name;
+                    last_name_option.text = last_name;
+    
+                    first_name_dropdown2.add(first_name_option);
+                    last_name_dropdown2.add(last_name_option);
+                });
+
+                dependantRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    for (var key in family_details) {
+                        if (family_details.hasOwnProperty(key)) {
+                            var first_name_option = document.createElement('option');
+                            first_name_option.value = family_details[key]['first_name'];
+                            first_name_option.text = family_details[key]['first_name'];
+                            
+                            first_name_dropdown2.add(first_name_option);
+                        }
+                    }
+                    
+                    last_name_auto_dropdown_cloned();
+    
+                    var changeEvent = new Event('change');
+                    first_name_dropdown2.dispatchEvent(changeEvent);
+                });
+
+                bothRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    var first_name_option_self = document.createElement('option');
+                    first_name_option_self.value = first_name;
+                    first_name_option_self.text = first_name;
+    
+                    first_name_dropdown2.add(first_name_option_self);
+    
+                    for (var key in family_details) {
+                        if (family_details.hasOwnProperty(key)) {
+                            var first_name_option = document.createElement('option');
+                            first_name_option.value = family_details[key]['first_name'];
+                            first_name_option.text = family_details[key]['first_name'];
+                            
+                            first_name_dropdown2.add(first_name_option);
+                        }
+                    }
+    
+                    last_name_auto_dropdown_both_cloned();
+    
+                    var changeEvent = new Event('change');
+                    first_name_dropdown2.dispatchEvent(changeEvent);
+                });
+
+                function last_name_auto_dropdown_cloned() {
+                    first_name_dropdown2.addEventListener('change', function() {
+                        var selectedFirstName = first_name_dropdown2.value;
+    
+                        if (selectedFirstName) {
+                            var selectedLastName = '';
+                            for (var key in family_details) {
+                                if (family_details.hasOwnProperty(key)) {
+                                    if (family_details[key]['first_name'] === selectedFirstName) {
+                                        selectedLastName = family_details[key]['last_name'];
+                                        break;
+                                    }
+                                }
+                            }
+        
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = selectedLastName;
+                            last_name_option.text = selectedLastName;
+                            last_name_dropdown2.innerHTML = '';
+                            last_name_dropdown2.add(last_name_option);
+                        }
+                        else {
+                            last_name_dropdown2.innerHTML = '';
+                        }
+                    });
+                }
+
+                function last_name_auto_dropdown_both_cloned() {
+                    first_name_dropdown2.addEventListener('change', function() {
+                        var selectedFirstName = first_name_dropdown2.value;
+                        last_name_dropdown2.innerHTML = '';
+    
+                        if (selectedFirstName) {
+                            var selectedLastName = '';
+                            var foundMatch = false;
+    
+                            for (var key in family_details) {
+                                if (family_details.hasOwnProperty(key)) {
+                                    if (family_details[key]['first_name'] === selectedFirstName) {
+                                        selectedLastName = family_details[key]['last_name'];
+                                        foundMatch = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (foundMatch) {
+                                var last_name_option = document.createElement('option');
+                                last_name_option.value = selectedLastName;
+                                last_name_option.text = selectedLastName;
+                                last_name_dropdown2.innerHTML = '';
+                                last_name_dropdown2.add(last_name_option);
+                            }
+                            else {
+                                var last_name_option_self = document.createElement('option');
+                                last_name_option_self.value = last_name;
+                                last_name_option_self.text = last_name;
+                                last_name_dropdown2.add(last_name_option_self);
+                            }
+                        }
+                        else {
+                            last_name_dropdown2.innerHTML = '';
+                        }
+                    });
+                }
+
             }
 
             var fieldCount = 0;
@@ -750,6 +1172,27 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     addForm();
                 }
             }
+
+            // Show companyOthers when 'Others' is selected from dropdown
+            var companySelect = document.getElementById('companySelect');
+
+            if(existingPolicy && existingPolicy['policy_1'] && existingPolicy['policy_1']['company_others'] != null || companySelect.value === 'Others') {
+                companyOthers.style.display = 'block';
+            }
+
+            companySelect.addEventListener('change', function() {
+                var selectedOption = this.value;
+                var companyOthers = document.getElementById('companyOthers');
+                var input = document.getElementById('companyOthersText');
+                // var storedCompanyValue = companyValueInput.value;
+                if (selectedOption === 'Others') {
+                    companyOthers.style.display = 'block';
+                }
+                else {
+                    companyOthers.style.display = 'none';
+                    input.value = '';
+                }
+            });
         });
     }
 }
