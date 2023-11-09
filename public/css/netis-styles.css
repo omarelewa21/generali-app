@@ -1,0 +1,1061 @@
+/* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+/* .navbar {
+    right:50%;
+} */
+.navbar-needs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+    z-index: 1000;
+}
+
+.form-input-needs-xs {
+    width: 11%;
+    font-size: 2.125rem;
+    line-height: 1rem;
+    background-color: transparent !important;
+}
+
+.form-input-needs-sm {
+    width: 12%;
+    font-size: 2.125rem;
+    line-height: 1rem;
+    background-color: transparent !important;
+}
+
+.form-input-needs-md {
+    width: 20%;
+    font-size: 2.125rem;
+    line-height: 1rem;
+}
+
+.form-input-needs-lg {
+    width: 45%;
+    font-size: 2.125rem;
+    line-height: 1rem;
+}
+
+/* .neg-left {
+    position:relative;
+    left:-6px;
+} */
+
+/* Retirement - Home page */
+.needs-grey-bg {
+    padding-top: 280px;
+    background-color: #E9E9E9;
+}
+
+
+.needs-grey-bg-md {
+    padding-top: 240px;
+    left: 0px;
+    background-color: #E9E9E9;
+
+}
+
+/* main css for needs */
+.bg-needs-1 {
+    background-image: url(/images/needs/background/bg-needs-1.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+.bg-needs-2 {
+    background-image: url(/images/needs/background/bg-needs-2.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.bg-needs-3 {
+    background-image: url(/images/needs/background/bg-needs-3.png);
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+
+    .bg-needs-4 {
+        background-image: url(/images/needs/background/bg-needs-4.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+    }
+
+    height: 100%;
+}
+
+.bg-needs-gap {
+    background-image: url(/images/needs/background/bg-needs-gap.png);
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 120px);
+}
+
+.bg-needs-gap2 {
+    background-image: url(/images/needs/background/bg-needs-gap2.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+/* .main-cloud {
+    background-image: url(/images/needs/background/abstracts/cloud-1.png);
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    height:100vh;
+} */
+.second-cloud {
+    background-image: url(/images/needs/background/abstracts/cloud-2.png);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.green-tick {
+    display: inline-block;
+    width: 30px;
+    /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/green-tick.svg') no-repeat center center;
+    background-size: contain;
+    /* Adjust this property based on your image dimensions */
+}
+
+.red-tick {
+    display: inline-block;
+    width: 30px;
+    /* Adjust the width and height to match your icon size */
+    height: 30px;
+    background: url('/images/needs/background/red-tick.svg') no-repeat center center;
+    background-size: contain;
+    /* Adjust this property based on your image dimensions */
+}
+
+.clock-icon {
+    display: inline-block;
+    width: 17px;
+    /* Adjust the width and height to match your icon size */
+    height: 17px;
+    background: url('/images/needs/background/clock-icon.svg') no-repeat center center;
+    background-size: contain;
+    /* Adjust this property based on your image dimensions */
+}
+
+.glow-box {
+    box-shadow: 4px 20px 20px 0px rgba(198, 198, 198, 0.25), -4px -10px 20px 0px #E4F4F6;
+}
+
+/* Protection pages */
+/* protection coverage */
+#protection_coverage .coverage-avatar img.spouse-avatar {
+    margin-right:15px;
+}
+/* Protection - Monthly Support */
+.monthly-support-asset {
+    left: 7%;
+    bottom: 0%;
+    z-index: 10;
+    width: 49vh;
+}
+
+/* Protection - Existing Policy */
+.protection-existing-policy-asset {
+    left: 7%;
+    bottom: 0%;
+    z-index: 10;
+    width: 49vh;
+}
+
+
+.calendar-protection {
+    width: 85%;
+}
+
+/* Protection Pages */
+/* Protection - Home */
+.needs-home {
+    grid-template-areas: "header-needs" "content-needs" "footer-needs";
+    grid-template-rows: 15vh 71vh 13vh;
+    grid-gap: 0;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.header-needs {
+    grid-area: header-needs;
+}
+
+.content-needs {
+    grid-area: content-needs;
+}
+
+.footer-needs {
+    grid-area: footer-needs;
+    background-color: rgba(233, 233, 233, 1);
+}
+
+#protection_home .needs-home-avatar img {
+    max-height: 55vh;
+}
+
+#retirement_home .needs-home-avatar img {
+    max-height: 53vh;
+}
+
+
+/* Retirement - Ideal age to retire page */
+#bg-ideal-age {
+    background-image: url(/images/needs/retirement/bg-age-to-retire.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+.avatar-age-to-retire {
+    right: 14%;
+    bottom: 9%;
+    z-index: 10;
+    width: 52vh;
+}
+
+.retirement-progress {
+    border-radius: 10px;
+    background: #D9D9D9;
+    height: 10px;
+}
+
+.retirement-progress-bar {
+    border-radius: 10px;
+    background: linear-gradient(90deg, #AA1B17 0%, #DA331E 100%);
+    height: 8px;
+    margin-left: 1px;
+}
+
+.summary-progress-bar {
+    border-bottom-right-radius: 1.3rem;
+    border-bottom-left-radius: 1.3rem;
+}
+
+/* Retirement - Allocated funds */
+#bg-allocated-funds {
+    background-image: url(/images/needs/retirement/bg-allocated-funds.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+.avatar-allocated-funds {
+    right: 8%;
+    bottom: 12%;
+    z-index: 10;
+    width: 62vh;
+}
+
+/* Retirement - years to retire */
+#bg-years-to-retire {
+    background-image: url(/images/needs/retirement/bg-years-to-retire.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+.avatar-years-till-retire {
+    right: 4%;
+    bottom: 12%;
+    z-index: 10;
+    width: 52vh;
+}
+
+/* Retirement - allocated funds aside */
+#bg-allocated-funds-aside {
+    background-image: url(/images/needs/retirement/bg-allocated-funds-aside.png);
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 66vh;
+}
+
+.avatar-allocated-funds-aside {
+    left: 3%;
+    top: 10%;
+    z-index: 10;
+    width: 70vh;
+}
+
+/* .fixed-bottom {
+    z-index: 5;
+} */
+.needs-text {
+    z-index: 1000;
+}
+
+h5.gap-text {
+    font-size: 1.6rem;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+h5.gap-value {
+    font-size: 2rem;
+}
+
+
+.box-shadow {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+
+}
+
+.box-shadow:hover {
+    /* -webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	transform: scale(1.05); */
+    filter: drop-shadow(1px 5px 4px rgba(0, 69, 134, 0.4));
+
+}
+
+.selected-box-shadow {
+    filter: drop-shadow(1px 5px 4px rgba(179, 73, 91, 0.4));
+    /* pointer-events: none; */
+}
+
+.slick-arrow {
+    display: flex;
+    cursor: pointer;
+    font-size: 50px;
+    z-index: 11;
+}
+
+.input-text {
+    font-size: 2.125rem;
+    font-family: "Helvetica Neue Bold", sans-serif;
+}
+
+.fs-64 {
+    font-size: 4rem;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.toast {
+    box-shadow: none;
+}
+
+.btn-custom-close {
+    background: transparent;
+    border: 0;
+    line-height: 1.2rem;
+    font-size: 25px;
+}
+
+@keyframes slide-in-from-bottom {
+    from {
+        transform: translateY(30px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+.toast.slide-in-from-bottom {
+    animation: slide-in-from-bottom 0.5s ease-in-out;
+}
+
+.pos-bottom-error {
+    bottom: 12%;
+    z-index: 100;
+}
+
+#retirement_coverage .pos-bottom-error {
+    bottom: 11%;
+}
+
+.label-invalid {
+    border: 3px solid var(--bs-form-invalid-border-color);
+}
+
+.label-invalid:focus {
+    border-color: #000000;
+}
+
+
+/* mobile css */
+@media only screen and (max-width: 767px) {
+
+    /* body,
+    html {
+        overflow-y: auto;
+    } */
+
+    /* added to fix overlaying issue with needs navigation unable to be selected in mobile */
+    .navbar-needs {
+        right: 0;
+    }
+
+    /* body {
+        min-height: 51.5rem;
+    padding-top: 5.5rem;
+    } */
+    .vh-sm-0 {
+        height: 100% !important;
+    }
+
+    .w-sm-100 {
+        width: 100% !important;
+    }
+
+    .w-sm-25 {
+        width: 25% !important;
+    }
+
+    .bg-needs-main {
+        background-size: cover;
+
+    }
+
+    .bg-needs-1 {
+        background-size: cover;
+
+    }
+
+    .bg-retirement-home {
+        /* background-size:cover; */
+        background: none;
+
+    }
+
+    .needs-home-avatar {
+        top: 5%;
+        left: 0%;
+        z-index: 1;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        position: relative !important;
+    }
+
+    #retirement_home .needs-home-avatar img {
+        height: 53vh;
+    }
+
+    /* .needs-home-avatar img {
+        height: 50vh;
+    } */
+
+    .needs-grey-bg {
+        display: none !important;
+    }
+
+    .needs-grey-bg-mobile {
+        padding: 25px;
+        background-color: #E9E9E9;
+        width: 100%;
+    }
+
+    .needs-grey-bg-md {
+        padding: 136px;
+    }
+
+    .coverage-avatar {
+        z-index: 5;
+    }
+
+    .coverage-avatar img.self-avatar {
+        width: 17vh;
+    }
+
+    .coverage-avatar img.spouse-avatar {
+        width: 15vh;
+    }
+
+    .coverage-avatar img.kid-avatar {
+        width: 15vh;
+    }
+
+    .coverage-avatar img.parent-avatar {
+        width: 30vh;
+    }
+
+    .avatar-age-to-retire {
+        top: 5%;
+        right: 0%;
+        width: 41vh;
+    }
+
+    /* .children-avatar-mobile {
+    min-height: 430px !important;
+} */
+    .avatar-years-till-retire {
+        right: 0;
+        width: 40vh;
+    }
+
+    .avatar-allocated-funds {
+        right: 0;
+        width: 45vh;
+        bottom: 0;
+    }
+
+    .avatar-allocated-funds-aside {
+        left: 0;
+        top: 0px;
+        width: 43vh;
+    }
+
+    .summary-progress-bar {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    #optionsForIdeal img {
+        width: 100% !important;
+    }
+
+    .monthly-support-asset {
+        left: 0;
+        bottom: -10%;
+        width: 30vh;
+    }
+
+    .protection-existing-policy-asset {
+        left: 0;
+        bottom: 0;
+        width: 22vh;
+    }
+
+    .form-input-needs-xs {
+        width: 16%;
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+
+    .form-input-needs-md {
+        width: 34%;
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+
+    .calendar-protection {
+        width: 80%;
+    }
+
+
+    #protection_home .needs-home {
+        grid-template-rows: 5vh 26vh 42vh;
+    }
+
+    /* form input-needs */
+    .input-text {
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+
+    .fs-64 {
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+
+    /* Needs - Home - Mobile CSS */
+    #protection_home .progress-main p,
+    #retirement_home .progress-main p {
+        color: #ffffff !important;
+    }
+
+    #protection_home .progress-value p,
+    #retirement_home .progress-value p {
+        color: inherit !important;
+    }
+
+    #protection_home .fixed-bottom,
+    #retirement_home .fixed-bottom {
+        z-index: 1;
+    }
+
+    .needs-home {
+        grid-template-rows: 8vh 26vh 30vh;
+    }
+
+    /* End for Needs - Home - Mobile CSS */
+
+    .svg-container {
+        transform: scale(1) !important;
+    }
+
+}
+
+/* large desktop css */
+@media screen and (min-height:840px) and (min-width:968px) {
+
+    .needs-home-avatar {
+        top: 15%;
+    }
+
+    .avatar-allocated-funds {
+        bottom: 0;
+    }
+
+    .avatar-years-till-retire {
+        bottom: 0;
+    }
+
+    .avatar-allocated-funds-aside {
+        top: 22%;
+    }
+
+    .avatar-age-to-retire {
+        right: 11%;
+        bottom: 0%;
+        z-index: 10;
+        width: 59vh;
+    }
+
+    .coverage-avatar img.self-avatar {
+        width: 24vh;
+    }
+
+    .coverage-avatar img.spouse-avatar {
+        width: 20vh;
+    }
+
+    .coverage-avatar img.kid-avatar {
+        width: 21vh;
+    }
+
+    .coverage-avatar img.parent-avatar {
+        width: 40vh;
+    }
+
+    /* .coverage-avatar {
+        bottom:3%;
+      } */
+
+    .monthly-support-asset {
+        left: 8%;
+        bottom: 0%;
+        width: 50vh;
+    }
+
+}
+
+/* Code for Retirement - Ideal page */
+#optionsForIdeal img {
+    width: 100%;
+    max-width: 330px;
+}
+
+
+/* target iPad air,mini, iPad Pro */
+@media only screen and (min-width: 768px) and (max-height: 1366px) and (orientation: portrait) {
+
+    /* protection - home */
+    .bg-needs-main {
+        /* background-position: center 70%, center 55%; */
+        background-size: cover;
+    }
+
+    #retirement_home .bg-needs-main {
+        background-position: center 74%;
+        background-size: auto;
+
+    }
+
+    .calendar-protection {
+        width: 62%;
+    }
+
+    .protection-existing-policy-asset {
+        left: 0;
+        bottom: 19%;
+        z-index: 10;
+        width: 28vh;
+    }
+
+    .needs-home-avatar img {
+        max-height: 60vh !important;
+    }
+
+    .monthly-support-asset {
+        left: -5%;
+        bottom: 8%;
+        z-index: 10;
+        width: 40vh;
+    }
+
+    /* .needs-text {
+        display: flex;
+        justify-content: center;
+    } */
+    .w-md-65 {
+        width: 65% !important;
+    }
+
+    .w-md-25 {
+        width: 25% !important;
+    }
+    .w-md-100 {
+        width: 100% !important;
+    }
+    .avatar-allocated-funds-aside {
+        width: 60vh !important;
+        top: 0;
+    }
+
+    .pos-bottom-error {
+        bottom: 7% !important;
+    }
+
+    .slick-slide {
+        height: 76vh !important;
+    }
+
+    #protection_home .needs-home {
+        grid-template-rows: 21vh 69vh 7vh;
+    }
+
+    #protection_coverage .slick-track {
+        top: 3% !important;
+    }
+
+    .svg-container {
+        transform: scale(1) !important;
+    }
+    #retirement_ideal .slick-slide {
+        height: 50vh !important;
+    }
+    .retirement-ideal-text {
+        margin-top:150px;
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+    /* .fixed-bottom {
+        z-index: 10;
+    } */
+    
+
+}
+
+@media only screen and (width:600px) and (height:960px) and (orientation:portrait) {
+    .slick-track {
+        top: 13% !important;
+    }
+}
+
+/* Target iPad air,mini landscape mode */
+@media only screen and (min-width: 1024px) and (max-width:1180px) and (max-height: 1024px) and (orientation: landscape) {
+    .needs-home-avatar img {
+        height: 54vh;
+    }
+
+    #protection_home .needs-home {
+        grid-template-rows: 13vh 60vh 17vh;
+    }
+
+    .slick-track {
+        height: 94%;
+    }
+
+    #retirement_home .needs-home {
+        grid-template-rows: 9vh 77vh 30vh;
+    }
+
+    #protection_coverage .coverage-avatar img.self-avatar {
+        width: 20vh;
+    }
+
+    #protection-existing-policy .bg-needs-1 {
+        height: 51vh;
+    }
+
+    .protection-existing-policy-asset {
+        left: 7%;
+        bottom: -12%;
+        z-index: 10;
+        width: 44vh;
+    }
+
+    .svg-container {
+        transform: scale(1.1) !important;
+    }
+    #Protection-monthly-support .bg-needs-1 {
+        height: 51vh !important;
+    }
+    .monthly-support-asset {
+        bottom: -10% !important;
+    }
+    .w-sm-100 {
+        width: 100%;
+    }
+}
+
+/* target iPad */
+@media only screen and (width: 768px) and (orientation:portrait) {
+    .slick-slide {
+        height: 66vh !important;
+    }
+
+    #protection_home .needs-home {
+        grid-template-rows: 18vh 69vh 12vh;
+    }
+
+    #retirement_home .needs-home {
+        grid-template-rows: 24vh 65vh 11vh;
+    }
+
+    .monthly-support-asset {
+        bottom: 14%;
+        width: 36vh;
+    }
+
+    .protection-existing-policy-asset {
+        width: 32vh;
+    }
+    .avatar-allocated-funds-aside {
+        width: 50vh !important;
+        top: -8%;
+    }
+}
+
+/* Nexus 10 */
+@media only screen and (width:800px) and (orientation:portrait),
+(width:950px) and (orientation:portrait){
+    .slick-slide {
+        height: 73vh !important;
+    }
+    #retirement_home .needs-home{
+    grid-template-rows: 39vh 52vh 11vh;
+    }
+    .avatar-age-to-retire {
+        right: 2%;
+        bottom: -5%;
+        width: 57vh;
+    }
+    .w-sm-100 {
+        width: 100% !important;
+    }
+}
+
+/* target iPad Air */
+@media only screen and (width: 820px) and (orientation:portrait) {
+
+    .slick-slide {
+        height: 70vh !important;
+    }
+
+    #retirement_home .needs-home {
+        grid-template-rows: 33vh 57vh 10vh;
+    }
+
+    .protection-existing-policy-asset {
+        bottom: 14%;
+        width: 37vh;
+    }
+    h5#textProtectionFund {
+        display: none;
+    }
+    .retirement-coverage-text {
+        margin-top:100px;
+        padding-top:0px !important;
+        padding-bottom:0px !important;
+    }
+    .coverage-avatar img.self-avatar {
+        width: 24vh;
+    }
+    .coverage-avatar img.spouse-avatar{
+        width: 20vh;
+    }
+    .avatar-age-to-retire {
+        bottom: -5%;
+        width: 46vh;
+    }
+
+}
+
+/* target iPad */
+@media only screen and (width: 1024px) and (orientation:landscape) {
+    .coverage-avatar img.self-avatar {
+        width: 19vh !important;
+    }
+
+    .coverage-avatar img.spouse-avatar {
+        width: 16vh !important;
+    }
+
+    .coverage-avatar img.parent-avatar {
+        width: 32vh !important;
+    }
+
+    .slick-track {
+        top: 5% !important;
+    }
+
+
+}
+
+/* target iPad Pro Portrait */
+@media only screen and (width:1024px) and (orientation:portrait) {
+    .needs-home {
+        grid-template-rows: 40vh 52vh 7vh;
+    }
+
+    #protection_coverage .slick-track {
+        top: 0 !important;
+    }
+
+    .monthly-support-asset {
+        bottom: 0;
+    }
+
+    .protection-existing-policy-asset {
+        bottom: 6%;
+        width: 40vh;
+    }
+
+}
+
+
+/* target iPad Pro */
+@media only screen and (width: 1366px) and (orientation:landscape) {
+    .bg-needs-main {
+        background-position: center 75%, center 20% !important;
+    }
+
+    #retirement_coverage .coverage-avatar img.self-avatar {
+        margin-top: 20.5%;
+    }
+
+    #protection_home .needs-home-avatar img {
+        max-height: 59vh;
+    }
+
+    #protection_coverage .coverage-avatar img.self-avatar {
+        width: 26vh;
+    }
+
+    #retirement_home .needs-home {
+        grid-template-rows: 23vh 66vh 10vh;
+    }
+
+    .bg-needs-gap {
+        min-height: calc(100vh - 0px);
+    }
+}
+
+/* target Galaxy Tab */
+@media only screen and (width:712px) and (height:1138px) and (orientation:portrait) {
+    #protection_home .needs-home-avatar img {
+        height: 60vh;
+    }
+
+    .needs-grey-bg-mobile {
+        padding: 30px 150px !important;
+    }
+    #retirement_coverage .slick-track {
+        height: 70vh;
+    }
+}
+
+/* target large screen */
+@media only screen and (width: 688px) and (height:1031px) and (orientation:portrait) {
+    .protection-existing-policy-asset {
+        left: 0px;
+        bottom: 0%;
+        width: 28vh;
+    }
+
+    .needs-home-avatar img {
+        height: 43vh;
+    }
+}
+
+@media only screen and (min-height:940px) and (max-height:970px) and (orientation:landscape) {
+    .coverage-avatar img.self-avatar {
+        width: 25vh;
+    }
+    #retire_ideal_content {
+        margin:7% 0 !important;
+    }
+}
+
+
+
+@media only screen and (min-height:800px) and (max-height:860px) and (orientation:landscape) {
+    .coverage-avatar img.self-avatar {
+        width: 22vh;
+    }
+    #retirementAllocatedFundsAsidePage .bg-needs-1 {
+        height: 50vh;
+        background-size: cover;
+        background-position: left 0;
+    }
+    .avatar-allocated-funds-aside {
+        top: 46%;
+    }
+}
+/* target phone landscape */
+@media only screen and (min-width:844px) and (max-height:430px) and (orientation:landscape){
+#retirement_home .needs-home-avatar img {
+    max-height: 33vh;
+}
+.needs-grey-bg {
+    padding-top: 180px;
+}
+}
+
+/* old css */
+@keyframes slide-in-from-top {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.toast.slide-in-from-top {
+    animation: slide-in-from-top 0.5s ease-in-out;
+}
+
+@keyframes slide-in-and-bounce {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    60% {
+        transform: translateY(5px);
+        /* Slide down with bounce effect */
+    }
+
+    80% {
+        transform: translateY(0);
+        /* Bounce back slightly */
+    }
+
+    100% {
+        transform: translateY(0);
+        /* Resting position */
+    }
+}
+
+.toast.slide-in-and-bounce {
+    animation: slide-in-and-bounce 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* Adjust cubic-bezier values for desired bounce effect */
+}
