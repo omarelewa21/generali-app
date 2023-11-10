@@ -150,5 +150,13 @@
     var avatar = {!! json_encode(session('customer_details.avatar')) !!};
     var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
     var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+
+    const animationFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-female-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/avatar-general/gender-female.json') }}'
+    });
 </script>
 @endsection

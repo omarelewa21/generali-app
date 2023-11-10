@@ -571,8 +571,8 @@ h2.display-5, .currencyField {
 }
 
 .homeVector {
-  width: 100%;
-  max-width:550px;
+  width: auto;
+  height:100%;
 }
 
 /* Avatar Welcome Page */
