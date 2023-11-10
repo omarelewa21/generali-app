@@ -463,12 +463,12 @@
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : ($key == 'father' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : ($key == 'mother' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
