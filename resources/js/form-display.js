@@ -877,9 +877,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['name'] && input.getAttribute('name') == 'policyFirstName' + i) {
                         input.value = existingPolicy['policy_' + i]['name'] || '';
                     }
+                    // const oldInputValue = `{{ old('companyOthers', $existingPolicy['policy_1']['company_others'] ?? '') }}`;
+                    // if (oldInputValue !== '') {
+                    //     input.value = oldInputValue;
+                    // }
                     else {
                         input.value = '';
                         input.classList.remove('is-valid');
+                        input.classList.remove('is-invalid');
                     }
                 });
 
@@ -902,9 +907,17 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     if (elementForm.id) {
                         elementForm.id = elementForm.id + i;
                     }
+
                     if (elementForm.tagName.toLowerCase() === 'select') {
                         elementForm.classList.remove('is-valid');
                         elementForm.classList.remove('is-invalid');
+                        if (elementForm.name) {
+                            elementForm.name = elementForm.name + i;
+                        }
+                        if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['first_name']) {
+                            console.log(elementForm);
+                            elementForm.selected = true;
+                        }
                     }
                 });
 
@@ -912,8 +925,11 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var clonedRadioButtons = clonedForm.querySelectorAll('input[type="radio"]');
                 clonedRadioButtons.forEach(function(radioButton) {
                     radioButton.checked = false;
+                    if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['role']) {
+                        radioButton.checked = true;
+                    }
                 });
-            
+
                 var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
                 var modalTarget = modalLink.getAttribute('data-bs-target');
                 const newModalTarget = modalTarget + i;
@@ -1036,6 +1052,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     first_name_dropdown2.dispatchEvent(changeEvent);
                 });
 
+                clientValidations();
+
                 function last_name_auto_dropdown_cloned() {
                     first_name_dropdown2.addEventListener('change', function() {
                         var selectedFirstName = first_name_dropdown2.value;
@@ -1099,6 +1117,147 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                             last_name_dropdown2.innerHTML = '';
                         }
                     });
+                }
+
+                function clientValidations() {
+                    var policyFirstNameSelect2 = document.getElementById('policyFirstNameSelect2');
+                    var policyLastNameSelect2 = document.getElementById('policyLastNameSelect2');
+                    var companySelect2 = document.getElementById('companySelect2');
+                    var companyOthersText2 = document.getElementById('companyOthersText2');
+                    var inceptionYearInput2 = document.getElementById('inceptionYearInput2');
+                    var policyPlanSelect2 = document.getElementById('policyPlanSelect2');
+                    var maturityYearInput2 = document.getElementById('maturityYearInput2');
+                    var premiumModeSelect2 = document.getElementById('premiumModeSelect2');
+                    var premiumContributionInput2 = document.getElementById('premiumContributionInput2');
+                    var lifeCoverageInput2 = document.getElementById('lifeCoverageInput2');
+                    var criticalIllnessInput2 = document.getElementById('criticalIllnessInput2');
+
+                    companySelect2.addEventListener('blur', function() {
+                        validateSelectField(companySelect2);
+                    });
+
+                    policyFirstNameSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyFirstNameSelect2);
+                    });
+
+                    policyLastNameSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyLastNameSelect2);
+                    });
+
+                    companyOthersText2.addEventListener('blur', function() {
+                        validateInputFieldOthers(companyOthersText2);
+                    });
+
+                    inceptionYearInput2.addEventListener('blur', function() {
+                        validateNumberField(inceptionYearInput2);
+                    });
+
+                    policyPlanSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyPlanSelect2);
+                    });
+
+                    maturityYearInput2.addEventListener('blur', function() {
+                        validateNumberFieldMaturity(maturityYearInput2);
+                    });
+
+                    premiumModeSelect2.addEventListener('blur', function() {
+                        validateSelectField(premiumModeSelect2);
+                    });
+
+                    premiumContributionInput2.addEventListener('blur', function() {
+                        validateCurrencyField(premiumContributionInput2);
+                    });
+
+                    lifeCoverageInput2.addEventListener('blur', function() {
+                        validateCurrencyField(lifeCoverageInput2);
+                    });
+
+                    criticalIllnessInput2.addEventListener('blur', function() {
+                        validateCurrencyField(criticalIllnessInput2);
+                    });
+
+                    function validateSelectField(field) {
+                        if (field.value) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateInputFieldOthers(field) {
+                        if (field.value) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateNumberField(field) {
+                        if (field.value && isValidYear(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateNumberFieldMaturity(field) {
+                        if (field.value && isValidYearMaturity(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateCurrencyField(field) {
+                        if (field.value && isValidCurrency(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function isValidYear(year) {
+                        // Return true if the year is valid (1900 to current year), false otherwise
+                        var yearRegex = /^(19\d{2}|20\d{2})$/;
+                        var currentYear = new Date().getFullYear();
+
+                        if (yearRegex.test(year) && parseInt(year) >= 1900 && parseInt(year) <= currentYear) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function isValidYearMaturity(year) {
+                        var currentYear = new Date().getFullYear();
+                        var customerAge = currentYear - dobYear;
+                        var maturityYear = 100 - customerAge;
+                        var allowedYear = currentYear + maturityYear;
+
+                        if (parseInt(year) >= currentYear && parseInt(year) <= allowedYear) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function isValidCurrency(currency) {
+                        // Return true if the currency is valid, false otherwise
+                        var currencyRegex = /^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/;
+
+                        var isValid = currencyRegex.test(currency);
+                        return isValid;
+                    }
                 }
 
             }

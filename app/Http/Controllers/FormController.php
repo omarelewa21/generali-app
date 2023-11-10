@@ -948,6 +948,62 @@ class FormController extends Controller {
                 'policyFirstName3'=> 'nullable',
             ]);
 
+            // $validatedData = $request->validate([
+            //     'policyRole' => 'required',
+            //     'policyFirstName' => 'required',
+            //     'policyLastName' => 'required',
+            //     'policyRole2' => 'nullable',
+            //     'policyFirstName2' => 'nullable',
+            //     'policyLastName2' => 'nullable',
+            //     // 'company2' => 'required|in:' . implode(',', $companies),
+            //     // 'companyOthers2' => [
+            //     //     'nullable',
+            //     //     Rule::requiredIf(function () use ($request) {
+            //     //         return $request->input('company2') === 'Others';
+            //     //     })
+            //     // ],
+            //     // 'inceptionYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) {
+            //     //         $currentYear = date('Y');
+            //     //         if (intval($value) < 1900 || intval($value) > $currentYear) {
+            //     //             $fail('The year must be a valid year between 1900 and '.$currentYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'policyPlan2' => 'required|in:' . implode(',', $plans),
+            //     // 'maturityYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) use ($request) {
+            //     //         $dob = $request->session()->get('customer_details.identity_details.dob', []);
+            //     //         $dobYear = substr($dob, -4);
+            //     //         $currentYear = date('Y');
+            //     //         $customerAge = $currentYear - $dobYear;
+            //     //         $maturityYear = 100 - $customerAge;
+            //     //         $allowedYear = $currentYear + $maturityYear;
+
+            //     //         if (intval($value) < $currentYear || intval($value) > $allowedYear) {
+            //     //             $fail('The year must be a valid year between '.$currentYear.' and '.$allowedYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'premiumMode2' => 'required|in:' . implode(',', $mode),
+            //     // 'premiumContribution2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'lifeCoverage2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'criticalIllness2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            // ]);
+
             // Add the new array inside the customer_details array
             if ($policy) {
                 $customerDetails['existing_policy']['policy_1'] = [
@@ -968,7 +1024,18 @@ class FormController extends Controller {
             
             if ($policy2) {
                 $customerDetails['existing_policy']['policy_2'] = [
-                    'name' => $validatedData['policyFirstName2']
+                    // 'role' => $validatedData['policyRole2'],
+                    // 'first_name' => $validatedData['policyFirstName2'],
+                    // 'last_name' => $validatedData['policyLastName2'],
+                    // 'company' => $validatedData['company2'],
+                    // 'company_others' => $validatedData['companyOthers2'],
+                    // 'inception_year' => $validatedData['inceptionYear2'],
+                    // 'policy_plan' => $validatedData['policyPlan2'],
+                    // 'maturity_Year' => $validatedData['maturityYear2'],
+                    // 'premium_mode' => $validatedData['premiumMode2'],
+                    // 'premium_contribution' => $validatedData['premiumContribution2'],
+                    // 'life_coverage' => $validatedData['lifeCoverage2'],
+                    // 'critical_illness' => $validatedData['criticalIllness2']
                 ];
             }
 
