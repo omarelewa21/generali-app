@@ -10,18 +10,18 @@
 
 @section('content')
 
-<div id="health-medical-home" class="vh-100 overflow-x-hidden scrollable-content">
+<div id="health-medical-home">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner z-99">
+        <div class="row vh-100 overflow-x-hidden scrollable-content">
+            <div class="col-12 col-md-3 col-xl-2 bg-primary sidebanner">
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h4 class="display-5 fw-bold text-white">My Priorities</h4>
                 </div>
             </div>
-            <div class="col-12 col-md-9 col-xl-10 bg-accent-bg-grey text-dark px-0">
+            <div class="col-12 col-md-9 col-xl-10 text-dark px-0">
                 <div class="vh-md-100 overflow-y-auto overflow-x-hidden">
-                    <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block" />
+                    <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block"/>
                     <section class="needs-home-wrapper bg-needs-home">
                         <div class="container needs-home-contents bg-hm-home-element">
                             <div class="row needs-home-avatar-wrapper justify-content-center h-100">
@@ -38,14 +38,14 @@
                             </div>
                         </div>
                     </section>
-                    <div class="col-12 show-mobile footer">
+                    <div class="col-12 d-md-none footer">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4 z-1 bg-white py-4">
                                     <a href="{{route('investment.gap')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <a href="{{route('health.medical.selection')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                 </div>
-                                <div class="col-12 position-absolute bottom-0 show-mobile">
+                                <div class="col-12 position-absolute bottom-0 d-md-none">
                                     <div class="row">
                                         <div class="needs-stand-bg bg-btn_bar"></div>
                                     </div>
@@ -53,12 +53,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 hide-mobile">
+                    <div class="col-12 d-none d-md-block">
                         <div class="row">
                             <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg"></div>
                         </div>
                     </div>
-                    <section class="footer bg-white py-4 fixed-bottom hide-mobile">
+                    <section class="footer bg-white py-4 fixed-bottom d-none d-md-block">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

@@ -17,10 +17,10 @@
     $selectedHospital = session('customer_details.health_medical_needs.medical_planning.typeOfHospital');
 @endphp
 
-<div id="medical-hospital-selection" class="vh-100">
+<div id="medical-hospital-selection">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
+        <div class="row vh-100">
+            <div class="col-12 vh-100 wrapper-needs-master-full-default bg-needs-master-full">
                 <section class="header-needs-default">
                     <div class="col-lg-6 col-md-12">
                         @include('templates.nav.nav-red-menu')

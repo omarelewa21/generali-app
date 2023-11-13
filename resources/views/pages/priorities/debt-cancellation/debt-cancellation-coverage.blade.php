@@ -20,10 +20,10 @@
     $debtCancellationSelectedAvatar = session('customer_details.debt_cancellation_needs.coveragePerson');
 @endphp
 
-<div id="debt-coverage" class="vh-100">
+<div id="debt-coverage">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
+        <div class="row vh-100">
+            <div class="col-12 vh-100 wrapper-needs-master-full-default bg-needs-master-full">
                 <section class="header-needs-default">
                     <div class="col-lg-6 col-md-12">
                         @include('templates.nav.nav-red-menu')

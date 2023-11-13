@@ -17,10 +17,10 @@
     $selectedHealthMedical = session('customer_details.health_medical_needs.coverageSelection');
 @endphp
 
-<div id="health-medical-selection" class="vh-100">
+<div id="health-medical-selection">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 vh-100 wrapper-needs-coverage-default bg-education-gap">
+        <div class="row vh-100">
+            <div class="col-12 vh-100 wrapper-needs-master-full-default bg-needs-master-full">
                 <section class="header-needs-default">
                     <div class="col-lg-6 col-md-12">
                         @include('templates.nav.nav-red-menu')

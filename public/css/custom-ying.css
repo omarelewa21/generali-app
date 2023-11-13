@@ -1,15 +1,9 @@
 /* ============================== Global =================================*/
-.needs-stand-bg{
-    padding:140px;
+.mh-90{
+    max-height: 90%;
 }
-.needs-stand-bg.error-padding{
-    padding:150px;
-}
-.show-tablet{
-    display:none;
-}
-.hide-tablets{
-    display:block;
+.z-99{
+    z-index:99;
 }
 .f-family{
     font-family: Helvetica Neue;
@@ -17,70 +11,54 @@
 .fw-700{
     font-weight: 700;
 }
-.f-20{
-    font-size: 20px;
+.f-34{
+    font-size: 34px !important;
 }
-.w-45{
-    width: 45%;
+.f-64{
+    font-size: 64px !important;
 }
-.mh-90{
-    max-height: 90%;
+.left-20{
+    left: 20%;
 }
-.start-25{
+.start-25px{
     left: 25px;
 }
 .start-20{
     left: 20%;
 }
-.left-20{
-    left: 20%;
+.bottom-33{
+    bottom: -33px;
 }
-.f-55{
-    font-size: 55px;
-}
-.f-50{
-    font-size: 50px;
-}
-.f-45{
-    font-size: 45px;
-}
-.f-40{
-    font-size: 40px;
-}
-.w-35{
-    width: 35%;
-}
-.left-12{
-    left: 12%;
-}
-.right-2{
-    right: 2%;
-}
-.lh-normal{
-    line-height: normal;
+.position-absolute.center{
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 }
 .mh-55{
     max-height: 55%;
 }
-
-/* Form Style */
-.form-control.money {
-    color: #C21B17;
-    font-weight: 500;
+.w-45{
+    width: 45%;
 }
 
-/* Education Global */
-.bg-education-home{
-    background-image: url(/images/needs/background/bg-main.png);
-    background-size: contain,90%;
-    background-position: center, center 20%;
+/* ============================ Button Effect ===============================*/
+button.choice:hover, 
+button.choice:focus,
+.button-needs[data-required="selected"],
+.button-needs.selected {
+    background-image: url('/images/needs/hover-coverage.png');
     background-repeat: no-repeat;
-}
-.bottom-33{
-    bottom: -33px;
+    background-position: center bottom 8%;
+    background-size: 80%;
 }
 
-/* =============================== Needs Home Page ===============================*/
+/* ============================ Needs Home ===============================*/
+.bg-needs-home{
+    background-image: url(/images/needs/background/bg-home-needs.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
 .needs-home-wrapper{
     display: grid;
     grid-template-columns: 100%;
@@ -92,15 +70,8 @@
 .needs-home-contents{
     grid-area: needs-home-contents;
     grid-template-columns: 100%;
-    /* test */
     display: grid;
     grid-template-rows: 100%;
-    /* grid-template-areas: 
-    "needs-home-avatars"
-    "needs-home-text";
-    grid-template-rows: 75% 25%; */
-    /* grid-template-columns: repeat(3, minmax(250px, 1fr)); */
-
 }
 .needs-home-avatar-wrapper{
     display: grid;
@@ -121,24 +92,72 @@
     grid-area: needs-home-text;
     grid-template-columns: 100%;
 }
-#investment-home .needs-stand-bg,
-#education-home .needs-stand-bg{
-    padding: 180px;
+.needs-stand-bg{
+    padding:140px;
 }
-.bg-needs-home{
-    background-image: url(/images/needs/background/bg-home-needs.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
+.needs-stand-bg.error-padding{
+    padding:150px;
 }
-.bg-needs-home-element{
+.bg-btn_bar{
+    background-color: #E9E9E9;
+}
+/* =========== Protection Home Page ==============*/
+#protection-home .needs-home-contents{
+    grid-template-rows: 100%;
+}
+/* =========== Education Home Page ==============*/
+#education-home .bg-needs-home-element{
     background-image: url(/images/needs/education/home/bg-education-home-element.png);
     background-repeat: no-repeat;
     background-position: center top 15%;
     background-size: 80%;
 }
-/* =============================== Needs Coverage Page ===============================*/
-.wrapper-needs-coverage-default {
+/* ============= Retirement Homepage =============*/
+#retirement-home .needs-stand-bg{
+    padding: 175px;
+}
+/* ============= Investment Home =================*/
+#investment-home .needs-home-avatar-wrapper{
+    grid-template-rows: 81% 19%;
+}
+.bg-investment-home-element{
+    background-image: url('/images/needs/investment/home/investment-home-ele.png');
+    background-repeat: no-repeat;
+    background-size: 25%;
+    background-position: left 10% top 12%;
+}
+.inv_avatar{
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* ============ Health and Medical  Home ==========*/
+#health-medical-home .needs-stand-bg{
+    padding: 155px;
+}
+#hospital-room-selection .bg-btn_bar{
+    background-color: #D9D9D9;
+}
+.bg-hm-home-element{
+    background-image: url('/images/needs/health-medical/home/hnm-home-ele.png');
+    background-repeat: no-repeat;
+    background-size: 65%;
+    background-position: center top 10%;
+}
+
+/* ====== Health and Medical  & Debt Cancellation Home =====*/
+#health-medical-home .needs-home-avatars,
+#debt-cancellation-home .needs-home-avatars{
+    grid-template-columns: 100%;
+}
+/* ===========  Debt Cancellation Home =========== */
+#debt-cancellation-home .needs-stand-bg,
+#investment-home .needs-stand-bg,
+#education-home .needs-stand-bg{
+    padding: 180px;
+}
+
+/* =============================== Needs Master Selection Plain Page ===============================*/
+.wrapper-needs-master-full-default {
     display: grid;
     grid-gap: 0px;
     grid-template-columns: 100%;
@@ -147,8 +166,15 @@
         "content-needs-default";
     grid-template-rows: 15% 85%;
 }
+.bg-needs-master-full{
+    background-image: url('/images/needs/background/bg-master-needs-gap.png');
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position:center top 40%;
+}
 .header-needs-default {
     grid-area: header-needs-default;
+    grid-template-columns: 100%;
 }
 .content-needs-default {
     grid-area: content-needs-default;
@@ -169,13 +195,6 @@
     "selection-content-coverage";
     grid-template-rows: 10% 90%;
 }
-.warning{
-    grid-area: warning;
-}
-.footer-needs-default {
-    grid-area: footer-needs-default;
-    
-}
 .header-content-coverage{
     grid-area: header-content-coverage;
     grid-template-columns: 100%;
@@ -187,22 +206,8 @@
     display: grid;
     grid-template-rows: 100%;
 }
-.bg-education-coverage{
-    background-image: url(/images/needs/education/education-coverage-vector.png);
-    background-size: auto;
-    background-position: center top 25%;
-    background-repeat: no-repeat;
-}
-#education-coverage .progress{
-    width: 44px;
-    height: 44px;
-    line-height: 150px;
-    background: transparent;
-    margin: 0 auto;
-    box-shadow: none;
-    position: relative;
-    z-index: 1000;
-}
+
+/* ============================ Needs Coverage Page ======================================*/
 .coverage_slick .slick-slide button,
 .savings_coverage .slick-slide button{
     display: grid;
@@ -213,6 +218,9 @@
         "coverage-text";
     grid-gap: 0px;
     align-items: end;
+}
+.slick-padding{
+    padding: 3rem 3rem 0px 3rem;
 }
 .coverage-image {
     grid-area: coverage-image;
@@ -226,61 +234,15 @@
 .coverage-text strong{
     line-height:1;
 }
-/* =============================== Protection Home Page ===============================*/
-#protection-home .needs-stand-bg {
-    padding: 170px;
+.warning{
+    grid-area: warning;
+    grid-template-columns: 100%;
 }
-#protection-home .needs-home-contents{
-    grid-template-rows: 100%;
+.footer-needs-default {
+    grid-area: footer-needs-default;
+    grid-template-columns: 100%;
 }
-#protection-home .needs-home-avatars{
-    grid-template-rows: 100%;
-}
-/* =============================== Protection Monthly Support Page ===============================*/
-.protection-monthly {
-    display: grid;
-    grid-gap: 0px;
-    grid-template-columns: auto;
-    grid-template-rows: 100%;
-}
-/* =============================== Protection Existing Policy Page ===============================*/
-#protection-existing-policy .education-support{
-    grid-template-rows: 5% 93%;
-}
-/* =============================== Retirement Homepage ===============================*/
-#retirement-home .bg-needs-home{
-    background-image: url(/images/needs/retirement/home/retirement-bg.png);
-}
-#retirement-home .needs-stand-bg{
-    padding: 175px;
-}
-.retirement-home-element{
-    background-image: url(/images/needs/retirement/home/retirement-home-element.png);
-    background-repeat: no-repeat;
-    background-size: 95%;
-    background-position: center bottom 30%;
-}
-/* =============================== Retirement Ideal Page ===============================*/
-#retirement-ideal .slick-padding{
-    padding: 0px;
-}
-#retirement-ideal .coverage_slick .slick-slide button, .savings_coverage .slick-slide button {
-    grid-template-rows: 85% 15%;
-}
-#retirement-ideal button.choice:hover, 
-#retirement-ideal button.choice:focus, 
-#retirement-ideal .button-needs[data-required="selected"], 
-#retirement-ideal .button-needs.selected{
-    background-position: center bottom;
-}
-/* =============================== Retirement Retire Age Page ===============================*/
-.bg-retire-age{
-    background-image: url('/images/needs/retirement/retire-age/bg-retire-age.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position:left top;
-}
-/* =============================== Education Coverage Page ===============================*/
+/* =========== Education Coverage ====================*/
 #education-coverage .coverage_slick .slick-slide button{
     display: grid;
     grid-template-columns: 100%;
@@ -300,48 +262,109 @@
     background:linear-gradient(90deg, #66B560 0%, #2272B6 100%);
     width: 100px;
     height: 35px;
-
 }
-/* =============================== Education Supporting Page ===============================*/
-.wrapper-needs-supporting-default {
+/* ============= Health and Medical Selection =================*/
+.hnm-selection button{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 90% 10%;
+    grid-template-areas:
+        "coverage-image"
+        "coverage-text";
+    grid-gap: 0px;
+}
+.plant .position-absolute.center{
+    top:60%;
+}
+/* ========= Health and Medical Planning Hospital Selection =============*/
+.hospital .position-absolute.center {
+    top: 58%;
+}
+
+/* ============================  Needs Full Content Page =================================*/
+.wrapper-needs-full-master-default{
     display: grid;
     grid-gap: 0px;
     grid-template-columns: 100%;
     grid-template-areas:
         "header-needs-default"
-        "content-supporting-default";
+        "content-full-master-default";
     grid-template-rows: 19vh 67.5vh;
 }
-.content-supporting-default{
-    grid-area: content-supporting-default;
+.content-full-master-default{
+    grid-area: content-full-master-default;
     display: grid;
     grid-gap: 0px;
     grid-template-columns: 100%;
     grid-template-areas:
-    "edu-con"
+    "full-content"
     "alert-support";
     grid-template-rows: 93% auto;
 }
-.edu-con{
-    grid-area: edu-con;
+.full-content{
+    grid-area: full-content;
+    grid-template-columns: 100%;
+    display: grid;
+    grid-template-rows: 100%;
+}
+
+/* ============ Supporting Years - Calendar ========= */
+#calendar .position-absolute.center{
+    top: 55%;
+}
+.calendar{
+    max-width: 36%;
+}
+
+/* ============================  Needs Half Content Page =================================*/
+.bg-half-content{
+    background-image: url('/images/needs/background/bg-protection.png');
+    background-repeat: no-repeat;
+    background-size: 95%;
+    background-position: bottom left;
+}
+.wrapper-needs-half-master-default {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-half-master-default";
+    grid-template-rows: 19vh 67.5vh;
+}
+.content-half-master-default{
+    grid-area: content-half-master-default;
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 100%;
+    grid-template-areas:
+    "half-master-content"
+    "alert-support";
+    grid-template-rows: 93% auto;
+}
+.half-master-content{
+    grid-area: half-master-content;
     grid-template-columns: 100%;
     display: grid;
     grid-template-rows: 100%;
 }
 .alert-support{
     grid-area: alert-support;
-    /* height: 50px; */
 }
-.edu_sup_years{
+.needs-half-master-content {
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-    grid-gap: 0;
+    grid-gap: 0px;
+    grid-template-columns: auto;
+    grid-template-rows: 100%;
 }
-.avatar-supporting-wrapper{
-    grid-template-columns: 100%;
-    display: grid;
+/* ============== Protection Existing Policy ========== */
+#protection-existing-policy .image-content-spacing{
+    grid-template-rows: 5% 93%;
 }
-.education-support{
+.hide-content{
+    display:none;
+}
+.image-content-spacing{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 5% 80%;
@@ -358,135 +381,13 @@
     grid-area: avatar-text;
     grid-template-columns: 100%;
 }
-#calendar .position-absolute.center{
-    top: 55%;
-}
-/* =============================== Education Other Savings Page ===============================*/
-.bg-education-others-section{
-    background-image: url('/images/needs/education/bg-others-ele.png');
-    background-repeat: no-repeat;
-    background-size: 52%;
-    background-position: left 66% top;
-}
-/* =============================== Education Gap Page =======================================*/
-.wrapper-needs-gap-default {
-    display: grid;
-    grid-gap: 0px;
-    grid-template-columns: 100%;
-    grid-template-areas:
-        "header-needs-default"
-        "content-gap-default";
-    grid-template-rows: 13% 87%;
-}
-.content-gap-default{
-    grid-area: content-gap-default;
-    grid-template-columns: 100%;
-    display: grid;
-    grid-template-rows: 84.5%;
-}
-.graph-wrapper{
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: 100%;
-    grid-template-areas:
-        "gap-graph"
-        "gap-title";
-    grid-template-rows: 90% 10%;
-}
-.gap-graph{
-    grid-area: gap-graph;
-    grid-template-columns: 100%;
-}
-.gap-title{
-    grid-area: gap-title;
-    grid-template-columns: 100%;
-}
-.summary-value{
-    color:#C21B17;
-    text-align: right;
-}
-#education-summary h6{
-    font-size: 26px;
-}
-.text-correct{
-    color: #14A38B;
-}
-#education-summary #gap .circle{
-    filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
-}
-#education-summary #gap .circle__medium{
-    filter: none;
-}
-#education-summary #gap .circle__small{
-    filter: none;
+
+/* =========== Risk Profile =========== */
+#savings-risk-profile .image-content-spacing,
+#investment-risk-profile .image-content-spacing{
+    grid-template-rows: 5% 95%;
 }
 
-/* =============================== Savings Goal =======================================*/
-#savings-goals #sortable .first {
-    grid-column: 22 / span 8;
-    grid-row: 23 / 71;
-}
-#savings-goals .first .remove-button {
-    right: 17%;
-    bottom: 30%;
-}
-#savings-goals #sortable .second {
-    grid-column: 22 / span 11;
-    grid-row: 22 / 49;
-    transform: translate(-50%,-50%);
-    left: 90%;
-    top: -13%;
-}
-#savings-goals .second .remove-button {
-    bottom: -5%;
-    right: 40%;
-}
-#savings-goals #sortable .third {
-    grid-column: 35 / span 15;
-    grid-row: 2 / 33;
-}
-#savings-goals .third .remove-button {
-    right: 50%;
-    bottom: 0%;
-}
-#savings-goals #sortable .fourth {
-    grid-column: 45 / span 8;
-    grid-row: 23 / 69;
-}
-#savings-goals .fourth .dropped img:not(.close) {
-    margin-left: 15px;
-    margin-top: 15%;
-}
-#savings-goals .fourth .remove-button {
-    bottom: 27%;
-    right: 0%;
-    left: 18%;
-}
-/* =============================== Savings Monthly Payment =======================================*/
-.savings-monthly{
-    display: grid;
-    grid-gap: 0px;
-    grid-template-columns: 55% 20%;
-    grid-template-rows: 100%;
-}
-/* =============================== Savings Goal Amount =======================================*/
-.tabung-wrapper{
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 20% 80%;
-    grid-template-areas:
-        "tabung-title"
-        "tabung-content";
-    grid-gap: 0px;
-}
-.tabung-title{
-    grid-area: tabung-title;
-    grid-template-columns: 100%;
-}
-.tabung-content{
-    grid-area: tabung-content;
-    grid-template-columns: 100%;
-}
 /* ===============================  Risk Profile =======================================*/
 #savings-risk-profile .content-block,
 #investment-risk-profile .content-block{
@@ -496,144 +397,28 @@
         "risk-content";
     grid-template-rows: 10% 20% 70%;
 }
-#savings-risk-profile .wrapper-needs-supporting-default,
-#investment-risk-profile .wrapper-needs-supporting-default{
-    grid-template-rows: 15vh 71.5vh;
+/* =============================== Retirement Ideal Page ===============================*/
+#retirement-ideal .coverage_slick .slick-slide button, .savings_coverage .slick-slide button {
+    grid-template-rows: 85% 15%;
 }
-#savings-risk-profile .education-support,
-#investment-risk-profile .education-support{
-    grid-template-rows: 5% 95%;
+#retirement-ideal button.choice:hover, 
+#retirement-ideal button.choice:focus, 
+#retirement-ideal .button-needs[data-required="selected"], 
+#retirement-ideal .button-needs.selected{
+    background-position: center bottom;
 }
-#savings-risk-profile .content-supporting-default,
-#investment-risk-profile .content-supporting-default{
-    grid-template-rows: 90% auto;
+#retirement-ideal .slick-padding{
+    padding: 0px;
 }
-.risk-header{
-    grid-area: risk-header;
-    grid-template-columns: 100%;
-    display: grid;
-}
-.risk-selection{
-    grid-area: risk-selection;
-    grid-template-columns: 100%;
-    display: grid;
-}
-.risk-content{
-    grid-area: risk-content;
-    grid-template-columns: 100%;
-    display: grid;
-}
-.risk-btn{
-    /* background:rgba(238, 238, 238, 1); */
-    border:1px solid rgba(240, 240, 240, 1);
-    color:rgba(10, 4, 60, 0.50);
-    font-size: 22px;
-    font-weight: 700;
-    width: 301px;
-    height: 85px;
-}
-.risk-btn:hover,
-.risk-btn[data-required="selected"],
-.risk-btn.selected{
-    background: #C0232C;
-    border: 1px solid #A0A0A0;
-    color: #fff;
-}
-.risk-potential-title{
-    font-size: 18px;
-    font-family: 'Helvetica Neue';
-    line-height: 22px;
-}
-.potential-btn{
-    background-color: #fff;
-    border: 1px solid #A0A0A0;
-    width: 100px;
-    height: 57px;
-    font-size: 22px;
-}
-.potential-btn:hover,
-.potential-btn[data-required="selected"],
-.potential-btn.selected{
-    border: 1px solid #C0232C;
-}
-.potential-btn.border-start-0.border-end-0:hover,
-.potential-btn.border-start-0.border-end-0[data-required="selected"],
-.potential-btn.border-start-0.border-end-0.selected{
-    border-left: 1px solid #C0232C !important;
-    border-right: 1px solid #C0232C !important;
-}
-
-/* =============================== Investment Home =======================================*/
-#investment-home .needs-home-avatar-wrapper{
-    grid-template-rows: 81% 19%;
-}
-.bg-investment-home-element{
-    background-image: url('/images/needs/investment/home/investment-home-ele.png');
-    background-repeat: no-repeat;
-    background-size: 25%;
-    background-position: left 10% top 12%;
-}
-.inv_avatar{
-    left: 50%;
-    transform: translateX(-50%);
-}
-/* =============================== Investment Monthly =======================================*/
-.investment-monthly{
-    display: grid;
-    grid-gap: 0px;
-    grid-template-columns: 55% 20%;
-    grid-template-rows: 100%;
-}
-/* =============================== Investment Annual Return =======================================*/
-.investment-annual{
-    display: grid;
-    grid-gap: 0px;
-    grid-template-columns: 48% 20%;
-    grid-template-rows: 100%;
-}
-/* =============================== Health and Medical Home =======================================*/
-.bg-hm-home-element{
-    background-image: url('/images/needs/health-medical/home/hnm-home-ele.png');
-    background-repeat: no-repeat;
-    background-size: 65%;
-    background-position: center top 10%;
-}
-#health-medical-home .needs-home-avatars{
-    grid-template-columns:100%;
-    grid-template-rows: 100%;
-}
-#health-medical-home .needs-stand-bg{
-    padding: 155px;
-}
-/* =============================== Health and Medical Selection =======================================*/
-.hnm-selection button{
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 90% 10%;
-    grid-template-areas:
-        "coverage-image"
-        "coverage-text";
-    grid-gap: 0px;
-}
-.plant .position-absolute.center{
-    top:60%;
-}
-/* =============================== Health and Medical Critical Monthly Support =======================================*/
-.bg-hnm {
-    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: top left;
-}
-/* =============================== Health and Medical Planning Hospital Selection =======================================*/
-.hospital .position-absolute.center {
-    top: 58%;
-}
+/* ========================== Health and Medical Planning Hospital Selection ====================*/
 #medical-hospital-selection .content-block {
     grid-template-rows: 15% 85%;
 }
 
-/* =============================== Health and Medical Planning Room Selection =======================================*/
+/* ===================== Health and Medical Planning Room Selection ======================*/
+#hospital-room-selection .needs-stand-bg{
+    padding: 100px;
+}
 .wrapper-room-selection{
     display: grid;
     grid-template-columns: 100%;
@@ -667,24 +452,6 @@
     max-width: 100%;
     bottom: -22%;
 }
-/* .room-selection-center{
-    grid-area: room-selection-center;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-}
-.room-selection-right{
-    grid-area: room-selection-right;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-}
-.room-selection-left{
-    grid-area: room-selection-left;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-} */
-#hospital-room-selection .needs-stand-bg{
-    padding: 100px;
-}
 .patient,
 .patient-2 {
     grid-template-areas:
@@ -716,1117 +483,62 @@
     justify-content: end;
 }
 
-/* =============================== Debt Cancellation Home =======================================*/
-#debt-cancellation-home .needs-stand-bg{
-    padding: 180px;
-}
-#debt-cancellation-home .needs-home-avatars{
-    grid-template-columns: 100%;
-}
-
-/* Media Query - Mobile (screen size max 767px) */
-@media only screen and (max-width: 360px){
-    .col-xs-10{
-        flex: 0 0 auto;
-        width: 83.33333333%;
-    }
-}
-@media only screen and (max-width: 400px){
-    #health-medical-home .needs-home-avatar-wrapper{
-        grid-template-rows: 75% 25%;
-    }
-}
-
-@media only screen and (max-width: 767px){
-    .wrapper-needs-supporting-default {
-        grid-template-rows: auto;
-    }
-    .bg-education-supporting{
-        background-size: 100%;
-    }
-    .savings-monthly{
-        grid-template-columns: 60% 27%;
-        grid-template-rows: 90%;
-    }
-    .investment-monthly{
-        grid-template-columns: 75% 25%;
-        grid-template-rows: 90%;
-    }
-    .protection-monthly{
-        grid-template-rows: 90%;
-    }
-    .investment-tree{
-        max-width: 180% !important;
-    }
-    .avatar-investment-pa{
-        max-width: 100% !important;
-    }
-    .mob-align-top{
-        align-items: start !important;
-    }
-    #health-medical-home .needs-stand-bg{
-        padding: 180px;
-    }
-}
-@media only screen and (min-width: 597px) and (max-width: 767px){
-    .saving-tabung{
-        height: 80% !important;
-    }
-    .investment-annual{
-        max-height: 65% !important;
-    }
-}
-@media only screen and (max-width: 767px) and (min-height: 740px) and (max-height: 800px){
-    .start-20{
-        top: 62% !important;
-    }
-}
-@media only screen and (max-width: 767px) and (min-height: 801px) {
-    .start-20{
-        top: 65% !important;
-    }
-}
-@media only screen and (max-width: 600px) and (max-height: 699px){
-    .content-needs-default {
-       grid-template-rows: auto 7vh 16vh !important;
-    }
-}
-@media only screen and (max-width: 600px) and (min-height: 700px) and (max-height: 760px){
-
-    .content-needs-default {
-        grid-template-rows: auto 6.5vh 14.5vh !important;
-    }
-}
-@media only screen and (max-width: 600px) and (min-height: 761px) and (max-height: 798px){
-
-    .content-needs-default {
-        grid-template-rows: auto 5.5vh 14vh !important;
-    }
-}
-@media only screen and (max-width: 600px) and (min-height: 799px) and (max-height: 860px){
-    .content-needs-default {
-        grid-template-rows: auto 5.5vh 13vh !important;
-    }
-    .coverage_slick .slick-slide button{
-        grid-template-rows: 92% 8%;
-    }
-}
-@media only screen and (max-width: 600px) and (min-height:861px) and (max-height: 900px){
-    .content-needs-default {
-        /* grid-template-rows: minmax(66.2vh, 73vh) auto 12.2vh; */
-    }
-    .coverage_slick .slick-slide button{
-        grid-template-rows: 92% 8%;
-    }
-}
-@media only screen and (max-width: 600px) and (min-height:901px) and (max-height: 1024px){
-    .wrapper-needs-coverage-default {
-        /* grid-template-rows: 15% minmax(67%,74%) auto 11%; */
-    }
-}
-@media only screen and (min-width: 600px) and (max-width: 797px) and (min-height: 800px){
-    .content-needs-default  {
-        grid-template-rows: auto 5vh 11vh;
-    }
-}
-@media only screen and (min-width: 600px) and (max-width: 797px) and (min-height: 1000px){
-    .content-needs-default  {
-        grid-template-rows: auto 4.5vh 10.5vh;
-    }
-}
-@media only screen and (max-width: 600px){
-    .scroll-content {
-       overflow-x: hidden;
-       overflow-y: auto;
-       height: 100vh;
-    }
-    /* .alert-support{
-        height: 57px;
-    } */
-    .content-needs-default{
-        grid-template-rows: auto 5vh 12vh;
-    }
-    #health-medical-selection .slick-padding{
-        padding: 15px 15px 0px 15px;
-    }
-}
-@media only screen and (max-width: 592px){
-    .saving-tabung{
-        max-height: 100% !important;
-    }
-    .investment-graph{
-        max-width: 150%;
-    }
-    .investment-annual{
-        max-height: 55% !important;
-    }
-    .mw-mob{
-        max-width: 100% !important;
-    }
-    #retirement-home .needs-home-avatar-wrapper{
-        grid-template-rows: 85% 15%;
-    }
-}
-@media only screen and (max-width: 700px){
-    .pb-7{
-        padding-bottom: 90px;
-    }
-}
-
-/* Media Query - Medium device (screen size max 1024px) */
-@media only screen and (min-width: 768px) and (max-width: 1200px){
-    .bg-education-coverage{
-        background-size: contain;
-    }
-    .mt-md-6{
-        margin-top: 4rem;
-    }
-    .investment-annual{
-        grid-template-columns: 55% 30%;
-    }
-    .slick-slide{
-        max-height: 100%;
-    }
-    #debt-cancellation-home .needs-stand-bg {
-        padding: 210px;
-    }
-}
-@media only screen and (max-width: 992px){
-    .start-20{
-        max-width: 100%;
-        transform: translate(-50%, -50%);
-        top: 58%;
-        left: 50%;
-    }
-    .calendar-wrapper{
-        display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: auto 60% auto;
-        grid-template-areas:
-            "calendar-text"
-            "calendar-content"
-            "calendar-text2";
-        grid-gap: 0px;
-    }
-    .calendar-text {
-        grid-area: calendar-text;
-        grid-template-columns: 100%;
-        justify-content: center !important;
-    }
-    .calendar-content {
-        grid-area: calendar-content;
-        grid-template-columns: 100%;
-        display: grid !important;
-        grid-template-rows: 100%;
-    }
-    .calendar-text2 {
-        grid-area: calendar-text2;
-        grid-template-columns: 100%;
-        justify-content: center !important;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1050px){
-    .content-needs-default {
-        grid-template-rows: auto 4vh 11vh !important;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 17vh 72.5vh !important;
-    }
-    .content-supporting-default{
-        grid-template-rows: 94% auto !important;
-    }
-    .education-support{
-        grid-template-rows: 10% 80% !important;
-    }
-    .start-20{
-        top: 65% !important;
-    }
-    /* .savings-monthly{
-        grid-template-rows: 70% !important;
-    } */
-    .investment-monthly{
-        grid-template-rows: 80% !important;
-    }
-    .protection-monthly{
-        grid-template-rows: 68% !important;
-    }
-    .investment-annual {
-        grid-template-rows: 80% !important;
-        grid-template-columns: 40% 29% !important;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1059px) and (max-height: 1199px){
-    .content-needs-default {
-        grid-template-rows: auto 4.5vh 9.8vh !important;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 15vh 75.5vh!important;
-    }
-    .start-20{
-        top: 68% !important;
-    }
-    /* .savings-monthly{
-        grid-template-rows: 80% !important;
-    } */
-    
-}
-@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
-    .content-needs-default {
-        grid-template-rows: auto 4vh 8.5vh !important;
-    }
-    .start-20{
-        top: 73% !important;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 13vh 79vh;
-    }
-    .investment-annual {
-        grid-template-columns: 45% 45% !important;
-    }
-    #retirement-home .needs-home-avatar-wrapper {
-        grid-template-rows: 85% 15%;
-    }
-    #retirement-home .needs-stand-bg{
-        padding: 220px;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 900px){
-    #savings-home .needs-stand-bg {
-        padding: 250px !important;
-    }
-    #savings-risk-profile .content-supporting-default,
-    #investment-risk-profile .content-supporting-default{
-        grid-template-rows: 94.6% auto;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px){
-    .needs-stand-bg.error-padding {
-        padding: 190px;
-    }
-    .needs-stand-bg{
-        padding: 180px;
-    }
-    .content-needs-default {
-        grid-template-rows: auto 4vh 8vh;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 11vh 81vh;
-    }
-    .content-supporting-default{
-        grid-template-rows: 96% auto;
-    }
-    .needs-home-wrapper{
-        grid-template-rows: 90vh;
-    }
-    #investment-home .needs-stand-bg,
-    #education-home .needs-stand-bg,
-    #protection-home .needs-stand-bg {
-        padding: 250px;
-    }
-    #savings-home .needs-stand-bg{
-        padding: 200px;
-    }
-    .savings-monthly,
-    .investment-monthly,
-    .protection-monthly{
-        grid-template-rows: 90%;
-    }
-    .investment-annual{
-        grid-template-rows: 90%;
-        height: 78%;
-        grid-template-columns: 45% 40%;
-    }
-    #retirement-home .needs-home-wrapper{
-        grid-template-rows: 92vh;
-    }
-    
-}
-@media only screen and (min-width: 900px) and (max-width: 1100px) and (min-height: 1200px){
-    #retirement-home .needs-home-avatar-wrapper{
-        grid-template-rows: 83% 17%;
-    }
-    #retirement-home .needs-stand-bg{
-        padding: 250px;
-    }
-}
-@media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 600px){
-    .content-needs-default {
-        grid-template-rows: auto 8vh 18vh !important;
-    }
-    #education-monthly-content .col-12.col-xl-6,
-    #needs-content .col-12.col-xl-6{    
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    #education-monthly-content .first-order,
-    #needs-content .first-order{
-        order: 2;
-    }
-    #education-monthly-content .second-order,
-    #needs-content .second-order{
-        order: 1;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 23vh 54vh;
-    }
-    /* .education-support {
-        grid-template-rows: 80% 10%;
-    } */
-    .needs-home-wrapper{
-        grid-template-rows: 80vh;
-    }
-    #retirement-age .col-10 .col-sm-6{
-        width: 83.3333%;
-        flex: 0 0 auto;
-    }
-}
-@media only screen and (min-width: 992px) and (max-width: 1200px){
-    .show-tablet{
-        display:block;
-    }
-    .hide-tablets{
-        display:none;
-    }
-}
-@media only screen and (min-width: 992px) and (max-width: 1100px) and (max-height:800px){
-    .content-needs-default {
-        /* grid-template-rows: auto 5.5vh 13.5vh; */
-        grid-template-rows: auto 6vh 14vh;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 18vh 68.5vh;
-    }
-    #education-monthly-content .col-12.col-xl-6,
-    #needs-content .col-12.col-xl-6{    
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    #education-monthly-content .first-order,
-    #needs-content .first-order{
-        order: 2;
-    }
-    #education-monthly-content .second-order,
-    #needs-content .second-order{
-        order: 1;
-    }
-    .content-supporting-default {
-        grid-template-rows: 92% auto;
-    }
-    .needs-stand-bg{
-        padding: 130px;
-    }
-    #health-medical-selection .needs-stand-bg{
-        padding: 180px;
-    }
-    
-    .needs-stand-bg.error-padding{
-        padding: 140px;
-    }
-    .needs-home-wrapper{
-        grid-template-rows: 86vh;
-    }
-    #savings-home .needs-home-avatar-wrapper {
-        grid-template-rows: 75% 15%;
-    }
-    .savings-monthly{
-        grid-template-columns: 20% 20%;
-        grid-template-rows: 65%;
-    }
-    #investment-home .mh-90 {
-        max-height: 85%;
-    }
-    .investment-monthly{
-        grid-template-columns: 30% 17%;
-        grid-template-rows: 100%;
-        height: 65% !important;
-    }
-    .protection-monthly{
-        grid-template-rows: 100%;
-        height: 65% !important;
-    }
-    .investment-annual {
-        grid-template-columns: 20% 17%;
-        grid-template-rows: 100%;
-        height: 65% !important;
-    }
-    .avatar-invest{
-        max-height: 75% !important;
-    }
-    #retirement-home .needs-home-wrapper {
-        grid-template-rows: 85vh;
-    }
-}
-@media only screen and (max-width: 1024px){
-    .p-mb-0{
-        padding: 0px;
-    }
-    .needs-home-avatars{
-        grid-template-columns: repeat(3, 0% 100% 0%);
-    }
-    .start-25{
-        left: 0px;
-    }
-    .bg-retire-age{
-        background-size: cover;
-    }
-    .bg-hm-home-element{
-        background-size: 100%;
-        background-position: center top 40%;
-    }
-    .bg-hnm{
-        background-size: cover;
-        background-position: top left 15%;
-        background-repeat: no-repeat;
-        background: linear-gradient(rgba(0, 0, 0, 0.03) 100%, rgba(255, 255, 255, 0) 0%),url(/images/needs/health-medical/critical-illness/monthly-support/bg-critical-monthly-support.png);
-    }
-    #debt-cancellation-home .left-20{
-        left: 3%;
-    }
-    #debt-cancellation-home .coins{
-        width: 35%;
-    }
-}
-@media only screen and (min-width: 1024px){
-    .hide-h-100{
-        height: 100%;
-    }
-}
-
-/* Media Query - Large device (screen size max 1500px) */
-@media only screen and (min-width: 1025px) and (max-width: 1280px) and (min-height: 900px){
-    .content-needs-default {
-        grid-template-rows: auto 5.5vh 11.4vh;
-    }
-    .wrapper-needs-supporting-default{
-        grid-template-rows: 16vh 73.5vh;
-    }
-    .content-supporting-default {
-        grid-template-rows:93% auto;
-    }
-    .needs-home-wrapper{
-        grid-template-rows: 88vh;
-    }
-    .needs-home-avatar-wrapper {
-        grid-template-rows: 85% 15%;
-    }
-    #savings-home .needs-home-avatars {
-        grid-template-columns: repeat(3, 5% 90% auto);
-    }
-    .investment-monthly{
-        grid-template-columns: 75% 25%;
-    }
-}
-@media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 840px){
-    .content-needs-default {
-        grid-template-rows: auto 5.5vh 13.5vh;
-    }
-    #education-monthly-content .col-12.col-xl-6,    
-    #needs-content .col-12.col-xl-6{    
-        flex: 0 0 auto;
-        width: 50%;
-    }
-    #education-monthly-content .first-order,
-    #needs-content .first-order{
-        order: 2;
-    }
-    #education-monthly-content .second-order,
-    #needs-content .second-order{
-        order: 1;
-    }
-    .content-supporting-default{
-        grid-template-rows: 93% auto;
-    }
-    .needs-home-avatars {
-        grid-template-columns: repeat(3, 10% 75% auto);
-    }
-    #savings-home .needs-home-avatars {
-        grid-template-columns: repeat(3, 8% 80% auto);
-    }
-}
-@media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 700px){
-    .content-needs-default {
-        grid-template-rows: auto 6.5vh 15.5vh;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 20.5vh 64vh;
-    }
-    .content-supporting-default{
-        grid-template-rows: 91% auto;
-    }
-}
-@media only screen and (min-width: 1400px) and (min-height: 900px){
-    .content-needs-default {
-        grid-template-rows: auto 5.5vh 12vh;
-    }
-    .content-supporting-default {
-        grid-template-rows:93% auto;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 19vh 69.5vh;
-    }
-}
-@media only screen and (min-width: 1366px) and (max-width: 1399px) and (min-height: 1000px){
-    .content-needs-default {
-        grid-template-rows: auto 4.5vh 10.5vh !important;
-    }
-    .wrapper-needs-supporting-default{
-        grid-template-rows: 19vh 70.5vh !important;
-    }
-    .content-supporting-default{
-        grid-template-rows: 94% auto !important;
-    }
-}
-@media screen and (max-width: 1200px) {
-    .bg-half{
-        background-image: url('/images/needs/background/bg-half-master-mob.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: left center;
-    }
-    .bg-education-others-mob{
-        background-image: url('/images/needs/education/background/bg-education-others-mob.png');
-        background-repeat: no-repeat;
-        background-size: containxs;
-        background-position:left center;
-    }
-    .bg-master-mob{
-        background-image: url('/images/needs/background/bg-master-needs-gap.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center top;
-    }
-}
-@media screen and (min-width: 1250px) {
-    .bg-education-others{
-        background-image: url('/images/needs/education/background/bg-education-other.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:left bottom 28%;;
-    }
-    .bg-education-gap{
-        background-image: url('/images/needs/background/bg-master-needs-gap.png');
-        background-repeat: no-repeat;
-        background-size: 85%;
-        background-position:center top 40%;
-    }
-    #savings-risk-profile .bg-education-gap{
-        background-size: 75%;
-    }
-    #health-medical-selection .needs-stand-bg{
-        padding: 155px;
-    }
-}
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-    .single.room-selection-content{
-        grid-template-columns: 20% 50% 30%;
-    }
-}
-@media screen and (min-width: 1600px) {
-    .content-needs-default {
-        grid-template-rows: auto 4.5vh 11.2vh;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 16vh 73.5vh;
-    }
-    .content-supporting-default {
-        grid-template-rows:94.5% auto;
-    }
-    #savings-risk-profile .content-supporting-default, 
-    #investment-risk-profile .content-supporting-default {
-        grid-template-rows: 97% auto;
-    }
-    .needs-home-wrapper{
-        grid-template-rows: 88vh;
-    }
-    #protection-home .needs-home-wrapper {
-        grid-template-rows: 86vh;
-    }
-    .needs-home-avatar-wrapper{
-        grid-template-rows: 85% 15%;
-    }
-    #investment-home .needs-home-avatar-wrapper{
-        grid-template-rows: 85% 15%;
-    }
-    #savings-monthly .content-supporting-default,
-    #investment-monthly .content-supporting-default{
-        grid-template-rows: 93.5% auto;
-    }
-    #retirement-home .needs-stand-bg{
-        padding: 200px;
-    }
-    .col-xxxl-5 {
-        flex: 0 0 auto;
-        width: 41.66666667%;
-    }
-    #health-medical-home .needs-stand-bg{
-        padding: 190px;
-    }
-    .plant .position-absolute.center{
-        top:70%;
-    }
-    .single.room-selection-content{
-        grid-template-columns: 17% 60% 23%
-    }
-}
-@media screen and (min-width: 1800px) {
-    .investment-annual{
-        grid-template-columns: 50% 20%;
-    }
-}
-@media screen and (min-width: 1900px) {
-    .investment-annual{
-        grid-template-columns: 47% 20%;
-    }
-}
-@media screen and (min-width: 2000px) {
-    .content-needs-default {
-        grid-template-rows: auto 5% 8.7%;
-    }
-    .needs-stand-bg{
-        padding:190px;
-    }
-    .needs-stand-bg.error-padding{
-        padding:230px;
-    }
-    .wrapper-needs-supporting-default {
-        grid-template-rows: 19% 74%;
-    }
-    .content-supporting-default {
-        grid-template-rows:95.5% auto;
-    }
-    .needs-home-wrapper{
-        grid-template-rows: 90vh;
-    }
-    #protection-home .needs-home-wrapper{
-        grid-template-rows: 91.5vh;
-    }
-    #protection-home .needs-home-avatar-wrapper {
-        grid-template-rows: 90% 10%;
-    }
-    #investment-home .needs-stand-bg,
-    #education-home .needs-stand-bg {
-        padding: 250px;
-    }
-    .savings-monthly,
-    .investment-monthly{
-        grid-template-columns: 42% 20%;
-    }
-    .investment-annual{
-        grid-template-columns: 37% 20%;
-    }
-    #retirement-home .needs-stand-bg{
-        padding: 250px;
-    }
-    .plant .position-absolute.center{
-        top:80%;
-    }
-    .hospital .position-absolute.center {
-        top: 68%;
-    }
-    #debt-cancellation-home .needs-stand-bg{
-        padding: 250px;
-    }
-    #hospital-room-selection .needs-stand-bg{
-        padding: 180px;
-    }
-    .single.room-selection-content{
-        grid-template-columns: 15% 65% 20%;
-    }
-    .room-selection-content img{
-        width:100%;
-        height:100%;
-    }
-    img.windows{
-        width: 30%;
-        height: auto;
-    }
-    .patient img.avatar-patient{
-        width: 73%;
-        height: auto;
-    }
-    .patient-2 img.avatar-patient{
-        width: 100%;
-        height: auto;
-    }
-    img.roommate{
-        width: 100%;
-        height: auto;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/****************************************************** Redo Everything ******************************************************************/
-
-/* Gender Selection */
-:where(html){
-    --skinColor-1: linear-gradient(to bottom right,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E,#FFAE9E);
-    --skinColor-2: linear-gradient(to bottom right,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391,#F3A391);
-    --skinColor-3: linear-gradient(to bottom right,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E,#F69E6E);
-    --skinColor-4: linear-gradient(to bottom right,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471,#C68471);
-    --skinColor-5: linear-gradient(to bottom right,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951,#B66951);
-    --skinColor-6: linear-gradient(to bottom right,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F,#8F452F);
-}
-.bg-gender{
-    background: url(/images/avatar-general/gender-selection-display.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: bottom;
-}
-.left-center{
-    bottom: 50%;
-    left: 10%;
-}
-.right-center{
-    bottom: 50%;
-    right: 10%;
-}
-
-/* Global */
-.position-absolute.center{
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-}
-.h-88{
-    height: 88% !important;
-}
-.f-64{
-    font-size: 64px !important;
-}
-.w-80{
-    width: 80%;
-}
-.wd-80{
-    width: 100% !important;
-}
-.f-34{
-    font-size: 34px !important;
-}
-.fund-nav-rad{
-    border-radius: 0px 0px 20px 20px;
-}
-.chart-canvas{
-    width: 434px !important;
-    height: 434px !important;
-}
-.w-30{
-    width: 30%;
-}
-.max-h-100{
-    max-height: 100%;
-}
-/* Only show on bigger screen like desktop (min width 1250px) */
-.show-desktop{
-    display: none !important;
-}
-/* Only show on mobile and tablet devices (max width 1024px) */
-.hide-desktop{
-    display: none !important;
-}
-/* Only show on small device like mobile (max width 596px) */
-.d-hide-desk{
-    display: none !important;
-}
-/* Only show on small device like mobile (max width 767px) */
-.show-mobile{
-    display: none !important;
-}
-/* Only hide on mobile device (max width 767px) */
-.hide-mobile{
-    display:block !important;
-}
-/* Only hide on tablet device (max width 1024px) */
-.hide-tablet{
-    display: block !important;
-}
-.coverage_slick .slick-prev{
-    left: 15px;
-}
-.coverage_slick .slick-next{
-    right: 0;
-}
-.coverage_slick .slick-prev:before,
-.coverage_slick .slick-next:before{
-    color: #000;
-}
-.slick-height{
-    height: 100% !important;
-}
-.slick-padding{
-    padding: 3rem 3rem 0px 3rem;
-}
-.slide-button:hover path{
-    fill: #fff;
-}
-svg.slide-button.slick-arrow:hover {
-    background: #C21B17;
-}
-
-/* Global - Needs */
-.bg-needs{
-    background-image: url('/images/needs/education/bg-need-plain.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-.bg-needs-content{
-    background-image: url('/images/needs/education/bg-needs-master.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
-.bg-needs-content-full{
-    background-image: url('/images/needs/investment/bg-investment-master.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
-
-/* Education */
-.education-needs-home {
-    grid-template-areas: "header-spacing" "education-content-needs" "footer-avatar-default";
-    grid-template-rows: 10vh 60vh 30vh;
-    grid-gap: 0;
+/* ===================== Needs Master Summary Page ======================*/
+.wrapper-needs-summary-default {
     display: grid;
+    grid-gap: 0px;
     grid-template-columns: 100%;
+    grid-template-areas:
+        "header-needs-default"
+        "content-summary-default";
+    grid-template-rows: 13% 87%;
 }
-.education-content-needs {
-    grid-area: education-content-needs;
-}
-.education-needs-coverage {
-    grid-template-areas: "education-coverage-content" "footer-avatar-default";
-    grid-template-rows: 66vh 34vh;
-    grid-gap: 0;
-    display: grid;
-    grid-template-columns: 100%;
-}
-.education-coverage-content {
-    grid-area: education-coverage-content;
-}
-.footer-needs {
-    grid-area: footer-needs;
-    background-color: rgba(233, 233, 233, 1);
-}
-.position-absolute.center.up{
-    top: 45% !important;
-}
-.bg-education{
-    background-image: url('/images/needs/education/education-master-bg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
-.bg-education-book{
-    background-image: url(/images/needs/education/education-plain-home.png);
-    background-size: contain,90%;
-    background-position: center, center 20%;
-    background-repeat: no-repeat;
-}
-.bg-education-supporting{
-    background-image: url('/images/needs/education/bg-supporting.png');
-    background-repeat: no-repeat;
-    background-size: 67%;
-    background-position: bottom 10% left 28%;
-}
-.font-color-default{
-    color:#000;
-}
-.font-color-white{
-    color:#fff;
-}
-.bg-btn_bar{
-    background-color: #E9E9E9;
-}
-#hospital-room-selection .bg-btn_bar{
-    background-color: #D9D9D9;
-}
-.bg-needs_text{
-    background-color: #d3d3d3;
-}
-.min-h-100{
-    height: 100%;
-}
-/* #education-content .needs-nav a > img{
-    filter: invert(1);
-} */
-#education-content p{
-    font-size: 20px;
-}
-.pd-needs-home{
-    padding:130px;
-}
-.avatar-height{
-    height:83%;
-}
-.progress:after{
-    border: 3px solid #a0a0a0;
-}
-.progress .progress-bar{
-    border-width: 3px;
-}
-.progress-text{
-    color: #C21B17;
-    font-family: 'Helvetica Neue Regular';
-}
-.progress-left,
-.progress-right{
-    width: 30px; 
-    height: 60px;
-}
-.progress{
-    width: 50px; 
-    height: 50px;
-}
-.progress .progress-value{
-    line-height:45px;
-}
-.education-home-content{
-    grid-area: education-home-content;
-    grid-gap: 20px;
+.content-summary-default{
+    grid-area: content-summary-default;
     grid-template-columns: 100%;
     display: grid;
-    grid-auto-rows: 100%;
+    grid-template-rows: 84.5%;
 }
-.wrapper-needs{
+.graph-wrapper{
+    display: grid;
     grid-gap: 20px;
     grid-template-columns: 100%;
     grid-template-areas:
-        "education-home-content"
-        "education-home-text";
-    grid-template-rows: 35vh 55vh;
-    display: grid;
+        "summary-graph"
+        "summary-title";
+    grid-template-rows: 90% 10%;
 }
-.coverage-content{
-    grid-gap: 20px;
-    grid-template-columns: 50% 50%;
-    display: grid;
-    grid-auto-rows: 100%;
+.summary-graph{
+    grid-area: summary-graph;
+    grid-template-columns: 100%;
 }
-.needs-home-line{
-    height:2vh;
+.summary-title{
+    grid-area: summary-title;
+    grid-template-columns: 100%;
 }
-.needs-coverage-nav{
-    height:12vh;
-}
-.needs-nav-mob{
-    height:21vh;
-}
-.needs-master-nav{
-    height:18.5vh;
-}
-.needs-master-content{
-    height:66vh;
-}
-.needs-coverage-title{
-    height:10vh;
-}
-.needs-coverage-content{
-    height: 65vh;
-}
-.needs-gap-content{
-    height: 75vh;
-}
-.h-90{
-    height:90%;
-}
-.p-master{
-    padding:70px;
-}
-.fund-progress{
-    border-radius: 10px;
-    background: #D9D9D9;
-    height:10px;
-}
-.fund-progress-bar{
-    border-radius: 10px;
-    background: linear-gradient(90deg, #AA1B17 0%, #DA331E 100%);
-    height:8px;
-    margin-left:1px;
-}
-button.choice:hover, 
-button.choice:focus,
-.button-needs[data-required="selected"],
-.button-needs.selected {
-    background-image: url('/images/needs/hover-coverage.png');
-    background-repeat: no-repeat;
-    background-position: center bottom 8%;
-    background-size: 80%;
-}
-.z-99{
-    z-index:99;
-}
-.desktop-height{
-    height: 100%;
+.summary-value{
+    color:#C21B17;
+    text-align: right;
 }
 
-/* Investment */
-.bg-investments-needs{
-    background-image: url('/images/needs/investment/bg-investment.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+/* ===================== Form Control Text Field ======================*/
+.currencyinput {
+    border-bottom: 3px solid #000;
+    color: #C21B17;
+    font-weight: 700;
 }
-.bg-investment-supporting{
-    background-image: url('/images/needs/investment/bg-supporting.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:bottom;
+.currencyinput input {
+    border: 0;
 }
-.bg-investment-return{
-    background-image: url('/images/needs/investment/investment-avatar.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position:center;
+.money::placeholder{
+    font-size: 34px;
+    color: #C21B17;
+    font-weight: bold;
 }
-.bg-investment-others{
-    background-image: url('/images/needs/education/bg-others-new.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
+.form-control.money {
+    color: #C21B17;
+    font-weight: 500;
 }
-.bg-investment-gap{
-    background-image: url('/images/needs/education/bg-gap.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:center;
-}
-.calendar{
-    max-width: 36%;
-}
-
-/* Form */
-
 /* Hide the default radio buttons */
 .needs-radio {
     appearance: none;
@@ -1872,506 +584,152 @@ button.choice:focus,
     font-size: 18px; /* Adjust font size to control the size of the tick symbol */
     color: #C21B17; /* Color of the tick symbol */
 }
-.money::placeholder{
-    font-size: 34px;
-    color: #C21B17;
-    font-weight: bold;
-}
-.currencyinput {
-    border-bottom: 3px solid #000;
-    color: #C21B17;
-    font-weight: 700;
-}
-.currencyinput input {
-    border: 0;
-}
-.hide-content{
-    display:none;
-}
-  
-  
 
-/* Mobile  */
-@media only screen and (max-width: 596px){
-    .needs-home-mobile{
-        height: 100vh;
+/* Media Query - Mobile (screen size max 767px) */
+@media only screen and (max-width: 400px){
+    #health-medical-home .needs-home-avatar-wrapper{
+        grid-template-rows: 75% 25%;
     }
-    .needs-height{
-        height: 100%;
+}
+@media only screen and (max-width: 592px){
+    #retirement-home .needs-home-avatar-wrapper{
+        grid-template-rows: 85% 15%;
     }
-    .needs-mobile-nav{
-        height:23vh;
+    .mw-mob{
+        max-width: 100% !important;
     }
-    .needs-mobile-content{
-        height:77vh;
+}
+@media only screen and (max-width: 600px){
+    .content-needs-default{
+        grid-template-rows: auto 5vh 12vh;
     }
-    .w-80{
-        width: 100%;
+    #health-medical-selection .slick-padding{
+        padding: 15px 15px 0px 15px;
     }
-    .d-hide{
-        display:none !important;
+}
+@media only screen and (max-width: 600px) and (max-height: 699px){
+    .content-needs-default {
+       grid-template-rows: auto 7vh 16vh !important;
     }
-    .d-hide-desk{
-        display: block !important;
+}
+@media only screen and (max-width: 600px) and (min-height: 700px) and (max-height: 760px){
+    .content-needs-default {
+        grid-template-rows: auto 6.5vh 14.5vh !important;
     }
-    .h-88{
-        height: 70% !important;
+}
+@media only screen and (max-width: 600px) and (min-height: 761px) and (max-height: 798px){
+    .content-needs-default {
+        grid-template-rows: auto 5.5vh 14vh !important;
     }
-    .chart-canvas{
-        width: 334px !important;
-        height: 334px !important;
+}
+@media only screen and (min-width: 600px) and (max-width: 797px) and (min-height: 800px){
+    .content-needs-default  {
+        grid-template-rows: auto 5vh 11vh;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 797px) and (min-height: 1000px){
+    .content-needs-default  {
+        grid-template-rows: auto 4.5vh 10.5vh;
+    }
+}
+@media only screen and (max-width: 600px) and (min-height: 799px) and (max-height: 860px){
+    .content-needs-default {
+        grid-template-rows: auto 5.5vh 13vh !important;
+    }
+    .coverage_slick .slick-slide button{
+        grid-template-rows: 92% 8%;
+    }
+}
+@media only screen and (max-width: 700px){
+    .pb-7{
+        padding-bottom: 90px;
     }
 }
 @media only screen and (max-width: 767px){
-    .min-h-100{
-        height: 250px;
+    #health-medical-home .needs-stand-bg{
+        padding: 180px;
     }
-    .img_center{
-        transform: unset !important;
-        top: -75% !important;
-        left: 0 !important;
-    }
-    .height-mobile{
-        padding-bottom: 116px;
-    }
-    .needs-coverage-content{
-        height: 69vh;
-    }
-    .needs-master-content{
-        height:86vh;
-    }
-    .needs-master-footer{
-        height: 19vh;
-    }
-    .hide-mobile{
-        display: none !important;
-    }
-    .show-mobile{
-        display: block !important;
-    }
-    .needs-nav-mob{
-        height:14vh;
-    }
-    .needs-gap-content{
-        height: 88vh;
+    #health-medical-home .needs-stand-bg.error-padding{
+        padding: 190px;
     }
     .f-34{
-        font-size: 25px !important;
+        font-size: 25px;
     }
-    #education-content p{
-        font-size: 16px;
+    #education-home .start-20{
+        max-width: 100%;
+        transform: translate(-50%, -50%);
+        top: 58%;
+        left: 50%;
+    }
+    .mob-align-top{
+        align-items: start !important;
     }
     .money::placeholder{
         font-size: 16px;
     }
-    .slick-height{
-        height: fit-content !important;
-        max-height: 100% !important;
-    }
-    /* .slick-padding{
-        padding: 3rem !important;
-    } */
-    .desktop-height{
-        height: auto;
-    }
-    .investment-annual {
-        grid-template-columns: 50% 50% !important;
+}
+@media only screen and (max-width: 600px) and (min-height:861px) and (max-height: 900px){
+    .coverage_slick .slick-slide button{
+        grid-template-rows: 92% 8%;
     }
 }
-@media only screen and (max-width: 596px) and (max-height: 700px){
-    .needs-coverage-content{
-        height: 62vh;
-    }
-    .needs-master-footer{
-        height: 26vh;
-    }
-    /* .needs-master-content{
-        height:43.5vh;
-    } */
-}
-@media only screen and (max-width: 596px) and (min-height: 701px) and (max-height: 800px){
-    .needs-coverage-content{
-        height: 65vh;
-    }
-    .needs-master-footer{
-        height: 23vh;
-    }
-    /* .needs-master-content{
-        height:46.5vh;
-    } */
-}
-@media only screen and (max-width: 596px) and (min-height: 801px) and (max-height: 900px){
-    .needs-coverage-content{
-        height: 67vh;
-    }
-    .needs-master-footer{
-        height: 21vh;
-    }
-    /* .needs-master-content{
-        height:48.5vh;
-    } */
-}
-@media only screen and (max-width: 1024px){
-    .img_center{
-        transform: translate(-50%,-50%);
-        top: 50%;
-        left: 50%;
-    }
-    .avatar-height{
-        max-height:100%;
-        max-width:100%;
-        object-fit: contain;
-    }
-    .hide-tablet{
-        display: none !important;
-    }
-    .hide-desktop{
-        display: block !important;
-    }
-    .bg-education-gap-mob{
-        background-image: url('/images/needs/education/bg-education-gap-mob.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:center;
-    }
-    .calendar{
-        max-width: 70%;
-    }
-    /* .slick-padding{
-        padding: 0.5rem;
-    } */
-    .bg-education-home{
-        background-size: cover;
-    }
-    .bg-education-book{
-        background-size: cover;
-    }
-    #hospital-room-selection .needs-stand-bg{
-        padding: 140px;
-    }
-    .single.room-selection-content {
-        grid-template-columns: 0% 100% 0%;
-    }
-}
-@media only screen and (min-width: 1024px){
-    .needs-home-nav {
-        height: 4.5vh;
-    }
-    .needs-home-footer {
-        height: 8vh;
-    }
-    .needs-coverage-content{
-        height: 70vh;
-    }
-    .needs-master-footer{
-        height: 8vh;
-    }
-    .needs-gap-content{
-        height: 80vh;
-    }
-    .needs-master-content{
-        height:71vh;
-    }
-    .needs-home-content{
-        height:85.5vh;
-    }
-}
-@media only screen and (min-width: 992px) and (max-width: 1023px) {
-    .needs-home-nav{
-        height:8.5vh;
-    }
-    .needs-home-content{
-        height:76.5vh;
-    }
 
-}
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-    .needs-home-nav{
-        height:5.5vh;
+/* Media Query - Medium device (screen size max 1024px) */
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .needs-home-wrapper{
+        grid-template-rows: 90vh;
     }
-    .needs-home-footer{
-        height:9vh;
+    #retirement-home .needs-home-wrapper{
+        grid-template-rows: 92vh;
     }
-    .needs-coverage-content{
-        height: 69vh;
+    .needs-stand-bg.error-padding {
+        padding: 190px;
     }
-    .needs-master-footer{
-        height:9vh;
+    .needs-stand-bg{
+        padding: 180px;
     }
-    .needs-gap-content{
-        height: 79vh;
-    }
-    .needs-master-content{
-        height:70vh;
-    }
-    .needs-home-content{
-        height:83.5vh;
-    }
-    .needs-row{
-        display: grid;
-    }
-    .p-master{
-        padding:70px;
-    }
-    .fund-nav-rad h3{
-        font-size: 40px;
-    }
-    .slick-height{
-        height: fit-content !important;
-    }
-    
-
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-    .h-88{
-        height: 80% !important;
-    }
-    #health-medical-home .needs-stand-bg{
+    #investment-home .needs-stand-bg,
+    #education-home .needs-stand-bg,
+    #protection-home .needs-stand-bg {
         padding: 250px;
     }
-}
-@media only screen and (min-width: 768px) and (max-height: 1024px) {
-    .needs-home-nav{
-        height:6vh;
+    #investment-home .needs-stand-bg.error-padding,
+    #education-home .needs-stand-bg.error-padding,
+    #protection-home .needs-stand-bg.error-padding {
+        padding: 270px;
     }
-    .needs-home-footer{
-        height:10vh;
+    #savings-home .needs-stand-bg{
+        padding: 200px;
     }
-    .needs-coverage-content{
-        height: 68vh;
+    #savings-home .needs-stand-bg.error-padding{
+        padding: 210px;
     }
-    .needs-master-footer{
-        height:10vh;
+    .content-needs-default {
+        grid-template-rows: auto 4vh 8vh;
     }
-    .needs-gap-content{
-        height: 78vh;
-    }
-    .needs-master-content{
-        height:69vh;
-    }
-    .needs-home-content{
-        height:82vh;
+    button.choice:hover, 
+    button.choice:focus,
+    .button-needs[data-required="selected"],
+    .button-needs.selected {
+        background-position: center bottom 10%;
     }
 }
-@media only screen and (min-width: 768px){
-    .w-md-50{
-        width:50%;
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
+    #retirement-home .needs-home-avatar-wrapper {
+        grid-template-rows: 85% 15%;
     }
-    .vh-md-100{
-        height: 100vh;
-    }
-}
-@media only screen and (min-width: 700px) and (max-width: 767px) and (min-height: 1024px) {
-    .needs-home-nav{
-        height:5.5vh;
-    }
-    .needs-home-footer{
-        height:15vh;
-    }
-    .needs-coverage-content{
-        height: 63vh;
-    }
-    .needs-master-footer{
-        height:15vh;
-    }
-    /* .needs-master-content{
-        height:54.5vh;
-    } */
-    .needs-home-content{
-        height:77.5vh;
-    }
-
-}
-@media only screen and (min-width: 600px) and (max-width: 699px) and (min-height: 900px) {
-    .needs-home-nav{
-        height:6vh;
-    }
-    .needs-home-footer{
-        height:17vh;
-    }
-    .needs-coverage-content{
-        height: 70vh;
-    }
-    .needs-master-footer{
-        height:18vh;
-    }
-    /* .needs-master-content{
-        height:52.5vh;
-    } */
-    .needs-home-content{
-        height:75vh;
-    }
-
-}
-@media only screen and (min-width: 1500px){
-    .needs-home-line{
-        height:1.5vh;
-    }
-    .needs-home-nav{
-        height:7vh;
-    }
-    .needs-home-footer{
-        height:11vh;
-    }
-    .needs-coverage-content{
-        height: 67vh;
-    }
-    .needs-master-footer{
-        height:11vh;
-    }
-    .needs-gap-content{
-        height: 77vh;
-    }
-    .needs-master-content{
-        height:68vh;
-    }
-    .needs-home-content{
-        height:80.5vh;
-    }
-    .h-xxl-100{
-        height:100%;
+    #retirement-home .needs-stand-bg{
+        padding: 220px;
     }
 }
-@media only screen and (max-height: 670px){
-    h5{
-        font-size: 21px;
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (min-height: 900px){
+    #savings-home .needs-stand-bg,
+    #health-medical-home .needs-stand-bg {
+        padding: 250px !important;
     }
-}
-@media only screen and (min-width: 992px) and (max-width: 1023px) and (max-height: 1100px){
-    .needs-home-nav {
-        height: 6vh;
-    }
-    .needs-home-content{
-        height:82.5vh;
-    }
-
-}
-@media only screen and (min-width: 900px) and (max-width: 1023px) and (min-height: 1100px){
-    .needs-home-nav {
-        height: 4.5vh;
-    }
-    .needs-home-footer {
-        height: 8vh;
-    }
-    .needs-coverage-content{
-        height: 70vh;
-    }
-    .needs-master-footer {
-        height: 8vh;
-    }
-    .needs-gap-content{
-        height: 80vh;
-    }
-    .needs-master-content{
-        height:71vh;
-    }
-    .needs-home-content{
-        height:85.5vh;
-    }
-}
-@media only screen and (min-width: 1024px) and (max-height: 600px){
-    .needs-home-content {
-        height: 69.5vh;
-    }
-    .needs-home-footer {
-        height: 18vh;
-    }
-    .needs-coverage-content{
-        height: 60vh;
-    }
-    .needs-master-footer {
-        height: 18vh;
-    }
-    .needs-gap-content{
-        height: 70vh;
-    }
-    .needs-master-content{
-        height:61vh;
-    }
-    .needs-home-nav {
-        height: 10.5vh;
-    }
-}
-/* @media only screen and (min-width: 1023px) and (min-height: 799px){
-    .avatar-height{
-        height:60%;
-    }
-} */
-@media only screen and (min-width: 1024px) and (max-width: 1400px) and (min-height: 760px) and (max-height: 850px){
-    .needs-home-content {
-        height: 77vh;
-    }
-    .needs-home-footer {
-        height: 13vh;
-    }
-    .needs-coverage-content{
-        height: 65vh;
-    }
-    .needs-master-footer {
-        height: 13vh;
-    }
-    .needs-gap-content{
-        height: 75vh;
-    }
-    .needs-master-content{
-        height:66vh;
-    }
-    .needs-home-nav {
-        height: 8vh;
-    }
-    .avatar-height{
-        height:83%;
-    }
-    .wd-80{
-        width:80% !important;
-    }
-    /* .slick-padding{
-        padding: 3rem;
-    } */
-}
-@media only screen and (min-width: 1280px) and (max-height: 800px){
-    .needs-home-content {
-        height: 77vh;
-    }
-    .needs-home-footer {
-        height: 13vh;
-    }
-    .needs-coverage-content{
-        height: 65vh;
-    }
-    .needs-master-footer{
-        height: 13vh;
-    }
-    .needs-gap-content{
-        height: 75vh;
-    }
-    .needs-master-content{
-        height:66vh;
-    }
-    .needs-home-nav {
-        height: 8vh;
-    }
-}
-@media only screen and (min-width: 1250px) and (max-width: 1280px) and (min-height: 801px){
-}
-@media only screen and (min-width: 1250px){
-    .bg-needs-desktop{
-        background-image: url('/images/needs/background/bg-master-needs.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position:left center;
-    }
-    .bg-protection{
-        background-image: url('/images/needs/background/bg-protection.png');
-        background-repeat: no-repeat;
-        background-size: 95%;
-        background-position: bottom left;
-    }
-    .show-desktop{
-        display: block !important;
-    }
-    .d-vh-100{
-        height: 100vh !important;
+    #savings-home .needs-stand-bg.error-padding,
+    #health-medical-home .needs-stand-bg.error-padding {
+        padding: 260px !important;
     }
 }
 @media only screen and (max-width: 1199px){
@@ -2382,29 +740,327 @@ button.choice:focus,
         order:2;
     }
 }
-@media only screen and (min-width:1100px) and (max-width: 1199px){
-    .investment-monthly{
-        grid-template-columns: 22% 8%;
-        grid-template-rows: 100%;
-        height: 63%;
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 800px) and (max-height: 1050px){
+    .content-needs-default {
+        grid-template-rows: auto 4vh 11vh !important;
     }
-    .protection-monthly {
+    .image-content-spacing{
+        grid-template-rows: 10% 80% !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1059px) and (max-height: 1199px){
+    .content-needs-default {
+        grid-template-rows: auto 4.5vh 9.8vh !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
+    .content-needs-default {
+        grid-template-rows: auto 4vh 8.5vh !important;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1100px) and (max-height: 600px){
+    .needs-home-wrapper{
+        grid-template-rows: 80vh;
+    }
+    .content-needs-default {
+        grid-template-rows: auto 8vh 18vh !important;
+    }
+    #needs-content .col-12.col-xl-6{    
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    #needs-content .first-order{
+        order: 2;
+    }
+    #needs-content .second-order{
+        order: 1;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1100px) and (min-height: 1200px){
+    #retirement-home .needs-home-avatar-wrapper{
+        grid-template-rows: 83% 17%;
+    }
+    #retirement-home .needs-stand-bg{
+        padding: 250px;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1100px) and (max-height:800px){
+    .needs-home-wrapper{
+        grid-template-rows: 86vh;
+    }
+    #retirement-home .needs-home-wrapper {
+        grid-template-rows: 85vh;
+    }
+    #savings-home .needs-home-avatar-wrapper {
+        grid-template-rows: 75% 15%;
+    }
+    #investment-home .mh-90 {
+        max-height: 85%;
+    }
+    .needs-stand-bg{
+        padding: 130px;
+    }
+    .needs-stand-bg.error-padding{
+        padding: 140px;
+    }
+    #health-medical-selection .needs-stand-bg{
+        padding: 180px;
+    }
+    #health-medical-selection .needs-stand-bg.error-padding{
+        padding: 190px;
+    }
+    .content-needs-default {
+        grid-template-rows: auto 6vh 14vh;
+    }
+    #needs-content .col-12.col-xl-6{    
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    #needs-content .first-order{
+        order: 2;
+    }
+    #needs-content .second-order{
+        order: 1;
+    }
+}
+@media only screen and (max-width: 992px){
+    .calendar-wrapper{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto 60% auto;
+        grid-template-areas:
+            "calendar-text"
+            "calendar-content"
+            "calendar-text2";
+        grid-gap: 0px;
+    }
+    .calendar-text {
+        grid-area: calendar-text;
+        grid-template-columns: 100%;
+        justify-content: center !important;
+    }
+    .calendar-content {
+        grid-area: calendar-content;
+        grid-template-columns: 100%;
+        display: grid !important;
         grid-template-rows: 100%;
-        height: 63%;
+    }
+    .calendar-text2 {
+        grid-area: calendar-text2;
+        grid-template-columns: 100%;
+        justify-content: center !important;
+    }
+}
+@media only screen and (max-width: 1024px){
+    .needs-home-avatars{
+        grid-template-columns: repeat(3, 0% 100% 0%);
+    }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 140px;
+    }
+    #hospital-room-selection .needs-stand-bg.error-padding{
+        padding: 150px;
+    }
+    .bg-needs-master-full{
+        background-size: cover;
+    }
+    #debt-cancellation-home .coins{
+        width: 35%;
+    }
+    #debt-cancellation-home .left-20{
+        left: 3%;
+    }
+    #education-home .start-25px{
+        left: 0px;
+    }
+    .bg-hm-home-element{
+        background-size: 100%;
+        background-position: center top 40%;
+    }
+    .single.room-selection-content {
+        grid-template-columns: 0% 100% 0%;
+    }
+    .bg-half-content{
+        background-size: cover !important;
+    }
+    .calendar{
+        max-width: 70%;
+    }
+}
+@media only screen and (min-width: 768px){
+    .w-md-50{
+        width:50%;
+    }
+    .vh-md-100{
+        height: 100vh;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px){
+    #debt-cancellation-home .needs-stand-bg {
+        padding: 210px;
+    }
+    .slick-slide{
+        max-height: 100%;
     }
 }
 
-/* @media only screen and (max-width: 1440px){
-    .needs-home-line{
-        height:2vh;
+/* Media Query - Large device (screen size max 1500px) */
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 700px){
+    .content-needs-default {
+        grid-template-rows: auto 6.5vh 15.5vh;
     }
-    .needs-home-nav{
-        height:8vh;
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (max-height: 840px){
+    .needs-home-avatars {
+        grid-template-columns: repeat(3, 10% 75% auto);
     }
-    .needs-home-footer{
-        height:14vh;
+    #savings-home .needs-home-avatars {
+        grid-template-columns: repeat(3, 8% 80% auto);
     }
-    .needs-home-content{
-        height:76vh;
+    .content-needs-default {
+        grid-template-rows: auto 5.5vh 13.5vh;
     }
-} */
+    #needs-content .col-12.col-xl-6{    
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    #needs-content .first-order{
+        order: 2;
+    }
+    #needs-content .second-order{
+        order: 1;
+    }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) and (min-height: 900px){
+    .needs-home-wrapper{
+        grid-template-rows: 88vh;
+    }
+    .needs-home-avatar-wrapper {
+        grid-template-rows: 85% 15%;
+    }
+    #savings-home .needs-home-avatars {
+        grid-template-columns: repeat(3, 5% 90% auto);
+    }
+    .content-needs-default {
+        grid-template-rows: auto 5.5vh 11.4vh;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .single.room-selection-content{
+        grid-template-columns: 20% 50% 30%;
+    }
+}
+@media screen and (min-width: 1250px) {
+    #health-medical-selection .needs-stand-bg{
+        padding: 155px;
+    }
+    #health-medical-selection .needs-stand-bg.error-padding{
+        padding: 165px;
+    }
+}
+@media only screen and (min-width: 1366px) and (max-width: 1399px) and (min-height: 1000px){
+    .content-needs-default {
+        grid-template-rows: auto 4.5vh 10.5vh !important;
+    }
+}
+@media only screen and (min-width: 1400px) and (min-height: 900px){
+    .content-needs-default {
+        grid-template-rows: auto 5.5vh 12vh;
+    }
+}
+@media screen and (min-width: 1600px) {
+    .needs-home-wrapper{
+        grid-template-rows: 88vh;
+    }
+    #protection-home .needs-home-wrapper {
+        grid-template-rows: 86vh;
+    }
+    .needs-home-avatar-wrapper,
+    #investment-home .needs-home-avatar-wrapper{
+        grid-template-rows: 85% 15%;
+    }
+    #retirement-home .needs-stand-bg,
+    #health-medical-home .needs-stand-bg.error-padding{
+        padding: 200px;
+    }
+    #retirement-home .needs-stand-bg.error-padding{
+        padding: 210px;
+    }
+    #health-medical-home .needs-stand-bg{
+        padding: 190px;
+    }
+    .content-needs-default {
+        grid-template-rows: auto 4.5vh 11.2vh;
+    }
+    .plant .position-absolute.center{
+        top:70%;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 17% 60% 23%
+    }
+}
+@media screen and (min-width: 2000px) {
+    .needs-home-wrapper{
+        grid-template-rows: 90vh;
+    }
+    #protection-home .needs-home-wrapper{
+        grid-template-rows: 91.5vh;
+    }
+    #protection-home .needs-home-avatar-wrapper {
+        grid-template-rows: 90% 10%;
+    }
+    .needs-stand-bg,
+    #hospital-room-selection .needs-stand-bg.error-padding{
+        padding:190px;
+    }
+    .needs-stand-bg.error-padding{
+        padding:230px;
+    }
+    #investment-home .needs-stand-bg,
+    #education-home .needs-stand-bg,
+    #retirement-home .needs-stand-bg,
+    #debt-cancellation-home .needs-stand-bg{
+        padding: 250px;
+    }
+    #hospital-room-selection .needs-stand-bg{
+        padding: 180px;
+    }
+    #investment-home .needs-stand-bg.error-padding,
+    #education-home .needs-stand-bg.error-padding,
+    #retirement-home .needs-stand-bg.error-padding,
+    #debt-cancellation-home .needs-stand-bg.error-padding{
+        padding: 265px;
+    }
+    .content-needs-default {
+        grid-template-rows: auto 5% 8.7%;
+    }
+    .plant .position-absolute.center{
+        top:80%;
+    }
+    .hospital .position-absolute.center {
+        top: 68%;
+    }
+    .single.room-selection-content{
+        grid-template-columns: 15% 65% 20%;
+    }
+    .room-selection-content img{
+        width:100%;
+        height:100%;
+    }
+    img.roommate{
+        width: 100%;
+        height: auto;
+    }
+    .patient img.avatar-patient{
+        width: 73%;
+        height: auto;
+    }
+    .patient-2 img.avatar-patient{
+        width: 100%;
+        height: auto;
+    }
+    img.windows{
+        width: 30%;
+        height: auto;
+    }
+}

@@ -18,10 +18,10 @@
     $selectedRoom = session('customer_details.health_medical_needs.medical_planning.roomOption');
 @endphp
 
-<div id="hospital-room-selection" class="vh-100 overflow-hidden">
+<div id="hospital-room-selection">
     <div class="container-fluid">
-        <div class="row scrollable-content">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white" style="z-index: 1;">
+        <div class="row scrollable-content vh-100 overflow-hidden">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white z-1">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center wrapper-room-selection">
@@ -90,8 +90,8 @@
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="110px" alt="own-space">
                                                     </div>
-                                                    <div class="col-8 d-flex justify-content-center">
-                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">My own space</p>
+                                                    <div class="col-8 d-flex">
+                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal">My own space</p>
                                                     </div>
                                                 </button>
                                             </div>
@@ -104,8 +104,8 @@
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion">
                                                     </div>
-                                                    <div class="col-8 d-flex justify-content-center">
-                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">A companion</p>
+                                                    <div class="col-8 d-flex">
+                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal">A companion</p>
                                                     </div>
                                                 </button>
                                             </div>
@@ -118,8 +118,8 @@
                                                     <div class="col-4">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates">
                                                     </div>
-                                                    <div class="col-8 d-flex justify-content-center">
-                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">More roommates</p>
+                                                    <div class="col-8 d-flex">
+                                                        <p class="avatar-text text-start mb-0 fw-bold lh-normal">More roommates</p>
                                                     </div>
                                                 </button>
                                             </div>

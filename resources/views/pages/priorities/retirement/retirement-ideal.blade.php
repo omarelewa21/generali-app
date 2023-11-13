@@ -17,10 +17,10 @@
     $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
 @endphp
 
-<div id="retirement-ideal" class="vh-100">
+<div id="retirement-ideal">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 vh-100 wrapper-needs-coverage-default">
+        <div class="row vh-100">
+            <div class="col-12 vh-100 wrapper-needs-master-full-default">
                 <section class="header-needs-default">
                     <div class="col-lg-6 col-md-12">
                         @include('templates.nav.nav-red-menu')
