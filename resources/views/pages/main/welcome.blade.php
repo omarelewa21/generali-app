@@ -28,8 +28,10 @@
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center pt-xl-0 pt-sm-5 pt-5">
-                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector">
-                </div>
+                    <!-- <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector"> -->
+                    <div id="lottie-male-animation" class="homeVector"></div>
+                    <div id="lottie-female-animation" class="homeVector"></div>
+            </div>
             </div>
         </div>
     </section>
@@ -37,4 +39,23 @@
         <img src="{{ asset('images/welcome-page/home-vector.png') }}" width="30%" alt="Footer Vector" class="footerVector">
     </section>
 </div>
+
+<script>
+    // Load the animation using Lottie
+    const animationFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-female-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/welcome-page/female-avatar.json') }}'
+    });
+
+    const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-male-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/welcome-page/male-avatar.json') }}'
+    });
+</script>
 @endsection

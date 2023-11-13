@@ -12,7 +12,7 @@
 
 @section('content')
 
-<div id="monthly_goals" class="vh-100 overflow-y-auto overflow-x-hidden secondary-default-bg">
+<div id="monthly_goals" class="secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
@@ -51,7 +51,8 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <a href="{{route('existing.policy')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
-                                <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                <a href="{{route('summary.expected-income')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Next</a>
+                                <!-- <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button> -->
                             </div>
                         </div>
                     </div>

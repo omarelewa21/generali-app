@@ -598,133 +598,759 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/existing-policy') {
         document.addEventListener('DOMContentLoaded', function() {
-            // Add more form
-            let i = 2;
-            var formContainer = document.getElementById('formContainer');
-            var existingpolicy = document.getElementById('existing_policy');
-            var formTemplate = document.getElementById('form');
-            var modalTemplate = document.getElementById('addBenefits');
+            // Show dropdown based on selected radio buttons
+            var ownerRadioButton = document.querySelector('input[name="policyRole"][value="owner"]');
+            var dependantRadioButton = document.querySelector('input[name="policyRole"][value="life insured"]');
+            var bothRadioButton = document.querySelector('input[name="policyRole"][value="both"]');
+            var first_name_dropdown = document.getElementById('policyFirstNameSelect');
+            var last_name_dropdown = document.getElementById('policyLastNameSelect');
 
-            document.getElementById('addFormsBtn').addEventListener('click', function() {
-                if (i <= 4) {
-                    // Clone the form template
-                    var clonedForm = formTemplate.cloneNode(true);
-                    var clonedModal = modalTemplate.cloneNode(true);
+            // Pre-select the options
+            if (existingPolicy && existingPolicy['policy_1']) {
+                var sessionRole = existingPolicy['policy_1']['role'];
+                var sessionFirstName = existingPolicy['policy_1']['first_name'];
+                var sessionLastName = existingPolicy['policy_1']['last_name'];
+            }
 
-                    // Generate unique IDs for input fields within the cloned form
-                    const originalForm = clonedForm.getAttribute('id');
-                    const newForm = originalForm + i;
-                    clonedForm.setAttribute('id', newForm);
+            if (sessionRole === 'owner') {
+                var first_name_option = document.createElement('option');
+                first_name_option.value = first_name;
+                first_name_option.text = first_name;
+                var last_name_option = document.createElement('option');
+                last_name_option.value = last_name;
+                last_name_option.text = last_name;
 
-                    // Get the title
-                    const oriTitle = clonedForm.querySelector('h4');
-                    const newTitle = 'Policy ' + i;
-                    oriTitle.innerHTML = newTitle;
+                first_name_dropdown.add(first_name_option);
+                last_name_dropdown.add(last_name_option);
+                first_name_dropdown.value = sessionFirstName;
+                last_name_dropdown.value = sessionLastName;
+            }
+            else if (sessionRole === 'life insured') {
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
 
-                    clonedForm.querySelectorAll('input').forEach(input => {
-                        const originalId = input.getAttribute('id');
-                        const newId = originalId + i;
-                        input.setAttribute('name', newId);
-                        input.value = '';
-                    });
-
-                    clonedForm.querySelectorAll('*').forEach(elementForm => {
-                        if (elementForm.id) {
-                            elementForm.id = elementForm.id + i;
+                        if (family_details[key]['first_name'] === sessionFirstName) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = family_details[key]['last_name'];
+                            last_name_option.text = family_details[key]['last_name'];
+                            last_name_dropdown.add(last_name_option);
                         }
-                    });
+                        
+                        first_name_dropdown.add(first_name_option);
+                        first_name_dropdown.value = sessionFirstName;
+                        last_name_dropdown.value = sessionLastName;
 
-                    var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
-                    var modalTarget = modalLink.getAttribute('data-bs-target');
-                    const newModalTarget = modalTarget + i;
-                    modalLink.setAttribute('data-bs-target', newModalTarget);
-                    clonedForm.setAttribute('data-index', i);
-
-                    const modalId = clonedModal.getAttribute('id');
-                    const newModalId = modalId + i;
-                    clonedModal.setAttribute('id', newModalId);
-                    var modalButton = clonedModal.querySelector('.btn-exit-benefits');
-                    modalButton.setAttribute('data-index', i);
-
-                    // clonedModal.querySelectorAll('*').forEach(element => {
-                    //     if (element.id) {
-                    //         element.id = element.id + i;
-                    //     }
-                    // });
-                    clonedModal.querySelectorAll('input').forEach(input => {
-                        const originalInput = input.getAttribute('id');
-                        const newInput = originalInput + i;
-                        input.setAttribute('id', newInput);
-                        input.setAttribute('name', newInput);
-                        input.value = '';
-                    });
-
-                    var removeField = clonedForm.querySelectorAll('.remove-div');
-                    removeField.forEach(function(removeFields) {
-                        removeFields.remove();
-                    });
-
-                    // Append the cloned form to the container
-                    formContainer.appendChild(clonedForm);
-                    existingpolicy.appendChild(clonedModal);
-
-                    if (i === 4) {
-                        $('.customAddBtn').hide();
+                        last_name_auto_dropdown();
                     }
-                    i++;
                 }
+            }
+            else if (sessionRole === 'both') {
+                var first_name_option_self = document.createElement('option');
+                first_name_option_self.value = first_name;
+                first_name_option_self.text = first_name;
+
+                first_name_dropdown.add(first_name_option_self);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+
+                        if (family_details[key]['first_name'] === sessionFirstName) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = family_details[key]['last_name'];
+                            last_name_option.text = family_details[key]['last_name'];
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        else {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = last_name;
+                            last_name_option.text = last_name;
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        
+                        first_name_dropdown.add(first_name_option);
+                        first_name_dropdown.value = sessionFirstName;
+                        last_name_dropdown.value = sessionLastName;
+
+                        last_name_auto_dropdown_both();
+                    }
+                }
+            }
+            else {
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                last_name_dropdown.add(defaultOption);
+            }
+
+            // Show options based on selected radio button
+            ownerRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
+
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                // first_name_dropdown.add(defaultOption.cloneNode(true));
+                first_name_dropdown.add(defaultOption);
+
+                var first_name_option = document.createElement('option');
+                first_name_option.value = first_name;
+                first_name_option.text = first_name;
+                var last_name_option = document.createElement('option');
+                last_name_option.value = last_name;
+                last_name_option.text = last_name;
+
+                first_name_dropdown.add(first_name_option);
+                last_name_dropdown.add(last_name_option);
             });
 
-            // Add more fields
-            var fieldCount = 0;
-            $(document).on('click', '.btn-exit-benefits', function(event) {
-                event.preventDefault();
+            dependantRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
 
-                var addBenefitsInput;
-                var addFields;
-                var dataIndex = $(this).data('index');
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                first_name_dropdown.add(defaultOption);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+                        
+                        first_name_dropdown.add(first_name_option);
+                    }
+                }
                 
-                if (dataIndex == '1') {
-                    addBenefitsInput = 'addBenefitsInput';
-                    addFields = '#addFields';
-                }
-                else {
-                    addBenefitsInput = 'addBenefitsInput' + dataIndex;
-                    addFields = '#addFields' + dataIndex;
-                }
-                const title = document.getElementById(addBenefitsInput);
-                var capitalizedTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
-                var formattedTitle = title.value.replace(/\s+/g, '').toLowerCase();
+                last_name_auto_dropdown();
 
-                // Create a new label element
-                var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12 remove-div'>");
-                var label = '<label for="benefitsInput" class="form-label">' + capitalizedTitle + '</label>';
-                var alert = '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><div class="text">There was a problem with your submission. You can only add up to 4 benefits.</div>';
+                var changeEvent = new Event('change');
+                first_name_dropdown.dispatchEvent(changeEvent);
+            });
+
+            function last_name_auto_dropdown() {
+                first_name_dropdown.addEventListener('change', function() {
+                    var selectedFirstName = first_name_dropdown.value;
+
+                    if (selectedFirstName) {
+                        var selectedLastName = '';
+                        for (var key in family_details) {
+                            if (family_details.hasOwnProperty(key)) {
+                                if (family_details[key]['first_name'] === selectedFirstName) {
+                                    selectedLastName = family_details[key]['last_name'];
+                                    break;
+                                }
+                            }
+                        }
     
-                // Create a new text input element
-                var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="' + formattedTitle + '" class="form-control @error("' + formattedTitle + '") is-invalid @enderror" id="benefitsInput" value="{{ old("' + formattedTitle + '", $basicDetails["house_phone_number"] ?? "") }}"><a class="remove-field"><i class="bi bi-trash3-fill" style="color:#C21B17"></i></a></div>';
+                        var last_name_option = document.createElement('option');
+                        last_name_option.value = selectedLastName;
+                        last_name_option.text = selectedLastName;
+                        last_name_dropdown.innerHTML = '';
+                        last_name_dropdown.add(last_name_option);
+                    }
+                    else {
+                        last_name_dropdown.innerHTML = '';
+                    }
+                });
+            }
+            
+            bothRadioButton.addEventListener('click', function() {
+                first_name_dropdown.innerHTML = '';
+                last_name_dropdown.innerHTML = '';
 
-                // Append the label and text input to the container div
-                if (fieldCount < 4) {
+                var defaultOption = document.createElement('option');
+                defaultOption.text = 'Please Select';
+                defaultOption.value = '';
+                defaultOption.disabled = true;
+
+                first_name_dropdown.add(defaultOption);
+
+                var first_name_option_self = document.createElement('option');
+                first_name_option_self.value = first_name;
+                first_name_option_self.text = first_name;
+
+                first_name_dropdown.add(first_name_option_self);
+
+                for (var key in family_details) {
+                    if (family_details.hasOwnProperty(key)) {
+                        var first_name_option = document.createElement('option');
+                        first_name_option.value = family_details[key]['first_name'];
+                        first_name_option.text = family_details[key]['first_name'];
+                        
+                        first_name_dropdown.add(first_name_option);
+                    }
+                }
+
+                last_name_auto_dropdown_both();
+
+                var changeEvent = new Event('change');
+                first_name_dropdown.dispatchEvent(changeEvent);
+            });
+
+            function last_name_auto_dropdown_both() {
+                first_name_dropdown.addEventListener('change', function() {
+                    var selectedFirstName = first_name_dropdown.value;
+                    last_name_dropdown.innerHTML = '';
+
+                    if (selectedFirstName) {
+                        var selectedLastName = '';
+                        var foundMatch = false;
+
+                        for (var key in family_details) {
+                            if (family_details.hasOwnProperty(key)) {
+                                if (family_details[key]['first_name'] === selectedFirstName) {
+                                    selectedLastName = family_details[key]['last_name'];
+                                    foundMatch = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (foundMatch) {
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = selectedLastName;
+                            last_name_option.text = selectedLastName;
+                            last_name_dropdown.innerHTML = '';
+                            last_name_dropdown.add(last_name_option);
+                        }
+                        else {
+                            var last_name_option_self = document.createElement('option');
+                            last_name_option_self.value = last_name;
+                            last_name_option_self.text = last_name;
+                            last_name_dropdown.add(last_name_option_self);
+                        }
+                    }
+                    else {
+                        last_name_dropdown.innerHTML = '';
+                    }
+                });
+            }
+            
+            let i = 2;
+
+            // Function to add a new form
+            function addForm() {
+                var formContainer = document.getElementById('formContainer');
+                var existingpolicy = document.getElementById('existing_policy');
+                var formTemplate = document.getElementById('form');
+                var modalTemplate = document.getElementById('addBenefits');
+
+                // Clone the form template
+                var clonedForm = formTemplate.cloneNode(true);
+                var clonedModal = modalTemplate.cloneNode(true);
+
+                // Generate unique IDs for cloned form
+                const originalForm = clonedForm.getAttribute('id');
+                const newForm = originalForm + i;
+                clonedForm.setAttribute('id', newForm);
+
+                // Generate unique title for cloned form
+                const oriTitle = clonedForm.querySelector('h4');
+                const newTitle = 'Policy ' + i;
+                oriTitle.innerHTML = newTitle;
+
+                // Generate unique labels for cloned form
+                clonedForm.querySelectorAll('label.form-label').forEach(input => {
+                    const originalLabel = input.getAttribute('for');
+                    const newLabel = originalLabel + i;
+                    input.setAttribute('for', newLabel);
+                });
+
+                // Generate unique IDs for inputs within cloned form
+                clonedForm.querySelectorAll('input:not(.policy):not(.role)').forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    const newName = originalName + i;
+                    input.setAttribute('name', newName);
+                    if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['name'] && input.getAttribute('name') == 'policyFirstName' + i) {
+                        input.value = existingPolicy['policy_' + i]['name'] || '';
+                    }
+                    // const oldInputValue = `{{ old('companyOthers', $existingPolicy['policy_1']['company_others'] ?? '') }}`;
+                    // if (oldInputValue !== '') {
+                    //     input.value = oldInputValue;
+                    // }
+                    else {
+                        input.value = '';
+                        input.classList.remove('is-valid');
+                        input.classList.remove('is-invalid');
+                    }
+                });
+
+                clonedForm.querySelectorAll('input.role').forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    const newName = originalName + i;
+                    input.setAttribute('name', newName);
+                });
+
+                // Generate unique inputs for cloned form
+                clonedForm.querySelectorAll('input.policy').forEach(input => {
+                    const originalHidden = input.getAttribute('id');
+                    const newHidden = originalHidden + i;
+                    input.setAttribute('name', newHidden);
+                    input.value = newHidden;
+                });
+
+                // Generate unique IDs for all elements within cloned form
+                clonedForm.querySelectorAll('*').forEach(elementForm => {
+                    if (elementForm.id) {
+                        elementForm.id = elementForm.id + i;
+                    }
+
+                    if (elementForm.tagName.toLowerCase() === 'select') {
+                        elementForm.classList.remove('is-valid');
+                        elementForm.classList.remove('is-invalid');
+                        if (elementForm.name) {
+                            elementForm.name = elementForm.name + i;
+                        }
+                        if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['first_name']) {
+                            console.log(elementForm);
+                            elementForm.selected = true;
+                        }
+                    }
+                });
+
+                // Empty all radio button fields when cloned.
+                var clonedRadioButtons = clonedForm.querySelectorAll('input[type="radio"]');
+                clonedRadioButtons.forEach(function(radioButton) {
+                    radioButton.checked = false;
+                    if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['role']) {
+                        radioButton.checked = true;
+                    }
+                });
+
+                var modalLink = clonedForm.querySelector('#addFieldsBtn' + i);
+                var modalTarget = modalLink.getAttribute('data-bs-target');
+                const newModalTarget = modalTarget + i;
+                modalLink.setAttribute('data-bs-target', newModalTarget);
+                clonedForm.setAttribute('data-index', i);
+
+                const modalId = clonedModal.getAttribute('id');
+                const newModalId = modalId + i;
+                clonedModal.setAttribute('id', newModalId);
+                var modalButton = clonedModal.querySelector('.btn-exit-benefits');
+                modalButton.setAttribute('data-index', i);
+
+                clonedModal.querySelectorAll('input').forEach(input => {
+                    const originalInput = input.getAttribute('id');
+                    const newInput = originalInput + i;
+                    input.setAttribute('id', newInput);
+                    input.setAttribute('name', newInput);
+                    input.value = '';
+                });
+
+                var removeField = clonedForm.querySelectorAll('.remove-div');
+                removeField.forEach(function(removeFields) {
+                    removeFields.remove();
+                });
+
+                // Append the cloned form to the container
+                formContainer.appendChild(clonedForm);
+                existingpolicy.appendChild(clonedModal);
+
+                if (i === 4) {
+                    $('.customAddBtn').hide();
+                }
+                i++;
+
+                var ownerRadioButton2 = document.querySelector('input[name="policyRole2"][value="owner"]');
+                var dependantRadioButton2 = document.querySelector('input[name="policyRole2"][value="life insured"]');
+                var bothRadioButton2 = document.querySelector('input[name="policyRole2"][value="both"]');
+                var first_name_dropdown2 = document.getElementById('policyFirstNameSelect2');
+                var last_name_dropdown2 = document.getElementById('policyLastNameSelect2');
+            
+                ownerRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    var first_name_option = document.createElement('option');
+                    first_name_option.value = first_name;
+                    first_name_option.text = first_name;
+                    var last_name_option = document.createElement('option');
+                    last_name_option.value = last_name;
+                    last_name_option.text = last_name;
+    
+                    first_name_dropdown2.add(first_name_option);
+                    last_name_dropdown2.add(last_name_option);
+                });
+
+                dependantRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    for (var key in family_details) {
+                        if (family_details.hasOwnProperty(key)) {
+                            var first_name_option = document.createElement('option');
+                            first_name_option.value = family_details[key]['first_name'];
+                            first_name_option.text = family_details[key]['first_name'];
+                            
+                            first_name_dropdown2.add(first_name_option);
+                        }
+                    }
+                    
+                    last_name_auto_dropdown_cloned();
+    
+                    var changeEvent = new Event('change');
+                    first_name_dropdown2.dispatchEvent(changeEvent);
+                });
+
+                bothRadioButton2.addEventListener('click', function() {
+                    first_name_dropdown2.innerHTML = '';
+                    last_name_dropdown2.innerHTML = '';
+    
+                    var defaultOption = document.createElement('option');
+                    defaultOption.text = 'Please Select';
+                    defaultOption.value = '';
+                    defaultOption.disabled = true;
+    
+                    first_name_dropdown2.add(defaultOption);
+    
+                    var first_name_option_self = document.createElement('option');
+                    first_name_option_self.value = first_name;
+                    first_name_option_self.text = first_name;
+    
+                    first_name_dropdown2.add(first_name_option_self);
+    
+                    for (var key in family_details) {
+                        if (family_details.hasOwnProperty(key)) {
+                            var first_name_option = document.createElement('option');
+                            first_name_option.value = family_details[key]['first_name'];
+                            first_name_option.text = family_details[key]['first_name'];
+                            
+                            first_name_dropdown2.add(first_name_option);
+                        }
+                    }
+    
+                    last_name_auto_dropdown_both_cloned();
+    
+                    var changeEvent = new Event('change');
+                    first_name_dropdown2.dispatchEvent(changeEvent);
+                });
+
+                clientValidations();
+
+                function last_name_auto_dropdown_cloned() {
+                    first_name_dropdown2.addEventListener('change', function() {
+                        var selectedFirstName = first_name_dropdown2.value;
+    
+                        if (selectedFirstName) {
+                            var selectedLastName = '';
+                            for (var key in family_details) {
+                                if (family_details.hasOwnProperty(key)) {
+                                    if (family_details[key]['first_name'] === selectedFirstName) {
+                                        selectedLastName = family_details[key]['last_name'];
+                                        break;
+                                    }
+                                }
+                            }
+        
+                            var last_name_option = document.createElement('option');
+                            last_name_option.value = selectedLastName;
+                            last_name_option.text = selectedLastName;
+                            last_name_dropdown2.innerHTML = '';
+                            last_name_dropdown2.add(last_name_option);
+                        }
+                        else {
+                            last_name_dropdown2.innerHTML = '';
+                        }
+                    });
+                }
+
+                function last_name_auto_dropdown_both_cloned() {
+                    first_name_dropdown2.addEventListener('change', function() {
+                        var selectedFirstName = first_name_dropdown2.value;
+                        last_name_dropdown2.innerHTML = '';
+    
+                        if (selectedFirstName) {
+                            var selectedLastName = '';
+                            var foundMatch = false;
+    
+                            for (var key in family_details) {
+                                if (family_details.hasOwnProperty(key)) {
+                                    if (family_details[key]['first_name'] === selectedFirstName) {
+                                        selectedLastName = family_details[key]['last_name'];
+                                        foundMatch = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (foundMatch) {
+                                var last_name_option = document.createElement('option');
+                                last_name_option.value = selectedLastName;
+                                last_name_option.text = selectedLastName;
+                                last_name_dropdown2.innerHTML = '';
+                                last_name_dropdown2.add(last_name_option);
+                            }
+                            else {
+                                var last_name_option_self = document.createElement('option');
+                                last_name_option_self.value = last_name;
+                                last_name_option_self.text = last_name;
+                                last_name_dropdown2.add(last_name_option_self);
+                            }
+                        }
+                        else {
+                            last_name_dropdown2.innerHTML = '';
+                        }
+                    });
+                }
+
+                function clientValidations() {
+                    var policyFirstNameSelect2 = document.getElementById('policyFirstNameSelect2');
+                    var policyLastNameSelect2 = document.getElementById('policyLastNameSelect2');
+                    var companySelect2 = document.getElementById('companySelect2');
+                    var companyOthersText2 = document.getElementById('companyOthersText2');
+                    var inceptionYearInput2 = document.getElementById('inceptionYearInput2');
+                    var policyPlanSelect2 = document.getElementById('policyPlanSelect2');
+                    var maturityYearInput2 = document.getElementById('maturityYearInput2');
+                    var premiumModeSelect2 = document.getElementById('premiumModeSelect2');
+                    var premiumContributionInput2 = document.getElementById('premiumContributionInput2');
+                    var lifeCoverageInput2 = document.getElementById('lifeCoverageInput2');
+                    var criticalIllnessInput2 = document.getElementById('criticalIllnessInput2');
+
+                    companySelect2.addEventListener('blur', function() {
+                        validateSelectField(companySelect2);
+                    });
+
+                    policyFirstNameSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyFirstNameSelect2);
+                    });
+
+                    policyLastNameSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyLastNameSelect2);
+                    });
+
+                    companyOthersText2.addEventListener('blur', function() {
+                        validateInputFieldOthers(companyOthersText2);
+                    });
+
+                    inceptionYearInput2.addEventListener('blur', function() {
+                        validateNumberField(inceptionYearInput2);
+                    });
+
+                    policyPlanSelect2.addEventListener('blur', function() {
+                        validateSelectField(policyPlanSelect2);
+                    });
+
+                    maturityYearInput2.addEventListener('blur', function() {
+                        validateNumberFieldMaturity(maturityYearInput2);
+                    });
+
+                    premiumModeSelect2.addEventListener('blur', function() {
+                        validateSelectField(premiumModeSelect2);
+                    });
+
+                    premiumContributionInput2.addEventListener('blur', function() {
+                        validateCurrencyField(premiumContributionInput2);
+                    });
+
+                    lifeCoverageInput2.addEventListener('blur', function() {
+                        validateCurrencyField(lifeCoverageInput2);
+                    });
+
+                    criticalIllnessInput2.addEventListener('blur', function() {
+                        validateCurrencyField(criticalIllnessInput2);
+                    });
+
+                    function validateSelectField(field) {
+                        if (field.value) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateInputFieldOthers(field) {
+                        if (field.value) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateNumberField(field) {
+                        if (field.value && isValidYear(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateNumberFieldMaturity(field) {
+                        if (field.value && isValidYearMaturity(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function validateCurrencyField(field) {
+                        if (field.value && isValidCurrency(field.value)) {
+                            field.classList.add('is-valid');
+                            field.classList.remove('is-invalid');
+                        } else {
+                            field.classList.remove('is-valid');
+                            field.classList.add('is-invalid');
+                        }
+                    }
+
+                    function isValidYear(year) {
+                        // Return true if the year is valid (1900 to current year), false otherwise
+                        var yearRegex = /^(19\d{2}|20\d{2})$/;
+                        var currentYear = new Date().getFullYear();
+
+                        if (yearRegex.test(year) && parseInt(year) >= 1900 && parseInt(year) <= currentYear) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function isValidYearMaturity(year) {
+                        var currentYear = new Date().getFullYear();
+                        var customerAge = currentYear - dobYear;
+                        var maturityYear = 100 - customerAge;
+                        var allowedYear = currentYear + maturityYear;
+
+                        if (parseInt(year) >= currentYear && parseInt(year) <= allowedYear) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function isValidCurrency(currency) {
+                        // Return true if the currency is valid, false otherwise
+                        var currencyRegex = /^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/;
+
+                        var isValid = currencyRegex.test(currency);
+                        return isValid;
+                    }
+                }
+
+            }
+
+            var fieldCount = 0;
+            function addFields() {
+                // Add more fields
+                var modal = document.getElementById('addBenefits');
+                var input = modal.querySelector('input#addBenefitsInput');
+                
+                $(document).off('click', '.btn-exit-benefits').on('click', '.btn-exit-benefits', function(event) {
+                    event.preventDefault();
+                    
+                    if (fieldCount < 5) {
+                        var dataIndex = $(this).data('index');
+    
+                        if(dataIndex == 1) {
+                            var dataIndexPass = 'addBenefitsInput';
+                            var addFields = '#addFields';
+                        }
+                        else {
+                            var dataIndexPass = 'addBenefitsInput' + dataIndex;
+                            var addFields = '#addFields' + dataIndex;
+                        }
+
+                        fieldTemplate(dataIndex, dataIndexPass, addFields);
+
+                        fieldCount++;
+                    }
+                    else {
+                        alert('yes');
+                    }                    
+                });
+        
+                function fieldTemplate(dataIndex, dataIndexPass, addFields) {
+                    const title = document.getElementById(dataIndexPass);
+                    var capitalizedTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
+                    var formattedTitle = title.value.replace(/\s+/g, '').toLowerCase();
+                    
+                    var div = $("<div class='mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12 remove-div'>");
+                    var label = '<label for="label'+ formattedTitle + '" class="form-label">' + capitalizedTitle + '</label>';
+                    var input = '<div class="input-group"><span class="input-group-text">RM</span><input type="number" name="input' + formattedTitle + '" class="form-control @error("input' + formattedTitle + '") is-invalid @enderror" id="label'+ formattedTitle + '" value="{{ old("input' + formattedTitle + '", $basicDetails["house_phone_number"] ?? "") }}"><a class="remove-field"><i class="bi bi-trash3-fill" style="color:#C21B17"></i></a></div>';
+                    
                     div.append(label, input);
                     $(addFields).append(div);
-                    fieldCount++;
 
-                    // if (fieldCount === 4) {
-                    //     $('#addFieldsBtn').hide();
-                    // }
+                   // Add event listener to the trash icon for removal
+                    div.find('.remove-field').on('click', function() {
+                        $(this).closest('.remove-div').remove();
+                        fieldCount--;
+                        $('#addFieldsBtn').show();
+                    });
+                }
+            }
+            
+            document.getElementById('addFormsBtn').addEventListener('click', function() {
+                if (i <= 4) {
+                    addForm();
+                }
+            });
+            
+            document.getElementById('addFieldsBtn').addEventListener('click', function() {
+                addFields();
+            });
+
+            if(existingPolicy) {
+                let existingPoliciesCount = Object.keys(existingPolicy).length;
+
+                // Add forms based on the existing policies count on page load
+                for (let count = 1; count < existingPoliciesCount; count++) {
+                    addForm();
+                }
+            }
+
+            // Show companyOthers when 'Others' is selected from dropdown
+            var companySelect = document.getElementById('companySelect');
+
+            if(existingPolicy && existingPolicy['policy_1'] && existingPolicy['policy_1']['company_others'] != null || companySelect.value === 'Others') {
+                companyOthers.style.display = 'block';
+            }
+
+            companySelect.addEventListener('change', function() {
+                var selectedOption = this.value;
+                var companyOthers = document.getElementById('companyOthers');
+                var input = document.getElementById('companyOthersText');
+                // var storedCompanyValue = companyValueInput.value;
+                if (selectedOption === 'Others') {
+                    companyOthers.style.display = 'block';
                 }
                 else {
-                    var alertDiv = $('.custom-alert');
-                    alertDiv.append(alert);
+                    companyOthers.style.display = 'none';
+                    input.value = '';
                 }
-
-                // Add event listener to the trash icon for removal
-                div.find('.remove-field').on('click', function() {
-                    $(this).closest('.remove-div').remove();
-                    fieldCount--;
-                    $('#addFieldsBtn').show();
-                });
             });
         });
     }

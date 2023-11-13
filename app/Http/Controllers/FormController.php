@@ -60,7 +60,7 @@ class FormController extends Controller {
         }
         
         if ($validToken) {
-            // Fetch titles from the database
+            // Fetch from the database
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $full_number = $request->input('full_number');
             $full_number_house = $request->input('full_number_house');
@@ -137,7 +137,7 @@ class FormController extends Controller {
         }
         
         if ($validToken) {
-            // Fetch titles from the database
+            // Fetch from the database
             $countries = DB::table('countries')->pluck('countries')->toArray();
             $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
             $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
@@ -430,7 +430,7 @@ class FormController extends Controller {
         }
         
         if ($validToken) {
-            // Fetch spouseMaritalStatus from the database
+            // Fetch from the database
             $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $countries = DB::table('countries')->pluck('countries')->toArray();
@@ -881,19 +881,180 @@ class FormController extends Controller {
         }
 
         if ($validToken) {
-            // $decision = $request->input('decision');
+            $companies = DB::table('companies')->pluck('companies')->toArray();
+            $plans = DB::table('policy_plans')->pluck('policy_plans')->toArray();
+            $mode = DB::table('premium_modes')->pluck('Modes')->toArray();
 
-            // // Get the existing array from the session
-            // $customerDetails = $request->session()->get('customer_details', []);
-                        
-            // // Add or update the data value in the array
-            // $customerDetails['pdpa'] = $decision;
+            $policy = $request->input('policy');
+            $policy2 = $request->input('policy2');
+            $policy3 = $request->input('policy3');
+            $policy4 = $request->input('policy4');
 
-            // // Store the updated array back into the session
-            // $request->session()->put('customer_details', $customerDetails);
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
+
+            $validatedData = $request->validate([
+                'policyRole' => 'required',
+                'policyFirstName' => 'required',
+                'policyLastName' => 'required',
+                'company' => 'required|in:' . implode(',', $companies),
+                'companyOthers' => [
+                    'nullable',
+                    Rule::requiredIf(function () use ($request) {
+                        return $request->input('company') === 'Others';
+                    })
+                ],
+                'inceptionYear' => [
+                    'required',
+                    'regex:/^(19\d{2}|20\d{2})$/',
+                    function ($attribute, $value, $fail) {
+                        $currentYear = date('Y');
+                        if (intval($value) < 1900 || intval($value) > $currentYear) {
+                            $fail('The year must be a valid year between 1900 and '.$currentYear.'.');
+                        }
+                    },
+                ],
+                'policyPlan' => 'required|in:' . implode(',', $plans),
+                'maturityYear' => [
+                    'required',
+                    'regex:/^(19\d{2}|20\d{2})$/',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $dob = $request->session()->get('customer_details.identity_details.dob', []);
+                        $dobYear = substr($dob, -4);
+                        $currentYear = date('Y');
+                        $customerAge = $currentYear - $dobYear;
+                        $maturityYear = 100 - $customerAge;
+                        $allowedYear = $currentYear + $maturityYear;
+
+                        if (intval($value) < $currentYear || intval($value) > $allowedYear) {
+                            $fail('The year must be a valid year between '.$currentYear.' and '.$allowedYear.'.');
+                        }
+                    },
+                ],
+                'premiumMode' => 'required|in:' . implode(',', $mode),
+                'premiumContribution' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'lifeCoverage' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'criticalIllness' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'policyFirstName2'=> 'nullable',
+                'policyFirstName3'=> 'nullable',
+            ]);
+
+            // $validatedData = $request->validate([
+            //     'policyRole' => 'required',
+            //     'policyFirstName' => 'required',
+            //     'policyLastName' => 'required',
+            //     'policyRole2' => 'nullable',
+            //     'policyFirstName2' => 'nullable',
+            //     'policyLastName2' => 'nullable',
+            //     // 'company2' => 'required|in:' . implode(',', $companies),
+            //     // 'companyOthers2' => [
+            //     //     'nullable',
+            //     //     Rule::requiredIf(function () use ($request) {
+            //     //         return $request->input('company2') === 'Others';
+            //     //     })
+            //     // ],
+            //     // 'inceptionYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) {
+            //     //         $currentYear = date('Y');
+            //     //         if (intval($value) < 1900 || intval($value) > $currentYear) {
+            //     //             $fail('The year must be a valid year between 1900 and '.$currentYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'policyPlan2' => 'required|in:' . implode(',', $plans),
+            //     // 'maturityYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) use ($request) {
+            //     //         $dob = $request->session()->get('customer_details.identity_details.dob', []);
+            //     //         $dobYear = substr($dob, -4);
+            //     //         $currentYear = date('Y');
+            //     //         $customerAge = $currentYear - $dobYear;
+            //     //         $maturityYear = 100 - $customerAge;
+            //     //         $allowedYear = $currentYear + $maturityYear;
+
+            //     //         if (intval($value) < $currentYear || intval($value) > $allowedYear) {
+            //     //             $fail('The year must be a valid year between '.$currentYear.' and '.$allowedYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'premiumMode2' => 'required|in:' . implode(',', $mode),
+            //     // 'premiumContribution2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'lifeCoverage2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'criticalIllness2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            // ]);
+
+            // Add the new array inside the customer_details array
+            if ($policy) {
+                $customerDetails['existing_policy']['policy_1'] = [
+                    'role' => $validatedData['policyRole'],
+                    'first_name' => $validatedData['policyFirstName'],
+                    'last_name' => $validatedData['policyLastName'],
+                    'company' => $validatedData['company'],
+                    'company_others' => $validatedData['companyOthers'],
+                    'inception_year' => $validatedData['inceptionYear'],
+                    'policy_plan' => $validatedData['policyPlan'],
+                    'maturity_Year' => $validatedData['maturityYear'],
+                    'premium_mode' => $validatedData['premiumMode'],
+                    'premium_contribution' => $validatedData['premiumContribution'],
+                    'life_coverage' => $validatedData['lifeCoverage'],
+                    'critical_illness' => $validatedData['criticalIllness']
+                ];
+            }
             
-            // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss');
+            if ($policy2) {
+                $customerDetails['existing_policy']['policy_2'] = [
+                    // 'role' => $validatedData['policyRole2'],
+                    // 'first_name' => $validatedData['policyFirstName2'],
+                    // 'last_name' => $validatedData['policyLastName2'],
+                    // 'company' => $validatedData['company2'],
+                    // 'company_others' => $validatedData['companyOthers2'],
+                    // 'inception_year' => $validatedData['inceptionYear2'],
+                    // 'policy_plan' => $validatedData['policyPlan2'],
+                    // 'maturity_Year' => $validatedData['maturityYear2'],
+                    // 'premium_mode' => $validatedData['premiumMode2'],
+                    // 'premium_contribution' => $validatedData['premiumContribution2'],
+                    // 'life_coverage' => $validatedData['lifeCoverage2'],
+                    // 'critical_illness' => $validatedData['criticalIllness2']
+                ];
+            }
+
+            if ($policy3) {
+                $customerDetails['existing_policy']['policy_3'] = [
+                    'name' => $validatedData['policyFirstName3']
+                ];
+            }
+
+            if ($policy4) {
+                $customerDetails['existing_policy']['policy_4'] = [
+                    'name' => $validatedData['policyFirstName4']
+                ];
+            }
+
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+            return redirect()->route('summary.monthly-goals');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
