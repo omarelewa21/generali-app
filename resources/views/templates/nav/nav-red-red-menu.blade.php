@@ -8,7 +8,7 @@
 @include('templates.nav.nav-links')
 {{--end of nav links --}}
 
-<header id="wrapper-navbar" class="desktop fixed-top navbar-scroll">
+<header id="wrapper-navbar" class="desktop white fixed-top navbar-scroll">
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-4 px-xl-5">
             <div class="navbar-brand py-4 py-md-5">

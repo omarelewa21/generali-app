@@ -205,10 +205,6 @@ input[type="number"] {
   z-index: 3;
 }
 
-.main-logo {
-  max-width: 220px;
-}
-
 .navbar-scroll.scrolled-up {
   transform: translateY(0);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -985,11 +981,10 @@ fieldset legend {
   }
 }
 
-@media only screen and (max-width: 991px) {
-  
-}
-
 @media only screen and (min-width: 768px) {
+  .main-logo {
+    max-width: 220px;
+  }
   .main-content {
     overflow-y: auto;
     height: 100vh;
@@ -1019,8 +1014,11 @@ fieldset legend {
 }
 
 @media only screen and (max-width: 767px) {
-  .white-logo, .red-logo {
-    width: 150px;
+  .avatar-text {
+    font-size: 18px;
+  }
+  .main-logo, .white-logo, .red-logo {
+    max-width: 172px
   }
   .sidebanner .display-5, p.nav-text {
     font-size: 20px;
@@ -1040,9 +1038,11 @@ fieldset legend {
     right: 0;
     left: 0;
   }
-  #wrapper-navbar.fixed-top {
+  #wrapper-navbar.fixed-top.red.scrolled-up {
+    background-color: #C21B17;
+  }
+  #wrapper-navbar.fixed-top.white.scrolled-up {
     background-color: #fff;
-    box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
   }
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
