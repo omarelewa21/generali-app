@@ -16,7 +16,7 @@
     // Retrieving values from the session
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-female.json');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $firstName = session('customer_details.basic_details.first_name');
 @endphp
 
@@ -64,8 +64,8 @@
                     </button>
 
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"> -->
-                        <div id="lottie-animation" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"></div>
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes">
+                        <!-- <div id="lottie-animation" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"></div> -->
                     </div>
                     
                     <button type="button" class="btn btn-outline-primary slide-button right-center position-absolute" id="avatar-right">
