@@ -512,7 +512,7 @@ color: #EA4C89;
 
 /* Mobile / Tab Responsive */
 @include media-breakpoint-down(md) {
-  p {
+  p, .display-6 {
     font-size: 16px;
   }
 }

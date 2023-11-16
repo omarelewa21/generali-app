@@ -6,7 +6,7 @@
 
 ::-webkit-scrollbar-track {
   background: #A0A0A0;
-  border-radius: 0;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -609,9 +609,9 @@ h2.display-5, .currencyField {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-.changeImage {
+/* .changeImage {
   overflow-x: hidden;
-}
+} */
 
 .slide-button {
   border-radius: 50%;
@@ -676,7 +676,7 @@ h2.display-5, .currencyField {
 }
 
 #avatar_family_dependant .content-avatar-default, #avatar_family_dependant_details .content-avatar-default {
-  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-gap: 0;
 }
 
@@ -1014,6 +1014,13 @@ fieldset legend {
 }
 
 @media only screen and (max-width: 767px) {
+  .slider {
+    flex-flow: nowrap;
+    overflow: auto;
+  }
+  #avatar_marital_status .main-content, #avatar_family_dependant .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
+    padding-bottom: 50px!important;
+  }
   .avatar-text {
     font-size: 18px;
   }
@@ -1047,7 +1054,7 @@ fieldset legend {
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
-  #identity_details .bg-primary, #avatar_marital_status .bg-primary, #avatar_family_dependant .bg-primary, #avatar_family_dependant_details .bg-primary, #avatar_my_assets .bg-primary {
+  #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
     margin-top: -300px;
   }
   #home {
