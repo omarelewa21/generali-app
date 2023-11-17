@@ -183,7 +183,7 @@
                                                     $selectedDay = sprintf('%02d', $selectedDay);
                                                 }
                                             @endphp
-                                            <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
+                                            <label for="day" class="form-label text-white">Date of Birth * <span id="ageDiv">( <div id="age" class="d-inline-block"></div> )</span></label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                     @if(isset($identityDetails['dob']))

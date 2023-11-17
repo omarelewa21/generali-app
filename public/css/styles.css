@@ -201,9 +201,9 @@ input[type="number"] {
   z-index: 1000;
 } */
 
-#wrapper-navbar.fixed-top {
+/* #wrapper-navbar.fixed-top {
   z-index: 3;
-}
+} */
 
 .navbar-scroll.scrolled-up {
   transform: translateY(0);
@@ -1044,11 +1044,12 @@ fieldset legend {
     top: 0;
     right: 0;
     left: 0;
+    z-index: 1;
   }
-  #wrapper-navbar.fixed-top.red.scrolled-up {
+  #wrapper-navbar.red.scrolled-up {
     background-color: #C21B17;
   }
-  #wrapper-navbar.fixed-top.white.scrolled-up {
+  #wrapper-navbar.white.scrolled-up {
     background-color: #fff;
   }
   .wrapper-avatar {

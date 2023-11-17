@@ -66,8 +66,11 @@ class FormController extends Controller {
             $full_number_house = $request->input('full_number_house');
 
             $validatedData = $request->validate([
-                'firstName' => 'required|max:30',
-                'lastName' => 'required|max:30',
+                'fullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
                 'title' => 'required|in:' . implode(',', $titles),
                 'mobileNumber' => 'required',
                 'email' => 'required|email:rfc,dns|max:255',
@@ -108,8 +111,7 @@ class FormController extends Controller {
             // Add the new array inside the customer_details array
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
-                'first_name' => $validatedData['firstName'],
-                'last_name' => $validatedData['lastName'],
+                'first_name' => $validatedData['fullName'],
                 'mobile_number' => $full_number,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']

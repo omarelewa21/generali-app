@@ -165,6 +165,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         const dayField = document.getElementById('day');
         const monthField = document.getElementById('month');
         const yearField = document.getElementById('year');
+        const ageDiv = document.getElementById('ageDiv');
         const ageField = document.getElementById('age');
         const genderRegex = /[13579]/;
         const genderRadioMaleInput = document.getElementById("identityrMaleInput");
@@ -223,6 +224,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             const selectedYear = selectedYearOption.textContent;
             
             if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
+                ageDiv.style.display = 'none';
                 ageField.textContent = 'Invalid ID number entered';
                 return;
             }
@@ -242,6 +244,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             age--;
             }
 
+            ageDiv.style.display = 'inline-block';
             ageField.textContent = 'Age: ' + age;
         }
 
@@ -915,7 +918,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                             elementForm.name = elementForm.name + i;
                         }
                         if (existingPolicy && existingPolicy['policy_' + i] && existingPolicy['policy_' + i]['first_name']) {
-                            console.log(elementForm);
                             elementForm.selected = true;
                         }
                     }
