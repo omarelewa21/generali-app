@@ -34,8 +34,7 @@
                             <div class="col-sm-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0 mt-lg-0">
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-lg-8 col-xl-6 bg-primary summary-progress-bar px-4 px-md-2 px-lg-2">
-                                        <div
-                                            class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
+                                        <div class="col-12 retirement-progress mt-3 d-flex justify-content-enter align-items-center">
                                             <div class="px-2 retirement-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;"
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>

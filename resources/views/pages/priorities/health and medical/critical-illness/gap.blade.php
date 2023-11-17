@@ -14,11 +14,11 @@
     $totalAmountNeeded = session('customer_details.health_medical_needs.critical_illness.totalAmountNeeded');
 @endphp
 
-<div id="critical-summary"  class="vh-100 scrollable-content">
+<div id="critical-summary">
     <div class="container-fluid">
-        <div class="row h-100">
+        <div class="row vh-100 scrollable-content">
             <div class="col-12">
-                <div class="row h-100 bg-education-gap wrapper-needs-gap-default">
+                <div class="row h-100 bg-needs-master-full wrapper-needs-summary-default">
                     <section class="header-needs-default">
                         <div class="row">
                             <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
@@ -29,14 +29,14 @@
                             </div>
                         </div>
                     </section>
-                    <form novalidate action="{{route('form.submit.critical.illness.gap')}}" method="POST" class="m-0 content-gap-default">
+                    <form novalidate action="{{route('form.submit.critical.illness.gap')}}" method="POST" class="m-0 content-summary-default">
                         @csrf
                         <section class="row align-items-end mh-100">
                             <div class="col-12 position-relative mh-100 scrollable-content">
                                 <div class="row h-100">
                                     <div class="col-12 col-xl-5 d-flex align-items-center justify-content-center z-1 mh-100">
                                         <div class="row graph-wrapper">
-                                            <div class="col-12 d-flex justify-content-center graph-graph mt-md-6">
+                                            <div class="col-12 d-flex justify-content-center summary-graph mt-md-6">
                                                 <div class="svg-container" style="transform:scale(1.3)">
                                                     <div class="card-gap" id="gap">
                                                         <div class="card-gap__percent">
@@ -62,7 +62,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-center py-2 gap-title">
+                                            <div class="col-12 d-flex justify-content-center py-2 summary-title">
                                                 <h5 class="f-family fw-700">Total Health & Medical Fund</h5>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 show-mobile footer bg-white py-4 z-1">
+                                    <div class="col-12 d-block d-md-none footer bg-white py-4 z-1">
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="footer bg-white py-4 fixed-bottom footer-needs-default hide-mobile">
+                        <section class="footer bg-white py-4 fixed-bottom footer-needs-default d-none d-md-block">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

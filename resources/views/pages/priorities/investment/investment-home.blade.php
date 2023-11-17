@@ -36,8 +36,8 @@
                                     <div class="position-relative h-100 mh-100"></div>
                                 </div>
                                 <div class="col-12 needs-home-text z-1 align-items-end d-grid">
-                                    <div class="col-md-6 col-xl-4 d-flex justify-content-center text-center m-auto z-1">
-                                        <h4 class="py-3 f-family fw-700">Now let's plan for your investments.</h4>
+                                    <div class="col-md-6 col-xl-5 d-flex justify-content-center text-center m-auto z-1">
+                                        <h4 class="py-3 f-family fw-700">Now let's plan for your lump sum investments.</h4>
                                     </div>
                                 </div>
                             </div>
