@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
@@ -42,7 +42,7 @@
                                         <p class="text-white display-6 lh-base">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                     </div>
                                 </div>
-                                <div class="form-container pb-5">
+                                <div class="form-container pb-0 pb-md-5">
                                     @if ($errors->any())
                                         <div class="row px-4 pb-3 px-sm-5">
                                             <div class="col-12">
@@ -123,7 +123,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-12 pt-4" id="gendergroup">
-                                            <label for="gender" class="form-label text-white">Gender *</label>
+                                            <label for="identityrMaleInput" class="form-label text-white">Gender *</label>
                                             <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
@@ -298,7 +298,10 @@
 </div>
 
 <script>
-var sessionData = {!! json_encode(session('customer_details')) !!};
+var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
 
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
@@ -308,6 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var birthCert = document.getElementById('birthCert');
     var policeNumber = document.getElementById('policeNumber');
     var registrationNumber = document.getElementById('registrationNumber');
+    var educationLevelSelect = document.getElementById('educationLevelSelect');
+    var occupationSelect = document.getElementById('occupationSelect');
 
     countrySelect.addEventListener('blur', function() {
         validateSelectField(countrySelect);
@@ -335,6 +340,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     registrationNumber.addEventListener('blur', function() {
         validateInputField(registrationNumber);
+    });
+
+    educationLevelSelect.addEventListener('blur', function() {
+        validateSelectField(educationLevelSelect);
+    });
+
+    occupationSelect.addEventListener('blur', function() {
+        validateSelectField(occupationSelect);
     });
 
     function validateSelectField(field) {

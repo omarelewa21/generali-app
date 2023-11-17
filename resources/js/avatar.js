@@ -1,6 +1,6 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'gender'
+    'avatar'
 ];
 
 if (specificPageURLs.some(url => window.location.href.includes(url))) {

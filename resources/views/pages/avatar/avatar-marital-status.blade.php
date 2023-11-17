@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Marital Status</title>
+<title>Marital Status</title>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
@@ -30,7 +30,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                         @csrf
@@ -56,7 +56,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
+                                                <button class="border-0 w-100 py-4 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
                                                     <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
@@ -66,7 +66,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
+                                                <button class="border-0 w-100 py-4 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
@@ -76,7 +76,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
+                                                <button class="border-0 w-100 py-4 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
@@ -86,7 +86,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
-                                                <button class="border-0 btn-avatar py-4 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
+                                                <button class="border-0 w-100 py-4 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
                                                     <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
@@ -118,6 +118,10 @@
 </div>
 
 <script>
-    var sessionData = {!! json_encode(session('customer_details')) !!};
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+    var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+    var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+    var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+    var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
 </script>
 @endsection

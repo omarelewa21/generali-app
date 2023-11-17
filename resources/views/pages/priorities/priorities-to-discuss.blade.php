@@ -18,12 +18,12 @@
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
-<div id="priorities_to_discuss" class="vh-100 overflow-hidden">
+<div id="priorities_to_discuss">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 vh-100 wrapper-avatar-default bg-white" style="z-index: 1;">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
-                <section class="avatar-design-placeholder content-avatar-default">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>    
+                <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
                         <div id="sortable-main" class="position-relative pt-3">
@@ -55,7 +55,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -72,7 +71,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -89,7 +87,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -106,7 +103,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -123,7 +119,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -140,7 +135,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -157,7 +151,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -174,7 +167,6 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
-                                                    <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -191,7 +183,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -203,113 +195,76 @@
                             <div class="row px-4 pb-4 px-sm-5">
                                 <div class="col-12">
                                     <div class="accordion accordion-flush" id="accordionPriorities">
-                                        @foreach($topPriorities as $priority)
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="flush-heading{{$priority}}">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                        <img src="{{ asset('images/top-priorities/'.$priority.'-icon.svg') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$priority}}
-                                                    </button>
-                                                </h2>
-                                                <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
-                                                    <div class="accordion-body">
-                                                        <div class="row py-2 px-3">
-                                                            <div class="col-12 form-check form-check-reverse">
-                                                                <label class="form-check-label display-6" for="protection">I've got this covered</label>
-                                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protection">
+                                        @php
+                                            if (isset($topPriorities)) {
+                                                foreach($topPriorities as $priority) {
+                                                    if ($priority === 'protection') {
+                                                        $title = 'Protection';
+                                                    }
+                                                    else if ($priority === 'retirement') {
+                                                        $title = 'Retirement';
+                                                    }
+                                                    else if ($priority === 'education') {
+                                                        $title = 'Education';
+                                                    }
+                                                    else if ($priority === 'savings') {
+                                                        $title = 'Savings';
+                                                    }
+                                                    else if ($priority === 'debt-cancellation') {
+                                                        $title = 'Debt Cancellation';
+                                                    }
+                                                    else if ($priority === 'health-medical') {
+                                                        $title = 'Health Medical';
+                                                    }
+                                                    else if ($priority === 'investments') {
+                                                        $title = 'Investments';
+                                                    }
+                                                    else if ($priority === 'others') {
+                                                        $title = 'Others';
+                                                    }
+                                                    else {
+                                                        $title = '';
+                                                    }
+
+                                                    if ($priority) { @endphp
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="flush-heading{{$priority}}">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
+                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
+                                                                <div class="accordion-body">
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row py-2 px-3">
-                                                            <div class="col-12 form-check form-check-reverse">
-                                                                <label class="form-check-label display-6" for="protectionDiscuss">I'd like to discuss this</label>
-                                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="protectionDiscuss">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        
-                                        <!-- <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                                    <img src="{{ asset('images/top-priorities/retirement-icon.svg') }}" width="60px" height="auto" alt="Retirement" class="pe-4"> Retirement
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionPriorities">
-                                                <div class="accordion-body">
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-check-reverse">
-                                                            <label class="form-check-label display-6" for="retirement">I've got this covered</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="retirement">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-check-reverse">
-                                                            <label class="form-check-label display-6" for="retirementDiscuss">I'd like to discuss this</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="retirementDiscuss">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingFour">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                                    <img src="{{ asset('images/top-priorities/education-icon.svg') }}" width="60px" height="auto" alt="Education" class="pe-4"> Education
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionPriorities">
-                                                <div class="accordion-body">
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="education">I've got this covered</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="education">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="educationDiscuss">I'd like to discuss this</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="educationDiscuss">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingFour">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                                    <img src="{{ asset('images/top-priorities/savings-icon.svg') }}" width="60px" height="auto" alt="Savings" class="pe-4"> Savings
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionPriorities">
-                                                <div class="accordion-body">
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="savings">I've got this covered</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="savings">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row py-2 px-3">
-                                                        <div class="col-12 form-check form-switch form-check-reverse">
-                                                            <label class="form-check-label display-6" for="savingsDiscuss">I'd like to discuss this</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="savingsDiscuss">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                                    @php } 
+                                                }
+                                            }
+                                        @endphp
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                    <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -321,14 +276,49 @@
 </div>
 
 <script>
-// Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure the first accordion item is always open
     const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     if (firstAccordionItem) {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');
     }
+
+    // Sent checkbox value to controller
+    var checkboxValues = {};
+
+    // First set all to true
+    $('input[type="checkbox"]').each(function() {
+        var checkboxId = $(this).attr('id');
+        checkboxValues[checkboxId] = true;
+        $(this).prop('checked', true); // Check the checkboxes initially
+    });
+
+    // Update checkboxValues object when any checkbox is changed
+    $('input[type="checkbox"]').on('change', function() {
+        var checkboxId = $(this).attr('id');
+        var isChecked = $(this).prop('checked');
+        checkboxValues[checkboxId] = isChecked;
+    });
+
+    $('#priorityNext').on('click', function(event) {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('priorities.redirect') }}",
+            data: checkboxValues,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                // Handle success, if needed
+            },
+            error: function(xhr, status, error) {
+                // Handle error, if needed
+            }
+        });
+    });
 });
 </script>
 @endsection

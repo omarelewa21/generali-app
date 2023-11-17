@@ -18,73 +18,26 @@
             <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
-                    <h4 class="display-5 fw-bold text-white">To begin, may we have permission to share or use your personal details?</h4>
+                    <h2 class="display-5 fw-bold">To begin, may we have permission to share or use your personal details?</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey text-dark px-0 content-section">
+            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey px-0 content-section">
                 <div>
                     <section class="main-content">
                         <div class="container">
                             <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                 <div class="col-12">
-                                    <h1 class="display-2 text-uppercase">Your Agreement</h1>
+                                    <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT / KENYATAAN PERLINDUNGAN DATA</h1>
                                 </div>
                             </div>
                             <div class="row px-4">
                                 <div class="col-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tincidunt, velit sodales
-                                    congue ornare, orci purus semper tortor, at vehicula eros lorem ac elit. Morbi erat turpis,
-                                    tristique quis euismod et, varius id eros. Pellentesque ultricies, neque vitae elementum
-                                    sodales, nisi dolor ornare tellus, eget feugiat est risus sed magna. Duis dictum placerat
-                                    nunc, et ullamcorper ex euismod at. Nunc sit amet fermentum elit. Donec convallis blandit
-                                    arcu, id pretium mi euismod nec. Morbi suscipit massa at interdum consectetur. Pellentesque
-                                    volutpat sagittis diam non sodales. Sed non risus in turpis pellentesque suscipit. Nam at
-                                    eleifend nulla, at ultricies lectus. Nunc consequat ullamcorper malesuada.</p>
-
-                                    <p>Donec id ipsum volutpat, pharetra ante ut, dictum tortor. Aenean pharetra ornare tellus, non
-                                    luctus leo lobortis quis. Proin venenatis augue sit amet lacus finibus ultricies. In hac
-                                    habitasse platea dictumst. In ante eros, auctor vitae lacus non, venenatis hendrerit justo.
-                                    In sed lorem orci. Vivamus sit amet lacus ultricies, tempus metus vitae, ultricies elit.
-                                    Vivamus ultrices consequat imperdiet. Nullam at dolor in nunc finibus vehicula quis non
-                                    odio. Aenean imperdiet tincidunt dui sit amet posuere.</p>
-
-                                    <p>Mauris venenatis sagittis vehicula. Interdum et malesuada fames ac ante ipsum primis in
-                                    faucibus. In cursus sollicitudin efficitur. Duis sed iaculis erat, non pellentesque libero.
-                                    Curabitur purus lacus, ullamcorper non risus non, lobortis vehicula sem. Praesent lobortis
-                                    rutrum risus finibus mattis. Nulla lorem leo, rutrum vitae ante et, vulputate dictum quam.
-                                    Proin sagittis facilisis nulla quis feugiat. Fusce quis mi magna.</p>
-
-                                    <p>Pellentesque sed lorem eget risus pulvinar ullamcorper id aliquam nunc. Proin ut suscipit
-                                    leo, id fringilla nulla. Etiam ac euismod elit. Vestibulum leo mi, suscipit vel iaculis ut,
-                                    pellentesque aliquam orci. Praesent urna nunc, sagittis sed tellus non, fermentum convallis
-                                    dolor. In hac habitasse platea dictumst. Nulla ultricies est lacus, et vulputate velit
-                                    semper quis. Etiam eu ligula vitae odio facilisis varius vel a lacus. Aliquam eu ligula
-                                    congue, aliquet dui et, convallis ipsum.</p>
-
-                                    <p>Aliquam vehicula augue eu felis euismod porttitor. Vestibulum id enim luctus, scelerisque
-                                    ante eu, venenatis orci. Curabitur dignissim ligula et eros bibendum, non aliquet urna
-                                    ultricies. Integer fringilla metus vitae lectus vulputate consectetur. Vestibulum ante ipsum
-                                    primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras aliquam sapien eu
-                                    magna gravida venenatis. Aliquam vulputate vel quam eget lobortis. Suspendisse in erat
-                                    commodo, sollicitudin felis id, rhoncus nulla. Ut semper, leo semper egestas interdum, dolor
-                                    tortor pellentesque orci, vel molestie tellus leo commodo nisi. Aenean non metus purus.
-                                    Morbi semper, dui ac aliquam eleifend, sem quam blandit diam, sed auctor felis massa at
-                                    nisi.</p>
-
-                                    <p>Nulla facilisi. In vestibulum iaculis sagittis. Cras id erat quis dui egestas tincidunt sit
-                                    amet sit amet libero. Mauris feugiat risus ut metus fermentum, sit amet ultrices diam
-                                    fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-                                    turpis egestas. Nunc hendrerit felis vitae aliquet congue. Cras lacinia mollis tristique. Ut
-                                    fermentum eu lectus vitae tempor. Sed congue dignissim dui quis ultricies. Sed ac magna
-                                    tincidunt, malesuada tellus vitae, mattis tortor. Quisque a imperdiet libero, non ultrices
-                                    sapien. Ut dictum elementum varius. Morbi vestibulum metus arcu, vel venenatis ex gravida
-                                    at. Aenean condimentum, ipsum pellentesque facilisis scelerisque, purus eros vulputate ex,
-                                    sit amet aliquet leo felis ac ipsum.</p>
+                                    <p>Your privacy is important to us. The Company is committed to ensure that your personal data under our care is safe and secured. We will ensure that your information collected via this application and any other information that you may provide to the Company is used for the purposes of purchasing an insurance policy including but not limited to underwriting and administering your plan; processing service request; processing claims; complying with all applicable laws; conducting due diligence; performing our functions as an insurance company and such other purposes referred to in our Personal Data Policy. For further details on how we collect, process, share and retain your personal data, please refer to our website at <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
+                                    <p>Privasi anda adalah penting bagi kami. Syarikat adalah komited untuk memastikan bahawa data peribadi anda di bawah jagaan kami adalah selamat dan terjamin. Kami akan memastikan maklumat anda yang dikumpulkan melalui permohonan ini dan apa-apa maklumat lain yang anda kemukakan untuk Syarikat digunakan untuk tujuan-tujuan membeli polisi insurans termasuk tetapi tidak terhad kepada pengunderaitan dan mentadbir pelan anda; permintaan perkhidmatan pemprosesan; pemprosesan tuntutan; mematuhi semua undang-undang; menjalankan usaha wajar; melaksanakan tugas kami sebagai sebuah syarikat insurans dan apa-apa maksud lain yang disebut dalam Dasar Data Peribadi kami. Untuk maklumat lanjut mengenai bagaimana kami mengumpul, memproses, berkongsi dan menyimpan data peribadi anda, sila rujuk kepada laman web kami di <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
                                 </div>
                             </div>
                         </div>
                     </section>
-
                     <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
@@ -116,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function pdpa(decision, route) {
         $.ajax({
             type: "POST",
-            url: "{{ route('save.button.click') }}",
+            url: "{{ route('pdpa.disclosure') }}",
             data: { decision: decision, route: route },
             headers: {
                 'X-CSRF-TOKEN': csrfToken

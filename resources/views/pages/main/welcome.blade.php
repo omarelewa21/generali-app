@@ -21,15 +21,17 @@
                     <div class="col-12">
                         <h1 class="text-uppercase text-primary">Welcome!</h1>
                         <h2 class="text-uppercase text-primary">Your Future Awaits.</h2>
-                        <p class="text-dark py-4">We’re glad you’re looking to secure your future with us.<br>
+                        <p class="py-4">We’re glad you’re looking to secure your future with us.<br>
                             Let’s begin by getting to know you
                             better.</p>
                         <a href="{{ route('pdpa.disclosure') }}" class="btn btn-primary">START YOUR JOURNEY</a>
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center pt-xl-0 pt-sm-5 pt-5">
-                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector">
-                </div>
+                    <!-- <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector"> -->
+                    <div id="lottie-male-animation" class="homeVector"></div>
+                    <div id="lottie-female-animation" class="homeVector"></div>
+            </div>
             </div>
         </div>
     </section>
@@ -38,4 +40,22 @@
     </section>
 </div>
 
+<script>
+    // Load the animation using Lottie
+    const animationFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-female-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/welcome-page/female-avatar.json') }}'
+    });
+
+    const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-male-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/welcome-page/male-avatar.json') }}'
+    });
+</script>
 @endsection

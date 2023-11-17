@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Occupation;
 use App\Models\Country;
 use App\Models\Title;
-use App\Models\IDType;
+use App\Models\idtype;
 use App\Models\educationLevel;
 use App\Models\maritalStatus;
+use App\Models\Company;
+use App\Models\PolicyPlan;
+use App\Models\PremiumMode;
 
 class DropdownController extends Controller
 {
@@ -21,7 +24,7 @@ class DropdownController extends Controller
     public function identityDetails()
     {
         $countries = Country::all();
-        $idtypes = IDType::all();
+        $idtypes = idtype::all();
         $occupations = Occupation::all();
         $educationLevels = educationLevel::all();
         return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
@@ -32,8 +35,16 @@ class DropdownController extends Controller
         $maritalstatuses = maritalStatus::all();
         $titles = Title::all();
         $countries = Country::all();
-        $idtypes = IDType::all();
+        $idtypes = idtype::all();
         $occupations = Occupation::all();
         return view('pages/avatar/avatar-family-dependant-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
+    }
+
+    public function existingPolicy()
+    {
+        $companies = Company::all();
+        $policyPlans = PolicyPlan::all();
+        $premiumModes = PremiumMode::all();
+        return view('pages/summary/existing-policy', compact('companies', 'policyPlans','premiumModes'));
     }
 }

@@ -39,7 +39,7 @@
 }
 
 // Body Styling
-$primary: #C0232C;
+$primary: #C21B17;
 $container-max-widths: (
   // sm: 540px,
   // md: 720px,
@@ -59,6 +59,7 @@ $display-font-sizes: (
   6: 1.375rem //22px
 );
 $btn-font-size: 18px;
+$btn-font-size-lg: 4rem;
 
 // Headings
 $headings-font-family: 'Helvetica Neue Bold Condensed', sans-serif;
@@ -77,13 +78,13 @@ $form-feedback-font-size: 18px;
 $form-feedback-font-style: normal;
 $form-label-margin-bottom: 0.813rem;
 $form-label-font-weight: 700;
-$form-feedback-invalid-color: #C0232C;
+$form-feedback-invalid-color: #C21B17;
 $input-btn-focus-blur: none;
 $input-btn-focus-box-shadow: none;
 $form-select-focus-box-shadow: none;
 
 // Offcanvas Menu
-$offcanvas-bg-color: #C0232C;
+$offcanvas-bg-color: #C21B17;
 
 // Sticky Header
 $zindex-sticky: 1;
@@ -94,22 +95,22 @@ $danger: #AA1B17;
 
 // Modal
 $modal-header-border-color: #fff;
-$modal-content-color: #C0232C;
+$modal-content-color: #C21B17;
 $modal-title-line-height: normal;
 $modal-content-border-radius: normal;
-$modal-footer-bg: #C0232C;
+$modal-footer-bg: #C21B17;
 $zindex-modal: 2000;
 $zindex-modal-backdrop: 1199;
-$btn-close-color: #C0232C;
+$btn-close-color: #C21B17;
 
 // Accordion
 $accordion-bg: #F0F0F0;
 $accordion-button-bg: #fff;
 $accordion-button-active-color: #0A043C;
 $accordion-button-color: rgba(10, 4, 60, 0.50);
-$accordion-icon-color: #C0232C;
-$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='#{$accordion-icon-color}'><path d='M18 10.2857H10.2857V18H7.71429V10.2857H0V7.71429H7.71429V0H10.2857V7.71429H18V10.2857Z' fill='#C0232C'/></svg>");
-$accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='4' viewBox='0 0 18 4' fill='#{$accordion-icon-color}'><path d='M18 3.28572H0V0.714287H18V3.28572Z' fill='#C0232C'/></svg>");
+$accordion-icon-color: #C21B17;
+$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='#{$accordion-icon-color}'><path d='M18 10.2857H10.2857V18H7.71429V10.2857H0V7.71429H7.71429V0H10.2857V7.71429H18V10.2857Z' fill='#C21B17'/></svg>");
+$accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='4' viewBox='0 0 18 4' fill='#{$accordion-icon-color}'><path d='M18 3.28572H0V0.714287H18V3.28572Z' fill='#C21B17'/></svg>");
 $accordion-button-active-bg: #fff;
 $accordion-border-color: #CCCCCC;
 
@@ -163,10 +164,6 @@ $accordion-border-color: #CCCCCC;
 //   text-decoration: none;
 // }
 
-.bg-accent-bg-grey {
-  background-color: #F8F8F8;
-}
-
 .bg-accent-light-white {
   background-color: #f0f0f0;
 }
@@ -176,18 +173,14 @@ footer {
   max-height: 103px !important;
 }
 
-// .text-dark {
-//   color: #000 !important;
-// }
-
 .btn-primary:hover {
   background-color: transparent;
-  color: #C0232C;
+  color: #C21B17;
 }
 
 .btn-primary:hover {
   background-color: #ffffff !important;
-  color: #C0232C !important;
+  color: #C21B17 !important;
 }
 
 // .bg-white {

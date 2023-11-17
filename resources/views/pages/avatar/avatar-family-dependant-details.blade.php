@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Avatar - Family Dependant Details</title>
+<title>Family Dependant Details</title>
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
@@ -37,7 +37,7 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
@@ -215,7 +215,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">                                                                        
-                                                                        <label for="day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
+                                                                        <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 @if(isset($spouseData['dob']))
@@ -258,7 +258,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                        <label for="spouseMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                 <input type="radio" class="btn-check" name="gender" id="spouseMaleInput" autocomplete="off" value="male"
@@ -278,7 +278,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="habits" class="form-label">Your Habits <span class="text-danger">*</span></label>
+                                                                        <label for="smoker" class="form-label">Your Habits <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('habits') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                 <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="smoker"
@@ -344,7 +344,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
@@ -459,16 +459,16 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}Gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : ($key == 'father' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                     <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : ($key == 'mother' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
@@ -650,9 +650,31 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="missingFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Family Dependant is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to fill up the form in Family Dependant page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-// Manually convert the PHP array to JSON
-var customer_details = {!! json_encode(session('customer_details')) !!};
+var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
+var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
+var avatar = {!! json_encode(session('customer_details.avatar')) !!};
+var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
+var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {
