@@ -21,8 +21,8 @@
 <div id="top_priorities">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>    
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white order-md-1 order-sm-2 order-2">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
                         <h4 class="fw-bold">Here's how I see my priorities:</h4>
@@ -191,17 +191,17 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                            <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
                                     <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
                                     <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
                                 </div>
                             </div>
-                            <div id="needs" class="row px-4 pb-4 px-sm-5 needs">
+                            <div id="needs" class="row mx-4 pb-4 mx-sm-5 needs slider">
                                     @if ($errors->has('topPrioritiesButtonInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">

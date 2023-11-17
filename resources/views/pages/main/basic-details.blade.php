@@ -63,19 +63,19 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" required>
-                                                @error('firstName')
+                                                <label for="fullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
+                                                @error('fullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <!-- <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                 <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
                                                 @error('lastName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
@@ -100,7 +100,7 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -136,20 +136,15 @@ var family_details = {!! json_encode(session('customer_details.family_details.de
 
 document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
-    var firstNameInput = document.getElementById('firstNameInput');
-    var lastNameInput = document.getElementById('lastNameInput');
+    var fullNameInput = document.getElementById('fullNameInput');
     var emailInput = document.getElementById('email');
 
     titleSelect.addEventListener('blur', function() {
         validateSelectField(titleSelect);
     });
 
-    firstNameInput.addEventListener('blur', function() {
-        validateInputField(firstNameInput);
-    });
-
-    lastNameInput.addEventListener('blur', function() {
-        validateInputField(lastNameInput);
+    fullNameInput.addEventListener('blur', function() {
+        validateInputField(fullNameInput);
     });
 
     emailInput.addEventListener('blur', function() {
@@ -188,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidName(name) {
         // Return true if the wording is 30 characters, false otherwise
-        var nameRegex = /^[A-Za-z\s]{1,30}$/;
+        var nameRegex = /^[A-Za-z,\s\/]{1,100}$/;
 
         var isValid = nameRegex.test(name);
 

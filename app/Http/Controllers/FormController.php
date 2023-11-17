@@ -66,8 +66,11 @@ class FormController extends Controller {
             $full_number_house = $request->input('full_number_house');
 
             $validatedData = $request->validate([
-                'firstName' => 'required|max:30',
-                'lastName' => 'required|max:30',
+                'fullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
                 'title' => 'required|in:' . implode(',', $titles),
                 'mobileNumber' => 'required',
                 'email' => 'required|email:rfc,dns|max:255',
@@ -108,8 +111,7 @@ class FormController extends Controller {
             // Add the new array inside the customer_details array
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
-                'first_name' => $validatedData['firstName'],
-                'last_name' => $validatedData['lastName'],
+                'full_name' => $validatedData['fullName'],
                 'mobile_number' => $full_number,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
@@ -332,7 +334,7 @@ class FormController extends Controller {
 
                 $decodedValue = json_decode($value, true);
 
-                if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true)) {
+                if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true) || (isset($decodedValue['siblings']) && $decodedValue['siblings'] === true)) {
                     return true;
                 }
 
@@ -444,13 +446,20 @@ class FormController extends Controller {
                 'month.required' => 'The date of birth field is required.',
                 'day.required' => 'The date of birth field is required.',
                 'year.required' => 'The date of birth field is required.',
+                'siblingmonth.required' => 'The date of birth field is required.',
+                'siblingday.required' => 'The date of birth field is required.',
+                'siblingyear.required' => 'The date of birth field is required.',
             ];
 
             // Define the common validation rules for spouse
             $commonRules = [
                 'spouseTitle' => 'required|in:' . implode(',', $titles),
-                'spouseFirstName' => 'required|max:30',
-                'spouseLastName' => 'required|max:30',
+                'spouseFullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
+                // 'spouseLastName' => 'required|max:30',
                 'spouseCountry' => 'required|in:' . implode(',', $countries),
                 'spouseIdType' => 'required|in:' . implode(',', $idtypes),
                 'spouseIdNumber' => [
@@ -556,14 +565,71 @@ class FormController extends Controller {
                 'spouseOccupation' => 'required|in:' . implode(',', $occupation),
             ];
 
+            $commonRulesSiblings = [
+                'siblingFullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
+                // 'siblingLastName' => 'required|max:30',
+                'siblingday' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingmonth' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingyear' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingGender' => 'required|in:male,female',
+                'siblingYearsOfSupport' => 'required|numeric|max:100',
+                'siblingMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
+            ];
+
             $customMessagesChild = [];
             $customMessagesParents = [];
 
             if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
 
-                    $customMessagesChild[$childKey .'FirstName.required'] = 'The child first name field is required.';
-                    $customMessagesChild[$childKey .'LastName.required'] = 'The child last name field is required.';
+                    $customMessagesChild[$childKey .'FullName.required'] = 'The child full name field is required.';
+                    // $customMessagesChild[$childKey .'LastName.required'] = 'The child last name field is required.';
                     $customMessagesChild[$childKey .'Gender.required'] = 'The child gender field is required.';
                     $customMessagesChild[$childKey .'day.required'] = 'The child date of birth field is required.';
                     $customMessagesChild[$childKey .'month.required'] = 'The child date of birth field is required.';
@@ -571,8 +637,12 @@ class FormController extends Controller {
                     $customMessagesChild[$childKey .'YearsOfSupport.required'] = 'The child years of support field is required.';
                     $customMessagesChild[$childKey .'MaritalStatus.required'] = 'The child marital status field is required.';
                     
-                    $commonRulesChild[$childKey . 'FirstName'] = 'required|max:30';
-                    $commonRulesChild[$childKey . 'LastName'] = 'required|max:30';
+                    $commonRulesChild[$childKey . 'FullName'] = [
+                        'required',
+                        'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                        'max:100',
+                    ];
+                    // $commonRulesChild[$childKey . 'LastName'] = 'required|max:30';
                     $commonRulesChild[$childKey . 'Gender'] = 'required|in:male,female';
                     $commonRulesChild[$childKey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesChild[$childKey . 'day'] = [
@@ -627,8 +697,8 @@ class FormController extends Controller {
             if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
 
-                    $customMessagesParents[$parentkey .'FirstName.required'] = 'The parent first name field is required.';
-                    $customMessagesParents[$parentkey .'LastName.required'] = 'The parent last name field is required.';
+                    $customMessagesParents[$parentkey .'FullName.required'] = 'The parent full name field is required.';
+                    // $customMessagesParents[$parentkey .'LastName.required'] = 'The parent last name field is required.';
                     $customMessagesParents[$parentkey .'Gender.required'] = 'The parent gender field is required.';
                     $customMessagesParents[$parentkey .'day.required'] = 'The parent date of birth field is required.';
                     $customMessagesParents[$parentkey .'month.required'] = 'The parent date of birth field is required.';
@@ -636,8 +706,12 @@ class FormController extends Controller {
                     $customMessagesParents[$parentkey .'YearsOfSupport.required'] = 'The parent years of support field is required.';
                     $customMessagesParents[$parentkey .'MaritalStatus.required'] = 'The parent marital status field is required.';
 
-                    $commonRulesParents[$parentkey . 'FirstName'] = 'required|max:30';
-                    $commonRulesParents[$parentkey . 'LastName'] = 'required|max:30';
+                    $commonRulesParents[$parentkey . 'FullName'] = [
+                        'required',
+                        'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                        'max:100',
+                    ];
+                    // $commonRulesParents[$parentkey . 'LastName'] = 'required|max:30';
                     $commonRulesParents[$parentkey . 'Gender'] = 'required|in:male,female';
                     $commonRulesParents[$parentkey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesParents[$parentkey . 'day'] = [
@@ -702,8 +776,8 @@ class FormController extends Controller {
 
                 $newData = [
                     'title' => $validatedData['spouseTitle'],
-                    'first_name' => $validatedData['spouseFirstName'],
-                    'last_name' => $validatedData['spouseLastName'],
+                    'full_name' => $validatedData['spouseFullName'],
+                    // 'last_name' => $validatedData['spouseLastName'],
                     'country' => $validatedData['spouseCountry'],
                     'id_type' => $validatedData['spouseIdType'],
                     'id_number' => $validatedData['spouseIdNumber'],
@@ -732,8 +806,8 @@ class FormController extends Controller {
                     }
 
                     $childData = [
-                        'first_name' => $validatedData[$childKey . 'FirstName'],
-                        'last_name' => $validatedData[$childKey . 'LastName'],
+                        'full_name' => $validatedData[$childKey . 'FullName'],
+                        // 'last_name' => $validatedData[$childKey . 'LastName'],
                         'gender' => $validatedData[$childKey . 'Gender'],
                         'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
                         'dob' => $dob,
@@ -756,8 +830,8 @@ class FormController extends Controller {
                     }
 
                     $parentsData = [
-                        'first_name' => $validatedData[$parentkey . 'FirstName'],
-                        'last_name' => $validatedData[$parentkey . 'LastName'],
+                        'full_name' => $validatedData[$parentkey . 'FullName'],
+                        // 'last_name' => $validatedData[$parentkey . 'LastName'],
                         'gender' => $validatedData[$parentkey . 'Gender'],
                         'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
                         'dob' => $dob,
@@ -765,6 +839,28 @@ class FormController extends Controller {
                     ];
                     $customerDetails['family_details']['dependant']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['dependant']['parents_data'][$parentkey], $parentsData);
                 }
+            }
+
+            if (isset ($customerDetails['family_details']['dependant']['siblings']) && $customerDetails['family_details']['dependant']['siblings'] === true) {
+                $validatedData = $request->validate($commonRulesSiblings, $customMessages);
+
+                $day = $request->input('siblingday');
+                $month = $request->input('siblingmonth');
+                $year = $request->input('siblingyear');
+
+                if ($day !== NULL && $day !== '') {
+                    $dob = $day . '-' . $month . '-' . $year;
+                }
+
+                $siblingData = [
+                    'full_name' => $validatedData['siblingFullName'],
+                    // 'last_name' => $validatedData['siblingLastName'],
+                    'gender' => $validatedData['siblingGender'],
+                    'dob' => $dob,
+                    'years_support' => $validatedData['siblingYearsOfSupport'],
+                    'marital_status' => $validatedData['siblingMaritalStatus']
+                ];
+                $customerDetails['family_details']['dependant']['siblings_data'] = array_merge($customerDetails['family_details']['dependant']['siblings_data'], $siblingData);
             }
 
             // Store the updated customer_details array back into the session

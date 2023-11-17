@@ -125,8 +125,6 @@ $accordion-border-color: #CCCCCC;
 
 
 
-
-
 // h4.font-normal {
 //   font-family: 'Helvetica Neue Regular', sans-serif;
 // }
@@ -511,3 +509,10 @@ color: #EA4C89;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap5-toggle/css/bootstrap5-toggle.min.css';
 @import 'intl-tel-input/build/css/intlTelInput.css';
+
+/* Mobile / Tab Responsive */
+@include media-breakpoint-down(md) {
+  p, .display-6 {
+    font-size: 16px;
+  }
+}

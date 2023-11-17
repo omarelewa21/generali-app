@@ -16,15 +16,15 @@
     // Retrieving values from the session
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-female.json');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $firstName = session('customer_details.basic_details.first_name');
 @endphp
 
 <div id="avatar_gender_selection">
     <div class="container-fluid">
         <div class="row">
-            @include('templates.nav.nav-red-menu')
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar order-md-1 order-sm-2 order-2">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
                         <div class="row">
@@ -64,8 +64,8 @@
                     </button>
 
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"> -->
-                        <div id="lottie-animation" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"></div>
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes">
+                        <!-- <div id="lottie-animation" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"></div> -->
                     </div>
                     
                     <button type="button" class="btn btn-outline-primary slide-button right-center position-absolute" id="avatar-right">
@@ -81,14 +81,14 @@
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         @if(isset($firstName))
-                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you, {{ $firstName }}</h1>
+                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you, {{ $firstName }}</h1>
                                         @else 
-                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold">Nice to meet you.</h1>
+                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you.</h1>
                                         @endif
-                                        <p class="text-white display-6 lh-base">Please click to select your gender.</p>
+                                        <p class="text-white display-6 lh-base text-center text-md-start">Please click to select your gender.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 pb-4 px-sm-5">
@@ -102,7 +102,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
+                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2">
+                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">

@@ -21,8 +21,8 @@
 <div id="avatar_family_dependant">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
@@ -31,19 +31,19 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family.</h1>
                                         <p class="text-white display-6 lh-base">Click to select your family details.</p>
                                     </div>
                                 </div>
-                                <div class="row px-4 pb-4 px-sm-5">
+                                <div class="row mx-4 pb-4 mx-sm-5 slider">
                                     @if ($errors->has('familyDependantButtonInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
@@ -84,16 +84,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
+                                                <button class="border-0 w-100 py-4 @if(isset($familyDependant['siblings']) && $familyDependant['siblings'] === true) default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                                 </button>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </section>

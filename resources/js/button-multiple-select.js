@@ -27,10 +27,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
 
                 // For Spouse and Sibling(s) buttons, toggle the 'selected' class
-                // if (this.getAttribute('data-avatar') === 'spouse' || this.getAttribute('data-avatar') === 'siblings') {
-                //     this.setAttribute('data-required', 'selected');
-                //     this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
-                // }
+                if (this.getAttribute('data-avatar') === 'siblings') {
+                    this.setAttribute('data-required', 'selected');
+                    this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
+                }
             });
         });
 
