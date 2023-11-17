@@ -19,6 +19,7 @@
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $childrenData = session('customer_details.family_details.dependant.children_data');
     $parentsData = session('customer_details.family_details.dependant.parents_data');
+    $siblingsData = session('customer_details.family_details.dependant.siblings_data');
     $childKeys = is_array($childrenData) ? array_keys($childrenData) : [];
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
@@ -130,14 +131,14 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="spouseFirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="spouseFirstName" class="form-control @error('spouseFirstName') is-invalid @enderror" id="spouseFirstNameInput" placeholder="Your First Name" value="{{ old('spouseFirstName', $spouseData['first_name'] ?? '') }}" required>
-                                                                        @error('spouseFirstName')
+                                                                        <label for="spouseFullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                                        <input type="text" name="spouseFullName" class="form-control @error('spouseFullName') is-invalid @enderror" id="spouseFullNameInput" placeholder="Your Full Name" value="{{ old('spouseFullName', $spouseData['full_name'] ?? '') }}" required>
+                                                                        @error('spouseFullName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                                <div class="row py-2">
+                                                                <!-- <div class="row py-2">
                                                                     <div class="col-12 pt-4">
                                                                         <label for="spouseLastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseLastName" class="form-control @error('spouseLastName') is-invalid @enderror" id="spouseLastNameInput" placeholder="Your Last Name" value="{{ old('spouseLastName', $spouseData['last_name'] ?? '') }}" required>
@@ -145,7 +146,7 @@
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="row py-2">
                                                                     <div class="col-8 pt-4">
                                                                         <label for="spouseCountrySelect" class="form-label">Citizenship <span class="text-danger">*</span></label>
@@ -215,7 +216,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">                                                                        
-                                                                        <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="spouseAge" class="d-inline-block"></span> )</label>
+                                                                        <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="spouseAgeDiv">( <div id="spouseAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
                                                                                 @if(isset($spouseData['dob']))
@@ -326,14 +327,14 @@
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
-                                                                            <label for="{{$key}}FirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="{{$key}}FirstName" class="form-control @error($key . 'FirstName') is-invalid @enderror" id="{{$key}}FirstNameInput" placeholder="Your First Name" value="{{ old($key . 'FirstName', $childrenData[$key]['first_name'] ?? '') }}" required>
-                                                                            @error($key . 'FirstName')
+                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="{{$key}}FullName" class="form-control @error($key . 'FullName') is-invalid @enderror" id="{{$key}}FullNameInput" placeholder="Your Full Name" value="{{ old($key . 'FullName', $childrenData[$key]['full_name'] ?? '') }}" required>
+                                                                            @error($key . 'FullName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row py-2">
+                                                                    <!-- <div class="row py-2">
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}LastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$key}}LastName" class="form-control @error($key . 'LastName') is-invalid @enderror" id="{{$key}}LastNameInput" placeholder="Your Last Name" value="{{ old($key . 'LastName', $childrenData[$key]['last_name'] ?? '') }}" required>
@@ -341,7 +342,7 @@
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
@@ -364,7 +365,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$key}}Age" class="d-inline-block"></span> )</label>
+                                                                            <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
@@ -441,14 +442,14 @@
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
-                                                                            <label for="{{$key}}FirstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                            <input type="text" name="{{$key}}FirstName" class="form-control @error($key . 'FirstName') is-invalid @enderror" id="{{$key}}FirstNameInput" placeholder="Your First Name" value="{{ old($key . 'FirstName', $parentsData[$key]['first_name'] ?? '') }}" required>
-                                                                            @error($key . 'FirstName')
+                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="{{$key}}FullName" class="form-control @error($key . 'FullName') is-invalid @enderror" id="{{$key}}FullNameInput" placeholder="Your Full Name" value="{{ old($key . 'FullName', $parentsData[$key]['full_name'] ?? '') }}" required>
+                                                                            @error($key . 'FullName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row py-2">
+                                                                    <!-- <div class="row py-2">
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}LastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$key}}LastName" class="form-control @error($key . 'LastName') is-invalid @enderror" id="{{$key}}LastNameInput" placeholder="Your Last Name" value="{{ old($key . 'LastName', $parentsData[$key]['last_name'] ?? '') }}" required>
@@ -456,7 +457,7 @@
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                             @enderror
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
@@ -479,7 +480,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 pt-4">
-                                                                            <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="{{$key}}Age" class="d-inline-block"></span> )</label>
+                                                                            <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
                                                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
@@ -548,83 +549,123 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                <!-- @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes')
+                                                @if(isset($familyDependant['siblings']) && $familyDependant['siblings'] === true)
                                                     <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingSix">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="true" aria-controls="flush-collapseSix">
+                                                        <h2 class="accordion-header" id="flush-headingSibling">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSibling" aria-expanded="true" aria-controls="flush-collapseSibling">
                                                                 Sibling
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseSibling" class="accordion-collapse collapse" aria-labelledby="flush-headingSibling" data-bs-parent="#accordionDependantDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
-                                                                        <label for="siblingFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="siblingFirstName" class="form-control @error('siblingFirstName') is-invalid @enderror" id="siblingFirstNameInput" placeholder="Your First Name" value="{{ old('siblingFirstName', $arrayData['FamilyDependant']['siblings']['firstName'] ?? '') }}" required>
-                                                                        @error('siblingFirstName')
+                                                                        <label for="siblingFullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                                        <input type="text" name="siblingFullName" class="form-control @error('siblingFullName') is-invalid @enderror" id="siblingFullNameInput" placeholder="Your Full Name" value="{{ old('siblingFullName', $siblingsData['full_name'] ?? '') }}" required>
+                                                                        @error('siblingFullName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
                                                                 </div>
-                                                                <div class="row py-2">
+                                                                <!-- <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="siblingLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" name="siblingLastName" class="form-control @error('siblingLastName') is-invalid @enderror" id="siblingLastNameInput" placeholder="Your Last Name" value="{{ old('siblingLastName', $arrayData['FamilyDependant']['siblings']['lastName'] ?? '') }}" required>
+                                                                        <label for="siblingLastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                                        <input type="text" name="siblingLastName" class="form-control @error('siblingLastName') is-invalid @enderror" id="siblingLastNameInput" placeholder="Your Last Name" value="{{ old('siblingLastName', $siblingsData['last_name'] ?? '') }}" required>
                                                                         @error('siblingLastName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
+                                                                </div> -->
+                                                                <div class="row py-2">
+                                                                    <div class="col-12 pt-4">
+                                                                        <label for="siblingGenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                                        <div class="d-flex btn-group @error('siblingGender') is-invalid @enderror" role="group">
+                                                                            <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderMaleInput" autocomplete="off" value="male"
+                                                                                {{ (old('siblingGender') === 'male' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
+                                                                            </label>
+                                                                            <label class="radio-container d-flex justify-content-center align-items-center flex-1">
+                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderFemaleInput" autocomplete="off" value="female"
+                                                                                {{ (old('siblingGender') === 'female' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
+                                                                            </label>
+                                                                        </div>
+                                                                        @error('siblingGender')
+                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                        @enderror  
+                                                                    </div>
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="siblingDob" class="form-label">Date of Birth <span class="text-danger">*</span> ( <span id="siblingAge" class="d-inline-block"></span> )</label>
+                                                                        <label for="siblingday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="siblingAgeDiv">( <div id="siblingAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday', $arrayData['FamilyDependant']['siblings']['day'] ?? ''), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
+                                                                                @if(isset($siblingsData['dob']))
+                                                                                    {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday', substr($siblingsData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday'), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
+                                                                                @endif
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth', $arrayData['FamilyDependant']['siblings']['month'] ?? ''), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
+                                                                                @if(isset($siblingsData['dob']))
+                                                                                    {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth', substr($siblingsData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth'), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
+                                                                                @endif
                                                                             </div>
                                                                             <div class="col-md-4 pb-2 pb-md-0">
-                                                                                {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                    return substr($year, -2);
-                                                                                }, $yearRange), $yearRange), old('siblingyear', $arrayData['FamilyDependant']['siblings']['year'] ?? ''), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
+                                                                                @if(isset($siblingsData['dob']))
+                                                                                    {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                        return substr($year, -4);
+                                                                                    }, $yearRange), $yearRange), old('siblingyear', substr($siblingsData['dob'], -4)), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
+                                                                                @else
+                                                                                    {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
+                                                                                        return substr($year, -4);
+                                                                                    }, $yearRange), $yearRange), old('siblingyear'), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
+                                                                                @endif
                                                                             </div>
                                                                             @if ($errors->has('siblingday') || $errors->has('siblingmonth') || $errors->has('siblingyear'))
                                                                                 <div class="col-md-12">
-                                                                                    <div class="invalid-feedback text-red" style="display:block">Please select a day, month, and year.</div>
+                                                                                    @if ($errors->has('siblingyear'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('siblingyear') }}</div>
+                                                                                    @elseif ($errors->has('siblingmonth'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('siblingmonth') }}</div>
+                                                                                    @elseif ($errors->has('siblingday'))
+                                                                                        <div class="invalid-feedback text-red" style="display:block">{{ $errors->first('siblingday') }}</div>
+                                                                                    @endif
                                                                                 </div>
                                                                             @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="siblingYearsOfSupport" class="form-label">Years of Support <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control @error('siblingYearsOfSupport') is-invalid @enderror" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $arrayData['FamilyDependant']['siblings']['yearsOfSupport'] ?? '') }}" required>
-                                                                        @error('siblingYearsOfSupport')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                        @enderror
+                                                                    <div class="col-8 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
+                                                                        <label for="siblingYearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
                                                                     </div>
+                                                                    @error('siblingYearsOfSupport')
+                                                                        <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
-                                                                        <label for="siblingMaritalStatus" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
-                                                                        <select name="siblingMaritalStatus" class="form-select @error('siblingMaritalStatus') is-invalid @enderror" aria-label="Siblings Marital Status" id="siblingMaritalStatusSelect" required>
+                                                                    <div class="col-8 pt-4 @error('siblingMaritalStatus') is-invalid @enderror">
+                                                                        <label for="siblingMaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                        <select name="siblingMaritalStatus" class="form-select" aria-label="Siblings Marital Status" id="siblingMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
-                                                                                <option value="{{ $status->maritalStatus }}" {{ old('siblingMaritalStatus', $arrayData['FamilyDependant']['siblings']['maritalStatus'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
+                                                                                <option value="{{ $status->maritalStatus }}" {{ old('siblingMaritalStatus', $siblingsData['marital_status'] ?? '') === $status->maritalStatus ? 'selected' : '' }}>{{ $status->maritalStatus }}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                        @error('siblingMaritalStatus')
-                                                                            <div class="invalid-feedback text-red">{{ $message }}</div>
-                                                                        @enderror
                                                                     </div>
+                                                                    @error('siblingMaritalStatus')
+                                                                        <div class="invalid-feedback text-red">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif -->
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -670,6 +711,7 @@
 
 <script>
 var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
+var siblings_session = {!! json_encode(session('customer_details.family_details.dependant.siblings')) !!};
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
 var avatar = {!! json_encode(session('customer_details.avatar')) !!};
@@ -688,10 +730,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Client Validation
 document.addEventListener('DOMContentLoaded', function() {
-
     setupSelectFieldValidation('spouseTitleSelect');
-    setupFieldValidation('spouseFirstNameInput');
-    setupFieldValidation('spouseLastNameInput');
+    setupFieldValidation('spouseFullNameInput');
+    // setupFieldValidation('spouseLastNameInput');
     setupSelectFieldValidation('spouseCountrySelect');
     setupSelectFieldValidation('spouseIdSelect');
     setupIDFieldValidation('spouseIdNumber');
@@ -700,27 +741,27 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSelectFieldValidation('spouseyear');
     setupSelectFieldValidation('spouseOccupationSelect');
 
-    // setupFieldValidation('siblingFirstNameInput');
-    // setupFieldValidation('siblingLastNameInput');
-    // setupNumberFieldValidation('spouseYearsOfSupportInput');
-    // setupNumberFieldValidation('siblingYearsOfSupportInput');
-    // setupSelectFieldValidation('spouseMaritalStatusSelect');
-    // setupSelectFieldValidation('siblingMaritalStatusSelect');
+    setupFieldValidation('siblingFullNameInput');
+    setupSelectFieldValidation('siblingday');
+    setupSelectFieldValidation('siblingmonth');
+    setupSelectFieldValidation('siblingyear');
+    setupNumberFieldValidation('siblingYearsOfSupportInput');
+    setupSelectFieldValidation('siblingMaritalStatusSelect');
 
     var childNames = <?php echo json_encode($childKeys); ?>;
     var parentNames = <?php echo json_encode($parentKeys); ?>;
 
     childNames.forEach(function(childName) {
-        var FirstNameInput = childName + 'FirstNameInput';
-        var LastNameInput = childName + 'LastNameInput';
+        var FullNameInput = childName + 'FullNameInput';
+        // var LastNameInput = childName + 'LastNameInput';
         var DayInput = childName + 'day';
         var MonthInput = childName + 'month';
         var YearInput = childName + 'year';
         var YearsOfSupportInput = childName + 'YearsOfSupportInput';
         var MaritalStatusSelect = childName + 'MaritalStatusSelect';
 
-        setupFieldValidation(FirstNameInput);
-        setupFieldValidation(LastNameInput);
+        setupFieldValidation(FullNameInput);
+        // setupFieldValidation(LastNameInput);
         setupSelectFieldValidation(DayInput);
         setupSelectFieldValidation(MonthInput);
         setupSelectFieldValidation(YearInput);
@@ -729,16 +770,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     parentNames.forEach(function(parentName) {
-        var FirstNameInput = parentName + 'FirstNameInput';
-        var LastNameInput = parentName + 'LastNameInput';
+        var FullNameInput = parentName + 'FullNameInput';
+        // var LastNameInput = parentName + 'LastNameInput';
         var DayInput = parentName + 'day';
         var MonthInput = parentName + 'month';
         var YearInput = parentName + 'year';
         var YearsOfSupportInput = parentName + 'YearsOfSupportInput';
         var MaritalStatusSelect = parentName + 'MaritalStatusSelect';
 
-        setupFieldValidation(FirstNameInput);
-        setupFieldValidation(LastNameInput);
+        setupFieldValidation(FullNameInput);
+        // setupFieldValidation(LastNameInput);
         setupSelectFieldValidation(DayInput);
         setupSelectFieldValidation(MonthInput);
         setupSelectFieldValidation(YearInput);
@@ -824,7 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidName(name) {
         // Return true if the email is valid, false otherwise
-        var nameRegex = /^[A-Za-z\s]{1,30}$/;
+        var nameRegex = /^[A-Za-z,\s\/]{1,100}$/;
 
         var isValid = nameRegex.test(name);
 
@@ -857,101 +898,63 @@ document.addEventListener('DOMContentLoaded', function() {
         childNames.forEach(function(childName) {
             setupAgeCalculation(childName);
         });
-
-        function setupAgeCalculation(entity) {
-            var daySelect = document.getElementById(entity + 'day');
-            var monthSelect = document.getElementById(entity + 'month');
-            var yearSelect = document.getElementById(entity + 'year');
-
-            daySelect.addEventListener('change', calculateAge.bind(null, entity));
-            monthSelect.addEventListener('change', calculateAge.bind(null, entity));
-            yearSelect.addEventListener('change', calculateAge.bind(null, entity));
-            
-            // Calculate age on initial load
-            calculateAge(entity);
-        }
-
-        function calculateAge(entity) {
-            var daySelect = document.getElementById(entity + 'day');
-            var monthSelect = document.getElementById(entity + 'month');
-            var yearSelect = document.getElementById(entity + 'year');
-            
-            var ageDiv = document.getElementById(entity + 'Age');
-            
-            var selectedDay = daySelect.value;
-            var selectedMonth = monthSelect.value;
-            var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
-            var selectedYear = selectedYearOption.textContent;
-            
-            if (selectedYear) {
-                if (selectedDay && selectedMonth) {
-                    var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
-                    var currentDate = new Date();
-                    
-                    var age = currentDate.getFullYear() - dob.getFullYear();
-                    if (currentDate.getMonth() < dob.getMonth() ||
-                        (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
-                        age--;
-                    }
-                    
-                    ageDiv.textContent = 'Age: ' + age;
-                } else {
-                    ageDiv.textContent = 'Age:';
-                }
-            } else {
-                ageDiv.textContent = 'Age:';
-            }
-        }
     }
 
     if (parentNames) {
         parentNames.forEach(function(parentName) {
             setupAgeCalculation(parentName);
         });
+    }
 
-        function setupAgeCalculation(entity) {
-            var daySelect = document.getElementById(entity + 'day');
-            var monthSelect = document.getElementById(entity + 'month');
-            var yearSelect = document.getElementById(entity + 'year');
+    function setupAgeCalculation(entity) {
+        var daySelect = document.getElementById(entity + 'day');
+        var monthSelect = document.getElementById(entity + 'month');
+        var yearSelect = document.getElementById(entity + 'year');
 
-            daySelect.addEventListener('change', calculateAge.bind(null, entity));
-            monthSelect.addEventListener('change', calculateAge.bind(null, entity));
-            yearSelect.addEventListener('change', calculateAge.bind(null, entity));
-            
-            // Calculate age on initial load
-            calculateAge(entity);
-        }
+        daySelect.addEventListener('change', calculateAge.bind(null, entity));
+        monthSelect.addEventListener('change', calculateAge.bind(null, entity));
+        yearSelect.addEventListener('change', calculateAge.bind(null, entity));
+        
+        // Calculate age on initial load
+        calculateAge(entity);
+    }
 
-        function calculateAge(entity) {
-            var daySelect = document.getElementById(entity + 'day');
-            var monthSelect = document.getElementById(entity + 'month');
-            var yearSelect = document.getElementById(entity + 'year');
-            
-            var ageDiv = document.getElementById(entity + 'Age');
-            
-            var selectedDay = daySelect.value;
-            var selectedMonth = monthSelect.value;
-            var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
-            var selectedYear = selectedYearOption.textContent;
-            
-            if (selectedYear) {
-                if (selectedDay && selectedMonth) {
-                    var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
-                    var currentDate = new Date();
-                    
-                    var age = currentDate.getFullYear() - dob.getFullYear();
-                    if (currentDate.getMonth() < dob.getMonth() ||
-                        (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
-                        age--;
-                    }
-                    
-                    ageDiv.textContent = 'Age: ' + age;
-                } else {
-                    ageDiv.textContent = 'Age:';
+    function calculateAge(entity) {
+        var daySelect = document.getElementById(entity + 'day');
+        var monthSelect = document.getElementById(entity + 'month');
+        var yearSelect = document.getElementById(entity + 'year');
+        
+        var ageField = document.getElementById(entity + 'Age');
+        var ageDiv = document.getElementById(entity + 'AgeDiv');
+        
+        var selectedDay = daySelect.value;
+        var selectedMonth = monthSelect.value;
+        var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+        var selectedYear = selectedYearOption.textContent;
+
+        if (selectedYear) {
+            if (selectedDay && selectedMonth) {
+                var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+                var currentDate = new Date();
+                
+                var age = currentDate.getFullYear() - dob.getFullYear();
+                if (currentDate.getMonth() < dob.getMonth() ||
+                    (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                    age--;
                 }
+                
+                if (!isNaN(age)) {
+                    ageField.textContent = 'Age: ' + age;
+                    ageDiv.style.display = 'inline-block';
+                }
+                
             } else {
-                ageDiv.textContent = 'Age:';
+                ageDiv.style.display = 'none';
+                ageField.textContent = 'Age:';
             }
+        } else {
+            ageDiv.style.display = 'none';
+            ageField.textContent = 'Age:';
         }
     }
 });

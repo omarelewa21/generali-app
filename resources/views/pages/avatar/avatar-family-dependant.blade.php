@@ -84,16 +84,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg">
-                                            <div class="col-12 py-4 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 @if(isset($arrayData['FamilyDependant']['siblings']['status']) && $arrayData['FamilyDependant']['siblings']['status'] === 'yes') default @endif" data-avatar="siblings" data-required="" id="siblingButton">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
+                                                <button class="border-0 w-100 py-4 @if(isset($familyDependant['siblings']) && $familyDependant['siblings'] === true) default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/avatar-family-dependant/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
                                                 </button>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </section>

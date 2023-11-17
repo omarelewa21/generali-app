@@ -64,7 +64,7 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="fullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="First Name" value="{{ old('fullName', $basicDetails['first_name'] ?? '') }}" required>
+                                                <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
                                                 @error('fullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -100,7 +100,7 @@
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

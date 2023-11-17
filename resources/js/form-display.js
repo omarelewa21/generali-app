@@ -329,6 +329,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (family_details) {
                 var dependant = family_details;
                 var spouse = spouse_session;
+                var siblings = siblings_session;
                 
                 if (spouse === true) {
                     // Show the selected groups based on the dropdown selected
@@ -536,6 +537,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         const selectedYear = selectedYearOption.textContent;
                         
                         if (isNaN(selectedDay) || isNaN(selectedMonth) || isNaN(selectedYear)) {
+                            spouseAgeDiv.style.display = 'none';
                             ageField.textContent = 'Invalid ID number entered';
                             return;
                         }
@@ -554,17 +556,75 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < selectedDate.getDate())) {
                         age--;
                         }
-        
+
+                        spouseAgeDiv.style.display = 'inline-block';
                         ageField.textContent = 'Age: ' + age;
                     }
         
-                    // // Calculate age on initial load
+                    // Calculate age on initial load
                     calculateAge();
         
                     // Calculate age whenever the date fields are changed
                     dayField.addEventListener('change', calculateAge);
                     monthField.addEventListener('change', calculateAge);
                     yearField.addEventListener('change', calculateAge);
+                }
+
+                if (siblings === true) {
+                    // Logics to calculate age
+                    setupAgeCalculation();
+                    
+                    function setupAgeCalculation() {
+                        var daySelect = document.getElementById('siblingday');
+                        var monthSelect = document.getElementById('siblingmonth');
+                        var yearSelect = document.getElementById('siblingyear');
+                
+                        daySelect.addEventListener('change', calculateAge.bind(null));
+                        monthSelect.addEventListener('change', calculateAge.bind(null));
+                        yearSelect.addEventListener('change', calculateAge.bind(null));
+                        
+                        // Calculate age on initial load
+                        calculateAge();
+                    }
+
+                    function calculateAge() {
+                        var daySelect = document.getElementById('siblingday');
+                        var monthSelect = document.getElementById('siblingmonth');
+                        var yearSelect = document.getElementById('siblingyear');
+                        
+                        var ageField = document.getElementById('siblingAge');
+                        var ageDiv = document.getElementById('siblingAgeDiv');
+                        
+                        var selectedDay = daySelect.value;
+                        var selectedMonth = monthSelect.value;
+                        var selectedYearOption = yearSelect.options[yearSelect.selectedIndex];
+                        var selectedYear = selectedYearOption.textContent;
+                
+                        if (selectedYear) {
+                            if (selectedDay && selectedMonth) {
+                                var dob = new Date(selectedYear, selectedMonth - 1, selectedDay);
+                                var currentDate = new Date();
+                                
+                                var age = currentDate.getFullYear() - dob.getFullYear();
+                                if (currentDate.getMonth() < dob.getMonth() ||
+                                    (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+                                    age--;
+                                }
+                                
+                                if (!isNaN(age)) {
+                                    ageField.textContent = 'Age: ' + age;
+                                    ageDiv.style.display = 'inline-block';
+                                }
+                                
+                            } else {
+                                ageDiv.style.display = 'none';
+                                ageField.textContent = 'Age:';
+                            }
+                        } else {
+                            ageDiv.style.display = 'none';
+                            ageField.textContent = 'Age:';
+                        }
+                    }
                 }
             }
             else {

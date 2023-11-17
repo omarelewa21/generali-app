@@ -430,6 +430,7 @@ h2.display-5, .currencyField {
   width: 80px;
   text-align: center;
   border:none;
+  z-index: 0;
 }
 
 .modal-footer {
