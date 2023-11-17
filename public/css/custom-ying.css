@@ -61,6 +61,15 @@ button.choice:focus,
     background-size: 80%;
 }
 
+/* ============================ Gender Selection ===============================*/
+.left-center{
+    bottom: 50%;
+    left: 10%;
+}
+.right-center{
+    bottom: 50%;
+    right: 10%;
+}
 /* ============================ Needs Home ===============================*/
 .bg-needs-home{
     background-image: url(/images/needs/background/bg-home-needs.png);
