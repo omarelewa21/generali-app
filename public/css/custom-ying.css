@@ -129,6 +129,10 @@ button.choice:focus,
 #investment-home .needs-home-avatar-wrapper{
     grid-template-rows: 81% 19%;
 }
+#retirement-home .bg-needs-home{
+    background-image: url(/images/needs/retirement/home/retirement-bg.png);
+}
+
 .bg-investment-home-element{
     background-image: url('/images/needs/investment/home/investment-home-ele.png');
     background-repeat: no-repeat;
@@ -1231,4 +1235,22 @@ button.choice:focus,
         width: 30%;
         height: auto;
     }
+}
+
+/* Test */
+.text-correct{
+    color: #14A38B;
+}
+#gap .circle{
+    filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
+}
+#gap .circle__medium{
+    filter: none;
+}
+#gap .circle__small{
+    filter: none;
+}
+.scrollable-content{
+    overflow-x: hidden;
+    overflow-y: auto;
 }

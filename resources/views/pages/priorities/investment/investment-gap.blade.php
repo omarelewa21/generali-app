@@ -35,8 +35,8 @@
                         <section class="row align-items-end mh-100">
                             <div class="col-12 position-relative mh-100 scrollable-content">
                                 <div class="row h-100">
-                                    <div class="col-12 col-xl-5 d-flex align-items-center justify-content-center z-1 mh-100">
-                                        <div class="row graph-wrapper">
+                                    <div class="col-12 col-xl-5 d-flex align-items-center justify-content-center z-1 mh-100 h-100">
+                                        <div class="row graph-wrapper mt-5 mt-xl-0">
                                             <div class="col-12 d-flex justify-content-center summary-graph mt-md-6">
                                                 <div class="svg-container" style="transform:scale(1.3)">
                                                     <div class="card-gap" id="gap">
@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xl-7 d-flex align-items-center z-1 justify-content-center mt-5 mt-xl-0 mb-4 mb-md-0">
+                                    <div class="col-12 col-xl-7 d-flex align-items-center z-1 justify-content-center h-100 mh-100">
                                         <div class="row justify-content-center align-items-center">
                                             <div class="col-12 mb-3 justify-content-center">
                                                 <div class="row justify-content-center">
