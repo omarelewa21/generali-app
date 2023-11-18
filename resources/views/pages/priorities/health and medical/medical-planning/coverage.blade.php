@@ -14,6 +14,7 @@
 @php
     // Retrieving values from the session
     $healthMedical = session('customer_details.health_medical_needs');
+    $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
@@ -42,23 +43,23 @@
                         </div>
                         <div class="col-11 m-auto selection-content-coverage h-100 coverage_slick z-1">
                             <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === 'self') default @endif" id="self" data-avatar="self" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === $selfData['first_name'].' '.$selfData['last_name']) default @endif" id="{{ $selfData['first_name'] }} {{ $selfData['last_name'] }}" data-avatar="{{ $selfData['first_name'] }} {{ $selfData['last_name'] }}" data-required="">
                                     <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                     <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Self</strong></p>
                                 </button>
                             </div>
                             @if ($spouseData)
                                 <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === $spouseData['first_name'] .' '. $spouseData['last_name']) default @endif" id="{{ $spouseData['first_name'] }} {{ $spouseData['last_name'] }}" data-avatar="{{ $spouseData['first_name'] }} {{ $spouseData['last_name'] }}" data-required="">
                                         <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
-                                        <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>Spouse</strong></p>
+                                        <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>{{ $spouseData['first_name'] }} {{ $spouseData['last_name'] }}</strong></p>
                                     </button>
                                 </div>
                             @endif
                             @if ($childData)
                                 @foreach($childData as $child)
                                     <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                        <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === $child['first_name'].''.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
+                                        <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($medicalPlanningSelectedAvatar === $child['first_name'].' '.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
                                             <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" class="mt-auto mh-100 mx-auto coverage-image">
                                             <p class="py-2 m-0 f-family fw-700 coverage-text"><strong>{{ $child['first_name'] }} {{ $child['last_name'] }}</strong></p>
                                         </button>

@@ -207,12 +207,25 @@ class DebtCancellationController extends Controller
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
         $newPercentage = floatval($existing_debt_amount / $customerDetails['debt_cancellation_needs']['totalDebtCancellationFund'] * 100);
+        $newTotalDebtNeeded = floatval($request->input('newTotal_debtNeeded'));
+        $newDebtTotalFund = floatval($customerDetails['debt_cancellation_needs']['totalDebtCancellationFund'] - $existing_debt_amount);
 
         // Update specific keys with new values
         $debtCancellation = array_merge($debtCancellation, [
             'existingDebt' => $existing_debt,
             'existingDebtAmount' => $existing_debt_amount
         ]);
+
+        if ($newDebtTotalFund === $newTotalDebtNeeded){
+            $debtCancellation = array_merge($debtCancellation, [
+                'newTotalDebtCancellationFund' => $newTotalDebtNeeded
+            ]);
+        }
+        else{
+            $debtCancellation = array_merge($debtCancellation, [
+                'newTotalDebtCancellationFund' => $newDebtTotalFund
+            ]);
+        }
 
         if ($newTotalAmountNeeded === $totalAmountNeeded && $newPercentage === $totalPercentage){
             if ($newTotalAmountNeeded <= 0){

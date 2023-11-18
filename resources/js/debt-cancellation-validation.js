@@ -127,8 +127,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
+        var newTotalFund = document.getElementById("newTotal_debtNeeded");
         var totalDebtPercentage = document.getElementById("percentage");
         var totalDisplayFund = document.getElementById("TotalDebtCancellationFund");
+
+        if (sessionExistingDebtAmount !== '' || sessionExistingDebtAmount !== 0 && oldTotalFund !== '') {
+            newTotalFund.value = oldTotalFund - sessionExistingDebtAmount;
+        } 
 
         existing_debt_amount.addEventListener("input", function() {
 
@@ -161,6 +166,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     $('.retirement-progress-bar').css('width', totalPercentage + '%');
                     totalDisplayFund.innerText = "RM" + result;
                 }
+                newTotalFund.value = total;
 
             } else {
             // If it's not a valid number, display the cleaned value as is

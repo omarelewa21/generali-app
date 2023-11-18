@@ -172,6 +172,7 @@ Route::view('/financial-statement/expected-income', 'pages.summary.expected-inco
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
 Route::view('/overview', 'pages.summary.overview')->name('overview');
+Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

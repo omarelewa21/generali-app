@@ -175,6 +175,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
         var totalProtectionPercentage = document.getElementById("percentage");
+        var totalDisplayFund = document.getElementById("TotalProtectionFund");
 
         existing_policy_amount.addEventListener("input", function() {
 
@@ -183,32 +184,34 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
             // Remove non-digit characters
             const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
+
+            var existingAmount = parseInt(cleanedValue);
+
+            var total = oldTotalFund - existingAmount;
+            var totalPercentage = existingAmount / oldTotalFund * 100;
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
             // If it's a valid number, format it with commas
                 const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                var result = total.toLocaleString();
+                if (total <= 0){
+                    totalAmountNeeded.value = 0;
+                    totalProtectionPercentage.value = 100;
+                    $('.retirement-progress-bar').css('width','100%');
+                    totalDisplayFund.innerText = "RM 0";
+                }
+                else{
+                    totalAmountNeeded.value = total;
+                    totalProtectionPercentage.value = totalPercentage;
+                    $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                    totalDisplayFund.innerText = "RM" + result;
+                }
             } else {
             // If it's not a valid number, display the cleaned value as is
                 this.value = existingPolicyAmountValue;
-            }
-    
-            var existingAmount = parseInt(cleanedValue);
-    
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
-            
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            if (total <= 0){
-                totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
-            }
-            else{
-                totalAmountNeeded.value = total;
-                totalProtectionPercentage.value = totalPercentage;
-                $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                totalDisplayFund.innerText = "RM 0";
             }
     
         });

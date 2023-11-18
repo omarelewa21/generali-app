@@ -42,7 +42,7 @@
                             @if ($childData)
                                 @foreach($childData as $child)
                                     <div class="slick-slide h-100 mh-100 d-flex justify-content-center align-items-center">
-                                        <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === $child['first_name'].''.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
+                                        <button class="border-0 bg-transparent choice h-100 slick-padding mt-auto button-needs justify-content-center align-items-center @if($educationSelectedAvatar === $child['first_name'].' '.$child['last_name']) default @endif" id="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-avatar="{{ $child['first_name'] }} {{ $child['last_name'] }}" data-required="">
                                             @php
                                             $birthdate = $child['dob'];
 

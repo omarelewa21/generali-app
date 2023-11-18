@@ -726,6 +726,11 @@ button.choice:focus,
     color: #C21B17; /* Color of the tick symbol */
 }
 
+/* =============== Summary Overview ============= */
+#overview-new .wrapper-overview{
+    grid-template-rows: 20vh 65vh 15vh;
+}
+
 /* Media Query - Mobile (screen size max 767px) */
 @media only screen and (max-width: 360px){
     .col-xs-10{

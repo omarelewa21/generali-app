@@ -11,6 +11,7 @@
     $existingDebt = session('customer_details.debt_cancellation_needs.existingDebt');
     $existingDebtAmount = session('customer_details.debt_cancellation_needs.existingDebtAmount');
     $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
+    $newTotalDebtNeeded = session('customer_details.debt_cancellation_needs.newTotalDebtCancellationFund');
     $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.debt_cancellation_needs.totalAmountNeeded');
 @endphp
@@ -77,6 +78,7 @@
                                                     <span class="currencyinput f-34">RM<input type="text" name="existing_debt_amount" class="form-control d-inline-block w-45 money f-34 @error('existing_debt_amount') is-invalid @enderror" id="existing_debt_amount" value="{{ $existingDebtAmount !== null ? number_format(floatval($existingDebtAmount)) : $existingDebtAmount }}" required></span>
                                                 </p>
                                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                                <input type="hidden" name="newTotal_debtNeeded" id="newTotal_debtNeeded" value="{{$newTotalDebtNeeded}}">
                                                 <input type="hidden" name="percentage" id="percentage" value="{{$debtFundPercentage}}">
                                             </div>
                                         </div>

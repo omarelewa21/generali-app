@@ -139,6 +139,8 @@ class ProtectionController extends Controller
         Log::debug($customerDetails);
 
         // Process the form data and perform any necessary actions
+         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('protection.supporting.years');
     }
     public function validateProtectionSupporting(Request $request){
@@ -305,9 +307,9 @@ class ProtectionController extends Controller
         Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('retirement.home');
+         $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('retirement.home');
     }
 
 }
