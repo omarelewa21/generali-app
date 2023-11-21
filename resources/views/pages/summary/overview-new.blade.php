@@ -201,7 +201,7 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center position-absolute" style="font-size:80px;line-height:90px;z-index:9999;">{{$total_chart}}%
+                                            <div class="card-gap__number text-primary text-center position-absolute" style="font-size:80px;line-height:90px;z-index:1000;">{{$total_chart}}%
                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                             </div>
                                         </div>
@@ -418,14 +418,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 d-flex px-4 d-none d-sm-flex">
-                            <a href="#" class="btn btn-primary text-uppercase">Email me</a>
+                            <a href="#" class="btn btn-primary text-uppercase" data-bs-toggle="modal" data-bs-target="#emailSummary">Email me</a>
                             <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary ms-auto me-md-2 text-uppercase">Back</a>
-                            <a href="#" class="btn btn-secondary me-md-2 text-uppercase">Next</a>
+                            <a href="#" class="btn btn-secondary me-md-2 text-uppercase" data-bs-toggle="modal" data-bs-target="#endSession">Submit</a>
                         </div>
-                        <div class="col-12 d-sm-none mb-3 px-4"><a href="#" class="btn btn-primary w-100 text-uppercase">Email me</a></div>
+                        <div class="col-12 d-sm-none mb-3 px-4"><a href="#" class="btn btn-primary w-100 text-uppercase" data-bs-toggle="modal" data-bs-target="#emailSummary">Email me</a></div>
                         <div class="col-12 d-flex gap-2 d-sm-none text-end px-4">
                             <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
-                            <a href="{{route('summary.increment-amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Next</a>
+                            <a href="{{route('summary.increment-amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase" data-bs-toggle="modal" data-bs-target="#endSession">Submit</a>
                         </div>
                     </div>
                 </div>
@@ -433,6 +433,40 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="emailSummary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="emailSummaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4">
+                <h3 class="modal-title f-family fw-bold f-34 text-center" id="emailSummaryLabel">Thank you for securing your future with us!</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>We’ve sent you an email summarising your priorities and the coverage needed for your journey ahead.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="endSession" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="endSessionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4">
+                <h3 class="modal-title f-family fw-bold f-34 text-center" id="endSessionLabel">Thank you for sharing your needs and priorities!</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Our advisors are now ready to guide you on how you can best secure your future.</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">End session</button> -->
+                <a href="{{route('welcome')}}" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" type="button" id="saveSession" data-clear-route="{{ route('clear_session_data') }}">End session</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var circle = document.getElementById("circle");
 
