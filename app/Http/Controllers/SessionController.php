@@ -13,13 +13,13 @@ class SessionController extends Controller
         Session::flush();
         return response()->json(['message' => 'Session data cleared.']);
     }
+    
+    public function getSessionData(Request $request)
+    {
+        // Retrieve session data
+        $sessionData = $request->session()->all();
 
-    // public function getSession()
-    // {
-    //     $data = [
-    //         'key' => 'value',
-    //         'another_key' => 'another_value',
-    //     ];
-    //     return view('pages.avatar.avatar-family-dependant')->with($data);
-    // }
+        // Return session data as JSON response
+        return response()->json($sessionData);
+    }
 }

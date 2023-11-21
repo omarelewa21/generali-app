@@ -161,5 +161,6 @@
     var avatar = {!! json_encode(session('customer_details.avatar')) !!};
     var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
     var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+    var assets = {!! json_encode(session('customer_details.assets')) !!};
 </script>
 @endsection

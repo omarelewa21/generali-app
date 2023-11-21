@@ -175,3 +175,4 @@ Route::view('/overview', 'pages.summary.overview')->name('overview');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
+Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->name('get.session.data');

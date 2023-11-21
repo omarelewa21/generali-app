@@ -213,8 +213,8 @@
                                         </div>
                                     @endif
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
@@ -223,8 +223,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
@@ -233,8 +233,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
@@ -243,8 +243,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
@@ -253,8 +253,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
@@ -263,8 +263,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
@@ -273,18 +273,18 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Investments">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Investments</p>
+                                                <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>

@@ -217,7 +217,7 @@
                                                         $title = 'Health Medical';
                                                     }
                                                     else if ($priority === 'investments') {
-                                                        $title = 'Investments';
+                                                        $title = 'Lump Sum Investment';
                                                     }
                                                     else if ($priority === 'others') {
                                                         $title = 'Others';
