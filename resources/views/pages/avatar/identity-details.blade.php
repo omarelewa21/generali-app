@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
+                <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
@@ -183,7 +183,7 @@
                                                     $selectedDay = sprintf('%02d', $selectedDay);
                                                 }
                                             @endphp
-                                            <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
+                                            <label for="day" class="form-label text-white">Date of Birth * <span id="ageDiv">( <div id="age" class="d-inline-block"></div> )</span></label>
                                             <div class="row">
                                                 <div class="col-md-4 pb-2 pb-md-0">
                                                     @if(isset($identityDetails['dob']))

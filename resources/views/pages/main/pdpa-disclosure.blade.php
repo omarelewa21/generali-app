@@ -27,13 +27,12 @@
                         <div class="container">
                             <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                 <div class="col-12">
-                                    <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT / KENYATAAN PERLINDUNGAN DATA</h1>
+                                    <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT</h1>
                                 </div>
                             </div>
                             <div class="row px-4">
                                 <div class="col-12">
                                     <p>Your privacy is important to us. The Company is committed to ensure that your personal data under our care is safe and secured. We will ensure that your information collected via this application and any other information that you may provide to the Company is used for the purposes of purchasing an insurance policy including but not limited to underwriting and administering your plan; processing service request; processing claims; complying with all applicable laws; conducting due diligence; performing our functions as an insurance company and such other purposes referred to in our Personal Data Policy. For further details on how we collect, process, share and retain your personal data, please refer to our website at <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
-                                    <p>Privasi anda adalah penting bagi kami. Syarikat adalah komited untuk memastikan bahawa data peribadi anda di bawah jagaan kami adalah selamat dan terjamin. Kami akan memastikan maklumat anda yang dikumpulkan melalui permohonan ini dan apa-apa maklumat lain yang anda kemukakan untuk Syarikat digunakan untuk tujuan-tujuan membeli polisi insurans termasuk tetapi tidak terhad kepada pengunderaitan dan mentadbir pelan anda; permintaan perkhidmatan pemprosesan; pemprosesan tuntutan; mematuhi semua undang-undang; menjalankan usaha wajar; melaksanakan tugas kami sebagai sebuah syarikat insurans dan apa-apa maksud lain yang disebut dalam Dasar Data Peribadi kami. Untuk maklumat lanjut mengenai bagaimana kami mengumpul, memproses, berkongsi dan menyimpan data peribadi anda, sila rujuk kepada laman web kami di <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
                                 </div>
                             </div>
                         </div>

@@ -58,14 +58,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var assets_fields = [];
             assets_fields.push('/assets');
         }
-        console.log(assets_fields);
 
         if (assets_fields == null) {
             allFieldsFilled.push(basic_details_fields, avatar_fields, identity_details_fields, family_details_fields, '/assets');
         }
     
         allFieldsFilled
-        console.log(allFieldsFilled);
+        // console.log(allFieldsFilled);
     
         $('.timeline-item').each(function (index) {
     

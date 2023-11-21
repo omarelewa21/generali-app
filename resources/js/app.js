@@ -20,9 +20,6 @@ import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
 
-// $('.toast').toast('show');
-// $('.tooltip').tooltip('show');
-
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
     // Detect the element with id

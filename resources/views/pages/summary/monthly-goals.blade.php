@@ -38,7 +38,7 @@
             <section class="footer footer-avatar-grey">
                 <div class="container">
                     <div class="row justify-content-center position-relative">
-                        <div class="col-md-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -150px">
+                        <div class="col-md-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -130px">
                             <img src="{{ asset('images/summary/bank-container.png') }}" width="100%" alt="Monthly Goals">
                             <div class="col-12 position-absolute px-5">
                                 <p class="display-3 currencyField"><span class="text-black fw-bold border-bottom border-dark border-3">RM<input type="number" name="existing_policy_monthly_support" class="form-control position-relative border-0 d-inline-block w-50 fw-bold text-primary @error('existing_policy_monthly_support') is-invalid @enderror" id="existing_policy_monthly_support" value="" required></span></p>

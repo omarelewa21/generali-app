@@ -38,7 +38,7 @@ $(document).ready(function() {
 
         // Check if the window width is less than 767px
         if (windowWidth < 768) {
-            const menuHeight = $("#wrapper-navbar.fixed-top").outerHeight();
+            const menuHeight = $("#wrapper-navbar.fixed-top.mobile").outerHeight();
             const responsiveHeader = menuHeight; // Adding 10 pixels
             $(".content-section").css("padding-top", responsiveHeader + "px");
         } else {
