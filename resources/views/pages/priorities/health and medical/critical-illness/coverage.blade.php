@@ -13,12 +13,12 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
+    $healthMedical = session('customer_details.health-medical_needs');
     $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $criticalIllnessSelectedAvatar = session('customer_details.health_medical_needs.critical_illness.coveragePerson');
+    $criticalIllnessSelectedAvatar = session('customer_details.health-medical_needs.critical_illness.coveragePerson');
 @endphp
 
 <div id="critical-illness-coverage">

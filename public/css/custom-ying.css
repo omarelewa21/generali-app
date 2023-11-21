@@ -727,8 +727,61 @@ button.choice:focus,
 }
 
 /* =============== Summary Overview ============= */
+.chart-wrapper {
+    display:grid;
+    grid-auto-rows: 100%;
+    grid-auto-columns:100%;
+    grid-template-areas:
+        "overview-graph";
+}
+.overview-graph{
+    grid-area: overview-graph;
+    grid-auto-rows: 100%;
+    grid-auto-columns:100%;
+    display: grid;
+}
+#overview-new h2.display-5{
+    font-size: 26px;
+    line-height: normal;
+}
+
+table {
+    font-family: 'Helvetica Neue', sans-serif;
+}
 #overview-new .wrapper-overview{
-    grid-template-rows: 20vh 65vh 15vh;
+    grid-template-rows: 16vh 69vh 15vh;
+}
+#overview-new .navbar-brand.py-md-5{
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+#overview-table th{
+    color: #707070;
+    font-size: 18px;
+    line-height: 22px;
+}
+#overview-table thead, #overview-table tbody, #overview-table tfoot, #overview-table tr, #overview-table td, #overview-table th{
+    padding: 15px 10px;
+}
+#overview-needs tbody, #overview-needs tr, #overview-needs td{
+    padding: 10px;
+}
+#overview-needs tbody td:first-child{
+    font-size: 22px;
+    line-height: 150%;
+    padding-right: 32px;
+}
+#overview-table tbody tr:nth-child(odd) {
+    background-color: #F3F3F3;
+}
+#overview-table tbody td,
+#overview-needs tbody td:last-child{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 150%;
+}
+#overview-table tbody td:last-child{
+    color: #C0232C;
 }
 
 /* Media Query - Mobile (screen size max 767px) */
@@ -882,6 +935,25 @@ button.choice:focus,
     .needs-monthly{
         grid-template-rows: 90%;
     }
+}
+
+/* Overview graph */
+@media only screen and (max-width: 439px){
+    #overview-new #gap svg{
+        position: absolute;
+    }
+    #overview-new #gap .card-gap__percent{
+        height: 390px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 850px){
+    #overview-new #gap svg{
+        position: absolute;
+    }
+    #overview-new #gap .card-gap__percent{
+        height: 390px;
+    }
+    
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
     #retirement-home .needs-home-avatar-wrapper {

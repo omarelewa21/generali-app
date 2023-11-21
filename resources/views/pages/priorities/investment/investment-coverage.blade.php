@@ -13,12 +13,12 @@
 
 @php
     // Retrieving values from the session
-    $investment = session('customer_details.investment_needs');
+    $investment = session('customer_details.investments_needs');
     $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $investmentSelectedAvatar = session('customer_details.investment_needs.coveragePerson');
+    $investmentSelectedAvatar = session('customer_details.investments_needs.coveragePerson');
 @endphp
 
 <div id="investment-coverage">

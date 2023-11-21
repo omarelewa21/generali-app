@@ -7,11 +7,11 @@
 
 @php
     // Retrieving values from the session
-    $debtCancellation = session('customer_details.debt_cancellation_needs');
-    $criticalIllnessCoverage = session('customer_details.debt_cancellation_needs.criticalIllnessCoverage');
-    $coverageAmount = session('customer_details.debt_cancellation_needs.criticalIllnessCoverageAmount');
-    $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
+    $debtCancellation = session('customer_details.debt-cancellation_needs');
+    $criticalIllnessCoverage = session('customer_details.debt-cancellation_needs.criticalIllnessCoverage');
+    $coverageAmount = session('customer_details.debt-cancellation_needs.criticalIllnessCoverageAmount');
+    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
+    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
 @endphp
 
 <div id="debt-critical-illness">

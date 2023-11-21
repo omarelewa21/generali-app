@@ -13,7 +13,7 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
+    $healthMedical = session('customer_details.health-medical_needs');
     $selectedHospital = session('customer_details.health_medical_needs.medical_planning.typeOfHospital');
 @endphp
 

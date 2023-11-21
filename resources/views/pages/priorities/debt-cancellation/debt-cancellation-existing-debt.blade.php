@@ -7,13 +7,13 @@
 
 @php
     // Retrieving values from the session
-    $debtCancellation = session('customer_details.debt_cancellation_needs');
-    $existingDebt = session('customer_details.debt_cancellation_needs.existingDebt');
-    $existingDebtAmount = session('customer_details.debt_cancellation_needs.existingDebtAmount');
-    $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
-    $newTotalDebtNeeded = session('customer_details.debt_cancellation_needs.newTotalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.debt_cancellation_needs.totalAmountNeeded');
+    $debtCancellation = session('customer_details.debt-cancellation_needs');
+    $existingDebt = session('customer_details.debt-cancellation_needs.existingDebt');
+    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
+    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
+    $newTotalDebtNeeded = session('customer_details.debt-cancellation_needs.newTotalDebtCancellationFund');
+    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
 @endphp
 
 <div id="debt-existing-debt">

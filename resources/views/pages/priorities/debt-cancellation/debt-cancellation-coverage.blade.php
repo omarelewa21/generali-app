@@ -13,12 +13,12 @@
 
 @php
     // Retrieving values from the session
-    $debtCancellation = session('customer_details.debt_cancellation_needs');
+    $debtCancellation = session('customer_details.debt-cancellation_needs');
     $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $debtCancellationSelectedAvatar = session('customer_details.debt_cancellation_needs.coveragePerson');
+    $debtCancellationSelectedAvatar = session('customer_details.debt-cancellation_needs.coveragePerson');
 @endphp
 
 <div id="debt-coverage">

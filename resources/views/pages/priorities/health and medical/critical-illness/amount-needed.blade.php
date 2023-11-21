@@ -12,10 +12,10 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
-    $criticalAmountNeeded = session('customer_details.health_medical_needs.critical_illness.neededAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health_medical_needs.critical_illness.totalHealthMedicalNeeded', '0');
-    $healthMedicalFundPercentage = session('customer_details.health_medical_needs.critical_illness.fundPercentage', '0');
+    $healthMedical = session('customer_details.health-medical_needs');
+    $criticalAmountNeeded = session('customer_details.health-medical_needs.critical_illness.neededAmount');
+    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.critical_illness.totalHealthMedicalNeeded', '0');
+    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.critical_illness.fundPercentage', '0');
     
 @endphp
 

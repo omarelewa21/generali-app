@@ -13,8 +13,8 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
-    $selectedHealthMedical = session('customer_details.health_medical_needs.coverageSelection');
+    $healthMedical = session('customer_details.health-medical_needs');
+    $selectedHealthMedical = session('customer_details.health-medical_needs.coverageSelection');
 @endphp
 
 <div id="health-medical-selection">

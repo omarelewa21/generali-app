@@ -7,12 +7,12 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
-    $existingProtection = session('customer_details.health_medical_needs.medical_planning.existingProtection');
-    $existingProtectionAmount = session('customer_details.health_medical_needs.medical_planning.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health_medical_needs.medical_planning.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health_medical_needs.medical_planning.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health_medical_needs.medical_planning.totalAmountNeeded');
+    $healthMedical = session('customer_details.health-medical_needs');
+    $existingProtection = session('customer_details.health-medical_needs.medical_planning.existingProtection');
+    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
+    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
+    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
 @endphp
 
 <div id="medical-existing-protection">

@@ -12,11 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $debtCancellation = session('customer_details.debt_cancellation_needs');
-    $settlementYears = session('customer_details.debt_cancellation_needs.remainingYearsOfSettlement');
-    $totalDebtNeeded = session('customer_details.debt_cancellation_needs.totalDebtCancellationFund');
-    $newTotalDebtNeeded = session('customer_details.debt_cancellation_needs.newTotalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt_cancellation_needs.fundPercentage', '0');
+    $debtCancellation = session('customer_details.debt-cancellation_needs');
+    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
+    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
+    $newTotalDebtNeeded = session('customer_details.debt-cancellation_needs.newTotalDebtCancellationFund');
+    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
 @endphp
 
 

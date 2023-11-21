@@ -20,7 +20,6 @@
     $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
     $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
-    $existingPolicy = session('customer_details.protection_needs.existingPolicy');
     
 @endphp
 
@@ -46,19 +45,13 @@
                                         <h3 id="TotalProtectionFund" class="m-1 text-light text-center f-50">RM
                                             <!-- {{ ($newTotalProtectionNeeded !== null && $newTotalProtectionNeeded !== '' && $protectionSupportingYears !== null && $totalProtectionNeeded !== '' && $existingPolicyAmount === '') ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears))
                                                 : ( ($newTotalProtectionNeeded !== null && $newTotalProtectionNeeded !== '' && $existingPolicyAmount !== '') ? ($existingPolicyAmount > (floatval($totalProtectionNeeded) * floatval($protectionSupportingYears)) ? '0' : number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears) - $existingPolicyAmount)) : number_format(floatval($totalProtectionNeeded)) ) }}</h3> -->
-                                                {{
-                                                ($protectionSupportingYears === null && $existingPolicyAmount === null)
-                                                    ? number_format(floatval($totalProtectionNeeded))
-                                                    : (
-                                                        ($protectionSupportingYears !== null)
-                                                            ? number_format(floatval($totalProtectionNeeded) * floatval($protectionSupportingYears))
-                                                            : (
-                                                                ($existingPolicyAmount !== '' && $protectionSupportingYears !== '')
-                                                                    ? number_format(floatval($newTotalProtectionNeeded))
-                                                                    : number_format(floatval($totalAmountNeeded))
-                                                            )
-                                                    )
-                                                }}
+                                            {{ 
+                                            $existingPolicyAmount === null || $existingPolicyAmount === '' 
+                                                ? number_format(floatval($totalProtectionNeeded)) 
+                                                : ($existingPolicyAmount > floatval($totalProtectionNeeded) 
+                                                ? '0' 
+                                                : number_format(floatval($totalProtectionNeeded) - floatval($existingPolicyAmount)))
+                                            }}
                                         </h3>
                                         <p class="text-light text-center">Total Protection Needed</p>
                                     </div>

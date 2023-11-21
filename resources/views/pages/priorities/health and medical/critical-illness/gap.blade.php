@@ -7,11 +7,11 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health_medical_needs');
-    $existingProtectionAmount = session('customer_details.health_medical_needs.critical_illness.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health_medical_needs.critical_illness.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health_medical_needs.critical_illness.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health_medical_needs.critical_illness.totalAmountNeeded');
+    $healthMedical = session('customer_details.health-medical_needs');
+    $existingProtectionAmount = session('customer_details.health-medical_needs.critical_illness.existingProtectionAmount');
+    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.critical_illness.totalHealthMedicalNeeded');
+    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.critical_illness.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.health-medical_needs.critical_illness.totalAmountNeeded');
 @endphp
 
 <div id="critical-summary">

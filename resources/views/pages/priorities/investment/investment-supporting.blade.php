@@ -12,11 +12,11 @@
 
 @php
     // Retrieving values from the session
-    $investment = session('customer_details.investment_needs');
-    $investmentSupportingYears = session('customer_details.investment_needs.investmentTimeFrame');
-    $totalInvestmentNeeded = session('customer_details.investment_needs.totalInvestmentNeeded', '0');
-    $newTotalInvestmentNeeded = session('customer_details.investment_needs.newTotalInvestmentNeeded');
-    $investmentFundPercentage = session('customer_details.investment_needs.fundPercentage', '0');
+    $investment = session('customer_details.investments_needs');
+    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
+    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded', '0');
+    $newTotalInvestmentNeeded = session('customer_details.investments_needs.newTotalInvestmentNeeded');
+    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
 @endphp
 
 

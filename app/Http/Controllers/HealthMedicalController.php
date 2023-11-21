@@ -19,7 +19,7 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -52,8 +52,8 @@ class HealthMedicalController extends Controller
             'coverageSelection' => $healthMedicalSelectedInput
         ]);
 
-        // Set the updated health_medical_needs back to the customer_details session
-        $customerDetails['health_medical_needs'] = $healthMedical;
+        // Set the updated health-medical_needs back to the customer_details session
+        $customerDetails['health-medical_needs'] = $healthMedical;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -69,10 +69,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health_medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -106,7 +106,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health_medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -120,10 +120,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Set the updated critical_illness back to the customer_details session
-        $criticalIllness = $customerDetails['health_medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
 
         $customMessages = [
             'critical_amount_needed.required' => 'You are required to enter an amount.',
@@ -165,7 +165,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health_medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -213,18 +213,18 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health_medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $critical_existing_protection = $request->input('critical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['health_medical_needs']['critical_illness']['totalHealthMedicalNeeded'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['health-medical_needs']['critical_illness']['totalHealthMedicalNeeded'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['health_medical_needs']['critical_illness']['totalHealthMedicalNeeded'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['health-medical_needs']['critical_illness']['totalHealthMedicalNeeded'] * 100);
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
@@ -262,7 +262,7 @@ class HealthMedicalController extends Controller
         }
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health_medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -278,13 +278,13 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health_medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health_medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -302,10 +302,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -339,7 +339,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -354,10 +354,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -391,7 +391,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -406,10 +406,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -443,7 +443,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -459,10 +459,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         $customMessages = [
             'medical_amount_needed.required' => 'You are required to enter an amount.',
@@ -504,7 +504,7 @@ class HealthMedicalController extends Controller
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -550,18 +550,18 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $medical_existing_protection = $request->input('medical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['health_medical_needs']['medical_planning']['totalHealthMedicalNeeded'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['health-medical_needs']['medical_planning']['totalHealthMedicalNeeded'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['health_medical_needs']['medical_planning']['totalHealthMedicalNeeded'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['health-medical_needs']['medical_planning']['totalHealthMedicalNeeded'] * 100);
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
@@ -599,7 +599,7 @@ class HealthMedicalController extends Controller
         }
 
         // Set the updated medicalPlanning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -615,13 +615,13 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health_medical_needs'] ?? [];
+        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health_medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health_medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

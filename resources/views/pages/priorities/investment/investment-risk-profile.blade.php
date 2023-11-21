@@ -13,9 +13,9 @@
 
 @php
     // Retrieving values from the session
-    $investment = session('customer_details.investment_needs');
-    $investmentRiskProfile = session('customer_details.investment_needs.riskProfile');
-    $investmentPotentialReturn = session('customer_details.investment_needs.potentialReturn');
+    $investment = session('customer_details.investments_needs');
+    $investmentRiskProfile = session('customer_details.investments_needs.riskProfile');
+    $investmentPotentialReturn = session('customer_details.investments_needs.potentialReturn');
 @endphp
 
 <div id="investment-risk-profile">
