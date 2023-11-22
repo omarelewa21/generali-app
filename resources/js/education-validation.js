@@ -11,7 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (path === '/education-coverage') {
+    if (path === '/education/coverage') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -48,57 +48,83 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
         });
     }
-    else if (path == '/education-amount') {
+    else if (path == '/education/amount-needed') {
         // Get the input value
-        var education_amount = document.getElementById("tertiary_education_amount");
-        var totalEducationFund = document.getElementById("TotalEducationFund");
+        var educationAmountNeeded = document.getElementById("tertiary_education_amount");
+        var supportingYears = document.getElementById("tertiary_education_years");
         var totalEducationFundNeeded = document.getElementById("total_educationNeeded");
 
-        education_amount.addEventListener("input", function() {
+        var totalEducationFund = document.getElementById("TotalEducationFund");
+
+        educationAmountNeeded.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var educationAmountValue = education_amount.value;
+            var educationAmountNeededValue = educationAmountNeeded.value;
 
             // Remove non-digit characters
-            const cleanedValue = parseFloat(educationAmountValue.replace(/\D/g, ''));
+            const cleanedValue = parseFloat(educationAmountNeededValue.replace(/\D/g, ''));
+            const educationYear = parseInt(supportingYears.value);
 
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+            // Calculate months
+            var totalEducationAmount = cleanedValue / educationYear;
 
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
-            // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+            if (!isNaN(cleanedValue)) {
+                // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                totalEducationFund.innerText = "RM" + formattedValue;
+                if (!isNaN(educationYear)){
+                    var result = totalEducationAmount.toLocaleString();
+                    totalEducationFund.innerText = "RM" + result;
+                }
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = educationAmountValue;
-            }
-
-            var monthlyAmount = parseInt(cleanedValue);
-
-            if (isNaN(monthlyAmount)) {
-                // Input is not a valid number
+                this.value = educationAmountNeededValue;
                 totalEducationFund.innerText = "RM 0";
-            } else {
+            }
+            // Set the value of the hidden input field
+            totalEducationFundNeeded.value =  totalEducationAmount;
+        });
+
+        supportingYears.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var supportingYearsValue = supportingYears.value;
+
+            var amountNeeded = parseFloat(educationAmountNeeded.value.replace(/\D/g, '')); 
+            var Year = parseInt(supportingYearsValue);
+
+            // Calculate months
+            var totalAmount =  amountNeeded / Year;
+
+            if (!isNaN(Year)) {
                 // Input is a valid number, perform the calculation
                 // Display the result
-                var result = monthlyAmount.toLocaleString();
-
+                var result = totalAmount.toLocaleString();
                 totalEducationFund.innerText = "RM" + result;
+            } else {
+                // Input is not a valid number
+                this.value = supportingYearsValue;
+                totalEducationFund.innerText = "RM 0";
             }
-
             // Set the value of the hidden input field
-            totalEducationFundNeeded.value = monthlyAmount;
+            totalEducationFundNeeded.value =  totalAmount;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            education_amount.addEventListener("blur", function() {
-                validateNumberField(education_amount);
+            educationAmountNeeded.addEventListener("blur", function() {
+                validateAmountNumberField(educationAmountNeeded);
             });
         });
 
-        function validateNumberField(field) {
+        document.addEventListener("DOMContentLoaded", function() {
+            supportingYears.addEventListener("blur", function() {
+                validateYearsNumberField(supportingYears);
+            });
+        });
+
+        function validateAmountNumberField(field) {
             var value = field.value.replace(/,/g, ''); // Remove commas
             var numericValue = parseFloat(value);
 
@@ -109,19 +135,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
-    }
-    else if (path == '/education-supporting-years') {
 
-        // Get the input value
-        var educationYear = document.getElementById("tertiary_education_years");
-    
-        document.addEventListener("DOMContentLoaded", function() {
-            educationYear.addEventListener("blur", function() {
-                validateNumberField(educationYear);
-            });
-        });
-
-        function validateNumberField(field) {
+        function validateYearsNumberField(field) {
             const value = field.value.trim();
 
             if (value === "" || isNaN(value)) {
@@ -130,14 +145,98 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
-
     }
-    else if (path == '/education-existing-fund') {
+    // else if (path == '/education-amount') {
+    //     // Get the input value
+    //     var education_amount = document.getElementById("tertiary_education_amount");
+    //     var totalEducationFund = document.getElementById("TotalEducationFund");
+    //     var totalEducationFundNeeded = document.getElementById("total_educationNeeded");
+
+    //     education_amount.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var educationAmountValue = education_amount.value;
+
+    //         // Remove non-digit characters
+    //         const cleanedValue = parseFloat(educationAmountValue.replace(/\D/g, ''));
+
+    //         // Attempt to parse the cleaned value as a float
+    //         const parsedValue = parseFloat(cleanedValue);
+
+    //         // Check if the parsed value is a valid number
+    //         if (!isNaN(parsedValue)) {
+    //         // If it's a valid number, format it with commas
+    //             const formattedValue = parsedValue.toLocaleString('en-MY');
+    //             this.value = formattedValue;
+    //         } else {
+    //         // If it's not a valid number, display the cleaned value as is
+    //             this.value = educationAmountValue;
+    //         }
+
+    //         var monthlyAmount = parseInt(cleanedValue);
+
+    //         if (isNaN(monthlyAmount)) {
+    //             // Input is not a valid number
+    //             totalEducationFund.innerText = "RM 0";
+    //         } else {
+    //             // Input is a valid number, perform the calculation
+    //             // Display the result
+    //             var result = monthlyAmount.toLocaleString();
+
+    //             totalEducationFund.innerText = "RM" + result;
+    //         }
+
+    //         // Set the value of the hidden input field
+    //         totalEducationFundNeeded.value = monthlyAmount;
+    //     });
+
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         education_amount.addEventListener("blur", function() {
+    //             validateNumberField(education_amount);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         var value = field.value.replace(/,/g, ''); // Remove commas
+    //         var numericValue = parseFloat(value);
+
+    //         if (isNaN(numericValue)) {
+    //             field.classList.add("is-invalid");
+
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    // else if (path == '/education-supporting-years') {
+
+    //     // Get the input value
+    //     var educationYear = document.getElementById("tertiary_education_years");
+    
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         educationYear.addEventListener("blur", function() {
+    //             validateNumberField(educationYear);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         const value = field.value.trim();
+
+    //         if (value === "" || isNaN(value)) {
+    //             field.classList.add("is-invalid");
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+
+    // }
+    else if (path == '/education/existing-fund') {
         var education_saving = document.getElementById('education_saving_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
         var totalEducationPercentage = document.getElementById("percentage");
+        var totalDisplayFund = document.getElementById("TotalEducationFund");
 
         education_saving.addEventListener("input", function() {
 
@@ -146,45 +245,42 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
             // Remove non-digit characters
             const cleanedValue = parseFloat(educationSavingValue.replace(/\D/g, ''));
-    
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+
+            var total = oldTotalFund - cleanedValue;
+            var totalPercentage = cleanedValue / oldTotalFund * 100;
     
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
-            // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+            if (!isNaN(cleanedValue)) {
+                // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                var result = total.toLocaleString();
+                if (total <= 0){
+                    totalAmountNeeded.value = 0;
+                    totalEducationPercentage.value = 100;
+                    $('.calculation-progress-bar').css('width','100%');
+                    totalDisplayFund.innerText = "RM 0";
+                }
+                else{
+                    totalAmountNeeded.value = total;
+                    totalEducationPercentage.value = totalPercentage;
+                    $('.calculation-progress-bar').css('width', totalPercentage + '%');
+                    totalDisplayFund.innerText = "RM" + result;
+                }
             } else {
-            // If it's not a valid number, display the cleaned value as is
+                // If it's not a valid number, display the cleaned value as is
                 this.value = educationSavingValue;
-            }
-    
-            var savingAmount = parseInt(cleanedValue);
-    
-            var total = oldTotalFund - savingAmount;
-            var totalPercentage = savingAmount / oldTotalFund * 100;
-            
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            if (total <= 0){
-                totalAmountNeeded.value = 0;
-                totalEducationPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
-            }
-            else{
-                totalAmountNeeded.value = total;
-                totalEducationPercentage.value = totalPercentage;
-                $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                totalDisplayFund.innerText = "RM 0";
             }
     
         });
         // Add event listeners to the radio buttons
         yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
+            jQuery('.hide-content').css('opacity','1');
         });
     
         noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
+            jQuery('.hide-content').css('opacity','0');
             education_saving.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
@@ -198,7 +294,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
+                jQuery('.hide-content').css('opacity','1');
             }
             
             function validateNumberField(field) {
@@ -223,16 +319,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
                 totalEducationPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
+                $('.calculation-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
                 totalEducationPercentage.value = newTotalPercentage;
-                $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+                $('.calculation-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/education-gap') {
+    else if (path == '/education/gap') {
         var Uncovered = (100 - Covered).toFixed(2);
         var Covered = (educationSavingAmount / newTotalEducationFundNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");

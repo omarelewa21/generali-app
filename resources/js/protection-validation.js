@@ -287,10 +287,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             var total = oldTotalFund - cleanedValue;
             var totalPercentage = cleanedValue / oldTotalFund * 100;
-            console.log("babigao");
+  
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
-                console.log("babi");
+
                 // If it's a valid number, format it with commas
                 const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;

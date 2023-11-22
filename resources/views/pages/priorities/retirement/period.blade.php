@@ -22,7 +22,7 @@
     $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
 
-<div id="retirement-amount-needed" class="bg-retire-age">
+<div id="retirement-period" class="bg-retire-age">
     <div class="container-fluid">
         <div class="row">
             <form novalidate action="{{route('validate.retirement.period')}}" method="POST">

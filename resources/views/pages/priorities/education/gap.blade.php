@@ -8,7 +8,7 @@
 @php
     // Retrieving values from the session
     $education = session('customer_details.education_needs');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+    $totalEducationYear = session('customer_details.education_needs.supportingYears');
     $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
     $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded');
     $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
@@ -118,7 +118,7 @@
                                                     <span class="align-self-center green-tick"></span>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-12 mb-3 justify-content-center">
+                                            <div class="col-12 mb-3 justify-content-center">
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
                                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -133,7 +133,7 @@
                                                     </div>
                                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 d-block d-md-none footer bg-white py-4 z-1">

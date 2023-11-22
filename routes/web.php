@@ -47,11 +47,11 @@ Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->
 Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
-/* Priorities - Protection */
-Route::view('/protection', 'pages.priorities.protection.home')->name('protection.home');
 // this is for testing
 Route::view('/protection-home', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
 
+/* Priorities - Protection */
+Route::view('/protection', 'pages.priorities.protection.home')->name('protection.home');
 Route::view('/protection/coverage', 'pages.priorities.protection.coverage')->name('protection.coverage');
 Route::post('/protection/coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection/amount-needed', 'pages.priorities.protection.amount-needed')->name('protection.amount.needed');
@@ -87,17 +87,20 @@ Route::view('/retirement-retire-age', 'pages.priorities.retirement.retirement-re
 Route::Post('/retirement-retire-age', [RetirementController::class, 'validateRetireAge'])->name('validate.retire.age');
 
 /* Priorities - Education */
-Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');
-Route::view('/education-coverage', 'pages.priorities.education.education-coverage')->name('education.coverage');
-Route::post('/education-coverage', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
+Route::view('/education', 'pages.priorities.education.education-home')->name('education.home');
+Route::view('/education/coverage', 'pages.priorities.education.coverage')->name('education.coverage');
+Route::post('/education/coverage', [EducationController::class, 'validateEducationCoverageSelection'])->name('validate.education.coverage.selection');
+Route::view('/education/amount-needed', 'pages.priorities.education.amount-needed')->name('education.amount.needed');
+Route::post('/education/amount-needed', [EducationController::class, 'validateEducationAmountNeeded'])->name('validate.education.amount.needed');
+Route::view('/education/existing-fund', 'pages.priorities.education.existing-fund')->name('education.existing.fund');
+Route::post('/education/existing-fund', [EducationController::class, 'validateEducationExistingFund'])->name('validate.education.existing.fund');
+Route::view('/education/gap', 'pages.priorities.education.gap')->name('education.gap');
+Route::post('/education/gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
+
 Route::view('/education-amount', 'pages.priorities.education.education-amount')->name('education.amount');
 Route::post('/education-amount', [EducationController::class, 'validateEducationAmount'])->name('validate.education.amount');
 Route::view('/education-supporting-years', 'pages.priorities.education.education-supporting-years')->name('education.supporting.years');
 Route::post('/education-supporting-years', [EducationController::class, 'validateEducationSupportingYears'])->name('validate.education.supporting');
-Route::view('/education-existing-fund', 'pages.priorities.education.education-existing-fund')->name('education.existing.fund');
-Route::post('/education-existing-fund', [EducationController::class, 'validateEducationExistingFund'])->name('validate.education.existing.fund');
-Route::view('/education-gap', 'pages.priorities.education.education-gap')->name('education.gap');
-Route::post('/education-gap', [EducationController::class, 'submitEducationGap'])->name('form.submit.education.gap');
 
 /* Priorities - Savings */
 Route::view('/savings-home', 'pages.priorities.savings.savings-home')->name('savings.home');
