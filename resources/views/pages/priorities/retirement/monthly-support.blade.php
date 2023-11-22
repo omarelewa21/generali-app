@@ -16,6 +16,7 @@
     $retirement = session('customer_details.retirement_needs');
     $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
     $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
+    $supportingYears = session('customer_details.retirement_needs.supportingYears');
     $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
     $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
@@ -39,11 +40,13 @@
                                                 <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$retirementFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <h3 id="TotalRetirementFund" class="text-light text-center m-1 f-family">RM{{ 
-                                                $retirementSavings === null || $retirementSavings === '' 
-                                                    ? number_format(floatval($totalRetirementNeeded)) 
-                                                    : ($retirementSavings > floatval($totalRetirementNeeded) 
-                                                    ? '0' 
-                                                    : number_format(floatval($totalRetirementNeeded) - floatval($retirementSavings)))
+                                                $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
+                                                ? number_format(floatval($totalRetirementNeeded))
+                                                : ($retirementSavings === null || $retirementSavings === ''
+                                                    ? number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))
+                                                    : ($retirementSavings > (floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))
+                                                        ? '0'
+                                                        : number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears) - floatval($retirementSavings))))
                                                 }}
                                             </h3>
                                             <p class="text-light text-center">Total Retirement Fund Needed</p>
