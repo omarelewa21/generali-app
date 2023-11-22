@@ -10,7 +10,7 @@
     $retirement = session('customer_details.retirement_needs');
     $supportingYears = session('customer_details.retirement_needs.supportingYears');
     $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $newTotalRetirementNeeded = session('customer_details.retirement_needs.newTotalRetirementNeeded');
+    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded');
     $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
 @endphp
@@ -56,7 +56,7 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -95,7 +95,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I should have a fund of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalRetirementNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -168,7 +168,7 @@
 <script>
     var retirementSavings =  {{$retirementSavings}};
     var percentage = {{$retirementFundPercentage}};
-    var newTotalRetirementNeeded = {{$newTotalRetirementNeeded}};
+    var newTotalRetirementNeeded = {{$totalRetirementNeeded}};
 </script>
 
 @endsection

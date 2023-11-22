@@ -48,36 +48,43 @@ Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-to-dis
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
-Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+Route::view('/protection', 'pages.priorities.protection.home')->name('protection.home');
 // this is for testing
-Route::view('/protection', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
-Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
-Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
+Route::view('/protection-home', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
+
+Route::view('/protection/coverage', 'pages.priorities.protection.coverage')->name('protection.coverage');
+Route::post('/protection/coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
+Route::view('/protection/amount-needed', 'pages.priorities.protection.amount-needed')->name('protection.amount.needed');
+Route::post('/protection/amount-needed', [ProtectionController::class, 'validateProtectionAmountNeeded'])->name('validate.protection.amount.needed');
+Route::view('/protection/existing-policy', 'pages.priorities.protection.existing-policy')->name('protection.existing.policy');
+Route::post('/protection/existing-policy', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
+Route::view('/protection/gap', 'pages.priorities.protection.gap')->name('protection.gap');
+Route::post('/protection/gap', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
+
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
 Route::post('/protection-monthly-support', [ProtectionController::class, 'validateMonthlySupport'])->name('validate.monthly.support');
 Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
 Route::post('/protection-supporting-years', [ProtectionController::class, 'validateProtectionSupporting'])->name('validate.protection.supporting');
-Route::view('/protection-existing-policy', 'pages.priorities.protection.protection-existing-policy')->name('protection.existing.policy');
-Route::post('/protection-existing-policy', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
-Route::view('/protection-gap', 'pages.priorities.protection.protection-gap')->name('protection.gap');
-Route::post('/protection-gap', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
 
 /* Priorities - Retirement */
-Route::view('/retirement-home', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
-Route::view('/retirement-coverage', 'pages.priorities.retirement.retirement-coverage')->name('retirement.coverage');
-Route::post('/retirement-coverage', [RetirementController::class, 'validateRetirementCoverageSelection'])->name('validate.retirement.coverage.selection');
-Route::view('/retirement-ideal', 'pages.priorities.retirement.retirement-ideal')->name('retirement.ideal');
-Route::Post('/retirement-ideal', [RetirementController::class, 'validateIdeal'])->name('validate.retirement.ideal');
-Route::view('/retirement-monthly-support', 'pages.priorities.retirement.retirement-monthly-support')->name('retirement.monthly.support');
-Route::Post('/retirement-monthly-support', [RetirementController::class, 'validateMonthlySupport'])->name('validate.retirement.monthly.support');
+Route::view('/retirement', 'pages.priorities.retirement.retirement-home')->name('retirement.home');
+Route::view('/retirement/coverage', 'pages.priorities.retirement.coverage')->name('retirement.coverage');
+Route::post('/retirement/coverage', [RetirementController::class, 'validateRetirementCoverageSelection'])->name('validate.retirement.coverage.selection');
+Route::view('/retirement/ideal', 'pages.priorities.retirement.ideal')->name('retirement.ideal');
+Route::Post('/retirement/ideal', [RetirementController::class, 'validateIdeal'])->name('validate.retirement.ideal');
+Route::view('/retirement/monthly-support', 'pages.priorities.retirement.monthly-support')->name('retirement.monthly.support');
+Route::Post('/retirement/monthly-support', [RetirementController::class, 'validateRetirementMonthlySupport'])->name('validate.retirement.monthly.support');
+Route::view('/retirement/period', 'pages.priorities.retirement.period')->name('retirement.period');
+Route::Post('/retirement/period', [RetirementController::class, 'validateRetirementPeriod'])->name('validate.retirement.period');
+Route::view('/retirement/others', 'pages.priorities.retirement.others')->name('retirement.others');
+Route::Post('/retirement/others', [RetirementController::class, 'validateRetirementOthers'])->name('validate.retirement.others');
+Route::view('/retirement/gap', 'pages.priorities.retirement.gap')->name('retirement.gap');
+Route::post('/retirement/gap', [RetirementController::class, 'submitRetirementGap'])->name('form.submit.retirement.gap');
+
 Route::view('/retirement-supporting-years', 'pages.priorities.retirement.retirement-supporting-years')->name('retirement.supporting.years');
 Route::Post('/retirement-supporting-years', [RetirementController::class, 'validateSupportingYears'])->name('validate.supporting.years');
 Route::view('/retirement-retire-age', 'pages.priorities.retirement.retirement-retire-age')->name('retirement.retire.age');
 Route::Post('/retirement-retire-age', [RetirementController::class, 'validateRetireAge'])->name('validate.retire.age');
-Route::view('/retirement-others', 'pages.priorities.retirement.retirement-others')->name('retirement.others');
-Route::Post('/retirement-others', [RetirementController::class, 'validateOthers'])->name('validate.others');
-Route::view('/retirement-gap', 'pages.priorities.retirement.retirement-gap')->name('retirement.gap');
-Route::post('/retirement-gap', [RetirementController::class, 'submitRetirementGap'])->name('form.submit.retirement.gap');
 
 /* Priorities - Education */
 Route::view('/education-home', 'pages.priorities.education.education-home')->name('education.home');

@@ -10,13 +10,13 @@
     $protection = session('customer_details.protection_needs');
     $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
     $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
-    $newTotalProtectionNeeded = session('customer_details.protection_needs.newTotalProtectionNeeded');
+    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
     $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
 <div id="protection-summary">
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row vh-100 scrollable-content">
             <div class="col-12">
                 <div class="row h-100 bg-needs-master-full wrapper-needs-summary-default">
@@ -56,7 +56,7 @@
                                                             <div class="circle"></div>
                                                             <div class="circle circle__medium"></div>
                                                             <div class="circle circle__small"></div>
-                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $newTotalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%
+                                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%
                                                                 <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
                                                             </div>
                                                         </div>
@@ -95,7 +95,7 @@
                                                                 <h6 class="f-family fw-700 m-0 ps-3">I should have a fund of</h6>
                                                             </div>
                                                             <div class="m-0 ml-auto">
-                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($newTotalProtectionNeeded))}}</h4>
+                                                                <h4 class="f-family fw-700 summary-value m-0">RM {{number_format(floatval($totalProtectionNeeded))}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -168,7 +168,7 @@
 <script>
     var existingPolicyAmount =  {{$existingPolicyAmount}};
     var percentage = {{$protectionFundPercentage}};
-    var newTotalProtectionNeeded = {{$newTotalProtectionNeeded}};
+    var newTotalProtectionNeeded = {{$totalProtectionNeeded}};
 </script>
 
 @endsection
