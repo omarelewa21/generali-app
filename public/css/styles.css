@@ -471,6 +471,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-bottom-grey {
+  grid-template-areas:
+      "header"
+      "content-needs-grey"
+      "footer-avatar-grey";
+  grid-template-rows: 20vh 45vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .wrapper-needs-grey {
   grid-template-areas:
       "header"
@@ -524,6 +534,20 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
   display: grid;
   grid-auto-rows: 100%;
+}
+
+.content-needs-grey {
+  grid-template-areas:"heading" "bottom-content";
+  display: grid;
+  grid-auto-rows: 10vh 45vh;
+  grid-template-columns: 100%;
+  grid-area: content-needs-grey;
+}
+.heading {
+  grid-area: heading;
+}
+.bottom-content {
+  grid-area: bottom-content;
 }
 
 .footer-main {
@@ -663,9 +687,9 @@ h2.display-5, .currencyField {
 
 /* Marital Status Page */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
-  background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
-  background-size: 25%,20%;
-  background-position: top left, bottom right;
+  background-image: url(/images/avatar-marital-status/vector-plant.png);
+  background-size: 20%;
+  background-position: bottom right;
   background-repeat: no-repeat;
 }
 
@@ -1062,6 +1086,9 @@ fieldset legend {
   #home {
     background-position: right bottom;
     background-size: contain;
+  }
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 40vh 35vh;
   }
 }
 

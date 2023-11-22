@@ -10,7 +10,7 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
-<section class="position-fixed top-0 end-0">
+<section class="d-flex justify-content-end">
     <div class="row align-items-center px-4 py-4">
         <div class="col-auto">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">

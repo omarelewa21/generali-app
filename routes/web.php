@@ -37,7 +37,6 @@ Route::view('/avatar', 'pages.avatar.avatar-gender-selection')->name('avatar.gen
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
-Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
 
@@ -48,9 +47,9 @@ Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-to-dis
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
-Route::view('/protection-home', 'pages.priorities.protection.protection-home')->name('protection.home');
+Route::view('/protection', 'pages.priorities.protection.protection-home')->name('protection.home');
 // this is for testing
-Route::view('/protection', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
+Route::view('/protection/coverage', 'pages.priorities.protection.protection-coverage-new')->name('protection.coverage.new');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
 Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
