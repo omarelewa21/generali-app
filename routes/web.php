@@ -50,6 +50,7 @@ Route::post('/financial-priorities/discuss', [FormController::class, 'priorities
 Route::view('/protection', 'pages.priorities.protection.protection-home')->name('protection.home');
 // this is for testing
 Route::view('/protection/coverage', 'pages.priorities.protection.protection-coverage-new')->name('protection.coverage.new');
+Route::post('/protection/coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection-coverage', 'pages.priorities.protection.protection-coverage')->name('protection.coverage');
 Route::post('/protection-coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
 Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
