@@ -122,7 +122,6 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    z-index: 1000;
 }
 
 .progress .progress-left {
@@ -215,7 +214,6 @@
 @media only screen and (max-device-width:986px) {
 .progress .progress-value{
     background:transparent;
-    z-index:1000;
 }
 
 /* .progress-mobile {
