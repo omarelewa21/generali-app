@@ -103,7 +103,6 @@
     margin: 0 auto;
     box-shadow: none;
     position: relative;
-    z-index: 1000;
 }
 
 .progress:after {

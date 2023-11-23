@@ -309,6 +309,10 @@ p.nav-text {
   height:100vh;
 }
 
+.offcanvas .offcanvas-body {
+  flex-grow: inherit;
+}
+
 /* Button Styling */
 .btn-check + .btn:hover {
   background-color: #ffffff;
@@ -1098,6 +1102,12 @@ fieldset legend {
   }
   .wrapper-needs-grey {
     grid-template-rows: 9vh 35vh 35vh;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 30vh 40vh;
   }
 }
 
