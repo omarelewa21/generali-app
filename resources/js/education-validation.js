@@ -66,7 +66,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             const educationYear = parseInt(supportingYears.value);
 
             // Calculate months
-            var totalEducationAmount = cleanedValue / educationYear;
+            // var totalEducationAmount = cleanedValue / educationYear;
 
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
@@ -75,8 +75,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 this.value = formattedValue;
                 totalEducationFund.innerText = "RM" + formattedValue;
                 if (!isNaN(educationYear)){
-                    var result = totalEducationAmount.toLocaleString();
-                    totalEducationFund.innerText = "RM" + result;
+                    // var result = totalEducationAmount.toLocaleString();
+                    totalEducationFund.innerText = "RM" + formattedValue;
                 }
             } else {
             // If it's not a valid number, display the cleaned value as is
@@ -84,7 +84,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 totalEducationFund.innerText = "RM 0";
             }
             // Set the value of the hidden input field
-            totalEducationFundNeeded.value =  totalEducationAmount;
+            totalEducationFundNeeded.value =  cleanedValue;
         });
 
         supportingYears.addEventListener("input", function() {
@@ -92,24 +92,24 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             // Retrieve the current input value
             var supportingYearsValue = supportingYears.value;
 
-            var amountNeeded = parseFloat(educationAmountNeeded.value.replace(/\D/g, '')); 
+            // var amountNeeded = parseFloat(educationAmountNeeded.value.replace(/\D/g, '')); 
             var Year = parseInt(supportingYearsValue);
 
             // Calculate months
-            var totalAmount =  amountNeeded / Year;
+            // var totalAmount =  amountNeeded / Year;
 
             if (!isNaN(Year)) {
                 // Input is a valid number, perform the calculation
                 // Display the result
-                var result = totalAmount.toLocaleString();
-                totalEducationFund.innerText = "RM" + result;
+                // var result = totalAmount.toLocaleString();
+                // totalEducationFund.innerText = "RM" + result;
             } else {
                 // Input is not a valid number
                 this.value = supportingYearsValue;
-                totalEducationFund.innerText = "RM 0";
+                // totalEducationFund.innerText = "RM 0";
             }
             // Set the value of the hidden input field
-            totalEducationFundNeeded.value =  totalAmount;
+            // totalEducationFundNeeded.value =  totalAmount;
         });
 
         document.addEventListener("DOMContentLoaded", function() {

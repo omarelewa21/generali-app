@@ -563,8 +563,8 @@ button.choice:focus,
 .bg-hnm {
     background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: top left;
+    background-size: 90%;
+    background-position: top -22% left -2%;
 }
 /* ========================== Health and Medical Planning Hospital Selection ====================*/
 #medical-hospital-selection .content-block {

@@ -1,31 +1,30 @@
 <?php
  /**
- * Template Name: Health Medical - Medical Planning Amount Needed
+ * Template Name: Debt Cancellation - Amount Needed
  */
 ?>
+
 @extends('templates.master')
 
 @section('title')
-<title>Health Medical - Medical Planning Amount Needed</title>
+    <title>Debt Cancellation - Amount Needed</title>
+@endsection
 
 @section('content')
 
 @php
-    // Retrieving values from the session
-    $healthMedical = session('customer_details.health-medical_needs');
-    $medicalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.neededAmount');
-    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded', '0');
-    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
-    
+    $debtCancellation = session('customer_details.debt-cancellation_needs'); 
+    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
+    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
+    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
+    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
+    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
 @endphp
 
-
-<div id="medical-amount-needed" class="bg-hnm">
+<div id="debt-cancellation-amount-needed" class="bg-half-master">
     <div class="container-fluid">
-        <div class="row mh-100">
-            <form novalidate action="{{route('validate.medical.planning.amount.needed')}}" method="POST">
+        <div class="row">
+            <form novalidate action="{{route('validate.debt.cancellation.amount.needed')}}" method="POST">
                 @csrf
                 <div class="row wrapper-grey">
                     <div class="header">
@@ -38,17 +37,17 @@
                                     <div class="row justify-content-center">
                                         <div class="col-lg-8 col-xl-6 bg-primary calculation-progress-bar-wrapper px-4 px-md-2">
                                             <div class="calculation-progress mt-3 d-flex align-items-center">
-                                                <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <h3 id="TotalHealthMedicalFund" class="text-light text-center m-1 f-family">RM{{ 
-                                                $existingProtectionAmount === null || $existingProtectionAmount === '' 
-                                                    ? number_format(floatval($totalHealthMedicalNeeded)) 
-                                                    : ($existingProtectionAmount > floatval($totalHealthMedicalNeeded) 
+                                            <h3 id="TotalDebtCancellationFund" class="text-light text-center m-1 f-family">RM{{ 
+                                                $existingDebtAmount === null || $existingDebtAmount === '' 
+                                                    ? number_format(floatval($totalDebtNeeded)) 
+                                                    : ($existingDebtAmount > floatval($totalDebtNeeded) 
                                                     ? '0' 
-                                                    : number_format(floatval($totalHealthMedicalNeeded) - floatval($existingProtectionAmount)))
+                                                    : number_format(floatval($totalDebtNeeded) - floatval($existingDebtAmount)))
                                                 }}
                                             </h3>
-                                            <p class="text-light text-center">Total Health & Medical Fund Needed</p>
+                                            <p class="text-light text-center">Total Debt Cancellation</p>
                                         </div>
                                     </div>
                                 </div>
@@ -64,15 +63,15 @@
                                 <div class="col-md-6">
                                     <!-- Just keep this empty -->
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-md-start justify-content-sm-center z-1 mt-5">
-                                    <div class="col-xxl-11 text-md-start text-sm-center text-center">
-                                        <p class="f-40 f-family fw-bold lh-normal m-0">In the event of any Medical/Hospitalisation needs, I would require<br>
-                                            <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control f-40 f-family fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded !== null ? number_format(floatval($medicalAmountNeeded)) : $medicalAmountNeeded }}" required></span>
-                                            /month to take care of myself and my family with
-                                            <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="medical_year" class="form-control f-40 f-family fw-bold position-relative border-0 d-inline-block w-35 text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
-                                            years to build this fund.
+                                <div class="col-md-6 d-flex justify-content-md-start justify-content-sm-center">
+                                    <div class="col-xxl-9 text-md-start text-sm-center text-center">
+                                        <p class="f-40 f-family fw-bold lh-normal m-0">I’d like to clear my outstanding loans of<br>
+                                            <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="debt_outstanding_loan" class="form-control f-40 f-family fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('debt_outstanding_loan') is-invalid @enderror" id="debt_outstanding_loan" value="{{ $debtOutstandingLoan !== null ? number_format(floatval($debtOutstandingLoan)) : $debtOutstandingLoan }}" required></span>
+                                            . & be debt free in
+                                            <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="debt_settlement_years" class="form-control f-40 f-family fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('debt_settlement_years') is-invalid @enderror" id="debt_settlement_years" value="{{$settlementYears}}" required></span>
+                                            years.
                                         </p>
-                                        <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
+                                        <input type="hidden" name="total_debtFund" id="total_debtFund" value="{{$totalDebtNeeded}}">
                                     </div>
                                 </div>
                             </div>
@@ -82,17 +81,17 @@
                         <div class="container">
                             <div class="row position-relative">
                                 <div class="col-md-6 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -150px">
-                                    <img src="{{ asset('images/needs/health-medical/medical-planning/amount-needed/avatar.png') }}" width="auto" height="450px" alt="Education Amount Needed Avatar" class="mobileImg">
+                                    <img src="{{ asset('images/needs/debt-cancellation/outstanding-loan/avatar.png') }}" width="auto" height="450px" alt="Debt Cancellation Amount Needed Avatar" class="mobileImg">
                                 </div>
                             </div>
                         </div>
-                        @if ($errors->has('medical_amount_needed') || $errors->has('medical_year'))
+                        @if ($errors->has('debt_outstanding_loan') || $errors->has('debt_settlement_years'))
                             <div class="row position-absolute alert-position w-100 z-1">
                                 <div class="col-12 alert alert-danger py-2 rounded-0 d-flex justify-content-center align-items-center alert-height m-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('medical_amount_needed') }} {{ $errors->first('medical_year') }}</div>
+                                    <div class="text">{{ $errors->first('debt_outstanding_loan') }} {{ $errors->first('debt_settlement_years') }}</div>
                                 </div>
                             </div>
                         @endif
@@ -100,7 +99,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('health.medical.planning.room.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{route('debt.cancellation.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -112,8 +111,5 @@
         </div>
     </div>
 </div>
-<script>
-    var amountNeeded = document.getElementById("medical_amount_needed");
-    var supportingYears = document.getElementById("medical_year");
-</script>
+
 @endsection

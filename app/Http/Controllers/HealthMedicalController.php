@@ -128,9 +128,14 @@ class HealthMedicalController extends Controller
         $customMessages = [
             'critical_amount_needed.required' => 'You are required to enter an amount.',
             'critical_amount_needed.regex' => 'You must enter number',
+            'critical_year.required' => 'You are required to enter a year.',
+            'critical_year.integer' => 'The year must be a number.',
+            'critical_year.min' => 'The year must be at least :min.',
+            'critical_year.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
+            'critical_year' => 'required|integer|min:1|max:99',
             'critical_amount_needed' => [
                 'required',
                 'regex:/^[0-9,]+$/',
@@ -142,8 +147,8 @@ class HealthMedicalController extends Controller
                     if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
-                    if (intval($numericValue) > $max) {
-                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                    if (intval($numericValue * 12) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). 'per annual.');
                     }
                 },
             ],
@@ -156,13 +161,27 @@ class HealthMedicalController extends Controller
 
         // Validation passed, perform any necessary processing.
         $critical_amount_needed = str_replace(',','',$request->input('critical_amount_needed'));
+        $supportingYears = $request->input('critical_year');
+        $healthMedicalTotalFund = floatval($critical_amount_needed * 12 * $supportingYears);
         $totalHealthMedicalNeeded = floatval($request->input('total_healthMedicalNeeded'));
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
             'neededAmount' => $critical_amount_needed,
-            'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+            'year' => $supportingYears
         ]);
+
+        if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
+
+            $criticalIllness = array_merge($criticalIllness, [
+                'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+            ]);
+        }
+        else{
+            $criticalIllness = array_merge($criticalIllness, [
+                'totalHealthMedicalNeeded' => $healthMedicalTotalFund
+            ]);
+        }
 
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
@@ -467,9 +486,14 @@ class HealthMedicalController extends Controller
         $customMessages = [
             'medical_amount_needed.required' => 'You are required to enter an amount.',
             'medical_amount_needed.regex' => 'You must enter number',
+            'medical_year.required' => 'You are required to enter a year.',
+            'medical_year.integer' => 'The year must be a number.',
+            'medical_year.min' => 'The year must be at least :min.',
+            'medical_year.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
+            'medical_year' => 'required|integer|min:1|max:99',
             'medical_amount_needed' => [
                 'required',
                 'regex:/^[0-9,]+$/',
@@ -481,8 +505,8 @@ class HealthMedicalController extends Controller
                     if (intval($numericValue) < $min) {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
-                    if (intval($numericValue) > $max) {
-                        $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                    if (intval($numericValue * 12) > $max) {
+                        $fail('Your amount must not more than RM' .number_format(floatval($max)). 'per annual.');
                     }
                 },
             ],
@@ -495,13 +519,27 @@ class HealthMedicalController extends Controller
 
         // Validation passed, perform any necessary processing.
         $medical_amount_needed = str_replace(',','',$request->input('medical_amount_needed'));
+        $supportingYears = $request->input('medical_year');
+        $healthMedicalTotalFund = floatval($medical_amount_needed * 12 * $supportingYears);
         $totalHealthMedicalNeeded = floatval($request->input('total_healthMedicalNeeded'));
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
             'neededAmount' => $medical_amount_needed,
-            'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+            'year' => $supportingYears
         ]);
+
+        if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
+
+            $medicalPlanning = array_merge($medicalPlanning, [
+                'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+            ]);
+        }
+        else{
+            $medicalPlanning = array_merge($medicalPlanning, [
+                'totalHealthMedicalNeeded' => $healthMedicalTotalFund
+            ]);
+        }
 
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;

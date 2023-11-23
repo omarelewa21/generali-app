@@ -104,7 +104,7 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $tertiary_education_amount = str_replace(',','',$request->input('tertiary_education_amount'));
         $tertiary_education_years = $request->input('tertiary_education_years');
-        $educationTotalFund = floatval($tertiary_education_amount / $tertiary_education_years);
+        // $educationTotalFund = floatval($tertiary_education_amount / $tertiary_education_years);
         $totalEducationFund = floatval($request->input('total_educationNeeded'));
 
         // Get the existing customer_details array from the session
@@ -116,20 +116,21 @@ class EducationController extends Controller
         // Update specific keys with new values
         $education = array_merge($education, [
             'tertiaryEducationAmount' => $tertiary_education_amount,
-            'supportingYears' => $tertiary_education_years
+            'supportingYears' => $tertiary_education_years,
+            'totalEducationNeeded' => $totalEducationFund
         ]);
 
-        if ($totalEducationFund === $educationTotalFund){
+        // if ($totalEducationFund === $educationTotalFund){
 
-            $education = array_merge($education, [
-                'totalEducationNeeded' => $totalEducationFund
-            ]);
-        }
-        else{
-            $education = array_merge($education, [
-                'totalEducationNeeded' => $educationTotalFund
-            ]);
-        }
+        //     $education = array_merge($education, [
+        //         'totalEducationNeeded' => $totalEducationFund
+        //     ]);
+        // }
+        // else{
+        //     $education = array_merge($education, [
+        //         'totalEducationNeeded' => $educationTotalFund
+        //     ]);
+        // }
 
         // Set the updated education back to the customer_details session
         $customerDetails['education_needs'] = $education;

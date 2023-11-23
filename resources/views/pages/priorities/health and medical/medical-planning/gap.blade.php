@@ -9,6 +9,7 @@
     // Retrieving values from the session
     $healthMedical = session('customer_details.health-medical_needs');
     $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
+    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
     $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
     $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
@@ -69,6 +70,22 @@
                                     </div>
                                     <div class="col-12 col-xl-7 d-flex align-items-center z-1 justify-content-center h-100 mh-100">
                                         <div class="row justify-content-center align-items-center">
+                                            <div class="col-12 mb-3 justify-content-center">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
+                                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
+                                                            <div class="m-0 d-flex align-items-center w-md-50">
+                                                                <img src="{{ asset('images/needs/icon/clock.png') }}">
+                                                                <h6 class="f-family fw-700 m-0 ps-3">After the next</h6>
+                                                            </div>
+                                                            <div class="m-0 ml-auto">
+                                                                <h4 class="f-family fw-700 summary-value m-0">{{$medicalYear}} years</h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="align-self-center green-tick"></span>
+                                                </div>
+                                            </div>
                                             <div class="col-12 mb-3 justify-content-center">
                                                 <div class="row justify-content-center">
                                                     <div class="col-11 col-md-10 col-xs-10 d-flex align-items-center">
