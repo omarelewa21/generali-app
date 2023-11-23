@@ -1111,6 +1111,26 @@ fieldset legend {
   }
 }
 
+@media only screen and (min-width: 577px) {
+  .timeline-item-needs::after {
+    content: '';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #707070;
+    transform: translateY(-50%);
+  }
+
+  .timeline-item-needs.active::after {
+    background: #C21B17;
+    border: 0;
+  }
+}
+
 @media only screen and (max-width: 375px) {
   .btn-primary {
     font-size: 16px;
@@ -1483,23 +1503,7 @@ fieldset legend {
     display: none;
   }
   
-  .timeline-item-needs::after {
-    content: '';
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 3px solid #707070;
-    transform: translateY(-50%);
-  }
-
-  .timeline-item-needs.active::after {
-    background: #C21B17;
-    border: 0;
-  }
+  
 
 #bm {
   height:200px;
