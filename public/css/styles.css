@@ -1088,7 +1088,7 @@ fieldset legend {
     background-size: contain;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 9vh 40vh 35vh;
+    grid-template-rows: 9vh 35vh 35vh;
   }
 }
 

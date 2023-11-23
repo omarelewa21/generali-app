@@ -1,20 +1,13 @@
 // Left Offcanvas Navigation
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'basic-details',
-    '/welcome',
-    '/avatar',
-    '/identity-details',
-    '/marital-status',
-    'family-dependant',
-    'family-dependant/details',
-    'assets',
-    'financial-priorities'
+    '/',
+    '/pdpa-disclosure'
 ];
 
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const currentPath = url.pathname;
