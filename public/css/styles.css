@@ -1,5 +1,4 @@
-/* For WebKit-based browsers (Chrome, Safari) */
-/* Customize the scrollbar's width, color, and track */
+/* ========== Customize the scrollbar's width, color, and track ========== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -23,8 +22,6 @@
   background: #C21B17;
 }
 
-/* For Firefox */
-/* Customize the scrollbar's width, color, and track */
 scrollbar {
   width: 8px;
   background-color: #A0A0A0;
@@ -40,7 +37,7 @@ scrollbar-thumb:hover {
   background-color: #C21B17;
 }
 
-/* Body */
+/* ============================== Body ============================== */
 body {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -83,7 +80,7 @@ body.overflow #top_priorities, body.overflow #priorities_to_discuss, body.overfl
   z-index:1;
 }
 
-/* Headings */
+/* ============================== Headings ============================== */
 h4 {
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -95,7 +92,7 @@ h4 {
   line-height: normal;
 }
 
-/* Forms */
+/* ============================== Forms ============================== */
 .form-control,
 .form-select {
   border-top: 0 !important;
@@ -167,19 +164,17 @@ h4 {
   background-color: #EEE;
 }
 
-/* Works for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Works for Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* Alerts */
+/* ============================== Alerts ============================== */
 .alert div.text {
   font-size: 18px;
 }
@@ -192,19 +187,7 @@ input[type="number"] {
   fill: #664d03;
 }
 
-/* Navigation Menu */
-/* .navbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-} */
-
-/* #wrapper-navbar.fixed-top {
-  z-index: 3;
-} */
-
+/* ============================== Navigation Menu ============================== */
 .navbar-scroll.scrolled-up {
   transform: translateY(0);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -225,7 +208,7 @@ input[type="number"] {
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Offcanvas Menu */
+/* ============================== Offcanvas Menu ============================== */
 .timeline {
   position: relative;
   margin: 0 auto;
@@ -331,7 +314,7 @@ p.nav-text {
   flex-grow: inherit;
 }
 
-/* Button Styling */
+/* ============================== Button Styling ============================== */
 .btn-check + .btn:hover {
   background-color: #ffffff;
 }
@@ -429,12 +412,12 @@ button[data-required="selected"] img {
   width: 100%;
 }
 
-/* Right Sidebar */
+/* ============================== Right Sidebar ============================== */
 .right-sidebar h1 {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-/* Left Sidebar */
+/* ============================== Left Sidebar ============================== */
 h2.display-5, .currencyField {
   font-family: 'Helvetica Neue', sans-serif;
 }
@@ -442,7 +425,7 @@ h2.display-5, .currencyField {
   z-index: 2;
 }
 
-/* Modal / Popover */
+/* ============================== Modal / Popover ============================== */
 .popover {
   font-family: 'Helvetica Neue Bold Condensed', sans-serif;
   background: linear-gradient(90deg, #66B560 0%, #2272B6 100%);
@@ -468,7 +451,7 @@ h2.display-5, .currencyField {
   line-height: 3.5rem;
 }
 
-/* Grid System */
+/* ============================== Grid System ============================== */
 .wrapper {
   display: grid;
   grid-template-columns: 100%;
@@ -498,7 +481,7 @@ h2.display-5, .currencyField {
       "header"
       "content-needs-grey"
       "footer-avatar-grey";
-  grid-template-rows: 20vh 45vh 35vh;
+  grid-template-rows: 15vh 45vh 35vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -561,7 +544,7 @@ h2.display-5, .currencyField {
 .content-needs-grey {
   grid-template-areas:"top-menu" "heading" "bottom-content";
   display: grid;
-  grid-auto-rows: 10vh 10vh 35vh;
+  grid-auto-rows: 10vh 10vh 45vh;
   grid-template-columns: 100%;
   grid-area: content-needs-grey;
 }
@@ -605,7 +588,7 @@ h2.display-5, .currencyField {
   background-color:rgba(233, 233, 233, 1);
 }
 
-/* Welcome Page */
+/* ============================== Welcome Page ============================== */
 #home {
   background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
   background-size: auto 90%;
@@ -618,7 +601,7 @@ h2.display-5, .currencyField {
   height:100%;
 }
 
-/* Avatar Welcome Page */
+/* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
   background-image: url(/images/avatar-welcome/avatar-welcome-bg.jpg);
   background-size: auto 100%;
@@ -626,7 +609,7 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-/* Avatar Gender Page */
+/* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
   background-size: auto 70%;
@@ -655,10 +638,6 @@ h2.display-5, .currencyField {
   font-size: 26px;
   font-family: 'Helvetica Neue', sans-serif;
 }
-
-/* .changeImage {
-  overflow-x: hidden;
-} */
 
 .slide-button {
   border-radius: 50%;
@@ -691,7 +670,7 @@ h2.display-5, .currencyField {
   right: 10%;
 }
 
-/* Identity Details Page */
+/* ============================== Identity Details Page ============================== */
 .btn-check:checked+.btn {
   border-radius: 0;
   background-color: #ffffff;
@@ -707,7 +686,7 @@ h2.display-5, .currencyField {
   border-color: #A0A0A0;
 }
 
-/* Marital Status Page */
+/* ============================== Marital Status Page ============================== */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
   background-image: url(/images/avatar-marital-status/vector-plant.png);
   background-size: 20%;
@@ -715,7 +694,7 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-/* Family Details Page */
+/* ============================== Family Details Page ============================== */
 .accordion-button {
   font-size: 1.375rem;
   line-height: 33px;
@@ -727,12 +706,12 @@ h2.display-5, .currencyField {
   grid-gap: 0;
 }
 
-/* Assets Page */
+/* ============================== Assets Page ============================== */
 .assets-overlay {
   position: relative;
 }
 
-/* Skin Tone */
+/* ============================== Skin Tone ============================== */
 :where(html) {
   --gradient-1: repeating-linear-gradient(to bottom, #FFAE9E 0%, #FCD7CB 100%);
   --gradient-2: repeating-linear-gradient(to bottom, #F3A391 0%, #FED08E 100%);
@@ -803,7 +782,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   background: var(--gradient-6);
 }
 
-/* Top Priorities Page */
+/* ============================== Top Priorities Page ============================== */
 #sortable button {
   background-color: transparent;
   border: none;
@@ -978,7 +957,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   grid-row: 59 / 96;
 }
 
-/* Protection Home Page */
+/* ============================== Protection Home Page ============================== */
 .bg-needs-main {
   background-image: url(/images/needs/background/bg-main.png), url(/images/needs/background/abstracts/cloud-1.png);
   background-size: contain,90%;
@@ -987,14 +966,14 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   height: 100%;
 }
 
-/* Existing Policy */
+/* ============================== Existing Policy ============================== */
 fieldset legend {
   margin: auto;
   float: none;
   width: inherit;
 }
 
-/* Financial Statements */
+/* ============================== Financial Statements ============================== */
 .currencyField input {
   font-size: 3.5rem;
   z-index: 1;
@@ -1012,7 +991,16 @@ fieldset legend {
   background-color: #fff;
 }
 
-/* Mobile / Tab Responsive */
+/* ============================== Needs Coverage Page ============================== */
+button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
+    background-image: url('/images/needs/hover-coverage.png');
+    background-repeat: no-repeat;
+    background-position: center bottom 18%;
+    background-size: 100%;
+    width: 60%;
+}
+
+/* ============================== Mobile / Tab Responsive ============================== */
 @media only screen and (min-width: 1200px) {
   .homeVector {
     margin-top: -80px;
@@ -1060,13 +1048,19 @@ fieldset legend {
   }
   .content-needs-grey {
     grid-template-areas:"heading" "bottom-content";
-    grid-auto-rows: 10vh 45vh;
+    grid-auto-rows: 10vh 55vh;
   }
   .top-menu {
     position:absolute;
     top: 0;
     right: 0;
     z-index: 2;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+  button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
+      background-position: center bottom 18%;
   }
 }
 
