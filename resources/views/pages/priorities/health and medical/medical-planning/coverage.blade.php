@@ -26,10 +26,10 @@
         <div class="row">
             <div class="col-12 vh-100 wrapper-needs-master-full-default bg-needs-master-full">
                 <section class="header-needs-default">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-12">
                         @include('templates.nav.nav-red-menu')
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-12">
                         @include ('templates.nav.nav-sidebar-needs')
                     </div>
                 </section>

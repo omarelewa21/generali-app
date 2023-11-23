@@ -15,7 +15,7 @@
 @php
     $education = session('customer_details.education_needs');
     $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
-    $totalEducationYear = session('customer_details.education_needs.supportingYears');
+    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
     $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
     $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
     $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');

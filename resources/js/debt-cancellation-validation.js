@@ -43,47 +43,70 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
         });
     } 
-    else if (path == '/debt-cancellation-outstanding-loan') {
+    else if (path == '/debt-cancellation/amount-needed') {
         // Get the input value
-        var outstandingLoan = document.getElementById("debt_outstanding_loan");
-        var totalDebtNeeded = document.getElementById("total_debtFund");
-        var totalDebtFund = document.getElementById("TotalDebtCancellationFund");
+        var debtAmountNeeded = document.getElementById("debt_outstanding_loan");
+        var supportingYears = document.getElementById("debt_settlement_years");
+        var totalDebtFundNeeded = document.getElementById("total_debtFund");
 
-        outstandingLoan.addEventListener("input", function() {
+        var totalDisplayFund = document.getElementById("TotalDebtCancellationFund");
+
+        debtAmountNeeded.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var outstandingLoanValue = outstandingLoan.value;
+            var debtAmountNeededValue = debtAmountNeeded.value;
 
             // Remove non-digit characters
-            const cleanedValue = parseFloat(outstandingLoanValue.replace(/\D/g, ''));
-
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+            const cleanedValue = parseFloat(debtAmountNeededValue.replace(/\D/g, ''));
+            const debtYear = parseInt(supportingYears.value);
 
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
-            // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+            if (!isNaN(cleanedValue)) {
+                // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
-                // Display the result
-                totalDebtFund.innerText = "RM" + formattedValue;
+                totalDisplayFund.innerText = "RM" + formattedValue;
+                // if (!isNaN(debtYear)){
+                    // var result = totalEducationAmount.toLocaleString();
+                    // totalDisplayFund.innerText = "RM" + formattedValue;
+                // }
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = outstandingLoanValue;
-                totalDebtFund.innerText = "RM 0";
+                this.value = debtAmountNeededValue;
+                totalDisplayFund.innerText = "RM 0";
             }
-
             // Set the value of the hidden input field
-            totalDebtNeeded.value = parsedValue;
+            totalDebtFundNeeded.value =  cleanedValue;
+        });
+
+        supportingYears.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var supportingYearsValue = supportingYears.value;
+
+            var Year = parseInt(supportingYearsValue);
+
+            if (!isNaN(Year)) {
+
+            } else {
+                // Input is not a valid number
+                this.value = supportingYearsValue;
+            }
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            outstandingLoan.addEventListener("blur", function() {
-                validateNumberField(outstandingLoan);
+            debtAmountNeeded.addEventListener("blur", function() {
+                validateAmountNumberField(debtAmountNeeded);
             });
         });
 
-        function validateNumberField(field) {
+        document.addEventListener("DOMContentLoaded", function() {
+            supportingYears.addEventListener("blur", function() {
+                validateYearsNumberField(supportingYears);
+            });
+        });
+
+        function validateAmountNumberField(field) {
             var value = field.value.replace(/,/g, ''); // Remove commas
             var numericValue = parseFloat(value);
 
@@ -94,46 +117,103 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
-    }
-    else if (path == '/debt-cancellation-settlement-years') {
 
-        // Get the input value
-        var debtSettlementYears = document.getElementById("debt_settlement_years");
-    
-        document.addEventListener("DOMContentLoaded", function() {
-            debtSettlementYears.addEventListener("blur", function() {
-                validateNumberField(debtSettlementYears);
-            });
-        });
-
-        function validateNumberField(field) {
+        function validateYearsNumberField(field) {
             const value = field.value.trim();
 
             if (value === "" || isNaN(value)) {
                 field.classList.add("is-invalid");
             } else {
-                var Year = parseInt(value);
-                if(Year > 99 || Year < 1){
-                    field.classList.add("is-invalid");
-                }
-                else{
-                    field.classList.remove("is-invalid");
-                }
+                field.classList.remove("is-invalid");
             }
         }
     }
-    else if (path == '/debt-cancellation-existing-debt') {
+    // else if (path == '/debt-cancellation-outstanding-loan') {
+    //     // Get the input value
+    //     var outstandingLoan = document.getElementById("debt_outstanding_loan");
+    //     var totalDebtNeeded = document.getElementById("total_debtFund");
+    //     var totalDebtFund = document.getElementById("TotalDebtCancellationFund");
+
+    //     outstandingLoan.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var outstandingLoanValue = outstandingLoan.value;
+
+    //         // Remove non-digit characters
+    //         const cleanedValue = parseFloat(outstandingLoanValue.replace(/\D/g, ''));
+
+    //         // Attempt to parse the cleaned value as a float
+    //         const parsedValue = parseFloat(cleanedValue);
+
+    //         // Check if the parsed value is a valid number
+    //         if (!isNaN(parsedValue)) {
+    //         // If it's a valid number, format it with commas
+    //             const formattedValue = parsedValue.toLocaleString('en-MY');
+    //             this.value = formattedValue;
+    //             // Display the result
+    //             totalDebtFund.innerText = "RM" + formattedValue;
+    //         } else {
+    //         // If it's not a valid number, display the cleaned value as is
+    //             this.value = outstandingLoanValue;
+    //             totalDebtFund.innerText = "RM 0";
+    //         }
+
+    //         // Set the value of the hidden input field
+    //         totalDebtNeeded.value = parsedValue;
+    //     });
+
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         outstandingLoan.addEventListener("blur", function() {
+    //             validateNumberField(outstandingLoan);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         var value = field.value.replace(/,/g, ''); // Remove commas
+    //         var numericValue = parseFloat(value);
+
+    //         if (isNaN(numericValue)) {
+    //             field.classList.add("is-invalid");
+
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    // else if (path == '/debt-cancellation-settlement-years') {
+
+    //     // Get the input value
+    //     var debtSettlementYears = document.getElementById("debt_settlement_years");
+    
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         debtSettlementYears.addEventListener("blur", function() {
+    //             validateNumberField(debtSettlementYears);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         const value = field.value.trim();
+
+    //         if (value === "" || isNaN(value)) {
+    //             field.classList.add("is-invalid");
+    //         } else {
+    //             var Year = parseInt(value);
+    //             if(Year > 99 || Year < 1){
+    //                 field.classList.add("is-invalid");
+    //             }
+    //             else{
+    //                 field.classList.remove("is-invalid");
+    //             }
+    //         }
+    //     }
+    // }
+    else if (path == '/debt-cancellation/existing-debt') {
         var existing_debt_amount = document.getElementById('existing_debt_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
-        var newTotalFund = document.getElementById("newTotal_debtNeeded");
         var totalDebtPercentage = document.getElementById("percentage");
         var totalDisplayFund = document.getElementById("TotalDebtCancellationFund");
-
-        if (sessionExistingDebtAmount !== '' || sessionExistingDebtAmount !== 0 && oldTotalFund !== '') {
-            newTotalFund.value = oldTotalFund - sessionExistingDebtAmount;
-        } 
 
         existing_debt_amount.addEventListener("input", function() {
 
@@ -142,11 +222,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
             // Remove non-digit characters
             const cleanedValue = parseFloat(existingDebtAmountValue.replace(/\D/g, ''));
-
-            var existingAmount = parseInt(cleanedValue);
     
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
+            var total = oldTotalFund - cleanedValue;
+            var totalPercentage = cleanedValue / oldTotalFund * 100;
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
@@ -157,16 +235,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (total <= 0){
                     totalAmountNeeded.value = 0;
                     totalDebtPercentage.value = 100;
-                    $('.retirement-progress-bar').css('width','100%');
+                    $('.calculation-progress-bar').css('width','100%');
                     totalDisplayFund.innerText = "RM 0";
                 }
                 else{
                     totalAmountNeeded.value = total;
                     totalDebtPercentage.value = totalPercentage;
-                    $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                    $('.calculation-progress-bar').css('width', totalPercentage + '%');
                     totalDisplayFund.innerText = "RM" + result;
                 }
-                newTotalFund.value = total;
 
             } else {
             // If it's not a valid number, display the cleaned value as is
@@ -177,15 +254,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         });
         // Add event listeners to the radio buttons
         yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
+            jQuery('.hide-content').css('opacity','1');
         });
     
         noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
+            jQuery('.hide-content').css('opacity','0');
             existing_debt_amount.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
             totalDebtPercentage.value = totalPercentage;
+            var result = oldTotalFund.toLocaleString();
+            totalDisplayFund.innerText = "RM" + result;
         });
     
         document.addEventListener('DOMContentLoaded', function() {
@@ -195,7 +274,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
+                jQuery('.hide-content').css('opacity','1');
             }
             
             function validateNumberField(field) {
@@ -222,16 +301,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
                 totalDebtPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
+                $('.calculation-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
                 totalDebtPercentage.value = newTotalPercentage;
-                $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+                $('.calculation-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/debt-cancellation-critical-illness') {
+    else if (path == '/debt-cancellation/critical-illness') {
         var critical_coverage_amount = document.getElementById('critical_coverage_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
@@ -259,11 +338,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
         // Add event listeners to the radio buttons
         yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
+            jQuery('.hide-content').css('opacity','1');
         });
     
         noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
+            jQuery('.hide-content').css('opacity','0');
             critical_coverage_amount.value = 0; // Clear the money input
         });
     
@@ -274,7 +353,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
+                jQuery('.hide-content').css('opacity','1');
             }
             
             function validateNumberField(field) {
@@ -293,7 +372,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         });
     }
-    else if (path == '/debt-cancellation-gap') {
+    else if (path == '/debt-cancellation/gap') {
         var Uncovered = (100 - Covered).toFixed(2);
         var Covered = (existingDebtAmount / totalDebtFundNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");

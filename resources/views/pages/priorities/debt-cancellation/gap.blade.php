@@ -23,10 +23,10 @@
                 <div class="row h-100 bg-needs-master-full wrapper-needs-summary-default">
                     <section class="header-needs-default">
                         <div class="row">
-                            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
+                            <div class="col-6 order-sm-0 order-md-0 order-lg-0 order-0">
                                 @include('templates.nav.nav-red-menu')
                             </div>
-                            <div class="col-sm-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
+                            <div class="col-6 order-sm-1 order-md-2 order-lg-2 order-1">
                                 @include('templates.nav.nav-sidebar-needs')
                             </div>
                         </div>

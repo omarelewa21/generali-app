@@ -22,10 +22,10 @@
         <div class="row vh-100">
             <div class="col-12 vh-100 wrapper-needs-master-full-default">
                 <section class="header-needs-default">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-6">
                         @include('templates.nav.nav-red-menu')
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-6">
                         @include ('templates.nav.nav-sidebar-needs')
                     </div>
                 </section>

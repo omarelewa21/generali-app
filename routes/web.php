@@ -167,17 +167,17 @@ Route::view('/debt-cancellation/coverage', 'pages.priorities.debt-cancellation.c
 Route::post('/debt-cancellation/coverage', [DebtCancellationController::class, 'validateDebtCancellationCoverage'])->name('validate.debt.cancellation.coverage');
 Route::view('/debt-cancellation/amount-needed', 'pages.priorities.debt-cancellation.amount-needed')->name('debt.cancellation.amount.needed');
 Route::post('/debt-cancellation/amount-needed', [DebtCancellationController::class, 'validateDebtCancellationAmountNeeded'])->name('validate.debt.cancellation.amount.needed');
+Route::view('/debt-cancellation/existing-debt', 'pages.priorities.debt-cancellation.existing-debt')->name('debt.cancellation.existing.debt');
+Route::post('/debt-cancellation/existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
+Route::view('/debt-cancellation/critical-illness', 'pages.priorities.debt-cancellation.critical-illness')->name('debt.cancellation.critical.illness');
+Route::post('/debt-cancellation/critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
+Route::view('/debt-cancellation/gap', 'pages.priorities.debt-cancellation.gap')->name('debt.cancellation.gap');
+Route::post('/debt-cancellation/gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 Route::view('/debt-cancellation-outstanding-loan', 'pages.priorities.debt-cancellation.debt-cancellation-outstanding-loan')->name('debt.cancellation.outstanding.loan');
 Route::post('/debt-cancellation-outstanding-loan', [DebtCancellationController::class, 'validateDebtCancellationOutstandingLoan'])->name('validate.debt.outstanding.loan');
 Route::view('/debt-cancellation-settlement-years', 'pages.priorities.debt-cancellation.debt-cancellation-settlement-years')->name('debt.cancellation.settlement.years');
 Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::class, 'validateDebtCancellationSettlementYears'])->name('validate.debt.settlement.years');
-Route::view('/debt-cancellation-existing-debt', 'pages.priorities.debt-cancellation.debt-cancellation-existing-debt')->name('debt.cancellation.existing.debt');
-Route::post('/debt-cancellation-existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
-Route::view('/debt-cancellation-critical-illness', 'pages.priorities.debt-cancellation.debt-cancellation-critical-illness')->name('debt.cancellation.critical.illness');
-Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
-Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
-Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 // Summary
 Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
@@ -186,8 +186,8 @@ Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
-Route::view('/overview', 'pages.summary.overview')->name('overview');
-Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview-new', 'pages.summary.overview')->name('overview');
+Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
