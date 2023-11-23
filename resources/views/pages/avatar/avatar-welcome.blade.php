@@ -44,11 +44,6 @@
 </div>
 
 <script>
-    var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
-    var avatar = {!! json_encode(session('customer_details.avatar')) !!};
-    var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
-    var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
-
     // Load the animation using Lottie
     const animationMale = lottie.loadAnimation({
         container: document.getElementById('lottie-male-animation'),

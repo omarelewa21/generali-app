@@ -298,15 +298,37 @@ p.nav-text {
 .timeline-needs:before {
   content: '';
   position: absolute;
-  right: 37px;
+  right: 40px;
   top: 10px;
   bottom: 15px;
   width: 2px;
   background: #707070;
 }
 
+.timeline-item-needs::after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #707070;
+  transform: translateY(-50%);
+}
+
+.timeline-item-needs.active::after {
+  background: #C21B17;
+  border: 0;
+}
+
 .offcanvas.showing, .offcanvas.hiding, .offcanvas.show {
   height:100vh;
+}
+
+.offcanvas .offcanvas-body {
+  flex-grow: inherit;
 }
 
 /* Button Styling */
@@ -471,6 +493,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-bottom-grey {
+  grid-template-areas:
+      "header"
+      "content-needs-grey"
+      "footer-avatar-grey";
+  grid-template-rows: 20vh 45vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .wrapper-needs-grey {
   grid-template-areas:
       "header"
@@ -524,6 +556,20 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
   display: grid;
   grid-auto-rows: 100%;
+}
+
+.content-needs-grey {
+  grid-template-areas:"top-menu" "heading" "bottom-content";
+  display: grid;
+  grid-auto-rows: 10vh 10vh 35vh;
+  grid-template-columns: 100%;
+  grid-area: content-needs-grey;
+}
+.heading {
+  grid-area: heading;
+}
+.bottom-content {
+  grid-area: bottom-content;
 }
 
 .footer-main {
@@ -663,9 +709,9 @@ h2.display-5, .currencyField {
 
 /* Marital Status Page */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
-  background-image: url(/images/avatar-marital-status/vector-mirror.png), url(/images/avatar-marital-status/vector-plant.png);
-  background-size: 25%,20%;
-  background-position: top left, bottom right;
+  background-image: url(/images/avatar-marital-status/vector-plant.png);
+  background-size: 20%;
+  background-position: bottom right;
   background-repeat: no-repeat;
 }
 
@@ -1012,6 +1058,16 @@ fieldset legend {
   .footer-home {
     grid-area: footer-home;
   }
+  .content-needs-grey {
+    grid-template-areas:"heading" "bottom-content";
+    grid-auto-rows: 10vh 45vh;
+  }
+  .top-menu {
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1045,7 +1101,7 @@ fieldset legend {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
   }
   #wrapper-navbar.red.scrolled-up {
     background-color: #C21B17;
@@ -1061,7 +1117,16 @@ fieldset legend {
   }
   #home {
     background-position: right bottom;
-    background-size: contain;
+    background-size: auto 60%;
+  }
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 35vh 35vh;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 30vh 40vh;
   }
 }
 
@@ -1437,23 +1502,7 @@ fieldset legend {
     display: none;
   }
   
-  .timeline-item-needs::after {
-    content: '';
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 3px solid #707070;
-    transform: translateY(-50%);
-  }
-
-  .timeline-item-needs.active::after {
-    background: #C21B17;
-    border: 0;
-  }
+  
 
 #bm {
   height:200px;

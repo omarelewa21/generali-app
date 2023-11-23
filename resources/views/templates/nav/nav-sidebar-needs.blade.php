@@ -10,8 +10,8 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
-<section class="position-fixed top-0 end-0">
-    <div class="row align-items-center px-4 py-4">
+<section class="d-flex justify-content-end">
+    <div class="row align-items-center px-4 py-md-4">
         <div class="col-auto">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">
                 <p class="display-6 text-dark m-1">
@@ -103,7 +103,6 @@
     margin: 0 auto;
     box-shadow: none;
     position: relative;
-    z-index: 1000;
 }
 
 .progress:after {
@@ -123,7 +122,6 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    z-index: 1000;
 }
 
 .progress .progress-left {
@@ -216,7 +214,6 @@
 @media only screen and (max-device-width:986px) {
 .progress .progress-value{
     background:transparent;
-    z-index:1000;
 }
 
 /* .progress-mobile {

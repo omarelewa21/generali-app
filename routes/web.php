@@ -37,7 +37,6 @@ Route::view('/avatar', 'pages.avatar.avatar-gender-selection')->name('avatar.gen
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
-Route::view('/priorities-menu', 'pages.priorities.priorities-menu')->name('priorities.menu');
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
 
@@ -192,3 +191,4 @@ Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new')
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
+Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->name('get.session.data');

@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="fullNameInput" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                <label for="fullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
                                                 <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
                                                 @error('fullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -128,12 +128,6 @@
 </div>
 
 <script>
-// Manually convert the PHP array to JSON
-var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
-var avatar = {!! json_encode(session('customer_details.avatar')) !!};
-var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
-var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
-
 document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
     var fullNameInput = document.getElementById('fullNameInput');
