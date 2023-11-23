@@ -82,7 +82,7 @@
     bottom:107.5px;
 }
 /* ============================ Button Effect ===============================*/
-button.choice:hover, 
+/* button.choice:hover, 
 button.choice:focus,
 .button-needs[data-required="selected"],
 .button-needs.selected {
@@ -90,7 +90,7 @@ button.choice:focus,
     background-repeat: no-repeat;
     background-position: center bottom 8%;
     background-size: 80%;
-}
+} */
 
 /* ============================ Gender Selection ===============================*/
 .left-center{
@@ -261,7 +261,7 @@ button.choice:focus,
 }
 
 /* ============================ Needs Coverage Page ======================================*/
-.coverage_slick .slick-slide button,
+/* .coverage_slick .slick-slide button,
 .savings_coverage .slick-slide button{
     display: grid;
     grid-template-columns: 100%;
@@ -271,7 +271,7 @@ button.choice:focus,
         "coverage-text";
     grid-gap: 0px;
     align-items: end;
-}
+} */
 .slick-padding{
     padding: 3rem 3rem 0px 3rem;
 }
@@ -436,10 +436,10 @@ button.choice:focus,
     grid-area: avatar-img;
     grid-template-columns: 100%;
 }
-.avatar-text {
+/* .avatar-text {
     grid-area: avatar-text;
     grid-template-columns: 100%;
-}
+} */
 
 /* =========== Risk Profile =========== */
 #savings-risk-profile .image-content-spacing,
@@ -961,12 +961,9 @@ table {
     .content-needs-default {
         grid-template-rows: auto 4vh 8vh;
     }
-    button.choice:hover, 
-    button.choice:focus,
-    .button-needs[data-required="selected"],
-    .button-needs.selected {
-        background-position: center bottom 10%;
-    }
+    /* button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
+        background-position: center bottom 16%;
+    } */
     .needs-monthly{
         grid-template-rows: 90%;
     }

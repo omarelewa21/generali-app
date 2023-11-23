@@ -30,7 +30,7 @@
                     <p class="nav-text">My Family</p>
                 </a>
             </div>
-            <div id="assets" class="timeline-item">
+            <div class="timeline-item">
                 <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('assets') }}">
                     <p class="nav-text">My Assets</p>
                 </a>

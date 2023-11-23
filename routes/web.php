@@ -17,7 +17,6 @@ use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
 /* Main pages */
-// Route::post('/store-select', [DropdownController::class, 'storeSelect'])->name('store.select');
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
@@ -25,15 +24,14 @@ Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('fo
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 
 /* Avatar pages */
-Route::view('/welcome', 'pages.avatar.avatar-welcome')->name('avatar.welcome');
-Route::view('/marital-status', 'pages.avatar.avatar-marital-status')->name('avatar.marital.status');
-Route::view('/family-dependant', 'pages.avatar.avatar-family-dependant')->name('avatar.family.dependant');
-// Route::get('/family-dependant', [SessionController::class, 'getSession'])->name('get.session');
+Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
+Route::view('/marital-status', 'pages.avatar.marital-status')->name('avatar.marital.status');
+Route::view('/family-dependant', 'pages.avatar.family-dependant')->name('avatar.family.dependant');
 Route::get('/family-dependant/details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
 Route::post('/family-dependant/details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
-Route::view('/assets', 'pages.avatar.avatar-my-assets')->name('avatar.my.assets');
+Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
-Route::view('/avatar', 'pages.avatar.avatar-gender-selection')->name('avatar.gender.selection');
+Route::view('/avatar', 'pages.avatar.gender')->name('avatar.gender.selection');
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
@@ -43,7 +41,7 @@ Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name
 /* Priorities */
 Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
 Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
-Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-to-discuss')->name('priorities.to.discuss');
+Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 // this is for testing
