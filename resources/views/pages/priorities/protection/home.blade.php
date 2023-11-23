@@ -19,10 +19,10 @@
                     <h2 class="display-5 fw-bold">My Priorities</h2>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey content-section px-0">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block">
                 <div class="wrapper-needs-grey main-default-bg">
-                    <section class="header"></section>
+                    <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
                             <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
@@ -31,7 +31,7 @@
                     <section class="footer footer-avatar-grey">
                         <div class="container">
                             <div class="row justify-content-center align-items-center" style="height:70%">
-                                <div class="col-xl-6 col-sm-9 text-center">
+                                <div class="col-xl-6 text-center">
                                     <h2 class="display-5 fw-bold lh-base py-4">Let’s figure out what you need for Protection.</h2>
                                 </div>
                             </div>
@@ -53,4 +53,4 @@
     </div>
 </div>
 
-@endsection 
+@endsection
