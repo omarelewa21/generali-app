@@ -298,11 +298,29 @@ p.nav-text {
 .timeline-needs:before {
   content: '';
   position: absolute;
-  right: 37px;
+  right: 40px;
   top: 10px;
   bottom: 15px;
   width: 2px;
   background: #707070;
+}
+
+.timeline-item-needs::after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #707070;
+  transform: translateY(-50%);
+}
+
+.timeline-item-needs.active::after {
+  background: #C21B17;
+  border: 0;
 }
 
 .offcanvas.showing, .offcanvas.hiding, .offcanvas.show {
@@ -1048,6 +1066,7 @@ fieldset legend {
     position:absolute;
     top: 0;
     right: 0;
+    z-index: 2;
   }
 }
 
@@ -1108,26 +1127,6 @@ fieldset legend {
 @media only screen and (max-width: 576px) {
   .wrapper-needs-grey {
     grid-template-rows: 9vh 30vh 40vh;
-  }
-}
-
-@media only screen and (min-width: 577px) {
-  .timeline-item-needs::after {
-    content: '';
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 3px solid #707070;
-    transform: translateY(-50%);
-  }
-
-  .timeline-item-needs.active::after {
-    background: #C21B17;
-    border: 0;
   }
 }
 
