@@ -11,7 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (path === '/protection-coverage') {
+    if (path === '/protection/coverage') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -49,9 +49,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
         });
     } 
-    else if (path == '/protection-monthly-support') {
+    else if (path == '/protection/amount-needed') {
         // Get the input value
         var monthlyInput = document.getElementById("protection_monthly_support");
+        var supportingYears = document.getElementById("protection_supporting_years");
         var totalProtectionNeeded = document.getElementById("total_protectionNeeded");
 
         var totalProtectionFund = document.getElementById("TotalProtectionFund");
@@ -63,47 +64,70 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             // Remove non-digit characters
             const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+            const protectionYears = parseInt(supportingYears.value);
 
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+            // Calculate months
+            var amountPerYear = cleanedValue * 12;
+            var totalProtection = protectionYears * amountPerYear;
 
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
-            // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+            if (!isNaN(cleanedValue)) {
+                // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                var result = amountPerYear.toLocaleString();
+                totalProtectionFund.innerText = "RM" + result;
+                if (!isNaN(protectionYears)){
+                    var result = totalProtection.toLocaleString();
+                    totalProtectionFund.innerText = "RM" + result;
+                }
             } else {
             // If it's not a valid number, display the cleaned value as is
                 this.value = monthlyInputValue;
+                totalProtectionFund.innerText = "RM 0";
             }
+            // Set the value of the hidden input field
+            totalProtectionNeeded.value =  totalProtection;
+        });
 
-            var monthlyAmount = parseInt(cleanedValue);
+        supportingYears.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var supportingYearsValue = supportingYears.value;
+
+            var amountNeeded = parseFloat(monthlyInput.value.replace(/\D/g, '')) * 12; 
+            var Year = parseInt(supportingYearsValue);
 
             // Calculate months
-            var amountPerYear = monthlyAmount * 12;
+            var totalAmount = Year * amountNeeded;
 
-            if (isNaN(monthlyAmount)) {
-                // Input is not a valid number
-                totalProtectionFund.innerText = "RM 0";
-            } else {
+            if (!isNaN(Year)) {
                 // Input is a valid number, perform the calculation
                 // Display the result
-                var result = amountPerYear.toLocaleString();
-
+                var result = totalAmount.toLocaleString();
                 totalProtectionFund.innerText = "RM" + result;
+            } else {
+                // Input is not a valid number
+                this.value = supportingYearsValue;
+                totalProtectionFund.innerText = "RM 0";
             }
-
             // Set the value of the hidden input field
-            totalProtectionNeeded.value = amountPerYear;
+            totalProtectionNeeded.value =  totalAmount;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
             monthlyInput.addEventListener("blur", function() {
-                validateNumberField(monthlyInput);
+                validateAmountNumberField(monthlyInput);
             });
         });
 
-        function validateNumberField(field) {
+        document.addEventListener("DOMContentLoaded", function() {
+            supportingYears.addEventListener("blur", function() {
+                validateYearsNumberField(supportingYears);
+            });
+        });
+
+        function validateAmountNumberField(field) {
             var value = field.value.replace(/,/g, ''); // Remove commas
             var numericValue = parseFloat(value);
 
@@ -114,52 +138,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
-    }
-    else if (path == '/protection-supporting-years') {
-        // Get the input value
 
-        var supportingYears = document.getElementById("protection_supporting_years");
-        var newTotalFund = document.getElementById("newTotal_protectionNeeded");
-        
-        var totalProtectionFund = document.getElementById("TotalProtectionFund");
-
-        if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
-                newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
-        } 
-        
-
-        supportingYears.addEventListener("input", function() {
-
-            // Retrieve the current input value
-            var supportingYearsValue = supportingYears.value;
-
-            var Year = parseInt(supportingYearsValue);
-
-            // Calculate months
-            var totalAmount = Year * oldTotalFund;
-
-            if (isNaN(Year)) {
-                // Input is not a valid number
-                totalProtectionFund.innerText = "RM 0";
-            } else {
-                // Input is a valid number, perform the calculation
-                // Display the result
-                var result = totalAmount.toLocaleString();
-
-                totalProtectionFund.innerText = "RM" + result;
-            }
-            
-            newTotalFund.value = Year * oldTotalFund;
-            
-        });
-    
-        document.addEventListener("DOMContentLoaded", function() {
-            supportingYears.addEventListener("blur", function() {
-                validateNumberField(supportingYears);
-            });
-        });
-
-        function validateNumberField(field) {
+        function validateYearsNumberField(field) {
             const value = field.value.trim();
 
             if (value === "" || isNaN(value)) {
@@ -169,12 +149,133 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/protection-existing-policy') {
+    // else if (path == '/protection-monthly-support') {
+    //     // Get the input value
+    //     var monthlyInput = document.getElementById("protection_monthly_support");
+    //     var totalProtectionNeeded = document.getElementById("total_protectionNeeded");
+
+    //     var totalProtectionFund = document.getElementById("TotalProtectionFund");
+
+    //     monthlyInput.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var monthlyInputValue = monthlyInput.value;
+
+    //         // Remove non-digit characters
+    //         const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+
+    //         // Attempt to parse the cleaned value as a float
+    //         const parsedValue = parseFloat(cleanedValue);
+
+    //         // Check if the parsed value is a valid number
+    //         if (!isNaN(parsedValue)) {
+    //         // If it's a valid number, format it with commas
+    //             const formattedValue = parsedValue.toLocaleString('en-MY');
+    //             this.value = formattedValue;
+    //         } else {
+    //         // If it's not a valid number, display the cleaned value as is
+    //             this.value = monthlyInputValue;
+    //         }
+
+    //         var monthlyAmount = parseInt(cleanedValue);
+
+    //         // Calculate months
+    //         var amountPerYear = monthlyAmount * 12;
+
+    //         if (isNaN(monthlyAmount)) {
+    //             // Input is not a valid number
+    //             totalProtectionFund.innerText = "RM 0";
+    //         } else {
+    //             // Input is a valid number, perform the calculation
+    //             // Display the result
+    //             var result = amountPerYear.toLocaleString();
+
+    //             totalProtectionFund.innerText = "RM" + result;
+    //         }
+
+    //         // Set the value of the hidden input field
+    //         totalProtectionNeeded.value = amountPerYear;
+    //     });
+
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         monthlyInput.addEventListener("blur", function() {
+    //             validateNumberField(monthlyInput);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         var value = field.value.replace(/,/g, ''); // Remove commas
+    //         var numericValue = parseFloat(value);
+
+    //         if (isNaN(numericValue)) {
+    //             field.classList.add("is-invalid");
+
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    // else if (path == '/protection-supporting-years') {
+    //     // Get the input value
+
+    //     var supportingYears = document.getElementById("protection_supporting_years");
+    //     var newTotalFund = document.getElementById("newTotal_protectionNeeded");
+        
+    //     var totalProtectionFund = document.getElementById("TotalProtectionFund");
+
+    //     if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
+    //             newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
+    //     } 
+        
+
+    //     supportingYears.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var supportingYearsValue = supportingYears.value;
+
+    //         var Year = parseInt(supportingYearsValue);
+
+    //         // Calculate months
+    //         var totalAmount = Year * oldTotalFund;
+
+    //         if (isNaN(Year)) {
+    //             // Input is not a valid number
+    //             totalProtectionFund.innerText = "RM 0";
+    //         } else {
+    //             // Input is a valid number, perform the calculation
+    //             // Display the result
+    //             var result = totalAmount.toLocaleString();
+
+    //             totalProtectionFund.innerText = "RM" + result;
+    //         }
+            
+    //         newTotalFund.value = Year * oldTotalFund;
+            
+    //     });
+    
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         supportingYears.addEventListener("blur", function() {
+    //             validateNumberField(supportingYears);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         const value = field.value.trim();
+
+    //         if (value === "" || isNaN(value)) {
+    //             field.classList.add("is-invalid");
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    else if (path == '/protection/existing-policy') {
         var existing_policy_amount = document.getElementById('existing_policy_amount');
         var yesRadio = document.getElementById('yes');
         var noRadio = document.getElementById('no');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
         var totalProtectionPercentage = document.getElementById("percentage");
+        var totalDisplayFund = document.getElementById("TotalProtectionFund");
 
         existing_policy_amount.addEventListener("input", function() {
 
@@ -183,42 +284,43 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
             // Remove non-digit characters
             const cleanedValue = parseFloat(existingPolicyAmountValue.replace(/\D/g, ''));
-    
+
+            var total = oldTotalFund - cleanedValue;
+            var totalPercentage = cleanedValue / oldTotalFund * 100;
+  
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
-            // If it's a valid number, format it with commas
+
+                // If it's a valid number, format it with commas
                 const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
+                var result = total.toLocaleString();
+                if (total <= 0){
+                    totalAmountNeeded.value = 0;
+                    totalProtectionPercentage.value = 100;
+                    $('.calculation-progress-bar').css('width','100%');
+                    totalDisplayFund.innerText = "RM 0";
+                }
+                else{
+                    totalAmountNeeded.value = total;
+                    totalProtectionPercentage.value = totalPercentage;
+                    $('.calculation-progress-bar').css('width', totalPercentage + '%');
+                    totalDisplayFund.innerText = "RM" + result;
+                }
             } else {
             // If it's not a valid number, display the cleaned value as is
                 this.value = existingPolicyAmountValue;
-            }
-    
-            var existingAmount = parseInt(cleanedValue);
-    
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
-            
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
-            if (total <= 0){
-                totalAmountNeeded.value = 0;
-                totalProtectionPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
-            }
-            else{
-                totalAmountNeeded.value = total;
-                totalProtectionPercentage.value = totalPercentage;
-                $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                totalDisplayFund.innerText = "RM 0";
             }
     
         });
         // Add event listeners to the radio buttons
         yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
+            jQuery('.hide-content').css('opacity','1');
         });
     
         noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
+            jQuery('.hide-content').css('opacity','0');
             existing_policy_amount.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
@@ -232,7 +334,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
+                jQuery('.hide-content').css('opacity','1');
             }
             
             function validateNumberField(field) {
@@ -259,16 +361,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
                 totalProtectionPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
+                $('.calculation-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
                 totalProtectionPercentage.value = newTotalPercentage;
-                $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+                $('.calculation-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
-    else if (path == '/protection-gap') {
+    else if (path == '/protection/gap') {
         var Uncovered = (100 - Covered).toFixed(2);
         var Covered = (existingPolicyAmount / newTotalProtectionNeeded * 100).toFixed(2);
         var circle = document.getElementById("circle");
@@ -280,7 +382,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;
-            // console.log('change', change);
         }
         else   {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage

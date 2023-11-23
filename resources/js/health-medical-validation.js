@@ -12,7 +12,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (path === '/health-medical-selection' || path === '/health-medical/critical-illness/coverage' || path === '/health-medical/medical-planning/coverage' || path === '/health-medical/medical-planning/hospital-selection') {
+    if (path === '/health-medical/medical-selection' || path === '/health-medical/critical-illness/coverage' || path === '/health-medical/medical-planning/coverage' || path === '/health-medical/medical-planning/hospital-selection') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -193,18 +193,22 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             // Remove non-digit characters
             const cleanedValue = parseFloat(amountNeededValue.replace(/\D/g, ''));
+            const healthMedicalYears = parseInt(supportingYears.value);
 
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+            var amountPerYear = cleanedValue * 12;
+            var totalHealthMedical = healthMedicalYears * amountPerYear;
 
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
+            if (!isNaN(cleanedValue)) {
                 // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
-                // Display the result
-                var result = parsedValue.toLocaleString();
+                var result = amountPerYear.toLocaleString();
                 totalDisplayFund.innerText = "RM" + result;
+                if (!isNaN(healthMedicalYears)){
+                    var result = totalHealthMedical.toLocaleString();
+                    totalDisplayFund.innerText = "RM" + result;
+                }
                 
             } else {
             // If it's not a valid number, display the cleaned value as is
@@ -214,12 +218,40 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 
             }
             // Set the value of the hidden input field
-            totalFundNeeded.value = parsedValue;
+            totalFundNeeded.value = totalHealthMedical;
+        });
+
+        supportingYears.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var supportingYearsValue = supportingYears.value;
+
+            var healthMedicalAmountNeeded = parseFloat(amountNeeded.value.replace(/\D/g, '')) * 12; 
+            var Year = parseInt(supportingYearsValue);
+
+            // Calculate months
+            var totalAmount = Year * healthMedicalAmountNeeded;
+
+            if (!isNaN(Year)) {
+                var result = totalAmount.toLocaleString();
+                totalDisplayFund.innerText = "RM" + result;
+            } else {
+                // Input is not a valid number
+                this.value = supportingYearsValue;
+                totalDisplayFund.innerText = "RM 0";
+            }
+            // Set the value of the hidden input field
+            totalFundNeeded.value =  totalAmount;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
             amountNeeded.addEventListener("blur", function() {
                 validateNumberField(amountNeeded);
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            supportingYears.addEventListener("blur", function() {
+                validateYearsNumberField(supportingYears);
             });
         });
 
@@ -230,6 +262,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (isNaN(numericValue)) {
                 field.classList.add("is-invalid");
 
+            } else {
+                field.classList.remove("is-invalid");
+            }
+        }
+        function validateYearsNumberField(field) {
+            const value = field.value.trim();
+
+            if (value === "" || isNaN(value)) {
+                field.classList.add("is-invalid");
             } else {
                 field.classList.remove("is-invalid");
             }
@@ -250,11 +291,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     
             // Remove non-digit characters
             const cleanedValue = parseFloat(existingProtectionAmountValue.replace(/\D/g, ''));
-
-            var existingAmount = parseInt(cleanedValue);
     
-            var total = oldTotalFund - existingAmount;
-            var totalPercentage = existingAmount / oldTotalFund * 100;
+            var total = oldTotalFund - cleanedValue;
+            var totalPercentage = cleanedValue / oldTotalFund * 100;
     
             // Check if the parsed value is a valid number
             if (!isNaN(cleanedValue)) {
@@ -265,13 +304,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (total <= 0){
                     totalAmountNeeded.value = 0;
                     totalHealthMedicalPercentage.value = 100;
-                    $('.retirement-progress-bar').css('width','100%');
+                    $('.calculation-progress-bar').css('width','100%');
                     totalDisplayFund.innerText = "RM 0";
                 }
                 else{
                     totalAmountNeeded.value = total;
                     totalHealthMedicalPercentage.value = totalPercentage;
-                    $('.retirement-progress-bar').css('width', totalPercentage + '%');
+                    $('.calculation-progress-bar').css('width', totalPercentage + '%');
                     totalDisplayFund.innerText = "RM" + result;
                 }
 
@@ -284,11 +323,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         });
         // Add event listeners to the radio buttons
         yesRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','block');
+            jQuery('.hide-content').css('opacity','1');
         });
     
         noRadio.addEventListener('change', function () {
-            jQuery('.hide-content').css('display','none');
+            jQuery('.hide-content').css('opacity','0');
             existing_protection_amount.value = 0; // Clear the money input
             totalAmountNeeded.value = oldTotalFund;
             var totalPercentage = 0 / oldTotalFund * 100;
@@ -302,7 +341,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
     
             if (yesRadio.classList.contains('checked-yes')) {
-                jQuery('.hide-content').css('display','block');
+                jQuery('.hide-content').css('opacity','1');
             }
             
             function validateNumberField(field) {
@@ -329,12 +368,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (newTotal <= 0){
                 totalAmountNeeded.value = 0;
                 totalHealthMedicalPercentage.value = 100;
-                $('.retirement-progress-bar').css('width','100%');
+                $('.calculation-progress-bar').css('width','100%');
             }
             else{
                 totalAmountNeeded.value = newTotal;
                 totalHealthMedicalPercentage.value = newTotalPercentage;
-                $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
+                $('.calculation-progress-bar').css('width', newTotalPercentage + '%');
             }
         }
     }
