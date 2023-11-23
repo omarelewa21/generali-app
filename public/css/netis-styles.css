@@ -194,9 +194,9 @@
     grid-area: header-needs;
 }
 
-.content-needs {
+/* .content-needs {
     grid-area: content-needs;
-}
+} */
 
 .footer-needs {
     grid-area: footer-needs;
@@ -342,7 +342,6 @@ h5.gap-value {
     display: flex;
     cursor: pointer;
     font-size: 50px;
-    z-index: 11;
 }
 
 .input-text {

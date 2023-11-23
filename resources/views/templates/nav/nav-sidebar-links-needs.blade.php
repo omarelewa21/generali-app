@@ -73,8 +73,7 @@
 <script>
 
 // Keep this script within this file
-
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function() {
     // Get the current folder name
     var currentFolderName = '{{ $folderName }}';
 
