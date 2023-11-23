@@ -22,7 +22,7 @@
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey content-section px-0">
                 <hr class="py-1 m-0 bg-primary opacity-100 border-0 d-none d-md-block">
                 <div class="wrapper-needs-grey main-default-bg">
-                    <section class="header">@include ('templates.nav.nav-sidebar-needs')</section>
+                    <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
                             <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
