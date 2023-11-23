@@ -537,9 +537,9 @@ h2.display-5, .currencyField {
 }
 
 .content-needs-grey {
-  grid-template-areas:"heading" "bottom-content";
+  grid-template-areas:"top-menu" "heading" "bottom-content";
   display: grid;
-  grid-auto-rows: 10vh 45vh;
+  grid-auto-rows: 10vh 10vh 35vh;
   grid-template-columns: 100%;
   grid-area: content-needs-grey;
 }
@@ -1036,6 +1036,15 @@ fieldset legend {
   .footer-home {
     grid-area: footer-home;
   }
+  .content-needs-grey {
+    grid-template-areas:"heading" "bottom-content";
+    grid-auto-rows: 10vh 45vh;
+  }
+  .top-menu {
+    position:absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1069,7 +1078,7 @@ fieldset legend {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
   }
   #wrapper-navbar.red.scrolled-up {
     background-color: #C21B17;
@@ -1085,7 +1094,7 @@ fieldset legend {
   }
   #home {
     background-position: right bottom;
-    background-size: contain;
+    background-size: auto 60%;
   }
   .wrapper-needs-grey {
     grid-template-rows: 9vh 35vh 35vh;

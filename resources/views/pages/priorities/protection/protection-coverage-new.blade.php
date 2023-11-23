@@ -24,8 +24,9 @@
 <div id="protection_coverage" class="secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs') @include ('templates.nav.nav-sidebar-needs')</div></div>
+            <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
             <section class="content-needs-grey">
+                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <div class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
