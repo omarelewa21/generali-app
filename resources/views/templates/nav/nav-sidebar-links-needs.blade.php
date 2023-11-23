@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body pt-5">
-        <div class="timeline-needs text-end">
+        <div class="timeline-needs text-end px-2">
             @php
                 // Get the current URL path
                 $routeName = Route::currentRouteName();
@@ -96,3 +96,4 @@ $(document).ready(function () {
 });
 
 </script>
+
