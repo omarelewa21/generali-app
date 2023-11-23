@@ -25,7 +25,7 @@
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
-                        <h4 class="fw-bold">Here's how I see my priorities:</h4>
+                        <h2 class="display-5 fw-bold lh-base text-center">Here's how I see my priorities:</h2>
                         <div id="sortable-main" class="position-relative pt-3">
                             <svg width="100%" height="100%" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path class="second @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
@@ -213,8 +213,8 @@
                                         </div>
                                     @endif
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
@@ -223,8 +223,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
@@ -233,8 +233,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
@@ -243,8 +243,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
@@ -253,8 +253,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
@@ -263,8 +263,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
@@ -273,18 +273,18 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Investments">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Investments</p>
+                                                <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
-                                    <div class="col-12 button-bg">
-                                        <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
@@ -318,242 +318,5 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
-    var customer_details = {!! json_encode(session('customer_details')) !!};
 </script>
-<!-- <script>
-    // Get all the path elements inside #sortable-main
-var paths = document.querySelectorAll("#sortable-main path");
-
-// Add the class "item-dropped" to each path element
-paths.forEach(function (path) {
-  path.classList.add("item-dropped");
-});
-</script> -->
-<!-- <script>
-    $(function() {
-    var $needs = $("#needs"),
-    $sortable = $("#sortable");
-
-    var addedNeedsImages = []; // Array to keep track of added needs images
-
-    console.log(addedNeedsImages);
-
-    function addImageToSortable(imageName) {
-        var droppedContainer = $sortable.find(".dropped:empty:first");
-        if (droppedContainer.length > 0) {
-            
-            if (addedNeedsImages.indexOf(imageName) === -1) {
-                addedNeedsImages.push(imageName);
-                var img = new Image();
-                img.src = imageName;
-                img.onload = function() {
-                    var droppedItem = $("<img>").attr("src", imageName);
-                    droppedContainer.append(droppedItem);
-                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
-                    droppedContainer.append(removeButton);
-                    droppedItem.animate({ width: "40%" }, function() {
-                        droppedItem.animate({ height: "auto" });
-                    });
-                    
-                    var parentSvgButton = droppedContainer.closest(".svg-button");
-                    parentSvgButton.addClass("item-dropped");
-                    
-                    removeButton.click(function() {
-                        parentSvgButton.removeClass("item-dropped");
-                        droppedItem.remove();
-                        removeButton.remove();
-                        var index = addedNeedsImages.indexOf(imageName);
-
-                        if (index !== -1) {
-                            addedNeedsImages.splice(index, 1);
-                        }
-                    });
-                };
-            }
-        }
-    }
-    
-    $("button img", $needs).draggable({
-        cancel: "a.ui-icon",
-        revert: "invalid",
-        containment: "document",
-        helper: "clone",
-        cursor: "move",
-        start: function(event, ui) {
-            if ($(this).hasClass("item-dropped")) {
-                ui.helper.addClass("item-dropped");
-            }
-        }
-    });
-
-    $sortable.sortable({
-        items: ".dropped",
-        connectWith: ".dropped",
-        placeholder: "ui-state-highlight",
-        update: function(event, ui) {
-            // Update the addedNeedsImages array to reflect the new order
-            addedNeedsImages = $sortable.find(".dropped img").map(function() {
-                return $(this).attr("src");
-            }).get();
-        }
-    });
-    
-    $sortable.find(".dropped img").draggable({
-        connectToSortable: "#sortable",
-        containment: "#sortable",
-        helper: "clone",
-        cursor: "move",
-        start: function(event, ui) {
-            ui.helper.addClass("item-dropped");
-        },
-        stop: function(event, ui) {
-            // Restore original image source after dragging
-            $(this).attr("src", $(this).data("original-src"));
-        }
-    });
-    
-    $(".remove-button").droppable({
-        accept: ".dropped img",
-        drop: function(event, ui) {
-            // Prevent dropping images inside .remove-button
-        }
-    });
-    
-    $sortable.find(".dropped").sortable({
-        items: "img", // Only allow sorting of images
-        connectWith: ".dropped",
-        placeholder: "ui-state-highlight",
-        cancel: ".remove-button", // Exclude elements with the class "remove-button" from sorting
-        start: function(event, ui) {
-            // Store the original image source before sorting
-            $(ui.item.find("img")).data("original-src", $(ui.item.find("img")).attr("src"));
-        },
-        stop: function(event, ui) {
-            // Update the addedNeedsImages array to reflect the new order
-            addedNeedsImages = $sortable.find(".dropped img").map(function() {
-                return $(this).attr("src");
-            }).get();
-        }
-    });    
-    
-    
-    
-    
-    
-    
-
-    // $sortable.sortable({
-    //     items: ".dropped",
-    //     update: function(event, ui) {
-    //         // Update the addedNeedsImages array to reflect the new order
-    //         addedNeedsImages = $sortable.find(".dropped img").map(function() {
-    //             return $(this).attr("src");
-    //         }).get();
-    //     }
-    // });
-
-    $sortable.droppable({
-        accept: "#needs button img:not(.item-dropped)",
-        classes: {
-            "ui-droppable-active": "ui-state-highlight"
-        },
-
-        drop: function(event, ui) {
-            var droppedItem = ui.draggable.clone();
-            var droppedContainer = $(this).find(".dropped:empty:first");
-            
-            if (droppedContainer.length > 0) {
-                // Check if the needs image has already been added
-                var imageName = droppedItem.attr("src");
-                if (addedNeedsImages.indexOf(imageName) === -1) {
-                    addedNeedsImages.push(imageName);
-                    droppedContainer.append(droppedItem);
-                    var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
-                    droppedContainer.append(removeButton);
-
-                    droppedItem.animate({ width: "40%" }, function() {
-                        droppedItem.find("img").animate({ height: "30px" });
-                    });
-                    
-                    var parentSvgButton = droppedContainer.closest(".svg-button");
-                    parentSvgButton.addClass("item-dropped");
-                    
-                    removeButton.click(function() {
-                        parentSvgButton.removeClass("item-dropped");
-                        droppedItem.remove();
-                        removeButton.remove();
-                        
-                        // Remove the image from the addedNeedsImages array
-                        var index = addedNeedsImages.indexOf(imageName);
-
-                        if (index !== -1) {
-                            addedNeedsImages.splice(index, 1);
-                        }
-                    });
-                }
-            }
-        }
-    });
-
-    // $sortable.find(".dropped").droppable({
-    //     accept: "#sortable .dropped img",
-    //     drop: function(event, ui) {
-    //         var sourceDropped = ui.helper.closest(".dropped");
-    //         var targetDropped = $(this);
-
-    //         // Swap the images and reset the helper
-    //         var sourceImage = sourceDropped.find("img");
-    //         var targetImage = targetDropped.find("img");
-
-    //         // Swap their src attributes
-    //         var tempSrc = sourceImage.attr("src");
-    //         sourceImage.attr("src", targetImage.attr("src"));
-    //         targetImage.attr("src", tempSrc);
-
-    //         // Clear the helper
-    //         ui.helper.empty();
-
-    //         // Update the addedNeedsImages array
-    //         var sourceIndex = addedNeedsImages.indexOf(sourceImage.attr("src"));
-    //         var targetIndex = addedNeedsImages.indexOf(targetImage.attr("src"));
-
-    //         if (sourceIndex !== -1 && targetIndex !== -1) {
-    //             var tempImage = addedNeedsImages[sourceIndex];
-    //             addedNeedsImages[sourceIndex] = addedNeedsImages[targetIndex];
-    //             addedNeedsImages[targetIndex] = tempImage;
-    //         }
-    //     }
-    // });
-    
-    $needs.droppable({
-        accept: "#sortable button img",
-        classes: {
-            "ui-droppable-active": "custom-state-active"
-        },
-
-        drop: function(event, ui) {
-            var droppedItem = ui.draggable;
-            var parentSvgButton = droppedItem.closest(".svg-button");
-            droppedItem.draggable("enable");
-            droppedItem.removeClass("item-dropped");
-            parentSvgButton.removeClass("item-dropped");
-            droppedItem.remove();
-            
-            // Remove the image from the addedNeedsImages array
-            var imageName = droppedItem.attr("src");
-            var index = addedNeedsImages.indexOf(imageName);
-
-            if (index !== -1) {
-                addedNeedsImages.splice(index, 1);
-            }
-        }
-    });
-    
-    // Add click functionality to #needs button images
-    $("button img", $needs).click(function() {
-        var imageName = $(this).attr("src");
-        addImageToSortable(imageName);
-    });    
-});
-</script> -->
 @endsection

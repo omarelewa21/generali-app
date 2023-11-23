@@ -128,12 +128,6 @@
 </div>
 
 <script>
-// Manually convert the PHP array to JSON
-var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
-var avatar = {!! json_encode(session('customer_details.avatar')) !!};
-var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
-var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
-
 document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
     var fullNameInput = document.getElementById('fullNameInput');

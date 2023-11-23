@@ -147,11 +147,6 @@
 </div>
 
 <script>
-    var basic_details = {!! json_encode(session('customer_details.basic_details')) !!};
-    var avatar = {!! json_encode(session('customer_details.avatar')) !!};
-    var identity_details = {!! json_encode(session('customer_details.identity_details')) !!};
-    var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
-
     const animationFemale = lottie.loadAnimation({
         container: document.getElementById('lottie-animation'),
         renderer: 'svg', 

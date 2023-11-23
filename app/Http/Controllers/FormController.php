@@ -13,7 +13,7 @@ use libphonenumber\NumberParseException;
 // use Illuminate\Support\Facades\Response;
 // use SebastianBergmann\Environment\Console;
 // use Illuminate\Support\Facades\View;
-// use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
 // use libphonenumber\PhoneNumberFormat;
 // use libphonenumber\PhoneNumberType;
 
@@ -120,6 +120,7 @@ class FormController extends Controller {
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
             Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.welcome');
         } else {

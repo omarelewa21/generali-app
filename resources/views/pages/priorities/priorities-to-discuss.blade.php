@@ -25,7 +25,7 @@
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
-                        <h4 class="fw-bold">Here's how I see my priorities:</h4>
+                        <h2 class="display-5 fw-bold lh-base text-center">I'd like to figure out future plans for these:</h2>
                         <div id="sortable-main" class="position-relative pt-3">
                             <svg width="100%" height="100%" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path class="second @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
@@ -217,7 +217,7 @@
                                                         $title = 'Health Medical';
                                                     }
                                                     else if ($priority === 'investments') {
-                                                        $title = 'Investments';
+                                                        $title = 'Lump Sum Investment';
                                                     }
                                                     else if ($priority === 'others') {
                                                         $title = 'Others';
