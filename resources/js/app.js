@@ -26,6 +26,8 @@ $(document).ready(function () {
     var home = $('#home');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
+    var savings_home = $('#savings_home');
+    var investment_home = $('#investment_home');
 
     // Check if the element exists on the page
     if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1) {

@@ -25,7 +25,7 @@
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center position-relative">
-                        <h4 class="fw-bold">I have my eye set on these goals:</h4>
+                        <h4 class="fw-bold">I Plan to have a saving goal of</h4>
                         <div id="sortable-main" class="position-relative pt-3">
                             <svg width="100%" height="100%" viewBox="0 0 814 408" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path class="second @if(isset($arrayData['savings']['savingsGoals']) && isset($arrayData['savings']['savingsGoals'][1])) item-dropped @endif" d="M407.09 5C292.17 5 188.51 53.19 115.2 130.46L225.19 240.45C269.9 190.44 334.8 158.88 407.09 158.59V5Z" fill="#F2F2F2" stroke="#707070" stroke-dasharray="8 6"/>

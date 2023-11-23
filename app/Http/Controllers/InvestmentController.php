@@ -47,8 +47,8 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
@@ -56,7 +56,7 @@ class InvestmentController extends Controller
         ]);
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -103,8 +103,8 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
@@ -123,7 +123,7 @@ class InvestmentController extends Controller
         }
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -152,12 +152,12 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $investment_supporting_years = $request->input('investment_supporting_years');
-        $newInvestmentTotalFund = floatval($investment_supporting_years * $customerDetails['investment_needs']['totalInvestmentNeeded']);
+        $newInvestmentTotalFund = floatval($investment_supporting_years * $customerDetails['investments_needs']['totalInvestmentNeeded']);
         $newTotalInvestmentNeeded = $request->input('newTotal_investmentNeeded');
 
         $investment = array_merge($investment, [
@@ -176,7 +176,7 @@ class InvestmentController extends Controller
         }
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -208,15 +208,15 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $investment_pa = $request->input('investment_pa');
         $totalAnnualReturn = $request->input('total_annualReturn');
-        $newTotalAnnualReturn = $customerDetails['investment_needs']['newTotalInvestmentNeeded'] * $investment_pa / 100;
+        $newTotalAnnualReturn = $customerDetails['investments_needs']['newTotalInvestmentNeeded'] * $investment_pa / 100;
         $totalPercentage = $request->input('percentage');
-        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['investment_needs']['newTotalInvestmentNeeded'] * 100);
+        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['investments_needs']['newTotalInvestmentNeeded'] * 100);
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
@@ -253,7 +253,7 @@ class InvestmentController extends Controller
         }
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -287,8 +287,8 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
@@ -297,7 +297,7 @@ class InvestmentController extends Controller
         ]);
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -312,11 +312,11 @@ class InvestmentController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investment_needs from the session
-        $investment = $customerDetails['investment_needs'] ?? [];
+        // Get existing investments_needs from the session
+        $investment = $customerDetails['investments_needs'] ?? [];
 
         // Set the updated identity_details back to the customer_details session
-        $customerDetails['investment_needs'] = $investment;
+        $customerDetails['investments_needs'] = $investment;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
