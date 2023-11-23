@@ -42,6 +42,8 @@ $('.coverage_slick').slick({
     ]
 });
 
+$('.coverage_slick').find('div').css('height', '100%');
+
 $('#hnm-selection').slick({
     dots: false,
     infinite: true,

@@ -39,7 +39,7 @@
                 </section>
                 <section class="bottom-content">
                     <div class="container h-100">
-                        <div class="row justify-content-center h-100">
+                        <div class="row justify-content-center h-100 coverage_slick">
                             <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($protectionSelectedAvatar === 'self') default @endif" id="self" data-avatar="self" data-required="">
                                     <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" height="100%" width="auto">

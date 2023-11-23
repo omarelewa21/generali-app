@@ -354,10 +354,10 @@
     grid-area: avatar-img;
     grid-template-columns: 100%;
 }
-.avatar-text {
+/* .avatar-text {
     grid-area: avatar-text;
     grid-template-columns: 100%;
-}
+} */
 #calendar .position-absolute.center{
     top: 55%;
 }
