@@ -40,19 +40,19 @@
                             <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-bucket-list.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Visiting destinations on my bucket list</p>
+                                    <p class="avatar-text text-center pt-4 fw-bold">Visiting destinations on my bucket list</p>
                                 </button>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Maintaining a comfortable lifestyle</p>
+                                    <p class="avatar-text text-center pt-4 fw-bold">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retiring early with secure finances</p>
+                                    <p class="avatar-text text-center pt-4 fw-bold">Retiring early with secure finances</p>
                                 </button>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-12 h-100 d-flex justify-content-center py-3">

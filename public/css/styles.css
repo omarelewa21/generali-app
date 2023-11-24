@@ -1074,6 +1074,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 
 .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
   width: auto;
+  background-position: center bottom 21%;
 }
 
 /* ============================== Calculator ============================== */
@@ -1247,7 +1248,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     display: block;
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
-    background-position: center bottom 10%;
+    background-position: center bottom 18%;
   }
 }
 
