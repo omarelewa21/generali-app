@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $protection = session('customer_details.protection_needs');
     $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
     $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
     $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');

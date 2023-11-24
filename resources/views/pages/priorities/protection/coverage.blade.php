@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $protection = session('customer_details.protection_needs');
     $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');

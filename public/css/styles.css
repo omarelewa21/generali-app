@@ -958,12 +958,11 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 /* ============================== Protection Home Page ============================== */
-.bg-needs-main {
-  background-image: url(/images/needs/background/bg-main.png), url(/images/needs/background/abstracts/cloud-1.png);
-  background-size: contain,90%;
-  background-position: center, center 20%;
+#protection_summary {
+  background-image: url(/images/needs/protection/summary-bg.jpg);
+  background-size: auto 90%;
+  background-position: center;
   background-repeat: no-repeat;
-  height: 100%;
 }
 
 /* ============================== Existing Policy ============================== */
@@ -1022,6 +1021,35 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   opacity:0;
 }
 
+.summary-page h2.display-4 {
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+#gap .circle{
+  filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
+}
+
+#gap .circle__medium{
+  filter: none;
+}
+
+#gap .circle__small{
+  filter: none;
+}
+
+#gap .card-gap__number {
+  font-size: 80px;
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+.green-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('/images/needs/general/green-tick.png') no-repeat center center;
+  background-size: contain;
+}
+
 /* ============================== Calculator ============================== */
 .calculation-progress-bar-wrapper {
   border-bottom-right-radius: 1.3rem;
@@ -1054,6 +1082,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .footerVector {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px){
+  .svg-container {
+    transform: scale(1.1) !important;
   }
 }
 
