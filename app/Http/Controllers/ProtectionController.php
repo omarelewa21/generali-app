@@ -18,9 +18,6 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
-        // $identityDetails = $customerDetails['identity_details'] ?? [];
-
         // Get existing protection_needs from the session
         $protection = $customerDetails['protection_needs'] ?? [];
 
@@ -55,96 +52,18 @@ class ProtectionController extends Controller
             'coveragePerson' => $protectionSelectedAvatarInput
         ]);
 
-        // Add the new array inside the customer_details array
-        // $customerDetails['protection_needs'] = [
-        //     'coveragePerson' => $protectionSelectedAvatarInput
-        // ];
-
         // Set the updated identity_details back to the customer_details session
         $customerDetails['protection_needs'] = $protection;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-    
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
+
         return redirect()->route('protection.amount.needed');
     }
 
-    // public function validateMonthlySupport(Request $request){
-
-    //     $customMessages = [
-    //         'protection_monthly_support.required' => 'You are required to enter an amount.',
-    //         'protection_monthly_support.regex' => 'You must enter number',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'protection_monthly_support' => [
-    //             'required',
-    //             'regex:/^[0-9,]+$/',
-    //             function ($attribute, $value, $fail) {
-    //                 // Remove commas and check if the value is at least 1
-    //                 $numericValue = str_replace(',', '', $value);
-    //                 $min = 1;
-    //                 $max = 20000000;
-    //                 if (intval($numericValue) < $min) {
-    //                     $fail('Your amount must be at least ' .$min. '.');
-    //                 }
-    //                 if (intval($numericValue * 12) > $max) {
-    //                     $fail('Your amount must not more than RM' .number_format(floatval($max)). ' per annual.');
-    //                 }
-    //             },
-    //         ],
-    //     ], $customMessages);
-        
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $protection_monthly_support = str_replace(',','',$request->input('protection_monthly_support'));
-    //     $protectionTotalFund = floatval($protection_monthly_support * 12);
-    //     $totalProtectionFund = floatval($request->input('total_protectionFund'));
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing protection_needs from the session
-    //     $protection = $customerDetails['protection_needs'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $protection = array_merge($protection, [
-    //         'monthlySupportAmount' => $protection_monthly_support
-    //     ]);
-
-    //     if ($totalProtectionFund === $protectionTotalFund){
-
-    //         $protection = array_merge($protection, [
-    //             'totalProtectionNeeded' => $totalProtectionFund
-    //         ]);
-    //     }
-    //     else{
-    //         $protection = array_merge($protection, [
-    //             'totalProtectionNeeded' => $protectionTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated protection back to the customer_details session
-    //     $customerDetails['protection_needs'] = $protection;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     // Process the form data and perform any necessary actions
-    //      // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-    //     // return ($formattedArray);
-    //     return redirect()->route('protection.supporting.years');
-    // }
-    public function validateProtectionAmountNeeded(Request $request){
-
+    public function validateProtectionAmountNeeded(Request $request)
+    {
         $customMessages = [
             'protection_monthly_support.required' => 'You are required to enter an amount.',
             'protection_monthly_support.regex' => 'You must enter number.',
@@ -173,7 +92,6 @@ class ProtectionController extends Controller
                 },
             ],
         ], $customMessages);
-        
         
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
@@ -215,10 +133,7 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
-        // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
+        
         return redirect()->route('protection.existing.policy');
     }
     // public function validateProtectionSupporting(Request $request){

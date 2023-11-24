@@ -26,8 +26,6 @@ $(document).ready(function () {
     var home = $('#home');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
-    var savings_home = $('#savings_home');
-    var investment_home = $('#investment_home');
 
     // Check if the element exists on the page
     if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1) {
@@ -37,21 +35,23 @@ $(document).ready(function () {
 });
 
 // Mobile Responsive Mobile Menu
-var scroll_top = 0; // Declare scroll_top as a global variable
+var scroll_top = 0;
 
 function navbar_scroll() {
     var last_scroll_top = 0;
 
     $(window).on('scroll', function() {
         scroll_top = $(this).scrollTop(); // Update the global variable scroll_top
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        if (scroll_top === 0) {
+            $('.navbar-scroll').removeClass('scrolled-up');
+        } else if (scroll_top > 50) {
             if(scroll_top < last_scroll_top) {
                 $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
                 $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
             }
         } else {
-            $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+            $('.navbar-scroll').removeClass('scrolled-down');
         }
         last_scroll_top = scroll_top;
     });
@@ -62,14 +62,16 @@ function footer_scroll() {
 
     $(window).on('scroll', function() {
         scroll_top = $(this).scrollTop(); // Update the global variable scroll_top
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        if (scroll_top === 0) {
+            $('.footer-scroll').removeClass('scrolled-up');
+        } else if (scroll_top > 50) {
             if(scroll_top < last_scroll_top) {
                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
             }
         } else {
-            $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+            $('.footer-scroll').removeClass('scrolled-down');
         }
         last_scroll_top = scroll_top;
     });
