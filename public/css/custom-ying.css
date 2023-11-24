@@ -665,15 +665,7 @@ button.choice:focus,
 .text-correct{
     color: #14A38B;
 }
-#gap .circle{
-    filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
-}
-#gap .circle__medium{
-    filter: none;
-}
-#gap .circle__small{
-    filter: none;
-}
+
 .scrollable-content{
     overflow-x: hidden;
     overflow-y: auto;

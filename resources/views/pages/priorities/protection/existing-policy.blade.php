@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $protection = session('customer_details.protection_needs');
     $existingPolicy = session('customer_details.protection_needs.existingPolicy');
     $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
     $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
