@@ -93,14 +93,17 @@ class SavingsController extends Controller
                 $validator->errors()->add($attribute, $customMessage);
 
                 return false;
-            });    
+            });  
 
             $customMessages = [
                 'savings_goals_amount.required' => 'You are required to enter an amount.',
                 'savings_goals_amount.regex' => 'You must enter number',
             ];
-
-            $validatedData = Validator::make($request->all(), [
+            
+            $validator = Validator::make($request->all(), [
+                'savingsSelectedAvatarInput' => [
+                    'at_least_one_selected',
+                ],
                 'savings_goals_amount' => [
                     'required',
                     'regex:/^[0-9,]+$/',
@@ -119,11 +122,32 @@ class SavingsController extends Controller
                 ],
             ], $customMessages);
 
-            $validator = Validator::make($request->all(), [
-                'savingsGoalsButtonInput' => [
-                    'at_least_one_selected',
-                ],
-            ]);
+            
+
+            // $validatedData = Validator::make($request->all(), [
+            //     'savings_goals_amount' => [
+            //         'required',
+            //         'regex:/^[0-9,]+$/',
+            //         function ($attribute, $value, $fail) {
+            //             // Remove commas and check if the value is at least 1
+            //             $numericValue = str_replace(',', '', $value);
+            //             $min = 1;
+            //             $max = 20000000;
+            //             if (intval($numericValue) < $min) {
+            //                 $fail('Your amount must be at least ' .$min. '.');
+            //             }
+            //             if (intval($numericValue) > $max) {
+            //                 $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+            //             }
+            //         },
+            //     ],
+            // ], $customMessages);
+
+            // $validator = Validator::make($request->all(), [
+            //     'savingsGoalsButtonInput' => [
+            //         'at_least_one_selected',
+            //     ],
+            // ]);
 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -133,10 +157,10 @@ class SavingsController extends Controller
             $savingsGoalsSerialized = $request->input('savingsGoalsButtonInput');
             $savingsGoalsButtonInput = json_decode($savingsGoalsSerialized, true);
             
-            $savingsGoalsButtonInput = array_filter($savingsGoalsButtonInput, function($value) {
-                return $value !== null;
-            });
-            $savingsGoalsButtonInput = array_values($savingsGoalsButtonInput);
+            // $savingsGoalsButtonInput = array_filter($savingsGoalsButtonInput, function($value) {
+            //     return $value !== null;
+            // });
+            // $savingsGoalsButtonInput = array_values($savingsGoalsButtonInput);
 
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
@@ -145,7 +169,7 @@ class SavingsController extends Controller
             $savings = $customerDetails['savings_needs'] ?? [];
 
             $savings = array_merge($savings, [
-                'goalTarget' => $savingsSelectedAvatarInput,
+                // 'goalTarget' => $savingsSelectedAvatarInput,
                 'goalsAmount' => $savings_goals_amount
             ]);
 

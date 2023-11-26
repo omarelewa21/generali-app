@@ -29,9 +29,12 @@
                         <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                         <section class="content-avatar-default">
                             <div class="col-12 text-center position-relative">
-                                <h2 class="display-5 fw-bold lh-base text-center">I Plan to have a saving goal of<br>
+                                <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I Plan to have a saving goal of<br>
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_goals_amount" class="form-control display-5 fw-bold lh-base position-relative border-0 d-inline-block w-25 text-primary @error('savings_goals_amount') is-invalid @enderror" id="savings_goals_amount" value="{{ $goalsAmount !== null ? number_format(floatval($goalsAmount)) : $goalsAmount }}"></span>
                                 </h2>
+                                @if ($errors->has('savings_goals_amount'))
+                                    <div class="invalid-feedback">{{ $errors->first('savings_goals_amount') }}</div>
+                                @endif
                                 <div id="sortable-main" class="position-relative pt-3" style="height: 70%;">
                                     <svg width="100%" height="100%" viewBox="0 0 814 408" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path class="second @if(isset($savingsGoals) && isset($savingsGoals[1])) item-dropped @endif" d="M407.09 5C292.17 5 188.51 53.19 115.2 130.46L225.19 240.45C269.9 190.44 334.8 158.88 407.09 158.59V5Z" fill="#F2F2F2" stroke="#707070" stroke-dasharray="8 6"/>
@@ -131,13 +134,13 @@
                                         </div>
                                     </div>
                                     <div id="needs" class="row mx-4 pb-4 mx-sm-5 needs slider">
-                                            @if ($errors->has('savingsGoalsButtonInput') || $errors->has('savings_goals_amount'))
+                                            @if ($errors->has('savingsGoalsButtonInput'))
                                                 <div class="col-12">
                                                     <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                                         </svg>
-                                                        <div class="text">{{ $errors->first('savingsGoalsButtonInput') }} {{ $errors->first('savings_goals_amount') }}</div>
+                                                        <div class="text">{{ $errors->first('savingsGoalsButtonInput') }}</div>
                                                     </div>
                                                 </div>
                                             @endif
@@ -207,7 +210,7 @@
                                         <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                             <!-- Add a hidden input field to store the selected button -->
                                             <input type="hidden" name="savingsGoalsButtonInput" id="savingsGoalsButtonInput" value="{{ json_encode($savingsGoals) }}">
-                                            <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                            <a href="{{route('savings.coverage')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                             <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                         </div>
                                     </div>

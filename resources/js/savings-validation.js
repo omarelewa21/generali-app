@@ -84,6 +84,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
+        function updateHiddenInputValue() {
+            var savingsGoalsButtonInput = document.getElementById('savingsGoalsButtonInput');
+            savingsGoalsButtonInput.value = JSON.stringify(addedNeedsImages);
+        }
     }
     else if (path == '/savings-monthly-payment') {
         // Get the input value
