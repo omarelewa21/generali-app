@@ -11,7 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (path === '/savings/coverage') {
+    if (path === '/savings/coverage' || path === '/savings/goals') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -44,6 +44,46 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 defaultBtn.classList.add('selected');
             });
         });
+        var goalsAmount = document.getElementById("savings_goals_amount");
+
+        goalsAmount.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var goalsAmountValue = goalsAmount.value;
+
+            // Remove non-digit characters
+            const cleanedValue = parseFloat(goalsAmountValue.replace(/\D/g, ''));
+
+            // Check if the parsed value is a valid number
+            if (!isNaN(cleanedValue)) {
+            // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
+                this.value = formattedValue;
+            } else {
+            // If it's not a valid number, display the cleaned value as is
+                this.value = goalsAmountValue;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            goalsAmount.addEventListener("blur", function() {
+                validateNumberField(goalsAmount);
+            });
+        });
+
+        function validateNumberField(field) {
+            var value = field.value.replace(/,/g, ''); // Remove commas
+            var numericValue = parseFloat(value);
+
+            if (isNaN(numericValue)) {
+                // field.classList.remove("is-valid");
+                field.classList.add("is-invalid");
+
+            } else {
+                // field.classList.add("is-valid");
+                field.classList.remove("is-invalid");
+            }
+        }
     }
     else if (path == '/savings-monthly-payment') {
         // Get the input value
@@ -358,7 +398,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;
-            // console.log('change', change);
         }
         else   {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage

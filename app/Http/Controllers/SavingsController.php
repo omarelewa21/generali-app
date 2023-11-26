@@ -67,21 +67,100 @@ class SavingsController extends Controller
 
     public function goals(Request $request)
     {
-        $goalsSerialized = $request->input('savingsGoalsBtnInput');
-        $savingsGoalsBtnInput = json_decode($goalsSerialized, true);
+        // Validate CSRF token
+        if ($request->ajax() || $request->wantsJson()) {
+            // For AJAX requests, check the CSRF token without throwing an exception
+            $validToken = csrf_token() === $request->header('X-CSRF-TOKEN');
+        } else {
+            // For non-AJAX requests, use the normal CSRF token verification
+            $validToken = $request->session()->token() === $request->input('_token');
+        }
         
-        // // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
+        if ($validToken) {
+            Validator::extend('at_least_one_selected', function ($attribute, $value, $fail, $validator) {
 
-        // // Add or update the data value in the array
-        $arrayData['Goals'] = $savingsGoalsBtnInput;
+                $decodedValue = json_decode($value, true);
 
-        // // Store the updated array back into the session
-        session(['passingArrays' => $arrayData]);
+                if (is_array($decodedValue) && count(array_filter($decodedValue, function ($element) {
+                    return $element !== NULL;
+                })) > 0) {
+                    // At least one non-NULL element exists, validation passes
+                    return true;
+                }
 
-        Log::debug($arrayData);
-        // Process the form data and perform any necessary actions
-        return redirect()->route('savings.monthly.payment');
+                // If any of the conditions are not met, add a different error message
+                $customMessage = "Please select at least one.";
+                $validator->errors()->add($attribute, $customMessage);
+
+                return false;
+            });    
+
+            $customMessages = [
+                'savings_goals_amount.required' => 'You are required to enter an amount.',
+                'savings_goals_amount.regex' => 'You must enter number',
+            ];
+
+            $validatedData = Validator::make($request->all(), [
+                'savings_goals_amount' => [
+                    'required',
+                    'regex:/^[0-9,]+$/',
+                    function ($attribute, $value, $fail) {
+                        // Remove commas and check if the value is at least 1
+                        $numericValue = str_replace(',', '', $value);
+                        $min = 1;
+                        $max = 20000000;
+                        if (intval($numericValue) < $min) {
+                            $fail('Your amount must be at least ' .$min. '.');
+                        }
+                        if (intval($numericValue) > $max) {
+                            $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                        }
+                    },
+                ],
+            ], $customMessages);
+
+            $validator = Validator::make($request->all(), [
+                'savingsGoalsButtonInput' => [
+                    'at_least_one_selected',
+                ],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $savings_goals_amount = str_replace(',','',$request->input('savings_goals_amount'));
+            $savingsGoalsSerialized = $request->input('savingsGoalsButtonInput');
+            $savingsGoalsButtonInput = json_decode($savingsGoalsSerialized, true);
+            
+            $savingsGoalsButtonInput = array_filter($savingsGoalsButtonInput, function($value) {
+                return $value !== null;
+            });
+            $savingsGoalsButtonInput = array_values($savingsGoalsButtonInput);
+
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
+
+            // Get existing savings_needs from the session
+            $savings = $customerDetails['savings_needs'] ?? [];
+
+            $savings = array_merge($savings, [
+                'goalTarget' => $savingsSelectedAvatarInput,
+                'goalsAmount' => $savings_goals_amount
+            ]);
+
+            // Set the updated identity_details back to the customer_details session
+            $customerDetails['savings_needs'] = $savings;
+
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+
+            // Process the form data and perform any necessary actions
+            return redirect()->route('savings.monthly.payment');
+        } else {
+            return response()->json(['error' => 'Invalid CSRF token'], 403);
+        }
     }
 
     public function validateMonthlyPayment(Request $request)
