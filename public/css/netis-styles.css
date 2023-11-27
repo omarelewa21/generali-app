@@ -122,15 +122,7 @@
 
 
 
-.red-tick {
-    display: inline-block;
-    width: 30px;
-    /* Adjust the width and height to match your icon size */
-    height: 30px;
-    background: url('/images/needs/background/red-tick.svg') no-repeat center center;
-    background-size: contain;
-    /* Adjust this property based on your image dimensions */
-}
+
 
 .clock-icon {
     display: inline-block;

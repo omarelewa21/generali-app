@@ -965,6 +965,20 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   background-repeat: no-repeat;
 }
 
+/* ============================== Retirement Home Page ============================== */
+#retirement_home .wrapper-needs-grey {
+  background-image: url(/images/needs/retirement/home-bg.jpg);
+  background-size: cover;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-color: rgba(233, 233, 233, 1);
+  height: 70%;
+}
+
+#retirement_ideal .bottom-content img {
+  max-width: 324px;
+}
+
 /* ============================== Existing Policy ============================== */
 fieldset legend {
   margin: auto;
@@ -1048,6 +1062,19 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   height: 30px;
   background: url('/images/needs/general/green-tick.png') no-repeat center center;
   background-size: contain;
+}
+
+.red-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('/images/needs/general/red-tick.png') no-repeat center center;
+  background-size: contain;
+}
+
+.ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
+  width: auto;
+  background-position: center bottom 21%;
 }
 
 /* ============================== Calculator ============================== */
@@ -1216,6 +1243,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .calculator-page .bottom-content img {
     height: 80%;
+  }
+  #retirement_ideal .content-needs-grey {
+    display: block;
+  }
+  .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
+    background-position: center bottom 18%;
   }
 }
 
