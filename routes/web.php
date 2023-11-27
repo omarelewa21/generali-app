@@ -105,13 +105,15 @@ Route::view('/savings/coverage', 'pages.priorities.savings.coverage')->name('sav
 Route::post('/savings/coverage', [SavingsController::class, 'validateSavingsCoverageSelection'])->name('validate.savings.coverage.selection');
 Route::view('/savings/goals', 'pages.priorities.savings.goals')->name('savings.goals');
 Route::post('/savings/goals', [SavingsController::class, 'goals'])->name('form.goals');
+Route::view('/savings/amount-needed', 'pages.priorities.savings.amount-needed')->name('savings.amount.needed');
+Route::post('/savings/amount-needed', [SavingsController::class, 'validateSavingsAmountNeeded'])->name('validate.savings.amount.needed');
+Route::view('/savings/annual-return', 'pages.priorities.savings.annual-return')->name('savings.annual.return');
+Route::post('/savings/annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
 
 Route::view('/savings-monthly-payment', 'pages.priorities.savings.savings-monthly-payment')->name('savings.monthly.payment');
 Route::post('/savings-monthly-payment', [SavingsController::class, 'validateMonthlyPayment'])->name('validate.monthly.payment');
 Route::view('/savings-goal-duration', 'pages.priorities.savings.savings-goal-duration')->name('savings.goal.duration');
 Route::post('/savings-goal-duration', [SavingsController::class, 'validateGoalDuration'])->name('validate.goal.duration');
-Route::view('/savings-annual-return', 'pages.priorities.savings.savings-annual-return')->name('savings.annual.return');
-Route::post('/savings-annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
 Route::view('/savings-risk-profile', 'pages.priorities.savings.savings-risk-profile')->name('savings.risk.profile');
 Route::post('/savings-risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
 Route::view('/savings-gap', 'pages.priorities.savings.savings-gap')->name('savings.gap');

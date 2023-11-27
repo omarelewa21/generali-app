@@ -294,6 +294,7 @@ button.choice:focus,
 .footer-needs-default {
     grid-area: footer-needs-default;
     grid-template-columns: 100%;
+    background-color: rgba(233, 233, 233, 1);
 }
 /* =========== Education Coverage ====================*/
 #education-coverage .coverage_slick .slick-slide button{
