@@ -243,7 +243,7 @@ class RetirementController extends Controller
         // Process the form data and perform any necessary actions
         //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('retirement.others');
+        return redirect()->route('retirement.allocated.funds');
     }
 
     // public function validateSupportingYears(Request $request){

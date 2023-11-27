@@ -13,7 +13,6 @@
 @section('content')
 
 @php
-    $retirement = session('customer_details.retirement_needs');
     $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
     $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
     $supportingYears = session('customer_details.retirement_needs.supportingYears');

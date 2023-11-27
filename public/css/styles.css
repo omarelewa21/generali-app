@@ -984,10 +984,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   max-width: 324px;
 }
 
-#retirement_period .tertiary-default-bg {
+#retirement_period.tertiary-default-bg {
   background-image: url(/images/needs/retirement/period-bg.png);
   background-size: auto 80%;
-  background-position: left bottom;
+  background-position: left top;
   background-repeat: no-repeat;
   background-color: #fff;
 }
@@ -1244,11 +1244,19 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     text-align: center;
     justify-content: center;
   }
-  .tertiary-default-bg {
+  .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
   }
   .tertiary-mobile-bg {
     background-image: url(/images/general/tertiary-default-bg.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+
+  #retirement_period .tertiary-mobile-bg {
+    background-image: url(/images/needs/retirement/period-bg.png);
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
