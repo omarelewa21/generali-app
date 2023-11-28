@@ -116,7 +116,7 @@ class EducationController extends Controller
         // Update specific keys with new values
         $education = array_merge($education, [
             'tertiaryEducationAmount' => $tertiary_education_amount,
-            'supportingYears' => $tertiary_education_years,
+            'tertiaryEducationYear' => $tertiary_education_years,
             'totalEducationNeeded' => $totalEducationFund
         ]);
 
@@ -277,7 +277,7 @@ class EducationController extends Controller
                     if (intval($numericValue) < $min && $request->input('education_other_savings') === 'yes') {
                         $fail('Your amount must be at least ' .$min. '.');
                     }
-                    if (intval($numericValue) > $max) {
+                    if (intval($numericValue) > $max && $request->input('education_other_savings') === 'yes') {
                         $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
                     }
                 },

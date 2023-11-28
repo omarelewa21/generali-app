@@ -27,9 +27,13 @@ $(document).ready(function () {
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
     var retirement_home = $('#retirement_home');
+    var savings_home = $('#savings_home');
+    var investment_home = $('#investment_home');
+    var health_home = $('#health-medical_home');
+    var debt_home = $('#debt-cancellation_home');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1) {
+    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }

@@ -40,20 +40,22 @@
                 <section class="bottom-content">
                     <div class="container h-100">
                         <div class="row justify-content-center h-100 coverage_slick">
-                            <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($protectionSelectedAvatar === $selfData['full_name']) default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-required="">
-                                    <div>
-                                        <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" height="80%" width="auto">
-                                        <p class="avatar-text text-center pt-4 mb-0 fw-bold">Self</p>
-                                    </div>
-                                </button>
-                            </div>
+                            @if ($selfData)
+                                <div class="h-100 d-flex justify-content-center align-items-center col-3">
+                                    <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($protectionSelectedAvatar === $selfData['full_name']) default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-required="">
+                                        <div>
+                                            <img src="{{ asset('images/avatar/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" height="80%" width="auto" class="m-auto">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Self</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            @endif
                             @if ($spouseData)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                    <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($protectionSelectedAvatar === 'spouse') default @endif" id="spouse" data-avatar="spouse" data-required="">
+                                    <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($protectionSelectedAvatar === $spouseData['full_name']) default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-required="">
                                         <div>
-                                            <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" height="80%" width="auto">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                            <img src="{{ asset('images/avatar/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" height="80%" width="auto" class="m-auto">
+                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
@@ -63,7 +65,7 @@
                                     <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                         <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($protectionSelectedAvatar === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-required="">
                                             <div>
-                                                <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto">
+                                                <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto" class="m-auto">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                             </div>
                                         </button>
