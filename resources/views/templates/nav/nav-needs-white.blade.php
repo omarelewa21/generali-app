@@ -1,4 +1,4 @@
-<div class="row d-flex align-items-center justify-content-center">
+<!-- <div class="row d-flex align-items-center justify-content-center">
     <div class="col-12 col-md-8 mx-md-0 px-md-0 py-md-5 py-3">
         {{--start of nav links --}}
             @include('templates.nav.nav-links')
@@ -7,4 +7,4 @@
             <img class="d-inline" src="{{ asset('images/menu-button.svg') }}" alt="Logo" width="32px" height="26px">
         </a>
     </div>
-</div>
+</div> -->

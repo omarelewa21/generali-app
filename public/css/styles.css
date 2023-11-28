@@ -1242,7 +1242,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 9vh 35vh 35vh;
+    grid-template-rows: 20vh 45vh 35vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
