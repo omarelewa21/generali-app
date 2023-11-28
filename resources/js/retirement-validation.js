@@ -313,7 +313,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     //         }
     //     }
     // }
-    else if (path == '/retirement/others') {
+    else if (path == '/retirement/allocated-funds') {
         var retirement_savings = document.getElementById('retirement_savings');
         var other_income_sources = document.getElementById('other_income_sources');
         var totalAmountNeeded = document.getElementById("total_amountNeeded");
