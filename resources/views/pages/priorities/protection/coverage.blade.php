@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $protection = session('customer_details.protection_needs');
     $selfData = session('customer_details.basic_details');
     $selfGender = session('customer_details.identity_details.gender');
     $childData = session('customer_details.family_details.dependant.children_data');
@@ -33,7 +32,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-base text-center">I’d like to provide coverage for my:</h2>
+                                <h2 class="display-5 fw-bold lh-sm text-center">I’d like to provide coverage for my:</h2>
                             </div>
                         </div>
                     </div>

@@ -481,7 +481,7 @@ h2.display-5, .currencyField {
       "header"
       "content-needs-grey"
       "footer-avatar-grey";
-  grid-template-rows: 15vh 45vh 35vh;
+  grid-template-rows: 15vh 50vh 35vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -958,12 +958,25 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 /* ============================== Protection Home Page ============================== */
-.bg-needs-main {
-  background-image: url(/images/needs/background/bg-main.png), url(/images/needs/background/abstracts/cloud-1.png);
-  background-size: contain,90%;
-  background-position: center, center 20%;
+#protection_summary {
+  background-image: url(/images/needs/protection/summary-bg.jpg);
+  background-size: auto 90%;
+  background-position: center;
   background-repeat: no-repeat;
-  height: 100%;
+}
+
+/* ============================== Retirement Home Page ============================== */
+#retirement_home .wrapper-needs-grey {
+  background-image: url(/images/needs/retirement/home-bg.jpg);
+  background-size: cover;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-color: rgba(233, 233, 233, 1);
+  height: 70%;
+}
+
+#retirement_ideal .bottom-content img {
+  max-width: 324px;
 }
 
 /* ============================== Existing Policy ============================== */
@@ -975,11 +988,6 @@ fieldset legend {
 
 /* ============================== Financial Statements ============================== */
 .currencyField input {
-  font-size: 3.5rem;
-  z-index: 1;
-}
-
-#increment .currencyField input {
   font-size: 2.125rem;
 }
 
@@ -991,13 +999,101 @@ fieldset legend {
   background-color: #fff;
 }
 
-/* ============================== Needs Coverage Page ============================== */
+/* ============================== Needs Page ============================== */
 button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
     background-image: url('/images/needs/hover-coverage.png');
     background-repeat: no-repeat;
     background-position: center bottom 18%;
     background-size: 100%;
     width: 60%;
+}
+
+.coverage_slick div {
+  height: 100%;
+}
+
+.tertiary-default-bg {
+  background-image: url(/images/general/tertiary-default-bg.png);
+  background-size: auto 80%;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.needs-radio {
+  width: 0;
+}
+
+.needs-radio + label {
+  position: relative;
+  padding-left: 40px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.hide-content{
+  opacity:0;
+}
+
+.summary-page h2.display-4 {
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+#gap .circle{
+  filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
+}
+
+#gap .circle__medium{
+  filter: none;
+}
+
+#gap .circle__small{
+  filter: none;
+}
+
+#gap .card-gap__number {
+  font-size: 80px;
+  font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+.green-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('/images/needs/general/green-tick.png') no-repeat center center;
+  background-size: contain;
+}
+
+.red-tick {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('/images/needs/general/red-tick.png') no-repeat center center;
+  background-size: contain;
+}
+
+.ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
+  width: auto;
+  background-position: center bottom 21%;
+}
+
+/* ============================== Calculator ============================== */
+.calculation-progress-bar-wrapper {
+  border-bottom-right-radius: 1.3rem;
+  border-bottom-left-radius: 1.3rem;
+}
+
+.calculation-progress {
+  border-radius: 10px;
+  background: #D9D9D9;
+  height: 10px;
+}
+
+.calculation-progress-bar {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #AA1B17 0%, #DA331E 100%);
+  height: 8px;
+  margin-left: 1px;
 }
 
 /* ============================== Mobile / Tab Responsive ============================== */
@@ -1013,6 +1109,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .footerVector {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px){
+  .svg-container {
+    transform: scale(1.1) !important;
   }
 }
 
@@ -1055,6 +1157,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     top: 0;
     right: 0;
     z-index: 2;
+  }
+  .calculator-page .heading, .calculator-page .heading {
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
   }
 }
 
@@ -1115,6 +1223,32 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .wrapper-needs-grey {
     grid-template-rows: 9vh 35vh 35vh;
+  }
+  .calculator-page .content-needs-grey {
+    grid-auto-rows: 10vh 15vh 45vh;
+  }
+  .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
+    text-align: center;
+    justify-content: center;
+  }
+  .tertiary-default-bg {
+    background-image:none;
+  }
+  .tertiary-mobile-bg {
+    background-image: url(/images/general/tertiary-default-bg.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+  .calculator-page .bottom-content img {
+    height: 80%;
+  }
+  #retirement_ideal .content-needs-grey {
+    display: block;
+  }
+  .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
+    background-position: center bottom 18%;
   }
 }
 

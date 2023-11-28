@@ -44,9 +44,6 @@ Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->
 Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
-// this is for testing
-Route::view('/protection-home', 'pages.priorities.protection.protection-home-new')->name('protection.home.new');
-
 /* Priorities - Protection */
 Route::view('/protection', 'pages.priorities.protection.home')->name('protection.home');
 Route::view('/protection/coverage', 'pages.priorities.protection.coverage')->name('protection.coverage');

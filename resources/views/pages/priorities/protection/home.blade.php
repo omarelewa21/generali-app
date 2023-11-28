@@ -7,6 +7,7 @@
 
 @section('title')
 <title>Protection - Home</title>
+@endsection
 
 @section('content')
 
@@ -29,10 +30,10 @@
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
-                        <div class="container">
+                        <div class="container h-100">
                             <div class="row justify-content-center align-items-center" style="height:70%">
                                 <div class="col-xl-6 text-center">
-                                    <h2 class="display-5 fw-bold lh-base py-4">Let’s figure out what you need for Protection.</h2>
+                                    <h2 class="display-5 fw-bold lh-sm py-4">Let’s figure out what you need for Protection.</h2>
                                 </div>
                             </div>
                         </div>

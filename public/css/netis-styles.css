@@ -120,25 +120,9 @@
     height: 100%;
 }
 
-.green-tick {
-    display: inline-block;
-    width: 30px;
-    /* Adjust the width and height to match your icon size */
-    height: 30px;
-    background: url('/images/needs/background/green-tick.svg') no-repeat center center;
-    background-size: contain;
-    /* Adjust this property based on your image dimensions */
-}
 
-.red-tick {
-    display: inline-block;
-    width: 30px;
-    /* Adjust the width and height to match your icon size */
-    height: 30px;
-    background: url('/images/needs/background/red-tick.svg') no-repeat center center;
-    background-size: contain;
-    /* Adjust this property based on your image dimensions */
-}
+
+
 
 .clock-icon {
     display: inline-block;
@@ -594,9 +578,9 @@ h5.gap-value {
 
     /* End for Needs - Home - Mobile CSS */
 
-    .svg-container {
+    /* .svg-container {
         transform: scale(1) !important;
-    }
+    } */
 
 }
 
@@ -733,9 +717,9 @@ h5.gap-value {
         top: 3% !important;
     }
 
-    .svg-container {
+    /* .svg-container {
         transform: scale(1) !important;
-    }
+    } */
     #retirement_ideal .slick-slide {
         height: 50vh !important;
     }
@@ -790,9 +774,9 @@ h5.gap-value {
         width: 44vh;
     }
 
-    .svg-container {
+    /* .svg-container {
         transform: scale(1.1) !important;
-    }
+    } */
     #Protection-monthly-support .bg-needs-1 {
         height: 51vh !important;
     }
