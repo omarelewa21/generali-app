@@ -21,7 +21,6 @@
 
 <div id="education_coverage" class="secondary-default-bg">
     <div class="container-fluid">
-<<<<<<< HEAD
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
             <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="content-needs-grey">
@@ -32,24 +31,6 @@
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-5 fw-bold lh-sm text-center">I’d like to provide coverage for my:</h2>
-=======
-        <div class="row vh-100">
-            <div class="col-12 vh-100 wrapper-needs-master-full-default bg-needs-master-full">
-                <section class="header-needs-default">
-                    <div class="col-12">
-                        @include('templates.nav.nav-red-menu')
-                    </div>
-                    <div class="col-12">
-                        @include ('templates.nav.nav-sidebar-needs')
-                    </div>
-                </section>
-                <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="content-needs-default m-0">
-                    @csrf
-                    <section class="overflow-auto overflow-hidden row content-block">
-                        <div class="col-12 header-content-coverage">
-                            <div class="row d-flex justify-content-center align-items-center text-center">
-                                <h4 class="f-34 f-family fw-700">I'd like to provide coverage for my:</h4>
->>>>>>> staging
                             </div>
                         </div>
                     </div>
