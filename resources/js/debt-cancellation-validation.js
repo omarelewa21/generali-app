@@ -374,7 +374,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     }
     else if (path == '/debt-cancellation/gap') {
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (existingDebtAmount / totalDebtFundNeeded * 100).toFixed(2);
+        var Covered = (existingDebtAmount / totalDebtFund * 100).toFixed(2);
         var circle = document.getElementById("circle");
         var dotCircle = document.getElementById("dotCircle");
         

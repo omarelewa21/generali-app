@@ -56,6 +56,15 @@
     line-height: normal;
 }
 
+/* ============================ Hover style ===============================*/
+button.choice.default.selected,
+button.choice[data-required="selected"]{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom 18%;
+    background-size: 100%;
+    width: 60%;
+}
 /* ============================ Calculation style ===============================*/
 
 
@@ -317,6 +326,9 @@ button.choice:focus,
 }
 .plant .position-absolute.center{
     top:60%;
+}
+.selection_height{
+    height:380px;
 }
 /* ========= Health and Medical Planning Hospital Selection =============*/
 .hospital .position-absolute.center {
@@ -933,6 +945,9 @@ table {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
+    .selection_height{
+        height:300px;
+    }
 }
 @media only screen and (max-width: 600px) and (min-height:861px) and (max-height: 900px){
     .coverage_slick .slick-slide button{
@@ -998,6 +1013,16 @@ table {
         height: 390px;
     }
     
+}
+@media only screen and (min-height: 850px){
+    .selection_height{
+        height:420px;
+    }
+}
+@media only screen and (min-height:900px){
+    .selection_height{
+        height:450px;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) and (min-height: 1200px){
     #retirement-home .needs-home-avatar-wrapper {
