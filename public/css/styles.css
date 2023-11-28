@@ -174,6 +174,10 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.iti--show-flags {
+  width: 100%;
+}
+
 /* ============================== Alerts ============================== */
 .alert div.text {
   font-size: 18px;
@@ -443,12 +447,13 @@ h2.display-5, .currencyField {
 }
 
 .modal-title {
-  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+  font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
 .otherModalText {
   font-size: 5rem;
   line-height: 3.5rem;
+  font-family: 'Helvetica Neue Bold Condensed', sans-serif;
 }
 
 /* ============================== Grid System ============================== */
@@ -979,6 +984,21 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   max-width: 324px;
 }
 
+#retirement_period.tertiary-default-bg {
+  background-image: url(/images/needs/retirement/period-bg.png);
+  background-size: auto 80%;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+/* ============================== Education Home Page ============================== */
+#education_home .main-default-bg {
+  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.png);
+  background-size: auto 50%, auto 70%;
+  background-position: center top, center;
+}
+
 /* ============================== Existing Policy ============================== */
 fieldset legend {
   margin: auto;
@@ -1222,7 +1242,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 9vh 35vh 35vh;
+    grid-template-rows: 20vh 45vh 35vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1231,11 +1251,19 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     text-align: center;
     justify-content: center;
   }
-  .tertiary-default-bg {
+  .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
   }
   .tertiary-mobile-bg {
     background-image: url(/images/general/tertiary-default-bg.png);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+
+  #retirement_period .tertiary-mobile-bg {
+    background-image: url(/images/needs/retirement/period-bg.png);
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
@@ -1249,6 +1277,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
     background-position: center bottom 18%;
+  }
+  .fixed-sm-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding-top: 85.5px!important;
   }
 }
 

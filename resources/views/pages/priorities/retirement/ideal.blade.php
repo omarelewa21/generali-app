@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $retirement = session('customer_details.retirement_needs');
     $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
 @endphp
 
@@ -34,31 +33,25 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
+                <section class="bottom-content">
                     <div class="container h-100">
                         <div class="row h-100">
-                            <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
+                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-bucket-list.png') }}" height="auto" width="100%">
                                     <p class="avatar-text text-center pt-4 fw-bold">Visiting destinations on my bucket list</p>
                                 </button>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
+                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%">
                                     <p class="avatar-text text-center pt-4 fw-bold">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 h-100 d-flex justify-content-center py-3">
+                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%">
                                     <p class="avatar-text text-center pt-4 fw-bold">Retiring early with secure finances</p>
-                                </button>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-12 h-100 d-flex justify-content-center py-3">
-                                <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-others') default @endif" id="retirement-others" data-avatar="retirement-others" data-required="">
-                                    <label for="retirement-others" class="form-label text-dark">Others:</label>
-                                    <textarea class="form-control" id="retirement-others" rows="4" style="resize: none;"></textarea>
                                 </button>
                             </div>
                         </div>

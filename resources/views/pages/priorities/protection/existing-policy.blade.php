@@ -100,7 +100,6 @@
     </div>
 </div>
 
-
 <script>
     var oldTotalFund = parseFloat({{ $totalProtectionNeeded }});
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});

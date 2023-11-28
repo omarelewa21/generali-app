@@ -20,10 +20,10 @@
 <div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
+            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white-menu')
-                <div class="text-white px-4 px-xl-5 py-3">
-                    <h2 class="display-5 fw-bold">Hello! Let's get to know you better.</h2>
+                <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
+                    <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
@@ -48,7 +48,7 @@
                                     @endif
                                     <div class="col-12 py-4">
                                         <div class="row">
-                                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+                                            <div class="col-md-3">
                                                 <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
@@ -60,25 +60,16 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="fullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
+                                            <div class="col-md-9 pt-5 pt-md-0">
+                                                <label for="fullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                 <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
                                                 @error('fullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <!-- <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
-                                                @error('lastName')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div> -->
                                         </div>
                                         <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumberInput" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
@@ -87,7 +78,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="houseNumberInput" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
                                                     <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
@@ -98,7 +89,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')

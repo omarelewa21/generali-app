@@ -23,7 +23,8 @@ $(document).ready(function() {
         // Check if the window width is less than 767px
         if (windowWidth < 768) {
             const menuHeight = $(".sidebanner").outerHeight();
-            const responsiveMainContentPadding = menuHeight; // Adding 10 pixels
+            const descriptionHeight = $(".fixed-sm-top").outerHeight();
+            const responsiveMainContentPadding = menuHeight + descriptionHeight - 85.5;
             $(".content-section").css("padding-top", responsiveMainContentPadding + "px");
         } else {
             // Reset padding if window width is 767px or more

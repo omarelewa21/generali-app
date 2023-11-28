@@ -31,9 +31,10 @@ $(document).ready(function () {
     var investment_home = $('#investment_home');
     var health_home = $('#health-medical_home');
     var debt_home = $('#debt-cancellation_home');
+    var education_home = $('#education_home');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1) {
+    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }
@@ -64,19 +65,26 @@ function navbar_scroll() {
 
 function footer_scroll() {
     var last_scroll_top = 0;
+    var footer = $('.footer-scroll');
+    var documentHeight = $(document).height();
+    var windowHeight = $(window).height();
 
     $(window).on('scroll', function() {
-        scroll_top = $(this).scrollTop(); // Update the global variable scroll_top
+        var scroll_top = $(this).scrollTop();
+        var scroll_bottom = scroll_top + windowHeight;
+
         if (scroll_top === 0) {
-            $('.footer-scroll').removeClass('scrolled-up');
+            footer.removeClass('scrolled-up');
+        } else if (scroll_bottom >= documentHeight) {
+            footer.addClass('scrolled-up').removeClass('scrolled-down');
         } else if (scroll_top > 50) {
-            if(scroll_top < last_scroll_top) {
-                $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+            if (scroll_top < last_scroll_top) {
+                footer.removeClass('scrolled-down').addClass('scrolled-up');
             } else {
-                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                footer.removeClass('scrolled-up').addClass('scrolled-down');
             }
         } else {
-            $('.footer-scroll').removeClass('scrolled-down');
+            footer.removeClass('scrolled-down scrolled-up');
         }
         last_scroll_top = scroll_top;
     });

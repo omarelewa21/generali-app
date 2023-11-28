@@ -55,11 +55,6 @@ Route::post('/protection/existing-policy', [ProtectionController::class, 'valida
 Route::view('/protection/gap', 'pages.priorities.protection.gap')->name('protection.gap');
 Route::post('/protection/gap', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
 
-Route::view('/protection-monthly-support', 'pages.priorities.protection.protection-monthly-support')->name('protection.monthly.support');
-Route::post('/protection-monthly-support', [ProtectionController::class, 'validateMonthlySupport'])->name('validate.monthly.support');
-Route::view('/protection-supporting-years', 'pages.priorities.protection.protection-supporting-years')->name('protection.supporting.years');
-Route::post('/protection-supporting-years', [ProtectionController::class, 'validateProtectionSupporting'])->name('validate.protection.supporting');
-
 /* Priorities - Retirement */
 Route::view('/retirement', 'pages.priorities.retirement.home')->name('retirement.home');
 Route::view('/retirement/coverage', 'pages.priorities.retirement.coverage')->name('retirement.coverage');
@@ -70,8 +65,8 @@ Route::view('/retirement/monthly-support', 'pages.priorities.retirement.monthly-
 Route::Post('/retirement/monthly-support', [RetirementController::class, 'validateRetirementMonthlySupport'])->name('validate.retirement.monthly.support');
 Route::view('/retirement/period', 'pages.priorities.retirement.period')->name('retirement.period');
 Route::Post('/retirement/period', [RetirementController::class, 'validateRetirementPeriod'])->name('validate.retirement.period');
-Route::view('/retirement/others', 'pages.priorities.retirement.others')->name('retirement.others');
-Route::Post('/retirement/others', [RetirementController::class, 'validateRetirementOthers'])->name('validate.retirement.others');
+Route::view('/retirement/allocated-funds', 'pages.priorities.retirement.allocated-funds')->name('retirement.allocated.funds');
+Route::Post('/retirement/allocated-funds', [RetirementController::class, 'validateRetirementOthers'])->name('validate.retirement.allocated.funds');
 Route::view('/retirement/gap', 'pages.priorities.retirement.gap')->name('retirement.gap');
 Route::post('/retirement/gap', [RetirementController::class, 'submitRetirementGap'])->name('form.submit.retirement.gap');
 

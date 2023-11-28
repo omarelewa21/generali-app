@@ -15,7 +15,7 @@
 <div id="pdpa">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
+            <div class="col-12 col-md-4 col-xxl-3 px-0 bg-primary sidebanner navbar-scroll">
                 @include('templates.nav.nav-white')
                 <div class="text-white px-4 px-xl-5 py-3 py-md-5">
                     <h2 class="display-5 fw-bold">To begin, may we have permission to share or use your personal details?</h2>
