@@ -24,6 +24,7 @@
 
 <div id="retirement_summary" class="summary-page">
     <div class="container-fluid">
+<<<<<<< HEAD
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
             <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="content-needs-grey"">
@@ -34,6 +35,18 @@
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-4 text-center">Total Retirement Fund</h2>
+=======
+        <div class="row vh-100 scrollable-content">
+            <div class="col-12">
+                <div class="row h-100 bg-needs-master-full wrapper-needs-summary-default">
+                    <section class="header-needs-default">
+                        <div class="row">
+                            <div class="col-6 order-sm-0 order-md-0 order-lg-0 order-0">
+                                @include('templates.nav.nav-red-menu')
+                            </div>
+                            <div class="col-6 order-sm-1 order-md-2 order-lg-2 order-1">
+                                @include('templates.nav.nav-sidebar-needs')
+>>>>>>> staging
                             </div>
                         </div>
                     </div>

@@ -95,16 +95,17 @@ Route::post('/education-supporting-years', [EducationController::class, 'validat
 Route::view('/savings', 'pages.priorities.savings.home')->name('savings.home');
 Route::view('/savings/coverage', 'pages.priorities.savings.coverage')->name('savings.coverage');
 Route::post('/savings/coverage', [SavingsController::class, 'validateSavingsCoverageSelection'])->name('validate.savings.coverage.selection');
-
+Route::view('/savings/goals', 'pages.priorities.savings.goals')->name('savings.goals');
+Route::post('/savings/goals', [SavingsController::class, 'goals'])->name('form.goals');
+Route::view('/savings/amount-needed', 'pages.priorities.savings.amount-needed')->name('savings.amount.needed');
+Route::post('/savings/amount-needed', [SavingsController::class, 'validateSavingsAmountNeeded'])->name('validate.savings.amount.needed');
+Route::view('/savings/annual-return', 'pages.priorities.savings.annual-return')->name('savings.annual.return');
+Route::post('/savings/annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
 
 Route::view('/savings-monthly-payment', 'pages.priorities.savings.savings-monthly-payment')->name('savings.monthly.payment');
 Route::post('/savings-monthly-payment', [SavingsController::class, 'validateMonthlyPayment'])->name('validate.monthly.payment');
-Route::view('/savings-goals', 'pages.priorities.savings.savings-goals')->name('savings.goals');
-Route::post('/savings-goals', [SavingsController::class, 'goals'])->name('form.goals');
 Route::view('/savings-goal-duration', 'pages.priorities.savings.savings-goal-duration')->name('savings.goal.duration');
 Route::post('/savings-goal-duration', [SavingsController::class, 'validateGoalDuration'])->name('validate.goal.duration');
-Route::view('/savings-annual-return', 'pages.priorities.savings.savings-annual-return')->name('savings.annual.return');
-Route::post('/savings-annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
 Route::view('/savings-risk-profile', 'pages.priorities.savings.savings-risk-profile')->name('savings.risk.profile');
 Route::post('/savings-risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
 Route::view('/savings-gap', 'pages.priorities.savings.savings-gap')->name('savings.gap');
@@ -157,17 +158,17 @@ Route::view('/debt-cancellation/coverage', 'pages.priorities.debt-cancellation.c
 Route::post('/debt-cancellation/coverage', [DebtCancellationController::class, 'validateDebtCancellationCoverage'])->name('validate.debt.cancellation.coverage');
 Route::view('/debt-cancellation/amount-needed', 'pages.priorities.debt-cancellation.amount-needed')->name('debt.cancellation.amount.needed');
 Route::post('/debt-cancellation/amount-needed', [DebtCancellationController::class, 'validateDebtCancellationAmountNeeded'])->name('validate.debt.cancellation.amount.needed');
+Route::view('/debt-cancellation/existing-debt', 'pages.priorities.debt-cancellation.existing-debt')->name('debt.cancellation.existing.debt');
+Route::post('/debt-cancellation/existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
+Route::view('/debt-cancellation/critical-illness', 'pages.priorities.debt-cancellation.critical-illness')->name('debt.cancellation.critical.illness');
+Route::post('/debt-cancellation/critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
+Route::view('/debt-cancellation/gap', 'pages.priorities.debt-cancellation.gap')->name('debt.cancellation.gap');
+Route::post('/debt-cancellation/gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 Route::view('/debt-cancellation-outstanding-loan', 'pages.priorities.debt-cancellation.debt-cancellation-outstanding-loan')->name('debt.cancellation.outstanding.loan');
 Route::post('/debt-cancellation-outstanding-loan', [DebtCancellationController::class, 'validateDebtCancellationOutstandingLoan'])->name('validate.debt.outstanding.loan');
 Route::view('/debt-cancellation-settlement-years', 'pages.priorities.debt-cancellation.debt-cancellation-settlement-years')->name('debt.cancellation.settlement.years');
 Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::class, 'validateDebtCancellationSettlementYears'])->name('validate.debt.settlement.years');
-Route::view('/debt-cancellation-existing-debt', 'pages.priorities.debt-cancellation.debt-cancellation-existing-debt')->name('debt.cancellation.existing.debt');
-Route::post('/debt-cancellation-existing-debt', [DebtCancellationController::class, 'validateDebtCancellationExistingDebt'])->name('validate.debt.existing.debt');
-Route::view('/debt-cancellation-critical-illness', 'pages.priorities.debt-cancellation.debt-cancellation-critical-illness')->name('debt.cancellation.critical.illness');
-Route::post('/debt-cancellation-critical-illness', [DebtCancellationController::class, 'validateDebtCancellationCriticalIllness'])->name('validate.debt.critical.illness');
-Route::view('/debt-cancellation-gap', 'pages.priorities.debt-cancellation.debt-cancellation-gap')->name('debt.cancellation.gap');
-Route::post('/debt-cancellation-gap', [DebtCancellationController::class, 'submitDebtCancellationGap'])->name('form.submit.debt.cancellation.gap');
 
 // Summary
 Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
@@ -176,8 +177,8 @@ Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
-Route::view('/overview', 'pages.summary.overview')->name('overview');
-Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview-new', 'pages.summary.overview')->name('overview');
+Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

@@ -1,5 +1,6 @@
 const specificPageURLs = [
-    'financial-priorities'
+    'financial-priorities',
+    'savings/goals',
 ];
 
 const currentURL = window.location.href;

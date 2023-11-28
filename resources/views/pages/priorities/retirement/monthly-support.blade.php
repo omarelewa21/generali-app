@@ -20,7 +20,7 @@
     $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
 @endphp
 
-<div id="retirement_monthly_support" class="tertiary-default-bg calculator-page">
+<div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>

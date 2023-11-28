@@ -11,7 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (path === '/savings/coverage') {
+    if (path === '/savings/coverage' || path === '/savings/goals') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -44,58 +44,30 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 defaultBtn.classList.add('selected');
             });
         });
-    }
-    else if (path == '/savings-monthly-payment') {
-        // Get the input value
-        var monthlyInput = document.getElementById("savings_monthly_payment");
-        var totalSavingsNeeded = document.getElementById("total_savingsNeeded");
+        var goalsAmount = document.getElementById("savings_goals_amount");
 
-        var totalSavingsFund = document.getElementById("TotalSavingsFund");
-
-        monthlyInput.addEventListener("input", function() {
+        goalsAmount.addEventListener("input", function() {
 
             // Retrieve the current input value
-            var monthlyInputValue = monthlyInput.value;
+            var goalsAmountValue = goalsAmount.value;
 
             // Remove non-digit characters
-            const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-
-            // Attempt to parse the cleaned value as a float
-            const parsedValue = parseFloat(cleanedValue);
+            const cleanedValue = parseFloat(goalsAmountValue.replace(/\D/g, ''));
 
             // Check if the parsed value is a valid number
-            if (!isNaN(parsedValue)) {
+            if (!isNaN(cleanedValue)) {
             // If it's a valid number, format it with commas
-                const formattedValue = parsedValue.toLocaleString('en-MY');
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
                 this.value = formattedValue;
             } else {
             // If it's not a valid number, display the cleaned value as is
-                this.value = monthlyInputValue;
+                this.value = goalsAmountValue;
             }
-
-            var monthlyAmount = parseInt(cleanedValue);
-
-            // Calculate months
-            var amountPerYear = monthlyAmount * 12;
-
-            if (isNaN(monthlyAmount)) {
-                // Input is not a valid number
-                totalSavingsFund.innerText = "RM 0";
-            } else {
-                // Input is a valid number, perform the calculation
-                // Display the result
-                var result = amountPerYear.toLocaleString();
-
-                totalSavingsFund.innerText = "RM" + result;
-            }
-
-            // Set the value of the hidden input field
-            totalSavingsNeeded.value = amountPerYear;
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            monthlyInput.addEventListener("blur", function() {
-                validateNumberField(monthlyInput);
+            goalsAmount.addEventListener("blur", function() {
+                validateNumberField(goalsAmount);
             });
         });
 
@@ -112,58 +84,137 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
+        function updateHiddenInputValue() {
+            var savingsGoalsButtonInput = document.getElementById('savingsGoalsButtonInput');
+            savingsGoalsButtonInput.value = JSON.stringify(addedNeedsImages);
+        }
     }
-    else if (path == '/savings-goal-duration') {
+    else if (path == '/savings/amount-needed') {
         // Get the input value
+        var monthlyInput = document.getElementById("savings_monthly_payment");
         var goalDuration = document.getElementById("savings_goal_duration");
-        var newTotalFund = document.getElementById("newTotal_savingsNeeded");
+        var totalSavingsNeeded = document.getElementById("total_savingsNeeded");
+        var totalAmountNeeded = document.getElementById("total_amountNeeded");
+        var totalsavingsPercentage = document.getElementById("percentage");
+
         var totalSavingsFund = document.getElementById("TotalSavingsFund");
 
-        if (goalDurationSessionValue !== '' || goalDurationSessionValue !== 0 && oldTotalFund !== '') {
-                newTotalFund.value = goalDurationSessionValue * oldTotalFund;
-        } 
-        
+        monthlyInput.addEventListener("input", function() {
+
+            // Retrieve the current input value
+            var monthlyInputValue = monthlyInput.value;
+
+            // Remove non-digit characters
+            const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+            const savingsYears = parseInt(goalDuration.value);
+
+            // Calculate months
+            var amountPerYear = cleanedValue * 12;
+            var totalSavings = savingsYears * amountPerYear;
+            var total = goalAmount - totalSavings;
+            var totalPerYear = goalAmount - amountPerYear;
+            var totalPercentage = totalSavings / goalAmount * 100;
+
+            // Check if the parsed value is a valid number
+            if (!isNaN(cleanedValue)) {
+                // If it's a valid number, format it with commas
+                const formattedValue = cleanedValue.toLocaleString('en-MY');
+                this.value = formattedValue;
+                var result = totalPerYear.toLocaleString();
+                totalSavingsFund.innerText = "RM" + result;
+                if (!isNaN(savingsYears)){
+                    // var result = totalSavings.toLocaleString();
+                    // totalSavingsFund.innerText = "RM" + result;
+                    if (total <= 0){
+                        totalAmountNeeded.value = 0;
+                        totalsavingsPercentage.value = 100;
+                        $('.calculation-progress-bar').css('width','100%');
+                        totalSavingsFund.innerText = "RM 0";
+                    }
+                    else{
+                        totalAmountNeeded.value = total;
+                        totalsavingsPercentage.value = totalPercentage;
+                        $('.calculation-progress-bar').css('width', totalPercentage + '%');
+                        var totalResult = total.toLocaleString();
+                        totalSavingsFund.innerText = "RM" + totalResult;
+                    }
+                }
+            } else {
+            // If it's not a valid number, display the cleaned value as is
+                this.value = monthlyInputValue;
+                totalSavingsFund.innerText = "RM 0";
+            }
+            // Set the value of the hidden input field
+            totalSavingsNeeded.value =  totalSavings;
+            // totalAmountNeeded.value = ;
+        });
 
         goalDuration.addEventListener("input", function() {
 
             // Retrieve the current input value
             var goalDurationValue = goalDuration.value;
 
+            var amountNeeded = parseFloat(monthlyInput.value.replace(/\D/g, '')) * 12; 
             var Year = parseInt(goalDurationValue);
 
             // Calculate months
-            var totalAmount = Year * oldTotalFund;
+            var totalAmount = Year * amountNeeded;
+            var total = goalAmount - totalAmount;
+            var totalPercentage = totalAmount / goalAmount * 100;
 
-            if (isNaN(Year)) {
-                // Input is not a valid number
-                totalSavingsFund.innerText = "RM 0";
-            } else {
+            if (!isNaN(Year)) {
                 // Input is a valid number, perform the calculation
                 // Display the result
-                var result = totalAmount.toLocaleString();
-
+                this.value = Year;
+                var result = total.toLocaleString();
                 totalSavingsFund.innerText = "RM" + result;
+                if (total <= 0){
+                    totalAmountNeeded.value = 0;
+                    totalsavingsPercentage.value = 100;
+                    $('.calculation-progress-bar').css('width','100%');
+                    totalSavingsFund.innerText = "RM 0";
+                }
+                else{
+                    totalAmountNeeded.value = total;
+                    totalsavingsPercentage.value = totalPercentage;
+                    $('.calculation-progress-bar').css('width', totalPercentage + '%');
+                    var totalResult = total.toLocaleString();
+                    totalSavingsFund.innerText = "RM" + totalResult;
+                }
+            } else {
+                // Input is not a valid number
+                this.value = goalDurationValue;
+                totalSavingsFund.innerText = "RM 0";
             }
-            if(totalAmount >= 10000000000){
-                totalSavingsFund.classList.add('f-40');
-                totalSavingsFund.classList.remove('f-50');
-            }
-            else{
-                totalSavingsFund.classList.add('f-50');
-                totalSavingsFund.classList.remove('f-40');
-            }
-            
-            newTotalFund.value = Year * oldTotalFund;
-            
+            // Set the value of the hidden input field
+            totalSavingsNeeded.value =  totalAmount;
         });
-    
+
         document.addEventListener("DOMContentLoaded", function() {
-            goalDuration.addEventListener("blur", function() {
-                validateNumberField(goalDuration);
+            monthlyInput.addEventListener("blur", function() {
+                validateAmountNumberField(monthlyInput);
             });
         });
 
-        function validateNumberField(field) {
+        document.addEventListener("DOMContentLoaded", function() {
+            goalDuration.addEventListener("blur", function() {
+                validateYearsNumberField(goalDuration);
+            });
+        });
+
+        function validateAmountNumberField(field) {
+            var value = field.value.replace(/,/g, ''); // Remove commas
+            var numericValue = parseFloat(value);
+
+            if (isNaN(numericValue)) {
+                field.classList.add("is-invalid");
+
+            } else {
+                field.classList.remove("is-invalid");
+            }
+        }
+
+        function validateYearsNumberField(field) {
             const value = field.value.trim();
 
             if (value === "" || isNaN(value)) {
@@ -173,11 +224,138 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
     }
-    else if (path == '/savings-annual-return') {
+    // else if (path == '/savings-monthly-payment') {
+    //     // Get the input value
+    //     var monthlyInput = document.getElementById("savings_monthly_payment");
+    //     var totalSavingsNeeded = document.getElementById("total_savingsNeeded");
+
+    //     var totalSavingsFund = document.getElementById("TotalSavingsFund");
+
+    //     monthlyInput.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var monthlyInputValue = monthlyInput.value;
+
+    //         // Remove non-digit characters
+    //         const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
+
+    //         // Attempt to parse the cleaned value as a float
+    //         const parsedValue = parseFloat(cleanedValue);
+
+    //         // Check if the parsed value is a valid number
+    //         if (!isNaN(parsedValue)) {
+    //         // If it's a valid number, format it with commas
+    //             const formattedValue = parsedValue.toLocaleString('en-MY');
+    //             this.value = formattedValue;
+    //         } else {
+    //         // If it's not a valid number, display the cleaned value as is
+    //             this.value = monthlyInputValue;
+    //         }
+
+    //         var monthlyAmount = parseInt(cleanedValue);
+
+    //         // Calculate months
+    //         var amountPerYear = monthlyAmount * 12;
+
+    //         if (isNaN(monthlyAmount)) {
+    //             // Input is not a valid number
+    //             totalSavingsFund.innerText = "RM 0";
+    //         } else {
+    //             // Input is a valid number, perform the calculation
+    //             // Display the result
+    //             var result = amountPerYear.toLocaleString();
+
+    //             totalSavingsFund.innerText = "RM" + result;
+    //         }
+
+    //         // Set the value of the hidden input field
+    //         totalSavingsNeeded.value = amountPerYear;
+    //     });
+
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         monthlyInput.addEventListener("blur", function() {
+    //             validateNumberField(monthlyInput);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         var value = field.value.replace(/,/g, ''); // Remove commas
+    //         var numericValue = parseFloat(value);
+
+    //         if (isNaN(numericValue)) {
+    //             // field.classList.remove("is-valid");
+    //             field.classList.add("is-invalid");
+
+    //         } else {
+    //             // field.classList.add("is-valid");
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    // else if (path == '/savings-goal-duration') {
+    //     // Get the input value
+    //     var goalDuration = document.getElementById("savings_goal_duration");
+    //     var newTotalFund = document.getElementById("newTotal_savingsNeeded");
+    //     var totalSavingsFund = document.getElementById("TotalSavingsFund");
+
+    //     if (goalDurationSessionValue !== '' || goalDurationSessionValue !== 0 && oldTotalFund !== '') {
+    //             newTotalFund.value = goalDurationSessionValue * oldTotalFund;
+    //     } 
+        
+
+    //     goalDuration.addEventListener("input", function() {
+
+    //         // Retrieve the current input value
+    //         var goalDurationValue = goalDuration.value;
+
+    //         var Year = parseInt(goalDurationValue);
+
+    //         // Calculate months
+    //         var totalAmount = Year * oldTotalFund;
+
+    //         if (isNaN(Year)) {
+    //             // Input is not a valid number
+    //             totalSavingsFund.innerText = "RM 0";
+    //         } else {
+    //             // Input is a valid number, perform the calculation
+    //             // Display the result
+    //             var result = totalAmount.toLocaleString();
+
+    //             totalSavingsFund.innerText = "RM" + result;
+    //         }
+    //         if(totalAmount >= 10000000000){
+    //             totalSavingsFund.classList.add('f-40');
+    //             totalSavingsFund.classList.remove('f-50');
+    //         }
+    //         else{
+    //             totalSavingsFund.classList.add('f-50');
+    //             totalSavingsFund.classList.remove('f-40');
+    //         }
+            
+    //         newTotalFund.value = Year * oldTotalFund;
+            
+    //     });
+    
+    //     document.addEventListener("DOMContentLoaded", function() {
+    //         goalDuration.addEventListener("blur", function() {
+    //             validateNumberField(goalDuration);
+    //         });
+    //     });
+
+    //     function validateNumberField(field) {
+    //         const value = field.value.trim();
+
+    //         if (value === "" || isNaN(value)) {
+    //             field.classList.add("is-invalid");
+    //         } else {
+    //             field.classList.remove("is-invalid");
+    //         }
+    //     }
+    // }
+    else if (path == '/savings/annual-return') {
         // Get the input value
         var savingsGoalPA = document.getElementById('savings_goal_pa');
         var totalsavingsPercentage = document.getElementById("percentage");
-        var totalAnnualReturn = document.getElementById("total_annualReturn");
 
         savingsGoalPA.addEventListener("input", function() {
 
@@ -187,7 +365,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             var annualReturn = parseInt(savingsGoalPAValue);
 
             // Calculate annual return
-            var total_AR_amount = oldTotalFund * annualReturn / 100;
             var totalPercentage = total_AR_amount / oldTotalFund * 100;
 
             totalAnnualReturn.value = total_AR_amount;
@@ -358,7 +535,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;
-            // console.log('change', change);
         }
         else   {
             circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage

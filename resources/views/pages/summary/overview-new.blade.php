@@ -153,7 +153,7 @@
                                                                 //echo "$need : $overview_final_percentage";
                                                                 $counter++;
                                                             @endphp
-                                                            <linearGradient  id="gradient{{$counter}}" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
+                                                            <linearGradient  id="gradient_{{$need}}" cx="50%" cy="50%" r="10%" fx="50%" fy="50%">
                                                                 <stop offset="0%" stop-color="{{ $stopColor }}"/>
                                                                 <stop offset="100%" stop-color="{{ $stopColor }}"/>
                                                             </linearGradient>
@@ -192,7 +192,7 @@
                                                             L {{ 90 + $radius * cos(deg2rad($startAngle)) }}, {{ 90 + $radius * sin(deg2rad($startAngle)) }}
                                                             A {{ $radius }},{{ $radius }} 0 {{ $overview_final_percentage > 50 ? 1 : 0 }},0
                                                             {{ 90 + $radius * cos(deg2rad($endAngle)) }}, {{ 90 + $radius * sin(deg2rad($endAngle)) }}
-                                                            Z" fill="url(#gradient{{$counter}})"/>
+                                                            Z" fill="url(#gradient_{{$need}})"/>
                                                         @endforeach
                                                         <circle cx="90" cy="90" r="{{ $innerRadius }}" fill="#fff"/>
                                                     @endif
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pe-xl-5c">
+                        <div class="col-md-6 pe-xl-5 my-auto">
                             <div class="row justify-content-center">
                                 <div class="col-12">
                                     <table id="overview-needs" class="mx-auto">
@@ -262,7 +262,7 @@
                                                     <td>
                                                     {{
                                                     isset($health_medical_needs['critical_illness']) && isset($health_medical_needs['medical_planning'])
-                                                        ? floor(floatval($health_medical_planning_needs['fundPercentage']) + floatval($health_medical_critical_needs['fundPercentage']) / 2) 
+                                                        ? (floor(floatval($health_medical_planning_needs['fundPercentage']) + floatval($health_medical_critical_needs['fundPercentage'])) / 2) 
                                                         : (
                                                             isset($health_medical_needs['medical_planning'])
                                                             ? floor(floatval($health_medical_planning_needs['fundPercentage']))
@@ -317,7 +317,7 @@
                                                     </td>
                                                     <td>{{$protection_needs['coveragePerson']}}</td>
                                                     <td>{{$protection_needs['supportingYears']}} years</td>
-                                                    <td>RM{{$protection_needs['newTotalProtectionNeeded'] !== null || $protection_needs['newTotalProtectionNeeded'] !== '' ? number_format(floatval($protection_needs['newTotalProtectionNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$protection_needs['totalProtectionNeeded'] !== null || $protection_needs['totalProtectionNeeded'] !== '' ? number_format(floatval($protection_needs['totalProtectionNeeded'])) : '-'}}</td>
                                                     <td>RM{{$protection_needs['existingPolicyAmount'] !== null || $protection_needs['existingPolicyAmount'] !== '' ? number_format(floatval($protection_needs['existingPolicyAmount'])) : '-'}}</td>
                                                     <td>RM{{$protection_needs['totalAmountNeeded'] !== null || $protection_needs['totalAmountNeeded'] !== '' ? number_format(floatval($protection_needs['totalAmountNeeded'])) : '-'}}</td>
                                                 </tr>
@@ -329,7 +329,7 @@
                                                     </td>
                                                     <td>{{$retirement_needs['coveragePerson']}}</td>
                                                     <td>{{$retirement_needs['supportingYears']}} years</td>
-                                                    <td>RM{{$retirement_needs['newTotalRetirementNeeded'] !== null || $retirement_needs['newTotalRetirementNeeded'] !== '' ? number_format(floatval($retirement_needs['newTotalRetirementNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$retirement_needs['totalRetirementNeeded'] !== null || $retirement_needs['totalRetirementNeeded'] !== '' ? number_format(floatval($retirement_needs['totalRetirementNeeded'])) : '-'}}</td>
                                                     <td>RM{{$retirement_needs['retirementSavingsAmount'] !== null || $retirement_needs['retirementSavingsAmount'] !== '' ? number_format(floatval($retirement_needs['retirementSavingsAmount'])) : '-'}}</td>
                                                     <td>RM{{$retirement_needs['totalAmountNeeded'] !== null || $retirement_needs['totalAmountNeeded'] !== '' ? number_format(floatval($retirement_needs['totalAmountNeeded'])) : '-'}}</td>
                                                 </tr>
@@ -353,9 +353,9 @@
                                                     </td>
                                                     <td>{{$savings_needs['coveragePerson']}}</td>
                                                     <td>{{$savings_needs['investmentTimeFrame']}} years</td>
-                                                    <td>RM{{$savings_needs['newTotalSavingsNeeded'] !== null || $savings_needs['newTotalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['newTotalSavingsNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
                                                     <td>-</td>
-                                                    <td>RM{{$savings_needs['newTotalSavingsNeeded'] !== null || $savings_needs['newTotalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['newTotalSavingsNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($health_medical_planning_needs && $prioritiesHealthMedical === 'true')
@@ -364,7 +364,7 @@
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Planning
                                                     </td>
                                                     <td>{{$health_medical_planning_needs['coveragePerson']}}</td>
-                                                    <td>-</td>
+                                                    <td>{{$health_medical_planning_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_planning_needs['neededAmount'] !== null || $health_medical_planning_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_planning_needs['existingProtectionAmount'] !== null || $health_medical_planning_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['existingProtectionAmount'])) : '-'}}</td>
                                                     <td>RM{{$health_medical_planning_needs['totalAmountNeeded'] !== null || $health_medical_planning_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_planning_needs['totalAmountNeeded'])) : '-'}}</td>
@@ -376,7 +376,7 @@
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness
                                                     </td>
                                                     <td>{{$health_medical_critical_needs['coveragePerson']}}</td>
-                                                    <td>-</td>
+                                                    <td>{{$health_medical_critical_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_critical_needs['neededAmount'] !== null || $health_medical_critical_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_critical_needs['existingProtectionAmount'] !== null || $health_medical_critical_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['existingProtectionAmount'])) : '-'}}</td>
                                                     <td>RM{{$health_medical_critical_needs['totalAmountNeeded'] !== null || $health_medical_critical_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_critical_needs['totalAmountNeeded'])) : '-'}}</td>
@@ -389,9 +389,9 @@
                                                     </td>
                                                     <td>{{$investments_needs['coveragePerson']}}</td>
                                                     <td>{{$investments_needs['investmentTimeFrame']}} years</td>
-                                                    <td>RM{{$investments_needs['newTotalInvestmentNeeded'] !== null || $investments_needs['newTotalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['newTotalInvestmentNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
                                                     <td>-</td>
-                                                    <td>RM{{$investments_needs['newTotalInvestmentNeeded'] !== null || $investments_needs['newTotalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['newTotalInvestmentNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($debt_cancellation_needs && $prioritiesDebtCancellation === 'true')
