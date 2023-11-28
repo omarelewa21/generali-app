@@ -992,6 +992,13 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   background-color: #fff;
 }
 
+/* ============================== Education Home Page ============================== */
+#education_home .main-default-bg {
+  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.png);
+  background-size: auto 50%, auto 70%;
+  background-position: center top, center;
+}
+
 /* ============================== Existing Policy ============================== */
 fieldset legend {
   margin: auto;
@@ -1270,6 +1277,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
     background-position: center bottom 18%;
+  }
+  .fixed-sm-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding-top: 85.5px!important;
   }
 }
 

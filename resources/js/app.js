@@ -27,9 +27,10 @@ $(document).ready(function () {
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
     var retirement_home = $('#retirement_home');
+    var education_home = $('#education_home');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1) {
+    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }
