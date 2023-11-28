@@ -61,19 +61,26 @@ function navbar_scroll() {
 
 function footer_scroll() {
     var last_scroll_top = 0;
+    var footer = $('.footer-scroll');
+    var documentHeight = $(document).height();
+    var windowHeight = $(window).height();
 
     $(window).on('scroll', function() {
-        scroll_top = $(this).scrollTop(); // Update the global variable scroll_top
+        var scroll_top = $(this).scrollTop();
+        var scroll_bottom = scroll_top + windowHeight;
+
         if (scroll_top === 0) {
-            $('.footer-scroll').removeClass('scrolled-up');
+            footer.removeClass('scrolled-up');
+        } else if (scroll_bottom >= documentHeight) {
+            footer.addClass('scrolled-up').removeClass('scrolled-down');
         } else if (scroll_top > 50) {
-            if(scroll_top < last_scroll_top) {
-                $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+            if (scroll_top < last_scroll_top) {
+                footer.removeClass('scrolled-down').addClass('scrolled-up');
             } else {
-                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                footer.removeClass('scrolled-up').addClass('scrolled-down');
             }
         } else {
-            $('.footer-scroll').removeClass('scrolled-down');
+            footer.removeClass('scrolled-down scrolled-up');
         }
         last_scroll_top = scroll_top;
     });
