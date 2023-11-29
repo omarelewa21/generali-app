@@ -1312,6 +1312,9 @@ table {
     #savings-goals .display-5{
         font-size: 2.125rem !important;
     }
+    #savings-annual-return .content-needs-grey{
+        grid-auto-rows: 5vh 55vh;
+    }
 }
 @media screen and (min-width: 1250px) {
     #health-medical-selection .needs-stand-bg{
