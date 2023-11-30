@@ -53,7 +53,7 @@ class EducationController extends Controller
             'coveragePerson' => $educationSelectedAvatarInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session
@@ -203,7 +203,7 @@ class EducationController extends Controller
     //         ]);
     //     }
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated education_needs back to the customer_details session
     //     $customerDetails['education_needs'] = $education;
 
     //     // Store the updated customer_details array back into the session
@@ -243,7 +243,7 @@ class EducationController extends Controller
     //         'tertiaryEducationYear' => $tertiary_education_years
     //     ]);
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated education_needs back to the customer_details session
     //     $customerDetails['education_needs'] = $education;
 
     //     // Store the updated customer_details array back into the session
@@ -337,7 +337,7 @@ class EducationController extends Controller
             }
         }
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session
@@ -355,7 +355,7 @@ class EducationController extends Controller
         // Get existing education_needs from the session
         $education = $customerDetails['education_needs'] ?? [];
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session

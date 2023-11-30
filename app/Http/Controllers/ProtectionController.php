@@ -52,7 +52,7 @@ class ProtectionController extends Controller
             'coveragePerson' => $protectionSelectedAvatarInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated protection_needs back to the customer_details session
         $customerDetails['protection_needs'] = $protection;
 
         // Store the updated customer_details array back into the session
@@ -156,7 +156,7 @@ class ProtectionController extends Controller
     //     // Get the existing customer_details array from the session
     //     $customerDetails = $request->session()->get('customer_details', []);
 
-    //     // Get existing identity_details from the session
+    //     // Get existing protection_needs from the session
     //     $protection = $customerDetails['protection_needs'] ?? [];
 
     //     // Validation passed, perform any necessary processing.
@@ -225,7 +225,7 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
+        // Get existing protection_needs from the session
         $protection = $customerDetails['protection_needs'] ?? [];
 
         // Validation passed, perform any necessary processing.
@@ -289,7 +289,7 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
+        // Get existing protection_needs from the session
         $protection = $customerDetails['protection_needs'] ?? [];
 
         // Set the updated protection back to the customer_details session

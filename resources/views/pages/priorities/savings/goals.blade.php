@@ -30,7 +30,7 @@
                         <section class="content-avatar-default">
                             <div class="col-12 text-center position-relative">
                                 <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I Plan to have a saving goal of<br>
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_goals_amount" class="form-control display-5 fw-bold lh-base position-relative border-0 d-inline-block w-25 text-primary @error('savings_goals_amount') is-invalid @enderror" id="savings_goals_amount" value="{{ $goalsAmount !== null ? number_format(floatval($goalsAmount)) : $goalsAmount }}"></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_goals_amount" class="form-control display-5 fw-bold lh-base position-relative border-0 d-inline-block w-25 text-primary @error('savings_goals_amount') is-invalid @enderror" id="savings_goals_amount" value="{{ $goalsAmount !== null ? number_format(floatval($goalsAmount)) : $goalsAmount }}"></span> to:
                                 </h2>
                                 @if ($errors->has('savings_goals_amount'))
                                     <div class="invalid-feedback">{{ $errors->first('savings_goals_amount') }}</div>

@@ -447,13 +447,9 @@ button.choice:focus,
 }
 
 /* ===============================  Risk Profile =======================================*/
-#savings-risk-profile .content-block,
-#investment-risk-profile .content-block{
-    grid-template-areas:
-        "risk-header"
-        "risk-selection"
-        "risk-content";
-    grid-template-rows: 10% 20% 70%;
+#savings-risk-profile .content-needs-grey,
+#investment-risk-profile .content-needs-grey{
+    grid-template-rows: 5vh 60vh;
 }
 .risk-header{
     grid-area: risk-header;
@@ -471,9 +467,9 @@ button.choice:focus,
     display: grid;
 }
 .risk-btn{
-    /* background:rgba(238, 238, 238, 1); */
-    border:1px solid rgba(240, 240, 240, 1);
-    color:rgba(10, 4, 60, 0.50);
+    background:#fff;
+    border:1px solid #C0232C;
+    color:#C0232C;
     font-size: 22px;
     font-weight: 700;
     width: 301px;
@@ -483,7 +479,6 @@ button.choice:focus,
 .risk-btn[data-required="selected"],
 .risk-btn.selected{
     background: #C0232C;
-    border: 1px solid #A0A0A0;
     color: #fff;
 }
 .risk-potential-title{

@@ -176,7 +176,7 @@ class DebtCancellationController extends Controller
     //         'totalDebtCancellationFund' => $totalDebtFund
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -217,7 +217,7 @@ class DebtCancellationController extends Controller
     //         'remainingYearsOfSettlement' => $debt_settlement_years
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -310,7 +310,7 @@ class DebtCancellationController extends Controller
             }
         }
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
@@ -370,7 +370,7 @@ class DebtCancellationController extends Controller
             'criticalIllnessCoverageAmount' => $critical_coverage_amount
         ]);
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session

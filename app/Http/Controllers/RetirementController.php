@@ -53,7 +53,7 @@ class RetirementController extends Controller
             'coveragePerson' => $retirementSelectedAvatarInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -102,7 +102,7 @@ class RetirementController extends Controller
             'idealRetirement' => $retirementIdealInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -170,7 +170,7 @@ class RetirementController extends Controller
             ]);
         }
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session

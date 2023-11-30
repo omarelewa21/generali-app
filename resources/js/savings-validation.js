@@ -364,11 +364,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             var annualReturn = parseInt(savingsGoalPAValue);
 
-            // Calculate annual return
-            var totalPercentage = total_AR_amount / oldTotalFund * 100;
-
-            totalAnnualReturn.value = total_AR_amount;
-            $('.retirement-progress-bar').css('width', totalPercentage + '%');
+            if (!isNaN(annualReturn)) {
+                this.value = annualReturn;
+            }
+            else{
+                this.value = savingsGoalPAValue;
+            }
             
         });
     
@@ -387,15 +388,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 field.classList.remove("is-invalid");
             }
         }
-
-        if (sessionGoalPA !== '' || sessionGoalPA !== 0) {
-            var newTotal_AR_amount = oldTotalFund * sessionTotalAnnualReturn / 100;
-            var newTotalPercentage = newTotal_AR_amount / oldTotalFund * 100;
-            totalAnnualReturn.value = newTotal_AR_amount;
-            $('.retirement-progress-bar').css('width', newTotalPercentage + '%');
-        }
     }
-    else if (path == '/savings-risk-profile') {
+    else if (path == '/savings/risk-profile') {
 
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
@@ -424,6 +418,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Add 'selected' attribute to the clicked button
                 this.setAttribute('data-required', 'selected');
 
+                const selectedData = this.getAttribute('data-required');
+
                 dataButtons.forEach(btn => btn.classList.remove('selected'));
 
                 // Get the selected data-avatar value
@@ -433,8 +429,31 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 document.getElementById('savingsRiskProfileInput').value = dataAvatar;
 
                 const selectedPotential = document.getElementById('savingsPotentialReturnInput');
+
+                if(selectedData === 'selected'){
+                    switch(dataAvatar) {
+                        case 'High Risk':
+                            const selectedHighPR = highPotentialReturn.querySelector('#high-potential-return');
+                            selectedHighPR.setAttribute('data-required', 'selected');
+                            selectedPotential.value = 'High Potential Return';
+                            break;
+                        case 'Medium Risk':
+                            const selectedMediumPR = mediumPotentialReturn.querySelector('#medium-potential-return');
+                            selectedMediumPR.setAttribute('data-required', 'selected');
+                            selectedPotential.value = 'Medium Potential Return';
+                            break;
+                        case 'Low Risk':
+                            const selectedLowPR = lowPotentialReturn.querySelector('#low-potential-return');
+                            selectedLowPR.setAttribute('data-required', 'selected');
+                            selectedPotential.value = 'Low Potential Return';
+                            break;
+                        default:
+                            break;
+                      }
+                }
+                
                 // Check if the user selected a risk and remove the potential value if not
-                selectedPotential.value = '';
+                // selectedPotential.value = '';
             });
         });
 
@@ -524,9 +543,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             lowPotentialReturn.style.display = "block";
         }
     }
-    else if (path == '/savings-gap') {
+    else if (path == '/savings/gap') {
         var Uncovered = (100 - Covered).toFixed(2);
-        var Covered = (savingsAnnualReturn / newTotalSavingsNeeded * 100).toFixed(2);
+        var Covered = (savingsTotal / goals * 100).toFixed(2);
         var circle = document.getElementById("circle");
         var dotCircle = document.getElementById("dotCircle");
 

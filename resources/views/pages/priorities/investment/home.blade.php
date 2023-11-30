@@ -32,7 +32,7 @@
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center" style="height:70%">
                                 <div class="col-xl-6 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4">Now let's plan for your lump sum investments.</h2>
+                                    <h2 class="display-5 fw-bold lh-sm py-4">Now let's plan for your Lump Sum Investments.</h2>
                                 </div>
                             </div>
                         </div>

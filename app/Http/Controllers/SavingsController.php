@@ -54,7 +54,7 @@ class SavingsController extends Controller
             'coveragePerson' => $savingsSelectedAvatarInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated savings_needs back to the customer_details session
         $customerDetails['savings_needs'] = $savings;
 
         // Store the updated customer_details array back into the session
@@ -173,7 +173,7 @@ class SavingsController extends Controller
                 'goalsAmount' => $savings_goals_amount
             ]);
 
-            // Set the updated identity_details back to the customer_details session
+            // Set the updated savings_needs back to the customer_details session
             $customerDetails['savings_needs'] = $savings;
 
             // Store the updated customer_details array back into the session
@@ -191,7 +191,7 @@ class SavingsController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing protection_needs from the session
+        // Get existing savings_needs from the session
         $savings = $customerDetails['savings_needs'] ?? [];
 
         $customMessages = [
@@ -347,7 +347,7 @@ class SavingsController extends Controller
     //         ]);
     //     }
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated savings_needs back to the customer_details session
     //     $customerDetails['savings_needs'] = $savings;
 
     //     // Store the updated customer_details array back into the session
@@ -400,7 +400,7 @@ class SavingsController extends Controller
     //         ]);
     //     }
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated savings_needs back to the customer_details session
     //     $customerDetails['savings_needs'] = $savings;
 
     //     // Store the updated customer_details array back into the session
@@ -441,7 +441,7 @@ class SavingsController extends Controller
             'annualReturn' => $savings_goal_pa
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated savings_needs back to the customer_details session
         $customerDetails['savings_needs'] = $savings;
 
         // Store the updated customer_details array back into the session
@@ -525,7 +525,7 @@ class SavingsController extends Controller
             'potentialReturn' => $savingsPotentialReturnInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated savings_needs back to the customer_details session
         $customerDetails['savings_needs'] = $savings;
 
         // Store the updated customer_details array back into the session
@@ -546,7 +546,7 @@ class SavingsController extends Controller
         // Get existing savings_needs from the session
         $savings = $customerDetails['savings_needs'] ?? [];
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated savings_needs back to the customer_details session
         $customerDetails['savings_needs'] = $savings;
 
         // Store the updated customer_details array back into the session
