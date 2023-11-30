@@ -533,6 +533,9 @@ button.choice:focus,
 #education-existing-fund p{
     font-size: 20px;
 }
+#education-existing-fund .tertiary-default-bg{
+    
+}
 /* ========================== Education Others ========================*/
 .bg-education-others{
     background-image: url('/images/needs/education/background/bg-education-other.png');
