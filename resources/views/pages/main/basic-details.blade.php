@@ -20,10 +20,12 @@
 <div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner navbar-scroll">
-                @include('templates.nav.nav-white-menu')
-                <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                    <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top">
+                    @include('templates.nav.nav-white-menu')
+                    <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
+                        <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">

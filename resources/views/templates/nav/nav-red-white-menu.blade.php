@@ -9,12 +9,12 @@
 @include('templates.nav.nav-links-mobile')
 {{--end of nav links --}}
 
-<header id="wrapper-navbar" class="desktop navbar-scroll d-none d-xxl-block d-xl-block d-lg-block d-md-block">
+<header id="wrapper-navbar" class="desktop navbar-scroll d-none d-md-block">
     <nav class="navbar navbar-default transparent">
         <div class="container px-4 px-xl-5">
-            <div class="navbar-brand py-4 py-md-5">
+            <div class="navbar-brand py-3 py-md-5">
                 <img class="red-logo img-fluid" src="{{ asset('images/general/main-logo.png') }}" width="220" alt="Logo">
-                <div class="col-12 justify-content-start pt-0 pt-md-3">
+                <div class="col-12 justify-content-start pt-3">
                     <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
                         <img class="d-inline" src="{{ asset('images/general/menu-red-left-icon.png') }}" alt="Logo" width="32px" height="26px">
                     </a>
@@ -24,18 +24,16 @@
     </nav>
 </header>
 
-<header id="wrapper-navbar" class="mobile red fixed-top navbar-scroll d-block d-xxl-none d-xl-none d-lg-none d-md-none">
+<header id="wrapper-navbar" class="mobile red fixed-top navbar-scroll d-block d-md-none">
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
                 <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="172">
             </div>
             <div class="py-3 py-md-5">
-                <div class="col-12">
-                    <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">
-                        <img class="d-inline" src="{{ asset('images/general/menu-white-right-icon.png') }}" alt="Logo" width="32px" height="26px">
-                    </a>
-                </div>
+                <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">
+                    <img class="d-inline" src="{{ asset('images/general/menu-white-right-icon.png') }}" alt="Logo" width="32px" height="26px">
+                </a>
             </div>
         </div>
     </nav>
