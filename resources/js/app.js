@@ -19,6 +19,8 @@ import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
+// import ScrollMagic from 'scrollmagic';
+// import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
@@ -65,29 +67,49 @@ function navbar_scroll() {
 
 function footer_scroll() {
     var last_scroll_top = 0;
-    var footer = $('.footer-scroll');
-    var documentHeight = $(document).height();
-    var windowHeight = $(window).height();
+    var scroll_bottom = $(document).height() - $(window).height();
 
     $(window).on('scroll', function() {
         var scroll_top = $(this).scrollTop();
-        var scroll_bottom = scroll_top + windowHeight;
-
-        if (scroll_top === 0) {
-            footer.removeClass('scrolled-up');
-        } else if (scroll_bottom >= documentHeight) {
-            footer.addClass('scrolled-up').removeClass('scrolled-down');
-        } else if (scroll_top > 50) {
-            if (scroll_top < last_scroll_top) {
-                footer.removeClass('scrolled-down').addClass('scrolled-up');
+        console.log(scroll_bottom);
+        if (scroll_top > 50) {
+            if (scroll_top < last_scroll_top || scroll_top === scroll_bottom) {
+                $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
-                footer.removeClass('scrolled-up').addClass('scrolled-down');
+                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
             }
         } else {
-            footer.removeClass('scrolled-down scrolled-up');
+            $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
         }
         last_scroll_top = scroll_top;
     });
+
+    function hasParallaxSectionClass() {
+        return document.querySelector('.parallax-section') !== null;
+    }
+
+    if (hasParallaxSectionClass()) {
+        // Create an intersection observer
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // The observed element is now in view
+                $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+            } else {
+                // The observed element is not in view
+                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+            }
+            });
+        });
+        
+        // Define the target element to observe (replace '.target-element' with your specific element selector)
+        const targetElement = document.querySelector('.parallax-inner.parallax-top');
+
+        // Start observing the target element
+        observer.observe(targetElement);
+    }
 }
 
 $(document).ready(function () {

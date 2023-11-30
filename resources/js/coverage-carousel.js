@@ -37,7 +37,6 @@ else {
   }
 }
 
-
 // Call the initialization function when the DOM is ready
 $(function() { 
     initSlickCarousel();

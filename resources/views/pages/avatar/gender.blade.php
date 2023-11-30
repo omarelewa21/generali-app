@@ -81,7 +81,7 @@
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
+                                <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         @if(isset($firstName))
                                             <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you, {{ $firstName }}</h1>
@@ -91,7 +91,7 @@
                                         <p class="text-white display-6 lh-base text-center text-md-start">Please click to select your gender.</p>
                                     </div>
                                 </div>
-                                <div class="row px-4 pb-4 px-sm-5">
+                                <div class="row px-4 pb-4 px-md-5">
                                     @if ($errors->has('genderSelection'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">

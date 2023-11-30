@@ -1,5 +1,7 @@
 // Function to initialize Slick carousel
 $(document).ready(function() {
+    var viewportWidth = $(window).width();
+
     $('.coverage_slick').slick({
         dots: false,
         infinite: true,
@@ -42,6 +44,30 @@ $(document).ready(function() {
             // instead of a settings object
         ]
     });
+
+    if (viewportWidth <= 767) {
+        $('.action_button_slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            centerMode: true,
+            prevArrow:false,
+            nextArrow: false,
+            initialSlide: 1,
+            responsive: [
+                {
+                    breakpoint: 440,
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                }
+            ]
+        });
+    }
 });
 
 $('#hnm-selection').slick({
