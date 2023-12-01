@@ -71,7 +71,7 @@ function footer_scroll() {
 
     $(window).on('scroll', function() {
         var scroll_top = $(this).scrollTop();
-        console.log(scroll_bottom);
+
         if (scroll_top > 50) {
             if (scroll_top < last_scroll_top || scroll_top === scroll_bottom) {
                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
@@ -92,23 +92,38 @@ function footer_scroll() {
         // Create an intersection observer
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // The observed element is now in view
-                $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-                $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-            } else {
-                // The observed element is not in view
-                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-                $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-            }
+                if (entry.isIntersecting) {
+                    // The observed element is now in view
+                    $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                    $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                }
+                else {
+                    // The observed element is not in view
+                    $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                    $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                }
+            });
+        });
+
+        const bottomObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('visible');
+                    $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                }
+                else {
+                    console.log('not-visible');
+                    $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                }
             });
         });
         
-        // Define the target element to observe (replace '.target-element' with your specific element selector)
         const targetElement = document.querySelector('.parallax-inner.parallax-top');
+        const bottomElement = document.querySelector('.bottomObeserver');
 
         // Start observing the target element
         observer.observe(targetElement);
+        bottomObserver.observe(bottomElement);
     }
 }
 

@@ -21,8 +21,8 @@
 
 <div id="identity_details">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
@@ -30,7 +30,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('form.submit.identity') }}" method="POST" id="identityForm">
                         @csrf
@@ -185,21 +185,21 @@
                                             @endphp
                                             <label for="day" class="form-label text-white">Date of Birth * <span id="ageDiv">( <div id="age" class="d-inline-block"></div> )</span></label>
                                             <div class="row">
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], 0, 2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @else
                                                         {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @endif
                                                 </div>
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 3, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @else
                                                         {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @endif
                                                 </div>
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                             return substr($year, -4);
@@ -279,7 +279,7 @@
                                 </div>
                             </div>
                         </section>
-
+                        <div class="bottomObeserver"></div>
                         <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">

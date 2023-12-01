@@ -63,6 +63,7 @@ $(document).ready(function() {
                         centerMode: true,
                         slidesToShow: 1,
                         slidesToScroll: 1,
+                        initialSlide: 0,
                     }
                 }
             ]

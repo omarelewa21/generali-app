@@ -22,8 +22,8 @@
 
 <div id="avatar_gender_selection">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar order-md-1 order-sm-2 order-2">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
@@ -74,8 +74,10 @@
                         </svg>
                     </button>
                 </section>
+                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                     <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
@@ -102,7 +104,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2">
+                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2 px-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
@@ -112,7 +114,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2">
+                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2 px-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
@@ -125,7 +127,7 @@
                                 </div>
                             </div>
                         </section>
-
+                        
                         <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">

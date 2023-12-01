@@ -20,28 +20,29 @@
 
 <div id="avatar_my_assets">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-grey assets-overlay overflow-hidden px-0 order-md-1 order-sm-2 order-2">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-grey assets-overlay overflow-hidden px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
                     <img src="{{ asset($image) }}" width="auto" height="70%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
                 </section>
+                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                 <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
+                                <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">Right, let’s get an idea of your finances and loans.</h1>
-                                        <p class="text-white display-6">Click to add your assets next to your avatar.</p>
+                                        <p class="text-white display-6 lh-base">Click to add your assets next to your avatar.</p>
                                     </div>
                                 </div>
-                                <div class="row mx-4 pb-4 mx-sm-5 slider">
+                                <div class="row px-4 px-md-5">
                                     @if ($errors->has('assetsButtonInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
@@ -52,61 +53,63 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                </div>
+                                <div class="row px-4 px-md-5 action_button_slider">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['car']) && $assets['car'] === true) default @endif" data-avatar="car" data-required="" id="carButton">
-                                                    <img src="{{ asset('images/avatar-my-assets/car-icon-02.png') }}" width="auto" height="100px" alt="Car">
+                                                    <img src="{{ asset('images/assets/car-icon-02.png') }}" width="auto" height="100px" alt="Car" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Car</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['scooter']) && $assets['scooter'] === true) default @endif" data-avatar="motorcycle" data-required="" id="scooterButton">
-                                                    <img src="{{ asset('images/avatar-my-assets/motorcycle-icon.png') }}" width="auto" height="100px" alt="Motorcycle">
+                                                    <img src="{{ asset('images/assets/motorcycle-icon.png') }}" width="auto" height="100px" alt="Motorcycle" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Motorcycle</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['house']) && $assets['house'] === true) default @endif" data-avatar="house" data-required="" id="houseButton">
-                                                    <img src="{{ asset('images/avatar-my-assets/house-icon.png') }}" width="auto" height="100px" alt="House">
+                                                    <img src="{{ asset('images/assets/house-icon.png') }}" width="auto" height="100px" alt="House" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">House</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['bungalow']) && $assets['bungalow'] === true) default @endif" data-avatar="bungalow" data-required="" id="bungalowButton">
-                                                    <img src="{{ asset('images/avatar-my-assets/bungalow-icon.png') }}" width="auto" height="100px" alt="Bungalow">
+                                                    <img src="{{ asset('images/assets/bungalow-icon.png') }}" width="auto" height="100px" alt="Bungalow" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Bungalow</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['condo']) && $assets['condo'] === true) default @endif" data-avatar="apartment" data-required="" id="condoButton">
-                                                    <img src="{{ asset('images/avatar-my-assets/apartment-icon.png') }}" width="auto" height="100px" alt="Apartment">
+                                                    <img src="{{ asset('images/assets/apartment-icon.png') }}" width="auto" height="100px" alt="Apartment" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Apartment</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($assets['others']) && $assets['others'] === true) default @endif" data-avatar="othersAssets" data-required="" data-bs-toggle="modal" data-bs-target="#otherAssets">
-                                                    <img src="{{ asset('images/avatar-my-assets/others-icon.png') }}" width="auto" height="100px" alt="Others">
+                                                    <img src="{{ asset('images/assets/others-icon.png') }}" width="auto" height="100px" alt="Others" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                                 </button>
                                             </div>

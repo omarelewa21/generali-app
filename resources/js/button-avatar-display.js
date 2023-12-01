@@ -112,7 +112,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var carImages = [
             {
-                src: "/images/avatar-my-assets/car-vector.png",
+                src: "/images/assets/car-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "Car",
@@ -123,7 +123,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var scooterImages = [
             {
-                src: "/images/avatar-my-assets/scooter-vector.png",
+                src: "/images/assets/scooter-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "Scooter",
@@ -134,7 +134,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var houseImages = [
             {
-                src: "/images/avatar-my-assets/house-vector.png",
+                src: "/images/assets/house-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "House",
@@ -144,7 +144,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var bungalowImages = [
             {
-                src: "/images/avatar-my-assets/bungalow-vector.png",
+                src: "/images/assets/bungalow-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "Bungalow",
@@ -154,7 +154,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var condoImages = [
             {
-                src: "/images/avatar-my-assets/condo-vector.png",
+                src: "/images/assets/condo-vector.png",
                 width: "auto",
                 height: "100%",
                 alt: "Bungalow",

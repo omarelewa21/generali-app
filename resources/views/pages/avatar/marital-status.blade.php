@@ -21,7 +21,7 @@
 <div id="avatar_marital_status">
     <div class="container-fluid">
         <div class="row parallax-section">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom" id="parallax-bottom">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
@@ -29,8 +29,10 @@
                         <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>
+                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top" id="parallax-top">
+            
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                         @csrf
@@ -59,7 +61,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
                                             </div>
@@ -69,7 +71,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
                                             </div>
@@ -79,7 +81,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
                                             </div>
@@ -89,7 +91,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
                                             </div>
@@ -118,16 +120,7 @@
         </div>
     </div>
 </div>
-<style>
-.parallax-section {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
-.parallax-inner {
-  scroll-snap-align: start;
-}
-</style>
+
 <script>
     var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 </script>
