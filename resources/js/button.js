@@ -1,6 +1,6 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'gender',
+    'avatar',
     'marital-status'
 ];
 
@@ -12,7 +12,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (path == '/gender') {
+    if (path == '/avatar') {
         dataButtons.forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default behavior of the button click

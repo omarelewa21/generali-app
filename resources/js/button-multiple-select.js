@@ -2,7 +2,7 @@
 const specificPageURLs = [
     'family-dependant',
     'assets',
-    'top-priorities'
+    'financial-priorities'
 ];
 
 const currentURL = window.location.href;
@@ -27,10 +27,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
 
                 // For Spouse and Sibling(s) buttons, toggle the 'selected' class
-                // if (this.getAttribute('data-avatar') === 'spouse' || this.getAttribute('data-avatar') === 'siblings') {
-                //     this.setAttribute('data-required', 'selected');
-                //     this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
-                // }
+                if (this.getAttribute('data-avatar') === 'siblings') {
+                    this.setAttribute('data-required', 'selected');
+                    this.closest('.button-bg').classList.toggle('selected'); // Toggle the 'selected' class
+                }
             });
         });
 
@@ -111,7 +111,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
     }
-    else if (path == '/top-priorities') {
+    else if (path == '/financial-priorities') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 

@@ -4,22 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use libphonenumber\PhoneNumberType;
-use libphonenumber\PhoneNumberUtil;
-use Illuminate\Support\Facades\View;
-use libphonenumber\PhoneNumberFormat;
-use Illuminate\Support\Facades\Session;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use Illuminate\Support\Facades\Response;
-use libphonenumber\NumberParseException;
 use Illuminate\Support\Facades\Validator;
-use SebastianBergmann\Environment\Console;
-use App\Http\Requests\AvatarSelectionRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\NumberParseException;
+// use App\Http\Requests\AvatarSelectionRequest;
+// use Illuminate\Support\Facades\Response;
+// use SebastianBergmann\Environment\Console;
+// use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
+// use libphonenumber\PhoneNumberFormat;
+// use libphonenumber\PhoneNumberType;
 
-class FormController extends Controller
-{
+
+class FormController extends Controller {
     public function pdpa(Request $request)
     {
         // Validate CSRF token
@@ -36,13 +35,13 @@ class FormController extends Controller
 
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
-
+                        
             // Add or update the data value in the array
             $customerDetails['pdpa'] = $decision;
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -59,16 +58,19 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
-            // Fetch titles from the database
+            // Fetch from the database
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $full_number = $request->input('full_number');
             $full_number_house = $request->input('full_number_house');
 
             $validatedData = $request->validate([
-                'firstName' => 'required|max:30',
-                'lastName' => 'required|max:30',
+                'fullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
                 'title' => 'required|in:' . implode(',', $titles),
                 'mobileNumber' => 'required',
                 'email' => 'required|email:rfc,dns|max:255',
@@ -79,8 +81,6 @@ class FormController extends Controller
 
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
-
-                // dd($request->all(), $phoneNumberUtil, $parsedPhoneNumber);
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
                     // Invalid phone number
@@ -94,7 +94,7 @@ class FormController extends Controller
             if (!empty($full_number_house)) {
                 try {
                     $parsedPhoneNumberHouse = $phoneNumberUtil->parse($full_number_house, null);
-
+            
                     if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumberHouse)) {
                         // Invalid phone number
                         return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
@@ -111,8 +111,7 @@ class FormController extends Controller
             // Add the new array inside the customer_details array
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
-                'first_name' => $validatedData['firstName'],
-                'last_name' => $validatedData['lastName'],
+                'full_name' => $validatedData['fullName'],
                 'mobile_number' => $full_number,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
@@ -120,6 +119,7 @@ class FormController extends Controller
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
 
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.welcome');
@@ -138,9 +138,9 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
-            // Fetch titles from the database
+            // Fetch from the database
             $countries = DB::table('countries')->pluck('countries')->toArray();
             $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
             $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
@@ -217,7 +217,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -236,7 +236,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -255,7 +255,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -299,7 +299,7 @@ class FormController extends Controller
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status');
         } else {
@@ -317,14 +317,14 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
             // Define custom validation rule for button selection
             Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
                 if ($value !== null && $value === 'single' || $value === 'married' || $value === 'married' || $value === 'divorced' || $value === 'widowed') {
                     return true;
                 }
-
+                
                 $customMessage = "Please select at least one.";
                 $validator->errors()->add($attribute, $customMessage);
 
@@ -335,7 +335,7 @@ class FormController extends Controller
 
                 $decodedValue = json_decode($value, true);
 
-                if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true)) {
+                if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true) || (isset($decodedValue['siblings']) && $decodedValue['siblings'] === true)) {
                     return true;
                 }
 
@@ -344,7 +344,7 @@ class FormController extends Controller
                 $validator->errors()->add($attribute, $customMessage);
 
                 return false;
-            });
+            });    
 
             $validator = Validator::make($request->all(), [
                 'maritalStatusButtonInput' => [
@@ -378,15 +378,17 @@ class FormController extends Controller
 
                 if (isset($customerDetails['identity_details'])) {
                     $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
-                } else {
+                }
+                else {
                     $customerDetails['identity_details'] = $newData;
                 }
-
+                
                 if ($maritalStatusButtonInput === 'single') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
                     $customerDetails['family_details']['dependant']['children'] = false;
                     unset($customerDetails['family_details']['dependant']['spouse_data']);
                     unset($customerDetails['family_details']['dependant']['children_data']);
+
                 } else if ($maritalStatusButtonInput === 'married') {
                     $customerDetails['family_details']['dependant']['spouse'] = true;
                     if (!isset($customerDetails['family_details']['dependant']['spouse_data'])) {
@@ -394,21 +396,24 @@ class FormController extends Controller
                             'relation' => 'Spouse'
                         ];
                     }
+                    
                 } else if ($maritalStatusButtonInput === 'divorced' || $maritalStatusButtonInput === 'widowed') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
                     unset($customerDetails['family_details']['dependant']['spouse_data']);
                 }
-            } elseif ($familyDependantButtonInput) {
+            }
+            elseif ($familyDependantButtonInput) {
                 $customerDetails['family_details'] = [
                     'dependant' => $familyDependantButtonInput
                 ];
-            } elseif ($assetsButtonInput) {
+            }
+            elseif ($assetsButtonInput) {
                 $customerDetails['assets'] = $assetsButtonInput;
             }
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Store the updated array back into the session
             return redirect()->route($dataUrl);
         } else {
@@ -426,9 +431,9 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
-            // Fetch spouseMaritalStatus from the database
+            // Fetch from the database
             $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $countries = DB::table('countries')->pluck('countries')->toArray();
@@ -436,19 +441,26 @@ class FormController extends Controller
             $occupation = DB::table('occupations')->pluck('name')->toArray();
 
             // Get the existing customer_details array from the session
-            $customerDetails = $request->session()->get('customer_details', []);
+            $customerDetails = $request->session()->get('customer_details', []); 
 
             $customMessages = [
                 'month.required' => 'The date of birth field is required.',
                 'day.required' => 'The date of birth field is required.',
                 'year.required' => 'The date of birth field is required.',
+                'siblingmonth.required' => 'The date of birth field is required.',
+                'siblingday.required' => 'The date of birth field is required.',
+                'siblingyear.required' => 'The date of birth field is required.',
             ];
 
             // Define the common validation rules for spouse
             $commonRules = [
                 'spouseTitle' => 'required|in:' . implode(',', $titles),
-                'spouseFirstName' => 'required|max:30',
-                'spouseLastName' => 'required|max:30',
+                'spouseFullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
+                // 'spouseLastName' => 'required|max:30',
                 'spouseCountry' => 'required|in:' . implode(',', $countries),
                 'spouseIdType' => 'required|in:' . implode(',', $idtypes),
                 'spouseIdNumber' => [
@@ -497,7 +509,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -516,7 +528,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -535,7 +547,7 @@ class FormController extends Controller
                         $month = $request->input('month');
                         $day = $request->input('day');
 
-                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $selectedDate = $year .'-'. $month .'-'. $day;
                         $currentDate = now()->toDateString();
 
                         if ($selectedDate > $currentDate) {
@@ -554,23 +566,84 @@ class FormController extends Controller
                 'spouseOccupation' => 'required|in:' . implode(',', $occupation),
             ];
 
+            $commonRulesSiblings = [
+                'siblingFullName' => [
+                    'required',
+                    'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                    'max:100',
+                ],
+                // 'siblingLastName' => 'required|max:30',
+                'siblingday' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingmonth' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingyear' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $year = $request->input('siblingyear');
+                        $month = $request->input('siblingmonth');
+                        $day = $request->input('siblingday');
+        
+                        $selectedDate = $year . '-' . $month . '-' . $day;
+                        $currentDate = now()->toDateString();
+        
+                        if ($selectedDate > $currentDate) {
+                            $fail('The selected date cannot be in the future.');
+                        }
+                    },
+                ],
+                'siblingGender' => 'required|in:male,female',
+                'siblingYearsOfSupport' => 'required|numeric|max:100',
+                'siblingMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
+            ];
+
             $customMessagesChild = [];
             $customMessagesParents = [];
 
             if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
 
-                    $customMessagesChild[$childKey . 'FirstName.required'] = 'The child first name field is required.';
-                    $customMessagesChild[$childKey . 'LastName.required'] = 'The child last name field is required.';
-                    $customMessagesChild[$childKey . 'Gender.required'] = 'The child gender field is required.';
-                    $customMessagesChild[$childKey . 'day.required'] = 'The child date of birth field is required.';
-                    $customMessagesChild[$childKey . 'month.required'] = 'The child date of birth field is required.';
-                    $customMessagesChild[$childKey . 'year.required'] = 'The child date of birth field is required.';
-                    $customMessagesChild[$childKey . 'YearsOfSupport.required'] = 'The child years of support field is required.';
-                    $customMessagesChild[$childKey . 'MaritalStatus.required'] = 'The child marital status field is required.';
-
-                    $commonRulesChild[$childKey . 'FirstName'] = 'required|max:30';
-                    $commonRulesChild[$childKey . 'LastName'] = 'required|max:30';
+                    $customMessagesChild[$childKey .'FullName.required'] = 'The child full name field is required.';
+                    // $customMessagesChild[$childKey .'LastName.required'] = 'The child last name field is required.';
+                    $customMessagesChild[$childKey .'Gender.required'] = 'The child gender field is required.';
+                    $customMessagesChild[$childKey .'day.required'] = 'The child date of birth field is required.';
+                    $customMessagesChild[$childKey .'month.required'] = 'The child date of birth field is required.';
+                    $customMessagesChild[$childKey .'year.required'] = 'The child date of birth field is required.';
+                    $customMessagesChild[$childKey .'YearsOfSupport.required'] = 'The child years of support field is required.';
+                    $customMessagesChild[$childKey .'MaritalStatus.required'] = 'The child marital status field is required.';
+                    
+                    $commonRulesChild[$childKey . 'FullName'] = [
+                        'required',
+                        'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                        'max:100',
+                    ];
+                    // $commonRulesChild[$childKey . 'LastName'] = 'required|max:30';
                     $commonRulesChild[$childKey . 'Gender'] = 'required|in:male,female';
                     $commonRulesChild[$childKey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesChild[$childKey . 'day'] = [
@@ -579,10 +652,10 @@ class FormController extends Controller
                             $year = $request->input($childKey . 'year');
                             $month = $request->input($childKey . 'month');
                             $day = $request->input($childKey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -594,10 +667,10 @@ class FormController extends Controller
                             $year = $request->input($childKey . 'year');
                             $month = $request->input($childKey . 'month');
                             $day = $request->input($childKey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -609,10 +682,10 @@ class FormController extends Controller
                             $year = $request->input($childKey . 'year');
                             $month = $request->input($childKey . 'month');
                             $day = $request->input($childKey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -625,17 +698,21 @@ class FormController extends Controller
             if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
 
-                    $customMessagesParents[$parentkey . 'FirstName.required'] = 'The parent first name field is required.';
-                    $customMessagesParents[$parentkey . 'LastName.required'] = 'The parent last name field is required.';
-                    $customMessagesParents[$parentkey . 'Gender.required'] = 'The parent gender field is required.';
-                    $customMessagesParents[$parentkey . 'day.required'] = 'The parent date of birth field is required.';
-                    $customMessagesParents[$parentkey . 'month.required'] = 'The parent date of birth field is required.';
-                    $customMessagesParents[$parentkey . 'year.required'] = 'The parent date of birth field is required.';
-                    $customMessagesParents[$parentkey . 'YearsOfSupport.required'] = 'The parent years of support field is required.';
-                    $customMessagesParents[$parentkey . 'MaritalStatus.required'] = 'The parent marital status field is required.';
+                    $customMessagesParents[$parentkey .'FullName.required'] = 'The parent full name field is required.';
+                    // $customMessagesParents[$parentkey .'LastName.required'] = 'The parent last name field is required.';
+                    $customMessagesParents[$parentkey .'Gender.required'] = 'The parent gender field is required.';
+                    $customMessagesParents[$parentkey .'day.required'] = 'The parent date of birth field is required.';
+                    $customMessagesParents[$parentkey .'month.required'] = 'The parent date of birth field is required.';
+                    $customMessagesParents[$parentkey .'year.required'] = 'The parent date of birth field is required.';
+                    $customMessagesParents[$parentkey .'YearsOfSupport.required'] = 'The parent years of support field is required.';
+                    $customMessagesParents[$parentkey .'MaritalStatus.required'] = 'The parent marital status field is required.';
 
-                    $commonRulesParents[$parentkey . 'FirstName'] = 'required|max:30';
-                    $commonRulesParents[$parentkey . 'LastName'] = 'required|max:30';
+                    $commonRulesParents[$parentkey . 'FullName'] = [
+                        'required',
+                        'regex:/^[A-Za-z,\s\/]{1,100}$/',
+                        'max:100',
+                    ];
+                    // $commonRulesParents[$parentkey . 'LastName'] = 'required|max:30';
                     $commonRulesParents[$parentkey . 'Gender'] = 'required|in:male,female';
                     $commonRulesParents[$parentkey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesParents[$parentkey . 'day'] = [
@@ -644,10 +721,10 @@ class FormController extends Controller
                             $year = $request->input($parentkey . 'year');
                             $month = $request->input($parentkey . 'month');
                             $day = $request->input($parentkey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -659,10 +736,10 @@ class FormController extends Controller
                             $year = $request->input($parentkey . 'year');
                             $month = $request->input($parentkey . 'month');
                             $day = $request->input($parentkey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -674,10 +751,10 @@ class FormController extends Controller
                             $year = $request->input($parentkey . 'year');
                             $month = $request->input($parentkey . 'month');
                             $day = $request->input($parentkey . 'day');
-
+            
                             $selectedDate = $year . '-' . $month . '-' . $day;
                             $currentDate = now()->toDateString();
-
+            
                             if ($selectedDate > $currentDate) {
                                 $fail('The selected date cannot be in the future.');
                             }
@@ -687,7 +764,7 @@ class FormController extends Controller
                 }
             }
 
-            if (isset($customerDetails['family_details']['dependant']['spouse']) && $customerDetails['family_details']['dependant']['spouse'] === true) {
+            if (isset ($customerDetails['family_details']['dependant']['spouse']) && $customerDetails['family_details']['dependant']['spouse'] === true) {
                 $validatedData = $request->validate($commonRules, $customMessages);
 
                 $day = $request->input('day');
@@ -700,8 +777,8 @@ class FormController extends Controller
 
                 $newData = [
                     'title' => $validatedData['spouseTitle'],
-                    'first_name' => $validatedData['spouseFirstName'],
-                    'last_name' => $validatedData['spouseLastName'],
+                    'full_name' => $validatedData['spouseFullName'],
+                    // 'last_name' => $validatedData['spouseLastName'],
                     'country' => $validatedData['spouseCountry'],
                     'id_type' => $validatedData['spouseIdType'],
                     'id_number' => $validatedData['spouseIdNumber'],
@@ -717,21 +794,21 @@ class FormController extends Controller
                 $customerDetails['family_details']['dependant']['spouse_data'] = array_merge($customerDetails['family_details']['dependant']['spouse_data'], $newData);
             }
 
-            if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
+            if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
                     $validatedData = $request->validate($commonRulesChild, $customMessagesChild);
 
-                    $day = $request->input($childKey . 'day');
-                    $month = $request->input($childKey . 'month');
-                    $year = $request->input($childKey . 'year');
+                    $day = $request->input($childKey .'day');
+                    $month = $request->input($childKey .'month');
+                    $year = $request->input($childKey .'year');
 
                     if ($day !== NULL && $day !== '') {
                         $dob = $day . '-' . $month . '-' . $year;
                     }
 
                     $childData = [
-                        'first_name' => $validatedData[$childKey . 'FirstName'],
-                        'last_name' => $validatedData[$childKey . 'LastName'],
+                        'full_name' => $validatedData[$childKey . 'FullName'],
+                        // 'last_name' => $validatedData[$childKey . 'LastName'],
                         'gender' => $validatedData[$childKey . 'Gender'],
                         'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
                         'dob' => $dob,
@@ -745,17 +822,17 @@ class FormController extends Controller
                 foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
                     $validatedData = $request->validate($commonRulesParents, $customMessagesParents);
 
-                    $day = $request->input($parentkey . 'day');
-                    $month = $request->input($parentkey . 'month');
-                    $year = $request->input($parentkey . 'year');
+                    $day = $request->input($parentkey .'day');
+                    $month = $request->input($parentkey .'month');
+                    $year = $request->input($parentkey .'year');
 
                     if ($day !== NULL && $day !== '') {
                         $dob = $day . '-' . $month . '-' . $year;
                     }
 
                     $parentsData = [
-                        'first_name' => $validatedData[$parentkey . 'FirstName'],
-                        'last_name' => $validatedData[$parentkey . 'LastName'],
+                        'full_name' => $validatedData[$parentkey . 'FullName'],
+                        // 'last_name' => $validatedData[$parentkey . 'LastName'],
                         'gender' => $validatedData[$parentkey . 'Gender'],
                         'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
                         'dob' => $dob,
@@ -765,9 +842,31 @@ class FormController extends Controller
                 }
             }
 
+            if (isset ($customerDetails['family_details']['dependant']['siblings']) && $customerDetails['family_details']['dependant']['siblings'] === true) {
+                $validatedData = $request->validate($commonRulesSiblings, $customMessages);
+
+                $day = $request->input('siblingday');
+                $month = $request->input('siblingmonth');
+                $year = $request->input('siblingyear');
+
+                if ($day !== NULL && $day !== '') {
+                    $dob = $day . '-' . $month . '-' . $year;
+                }
+
+                $siblingData = [
+                    'full_name' => $validatedData['siblingFullName'],
+                    // 'last_name' => $validatedData['siblingLastName'],
+                    'gender' => $validatedData['siblingGender'],
+                    'dob' => $dob,
+                    'years_support' => $validatedData['siblingYearsOfSupport'],
+                    'marital_status' => $validatedData['siblingMaritalStatus']
+                ];
+                $customerDetails['family_details']['dependant']['siblings_data'] = array_merge($customerDetails['family_details']['dependant']['siblings_data'], $siblingData);
+            }
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.my.assets');
         } else {
@@ -785,7 +884,7 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
             Validator::extend('at_least_one_selected', function ($attribute, $value, $fail, $validator) {
 
@@ -803,7 +902,7 @@ class FormController extends Controller
                 $validator->errors()->add($attribute, $customMessage);
 
                 return false;
-            });
+            });    
 
             $validator = Validator::make($request->all(), [
                 'topPrioritiesButtonInput' => [
@@ -817,8 +916,8 @@ class FormController extends Controller
 
             $topPrioritiesSerialized = $request->input('topPrioritiesButtonInput');
             $topPrioritiesButtonInput = json_decode($topPrioritiesSerialized, true);
-
-            $topPrioritiesButtonInput = array_filter($topPrioritiesButtonInput, function ($value) {
+            
+            $topPrioritiesButtonInput = array_filter($topPrioritiesButtonInput, function($value) {
                 return $value !== null;
             });
             $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
@@ -830,7 +929,7 @@ class FormController extends Controller
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('priorities.to.discuss');
         } else {
@@ -848,19 +947,19 @@ class FormController extends Controller
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-
+        
         if ($validToken) {
             $checkboxValues = $request->all();
 
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
-
+            
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -879,18 +978,180 @@ class FormController extends Controller
         }
 
         if ($validToken) {
-            // $decision = $request->input('decision');
+            $companies = DB::table('companies')->pluck('companies')->toArray();
+            $plans = DB::table('policy_plans')->pluck('policy_plans')->toArray();
+            $mode = DB::table('premium_modes')->pluck('Modes')->toArray();
 
-            // // Get the existing array from the session
-            // $customerDetails = $request->session()->get('customer_details', []);
+            $policy = $request->input('policy');
+            $policy2 = $request->input('policy2');
+            $policy3 = $request->input('policy3');
+            $policy4 = $request->input('policy4');
 
-            // // Add or update the data value in the array
-            // $customerDetails['pdpa'] = $decision;
+            // Get the existing customer_details array from the session
+            $customerDetails = $request->session()->get('customer_details', []);
 
-            // // Store the updated array back into the session
-            // $request->session()->put('customer_details', $customerDetails);
+            $validatedData = $request->validate([
+                'policyRole' => 'required',
+                'policyFirstName' => 'required',
+                'policyLastName' => 'required',
+                'company' => 'required|in:' . implode(',', $companies),
+                'companyOthers' => [
+                    'nullable',
+                    Rule::requiredIf(function () use ($request) {
+                        return $request->input('company') === 'Others';
+                    })
+                ],
+                'inceptionYear' => [
+                    'required',
+                    'regex:/^(19\d{2}|20\d{2})$/',
+                    function ($attribute, $value, $fail) {
+                        $currentYear = date('Y');
+                        if (intval($value) < 1900 || intval($value) > $currentYear) {
+                            $fail('The year must be a valid year between 1900 and '.$currentYear.'.');
+                        }
+                    },
+                ],
+                'policyPlan' => 'required|in:' . implode(',', $plans),
+                'maturityYear' => [
+                    'required',
+                    'regex:/^(19\d{2}|20\d{2})$/',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $dob = $request->session()->get('customer_details.identity_details.dob', []);
+                        $dobYear = substr($dob, -4);
+                        $currentYear = date('Y');
+                        $customerAge = $currentYear - $dobYear;
+                        $maturityYear = 100 - $customerAge;
+                        $allowedYear = $currentYear + $maturityYear;
 
-            // return response()->json(['message' => 'Button click saved successfully']);
+                        if (intval($value) < $currentYear || intval($value) > $allowedYear) {
+                            $fail('The year must be a valid year between '.$currentYear.' and '.$allowedYear.'.');
+                        }
+                    },
+                ],
+                'premiumMode' => 'required|in:' . implode(',', $mode),
+                'premiumContribution' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'lifeCoverage' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'criticalIllness' => [
+                    'required',
+                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                ],
+                'policyFirstName2'=> 'nullable',
+                'policyFirstName3'=> 'nullable',
+            ]);
+
+            // $validatedData = $request->validate([
+            //     'policyRole' => 'required',
+            //     'policyFirstName' => 'required',
+            //     'policyLastName' => 'required',
+            //     'policyRole2' => 'nullable',
+            //     'policyFirstName2' => 'nullable',
+            //     'policyLastName2' => 'nullable',
+            //     // 'company2' => 'required|in:' . implode(',', $companies),
+            //     // 'companyOthers2' => [
+            //     //     'nullable',
+            //     //     Rule::requiredIf(function () use ($request) {
+            //     //         return $request->input('company2') === 'Others';
+            //     //     })
+            //     // ],
+            //     // 'inceptionYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) {
+            //     //         $currentYear = date('Y');
+            //     //         if (intval($value) < 1900 || intval($value) > $currentYear) {
+            //     //             $fail('The year must be a valid year between 1900 and '.$currentYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'policyPlan2' => 'required|in:' . implode(',', $plans),
+            //     // 'maturityYear2' => [
+            //     //     'required',
+            //     //     'regex:/^(19\d{2}|20\d{2})$/',
+            //     //     function ($attribute, $value, $fail) use ($request) {
+            //     //         $dob = $request->session()->get('customer_details.identity_details.dob', []);
+            //     //         $dobYear = substr($dob, -4);
+            //     //         $currentYear = date('Y');
+            //     //         $customerAge = $currentYear - $dobYear;
+            //     //         $maturityYear = 100 - $customerAge;
+            //     //         $allowedYear = $currentYear + $maturityYear;
+
+            //     //         if (intval($value) < $currentYear || intval($value) > $allowedYear) {
+            //     //             $fail('The year must be a valid year between '.$currentYear.' and '.$allowedYear.'.');
+            //     //         }
+            //     //     },
+            //     // ],
+            //     // 'premiumMode2' => 'required|in:' . implode(',', $mode),
+            //     // 'premiumContribution2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'lifeCoverage2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            //     // 'criticalIllness2' => [
+            //     //     'required',
+            //     //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+            //     // ],
+            // ]);
+
+            // Add the new array inside the customer_details array
+            if ($policy) {
+                $customerDetails['existing_policy']['policy_1'] = [
+                    'role' => $validatedData['policyRole'],
+                    'first_name' => $validatedData['policyFirstName'],
+                    'last_name' => $validatedData['policyLastName'],
+                    'company' => $validatedData['company'],
+                    'company_others' => $validatedData['companyOthers'],
+                    'inception_year' => $validatedData['inceptionYear'],
+                    'policy_plan' => $validatedData['policyPlan'],
+                    'maturity_Year' => $validatedData['maturityYear'],
+                    'premium_mode' => $validatedData['premiumMode'],
+                    'premium_contribution' => $validatedData['premiumContribution'],
+                    'life_coverage' => $validatedData['lifeCoverage'],
+                    'critical_illness' => $validatedData['criticalIllness']
+                ];
+            }
+            
+            if ($policy2) {
+                $customerDetails['existing_policy']['policy_2'] = [
+                    // 'role' => $validatedData['policyRole2'],
+                    // 'first_name' => $validatedData['policyFirstName2'],
+                    // 'last_name' => $validatedData['policyLastName2'],
+                    // 'company' => $validatedData['company2'],
+                    // 'company_others' => $validatedData['companyOthers2'],
+                    // 'inception_year' => $validatedData['inceptionYear2'],
+                    // 'policy_plan' => $validatedData['policyPlan2'],
+                    // 'maturity_Year' => $validatedData['maturityYear2'],
+                    // 'premium_mode' => $validatedData['premiumMode2'],
+                    // 'premium_contribution' => $validatedData['premiumContribution2'],
+                    // 'life_coverage' => $validatedData['lifeCoverage2'],
+                    // 'critical_illness' => $validatedData['criticalIllness2']
+                ];
+            }
+
+            if ($policy3) {
+                $customerDetails['existing_policy']['policy_3'] = [
+                    'name' => $validatedData['policyFirstName3']
+                ];
+            }
+
+            if ($policy4) {
+                $customerDetails['existing_policy']['policy_4'] = [
+                    'name' => $validatedData['policyFirstName4']
+                ];
+            }
+
+            // Store the updated customer_details array back into the session
+            $request->session()->put('customer_details', $customerDetails);
+            Log::debug($customerDetails);
+            return redirect()->route('summary.monthly-goals');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

@@ -15,42 +15,39 @@
 <div id="pdpa">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-xxl-3 bg-primary sidebanner navbar-scroll">
-                @include('templates.nav.nav-white')
-                <div class="text-white px-4 px-xl-5 py-3 py-md-5">
-                    <h2 class="display-5 fw-bold">To begin, may we have permission to share or use your personal details?</h2>
+            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top">
+                    @include('templates.nav.nav-white')
+                    <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
+                        <h2 class="display-5 fw-bold py-3">To begin, may we have permission to share or use your personal details?</h2>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-xxl-9 bg-accent-bg-grey px-0 content-section">
-                <div>
-                    <section class="main-content">
-                        <div class="container">
-                            <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
-                                <div class="col-12">
-                                    <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT / KENYATAAN PERLINDUNGAN DATA</h1>
-                                </div>
-                            </div>
-                            <div class="row px-4">
-                                <div class="col-12">
-                                    <p>Your privacy is important to us. The Company is committed to ensure that your personal data under our care is safe and secured. We will ensure that your information collected via this application and any other information that you may provide to the Company is used for the purposes of purchasing an insurance policy including but not limited to underwriting and administering your plan; processing service request; processing claims; complying with all applicable laws; conducting due diligence; performing our functions as an insurance company and such other purposes referred to in our Personal Data Policy. For further details on how we collect, process, share and retain your personal data, please refer to our website at <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
-
-                                    <p>Privasi anda adalah penting bagi kami. Syarikat adalah komited untuk memastikan bahawa data peribadi anda di bawah jagaan kami adalah selamat dan terjamin. Kami akan memastikan maklumat anda yang dikumpulkan melalui permohonan ini dan apa-apa maklumat lain yang anda kemukakan untuk Syarikat digunakan untuk tujuan-tujuan membeli polisi insurans termasuk tetapi tidak terhad kepada pengunderaitan dan mentadbir pelan anda; permintaan perkhidmatan pemprosesan; pemprosesan tuntutan; mematuhi semua undang-undang; menjalankan usaha wajar; melaksanakan tugas kami sebagai sebuah syarikat insurans dan apa-apa maksud lain yang disebut dalam Dasar Data Peribadi kami. Untuk maklumat lanjut mengenai bagaimana kami mengumpul, memproses, berkongsi dan menyimpan data peribadi anda, sila rujuk kepada laman web kami di <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
-                                </div>
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
+                <section class="main-content">
+                    <div class="container">
+                        <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                            <div class="col-12">
+                                <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT</h1>
                             </div>
                         </div>
-                    </section>
-
-                    <section class="footer bg-white py-4 fixed-bottom footer-scroll">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
-                                    <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
-                                </div>
+                        <div class="row px-4">
+                            <div class="col-12">
+                                <p>Your privacy is important to us. The Company is committed to ensure that your personal data under our care is safe and secured. We will ensure that your information collected via this application and any other information that you may provide to the Company is used for the purposes of purchasing an insurance policy including but not limited to underwriting and administering your plan; processing service request; processing claims; complying with all applicable laws; conducting due diligence; performing our functions as an insurance company and such other purposes referred to in our Personal Data Policy. For further details on how we collect, process, share and retain your personal data, please refer to our website at <a href="https://www.generali.com.my/" target="_blank">www.generali.com.my</a></p>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
+                <section class="footer bg-white py-4 fixed-bottom footer-scroll">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
+                                <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -71,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function pdpa(decision, route) {
         $.ajax({
             type: "POST",
-            url: "{{ route('save.button.click') }}",
+            url: "{{ route('pdpa.disclosure') }}",
             data: { decision: decision, route: route },
             headers: {
                 'X-CSRF-TOKEN': csrfToken

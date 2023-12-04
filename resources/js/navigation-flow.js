@@ -1,50 +1,93 @@
 // Left Offcanvas Navigation
-$(document).ready(function () {
-    // Get the current URL path
-    var currentPath = window.location.pathname;
+// Array of specific page URLs where the script should run
+const specificPageURLs = [
+    '/',
+    '/pdpa-disclosure'
+];
 
-    // Define an array of step paths that should be marked as active with /gender
-    var myAvatar = ['/basic-details', '/gender'];
-    var myDetails = ['/basic-details', '/gender' , '/identity-details'];
-    var myFamily = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant'];
-    var myAssets = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets'];
-    var myPriorities = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities'];
-    var existingPolicies = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities' , 'existing-policies'];
-    var summary = ['/basic-details', '/gender' , '/identity-details' , '/family-dependant' , '/assets' , '/top-priorities' , 'existing-policies' , 'summary'];
+const currentURL = window.location.href;
 
-    // Find all the timeline items and iterate through them
-    $('.timeline-item').each(function (index) {
-        // Get the URL of the timeline item
-        var itemURL = $(this).find('a').attr('href');
+if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
+    var siteurl = window.location.href;
+    const url = new URL(siteurl);
+    const currentPath = url.pathname;
 
-        // Create a URL object to parse the full URL
-        var urlObject = new URL(itemURL);
+    $(document).ready(function () {
 
-        // Get only the path from the URL object
-        var itemPath = urlObject.pathname;
+        // Define an array of step paths that should be marked as active
+        let allFieldsFilled = [];
 
-        // Check if the current page is /welcome and if the item is in the genderSteps array
-        if (currentPath === '/welcome' && myAvatar.includes(itemPath)) {
-            $(this).addClass('active');
+        $.ajax({
+            url: '/getSessionData',
+            method: 'GET',
+            success: function(response) {
+                var customer_details = response.customer_details;
+                sessionDetails(customer_details);
 
-        } else if(currentPath === '/marital-status' && myDetails.includes(itemPath)) {
-            $(this).addClass('active');
+                $('.timeline-item').each(function (index) {
+                    var itemURL = $(this).find('a').attr('href');
+                    var urlObject = new URL(itemURL);
+                    var itemPath = urlObject.pathname;
 
-        } else if(currentPath === '/family-dependant-details' && myFamily.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if(currentPath === '/priorities-to-discuss' && myPriorities.includes(itemPath)) {
-            $(this).addClass('active');
-
-        } else if (itemPath === currentPath) {
-            $(this).addClass('active');
-
-            // Also mark all previous steps as active
-            for (var i = 0; i < index; i++) {
-                $('.timeline-item:eq(' + i + ')').addClass('active');
+                    if (allFieldsFilled.includes(itemPath)) {
+                        $(this).addClass('active');
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
             }
-        }  else if (currentPath !== '/welcome'&& currentPath !== '/marital-status' && currentPath !== '/family-dependant-details' && currentPath !== '/priorities-to-discuss' && !myPriorities.includes(currentPath) && myPriorities.includes(itemPath)) {
-            $(this).addClass('active');
+        });
+
+        function sessionDetails(customer_details) {
+            
+            if (customer_details.basic_details) {
+                allFieldsFilled.push('/basic-details');
+            }
+            
+            if (customer_details.avatar) {
+                allFieldsFilled.push('/avatar');
+            }
+
+            if (customer_details.identity_details) {
+                var filled = false;
+            
+                for (var key in customer_details.identity_details) {
+                    if (customer_details.identity_details.hasOwnProperty(key) && key !== 'marital_status' && (customer_details.identity_details[key] === null || customer_details.identity_details[key] === '')) {
+                        filled = true;
+                        break;
+                    }
+                }
+
+                if (customer_details.identity_details && filled == true) {
+                    allFieldsFilled.push('/identity-details');
+                }
+            }
+
+            if (customer_details.family_details) {
+                var spouse_data = customer_details.family_details.dependant.spouse_data
+                var children_data = customer_details.family_details.dependant.children_data
+                var parents_data = customer_details.family_details.dependant.parents_data
+                var siblings_data = customer_details.family_details.dependant.siblings_data
+
+                if (spouse_data && spouse_data.full_name || children_data && children_data.full_name || parents_data &&  parents_data.full_name || siblings_data && siblings_data.full_name) {
+                    allFieldsFilled.push('/family-dependant');
+                }
+            }
+    
+            let assets_fields = JSON.parse(localStorage.getItem('visitedPaths')) || [];
+
+            if (currentPath === '/assets') {
+                localStorage.setItem('visitedPaths', JSON.stringify('/assets'));
+            }
+
+            if (assets_fields === '/assets') {
+                allFieldsFilled.push('/assets');
+            }
+
+            if (customer_details.financial_priorities) {
+                allFieldsFilled.push('/financial-priorities');
+            }
         }
     });
-});
+}

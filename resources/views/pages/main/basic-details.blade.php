@@ -15,22 +15,22 @@
 @php
     // Retrieving values from the session
     $basicDetails = session('customer_details.basic_details');
-    $selectedCountry = session('customer_details.basic_details.phone_code_mobile', '60');
-    $selectedCode = session('customer_details.basic_details.phone_code_house', '60');
 @endphp
 
 <div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner navbar-scroll">
-                @include('templates.nav.nav-white-menu')
-                <div class="text-white px-4 px-xl-5 py-md-5 py-3">
-                    <h2 class="display-5 fw-bold">Hello! Let's get to know you better.</h2>
+            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top">
+                    @include('templates.nav.nav-white-menu')
+                    <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
+                        <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
                 <div>
-                    <form novalidate action="{{ route('form.submit') }}" method="POST">
+                    <form novalidate action="{{ route('form.basic.details') }}" method="POST">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -50,7 +50,7 @@
                                     @endif
                                     <div class="col-12 py-4">
                                         <div class="row">
-                                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+                                            <div class="col-xxl-3 col-lg-4 col-md-12">
                                                 <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
@@ -62,25 +62,16 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="firstNameInput" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="firstName" class="form-control @error('firstName') is-invalid @enderror" id="firstNameInput" placeholder="First Name" value="{{ old('firstName', $basicDetails['first_name'] ?? '') }}" required>
-                                                @error('firstName')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="lastNameInput" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" id="lastNameInput" placeholder="Last Name" value="{{ old('lastName', $basicDetails['last_name'] ?? '') }}" required>
-                                                @error('lastName')
+                                            <div class="col-xxl-9 col-lg-8 col-md-12 pt-5 pt-lg-0">
+                                                <label for="fullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
+                                                <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
+                                                @error('fullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="mobileNumberInput" class="form-label">Mobile Number <span class="text-danger">*</span></label>
                                                 <div class="input-group">
                                                     <input type="tel" name="mobileNumber" class="form-control @error('mobileNumber') is-invalid @enderror" id="mobileNumberInput" value="{{ old('mobileNumber', $basicDetails['mobile_number'] ?? '') }}" required>
@@ -89,7 +80,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="houseNumberInput" class="form-label">House Phone Number</label>
                                                 <div class="input-group">
                                                     <input type="tel" name="housePhoneNumber" class="form-control @error('housePhoneNumber') is-invalid @enderror" id="houseNumberInput" value="{{ old('housePhoneNumber', $basicDetails['house_phone_number'] ?? '') }}">
@@ -100,9 +91,9 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
+                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -112,7 +103,6 @@
                                 </div>
                             </div>
                         </section>
-                        
                         <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
@@ -133,20 +123,15 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var titleSelect = document.getElementById('titleSelect');
-    var firstNameInput = document.getElementById('firstNameInput');
-    var lastNameInput = document.getElementById('lastNameInput');
+    var fullNameInput = document.getElementById('fullNameInput');
     var emailInput = document.getElementById('email');
 
     titleSelect.addEventListener('blur', function() {
         validateSelectField(titleSelect);
     });
 
-    firstNameInput.addEventListener('blur', function() {
-        validateInputField(firstNameInput);
-    });
-
-    lastNameInput.addEventListener('blur', function() {
-        validateInputField(lastNameInput);
+    fullNameInput.addEventListener('blur', function() {
+        validateInputField(fullNameInput);
     });
 
     emailInput.addEventListener('blur', function() {
@@ -185,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function isValidName(name) {
         // Return true if the wording is 30 characters, false otherwise
-        var nameRegex = /^[A-Za-z\s]{1,30}$/;
+        var nameRegex = /^[A-Za-z,\s\/]{1,100}$/;
 
         var isValid = nameRegex.test(name);
 

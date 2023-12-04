@@ -5,44 +5,36 @@
 ?>
 
 {{--start of nav links --}}
-@include('templates.nav.nav-links')
+@include('templates.nav.nav-links-desktop')
+@include('templates.nav.nav-links-mobile')
 {{--end of nav links --}}
 
-@php
-    $needsPages = ['protection-home', 'retirement-home', 'education-home' , 'savings-home' , 'investment-home', 'health-medical-home', 'debt-cancellation-home']; // Add your needs page slugs here
-@endphp
-
-@if(in_array(request()->path(), $needsPages))
-    <div class="row">
-        <div class="col-3 col-lg-6">
-            <header id="wrapper-navbar">
-                <nav class="navbar position-relative">
-                    <div class="container px-4 px-xl-5 pt-2 pt-md-5 pb-0">
-                        <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-                            <img class="d-inline" src="{{ asset('images/general/menu-button.svg') }}" alt="Logo" width="32px" height="26px">
-                        </a>
-                    </div>
-                </nav>
-            </header>
-        </div>
-        <div class="col-9 col-lg-6">
-            @include ('templates.nav.nav-sidebar-needs')
-        </div>
-    </div>
-@else
-    <header id="wrapper-navbar">
-        <nav class="navbar position-relative">
-            <div class="container px-4 px-xl-5 pt-2 pt-md-5 pb-0">
-                <div class="col-12 pb-0 pb-md-3">
-                    <img class="white-logo py-3" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220">
-                </div>
-                <div class="col-12 justify-content-start">
+<header id="wrapper-navbar" class="desktop d-none d-md-block">
+    <nav class="navbar position-relative">
+        <div class="container px-4 px-xl-5">
+            <div class="navbar-brand py-3 py-md-5">
+                <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220">
+                <div class="col-12 justify-content-start pt-3">
                     <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
-                        <img class="d-inline" src="{{ asset('images/general/menu-button.svg') }}" alt="Logo" width="32px" height="26px">
+                        <img class="d-inline" src="{{ asset('images/general/menu-white-left-icon.png') }}" alt="Logo" width="32px" height="26px">
                     </a>
                 </div>
-                
             </div>
-        </nav>
-    </header>
-@endif
+        </div>
+    </nav>
+</header>
+
+<header id="wrapper-navbar" class="mobile z-2 position-relative d-block d-md-none">
+    <nav class="navbar position-relative">
+        <div class="container px-4 px-xl-5">
+            <div class="navbar-brand py-3 py-md-5">
+                <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220">
+            </div>
+            <div class="py-3 py-md-5">
+                <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">
+                    <img class="d-inline" src="{{ asset('images/general/menu-white-right-icon.png') }}" alt="Logo" width="32px" height="26px">
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

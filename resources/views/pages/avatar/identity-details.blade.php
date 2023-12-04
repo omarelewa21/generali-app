@@ -21,30 +21,30 @@
 
 <div id="identity_details">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('form.submit.identity') }}" method="POST" id="identityForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">Now let’s get into the details.</h1>
                                         <p class="text-white display-6 lh-base">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                     </div>
                                 </div>
-                                <div class="form-container pb-5">
+                                <div class="form-container pb-0 pb-md-5">
                                     @if ($errors->any())
-                                        <div class="row px-4 pb-3 px-sm-5">
+                                        <div class="row px-4 pb-3 px-md-5">
                                             <div class="col-12">
                                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -55,7 +55,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12">
                                             <label for="countrySelect" class="form-label text-white">Citizenship *</label>
                                             <select name="country" class="form-select bg-white @error('country') is-invalid @enderror" aria-label="Countries" id="countrySelect" autocomplete="country" required>
@@ -71,7 +71,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="idType" class="form-label text-white">ID Type *</label>
                                             <select name="idType" class="form-select bg-white @error('idType') is-invalid @enderror" aria-label="ID Type" id="idType" required>
@@ -85,7 +85,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5" id="groups">
+                                    <div class="row px-4 pb-2 px-md-5" id="groups">
                                         <div class="col-12 pt-4" id="newicgroup" style="display: none;">
                                             <label for="idNumber" class="form-label text-white">ID Number *</label>
                                             <input type="text" name="idNumber" class="form-control bg-white @error('idNumber') is-invalid @enderror" id="idNumber" placeholder="xxxxxx-xx-xxxx" value="{{ old('idNumber', $identityDetails['id_number'] ?? '') }}">
@@ -124,7 +124,7 @@
                                         </div>
                                         <div class="col-12 pt-4" id="gendergroup">
                                             <label for="identityrMaleInput" class="form-label text-white">Gender *</label>
-                                            <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
+                                            <div class="d-flex bg-white btn-group @error('gender') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                     <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
                                                     {{ (old('gender') === 'male' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
@@ -141,7 +141,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 pt-4">
                                             @php
                                                 // Get the current year, month, and day
@@ -183,23 +183,23 @@
                                                     $selectedDay = sprintf('%02d', $selectedDay);
                                                 }
                                             @endphp
-                                            <label for="day" class="form-label text-white">Date of Birth * ( <div id="age" class="d-inline-block"></div> )</label>
+                                            <label for="day" class="form-label text-white">Date of Birth * <span id="ageDiv">( <div id="age" class="d-inline-block"></div> )</span></label>
                                             <div class="row">
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], 0, 2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @else
                                                         {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @endif
                                                 </div>
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 3, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @else
                                                         {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @endif
                                                 </div>
-                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                             return substr($year, -4);
@@ -224,7 +224,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 pt-4">
                                             <label for="smoker" class="form-label text-white">Your Habits *</label>
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
@@ -244,7 +244,7 @@
                                             @enderror  
                                         </div>
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="educationLevelSelect" class="form-label text-white">Education Level *</label>
                                             <select name="educationLevel" class="form-select bg-white @error('educationLevel') is-invalid @enderror" aria-label="Countries" id="educationLevelSelect" required>
@@ -262,7 +262,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                             <label for="occupationSelect" class="form-label text-white">Occupation *</label>
                                             <select name="occupation" class="form-select bg-white @error('occupation') is-invalid @enderror" aria-label="Countries" id="occupationSelect" required>
@@ -279,7 +279,7 @@
                                 </div>
                             </div>
                         </section>
-
+                        <div class="bottomObeserver"></div>
                         <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
@@ -298,8 +298,6 @@
 </div>
 
 <script>
-var sessionData = {!! json_encode(session('customer_details')) !!};
-
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
