@@ -55,6 +55,21 @@
 .lh-normal{
     line-height: normal;
 }
+.text-placeholder{
+    color: rgba(10, 4, 60, 0.30);
+}
+.border-btm{
+    border-bottom: 3px solid black;
+}
+.lh-placeholder{
+    line-height: 2.2;
+}
+.border-black{
+    border-color: black !important;
+}
+.display-3 input{
+    font-size: 3.5rem;
+}
 
 /* ============================ Hover style ===============================*/
 button.choice.default.selected,

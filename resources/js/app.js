@@ -15,6 +15,7 @@ import './savings-validation';
 import './investment-validation';
 import './health-medical-validation';
 import './debt-cancellation-validation';
+import './summary';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';

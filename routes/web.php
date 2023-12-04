@@ -13,6 +13,7 @@ use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\HealthMedicalController;
 use App\Http\Controllers\DebtCancellationController;
+use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
 
@@ -176,6 +177,7 @@ Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::
 Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
 Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('existing.policy');
 Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('summary.monthly-goals');
+Route::post('/financial-statement/monthly-goals', [SummaryController::class, 'validateSummaryMonthlyGoals'])->name('validate.summary.monthly.goals');
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
