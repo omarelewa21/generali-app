@@ -31,7 +31,7 @@
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
-                            <div class="row justify-content-center align-items-center" style="height:70%">
+                            <div class="row justify-content-center align-items-center h-100">
                                 <div class="col-xl-6 text-center">
                                     <h2 class="display-5 fw-bold lh-sm py-4">Let’s figure out what you need for Protection.</h2>
                                 </div>

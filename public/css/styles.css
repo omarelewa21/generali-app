@@ -525,8 +525,9 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content-needs"
-      "footer-avatar-grey";
-  grid-template-rows: 9vh 56vh 35vh;
+      "footer-avatar-grey"
+      "footer-navigation";
+  grid-template-rows: 9vh 56vh 23vh 12vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -1276,7 +1277,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 20vh 45vh 35vh;
+    grid-template-rows: 9vh 40vh 23vh 12vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1341,12 +1342,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   /* Keep this for scrolling */
   .bottomObeserver {
     height:50px;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  .wrapper-needs-grey {
-    grid-template-rows: 9vh 30vh 40vh;
   }
 }
 
