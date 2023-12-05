@@ -20,8 +20,8 @@
 
 <div id="avatar_marital_status">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
@@ -29,20 +29,22 @@
                         <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>
+                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                     <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
+                                <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">May we know your relationship status?</h1>
                                         <p class="text-white display-6 lh-base">Click to select your marital status.</p>
                                     </div>
                                 </div>
-                                <div class="row mx-4 pb-4 mx-sm-5 slider">
+                                <div class="row px-4 px-md-5">
                                     @if ($errors->has('maritalStatusButtonInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
@@ -53,41 +55,43 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                </div>
+                                <div class="row px-4 px-md-5 action_button_slider">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'single') default @endif" data-avatar="single" data-required="" id="singleButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single">
+                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'married') default @endif" data-avatar="married" data-required="" id="marriedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married">
+                                                    <img src="{{ asset('images/marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'divorced') default @endif" data-avatar="divorced" data-required="" id="divorcedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced">
+                                                    <img src="{{ asset('images/marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'widowed') default @endif" data-avatar="widowed" data-required="" id="widowedButton">
-                                                    <img src="{{ asset('images/avatar-marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed">
+                                                    <img src="{{ asset('images/marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
                                             </div>

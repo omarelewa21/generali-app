@@ -9,9 +9,9 @@
 @include('templates.nav.nav-links-mobile')
 {{--end of nav links --}}
 
-<header id="wrapper-navbar" class="desktop white navbar-scroll d-none d-md-block">
+<header id="wrapper-navbar" class="desktop navbar-scroll d-none d-md-block">
     <nav class="navbar navbar-default transparent">
-        <div class="container-fluid px-4 px-xl-5">
+        <div class="container px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
                 <img class="red-logo img-fluid" src="{{ asset('images/general/main-logo.png') }}" width="220" alt="Logo">
                 <div class="col-12 justify-content-start pt-3">
@@ -24,18 +24,16 @@
     </nav>
 </header>
 
-<header id="wrapper-navbar" class="desktop white navbar-scroll d-block d-md-none">
+<header id="wrapper-navbar" class="mobile white fixed-top navbar-scroll d-block d-md-none">
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
                 <img class="red-logo img-fluid" src="{{ asset('images/general/main-logo.png') }}" width="220" alt="Logo">
             </div>
             <div class="py-3 py-md-5">
-                <div class="col-12">
-                    <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">
-                        <img class="d-inline" src="{{ asset('images/general/menu-red-right-icon.png') }}" alt="Logo" width="32px" height="26px">
-                    </a>
-                </div>
+                <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">
+                    <img class="d-inline" src="{{ asset('images/general/menu-red-right-icon.png') }}" alt="Logo" width="32px" height="26px">
+                </a>
             </div>
         </div>
     </nav>

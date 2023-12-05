@@ -14,14 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male-secondary.svg');
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
 <div id="top_priorities">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white order-md-1 order-sm-2 order-2">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
@@ -190,103 +190,106 @@
                         </div>
                     </div>
                 </section>
+                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
+                            <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
                                     <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
                                     <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
                                 </div>
                             </div>
-                            <div id="needs" class="row mx-4 pb-4 mx-sm-5 needs slider">
-                                    @if ($errors->has('topPrioritiesButtonInput'))
-                                        <div class="col-12">
-                                            <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
-                                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                                </svg>
-                                                <div class="text">{{ $errors->first('topPrioritiesButtonInput') }}</div>
-                                            </div>
+                            <div class="row px-4 px-md-5">
+                                @if ($errors->has('topPrioritiesButtonInput'))
+                                    <div class="col-12">
+                                        <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                            </svg>
+                                            <div class="text">{{ $errors->first('topPrioritiesButtonInput') }}</div>
                                         </div>
-                                    @endif
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                    </div>
+                                @endif
+                            </div>
+                            <div id="needs" class="row px-4 px-md-5 needs action_button_slider">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect pt-2 pb-3">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                             </button>
                                         </div>

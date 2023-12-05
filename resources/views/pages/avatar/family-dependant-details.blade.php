@@ -27,8 +27,8 @@
 
 <div id="avatar_family_dependant_details">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
@@ -38,21 +38,21 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
                                         <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
                                     </div>
                                 </div>
-                                <div class="form-container pb-5">
+                                <div class="form-container pb-0 pb-md-5">
                                     @if ($errors->any())
-                                        <div class="row px-4 px-sm-5">
+                                        <div class="row px-4 pb-3 px-md-5">
                                             <div class="col-12">
                                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12">
                                             <div class="accordion accordion-flush" id="accordionDependantDetails">
                                                 @php
@@ -116,7 +116,7 @@
                                                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependantDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
-                                                                    <div class="col-8">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12">
                                                                         <label for="spouseTitleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                                         <select name="spouseTitle" class="form-select @error('spouseTitle') is-invalid @enderror" aria-label="Title" id="spouseTitleSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -148,7 +148,7 @@
                                                                     </div>
                                                                 </div> -->
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                                                         <label for="spouseCountrySelect" class="form-label">Citizenship <span class="text-danger">*</span></label>
                                                                         <select name="spouseCountry" class="form-select @error('spouseCountry') is-invalid @enderror" aria-label="Countries" id="spouseCountrySelect" autocomplete="country" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -164,7 +164,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('spouseIdType') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('spouseIdType') is-invalid @enderror">
                                                                         <label for="spouseIdSelect" class="form-label">ID Type <span class="text-danger">*</span></label>
                                                                         <select name="spouseIdType" class="form-select" aria-label="ID Type" id="spouseIdSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -218,21 +218,21 @@
                                                                     <div class="col-12 pt-4">                                                                        
                                                                         <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="spouseAgeDiv">( <div id="spouseAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
                                                                                     {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($spouseData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                                 @else
                                                                                     {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                                 @endif
                                                                                 </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
                                                                                     {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($spouseData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                                 @else
                                                                                     {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                                 @endif
                                                                                 </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
                                                                                     {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                         return substr($year, -4);
@@ -298,7 +298,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('spouseOccupation') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('spouseOccupation') is-invalid @enderror">
                                                                         <label for="spouseOccupationSelect" class="form-label">Occupation <span class="text-danger">*</span></label>
                                                                         <select name="spouseOccupation" class="form-select" aria-label="Countries" id="spouseOccupationSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -367,21 +367,21 @@
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
                                                                                         {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($childrenData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
                                                                                     @else
                                                                                         {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
                                                                                         {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month', substr($childrenData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
                                                                                     @else
                                                                                         {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month'), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
                                                                                         {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -4); }, $yearRange), $yearRange), old($key . 'year', substr($childrenData[$key]['dob'], -4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
                                                                                     @else
@@ -403,7 +403,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
@@ -412,7 +412,7 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
                                                                             <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Child Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
@@ -482,21 +482,21 @@
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
                                                                                         {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($parentsData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
                                                                                     @else
                                                                                         {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
                                                                                         {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', substr($parentsData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
                                                                                     @else
                                                                                         {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month'), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
                                                                                         {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                             return substr($year, -4);
@@ -522,7 +522,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
@@ -531,7 +531,7 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
                                                                             <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Parents Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
@@ -600,21 +600,21 @@
                                                                     <div class="col-12 pt-4">
                                                                         <label for="siblingday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="siblingAgeDiv">( <div id="siblingAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
                                                                                     {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday', substr($siblingsData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
                                                                                 @else
                                                                                     {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday'), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
                                                                                 @endif
                                                                             </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
                                                                                     {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth', substr($siblingsData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
                                                                                 @else
                                                                                     {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth'), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
                                                                                 @endif
                                                                             </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
                                                                                     {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
                                                                                         return substr($year, -4);
@@ -640,7 +640,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
                                                                         <label for="siblingYearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
                                                                         <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
                                                                     </div>
@@ -649,7 +649,7 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('siblingMaritalStatus') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingMaritalStatus') is-invalid @enderror">
                                                                         <label for="siblingMaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
                                                                         <select name="siblingMaritalStatus" class="form-select" aria-label="Siblings Marital Status" id="siblingMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -672,7 +672,7 @@
                                 </div>
                             </div>
                         </section>
-                    
+                        <div class="bottomObeserver"></div>
                         <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">

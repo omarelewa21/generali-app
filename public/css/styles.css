@@ -47,8 +47,8 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities, body.overflow #priorities_to_discuss, body.overflow #home {
-  overflow-y: hidden;
+body.overflow #top_priorities .parallax-bottom, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+  overflow: hidden;
 }
 
 .fade-effect img {
@@ -156,10 +156,6 @@ h4 {
   text-align:left;
 }
 
-#day:disabled, #month:disabled, #year:disabled {
-  background-color: rgb(253 252 252 / 67%)!important;
-}
-
 .radio-container span {
   background-color: #EEE;
 }
@@ -178,6 +174,40 @@ input[type="number"] {
   width: 100%;
 }
 
+.form-select::placeholder {
+  color: rgba(10, 4, 60);
+}
+
+/* ============================== Slick Carousel ============================== */
+.action_button_slider .slick-dots li.slick-active button:before, .action_button_slider .slick-dots li button:focus:before, .action_button_slider .slick-dots li button:hover:before, .action_button_slider .slick-dots li button:before {
+  opacity:0;
+}
+.action_button_slider .slick-dots li {
+  box-sizing: content-box;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 30px;
+  height: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: .5;
+  transition: opacity .6s ease;
+}
+
+.action_button_slider .slick-dots li.slick-active {
+  background-color: #8995C8;
+  opacity: 1;
+}
+
+.action_button_slider .slick-dots {
+  position: static;
+}
 /* ============================== Alerts ============================== */
 .alert div.text {
   font-size: 18px;
@@ -388,7 +418,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg:hover .hover {
-  border: 10px solid #8995CB;
+  border: 10px solid #8995C8;
   transition: border 0.7s ease;
 }
 
@@ -401,7 +431,7 @@ button[data-required="selected"] img {
 }
 
 .button-bg.selected .hover, .button-bg.selected .border-default {
-  border: 10px solid #8995CB;
+  border: 10px solid #8995C8;
 }
 
 .button-bg .hover img {
@@ -495,8 +525,9 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content-needs"
-      "footer-avatar-grey";
-  grid-template-rows: 9vh 56vh 35vh;
+      "footer-avatar-grey"
+      "footer-navigation";
+  grid-template-rows: 9vh 56vh 23vh 12vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -593,6 +624,16 @@ h2.display-5, .currencyField {
   background-color:rgba(233, 233, 233, 1);
 }
 
+/* ============================== Parallax ============================== */
+.parallax-section {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.parallax-inner {
+  scroll-snap-align: start;
+}
+
 /* ============================== Welcome Page ============================== */
 #home {
   background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
@@ -679,7 +720,7 @@ h2.display-5, .currencyField {
 .btn-check:checked+.btn {
   border-radius: 0;
   background-color: #ffffff;
-  color: inherit;
+  color: #0A043C;
   width: 100%;
   border-color: #A0A0A0;
 }
@@ -693,7 +734,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Marital Status Page ============================== */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
-  background-image: url(/images/avatar-marital-status/vector-plant.png);
+  background-image: url(/images/marital-status/vector-plant.png);
   background-size: 20%;
   background-position: bottom right;
   background-repeat: no-repeat;
@@ -1184,6 +1225,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     right: 0;
     width: 100%;
   }
+  .navbar-scroll.fixed-top {
+    position: relative;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px){
@@ -1198,7 +1242,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     overflow: auto;
   }
   #avatar_marital_status .main-content, #avatar_family_dependant .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
-    padding-bottom: 50px!important;
+    padding-bottom: inherit!important;
   }
   .avatar-text {
     font-size: 18px;
@@ -1215,34 +1259,25 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .timeline-item {
     margin-bottom: 35px;
   }
-  .sidebanner {
-    box-shadow: 3px 5px 12px 1px rgba(0, 0, 0, 0.15);
-  }
-  .navbar-scroll {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 2;
-  }
   #wrapper-navbar.red.scrolled-up {
     background-color: #C21B17;
   }
   #wrapper-navbar.white.scrolled-up {
     background-color: #fff;
+    z-index: 2;
   }
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
   #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
-    margin-top: -300px;
+    margin-top: -200px;
   }
   #home {
     background-position: right bottom;
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 20vh 45vh 35vh;
+    grid-template-rows: 9vh 40vh 23vh 12vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1285,11 +1320,28 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     left: 0;
     padding-top: 85.5px!important;
   }
-}
+  .inner_action_button img {
+    width: auto;
+    height: auto;
+    max-width: 100px;
+    max-height: 76px;
+  }
+  .wrapper-avatar-default.parallax-top {
+    grid-template-rows: 20vh 50vh;
+  }
+  .wrapper-avatar-default {
+    grid-template-rows: 10vh 80vh;
+  }
+  .wrapper-avatar-grey {
+    grid-template-rows: 10vh 55vh 25vh;
+  }
+  #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
+    padding-bottom: 50px;
+  }
 
-@media only screen and (max-width: 576px) {
-  .wrapper-needs-grey {
-    grid-template-rows: 9vh 30vh 40vh;
+  /* Keep this for scrolling */
+  .bottomObeserver {
+    height:50px;
   }
 }
 
