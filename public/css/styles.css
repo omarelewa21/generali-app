@@ -47,8 +47,8 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities, body.overflow #priorities_to_discuss, body.overflow #home {
-  overflow-y: hidden;
+body.overflow #top_priorities .parallax-bottom, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+  overflow: hidden;
 }
 
 .fade-effect img {
@@ -205,6 +205,9 @@ input[type="number"] {
   opacity: 1;
 }
 
+.action_button_slider .slick-dots {
+  position: static;
+}
 /* ============================== Alerts ============================== */
 .alert div.text {
   font-size: 18px;
@@ -522,8 +525,9 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content-needs"
-      "footer-avatar-grey";
-  grid-template-rows: 9vh 56vh 35vh;
+      "footer-avatar-grey"
+      "footer-navigation";
+  grid-template-rows: 9vh 56vh 23vh 12vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -618,6 +622,16 @@ h2.display-5, .currencyField {
 .footer-avatar-grey {
   grid-area: footer-avatar-grey;
   background-color:rgba(233, 233, 233, 1);
+}
+
+/* ============================== Parallax ============================== */
+.parallax-section {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.parallax-inner {
+  scroll-snap-align: start;
 }
 
 /* ============================== Welcome Page ============================== */
@@ -720,7 +734,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Marital Status Page ============================== */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
-  background-image: url(/images/avatar-marital-status/vector-plant.png);
+  background-image: url(/images/marital-status/vector-plant.png);
   background-size: 20%;
   background-position: bottom right;
   background-repeat: no-repeat;
@@ -1250,19 +1264,20 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
   #wrapper-navbar.white.scrolled-up {
     background-color: #fff;
+    z-index: 2;
   }
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
   #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
-    margin-top: -300px;
+    margin-top: -200px;
   }
   #home {
     background-position: right bottom;
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 20vh 45vh 35vh;
+    grid-template-rows: 9vh 40vh 23vh 12vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1311,14 +1326,22 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     max-width: 100px;
     max-height: 76px;
   }
-  .wrapper-avatar-default {
-    grid-template-rows: 20vh 80vh;
+  .wrapper-avatar-default.parallax-top {
+    grid-template-rows: 20vh 50vh;
   }
-}
+  .wrapper-avatar-default {
+    grid-template-rows: 10vh 80vh;
+  }
+  .wrapper-avatar-grey {
+    grid-template-rows: 10vh 55vh 25vh;
+  }
+  #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
+    padding-bottom: 50px;
+  }
 
-@media only screen and (max-width: 576px) {
-  .wrapper-needs-grey {
-    grid-template-rows: 9vh 30vh 40vh;
+  /* Keep this for scrolling */
+  .bottomObeserver {
+    height:50px;
   }
 }
 

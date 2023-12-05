@@ -50,7 +50,7 @@
                                     @endif
                                     <div class="col-12 py-4">
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-xxl-3 col-lg-4 col-md-12">
                                                 <label for="titleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                 <select name="title" class="form-select @error('title') is-invalid @enderror" aria-label="Title" id="titleSelect" required>
                                                     <option value="" selected disabled>Please Select</option>
@@ -62,7 +62,7 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-9 pt-5 pt-md-0">
+                                            <div class="col-xxl-9 col-lg-8 col-md-12 pt-5 pt-lg-0">
                                                 <label for="fullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                 <input type="text" name="fullName" class="form-control @error('fullName') is-invalid @enderror" id="fullNameInput" placeholder="Full Name" value="{{ old('fullName', $basicDetails['full_name'] ?? '') }}" required>
                                                 @error('fullName')
