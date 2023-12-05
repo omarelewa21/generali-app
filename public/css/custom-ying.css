@@ -70,6 +70,28 @@
 .display-3 input{
     font-size: 3.5rem;
 }
+#expected_income .footer{
+    display: grid;
+    grid-template-areas:
+        "warning"
+        "cta";
+}
+.btn-summary{
+    width: 180px;
+    height: 100px;
+    font-size: 64px;
+}
+.btm-no{
+    background-color: #A0A0A0;
+    color: #fff;
+}
+.btm-no:hover,
+.btn-summary.default.selected,
+.btn-summary[data-required="selected"]{
+    background-color: #fff;
+    border: 1px solid #C21B17;
+    color: #C21B17;
+}
 
 /* ============================ Hover style ===============================*/
 button.choice.default.selected,

@@ -179,7 +179,9 @@ Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->n
 Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('summary.monthly-goals');
 Route::post('/financial-statement/monthly-goals', [SummaryController::class, 'validateSummaryMonthlyGoals'])->name('validate.summary.monthly.goals');
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
+Route::post('/financial-statement/expected-income', [SummaryController::class, 'validateSummaryExpectedIncome'])->name('validate.summary.expected.income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
+Route::post('/financial-statement/increment-amount', [SummaryController::class, 'validateSummaryIncrementAmount'])->name('validate.summary.increment.amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
 Route::view('/overview-new', 'pages.summary.overview')->name('overview');
 Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
