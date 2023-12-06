@@ -14,9 +14,15 @@
 
 @php
     // Retrieving values from the session
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $education = session('customer_details.education_needs');
     $childData = session('customer_details.family_details.dependant.children_data');
-    $educationSelectedAvatar = session('customer_details.education_needs.coveragePerson');
+
+    $relationship = session('customer_details.education_needs.coverFor');
+    $selectedInsuredName = session('customer_details.education_needs.selectedInsuredName');
+    $othersCoverForName = session('customer_details.education_needs.othersCoverForName');
+    $selectedCoverForDob = session('customer_details.education_needs.selectedCoverForDob');
+    $othersCoverForDob = session('customer_details.education_needs.othersCoverForDob');
 @endphp
 
 <div id="education_coverage" class="secondary-default-bg">
@@ -41,7 +47,7 @@
                             @if ($childData)
                                 @foreach($childData as $child)
                                     <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                        <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($educationSelectedAvatar === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-required="">
+                                        <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                             @php
                                                 $birthdate = $child['dob'];
 
@@ -57,8 +63,8 @@
                                             @endphp
                                             <div>
                                                 <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
-                                                <img src="{{ asset('images/avatar/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto" class="m-auto">
+                                                <p class="avatar-text text-center pt-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                             </div>
                                         </button>
                                     </div>
@@ -68,14 +74,14 @@
                     </div>
                 </section>
                 <section class="footer fixed-bottom">
-                    @if ($errors->has('educationSelectedAvatarInput'))
+                    @if ($errors->has('relationshipInput'))
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 alert alert-danger d-flex justify-content-center align-items-center py-2 m-0 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
-                                    <div class="text">{{ $errors->first('educationSelectedAvatarInput') }}</div>
+                                    <div class="text">{{ $errors->first('relationshipInput') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +90,11 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <input type="hidden" name="educationSelectedAvatarInput" id="educationSelectedAvatarInput" value="{{$educationSelectedAvatar}}">
+                                    <input type="hidden" name="relationshipInput" id="relationshipInput" value="{{$relationship}}">
+                                    <input type="hidden" name="selectedInsuredNameInput" id="selectedInsuredNameInput" value="{{$selectedInsuredName}}">
+                                    <input type="hidden" name="othersCoverForNameInput" id="othersCoverForNameInput" value="{{$othersCoverForName}}">
+                                    <input type="hidden" name="selectedCoverForDobInput" id="selectedCoverForDobInput" value="{{$selectedCoverForDob}}">
+                                    <input type="hidden" name="othersCoverForDobInput" id="othersCoverForDobInput" value="{{$othersCoverForDob}}">
                                     <a href="{{route('education.home')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
@@ -98,4 +108,40 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingEducationFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingEducationFieldsLabel">Education Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable education priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingChildFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldssLabel">Your Child Name is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input your child name in Family dependant page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var educationPriority = '{{$educationPriority}}';
+    var childData = {!! json_encode($childData) !!};
+    console.log(childData);
+</script>
 @endsection

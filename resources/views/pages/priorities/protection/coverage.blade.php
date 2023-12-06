@@ -39,8 +39,8 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I’d like to provide coverage for my:</h2>
+                            <div class="col-12 pb-5">
+                                <h2 class="display-5 fw-bold lh-sm text-center">I plan to provide financial protection for my:</h2>
                             </div>
                         </div>
                     </div>

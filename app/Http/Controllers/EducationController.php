@@ -29,7 +29,7 @@ class EducationController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'educationSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -40,7 +40,11 @@ class EducationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -50,7 +54,11 @@ class EducationController extends Controller
 
         // Update specific keys with new values
         $education = array_merge($education, [
-            'coveragePerson' => $educationSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated education_needs back to the customer_details session
@@ -59,9 +67,7 @@ class EducationController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
+        
         return redirect()->route('education.amount.needed');
     }
 

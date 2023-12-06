@@ -92,6 +92,26 @@
     border: 1px solid #C21B17;
     color: #C21B17;
 }
+#retirement_ideal button.choice:hover,
+#retirement_ideal button.choice[data-required="selected"],
+#retirement_ideal button.choice.default.selected{
+    background: none;
+    width: 100%;
+}
+#retirement_ideal button.choice:hover img,
+#retirement_ideal button.choice[data-required="selected"] img,
+#retirement_ideal button.choice.default.selected img{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+}
+#retirement_ideal .content-needs-grey{
+    grid-auto-rows: 7vh 55vh;
+}
+#education_coverage button.choice:hover, #education_coverage button.choice[data-required="selected"], #education_coverage button.choice.default.selected{
+    background-position: center bottom 10%;
+}
 
 /* ============================ Hover style ===============================*/
 button.choice.default.selected,
@@ -1354,6 +1374,12 @@ table {
     }
     #health-medical-selection .needs-stand-bg.error-padding{
         padding: 165px;
+    }
+}
+@media screen and (min-width: 1500px) {
+    .py-xxxl-5{
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 }
 @media only screen and (min-width: 1366px) and (max-width: 1399px) and (min-height: 1000px){
