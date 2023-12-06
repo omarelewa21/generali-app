@@ -142,6 +142,5 @@
 <script>
     var educationPriority = '{{$educationPriority}}';
     var childData = {!! json_encode($childData) !!};
-    console.log(childData);
 </script>
 @endsection
