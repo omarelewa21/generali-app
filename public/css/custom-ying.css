@@ -1376,7 +1376,7 @@ table {
         padding: 165px;
     }
 }
-@media screen and (min-width: 1500px) {
+@media screen and (min-height: 900px) {
     .py-xxxl-5{
         padding-top: 3rem;
         padding-bottom: 3rem;

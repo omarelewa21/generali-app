@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $debtCancellation = session('customer_details.debt-cancellation_needs');
     $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
     $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
@@ -61,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 py-5">
+                            <div class="col-xl-7 col-lg-7 col-md-12 py-xxxl-5">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -130,10 +131,27 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingDebtFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingDebtFieldsLabel">Debt Cancellation Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable debt cancellation priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    var existingDebtAmount =  {{$existingDebtAmount}};
-    var percentage = {{$debtFundPercentage}};
-    var totalDebtFund = {{$totalDebtNeeded}}
+    var existingDebtAmount =  parseFloat({{$existingDebtAmount}});
+    var percentage = parseFloat({{$debtFundPercentage}});
+    var totalDebtFund = parseFloat({{$totalDebtNeeded}});
+    var debtPriority = '{{$debtPriority}}';
 </script>
 
 @endsection

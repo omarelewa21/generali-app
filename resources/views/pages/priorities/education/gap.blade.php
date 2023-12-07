@@ -152,9 +152,9 @@
     </div>
 </div>
 <script>
-    var educationSavingAmount =  {{$educationSavingAmount}};
-    var newTotalEducationFundNeeded = {{$totalEducationNeeded}};
-    var percentage = {{$educationFundPercentage}};
+    var educationSavingAmount =  parseFloat({{ $educationSavingAmount }});
+    var newTotalEducationFundNeeded = parseFloat({{$totalEducationNeeded}});
+    var percentage = parseFloat({{$educationFundPercentage}});
     var educationPriority = '{{$educationPriority}}';
 </script>
 

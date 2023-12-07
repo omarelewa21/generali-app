@@ -45,11 +45,19 @@ class DebtCancellationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $debtSelectedAvatarInput = $request->input('debtSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $debtCancellation = array_merge($debtCancellation, [
-            'coveragePerson' => $debtSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated debt_cancellation_needs back to the customer_details session
