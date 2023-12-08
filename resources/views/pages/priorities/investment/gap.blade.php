@@ -16,7 +16,7 @@
     $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
 @endphp
 
-<div id="investment-summary" class="summary-page">
+<div id="investment-summary" class="secondary-default-bg summary-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>

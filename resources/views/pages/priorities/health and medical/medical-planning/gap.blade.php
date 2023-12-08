@@ -15,7 +15,7 @@
     $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
 @endphp
 
-<div id="medical-summary" class="summary-page">
+<div id="medical-summary" class="secondary-default-bg summary-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>

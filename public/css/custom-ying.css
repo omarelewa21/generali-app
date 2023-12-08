@@ -94,13 +94,26 @@
 }
 #retirement_ideal button.choice:hover,
 #retirement_ideal button.choice[data-required="selected"],
-#retirement_ideal button.choice.default.selected{
+#retirement_ideal button.choice.default.selected,
+#health-medical-selection button.choice:hover,
+#health-medical-selection button.choice[data-required="selected"],
+#health-medical-selection button.choice[data-required=""],
+#health-medical-selection button.choice.default.selected
+#medical-hospital-selection button.choice:hover,
+#medical-hospital-selection button.choice[data-required="selected"],
+#medical-hospital-selection button.choice[data-required=""]{
     background: none;
     width: 100%;
 }
 #retirement_ideal button.choice:hover img,
 #retirement_ideal button.choice[data-required="selected"] img,
-#retirement_ideal button.choice.default.selected img{
+#retirement_ideal button.choice.default.selected img,
+#health-medical-selection button.choice:hover img,
+#health-medical-selection button.choice[data-required="selected"] img,
+#health-medical-selection button.choice.default.selected img,
+#medical-hospital-selection button.choice:hover img,
+#medical-hospital-selection button.choice[data-required="selected"] img,
+#medical-hospital-selection button.choice.default.selected img{
     background-image: url(/images/needs/hover-coverage.png);
     background-repeat: no-repeat;
     background-position: center bottom;

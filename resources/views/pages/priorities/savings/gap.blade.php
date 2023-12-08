@@ -17,7 +17,7 @@
     $goalsAmount = session('customer_details.savings_needs.goalsAmount');
 @endphp
 
-<div id="savings-summary" class="summary-page">
+<div id="savings-summary" class="secondary-default-bg summary-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>

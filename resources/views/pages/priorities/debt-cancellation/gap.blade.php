@@ -17,7 +17,7 @@
     $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
 @endphp
 
-<div id="debt-cancellation-summary" class="summary-page">
+<div id="debt-cancellation-summary" class="secondary-default-bg summary-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
