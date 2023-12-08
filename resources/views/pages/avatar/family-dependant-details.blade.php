@@ -404,7 +404,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
-                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
@@ -413,7 +413,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
-                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status​ <span class="text-danger">*</span></label>
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Child Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
@@ -523,7 +523,7 @@
                                                                     </div>
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
-                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
@@ -641,7 +641,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
-                                                                        <label for="siblingYearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                        <label for="siblingYearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                         <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
                                                                     </div>
                                                                     @error('siblingYearsOfSupport')
