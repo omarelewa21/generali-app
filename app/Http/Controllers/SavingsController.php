@@ -30,7 +30,7 @@ class SavingsController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'savingsSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);

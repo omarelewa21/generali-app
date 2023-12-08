@@ -12,6 +12,7 @@
 
 @php
     // Retrieving values from the session
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
     $investment = session('customer_details.investments_needs');
     $investmentPA = session('customer_details.investments_needs.annualReturn','5');
     $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');
@@ -47,10 +48,10 @@
                                 <img src="{{ asset('images/needs/investment/annual-return/avatar.png') }}" width="auto" height="100%" alt="Increment">
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">Of course, ideally I'd like to see annual returns of</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_pa" class="form-control fw-bold position-relative text-center border-0 d-inline-block w-50 text-primary @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{ $investmentPA }}" required></span>
-                                % p.a.</p>
+                                <h2 class="display-5 fw-bold lh-sm currencyField">Of course, ideally I'd like to see annual returns of
+                                <!-- <p class="display-5 fw-bold currencyField"> -->
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_pa" class="form-control fw-bold position-relative text-center border-0 d-inline-block w-25 text-primary @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{ $investmentPA }}" required></span>
+                                % p.a.</h2>
                                 <input type="hidden" name="total_annualReturn" id="total_annualReturn" value="{{$totalAnnualReturn}}">
                                 <input type="hidden" name="percentage" id="percentage" value="{{$investmentFundPercentage}}">
                             </div>
@@ -86,7 +87,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingInvestmentFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingInvestmentFieldsLabel">Investment Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable investment priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    var oldTotalFund = {{ $totalInvestmentNeeded }};
+    var investmentPriority = '{{$investmentPriority}}';
+    var oldTotalFund = parsefloat({{ $totalInvestmentNeeded }});
 </script>
 @endsection

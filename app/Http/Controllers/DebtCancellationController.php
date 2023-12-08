@@ -34,7 +34,7 @@ class DebtCancellationController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'debtSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);

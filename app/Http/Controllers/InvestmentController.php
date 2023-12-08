@@ -31,7 +31,7 @@ class InvestmentController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'investmentSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -42,7 +42,11 @@ class InvestmentController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $investmentSelectedAvatarInput = $request->input('investmentSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -52,7 +56,11 @@ class InvestmentController extends Controller
 
         // Update specific keys with new values
         $investment = array_merge($investment, [
-            'coveragePerson' => $investmentSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated investments_needs back to the customer_details session
@@ -62,7 +70,7 @@ class InvestmentController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
-        return redirect()->route('investment.monthly.payment');
+        return redirect()->route('investment.amount.needed');
     }
 
     public function validateInvestmentAmountNeeded(Request $request){

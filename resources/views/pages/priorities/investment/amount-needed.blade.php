@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
     $investment = session('customer_details.investments_needs');
     $investmentMonthlyPayment = session('customer_details.investments_needs.monthlyInvestmentAmount');
     $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
@@ -48,12 +49,12 @@
                                 <img src="{{ asset('images/needs/investment/monthly-payment/avatar.png') }}" width="auto" height="100%" alt="Increment">
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">I plan to invest a lump sum of</h2>
-                                <p class="display-5 fw-bold currencyField">
+                                <h2 class="display-5 fw-bold lh-sm currencyField">I plan to invest a lump sum of
+                                <!-- <p class="display-5 fw-bold currencyField"> -->
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="investment_monthly_payment" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('investment_monthly_payment') is-invalid @enderror" id="investment_monthly_payment" value="{{ $investmentMonthlyPayment !== null ? number_format(floatval($investmentMonthlyPayment)) : $investmentMonthlyPayment }}" required></span>
-                                / month over the next
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('investment_supporting_years') is-invalid @enderror" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required></span>
-                                years.</p>
+                                /month over the next
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('investment_supporting_years') is-invalid @enderror" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required></span>
+                                years.</h2>
                                 <input type="hidden" name="total_investmentNeeded" id="total_investmentNeeded" value="{{$totalInvestmentNeeded}}">
                             </div>
                         </div>
@@ -88,4 +89,23 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingInvestmentFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingInvestmentFieldsLabel">Investment Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable investment priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var investmentPriority = '{{$investmentPriority}}';
+</script>
 @endsection
