@@ -14,9 +14,11 @@
 
 @php
     // Retrieving values from the session
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $goalsAmount = session('customer_details.savings_needs.goalsAmount');
     $savingsGoals = session('customer_details.savings_needs.goalTarget');
+    $relationship = session('customer_details.savings_needs.coverFor');
 @endphp
 
 <div id="savings-goals">
@@ -119,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 position-absolute" style="top: 50%; height:300px;">
-                                    <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                    <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                                 </div>
                             </div>
                         </section>
@@ -128,6 +130,18 @@
                         <div class="scrollable-content">
                             <section class="main-content">
                                 <div class="container">
+                                    @php
+                                        if($relationship === 'Child'){
+                                            $goal_1 = 'goal-interest';
+                                            $goal_2 = 'goal-business';
+                                            $goal_3 = 'goal-tuition';
+                                        }
+                                        else{
+                                            $goal_1 = 'goal-travel';
+                                            $goal_2 = 'goal-lifestyle';
+                                            $goal_3 = 'goal-donate';
+                                        }
+                                    @endphp
                                     <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
                                         <div class="col-12">
                                             <p class="text-white display-6 lh-base">Drag and drop your goals on top of your avatar.</p>
@@ -147,12 +161,12 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('goal-travel', $savingsGoals)) default @endif" data-avatar="goal-travel" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Enable them to pursue their interests' :'Travel around the world'}}" data-required="">
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-travel.png') }}" width="auto" height="110px" alt="goal-travel">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'interest' :'travel').'.png') }}" width="auto" height="110px" alt="{{$goal_1}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
-                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to travel around the world</p>
+                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Enable them to pursue their interests' : 'Travel around the world'}}</p>
                                                         </div>
                                                     </button>
                                                 </div>
@@ -161,12 +175,12 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('goal-wedding', $savingsGoals)) default @endif" data-avatar="goal-wedding" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'To start their own business' : 'Upgrade my assets & lifestyle'}}" data-required="">
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-wedding.png') }}" width="auto" height="110px" alt="goal-wedding">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'business' :'home').'.png') }}" width="auto" height="110px" alt="{{$goal_2}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
-                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to have my dream wedding</p>
+                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'To start their own business' : 'Upgrade my assets & lifestyle'}}</p>
                                                         </div>
                                                     </button>
                                                 </div>
@@ -175,12 +189,12 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('goal-home', $savingsGoals)) default @endif" data-avatar="goal-home" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_3, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Contribute to their tuition fees' : 'Contribute to charitable needs'}}" data-required="">
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-home.png') }}" width="auto" height="110px" alt="goal-home">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'tuition' :'donate').'.png') }}" width="auto" height="110px" alt="{{$goal_3}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
-                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">I want to upgrade my car and home</p>
+                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Contribute to their tuition fees' : 'Contribute to charitable needs'}}</p>
                                                         </div>
                                                     </button>
                                                 </div>
@@ -189,7 +203,7 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('goal-other', $savingsGoals)) default @endif" data-avatar="goal-other" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('goal-other', $savingsGoals)) default @endif" data-avatar="Others" data-required="">
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="110px" alt="goal-other">
                                                         </div>
@@ -224,7 +238,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    var savingsPriority = '{{$savingsPriority}}';
     var sessionData = {!! json_encode(session('customer_details.savings_needs.goalTarget')) !!};
 </script>
 @endsection

@@ -48,8 +48,18 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        @php
+                                            if ($retirementPriority === 'true' || $retirementPriority === true) {
+                                                $route = route('retirement.gap');
+                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                                $route = route('protection.gap');
+                                            }
+                                            else {
+                                                $route = route('priorities.to.discuss');
+                                            }
+                                        @endphp
                                         <!-- <a href="{{route('retirement.home')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a> -->
-                                        <a href="{{$retirementPriority === 'true' || $retirementPriority === true ? route('retirement.gap') : ($protectionPriority === 'true' || $protectionPriority === true ? route('protection.gap') :route('priorities.to.discuss'))}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{ $route }}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <a href="{{route('education.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>

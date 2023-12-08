@@ -41,7 +41,11 @@ class SavingsController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $savingsSelectedAvatarInput = $request->input('savingsSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -51,7 +55,11 @@ class SavingsController extends Controller
 
         // Update specific keys with new values
         $savings = array_merge($savings, [
-            'coveragePerson' => $savingsSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated savings_needs back to the customer_details session

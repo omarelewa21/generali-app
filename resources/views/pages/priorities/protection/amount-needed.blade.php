@@ -112,6 +112,6 @@
     </div>
 </div>
 <script>
-    var protectionPriority = {{$protectionPriority}};
+    var protectionPriority = '{{$protectionPriority}}';
 </script>
 @endsection

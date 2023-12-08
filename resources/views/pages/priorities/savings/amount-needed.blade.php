@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $savings = session('customer_details.savings_needs');
     $goalsAmount = session('customer_details.savings_needs.goalsAmount');
     $savingsMonthlyPayment = session('customer_details.savings_needs.monthlyInvestmentAmount');
@@ -43,7 +44,7 @@
                                         : number_format(floatval($totalAmountNeeded))
                                     }}
                                 </h1>
-                                <p class="text-white display-6 lh-base text-center">Total Savings Needed</p>
+                                <p class="text-white display-6 lh-base text-center">Total Regular Savings Fund Needed</p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                                 <p class="display-5 fw-bold currencyField">
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_monthly_payment" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('savings_monthly_payment') is-invalid @enderror" id="savings_monthly_payment" value="{{ $savingsMonthlyPayment !== null ? number_format(floatval($savingsMonthlyPayment)) : $savingsMonthlyPayment }}" required></span>
                                 / month over the next
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_duration" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('savings_goal_duration') is-invalid @enderror" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_duration" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('savings_goal_duration') is-invalid @enderror" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required></span>
                                 years to achieve my goals.</p>
                                 <input type="hidden" name="total_savingsNeeded" id="total_savingsNeeded" value="{{$totalSavingsNeeded}}">
                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
@@ -97,7 +98,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    var savingsPriority = '{{$savingsPriority}}';
     var goalAmount = parseFloat({{ $goalsAmount }});
     var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
 </script>

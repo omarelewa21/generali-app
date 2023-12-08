@@ -13,6 +13,7 @@
 
 @php
     // Retrieving values from the session
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $savings = session('customer_details.savings_needs');
     $savingsRiskProfile = session('customer_details.savings_needs.riskProfile','High Risk');
     $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn','High Potential Return');
@@ -39,46 +40,49 @@
                                 <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
                                 <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
+                            <div class="col-xl-4 col-lg-6 col-md-6 order-md-2 order-1 order-sm-1">
                                 <h2 class="display-5 fw-bold lh-sm mb-4">I am a</h2>
                                 <div class="col-12 mb-3 z-1">
-                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'High Risk') default @endif" id="high-risk" data-avatar="High Risk" data-required="{{old('savingsRiskProfileInput') === 'High Risk' ? 'selected' : ''}}">High Risk</button>
+                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'High Risk') default @endif" id="high-risk" data-avatar="High Risk" data-required="{{old('savingsRiskProfileInput') === 'High Risk' ? 'selected' : ''}}">High Risk Taker</button>
                                 </div>
                                 <div class="col-12 mb-3 z-1" id="high-risk-potential-content" style="display:none;">
-                                    <p class="risk-potential-title px-3">Potential Return:</p>
-                                    <div class="row">
+                                    <p class="risk-potential-title fw-bold">and expect</p>
+                                    <div class="row mb-3">
                                         <div class="col-12 d-flex">
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'High Risk' && $savingsPotentialReturn === 'High Potential Return') default @endif" id="high-potential-return" data-risk="High Potential Return" data-required="">High</button>
                                             <button class="potential-btn risk-potential-content border-start-0 border-end-0 f-family @if($savingsRiskProfile === 'High Risk' && $savingsPotentialReturn === 'Medium Potential Return') default @endif" id="medium-potential-return" data-risk="Medium Potential Return" data-required="">Medium</button>
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'High Risk' && $savingsPotentialReturn === 'Low Potential Return') default @endif" id="low-potential-return" data-risk="Low Potential Return" data-required="">Low</button>
                                         </div>
                                     </div>
+                                    <p class="risk-potential-title fw-bold">potential returns.</p>
                                 </div>
                                 <div class="col-12 mb-3 z-1">
-                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'Medium Risk') default @endif" id="medium-risk" data-avatar="Medium Risk" data-required="{{old('savingsRiskProfileInput') === 'Medium Risk' ? 'selected' : ''}}">Medium Risk</button>
+                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'Medium Risk') default @endif" id="medium-risk" data-avatar="Medium Risk" data-required="{{old('savingsRiskProfileInput') === 'Medium Risk' ? 'selected' : ''}}">Medium Risk Taker</button>
                                 </div>
                                 <div class="col-12 mb-3 z-1" id="medium-risk-potential-content" style="display:none;">
-                                    <p class="risk-potential-title px-3">Potential Return:</p>
-                                    <div class="row">
+                                    <p class="risk-potential-title fw-bold">and expect</p>
+                                    <div class="row mb-3">
                                         <div class="col-12 d-flex">
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'Medium Risk' && $savingsPotentialReturn === 'High Potential Return') default @endif" id="high-potential-return" data-risk="High Potential Return" data-required="">High</button>
                                             <button class="potential-btn risk-potential-content border-start-0 border-end-0 f-family @if($savingsRiskProfile === 'Medium Risk' && $savingsPotentialReturn === 'Medium Potential Return') default @endif" id="medium-potential-return" data-risk="Medium Potential Return" data-required="">Medium</button>
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'Medium Risk' && $savingsPotentialReturn === 'Low Potential Return') default @endif" id="low-potential-return" data-risk="Low Potential Return" data-required="">Low</button>
                                         </div>
                                     </div>
+                                    <p class="risk-potential-title fw-bold">potential returns.</p>
                                 </div>
                                 <div class="col-12 mb-3 z-1">
-                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'Low Risk') default @endif" id="low-risk" data-avatar="Low Risk" data-required="{{old('savingsRiskProfileInput') === 'Low Risk' ? 'selected' : ''}}">Low Risk</button>
+                                    <button class="risk-btn f-family @if($savingsRiskProfile === 'Low Risk') default @endif" id="low-risk" data-avatar="Low Risk" data-required="{{old('savingsRiskProfileInput') === 'Low Risk' ? 'selected' : ''}}">Low Risk Taker</button>
                                 </div>
                                 <div class="col-12 mb-3 risk-potential-content" id="low-risk-potential-content" style="display:none;">
-                                    <p class="risk-potential-title px-3">Potential Return:</p>
-                                    <div class="row">
+                                    <p class="risk-potential-title fw-bold">and expect</p>
+                                    <div class="row mb-3">
                                         <div class="col-12 d-flex">
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'Low Risk' && $savingsPotentialReturn === 'High Potential Return') default @endif" id="high-potential-return" data-risk="High Potential Return" data-required="">High</button>
                                             <button class="potential-btn risk-potential-content border-start-0 border-end-0 f-family @if($savingsRiskProfile === 'Low Risk' && $savingsPotentialReturn === 'Medium Potential Return') default @endif" id="medium-potential-return" data-risk="Medium Potential Return" data-required="">Medium</button>
                                             <button class="potential-btn risk-potential-content f-family @if($savingsRiskProfile === 'Low Risk' && $savingsPotentialReturn === 'Low Potential Return') default @endif" id="low-potential-return" data-risk="Low Potential Return" data-required="">Low</button>
                                         </div>
                                     </div>
+                                    <p class="risk-potential-title fw-bold">potential returns.</p>
                                 </div>
                                 <input type="hidden" name="savingsRiskProfileInput" id="savingsRiskProfileInput" value="{{old('savingsRiskProfileInput', $savingsRiskProfile)}}">
                                 <input type="hidden" name="savingsPotentialReturnInput" id="savingsPotentialReturnInput" value="{{$savingsPotentialReturn}}">
@@ -116,4 +120,22 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var savingsPriority = '{{$savingsPriority}}';
+</script>
 @endsection

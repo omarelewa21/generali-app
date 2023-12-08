@@ -120,6 +120,6 @@
     var oldTotalFund = parseFloat({{ $totalProtectionNeeded }});
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
-    var protectionPriority = {{$protectionPriority}};
+    var protectionPriority = '{{$protectionPriority}}';
 </script>
 @endsection
