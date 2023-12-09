@@ -125,6 +125,9 @@
 #education_coverage button.choice:hover, #education_coverage button.choice[data-required="selected"], #education_coverage button.choice.default.selected{
     background-position: center bottom 10%;
 }
+#hospital-room-selection .wrapper-avatar-default{
+    grid-template-rows: 20vh 65vh;
+}
 
 /* ============================ Hover style ===============================*/
 button.choice.default.selected,
@@ -688,12 +691,12 @@ button.choice:focus,
 
 /* ===================== Health and Medical Planning Room Selection ======================*/
 #hospital-room-selection .needs-stand-bg{
-    padding: 100px;
+    padding: 75px;
 }
 .wrapper-room-selection{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 15% 75%;
+    grid-template-rows: 15% 85%;
     grid-template-areas:
         "room-selection-title"
         "room-selection-content";
@@ -712,7 +715,8 @@ button.choice:focus,
     grid-template-rows: 100%;
 }
 .single.room-selection-content {
-    grid-template-columns: 20% 55% 25%;
+    grid-template-columns: 15% 60% 25%;
+    /* grid-template-columns: 20% 55% 25%; */
 }
 .couple.room-selection-content {
     grid-template-columns: 38% 24% 38%;
@@ -1263,12 +1267,12 @@ table {
     .needs-home-avatars{
         grid-template-columns: repeat(3, 0% 100% 0%);
     }
-    #hospital-room-selection .needs-stand-bg{
+    /* #hospital-room-selection .needs-stand-bg{
         padding: 140px;
-    }
-    #hospital-room-selection .needs-stand-bg.error-padding{
+    } */
+    /* #hospital-room-selection .needs-stand-bg.error-padding{
         padding: 150px;
-    }
+    } */
     .bg-needs-master-full{
         background-size: cover;
     }
@@ -1450,10 +1454,10 @@ table {
     #protection-home .needs-home-avatar-wrapper {
         grid-template-rows: 90% 10%;
     }
-    .needs-stand-bg,
+    /* .needs-stand-bg,
     #hospital-room-selection .needs-stand-bg.error-padding{
         padding:190px;
-    }
+    } */
     .needs-stand-bg.error-padding{
         padding:230px;
     }
@@ -1463,9 +1467,9 @@ table {
     #debt-cancellation-home .needs-stand-bg{
         padding: 250px;
     }
-    #hospital-room-selection .needs-stand-bg{
+    /* #hospital-room-selection .needs-stand-bg{
         padding: 180px;
-    }
+    } */
     #investment-home .needs-stand-bg.error-padding,
     #education-home .needs-stand-bg.error-padding,
     #retirement-home .needs-stand-bg.error-padding,

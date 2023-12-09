@@ -39,16 +39,16 @@
                             <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                 <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedHospital === 'private hospital') default @endif" id="private_hospital" data-avatar="private hospital" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/private-hospital.png') }}" width="auto" class="m-auto selection_height pb-4">
-                                        <p class="avatar-text text-center pt-2 mb-0 fw-bold">Private hospital</p>
+                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/private-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
+                                        <p class="avatar-text text-center mb-0 fw-bold">Private hospital</p>
                                     </div>
                                 </button>
                             </div>
                             <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                 <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedHospital === 'general hospital') default @endif" id="general_hospital" data-avatar="general hospital" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/general-hospital.png') }}" width="auto" class="m-auto selection_height pb-4">
-                                        <p class="avatar-text text-center pt-2 mb-0 fw-bold">General hospital</p>
+                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/general-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
+                                        <p class="avatar-text text-center mb-0 fw-bold">General hospital</p>
                                     </div>
                                 </button>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                     <input type="hidden" name="medicalHospitalSelectedInput" id="medicalHospitalSelectedInput" value="{{$selectedHospital}}">
-                                    <a href="{{route('health.medical.home')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('health.medical.medical.planning.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>

@@ -205,55 +205,55 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             const dataButtons = document.querySelectorAll('[data-avatar]');
             const dataSelected = document.querySelectorAll('.default');
             const roomSelection = document.querySelectorAll('.room-selection-content');
-            const singleRoom = document.querySelectorAll('.own-space');
-            const coupleRoom = document.querySelectorAll('.couple-room');
-            const moreRooms = document.querySelectorAll('.more-rooms');
+            // const singleRoom = document.querySelectorAll('.own-space');
+            // const coupleRoom = document.querySelectorAll('.couple-room');
+            // const moreRooms = document.querySelectorAll('.more-rooms');
     
             // Hide all option elements
-            singleRoom.forEach(el => el.style.display = 'block');
-            coupleRoom.forEach(el => el.style.display = 'none');
-            moreRooms.forEach(el => el.style.display = 'none');
+            // singleRoom.forEach(el => el.style.display = 'block');
+            // coupleRoom.forEach(el => el.style.display = 'none');
+            // moreRooms.forEach(el => el.style.display = 'none');
     
-            dataSelected.forEach(btnSelected => {
+            // dataSelected.forEach(btnSelected => {
                 // Hide all option elements
-                singleRoom.forEach(el => el.style.display = 'none');
-                coupleRoom.forEach(el => el.style.display = 'none');
-                moreRooms.forEach(el => el.style.display = 'none');
+                // singleRoom.forEach(el => el.style.display = 'none');
+                // coupleRoom.forEach(el => el.style.display = 'none');
+                // moreRooms.forEach(el => el.style.display = 'none');
     
-                const defaultSelection = btnSelected.getAttribute('data-avatar');
-                if (defaultSelection === 'my own space') {
-                    singleRoom.forEach(el => el.style.display = 'block');
-                    roomSelection.forEach(element => {
-                        element.classList.add('single');
-                        element.classList.remove('couple');
-                    });
-                    document.getElementById("room-first-col").classList.add('single-patient'); 
-                    document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
-                    document.getElementById("room-center-col").classList.add('z-99'); 
-                    document.getElementById("room-center-col").classList.remove('h-100'); 
-                    document.getElementById("room-last-col").classList.add('single-patient-2'); 
-                    document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
+                // const defaultSelection = btnSelected.getAttribute('data-avatar');
+                // if (defaultSelection === 'my own space') {
+                //     singleRoom.forEach(el => el.style.display = 'block');
+                //     roomSelection.forEach(element => {
+                //         element.classList.add('single');
+                //         element.classList.remove('couple');
+                //     });
+                //     document.getElementById("room-first-col").classList.add('single-patient'); 
+                //     document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
+                //     document.getElementById("room-center-col").classList.add('z-99'); 
+                //     document.getElementById("room-center-col").classList.remove('h-100'); 
+                //     document.getElementById("room-last-col").classList.add('single-patient-2'); 
+                //     document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
     
-                } else {
-                    roomSelection.forEach(element => {
-                        element.classList.remove('single');
-                        element.classList.add('couple');
-                    });
+                // } else {
+                    // roomSelection.forEach(element => {
+                    //     element.classList.remove('single');
+                    //     element.classList.add('couple');
+                    // });
     
-                    document.getElementById("room-first-col").classList.remove('single-patient'); 
-                    document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
-                    document.getElementById("room-center-col").classList.remove('z-99'); 
-                    document.getElementById("room-center-col").classList.add('h-100', 'z-1'); 
-                    document.getElementById("room-last-col").classList.remove('single-patient-2'); 
-                    document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
-                    if (defaultSelection === 'a companion') {
-                        coupleRoom.forEach(el => el.style.display = 'block');
-                    } else if (defaultSelection === 'more roommates') {
-                        moreRooms.forEach(el => el.style.display = 'block');
-                        coupleRoom.forEach(el => el.style.display = 'block');
-                    }
-                }
-            });
+                    // document.getElementById("room-first-col").classList.remove('single-patient'); 
+                    // document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
+                    // document.getElementById("room-center-col").classList.remove('z-99'); 
+                    // document.getElementById("room-center-col").classList.add('h-100', 'z-1'); 
+                    // document.getElementById("room-last-col").classList.remove('single-patient-2'); 
+                    // document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
+                    // if (defaultSelection === 'a companion') {
+                    //     coupleRoom.forEach(el => el.style.display = 'block');
+                    // } else if (defaultSelection === 'more roommates') {
+                    //     moreRooms.forEach(el => el.style.display = 'block');
+                    //     coupleRoom.forEach(el => el.style.display = 'block');
+                    // }
+                // }
+            // });
     
             dataButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
@@ -275,33 +275,33 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Update the hidden input field value with the selected avatar
                     selectionInput.value = dataAvatar;
     
-                    roomSelection.forEach(element => {
+                    // roomSelection.forEach(element => {
     
-                        if (dataAvatar === 'my own space') {
-                            element.classList.add('single');
-                            element.classList.remove('couple');
+                        // if (dataAvatar === 'my own space') {
+                        //     element.classList.add('single');
+                            // element.classList.remove('couple');
     
-                            document.getElementById("room-first-col").classList.add('single-patient'); 
-                            document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
-                            document.getElementById("room-center-col").classList.add('z-99'); 
-                            document.getElementById("room-center-col").classList.remove('h-100'); 
-                            document.getElementById("room-last-col").classList.add('single-patient-2'); 
-                            document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
+                            // document.getElementById("room-first-col").classList.add('single-patient'); 
+                            // document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
+                            // document.getElementById("room-center-col").classList.add('z-99'); 
+                            // document.getElementById("room-center-col").classList.remove('h-100'); 
+                            // document.getElementById("room-last-col").classList.add('single-patient-2'); 
+                            // document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
     
-                        } else {
-                            element.classList.remove('single');
-                            element.classList.add('couple');
+                        // } else {
+                        //     element.classList.remove('single');
+                        //     element.classList.add('couple');
     
-                            document.getElementById("room-first-col").classList.remove('single-patient'); 
-                            document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
-                            document.getElementById("room-center-col").classList.remove('z-99'); 
-                            document.getElementById("room-center-col").classList.add('h-100'); 
-                            document.getElementById("room-last-col").classList.remove('single-patient-2'); 
-                            document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
-                        }
-                    });
+                        //     document.getElementById("room-first-col").classList.remove('single-patient'); 
+                        //     document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
+                        //     document.getElementById("room-center-col").classList.remove('z-99'); 
+                        //     document.getElementById("room-center-col").classList.add('h-100'); 
+                        //     document.getElementById("room-last-col").classList.remove('single-patient-2'); 
+                        //     document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
+                        // }
+                    // });
     
-                    updateView(dataAvatar);
+                    // updateView(dataAvatar);
                 });
             });
     
@@ -315,24 +315,24 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 });
             });
     
-            function updateView(selectedOption) {
+            // function updateView(selectedOption) {
     
-                // Hide all option elements
-                singleRoom.forEach(el => el.style.display = 'none');
-                coupleRoom.forEach(el => el.style.display = 'none');
-                moreRooms.forEach(el => el.style.display = 'none');
+            //     // Hide all option elements
+            //     singleRoom.forEach(el => el.style.display = 'none');
+            //     coupleRoom.forEach(el => el.style.display = 'none');
+            //     moreRooms.forEach(el => el.style.display = 'none');
             
-                // Show the option elements based on the selected option
-                if (selectedOption === 'my own space') {
-                    singleRoom.forEach(el => el.style.display = 'block');
+            //     // Show the option elements based on the selected option
+            //     if (selectedOption === 'my own space') {
+            //         singleRoom.forEach(el => el.style.display = 'block');
     
-                } else if (selectedOption === 'a companion') {
-                    coupleRoom.forEach(el => el.style.display = 'block');
-                } else if (selectedOption === 'more roommates') {
-                    moreRooms.forEach(el => el.style.display = 'block');
-                    coupleRoom.forEach(el => el.style.display = 'block');
-                }
-            }
+            //     } else if (selectedOption === 'a companion') {
+            //         coupleRoom.forEach(el => el.style.display = 'block');
+            //     } else if (selectedOption === 'more roommates') {
+            //         moreRooms.forEach(el => el.style.display = 'block');
+            //         coupleRoom.forEach(el => el.style.display = 'block');
+            //     }
+            // }
         }
         if (path == '/health-medical/critical-illness/amount-needed' || path == '/health-medical/medical-planning/amount-needed') {
     
