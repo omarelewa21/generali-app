@@ -22,7 +22,7 @@
     $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
-<div id="protection_summary" class="summary-page">
+<div id="protection_summary" class="summary-page secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
