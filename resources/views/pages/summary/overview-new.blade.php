@@ -353,9 +353,9 @@
                                                     </td>
                                                     <td>{{$savings_needs['coveragePerson']}}</td>
                                                     <td>{{$savings_needs['investmentTimeFrame']}} years</td>
+                                                    <td>RM{{$savings_needs['goalsAmount'] !== null || $savings_needs['goalsAmount'] !== '' ? number_format(floatval($savings_needs['goalsAmount'])) : '-'}}</td>
                                                     <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
-                                                    <td>-</td>
-                                                    <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$savings_needs['totalAmountNeeded'] !== null || $savings_needs['totalAmountNeeded'] !== '' ? number_format(floatval($savings_needs['totalAmountNeeded'])) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($health_medical_planning_needs && $prioritiesHealthMedical === 'true')
@@ -389,9 +389,9 @@
                                                     </td>
                                                     <td>{{$investments_needs['coveragePerson']}}</td>
                                                     <td>{{$investments_needs['investmentTimeFrame']}} years</td>
-                                                    <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
                                                     <td>-</td>
                                                     <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
+                                                    <td>-</td>
                                                 </tr>
                                             @endif
                                             @if ($debt_cancellation_needs && $prioritiesDebtCancellation === 'true')

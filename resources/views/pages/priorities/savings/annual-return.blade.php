@@ -12,6 +12,7 @@
 
 @php
     // Retrieving values from the session
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $savings = session('customer_details.savings_needs');
     $savingsGoalPA = session('customer_details.savings_needs.annualReturn', '5');
     $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
@@ -20,86 +21,96 @@
 @endphp
 
 
-<div id="savings-annual-return">
+<div id="savings-annual-return" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row mh-100">
-            <form novalidate action="{{route('validate.savings.annual.return')}}" method="POST">
+        <div class="row wrapper-bottom-grey">
+            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <form novalidate action="{{route('validate.savings.annual.return')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="row wrapper-grey">
-                    <div class="header">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-6 col-md-4 col-lg-3 order-sm-0 order-md-0 order-lg-0 order-0">
-                                    <div class="row navbar-scroll">@include('templates.nav.nav-red-menu')</div>
+                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <section class="heading">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
+                                <div class="calculation-progress mt-3 d-flex align-items-center">
+                                    <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$savingsFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <div class="col-12 col-md-4 col-lg-6 order-sm-2 order-md-1 order-lg-1 order-2 mt-3 mt-md-0">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8 col-xl-6 bg-primary calculation-progress-bar-wrapper px-4 px-md-2">
-                                            <div class="calculation-progress mt-3 d-flex align-items-center">
-                                                <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$savingsFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <h3 id="TotalSavingsFund" class="text-light text-center m-1 f-family">RM{{ number_format(floatval($totalAmountNeeded)) }}</h3>
-                                            <p class="text-light text-center">Total Savings Needed</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-4 col-lg-3 order-sm-1 order-md-2 order-lg-2 order-1">
-                                    @include('templates.nav.nav-sidebar-needs')
-                                </div>
+                                <h1 id="TotalSavingsFund" class="text-center display-3 text-uppercase text-white">RM{{ number_format(floatval($totalAmountNeeded)) }}</h1>
+                                <p class="text-white display-6 lh-base text-center">Total Regular Savings Fund Needed</p>
                             </div>
                         </div>
                     </div>
-                    <section class="content d-flex justify-content-center align-items-md-start">
-                        <div class="container">
+                </section>
+                <section class="bottom-content z-1">
+                    <div class="container h-100">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 col-xl-4 text-center col-12 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <h2 class="display-5 fw-bold lh-sm">Ultimately, I’m expecting annual returns of:</h2>
+                            </div>
+                        </div>
+                        <div class="row h-100">
+                            <div class="col-12 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <div class="position-relative">
+                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="100%" alt="Increment" class="pb-5">
+                                    <p class="display-5 fw-bold currencyField position-absolute center w-100 text-center">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary text-center @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
+                                    % p.a.</p>
+                                </div>
+                            </div>
+                            <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
+                                <p class="display-5 fw-bold currencyField">
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
+                                % p.a.</p>
+                            </div> -->
+                        </div>
+                    </div>
+                </section>
+                <section class="footer fixed-bottom">
+                    @if ($errors->has('savings_goal_pa'))
+                        <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="row justify-content-center align-items-start text-center">
-                                        <div class="col-md-4">
-                                            <h4 class="f-34 fw-700 f-family">Ultimately, I’m expecting annual returns of:</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="footer footer-avatar-grey">
-                        <div class="container">
-                            <div class="row position-relative">
-                                <div class="col-md-12 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -125px">
-                                    <div class="position-relative">
-                                        <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="405px" alt="Increment" class="mobileImg">
-                                        <p class="f-45 fw-700 position-absolute center w-100">
-                                            <input type="text" name="savings_goal_pa" class="form-control d-inline-block money text-center f-64 w-45" id="savings_goal_pa" value="{{$savingsGoalPA}}" required>
-                                            % p.a.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @if ($errors->has('savings_goal_pa'))
-                            <div class="row position-absolute alert-position w-100 z-1">
-                                <div class="col-12 alert alert-danger py-2 rounded-0 d-flex justify-content-center align-items-center alert-height m-0" role="alert">
+                                <div class="col-12 alert alert-danger d-flex justify-content-center align-items-center py-2 m-0 rounded-0" role="alert">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
                                         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
                                     <div class="text">{{ $errors->first('savings_goal_pa') }}</div>
                                 </div>
                             </div>
-                        @endif
-                        <div class="bg-white py-4 fixed-bottom footer-scroll">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('savings.amount.needed')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
-                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
-                                    </div>
+                        </div>
+                    @endif
+                    <div class="bg-white py-4 footer-scroll">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <a href="{{route('savings.amount.needed')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </form>
+            <div class="footer-avatar-grey d-none d-md-block"></div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var savingsPriority = '{{$savingsPriority}}';
+</script>
 @endsection
