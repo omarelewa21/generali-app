@@ -14,14 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health-medical_needs');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $selectedRoom = session('customer_details.health-medical_needs.medical_planning.roomOption');
 @endphp
 
 <div id="hospital-room-selection">
     <div class="container-fluid">
         <div class="row scrollable-content vh-100 overflow-hidden">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white z-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white z-99">
                 <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
                 <section class="avatar-design-placeholder content-avatar-default">
                     <div class="col-12 text-center wrapper-room-selection">
@@ -30,26 +30,30 @@
                                 <h4 class="fw-bold">If I had to stay, I would rather have:</h4>
                             </div>
                         </div>
-                        <div class="row justify-content-center single room-selection-content">
-                            <div class="col-12 z-1 mt-auto single-patient position-relative" id="room-first-col">
-                                <img class="pb-5 ml-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/Plant.png') }}">
-                                <div class="windows couple-room"></div>
+                        <div class="row justify-content-center room-selection-content position-relative">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/plant.png') }}" alt="room selection plant" style="width:180px;" class="position-absolute start-0 bottom-0 ps-0 z-1">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}" alt="room selection avatar" width="auto" height="450px" class="z-1">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/right-counter.png') }}" alt="room selection right counter" style="width:225px;" class="position-absolute end-0 z-1 pe-0">
+                        <!-- <div class="row justify-content-center single room-selection-content"> -->
+                            <!-- <div class="col-12 z-1 mt-auto single-patient position-relative" id="room-first-col"> -->
+                                <!-- <img class="pb-5 ml-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/plant.png') }}"> -->
+                                <!-- <div class="windows couple-room"></div>
                                 <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-avatar.png') }}">
-                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/first-roommate.png') }}">
-                            </div>
-                            <div class="col-12 z-99 mt-auto mx-auto mh-100 patient position-relative" id="room-center-col">
-                                <img class="ml-auto windows own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
-                                <img class="mw-100 mh-100 row mx-auto avatar-patient mt-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-avatar.png') }}">
-                                <img class="windows mw-100 w-75 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
+                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/first-roommate.png') }}"> -->
+                            <!-- </div> -->
+                            <!-- <div class="col-12 z-99 mt-auto mx-auto mh-100 h-100 position-relative" id="room-center-col"> -->
+                                <!-- <img class="ml-auto windows own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}"> -->
+                                <!-- <img class="mw-100 mh-100 row mx-auto avatar-patient mt-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}"> -->
+                                <!-- <img class="windows mw-100 w-75 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
                                 <img class="mw-100 row avatar-patient mt-auto ms-auto pb-3 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-counter.png') }}">
-                                <img class="position-absolute w-75 roommate more-rooms" style="left:10%;" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/beside-counter.png') }}">
-                            </div>
-                            <div class="col-12 z-1 mt-auto single-patient-2 position-relative" id="room-last-col">
-                                <img class="pb-3 mr-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-counter.png') }}">
-                                <img class="ml-auto windows pt-4 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/clock.png') }}">
+                                <img class="position-absolute w-75 roommate more-rooms" style="left:10%;" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/beside-counter.png') }}"> -->
+                            <!-- </div>
+                            <div class="col-12 z-1 mt-auto single-patient-2 position-relative" id="room-last-col"> -->
+                                <!-- <img class="pb-3 mr-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/right-counter.png') }}"> -->
+                                <!-- <img class="ml-auto windows pt-4 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/clock.png') }}">
                                 <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/campanion-avatar.png') }}">
-                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/second-roommate.png') }}">
-                            </div>
+                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/second-roommate.png') }}"> -->
+                            <!-- </div> -->
                         </div>
                     </div>
                     <div class="col-12">
@@ -147,7 +151,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    var healthPriority = '{{$healthPriority}}';
     var selectionInput = document.getElementById('roomTypeInput');
 </script>
 @endsection

@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $debtCancellation = session('customer_details.debt-cancellation_needs');
     $existingDebt = session('customer_details.debt-cancellation_needs.existingDebt');
     $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
@@ -57,7 +58,7 @@
                                     </span>
                                 </p>
                                 <div class="hide-content">
-                                    <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_debt_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_debt_amount') is-invalid @enderror" id="existing_debt_amount" value="{{ $existingDebtAmount !== null ? number_format(floatval($existingDebtAmount)) : $existingDebtAmount }}" required></span></p>
+                                    <p class="display-6">Current covered amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_debt_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_debt_amount') is-invalid @enderror" id="existing_debt_amount" value="{{ $existingDebtAmount !== null ? number_format(floatval($existingDebtAmount)) : $existingDebtAmount }}" required></span></p>
                                 </div>
                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                 <input type="hidden" name="percentage" id="percentage" value="{{$debtFundPercentage}}">
@@ -94,7 +95,24 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingDebtFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingDebtFieldsLabel">Debt Cancellation Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable debt cancellation priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    var debtPriority = '{{$debtPriority}}';
     var oldTotalFund = parseFloat({{ $totalDebtNeeded }});
     var fundPercentage = parseFloat({{ $debtFundPercentage }});
     var sessionExistingDebtAmount = parseFloat({{$existingDebtAmount}});

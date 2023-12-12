@@ -34,7 +34,7 @@ class DebtCancellationController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'debtSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -45,11 +45,19 @@ class DebtCancellationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $debtSelectedAvatarInput = $request->input('debtSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $debtCancellation = array_merge($debtCancellation, [
-            'coveragePerson' => $debtSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated debt_cancellation_needs back to the customer_details session
@@ -176,7 +184,7 @@ class DebtCancellationController extends Controller
     //         'totalDebtCancellationFund' => $totalDebtFund
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -217,7 +225,7 @@ class DebtCancellationController extends Controller
     //         'remainingYearsOfSettlement' => $debt_settlement_years
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -310,7 +318,7 @@ class DebtCancellationController extends Controller
             }
         }
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
@@ -370,7 +378,7 @@ class DebtCancellationController extends Controller
             'criticalIllnessCoverageAmount' => $critical_coverage_amount
         ]);
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session

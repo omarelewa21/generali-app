@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
     $otherIncomeResources = session('customer_details.retirement_needs.otherIncomeResources');
     $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
@@ -58,7 +59,7 @@
                                 <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
                                 <p class="display-5 fw-bold currencyField">
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
-                                    for my retirement. Other sources of income:
+                                    <br>for my retirement.<br>Other sources of income:
                                     <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeResources }}" required></span>
                                 </p>
                                 <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
@@ -97,10 +98,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var retirementFundPercentage = parseFloat({{ $retirementFundPercentage }});
     var sessionRetirementSavings = parseFloat({{$retirementSavings}});
+    var retirementPriority = '{{$retirementPriority}}';
 </script>
 
 @endsection

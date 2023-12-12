@@ -28,7 +28,7 @@ class RetirementController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'retirementSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -39,8 +39,11 @@ class RetirementController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $retirementSelectedAvatarInput = $request->input('retirementSelectedAvatarInput');
-        $retirementSelectedImage = $request->input('retirementSelectedAvatarImage');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -50,10 +53,14 @@ class RetirementController extends Controller
         
         // Update specific keys with new values
         $retirement = array_merge($retirement, [
-            'coveragePerson' => $retirementSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -102,7 +109,7 @@ class RetirementController extends Controller
             'idealRetirement' => $retirementIdealInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -170,7 +177,7 @@ class RetirementController extends Controller
             ]);
         }
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
