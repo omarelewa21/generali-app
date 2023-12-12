@@ -20,8 +20,8 @@
 
 <div id="top_priorities">
     <div class="container-fluid">
-        <div class="row parallax-section">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
@@ -47,7 +47,7 @@
                             </svg>
                             
                             <div id="sortable" class="position-absolute pt-3">
-                                <div class="svg-container first d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[0])) item-dropped @endif" data-svg-class="first">
+                                <div class="svg-container first d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[0])) item-dropped @endif" data-svg-class="first" data-index="1">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -64,7 +64,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container second d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" data-svg-class="second">
+                                <div class="svg-container second d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" data-svg-class="second" data-index="2">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -81,7 +81,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container third d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[2])) item-dropped @endif" data-svg-class="third">
+                                <div class="svg-container third d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[2])) item-dropped @endif" data-svg-class="third" data-index="3">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -98,7 +98,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[3])) item-dropped @endif" data-svg-class="fourth">
+                                <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[3])) item-dropped @endif" data-svg-class="fourth" data-index="4">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -115,7 +115,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[4])) item-dropped @endif" data-svg-class="fifth">
+                                <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[4])) item-dropped @endif" data-svg-class="fifth" data-index="5">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -132,7 +132,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[5])) item-dropped @endif" data-svg-class="sixth">
+                                <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[5])) item-dropped @endif" data-svg-class="sixth" data-index="6">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -149,7 +149,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[6])) item-dropped @endif" data-svg-class="seventh">
+                                <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[6])) item-dropped @endif" data-svg-class="seventh" data-index="7">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -166,7 +166,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="svg-container eight d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[7])) item-dropped @endif" data-svg-class="eight">
+                                <div class="svg-container eight d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[7])) item-dropped @endif" data-svg-class="eight" data-index="8">
                                     <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                         @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -190,9 +190,8 @@
                         </div>
                     </div>
                 </section>
-                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -214,8 +213,8 @@
                                     </div>
                                 @endif
                             </div>
-                            <div id="needs" class="row px-4 px-md-5 needs action_button_slider">
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                            <div id="needs" class="row px-4 px-md-5 needs">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
@@ -225,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
@@ -235,7 +234,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
@@ -245,7 +244,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
@@ -255,7 +254,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
@@ -265,7 +264,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
@@ -275,7 +274,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
@@ -285,7 +284,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
