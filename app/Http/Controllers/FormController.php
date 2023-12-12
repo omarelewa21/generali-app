@@ -64,7 +64,8 @@ class FormController extends Controller {
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $full_number = $request->input('full_number');
             $full_number_house = $request->input('full_number_house');
-
+            $parsedcountryCodeHouse = '';
+            
             $validatedData = $request->validate([
                 'fullName' => [
                     'required',
@@ -81,6 +82,8 @@ class FormController extends Controller {
 
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
+                $countryCode = $parsedPhoneNumber->getCountryCode();
+                $parsedcountryCode = '+' . $countryCode;
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
                     // Invalid phone number
@@ -94,7 +97,9 @@ class FormController extends Controller {
             if (!empty($full_number_house)) {
                 try {
                     $parsedPhoneNumberHouse = $phoneNumberUtil->parse($full_number_house, null);
-            
+                    $countryCodeHouse = $parsedPhoneNumberHouse->getCountryCode();
+                    $parsedcountryCodeHouse = '+' . $countryCodeHouse;
+                    
                     if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumberHouse)) {
                         // Invalid phone number
                         return redirect()->back()->withErrors(['housePhoneNumber' => 'Invalid phone number format.'])->withInput();
@@ -112,7 +117,9 @@ class FormController extends Controller {
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
                 'full_name' => $validatedData['fullName'],
+                'countryCode' => $parsedcountryCode,
                 'mobile_number' => $full_number,
+                'homeNumberCountryCode' => $parsedcountryCodeHouse,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
             ];
@@ -263,7 +270,7 @@ class FormController extends Controller {
                         }
                     },
                 ],
-                'btnradio' => 'required|in:smoker,nonSmoker',
+                'btnradio' => 'required|in:Smoker,Non-Smoker',
                 'educationLevel' => 'required|in:' . implode(',', $educationLevel),
                 'occupation' => 'required|in:' . implode(',', $occupation),
             ], $customMessages);
@@ -275,7 +282,12 @@ class FormController extends Controller {
             $identityDetails = $customerDetails['identity_details'] ?? [];
 
             if ($day !== NULL && $day !== '') {
-                $dob = $day . '-' . $month . '-' . $year;
+                $dob = $year . '-' . $month . '-' . $day;
+
+                $selectedYear = $year;
+                $currentYear = now()->year;
+
+                $age = $currentYear - $selectedYear;
             }
 
             // Update specific keys with new values
@@ -289,6 +301,7 @@ class FormController extends Controller {
                 'registration_number' => $validatedData['registrationNumber'],
                 'gender' => $validatedData['gender'],
                 'dob' => $dob,
+                'age'=> $age,
                 'habits' => $validatedData['btnradio'],
                 'education_level' => $validatedData['educationLevel'],
                 'occupation' => $validatedData['occupation']
@@ -321,7 +334,7 @@ class FormController extends Controller {
         if ($validToken) {
             // Define custom validation rule for button selection
             Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-                if ($value !== null && $value === 'single' || $value === 'married' || $value === 'married' || $value === 'divorced' || $value === 'widowed') {
+                if ($value !== null && $value === 'Single' || $value === 'Married' || $value === 'Divorced' || $value === 'Widowed') {
                     return true;
                 }
                 
@@ -383,13 +396,13 @@ class FormController extends Controller {
                     $customerDetails['identity_details'] = $newData;
                 }
                 
-                if ($maritalStatusButtonInput === 'single') {
+                if ($maritalStatusButtonInput === 'Single') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
                     $customerDetails['family_details']['dependant']['children'] = false;
                     unset($customerDetails['family_details']['dependant']['spouse_data']);
                     unset($customerDetails['family_details']['dependant']['children_data']);
 
-                } else if ($maritalStatusButtonInput === 'married') {
+                } else if ($maritalStatusButtonInput === 'Married') {
                     $customerDetails['family_details']['dependant']['spouse'] = true;
                     if (!isset($customerDetails['family_details']['dependant']['spouse_data'])) {
                         $customerDetails['family_details']['dependant']['spouse_data'] = [
@@ -397,7 +410,7 @@ class FormController extends Controller {
                         ];
                     }
                     
-                } else if ($maritalStatusButtonInput === 'divorced' || $maritalStatusButtonInput === 'widowed') {
+                } else if ($maritalStatusButtonInput === 'Divorced' || $maritalStatusButtonInput === 'Widowed') {
                     $customerDetails['family_details']['dependant']['spouse'] = false;
                     unset($customerDetails['family_details']['dependant']['spouse_data']);
                 }
@@ -562,7 +575,7 @@ class FormController extends Controller {
                     }),
                     'max:15',
                 ],
-                'habits' => 'required|in:smoker,nonSmoker',
+                'habits' => 'required|in:Smoker,Non-Smoker',
                 'spouseOccupation' => 'required|in:' . implode(',', $occupation),
             ];
 
@@ -618,7 +631,7 @@ class FormController extends Controller {
                         }
                     },
                 ],
-                'siblingGender' => 'required|in:male,female',
+                'siblingGender' => 'required|in:Male,Female',
                 'siblingYearsOfSupport' => 'required|numeric|max:100',
                 'siblingMaritalStatus' => 'required|in:' . implode(',', $maritalStatus),
             ];
@@ -628,7 +641,6 @@ class FormController extends Controller {
 
             if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
                 foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
-
                     $customMessagesChild[$childKey .'FullName.required'] = 'The child full name field is required.';
                     // $customMessagesChild[$childKey .'LastName.required'] = 'The child last name field is required.';
                     $customMessagesChild[$childKey .'Gender.required'] = 'The child gender field is required.';
@@ -644,7 +656,7 @@ class FormController extends Controller {
                         'max:100',
                     ];
                     // $commonRulesChild[$childKey . 'LastName'] = 'required|max:30';
-                    $commonRulesChild[$childKey . 'Gender'] = 'required|in:male,female';
+                    $commonRulesChild[$childKey . 'Gender'] = 'required|in:Male,Female';
                     $commonRulesChild[$childKey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesChild[$childKey . 'day'] = [
                         'required',
@@ -713,7 +725,7 @@ class FormController extends Controller {
                         'max:100',
                     ];
                     // $commonRulesParents[$parentkey . 'LastName'] = 'required|max:30';
-                    $commonRulesParents[$parentkey . 'Gender'] = 'required|in:male,female';
+                    $commonRulesParents[$parentkey . 'Gender'] = 'required|in:Male,Female';
                     $commonRulesParents[$parentkey . 'YearsOfSupport'] = 'required|numeric|max:100';
                     $commonRulesParents[$parentkey . 'day'] = [
                         'required',
@@ -772,8 +784,16 @@ class FormController extends Controller {
                 $year = $request->input('year');
 
                 if ($day !== NULL && $day !== '') {
-                    $dob = $day . '-' . $month . '-' . $year;
+                    $dob = $year . '-' . $month . '-' . $day;
+
+                    $selectedYear = $year;
+                    $currentYear = now()->year;
+
+                    $age = $currentYear - $selectedYear;
                 }
+
+                $marital_status = $customerDetails['identity_details']['marital_status'];
+                $numOfChildren = $customerDetails['identity_details']['noOfKids'];
 
                 $newData = [
                     'title' => $validatedData['spouseTitle'],
@@ -787,9 +807,12 @@ class FormController extends Controller {
                     'police_number' => $validatedData['spousePoliceNumber'],
                     'registration_number' => $validatedData['spouseRegistrationNumber'],
                     'dob' => $dob,
+                    'age' => $age,
                     'gender' => $validatedData['gender'],
                     'habits' => $validatedData['habits'],
-                    'occupation' => $validatedData['spouseOccupation']
+                    'occupation' => $validatedData['spouseOccupation'],
+                    'maritalStatus' => $marital_status,
+                    'noOfKids' => $numOfChildren
                 ];
                 $customerDetails['family_details']['dependant']['spouse_data'] = array_merge($customerDetails['family_details']['dependant']['spouse_data'], $newData);
             }
@@ -803,7 +826,8 @@ class FormController extends Controller {
                     $year = $request->input($childKey .'year');
 
                     if ($day !== NULL && $day !== '') {
-                        $dob = $day . '-' . $month . '-' . $year;
+                        //$dob = $day . '-' . $month . '-' . $year;
+                        $dob = $year . '-' . $month . '-' . $day;
                     }
 
                     $childData = [
@@ -814,7 +838,21 @@ class FormController extends Controller {
                         'dob' => $dob,
                         'marital_status' => $validatedData[$childKey . 'MaritalStatus']
                     ];
+
                     $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
+                }
+
+                $numChildren = count($customerDetails['family_details']['dependant']['children_data']);
+
+                $newChildData = [
+                    'noOfKids' => $numChildren
+                ];
+
+                if (isset($customerDetails['identity_details'])) {
+                    $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newChildData);
+                }
+                else {
+                    $customerDetails['identity_details'] = $newChildData;
                 }
             }
 
@@ -827,7 +865,8 @@ class FormController extends Controller {
                     $year = $request->input($parentkey .'year');
 
                     if ($day !== NULL && $day !== '') {
-                        $dob = $day . '-' . $month . '-' . $year;
+                        // $dob = $day . '-' . $month . '-' . $year;
+                        $dob = $year . '-' . $month . '-' . $day;
                     }
 
                     $parentsData = [
@@ -850,7 +889,8 @@ class FormController extends Controller {
                 $year = $request->input('siblingyear');
 
                 if ($day !== NULL && $day !== '') {
-                    $dob = $day . '-' . $month . '-' . $year;
+                    // $dob = $day . '-' . $month . '-' . $year;
+                    $dob = $year . '-' . $month . '-' . $day;
                 }
 
                 $siblingData = [

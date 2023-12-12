@@ -108,11 +108,9 @@ function footer_scroll() {
         const bottomObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    console.log('visible');
                     $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
                 }
                 else {
-                    console.log('not-visible');
                     $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
                 }
             });

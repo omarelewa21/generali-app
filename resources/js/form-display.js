@@ -263,7 +263,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var maritalStatus = marital_status;
 
                 // Disable the 'Spouse' button if maritalStatus is 'single'
-                if (maritalStatus === 'single') {
+                if (maritalStatus === 'Single') {
                     const spouseButton = document.getElementById('spouseButton');
                     const childButton = document.getElementById('childButton');
                     spouseButton.disabled = true;
@@ -280,7 +280,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     spouseImg.style.opacity = '0.5'; 
                     childImg.style.opacity = '0.5'; 
         
-                } else if (maritalStatus === 'divorced' || maritalStatus === 'widowed') {
+                } else if (maritalStatus === 'Divorced' || maritalStatus === 'Widowed') {
                     const spouseButton = document.getElementById('spouseButton');
                     spouseButton.disabled = true;
         
