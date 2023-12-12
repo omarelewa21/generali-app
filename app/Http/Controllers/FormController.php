@@ -793,8 +793,14 @@ class FormController extends Controller {
                 }
 
                 $marital_status = $customerDetails['identity_details']['marital_status'];
-                $numOfChildren = $customerDetails['identity_details']['noOfKids'];
 
+                if (isset($customerDetails['identity_details']['noOfKids'])) {
+                    $numOfChildren = $customerDetails['identity_details']['noOfKids'];
+                }
+                else {
+                    $numOfChildren = '0';
+                }
+                
                 $newData = [
                     'title' => $validatedData['spouseTitle'],
                     'full_name' => $validatedData['spouseFullName'],
