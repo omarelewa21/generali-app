@@ -191,7 +191,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             var preselect = document.getElementById('maritalStatusButtonInput');
 
-            if (preselect.value == 'married') {
+            if (preselect.value == 'Married') {
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
                 $(".imageContainerMarried").append(newImage);
             }

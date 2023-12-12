@@ -40,7 +40,6 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         function sessionDetails(customer_details) {
-            
             if (customer_details.basic_details) {
                 allFieldsFilled.push('/basic-details');
             }
@@ -75,16 +74,18 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
             }
     
-            let assets_fields = JSON.parse(localStorage.getItem('visitedPaths')) || [];
+            if (customer_details.pdpa) {
+                let assets_fields = JSON.parse(localStorage.getItem('visitedPaths')) || [];
 
-            if (currentPath === '/assets') {
-                localStorage.setItem('visitedPaths', JSON.stringify('/assets'));
+                if (currentPath === '/assets') {
+                    localStorage.setItem('visitedPaths', JSON.stringify('/assets'));
+                }
+
+                if (assets_fields === '/assets') {
+                    allFieldsFilled.push('/assets');
+                }
             }
-
-            if (assets_fields === '/assets') {
-                allFieldsFilled.push('/assets');
-            }
-
+            
             if (customer_details.financial_priorities) {
                 allFieldsFilled.push('/financial-priorities');
             }
