@@ -357,10 +357,20 @@ p.nav-text {
   letter-spacing: 0.9px;
 }
 
-.btn-exit {
+.btn-exit, .btn-refresh {
   border: 1px solid #ffffff;
   border-radius: 66px;
   color: #ffffff;
+}
+
+.btn-refresh-red {
+  border: 1px solid #C21B17;
+  border-radius: 66px;
+  color: #C21B17;
+}
+
+.btn-refresh {
+  font-family: 'Helvetica Neue Regular', sans-serif;
 }
 
 .btn-exit:hover {
@@ -378,6 +388,40 @@ p.nav-text {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.btn-refresh:before {
+  content: "";
+  background-image: url(/images/general/refresh.svg);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.btn-refresh-red:before {
+  content: "";
+  background-image: url(/images/general/refresh-red.svg);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.btn-refresh-red:hover:before {
+  content: "";
+  background-image: url(/images/general/refresh-white.svg);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .btn-exit:hover:before {
   content: "";
   background-image: url(/images/general/Logout-red.svg);
