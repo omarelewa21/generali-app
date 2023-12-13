@@ -793,8 +793,14 @@ class FormController extends Controller {
                 }
 
                 $marital_status = $customerDetails['identity_details']['marital_status'];
-                $numOfChildren = $customerDetails['identity_details']['noOfKids'];
 
+                if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
+                    $numOfChildren = count($customerDetails['family_details']['dependant']['children_data']);
+                }
+                else {
+                    $numOfChildren = '0';
+                }
+                
                 $newData = [
                     'title' => $validatedData['spouseTitle'],
                     'full_name' => $validatedData['spouseFullName'],
@@ -826,8 +832,12 @@ class FormController extends Controller {
                     $year = $request->input($childKey .'year');
 
                     if ($day !== NULL && $day !== '') {
-                        //$dob = $day . '-' . $month . '-' . $year;
                         $dob = $year . '-' . $month . '-' . $day;
+
+                        $selectedYear = $year;
+                        $currentYear = now()->year;
+
+                        $age = $currentYear - $selectedYear;
                     }
 
                     $childData = [
@@ -836,7 +846,8 @@ class FormController extends Controller {
                         'gender' => $validatedData[$childKey . 'Gender'],
                         'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
                         'dob' => $dob,
-                        'marital_status' => $validatedData[$childKey . 'MaritalStatus']
+                        'age' => $age,
+                        'marital_status' => $validatedData[$childKey . 'MaritalStatus'],
                     ];
 
                     $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);

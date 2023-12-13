@@ -214,7 +214,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <div id="needs" class="row px-4 px-md-5 needs action_button_slider">
+                            <div id="needs" class="row px-4 px-md-5 pb-md-5 needs action_button_slider">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
