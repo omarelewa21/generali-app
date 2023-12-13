@@ -92,7 +92,7 @@
                                         <p class="text-white display-6 lh-base text-center text-md-start">Please click to select your gender.</p>
                                     </div>
                                 </div>
-                                <div class="row px-4 pb-4 px-md-5">
+                                <div class="row px-4 pb-5 px-md-5">
                                     @if ($errors->has('genderSelection'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">

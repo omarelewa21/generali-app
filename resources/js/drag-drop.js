@@ -22,7 +22,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var position = addedNeedsImages.findIndex(item => item === null); // Find the first empty slot
         
             if (position === -1) {
-                // If no empty slot found, add to the end of the array 
+                // If no empty slot found, add to the end of the array
                 position = addedNeedsImages.length;
             }
         
