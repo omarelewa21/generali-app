@@ -47,7 +47,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .parallax-bottom, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
   overflow: hidden;
 }
 
@@ -625,14 +625,14 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Parallax ============================== */
-.parallax-section {
+/* .parallax-section {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
 .parallax-inner {
   scroll-snap-align: start;
-}
+} */
 
 /* ============================== Welcome Page ============================== */
 #home {

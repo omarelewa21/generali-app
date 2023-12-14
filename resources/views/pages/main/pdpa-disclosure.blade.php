@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     document.getElementById("declineButton").addEventListener("click", function() {
-        pdpa("declined");
+        pdpa("Declined");
     });
 
     document.getElementById("acceptButton").addEventListener("click", function() {
-        pdpa("accepted");
+        pdpa("Accepted");
     });
 
     function pdpa(decision, route) {
