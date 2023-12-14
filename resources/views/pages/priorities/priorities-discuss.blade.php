@@ -14,14 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male-secondary.svg');
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
 <div id="priorities_to_discuss">
     <div class="container-fluid">
-        <div class="row parallax-section">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
@@ -188,9 +188,8 @@
                         </div>
                     </div>
                 </section>
-                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -308,6 +307,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var checkboxId = $(this).attr('id');
         var isChecked = $(this).prop('checked');
         checkboxValues[checkboxId] = isChecked;
+
+        if (!isChecked) {
+            console.log(checkboxId);
+            return true;
+        }
     });
 
     $('#priorityNext').on('click', function(event) {
