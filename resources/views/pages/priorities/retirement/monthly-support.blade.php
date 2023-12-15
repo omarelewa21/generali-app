@@ -36,7 +36,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$retirementFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalRetirementFund" class="text-center display-3 text-uppercase text-white">RM{{ 
+                                <h1 id="TotalRetirementFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
                                     $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
                                     ? number_format(floatval($totalRetirementNeeded))
                                     : ($retirementSavings === null || $retirementSavings === ''
