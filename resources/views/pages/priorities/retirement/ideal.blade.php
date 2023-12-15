@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
+    $relationship = session('customer_details.protection_needs.coverFor');
 @endphp
 
 <div id="retirement_ideal" class="ideal">
@@ -103,8 +104,24 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var retirementPriority = '{{$retirementPriority}}';
+    var lastPageInput = '{{$relationship}}';
 </script>
 @endsection
