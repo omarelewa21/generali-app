@@ -461,7 +461,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">End session</button> -->
-                <a href="{{route('welcome')}}" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" type="button" id="saveSession" data-clear-route="{{ route('clear_session_data') }}">End session</a>
+                <a href="{{route('welcome')}}" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" type="button" id="saveSession" >End session</a>
             </div>
         </div>
     </div>
