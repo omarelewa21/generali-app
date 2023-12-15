@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male-secondary.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
@@ -191,6 +191,7 @@
                             </div>
                             <div class="col-12">
                                 <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                <!-- <div id="priorities-animation" class="homeVector" style="width:auto; height:100%"></div> -->
                             </div>
                         </div>
                     </div>
@@ -325,5 +326,14 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
+
+    // // Load the animation using Lottie
+    // const animationMale = lottie.loadAnimation({
+    //     container: document.getElementById('priorities-animation'),
+    //     renderer: 'svg', 
+    //     loop: true,
+    //     autoplay: true,
+    //     path: '{{ asset('images/top-priorities/priorities.json') }}'
+    // });
 </script>
 @endsection
