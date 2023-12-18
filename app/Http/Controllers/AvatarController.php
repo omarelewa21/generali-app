@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use App\Models\SessionStorage; 
 
 class AvatarController extends Controller
 {
@@ -51,6 +53,18 @@ class AvatarController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
         return redirect()->route('identity.details');
     } 
 }

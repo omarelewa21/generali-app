@@ -10,6 +10,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use App\Models\SessionStorage; 
 
 class ProtectionController extends Controller
 {
@@ -58,6 +60,18 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         return redirect()->route('protection.amount.needed');
     }
@@ -133,6 +147,18 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
         
         return redirect()->route('protection.existing.policy');
     }
@@ -278,6 +304,18 @@ class ProtectionController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
         // // Process the form data and perform any necessary actions
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
@@ -298,6 +336,18 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         // // Process the form data and perform any necessary actions
         //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";

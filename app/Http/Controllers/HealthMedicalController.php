@@ -10,6 +10,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use App\Models\SessionStorage; 
 
 class HealthMedicalController extends Controller
 {
@@ -58,6 +60,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     
         return redirect()->route('health.medical.'.str_replace(' ', '.', $healthMedicalSelectedInput).'.coverage');
     }
@@ -111,6 +125,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     
         return redirect()->route('health.medical.critical.amount.needed');
     }
@@ -189,6 +215,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
@@ -287,6 +325,18 @@ class HealthMedicalController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
         // // Process the form data and perform any necessary actions
         return redirect()->route('health.medical.critical.gap');
     }
@@ -308,6 +358,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         // // Process the form data and perform any necessary actions
         return redirect()->route('debt.cancellation.home');
@@ -363,6 +425,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
     
         return redirect()->route('health.medical.planning.hospital.selection');
     }
@@ -416,6 +490,18 @@ class HealthMedicalController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
         return redirect()->route('health.medical.planning.room.selection');
     }
 
@@ -467,6 +553,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('health.medical.planning.amount.needed');
@@ -547,6 +645,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         return redirect()->route('health.medical.planning.existing.protection');
     }
@@ -643,6 +753,18 @@ class HealthMedicalController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+
         // // Process the form data and perform any necessary actions
         return redirect()->route('health.medical.planning.gap');
     }
@@ -664,6 +786,18 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
+        try {
+            DB::transaction(function () use ($request,$customerDetails) {
+                $sessionStorage = new SessionStorage();
+                $sessionStorage->data = json_encode($customerDetails);
+                $route = json_encode(request()->path());
+                $sessionStorage->page_route = $route;
+                $sessionStorage->save();
+            });
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         // // Process the form data and perform any necessary actions
         return redirect()->route('debt.cancellation.home');
