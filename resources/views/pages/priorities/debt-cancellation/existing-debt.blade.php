@@ -15,6 +15,8 @@
     $newTotalDebtNeeded = session('customer_details.debt-cancellation_needs.newTotalDebtCancellationFund');
     $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
+    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
+    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
 @endphp
 
 <div id="debt-existing-debt" class="tertiary-default-bg calculator-page">
@@ -111,10 +113,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var debtPriority = '{{$debtPriority}}';
     var oldTotalFund = parseFloat({{ $totalDebtNeeded }});
     var fundPercentage = parseFloat({{ $debtFundPercentage }});
     var sessionExistingDebtAmount = parseFloat({{$existingDebtAmount}});
+    var sessionExistingDebt = parseFloat({{$existingDebt}});
+    var lastPageInput = '{{$debtOutstandingLoan === "" || $debtOutstandingLoan === null ? $debtOutstandingLoan : $settlementYears}}';
 </script>
 @endsection

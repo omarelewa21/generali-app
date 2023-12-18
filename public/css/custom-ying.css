@@ -138,9 +138,37 @@ button.choice[data-required="selected"]{
     background-size: 100%;
     width: 60%;
 }
-/* ============================ Calculation style ===============================*/
-
-
+/* ============================ Education Amount Needed ===============================*/
+#tuitionFees .modal-dialog{
+    max-width: 1200px;
+}
+#tuitionFees .modal-title{
+    font-family: "Helvetica Neue Bold Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 58px !important;
+}
+#tuitionFees .btn-exit-sidebar:hover{
+    background: transparent;
+}
+#tuitionFees .modal-footer p{
+    line-height: normal;
+    margin: 0;
+    font-size: 18px;
+    width: 100%;
+}
+#costingTable table,
+#costingTable th,
+#costingTable tr,
+#costingTable td{
+    background-color: transparent;
+    color: #fff;
+}
+#costingTable tbody th,
+#costingTable tbody tr,
+#costingTable tbody td{
+    font-weight: 400;
+    font-size: 18px;
+}
 
 
 

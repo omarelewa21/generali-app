@@ -20,6 +20,7 @@
     $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
     $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
     $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
+    $relationship = session('customer_details.debt-cancellation_needs.coverFor');
 @endphp
 
 <div id="debt-cancellation-amount-needed" class="tertiary-default-bg calculator-page">
@@ -36,7 +37,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white">RM{{ 
+                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
                                     $existingDebtAmount === null || $existingDebtAmount === '' 
                                         ? number_format(floatval($totalDebtNeeded)) 
                                         : ($existingDebtAmount > floatval($totalDebtNeeded) 
@@ -112,7 +113,23 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var debtPriority = '{{$debtPriority}}';
+    var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

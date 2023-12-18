@@ -15,6 +15,8 @@
     $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
     $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
     $goalsAmount = session('customer_details.savings_needs.goalsAmount');
+    $savingsRiskProfile = session('customer_details.savings_needs.riskProfile');
+    $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn');
 @endphp
 
 <div id="savings-summary" class="secondary-default-bg summary-page">
@@ -152,11 +154,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var savingsTotal =  parseFloat({{$totalSavingsNeeded}});
     var percentage = parseFloat({{$savingsFundPercentage}});
     var goals = parseFloat({{$goalsAmount}});
     var savingsPriority = '{{$savingsPriority}}';
+    var lastPageInput = '{{$savingsRiskProfile === "" || $savingsRiskProfile === null ? $savingsRiskProfile : $savingsPotentialReturn}}';
 </script>
 
 @endsection

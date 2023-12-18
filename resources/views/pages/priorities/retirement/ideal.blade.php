@@ -16,7 +16,7 @@
     // Retrieving values from the session
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
-    $relationship = session('customer_details.protection_needs.coverFor');
+    $relationship = session('customer_details.retirement_needs.coverFor');
 @endphp
 
 <div id="retirement_ideal" class="ideal">
