@@ -30,7 +30,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white">RM{{number_format(floatval($totalAmountNeeded))}}</h1>
+                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{number_format(floatval($totalAmountNeeded))}}</h1>
                                 <p class="text-white display-6 lh-base text-center">Total Debt Cancellation</p>
                             </div>
                         </div>

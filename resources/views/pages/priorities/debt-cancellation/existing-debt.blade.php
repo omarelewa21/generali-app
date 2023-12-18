@@ -33,7 +33,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white">RM{{ $existingDebtAmount === null || $existingDebtAmount === '' ? number_format(floatval($totalDebtNeeded)) : ($totalDebtNeeded > $existingDebtAmount ? number_format(floatval($totalDebtNeeded - $existingDebtAmount)) : '0') }}</h1>
+                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ $existingDebtAmount === null || $existingDebtAmount === '' ? number_format(floatval($totalDebtNeeded)) : ($totalDebtNeeded > $existingDebtAmount ? number_format(floatval($totalDebtNeeded - $existingDebtAmount)) : '0') }}</h1>
                                 <p class="text-white display-6 lh-base text-center">Total Debt Cancellation</p>
                             </div>
                         </div>
