@@ -31,7 +31,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white">RM{{ $existingProtectionAmount === null || $existingProtectionAmount === '' ? number_format(floatval($totalHealthMedicalNeeded)) : ($totalHealthMedicalNeeded > $existingProtectionAmount ? number_format(floatval($totalHealthMedicalNeeded - $existingProtectionAmount)) : '0') }}</h1>
+                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ $existingProtectionAmount === null || $existingProtectionAmount === '' ? number_format(floatval($totalHealthMedicalNeeded)) : ($totalHealthMedicalNeeded > $existingProtectionAmount ? number_format(floatval($totalHealthMedicalNeeded - $existingProtectionAmount)) : '0') }}</h1>
                                 <p class="text-white display-6 lh-base text-center">Total Health & Medical Fund Needed</p>
                             </div>
                         </div>
