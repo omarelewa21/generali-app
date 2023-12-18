@@ -10,7 +10,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         var $needs = $("#needs"),
         $sortable = $("#sortable");
 
-        var addedNeedsImages = sessionData ? sessionData : [];
+        var addedNeedsImages = sessionData ? sessionData : [null, null, null, null, null, null, null, null];
         
         // Function to click to drop
         function addImageToSortable(imageName, dataAvatar) {
@@ -18,7 +18,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (addedNeedsImages.includes(dataAvatar)) {
                 return; // Don't add it again
             }
-        
+
             var position = addedNeedsImages.findIndex(item => item === null); // Find the first empty slot
         
             if (position === -1) {
@@ -38,12 +38,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var container = $("<div class='sortable-container'></div>");
         
                 // Create the droppedItem as an image
-                var droppedItem = $("<img class='inner-dropped'>").attr("src", imageName);
-        
+                var droppedItem = $("<img class='inner-dropped'>").attr("src", imageName).attr("data-avatar", dataAvatar);
+                
                 // Append the droppedItem to the container
                 container.append(droppedItem);
         
-                var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                var parentSvgContainer = droppedContainer.closest(".svg-container");
+                var pathClass = parentSvgContainer.attr("data-svg-class");
+                var dataIndex = parentSvgContainer.attr("data-index");
+
+                var removeButton = $("<button class='remove-button btn-remove' data-avatar='" + dataAvatar + "' data-index='" + dataIndex + "'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
                 container.append(removeButton);
                 droppedContainer.append(container);
         
@@ -51,12 +55,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     droppedItem.animate({ height: "auto" });
                 });
         
-                var parentSvgContainer = droppedContainer.closest(".svg-container");
-                var pathClass = parentSvgContainer.attr("data-svg-class");
+                // var parentSvgContainer = droppedContainer.closest(".svg-container");
+                // var pathClass = parentSvgContainer.attr("data-svg-class");
         
+                parentSvgContainer.removeClass("blank-item");
                 parentSvgContainer.addClass("item-dropped");
                 droppedContainer.attr("data-identifier", dataAvatar);
                 removeButton.attr("data-identifier", dataAvatar);
+                droppedContainer.addClass("not-available");
 
                 // Check if an item has been dropped into the SVG container
                 if (pathClass) {
@@ -68,65 +74,103 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     });
                 }
 
-                removeButton.click(function() {
-                    parentSvgContainer.removeClass("item-dropped");
+                // removeButton.click(function() {
+                //     parentSvgContainer.removeClass("item-dropped");
 
-                    if (pathClass) {
-                        // Find the path elements with the specified class
-                        var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-                        // Add the "item-dropped" class to the matching path elements
-                        paths.forEach(function(path) {
-                            path.classList.remove("item-dropped");
-                        });
-                    }
-                    container.remove();
-                    removeButton.remove();
-                    droppedContainer.removeAttr("data-identifier");
+                //     if (pathClass) {
+                //         // Find the path elements with the specified class
+                //         var paths = document.querySelectorAll("#sortable-main path." + pathClass);
+                //         // Add the "item-dropped" class to the matching path elements
+                //         paths.forEach(function(path) {
+                //             path.classList.remove("item-dropped");
+                //         });
+                //     }
+                //     container.remove();
+                //     removeButton.remove();
+                //     droppedContainer.removeAttr("data-identifier");
 
-                    // Clear the position in the imagePositions array
-                    addedNeedsImages[position] = null;
+                //     // Clear the position in the imagePositions array
+                //     addedNeedsImages[position] = null;
 
-                    updateHiddenInputValue();
-                });
+                //     updateHiddenInputValue();
+                // });
             };
             updateHiddenInputValue();
         }
         
 
         // Do this when the priorities needed to be removed on pre-select
-        var removeButtons = document.querySelectorAll('.remove-button');
+        // var removeButtons = document.querySelectorAll('.remove-button');
         
-        if (removeButtons.length > 0) {
-            removeButtons.forEach(function(removeButtonSession) {
-                removeButtonSession.addEventListener('click', function() {
-                    var parentSvgContainer = $(this).closest(".svg-container");
-                    var pathClass = parentSvgContainer.attr("data-svg-class");
-                    var droppedDiv = $(this).closest(".dropped");
-                    var sortableContainer = droppedDiv.find(".sortable-container");
-                    var buttonBg = droppedDiv.attr("data-identifier");
+        // if (removeButtons.length > 0) {
+        //     removeButtons.forEach(function(removeButtonSession) {
+        //         removeButtonSession.addEventListener('click', function() {
+        //             var parentSvgContainer = $(this).closest(".svg-container");
+        //             var pathClass = parentSvgContainer.attr("data-svg-class");
+        //             var droppedDiv = $(this).closest(".dropped");
+        //             var sortableContainer = droppedDiv.find(".sortable-container");
+        //             var buttonBg = droppedDiv.attr("data-identifier");
 
-                    var removedIndex = addedNeedsImages.findIndex(item => item === buttonBg);
+        //             var removedIndex = addedNeedsImages.findIndex(item => item === buttonBg);
 
-                    if (removedIndex !== -1) {
-                        // If the item was found in addedNeedsImages, set it to null
-                        addedNeedsImages[removedIndex] = null;
-                    }
+        //             if (removedIndex !== -1) {
+        //                 // If the item was found in addedNeedsImages, set it to null
+        //                 addedNeedsImages[removedIndex] = null;
+        //             }
 
-                    if (pathClass) {
-                        // Find the path elements with the specified class
-                        var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-                        // Add the "item-dropped" class to the matching path elements
-                        paths.forEach(function(path) {
-                            path.classList.remove("item-dropped");
-                        });
-                    }
-                    parentSvgContainer.removeClass("item-dropped");
-                    sortableContainer.remove();
-                    droppedDiv.removeAttr("data-identifier");
-                    updateHiddenInputValue();
+        //             if (pathClass) {
+        //                 // Find the path elements with the specified class
+        //                 var paths = document.querySelectorAll("#sortable-main path." + pathClass);
+        //                 // Add the "item-dropped" class to the matching path elements
+        //                 paths.forEach(function(path) {
+        //                     path.classList.remove("item-dropped");
+        //                 });
+        //             }
+        //             parentSvgContainer.removeClass("item-dropped");
+        //             sortableContainer.remove();
+        //             droppedDiv.removeAttr("data-identifier");
+        //             updateHiddenInputValue();
+        //         });
+        //     });
+        // }
+
+        $(document).on("click", ".remove-button", function () {
+            $(this).closest(".svg-container").addClass("blank-item").removeClass("item-dropped");
+            const sortable = $(this).closest(".sortable-container");
+            var dataAvatar = sortable.parent().attr("data-identifier")
+            var theButton = $(this)
+                .closest("#top_priorities")
+                .find("button[data-avatar=" + dataAvatar + "]");
+            theButton.attr("disabled", false);
+            theButton.closest(".button-bg").removeClass("selected");
+
+            let svg = $(this).closest(".svg-container");
+            let currentpath = svg.attr("data-svg-class");
+            if (currentpath) {
+                // Find the path elements with the specified class
+                var paths = document.querySelectorAll(
+                    "#sortable-main path." + currentpath
+                );
+                // Add the "item-dropped" class to the matching path elements
+                paths.forEach(function (path) {
+                    path.classList.remove("item-dropped");
                 });
-            });
-        }
+            }
+
+            var parentcontainer = $(this).closest(".sortable-container");
+            var parentdropped = parentcontainer.closest(".dropped");
+            parentdropped.attr("data-identifier", null);
+            parentdropped.removeClass("not-available");
+            parentcontainer.remove();
+
+            // Clear the position in the imagePositions array
+            var index = svg.attr("data-index");
+            var fixindex = index - 1;
+
+            addedNeedsImages[fixindex] = null;
+
+            updateHiddenInputValue();
+        });
 
         // Function to update the hidden field
         function updateHiddenInputValue() {

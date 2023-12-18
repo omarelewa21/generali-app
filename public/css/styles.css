@@ -829,8 +829,8 @@ h2.display-5, .currencyField {
 }
 
 .homeVector {
-  width: auto;
-  height:100%;
+  width: 550px;
+  height:auto;
 }
 
 /* ============================== Avatar Welcome Page ============================== */
@@ -1415,6 +1415,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  .homeVector {
+    width: 100%;
+    height:auto;
+  }
   body #login {
     height: inherit;
   }

@@ -187,11 +187,11 @@
                         </div>
                         <div class="col-12 position-absolute d-grid z-1" style="top: 50%; grid-gap: 20px;">
                             <div class="col-12 d-flex justify-content-center">
-                                <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end" type="button">Refresh</button></p>
+                                <!-- <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end" type="button">Refresh</button></p> -->
                             </div>
                             <div class="col-12">
-                                <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                                <!-- <div id="priorities-animation" class="homeVector" style="width:auto; height:100%"></div> -->
+                                <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                                <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                             </div>
                         </div>
                     </div>
@@ -327,13 +327,13 @@
 <script>
     var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
 
-    // // Load the animation using Lottie
-    // const animationMale = lottie.loadAnimation({
-    //     container: document.getElementById('priorities-animation'),
-    //     renderer: 'svg', 
-    //     loop: true,
-    //     autoplay: true,
-    //     path: '{{ asset('images/top-priorities/priorities.json') }}'
-    // });
+    // Load the animation using Lottie
+    const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/top-priorities/priorities.json') }}'
+    });
 </script>
 @endsection

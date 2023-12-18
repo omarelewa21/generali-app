@@ -193,16 +193,6 @@
                         </div>
                     </div>
                 </section>
-                <section class="footer bg-white py-4 fixed-bottom footer-scroll">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
-                                <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </div>
     </div>
