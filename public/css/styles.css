@@ -51,6 +51,11 @@ body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities
   overflow: hidden;
 }
 
+body #login {
+  background-color: #f5f5f5;
+  height: 100vh;
+}
+
 .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -66,6 +71,14 @@ body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities
 
 .text-gray {
   color: #707070;
+}
+
+.text-green {
+  color: #14A38B!important;
+}
+
+.text-yellow {
+  color: #F2AC57;
 }
 
 .flex-1 {
@@ -176,6 +189,36 @@ input[type="number"] {
 
 .form-select::placeholder {
   color: rgba(10, 4, 60);
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin .form-control {
+  background-color: #ffffff;
+  border-radius: 0.375rem;
+  border: 2px inset rgb(118, 118, 118);
+}
+
+.form-signin .checkbox {
+  font-size: 18px;
+}
+
+.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .form-control-plaintext:focus, .form-floating > .form-control-plaintext:not(:placeholder-shown) {
+  padding-top: 2.4rem;
 }
 
 /* ============================== Slick Carousel ============================== */
@@ -400,6 +443,66 @@ p.nav-text {
   background-repeat: no-repeat;
 }
 
+.btn-create:before {
+  content: "";
+  background-image: url(/images/general/create.png);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 45px;
+}
+
+.btn-create:hover:before {
+  content: "";
+  background-image: url(/images/general/create-white.png);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 45px;
+}
+
+.btn-tick .btn-text:before {
+  content: "";
+  background-image: url(/images/general/icon-tick.png);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 45px;
+}
+
+.btn-draft .btn-text:before {
+  content: "";
+  background-image: url(/images/general/icon-draft.png);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 45px;
+}
+
+.btn-cancelled .btn-text:before {
+  content: "";
+  background-image: url(/images/general/icon-cancel.png);
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 45px;
+}
+
 .btn-refresh-red:before {
   content: "";
   background-image: url(/images/general/refresh-red.svg);
@@ -441,12 +544,28 @@ p.nav-text {
 .btn-secondary {
   background-color: #ffffff;
   color: #C21B17;
+  border-color: #CCCCCC;
 }
 
 .btn-secondary:hover {
   background-color: #AA1B17;
   color: #fff;
   border-color: #AA1B17;
+}
+
+.btn-tick, .btn-draft, .btn-cancelled {
+  background-color: #ffffff;
+  border: 1px solid #CCCCCC;
+  border-radius: 6px;
+}
+
+.btn-tick:hover, .btn-draft:hover {
+  background-color: #ffffff;
+  border-color: #CCCCCC;
+}
+
+.btn-tick .text-green, .btn-draft .text-yellow, .btn-cancelled .text-primary {
+  overflow: hidden;
 }
 
 button[data-required="selected"] img {
@@ -668,7 +787,7 @@ h2.display-5, .currencyField {
   background-color:rgba(233, 233, 233, 1);
 }
 
-/* ============================== Parallax ============================== */
+/* ============================== Sign In Page ============================== */
 /* .parallax-section {
   height: 100vh;
   overflow-y: scroll;
@@ -677,6 +796,29 @@ h2.display-5, .currencyField {
 .parallax-inner {
   scroll-snap-align: start;
 } */
+
+#login img {
+  max-width: 450px;
+}
+
+/* ============================== Dashboard Page ============================== */
+#dashboard .timeline:before {
+  left:11px;
+  bottom: 21px;
+}
+
+#dashboard .timeline-item::after {
+  left:0;
+}
+
+#dashboard .timeline-item {
+  padding-left: 60px;
+}
+
+.tutorial {
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+}
 
 /* ============================== Welcome Page ============================== */
 #home {
@@ -687,8 +829,8 @@ h2.display-5, .currencyField {
 }
 
 .homeVector {
-  width: auto;
-  height:100%;
+  width: 550px;
+  height:auto;
 }
 
 /* ============================== Avatar Welcome Page ============================== */
@@ -725,7 +867,7 @@ h2.display-5, .currencyField {
 }
 
 .avatar-text {
-  font-size: 26px;
+  font-size: calc(12px + 0.95vw);
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -1273,6 +1415,16 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  .homeVector {
+    width: 100%;
+    height:auto;
+  }
+  body #login {
+    height: inherit;
+  }
+  #login img {
+    width: 200px;
+  }
   .slider {
     flex-flow: nowrap;
     overflow: auto;
