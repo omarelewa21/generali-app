@@ -377,47 +377,55 @@
                     });
                 }
 
-                if (checkboxId == 'protectionDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                    if(checkboxId == 'retirementDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                        if(checkboxId == 'educationDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                            if(checkboxId == 'savingsDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                                if(checkboxId == 'investmentsDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                                    if(checkboxId == 'health-medicalDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                                        if(checkboxId == 'debt-cancellationDiscuss' && (checkboxValues[checkboxId] == false || checkboxValues[checkboxId] == 'false') ){
-                                        
-                                        } else {
-                                            // document.getElementById('priorityNext').setAttribute('href', route('debt.cancellation.home'));
-                                            console.log('go protection page');
-                                        }
-                                        console.log('health false');
-                                    } else {
-                                        // document.getElementById('priorityNext').setAttribute('href', route('debt.cancellation.home'));
-                                        console.log('go debt-cancellation page');
-                                    }
-                                    console.log('investment false');
-                                } else{
-                                    // document.getElementById('priorityNext').setAttribute('href', route('health.medical.home'));
-                                    console.log('go health-medical page');
-                                }
-                                console.log('savings false');
-                            } else{
-                                // document.getElementById('priorityNext').setAttribute('href', route('investment.home'));
-                                console.log('go investment page');
+                //Assign the needs sequence
+                const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
+
+                // Get the list of unchecked checkboxes
+                const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
+
+                // Check if there are unchecked checkboxes
+                if (uncheckedCheckboxes.length > 0) {
+                    // Iterate through the sequence of content checkboxes
+                    for (const checkboxId of contents) {
+                        // Check if the current checkbox is unchecked
+                        if (checkboxValues[checkboxId] === true) {
+                            // Check the sequence and redirect accordingly
+                            if (checkboxId === 'protectionDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
+
+                                break;
                             }
-                            console.log('education false');
-                        } else {
-                            // document.getElementById('priorityNext').setAttribute('href', route('savings.home'));
-                            console.log('go savings page');
+                            else if (checkboxId === 'retirementDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'educationDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'savingsDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'investmentsDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'health-medicalDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
+                                break;
+                            }
+
+                            else {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
+                                break;
+                            }
+                            // Break out of the loop once the first unchecked checkbox is handled
+                            break;
                         }
-                        console.log('retirement false');
-                    } else{
-                        // document.getElementById('priorityNext').setAttribute('href', route('education.home'));
-                        console.log('go education page');
                     }
-                    console.log('protection false');
-                }else{
-                    console.log('go retirement page');
-                    // document.getElementById('priorityNext').setAttribute('href', route('retirement.home'));
+                } else {
+                    // Handle the case where no checkboxes are unchecked
                 }
             });
 
