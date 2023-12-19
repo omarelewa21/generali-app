@@ -562,8 +562,16 @@ class SavingsController extends Controller
         Log::debug($customerDetails);
         
         // // Process the form data and perform any necessary actions
-        
-        return redirect()->route('investment.home');
+        if (isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] === 'true' || $customerDetails['priorities']['investmentsDiscuss'] === true)) {
+            return redirect()->route('investment.home');
+        } else if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }
