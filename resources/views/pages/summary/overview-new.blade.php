@@ -327,7 +327,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-retirement.png') }}" height="100%" width="auto" class="me-3" alt="Retirement Icon">Retirement
                                                     </td>
-                                                    <td>{{$retirement_needs['coveragePerson']}}</td>
+                                                    <td>{{$retirement_needs['coverFor']}}</td>
                                                     <td>{{$retirement_needs['supportingYears']}} years</td>
                                                     <td>RM{{$retirement_needs['totalRetirementNeeded'] !== null || $retirement_needs['totalRetirementNeeded'] !== '' ? number_format(floatval($retirement_needs['totalRetirementNeeded'])) : '-'}}</td>
                                                     <td>RM{{$retirement_needs['retirementSavingsAmount'] !== null || $retirement_needs['retirementSavingsAmount'] !== '' ? number_format(floatval($retirement_needs['retirementSavingsAmount'])) : '-'}}</td>
@@ -339,7 +339,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-education.png') }}" height="100%" width="auto" class="me-3" alt="Education Icon">Education
                                                     </td>
-                                                    <td>{{$education_needs['coveragePerson']}}</td>
+                                                    <td>{{$education_needs['coverFor']}}</td>
                                                     <td>{{$education_needs['tertiaryEducationYear']}} years</td>
                                                     <td>RM{{$education_needs['tertiaryEducationAmount'] !== null || $education_needs['tertiaryEducationAmount'] !== '' ? number_format(floatval($education_needs['tertiaryEducationAmount'])) : '-'}}</td>
                                                     <td>RM{{$education_needs['existingFundAmount'] !== null || $education_needs['existingFundAmount'] !== '' ? number_format(floatval($education_needs['existingFundAmount'])) : '-'}}</td>
@@ -351,7 +351,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-savings.png') }}" height="100%" width="auto" class="me-3" alt="Savings Icon">Savings
                                                     </td>
-                                                    <td>{{$savings_needs['coveragePerson']}}</td>
+                                                    <td>{{$savings_needs['coverFor']}}</td>
                                                     <td>{{$savings_needs['investmentTimeFrame']}} years</td>
                                                     <td>RM{{$savings_needs['goalsAmount'] !== null || $savings_needs['goalsAmount'] !== '' ? number_format(floatval($savings_needs['goalsAmount'])) : '-'}}</td>
                                                     <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
@@ -363,7 +363,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Planning
                                                     </td>
-                                                    <td>{{$health_medical_planning_needs['coveragePerson']}}</td>
+                                                    <td>{{$health_medical_planning_needs['coverFor']}}</td>
                                                     <td>{{$health_medical_planning_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_planning_needs['neededAmount'] !== null || $health_medical_planning_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_planning_needs['existingProtectionAmount'] !== null || $health_medical_planning_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['existingProtectionAmount'])) : '-'}}</td>
@@ -375,7 +375,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness
                                                     </td>
-                                                    <td>{{$health_medical_critical_needs['coveragePerson']}}</td>
+                                                    <td>{{$health_medical_critical_needs['coverFor']}}</td>
                                                     <td>{{$health_medical_critical_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_critical_needs['neededAmount'] !== null || $health_medical_critical_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_critical_needs['existingProtectionAmount'] !== null || $health_medical_critical_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['existingProtectionAmount'])) : '-'}}</td>
@@ -387,7 +387,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-investment.png') }}" height="100%" width="auto" class="me-3" alt="Lump Sum Investment Icon">Lump Sum Investment
                                                     </td>
-                                                    <td>{{$investments_needs['coveragePerson']}}</td>
+                                                    <td>{{$investments_needs['coverFor']}}</td>
                                                     <td>{{$investments_needs['investmentTimeFrame']}} years</td>
                                                     <td>-</td>
                                                     <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
@@ -399,7 +399,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-debt.png') }}" height="100%" width="auto" class="me-3" alt="Debt Cancellation Icon">Debt Cancellation
                                                     </td>
-                                                    <td>{{$debt_cancellation_needs['coveragePerson']}}</td>
+                                                    <td>{{$debt_cancellation_needs['coverFor']}}</td>
                                                     <td>{{$debt_cancellation_needs['remainingYearsOfSettlement']}} years</td>
                                                     <td>RM{{$debt_cancellation_needs['totalDebtCancellationFund'] !== null || $debt_cancellation_needs['totalDebtCancellationFund'] !== '' ? number_format(floatval($debt_cancellation_needs['totalDebtCancellationFund'])) : '-'}}</td>
                                                     <td>RM{{$debt_cancellation_needs['existingDebtAmount'] !== null || $debt_cancellation_needs['existingDebtAmount'] !== '' ? number_format(floatval($debt_cancellation_needs['existingDebtAmount'])) : '-'}}</td>
