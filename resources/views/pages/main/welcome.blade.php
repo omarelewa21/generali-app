@@ -28,9 +28,9 @@
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-md-12 d-flex justify-content-center pt-xl-0 pt-sm-5 pt-5">
-                    <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" style="width:550px; height:auto" class="homeVector">
-                    <!-- <div id="lottie-male-animation" class="homeVector"></div>
-                    <div id="lottie-female-animation" class="homeVector"></div> -->
+                    <!-- <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Footer Vector" class="homeVector"> -->
+                    <div id="lottie-male-animation" class="homeVector" style="width:100%;max-height:700px;margin-top: inherit;"></div>
+                    <div id="lottie-female-animation" class="homeVector" style="width:100%;max-height:700px;margin-left: -300px;margin-top: inherit;"></div>
             </div>
             </div>
         </div>
