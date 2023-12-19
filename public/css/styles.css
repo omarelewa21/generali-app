@@ -52,7 +52,7 @@ body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities
 }
 
 body #login {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   height: 100vh;
 }
 
@@ -203,14 +203,15 @@ input[type="number"] {
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .form-signin .form-control {
   background-color: #ffffff;
   border-radius: 0.375rem;
-  border: 2px inset rgb(118, 118, 118);
+  border: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC!important;
+  border-left: 1px solid #CCCCCC!important;
+  border-right: 1px solid #CCCCCC!important;
 }
 
 .form-signin .checkbox {
@@ -801,6 +802,13 @@ h2.display-5, .currencyField {
   max-width: 450px;
 }
 
+.login-bg {
+  background-image: url(/images/general/login-bg.jpg);
+  background-size: auto 80%;
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
 /* ============================== Dashboard Page ============================== */
 #dashboard .timeline:before {
   left:11px;
@@ -1268,6 +1276,26 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   padding-left: 40px;
   cursor: pointer;
   font-weight: 400;
+}
+
+.needs-radio:checked + label::after {
+  content: url("/images/needs/general/check.png"); 
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  font-size: 18px;
+  color: #C21B17;
+}
+
+.needs-radio + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #A0A0A0;
+  background-color: #fff;
 }
 
 .hide-content{
