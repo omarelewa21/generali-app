@@ -240,10 +240,15 @@ class ProtectionController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
         $protection_existing_policy = $request->input('protection_existing_policy');
-        $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - $existing_policy_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        if ($existing_policy_amount === '' || $existing_policy_amount === null){
+            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - 0);
+            $newProtectionPercentage = floatval(0 / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        } else {
+            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - $existing_policy_amount);
+            $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        }
 
         // Update specific keys with new values
         $protection = array_merge($protection, [

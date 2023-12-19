@@ -315,7 +315,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-protection.png') }}" height="100%" width="auto" class="me-3" alt="Protection Icon">Protection
                                                     </td>
-                                                    <td>{{$protection_needs['coveragePerson']}}</td>
+                                                    <td>{{$protection_needs['coverFor']}}</td>
                                                     <td>{{$protection_needs['supportingYears']}} years</td>
                                                     <td>RM{{$protection_needs['totalProtectionNeeded'] !== null || $protection_needs['totalProtectionNeeded'] !== '' ? number_format(floatval($protection_needs['totalProtectionNeeded'])) : '-'}}</td>
                                                     <td>RM{{$protection_needs['existingPolicyAmount'] !== null || $protection_needs['existingPolicyAmount'] !== '' ? number_format(floatval($protection_needs['existingPolicyAmount'])) : '-'}}</td>
@@ -475,6 +475,7 @@
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;
+            console.log(change);
             // console.log('change', change);
         }
         else   {
