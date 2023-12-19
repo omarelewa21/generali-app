@@ -26,6 +26,7 @@
     $othersCoverForName = session('customer_details.health-medical_needs.medical_planning.othersCoverForName');
     $selectedCoverForDob = session('customer_details.health-medical_needs.medical_planning.selectedCoverForDob');
     $othersCoverForDob = session('customer_details.health-medical_needs.medical_planning.othersCoverForDob');
+    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
 @endphp
 
 <div id="medical-planning-coverage" class="secondary-default-bg">
@@ -51,8 +52,8 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
                                         <div>
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" height="80%" width="auto" class="m-auto">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Self</p>
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                            <p class="avatar-text text-center pb-3 mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
                                 </div>
@@ -61,8 +62,8 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div>
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" height="80%" width="auto" class="m-auto">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                            <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
@@ -72,8 +73,8 @@
                                     <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                         <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                             <div>
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto" class="m-auto">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                                <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                             </div>
                                         </button>
                                     </div>
@@ -147,6 +148,21 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var relationshipInput = document.getElementById('relationshipInput');
     var selectedInsuredNameInput = document.getElementById('selectedInsuredNameInput');
@@ -155,5 +171,6 @@
     var othersCoverForDobInput = document.getElementById('othersCoverForDobInput');
     var healthPriority = '{{$healthPriority}}';
     var selfData = '{{$selfDataName}}';
+    var lastPageInput = '{{$selectedMedical}}';
 </script>
 @endsection

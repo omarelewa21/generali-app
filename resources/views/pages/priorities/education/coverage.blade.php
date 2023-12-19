@@ -52,7 +52,7 @@
                                                 $birthdate = $child['dob'];
 
                                                 // Convert DOB to DateTime object
-                                                $dobDate = \DateTime::createFromFormat('d-m-Y', $birthdate);
+                                                $dobDate = \DateTime::createFromFormat('Y-m-d', $birthdate);
 
                                                 //Get current Date
                                                 $currentDate = new \DateTime();
@@ -62,9 +62,9 @@
                                                 $age = $ageInterval->y; // Access the years property of the interval
                                             @endphp
                                             <div>
-                                                <p class="py-2 m-auto m-0 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto" class="m-auto">
-                                                <p class="avatar-text text-center pt-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                <p class="py-2 m-auto mt-3 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto mb-4">
+                                                <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                             </div>
                                         </button>
                                     </div>

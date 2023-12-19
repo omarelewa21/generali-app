@@ -38,8 +38,8 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
-                            <div class="col-12 pb-5">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
                                 <h2 class="display-5 fw-bold lh-sm text-center">I plan to provide financial protection for my:</h2>
                             </div>
                         </div>
@@ -51,9 +51,9 @@
                             @if ($selfData)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
-                                        <div>
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'female' ? 'female' : 'male').'.png') }}" height="80%" width="auto" class="m-auto">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">Self</p>
+                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                            <p class="avatar-text pb-3 text-center mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
                                 </div>
@@ -61,9 +61,9 @@
                             @if ($spouseData)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
-                                        <div>
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'female' ? 'male' : 'female').'.png') }}" height="80%" width="auto" class="m-auto">
-                                            <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
+                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                            <p class="avatar-text pb-3 text-center mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
@@ -72,9 +72,9 @@
                                 @foreach($childData as $child)
                                     <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                         <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
-                                            <div>
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="80%" width="auto" class="m-auto">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                            <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                                <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                             </div>
                                         </button>
                                     </div>

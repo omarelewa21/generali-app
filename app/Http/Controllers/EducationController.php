@@ -303,10 +303,15 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        if ($education_saving_amount === '' || $education_saving_amount === null){
+            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - 0);
+            $newEducationPercentage = floatval(0 / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        } else{
+            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
+            $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        }
 
         // Update specific keys with new values
         $education = array_merge($education, [
