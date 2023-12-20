@@ -46,28 +46,30 @@
                         <div class="row justify-content-center h-100 coverage_slick">
                             @if ($childData)
                                 @foreach($childData as $child)
-                                    <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                        <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
-                                            @php
-                                                $birthdate = $child['dob'];
+                                    @if (isset($child['full_name']))
+                                        <div class="h-100 d-flex justify-content-center align-items-center col-3">
+                                            <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
+                                                @php
+                                                    $birthdate = $child['dob'];
 
-                                                // Convert DOB to DateTime object
-                                                $dobDate = \DateTime::createFromFormat('Y-m-d', $birthdate);
+                                                    // Convert DOB to DateTime object
+                                                    $dobDate = \DateTime::createFromFormat('Y-m-d', $birthdate);
 
-                                                //Get current Date
-                                                $currentDate = new \DateTime();
+                                                    //Get current Date
+                                                    $currentDate = new \DateTime();
 
-                                                // Calculate the difference between the two dates
-                                                $ageInterval = $currentDate->diff($dobDate);
-                                                $age = $ageInterval->y; // Access the years property of the interval
-                                            @endphp
-                                            <div>
-                                                <p class="py-2 m-auto mt-3 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto mb-4">
-                                                <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
-                                            </div>
-                                        </button>
-                                    </div>
+                                                    // Calculate the difference between the two dates
+                                                    $ageInterval = $currentDate->diff($dobDate);
+                                                    $age = $ageInterval->y; // Access the years property of the interval
+                                                @endphp
+                                                <div>
+                                                    <p class="py-2 m-auto mt-3 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
+                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto mb-4">
+                                                    <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -127,7 +129,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingChildFieldssLabel">Your Child Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your child name in Family dependant page first.</p>
@@ -141,6 +143,16 @@
 
 <script>
     var educationPriority = '{{$educationPriority}}';
-    var childData = {!! json_encode($childData) !!};
+    var childDatas = {!! json_encode($childData) !!};
+    if (childDatas){
+        for (let i = 0; i < childDatas.length; i++) {
+            if (childDatas[i].hasOwnProperty('full_name')) {
+                var childData = 'true';
+            }
+            else{
+                var childData = '';
+            }
+        }
+    }
 </script>
 @endsection

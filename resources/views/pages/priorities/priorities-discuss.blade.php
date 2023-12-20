@@ -384,7 +384,7 @@
                     checkboxValues[checkboxId] = true;
                     $(this).prop('checked', true); // Check the checkboxes initially
                 }
-
+////////////////////////// Link doesn't cater when didn't uncheck anything after submitted /////////////////////////////
                 if (checkboxValues[checkboxId] === true) {
                     // Assign link based on the sequence
                     switch (checkboxId) {
