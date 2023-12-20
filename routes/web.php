@@ -202,5 +202,5 @@ Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->nam
 
 // Admin Dashboard
 Route::view('/login', 'pages.login')->name('login');
-Route::view('/admin', 'pages.dashboard.admin')->name('dashboard');
-Route::view('/admin/logs', 'pages.dashboard.logs')->name('logs');
+Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
+Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');

@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Admin Dashboard Page
+ * Template Name: Agent Dashboard Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Admin Dashboard</title>
+<title>Agent Dashboard</title>
 @endsection
 
 @section('content')
@@ -21,12 +21,12 @@
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
                     <div class="timeline">
                         <div class="timeline-item">
-                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('basic-details') }}">
+                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent') }}">
                                 <p class="nav-text">Dashboard</p>
                             </a>
                         </div>
                         <div class="timeline-item">
-                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('avatar') }}">
+                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent/logs') }}">
                                 <p class="nav-text">Transaction Logs</p>
                             </a>
                         </div>
@@ -38,11 +38,11 @@
                 <section class="main-content">
                     <div class="container">
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
-                            <div class="col-9">
+                            <div class="col-8">
                                 <h2 class="display-5 fw-bold lh-sm text-primary">Hi, Agent Lee</h2>
                             </div>
-                            <div class="col-3">
-                                <p class="text-gray">Last login: 01/11/23 13:10</p>
+                            <div class="col-4 text-end">
+                                <p class="text-gray">Last login: 2023-11-01 20:01:00</p>
                             </div>
                             <div class="col-12">
                                 <p class="text-gray my-0">15428</p>
@@ -94,11 +94,12 @@
                             <div class="col-12">
                                 <h4 class="display-6 lh-base fw-bold pb-3">Saved Sessions</h4>
                             </div>
-                            <div class="col-12 table-responsive">
+                            <div id="datatable" class="col-12 table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>
+                                            <th scope="col">Transaction ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Last Saved</th>
@@ -109,51 +110,57 @@
                                     <tbody>
                                         <tr>
                                             <td>1.</td>
+                                            <td>01234</td>
                                             <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>2.</td>
+                                            <td>09584</td>
+                                            <td>Customer M</td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>3.</td>
+                                            <td>07392</td>
+                                            <td>Customer Zee</td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>4.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>5.</td>
+                                            <td>03654</td>
+                                            <td>Customer Az</td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Customer Abc</td>
-                                            <td>ID 01234</td>
-                                            <td>01/11/23, 09:10 am</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Continue</a></td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
+                                            <td>6.</td>
+                                            <td>05673</td>
+                                            <td>Customer Lum</td>
+                                            <td>999999-14-9999</td>
+                                            <td>2023-11-01 20:01:00</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
+                                            <td><a href="" class="btn btn-sm"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -174,7 +181,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="col-12">
-                                    <img src="{{ asset('images/dashboard/home-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
+                                    <img src="{{ asset('images/dashboard/instructions-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
                                 </div>
                                 <div class="col-12 py-3">
                                     <h4 class="display-6 lh-base fw-bold">How to use Generali App</h4>
@@ -183,7 +190,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="col-12">
-                                    <img src="{{ asset('images/dashboard/home-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
+                                    <img src="{{ asset('images/dashboard/customer-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
                                 </div>
                                 <div class="col-12 py-3">
                                     <h4 class="display-6 lh-base fw-bold">Get to know your customer</h4>

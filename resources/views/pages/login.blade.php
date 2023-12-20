@@ -39,7 +39,7 @@
                                     <input type="checkbox" value="remember-me"> Remember me
                                 </label>
                             </div>
-                            <button class="btn btn-primary text-uppercase w-100 mt-4" type="submit">Sign in</button>
+                            <a href="{{route('dashboard')}}" class="btn btn-primary text-uppercase w-100 mt-4">Sign in</a>
                             <!-- <p class="text-center mt-5 mb-3 text-muted">&copy; 2017–2022</p> -->
                         </form>
                     </div>
