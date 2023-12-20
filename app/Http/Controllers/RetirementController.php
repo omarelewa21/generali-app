@@ -460,7 +460,20 @@ class RetirementController extends Controller
         // // Process the form data and perform any necessary actions
         //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('education.home');
+        if (isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] === 'true' || $customerDetails['priorities']['educationDiscuss'] === true)) {
+            return redirect()->route('education.home');
+        } else if (isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] === 'true' || $customerDetails['priorities']['savingsDiscuss'] === true)) {
+            return redirect()->route('savings.home');
+        } else if (isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] === 'true' || $customerDetails['priorities']['investmentsDiscuss'] === true)) {
+            return redirect()->route('investment.home');
+        } else if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }

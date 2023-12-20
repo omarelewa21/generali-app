@@ -407,9 +407,9 @@ class DebtCancellationController extends Controller
         Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-         $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('existing.policy');
+        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('existing.policy');
     }
 
 }

@@ -408,7 +408,14 @@ class InvestmentController extends Controller
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
 
-        return redirect()->route('health.medical.home');
+        if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }
