@@ -16,6 +16,15 @@
     // Retrieving values from the session
     $existingPolicy = session('customer_details.existing_policy');
     $basicDetails = session('customer_details.basic_details');
+
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
 @endphp
 
 <div id="existing_policy">
@@ -191,9 +200,32 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                        <a href="{{route('summary.monthly-goals')}}" class="btn btn-primary text-uppercase flex-fill">Next</a>
-                                        <!-- <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button> -->
+                                        @php
+                                            if ($debtPriority === 'true' || $debtPriority === true) {
+                                                $route = route('debt.cancellation.gap');
+                                            } elseif ($healthPriority === 'true' || $healthPriority === true) {
+                                                if($selectedMedical === 'Medical Planning Care'){
+                                                    $route = route('health.medical.planning.gap');
+                                                } else{ 
+                                                    $route = route('health.medical.critical.gap');
+                                                }
+                                            } elseif ($investmentPriority === 'true' || $investmentPriority === true) {
+                                                $route = route('investment.gap');
+                                            } elseif ($savingsPriority === 'true' || $savingsPriority === true) {
+                                                $route = route('savings.gap');
+                                            } elseif ($educationPriority === 'true' || $educationPriority === true) {
+                                                $route = route('education.gap');
+                                            } elseif ($retirementPriority === 'true' || $retirementPriority === true) {
+                                                $route = route('retirement.gap');
+                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                                $route = route('protection.gap');
+                                            }
+                                            else {
+                                                $route = route('priorities.to.discuss');
+                                            }
+                                        @endphp
+                                        <a href="{{ $route }}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
                             </div>

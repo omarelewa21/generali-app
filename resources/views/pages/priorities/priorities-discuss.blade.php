@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.financial_priorities');
+    $prioritiesDiscuss = session('customer_details.priorities');
 @endphp
 
 <div id="priorities_to_discuss">
@@ -247,7 +248,7 @@
                                                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row py-2 px-3">
+                                                                    <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
                                                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
@@ -269,8 +270,9 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                    <input type="hidden" name="prioritiesDiscussInput" id="prioritiesDiscussInput" value="{{ json_encode($prioritiesDiscuss) }}">
                                     <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
+                                    <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -280,72 +282,170 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">Top Priorities is Required</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in top priorities page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure the first accordion item is always open
-    const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var lastPageInput = {!! json_encode($topPriorities) !!};
+    if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+        var nameModal = document.getElementById('missingLastPageInputFields');
+        nameModal.classList.add('show');
+        nameModal.style.display = 'block';
+        document.querySelector('body').style.paddingRight = '0px';
+        document.querySelector('body').style.overflow = 'hidden';
+        document.querySelector('body').classList.add('modal-open');
 
-    if (firstAccordionItem) {
-        const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
-        firstCollapse.classList.add('show');
-    }
+        var modalBackdrop = document.createElement('div');
+        modalBackdrop.className = 'modal-backdrop fade show';
+        document.querySelector('body.modal-open').append(modalBackdrop);
 
-    // Sent checkbox value to controller
-    var checkboxValues = {};
-
-    // First set all to true
-    $('input[type="checkbox"]').each(function() {
-        var checkboxId = $(this).attr('id');
-        checkboxValues[checkboxId] = true;
-        $(this).prop('checked', true); // Check the checkboxes initially
-    });
-
-    // Update checkboxValues object when any checkbox is changed
-    $('input[type="checkbox"]').on('change', function() {
-        var checkboxId = $(this).attr('id');
-        var isChecked = $(this).prop('checked');
-        checkboxValues[checkboxId] = isChecked;
-        var droppedDiv = document.querySelectorAll('.dropped');
-
-        if (!isChecked) {
-            droppedDiv.forEach(function(element) {
-                var droppedAttribute = element.getAttribute("data-identifier");
-                var image = document.querySelector('img.' + droppedAttribute);
-                console.log(image);
-                if (image) {
-                    image.style.display = 'none';
-                }
-            });
-        }
-        else {
-            droppedDiv.forEach(function(element) {
-                var droppedAttribute = element.getAttribute("data-identifier");
-                var image = document.querySelector('img.' + droppedAttribute);
-                if (image) {
-                    image.style.display = 'block';
-                }
-            });
-        }
-    });
-
-    $('#priorityNext').on('click', function(event) {
-        $.ajax({
-            type: "POST",
-            url: "{{ route('priorities.redirect') }}",
-            data: checkboxValues,
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                // Handle success, if needed
-            },
-            error: function(xhr, status, error) {
-                // Handle error, if needed
+        // Close the modal
+        var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
+        closeButton.addEventListener('click', function() {
+            nameModal.classList.remove('show');
+            nameModal.style.display = 'none';
+            document.querySelector('body').style.paddingRight = '';
+            document.querySelector('body').style.overflow = '';
+            document.querySelector('body').classList.remove('modal-open');
+            var modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.remove();
             }
+            window.location.href = '/financial-priorities';
         });
-    });
-});
+
+    } else{
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Ensure the first accordion item is always open
+            const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            if (firstAccordionItem) {
+                const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
+                firstCollapse.classList.add('show');
+            }
+
+            // Sent checkbox value to controller
+            var checkboxValues = {};
+
+            // First set all to true
+            $('input[type="checkbox"]').each(function() {
+                var checkboxId = $(this).attr('id');
+                checkboxValues[checkboxId] = true;
+                $(this).prop('checked', true); // Check the checkboxes initially
+            });
+
+            // Update checkboxValues object when any checkbox is changed
+            $('input[type="checkbox"]').on('change', function() {
+                var checkboxId = $(this).attr('id');
+                
+                var isChecked = $(this).prop('checked');
+                checkboxValues[checkboxId] = isChecked;
+                var droppedDiv = document.querySelectorAll('.dropped');
+
+                if (!isChecked) {
+                    droppedDiv.forEach(function(element) {
+                        var droppedAttribute = element.getAttribute("data-identifier");
+                        var image = document.querySelector('img.' + droppedAttribute);
+                        // console.log(image);
+                        if (image) {
+                            image.style.display = 'none';
+                        }
+                    });
+                }
+                else {
+                    droppedDiv.forEach(function(element) {
+                        var droppedAttribute = element.getAttribute("data-identifier");
+                        var image = document.querySelector('img.' + droppedAttribute);
+                        if (image) {
+                            image.style.display = 'block';
+                        }
+                    });
+                }
+
+                //Assign the needs sequence
+                const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
+
+                // Get the list of unchecked checkboxes
+                const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
+
+                // Check if there are unchecked checkboxes
+                if (uncheckedCheckboxes.length > 0) {
+                    // Iterate through the sequence of content checkboxes
+                    for (const checkboxId of contents) {
+                        // Check if the current checkbox is unchecked
+                        if (checkboxValues[checkboxId] === true) {
+                            // Check the sequence and redirect accordingly
+                            if (checkboxId === 'protectionDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
+
+                                break;
+                            }
+                            else if (checkboxId === 'retirementDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'educationDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'savingsDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'investmentsDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
+                                break;
+                            }
+                            else if (checkboxId === 'health-medicalDiscuss') {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
+                                break;
+                            }
+
+                            else {
+                                document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
+                                break;
+                            }
+                            // Break out of the loop once the first unchecked checkbox is handled
+                            break;
+                        }
+                    }
+                } else {
+                    // Handle the case where no checkboxes are unchecked
+                }
+            });
+
+            $('#priorityNext').on('click', function(event) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('priorities.redirect') }}",
+                    data: checkboxValues,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        // Handle success, if needed
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error, if needed
+                    }
+                });
+            });
+        });
+    }
 </script>
 @endsection

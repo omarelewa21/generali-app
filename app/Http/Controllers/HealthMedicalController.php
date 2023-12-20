@@ -736,6 +736,11 @@ class HealthMedicalController extends Controller
         Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.home');
+        if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 }
