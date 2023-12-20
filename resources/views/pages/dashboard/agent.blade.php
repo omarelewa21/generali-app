@@ -95,7 +95,7 @@
                                 <h4 class="display-6 lh-base fw-bold pb-3">Saved Sessions</h4>
                             </div>
                             <div id="datatable" class="col-12 table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="agentTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>

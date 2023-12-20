@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
-                <section class="main-content">
+                <section class="main-content pb-5">
                     <div class="container">
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
                             <div class="col-8">
@@ -54,8 +54,8 @@
                             </div>
                         </div>
                         <div class="row px-4">
-                            <div class="col-12 table-responsive">
-                                <table class="table table-striped">
+                            <div class="col-12">
+                                <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">No.</th>
@@ -63,7 +63,8 @@
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Date of Completion</th>
+                                            <th scope="col">Created</th>
+                                            <th scope="col">Modified</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -75,6 +76,7 @@
                                             <td>999999-14-9999</td>
                                             <td class="text-green">Completed</td>
                                             <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
                                         </tr>
                                         <tr>
@@ -83,6 +85,7 @@
                                             <td>Customer M</td>
                                             <td>999999-14-9999</td>
                                             <td class="text-green">Completed</td>
+                                            <td>2023-10-30</td>
                                             <td>2023-10-30</td>
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
                                         </tr>
@@ -93,6 +96,7 @@
                                             <td>999999-14-9999</td>
                                             <td class="text-green">Completed</td>
                                             <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
                                         </tr>
                                         <tr>
@@ -102,6 +106,7 @@
                                             <td>999999-14-9999</td>
                                             <td class="text-primary">Cancelled</td>
                                             <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
                                         </tr>
                                         <tr>
@@ -110,6 +115,87 @@
                                             <td>Customer Phg</td>
                                             <td>999999-14-9999</td>
                                             <td class="text-green">Completed</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-primary">Cancelled</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-green">Completed</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-primary">Cancelled</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-green">Completed</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-primary">Cancelled</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>11.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-green">Completed</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>12.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-primary">Cancelled</td>
+                                            <td>2023-10-30</td>
+                                            <td>2023-10-30</td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>13.</td>
+                                            <td>02849</td>
+                                            <td>Customer Phg</td>
+                                            <td>999999-14-9999</td>
+                                            <td class="text-primary">Cancelled</td>
+                                            <td>2023-10-30</td>
                                             <td>2023-10-30</td>
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">View</a></td>
                                         </tr>
