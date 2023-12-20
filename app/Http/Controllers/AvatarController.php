@@ -58,7 +58,7 @@ class AvatarController extends Controller
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
                 $sessionStorage->data = json_encode($customerDetails);
-                $route = json_encode(request()->path());
+                $route = strval(request()->path());
                 $sessionStorage->page_route = $route;
                 $sessionStorage->save();
             });
