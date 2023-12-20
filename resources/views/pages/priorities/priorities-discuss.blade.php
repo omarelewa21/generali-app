@@ -198,7 +198,7 @@
                                 <div class="col-12">
                                     <h1 class="display-4 text-white fw-bold pb-3">Let's go through what you'd like to discuss.</h1>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="row px-4 pb-2 px-md-5">
                                 <div class="col-12">
                                     <div class="accordion accordion-flush" id="accordionPriorities">
@@ -270,7 +270,6 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <input type="hidden" name="prioritiesDiscussInput" id="prioritiesDiscussInput" value="{{ json_encode($prioritiesDiscuss) }}">
                                     <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
@@ -329,7 +328,7 @@
 
     } else{
         document.addEventListener('DOMContentLoaded', function() {
-
+            var priority = {!! json_encode($prioritiesDiscuss) !!};
             // Ensure the first accordion item is always open
             const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -345,8 +344,73 @@
             // First set all to true
             $('input[type="checkbox"]').each(function() {
                 var checkboxId = $(this).attr('id');
-                checkboxValues[checkboxId] = true;
-                $(this).prop('checked', true); // Check the checkboxes initially
+                if(priority){
+                    for (var key in priority) {
+                        var value = priority[key];
+                        if (value === 'true') {
+                            checkboxValues[key] = true;
+                            $('#' + key).prop('checked', true);
+                        }
+                        else{
+                            checkboxValues[key] = false;
+                            $('#' + key).prop('checked', false);
+                        }
+                    }
+                    var isChecked = $(this).prop('checked');
+                    checkboxValues[checkboxId] = isChecked;
+                    var droppedDiv = document.querySelectorAll('.dropped');
+
+                    if (!isChecked) {
+                        droppedDiv.forEach(function(element) {
+                            var droppedAttribute = element.getAttribute("data-identifier");
+                            var image = document.querySelector('img.' + droppedAttribute);
+                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            // if (image) {
+                                image.style.display = 'none';
+                            }
+                        });
+                    }
+                    else {
+                        droppedDiv.forEach(function(element) {
+                            var droppedAttribute = element.getAttribute("data-identifier");
+                            var image = document.querySelector('img.' + droppedAttribute);
+                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            // if (image) {
+                                image.style.display = 'block';
+                            }
+                        });
+                    }
+                } else{
+                    checkboxValues[checkboxId] = true;
+                    $(this).prop('checked', true); // Check the checkboxes initially
+                }
+
+                if (checkboxValues[checkboxId] === true) {
+                    // Assign link based on the sequence
+                    switch (checkboxId) {
+                        case 'protectionDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
+                            break;
+                        case 'retirementDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
+                            break;
+                        case 'educationDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
+                            break;
+                        case 'savingsDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
+                            break;
+                        case 'investmentsDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
+                            break;
+                        case 'health-medicalDiscuss':
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
+                            break;
+                        default:
+                            document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
+                            break;
+                    }
+                }
             });
 
             // Update checkboxValues object when any checkbox is changed
@@ -361,8 +425,8 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        // console.log(image);
-                        if (image) {
+                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        // if (image) {
                             image.style.display = 'none';
                         }
                     });
@@ -371,7 +435,8 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        if (image) {
+                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        // if (image) {
                             image.style.display = 'block';
                         }
                     });
@@ -392,7 +457,6 @@
                             // Check the sequence and redirect accordingly
                             if (checkboxId === 'protectionDiscuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
-
                                 break;
                             }
                             else if (checkboxId === 'retirementDiscuss') {
