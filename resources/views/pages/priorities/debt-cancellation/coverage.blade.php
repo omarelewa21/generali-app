@@ -19,8 +19,11 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
+    $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
+
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
+    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
     $relationship = session('customer_details.debt-cancellation_needs.coverFor');
     $selectedInsuredName = session('customer_details.debt-cancellation_needs.selectedInsuredName');
@@ -58,7 +61,7 @@
                                     </button>
                                 </div>
                             @endif
-                            @if ($spouseData)
+                            @if ($spouseDataName)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div>
@@ -70,14 +73,16 @@
                             @endif
                             @if ($childData)
                                 @foreach($childData as $child)
-                                    <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                        <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
-                                            <div>
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto my-4">
-                                                <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
-                                            </div>
-                                        </button>
-                                    </div>
+                                    @if (isset($child['full_name']))
+                                        <div class="h-100 d-flex justify-content-center align-items-center col-3">
+                                            <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
+                                                <div>
+                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto my-4">
+                                                    <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -148,8 +153,64 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingSpouseFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input your name in Family Depandent Details page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingChildFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input your child name in Family dependant page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var debtPriority = '{{$debtPriority}}';
     var selfData = '{{$selfDataName}}';
+    var familyDependent = {!! json_encode($familyDependent) !!};
+
+    if (familyDependent){
+        var spouseDatas = {!! json_encode($spouseData) !!};
+        var childDatas = {!! json_encode($childData) !!};
+        if('spouse_data' in familyDependent && spouseDatas){
+            if('full_name' in spouseDatas){
+                var spouseData = '{{$spouseDataName}}';
+            } else{
+                var spouseData = null;
+            }
+        }
+        if('children_data' in familyDependent){
+            for (let key in childDatas) {
+                if (childDatas.hasOwnProperty(key)) {
+                    let child = childDatas[key];
+                    if (child.hasOwnProperty('full_name')) {
+                        var childData = 'not empty';
+                    }
+                    else{
+                        var childData = null;
+                    }
+                }
+            }
+        }
+    }
 </script>
 @endsection

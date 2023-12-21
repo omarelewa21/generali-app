@@ -341,6 +341,9 @@
             // Sent checkbox value to controller
             var checkboxValues = {};
 
+            //Assign the needs sequence
+            const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
+
             // First set all to true
             $('input[type="checkbox"]').each(function() {
                 var checkboxId = $(this).attr('id');
@@ -384,31 +387,39 @@
                     checkboxValues[checkboxId] = true;
                     $(this).prop('checked', true); // Check the checkboxes initially
                 }
-////////////////////////// Link doesn't cater when didn't uncheck anything after submitted /////////////////////////////
-                if (checkboxValues[checkboxId] === true) {
-                    // Assign link based on the sequence
-                    switch (checkboxId) {
-                        case 'protectionDiscuss':
+
+                for (const checkboxId of contents) {
+                    if (checkboxValues[checkboxId] === true) {
+                        // Assign link based on the sequence
+                        if (checkboxId === 'protectionDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
                             break;
-                        case 'retirementDiscuss':
+                        }
+                        else if (checkboxId === 'retirementDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
                             break;
-                        case 'educationDiscuss':
+                        }
+                        else if (checkboxId === 'educationDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
                             break;
-                        case 'savingsDiscuss':
+                        }
+                        else if (checkboxId === 'savingsDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
                             break;
-                        case 'investmentsDiscuss':
+                        }
+                        else if (checkboxId === 'investmentsDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
                             break;
-                        case 'health-medicalDiscuss':
+                        }
+                        else if (checkboxId === 'health-medicalDiscuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
                             break;
-                        default:
+                        }
+
+                        else {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
                             break;
+                        }
                     }
                 }
             });
@@ -441,9 +452,6 @@
                         }
                     });
                 }
-
-                //Assign the needs sequence
-                const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
 
                 // Get the list of unchecked checkboxes
                 const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);

@@ -197,17 +197,16 @@
                 var spouseData = null;
             }
         }
-        //haven't fix Stop here
         if('children_data' in familyDependent){
-            for (let i = 0; i < childDatas.length; i++) {
-                console.log('y here?');
-                if (childDatas[i].hasOwnProperty('full_name')) {
-                    var childData = 'not empty';
-                    console.log('y here?');
-                }
-                else{
-                    var childData = null;
-                    console.log('y here?');
+            for (let key in childDatas) {
+                if (childDatas.hasOwnProperty(key)) {
+                    let child = childDatas[key];
+                    if (child.hasOwnProperty('full_name')) {
+                        var childData = 'not empty';
+                    }
+                    else{
+                        var childData = null;
+                    }
                 }
             }
         }

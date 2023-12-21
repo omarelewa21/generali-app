@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $educationPriority = session('customer_details.priorities.educationDiscuss');
     $education = session('customer_details.education_needs');
+    $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
 
     $relationship = session('customer_details.education_needs.coverFor');
@@ -144,15 +145,26 @@
 <script>
     var educationPriority = '{{$educationPriority}}';
     var childDatas = {!! json_encode($childData) !!};
-    if (childDatas){
-        for (let i = 0; i < childDatas.length; i++) {
-            if (childDatas[i].hasOwnProperty('full_name')) {
-                var childData = 'true';
-            }
-            else{
-                var childData = '';
+    var familyDependent = {!! json_encode($familyDependent) !!};
+    if(childDatas){
+        if (familyDependent){
+            if('children_data' in familyDependent){
+                for (let key in childDatas) {
+                    if (childDatas.hasOwnProperty(key)) {
+                        let child = childDatas[key];
+                        if (child.hasOwnProperty('full_name')) {
+                            var childData = 'not empty';
+                        }
+                        else{
+                            var childData = null;
+                        }
+                    }
+                }
             }
         }
+    } else{
+        var childData = null;
     }
+    
 </script>
 @endsection

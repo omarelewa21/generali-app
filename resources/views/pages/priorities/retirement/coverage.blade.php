@@ -19,6 +19,7 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
+    $familyDependent = session('customer_details.family_details.dependant');
 
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
@@ -156,6 +157,17 @@
 <script>
     var retirementPriority = '{{$retirementPriority}}';
     var selfData = '{{$selfDataName}}';
-    var spouseData = '{{$spouseDataName}}';
+    var familyDependent = {!! json_encode($familyDependent) !!};
+
+    if (familyDependent){
+        var spouseDatas = {!! json_encode($spouseData) !!};
+        if('spouse_data' in familyDependent && spouseDatas){
+            if('full_name' in spouseDatas){
+                var spouseData = '{{$spouseDataName}}';
+            } else{
+                var spouseData = null;
+            }
+        }
+    }
 </script>
 @endsection

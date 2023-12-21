@@ -145,6 +145,65 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         window.location.href = '/basic-details';
                     });
 
+                } else if(familyDependent){
+                    if(spouseDatas){
+                        if (spouseData == null || spouseData == undefined || spouseData == '') {
+                            var nameModal = document.getElementById('missingSpouseFields');
+                            nameModal.classList.add('show');
+                            nameModal.style.display = 'block';
+                            document.querySelector('body').style.paddingRight = '0px';
+                            document.querySelector('body').style.overflow = 'hidden';
+                            document.querySelector('body').classList.add('modal-open');
+        
+                            var modalBackdrop = document.createElement('div');
+                            modalBackdrop.className = 'modal-backdrop fade show';
+                            document.querySelector('body.modal-open').append(modalBackdrop);
+        
+                            // Close the modal
+                            var closeButton = document.querySelector('#missingSpouseFields .btn-exit-sidebar');
+                            closeButton.addEventListener('click', function() {
+                                nameModal.classList.remove('show');
+                                nameModal.style.display = 'none';
+                                document.querySelector('body').style.paddingRight = '';
+                                document.querySelector('body').style.overflow = '';
+                                document.querySelector('body').classList.remove('modal-open');
+                                var modalBackdrop = document.querySelector('.modal-backdrop');
+                                if (modalBackdrop) {
+                                    modalBackdrop.remove();
+                                }
+                                window.location.href = '/family-dependant/details';
+                            });
+                        }  
+                    }
+                    if(childDatas){
+                        if (childData === null || childData === undefined) {
+                            var nameModal = document.getElementById('missingChildFields');
+                            nameModal.classList.add('show');
+                            nameModal.style.display = 'block';
+                            document.querySelector('body').style.paddingRight = '0px';
+                            document.querySelector('body').style.overflow = 'hidden';
+                            document.querySelector('body').classList.add('modal-open');
+        
+                            var modalBackdrop = document.createElement('div');
+                            modalBackdrop.className = 'modal-backdrop fade show';
+                            document.querySelector('body.modal-open').append(modalBackdrop);
+        
+                            // Close the modal
+                            var closeButton = document.querySelector('#missingChildFields .btn-exit-sidebar');
+                            closeButton.addEventListener('click', function() {
+                                nameModal.classList.remove('show');
+                                nameModal.style.display = 'none';
+                                document.querySelector('body').style.paddingRight = '';
+                                document.querySelector('body').style.overflow = '';
+                                document.querySelector('body').classList.remove('modal-open');
+                                var modalBackdrop = document.querySelector('.modal-backdrop');
+                                if (modalBackdrop) {
+                                    modalBackdrop.remove();
+                                }
+                                window.location.href = '/family-dependant/details';
+                            });
+                        } 
+                    }
                 } else{
                     // Add event listener to each button with the 'data-required' attribute
                     const dataButtons = document.querySelectorAll('[data-avatar]');
