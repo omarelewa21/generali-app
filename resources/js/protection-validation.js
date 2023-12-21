@@ -127,56 +127,56 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     } 
                 }
             } else{
-                // Add event listener to each button with the 'data-required' attribute
-                const dataButtons = document.querySelectorAll('[data-avatar]');
-        
-                dataButtons.forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the button click
-        
-                        dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                        // Add 'selected' attribute to the clicked button
-                        this.setAttribute('data-required', 'selected');
-        
-                        // selectedAvatar = this.getAttribute('data-required');
-        
-                        dataButtons.forEach(btn => btn.classList.remove('selected'));
-        
-                        // Get the selected data-avatar value
-                        const dataAvatar = this.getAttribute('data-avatar');
-                        const dataAvatarDob = this.getAttribute('data-avatar-dob');
-                        const dataRelation = this.getAttribute('data-relation');
-                        // const dataAvatarImg = this.querySelector('img').getAttribute('src');
-        
-                        // Update the hidden input field value with the selected avatar
-                        document.getElementById('relationshipInput').value = dataRelation;
-                        document.getElementById('selectedInsuredNameInput').value = '';
-                        document.getElementById('selectedCoverForDobInput').value = '';
-                        document.getElementById('othersCoverForNameInput').value = '';
-                        document.getElementById('othersCoverForDobInput').value = '';
-                        if (dataRelation == 'Spouse'){
-                            document.getElementById('othersCoverForNameInput').value = dataAvatar;
-                            document.getElementById('othersCoverForDobInput').value = dataAvatarDob;
-                        }
-                        if(dataRelation == 'Child') {
-                            document.getElementById('selectedInsuredNameInput').value = dataAvatar;
-                            document.getElementById('selectedCoverForDobInput').value = dataAvatarDob;
-                        }
-                        // document.getElementById('protectionSelectedAvatarImage').value = dataAvatarImg;
-                    });
-                });
-        
-                // Preselect the button on page load
-                window.addEventListener('DOMContentLoaded', function() {
-                    const defaultBtn = document.querySelectorAll('.default');
-        
-                    defaultBtn.forEach(defaultBtn => {
-                        // Add the 'selected' class to the closest .button-bg div of each default button
-                        defaultBtn.classList.add('selected');
-                    });
-                });
-
+                
             }
+            // Add event listener to each button with the 'data-required' attribute
+            const dataButtons = document.querySelectorAll('[data-avatar]');
+        
+            dataButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default behavior of the button click
+    
+                    dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+                    // Add 'selected' attribute to the clicked button
+                    this.setAttribute('data-required', 'selected');
+    
+                    // selectedAvatar = this.getAttribute('data-required');
+    
+                    dataButtons.forEach(btn => btn.classList.remove('selected'));
+    
+                    // Get the selected data-avatar value
+                    const dataAvatar = this.getAttribute('data-avatar');
+                    const dataAvatarDob = this.getAttribute('data-avatar-dob');
+                    const dataRelation = this.getAttribute('data-relation');
+                    // const dataAvatarImg = this.querySelector('img').getAttribute('src');
+    
+                    // Update the hidden input field value with the selected avatar
+                    document.getElementById('relationshipInput').value = dataRelation;
+                    document.getElementById('selectedInsuredNameInput').value = '';
+                    document.getElementById('selectedCoverForDobInput').value = '';
+                    document.getElementById('othersCoverForNameInput').value = '';
+                    document.getElementById('othersCoverForDobInput').value = '';
+                    if (dataRelation == 'Spouse'){
+                        document.getElementById('othersCoverForNameInput').value = dataAvatar;
+                        document.getElementById('othersCoverForDobInput').value = dataAvatarDob;
+                    }
+                    if(dataRelation == 'Child') {
+                        document.getElementById('selectedInsuredNameInput').value = dataAvatar;
+                        document.getElementById('selectedCoverForDobInput').value = dataAvatarDob;
+                    }
+                    // document.getElementById('protectionSelectedAvatarImage').value = dataAvatarImg;
+                });
+            });
+    
+            // Preselect the button on page load
+            window.addEventListener('DOMContentLoaded', function() {
+                const defaultBtn = document.querySelectorAll('.default');
+    
+                defaultBtn.forEach(defaultBtn => {
+                    // Add the 'selected' class to the closest .button-bg div of each default button
+                    defaultBtn.classList.add('selected');
+                });
+            });
         } 
         if (path == '/protection/amount-needed') {
 
