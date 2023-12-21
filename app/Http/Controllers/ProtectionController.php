@@ -24,7 +24,7 @@ class ProtectionController extends Controller
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
-                return true;
+                return true; 
             }
             
             $customMessage = "Please select at least one.";
@@ -66,9 +66,9 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('protection.amount.needed');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('protection.amount.needed');
     }
 
     public function validateProtectionAmountNeeded(Request $request)

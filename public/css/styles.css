@@ -52,7 +52,7 @@ body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities
 }
 
 body #login {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   height: 100vh;
 }
 
@@ -203,22 +203,76 @@ input[type="number"] {
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
-.form-signin .form-control {
-  background-color: #ffffff;
-  border-radius: 0.375rem;
-  border: 2px inset rgb(118, 118, 118);
+.form-signin label {
+  color: rgba(10, 4, 60, 0.30);
 }
 
 .form-signin .checkbox {
   font-size: 18px;
 }
 
-.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .form-control-plaintext:focus, .form-floating > .form-control-plaintext:not(:placeholder-shown) {
-  padding-top: 2.4rem;
+.field-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.fa-id:before {
+  content: "";
+  background-image: url('/images/general/agentid-icon.png');
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.fa-password:before {
+  content: "";
+  background-image: url('/images/general/password-icon.png');
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+  transform: scale(0.85) translateY(-1rem) translateX(0.15rem);
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* ============================== Tables ============================== */
+.dataTable tr th, #agentTable tr th {
+  background-color: #EBEBEB;
+  font-size: 18px;
+  font-weight: normal;
+  color: #707070;
+}
+
+#dataTable_length, #dataTable_filter, #dataTable_info, #dataTable_paginate {
+  font-size: 18px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+#dataTable_paginate .page-link {
+  font-size: 18px;
+}
+
+.dropdown-options .dropdown-toggle:before {
+  content: none;
 }
 
 /* ============================== Slick Carousel ============================== */
@@ -797,24 +851,18 @@ h2.display-5, .currencyField {
   scroll-snap-align: start;
 } */
 
-#login img {
+.login-bg img {
   max-width: 450px;
 }
 
+.login-bg {
+  background-image: url(/images/general/login-bg.jpg);
+  background-size: auto 80%;
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
 /* ============================== Dashboard Page ============================== */
-#dashboard .timeline:before {
-  left:11px;
-  bottom: 21px;
-}
-
-#dashboard .timeline-item::after {
-  left:0;
-}
-
-#dashboard .timeline-item {
-  padding-left: 60px;
-}
-
 .tutorial {
   border-radius: 10px;
   border: 1px solid #cccccc;
@@ -1270,6 +1318,26 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   font-weight: 400;
 }
 
+.needs-radio:checked + label::after {
+  content: url("/images/needs/general/check.png"); 
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  font-size: 18px;
+  color: #C21B17;
+}
+
+.needs-radio + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #A0A0A0;
+  background-color: #fff;
+}
+
 .hide-content{
   opacity:0;
 }
@@ -1358,6 +1426,18 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
+  #dashboard .timeline:before {
+    left:11px;
+    bottom: 21px;
+  }
+  
+  #dashboard .timeline-item::after {
+    left:0;
+  }
+  
+  #dashboard .timeline-item {
+    padding-left: 60px;
+  }
   .main-logo {
     max-width: 220px;
   }
@@ -1422,8 +1502,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   body #login {
     height: inherit;
   }
-  #login img {
-    width: 200px;
+  .login-bg img {
+    width: auto;
+    height:100%;
+  }
+  #login .avatar-text {
+    font-size: 22px;
   }
   .slider {
     flex-flow: nowrap;
@@ -1526,7 +1610,16 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
   }
-
+  .login-bg {
+    background-image: none;
+  }
+  .wrapper-login {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas: "header" "content" "bottom-content";
+    grid-template-rows: 12vh 28vh 55vh;
+    grid-gap: 10px;
+  }
   /* Keep this for scrolling */
   .bottomObeserver {
     height:50px;

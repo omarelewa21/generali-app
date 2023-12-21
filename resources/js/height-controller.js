@@ -40,8 +40,10 @@ $(document).ready(function() {
         // Check if the window width is less than 767px
         if (windowWidth < 768) {
             const menuHeight = $("#wrapper-navbar.fixed-top.mobile").outerHeight();
-            const responsiveHeader = menuHeight; // Adding 10 pixels
+            const menuHeightAgent = $("#wrapper-navbar-agent .fixed-top").outerHeight();
+            const responsiveHeader = menuHeight; 
             $(".content-section").css("padding-top", responsiveHeader + "px");
+            $(".content-section-agent").css("padding-top", menuHeightAgent + "px");
         } else {
             // Reset padding if window width is 767px or more
             $(".content-section").css("padding-top", 0);

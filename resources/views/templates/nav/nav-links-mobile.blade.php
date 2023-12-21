@@ -61,3 +61,31 @@
         </div>
     </div>
 </div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenuMobileAgent">
+    <div class="offcanvas-header px-4 px-md-5 pt-4 pt-md-5 pb-3 justify-content-end">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="timeline">
+            <div class="timeline-item">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent') }}">
+                    <p class="nav-text">Dashboard</p>
+                </a>
+            </div>
+            <div class="timeline-item">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent/logs') }}">
+                    <p class="nav-text">Transaction Logs</p>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-navigation col-12">
+        <div class="col-12 px-5 py-4 inline-block">
+            <!-- Button trigger modal -->
+            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Save & Logout</a>
+        </div>
+    </div>
+</div>

@@ -40,7 +40,7 @@
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
-                            <div class="row justify-content-center align-items-center" style="height:100%">
+                            <div class="row justify-content-center align-items-center h-100">
                                 <div class="col-xl-6 text-center">
                                     <h2 class="display-5 fw-bold lh-sm py-4">Let's get you covered on the Health & Medical front.</h2>
                                 </div>

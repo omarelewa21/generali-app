@@ -53,8 +53,11 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
 
         // Function to update the avatar image source based on index
         function updateAvatarSource(currentIndex) {
-            const prefix = selectedGenderValue === 'Female' ? 'fe' : '';
-            const newImageSrc = "/images/avatar-general/gender-" + prefix + svgFileNames[currentIndex] + ".svg";
+            // Get the data-color attribute value
+            const dataColor = document.getElementById('skinSelection').value;
+            const filePrefix = selectedGenderValue === 'Female' ? 'fe' : '';
+
+            const newImageSrc = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".svg";
             avatar.setAttribute('src', newImageSrc);
 
             // Update the hidden input field value with the selected avatar
