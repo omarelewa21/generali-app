@@ -34,8 +34,17 @@ $(document).ready(function () {
             </svg>`,
             searchPlaceholder: 'Search...'
         },
-        responsive: true,
-        autoWidth: true,
+        responsive: false,
+        autoWidth: false,
+        scrollCollapse: false,
+        scrollY: false,
+    });
+
+    $('#agentTable').DataTable({
+        responsive: false,
+        autoWidth: false,
+        scrollCollapse: false,
+        scrollY: false,
     });
 });
 

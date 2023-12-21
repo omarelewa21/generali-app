@@ -254,7 +254,7 @@ input[type="number"] {
 }
 
 /* ============================== Tables ============================== */
-#dataTable tr th, #agentTable tr th {
+.dataTable tr th, #agentTable tr th {
   background-color: #EBEBEB;
   font-size: 18px;
   font-weight: normal;
@@ -269,6 +269,10 @@ input[type="number"] {
 
 #dataTable_paginate .page-link {
   font-size: 18px;
+}
+
+.dropdown-options .dropdown-toggle:before {
+  content: none;
 }
 
 /* ============================== Slick Carousel ============================== */
@@ -859,19 +863,6 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Dashboard Page ============================== */
-#dashboard .timeline:before {
-  left:11px;
-  bottom: 21px;
-}
-
-#dashboard .timeline-item::after {
-  left:0;
-}
-
-#dashboard .timeline-item {
-  padding-left: 60px;
-}
-
 .tutorial {
   border-radius: 10px;
   border: 1px solid #cccccc;
@@ -1435,6 +1426,18 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
+  #dashboard .timeline:before {
+    left:11px;
+    bottom: 21px;
+  }
+  
+  #dashboard .timeline-item::after {
+    left:0;
+  }
+  
+  #dashboard .timeline-item {
+    padding-left: 60px;
+  }
   .main-logo {
     max-width: 220px;
   }

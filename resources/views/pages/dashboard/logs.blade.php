@@ -15,37 +15,17 @@
 <div id="dashboard">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
-                <div class="navbar-scroll fixed-top">
-                    @include('templates.nav.nav-white')
-                    <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent') }}">
-                                <p class="nav-text">Dashboard</p>
-                            </a>
-                        </div>
-                        <div class="timeline-item">
-                            <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent/logs') }}">
-                                <p class="nav-text">Transaction Logs</p>
-                            </a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
+            @include('templates.nav.nav-white')
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section-agent">
                 <section class="main-content pb-5">
                     <div class="container">
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
                             <div class="col-8">
                                 <h2 class="display-5 fw-bold lh-sm text-primary">Hi, Agent Lee</h2>
+                                <p class="text-gray my-0">15428</p>
                             </div>
                             <div class="col-4 text-end">
                                 <p class="text-gray">Last login: 2023-11-01 20:01:00</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-gray my-0">15428</p>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
