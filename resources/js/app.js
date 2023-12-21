@@ -20,12 +20,38 @@ import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
-// import ScrollMagic from 'scrollmagic';
-// import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
+import DataTable from 'datatables.net-bs5';
+import 'datatables.net-responsive-bs5';
+import 'datatables.net-select-bs5';
+
+// Declare Datatables for sorting
+$(document).ready(function () {
+    $('#dataTable').DataTable({
+        language: {
+            search: `<svg width="18" height="18" class="w-4 lg:w-auto" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>`,
+            searchPlaceholder: 'Search...'
+        },
+        responsive: false,
+        autoWidth: false,
+        scrollCollapse: false,
+        scrollY: false,
+    });
+
+    $('#agentTable').DataTable({
+        responsive: false,
+        autoWidth: false,
+        scrollCollapse: false,
+        scrollY: false,
+    });
+});
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
     // Detect the element with id
+    var login = $('#login');
     var home = $('#home');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
@@ -37,7 +63,7 @@ $(document).ready(function () {
     var education_home = $('#education_home');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1) {
+    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1 || login.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }
