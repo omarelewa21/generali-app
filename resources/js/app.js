@@ -39,13 +39,6 @@ $(document).ready(function () {
         scrollCollapse: false,
         scrollY: false,
     });
-
-    $('#agentTable').DataTable({
-        responsive: false,
-        autoWidth: false,
-        scrollCollapse: false,
-        scrollY: false,
-    });
 });
 
 // Remove class 'overflow' to <body> tag
