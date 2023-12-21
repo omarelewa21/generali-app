@@ -261,13 +261,13 @@ input[type="number"] {
   color: #707070;
 }
 
-#dataTable_length, #dataTable_filter, #dataTable_info, #dataTable_paginate {
+#dataTable_length, #dataTable_filter, #dataTable_info, #agentTable_info, #dataTable_paginate, #agentTable_paginate {
   font-size: 18px;
   padding-bottom: 20px;
   padding-top: 10px;
 }
 
-#dataTable_paginate .page-link {
+#dataTable_paginate .page-link, #agentTable_paginate .page-link {
   font-size: 18px;
 }
 
@@ -275,6 +275,35 @@ input[type="number"] {
   content: none;
 }
 
+table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_asc:after {
+  line-height: 15px!important;
+  opacity: .3!important;
+}
+
+table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_desc:after {
+  opacity: 1!important;
+}
+
+.page-link.disabled, .disabled > .page-link, .page-link {
+  background-color: transparent;
+  border: none;
+}
+
+.page-link:focus {
+  box-shadow: none;
+}
+
+.page-link:hover {
+  background-color: var(--bs-pagination-focus-bg);
+}
+
+.active > .page-link {
+  background-color: var(--bs-pagination-active-bg);
+}
+
+/* #dashboard_logs div.dataTables_wrapper div.dataTables_filter {
+text-align: left;
+} */
 /* ============================== Slick Carousel ============================== */
 .action_button_slider .slick-dots li.slick-active button:before, .action_button_slider .slick-dots li button:focus:before, .action_button_slider .slick-dots li button:hover:before, .action_button_slider .slick-dots li button:before {
   opacity:0;
@@ -599,6 +628,24 @@ p.nav-text {
   background-color: #ffffff;
   color: #C21B17;
   border-color: #CCCCCC;
+}
+
+div.dt-buttons>.dt-button {
+  position: relative!important;
+  display: inherit!important;
+  margin-left: inherit!important;
+  margin-right: inherit!important;
+  margin-bottom: inherit!important;
+  padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x)!important;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color)!important;
+  border-radius: var(--bs-btn-border-radius)!important;
+  font-size: var(--bs-btn-font-size)!important;
+  line-height: inherit!important;
+  color: inherit!important;
+  background: none!important;
+  background-color: #ffffff!important;
+  color: #C21B17!important;
+  border-color: #CCCCCC!important;
 }
 
 .btn-secondary:hover {
@@ -1426,16 +1473,21 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
-  #dashboard .timeline:before {
+  #dataTable_wrapper .bottom, #dataTable_wrapper .top {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #dashboard .timeline:before, #dashboard_logs .timeline:before {
     left:11px;
     bottom: 21px;
   }
   
-  #dashboard .timeline-item::after {
+  #dashboard .timeline-item::after, #dashboard_logs .timeline-item::after {
     left:0;
   }
   
-  #dashboard .timeline-item {
+  #dashboard .timeline-item, #dashboard_logs .timeline-item {
     padding-left: 60px;
   }
   .main-logo {
@@ -1619,6 +1671,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     grid-template-areas: "header" "content" "bottom-content";
     grid-template-rows: 12vh 28vh 55vh;
     grid-gap: 10px;
+  }
+  #dataTable_wrapper, #agentTable_wrapper {
+    font-size: 18px;
   }
   /* Keep this for scrolling */
   .bottomObeserver {

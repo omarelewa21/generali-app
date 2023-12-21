@@ -23,6 +23,9 @@ import './phoneValidation';
 import DataTable from 'datatables.net-bs5';
 import 'datatables.net-responsive-bs5';
 import 'datatables.net-select-bs5';
+import 'datatables.net-buttons-dt';
+import 'datatables.net-searchbuilder-bs5';
+import 'datatables.net-datetime';
 
 // Declare Datatables for sorting
 $(document).ready(function () {
@@ -32,12 +35,82 @@ $(document).ready(function () {
                 <path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>`,
-            searchPlaceholder: 'Search...'
+            searchPlaceholder: 'Search...',
+            searchBuilder: {
+                button: 'Advanced Search',
+                add: 'Add Condition',
+                clearAll: 'Clear All',
+                condition: 'Condition',
+                data: 'Data',
+                deleteTitle: 'Delete filtering rule',
+                logicAnd: 'AND',
+                logicOr: 'OR',
+                title: {
+                    _: 'Advanced Search',
+                    0: 'Advanced Search'
+                },
+            }
         },
         responsive: false,
-        autoWidth: false,
-        scrollCollapse: false,
+        autoWidth: true,
+        scrollCollapse: true,
         scrollY: false,
+        scrollX: '1054px',
+        columnDefs: [
+            { width: '15%', targets: 0 },
+            { width: '18%', targets: 1 },
+            { width: '19%', targets: 2 },
+            { width: '12%', targets: 3 },
+            { width: '14%', targets: 4 },
+            { width: '13%', targets: 5 },
+            { width: '20%', targets: 6, orderable: false },
+        ],
+        dom: '<"top"Bf>rt<"bottom"ip>',
+        buttons: [{
+            extend: 'searchBuilder',
+            className: 'btn btn-secondary fw-bold btn-sm',
+        }],
+        initComplete: function () {
+            var tableWidth = $('.dataTables_scrollHeadInner');
+            var dataTable = $('.dataTables_scrollHeadInner .dataTable');
+            var tableBody = $('.dataTables_scrollBody .dataTable');
+
+            tableWidth.css('min-width', '1054px');
+            dataTable.css('min-width', '1054px');
+            tableBody.css('min-width', '1054px');
+        },
+    });
+
+    $('#agentTable').DataTable({
+        responsive: false,
+        autoWidth: true,
+        paging: true,
+        searching: false,
+        ordering: true,
+        lengthChange: false,
+        pageLength: 10,
+        columnDefs: [
+            { width: '15%', targets: 0 },
+            { width: '26%', targets: 1 },
+            { width: '19%', targets: 2 },
+            { width: '20%', targets: 3 },
+            { width: '13%', targets: 4, orderable: false },
+            { width: '7%', targets: 5, orderable: false },
+        ],
+        scrollCollapse: true,
+        scrollY: false,
+        scrollX: '1054px',
+        initComplete: function () {
+            // var table = this.api();
+            var container = $('#agentTable_wrapper');
+            var tableWidth = $('.dataTables_scrollHeadInner');
+            var dataTable = $('.dataTables_scrollHeadInner .dataTable');
+            var tableBody = $('.dataTables_scrollBody .dataTable');
+
+            tableWidth.css('min-width', '1054px');
+            dataTable.css('min-width', '1054px');
+            tableBody.css('min-width', '1054px');
+        }
     });
 });
 
