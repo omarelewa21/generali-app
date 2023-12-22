@@ -301,9 +301,45 @@ table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sort
   background-color: var(--bs-pagination-active-bg);
 }
 
-/* #dashboard_logs div.dataTables_wrapper div.dataTables_filter {
-text-align: left;
-} */
+.dtsb-titleRow {
+  text-align:center;
+}
+
+div.dtsb-searchBuilder div.dtsb-titleRow button.dtsb-clearAll {
+  float: none!important;
+  margin-bottom: inherit!important;
+  display: block;
+}
+
+div.dt-button-collection.dtb-collection-closeable div.dtsb-titleRow {
+  padding-right: inherit;
+  height: inherit;
+}
+
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-condition, div.dtsb-searchBuilder div.dtsb-group div.dtsb-logicContainer {
+  display:none!important;
+}
+
+div.dtsb-searchBuilder button.dtsb-button {
+  font-weight: 700 !important;
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 1rem;
+  --bs-btn-border-radius: var(--bs-border-radius-sm);
+}
+
+.dtsb-group {
+  text-align: center;
+}
+
+div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
+  border: 3px solid #000000!important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  font-style: inherit!important;
+}
+
 /* ============================== Slick Carousel ============================== */
 .action_button_slider .slick-dots li.slick-active button:before, .action_button_slider .slick-dots li button:focus:before, .action_button_slider .slick-dots li button:hover:before, .action_button_slider .slick-dots li button:before {
   opacity:0;
@@ -648,6 +684,13 @@ div.dt-buttons>.dt-button {
   border-color: #CCCCCC!important;
 }
 
+div.dt-buttons>.dt-button:hover, div.dt-buttons>.dt-button:focus {
+  background-color: #AA1B17!important;
+  color: #fff!important;
+  border-color: #AA1B17!important;
+  outline: none!important;
+}
+
 .btn-secondary:hover {
   background-color: #AA1B17;
   color: #fff;
@@ -724,6 +767,10 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Modal / Popover ============================== */
+#advancedSearch .modal-dialog {
+  max-width: 700px;
+}
+
 .popover {
   font-family: 'Helvetica Neue Bold Condensed', sans-serif;
   background: linear-gradient(90deg, #66B560 0%, #2272B6 100%);
