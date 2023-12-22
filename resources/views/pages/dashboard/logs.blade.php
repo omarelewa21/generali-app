@@ -35,6 +35,7 @@
                         </div>
                         <div class="row px-4">
                             <div class="col-12">
+                                <button class="dt-button btn btn-secondary fw-bold btn-sm my-3" tabindex="0" aria-controls="dataTable" type="button" id="buttonAdvanced" data-bs-toggle="modal" data-bs-target="#advancedSearch">Advanced Search</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="advancedSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
                                     <div class="modal-dialog modal-dialog-centered">
