@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row">
             @include('templates.nav.nav-white')
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section-agent">
+            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section-agent">
                 <section class="main-content pb-5">
                     <div class="container">
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
@@ -74,28 +74,26 @@
                             <div class="col-12">
                                 <h4 class="display-6 lh-base fw-bold pb-3">Saved Sessions</h4>
                             </div>
-                            <div id="datatable" class="col-12">
+                            <div id="datatable" class="col-12 table-responsive">
                                 <table class="table table-striped" id="agentTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No.</th>
                                             <th scope="col">Transaction ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Last Saved</th>
                                             <th scope="col">Action</th>
-                                            <th style="width:5%"></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1.</td>
                                             <td>01234</td>
                                             <td>Customer Abc</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -105,13 +103,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>2.</td>
                                             <td>09584</td>
                                             <td>Customer M</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -121,13 +118,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>3.</td>
                                             <td>07392</td>
                                             <td>Customer Zee</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -137,13 +133,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>4.</td>
                                             <td>02849</td>
                                             <td>Customer Phg</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -153,13 +148,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>5.</td>
                                             <td>03654</td>
                                             <td>Customer Az</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -169,13 +163,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>6.</td>
                                             <td>05673</td>
                                             <td>Customer Lum</td>
                                             <td>999999-14-9999</td>
                                             <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm">Restore</a></td>
-                                            <td>
+                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
+                                            <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
                                                     <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
                                                     <ul class="dropdown-menu">
@@ -192,7 +185,7 @@
                             <div class="col-12">
                                 <h4 class="display-6 lh-base fw-bold pb-3">Tutorials</h4>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="col-12 position-relative d-flex justify-content-center align-items-center">
                                     <img src="{{ asset('images/dashboard/play-icon.png') }}" width="50" height="auto" alt="Play Icon" class="position-absolute">
                                     <img src="{{ asset('images/dashboard/home-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
@@ -202,7 +195,7 @@
                                     <p class="text-gray">01 March 2024</p>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="col-12 position-relative d-flex justify-content-center align-items-center">
                                     <img src="{{ asset('images/dashboard/play-icon.png') }}" width="50" height="auto" alt="Play Icon" class="position-absolute">
                                     <img src="{{ asset('images/dashboard/instructions-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">
@@ -212,7 +205,7 @@
                                     <p class="text-gray">01 March 2024</p>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="col-12 position-relative d-flex justify-content-center align-items-center">
                                     <img src="{{ asset('images/dashboard/play-icon.png') }}" width="50" height="auto" alt="Play Icon" class="position-absolute">
                                     <img src="{{ asset('images/dashboard/customer-screenshot.jpg') }}" width="100%" height="auto" alt="Home" class="tutorial">

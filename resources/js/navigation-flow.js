@@ -2,6 +2,9 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     '/',
+    '/login',
+    '/agent',
+    '/agent/logs',
     '/pdpa-disclosure'
 ];
 
