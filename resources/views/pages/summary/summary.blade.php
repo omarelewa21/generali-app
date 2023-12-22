@@ -193,8 +193,7 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <a href="{{ $selectedExpectingInput === 'Yes' ? route('summary.increment-amount') : route('summary.expected-income')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                <!-- <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button> -->
-                                <a href="{{ route('overview-new')}}" class="btn btn-primary text-uppercase flex-fill">Next</a>
+                                <a href="{{route('overview-new')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Next</a>
                             </div>
                         </div>
                     </div>

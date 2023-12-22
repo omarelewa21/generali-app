@@ -19,8 +19,10 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
+    $familyDependent = session('customer_details.family_details.dependant');
 
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
+    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
     $relationship = session('customer_details.retirement_needs.coverFor');
     $selectedInsuredName = session('customer_details.retirement_needs.selectedInsuredName');
@@ -52,18 +54,18 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
-                                            <p class="avatar-text text-center pb-3 mb-0 fw-bold">Self</p>
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                            <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
                                 </div>
                             @endif
-                            @if ($spouseData)
+                            @if ($spouseDataName)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="75%" width="auto" class="mx-auto my-4">
-                                            <p class="avatar-text text-center pb-3 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                            <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
@@ -125,10 +127,25 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldssLabel">Your Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldsLabel">Your Name is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Basic Details page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingSpouseFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input your name in Family Depandent Details page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
@@ -140,5 +157,17 @@
 <script>
     var retirementPriority = '{{$retirementPriority}}';
     var selfData = '{{$selfDataName}}';
+    var familyDependent = {!! json_encode($familyDependent) !!};
+
+    if (familyDependent){
+        var spouseDatas = {!! json_encode($spouseData) !!};
+        if('spouse_data' in familyDependent && spouseDatas){
+            if('full_name' in spouseDatas){
+                var spouseData = '{{$spouseDataName}}';
+            } else{
+                var spouseData = null;
+            }
+        }
+    }
 </script>
 @endsection
