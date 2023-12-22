@@ -66,7 +66,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                     window.location.href = '/family-dependant/details';
                 });
-
             } else{
                 // Add event listener to each button with the 'data-required' attribute
                 const dataButtons = document.querySelectorAll('[data-avatar]');

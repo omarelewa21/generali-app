@@ -170,7 +170,7 @@
                                 <td>RM101,000</td>
                                 <td>RM95,000</td>
                                 <td>RM124,000</td>
-                                <td>RM500,00</td>
+                                <td>RM500,000</td>
                                 <td>RM102,500</td>
                             </tr>
                             <tr>
@@ -207,10 +207,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>Remark will be:-</p>
+                    <p>Remark:-</p>
                     <p>This Degree education cost is based on average cost of few selected Foreign Universities.</p>
                     <p>Cost based on Exchange rate of 1 USD = RM 4.65.</p>
-                    <p>The information is extracted from publicly available sources and is considered to be true and correct at the date of publication.</p>
+                    <p>The information is extracted from publicly available sources and is considered to be true and correct at the date of publication 2023.</p>
                     <p>Changes in circumstances after the time of publication may impact the accuracy of the information.</p>
                 </div>
                 <!-- <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button> -->

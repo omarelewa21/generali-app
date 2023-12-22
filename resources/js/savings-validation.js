@@ -68,52 +68,112 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     window.location.href = '/basic-details';
                 });
 
+            } else if(familyDependent){
+                if(spouseDatas){
+                    if (spouseData == null || spouseData == undefined || spouseData == '') {
+                        var nameModal = document.getElementById('missingSpouseFields');
+                        nameModal.classList.add('show');
+                        nameModal.style.display = 'block';
+                        document.querySelector('body').style.paddingRight = '0px';
+                        document.querySelector('body').style.overflow = 'hidden';
+                        document.querySelector('body').classList.add('modal-open');
+    
+                        var modalBackdrop = document.createElement('div');
+                        modalBackdrop.className = 'modal-backdrop fade show';
+                        document.querySelector('body.modal-open').append(modalBackdrop);
+    
+                        // Close the modal
+                        var closeButton = document.querySelector('#missingSpouseFields .btn-exit-sidebar');
+                        closeButton.addEventListener('click', function() {
+                            nameModal.classList.remove('show');
+                            nameModal.style.display = 'none';
+                            document.querySelector('body').style.paddingRight = '';
+                            document.querySelector('body').style.overflow = '';
+                            document.querySelector('body').classList.remove('modal-open');
+                            var modalBackdrop = document.querySelector('.modal-backdrop');
+                            if (modalBackdrop) {
+                                modalBackdrop.remove();
+                            }
+                            window.location.href = '/family-dependant/details';
+                        });
+                    }  
+                }
+                if(childDatas){
+                    if (childData === null || childData === undefined) {
+                        var nameModal = document.getElementById('missingChildFields');
+                        nameModal.classList.add('show');
+                        nameModal.style.display = 'block';
+                        document.querySelector('body').style.paddingRight = '0px';
+                        document.querySelector('body').style.overflow = 'hidden';
+                        document.querySelector('body').classList.add('modal-open');
+    
+                        var modalBackdrop = document.createElement('div');
+                        modalBackdrop.className = 'modal-backdrop fade show';
+                        document.querySelector('body.modal-open').append(modalBackdrop);
+    
+                        // Close the modal
+                        var closeButton = document.querySelector('#missingChildFields .btn-exit-sidebar');
+                        closeButton.addEventListener('click', function() {
+                            nameModal.classList.remove('show');
+                            nameModal.style.display = 'none';
+                            document.querySelector('body').style.paddingRight = '';
+                            document.querySelector('body').style.overflow = '';
+                            document.querySelector('body').classList.remove('modal-open');
+                            var modalBackdrop = document.querySelector('.modal-backdrop');
+                            if (modalBackdrop) {
+                                modalBackdrop.remove();
+                            }
+                            window.location.href = '/family-dependant/details';
+                        });
+                    } 
+                }
             } else{
-                // Add event listener to each button with the 'data-required' attribute
-                const dataButtons = document.querySelectorAll('[data-avatar]');
-        
-                dataButtons.forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the button click
-        
-                        dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                        // Add 'selected' attribute to the clicked button
-                        this.setAttribute('data-required', 'selected');
-        
-                        dataButtons.forEach(btn => btn.classList.remove('selected'));
-        
-                        // Get the selected data-avatar value
-                        const dataAvatar = this.getAttribute('data-avatar');
-                        const dataAvatarDob = this.getAttribute('data-avatar-dob');
-                        const dataRelation = this.getAttribute('data-relation');
-        
-                        // Update the hidden input field value with the selected avatar
-                        document.getElementById('relationshipInput').value = dataRelation;
-                        document.getElementById('selectedInsuredNameInput').value = '';
-                        document.getElementById('selectedCoverForDobInput').value = '';
-                        document.getElementById('othersCoverForNameInput').value = '';
-                        document.getElementById('othersCoverForDobInput').value = '';
-                        if (dataRelation == 'Spouse'){
-                            document.getElementById('othersCoverForNameInput').value = dataAvatar;
-                            document.getElementById('othersCoverForDobInput').value = dataAvatarDob;
-                        }
-                        if(dataRelation == 'Child') {
-                            document.getElementById('selectedInsuredNameInput').value = dataAvatar;
-                            document.getElementById('selectedCoverForDobInput').value = dataAvatarDob;
-                        }
-                    });
-                });
-        
-                // Preselect the button on page load
-                window.addEventListener('DOMContentLoaded', function() {
-                    const defaultBtn = document.querySelectorAll('.default');
-        
-                    defaultBtn.forEach(defaultBtn => {
-                        // Add the 'selected' class to the closest .button-bg div of each default button
-                        defaultBtn.classList.add('selected');
-                    });
-                });
+                
             }
+            // Add event listener to each button with the 'data-required' attribute
+            const dataButtons = document.querySelectorAll('[data-avatar]');
+        
+            dataButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default behavior of the button click
+    
+                    dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+                    // Add 'selected' attribute to the clicked button
+                    this.setAttribute('data-required', 'selected');
+    
+                    dataButtons.forEach(btn => btn.classList.remove('selected'));
+    
+                    // Get the selected data-avatar value
+                    const dataAvatar = this.getAttribute('data-avatar');
+                    const dataAvatarDob = this.getAttribute('data-avatar-dob');
+                    const dataRelation = this.getAttribute('data-relation');
+    
+                    // Update the hidden input field value with the selected avatar
+                    document.getElementById('relationshipInput').value = dataRelation;
+                    document.getElementById('selectedInsuredNameInput').value = '';
+                    document.getElementById('selectedCoverForDobInput').value = '';
+                    document.getElementById('othersCoverForNameInput').value = '';
+                    document.getElementById('othersCoverForDobInput').value = '';
+                    if (dataRelation == 'Spouse'){
+                        document.getElementById('othersCoverForNameInput').value = dataAvatar;
+                        document.getElementById('othersCoverForDobInput').value = dataAvatarDob;
+                    }
+                    if(dataRelation == 'Child') {
+                        document.getElementById('selectedInsuredNameInput').value = dataAvatar;
+                        document.getElementById('selectedCoverForDobInput').value = dataAvatarDob;
+                    }
+                });
+            });
+    
+            // Preselect the button on page load
+            window.addEventListener('DOMContentLoaded', function() {
+                const defaultBtn = document.querySelectorAll('.default');
+    
+                defaultBtn.forEach(defaultBtn => {
+                    // Add the 'selected' class to the closest .button-bg div of each default button
+                    defaultBtn.classList.add('selected');
+                });
+            });
         }
         if (path === '/savings/goals') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
