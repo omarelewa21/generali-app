@@ -43,58 +43,58 @@
                                             <div class="d-flex justify-content-end px-3 py-3">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-header px-4 justify-content-center">
+                                            <div class="modal-header px-4 py-0 justify-content-center">
                                                 <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Advanced Search</h2>
                                             </div>
-                                            <div class="modal-body text-dark text-center px-5 d-flex justify-content-center">
+                                            <div class="modal-body text-dark text-center px-5 py-5 d-flex justify-content-center">
                                                 <div style="width:90%">
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="searchTransaction" class="form-label m-0">Transaction ID</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <input type="text" id="searchTransaction" class="form-control" placeholder="Search by transaction ID">
                                                         </div>
                                                     </div>
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="searchName" class="form-label m-0">Customer Name</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <input type="text" id="searchName" class="form-control" placeholder="Search by Customer Name">
                                                         </div>
                                                     </div>
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="searchID" class="form-label m-0">Customer ID</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <input type="text" id="searchID" class="form-control" placeholder="Search by Customer ID">
                                                         </div>
                                                     </div>
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="searchStatus" class="form-label m-0">Status</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <select name="searchStatus" class="form-select" aria-label="Status" id="searchStatus">
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="min" class="form-label m-0">From Date</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <input type="text" id="min" name="min" class="form-control" placeholder="Search by Created Date">
                                                         </div>
                                                     </div>
-                                                    <div class="row py-3 align-items-center">
-                                                        <div class="col-5 text-start">
+                                                    <div class="row py-2 align-items-center">
+                                                        <div class="col-md-5 text-start">
                                                             <label for="max" class="form-label m-0">To Date</label>
                                                         </div>
-                                                        <div class="col-7">
+                                                        <div class="col-md-7">
                                                             <input type="text" id="max" name="max" class="form-control" placeholder="Search by Created Date">
                                                         </div>
                                                     </div>
