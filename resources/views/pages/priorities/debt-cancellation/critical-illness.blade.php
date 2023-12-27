@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $debtCancellation = session('customer_details.debt-cancellation_needs');
     $criticalIllnessCoverage = session('customer_details.debt-cancellation_needs.criticalIllnessCoverage');
     $coverageAmount = session('customer_details.debt-cancellation_needs.criticalIllnessCoverageAmount');
@@ -29,7 +30,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white">RM{{number_format(floatval($totalAmountNeeded))}}</h1>
+                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{number_format(floatval($totalAmountNeeded))}}</h1>
                                 <p class="text-white display-6 lh-base text-center">Total Debt Cancellation</p>
                             </div>
                         </div>
@@ -39,10 +40,10 @@
                     <div class="container h-100">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/debt-cancellation/critical-illness-coverage/avatar.png') }}" width="auto" height="100%" alt="Existing Policy">
+                                <img src="{{ asset('images/needs/debt-cancellation/critical-illness-coverage/critical-avatar.png') }}" width="auto" height="100%" alt="Critical Illness Care in Debt Cancellation">
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">Should I include Critical Illness Protection?</h2>
+                                <h2 class="display-5 fw-bold lh-sm">Should I include Critical Illness Care?</h2>
                                 <p class="d-flex pt-5">
                                     <span class="me-5 d-flex">
                                         <input type="radio" class="needs-radio @error('critical_coverage_amount') checked-yes @enderror {{$criticalIllnessCoverage === 'yes' ? 'checked-yes' : ''}}" id="yes" name="critical_coverage" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#critical_coverage_amount').attr('required',true);"
@@ -56,7 +57,7 @@
                                     </span>
                                 </p>
                                 <div class="hide-content">
-                                    <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="critical_coverage_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('critical_coverage_amount') is-invalid @enderror" id="critical_coverage_amount" value="{{ $coverageAmount !== null ? number_format(floatval($coverageAmount)) : $coverageAmount }}" required></span></p>
+                                    <p class="display-6">Current covered amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="critical_coverage_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('critical_coverage_amount') is-invalid @enderror" id="critical_coverage_amount" value="{{ $coverageAmount !== null ? number_format(floatval($coverageAmount)) : $coverageAmount }}" required></span></p>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('health.medical.planning.existing.protection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('debt.cancellation.existing.debt')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -91,7 +92,40 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingDebtFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingDebtFieldsLabel">Debt Cancellation Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable debt cancellation priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var sessionCriticalIllnessCoverageAmount = parseFloat({{$coverageAmount}});
+    var debtPriority = '{{$debtPriority}}';
+    var lastPageInput = {!! json_encode($debtCancellation) !!};
 </script>
 @endsection

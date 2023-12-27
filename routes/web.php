@@ -1,4 +1,14 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -13,8 +23,10 @@ use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\HealthMedicalController;
 use App\Http\Controllers\DebtCancellationController;
+use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TransactionController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -101,31 +113,33 @@ Route::view('/savings/amount-needed', 'pages.priorities.savings.amount-needed')-
 Route::post('/savings/amount-needed', [SavingsController::class, 'validateSavingsAmountNeeded'])->name('validate.savings.amount.needed');
 Route::view('/savings/annual-return', 'pages.priorities.savings.annual-return')->name('savings.annual.return');
 Route::post('/savings/annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
+Route::view('/savings/risk-profile', 'pages.priorities.savings.risk-profile')->name('savings.risk.profile');
+Route::post('/savings/risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
+Route::view('/savings/gap', 'pages.priorities.savings.gap')->name('savings.gap');
+Route::post('/savings/gap', [SavingsController::class, 'submitSavingsGap'])->name('form.submit.savings.gap');
 
 Route::view('/savings-monthly-payment', 'pages.priorities.savings.savings-monthly-payment')->name('savings.monthly.payment');
 Route::post('/savings-monthly-payment', [SavingsController::class, 'validateMonthlyPayment'])->name('validate.monthly.payment');
 Route::view('/savings-goal-duration', 'pages.priorities.savings.savings-goal-duration')->name('savings.goal.duration');
 Route::post('/savings-goal-duration', [SavingsController::class, 'validateGoalDuration'])->name('validate.goal.duration');
-Route::view('/savings-risk-profile', 'pages.priorities.savings.savings-risk-profile')->name('savings.risk.profile');
-Route::post('/savings-risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
-Route::view('/savings-gap', 'pages.priorities.savings.savings-gap')->name('savings.gap');
-Route::post('/savings-gap', [SavingsController::class, 'submitSavingsGap'])->name('form.submit.savings.gap');
 
 /* Priorities - Investment */
 Route::view('/investment', 'pages.priorities.investment.home')->name('investment.home');
 Route::view('/investment/coverage', 'pages.priorities.investment.coverage')->name('investment.coverage');
 Route::post('/investment/coverage', [InvestmentController::class, 'validateInvestmentCoverageSelection'])->name('validate.investment.coverage.selection');
+Route::view('/investment/amount-needed', 'pages.priorities.investment.amount-needed')->name('investment.amount.needed');
+Route::post('/investment/amount-needed', [InvestmentController::class, 'validateInvestmentAmountNeeded'])->name('validate.investment.amount.needed');
+Route::view('/investment/annual-return', 'pages.priorities.investment.annual-return')->name('investment.annual.return');
+Route::post('/investment/annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
+Route::view('/investment/risk-profile', 'pages.priorities.investment.risk-profile')->name('investment.risk.profile');
+Route::post('/investment/risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
+Route::view('/investment/gap', 'pages.priorities.investment.gap')->name('investment.gap');
+Route::post('/investment/gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
 Route::view('/investment-monthly-payment', 'pages.priorities.investment.investment-monthly-payment')->name('investment.monthly.payment');
 Route::post('/investment-monthly-payment', [InvestmentController::class, 'validateInvestmentMonthlyPayment'])->name('validate.investment.monthly.payment');
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
-Route::view('/investment-annual-return', 'pages.priorities.investment.investment-annual-return')->name('investment.annual.return');
-Route::post('/investment-annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
-Route::view('/investment-risk-profile', 'pages.priorities.investment.investment-risk-profile')->name('investment.risk.profile');
-Route::post('/investment-risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
-Route::view('/investment-gap', 'pages.priorities.investment.investment-gap')->name('investment.gap');
-Route::post('/investment-gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 
 /* Priorities - Health and Medical */
 Route::view('/health-medical', 'pages.priorities.health and medical.home')->name('health.medical.home');
@@ -135,8 +149,8 @@ Route::view('/health-medical/critical-illness/coverage', 'pages.priorities.healt
 Route::post('/health-medical/critical-illness/coverage', [HealthMedicalController::class, 'validateCriticalIllnessCoverageSelection'])->name('validate.critical.illness.coverage.selection');
 Route::view('/health-medical/critical-illness/amount-needed', 'pages.priorities.health and medical.critical-illness.amount-needed')->name('health.medical.critical.amount.needed');
 Route::post('/health-medical/critical-illness/amount-needed', [HealthMedicalController::class, 'validateCriticalIllnessAmountNeeded'])->name('validate.critical.illness.amount.needed');
-Route::view('/health-medical/critical-illness/existing-protection', 'pages.priorities.health and medical.critical-illness.existing-protection')->name('health.medical.critical.existing.protection');
-Route::post('/health-medical/critical-illness/existing-protection', [HealthMedicalController::class, 'validateCriticalIllnessExistingProtection'])->name('validate.critical.illness.existing.protection');
+Route::view('/health-medical/critical-illness/existing-care', 'pages.priorities.health and medical.critical-illness.existing-protection')->name('health.medical.critical.existing.protection');
+Route::post('/health-medical/critical-illness/existing-care', [HealthMedicalController::class, 'validateCriticalIllnessExistingProtection'])->name('validate.critical.illness.existing.protection');
 Route::view('/health-medical/critical-illness/gap', 'pages.priorities.health and medical.critical-illness.gap')->name('health.medical.critical.gap');
 Route::post('/health-medical/critical-illness/gap', [HealthMedicalController::class, 'submitCriticalIllnessGap'])->name('form.submit.critical.illness.gap');
 Route::view('/health-medical/medical-planning/coverage', 'pages.priorities.health and medical.medical-planning.coverage')->name('health.medical.medical.planning.coverage');
@@ -147,8 +161,8 @@ Route::view('/health-medical/medical-planning/room-selection', 'pages.priorities
 Route::post('/health-medical/medical-planning/room-selection', [HealthMedicalController::class, 'validateMedicalPlanningRoomSelection'])->name('validate.medical.planning.room.selection');
 Route::view('/health-medical/medical-planning/amount-needed', 'pages.priorities.health and medical.medical-planning.amount-needed')->name('health.medical.planning.amount.needed');
 Route::post('/health-medical/medical-planning/amount-needed', [HealthMedicalController::class, 'validateMedicalPlanningAmountNeeded'])->name('validate.medical.planning.amount.needed');
-Route::view('/health-medical/medical-planning/existing-protection', 'pages.priorities.health and medical.medical-planning.existing-protection')->name('health.medical.planning.existing.protection');
-Route::post('/health-medical/medical-planning/existing-protection', [HealthMedicalController::class, 'validateMedicalPlanningExistingProtection'])->name('validate.medical.planning.existing.protection');
+Route::view('/health-medical/medical-planning/existing-care', 'pages.priorities.health and medical.medical-planning.existing-protection')->name('health.medical.planning.existing.protection');
+Route::post('/health-medical/medical-planning/existing-care', [HealthMedicalController::class, 'validateMedicalPlanningExistingProtection'])->name('validate.medical.planning.existing.protection');
 Route::view('/health-medical/medical-planning/gap', 'pages.priorities.health and medical.medical-planning.gap')->name('health.medical.planning.gap');
 Route::post('/health-medical/medical-planning/gap', [HealthMedicalController::class, 'submitMedicalPlanningGap'])->name('form.submit.medical.planning.gap');
 
@@ -174,8 +188,11 @@ Route::post('/debt-cancellation-settlement-years', [DebtCancellationController::
 Route::post('/existing-policy', [FormController::class, 'existingPolicy'])->name('form.existing.policy');
 Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->name('existing.policy');
 Route::view('/financial-statement/monthly-goals', 'pages.summary.monthly-goals')->name('summary.monthly-goals');
+Route::post('/financial-statement/monthly-goals', [SummaryController::class, 'validateSummaryMonthlyGoals'])->name('validate.summary.monthly.goals');
 Route::view('/financial-statement/expected-income', 'pages.summary.expected-income')->name('summary.expected-income');
+Route::post('/financial-statement/expected-income', [SummaryController::class, 'validateSummaryExpectedIncome'])->name('validate.summary.expected.income');
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
+Route::post('/financial-statement/increment-amount', [SummaryController::class, 'validateSummaryIncrementAmount'])->name('validate.summary.increment.amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
 Route::view('/overview-new', 'pages.summary.overview')->name('overview');
 Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
@@ -183,3 +200,12 @@ Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
 Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->name('get.session.data');
+
+// Admin Dashboard
+Route::view('/login', 'pages.login')->name('login');
+Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
+Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
+// Route::get('/agent/logs', [TransactionController::class, 'index'])->name('transactions.logs');
+Route::get('/agent/logs', function () {
+    return view('pages.dashboard.logs');
+});

@@ -26,7 +26,7 @@ class ProtectionController extends Controller
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
-                return true;
+                return true; 
             }
             
             $customMessage = "Please select at least one.";
@@ -36,7 +36,7 @@ class ProtectionController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'protectionSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -47,20 +47,28 @@ class ProtectionController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $protectionSelectedAvatarInput = $request->input('protectionSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $protection = array_merge($protection, [
-            'coveragePerson' => $protectionSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated protection_needs back to the customer_details session
         $customerDetails['protection_needs'] = $protection;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+        
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -147,7 +155,7 @@ class ProtectionController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+        
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -159,7 +167,7 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        
+
         return redirect()->route('protection.existing.policy');
     }
     // public function validateProtectionSupporting(Request $request){
@@ -182,7 +190,7 @@ class ProtectionController extends Controller
     //     // Get the existing customer_details array from the session
     //     $customerDetails = $request->session()->get('customer_details', []);
 
-    //     // Get existing identity_details from the session
+    //     // Get existing protection_needs from the session
     //     $protection = $customerDetails['protection_needs'] ?? [];
 
     //     // Validation passed, perform any necessary processing.
@@ -251,16 +259,21 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
+        // Get existing protection_needs from the session
         $protection = $customerDetails['protection_needs'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
         $protection_existing_policy = $request->input('protection_existing_policy');
-        $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - $existing_policy_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        if ($existing_policy_amount === '' || $existing_policy_amount === null){
+            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - 0);
+            $newProtectionPercentage = floatval(0 / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        } else {
+            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - $existing_policy_amount);
+            $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+        }
 
         // Update specific keys with new values
         $protection = array_merge($protection, [
@@ -316,9 +329,6 @@ class ProtectionController extends Controller
             DB::rollBack();
         }
 
-        // // Process the form data and perform any necessary actions
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('protection.gap');
     }
 
@@ -327,7 +337,7 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing identity_details from the session
+        // Get existing protection_needs from the session
         $protection = $customerDetails['protection_needs'] ?? [];
 
         // Set the updated protection back to the customer_details session
@@ -349,10 +359,22 @@ class ProtectionController extends Controller
             DB::rollBack();
         }
 
-        // // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('retirement.home');
+        if (isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] === 'true' || $customerDetails['priorities']['retirementDiscuss'] === true)) {
+            return redirect()->route('retirement.home');
+        } else if (isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] === 'true' || $customerDetails['priorities']['educationDiscuss'] === true)) {
+            return redirect()->route('education.home');
+        } else if (isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] === 'true' || $customerDetails['priorities']['savingsDiscuss'] === true)) {
+            return redirect()->route('savings.home');
+        } else if (isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] === 'true' || $customerDetails['priorities']['investmentsDiscuss'] === true)) {
+            return redirect()->route('investment.home');
+        } else if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }

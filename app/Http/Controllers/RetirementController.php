@@ -30,7 +30,7 @@ class RetirementController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'retirementSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -41,8 +41,11 @@ class RetirementController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $retirementSelectedAvatarInput = $request->input('retirementSelectedAvatarInput');
-        $retirementSelectedImage = $request->input('retirementSelectedAvatarImage');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -52,10 +55,14 @@ class RetirementController extends Controller
         
         // Update specific keys with new values
         $retirement = array_merge($retirement, [
-            'coveragePerson' => $retirementSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -116,7 +123,7 @@ class RetirementController extends Controller
             'idealRetirement' => $retirementIdealInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -196,7 +203,7 @@ class RetirementController extends Controller
             ]);
         }
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated retirement_needs back to the customer_details session
         $customerDetails['retirement_needs'] = $retirement;
 
         // Store the updated customer_details array back into the session
@@ -290,9 +297,6 @@ class RetirementController extends Controller
             DB::rollBack();
         }
 
-        // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('retirement.allocated.funds');
     }
 
@@ -480,7 +484,7 @@ class RetirementController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+        
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -492,8 +496,7 @@ class RetirementController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
+
         return redirect()->route('retirement.gap');
     }
 
@@ -524,10 +527,20 @@ class RetirementController extends Controller
             DB::rollBack();
         }
 
-        // // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('education.home');
+        if (isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] === 'true' || $customerDetails['priorities']['educationDiscuss'] === true)) {
+            return redirect()->route('education.home');
+        } else if (isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] === 'true' || $customerDetails['priorities']['savingsDiscuss'] === true)) {
+            return redirect()->route('savings.home');
+        } else if (isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] === 'true' || $customerDetails['priorities']['investmentsDiscuss'] === true)) {
+            return redirect()->route('investment.home');
+        } else if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }

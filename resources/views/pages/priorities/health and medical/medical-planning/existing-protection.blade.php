@@ -7,12 +7,14 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health-medical_needs');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $existingProtection = session('customer_details.health-medical_needs.medical_planning.existingProtection');
     $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
     $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
     $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
+    $medicalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.neededAmount');
+    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
 @endphp
 
 <div id="medical-existing-protection" class="tertiary-default-bg calculator-page">
@@ -29,7 +31,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white">RM{{ $existingProtectionAmount === null || $existingProtectionAmount === '' ? number_format(floatval($totalHealthMedicalNeeded)) : ($totalHealthMedicalNeeded > $existingProtectionAmount ? number_format(floatval($totalHealthMedicalNeeded - $existingProtectionAmount)) : '0') }}</h1>
+                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ $existingProtectionAmount === null || $existingProtectionAmount === '' ? number_format(floatval($totalHealthMedicalNeeded)) : ($totalHealthMedicalNeeded > $existingProtectionAmount ? number_format(floatval($totalHealthMedicalNeeded - $existingProtectionAmount)) : '0') }}</h1>
                                 <p class="text-white display-6 lh-base text-center">Total Health & Medical Fund Needed</p>
                             </div>
                         </div>
@@ -93,9 +95,42 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var oldTotalFund = parseFloat({{ $totalHealthMedicalNeeded }});
     var fundPercentage = parseFloat({{ $healthMedicalFundPercentage }});
     var sessionExistingProtectionAmount = parseFloat({{$existingProtectionAmount}});
+    var healthPriority = '{{$healthPriority}}';
+    var lastPageInput = '{{$medicalAmountNeeded === "" || $medicalAmountNeeded === null ? $medicalAmountNeeded : $medicalYear}}';
 </script>
 @endsection

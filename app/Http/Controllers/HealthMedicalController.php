@@ -23,6 +23,9 @@ class HealthMedicalController extends Controller
         // Get existing healthMedical_needs from the session
         $healthMedical = $customerDetails['health-medical_needs'] ?? [];
 
+        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
+        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -36,7 +39,7 @@ class HealthMedicalController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'healthMedicalSelectedInput' => [
+            'selectionHealthMedicalInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -47,15 +50,56 @@ class HealthMedicalController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $healthMedicalSelectedInput = $request->input('healthMedicalSelectedInput');
+        $healthMedicalSelectedInput = $request->input('selectionHealthMedicalInput');
+        $selectionCriticalInput = $request->input('selectionCriticalInput');
+        $selectionMedicalInput = $request->input('selectionMedicalInput');
 
         // Update specific keys with new values
         $healthMedical = array_merge($healthMedical, [
-            'coverageSelection' => $healthMedicalSelectedInput
+            'numberOfSelection' => $healthMedicalSelectedInput,
+            'criticalIllnessSelection' => $selectionCriticalInput,
+            'medicalPlanningSelection' => $selectionMedicalInput
         ]);
+
+        if ($selectionCriticalInput === '' || $selectionCriticalInput === null ){
+            $criticalIllness = array_merge($criticalIllness, [
+                'coverFor' => '',
+                'selectedInsuredName' => '',
+                'selectedCoverForDob' => '',
+                'othersCoverForName' => '',
+                'othersCoverForDob' => '',
+                'neededAmount' => '',
+                'year' => '',
+                'totalHealthMedicalNeeded' => '',
+                'existingProtection' => '',
+                'existingProtectionAmount' => '',
+                'totalAmountNeeded' => '',
+                'fundPercentage' => ''
+            ]);
+        }
+        if ($selectionMedicalInput === '' || $selectionMedicalInput === null){
+            $medicalPlanning = array_merge($medicalPlanning, [
+                'coverFor' => '',
+                'selectedInsuredName' => '',
+                'selectedCoverForDob' => '',
+                'othersCoverForName' => '',
+                'othersCoverForDob' => '',
+                'typeOfHospital' => '',
+                'roomOption' => '',
+                'neededAmount' => '',
+                'year' => '',
+                'totalHealthMedicalNeeded' => '',
+                'existingProtection' => '',
+                'existingProtectionAmount' => '',
+                'totalAmountNeeded' => '',
+                'fundPercentage' => ''
+            ]);
+        }
 
         // Set the updated health-medical_needs back to the customer_details session
         $customerDetails['health-medical_needs'] = $healthMedical;
+        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -72,8 +116,14 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-    
-        return redirect()->route('health.medical.'.str_replace(' ', '.', $healthMedicalSelectedInput).'.coverage');
+
+        if ($selectionCriticalInput === 'Critical Illness Care'){
+            return redirect()->route('health.medical.critical.illness.coverage');
+        }
+        else{
+            return redirect()->route('health.medical.medical.planning.coverage');
+        }
+        
     }
 
     // Critical Illness
@@ -101,7 +151,7 @@ class HealthMedicalController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'criticalIllnessSelectedInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -112,11 +162,19 @@ class HealthMedicalController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $criticalIllnessSelectedInput = $request->input('criticalIllnessSelectedInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
-            'coveragePerson' => $criticalIllnessSelectedInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated critical_illness back to the customer_details session
@@ -125,7 +183,7 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+    
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -137,7 +195,7 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-    
+
         return redirect()->route('health.medical.critical.amount.needed');
     }
     public function validateCriticalIllnessAmountNeeded(Request $request)
@@ -215,7 +273,7 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+    
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -227,7 +285,7 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-    
+
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('health.medical.critical.existing.protection');
@@ -372,7 +430,11 @@ class HealthMedicalController extends Controller
         }
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.home');
+        if ($customerDetails['health-medical_needs']['medicalPlanningSelection'] === 'Medical Planning Care'){
+            return redirect()->route('health.medical.medical.planning.coverage');
+        } else{
+            return redirect()->route('debt.cancellation.home');
+        }
     }
 
 
@@ -401,7 +463,7 @@ class HealthMedicalController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'medicalPlanningSelectedInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -412,11 +474,19 @@ class HealthMedicalController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $medicalPlanningSelectedInput = $request->input('medicalPlanningSelectedInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'coveragePerson' => $medicalPlanningSelectedInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated medical_planning back to the customer_details session
@@ -425,7 +495,7 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+    
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -437,7 +507,7 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-    
+
         return redirect()->route('health.medical.planning.hospital.selection');
     }
 
@@ -565,6 +635,7 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
+
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('health.medical.planning.amount.needed');
@@ -800,6 +871,11 @@ class HealthMedicalController extends Controller
         }
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.home');
+        if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 }

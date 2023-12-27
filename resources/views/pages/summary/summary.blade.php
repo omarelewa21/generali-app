@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.financial_priorities');
+    $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
 @endphp
 
 <div id="summary">
@@ -187,13 +188,12 @@
                         </div>
                     </div>
                 </section>
-                
-                <section class="footer bg-white py-4 fixed-bottom footer-scroll">
+                <section class="footer py-4 fixed-bottom footer-scroll">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
+                                <a href="{{ $selectedExpectingInput === 'Yes' ? route('summary.increment-amount') : route('summary.expected-income')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                <a href="{{route('overview-new')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Next</a>
                             </div>
                         </div>
                     </div>

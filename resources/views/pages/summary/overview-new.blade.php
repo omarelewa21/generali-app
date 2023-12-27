@@ -315,11 +315,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-protection.png') }}" height="100%" width="auto" class="me-3" alt="Protection Icon">Protection
                                                     </td>
-                                                    <td>{{$protection_needs['coveragePerson']}}</td>
+                                                    <td>{{$protection_needs['coverFor'] === 'Spouse' ? $protection_needs['othersCoverForName'] : ($protection_needs['coverFor'] === 'Child' ? $protection_needs['selectedInsuredName'] : $protection_needs['coverFor']) }}</td>
                                                     <td>{{$protection_needs['supportingYears']}} years</td>
                                                     <td>RM{{$protection_needs['totalProtectionNeeded'] !== null || $protection_needs['totalProtectionNeeded'] !== '' ? number_format(floatval($protection_needs['totalProtectionNeeded'])) : '-'}}</td>
                                                     <td>RM{{$protection_needs['existingPolicyAmount'] !== null || $protection_needs['existingPolicyAmount'] !== '' ? number_format(floatval($protection_needs['existingPolicyAmount'])) : '-'}}</td>
-                                                    <td>RM{{$protection_needs['totalAmountNeeded'] !== null || $protection_needs['totalAmountNeeded'] !== '' ? number_format(floatval($protection_needs['totalAmountNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$protection_needs['totalAmountNeeded'] !== null || $protection_needs['totalAmountNeeded'] !== '' ? number_format(floatval($protection_needs['totalAmountNeeded']) + (floatval($protection_needs['totalAmountNeeded']) * (4 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($retirement_needs && $prioritiesRetirement === 'true')
@@ -327,11 +327,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-retirement.png') }}" height="100%" width="auto" class="me-3" alt="Retirement Icon">Retirement
                                                     </td>
-                                                    <td>{{$retirement_needs['coveragePerson']}}</td>
+                                                    <td>{{$retirement_needs['coverFor'] === 'Spouse' ? $retirement_needs['othersCoverForName'] : ($retirement_needs['coverFor'] === 'Child' ? $retirement_needs['selectedInsuredName'] : $retirement_needs['coverFor']) }}</td>
                                                     <td>{{$retirement_needs['supportingYears']}} years</td>
                                                     <td>RM{{$retirement_needs['totalRetirementNeeded'] !== null || $retirement_needs['totalRetirementNeeded'] !== '' ? number_format(floatval($retirement_needs['totalRetirementNeeded'])) : '-'}}</td>
                                                     <td>RM{{$retirement_needs['retirementSavingsAmount'] !== null || $retirement_needs['retirementSavingsAmount'] !== '' ? number_format(floatval($retirement_needs['retirementSavingsAmount'])) : '-'}}</td>
-                                                    <td>RM{{$retirement_needs['totalAmountNeeded'] !== null || $retirement_needs['totalAmountNeeded'] !== '' ? number_format(floatval($retirement_needs['totalAmountNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$retirement_needs['totalAmountNeeded'] !== null || $retirement_needs['totalAmountNeeded'] !== '' ? number_format(floatval($retirement_needs['totalAmountNeeded']) + (floatval($retirement_needs['totalAmountNeeded']) * (4 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($education_needs && $prioritiesEducation === 'true')
@@ -339,11 +339,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-education.png') }}" height="100%" width="auto" class="me-3" alt="Education Icon">Education
                                                     </td>
-                                                    <td>{{$education_needs['coveragePerson']}}</td>
+                                                    <td>{{$education_needs['coverFor'] === 'Spouse' ? $education_needs['othersCoverForName'] : ($education_needs['coverFor'] === 'Child' ? $education_needs['selectedInsuredName'] : $education_needs['coverFor']) }}</td>
                                                     <td>{{$education_needs['tertiaryEducationYear']}} years</td>
                                                     <td>RM{{$education_needs['tertiaryEducationAmount'] !== null || $education_needs['tertiaryEducationAmount'] !== '' ? number_format(floatval($education_needs['tertiaryEducationAmount'])) : '-'}}</td>
                                                     <td>RM{{$education_needs['existingFundAmount'] !== null || $education_needs['existingFundAmount'] !== '' ? number_format(floatval($education_needs['existingFundAmount'])) : '-'}}</td>
-                                                    <td>RM{{$education_needs['totalAmountNeeded'] !== null || $education_needs['totalAmountNeeded'] !== '' ? number_format(floatval($education_needs['totalAmountNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$education_needs['totalAmountNeeded'] !== null || $education_needs['totalAmountNeeded'] !== '' ? number_format(floatval($education_needs['totalAmountNeeded']) + (floatval($education_needs['totalAmountNeeded']) * (5 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($savings_needs && $prioritiesSavings === 'true')
@@ -351,11 +351,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-savings.png') }}" height="100%" width="auto" class="me-3" alt="Savings Icon">Savings
                                                     </td>
-                                                    <td>{{$savings_needs['coveragePerson']}}</td>
+                                                    <td>{{$savings_needs['coverFor'] === 'Spouse' ? $savings_needs['othersCoverForName'] : ($savings_needs['coverFor'] === 'Child' ? $savings_needs['selectedInsuredName'] : $savings_needs['coverFor']) }}</td>
                                                     <td>{{$savings_needs['investmentTimeFrame']}} years</td>
+                                                    <td>RM{{$savings_needs['goalsAmount'] !== null || $savings_needs['goalsAmount'] !== '' ? number_format(floatval($savings_needs['goalsAmount'])) : '-'}}</td>
                                                     <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
-                                                    <td>-</td>
-                                                    <td>RM{{$savings_needs['totalSavingsNeeded'] !== null || $savings_needs['totalSavingsNeeded'] !== '' ? number_format(floatval($savings_needs['totalSavingsNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$savings_needs['totalAmountNeeded'] !== null || $savings_needs['totalAmountNeeded'] !== '' ? number_format(floatval($savings_needs['totalAmountNeeded']) + (floatval($savings_needs['totalAmountNeeded']) * (4 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($health_medical_planning_needs && $prioritiesHealthMedical === 'true')
@@ -363,11 +363,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Planning
                                                     </td>
-                                                    <td>{{$health_medical_planning_needs['coveragePerson']}}</td>
+                                                    <td>{{$health_medical_planning_needs['coverFor'] === 'Spouse' ? $health_medical_planning_needs['othersCoverForName'] : ($health_medical_planning_needs['coverFor'] === 'Child' ? $health_medical_planning_needs['selectedInsuredName'] : $health_medical_planning_needs['coverFor']) }}</td>
                                                     <td>{{$health_medical_planning_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_planning_needs['neededAmount'] !== null || $health_medical_planning_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_planning_needs['existingProtectionAmount'] !== null || $health_medical_planning_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_planning_needs['existingProtectionAmount'])) : '-'}}</td>
-                                                    <td>RM{{$health_medical_planning_needs['totalAmountNeeded'] !== null || $health_medical_planning_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_planning_needs['totalAmountNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$health_medical_planning_needs['totalAmountNeeded'] !== null || $health_medical_planning_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_planning_needs['totalAmountNeeded']) + (floatval($health_medical_planning_needs['totalAmountNeeded']) * (11 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($health_medical_critical_needs && $prioritiesHealthMedical === 'true')
@@ -375,11 +375,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness
                                                     </td>
-                                                    <td>{{$health_medical_critical_needs['coveragePerson']}}</td>
+                                                    <td>{{$health_medical_critical_needs['coverFor'] === 'Spouse' ? $health_medical_critical_needs['othersCoverForName'] : ($health_medical_critical_needs['coverFor'] === 'Child' ? $health_medical_critical_needs['selectedInsuredName'] : $health_medical_critical_needs['coverFor']) }}</td>
                                                     <td>{{$health_medical_critical_needs['year']}} years</td>
                                                     <td>RM{{$health_medical_critical_needs['neededAmount'] !== null || $health_medical_critical_needs['neededAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['neededAmount']) * 12) : '-'}}</td>
                                                     <td>RM{{$health_medical_critical_needs['existingProtectionAmount'] !== null || $health_medical_critical_needs['existingProtectionAmount'] !== '' ? number_format(floatval($health_medical_critical_needs['existingProtectionAmount'])) : '-'}}</td>
-                                                    <td>RM{{$health_medical_critical_needs['totalAmountNeeded'] !== null || $health_medical_critical_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_critical_needs['totalAmountNeeded'])) : '-'}}</td>
+                                                    <td>RM{{$health_medical_critical_needs['totalAmountNeeded'] !== null || $health_medical_critical_needs['totalAmountNeeded'] !== '' ? number_format(floatval($health_medical_critical_needs['totalAmountNeeded']) + (floatval($health_medical_critical_needs['totalAmountNeeded']) * (4 /100)) ) : '-'}}</td>
                                                 </tr>
                                             @endif
                                             @if ($investments_needs && $prioritiesInvestment === 'true')
@@ -387,11 +387,11 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-investment.png') }}" height="100%" width="auto" class="me-3" alt="Lump Sum Investment Icon">Lump Sum Investment
                                                     </td>
-                                                    <td>{{$investments_needs['coveragePerson']}}</td>
+                                                    <td>{{$investments_needs['coverFor'] === 'Spouse' ? $investments_needs['othersCoverForName'] : ($investments_needs['coverFor'] === 'Child' ? $investments_needs['selectedInsuredName'] : $investments_needs['coverFor']) }}</td>
                                                     <td>{{$investments_needs['investmentTimeFrame']}} years</td>
-                                                    <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
                                                     <td>-</td>
                                                     <td>RM{{$investments_needs['totalInvestmentNeeded'] !== null || $investments_needs['totalInvestmentNeeded'] !== '' ? number_format(floatval($investments_needs['totalInvestmentNeeded'])) : '-'}}</td>
+                                                    <td>-</td>
                                                 </tr>
                                             @endif
                                             @if ($debt_cancellation_needs && $prioritiesDebtCancellation === 'true')
@@ -399,7 +399,7 @@
                                                     <td class="d-flex align-items-center">
                                                         <img src="{{ asset('images/summary/overview/icon/icon-debt.png') }}" height="100%" width="auto" class="me-3" alt="Debt Cancellation Icon">Debt Cancellation
                                                     </td>
-                                                    <td>{{$debt_cancellation_needs['coveragePerson']}}</td>
+                                                    <td>{{$debt_cancellation_needs['coverFor'] === 'Spouse' ? $debt_cancellation_needs['othersCoverForName'] : ($debt_cancellation_needs['coverFor'] === 'Child' ? $debt_cancellation_needs['selectedInsuredName'] : $debt_cancellation_needs['coverFor']) }}</td>
                                                     <td>{{$debt_cancellation_needs['remainingYearsOfSettlement']}} years</td>
                                                     <td>RM{{$debt_cancellation_needs['totalDebtCancellationFund'] !== null || $debt_cancellation_needs['totalDebtCancellationFund'] !== '' ? number_format(floatval($debt_cancellation_needs['totalDebtCancellationFund'])) : '-'}}</td>
                                                     <td>RM{{$debt_cancellation_needs['existingDebtAmount'] !== null || $debt_cancellation_needs['existingDebtAmount'] !== '' ? number_format(floatval($debt_cancellation_needs['existingDebtAmount'])) : '-'}}</td>
@@ -461,7 +461,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">End session</button> -->
-                <a href="{{route('welcome')}}" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" type="button" id="saveSession" >End session</a>
+                <a href="{{route('welcome')}}" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" type="button" id="saveSession" data-clear-route="{{ route('clear_session_data') }}">End session</a>
             </div>
         </div>
     </div>
@@ -475,6 +475,7 @@
         if (change < 0) {
             change = 0; // 0 represents 100% coverage
             circle.style.strokeDashoffset = change;
+            console.log(change);
             // console.log('change', change);
         }
         else   {

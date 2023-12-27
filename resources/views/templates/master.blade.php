@@ -26,6 +26,11 @@
     <link href="{{ asset('css/netis-styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/slick-theme.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
 </head>
 
 <body class="overflow">
@@ -46,8 +51,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">EXIT</button>
-                <a href="{{route('welcome')}}" class="btn btn-secondary text-uppercase" type="button" id="saveSession" >SAVE</a>
-                <a href="{{route('welcome')}}" class="btn btn-secondary text-uppercase" type="button" id="clearSession" data-clear-route="{{ route('clear_session_data') }}">Clear Session</a>
+                <a href="{{route('welcome')}}" class="btn btn-secondary text-uppercase" type="button" id="saveSession" data-clear-route="{{ route('clear_session_data') }}">SAVE</a>
             </div>
         </div>
     </div>

@@ -22,8 +22,8 @@
 
 <div id="avatar_gender_selection">
     <div class="container-fluid">
-        <div class="row parallax-section">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-color-palatte d-flex justify-content-center top-avatar">
                     <div class="container">
@@ -74,10 +74,9 @@
                         </svg>
                     </button>
                 </section>
-                <div class="bottomObeserver"></div>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
@@ -93,7 +92,7 @@
                                         <p class="text-white display-6 lh-base text-center text-md-start">Please click to select your gender.</p>
                                     </div>
                                 </div>
-                                <div class="row px-4 pb-4 px-md-5">
+                                <div class="row px-4 pb-5 px-md-5">
                                     @if ($errors->has('genderSelection'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">

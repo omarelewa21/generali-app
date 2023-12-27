@@ -12,13 +12,13 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health-medical_needs');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $medicalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.neededAmount');
     $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
     $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
     $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded', '0');
     $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
-    
+    $selectedRoom = session('customer_details.health-medical_needs.medical_planning.roomOption');
 @endphp
 
 
@@ -36,7 +36,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white">RM{{ 
+                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
                                     $existingProtectionAmount === null || $existingProtectionAmount === '' 
                                         ? number_format(floatval($totalHealthMedicalNeeded)) 
                                         : ($existingProtectionAmount > floatval($totalHealthMedicalNeeded) 
@@ -58,9 +58,9 @@
                             <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
                                 <h2 class="display-5 fw-bold lh-sm">In the event of any Medical/Hospitalisation needs, I would require</h2>
                                 <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded !== null ? number_format(floatval($medicalAmountNeeded)) : $medicalAmountNeeded }}" required></span>
-                                / month to take care of myself and my family.
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="medical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded !== null || $medicalAmountNeeded !== '' ? number_format(floatval($medicalAmountNeeded)) : $medicalAmountNeeded }}" required></span>
+                                /month to take care of myself and my family.
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="medical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
                                 years to build this fund.</p>
                                 <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
                             </div>
@@ -96,8 +96,41 @@
         </div>
     </div>
 </div>  
+
+<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var amountNeeded = document.getElementById("medical_amount_needed");
     var supportingYears = document.getElementById("medical_year");
+    var healthPriority = '{{$healthPriority}}';
+    var lastPageInput = '{{$selectedRoom}}';
 </script>
 @endsection

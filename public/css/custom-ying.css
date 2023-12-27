@@ -55,6 +55,94 @@
 .lh-normal{
     line-height: normal;
 }
+.text-placeholder{
+    color: rgba(10, 4, 60, 0.30);
+}
+.border-btm{
+    border-bottom: 3px solid black;
+}
+.lh-placeholder{
+    line-height: 2.2;
+}
+.border-black{
+    border-color: black !important;
+}
+.display-3 input{
+    font-size: 3.5rem;
+}
+#expected_income .footer{
+    display: grid;
+    grid-template-areas:
+        "warning"
+        "cta";
+}
+.btn-summary{
+    width: 180px;
+    height: 100px;
+    font-size: 64px;
+}
+.btm-no{
+    background-color: #A0A0A0;
+    color: #fff;
+}
+.btm-no:hover,
+.btn-summary.default.selected,
+.btn-summary[data-required="selected"]{
+    background-color: #fff;
+    border: 1px solid #C21B17;
+    color: #C21B17;
+}
+button.choice:hover,
+button.choice[data-required="selected"],
+button.choice.default.selected,
+button.choice[data-required=""]{
+    background: none !important;
+    width: 100% !important;
+}
+button.choice:hover img,
+button.choice[data-required="selected"] img,
+button.choice.default.selected img{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+}
+/* #retirement_ideal button.choice:hover,
+#retirement_ideal button.choice[data-required="selected"],
+#retirement_ideal button.choice.default.selected,
+#health-medical-selection button.choice:hover,
+#health-medical-selection button.choice[data-required="selected"],
+#health-medical-selection button.choice[data-required=""],
+#health-medical-selection button.choice.default.selected
+#medical-hospital-selection button.choice:hover,
+#medical-hospital-selection button.choice[data-required="selected"],
+#medical-hospital-selection button.choice[data-required=""]{
+    background: none;
+    width: 100%;
+}
+#retirement_ideal button.choice:hover img,
+#retirement_ideal button.choice[data-required="selected"] img,
+#retirement_ideal button.choice.default.selected img,
+#health-medical-selection button.choice:hover img,
+#health-medical-selection button.choice[data-required="selected"] img,
+#health-medical-selection button.choice.default.selected img,
+#medical-hospital-selection button.choice:hover img,
+#medical-hospital-selection button.choice[data-required="selected"] img,
+#medical-hospital-selection button.choice.default.selected img{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+} */
+#retirement_ideal .content-needs-grey{
+    grid-auto-rows: 7vh 55vh;
+}
+#education_coverage button.choice:hover, #education_coverage button.choice[data-required="selected"], #education_coverage button.choice.default.selected{
+    background-position: center bottom 10%;
+}
+#hospital-room-selection .wrapper-avatar-default{
+    grid-template-rows: 20vh 65vh;
+}
 
 /* ============================ Hover style ===============================*/
 button.choice.default.selected,
@@ -65,9 +153,37 @@ button.choice[data-required="selected"]{
     background-size: 100%;
     width: 60%;
 }
-/* ============================ Calculation style ===============================*/
-
-
+/* ============================ Education Amount Needed ===============================*/
+#tuitionFees .modal-dialog{
+    max-width: 1200px;
+}
+#tuitionFees .modal-title{
+    font-family: "Helvetica Neue Bold Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 58px !important;
+}
+#tuitionFees .btn-exit-sidebar:hover{
+    background: transparent;
+}
+#tuitionFees .modal-footer p{
+    line-height: normal;
+    margin: 0;
+    font-size: 18px;
+    width: 100%;
+}
+#costingTable table,
+#costingTable th,
+#costingTable tr,
+#costingTable td{
+    background-color: transparent;
+    color: #fff;
+}
+#costingTable tbody th,
+#costingTable tbody tr,
+#costingTable tbody td{
+    font-weight: 400;
+    font-size: 18px;
+}
 
 
 
@@ -447,13 +563,9 @@ button.choice:focus,
 }
 
 /* ===============================  Risk Profile =======================================*/
-#savings-risk-profile .content-block,
-#investment-risk-profile .content-block{
-    grid-template-areas:
-        "risk-header"
-        "risk-selection"
-        "risk-content";
-    grid-template-rows: 10% 20% 70%;
+#savings-risk-profile .content-needs-grey,
+#investment-risk-profile .content-needs-grey{
+    grid-template-rows: 5vh 60vh;
 }
 .risk-header{
     grid-area: risk-header;
@@ -471,9 +583,9 @@ button.choice:focus,
     display: grid;
 }
 .risk-btn{
-    /* background:rgba(238, 238, 238, 1); */
-    border:1px solid rgba(240, 240, 240, 1);
-    color:rgba(10, 4, 60, 0.50);
+    background:#fff;
+    border:1px solid #C0232C;
+    color:#C0232C;
     font-size: 22px;
     font-weight: 700;
     width: 301px;
@@ -483,7 +595,6 @@ button.choice:focus,
 .risk-btn[data-required="selected"],
 .risk-btn.selected{
     background: #C0232C;
-    border: 1px solid #A0A0A0;
     color: #fff;
 }
 .risk-potential-title{
@@ -623,12 +734,12 @@ button.choice:focus,
 
 /* ===================== Health and Medical Planning Room Selection ======================*/
 #hospital-room-selection .needs-stand-bg{
-    padding: 100px;
+    padding: 75px;
 }
 .wrapper-room-selection{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 15% 75%;
+    grid-template-rows: 15% 85%;
     grid-template-areas:
         "room-selection-title"
         "room-selection-content";
@@ -647,7 +758,8 @@ button.choice:focus,
     grid-template-rows: 100%;
 }
 .single.room-selection-content {
-    grid-template-columns: 20% 55% 25%;
+    grid-template-columns: 15% 60% 25%;
+    /* grid-template-columns: 20% 55% 25%; */
 }
 .couple.room-selection-content {
     grid-template-columns: 38% 24% 38%;
@@ -757,32 +869,14 @@ button.choice:focus,
 
   
 /* Create the custom radio button using ::before pseudo-element */
-  
-.needs-radio + label::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 28px; /* Adjust the width and height to change the size */
-    height: 28px;
-    border: 1px solid #A0A0A0; /* Border color for the circular radio button */
-    background-color: #fff; /* Background color when the radio button is not selected */
-}
+
   
   /* Style the custom radio button when it is selected */
 .needs-radio:checked + label::before {
     background-color: #fff;  /* Change the background color when selected */
 }
   
-/* Add a tick symbol using ::after pseudo-element when radio button is selected */
-.needs-radio:checked + label::after {
-    content: "\2713"; /* Unicode for the tick symbol */
-    position: absolute;
-    left: 6px; /* Adjust positioning of the tick symbol */
-    top: 1px;
-    font-size: 18px; /* Adjust font size to control the size of the tick symbol */
-    color: #C21B17; /* Color of the tick symbol */
-}
+/* Add a tick symbol using ::after pseudo-element when radio button is selected *
 
 /* =============== Summary Overview ============= */
 .chart-wrapper {
@@ -1198,12 +1292,12 @@ table {
     .needs-home-avatars{
         grid-template-columns: repeat(3, 0% 100% 0%);
     }
-    #hospital-room-selection .needs-stand-bg{
+    /* #hospital-room-selection .needs-stand-bg{
         padding: 140px;
-    }
-    #hospital-room-selection .needs-stand-bg.error-padding{
+    } */
+    /* #hospital-room-selection .needs-stand-bg.error-padding{
         padding: 150px;
-    }
+    } */
     .bg-needs-master-full{
         background-size: cover;
     }
@@ -1312,6 +1406,9 @@ table {
     #savings-goals .display-5{
         font-size: 2.125rem !important;
     }
+    #savings-annual-return .content-needs-grey{
+        grid-auto-rows: 5vh 55vh;
+    }
 }
 @media screen and (min-width: 1250px) {
     #health-medical-selection .needs-stand-bg{
@@ -1319,6 +1416,12 @@ table {
     }
     #health-medical-selection .needs-stand-bg.error-padding{
         padding: 165px;
+    }
+}
+@media screen and (min-height: 900px) {
+    .py-xxxl-5{
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 }
 @media only screen and (min-width: 1366px) and (max-width: 1399px) and (min-height: 1000px){
@@ -1376,10 +1479,10 @@ table {
     #protection-home .needs-home-avatar-wrapper {
         grid-template-rows: 90% 10%;
     }
-    .needs-stand-bg,
+    /* .needs-stand-bg,
     #hospital-room-selection .needs-stand-bg.error-padding{
         padding:190px;
-    }
+    } */
     .needs-stand-bg.error-padding{
         padding:230px;
     }
@@ -1389,9 +1492,9 @@ table {
     #debt-cancellation-home .needs-stand-bg{
         padding: 250px;
     }
-    #hospital-room-selection .needs-stand-bg{
+    /* #hospital-room-selection .needs-stand-bg{
         padding: 180px;
-    }
+    } */
     #investment-home .needs-stand-bg.error-padding,
     #education-home .needs-stand-bg.error-padding,
     #retirement-home .needs-stand-bg.error-padding,

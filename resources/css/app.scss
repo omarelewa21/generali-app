@@ -47,6 +47,7 @@ $container-max-widths: (
   // xl: 1140px,
   xxl: 1440px
 );
+$secondary: #AA1B17;
 $dark: #2C2738;
 $font-family-base: 'Helvetica Neue Regular', sans-serif;
 $font-size-base: 1.25rem; //20px
@@ -114,6 +115,9 @@ $accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w
 $accordion-button-active-bg: #fff;
 $accordion-border-color: #CCCCCC;
 
+// Datatables
+$table-striped-bg: #EBEBEB;
+$table-striped-order: even;
 
 
 
@@ -189,10 +193,6 @@ footer {
 //   width: 344px;
 //   z-index: 1100;
 // }
-
-
-
-$secondary: #AA1B17;
 
 $tertiary: #000000;
 

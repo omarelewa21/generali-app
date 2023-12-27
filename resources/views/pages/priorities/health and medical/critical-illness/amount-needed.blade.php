@@ -14,12 +14,13 @@
 
 @php
     // Retrieving values from the session
-    $healthMedical = session('customer_details.health-medical_needs');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $criticalAmountNeeded = session('customer_details.health-medical_needs.critical_illness.neededAmount');
     $criticalYear = session('customer_details.health-medical_needs.critical_illness.year');
     $existingProtectionAmount = session('customer_details.health-medical_needs.critical_illness.existingProtectionAmount');
     $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.critical_illness.totalHealthMedicalNeeded', '0');
     $healthMedicalFundPercentage = session('customer_details.health-medical_needs.critical_illness.fundPercentage', '0');
+    $relationship = session('customer_details.health-medical_needs.critical_illness.coverFor');
 @endphp
 
 <div id="critical-illness_amount_needed" class="bg-hnm calculator-page">
@@ -36,7 +37,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$healthMedicalFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white">RM{{ 
+                                <h1 id="TotalHealthMedicalFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
                                     $existingProtectionAmount === null || $existingProtectionAmount === '' 
                                         ? number_format(floatval($totalHealthMedicalNeeded)) 
                                         : ($existingProtectionAmount > floatval($totalHealthMedicalNeeded) 
@@ -59,8 +60,8 @@
                                 <h2 class="display-5 fw-bold lh-sm">In case of any Critical Illness, I would need</h2>
                                 <p class="display-5 fw-bold currencyField">
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="critical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('critical_amount_needed') is-invalid @enderror" id="critical_amount_needed" value="{{ $criticalAmountNeeded !== null ? number_format(floatval($criticalAmountNeeded)) : $criticalAmountNeeded }}" required></span>
-                                / month for
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="critical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('critical_year') is-invalid @enderror" id="critical_year" value="{{$criticalYear}}" required></span>
+                                /month for
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="critical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('critical_year') is-invalid @enderror" id="critical_year" value="{{$criticalYear}}" required></span>
                                 years to take care of myself and my loves one.</p>
                                 <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
                             </div>
@@ -97,8 +98,56 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var amountNeeded = document.getElementById("critical_amount_needed");
     var supportingYears = document.getElementById("critical_year");
+    var healthPriority = '{{$healthPriority}}';
+    var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

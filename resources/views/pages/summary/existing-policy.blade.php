@@ -16,6 +16,15 @@
     // Retrieving values from the session
     $existingPolicy = session('customer_details.existing_policy');
     $basicDetails = session('customer_details.basic_details');
+
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
 @endphp
 
 <div id="existing_policy">
@@ -78,20 +87,10 @@
                                         </div>
                                         <h4 class="display-7 text-gray">Policy Details</h4>
                                         <div class="row">
-                                            <div class="pt-4 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="policyFirstNameSelect" class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <select name="policyFirstName" class="form-select @error('policyFirstName') is-invalid @enderror" aria-label="First Name" id="policyFirstNameSelect" autocomplete="off" required>
-                                                    <option value="" disabled selected>Please Select</option>
-                                                </select>
-                                                @error('policyFirstName')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="pt-4 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                                                <label for="policyLastNameSelect" class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <select name="policyLastName" class="form-select @error('policyLastName') is-invalid @enderror" aria-label="Last Name" id="policyLastNameSelect" autocomplete="off" required>
-                                                </select>
-                                                @error('policyLastName')
+                                            <div class="pt-4 col-12">
+                                                <label for="policyFullNameInput" class="form-label">Full Name (as per I.C)<span class="text-danger">*</span></label>
+                                                <input type="text" name="policyFullName" class="form-control @error('policyFullName') is-invalid @enderror" id="policyFullNameInput" placeholder="Full Name" value="{{ old('policyFullName', $existingPolicy['policy_1']['full_name'] ?? '') }}" required>
+                                                @error('policyFullName')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -155,7 +154,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="premiumContributionInput" class="form-label">Premium Contribution <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">RM</span><input type="number" name="premiumContribution" class="form-control @error('premiumContribution') is-invalid @enderror" id="premiumContributionInput" value="{{ old('premiumContribution', $existingPolicy['policy_1']['premium_contribution'] ?? '') }}">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="premiumContribution" class="form-control border-black @error('premiumContribution') is-invalid @enderror" id="premiumContributionInput" value="{{ isset($existingPolicy['policy_1']['premium_contribution']) && ($existingPolicy['policy_1']['premium_contribution'] !== '' || $existingPolicy['policy_1']['premium_contribution'] !== null) ? number_format(floatval($premiumContribution)) : '' }} ">
                                                     @error('premiumContribution')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -164,7 +163,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lifeCoverageInput" class="form-label">Life Coverage <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">RM</span><input type="number" name="lifeCoverage" class="form-control @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ old('lifeCoverage', $existingPolicy['policy_1']['life_coverage'] ?? '') }}">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="lifeCoverage" class="form-control border-black @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ isset($existingPolicy['policy_1']['life_coverage']) && ($existingPolicy['policy_1']['life_coverage'] !== '' || $existingPolicy['policy_1']['life_coverage'] !== null) ? number_format(floatval($lifeCoverage)) : '' }}">
                                                     @error('lifeCoverage')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -173,7 +172,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="criticalIllnessInput" class="form-label">Critical Illness Benefit <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="input-group-text">RM</span><input type="number" name="criticalIllness" class="form-control @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ old('criticalIllness', $existingPolicy['policy_1']['critical_illness'] ?? '') }}">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="criticalIllness" class="form-control border-black @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ isset($existingPolicy['policy_1']['critical_illness']) && ($existingPolicy['policy_1']['critical_illness'] !== '' || $existingPolicy['policy_1']['critical_illness'] !== null) ? number_format(floatval($criticalIllness)) : '' }}">
                                                     @error('criticalIllness')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -201,7 +200,31 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        @php
+                                            if ($debtPriority === 'true' || $debtPriority === true) {
+                                                $route = route('debt.cancellation.gap');
+                                            } elseif ($healthPriority === 'true' || $healthPriority === true) {
+                                                if($selectedMedical === 'Medical Planning Care'){
+                                                    $route = route('health.medical.planning.gap');
+                                                } else{ 
+                                                    $route = route('health.medical.critical.gap');
+                                                }
+                                            } elseif ($investmentPriority === 'true' || $investmentPriority === true) {
+                                                $route = route('investment.gap');
+                                            } elseif ($savingsPriority === 'true' || $savingsPriority === true) {
+                                                $route = route('savings.gap');
+                                            } elseif ($educationPriority === 'true' || $educationPriority === true) {
+                                                $route = route('education.gap');
+                                            } elseif ($retirementPriority === 'true' || $retirementPriority === true) {
+                                                $route = route('retirement.gap');
+                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                                $route = route('protection.gap');
+                                            }
+                                            else {
+                                                $route = route('priorities.to.discuss');
+                                            }
+                                        @endphp
+                                        <a href="{{ $route }}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
@@ -235,17 +258,15 @@
 
 <script>
 var dob = {!! json_encode(session('customer_details.identity_details.dob')) !!};
-var existingPolicy = {!! json_encode(session('customer_details.existing_policy')) !!};
-var first_name = {!! json_encode(session('customer_details.basic_details.first_name')) !!};
-var last_name = {!! json_encode(session('customer_details.basic_details.last_name')) !!};
-var family_details = {!! json_encode(session('customer_details.family_details.dependant.children_data')) !!};
+// var existingPolicy = {!! json_encode(session('customer_details.existing_policy')) !!};
+// var full_name = {!! json_encode(session('customer_details.basic_details.full_name')) !!};
+// var family_details = {!! json_encode(session('customer_details.family_details.dependant.children_data')) !!};
 var dobYear = dob.slice(-4);
 
 document.addEventListener('DOMContentLoaded', function() {
-    var policyFirstNameSelect = document.getElementById('policyFirstNameSelect');
-    var policyLastNameSelect = document.getElementById('policyLastNameSelect');
+    var policyFullName = document.getElementById('policyFullNameInput');
     var companySelect = document.getElementById('companySelect');
-    var companyOthersText = document.getElementById('companyOthersText');
+    var companyOthers = document.getElementById('companyOthers');
     var inceptionYearInput = document.getElementById('inceptionYearInput');
     var policyPlanSelect = document.getElementById('policyPlanSelect');
     var maturityYearInput = document.getElementById('maturityYearInput');
@@ -258,16 +279,12 @@ document.addEventListener('DOMContentLoaded', function() {
         validateSelectField(companySelect);
     });
 
-    policyFirstNameSelect.addEventListener('blur', function() {
-        validateSelectField(policyFirstNameSelect);
+    policyFullName.addEventListener('blur', function() {
+        validateInputField(policyFullName);
     });
 
-    policyLastNameSelect.addEventListener('blur', function() {
-        validateSelectField(policyLastNameSelect);
-    });
-
-    companyOthersText.addEventListener('blur', function() {
-        validateInputFieldOthers(companyOthersText);
+    companyOthers.addEventListener('blur', function() {
+        validateInputFieldOthers(companyOthers);
     });
 
     inceptionYearInput.addEventListener('blur', function() {
@@ -300,6 +317,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function validateSelectField(field) {
         if (field.value) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        } else {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+        }
+    }
+
+    function validateInputField(field) {
+        if (field.value && isValidName(field.value)) {
             field.classList.add('is-valid');
             field.classList.remove('is-invalid');
         } else {
@@ -380,6 +407,63 @@ document.addEventListener('DOMContentLoaded', function() {
         var isValid = currencyRegex.test(currency);
         return isValid;
     }
+
+    function isValidName(name) {
+        // Return true if the wording is 30 characters, false otherwise
+        var nameRegex = /^[A-Za-z,\s\/]{1,100}$/;
+
+        var isValid = nameRegex.test(name);
+
+        return isValid;
+    }
+    premiumContributionInput.addEventListener("input", function() {
+        // Retrieve the current input value
+        var premiumContributionInputValue = premiumContributionInput.value;
+    
+        // Remove non-digit characters
+        const cleanedValue = parseFloat(premiumContributionInputValue.replace(/\D/g, ''));
+
+        if (!isNaN(cleanedValue)) {
+            // If it's a valid number, format it with commas
+            const formattedValue = cleanedValue.toLocaleString('en-MY');
+            this.value = formattedValue;
+        } else {
+            // If it's not a valid number, display the cleaned value as is
+            this.value = premiumContributionInputValue;
+        }
+    });
+    lifeCoverageInput.addEventListener("input", function() {
+        // Retrieve the current input value
+        var lifeCoverageInputValue = lifeCoverageInput.value;
+    
+        // Remove non-digit characters
+        const cleanedValue = parseFloat(lifeCoverageInputValue.replace(/\D/g, ''));
+
+        if (!isNaN(cleanedValue)) {
+            // If it's a valid number, format it with commas
+            const formattedValue = cleanedValue.toLocaleString('en-MY');
+            this.value = formattedValue;
+        } else {
+            // If it's not a valid number, display the cleaned value as is
+            this.value = lifeCoverageInputValue;
+        }
+    });
+    criticalIllnessInput.addEventListener("input", function() {
+        // Retrieve the current input value
+        var criticalIllnessInputValue = criticalIllnessInput.value;
+    
+        // Remove non-digit characters
+        const cleanedValue = parseFloat(criticalIllnessInputValue.replace(/\D/g, ''));
+
+        if (!isNaN(cleanedValue)) {
+            // If it's a valid number, format it with commas
+            const formattedValue = cleanedValue.toLocaleString('en-MY');
+            this.value = formattedValue;
+        } else {
+            // If it's not a valid number, display the cleaned value as is
+            this.value = criticalIllnessInputValue;
+        }
+    });
 });
 </script>
 

@@ -13,12 +13,14 @@
 @section('content')
 
 @php
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $debtCancellation = session('customer_details.debt-cancellation_needs'); 
     $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
     $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
     $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
     $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
     $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
+    $relationship = session('customer_details.debt-cancellation_needs.coverFor');
 @endphp
 
 <div id="debt-cancellation-amount-needed" class="tertiary-default-bg calculator-page">
@@ -35,7 +37,7 @@
                                 <div class="calculation-progress mt-3 d-flex align-items-center">
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$debtFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white">RM{{ 
+                                <h1 id="TotalDebtCancellationFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
                                     $existingDebtAmount === null || $existingDebtAmount === '' 
                                         ? number_format(floatval($totalDebtNeeded)) 
                                         : ($existingDebtAmount > floatval($totalDebtNeeded) 
@@ -59,7 +61,7 @@
                                 <p class="display-5 fw-bold currencyField">
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="debt_outstanding_loan" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('debt_outstanding_loan') is-invalid @enderror" id="debt_outstanding_loan" value="{{ $debtOutstandingLoan !== null ? number_format(floatval($debtOutstandingLoan)) : $debtOutstandingLoan }}" required></span>
                                 to be debt-free in
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="debt_settlement_years" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('debt_settlement_years') is-invalid @enderror" id="debt_settlement_years" value="{{$settlementYears}}" required></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="debt_settlement_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('debt_settlement_years') is-invalid @enderror" id="debt_settlement_years" value="{{$settlementYears}}" required></span>
                                 years' time.</p>
                                 <input type="hidden" name="total_debtFund" id="total_debtFund" value="{{$totalDebtNeeded}}">
                             </div>
@@ -96,4 +98,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingDebtFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingDebtFieldsLabel">Debt Cancellation Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable debt cancellation priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var debtPriority = '{{$debtPriority}}';
+    var lastPageInput = '{{$relationship}}';
+</script>
 @endsection

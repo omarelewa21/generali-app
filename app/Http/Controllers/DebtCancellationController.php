@@ -36,7 +36,7 @@ class DebtCancellationController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'debtSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -47,11 +47,19 @@ class DebtCancellationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $debtSelectedAvatarInput = $request->input('debtSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Update specific keys with new values
         $debtCancellation = array_merge($debtCancellation, [
-            'coveragePerson' => $debtSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
         // Set the updated debt_cancellation_needs back to the customer_details session
@@ -202,7 +210,7 @@ class DebtCancellationController extends Controller
     //         'totalDebtCancellationFund' => $totalDebtFund
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -243,7 +251,7 @@ class DebtCancellationController extends Controller
     //         'remainingYearsOfSettlement' => $debt_settlement_years
     //     ]);
 
-    //     // Set the updated protection back to the customer_details session
+    //     // Set the updated debt-cancellation_needs back to the customer_details session
     //     $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
     //     // Store the updated customer_details array back into the session
@@ -296,10 +304,15 @@ class DebtCancellationController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_debt_amount = str_replace(',','',$request->input('existing_debt_amount'));
         $existing_debt = $request->input('existing_debt');
-        $newTotalAmountNeeded = floatval($customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] - $existing_debt_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_debt_amount / $customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] * 100);
+        if ($existing_debt_amount === '' || $existing_debt_amount === null){
+            $newTotalAmountNeeded = floatval($customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] - 0);
+            $newPercentage = floatval(0 / $customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] * 100);
+        } else {
+            $newTotalAmountNeeded = floatval($customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] - $existing_debt_amount);
+            $newPercentage = floatval($existing_debt_amount / $customerDetails['debt-cancellation_needs']['totalDebtCancellationFund'] * 100);
+        }
 
         // Update specific keys with new values
         $debtCancellation = array_merge($debtCancellation, [
@@ -336,7 +349,7 @@ class DebtCancellationController extends Controller
             }
         }
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
@@ -408,7 +421,7 @@ class DebtCancellationController extends Controller
             'criticalIllnessCoverageAmount' => $critical_coverage_amount
         ]);
 
-        // Set the updated protection back to the customer_details session
+        // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['debt-cancellation_needs'] = $debtCancellation;
 
         // Store the updated customer_details array back into the session
@@ -442,6 +455,7 @@ class DebtCancellationController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
+
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();

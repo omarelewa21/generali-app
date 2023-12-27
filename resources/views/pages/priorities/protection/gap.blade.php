@@ -14,6 +14,8 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protection = session('customer_details.protection_needs');
     $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
     $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
     $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
@@ -21,7 +23,7 @@
     $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
 @endphp
 
-<div id="protection_summary" class="summary-page">
+<div id="protection_summary" class="summary-page secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
@@ -66,7 +68,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 py-5">
+                            <div class="col-xl-7 col-lg-7 col-md-12 py-xxxl-5">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -110,10 +112,15 @@
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So I need a plan for</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded))}}</h4>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
+                                </div>
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-10 d-flex align-items-center">
+                                        <p>*Calculated based on an average inflation rate of 4%.​</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -135,10 +142,43 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingProtectionFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingProtectionFieldsLabel">Protection Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable protection priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    var existingPolicyAmount =  {{$existingPolicyAmount}};
-    var percentage = {{$protectionFundPercentage}};
-    var newTotalProtectionNeeded = {{$totalProtectionNeeded}};
+    var protectionPriority = '{{$protectionPriority}}';
+    var percentage = parseFloat({{$protectionFundPercentage}});
+    var newTotalProtectionNeeded = parseFloat({{ $totalProtectionNeeded }});
+    var existingPolicyAmount = parseFloat({{$existingPolicyAmount}});
+    var lastPageInput = {!! json_encode($protection) !!};
 </script>
 
 @endsection

@@ -14,14 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male-secondary.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
 <div id="top_priorities">
     <div class="container-fluid">
-        <div class="row parallax-section">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
@@ -185,14 +185,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 position-absolute" style="top: 50%;">
-                            <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <div class="col-12 position-absolute d-grid z-1" style="top: 50%; grid-gap: 20px;">
+                            <div class="col-12 d-flex justify-content-center">
+                                <!-- <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end" type="button">Refresh</button></p> -->
+                            </div>
+                            <div class="col-12">
+                                <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                                <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
+                            </div>
                         </div>
                     </div>
                 </section>
-                <div class="bottomObeserver"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -214,7 +219,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <div id="needs" class="row px-4 px-md-5 needs action_button_slider">
+                            <div id="needs" class="row px-4 px-md-5 pb-md-5 needs action_button_slider">
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
@@ -321,5 +326,14 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
+
+    // Load the animation using Lottie
+    const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/top-priorities/priorities.json') }}'
+    });
 </script>
 @endsection

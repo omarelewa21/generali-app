@@ -126,13 +126,13 @@
                                             <label for="identityrMaleInput" class="form-label text-white">Gender *</label>
                                             <div class="d-flex bg-white btn-group @error('gender') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                    <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="male"
-                                                    {{ (old('gender') === 'male' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'male')) ? 'checked' : '' }}>
+                                                    <input type="radio" class="btn-check" name="gender" id="identityrMaleInput" autocomplete="off" value="Male"
+                                                    {{ (old('gender') === 'Male' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'Male')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                 </label>
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                    <input type="radio" class="btn-check" name="gender" id="identityFemaleInput" autocomplete="off" value="female"
-                                                    {{ (old('gender') === 'female' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'female')) ? 'checked' : '' }}>
+                                                    <input type="radio" class="btn-check" name="gender" id="identityFemaleInput" autocomplete="off" value="Female"
+                                                    {{ (old('gender') === 'Female' || (isset($identityDetails['gender']) && $identityDetails['gender'] === 'Female')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                 </label>
                                             </div>
@@ -187,14 +187,14 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
-                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], 0, 2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
+                                                        {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($identityDetails['dob'], -2)), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @else
                                                         {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select bg-white' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'day']) !!}
                                                     @endif
                                                 </div>
                                                 <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
-                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 3, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
+                                                        {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($identityDetails['dob'], 5, 2)), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @else
                                                         {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select bg-white' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'month']) !!}
                                                     @endif
@@ -202,11 +202,11 @@
                                                 <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                     @if(isset($identityDetails['dob']))
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                            return substr($year, -4);
-                                                        }, $yearRange), $yearRange), old('year', substr($identityDetails['dob'], -4)), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
+                                                            return substr($year, 0, 4);
+                                                        }, $yearRange), $yearRange), old('year', substr($identityDetails['dob'], 0, 4)), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
                                                         @else
                                                         {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                            return substr($year, -4);
+                                                            return substr($year, 0, 4);
                                                         }, $yearRange), $yearRange), old('year'), ['class' => 'form-select bg-white' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'year']) !!}
                                                     @endif
                                                 </div>
@@ -229,13 +229,13 @@
                                             <label for="smoker" class="form-label text-white">Your Habits *</label>
                                             <div class="d-flex btn-group @error('btnradio') is-invalid @enderror" role="group">
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                    <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="smoker"
-                                                    {{ (old('btnradio') === 'smoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'smoker')) ? 'checked' : '' }}>
+                                                    <input type="radio" class="btn-check" name="btnradio" id="smoker" autocomplete="off" value="Smoker"
+                                                    {{ (old('btnradio') === 'Smoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'Smoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                 </label>
                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                    <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="nonSmoker"
-                                                    {{ (old('btnradio') === 'nonSmoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'nonSmoker')) ? 'checked' : '' }}>
+                                                    <input type="radio" class="btn-check" name="btnradio" id="nonSmoker" autocomplete="off" value="Non-Smoker"
+                                                    {{ (old('btnradio') === 'Non-Smoker' || (isset($identityDetails['habits']) && $identityDetails['habits'] === 'Non-Smoker')) ? 'checked' : '' }}>
                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
                                                 </label>
                                             </div>

@@ -14,7 +14,9 @@
 
 @php
     // Retrieving values from the session
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
+    $relationship = session('customer_details.retirement_needs.coverFor');
 @endphp
 
 <div id="retirement_ideal" class="ideal">
@@ -38,20 +40,20 @@
                         <div class="row h-100">
                             <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-bucket-list.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 fw-bold">Visiting destinations on my bucket list</p>
+                                    <img src="{{ asset('images/needs/retirement/ideal-bucket-list.png') }}" height="auto" width="100%" class="pb-3">
+                                    <p class="avatar-text text-center fw-bold">Visiting destinations on my bucket list</p>
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 fw-bold">Maintaining a comfortable lifestyle</p>
+                                    <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3">
+                                    <p class="avatar-text text-center fw-bold">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%">
-                                    <p class="avatar-text text-center pt-4 fw-bold">Retiring early with secure finances</p>
+                                    <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3">
+                                    <p class="avatar-text text-center fw-bold">Retiring early with secure finances</p>
                                 </button>
                             </div>
                         </div>
@@ -87,4 +89,39 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var retirementPriority = '{{$retirementPriority}}';
+    var lastPageInput = '{{$relationship}}';
+</script>
 @endsection

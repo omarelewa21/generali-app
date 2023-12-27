@@ -15,16 +15,17 @@ import './savings-validation';
 import './investment-validation';
 import './health-medical-validation';
 import './debt-cancellation-validation';
+import './summary';
 import 'jquery-ui-dist/jquery-ui';
 import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
-// import ScrollMagic from 'scrollmagic';
-// import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
+import './datatables';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
     // Detect the element with id
+    var login = $('#login');
     var home = $('#home');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
@@ -36,7 +37,7 @@ $(document).ready(function () {
     var education_home = $('#education_home');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1) {
+    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1 || login.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }
@@ -108,11 +109,9 @@ function footer_scroll() {
         const bottomObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    console.log('visible');
                     $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
                 }
                 else {
-                    console.log('not-visible');
                     $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
                 }
             });
@@ -148,7 +147,6 @@ document.getElementById('saveSession').addEventListener('click', function() {
         }
     });
 });
-
 
 // Session Clear
 document.getElementById('clearSession').addEventListener('click', function() {

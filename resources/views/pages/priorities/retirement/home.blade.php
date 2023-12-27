@@ -11,6 +11,12 @@
 
 @section('content')
 
+@php
+    // Retrieving values from the session
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+@endphp
+
 <div id="retirement_home">
     <div class="container-fluid">
         <div class="row">
@@ -31,7 +37,7 @@
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
-                            <div class="row justify-content-center align-items-center" style="height:70%">
+                            <div class="row justify-content-center align-items-center h-100">
                                 <div class="col-xl-6 text-center">
                                     <h2 class="display-5 fw-bold lh-sm py-4">Now let's talk about your plans for Retirement.</h2>
                                 </div>
@@ -41,7 +47,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('protection.gap')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{$protectionPriority === 'true' || $protectionPriority === true ? route('protection.gap') : route('priorities.to.discuss')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <a href="{{route('retirement.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>
@@ -54,4 +60,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var retirementPriority = '{{$retirementPriority}}';
+</script>
 @endsection 

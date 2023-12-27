@@ -31,7 +31,7 @@ class EducationController extends Controller
         });
 
         $validator = Validator::make($request->all(), [
-            'educationSelectedAvatarInput' => [
+            'relationshipInput' => [
                 'at_least_one_selected',
             ],
         ]);
@@ -42,7 +42,11 @@ class EducationController extends Controller
         }
 
         // Validation passed, perform any necessary processing.
-        $educationSelectedAvatarInput = $request->input('educationSelectedAvatarInput');
+        $relationshipInput = $request->input('relationshipInput');
+        $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
+        $selectedCoverForDobInput = $request->input('selectedCoverForDobInput');
+        $othersCoverForNameInput = $request->input('othersCoverForNameInput');
+        $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -52,16 +56,20 @@ class EducationController extends Controller
 
         // Update specific keys with new values
         $education = array_merge($education, [
-            'coveragePerson' => $educationSelectedAvatarInput
+            'coverFor' => $relationshipInput,
+            'selectedInsuredName' => $selectedInsuredNameInput,
+            'selectedCoverForDob' => $selectedCoverForDobInput,
+            'othersCoverForName' => $othersCoverForNameInput,
+            'othersCoverForDob' => $othersCoverForDobInput
         ]);
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
-
+        
         try {
             DB::transaction(function () use ($request,$customerDetails) {
                 $sessionStorage = new SessionStorage();
@@ -74,8 +82,6 @@ class EducationController extends Controller
             DB::rollBack();
         }
 
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('education.amount.needed');
     }
 
@@ -229,7 +235,7 @@ class EducationController extends Controller
     //         ]);
     //     }
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated education_needs back to the customer_details session
     //     $customerDetails['education_needs'] = $education;
 
     //     // Store the updated customer_details array back into the session
@@ -269,7 +275,7 @@ class EducationController extends Controller
     //         'tertiaryEducationYear' => $tertiary_education_years
     //     ]);
 
-    //     // Set the updated identity_details back to the customer_details session
+    //     // Set the updated education_needs back to the customer_details session
     //     $customerDetails['education_needs'] = $education;
 
     //     // Store the updated customer_details array back into the session
@@ -323,10 +329,15 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
         $education_other_savings = $request->input('education_other_savings');
-        $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        if ($education_saving_amount === '' || $education_saving_amount === null){
+            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - 0);
+            $newEducationPercentage = floatval(0 / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        } else{
+            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
+            $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+        }
 
         // Update specific keys with new values
         $education = array_merge($education, [
@@ -363,7 +374,7 @@ class EducationController extends Controller
             }
         }
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session
@@ -393,7 +404,7 @@ class EducationController extends Controller
         // Get existing education_needs from the session
         $education = $customerDetails['education_needs'] ?? [];
 
-        // Set the updated identity_details back to the customer_details session
+        // Set the updated education_needs back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
         // Store the updated customer_details array back into the session
@@ -415,7 +426,18 @@ class EducationController extends Controller
         // Process the form data and perform any necessary actions
         //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('savings.home');
+        if (isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] === 'true' || $customerDetails['priorities']['savingsDiscuss'] === true)) {
+            return redirect()->route('savings.home');
+        } else if (isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] === 'true' || $customerDetails['priorities']['investmentsDiscuss'] === true)) {
+            return redirect()->route('investment.home');
+        } else if (isset($customerDetails['priorities']['health-medicalDiscuss']) && ($customerDetails['priorities']['health-medicalDiscuss'] === 'true' || $customerDetails['priorities']['health-medicalDiscuss'] === true)) {
+            return redirect()->route('health.medical.home');
+        } else if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+            return redirect()->route('debt.cancellation.home');
+        }
+        else {
+            return redirect()->route('existing.policy');
+        }
     }
 
 }
