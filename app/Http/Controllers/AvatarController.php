@@ -60,9 +60,28 @@ class AvatarController extends Controller
                 $sessionStorage->data = json_encode($customerDetails);
                 $route = strval(request()->path());
                 $sessionStorage->page_route = $route;
-                $sessionStorage->save();
+                $sessionId = $request->session()->getId();
+                $sessionStorage->session_id = $sessionId; 
+                $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+
+                //if session from request able to match with db then do update
+                $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
+
+                if (!empty($dbSessionId)) {
+                    SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                    ->update(['data' => $sessionStorage->data, 
+                              'page_route' => $sessionStorage->page_route,
+                              'customer_name' => $fullName
+                            ]);
+                }
+                else
+                {
+                    $sessionStorage->save();
+                }               
+             
             });
         } catch (\Exception $e) {
+            Log::debug($e);
             DB::rollBack();
         }
         return redirect()->route('identity.details');

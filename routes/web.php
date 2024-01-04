@@ -10,6 +10,7 @@
 |
 */
 
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
@@ -33,6 +34,10 @@ Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
+
+Route::get('/basic-details/{id?}', [DropdownController::class, 'titles'])->name('restore.basic.details');
+
+
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 
 /* Avatar pages */
@@ -205,7 +210,11 @@ Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->nam
 Route::view('/login', 'pages.login')->name('login');
 Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
+Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
 // Route::get('/agent/logs', [TransactionController::class, 'index'])->name('transactions.logs');
 Route::get('/agent/logs', function () {
     return view('pages.dashboard.logs');
 });
+
+//Create New Transaction Form
+Route::get('/', [FormController::class, 'create'])->name('welcome');

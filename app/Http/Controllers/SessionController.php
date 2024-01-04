@@ -11,6 +11,7 @@ class SessionController extends Controller
     public function clearSessionData()
     {
         Session::flush();
+        Session::regenerate();
         return response()->json(['message' => 'Session data cleared.']);
     }
     

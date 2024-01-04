@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
+use Illuminate\Support\Str;
 // use App\Http\Requests\AvatarSelectionRequest;
 // use Illuminate\Support\Facades\Response;
 // use SebastianBergmann\Environment\Console;
@@ -50,9 +51,29 @@ class FormController extends Controller {
                     $sessionStorage->data = json_encode($customerDetails);
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
+                    $sessionId = $request->session()->getId();
+                    $sessionStorage->session_id = $sessionId;   
+
+                    //if session from request able to match with db then do update
+                    $dbSessionId = json_decode(SessionStorage::findSessionId($sessionId)->get('session_id'),true);
+
+                    if (!empty($dbSessionId)) {
+
+                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                        ->update(['data' => $sessionStorage->data, 
+                                  'page_route' => $sessionStorage->page_route
+                                ]);
+                    }
+                    else
+                    {
+                        $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
+                        $newValue = $currentValue + 1;
+                        $sessionStorage->transaction_id = $newValue;            
+                        $sessionStorage->save();
+                    }
                 });
             } catch (\Exception $e) {
+                Log::debug($e);
                 DB::rollBack();
             }
 
@@ -61,6 +82,8 @@ class FormController extends Controller {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
+
+    
 
     public function basicDetails(Request $request)
     {
@@ -148,9 +171,36 @@ class FormController extends Controller {
                     $sessionStorage->data = json_encode($customerDetails);
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
+                    $sessionId = $request->session()->getId();
+                    $sessionStorage->session_id = $sessionId; 
+                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+
+                    //if session from request able to match with db then do update
+                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
+
+                    Log::debug($sessionId); 
+                    Log::debug($dbSessionId); 
+
+                    if ($sessionId == $dbSessionId) {
+                        Log::debug('not empty');
+                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                        ->update(['data' => $sessionStorage->data, 
+                                  'page_route' => $sessionStorage->page_route,
+                                  'customer_name' => $fullName
+                                ]);
+                    }
+                    else
+                    {
+                        // Log::debug('new session');
+                        $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
+                        $newValue = $currentValue + 1;
+                        $sessionStorage->transaction_id = $newValue;            
+                        $sessionStorage->save();
+                    }               
+                 
                 });
             } catch (\Exception $e) {
+                Log::debug($e);
                 DB::rollBack();
             }
 
@@ -346,9 +396,30 @@ class FormController extends Controller {
                     $sessionStorage->data = json_encode($customerDetails);
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
+                    $sessionId = $request->session()->getId();
+                    $sessionStorage->session_id = $sessionId; 
+                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+                    $customerId = $customerDetails['identity_details']['id_number'] ?? NULL;
+
+                    //if session from request able to match with db then do update
+                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
+
+                    if (!empty($dbSessionId)) {
+                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                        ->update(['data' => $sessionStorage->data, 
+                                  'page_route' => $sessionStorage->page_route,
+                                  'customer_name' => $fullName,
+                                  'customer_id' => $customerId
+                                ]);
+                    }
+                    else
+                    {
+                        $sessionStorage->save();
+                    }               
+                 
                 });
             } catch (\Exception $e) {
+                Log::debug($e);
                 DB::rollBack();
             }
 
@@ -473,9 +544,29 @@ class FormController extends Controller {
                     $sessionStorage->data = json_encode($customerDetails);
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
+                    $sessionId = $request->session()->getId();
+                    $sessionStorage->session_id = $sessionId; 
+                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+                    
+
+                    //if session from request able to match with db then do update
+                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
+
+                    if (!empty($dbSessionId)) {
+                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                        ->update(['data' => $sessionStorage->data, 
+                                  'page_route' => $sessionStorage->page_route,
+                                  'customer_name' => $fullName
+                                ]);
+                    }
+                    else
+                    {
+                        $sessionStorage->save();
+                    }               
+                 
                 });
             } catch (\Exception $e) {
+                Log::debug($e);
                 DB::rollBack();
             }
 
@@ -1309,5 +1400,31 @@ class FormController extends Controller {
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
+    }
+
+    public function create(Request $request)
+    {
+
+        // Check if the 'new' parameter is present
+        // if exist, generate new session id 
+        if ($request->query('new')) {
+            
+            // Clear the previous session if got 
+            // session()->forget(['customer_details', 'session_id']);
+            // session()->forget('session_id');
+            // // $sessionId = session()->getId();
+            // session()->regenerate();
+
+            // Regenerate the session ID
+            $session = $request->session()->regenerate();
+
+            $sessionId = $request->session()->getId();
+
+
+            // Store the form token in the session
+            session(['session_id' => $sessionId]);
+        }
+
+        return view('pages/main/welcome');
     }
 }

@@ -11,7 +11,6 @@ use App\Models\maritalStatus;
 use App\Models\Company;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
-
 class DropdownController extends Controller
 {
     public function titles()
