@@ -30,7 +30,7 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold">Create New Transaction</a>
+                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus"></i> Create New Transaction</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">

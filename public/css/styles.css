@@ -205,7 +205,7 @@ input[type="number"] {
   margin-bottom: 10px;
 }
 
-.form-signin label {
+.form-floating label {
   color: rgba(10, 4, 60, 0.30);
 }
 
@@ -221,26 +221,6 @@ input[type="number"] {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   color: rgba(0, 0, 0, 0.3);
-}
-
-.fa-id:before {
-  content: "";
-  background-image: url('/images/general/agentid-icon.png');
-  width: 20px;
-  height: 20px;
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.fa-password:before {
-  content: "";
-  background-image: url('/images/general/password-icon.png');
-  width: 20px;
-  height: 20px;
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .form-floating > .form-control:not(:placeholder-shown) ~ label {
