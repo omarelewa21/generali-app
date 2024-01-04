@@ -38,7 +38,7 @@ class SessionsDataTable extends DataTable
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">
                     <a class="dropdown-toggle" style="margin-left: 500%;" data-bs-toggle="dropdown" aria-expanded="false"><img src="https://generali.zenotechmy.com/images/general/icon-more.png" width="auto" height="20px" alt="More Options"></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                        <li><a class="dropdown-item" href="' . route('soft-delete', ['id' => $data->id]) . '">Delete</a></li>
                     </ul>
                 </div>';
 
@@ -112,6 +112,19 @@ class SessionsDataTable extends DataTable
                         'buttons' => [],
                     ])
                     ->responsive(true)
+
+                    // comment for dom below
+                    // 'l': Length changing (controls the "Show entries" dropdown).
+                    // 'f': Filtering input (controls the search input).
+                    // 't': Table.
+                    // 'i': Information (displays "Showing x of y entries").
+                    // 'p': Pagination.
+                    ->dom("<'row'<'col-sm-12 col-md-6'l>  
+                                 <'col-sm-12 col-md-6'f>>" . 
+                          "<'row'<'col-sm-12'tr>>" . 
+                          "<'row'<'col-sm-12 col-md-5'i>
+                          <'col-sm-12 col-md-7'p>>"
+                        )
                     ->columnDefs([
                         [
                             'targets' => '_all',
@@ -131,7 +144,7 @@ class SessionsDataTable extends DataTable
             Column::make('customer_id')->title('Customer Id'),
             Column::make('created_at')->title('Last Saved'),
             Column::make('action')->title('Action')->orderable(false)->searchable(false),
-            Column::make('status')->title('Status'),
+            // Column::make('status')->title('Status'),
         ];
     }
 

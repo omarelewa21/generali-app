@@ -211,6 +211,8 @@ Route::view('/login', 'pages.login')->name('login');
 Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
 Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
+Route::get('/soft-delete/{id}', [AgentController::class, 'softDelete'])->name('soft-delete');
+
 // Route::get('/agent/logs', [TransactionController::class, 'index'])->name('transactions.logs');
 Route::get('/agent/logs', function () {
     return view('pages.dashboard.logs');

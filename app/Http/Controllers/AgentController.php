@@ -39,4 +39,17 @@ class AgentController extends Controller
 
         return $dataTable->render('pages.dashboard.agent',compact('completedCount','draftCount','cancelledCount','grandTotal'));
     }
+
+    public function softDelete($id)
+    {
+        $item = SessionStorage::find($id);
+
+        if ($item) {
+            $item->status = 'cancelled';
+            $item->save();
+            // $item->delete(); // Soft delete
+        }
+
+        return redirect()->back()->with('success', 'Item soft deleted successfully.');
+    }
 }
