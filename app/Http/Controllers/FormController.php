@@ -429,7 +429,7 @@ class FormController extends Controller {
                 }
                 
                 if ($maritalStatusButtonInput === 'Single') {
-                    $customerDetails['family_details']['dependant']['spouse'] = false;
+                    $customerDetails['family_details']['spouse'] = false;
                     $customerDetails['family_details']['dependant']['children'] = false;
                     unset($customerDetails['family_details']['dependant']['spouse_data']);
                     unset($customerDetails['family_details']['dependant']['children_data']);
