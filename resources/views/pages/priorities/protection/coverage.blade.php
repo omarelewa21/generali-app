@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');

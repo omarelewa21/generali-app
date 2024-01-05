@@ -15,11 +15,11 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $familyDependant = session('customer_details.family_details.dependant');
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $childrenData = session('customer_details.family_details.dependant.children_data');
-    $parentsData = session('customer_details.family_details.dependant.parents_data');
-    $siblingsData = session('customer_details.family_details.dependant.siblings_data');
+    $familyDependant = session('customer_details.family_details');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $childrenData = session('customer_details.family_details.children_data');
+    $parentsData = session('customer_details.family_details.parents_data');
+    $siblingsData = session('customer_details.family_details.siblings_data');
     $childKeys = is_array($childrenData) ? array_keys($childrenData) : [];
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
@@ -710,10 +710,10 @@
 </div>
 
 <script>
-var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
-var siblings_session = {!! json_encode(session('customer_details.family_details.dependant.siblings')) !!};
+var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
+var siblings_session = {!! json_encode(session('customer_details.family_details.siblings')) !!};
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
-var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+var family_details = {!! json_encode(session('customer_details.family_details')) !!};
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {

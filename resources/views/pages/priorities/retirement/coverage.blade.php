@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');

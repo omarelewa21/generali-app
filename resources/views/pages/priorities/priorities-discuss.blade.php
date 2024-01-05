@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $topPriorities = session('customer_details.financial_priorities');
+    $topPriorities = session('customer_details.priorities_level');
     $prioritiesDiscuss = session('customer_details.priorities');
 @endphp
 
@@ -250,8 +250,8 @@
                                                                     </div>
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -342,7 +342,7 @@
             var checkboxValues = {};
 
             //Assign the needs sequence
-            const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
+            const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss'];
 
             // First set all to true
             $('input[type="checkbox"]').each(function() {
@@ -367,7 +367,7 @@
                         droppedDiv.forEach(function(element) {
                             var droppedAttribute = element.getAttribute("data-identifier");
                             var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
                             // if (image) {
                                 image.style.display = 'none';
                             }
@@ -377,7 +377,7 @@
                         droppedDiv.forEach(function(element) {
                             var droppedAttribute = element.getAttribute("data-identifier");
                             var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
                             // if (image) {
                                 image.style.display = 'block';
                             }
@@ -391,27 +391,27 @@
                 for (const checkboxId of contents) {
                     if (checkboxValues[checkboxId] === true) {
                         // Assign link based on the sequence
-                        if (checkboxId === 'protectionDiscuss') {
+                        if (checkboxId === 'protection_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'retirementDiscuss') {
+                        else if (checkboxId === 'retirement_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'educationDiscuss') {
+                        else if (checkboxId === 'education_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'savingsDiscuss') {
+                        else if (checkboxId === 'savings_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'investmentsDiscuss') {
+                        else if (checkboxId === 'investments_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'health-medicalDiscuss') {
+                        else if (checkboxId === 'health-medical_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
                             break;
                         }
@@ -436,7 +436,7 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
                         // if (image) {
                             image.style.display = 'none';
                         }
@@ -446,7 +446,7 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
                         // if (image) {
                             image.style.display = 'block';
                         }
@@ -463,27 +463,27 @@
                         // Check if the current checkbox is unchecked
                         if (checkboxValues[checkboxId] === true) {
                             // Check the sequence and redirect accordingly
-                            if (checkboxId === 'protectionDiscuss') {
+                            if (checkboxId === 'protection_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'retirementDiscuss') {
+                            else if (checkboxId === 'retirement_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'educationDiscuss') {
+                            else if (checkboxId === 'education_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'savingsDiscuss') {
+                            else if (checkboxId === 'savings_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'investmentsDiscuss') {
+                            else if (checkboxId === 'investments_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'health-medicalDiscuss') {
+                            else if (checkboxId === 'health-medical_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
                                 break;
                             }

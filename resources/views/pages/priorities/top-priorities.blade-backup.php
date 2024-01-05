@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Priorities To Discuss Page
+ * Template Name: Top Priorities Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Priorities To Discuss</title>
+<title>Top Priorities</title>
 @endsection
 
 @section('content')
@@ -18,14 +18,14 @@
     $topPriorities = session('customer_details.financial_priorities');
 @endphp
 
-<div id="priorities_to_discuss">
+<div id="top_priorities">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>    
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                 <section class="content-avatar-default">
                     <div class="col-12 text-center position-relative">
-                        <h2 class="display-5 fw-bold lh-base text-center">I'd like to figure out future plans for these:</h2>
+                        <h2 class="display-5 fw-bold lh-base text-center">Here's how I see my priorities:</h2>
                         <div id="sortable-main" class="position-relative pt-3">
                             <svg width="100%" height="100%" viewBox="0 0 776 389" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path class="second @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" d="M217.69 224.091C196.716 246.11 179.97 272.188 168.769 301.045L30.2097 247.62C48.5897 200.803 75.8854 158.479 110.016 122.74L217.69 224.091Z" fill="#F2F2F2" stroke="#A0A0A0" stroke-dasharray="8 6"/>
@@ -55,6 +55,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[0]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -71,6 +72,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[1]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -87,6 +89,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[2]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -103,6 +106,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[3]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -119,6 +123,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[4]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -135,6 +140,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[5]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -151,6 +157,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[6]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -167,6 +174,7 @@
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
+                                                    <button class="remove-button" data-identifier="{{$topPriorities[7]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                 </div>
                                             </div>
                                         @endif
@@ -177,98 +185,139 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 position-absolute" style="top: 50%;">
-                            <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <div class="col-12 position-absolute d-grid z-1" style="top: 50%; grid-gap: 20px;">
+                            <div class="col-12 d-flex justify-content-center">
+                                <!-- <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end" type="button">Refresh</button></p> -->
+                            </div>
+                            <div class="col-12">
+                                <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                                <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
+                            </div>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
-                            <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                            <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
-                                    <h1 class="display-4 text-white fw-bold pb-3">Let's go through what you'd like to discuss.</h1>
+                                    <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
+                                    <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
                                 </div>
                             </div>
-                            <div class="row px-4 pb-4 px-sm-5">
-                                <div class="col-12">
-                                    <div class="accordion accordion-flush" id="accordionPriorities">
-                                        @php
-                                            if (isset($topPriorities)) {
-                                                foreach($topPriorities as $priority) {
-                                                    if ($priority === 'protection') {
-                                                        $title = 'Protection';
-                                                    }
-                                                    else if ($priority === 'retirement') {
-                                                        $title = 'Retirement';
-                                                    }
-                                                    else if ($priority === 'education') {
-                                                        $title = 'Education';
-                                                    }
-                                                    else if ($priority === 'savings') {
-                                                        $title = 'Savings';
-                                                    }
-                                                    else if ($priority === 'debt-cancellation') {
-                                                        $title = 'Debt Cancellation';
-                                                    }
-                                                    else if ($priority === 'health-medical') {
-                                                        $title = 'Health Medical';
-                                                    }
-                                                    else if ($priority === 'investments') {
-                                                        $title = 'Lump Sum Investment';
-                                                    }
-                                                    else if ($priority === 'others') {
-                                                        $title = 'Others';
-                                                    }
-                                                    else {
-                                                        $title = '';
-                                                    }
-
-                                                    if ($priority) { @endphp
-                                                        <div class="accordion-item">
-                                                            <h2 class="accordion-header" id="flush-heading{{$priority}}">
-                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
-                                                                </button>
-                                                            </h2>
-                                                            <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
-                                                                <div class="accordion-body">
-                                                                    <div class="row py-2 px-3">
-                                                                        <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row py-2 px-3">
-                                                                        <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @php } 
-                                                }
-                                            }
-                                        @endphp
+                            <div class="row px-4 px-md-5">
+                                @if ($errors->has('topPrioritiesButtonInput'))
+                                    <div class="col-12">
+                                        <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                            </svg>
+                                            <div class="text">{{ $errors->first('topPrioritiesButtonInput') }}</div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                            <div id="needs" class="row px-4 px-md-5 pb-md-5 needs action_button_slider">
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 button-bg h-100">
+                                        <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
-                                    <a href="{{route('protection.home') }}" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
+                    <form action="{{ route('form.top.priorities') }}" method="post" class="buttonForm">
+                        @csrf
+                        <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                        <!-- Add a hidden input field to store the selected button -->
+                                        <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="{{ json_encode($topPriorities) }}">
+                                        <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </form>
                 </div>
             </div>
         </div>
@@ -276,49 +325,15 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure the first accordion item is always open
-    const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    var sessionData = {!! json_encode(session('customer_details.financial_priorities')) !!};
 
-    if (firstAccordionItem) {
-        const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
-        firstCollapse.classList.add('show');
-    }
-
-    // Sent checkbox value to controller
-    var checkboxValues = {};
-
-    // First set all to true
-    $('input[type="checkbox"]').each(function() {
-        var checkboxId = $(this).attr('id');
-        checkboxValues[checkboxId] = true;
-        $(this).prop('checked', true); // Check the checkboxes initially
+    // Load the animation using Lottie
+    const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/top-priorities/priorities.json') }}'
     });
-
-    // Update checkboxValues object when any checkbox is changed
-    $('input[type="checkbox"]').on('change', function() {
-        var checkboxId = $(this).attr('id');
-        var isChecked = $(this).prop('checked');
-        checkboxValues[checkboxId] = isChecked;
-    });
-
-    $('#priorityNext').on('click', function(event) {
-        $.ajax({
-            type: "POST",
-            url: "{{ route('priorities.redirect') }}",
-            data: checkboxValues,
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(response) {
-                // Handle success, if needed
-            },
-            error: function(xhr, status, error) {
-                // Handle error, if needed
-            }
-        });
-    });
-});
 </script>
 @endsection
