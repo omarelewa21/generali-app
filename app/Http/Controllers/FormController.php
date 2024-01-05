@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\DB;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
-// use App\Http\Requests\AvatarSelectionRequest;
-// use Illuminate\Support\Facades\Response;
-// use SebastianBergmann\Environment\Console;
-// use Illuminate\Support\Facades\View;
-// use Illuminate\Support\Facades\Session;
-// use libphonenumber\PhoneNumberFormat;
-// use libphonenumber\PhoneNumberType;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -131,9 +124,9 @@ class FormController extends Controller {
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
                 'full_name' => $validatedData['fullName'],
-                'countryCode' => $parsedcountryCode,
+                'country_code' => $parsedcountryCode,
                 'mobile_number' => $full_number,
-                'homeNumberCountryCode' => $parsedcountryCodeHouse,
+                'house_phone_number_country_code' => $parsedcountryCodeHouse,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
             ];

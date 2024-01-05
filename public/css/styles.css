@@ -234,6 +234,20 @@ input[type="number"] {
 }
 
 /* ============================== Tables ============================== */
+table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before {
+  content: "\f0de"!important;
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  font-size: 1rem!important;
+}
+
+table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:after {
+  content: "\f0dd"!important;
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  font-size: 1rem!important;
+}
+
 .dataTable tr th, #agentTable tr th {
   background-color: #EBEBEB;
   font-size: 18px;
@@ -256,7 +270,7 @@ input[type="number"] {
 }
 
 table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_asc:after {
-  line-height: 15px!important;
+  line-height: 1px!important;
   opacity: .3!important;
 }
 
@@ -361,6 +375,17 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 
 .alert.alert-warning svg path {
   fill: #664d03;
+}
+
+/* ============================== Font Awesome ============================== */
+.fa-solid.fa-plus {
+  border: 3px solid #C21B17;
+  border-radius: 100%;
+  padding: 4px;
+}
+
+.btn-create:hover .fa-solid.fa-plus {
+  border: 3px solid #ffffff;
 }
 
 /* ============================== Navigation Menu ============================== */
@@ -540,66 +565,6 @@ p.nav-text {
   vertical-align: middle;
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-.btn-create:before {
-  content: "";
-  background-image: url(/images/general/create.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-create:hover:before {
-  content: "";
-  background-image: url(/images/general/create-white.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-tick .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-tick.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-draft .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-draft.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-cancelled .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-cancel.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
 }
 
 .btn-refresh-red:before {

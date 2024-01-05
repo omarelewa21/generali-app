@@ -21,10 +21,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     if (path == '/agent/logs') {
         // Declare Datatables for sorting
         document.addEventListener('DOMContentLoaded', function () {
-//             var buttonHTML = '<button id="buttonAdvanced" class="btn btn-secondary fw-bold btn-sm">Advanced Search</button>';
-//             // Append the button to the DataTable's top section
-//             $('#dataTable_wrapper div.top .dt-buttons').append(buttonHTML);
-// console.log($('#dataTable_wrapper'));
             var table = $('#dataTable').DataTable({
                 language: {
                     search: `<svg width="18" height="18" class="w-4 lg:w-auto" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,17 +30,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     searchPlaceholder: 'Search...',
                 },
                 dom: 'rt<"bottom"ip>',
-                // buttons: [{
-                //     text: 'Advanced Search',
-                //     className: 'btn btn-secondary fw-bold btn-sm',
-                //     attr: {
-                //         id: 'buttonAdvanced'
-                //     },
-                //     action: function () {
-                //         jQuery.noConflict();
-                //         $('#advancedSearch').modal('show');
-                //     }
-                // }],
                 search: {
                     return: true
                 },
@@ -155,7 +140,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     if (path == '/agent') {
         // Declare Datatables for sorting
         $(document).ready(function () {
-            // Datatables for Agent Dashboard
             $('#agentTable').DataTable({
                 responsive: false,
                 autoWidth: true,

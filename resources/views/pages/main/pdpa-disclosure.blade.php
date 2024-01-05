@@ -19,7 +19,7 @@
                 <div class="navbar-scroll fixed-top">
                     @include('templates.nav.nav-white')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                        <h2 class="display-5 fw-bold py-3">To begin, may we have permission to share or use your personal details?</h2>
+                        <h2 class="display-5 fw-bold py-3">To begin, may we have permission to use your personal details?</h2>
                     </div>
                 </div>
             </div>
