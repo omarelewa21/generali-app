@@ -17,7 +17,7 @@
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $firstName = session('customer_details.basic_details.first_name');
+    $fullName = session('customer_details.basic_details.full_name');
 @endphp
 
 <div id="avatar_gender_selection">
@@ -84,8 +84,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        @if(isset($firstName))
-                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you, {{ $firstName }}</h1>
+                                        @if(isset($fullName))
+                                            <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you, {{ $fullName }}</h1>
                                         @else 
                                             <h1 class="display-4 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you.</h1>
                                         @endif

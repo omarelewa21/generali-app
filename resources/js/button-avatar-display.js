@@ -326,6 +326,39 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     $(".imageContainerHouse").html(newImage);
                 }
             }
+
+            function clearAvatar() {
+                var $imageContainerCar = $(".imageContainerCar");
+                var $imageContainerHouse = $(".imageContainerHouse");
+    
+                $imageContainerCar.empty();
+                $imageContainerHouse.empty();
+    
+                selectedAssets['car'] = false;
+                selectedAssets['house'] = false;
+                selectedAssets['scooter'] = false;
+                selectedAssets['bungalow'] = false;
+                selectedAssets['condo'] = false;
+    
+                if (assetsButtonInput.value == '') {
+                    assetsButtonInput.value = JSON.stringify(selectedAssets);
+                }
+                else {
+                    assetsButtonInput.value = JSON.stringify({
+                        ...JSON.parse(assetsButtonInput.value),
+                        car: selectedAssets.car,
+                        house: selectedAssets.house,
+                        scooter: selectedAssets.scooter,
+                        bungalow: selectedAssets.bungalow,
+                        condo: selectedAssets.condo
+                    });
+                }
+            }
+    
+            document.getElementById('refresh').addEventListener('click', function(event) {
+                event.preventDefault();
+                clearAvatar();
+            });
         }
 
         // Do the logics for button clicks
@@ -778,39 +811,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     others_data: selectedAssets.others_data,
                 });
             }
-        });
-
-        function clearAvatar() {
-            var $imageContainerCar = $(".imageContainerCar");
-            var $imageContainerHouse = $(".imageContainerHouse");
-
-            $imageContainerCar.empty();
-            $imageContainerHouse.empty();
-
-            selectedAssets['car'] = false;
-            selectedAssets['house'] = false;
-            selectedAssets['scooter'] = false;
-            selectedAssets['bungalow'] = false;
-            selectedAssets['condo'] = false;
-
-            if (assetsButtonInput.value == '') {
-                assetsButtonInput.value = JSON.stringify(selectedAssets);
-            }
-            else {
-                assetsButtonInput.value = JSON.stringify({
-                    ...JSON.parse(assetsButtonInput.value),
-                    car: selectedAssets.car,
-                    house: selectedAssets.house,
-                    scooter: selectedAssets.scooter,
-                    bungalow: selectedAssets.bungalow,
-                    condo: selectedAssets.condo
-                });
-            }
-        }
-
-        document.getElementById('refresh').addEventListener('click', function(event) {
-            event.preventDefault();
-            clearAvatar();
         });
     });
 }

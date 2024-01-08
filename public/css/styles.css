@@ -556,17 +556,6 @@ p.nav-text {
   background-repeat: no-repeat;
 }
 
-.btn-refresh:before {
-  content: "";
-  background-image: url(/images/general/refresh.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .btn-refresh-red:before {
   content: "";
   background-image: url(/images/general/refresh-red.svg);
@@ -1276,6 +1265,91 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   grid-row: 59 / 96;
 }
 
+#top_priorities {
+  height: 0 !important;
+}
+
+#sortable-main .item-dropped.digit{
+  stroke-width: 0;
+}
+
+.ui-state-default.dropdown[data-identifier] > div {
+  position: absolute;
+  padding-left: 86px;
+  top: 0;
+  padding-top: 16px;
+  left: 0;
+  right: 62px;
+  bottom: 0;
+}
+
+.sortablemobileContainer {
+  position: relative;
+  background-color: #C0232C;
+  padding: 16px;
+  padding-bottom: 120px;
+}
+
+#sortablemobile {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#sortablemobile ul.dropdown-menu {
+  width: 100%;
+  overflow: scroll !important;
+  max-height: 83vh;
+}
+
+#sortablemobile ul.dropdown-menu.show {
+  transform: translate3d(0px, 50px, 0px) !important;
+}
+
+#sortablemobile li {
+  margin-bottom: 16px;
+  padding: 12px 40px 12px 22px;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  position: relative;
+}
+
+#sortablemobile li.is-empty {
+  margin-bottom: 16px;
+  padding: 12px 40px 12px 22px;
+  border: 2px dashed #ffffff;
+  background-color: #F2F2F288;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  position: relative;
+}
+
+#sortablemobile .ui-sortable-placeholder {
+  visibility: visible !important;
+  border: 2px dashed #ffffff;
+  background: rgba(242, 242, 242, 0.50);
+}
+
+#sortablemobile li .arrowIcon {
+  margin-left: -25px;
+  position: absolute;
+  right: 10px;
+  top: 35%;
+  font-size: 30px;
+  transform: translate(-50%, -50%);
+  color: rgba(179, 34, 42, 1);
+  cursor: pointer;
+}
+
+#sortablemobile li.is-empty .arrowIcon {
+  color: #fff;
+}
+
+#sortablemobile li .needs-icon {
+  height: 2em;
+}
+
 /* ============================== Retirement Home Page ============================== */
 #retirement_home .wrapper-needs-grey {
   background-image: url(/images/needs/retirement/home-bg.jpg);
@@ -1465,6 +1539,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
+  #top_priorities {
+    height: 100vh !important;
+  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;

@@ -324,6 +324,54 @@
     </div>
 </div>
 
+<div class="sortablemobileContainer d-block d-md-none">
+    @include('templates.nav.nav-white-menu')
+    <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
+        <div class="col-12">
+            <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
+        </div>
+        <div class="d-flex justify-content-between gap-2 align-items-center">
+            <div>
+                <p class="text-white display-6 lh-base my-auto">Select your priorities by first to last.</p>
+            </div>
+            <div class="d-flex gap-2 justify-content-between align-items-center text-uppercase text-light fw-bolder px-2 py-1 border border-light border-2 rounded rounded-5 user-select-none" role="button" onClick="resetPriorities()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512" fill="currentColor">
+                    <path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/>
+                </svg>
+                <div style="font-size: 18px;">Refresh</div>
+            </div>
+        </div>
+    </div>
+    @php
+        $topPriorities = array_pad($topPriorities ?? [], 8, null);
+        $prioritiesMap = [
+            'protection' => 'Protection',
+            'retirement' => 'Retirement',
+            'education' => 'Education',
+            'savings' => 'Savings',
+            'debt-cancellation' => 'Debt Cancellation',
+            'health-medical' => 'Health & Medical',
+            'investments' => 'Lump Sum Investment',
+            'others' => 'Others',
+        ];
+    @endphp
+    <ul id="sortablemobile">
+        @foreach($topPriorities as $topPriority)
+            <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
+                <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0">&#8964;</span>
+                @if($topPriority && $topPriority != 'undefined')
+                    {{--                        <span class="removeIcon">&#10006;</span>--}}
+                    <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
+                    {{ $prioritiesMap[$topPriority] }}
+                @else
+                    {{ $loop->iteration }}
+                @endif
+                <ul class="dropdown-menu pre-scrollable" role="menu" style="max-height: 400px;"></ul>
+            </li>
+        @endforeach
+    </ul>
+</div>
+
 <script>
     var sessionData = {!! json_encode(session('customer_details.priorities_level')) !!};
 
@@ -336,4 +384,10 @@
         path: '{{ asset('images/top-priorities/priorities.json') }}'
     });
 </script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="resources/js/sortable.js"></script> -->
+    
 @endsection
