@@ -4,7 +4,6 @@ import 'datatables.net-responsive-bs5';
 import 'datatables.net-select-bs5';
 import 'datatables.net-searchbuilder-bs5';
 import 'datatables.net-datetime';
-import moment from 'moment';
 
 const specificPageURLs = [
     '/agent/logs',
@@ -34,7 +33,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     return: true
                 },
                 responsive: false,
-                autoWidth: true,
+                autoWidth: false,
                 scrollCollapse: true,
                 scrollY: false,
                 scrollX: '1054px',
@@ -142,7 +141,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $(document).ready(function () {
             $('#agentTable').DataTable({
                 responsive: false,
-                autoWidth: true,
+                autoWidth: false,
                 paging: true,
                 searching: false,
                 ordering: true,
@@ -160,7 +159,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 scrollY: false,
                 scrollX: '1054px',
                 initComplete: function () {
-                    // var table = this.api();
+                    var table = this.api();
                     var container = $('#agentTable_wrapper');
                     var tableWidth = $('.dataTables_scrollHeadInner');
                     var dataTable = $('.dataTables_scrollHeadInner .dataTable');

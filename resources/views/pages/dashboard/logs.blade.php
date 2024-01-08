@@ -30,7 +30,7 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <h3 class="avatar-text fw-bold pb-3">Transaction Logs</h3>
+                                <h3 class="avatar-text fw-bold pb-3">Entry Logs</h3>
                             </div>
                         </div>
                         <div class="row px-4">
@@ -48,11 +48,11 @@
                                             <div class="modal-header px-4 py-0 justify-content-center">
                                                 <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Search</h2>
                                             </div>
-                                            <div class="modal-body text-dark text-center px-5 py-5 d-flex justify-content-center">
+                                            <div class="modal-body text-dark text-center px-5 pb-5 pt-4 d-flex justify-content-center">
                                                 <div style="width:90%">
                                                     <div class="row py-2 align-items-center">
                                                         <div class="col-md-5 text-start">
-                                                            <label for="searchTransaction" class="form-label m-0">Transaction ID</label>
+                                                            <label for="searchTransaction" class="form-label m-0">Entry ID</label>
                                                         </div>
                                                         <div class="col-md-7">
                                                             <input type="text" id="searchTransaction" class="form-control">
@@ -88,16 +88,18 @@
                                                         <div class="col-md-5 text-start">
                                                             <label for="min" class="form-label m-0">From Date</label>
                                                         </div>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-7 position-relative">
                                                             <input type="text" id="min" name="min" class="form-control">
+                                                            <i class="field-icon fa-solid fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 align-items-center">
                                                         <div class="col-md-5 text-start">
                                                             <label for="max" class="form-label m-0">To Date</label>
                                                         </div>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-7 position-relative">
                                                             <input type="text" id="max" name="max" class="form-control">
+                                                            <i class="field-icon fa-solid fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,7 +114,7 @@
                                 <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Entry ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Status</th>

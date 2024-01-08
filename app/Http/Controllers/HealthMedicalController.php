@@ -871,7 +871,7 @@ class HealthMedicalController extends Controller
         }
 
         // // Process the form data and perform any necessary actions
-        if (isset($customerDetails['priorities']['debt-cancellationDiscuss']) && ($customerDetails['priorities']['debt-cancellationDiscuss'] === 'true' || $customerDetails['priorities']['debt-cancellationDiscuss'] === true)) {
+        if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
             return redirect()->route('debt.cancellation.home');
         }
         else {

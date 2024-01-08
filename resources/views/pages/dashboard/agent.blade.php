@@ -30,7 +30,7 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Transaction</a>
+                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
@@ -78,7 +78,7 @@
                                 <table class="table table-striped" id="agentTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Entry ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Last Saved</th>

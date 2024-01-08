@@ -65,7 +65,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container second d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" data-svg-class="second">
+                                    <div class="svg-container second d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[1])) item-dropped @endif" data-svg-class="second" data-index="2">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -73,7 +73,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[1]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -82,7 +82,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container third d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[2])) item-dropped @endif" data-svg-class="third">
+                                    <div class="svg-container third d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[2])) item-dropped @endif" data-svg-class="third" data-index="3">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -90,7 +90,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[2]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -99,7 +99,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[3])) item-dropped @endif" data-svg-class="fourth">
+                                    <div class="svg-container fourth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[3])) item-dropped @endif" data-svg-class="fourth" data-index="4">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -107,7 +107,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[3]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -116,7 +116,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[4])) item-dropped @endif" data-svg-class="fifth">
+                                    <div class="svg-container fifth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[4])) item-dropped @endif" data-svg-class="fifth" data-index="5">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -124,7 +124,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[4]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -133,7 +133,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[5])) item-dropped @endif" data-svg-class="sixth">
+                                    <div class="svg-container sixth d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[5])) item-dropped @endif" data-svg-class="sixth" data-index="6">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -141,7 +141,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[5]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -150,7 +150,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[6])) item-dropped @endif" data-svg-class="seventh">
+                                    <div class="svg-container seventh d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[6])) item-dropped @endif" data-svg-class="seventh" data-index="7">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -158,7 +158,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[6]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -167,7 +167,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="svg-container eight d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[7])) item-dropped @endif" data-svg-class="eight">
+                                    <div class="svg-container eight d-flex justify-content-center align-items-center position-relative @if(isset($topPriorities) && isset($topPriorities[7])) item-dropped @endif" data-svg-class="eight" data-index="8">
                                         <div class="svg-button px-0 d-flex justify-content-center align-items-center">
                                             @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
@@ -175,7 +175,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button" data-identifier="{{$topPriorities[7]}}"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -208,7 +208,7 @@
                                         <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
                                     </div>
                                 </div>
-                                <div class="row px-4 px-md-5">
+                                <div id="needs" class="row px-4 px-md-5 needs">
                                     @if ($errors->has('topPrioritiesButtonInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
@@ -219,12 +219,10 @@
                                             </div>
                                         </div>
                                     @endif
-                                </div>
-                                <div id="needs" class="row px-4 px-md-5 pb-md-5 needs action_button_slider">
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) default @endif" data-avatar="protection" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('protection', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/protection-icon.png') }}" width="auto" height="100px" alt="Protection">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Protection</p>
                                                 </button>
@@ -234,7 +232,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) default @endif" data-avatar="retirement" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('retirement', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/retirement-icon.png') }}" width="auto" height="100px" alt="Retirement">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Retirement</p>
                                                 </button>
@@ -244,7 +242,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) default @endif" data-avatar="education" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('education', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/education-icon.png') }}" width="auto" height="100px" alt="Education">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Education</p>
                                                 </button>
@@ -254,7 +252,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
                                                 </button>
@@ -264,7 +262,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) default @endif" data-avatar="debt-cancellation" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('debt-cancellation', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" width="auto" height="100px" alt="Debt Cancellation">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Debt Cancellation</p>
                                                 </button>
@@ -274,7 +272,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) default @endif" data-avatar="health-medical" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('health-medical', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/health-medical-icon.png') }}" width="auto" height="100px" alt="Health & Medical">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Health & Medical</p>
                                                 </button>
@@ -284,7 +282,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
                                                 </button>
@@ -294,7 +292,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg h-100">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="">
+                                                <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) disabled @endif>
                                                     <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                                 </button>
