@@ -43,7 +43,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 // Append the droppedItem to the container
                 container.append(droppedItem);
         
-                var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                var removeButton = $("<button class='remove-button text-primary'><i class='fa-solid fa-circle-xmark fa-xl'></i></button>");
                 container.append(removeButton);
                 droppedContainer.append(container);
         
@@ -284,7 +284,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         addedNeedsImages[position] = dataAvatar;
                         var container = droppedContainerSortable.eq(position);
                         container.append(droppedItem);
-                        var removeButton = $("<button class='remove-button'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                        var removeButton = $("<button class='remove-button text-primary'><i class='fa-solid fa-circle-xmark fa-xl'></i></button>");
 
                         droppedItem.animate({ width: "100px" }, function() {
                             droppedItem.find("img").animate({ height: "auto" });
