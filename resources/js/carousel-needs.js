@@ -1,3 +1,5 @@
+import 'slick-carousel';
+
 // Function to initialize Slick carousel
 $(document).ready(function() {
     var viewportWidth = $(window).width();
