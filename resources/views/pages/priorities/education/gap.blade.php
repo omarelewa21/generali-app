@@ -7,7 +7,7 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
     $education = session('customer_details.education_needs');
     $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
     $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');

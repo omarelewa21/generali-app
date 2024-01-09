@@ -233,6 +233,11 @@ input[type="number"] {
   margin-right: 10px;
 }
 
+.form-check-input:checked {
+  background-color: #C21B17;
+  border-color: #C21B17;
+}
+
 /* ============================== Tables ============================== */
 table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before {
   content: "\f0de"!important;

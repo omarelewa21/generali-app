@@ -14,10 +14,10 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
     $education = session('customer_details.education_needs');
-    $familyDependent = session('customer_details.family_details.dependant');
-    $childData = session('customer_details.family_details.dependant.children_data');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
 
     $relationship = session('customer_details.education_needs.coverFor');
     $selectedInsuredName = session('customer_details.education_needs.selectedInsuredName');

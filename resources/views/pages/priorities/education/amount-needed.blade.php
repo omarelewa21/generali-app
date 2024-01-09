@@ -13,7 +13,7 @@
 @section('content')
 
 @php
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
     $education = session('customer_details.education_needs');
     $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
     $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');

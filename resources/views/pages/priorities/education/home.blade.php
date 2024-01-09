@@ -13,9 +13,9 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
 @endphp
 
 <div id="education_home">
