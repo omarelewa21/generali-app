@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\DB;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
-use Illuminate\Support\Str;
-// use App\Http\Requests\AvatarSelectionRequest;
-// use Illuminate\Support\Facades\Response;
-// use SebastianBergmann\Environment\Console;
-// use Illuminate\Support\Facades\View;
-// use Illuminate\Support\Facades\Session;
-// use libphonenumber\PhoneNumberFormat;
-// use libphonenumber\PhoneNumberType;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -154,9 +146,9 @@ class FormController extends Controller {
             $customerDetails['basic_details'] = [
                 'title' => $validatedData['title'],
                 'full_name' => $validatedData['fullName'],
-                'countryCode' => $parsedcountryCode,
+                'country_code' => $parsedcountryCode,
                 'mobile_number' => $full_number,
-                'homeNumberCountryCode' => $parsedcountryCodeHouse,
+                'house_phone_number_country_code' => $parsedcountryCodeHouse,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
             ];
@@ -507,28 +499,26 @@ class FormController extends Controller {
                 }
                 
                 if ($maritalStatusButtonInput === 'Single') {
-                    $customerDetails['family_details']['dependant']['spouse'] = false;
-                    $customerDetails['family_details']['dependant']['children'] = false;
-                    unset($customerDetails['family_details']['dependant']['spouse_data']);
-                    unset($customerDetails['family_details']['dependant']['children_data']);
+                    $customerDetails['family_details']['spouse'] = false;
+                    $customerDetails['family_details']['children'] = false;
+                    unset($customerDetails['family_details']['spouse_data']);
+                    unset($customerDetails['family_details']['children_data']);
 
                 } else if ($maritalStatusButtonInput === 'Married') {
-                    $customerDetails['family_details']['dependant']['spouse'] = true;
-                    if (!isset($customerDetails['family_details']['dependant']['spouse_data'])) {
-                        $customerDetails['family_details']['dependant']['spouse_data'] = [
+                    $customerDetails['family_details']['spouse'] = true;
+                    if (!isset($customerDetails['family_details']['spouse_data'])) {
+                        $customerDetails['family_details']['spouse_data'] = [
                             'relation' => 'Spouse'
                         ];
                     }
                     
                 } else if ($maritalStatusButtonInput === 'Divorced' || $maritalStatusButtonInput === 'Widowed') {
-                    $customerDetails['family_details']['dependant']['spouse'] = false;
-                    unset($customerDetails['family_details']['dependant']['spouse_data']);
+                    $customerDetails['family_details']['spouse'] = false;
+                    unset($customerDetails['family_details']['spouse_data']);
                 }
             }
             elseif ($familyDependantButtonInput) {
-                $customerDetails['family_details'] = [
-                    'dependant' => $familyDependantButtonInput
-                ];
+                $customerDetails['family_details'] = $familyDependantButtonInput;
             }
             elseif ($assetsButtonInput) {
                 $customerDetails['assets'] = $assetsButtonInput;
@@ -782,8 +772,8 @@ class FormController extends Controller {
             $customMessagesChild = [];
             $customMessagesParents = [];
 
-            if (isset($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
-                foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
+            if (isset($customerDetails['family_details']['children']) && $customerDetails['family_details']['children'] === true) {
+                foreach ($customerDetails['family_details']['children_data'] as $childKey => $value) {
                     $customMessagesChild[$childKey .'FullName.required'] = 'The child full name field is required.';
                     // $customMessagesChild[$childKey .'LastName.required'] = 'The child last name field is required.';
                     $customMessagesChild[$childKey .'Gender.required'] = 'The child gender field is required.';
@@ -850,8 +840,8 @@ class FormController extends Controller {
                 }
             }
 
-            if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
-                foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
+            if (isset($customerDetails['family_details']['parents']) && $customerDetails['family_details']['parents'] === true) {
+                foreach ($customerDetails['family_details']['parents_data'] as $parentkey => $value) {
 
                     $customMessagesParents[$parentkey .'FullName.required'] = 'The parent full name field is required.';
                     // $customMessagesParents[$parentkey .'LastName.required'] = 'The parent last name field is required.';
@@ -919,7 +909,7 @@ class FormController extends Controller {
                 }
             }
 
-            if (isset ($customerDetails['family_details']['dependant']['spouse']) && $customerDetails['family_details']['dependant']['spouse'] === true) {
+            if (isset ($customerDetails['family_details']['spouse']) && $customerDetails['family_details']['spouse'] === true) {
                 $validatedData = $request->validate($commonRules, $customMessages);
 
                 $day = $request->input('day');
@@ -937,8 +927,8 @@ class FormController extends Controller {
 
                 $marital_status = $customerDetails['identity_details']['marital_status'];
 
-                if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
-                    $numOfChildren = count($customerDetails['family_details']['dependant']['children_data']);
+                if (isset ($customerDetails['family_details']['children']) && $customerDetails['family_details']['children'] === true) {
+                    $numOfChildren = count($customerDetails['family_details']['children_data']);
                 }
                 else {
                     $numOfChildren = '0';
@@ -960,14 +950,14 @@ class FormController extends Controller {
                     'gender' => $validatedData['gender'],
                     'habits' => $validatedData['habits'],
                     'occupation' => $validatedData['spouseOccupation'],
-                    'maritalStatus' => $marital_status,
-                    'noOfKids' => $numOfChildren
+                    'marital_status' => $marital_status,
+                    'children' => $numOfChildren
                 ];
-                $customerDetails['family_details']['dependant']['spouse_data'] = array_merge($customerDetails['family_details']['dependant']['spouse_data'], $newData);
+                $customerDetails['family_details']['spouse_data'] = array_merge($customerDetails['family_details']['spouse_data'], $newData);
             }
 
-            if (isset ($customerDetails['family_details']['dependant']['children']) && $customerDetails['family_details']['dependant']['children'] === true) {
-                foreach ($customerDetails['family_details']['dependant']['children_data'] as $childKey => $value) {
+            if (isset ($customerDetails['family_details']['children']) && $customerDetails['family_details']['children'] === true) {
+                foreach ($customerDetails['family_details']['children_data'] as $childKey => $value) {
                     $validatedData = $request->validate($commonRulesChild, $customMessagesChild);
 
                     $day = $request->input($childKey .'day');
@@ -993,13 +983,13 @@ class FormController extends Controller {
                         'marital_status' => $validatedData[$childKey . 'MaritalStatus'],
                     ];
 
-                    $customerDetails['family_details']['dependant']['children_data'][$childKey] = array_merge($customerDetails['family_details']['dependant']['children_data'][$childKey], $childData);
+                    $customerDetails['family_details']['children_data'][$childKey] = array_merge($customerDetails['family_details']['children_data'][$childKey], $childData);
                 }
 
-                $numChildren = count($customerDetails['family_details']['dependant']['children_data']);
+                $numChildren = count($customerDetails['family_details']['children_data']);
 
                 $newChildData = [
-                    'noOfKids' => $numChildren
+                    'children' => $numChildren
                 ];
 
                 if (isset($customerDetails['identity_details'])) {
@@ -1010,8 +1000,8 @@ class FormController extends Controller {
                 }
             }
 
-            if (isset($customerDetails['family_details']['dependant']['parents']) && $customerDetails['family_details']['dependant']['parents'] === true) {
-                foreach ($customerDetails['family_details']['dependant']['parents_data'] as $parentkey => $value) {
+            if (isset($customerDetails['family_details']['parents']) && $customerDetails['family_details']['parents'] === true) {
+                foreach ($customerDetails['family_details']['parents_data'] as $parentkey => $value) {
                     $validatedData = $request->validate($commonRulesParents, $customMessagesParents);
 
                     $day = $request->input($parentkey .'day');
@@ -1031,11 +1021,11 @@ class FormController extends Controller {
                         'dob' => $dob,
                         'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
                     ];
-                    $customerDetails['family_details']['dependant']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['dependant']['parents_data'][$parentkey], $parentsData);
+                    $customerDetails['family_details']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['parents_data'][$parentkey], $parentsData);
                 }
             }
 
-            if (isset ($customerDetails['family_details']['dependant']['siblings']) && $customerDetails['family_details']['dependant']['siblings'] === true) {
+            if (isset ($customerDetails['family_details']['siblings']) && $customerDetails['family_details']['siblings'] === true) {
                 $validatedData = $request->validate($commonRulesSiblings, $customMessages);
 
                 $day = $request->input('siblingday');
@@ -1055,7 +1045,7 @@ class FormController extends Controller {
                     'years_support' => $validatedData['siblingYearsOfSupport'],
                     'marital_status' => $validatedData['siblingMaritalStatus']
                 ];
-                $customerDetails['family_details']['dependant']['siblings_data'] = array_merge($customerDetails['family_details']['dependant']['siblings_data'], $siblingData);
+                $customerDetails['family_details']['siblings_data'] = array_merge($customerDetails['family_details']['siblings_data'], $siblingData);
             }
 
             // Store the updated customer_details array back into the session
@@ -1132,7 +1122,7 @@ class FormController extends Controller {
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
 
-            $customerDetails['financial_priorities'] = $topPrioritiesButtonInput;
+            $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
@@ -1179,7 +1169,7 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             try {
                 DB::transaction(function () use ($request,$customerDetails) {
                     $sessionStorage = new SessionStorage();

@@ -13,8 +13,8 @@
 
 @php
     // Retrieving values from the session
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
 @endphp
 
 <div id="retirement_home">

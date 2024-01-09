@@ -33,7 +33,7 @@
                         <div class="row px-4 pt-5">
                             <div class="col-12">
                                 {{-- <a href="{{ route('forms.create', ['new' => true]) }}">Create New Form</a> --}}
-                                <a href="{{ route('welcome',['new' => true]) }}" class="btn btn-secondary btn-create fw-bold">Create New Transaction</a>
+                                <a href="{{ route('welcome',['new' => true]) }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
@@ -51,7 +51,7 @@
                                 <div class="col-12 btn-tick">
                                     <a id="completedBtn"  class="btn w-100 status-btn" onclick="updateText('Completed')" data-url='{{ route('agent.index', ['status' => 'completed']) }}'>
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-green text-start btn-text avatar-text fw-bold d-flex align-items-center">Completed</div>
+                                            <div class="col-8 text-green text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-check me-3"></i>Completed</div>
                                             <div class="col-4 fw-bold text-green display-4 text-end">{{ $completedCount }}</div>
                                         </div>
                                     </a>
@@ -61,7 +61,7 @@
                                 <div class="col-12 btn-draft">
                                     <a id="draftBtn"  class="btn w-100 status-btn" onclick="updateText('Draft')" data-url='{{ route('agent.index', ['status' => 'draft']) }}'>
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-yellow text-start btn-text avatar-text fw-bold d-flex align-items-center">Draft</div>
+                                            <div class="col-8 text-yellow text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-regular fa-clock me-3"></i>Draft</div>
                                             <div class="col-4 fw-bold text-yellow display-4 text-end">{{ $draftCount }}</div>
                                         </div>
                                     </a>
@@ -71,7 +71,7 @@
                                 <div class="col-12 btn-cancelled">
                                     <a id="cancelledBtn" class="btn w-100 status-btn" onclick="updateText('Cancelled')" data-url='{{ route('agent.index', ['status' => 'cancelled']) }}'>
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-primary text-start btn-text avatar-text fw-bold d-flex align-items-center">Cancelled</div>
+                                            <div class="col-8 text-primary text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-xmark me-3"></i>Cancelled</div>
                                             <div class="col-4 fw-bold text-primary display-4 text-end">{{ $cancelledCount }}</div>
                                         </div>
                                     </a>

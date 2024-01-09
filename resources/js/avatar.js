@@ -6,8 +6,8 @@ const specificPageURLs = [
 if (specificPageURLs.some(url => window.location.href.includes(url))) {
     document.addEventListener('DOMContentLoaded', function() {
         var avatar = document.getElementById('avatar-clothes');
-        var btnLeft = document.getElementById('avatar-left');
-        var btnRight = document.getElementById('avatar-right');
+        // var btnLeft = document.getElementById('avatar-left');
+        // var btnRight = document.getElementById('avatar-right');
         var genderSelection = document.getElementById('genderSelection');
         var genderImage = document.getElementById('genderImage');
         const links = document.querySelectorAll('.skin-tone');
@@ -35,8 +35,8 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 // Store the selected data-avatar value
                 selectedGenderValue = this.getAttribute('data-avatar');
 
-                btnLeft.removeAttribute('disabled');
-                btnRight.removeAttribute('disabled');
+                // btnLeft.removeAttribute('disabled');
+                // btnRight.removeAttribute('disabled');
 
                 // Reset currentIndex based on selected gender
                 if (selectedGenderValue === 'Female') {
@@ -92,14 +92,14 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             });
         });
 
-        btnLeft.addEventListener('click', function() {
-            currentIndex = (currentIndex - 1 + svgFileNames.length) % svgFileNames.length;
-            updateAvatarSource(currentIndex);
-        });
+        // btnLeft.addEventListener('click', function() {
+        //     currentIndex = (currentIndex - 1 + svgFileNames.length) % svgFileNames.length;
+        //     updateAvatarSource(currentIndex);
+        // });
 
-        btnRight.addEventListener('click', function() {
-            currentIndex = (currentIndex + 1) % svgFileNames.length;
-            updateAvatarSource(currentIndex);
-        });
+        // btnRight.addEventListener('click', function() {
+        //     currentIndex = (currentIndex + 1) % svgFileNames.length;
+        //     updateAvatarSource(currentIndex);
+        // });
     });
 }

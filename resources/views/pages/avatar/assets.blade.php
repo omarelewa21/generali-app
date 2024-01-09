@@ -43,7 +43,7 @@
                                                 <p class="text-white display-6 lh-base">Click to add your assets next to your avatar.</p>
                                             </div>
                                             <div class="col-12">
-                                                <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button">Refresh</a></p>
+                                                <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
                                             </div>
                                         </div>
                                     </div>

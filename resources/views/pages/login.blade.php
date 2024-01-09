@@ -32,12 +32,12 @@
                             <div class="col-12 py-md-1 form-floating">
                                 <input type="text" name="agent" class="form-control" id="agentID" placeholder="Agent ID" required>
                                 <label for="agentID" class="fw-bold pb-2">Agent ID</label>
-                                <span class="field-icon fa-id"></span>
+                                <i class="field-icon fa-solid fa-user"></i>
                             </div>
                             <div class="col-12 py-md-1 form-floating">
                                 <input type="password" name="agentPassword" class="form-control" id="agentPassword" placeholder="Password" required>
                                 <label for="agentPassword" class="fw-bold pb-2">Password</label>
-                                <span class="field-icon fa-password"></span>
+                                <i class="field-icon fa-solid fa-unlock-keyhole"></i>
                             </div>
                             <div class="checkbox py-3">
                                 <label class="d-flex align-items-center">

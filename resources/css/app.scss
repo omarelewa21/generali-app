@@ -522,6 +522,7 @@ color: #EA4C89;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap5-toggle/css/bootstrap5-toggle.min.css';
 @import 'intl-tel-input/build/css/intlTelInput.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /* Mobile / Tab Responsive */
 @include media-breakpoint-down(md) {

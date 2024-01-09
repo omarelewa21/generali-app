@@ -30,12 +30,14 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <h3 class="avatar-text fw-bold pb-3">Transaction Logs</h3>
+                                <h3 class="avatar-text fw-bold pb-3">Entry Logs</h3>
                             </div>
                         </div>
                         <div class="row px-4">
                             <div class="col-12">
-                                <button class="dt-button btn btn-secondary fw-bold btn-sm my-3" tabindex="0" aria-controls="dataTable" type="button" id="buttonAdvanced" data-bs-toggle="modal" data-bs-target="#advancedSearch">Advanced Search</button>
+                                <div class="d-grid gap-2 col-2">
+                                    <button class="btn btn-sm btn-secondary fw-bold btn-sm my-3 py-2" type="button" id="buttonAdvanced" data-bs-toggle="modal" data-bs-target="#advancedSearch"><i class="fa-solid fa-magnifying-glass me-3"></i>Search</button>
+                                </div>
                                 <!-- Modal -->
                                 <div class="modal fade" id="advancedSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -44,16 +46,16 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-header px-4 py-0 justify-content-center">
-                                                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Advanced Search</h2>
+                                                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Search</h2>
                                             </div>
-                                            <div class="modal-body text-dark text-center px-5 py-5 d-flex justify-content-center">
+                                            <div class="modal-body text-dark text-center px-5 pb-5 pt-4 d-flex justify-content-center">
                                                 <div style="width:90%">
                                                     <div class="row py-2 align-items-center">
                                                         <div class="col-md-5 text-start">
-                                                            <label for="searchTransaction" class="form-label m-0">Transaction ID</label>
+                                                            <label for="searchTransaction" class="form-label m-0">Entry ID</label>
                                                         </div>
                                                         <div class="col-md-7">
-                                                            <input type="text" id="searchTransaction" class="form-control" placeholder="Search by transaction ID">
+                                                            <input type="text" id="searchTransaction" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 align-items-center">
@@ -61,7 +63,7 @@
                                                             <label for="searchName" class="form-label m-0">Customer Name</label>
                                                         </div>
                                                         <div class="col-md-7">
-                                                            <input type="text" id="searchName" class="form-control" placeholder="Search by Customer Name">
+                                                            <input type="text" id="searchName" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 align-items-center">
@@ -69,7 +71,7 @@
                                                             <label for="searchID" class="form-label m-0">Customer ID</label>
                                                         </div>
                                                         <div class="col-md-7">
-                                                            <input type="text" id="searchID" class="form-control" placeholder="Search by Customer ID">
+                                                            <input type="text" id="searchID" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 align-items-center">
@@ -86,23 +88,25 @@
                                                         <div class="col-md-5 text-start">
                                                             <label for="min" class="form-label m-0">From Date</label>
                                                         </div>
-                                                        <div class="col-md-7">
-                                                            <input type="text" id="min" name="min" class="form-control" placeholder="Search by Created Date">
+                                                        <div class="col-md-7 position-relative">
+                                                            <input type="text" id="min" name="min" class="form-control">
+                                                            <i class="field-icon fa-solid fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                     <div class="row py-2 align-items-center">
                                                         <div class="col-md-5 text-start">
                                                             <label for="max" class="form-label m-0">To Date</label>
                                                         </div>
-                                                        <div class="col-md-7">
-                                                            <input type="text" id="max" name="max" class="form-control" placeholder="Search by Created Date">
+                                                        <div class="col-md-7 position-relative">
+                                                            <input type="text" id="max" name="max" class="form-control">
+                                                            <i class="field-icon fa-solid fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal" id="submitButton">Submit</button>
-                                                <button type="button" class="btn btn-secondary text-uppercase" id="resetButton">Reset</button>
+                                                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" id="resetButton">Reset</button>
+                                                <button type="button" class="btn btn-secondary text-uppercase" data-bs-dismiss="modal" id="submitButton">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +114,7 @@
                                 <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Entry ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Status</th>

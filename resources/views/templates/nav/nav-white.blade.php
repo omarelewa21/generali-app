@@ -11,6 +11,11 @@
 <?php 
 $current_url = $_SERVER['REQUEST_URI'];
 
+$current_visited = rtrim($_SERVER['REQUEST_URI'], '/');
+
+$isAgentPage = $current_visited === '/agent';
+$isLogsPage = $current_visited === '/agent/logs';
+
 if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agent/logs') { ?>
     <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner desktop d-none d-md-block">
         <div class="navbar-scroll fixed-top">
@@ -23,12 +28,12 @@ if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agen
             </nav>
             <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item <?php echo $isAgentPage ? 'active' : ''; ?>">
                         <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent') }}">
                             <p class="nav-text">Dashboard</p>
                         </a>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item <?php echo $isLogsPage ? 'active' : ''; ?>">
                         <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent/logs') }}">
                             <p class="nav-text">Transaction Logs</p>
                         </a>

@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $familyDependant = session('customer_details.family_details.dependant');
+    $familyDependant = session('customer_details.family_details');
 @endphp
 
 <div id="avatar_family_dependant">
@@ -188,7 +188,7 @@
 
 <script>
     var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
-    var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
+    var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
     var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 </script>
 
