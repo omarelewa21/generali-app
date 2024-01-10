@@ -60,7 +60,7 @@ class TransactionLogsDataTable extends DataTable
         }
 
         if ($customerName){
-            $query->where('customer_name', $customerName);
+            $query->where('customer_name', 'LIKE', '%' . $customerName . '%');
         }
 
         if ($status){
