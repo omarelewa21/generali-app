@@ -10,6 +10,11 @@
 <title>Agent Dashboard</title>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" /> --}}
+  
+{{-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script> --}}
+
 @section('content')
 
 <div id="dashboard_logs">
@@ -81,6 +86,9 @@
                                                         <div class="col-md-7">
                                                             <select name="searchStatus" class="form-select" aria-label="Status" id="searchStatus">
                                                                 <option value="">All</option>
+                                                                <option value="completed">Completed</option>
+                                                                <option value="draft">Draft</option>
+                                                                <option value="cancelled">Cancelled</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -105,13 +113,17 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" id="resetButton">Reset</button>
-                                                <button type="button" class="btn btn-secondary text-uppercase" data-bs-dismiss="modal" id="submitButton">Submit</button>
+                                                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal" id="resetButton">Reset</button>
+                                                <button type="button" class="btn btn-secondary text-uppercase" data-bs-dismiss="modal" id="submitButton" onclick="filterDataTable()">Submit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-striped" id="dataTable">
+
+                                <div id="datatable" class="col-12 table-responsive">
+                                    <div class="card-body">{!! $dataTable->table() !!}</div>
+                                </div>
+                                {{-- <table class="table table-striped" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">Entry ID</th>
@@ -242,7 +254,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">View</a></td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
                         </div>
                     </div>
@@ -252,3 +264,57 @@
     </div>
 </div>
 @endsection
+
+
+@push('scripts')
+    
+    <!-- Use CDN for jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+    
+    {!! $dataTable->scripts() !!}
+
+    <script>
+    function filterDataTable(withData = true)
+    {
+        if(!withData){
+            return $("#transactionlogs-table").DataTable().ajax.url(window.location.href).load();
+        }
+
+        var data = $('#advancedSearch :input').map(function() {
+            return {name: this.id, value: this.value};
+        }).get();
+
+        var url = window.location.href + '?' + $.param(data);
+
+        return $("#transactionlogs-table").DataTable().ajax.url(url).load();
+    }
+
+    function initializeMinMax()
+    {
+        minDate = new DateTime('#min', {
+                    format: 'YYYY-MM-DD'
+        });
+
+        maxDate = new DateTime('#max', {
+            format: 'YYYY-MM-DD'
+        });
+    }
+
+    $(document).ready(function () {
+        initializeMinMax();
+        $('#advancedSearch input.dt-datetime').on('change',function(){
+            filterDataTable();
+        });
+
+        $('#resetButton').on('click', function(){
+           // clear all input and select tag and load the table again
+            $(":input").val('');  
+            $("select").change();
+            filterDataTable(false);
+        });     
+    });
+    </script>
+@endpush

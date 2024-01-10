@@ -11,13 +11,20 @@ use App\Models\maritalStatus;
 use App\Models\Company;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
+use App\Models\SessionStorage;
+use Illuminate\Http\Request;
 class DropdownController extends Controller
 {
-    public function titles()
+    public function titles(Request $request)
     {
         $countries = Country::all();
         $titles = Title::all();
-        return view('pages/main/basic-details', compact('titles','countries'));
+        $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
+
+        if($basicDetails){
+            $basicDetails = $basicDetails['basic_details'] ?? '';
+        }
+        return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
     }
 
     public function identityDetails()

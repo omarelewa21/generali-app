@@ -17,6 +17,10 @@ class SessionStorage extends Model
 
     protected $fillable = ['id','transaction_id','data','customer_id','customer_name','agent_id','agent_name','session_id','page_route'];
 
+    protected $casts = [
+        'data' => 'array'
+    ];
+
 
 
     // Scopes
@@ -35,10 +39,10 @@ class SessionStorage extends Model
         return Carbon::parse($value)->timezone('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
     }
 
-    // public function getUpdatedAtAttribute($value)
-    // {
-    //     return Carbon::parse($value)->timezone('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
-    // }
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->timezone('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+    }
 
     public function getCustomerNameAttribute($value)
     {

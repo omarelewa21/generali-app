@@ -36,11 +36,17 @@ class FormController extends Controller {
             $request->session()->put('customer_details', $customerDetails);
             Log::debug($customerDetails);
 
+            // centralize save session into one main function
+
+            // $saveSessionDB = SessionStorageController::saveSession($customerDetails);
+
+
+
             //also store updated session in database
             try {
                 DB::transaction(function () use ($request,$customerDetails) {
                     $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
+                    $sessionStorage->data = $customerDetails;
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
                     $sessionId = $request->session()->getId();
@@ -160,12 +166,13 @@ class FormController extends Controller {
             try {
                 DB::transaction(function () use ($request,$customerDetails) {
                     $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
+                    $sessionStorage->data = $customerDetails;
                     $route = strval(request()->path());
                     $sessionStorage->page_route = $route;
                     $sessionId = $request->session()->getId();
                     $sessionStorage->session_id = $sessionId; 
                     $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+                    $sessionStorage->customer_name = $fullName;
 
                     //if session from request able to match with db then do update
                     $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
@@ -186,7 +193,7 @@ class FormController extends Controller {
                         // Log::debug('new session');
                         $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
                         $newValue = $currentValue + 1;
-                        $sessionStorage->transaction_id = $newValue;            
+                        $sessionStorage->transaction_id = $newValue;         
                         $sessionStorage->save();
                     }               
                  

@@ -23,4 +23,15 @@ class SessionController extends Controller
         // Return session data as JSON response
         return response()->json($sessionData);
     }
+
+    public function clearSessionStorage()
+    {
+        Session::flush();
+
+        // Regenerate a new session ID
+        Session::regenerate();
+
+        // Redirect back to the "welcome" page
+        return redirect()->route('welcome');
+    }
 }

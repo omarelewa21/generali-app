@@ -11,7 +11,6 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Facades\Log;
 
 class SessionsDataTable extends DataTable
 {
@@ -33,7 +32,7 @@ class SessionsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($data) {
-                $button = '<a href="' . route('basic.details', ['id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
+                $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
                 
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">
                     <a class="dropdown-toggle" style="margin-left: 500%;" data-bs-toggle="dropdown" aria-expanded="false"><img src="https://generali.zenotechmy.com/images/general/icon-more.png" width="auto" height="20px" alt="More Options"></a>
@@ -55,20 +54,6 @@ class SessionsDataTable extends DataTable
     {
         $this->status = $status;  
         
-        return $this;
-    }
-
-     /**
-     * Set the data for the DataTable instance.
-     *
-     * @param  \Illuminate\Support\Collection|array  $data
-     * @return $this
-     */
-
-    public function setData($data)
-    {
-        $this->data = $data;
-
         return $this;
     }
 
@@ -108,11 +93,10 @@ class SessionsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->orderBy(0,'asc')
-                    ->parameters([
-                        'buttons' => [],
+                    ->parameters(
+                        ['buttons' => [],
                     ])
                     ->responsive(true)
-
                     // comment for dom below
                     // 'l': Length changing (controls the "Show entries" dropdown).
                     // 'f': Filtering input (controls the search input).
@@ -144,7 +128,6 @@ class SessionsDataTable extends DataTable
             Column::make('customer_id')->title('Customer Id'),
             Column::make('created_at')->title('Last Saved'),
             Column::make('action')->title('Action')->orderable(false)->searchable(false),
-            // Column::make('status')->title('Status'),
         ];
     }
 

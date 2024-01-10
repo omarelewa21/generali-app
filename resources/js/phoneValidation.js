@@ -5,9 +5,11 @@ const specificPageURLs = [
     'basic-details'
 ];
 
+const parameterName = 'transaction_id';
+
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.includes(parameterName))) {
 
     // Add phone code library
     document.addEventListener("DOMContentLoaded", function() {

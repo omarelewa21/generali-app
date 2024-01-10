@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $basicDetails = session('customer_details.basic_details');
+    $basicDetails ??= session('customer_details.basic_details');
 @endphp
 
 <div id="basic_details">

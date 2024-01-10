@@ -58,7 +58,7 @@
             <!-- Button trigger modal -->
             <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Save & Logout</a>
-            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" id="clearSession" data-clear-route="{{ route('clear_session_data') }}" type="button">
+            <a href="{{route('clear_session_storage')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" id="clearSession" data-clear-route="{{ route('clear_session_data') }}" type="button">
                 Clear Session</a>
         </div>
     </div>

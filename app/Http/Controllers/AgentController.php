@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\SessionsDataTable;
+use App\DataTables\TransactionLogsDataTable;
 use App\Models\SessionStorage;
+use Illuminate\Support\Facades\Log;
 
 
 class AgentController extends Controller
@@ -23,11 +25,6 @@ class AgentController extends Controller
         // $statusCounts = SessionStorage::selectRaw('status, COUNT(*) as count')
         //                 ->groupBy('status')
         //                 ->get();
-
-        // $resultCompleted = SessionStorage::where('status', '=', 'completed')->sum('status') ?? 0;
-        // $resultDraft = SessionStorage::where('status', '=','draft' )->sum('status') ?? 0;
-        // $resultCancelled = SessionStorage::where('status', '=', 'cancelled')->sum('status') ?? 0;
-
 
         $completedCount = SessionStorage::where('status', 'completed')->count() ?? 0;
         $draftCount = SessionStorage::where('status', 'draft')->count() ?? 0;

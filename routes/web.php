@@ -35,7 +35,7 @@ Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclo
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
 
-Route::get('/basic-details/{id?}', [DropdownController::class, 'titles'])->name('restore.basic.details');
+Route::get('/basic-details/{transaction_id?}', [DropdownController::class, 'titles'])->name('restore.basic.details');
 
 
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
@@ -205,18 +205,19 @@ Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
 Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->name('get.session.data');
+Route::get('/clear-session-storage', [SessionController::class, 'clearSessionStorage'])->name('clear_session_storage');
 
 // Admin Dashboard
 Route::view('/login', 'pages.login')->name('login');
-Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
+// Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
 Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
+Route::get('/agent/logs', [TransactionController::class,'index'])->name('transaction.index');
 Route::get('/soft-delete/{id}', [AgentController::class, 'softDelete'])->name('soft-delete');
 
-// Route::get('/agent/logs', [TransactionController::class, 'index'])->name('transactions.logs');
-Route::get('/agent/logs', function () {
-    return view('pages.dashboard.logs');
-});
+// Route::get('/agent/logs', function () {
+//     return view('pages.dashboard.logs');
+// });
 
 //Create New Transaction Form
 Route::get('/', [FormController::class, 'create'])->name('welcome');

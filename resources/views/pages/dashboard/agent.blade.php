@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-end">
-                                        <p id="statusText" class="text-justify">Current View: ALL</p>
+                                        <h6 id="statusText" class="text-justify">Current View: ALL</h6>
                                     </div>
                                 </div>
                                 
@@ -142,9 +142,9 @@
      {!! $dataTable->scripts() !!}
 
      <script>
-
+        
         $('.status-btn').on('click', function () {
-            var url = $(this).data('url'); // Assuming you use a data attribute to store the status
+            var url = $(this).data('url'); 
             // console.log('Button clicked with status:', status);
             // $(this).prop('disabled', true);
             filterData(url);
