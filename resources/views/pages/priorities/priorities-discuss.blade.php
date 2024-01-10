@@ -53,7 +53,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0 width="40px" style="left: 10px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 10px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
@@ -70,7 +70,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute width="40px" style="left: 20px;top: 50px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 20px;top: 50px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">

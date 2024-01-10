@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $familyDependant = session('customer_details.family_details');
+    $maritalStatus = session('customer_details.identity_details');
     $spouseData = session('customer_details.family_details.spouse_data');
     $childrenData = session('customer_details.family_details.children_data');
     $parentsData = session('customer_details.family_details.parents_data');
@@ -691,6 +692,10 @@
         </div>
     </div>
 </div>
+
+@if (empty($maritalStatus))
+    $missingPage = 
+@endif
 
 <!-- Modal -->
 <div class="modal fade" id="missingFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">

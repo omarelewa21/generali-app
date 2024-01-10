@@ -56,7 +56,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -73,7 +73,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -90,7 +90,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -107,7 +107,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -124,7 +124,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -141,7 +141,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -158,7 +158,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -175,7 +175,7 @@
                                                 <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                     <div class='sortable-container'>
                                                         <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
-                                                        <button class="remove-button"><img class="close" src="/images/top-priorities/close.png" width="100%"></button>
+                                                        <button class="remove-button text-primary"><i class="fa-solid fa-circle-xmark fa-xl"></i></button>
                                                     </div>
                                                 </div>
                                             @endif

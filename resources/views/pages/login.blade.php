@@ -15,13 +15,13 @@
 <div id="login">
     <div class="container-fluid h-100">
         <div class="row h-100 wrapper-login">
-            <div class="col-12 d-block d-md-none py-4 text-center header">
+            <div class="col-12 d-block d-md-none py-4 text-center">
                 <img src="{{ asset('images/general/main-logo.png') }}" alt="" width="172" height="auto">
             </div>
-            <div class="col-md-6 text-center d-flex justify-content-center align-items-center login-bg content">
+            <div class="col-md-6 text-center d-flex justify-content-center align-items-center login-bg">
                 <img src="{{ asset('images/welcome-page/welcome-avatar.png') }}" alt="Avatar" width="100%" height="auto">
             </div>
-            <div class="col-md-6 px-5 py-5 d-flex justify-content-center align-items-center bottom-content">
+            <div class="col-md-6 px-5 py-5 d-flex justify-content-center align-items-center">
                 <div class="row">
                     <div class="col-xxl-9 col-xl-9 col-lg-12 col-md-12">
                         <img class="pb-4 d-none d-md-block" src="{{ asset('images/general/main-logo.png') }}" alt="" width="300" height="auto">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="checkbox py-3">
                                 <label class="d-flex align-items-center">
-                                    <input type="checkbox" value="remember-me"> Remember me
+                                    <input type="checkbox" class="form-check-input" value="remember-me"> Remember me
                                 </label>
                             </div>
                             <a href="{{route('dashboard')}}" class="btn btn-primary text-uppercase w-100 mt-4">Sign in</a>

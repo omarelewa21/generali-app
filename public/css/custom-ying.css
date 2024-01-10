@@ -107,33 +107,7 @@ button.choice.default.selected img{
     background-position: center bottom;
     background-size: 100%;
 }
-/* #retirement_ideal button.choice:hover,
-#retirement_ideal button.choice[data-required="selected"],
-#retirement_ideal button.choice.default.selected,
-#health-medical-selection button.choice:hover,
-#health-medical-selection button.choice[data-required="selected"],
-#health-medical-selection button.choice[data-required=""],
-#health-medical-selection button.choice.default.selected
-#medical-hospital-selection button.choice:hover,
-#medical-hospital-selection button.choice[data-required="selected"],
-#medical-hospital-selection button.choice[data-required=""]{
-    background: none;
-    width: 100%;
-}
-#retirement_ideal button.choice:hover img,
-#retirement_ideal button.choice[data-required="selected"] img,
-#retirement_ideal button.choice.default.selected img,
-#health-medical-selection button.choice:hover img,
-#health-medical-selection button.choice[data-required="selected"] img,
-#health-medical-selection button.choice.default.selected img,
-#medical-hospital-selection button.choice:hover img,
-#medical-hospital-selection button.choice[data-required="selected"] img,
-#medical-hospital-selection button.choice.default.selected img{
-    background-image: url(/images/needs/hover-coverage.png);
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100%;
-} */
+
 #retirement_ideal .content-needs-grey{
     grid-auto-rows: 7vh 55vh;
 }
@@ -195,15 +169,7 @@ button.choice[data-required="selected"]{
     bottom:107.5px;
 }
 /* ============================ Button Effect ===============================*/
-/* button.choice:hover, 
-button.choice:focus,
-.button-needs[data-required="selected"],
-.button-needs.selected {
-    background-image: url('/images/needs/hover-coverage.png');
-    background-repeat: no-repeat;
-    background-position: center bottom 8%;
-    background-size: 80%;
-} */
+
 
 /* ============================ Gender Selection ===============================*/
 .left-center{
@@ -374,17 +340,7 @@ button.choice:focus,
 }
 
 /* ============================ Needs Coverage Page ======================================*/
-/* .coverage_slick .slick-slide button,
-.savings_coverage .slick-slide button{
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 88% 12%;
-    grid-template-areas:
-        "coverage-image"
-        "coverage-text";
-    grid-gap: 0px;
-    align-items: end;
-} */
+
 .slick-padding{
     padding: 3rem 3rem 0px 3rem;
 }
@@ -690,10 +646,7 @@ button.choice:focus,
     grid-row: 35 / 85;
     transform: translate(-70%, 5px);
 }
-/* #savings-goals .fourth .dropped img:not(.close) {
-    margin-left: 15px;
-    margin-top: 15%;
-} */
+
 #savings-goals .fourth .remove-button {
     bottom: 30%;
     left: 7%;
@@ -1292,12 +1245,7 @@ table {
     .needs-home-avatars{
         grid-template-columns: repeat(3, 0% 100% 0%);
     }
-    /* #hospital-room-selection .needs-stand-bg{
-        padding: 140px;
-    } */
-    /* #hospital-room-selection .needs-stand-bg.error-padding{
-        padding: 150px;
-    } */
+
     .bg-needs-master-full{
         background-size: cover;
     }
@@ -1479,10 +1427,7 @@ table {
     #protection-home .needs-home-avatar-wrapper {
         grid-template-rows: 90% 10%;
     }
-    /* .needs-stand-bg,
-    #hospital-room-selection .needs-stand-bg.error-padding{
-        padding:190px;
-    } */
+    
     .needs-stand-bg.error-padding{
         padding:230px;
     }
@@ -1492,9 +1437,7 @@ table {
     #debt-cancellation-home .needs-stand-bg{
         padding: 250px;
     }
-    /* #hospital-room-selection .needs-stand-bg{
-        padding: 180px;
-    } */
+    
     #investment-home .needs-stand-bg.error-padding,
     #education-home .needs-stand-bg.error-padding,
     #retirement-home .needs-stand-bg.error-padding,
