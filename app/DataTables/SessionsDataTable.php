@@ -123,7 +123,7 @@ class SessionsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('transaction_id')->title('Transaction Id'),
+            Column::make('transaction_id')->title('Entry Id'),
             Column::make('customer_name')->title('Customer Name'),
             Column::make('customer_id')->title('Customer Id'),
             Column::make('created_at')->title('Last Saved'),
