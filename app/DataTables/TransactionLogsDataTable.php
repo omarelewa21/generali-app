@@ -28,14 +28,23 @@ class TransactionLogsDataTable extends DataTable
             ->addColumn('action', function ($data) {
             
                 if ($data->status === 'cancelled') {
-                    $button = '<button style="background-color: grey;" class="btn btn-secondary btn-sm w-100" disabled>Continue</button>';
+                    $button = '<button style="background-color: grey;" class="btn btn-secondary btn-sm w-80" disabled>Continue</button>';
                 } else {
-                    $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-100">Continue</a>';
+                    $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-80">Continue</a>';
                 }
                 return $button;
             })
             ->editColumn('status', function ($data) {
                 return ucfirst($data->status);
+            })
+            ->editColumn('customer_name', function ($data) {
+
+                return $data->customer_name;
+               
+                // return (empty($data)) ? "-":"Customer ".$data->customer_name;
+            })
+            ->editColumn('transaction_id', function ($data) {
+                return "ID ".$data->transaction_id;
             })
             ->editColumn('created_at', function ($data) {
                 return Carbon::parse($data->created_at)->timezone('Asia/Kuala_Lumpur')->format('Y-m-d');
@@ -115,7 +124,7 @@ class TransactionLogsDataTable extends DataTable
                         )
                     ->columnDefs([
                         [
-                            'targets' => '_all',
+                            'targets' => [0,2,3,4,5],
                             'className' => 'dt-center',
                         ],
                         [
@@ -140,12 +149,13 @@ class TransactionLogsDataTable extends DataTable
     {
         return [
            
-            Column::make('transaction_id')->title('Transaction Id'),
+            Column::make('id')->title('No.'),
+            // Column::make('transaction_id')->title('Transaction Id'),
             Column::make('customer_name')->title('Customer Name'),
-            Column::make('customer_id')->title('Customer Id'),
+            Column::make('transaction_id')->title('Customer Id'),
             Column::make('status')->title('Status'),
-            Column::make('created_at')->title('Created'),
-            Column::make('updated_at')->title('Modified'),
+            Column::make('created_at')->title('Date of Completion'),
+            // Column::make('updated_at')->title('Modified'),
             Column::make('action')->title('Action')->orderable(false)->searchable(false),
         ];
     }

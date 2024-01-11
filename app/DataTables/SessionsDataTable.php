@@ -32,6 +32,13 @@ class SessionsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($data) {
+
+                if ($data->status === 'cancelled') {
+                    // return '<button style="background-color: grey; padding-left:10px" class="btn btn-primary btn-sm w-100" disabled>Restore</button>';
+
+                    return '-';
+                }
+
                 $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
                 
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">

@@ -35,7 +35,7 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <h3 class="avatar-text fw-bold pb-3">Entry Logs</h3>
+                                <h3 class="avatar-text fw-bold pb-3">Transaction Logs</h3>
                             </div>
                         </div>
                         <div class="row px-4">
