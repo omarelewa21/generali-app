@@ -26,7 +26,12 @@ class TransactionLogsDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($data) {
-                $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-100">View</a>';
+            
+                if ($data->status === 'cancelled') {
+                    $button = '<button style="background-color: grey;" class="btn btn-secondary btn-sm w-100" disabled>Continue</button>';
+                } else {
+                    $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-100">Continue</a>';
+                }
                 return $button;
             })
             ->editColumn('status', function ($data) {
@@ -53,7 +58,7 @@ class TransactionLogsDataTable extends DataTable
         $fromDate =  request()->get('min');
         $toDate =  request()->get('max');
         
-        $query = $model->newQuery();
+        $query = $model->newQuery()->withTrashed();
 
         if ($transactionId){
             $query->where('transaction_id', $transactionId);

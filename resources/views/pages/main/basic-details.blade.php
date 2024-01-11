@@ -30,7 +30,7 @@
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
                 <div>
-                    <form novalidate action="{{ route('form.basic.details') }}" method="POST">
+                    <form novalidate action="{{ route('form.basic.details', ['transaction_id' => request()->input('transaction_id')]) }}" method="POST">
                         @csrf
                         <section class="main-content">
                             <div class="container">

@@ -211,11 +211,11 @@ Route::view('/login', 'pages.login')->name('login');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
 Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
 Route::get('/agent/logs', [TransactionController::class,'index'])->name('transaction.index');
-Route::get('/soft-delete/{id}', [AgentController::class, 'softDelete'])->name('soft-delete');
+Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete');
 
 // Route::get('/agent/logs', function () {
 //     return view('pages.dashboard.logs');
 // });
 
-//Create New Transaction Form
-Route::get('/', [FormController::class, 'create'])->name('welcome');
+//Create New Transaction Form, always create a new session id 
+Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');

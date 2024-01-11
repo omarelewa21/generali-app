@@ -37,7 +37,7 @@ class SessionsDataTable extends DataTable
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">
                     <a class="dropdown-toggle" style="margin-left: 500%;" data-bs-toggle="dropdown" aria-expanded="false"><img src="https://generali.zenotechmy.com/images/general/icon-more.png" width="auto" height="20px" alt="More Options"></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="' . route('soft-delete', ['id' => $data->id]) . '">Delete</a></li>
+                        <li><a class="dropdown-item" href="' . route('delete', ['id' => $data->id]) . '">Delete</a></li>
                     </ul>
                 </div>';
 
@@ -64,7 +64,7 @@ class SessionsDataTable extends DataTable
      */
     public function query(SessionStorage $model)
     {
-        $query = $model->newQuery();
+        $query = $model->newQuery()->withTrashed();
 
         $allStatuses = ['completed','draft','cancelled'];
 

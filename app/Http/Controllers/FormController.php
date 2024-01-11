@@ -36,12 +36,6 @@ class FormController extends Controller {
             $request->session()->put('customer_details', $customerDetails);
             Log::debug($customerDetails);
 
-            // centralize save session into one main function
-
-            // $saveSessionDB = SessionStorageController::saveSession($customerDetails);
-
-
-
             //also store updated session in database
             try {
                 DB::transaction(function () use ($request,$customerDetails) {
@@ -93,7 +87,7 @@ class FormController extends Controller {
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-        
+        Log::debug($request->input('transaction_id'));
         if ($validToken) {
             // Fetch from the database
             $titles = DB::table('titles')->pluck('titles')->toArray();
@@ -175,14 +169,34 @@ class FormController extends Controller {
                     $sessionStorage->customer_name = $fullName;
 
                     //if session from request able to match with db then do update
+                    // if session not found, then use transaction id 
+
+                    //if found means the session after complete, and the session 
+                    // from agent is same, then do update also , 
+                    // if still not found then use transaction id 
+
+
                     $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
 
-                    Log::debug($sessionId); 
-                    Log::debug($dbSessionId); 
+                    $dbSessionId = SessionStorage::findTransactionId($request->input('transaction_id'))->get();
+                    $formData = SessionStorage::where('session_id',$dbSessionId);
 
-                    if ($sessionId == $dbSessionId) {
-                        Log::debug('not empty');
-                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
+                    Log::debug($dbSessionId);  //[]
+
+
+                    if($formData)
+                    {
+                        $transactionId = request()->input('transaction_id'); 
+                        Log::debug($transactionId);
+                        $formData = SessionStorage::where('transaction_id', $transactionId)->first();
+                    }
+
+
+                    if ($formData) {
+
+                        Log::debug('do update for basic details');
+                        Log::debug(json_encode($formData));
+                        SessionStorage::where('session_id',$formData[0]['session_id'])
                         ->update(['data' => $sessionStorage->data, 
                                   'page_route' => $sessionStorage->page_route,
                                   'customer_name' => $fullName
@@ -190,7 +204,6 @@ class FormController extends Controller {
                     }
                     else
                     {
-                        // Log::debug('new session');
                         $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
                         $newValue = $currentValue + 1;
                         $sessionStorage->transaction_id = $newValue;         
@@ -1399,28 +1412,15 @@ class FormController extends Controller {
         }
     }
 
-    public function create(Request $request)
+    public function createNewForm(Request $request)
     {
+        // Regenerate the session ID
+        $session = $request->session()->regenerate();
+        $sessionId = $request->session()->getId();
+        Log::debug($sessionId);
 
-        // Check if the 'new' parameter is present
-        // if exist, generate new session id 
-        if ($request->query('new')) {
-            
-            // Clear the previous session if got 
-            // session()->forget(['customer_details', 'session_id']);
-            // session()->forget('session_id');
-            // // $sessionId = session()->getId();
-            // session()->regenerate();
-
-            // Regenerate the session ID
-            $session = $request->session()->regenerate();
-
-            $sessionId = $request->session()->getId();
-
-
-            // Store the form token in the session
-            session(['session_id' => $sessionId]);
-        }
+        // Store the form token in the session
+        session(['session_id' => $sessionId]);
 
         return view('pages/main/welcome');
     }

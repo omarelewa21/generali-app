@@ -28,7 +28,9 @@ class AgentController extends Controller
 
         $completedCount = SessionStorage::where('status', 'completed')->count() ?? 0;
         $draftCount = SessionStorage::where('status', 'draft')->count() ?? 0;
-        $cancelledCount = SessionStorage::where('status', 'cancelled')->count() ?? 0;
+
+        //need to show the deleted record as well 
+        $cancelledCount = SessionStorage::where('status', 'cancelled')->withTrashed()->count() ?? 0;
 
         $grandTotal = $completedCount + $draftCount + $cancelledCount;
 
@@ -44,7 +46,7 @@ class AgentController extends Controller
         if ($item) {
             $item->status = 'cancelled';
             $item->save();
-            // $item->delete(); // Soft delete
+            $item->delete(); // Soft delete
         }
 
         return redirect()->back()->with('success', 'Item soft deleted successfully.');

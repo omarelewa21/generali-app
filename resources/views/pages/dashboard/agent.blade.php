@@ -33,7 +33,7 @@
                         <div class="row px-4 pt-5">
                             <div class="col-12">
                                 {{-- <a href="{{ route('forms.create', ['new' => true]) }}">Create New Form</a> --}}
-                                <a href="{{ route('welcome',['new' => true]) }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
+                                <a href="{{ route('welcome') }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
@@ -145,7 +145,6 @@
         
         $('.status-btn').on('click', function () {
             var url = $(this).data('url'); 
-            // console.log('Button clicked with status:', status);
             // $(this).prop('disabled', true);
             filterData(url);
         });
@@ -154,9 +153,6 @@
         function filterData(url) {
             $("#sessions-table").DataTable().ajax.url(url).load();
         }
-
-        // let viewName = 'Default'; // Set the default value
-
 
         function updateText(viewName) {
             $('#statusText').text('Current View: ' + viewName);
