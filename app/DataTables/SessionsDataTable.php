@@ -34,9 +34,8 @@ class SessionsDataTable extends DataTable
             ->addColumn('action', function ($data) {
 
                 if ($data->status === 'cancelled') {
-                    // return '<button style="background-color: grey; padding-left:10px" class="btn btn-primary btn-sm w-100" disabled>Restore</button>';
-
-                    return '-';
+                    return '<button style="background-color: grey; padding-left:10px;margin-left: -5%;" class="btn btn-primary btn-sm w-90" disabled>Restore</button>';
+                    // return '-';
                 }
 
                 $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
