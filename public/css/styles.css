@@ -47,7 +47,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default, body.overflow #home {
   overflow: hidden;
 }
 
@@ -553,28 +553,6 @@ p.nav-text {
 .btn-exit:before {
   content: "";
   background-image: url(/images/general/Logout.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-refresh-red:before {
-  content: "";
-  background-image: url(/images/general/refresh-red.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-refresh-red:hover:before {
-  content: "";
-  background-image: url(/images/general/refresh-white.svg);
   width: 30px;
   height: 30px;
   display: inline-block;
@@ -1271,45 +1249,30 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   grid-row: 59 / 96;
 }
 
-#top_priorities {
-  height: 0 !important;
-}
-
 #sortable-main .item-dropped.digit{
   stroke-width: 0;
 }
 
-.ui-state-default.dropdown[data-identifier] > div {
-  position: absolute;
-  padding-left: 86px;
-  top: 0;
-  padding-top: 16px;
-  left: 0;
-  right: 62px;
-  bottom: 0;
-}
-
-/* .sortablemobileContainer {
-  position: relative;
-  background-color: #C0232C;
-  padding: 16px;
-  padding-bottom: 120px;
-} */
-
 #sortablemobile {
   list-style-type: none;
-  /* margin: 0;
-  padding: 0; */
 }
 
 #sortablemobile ul.dropdown-menu {
   width: 100%;
-  overflow: scroll !important;
-  max-height: 83vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: inherit;
 }
 
-#sortablemobile ul.dropdown-menu.show {
-  transform: translate3d(0px, 50px, 0px) !important;
+#sortablemobile ul.dropdown-menu li {
+  padding: 12px 22px 12px 22px!important;
+}
+
+#sortablemobile ul.dropdown-menu li:hover {
+  background-color: #f8f9fa;
 }
 
 #sortablemobile li {
@@ -1321,14 +1284,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #sortablemobile li.is-empty {
-  margin-bottom: 16px;
-  padding: 12px 40px 12px 22px;
   border: 2px dashed #ffffff;
   background-color: #F2F2F288;
   color: white;
-  font-size: 20px;
   font-weight: 700;
-  position: relative;
 }
 
 #sortablemobile .ui-sortable-placeholder {
@@ -1338,13 +1297,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #sortablemobile li .arrowIcon {
-  margin-left: -25px;
   position: absolute;
   right: 10px;
-  top: 35%;
-  font-size: 30px;
-  transform: translate(-50%, -50%);
-  color: rgba(179, 34, 42, 1);
+  top: inherit;
   cursor: pointer;
 }
 
@@ -1354,6 +1309,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 #sortablemobile li .needs-icon {
   height: 2em;
+  margin-right: 15px;
 }
 
 /* ============================== Retirement Home Page ============================== */
@@ -1545,9 +1501,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
-  #top_priorities {
-    height: 100vh !important;
-  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;

@@ -795,10 +795,10 @@ button.choice[data-required="selected"]{
     color: #14A38B;
 }
 
-.scrollable-content{
+/* .scrollable-content{
     overflow-x: hidden;
     overflow-y: auto;
-}
+} */
 
 /* ===================== Form Control Text Field ======================*/
 .currencyinput {
