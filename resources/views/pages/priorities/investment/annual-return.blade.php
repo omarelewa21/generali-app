@@ -12,7 +12,7 @@
 
 @php
     // Retrieving values from the session
-    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
     $investment = session('customer_details.investments_needs');
     $investmentPA = session('customer_details.investments_needs.annualReturn','5');
     $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');

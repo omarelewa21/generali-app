@@ -1000,7 +1000,7 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Marital Status Page ============================== */
-#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
+#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
   background-image: url(/images/marital-status/vector-plant.png);
   background-size: 20%;
   background-position: bottom right;
@@ -1014,7 +1014,7 @@ h2.display-5, .currencyField {
   font-weight: 700;
 }
 
-#avatar_family_dependant .content-avatar-default, #avatar_family_dependant_details .content-avatar-default {
+#avatar_family_dependent .content-avatar-default, #avatar_family_dependent_details .content-avatar-default {
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-gap: 0;
 }
@@ -1640,7 +1640,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     flex-flow: nowrap;
     overflow: auto;
   }
-  #avatar_marital_status .main-content, #avatar_family_dependant .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
+  #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
     padding-bottom: inherit!important;
   }
   .avatar-text {
@@ -1668,7 +1668,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
-  #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
+  #identity_details .bg-primary, #avatar_family_dependent_details .bg-primary {
     margin-top: -200px;
   }
   #home {
@@ -1835,15 +1835,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_welcome section.footer .female {
     bottom: 2%;
     right: 10%;
-  }
-
-
-
-  #avatar_gender_selection .main-content h4,
-  #avatar_marital_status .main-content h4,
-  #avatar_family_dependant .main-content h4,
-  #avatar_my_assets .main-content h4 {
-    font-weight: 700;
   }
 
   .main-content .overflow-auto.full-height-350 {

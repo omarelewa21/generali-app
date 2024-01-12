@@ -64,7 +64,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (modalBackdrop) {
                         modalBackdrop.remove();
                     }
-                    window.location.href = '/family-dependant/details';
+                    window.location.href = '/family-dependent/details';
                 });
             } else{
                 // Add event listener to each button with the 'data-required' attribute

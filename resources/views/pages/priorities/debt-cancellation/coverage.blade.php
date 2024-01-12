@@ -13,17 +13,17 @@
 
 @php
     // Retrieving values from the session
-    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
     $debtCancellation = session('customer_details.debt-cancellation_needs');
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependant');
-    $childData = session('customer_details.family_details.dependant.children_data');
+    $familyDependent = session('customer_details.family_details.dependent');
+    $childData = session('customer_details.family_details.dependent.children_data');
 
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
+    $spouseData = session('customer_details.family_details.dependent.spouse_data');
+    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
 
     $relationship = session('customer_details.debt-cancellation_needs.coverFor');
     $selectedInsuredName = session('customer_details.debt-cancellation_needs.selectedInsuredName');
@@ -175,7 +175,7 @@
                 <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to input your child name in Family dependant page first.</p>
+                <p>Please click proceed to input your child name in Family dependent page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>

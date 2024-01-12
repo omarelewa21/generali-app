@@ -7,7 +7,7 @@
 
 @php
     // Retrieving values from the session
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
     $savings = session('customer_details.savings_needs');
     $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
     $savingsGoalPA = session('customer_details.savings_needs.annualReturn');

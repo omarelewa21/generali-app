@@ -313,94 +313,23 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
                 if ($(this).hasClass("item-dropped")) {
                     ui.helper.addClass("item-dropped");
                 }
-                draggedItem = $(this);
+                // draggedItem = $(this);
             }
         });
 
-        $sortable.droppable({
+        $("#sortable > div > div").droppable({
             accept: "#needs button img:not(.item-dropped)",
             classes: {
                 "ui-droppable-active": "ui-state-highlight"
             },
 
             drop: function(event, ui) {
-                var droppedItem = ui.draggable.clone();
-                var droppedContainer = $(this).find(".dropped:empty:first");
-                var droppedContainerSortable = $sortable.find(".dropped");
 
-                if (draggedItem) {
-                    var button = draggedItem.closest('button');
+                if($(this).find('.dropped').is(':empty')){
+                    var imageName = ui.draggable.parent().find("img").attr("src");
+                    var button = ui.draggable.parent();
                     var dataAvatar = button.attr("data-avatar");
-                }
-
-                if (droppedContainer.length > 0) {
-                    // Check if the needs image has already been added
-                    var imageName = droppedItem.attr("src");
-
-                    if (addedNeedsImages.indexOf(dataAvatar) === -1) {
-                        var position = addedNeedsImages.findIndex(item => item === null); // Find the first empty slot
-        
-                        if (position === -1) {
-                            // If no empty slot found, add to the end of the array
-                            position = addedNeedsImages.length;
-                        }
-                        
-                        addedNeedsImages[position] = dataAvatar;
-                        var container = droppedContainerSortable.eq(position);
-                        container.append(droppedItem);
-                        var removeButton = $("<button class='remove-button text-primary'><i class='fa-solid fa-circle-xmark fa-xl'></i></button>");
-
-                        droppedItem.animate({ width: "100px" }, function() {
-                            droppedItem.find("img").animate({ height: "auto" });
-                        });
-                        
-                        var parentSvgContainer = container.closest(".svg-container");
-                        var pathClass = parentSvgContainer.attr("data-svg-class");
-
-                        parentSvgContainer.addClass("item-dropped");
-                        parentSvgContainer.append(removeButton);
-                        container.attr("data-identifier", dataAvatar);
-                        removeButton.attr("data-identifier", dataAvatar);
-
-                        // Check if an item has been dropped into the SVG container
-                        if (pathClass) {
-                            // Find the path elements with the specified class
-                            var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-                            // Add the "item-dropped" class to the matching path elements
-                            paths.forEach(function(path) {
-                                path.classList.add("item-dropped");
-                            });
-                        }
-
-                        removeButton.click(function() {
-                            parentSvgContainer.removeClass("item-dropped");
-
-                            if (pathClass) {
-                                // Find the path elements with the specified class
-                                var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-                                // Add the "item-dropped" class to the matching path elements
-                                paths.forEach(function(path) {
-                                    path.classList.remove("item-dropped");
-                                });
-                            }
-
-                            droppedItem.remove();
-                            removeButton.remove();
-                            
-                            // Remove the image from the addedNeedsImages array
-                            var index = addedNeedsImages.indexOf(imageName);
-
-                            if (index !== -1) {
-                                addedNeedsImages.splice(index, 1);
-                            }
-
-                            // Clear the position in the imagePositions array
-                            addedNeedsImages[position] = null;
-
-                            updateHiddenInputValue();
-                        });
-                        updateHiddenInputValue();
-                    }
+                    addImageToSortable(imageName, dataAvatar);
                 }
             }
         });

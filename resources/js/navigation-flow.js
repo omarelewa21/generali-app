@@ -72,8 +72,8 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var parents_data = customer_details.family_details.parents_data
                 var siblings_data = customer_details.family_details.siblings_data
 
-                if (spouse_data && spouse_data.full_name || children_data && children_data.full_name || parents_data &&  parents_data.full_name || siblings_data && siblings_data.full_name) {
-                    allFieldsFilled.push('/family-dependant');
+                if (spouse_data && spouse_data.full_name || children_data && children_data.full_name || parents_data || siblings_data && siblings_data.full_name) {
+                    allFieldsFilled.push('/family-dependent');
                 }
             }
     

@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div class="timeline-item">
-                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('family-dependant') }}">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('family-dependent') }}">
                     <p class="nav-text">My Family</p>
                 </a>
             </div>
@@ -58,8 +58,6 @@
             <!-- Button trigger modal -->
             <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Save & Logout</a>
-            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" id="clearSession" data-clear-route="{{ route('clear_session_data') }}" type="button">
-                Clear Session</a>
         </div>
     </div>
 </div>

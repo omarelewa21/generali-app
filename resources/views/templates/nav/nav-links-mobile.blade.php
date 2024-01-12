@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div class="timeline-item">
-                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('family-dependant') }}">
+                <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('family-dependent') }}">
                     <p class="nav-text">My Family</p>
                 </a>
             </div>

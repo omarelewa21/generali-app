@@ -79,7 +79,13 @@ $(function () {
     new Sortable($("#sortablemobile").get(0), {
         handle: 'div',
         animation: 200,
-        onSort: function (event, ui) {
+        onStart: function (event) {
+            // Increase the z-index of the dragged item
+            event.item.style.zIndex = '1000';
+        },
+        onEnd: function (event) {
+            // Reset the z-index after the drag operation is complete
+            event.item.style.zIndex = '';
             updateMobileFields();
         }
     });

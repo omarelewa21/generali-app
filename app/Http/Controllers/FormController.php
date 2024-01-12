@@ -395,7 +395,7 @@ class FormController extends Controller {
                 'maritalStatusButtonInput' => [
                     'at_least_one_selected',
                 ],
-                'familyDependantButtonInput' => [
+                'familyDependentButtonInput' => [
                     'at_least_one_selected_family',
                 ],
             ]);
@@ -406,8 +406,8 @@ class FormController extends Controller {
 
             // Validation passed, perform any necessary processing.
             $maritalStatusButtonInput = $request->input('maritalStatusButtonInput');
-            $familyDependantSerialized = $request->input('familyDependantButtonInput');
-            $familyDependantButtonInput = json_decode($familyDependantSerialized, true);
+            $familyDependentSerialized = $request->input('familyDependentButtonInput');
+            $familyDependentButtonInput = json_decode($familyDependentSerialized, true);
             $assetsSerialized = $request->input('assetsButtonInput');
             $assetsButtonInput = json_decode($assetsSerialized, true);
             $dataUrl = $request->input('urlInput');
@@ -447,8 +447,8 @@ class FormController extends Controller {
                     unset($customerDetails['family_details']['spouse_data']);
                 }
             }
-            elseif ($familyDependantButtonInput) {
-                $customerDetails['family_details'] = $familyDependantButtonInput;
+            elseif ($familyDependentButtonInput) {
+                $customerDetails['family_details'] = $familyDependentButtonInput;
             }
             elseif ($assetsButtonInput) {
                 $customerDetails['assets'] = $assetsButtonInput;
@@ -477,7 +477,7 @@ class FormController extends Controller {
         }
     }
 
-    public function familyDependantDetails(Request $request)
+    public function familyDependentDetails(Request $request)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {

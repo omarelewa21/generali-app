@@ -35,9 +35,9 @@ Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic
 /* Avatar pages */
 Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.marital-status')->name('avatar.marital.status');
-Route::view('/family-dependant', 'pages.avatar.family-dependant')->name('avatar.family.dependant');
-Route::get('/family-dependant/details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
-Route::post('/family-dependant/details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
+Route::view('/family-dependent', 'pages.avatar.family-dependent')->name('avatar.family.dependent');
+Route::get('/family-dependent/details', [DropdownController::class, 'familyDependentDetails'])->name('avatar.family.dependent.details');
+Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/avatar', 'pages.avatar.gender')->name('avatar.gender.selection');

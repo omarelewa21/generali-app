@@ -260,7 +260,7 @@
 var dob = {!! json_encode(session('customer_details.identity_details.dob')) !!};
 // var existingPolicy = {!! json_encode(session('customer_details.existing_policy')) !!};
 // var full_name = {!! json_encode(session('customer_details.basic_details.full_name')) !!};
-// var family_details = {!! json_encode(session('customer_details.family_details.dependant.children_data')) !!};
+// var family_details = {!! json_encode(session('customer_details.family_details.dependent.children_data')) !!};
 var dobYear = dob.slice(-4);
 
 document.addEventListener('DOMContentLoaded', function() {
