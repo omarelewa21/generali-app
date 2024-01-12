@@ -27,7 +27,6 @@ $(document).ready(function() {
             const responsiveMainContentPadding = menuHeight + descriptionHeight - 85.5;
             $(".content-section").css("padding-top", responsiveMainContentPadding + "px");
         } else {
-            console.log('yes');
             // Reset padding if window width is 767px or more
             $(".content-section").css("padding-top", 0);
         }

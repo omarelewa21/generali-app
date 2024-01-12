@@ -604,7 +604,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
                 if ((dependent['spouse'] === false && dependent['children'] == false) && dependent['parents'] === undefined && dependent['siblings'] === undefined) {
                     missingPages();
-                    console.log('yes');
                 }
             }
             else {

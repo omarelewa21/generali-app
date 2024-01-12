@@ -185,9 +185,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 position-absolute d-grid" style="top: 50%; grid-gap: 20px;">
+                        <div class="col-12 position-absolute d-grid" style="top: 55%; grid-gap: 20px;">
                             <div class="col-12 d-flex justify-content-center">
-                                <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end" type="button">Refresh</button></p>
+                                <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end z-1" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</button></p>
                             </div>
                             <div class="col-12">
                                 <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
@@ -312,19 +312,18 @@
                                     'others' => 'Others',
                                 ];
                             @endphp
-                            <div class="row px-4 px-md-5 sortablemobileContainer d-flex d-md-none">
-                                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
+                            <div class="row px-4 px-md-5 d-flex d-md-none">
                                 <ul id="sortablemobile">
                                     @foreach($topPriorities as $topPriority)
                                         <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
-                                            <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0">&#8964;</span>
+                                            <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
                                             @if($topPriority && $topPriority != 'undefined')
                                                 <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
                                                 {{ $prioritiesMap[$topPriority] }}
                                             @else
                                                 {{ $loop->iteration }}
                                             @endif
-                                            <ul class="dropdown-menu pre-scrollable" role="menu" style="max-height: 400px;"></ul>
+                                            <ul class="dropdown-menu pre-scrollable" role="menu"></ul>
                                         </li>
                                     @endforeach
                                 </ul>
