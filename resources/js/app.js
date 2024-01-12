@@ -20,6 +20,7 @@ import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
 import './datatables';
+import './sortable';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {

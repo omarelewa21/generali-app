@@ -1289,17 +1289,17 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   bottom: 0;
 }
 
-.sortablemobileContainer {
+/* .sortablemobileContainer {
   position: relative;
   background-color: #C0232C;
   padding: 16px;
   padding-bottom: 120px;
-}
+} */
 
 #sortablemobile {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
 }
 
 #sortablemobile ul.dropdown-menu {
@@ -1622,6 +1622,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  #top_priorities .wrapper-avatar-default {
+    display:block;
+  }
+  body.overflow #top_priorities .wrapper-avatar-default {
+    overflow: auto;
+  }
   .homeVector {
     width: 100%;
     height:auto;
@@ -1640,7 +1646,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     flex-flow: nowrap;
     overflow: auto;
   }
-  #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
+  #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
   .avatar-text {

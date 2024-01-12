@@ -27,7 +27,7 @@ function updateMobileFields(newArray = null) {
     });
     data = Array(8).fill(null).map((value, index) => nullIfNone(data[index]));
     let liElems = [];
-    let priorityMap = {!! json_encode($prioritiesMap) !!};
+    let priorityMap = test;
 
     const newData = data.map(function (value, index) {
         const liElem = document.createElement('li');
@@ -79,13 +79,7 @@ $(function () {
     new Sortable($("#sortablemobile").get(0), {
         handle: 'div',
         animation: 200,
-        onStart: function (event) {
-            // Increase the z-index of the dragged item
-            event.item.style.zIndex = '1000';
-        },
-        onEnd: function (event) {
-            // Reset the z-index after the drag operation is complete
-            event.item.style.zIndex = '';
+        onSort: function (event, ui) {
             updateMobileFields();
         }
     });
@@ -95,7 +89,7 @@ $(function () {
         const dropdownElem = $(this).closest('li.ui-state-default').find('.dropdown-menu');
         dropdownElem.html('');
 
-        const priorityMap = {!! json_encode($prioritiesMap) !!};
+        const priorityMap = test;
         const data = JSON.parse($('#topPrioritiesButtonInput').val());
         const index = $(this).data('index');
         const options = [];
@@ -155,18 +149,6 @@ function resetPriorities() {
     updateMobileFields([null, null, null, null, null, null, null, null]);
     removeAllInWeb();
 }
-
-<script>
-    // Check if the data-identifier attribute has data
-    const pathElement = document.getElementById('myPath');
-    const dataIdentifier = pathElement.getAttribute('data-identifier');
-
-    if (dataIdentifier !== "") {
-        // Set opacity to 0 if data-identifier has data
-        pathElement.setAttribute('opacity', '0.0');
-    }
-</script>
-
 
 // Priority To Discuss Page JS
 document.addEventListener('DOMContentLoaded', function() {
