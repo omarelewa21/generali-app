@@ -47,7 +47,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default, body.overflow #home {
   overflow: hidden;
 }
 
@@ -561,28 +561,6 @@ p.nav-text {
   background-repeat: no-repeat;
 }
 
-.btn-refresh-red:before {
-  content: "";
-  background-image: url(/images/general/refresh-red.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-refresh-red:hover:before {
-  content: "";
-  background-image: url(/images/general/refresh-white.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .btn-exit:hover:before {
   content: "";
   background-image: url(/images/general/Logout-red.svg);
@@ -1000,7 +978,7 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Marital Status Page ============================== */
-#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
+#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
   background-image: url(/images/marital-status/vector-plant.png);
   background-size: 20%;
   background-position: bottom right;
@@ -1014,7 +992,7 @@ h2.display-5, .currencyField {
   font-weight: 700;
 }
 
-#avatar_family_dependant .content-avatar-default, #avatar_family_dependant_details .content-avatar-default {
+#avatar_family_dependent .content-avatar-default, #avatar_family_dependent_details .content-avatar-default {
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-gap: 0;
 }
@@ -1271,45 +1249,30 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   grid-row: 59 / 96;
 }
 
-#top_priorities {
-  height: 0 !important;
-}
-
 #sortable-main .item-dropped.digit{
   stroke-width: 0;
 }
 
-.ui-state-default.dropdown[data-identifier] > div {
-  position: absolute;
-  padding-left: 86px;
-  top: 0;
-  padding-top: 16px;
-  left: 0;
-  right: 62px;
-  bottom: 0;
-}
-
-.sortablemobileContainer {
-  position: relative;
-  background-color: #C0232C;
-  padding: 16px;
-  padding-bottom: 120px;
-}
-
 #sortablemobile {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 #sortablemobile ul.dropdown-menu {
   width: 100%;
-  overflow: scroll !important;
-  max-height: 83vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: inherit;
 }
 
-#sortablemobile ul.dropdown-menu.show {
-  transform: translate3d(0px, 50px, 0px) !important;
+#sortablemobile ul.dropdown-menu li {
+  padding: 12px 22px 12px 22px!important;
+}
+
+#sortablemobile ul.dropdown-menu li:hover {
+  background-color: #f8f9fa;
 }
 
 #sortablemobile li {
@@ -1321,14 +1284,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #sortablemobile li.is-empty {
-  margin-bottom: 16px;
-  padding: 12px 40px 12px 22px;
   border: 2px dashed #ffffff;
   background-color: #F2F2F288;
   color: white;
-  font-size: 20px;
   font-weight: 700;
-  position: relative;
 }
 
 #sortablemobile .ui-sortable-placeholder {
@@ -1338,13 +1297,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #sortablemobile li .arrowIcon {
-  margin-left: -25px;
   position: absolute;
   right: 10px;
-  top: 35%;
-  font-size: 30px;
-  transform: translate(-50%, -50%);
-  color: rgba(179, 34, 42, 1);
+  top: inherit;
   cursor: pointer;
 }
 
@@ -1354,6 +1309,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 #sortablemobile li .needs-icon {
   height: 2em;
+  margin-right: 15px;
 }
 
 /* ============================== Retirement Home Page ============================== */
@@ -1545,9 +1501,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (min-width: 768px) {
-  #top_priorities {
-    height: 100vh !important;
-  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;
@@ -1622,6 +1575,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  #top_priorities .wrapper-avatar-default {
+    display:block;
+  }
+  body.overflow #top_priorities .wrapper-avatar-default {
+    overflow: auto;
+  }
   .homeVector {
     width: 100%;
     height:auto;
@@ -1640,7 +1599,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     flex-flow: nowrap;
     overflow: auto;
   }
-  #avatar_marital_status .main-content, #avatar_family_dependant .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
+  #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
   .avatar-text {
@@ -1668,7 +1627,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
-  #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
+  #identity_details .bg-primary, #avatar_family_dependent_details .bg-primary {
     margin-top: -200px;
   }
   #home {
@@ -1835,15 +1794,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_welcome section.footer .female {
     bottom: 2%;
     right: 10%;
-  }
-
-
-
-  #avatar_gender_selection .main-content h4,
-  #avatar_marital_status .main-content h4,
-  #avatar_family_dependant .main-content h4,
-  #avatar_my_assets .main-content h4 {
-    font-weight: 700;
   }
 
   .main-content .overflow-auto.full-height-350 {

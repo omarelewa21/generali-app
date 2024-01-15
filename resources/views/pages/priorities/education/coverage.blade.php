@@ -133,7 +133,7 @@
                 <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to input your child name in Family dependant page first.</p>
+                <p>Please click proceed to input your child name in Family dependent page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>

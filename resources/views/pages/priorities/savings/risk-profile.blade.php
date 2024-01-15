@@ -13,7 +13,7 @@
 
 @php
     // Retrieving values from the session
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
     $savings = session('customer_details.savings_needs');
     $savingsRiskProfile = session('customer_details.savings_needs.riskProfile','High Risk');
     $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn','High Potential Return');

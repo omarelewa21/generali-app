@@ -11,7 +11,7 @@ $(document).ready(function() {
         } else {
             // Reset padding if window width is 767px or less
             $(".main-content").css("padding-bottom", 0);
-            $("#pdpa .main-content, #basic_details .main-content, #identity_details .main-content, #avatar_marital_status .main-content, #avatar_family_dependant_details .main-content").css("padding-bottom", mainContentPadding + "px");            
+            $("#pdpa .main-content, #basic_details .main-content, #identity_details .main-content, #avatar_marital_status .main-content, #avatar_family_dependent_details .main-content, #top_priorities .main-content").css("padding-bottom", mainContentPadding + "px");            
         }
     }
   
@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     function setResponsiveMainContentPadding() {
         const windowWidth = $(window).width();
-
+        
         // Check if the window width is less than 767px
         if (windowWidth < 768) {
             const menuHeight = $(".navbar-scroll").outerHeight();

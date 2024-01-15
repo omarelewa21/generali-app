@@ -36,14 +36,14 @@ class DropdownController extends Controller
         return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
     }
 
-    public function familyDependantDetails()
+    public function familyDependentDetails()
     {
         $maritalstatuses = maritalStatus::all();
         $titles = Title::all();
         $countries = Country::all();
         $idtypes = idtype::all();
         $occupations = Occupation::all();
-        return view('pages/avatar/family-dependant-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
+        return view('pages/avatar/family-dependent-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
     }
 
     public function existingPolicy()

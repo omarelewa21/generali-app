@@ -1,6 +1,6 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'family-dependant',
+    'family-dependent',
     'assets',
     'financial-priorities'
 ];
@@ -13,7 +13,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (path == '/family-dependant') {
+    if (path == '/family-dependent') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 

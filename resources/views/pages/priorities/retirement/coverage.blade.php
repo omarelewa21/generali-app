@@ -19,10 +19,10 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependant');
+    $familyDependent = session('customer_details.family_details.dependent');
 
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
+    $spouseData = session('customer_details.family_details.dependent.spouse_data');
+    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
 
     $relationship = session('customer_details.retirement_needs.coverFor');
     $selectedInsuredName = session('customer_details.retirement_needs.selectedInsuredName');

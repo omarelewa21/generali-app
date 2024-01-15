@@ -93,7 +93,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             if (modalBackdrop) {
                                 modalBackdrop.remove();
                             }
-                            window.location.href = '/family-dependant/details';
+                            window.location.href = '/family-dependent/details';
                         });
                     }  
                 }
@@ -122,7 +122,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             if (modalBackdrop) {
                                 modalBackdrop.remove();
                             }
-                            window.location.href = '/family-dependant/details';
+                            window.location.href = '/family-dependent/details';
                         });
                     } 
                 }

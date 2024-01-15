@@ -12,12 +12,12 @@
 @section('content')
 @php
     // Retrieving values from the session
-    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
 @endphp
 
 <div id="health-medical_home">

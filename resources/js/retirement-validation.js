@@ -93,7 +93,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             if (modalBackdrop) {
                                 modalBackdrop.remove();
                             }
-                            window.location.href = '/family-dependant/details';
+                            window.location.href = '/family-dependent/details';
                         });
 
                     } 
@@ -662,7 +662,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (change < 0) {
                     change = 0; // 0 represents 100% coverage
                     circle.style.strokeDashoffset = change;
-                    // console.log('change', change);
                 }
                 else   {
                     circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage

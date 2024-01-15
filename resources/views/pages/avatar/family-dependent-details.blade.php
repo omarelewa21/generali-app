@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Family Dependant Details Page
+ * Template Name: Family Dependent Details Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Family Dependant Details</title>
+<title>Family Dependent Details</title>
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $familyDependant = session('customer_details.family_details');
+    $familyDependent = session('customer_details.family_details');
     $maritalStatus = session('customer_details.identity_details');
     $spouseData = session('customer_details.family_details.spouse_data');
     $childrenData = session('customer_details.family_details.children_data');
@@ -26,7 +26,7 @@
     $selectedCountry = session('passingArrays.Country', '');
 @endphp
 
-<div id="avatar_family_dependant_details">
+<div id="avatar_family_dependent_details">
     <div class="container-fluid">
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
@@ -41,7 +41,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
+                    <form novalidate action="{{ route('avatar.family.dependent.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -66,7 +66,7 @@
                                     @endif
                                     <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12">
-                                            <div class="accordion accordion-flush" id="accordionDependantDetails">
+                                            <div class="accordion accordion-flush" id="accordionDependentDetails">
                                                 @php
                                                     // Get the current year, month, and day
                                                     $currentYear = date('Y');
@@ -107,14 +107,14 @@
                                                         $selectedDay = sprintf('%02d', $selectedDay);
                                                     }
                                                 @endphp
-                                                @if(isset($familyDependant['spouse']) && $familyDependant['spouse'] === true)
+                                                @if(isset($familyDependent['spouse']) && $familyDependent['spouse'] === true)
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
                                                                 Spouse
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependentDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
                                                                     <div class="col-12 col-lg-7 col-md-12 col-sm-12">
@@ -316,7 +316,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if(isset($familyDependant['children']) && $familyDependant['children'] === true)
+                                                @if(isset($familyDependent['children']) && $familyDependent['children'] === true)
                                                     @foreach ($childrenData as $key => $value)
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$key}}">
@@ -324,7 +324,7 @@
                                                                 {{$value['relation']}}
                                                                 </button>
                                                             </h2>
-                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependantDetails">
+                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependentDetails">
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
@@ -431,7 +431,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if(isset($familyDependant['parents']) && $familyDependant['parents'] === true)
+                                                @if(isset($familyDependent['parents']) && $familyDependent['parents'] === true)
                                                     @foreach ($parentsData as $key => $value)
                                                     <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$key}}">
@@ -439,7 +439,7 @@
                                                                     Parent ({{ $key }})
                                                                 </button>
                                                             </h2>
-                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependantDetails">
+                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependentDetails">
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
@@ -550,14 +550,14 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if(isset($familyDependant['siblings']) && $familyDependant['siblings'] === true)
+                                                @if(isset($familyDependent['siblings']) && $familyDependent['siblings'] === true)
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingSibling">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSibling" aria-expanded="true" aria-controls="flush-collapseSibling">
                                                                 Sibling
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseSibling" class="accordion-collapse collapse" aria-labelledby="flush-headingSibling" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseSibling" class="accordion-collapse collapse" aria-labelledby="flush-headingSibling" data-bs-parent="#accordionDependentDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
@@ -679,8 +679,8 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
-                                        <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{ json_encode($familyDependant) }}">
-                                        <a href="{{route('avatar.family.dependant')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
+                                        <a href="{{route('avatar.family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>
@@ -694,7 +694,17 @@
 </div>
 
 @if (empty($maritalStatus))
-    $missingPage = 
+    @php
+        $missingPage = 'Marital Status';
+    @endphp
+@elseif($familyDependent['spouse'] === false && $familyDependent['children'] === false)
+    @php
+        $missingPage = 'Family Dependent';
+    @endphp
+@else
+    @php
+        $missingPage = '';
+    @endphp
 @endif
 
 <!-- Modal -->
@@ -702,10 +712,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Family Dependant is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">{{$missingPage}} is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to fill up the form in Family Dependant page first.</p>
+                <p>Please click proceed to fill up the form in {{$missingPage}} page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
@@ -719,6 +729,7 @@ var spouse_session = {!! json_encode(session('customer_details.family_details.sp
 var siblings_session = {!! json_encode(session('customer_details.family_details.siblings')) !!};
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 var family_details = {!! json_encode(session('customer_details.family_details')) !!};
+var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {

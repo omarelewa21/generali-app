@@ -21,6 +21,7 @@ import 'bootstrap5-toggle';
 import './phoneValidation';
 import './datatables';
 import 'laravel-datatables-vite';
+import './sortable';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
@@ -147,20 +148,3 @@ document.getElementById('saveSession').addEventListener('click', function() {
         }
     });
 });
-
-// Session Clear
-// document.getElementById('clearSession').addEventListener('click', function() {
-//     var clearRoute = this.getAttribute('data-clear-route');
-
-//     $.ajax({
-//         url: clearRoute,
-//         method: "GET",
-//         success: function(response) {
-//             console.log("Session data cleared.");
-//             localStorage.clear();
-//         },
-//         error: function(xhr, status, error) {
-//             console.log("Error clearing session data:", error);
-//         }
-//     });
-// });
