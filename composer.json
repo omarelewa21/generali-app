@@ -13,10 +13,12 @@
         "laravel-views/laravel-views": "^2.4",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
+        "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
         "phpoffice/phpspreadsheet": "^1.29",
+        "socialiteproviders/salesforce": "^4.1",
         "victorybiz/laravel-tel-input": "^1.5",
         "yajra/laravel-datatables": "^10.1"
     },

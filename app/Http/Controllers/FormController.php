@@ -1417,7 +1417,6 @@ class FormController extends Controller {
         // Regenerate the session ID
         $session = $request->session()->regenerate();
         $sessionId = $request->session()->getId();
-        Log::debug($sessionId);
 
         // Store the form token in the session
         session(['session_id' => $sessionId]);

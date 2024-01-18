@@ -182,6 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        // \SocialiteProviders\Manager\ServiceProvider::class, // add
 
         /*
          * Package Service Providers...

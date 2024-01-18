@@ -219,3 +219,6 @@ Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete
 
 //Create New Transaction Form, always create a new session id 
 Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');
+
+// Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
+// Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');
