@@ -562,7 +562,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/protection/gap') {
-            if (!lastPageInput || !('existingPolicyAmount' in lastPageInput)) {
+            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

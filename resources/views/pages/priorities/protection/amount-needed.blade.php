@@ -15,12 +15,13 @@
 @php
     // Retrieving values from the session
     $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
-    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
-    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
-    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded', '0');
-    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
-    $relationship = session('customer_details.protection_needs.coverFor');
+    $protectionMonthlySupport = session('customer_details.selected_needs.advance_details.covered_amount_monthly');
+    $protectionAnnuallySupport = session('customer_details.selected_needs.advance_details.covered_amount');
+    $existingPolicyAmount = session('customer_details.selected_needs.advance_details.existing_amount');
+    $protectionSupportingYears = session('customer_details.selected_needs.advance_details.supporting_years');
+    $totalProtectionNeeded = session('customer_details.selected_needs.advance_details.totalProtectionNeeded', '0');
+    $protectionFundPercentage = session('customer_details.selected_needs.advance_details.fundPercentage', '0');
+    $relationship = session('customer_details.selected_needs.advance_details.relationship');
 @endphp
 
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
