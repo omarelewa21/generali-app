@@ -161,12 +161,12 @@ class ProtectionController extends Controller
         if ($totalProtectionFund === $protectionTotalFund){
 
             $advanceDetails = array_merge($advanceDetails, [
-                'totalProtectionNeeded' => $totalProtectionFund
+                'total_protection_needed' => $totalProtectionFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'totalProtectionNeeded' => $protectionTotalFund
+                'total_protection_needed' => $protectionTotalFund
             ]);
         }
 
@@ -300,20 +300,20 @@ class ProtectionController extends Controller
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
             'existing_amount' => $existing_policy_amount,
-            'existingPolicy' => $protection_existing_policy
+            'existing_policy' => $protection_existing_policy
         ]);
 
         if ($newProtectionTotalAmountNeeded === $totalAmountNeeded && $newProtectionPercentage === $totalPercentage){
             if ($newProtectionTotalAmountNeeded <= 0){
                 $advanceDetails = array_merge($advanceDetails, [
                     'insurance_amount' => '0',
-                    'fundPercentage' => '100'
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $advanceDetails = array_merge($advanceDetails, [
                     'insurance_amount' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
@@ -321,13 +321,13 @@ class ProtectionController extends Controller
             if ($newProtectionTotalAmountNeeded <= 0){
                 $advanceDetails = array_merge($advanceDetails, [
                     'insurance_amount' => '0',
-                    'fundPercentage' => '100'
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $advanceDetails = array_merge($advanceDetails, [
                     'insurance_amount' => $newProtectionTotalAmountNeeded,
-                    'fundPercentage' => $newProtectionPercentage
+                    'fund_percentage' => $newProtectionPercentage
                 ]);
             }
         }

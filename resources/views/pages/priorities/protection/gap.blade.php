@@ -18,8 +18,8 @@
     $protection = session('customer_details.selected_needs.advance_details');
     $protectionSupportingYears = session('customer_details.selected_needs.advance_details.supporting_years');
     $existingPolicyAmount = session('customer_details.selected_needs.advance_details.existing_amount');
-    $totalProtectionNeeded = session('customer_details.selected_needs.advance_details.totalProtectionNeeded');
-    $protectionFundPercentage = session('customer_details.selected_needs.advance_details.fundPercentage', '0');
+    $totalProtectionNeeded = session('customer_details.selected_needs.advance_details.total_protection_needed');
+    $protectionFundPercentage = session('customer_details.selected_needs.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.advance_details.insurance_amount');
 @endphp
 
@@ -60,8 +60,12 @@
                                             </svg>
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
-                                            <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%
+                                            <div class="circle circle__small">
+                                            
+                                            </div>
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/protection-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
