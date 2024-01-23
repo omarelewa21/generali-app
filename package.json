@@ -23,6 +23,8 @@
         "vite-plugin-laravel": "^0.3.1"
     },
     "dependencies": {
+        "@clerk/clerk-js": "^4.68.5",
+        "@clerk/themes": "^1.7.9",
         "@fortawesome/fontawesome-free": "^6.5.1",
         "axios": "^1.4.0",
         "bootstrap-icons": "^1.11.1",

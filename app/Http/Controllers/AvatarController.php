@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Services\TransactionService;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use App\Models\SessionStorage; 
 
 class AvatarController extends Controller
 {
-    public function changeImage(Request $request)
+    public function changeImage(Request $request, TransactionService $transactionService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -52,38 +51,11 @@ class AvatarController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionId = $request->session()->getId();
-                $sessionStorage->session_id = $sessionId; 
-                $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
+        //use service to update and insert record 
+        $transactionService->handleTransaction($request,$customerDetails);
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-                //if session from request able to match with db then do update
-                $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
-
-                if (!empty($dbSessionId)) {
-                    SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
-                    ->update(['data' => $sessionStorage->data, 
-                              'page_route' => $sessionStorage->page_route,
-                              'customer_name' => $fullName
-                            ]);
-                }
-                else
-                {
-                    $sessionStorage->save();
-                }               
-             
-            });
-        } catch (\Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
-        }
-        return redirect()->route('identity.details');
+        return redirect()->route('identity.details')->with($transactionData);
     } 
 }

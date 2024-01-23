@@ -44,7 +44,9 @@
                                     <input type="checkbox" class="form-check-input" value="remember-me"> Remember me
                                 </label>
                             </div>
-                            <a href="{{route('dashboard')}}" class="btn btn-primary text-uppercase w-100 mt-4">Sign in</a>
+                            <a href="{{route('login')}}" class="btn btn-primary text-uppercase w-100 mt-4">Sign in</a>
+
+                            <a class="btn btn-primary text-uppercase w-100 mt-4" id="loginBtn">Login</a>
                         </form>
                     </div>
                 </div>
@@ -52,4 +54,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            window.Clerk.openSignIn();
+        });
+    });
+</script>
 @endsection

@@ -27,13 +27,20 @@ class DropdownController extends Controller
         return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
     }
 
-    public function identityDetails()
+    public function identityDetails(Request $request)
     {
         $countries = Country::all();
         $idtypes = idtype::all();
         $occupations = Occupation::all();
         $educationLevels = educationLevel::all();
-        return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
+
+        $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
+
+        if($basicDetails){
+            $basicDetails = $basicDetails['basic_details'] ?? '';
+        }
+
+        return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
     }
 
     public function familyDependentDetails()

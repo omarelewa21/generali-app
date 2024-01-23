@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\DB;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
+use App\Services\TransactionService;
 
 class FormController extends Controller {
-    public function pdpa(Request $request)
+    public function pdpa(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -34,40 +35,10 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            //also store updated session in database
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = $customerDetails;
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionId = $request->session()->getId();
-                    $sessionStorage->session_id = $sessionId;   
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-                    //if session from request able to match with db then do update
-                    $dbSessionId = json_decode(SessionStorage::findSessionId($sessionId)->get('session_id'),true);
-
-                    if (!empty($dbSessionId)) {
-
-                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
-                        ->update(['data' => $sessionStorage->data, 
-                                  'page_route' => $sessionStorage->page_route
-                                ]);
-                    }
-                    else
-                    {
-                        $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
-                        $newValue = $currentValue + 1;
-                        $sessionStorage->transaction_id = $newValue;            
-                        $sessionStorage->save();
-                    }
-                });
-            } catch (\Exception $e) {
-                Log::debug($e);
-                DB::rollBack();
-            }
 
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
@@ -75,9 +46,7 @@ class FormController extends Controller {
         }
     }
 
-    
-
-    public function basicDetails(Request $request)
+    public function basicDetails(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -87,7 +56,7 @@ class FormController extends Controller {
             // For non-AJAX requests, use the normal CSRF token verification
             $validToken = $request->session()->token() === $request->input('_token');
         }
-        Log::debug($request->input('transaction_id'));
+
         if ($validToken) {
             // Fetch from the database
             $titles = DB::table('titles')->pluck('titles')->toArray();
@@ -155,75 +124,19 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = $customerDetails;
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionId = $request->session()->getId();
-                    $sessionStorage->session_id = $sessionId; 
-                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
-                    $sessionStorage->customer_name = $fullName;
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-                    //if session from request able to match with db then do update
-                    // if session not found, then use transaction id 
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-                    //if found means the session after complete, and the session 
-                    // from agent is same, then do update also , 
-                    // if still not found then use transaction id 
-
-
-                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
-
-                    $dbSessionId = SessionStorage::findTransactionId($request->input('transaction_id'))->get();
-                    $formData = SessionStorage::where('session_id',$dbSessionId);
-
-                    Log::debug($dbSessionId);  //[]
-
-
-                    if($formData)
-                    {
-                        $transactionId = request()->input('transaction_id'); 
-                        Log::debug($transactionId);
-                        $formData = SessionStorage::where('transaction_id', $transactionId)->first();
-                    }
-
-
-                    if ($formData) {
-
-                        Log::debug('do update for basic details');
-                        Log::debug(json_encode($formData));
-                        SessionStorage::where('session_id',$formData[0]['session_id'])
-                        ->update(['data' => $sessionStorage->data, 
-                                  'page_route' => $sessionStorage->page_route,
-                                  'customer_name' => $fullName
-                                ]);
-                    }
-                    else
-                    {
-                        $currentValue = SessionStorage::max('transaction_id',1000) ?? 1000;
-                        $newValue = $currentValue + 1;
-                        $sessionStorage->transaction_id = $newValue;         
-                        $sessionStorage->save();
-                    }               
-                 
-                });
-            } catch (\Exception $e) {
-                Log::debug($e);
-                DB::rollBack();
-            }
-
-            // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.welcome');
+            return redirect()->route('avatar.welcome')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function submitIdentity(Request $request)
+    public function submitIdentity(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -400,43 +313,13 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionId = $request->session()->getId();
-                    $sessionStorage->session_id = $sessionId; 
-                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
-                    $customerId = $customerDetails['identity_details']['id_number'] ?? NULL;
+            $transactionService->handleTransaction($request,$customerDetails);
 
-                    //if session from request able to match with db then do update
-                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
-
-                    if (!empty($dbSessionId)) {
-                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
-                        ->update(['data' => $sessionStorage->data, 
-                                  'page_route' => $sessionStorage->page_route,
-                                  'customer_name' => $fullName,
-                                  'customer_id' => $customerId
-                                ]);
-                    }
-                    else
-                    {
-                        $sessionStorage->save();
-                    }               
-                 
-                });
-            } catch (\Exception $e) {
-                Log::debug($e);
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.marital.status');
+            return redirect()->route('avatar.marital.status')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

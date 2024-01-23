@@ -31,6 +31,7 @@
                             </div>
                             <div class="col-4 text-end">
                                 <p class="text-gray">Last login: 2023-11-01 20:01:00</p>
+                                <div style="float: right;" id="user-button"></div>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">

@@ -13,22 +13,28 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('content')
-
 <div id="dashboard">
+    
     <div class="container-fluid">
         <div class="row">
+            
             @include('templates.nav.nav-white')
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section-agent">
                 <section class="main-content pb-5">
                     <div class="container">
+                        
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
                             <div class="col-8">
                                 <h2 class="display-5 fw-bold lh-sm text-primary">Hi, Agent Lee</h2>
                                 <p class="text-gray my-0">15428</p>
+                                
                             </div>
+                            
                             <div class="col-4 text-end">
                                 <p class="text-gray">Last login: 2023-11-01 20:01:00</p>
+                                <div style="float: right;" id="user-button"></div>
                             </div>
+                            
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
