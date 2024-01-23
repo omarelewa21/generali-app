@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -144,33 +139,6 @@ class SavingsController extends Controller
                 ],
             ], $customMessages);
 
-            
-
-            // $validatedData = Validator::make($request->all(), [
-            //     'savings_goals_amount' => [
-            //         'required',
-            //         'regex:/^[0-9,]+$/',
-            //         function ($attribute, $value, $fail) {
-            //             // Remove commas and check if the value is at least 1
-            //             $numericValue = str_replace(',', '', $value);
-            //             $min = 1;
-            //             $max = 20000000;
-            //             if (intval($numericValue) < $min) {
-            //                 $fail('Your amount must be at least ' .$min. '.');
-            //             }
-            //             if (intval($numericValue) > $max) {
-            //                 $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
-            //             }
-            //         },
-            //     ],
-            // ], $customMessages);
-
-            // $validator = Validator::make($request->all(), [
-            //     'savingsGoalsButtonInput' => [
-            //         'at_least_one_selected',
-            //     ],
-            // ]);
-
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
@@ -178,11 +146,6 @@ class SavingsController extends Controller
             $savings_goals_amount = str_replace(',','',$request->input('savings_goals_amount'));
             $savingsGoalsSerialized = $request->input('savingsGoalsButtonInput');
             $savingsGoalsButtonInput = json_decode($savingsGoalsSerialized, true);
-            
-            // $savingsGoalsButtonInput = array_filter($savingsGoalsButtonInput, function($value) {
-            //     return $value !== null;
-            // });
-            // $savingsGoalsButtonInput = array_values($savingsGoalsButtonInput);
 
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
@@ -339,126 +302,6 @@ class SavingsController extends Controller
         return redirect()->route('savings.annual.return');
     }
 
-    // public function validateMonthlyPayment(Request $request)
-    // {
-    //     $customMessages = [
-    //         'savings_monthly_payment.required' => 'You are required to enter an amount.',
-    //         'savings_monthly_payment.regex' => 'You must enter number',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'savings_monthly_payment' => [
-    //             'required',
-    //             'regex:/^[0-9,]+$/',
-    //             function ($attribute, $value, $fail) {
-    //                 // Remove commas and check if the value is at least 1
-    //                 $numericValue = str_replace(',', '', $value);
-    //                 $min = 1;
-    //                 $max = 20000000;
-    //                 if (intval($numericValue) < $min) {
-    //                     $fail('Your amount must be at least ' .$min. '.');
-    //                 }
-    //                 if (intval($numericValue) > $max) {
-    //                     $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
-    //                 }
-    //             },
-    //         ],
-    //     ], $customMessages);
-
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $savings_monthly_payment = str_replace(',','',$request->input('savings_monthly_payment'));
-    //     $savingsTotalFund = floatval($savings_monthly_payment * 12);
-    //     $totalSavingsNeeded = floatval($request->input('total_savingsNeeded'));
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing savings_needs from the session
-    //     $savings = $customerDetails['savings_needs'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $savings = array_merge($savings, [
-    //         'monthlyInvestmentAmount' => $savings_monthly_payment
-    //     ]);
-
-    //     if ($totalSavingsNeeded === $savingsTotalFund){
-    //         $savings = array_merge($savings, [
-    //             'totalSavingsNeeded' => $totalSavingsNeeded
-    //         ]);
-    //     }
-    //     else{
-    //         $savings = array_merge($savings, [
-    //             'totalSavingsNeeded' => $savingsTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated savings_needs back to the customer_details session
-    //     $customerDetails['savings_needs'] = $savings;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     return redirect()->route('savings.goal.duration');
-    // }
-
-    // public function validateGoalDuration(Request $request)
-    // {
-    //     $customMessages = [
-    //         'savings_goal_duration.required' => 'You are required to enter a year.',
-    //         'savings_goal_duration.integer' => 'The year must be a number',
-    //         'savings_goal_duration.min' => 'The year must be at least :min.',
-    //         'savings_goal_duration.max' => 'The year must not more than :max.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'savings_goal_duration' => 'required|integer|min:1|max:99',
-    //     ], $customMessages);
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing savings_needs from the session
-    //     $savings = $customerDetails['savings_needs'] ?? [];
-
-    //     // Validation passed, perform any necessary processing.
-    //     $savings_goal_duration = $request->input('savings_goal_duration');
-    //     $newSavingsTotalFund = floatval($savings_goal_duration * $customerDetails['savings_needs']['totalSavingsNeeded']);
-    //     $newTotalSavingsNeeded = $request->input('newTotal_savingsNeeded');
-
-    //     $savings = array_merge($savings, [
-    //         'investmentTimeFrame' => $savings_goal_duration
-    //     ]);
-
-    //     if ($newSavingsTotalFund === $newTotalSavingsNeeded){
-    //         $savings = array_merge($savings, [
-    //             'newTotalSavingsNeeded' => $newTotalSavingsNeeded
-    //         ]);
-    //     }
-    //     else{
-    //         $savings = array_merge($savings, [
-    //             'newTotalSavingsNeeded' => $newSavingsTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated savings_needs back to the customer_details session
-    //     $customerDetails['savings_needs'] = $savings;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-        
-    //     return redirect()->route('savings.annual.return');
-    // }
-
     public function validateSavingsAnnualReturn(Request $request){
 
         $customMessages = [
@@ -511,46 +354,8 @@ class SavingsController extends Controller
 
         return redirect()->route('savings.risk.profile');
     }
-    
 
     public function validateSavingsRiskProfile(Request $request){
-
-        // Define custom validation rule for button selection
-        // Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-        //     if ($value !== null) {
-        //         return true;
-        //     }
-            
-        //     $customMessage = "Please select at least one risk.";
-        //     $validator->errors()->add($attribute, $customMessage);
-    
-        //     return false;
-        // });
-
-        // Validator::extend('at_least_one_potential_selected', function ($attribute, $value, $parameters, $validator) {
-        //     if ($value !== null) {
-        //         return true;
-        //     }
-            
-        //     $customMessage = "Please select at least one potential return.";
-        //     $validator->errors()->add($attribute, $customMessage);
-    
-        //     return false;
-        // });
-
-        // $validator = Validator::make($request->all(), [
-        //     'savingsRiskProfileInput' => [
-        //         'at_least_one_selected',
-        //     ],
-        //     'savingsPotentialReturnInput' => [
-        //         'at_least_one_potential_selected',
-        //     ],
-        // ]);
-
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
         $customMessages = [
             'savingsRiskProfileInput.required' => 'Please select a risk level.',
             'savingsRiskProfileInput.in' => 'Invalid risk level selected.',

@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
 
@@ -140,18 +135,6 @@ class EducationController extends Controller
             'totalEducationNeeded' => $totalEducationFund
         ]);
 
-        // if ($totalEducationFund === $educationTotalFund){
-
-        //     $education = array_merge($education, [
-        //         'totalEducationNeeded' => $totalEducationFund
-        //     ]);
-        // }
-        // else{
-        //     $education = array_merge($education, [
-        //         'totalEducationNeeded' => $educationTotalFund
-        //     ]);
-        // }
-
         // Set the updated education back to the customer_details session
         $customerDetails['education_needs'] = $education;
 
@@ -171,121 +154,8 @@ class EducationController extends Controller
             DB::rollBack();
         }
 
-        // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('education.existing.fund');
     }
-
-    // public function validateEducationAmount(Request $request){
-
-    //     $customMessages = [
-    //         'tertiary_education_amount.required' => 'You are required to enter an amount.',
-    //         'tertiary_education_amount.regex' => 'You must enter number',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'tertiary_education_amount' => [
-    //             'required',
-    //             'regex:/^[0-9,]+$/',
-    //             function ($attribute, $value, $fail) {
-    //                 // Remove commas and check if the value is at least 1
-    //                 $numericValue = str_replace(',', '', $value);
-    //                 $min = 1;
-    //                 $max = 20000000;
-    //                 if (intval($numericValue) < $min) {
-    //                     $fail('Your amount must be at least ' .$min. '.');
-    //                 }
-    //                 if (intval($numericValue) > $max) {
-    //                     $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
-    //                 }
-    //             },
-    //         ],
-    //     ], $customMessages);
-        
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $tertiary_education_amount = str_replace(',','',$request->input('tertiary_education_amount'));
-    //     $educationTotalFund = floatval($tertiary_education_amount);
-    //     $totalEducationFund = floatval($request->input('total_educationFund'));
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing education_needs from the session
-    //     $education = $customerDetails['education_needs'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $education = array_merge($education, [
-    //         'tertiaryEducationAmount' => $tertiary_education_amount
-    //     ]);
-
-    //     if ($totalEducationFund === $educationTotalFund){
-    //         $education = array_merge($education, [
-    //             'totalEducationNeeded' => $totalEducationFund
-    //         ]);
-    //     }
-    //     else{
-    //         $education = array_merge($education, [
-    //             'totalEducationNeeded' => $educationTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated education_needs back to the customer_details session
-    //     $customerDetails['education_needs'] = $education;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     return redirect()->route('education.supporting.years');
-    // }
-    // public function validateEducationSupportingYears(Request $request){
-
-    //     $customMessages = [
-    //         'tertiary_education_years.required' => 'You are required to enter a year.',
-    //         'tertiary_education_years.integer' => 'The year must be a number',
-    //         'tertiary_education_years.min' => 'The year must be at least :min.',
-    //         'tertiary_education_years.max' => 'The year must not more than :max.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'tertiary_education_years' => 'required|integer|min:1|max:99',
-    //     ], $customMessages);
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing education_needs from the session
-    //     $education = $customerDetails['education_needs'] ?? [];
-
-    //     // Validation passed, perform any necessary processing.
-    //     $tertiary_education_years = $request->input('tertiary_education_years');
-
-    //     // Update specific keys with new values
-    //     $education = array_merge($education, [
-    //         'tertiaryEducationYear' => $tertiary_education_years
-    //     ]);
-
-    //     // Set the updated education_needs back to the customer_details session
-    //     $customerDetails['education_needs'] = $education;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-    //     // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-    //     // return ($formattedArray);
-
-    //     return redirect()->route('education.existing.fund');
-    // }
 
     public function validateEducationExistingFund(Request $request){
 
@@ -423,9 +293,6 @@ class EducationController extends Controller
             DB::rollBack();
         }
 
-        // Process the form data and perform any necessary actions
-        //  $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
             return redirect()->route('savings.home');
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {

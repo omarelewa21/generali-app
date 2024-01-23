@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -170,62 +165,6 @@ class ProtectionController extends Controller
 
         return redirect()->route('protection.existing.policy');
     }
-    // public function validateProtectionSupporting(Request $request){
-
-    //     $customMessages = [
-    //         'protection_supporting_years.required' => 'You are required to enter a year.',
-    //         'protection_supporting_years.integer' => 'The year must be a number',
-    //         'protection_supporting_years.min' => 'The year must be at least :min.',
-    //         'protection_supporting_years.max' => 'The year must not more than :max.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'protection_supporting_years' => 'required|integer|min:1|max:100',
-    //     ], $customMessages);
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing protection_needs from the session
-    //     $protection = $customerDetails['protection_needs'] ?? [];
-
-    //     // Validation passed, perform any necessary processing.
-    //     $protection_supporting_years = $request->input('protection_supporting_years');
-    //     $newProtectionTotalFund = floatval($protection_supporting_years * $customerDetails['protection_needs']['totalProtectionNeeded']);
-    //     $newTotalProtectionNeeded = floatval($request->input('newTotal_protectionNeeded'));
-
-    //     // Update specific keys with new values
-    //     $protection = array_merge($protection, [
-    //         'supportingYears' => $protection_supporting_years
-    //     ]);
-
-    //     if ($newProtectionTotalFund === $newTotalProtectionNeeded){
-    //         $protection = array_merge($protection, [
-    //             'newTotalProtectionNeeded' => $newTotalProtectionNeeded
-    //         ]);
-    //     }
-    //     else{
-    //         $protection = array_merge($protection, [
-    //             'newTotalProtectionNeeded' => $newProtectionTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated protection back to the customer_details session
-    //     $customerDetails['protection_needs'] = $protection;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     // Process the form data and perform any necessary actions
-    //     // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-    //     // return ($formattedArray);
-    //     return redirect()->route('protection.existing.policy');
-    // }
 
     public function validateProtectionExistingPolicy(Request $request){
 
