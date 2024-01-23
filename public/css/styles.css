@@ -1215,7 +1215,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortable .second {
   grid-column: 22 / span 16;
   grid-row: 28 / 73;
-  transform: translate(1px, 2px);
+  /* transform: translate(1px, 2px); */
 }
 
 #sortable .third {
@@ -1241,7 +1241,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortable .seventh {
   grid-column: 68 / span 16;
   grid-row: 28 / 73;
-  transform: translate(-2px, 3px);
+  /* transform: translate(-2px, 3px); */
 }
 
 #sortable .eight {

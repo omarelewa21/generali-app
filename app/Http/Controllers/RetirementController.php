@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -300,101 +295,6 @@ class RetirementController extends Controller
         return redirect()->route('retirement.allocated.funds');
     }
 
-    // public function validateSupportingYears(Request $request){
-
-    //     $customMessages = [
-    //         'supporting_years.required' => 'You are required to enter a year.',
-    //         'supporting_years.integer' => 'The year must be a number',
-    //         'supporting_years.min' => 'The year must be at least :min.',
-    //         'supporting_years.max' => 'The year must not more than :max.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'supporting_years' => 'required|integer|min:1|max:99',
-    //     ], $customMessages);
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing retirement_needs from the session
-    //     $retirement = $customerDetails['retirement_needs'] ?? [];
-
-    //     // Validation passed, perform any necessary processing.
-    //     $supporting_years = $request->input('supporting_years');
-    //     $newRetirementTotalFund = floatval($supporting_years * $customerDetails['retirement_needs']['totalRetirementNeeded']);
-    //     $newTotalRetirementNeeded = floatval($request->input('newTotal_retirementNeeded'));
-
-    //     // Update specific keys with new values
-    //     $retirement = array_merge($retirement, [
-    //         'supportingYears' => $supporting_years
-    //     ]);
-
-    //     if ($newRetirementTotalFund === $newTotalRetirementNeeded){
-    //         $retirement = array_merge($retirement, [
-    //             'newTotalRetirementNeeded' => $newTotalRetirementNeeded
-    //         ]);
-    //     }
-    //     else{
-    //         $retirement = array_merge($retirement, [
-    //             'newTotalRetirementNeeded' => $newRetirementTotalFund
-    //         ]);
-    //     }
-
-    //     // Set the updated retirement back to the customer_details session
-    //     $customerDetails['retirement_needs'] = $retirement;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     return redirect()->route('retirement.retire.age');
-    // }
-
-    // public function validateRetireAge(Request $request){
-
-    //     $customMessages = [
-    //         'retirement_age.required' => 'You are required to enter a year.',
-    //         'retirement_age.integer' => 'The year must be a number',
-    //         'retirement_age.min' => 'The year must be at least :min.',
-    //         'retirement_age.max' => 'The year must not more than :max.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'retirement_age' => 'required|integer|min:1|max:99',
-    //     ], $customMessages);
-        
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $retirement_age = $request->input('retirement_age');
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing retirement_needs from the session
-    //     $retirement = $customerDetails['retirement_needs'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $retirement = array_merge($retirement, [
-    //         'retirementAge' => $retirement_age
-    //     ]);
-
-    //     // Set the updated retirement back to the customer_details session
-    //     $customerDetails['retirement_needs'] = $retirement;
-
-    //     // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     Log::debug($customerDetails);
-
-    //     return redirect()->route('retirement.others');
-    // }
-
     public function validateRetirementOthers(Request $request){
 
         $customMessages = [
@@ -542,5 +442,4 @@ class RetirementController extends Controller
             return redirect()->route('existing.policy');
         }
     }
-
 }

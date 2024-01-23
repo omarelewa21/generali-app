@@ -10,7 +10,6 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
         var $needs = $("#needs"),
         $sortable = $("#sortable");
 
-        // var addedNeedsImages = sessionData ? sessionData : [];
         var addedNeedsImages = sessionData ? sessionData : Array(8).fill(null);
 
         // Function to click to drop
@@ -46,9 +45,6 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
         
                 // Create the droppedItem as an image
                 var droppedItem = $("<img class='inner-dropped'>").attr("src", imageName).attr("data-avatar", dataAvatar);
-
-                // Create the droppedItem as an image
-                // var droppedItem = $("<img class='inner-dropped'>").attr("src", imageName);
         
                 // Append the droppedItem to the container
                 container.append(droppedItem);
@@ -59,16 +55,12 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
 
                 var removeButton = $("<button class='remove-button btn-remove' data-avatar='" + dataAvatar + "' data-index='" + dataIndex + "'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
 
-                // var removeButton = $("<button class='remove-button text-primary'><i class='fa-solid fa-circle-xmark fa-xl'></i></button>");
                 container.append(removeButton);
                 droppedContainer.append(container);
         
                 droppedItem.animate({ width: "100px" }, function() {
                     droppedItem.animate({ height: "auto" });
                 });
-        
-                // var parentSvgContainer = droppedContainer.closest(".svg-container");
-                // var pathClass = parentSvgContainer.attr("data-svg-class");
         
                 parentSvgContainer.removeClass("blank-item");
                 parentSvgContainer.addClass("item-dropped");
@@ -84,65 +76,9 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
                         path.classList.add("item-dropped");
                     });
                 }
-
-                // removeButton.click(function() {
-                //     parentSvgContainer.removeClass("item-dropped");
-
-                //     if (pathClass) {
-                //         // Find the path elements with the specified class
-                //         var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-                //         // Add the "item-dropped" class to the matching path elements
-                //         paths.forEach(function(path) {
-                //             path.classList.remove("item-dropped");
-                //         });
-                //     }
-                //     container.remove();
-                //     removeButton.remove();
-                //     droppedContainer.removeAttr("data-identifier");
-
-                //     // Clear the position in the imagePositions array
-                //     addedNeedsImages[position] = null;
-
-                //     updateHiddenInputValue();
-                // });
             };
             updateHiddenInputValue();
         }
-        
-        // // Do this when the priorities needed to be removed on pre-select
-        // var removeButtons = document.querySelectorAll('.remove-button');
-        
-        // if (removeButtons.length > 0) {
-        //     removeButtons.forEach(function(removeButtonSession) {
-        //         removeButtonSession.addEventListener('click', function() {
-        //             var parentSvgContainer = $(this).closest(".svg-container");
-        //             var pathClass = parentSvgContainer.attr("data-svg-class");
-        //             var droppedDiv = $(this).closest(".dropped");
-        //             var sortableContainer = droppedDiv.find(".sortable-container");
-        //             var buttonBg = droppedDiv.attr("data-identifier");
-
-        //             var removedIndex = addedNeedsImages.findIndex(item => item === buttonBg);
-
-        //             if (removedIndex !== -1) {
-        //                 // If the item was found in addedNeedsImages, set it to null
-        //                 addedNeedsImages[removedIndex] = null;
-        //             }
-
-        //             if (pathClass) {
-        //                 // Find the path elements with the specified class
-        //                 var paths = document.querySelectorAll("#sortable-main path." + pathClass);
-        //                 // Add the "item-dropped" class to the matching path elements
-        //                 paths.forEach(function(path) {
-        //                     path.classList.remove("item-dropped");
-        //                 });
-        //             }
-        //             parentSvgContainer.removeClass("item-dropped");
-        //             sortableContainer.remove();
-        //             droppedDiv.removeAttr("data-identifier");
-        //             updateHiddenInputValue();
-        //         });
-        //     });
-        // }
 
         // Event handler for removing a dropped image
         $(document).on("click", ".remove-button", function () {
@@ -305,7 +241,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
 
         $("button img", $needs).draggable({
             cancel: "a.ui-icon",
-            revert: "invalid",
+            // revert: "invalid",
             containment: "document",
             helper: "clone",
             cursor: "move",
@@ -317,7 +253,8 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             }
         });
 
-        $("#sortable > div > div").droppable({
+        // $("#sortable > div > div").droppable({
+        $("#top_priorities").droppable({
             accept: "#needs button img:not(.item-dropped)",
             classes: {
                 "ui-droppable-active": "ui-state-highlight"
