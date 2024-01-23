@@ -13,13 +13,27 @@
 @section('content')
 
 @php
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+
+    if ($protectionPriority == true || $protectionPriority == 'true'){
+        $need_sequence = 2;
+    } else if ($retirementPriority == true || $retirementPriority == 'true'){
+        $need_sequence = 1;
+    }
+    $need = 'need_' . $need_sequence;
+
+    $retirementMonthlySupport = session('customer_details.selected_needs.'. $need .'.advance_details.monthly_covered_amount');
+    $retirementAnnual = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
+    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
+    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+
+    $retirementIdeal = session('customer_details.selected_needs.'. $need .'.advance_details.ideal_retirement');
 @endphp
 
 <div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">

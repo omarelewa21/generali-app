@@ -14,9 +14,21 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
-    $relationship = session('customer_details.retirement_needs.coverFor');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+
+    if ($protectionPriority == true || $protectionPriority == 'true'){
+        $need_sequence = 2;
+    } else if ($retirementPriority == true || $retirementPriority == 'true'){
+        $need_sequence = 1;
+    }
+    $need = 'need_' . $need_sequence;
+
+    $retirementIdeal = session('customer_details.selected_needs.'. $need .'.advance_details.ideal_retirement');
+    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
 @endphp
 
 <div id="retirement_ideal" class="ideal">

@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
@@ -24,13 +25,22 @@
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
-    $relationship = session('customer_details.retirement_needs.coverFor');
-    $selectedInsuredName = session('customer_details.retirement_needs.selectedInsuredName');
-    $othersCoverForName = session('customer_details.retirement_needs.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.retirement_needs.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.retirement_needs.othersCoverForDob');
-@endphp
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
 
+    if ($protectionPriority == true || $protectionPriority == 'true'){
+        $need_sequence = 2;
+    } else if ($retirementPriority == true || $retirementPriority == 'true'){
+        $need_sequence = 1;
+    }
+    $need = 'need_' . $need_sequence;
+
+    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.'. $need .'.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_dob');
+@endphp
 <div id="retirement_coverage" class="secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">

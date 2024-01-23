@@ -13,14 +13,26 @@
 @section('content')
 
 @php
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $retirementAge = session('customer_details.retirement_needs.retirementAge');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+
+    if ($protectionPriority == true || $protectionPriority == 'true'){
+        $need_sequence = 2;
+    } else if ($retirementPriority == true || $retirementPriority == 'true'){
+        $need_sequence = 1;
+    }
+    $need = 'need_' . $need_sequence;
+
+    $retirementAge = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
+    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
+    $retirementMonthlySupport = session('customer_details.selected_needs.'. $need .'.advance_details.monthly_covered_amount');
+    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+
 @endphp
 
 <div id="retirement_period" class="tertiary-default-bg calculator-page">

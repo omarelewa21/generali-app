@@ -531,12 +531,18 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             } else{
                 var retirement_savings = document.getElementById('retirement_savings');
                 var other_income_sources = document.getElementById('other_income_sources');
+                var other_income_sources_1 = document.getElementById('other_income_sources_1');
+                var other_income_sources_2 = document.getElementById('other_income_sources_2');
+                var other_income_sources_3 = document.getElementById('other_income_sources_3');
+                var other_income_sources_4 = document.getElementById('other_income_sources_4');
+                var other_income_sources_5 = document.getElementById('other_income_sources_5');
+                var other_income_sources_5_text = document.getElementById('other_income_sources_5_text');
                 var totalAmountNeeded = document.getElementById("total_amountNeeded");
                 var totalRetirementPercentage = document.getElementById("percentage");
                 var totalRetirementFund = document.getElementById("TotalRetirementFund");
         
-                other_income_sources.addEventListener('blur', function() {
-                    validateInputField(other_income_sources);
+                other_income_sources_5_text.addEventListener('blur', function() {
+                    validateInputField(other_income_sources_5_text);
                 });
         
                 function validateInputField(field) {

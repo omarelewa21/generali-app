@@ -14,21 +14,39 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+
+    if ($protectionPriority == true || $protectionPriority == 'true'){
+        $need_sequence = 2;
+    } else if ($retirementPriority == true || $retirementPriority == 'true'){
+        $need_sequence = 1;
+    }
+    $need = 'need_' . $need_sequence;
+    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
+    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $retirementAge = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
+
+    $other_income_sources_1 = session('customer_details.retirement_needs.otherIncomeResources');
+    $other_income_sources_2 = session('customer_details.retirement_needs.otherIncomeResources');
+    $other_income_sources_3 = session('customer_details.retirement_needs.otherIncomeResources');
+    $other_income_sources_4 = session('customer_details.retirement_needs.otherIncomeResources');
+    $other_income_sources_5 = session('customer_details.retirement_needs.otherIncomeResources');
+    $otherIncomeResources5Text = session('customer_details.retirement_needs.otherIncomeResources');
     $otherIncomeResources = session('customer_details.retirement_needs.otherIncomeResources');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
     $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
-    $retirementAge = session('customer_details.retirement_needs.retirementAge');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
 @endphp
 
 <div id="retirement_allocated_funds" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
-            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey">
+            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey h-100">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
@@ -57,15 +75,21 @@
                             <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                                 <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Increment">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
+                            <div class="col-xl-4 col-lg-6 col-md-6 order-md-2 order-1 order-sm-1" style="height:81vh;">
                                 <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
                                 <p class="display-5 fw-bold currencyField">
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
-                                    <br>for my retirement.<br>Other sources of income:
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeResources }}" required></span>
+                                    <br>for my retirement,through these income sources:
+                                    <!-- <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeResources }}" required></span> -->
                                 </p>
-                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                <input type="hidden" name="percentage" id="percentage" value="{{$retirementFundPercentage}}">
+                                <p><input type="checkbox" class="needs-radio" name="other_income_sources_1" id="other_income_sources_1" {{$other_income_sources_1 === 'Unit Trust' ? 'checked' : ''}} value="Unit Trust"><label for="other_income_sources_1" class="form-label display-6 lh-base">Unit Trust</label></p>
+                                <p><input type="checkbox" class="needs-radio" name="other_income_sources_2" id="other_income_sources_2" {{$other_income_sources_2 === 'Stock Trust' ? 'checked' : ''}} value="Stock Trust"><label for="other_income_sources_2" class="form-label display-6 lh-base">Stock Trust</label></p>
+                                <p><input type="checkbox" class="needs-radio" name="other_income_sources_3" id="other_income_sources_3" {{$other_income_sources_3 === 'Fixed Deposit (FD)' ? 'checked' : ''}} value="Fixed Deposit (FD)"><label for="other_income_sources_3" class="form-label display-6 lh-base">Fixed Deposit (FD)</label></p>
+                                <p><input type="checkbox" class="needs-radio" name="other_income_sources_4" id="other_income_sources_4" {{$other_income_sources_4 === 'Employee Provident Fund (EPF)' ? 'checked' : ''}} value="Employee Provident Fund (EPF)"><label for="other_income_sources_4" class="form-label display-6 lh-base">Employee Provident Fund (EPF)</label></p>
+                                <p><input type="checkbox" class="needs-radio" name="other_income_sources_5" id="other_income_sources_5" {{$other_income_sources_5 === 'Others' ? 'checked' : ''}} value="Others"><label for="other_income_sources_5" class="form-label display-6 lh-base">Others</label><span><input type="text" name="other_income_sources_5_text" class="form-control position-relative d-inline-block w-50 text-primary @error('other_income_sources_5_text') is-invalid @enderror" id="other_income_sources_5_text" value="{{ $otherIncomeResources5Text }}" required></span></p>
+                                <p><input type="hidden" name="other_income_resources" id="other_income_resources" value="{{$otherIncomeResources}}">
+                                <p><input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                <p><input type="hidden" name="percentage" id="percentage" value="{{$retirementFundPercentage}}">
                             </div>
                         </div>
                     </div>

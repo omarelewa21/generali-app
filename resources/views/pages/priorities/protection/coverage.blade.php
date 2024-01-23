@@ -25,11 +25,11 @@
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
-    $relationship = session('customer_details.selected_needs.advance_details.relationship');
-    $selectedInsuredName = session('customer_details.selected_needs.advance_details.child_name');
-    $othersCoverForName = session('customer_details.selected_needs.advance_details.spouse_name');
-    $selectedCoverForDob = session('customer_details.selected_needs.advance_details.child_dob');
-    $othersCoverForDob = session('customer_details.selected_needs.advance_details.spouse_dob');
+    $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_1.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_1.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_1.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_1.advance_details.spouse_dob');
 @endphp
 
 <div id="protection_coverage" class="secondary-default-bg">
