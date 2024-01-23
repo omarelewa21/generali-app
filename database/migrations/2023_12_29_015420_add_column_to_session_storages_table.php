@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('session_storages', function (Blueprint $table) {
-            $table->unsignedInteger('transaction_id')->unique()->default(1000)->after('id');
+            $table->unsignedInteger('transaction_id')->unique()->default()->after('id');
             $table->string('customer_id',15)->nullable()->after('data');
             $table->string('customer_name')->nullable()->after('customer_id');
             $table->unsignedBigInteger('agent_id')->nullable()->after('customer_name');
