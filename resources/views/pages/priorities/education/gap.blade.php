@@ -7,13 +7,24 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $education = session('customer_details.education_needs');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
-    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
-    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded');
-    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+
+    $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
+
+    $need = 'need_' . $need_sequence;
+    $education = session('customer_details.selected_needs.'. $need .'.advance_details');
+    $totalEducationYear = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
+    $educationSavingAmount = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
+    $totalEducationNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_education_needed','0');
+    $educationFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
 @endphp
 
 <div id="education-summary" class="secondary-default-bg summary-page">
@@ -54,7 +65,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/education-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>

@@ -73,8 +73,10 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%
-                                                <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/retirement-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%</span>
+                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
                                     </div>

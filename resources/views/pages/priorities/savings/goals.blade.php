@@ -14,11 +14,24 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
+
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
+    $need = 'need_' . $need_sequence;
+
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsGoals = session('customer_details.savings_needs.goalTarget');
-    $relationship = session('customer_details.savings_needs.coverFor');
+    $goalsAmount = session('customer_details.selected_needs.'. $need .'.advance_details.goals_amount');
+    $savingsGoals = session('customer_details.selected_needs.'. $need .'.advance_details.goal_target');
+    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
 @endphp
 
 <div id="savings-goals">
@@ -31,7 +44,7 @@
                         <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                         <section class="content-avatar-default">
                             <div class="col-12 text-center position-relative">
-                                <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I Plan to have a saving goal of<br>
+                                <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I plan to have a saving goal of<br>
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_goals_amount" class="form-control display-5 fw-bold lh-base position-relative border-0 d-inline-block w-25 text-primary @error('savings_goals_amount') is-invalid @enderror" id="savings_goals_amount" value="{{ $goalsAmount !== null ? number_format(floatval($goalsAmount)) : $goalsAmount }}"></span> to:
                                 </h2>
                                 @if ($errors->has('savings_goals_amount'))
@@ -270,7 +283,7 @@
 </div>
 <script>
     var savingsPriority = '{{$savingsPriority}}';
-    var sessionData = {!! json_encode(session('customer_details.savings_needs.goalTarget')) !!};
+    var sessionData = {!! json_encode(session('customer_details.savings_needs.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

@@ -450,7 +450,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/education/gap') {
-            if (!lastPageInput || !('existingFundAmount' in lastPageInput)) {
+            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

@@ -12,14 +12,28 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
-    $investment = session('customer_details.investments_needs');
-    $investmentPA = session('customer_details.investments_needs.annualReturn','5');
-    $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');
-    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded');
-    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
-    $investmentMonthlyPayment = session('customer_details.investments_needs.monthlyInvestmentAmount');
-    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
+    $savingsDiscuss = isset($savingsPriority) && ($savingsPriority == true || $savingsPriority == 'true');
+
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? ($savingsDiscuss ? 5 : 4) : ($savingsDiscuss ? 4 : 3)) : ($educationDiscuss ? ($savingsDiscuss ? 4 : 3) : ($savingsDiscuss ? 3 : 2))) : ($retirementDiscuss ? ($educationDiscuss ? ($savingsDiscuss ? 4 : 3) : ($savingsDiscuss ? 3 : 2)) : ($savingsDiscuss ? 2 : 1)));
+    $need = 'need_' . $need_sequence;
+
+    $investmentPA = session('customer_details.selected_needs.'. $need .'.advance_details.annual_returns','5');
+    $totalAnnualReturn = session('customer_details.selected_needs.'. $need .'.advance_details.annual_return_amount');
+    $totalInvestmentNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_investment_needed', '0');
+    $investmentFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $investmentMonthlyPayment = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
+    $investmentSupportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
 @endphp
 
 

@@ -7,16 +7,29 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsRiskProfile = session('customer_details.savings_needs.riskProfile');
-    $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
+
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
+    $need = 'need_' . $need_sequence;
+
+    $savings = session('customer_details.selected_needs.'. $need .'.advance_details');
+    $savingsGoalDuration = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
+    $savingsGoalPA = session('customer_details.selected_needs.'. $need .'.advance_details.annual_returns');
+    $savingsFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
+    $totalSavingsNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_savings_needed', '0');
+    $goalsAmount = session('customer_details.selected_needs.'. $need .'.advance_details.goals_amount');
+    $savingsRiskProfile = session('customer_details.selected_needs.'. $need .'.advance_details.risk_profile');
+    $savingsPotentialReturn = session('customer_details.selected_needs.'. $need .'.advance_details.potential_return');
 @endphp
 
 <div id="savings-summary" class="secondary-default-bg summary-page">
@@ -57,7 +70,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/savings-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>

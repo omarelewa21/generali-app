@@ -7,15 +7,25 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $education = session('customer_details.education_needs');
-    $edcationSaving = session('customer_details.education_needs.existingFund');
-    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
-    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
-    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
-    $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+
+    $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
+
+    $need = 'need_' . $need_sequence;
+    $totalEducationNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_education_needed','0');
+    $educationFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $tertiaryEducationAmount = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
+    $totalEducationYear = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
+    $edcationSaving = session('customer_details.selected_needs.'. $need .'.advance_details.existing_fund');
+    $educationSavingAmount = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
+    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
 @endphp
 
 <div id="education-existing-fund" class="tertiary-default-bg calculator-page">

@@ -19,12 +19,10 @@
 
     // Set the default value for $need_sequence
     $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
 
-    if ($protectionPriority == true || $protectionPriority == 'true'){
-        $need_sequence = 2;
-    } else if ($retirementPriority == true || $retirementPriority == 'true'){
-        $need_sequence = 1;
-    }
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
     $need = 'need_' . $need_sequence;
 
     $retirementIdeal = session('customer_details.selected_needs.'. $need .'.advance_details.ideal_retirement');

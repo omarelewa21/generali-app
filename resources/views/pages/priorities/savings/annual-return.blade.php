@@ -12,14 +12,26 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn', '5');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $savingsMonthlyPayment = session('customer_details.savings_needs.monthlyInvestmentAmount');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
+    
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
+
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
+    $need = 'need_' . $need_sequence;
+
+    $savingsGoalPA = session('customer_details.selected_needs.'. $need .'.advance_details.annual_returns', '5');
+    $totalSavingsNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_savings_needed', '0');
+    $savingsFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
+    $savingsMonthlyPayment = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
+    $savingsGoalDuration = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
 @endphp
 
 

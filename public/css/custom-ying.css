@@ -33,6 +33,120 @@ button.choice.default.selected img{
     border-color: #A0A0A0 !important;
 }
 
+/* Education Coverage age style */
+.coverage-age{
+    grid-area: coverage-age;
+    grid-template-columns: 100%;
+    font-size: 20px;
+    border-radius: 17.5px;
+    background:linear-gradient(90deg, #66B560 0%, #2272B6 100%);
+    width: 100px;
+    height: 35px;
+}
+
 .bg-transparent{
     background-color: transparent;
+}
+
+/* Education Cost Guide Modal Style */
+#tuitionFees .modal-dialog{
+    max-width: 1200px;
+}
+#tuitionFees .modal-title{
+    font-family: "Helvetica Neue Bold Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 58px !important;
+}
+#tuitionFees .btn-exit-sidebar:hover{
+    background: transparent;
+}
+#tuitionFees .modal-footer p{
+    line-height: normal;
+    margin: 0;
+    font-size: 18px;
+    width: 100%;
+}
+#costingTable table,
+#costingTable th,
+#costingTable tr,
+#costingTable td{
+    background-color: transparent;
+    color: #fff;
+}
+#costingTable tbody th,
+#costingTable tbody tr,
+#costingTable tbody td{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/* Savings Goals page input text style */
+#savings-goals .display-5{
+    font-size: calc(1.3375rem + 1.05vw) !important;
+}
+
+/* Global/General */
+.position-absolute.center{
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+/* ===============================  Risk Profile =======================================*/
+#savings-risk-profile .content-needs-grey,
+#investment-risk-profile .content-needs-grey{
+    grid-template-rows: 5vh 60vh;
+}
+.risk-header{
+    grid-area: risk-header;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-selection{
+    grid-area: risk-selection;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-content{
+    grid-area: risk-content;
+    grid-template-columns: 100%;
+    display: grid;
+}
+.risk-btn{
+    background:#fff;
+    border:1px solid #C0232C;
+    color:#C0232C;
+    font-size: 22px;
+    font-weight: 700;
+    width: 301px;
+    height: 85px;
+}
+.risk-btn:hover,
+.risk-btn[data-required="selected"],
+.risk-btn.selected{
+    background: #C0232C;
+    color: #fff;
+}
+.risk-potential-title{
+    font-size: 18px;
+    font-family: 'Helvetica Neue';
+    line-height: 22px;
+}
+.potential-btn{
+    background-color: #fff;
+    border: 1px solid #A0A0A0;
+    width: 100px;
+    height: 57px;
+    font-size: 22px;
+}
+.potential-btn:hover,
+.potential-btn[data-required="selected"],
+.potential-btn.selected{
+    border: 1px solid #C0232C;
+}
+.potential-btn.border-start-0.border-end-0:hover,
+.potential-btn.border-start-0.border-end-0[data-required="selected"],
+.potential-btn.border-start-0.border-end-0.selected{
+    border-left: 1px solid #C0232C !important;
+    border-right: 1px solid #C0232C !important;
 }

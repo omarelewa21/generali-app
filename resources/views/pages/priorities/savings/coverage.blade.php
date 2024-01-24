@@ -13,23 +13,34 @@
 
 @php
     // Retrieving values from the session
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    $savings = session('customer_details.savings_needs');
+    
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
     $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
-
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
-    $relationship = session('customer_details.savings_needs.coverFor');
-    $selectedInsuredName = session('customer_details.savings_needs.selectedInsuredName');
-    $othersCoverForName = session('customer_details.savings_needs.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.savings_needs.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.savings_needs.othersCoverForDob');
+    // Set the default value for $need_sequence
+    $need_sequence = 0;
+    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
+    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
+    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
+
+    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
+    $need = 'need_' . $need_sequence;
+
+    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.'. $need .'.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_dob');
 @endphp
 
 <div id="savings-coverage" class="secondary-default-bg">
