@@ -18,11 +18,16 @@ class TransactionService
 
                 $sessionStorage->data = $customerDetails;
                 $sessionStorage->page_route = $route;
-                $sessionStorage->session_id = $sessionId; 
+                $sessionStorage->session_id = $sessionId;
 
-                $formData = SessionStorage::findTransactionId($request->input('transaction_id'))->get();
-                //form data is initial data
-                //sesionstorage is new data
+                if(!empty($request->input('transaction_id')))
+                {
+                    $formData = SessionStorage::findTransactionId($request->input('transaction_id'))->get();
+                }
+                else
+                {
+                    $formData = SessionStorage::findSessionId($sessionId)->get();
+                }
 
 
                 if ($formData->isNotEmpty()) {
@@ -54,7 +59,9 @@ class TransactionService
                 'data' => $decodedForm ? $sessionStorage->data : "",
                 'page_route' => $sessionStorage->page_route,
                 'customer_name' => $sessionStorage->data['basic_details']['full_name'] ?? "",
-                'customer_id' => $formData[0]['customer_id'] ? $sessionStorage->data['identity_details']['id_number'] : "",
+                'customer_id' => $formData[0]['customer_id'] && isset($sessionStorage->data['identity_details']['id_number'])  
+                                 ? $sessionStorage->data['identity_details']['id_number'] 
+                                 : NULL,
             ]);
     }
 

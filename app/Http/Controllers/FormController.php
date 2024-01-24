@@ -325,7 +325,7 @@ class FormController extends Controller {
         }
     }
 
-    public function handleAvatarSelection(Request $request)
+    public function handleAvatarSelection(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -429,48 +429,20 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionId = $request->session()->getId();
-                    $sessionStorage->session_id = $sessionId; 
-                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
-                    
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-                    //if session from request able to match with db then do update
-                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
-
-                    if (!empty($dbSessionId)) {
-                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
-                        ->update(['data' => $sessionStorage->data, 
-                                  'page_route' => $sessionStorage->page_route,
-                                  'customer_name' => $fullName
-                                ]);
-                    }
-                    else
-                    {
-                        $sessionStorage->save();
-                    }               
-                 
-                });
-            } catch (\Exception $e) {
-                Log::debug($e);
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Store the updated array back into the session
-            return redirect()->route($dataUrl);
+            return redirect()->route($dataUrl)->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function familyDependentDetails(Request $request)
+    public function familyDependentDetails(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -953,28 +925,20 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
+
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.my.assets');
+            return redirect()->route('avatar.my.assets')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function topPriorities(Request $request)
+    public function topPriorities(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1029,28 +993,20 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss');
+            return redirect()->route('priorities.to.discuss')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function priorities(Request $request)
+    public function priorities(Request $request ,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1072,18 +1028,11 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
+
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
@@ -1091,7 +1040,7 @@ class FormController extends Controller {
         }
     }
 
-    public function existingPolicy(Request $request)
+    public function existingPolicy(Request $request ,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1275,21 +1224,13 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-            return redirect()->route('summary.monthly-goals');
+            return redirect()->route('summary.monthly-goals')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
