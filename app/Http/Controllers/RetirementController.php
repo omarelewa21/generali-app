@@ -442,14 +442,31 @@ class RetirementController extends Controller
 
     public function validateRetirementOthers(Request $request){
 
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true; 
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+            // $validator->errors()->add($attribute);
+    
+            return false;
+        });
+
         $customMessages = [
             'other_income_sources_5_text.required_if' => 'Please enter a source of income.',
             // 'other_income_sources.required' => 'Please enter a source of income.',
+            // 'other_income_sources.at_least_one_selected' => 'Please select at least one source of income.',
             'retirement_savings.regex' => 'The amount must be a number.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'other_income_sources_5_text' => 'required_if: other_income_sources_5|max:60',
+            // 'other_income_sources_5_text' => 'required_if: other_income_sources_5|max:60',
+            'other_income_sources_5_text' => 'required_if:other_income_sources_5,Others|max:60',
+            'other_income_sources' => [
+                'at_least_one_selected',
+            ],
             'retirement_savings' => [
                 'regex:/^[0-9,]+$/',
                 'nullable',
@@ -472,14 +489,10 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
+        $need_sequence = $this->calculateNeedSequence($request);
         $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
-        $other_income_sources_1 = $request->input('other_income_sources');
-        $other_income_sources_2 = $request->input('other_income_sources');
-        $other_income_sources_3 = $request->input('other_income_sources');
-        $other_income_sources_4 = $request->input('other_income_sources');
-        $other_income_sources_5 = $request->input('other_income_sources');
         $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
         if ($retirement_savings === '' || $retirement_savings === 0){
             $retirement_savings = 0;
@@ -487,49 +500,52 @@ class RetirementController extends Controller
         else{
             $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
         }
-        $newRetirementTotalAmountNeeded = floatval(($customerDetails['retirement_needs']['monthlySupportAmount'] * 12 * $customerDetails['retirement_needs']['supportingYears']) - $retirement_savings);
-        $newRetirementPercentage = floatval($retirement_savings / ($customerDetails['retirement_needs']['monthlySupportAmount'] * 12 * $customerDetails['retirement_needs']['supportingYears']) * 100);
+        $newRetirementTotalAmountNeeded = floatval(($customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['monthly_covered_amount'] * 12 * $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['supporting_years']) - $retirement_savings);
+        $newRetirementPercentage = floatval($retirement_savings / ($customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['monthly_covered_amount'] * 12 * $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['supporting_years']) * 100);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
+        $other_income_sources_5_text = $request->input('other_income_sources_5_text');
+        $other_income_sources = $request->input('other_income_sources');
         
 
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'retirementSavingsAmount' => $retirement_savings,
-            'otherIncomeResources' => $other_income_sources
+        $advanceDetails = array_merge($advanceDetails, [
+            'existing_amount' => $retirement_savings,
+            'other_sources_custom' => $other_income_sources_5_text,
+            'other_sources' => $other_income_sources
         ]);
 
         if ($newRetirementTotalAmountNeeded === $totalAmountNeeded && $newRetirementPercentage === $totalPercentage){
             if ($newRetirementTotalAmountNeeded <= 0){
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newRetirementTotalAmountNeeded <= 0){
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => $newRetirementTotalAmountNeeded,
-                    'fundPercentage' => $newRetirementPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $newRetirementTotalAmountNeeded,
+                    'fund_percentage' => $newRetirementPercentage
                 ]);
             }
         }
 
         // Set the updated retirement back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -556,10 +572,11 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $need_sequence = $this->calculateNeedSequence($request);
+        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
 
         // Set the updated retirement back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

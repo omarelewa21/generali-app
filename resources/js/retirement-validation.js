@@ -531,11 +531,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             } else{
                 var retirement_savings = document.getElementById('retirement_savings');
                 var other_income_sources = document.getElementById('other_income_sources');
-                var other_income_sources_1 = document.getElementById('other_income_sources_1');
-                var other_income_sources_2 = document.getElementById('other_income_sources_2');
-                var other_income_sources_3 = document.getElementById('other_income_sources_3');
-                var other_income_sources_4 = document.getElementById('other_income_sources_4');
-                var other_income_sources_5 = document.getElementById('other_income_sources_5');
+                var incomeSourcesCheckboxes = document.querySelectorAll('.other-income-checkbox');
                 var other_income_sources_5_text = document.getElementById('other_income_sources_5_text');
                 var totalAmountNeeded = document.getElementById("total_amountNeeded");
                 var totalRetirementPercentage = document.getElementById("percentage");
@@ -552,7 +548,41 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         field.classList.add('is-invalid');
                     }
                 }
-        
+
+                // Add click event listeners to each checkbox
+                incomeSourcesCheckboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', updateHiddenInput);
+                });
+                
+                other_income_sources_5_text.addEventListener('input', updateHiddenInput);
+
+                function updateHiddenInput() {
+                    var selectedResources = [];
+            
+                    // Loop through the checkboxes and add checked ones to the array
+                    incomeSourcesCheckboxes.forEach(function (checkbox) {
+                        if (checkbox.checked) {
+                            if (checkbox.value === 'Others') {
+                                selectedResources.push(other_income_sources_5_text.value);
+                                jQuery('#other_income_sources_5_text').removeClass('disabled-color');
+                                jQuery('#other_income_sources_5_text').attr('required',true);
+                                jQuery('#other_income_sources_5_text').removeAttr('disabled');
+                            }
+                            else{
+                                selectedResources.push(checkbox.value);
+                            }
+                        } else{
+                            if (checkbox.value === 'Others') {
+                                other_income_sources_5_text.value = '';
+                            }
+                        }
+                    });
+
+                    // Update the hidden input value with the selected resources
+                    other_income_sources.value = selectedResources.join(', ');
+                    
+                }
+
                 retirement_savings.addEventListener("input", function() {
         
                     // Retrieve the current input value
@@ -629,7 +659,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/retirement/gap') {
-            if (!lastPageInput || !('otherIncomeResources' in lastPageInput)) {
+            if (!lastPageInput || !('other_sources' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

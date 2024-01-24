@@ -27,3 +27,12 @@ button.choice.default.selected img{
     background-position: center bottom;
     background-size: 100%;
 }
+
+/* Change disabled border color */
+.disabled-color{
+    border-color: #A0A0A0 !important;
+}
+
+.bg-transparent{
+    background-color: transparent;
+}
