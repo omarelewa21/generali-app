@@ -71,7 +71,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{floor(floatval($investmentFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/investments-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{floor(floatval($investmentFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
