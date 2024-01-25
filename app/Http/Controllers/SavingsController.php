@@ -15,23 +15,23 @@ use App\Models\SessionStorage;
 
 class SavingsController extends Controller
 {
-    protected $need_sequence;
+    // protected $need_sequence;
 
-    public function calculateNeedSequence(Request $request) {
+    // public function calculateNeedSequence(Request $request) {
 
-        $customerDetails = $request->session()->get('customer_details', []);
+    //     $customerDetails = $request->session()->get('customer_details', []);
 
         // Set the default value for $need_sequence
-        $need_sequence = 0;
+    //     $need_sequence = 0;
+        
+    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
+    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+    //     $educationDiscuss = isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true');
 
-        $protectionDiscuss = $customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true';
-        $retirementDiscuss = $customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true';
-        $educationDiscuss = $customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true';
+    //     $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
 
-        $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
-
-        return $need_sequence;
-    }
+    //     return $need_sequence;
+    // }
 
     public function validateSavingsCoverageSelection(Request $request)
     {
@@ -69,11 +69,10 @@ class SavingsController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
         $selectedNeeds = $customerDetails['selected_needs'] ?? [];
-        $need_sequence = $this->calculateNeedSequence($request);
 
         // Get existing savings_needs from the session
-        $needs = $customerDetails['selected_needs']['need_'.$need_sequence] ?? [];
-        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_4'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         $index = array_search('savings', $customerDetails['financial_priorities'], true);
         if ($customerDetails['priorities']['savings'] == true || $customerDetails['priorities']['savings'] == 'true'){
@@ -103,8 +102,8 @@ class SavingsController extends Controller
         ]);
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_'.$need_sequence] = $needs;
-        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_4'] = $needs;
+        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -201,7 +200,7 @@ class SavingsController extends Controller
 
             // Get existing savings_needs from the session
             $need_sequence = $this->calculateNeedSequence($request);
-            $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+            $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
             $advanceDetails = array_merge($advanceDetails, [
                 // 'goalTarget' => $savingsSelectedAvatarInput,
@@ -209,7 +208,7 @@ class SavingsController extends Controller
             ]);
 
             // Set the updated savings_needs back to the customer_details session
-            $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+            $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
@@ -243,7 +242,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $need_sequence = $this->calculateNeedSequence($request);
-        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         $customMessages = [
             'savings_monthly_payment.required' => 'You are required to enter an amount.',
@@ -284,10 +283,10 @@ class SavingsController extends Controller
         $savings_goal_duration = $request->input('savings_goal_duration');
         $savingsTotalFund = floatval($savings_monthly_payment * 12 * $savings_goal_duration);
         $totalSavingsNeeded = floatval($request->input('total_savingsNeeded'));
-        $savingsTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['goals_amount'] - $savingsTotalFund);
+        $savingsTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_4']['advance_details']['goals_amount'] - $savingsTotalFund);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $savingsTotalPercentage = floatval($savingsTotalFund / $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details']['goals_amount'] * 100);
+        $savingsTotalPercentage = floatval($savingsTotalFund / $customerDetails['selected_needs']['need_4']['advance_details']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
@@ -331,7 +330,7 @@ class SavingsController extends Controller
         }
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -375,7 +374,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $need_sequence = $this->calculateNeedSequence($request);
-        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $savings_goal_pa = $request->input('savings_goal_pa');
@@ -386,7 +385,7 @@ class SavingsController extends Controller
         ]);
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -472,7 +471,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $need_sequence = $this->calculateNeedSequence($request);
-        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
@@ -481,7 +480,7 @@ class SavingsController extends Controller
         ]);
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -509,10 +508,10 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $need_sequence = $this->calculateNeedSequence($request);
-        $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

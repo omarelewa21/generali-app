@@ -13,25 +13,13 @@
 @section('content')
 
 @php
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $educationPriority = session('customer_details.priorities.educationDiscuss');
-
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-
-    $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
-
-    $need = 'need_' . $need_sequence;
-    
-    $tertiaryEducationAmount = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
-    $totalEducationYear = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
-    $educationSavingAmount = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
-    $totalEducationNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_education_needed','0');
-    $educationFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
-    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
+    $tertiaryEducationAmount = session('customer_details.selected_needs.need_3.advance_details.covered_amount');
+    $totalEducationYear = session('customer_details.selected_needs.need_3.advance_details.remaining_years');
+    $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
+    $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.total_education_needed','0');
+    $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
+    $relationship = session('customer_details.selected_needs.need_3.advance_details.relationship');
 @endphp
 
 <div id="education-amount-needed" class="tertiary-default-bg calculator-page">

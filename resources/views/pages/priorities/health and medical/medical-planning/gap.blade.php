@@ -8,12 +8,12 @@
 @php
     // Retrieving values from the session
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
-    $health_medical = session('customer_details.health-medical_needs.medical_planning');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
-    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
-    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
+    $health_medical = session('customer_details.selected_needs.need_6.advance_details.health_care');
+    $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
+    $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.total_health_medical_needed');
+    $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
 @endphp
 
 <div id="medical-summary" class="secondary-default-bg summary-page">
@@ -54,7 +54,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalHealthMedicalNeeded ? '100' : floor(floatval($healthMedicalFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/health-medical-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalHealthMedicalNeeded ? '100' : floor(floatval($healthMedicalFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>

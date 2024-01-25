@@ -13,23 +13,11 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
-
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
-    $need = 'need_' . $need_sequence;
-
-    $savingsRiskProfile = session('customer_details.selected_needs.'. $need .'.advance_details.risk_profile','High Risk');
-    $savingsPotentialReturn = session('customer_details.selected_needs.'. $need .'.advance_details.potential_return','High Potential Return');
-    $savingsGoalPA = session('customer_details.selected_needs.'. $need .'.advance_details.annual_returns');
+    $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile','High Risk');
+    $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return','High Potential Return');
+    $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
 @endphp
 
 <div id="savings-risk-profile" class="tertiary-default-bg">

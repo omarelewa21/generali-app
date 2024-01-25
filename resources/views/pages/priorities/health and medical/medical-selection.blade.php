@@ -15,10 +15,9 @@
 @php
     // Retrieving values from the session
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
-    $healthMedical = session('customer_details.health-medical_needs');
-    $selectedHealthMedical = session('customer_details.health-medical_needs.numberOfSelection');
-    $selectedCritical = session('customer_details.health-medical_needs.criticalIllnessSelection');
-    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
+    $selectedHealthMedical = session('customer_details.selected_needs.need_6.number_of_selection');
+    $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
+    $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
 @endphp
 
 <div id="health-medical-selection" class="secondary-default-bg">
@@ -41,7 +40,7 @@
                     <div class="container h-100">
                         <div class="row justify-content-center h-100" id="hnm-selection">
                             <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedCritical === 'Critical Illness Care') default @endif" id="critical_illness" data-avatar="Critical Illness Care" data-required="">
+                                <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedCritical === 'Yes') default @endif" id="critical_illness" data-avatar="Critical Illness Care" data-required="">
                                     <div>
                                         <img src="{{ asset('images/needs/health-medical/selection/critical-illness.png') }}" width="auto" class="m-auto selection_height pb-3">
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Critical Illness Care</p>
@@ -49,7 +48,7 @@
                                 </button>
                             </div>
                             <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedMedical === 'Medical Planning Care') default @endif" id="medical_planning" data-avatar="Medical Planning Care" data-required="">
+                                <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedMedical === 'Yes') default @endif" id="medical_planning" data-avatar="Medical Planning Care" data-required="">
                                     <div>
                                         <img src="{{ asset('images/needs/health-medical/selection/medical-planning.png') }}" width="auto" class="m-auto selection_height pb-3">
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Medical Plan Care</p>

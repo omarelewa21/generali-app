@@ -14,25 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-
-    if ($protectionPriority == true || $protectionPriority == 'true'){
-        $need_sequence = 2;
-    } else if ($retirementPriority == true || $retirementPriority == 'true'){
-        $need_sequence = 1;
-    }
-    $need = 'need_' . $need_sequence;
-
-    $retirement = session('customer_details.selected_needs.'. $need .'.advance_details');
-    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
-    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
-    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
-    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
-    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
+    $retirement = session('customer_details.selected_needs.need_2.advance_details');
+    $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
+    $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
 @endphp
 
 <div id="retirement_summary" class="secondary-default-bg summary-page">

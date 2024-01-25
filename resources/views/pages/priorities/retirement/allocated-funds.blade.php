@@ -14,26 +14,16 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
+    $retirementAge = session('customer_details.selected_needs.need_2.advance_details.remaining_years');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
-    $need = 'need_' . $need_sequence;
-    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
-    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
-    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
-    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
-    $retirementAge = session('customer_details.selected_needs.'. $need .'.advance_details.remaining_years');
-
-    $customOtherIncomeSources = session('customer_details.selected_needs.'. $need .'.advance_details.other_sources_custom');
-    $otherIncomeSources = session('customer_details.selected_needs.'. $need .'.advance_details.other_sources');
-    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
+    $customOtherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources_custom');
+    $otherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
 @endphp
 
 <div id="retirement_allocated_funds" class="tertiary-default-bg calculator-page">

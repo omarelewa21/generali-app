@@ -8,12 +8,12 @@
 @php
     // Retrieving values from the session
     $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
-    $debtCancellation = session('customer_details.debt-cancellation_needs');
-    $criticalIllnessCoverage = session('customer_details.debt-cancellation_needs.criticalIllnessCoverage');
-    $coverageAmount = session('customer_details.debt-cancellation_needs.criticalIllnessCoverageAmount');
-    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
+    $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
+    $criticalIllnessCoverage = session('customer_details.selected_needs.need_7.advance_details.critical_illness');
+    $coverageAmount = session('customer_details.selected_needs.need_7.advance_details.critical_illness_amount');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
 @endphp
 
 <div id="debt-critical-illness" class="tertiary-default-bg calculator-page">

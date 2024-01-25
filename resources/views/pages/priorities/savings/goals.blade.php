@@ -14,24 +14,12 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
-
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
-    $need = 'need_' . $need_sequence;
-
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $goalsAmount = session('customer_details.selected_needs.'. $need .'.advance_details.goals_amount');
-    $savingsGoals = session('customer_details.selected_needs.'. $need .'.advance_details.goal_target');
-    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $savingsGoals = session('customer_details.selected_needs.need_4.advance_details.goal_target');
+    $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
 @endphp
 
 <div id="savings-goals">
@@ -283,7 +271,7 @@
 </div>
 <script>
     var savingsPriority = '{{$savingsPriority}}';
-    var sessionData = {!! json_encode(session('customer_details.savings_needs.goal_target')) !!};
+    var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

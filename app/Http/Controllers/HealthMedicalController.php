@@ -15,16 +15,84 @@ use App\Models\SessionStorage;
 
 class HealthMedicalController extends Controller
 {
+    // protected $need_sequence;
+
+    // public function calculateNeedSequence(Request $request) {
+
+    //     $customerDetails = $request->session()->get('customer_details', []);
+
+    //     // Set the default value for $need_sequence
+    //     $need_sequence = 0;
+
+    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
+    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+    //     $educationDiscuss = isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true');
+    //     $savingsDiscuss = isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] == true || $customerDetails['priorities']['savingsDiscuss'] == 'true');
+    //     $investmentsDiscuss = isset($customerDetails['priorities']['investmentsDiscuss']) && ($customerDetails['priorities']['investmentsDiscuss'] == true || $customerDetails['priorities']['investmentsDiscuss'] == 'true');
+
+    //     // Alternatively, you can use a simpler version using the ternary operator:
+    //     $need_sequence = (
+    //         $protectionDiscuss ? (
+    //             $retirementDiscuss ? (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 6 : 5
+    //                     ) : ($investmentsDiscuss ? 5 : 4)
+    //                 ) : (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 5 : 4
+    //                     ) : ($investmentsDiscuss ? 4 : 3)
+    //                 )
+    //             ) : (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 5 : 4
+    //                     ) : ($investmentsDiscuss ? 4 : 3)
+    //                 ) : (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 4 : 3
+    //                     ) : ($investmentsDiscuss ? 3 : 2)
+    //                 )
+    //             )
+    //         ) : (
+    //             $retirementDiscuss ? (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 5 : 4
+    //                     ) : ($investmentsDiscuss ? 4 : 3)
+    //                 ) : (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 4 : 3
+    //                     ) : ($investmentsDiscuss ? 3 : 2)
+    //                 )
+    //             ) : (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 4 : 3
+    //                     ) : ($investmentsDiscuss ? 3 : 2)
+    //                 ) : (
+    //                     $savingsDiscuss ? (
+    //                         $investmentsDiscuss ? 3 : 2
+    //                     ) : ($investmentsDiscuss ? 2 : 1)
+    //                 )
+    //             )
+    //         )
+    //     );        
+
+    //     return $need_sequence;
+    // }
+
     public function validateHealthMedicalSelection(Request $request)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
-        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_6'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_6']['advance_details'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -54,52 +122,82 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
+        $index = array_search('investment', $customerDetails['financial_priorities'], true);
+        if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
+            $coverAnswer = 'Yes';
+        } else{
+            $coverAnswer = 'No';
+        }
+        if ($customerDetails['priorities']['investmentsDiscuss'] == true || $customerDetails['priorities']['investmentsDiscuss'] == 'true'){
+            $discussAnswer = 'Yes';
+        } else{
+            $discussAnswer = 'No';
+        }
+        if ($selectionCriticalInput != null || $selectionCriticalInput != ''){
+            $criticalPlan = 'Yes';
+        } else{
+            $criticalPlan = 'No';
+        }
+        if ($selectionMedicalInput != null || $selectionMedicalInput != ''){
+            $medicalPlan = 'Yes';
+        } else{
+            $medicalPlan = 'No';
+        }
+
         // Update specific keys with new values
-        $healthMedical = array_merge($healthMedical, [
-            'numberOfSelection' => $healthMedicalSelectedInput,
-            'criticalIllnessSelection' => $selectionCriticalInput,
-            'medicalPlanningSelection' => $selectionMedicalInput
+        $needs = array_merge($needs, [
+            'need_no' => 'N6',
+            'priority' => $index+1,
+            'cover' => $coverAnswer,
+            'discuss' => $discussAnswer,
+            'number_of_selection' => $healthMedicalSelectedInput,
+        ]);
+        $criticalIllness = array_merge($criticalIllness, [
+            'critical_illness_plan' => $criticalPlan
+        ]);
+        $medicalPlanning = array_merge($medicalPlanning, [
+            'medical_care_plan' => $medicalPlan
         ]);
 
         if ($selectionCriticalInput === '' || $selectionCriticalInput === null ){
             $criticalIllness = array_merge($criticalIllness, [
-                'coverFor' => '',
-                'selectedInsuredName' => '',
-                'selectedCoverForDob' => '',
-                'othersCoverForName' => '',
-                'othersCoverForDob' => '',
-                'neededAmount' => '',
+                'relationship' => '',
+                'child_name' => '',
+                'child_dob' => '',
+                'spouse_name' => '',
+                'spouse_dob' => '',
+                'covered_amount' => '',
                 'year' => '',
-                'totalHealthMedicalNeeded' => '',
-                'existingProtection' => '',
-                'existingProtectionAmount' => '',
-                'totalAmountNeeded' => '',
-                'fundPercentage' => ''
+                'total_health_medical_needed' => '',
+                'existing_protection' => '',
+                'existing_amount' => '',
+                'insurance_amount' => '',
+                'fund_percentage' => ''
             ]);
         }
         if ($selectionMedicalInput === '' || $selectionMedicalInput === null){
             $medicalPlanning = array_merge($medicalPlanning, [
-                'coverFor' => '',
-                'selectedInsuredName' => '',
-                'selectedCoverForDob' => '',
-                'othersCoverForName' => '',
-                'othersCoverForDob' => '',
-                'typeOfHospital' => '',
-                'roomOption' => '',
-                'neededAmount' => '',
+                'relationship' => '',
+                'child_name' => '',
+                'child_dob' => '',
+                'spouse_name' => '',
+                'spouse_dob' => '',
+                'type_of_hospital' => '',
+                'room_option' => '',
+                'covered_amount' => '',
                 'year' => '',
-                'totalHealthMedicalNeeded' => '',
-                'existingProtection' => '',
-                'existingProtectionAmount' => '',
-                'totalAmountNeeded' => '',
-                'fundPercentage' => ''
+                'total_health_medical_needed' => '',
+                'existing_protection' => '',
+                'existing_amount' => '',
+                'insurance_amount' => '',
+                'fund_percentage' => ''
             ]);
         }
 
         // Set the updated health-medical_needs back to the customer_details session
-        $customerDetails['health-medical_needs'] = $healthMedical;
-        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6'] = $needs;
+        $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -133,10 +231,7 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
-        // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -170,15 +265,15 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -203,11 +298,8 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Set the updated critical_illness back to the customer_details session
-        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
 
         $customMessages = [
             'critical_amount_needed.required' => 'You are required to enter an amount.',
@@ -251,24 +343,24 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
-            'neededAmount' => $critical_amount_needed,
+            'covered_amount' => $critical_amount_needed,
             'year' => $supportingYears
         ]);
 
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $criticalIllness = array_merge($criticalIllness, [
-                'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+                'total_health_medical_needed' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $criticalIllness = array_merge($criticalIllness, [
-                'totalHealthMedicalNeeded' => $healthMedicalTotalFund
+                'total_health_medical_needed' => $healthMedicalTotalFund
             ]);
         }
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -286,8 +378,6 @@ class HealthMedicalController extends Controller
             DB::rollBack();
         }
 
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('health.medical.critical.existing.protection');
     }
 
@@ -327,57 +417,54 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $critical_existing_protection = $request->input('critical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['health-medical_needs']['critical_illness']['totalHealthMedicalNeeded'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['health-medical_needs']['critical_illness']['totalHealthMedicalNeeded'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] * 100);
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
-            'existingProtection' => $critical_existing_protection,
-            'existingProtectionAmount' => $existing_protection_amount
+            'existing_protection' => $critical_existing_protection,
+            'existing_amount' => $existing_protection_amount
         ]);
 
         if ($newTotalAmountNeeded === $totalAmountNeeded && $newPercentage === $totalPercentage){
             if ($newTotalAmountNeeded <= 0){
                 $criticalIllness = array_merge($criticalIllness, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $criticalIllness = array_merge($criticalIllness, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newTotalAmountNeeded <= 0){
                 $criticalIllness = array_merge($criticalIllness, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $criticalIllness = array_merge($criticalIllness, [
-                    'totalAmountNeeded' => $newTotalAmountNeeded,
-                    'fundPercentage' => $newPercentage
+                    'insurance_amount' => $newTotalAmountNeeded,
+                    'fund_percentage' => $newPercentage
                 ]);
             }
         }
 
         // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -405,13 +492,10 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
 
         // Get existing critical_illness from the session
-        $criticalIllness = $customerDetails['health-medical_needs']['critical_illness'] ?? [];
-
-        // Set the updated critical_illness back to the customer_details session
-        $customerDetails['health-medical_needs']['critical_illness'] = $criticalIllness;
+        $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -445,10 +529,7 @@ class HealthMedicalController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
-        // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -482,15 +563,15 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -516,11 +597,8 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -550,11 +628,11 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'typeOfHospital' => $medicalHospitalSelectedInput
+            'type_of_hospital' => $medicalHospitalSelectedInput
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -580,11 +658,8 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -614,11 +689,11 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'roomOption' => $roomTypeInput
+            'room_option' => $roomTypeInput
         ]);
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -636,8 +711,6 @@ class HealthMedicalController extends Controller
             DB::rollBack();
         }
 
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
         return redirect()->route('health.medical.planning.amount.needed');
     }
 
@@ -646,11 +719,8 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         $customMessages = [
             'medical_amount_needed.required' => 'You are required to enter an amount.',
@@ -694,24 +764,24 @@ class HealthMedicalController extends Controller
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'neededAmount' => $medical_amount_needed,
+            'covered_amount' => $medical_amount_needed,
             'year' => $supportingYears
         ]);
 
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $medicalPlanning = array_merge($medicalPlanning, [
-                'totalHealthMedicalNeeded' => $totalHealthMedicalNeeded
+                'total_health_medical_needed' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $medicalPlanning = array_merge($medicalPlanning, [
-                'totalHealthMedicalNeeded' => $healthMedicalTotalFund
+                'total_health_medical_needed' => $healthMedicalTotalFund
             ]);
         }
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -768,57 +838,54 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $medical_existing_protection = $request->input('medical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['health-medical_needs']['medical_planning']['totalHealthMedicalNeeded'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['health-medical_needs']['medical_planning']['totalHealthMedicalNeeded'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] * 100);
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
-            'existingProtection' => $medical_existing_protection,
-            'existingProtectionAmount' => $existing_protection_amount
+            'existing_protection' => $medical_existing_protection,
+            'existing_amount' => $existing_protection_amount
         ]);
 
         if ($newTotalAmountNeeded === $totalAmountNeeded && $newPercentage === $totalPercentage){
             if ($newTotalAmountNeeded <= 0){
                 $medicalPlanning = array_merge($medicalPlanning, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $medicalPlanning = array_merge($medicalPlanning, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newTotalAmountNeeded <= 0){
                 $medicalPlanning = array_merge($medicalPlanning, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
                 $medicalPlanning = array_merge($medicalPlanning, [
-                    'totalAmountNeeded' => $newTotalAmountNeeded,
-                    'fundPercentage' => $newPercentage
+                    'insurance_amount' => $newTotalAmountNeeded,
+                    'fund_percentage' => $newPercentage
                 ]);
             }
         }
 
         // Set the updated medicalPlanning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -845,14 +912,11 @@ class HealthMedicalController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing healthMedical_needs from the session
-        $healthMedical = $customerDetails['health-medical_needs'] ?? [];
-
         // Get existing medical_planning from the session
-        $medicalPlanning = $customerDetails['health-medical_needs']['medical_planning'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Set the updated medical_planning back to the customer_details session
-        $customerDetails['health-medical_needs']['medical_planning'] = $medicalPlanning;
+        $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

@@ -8,15 +8,15 @@
 @php
     // Retrieving values from the session
     $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
-    $debtCancellation = session('customer_details.debt-cancellation_needs');
-    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
-    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
-    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
-    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
-    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
-    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
-    $criticalIllnessCoverage = session('customer_details.debt-cancellation_needs.criticalIllnessCoverage');
-    $coverageAmount = session('customer_details.debt-cancellation_needs.criticalIllnessCoverageAmount');
+    $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
+    $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
+    $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
+    $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
+    $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $criticalIllnessCoverage = session('customer_details.selected_needs.need_7.advance_details.critical_illness');
+    $coverageAmount = session('customer_details.selected_needs.need_7.advance_details.critical_illness_amount');
 @endphp
 
 <div id="debt-cancellation-summary" class="secondary-default-bg summary-page">
@@ -57,7 +57,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalDebtNeeded ? '100' : floor(floatval($debtFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/debt-cancellation-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalDebtNeeded ? '100' : floor(floatval($debtFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>

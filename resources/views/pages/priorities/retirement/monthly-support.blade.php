@@ -13,26 +13,16 @@
 @section('content')
 
 @php
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
+    $retirementMonthlySupport = session('customer_details.selected_needs.need_2.advance_details.monthly_covered_amount');
+    $retirementAnnual = session('customer_details.selected_needs.need_2.advance_details.covered_amount');
+    $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
 
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
-    $need = 'need_' . $need_sequence;
-
-    $retirementMonthlySupport = session('customer_details.selected_needs.'. $need .'.advance_details.monthly_covered_amount');
-    $retirementAnnual = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
-    $retirementSavings = session('customer_details.selected_needs.'. $need .'.advance_details.existing_amount');
-    $supportingYears = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
-    $totalRetirementNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_retirement_needed', '0');
-    $retirementFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
-
-    $retirementIdeal = session('customer_details.selected_needs.'. $need .'.advance_details.ideal_retirement');
+    $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');
 @endphp
 
 <div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">

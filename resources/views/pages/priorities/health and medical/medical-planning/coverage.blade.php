@@ -24,12 +24,12 @@
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
-    $relationship = session('customer_details.health-medical_needs.medical_planning.coverFor');
-    $selectedInsuredName = session('customer_details.health-medical_needs.medical_planning.selectedInsuredName');
-    $othersCoverForName = session('customer_details.health-medical_needs.medical_planning.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.health-medical_needs.medical_planning.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.health-medical_needs.medical_planning.othersCoverForDob');
-    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
+    $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_6.advance_details.health_care.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_6.advance_details.health_care.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_6.advance_details.health_care.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_6.advance_details.health_care.spouse_dob');
+    $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
 @endphp
 
 <div id="medical-planning-coverage" class="secondary-default-bg">

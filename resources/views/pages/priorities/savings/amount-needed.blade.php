@@ -14,26 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
 
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
-    $need = 'need_' . $need_sequence;
-
-    $goalsAmount = session('customer_details.selected_needs.'. $need .'.advance_details.goals_amount');
-    $savingsMonthlyPayment = session('customer_details.selected_needs.'. $need .'.advance_details.covered_amount');
-    $savingsGoalDuration = session('customer_details.selected_needs.'. $need .'.advance_details.supporting_years');
-    $totalSavingsNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.total_savings_needed', '0');
-    $totalAmountNeeded = session('customer_details.selected_needs.'. $need .'.advance_details.insurance_amount');
-    $savingsFundPercentage = session('customer_details.selected_needs.'. $need .'.advance_details.fund_percentage', '0');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
+    $savingsGoalDuration = session('customer_details.selected_needs.need_4.advance_details.supporting_years');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
+    $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
 @endphp
 
 <div id="savings-amount-needed" class="tertiary-default-bg calculator-page">

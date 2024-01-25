@@ -14,26 +14,15 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $educationPriority = session('customer_details.priorities.educationDiscuss');
     $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
 
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-
-    $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
-
-    $need = 'need_' . $need_sequence;
-
-    $relationship = session('customer_details.selected_needs.'. $need .'.advance_details.relationship');
-    $selectedInsuredName = session('customer_details.selected_needs.'. $need .'.advance_details.child_name');
-    $othersCoverForName = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_name');
-    $selectedCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.child_dob');
-    $othersCoverForDob = session('customer_details.selected_needs.'. $need .'.advance_details.spouse_dob');
+    $relationship = session('customer_details.selected_needs.need_3.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_3.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_3.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_3.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_3.advance_details.spouse_dob');
 @endphp
 
 <div id="education_coverage" class="secondary-default-bg">

@@ -13,25 +13,11 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
-
-    // Set the default value for $need_sequence
-    $need_sequence = 0;
-    $protectionDiscuss = isset($protectionPriority) && ($protectionPriority == true || $protectionPriority == 'true');
-    $retirementDiscuss = isset($retirementPriority) && ($retirementPriority == true || $retirementPriority == 'true');
-    $educationDiscuss = isset($educationPriority) && ($educationPriority == true || $educationPriority == 'true');
-    $savingsDiscuss = isset($savingsPriority) && ($savingsPriority == true || $savingsPriority == 'true');
-
-    $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? ($savingsDiscuss ? 5 : 4) : ($savingsDiscuss ? 4 : 3)) : ($educationDiscuss ? ($savingsDiscuss ? 4 : 3) : ($savingsDiscuss ? 3 : 2))) : ($retirementDiscuss ? ($educationDiscuss ? ($savingsDiscuss ? 4 : 3) : ($savingsDiscuss ? 3 : 2)) : ($savingsDiscuss ? 2 : 1)));
-    $need = 'need_' . $need_sequence;
     
-    $investmentRiskProfile = session('customer_details.selected_needs.'. $need .'.advance_details.risk_profile','High Risk');
-    $investmentPotentialReturn = session('customer_details.selected_needs.'. $need .'.advance_details.potential_return','High Potential Return');
-    $investmentPA = session('customer_details.selected_needs.'. $need .'.advance_details.annual_returns');
+    $investmentRiskProfile = session('customer_details.selected_needs.need_5.advance_details.risk_profile','High Risk');
+    $investmentPotentialReturn = session('customer_details.selected_needs.need_5.advance_details.potential_return','High Potential Return');
+    $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns');
 @endphp
 
 <div id="investment-risk-profile" class="tertiary-default-bg">

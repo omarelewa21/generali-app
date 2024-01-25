@@ -8,15 +8,14 @@
 @php
     // Retrieving values from the session
     $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
-    $debtCancellation = session('customer_details.debt-cancellation_needs');
-    $existingDebt = session('customer_details.debt-cancellation_needs.existingDebt');
-    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
-    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
-    $newTotalDebtNeeded = session('customer_details.debt-cancellation_needs.newTotalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
-    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
-    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
+    $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
+    $existingDebt = session('customer_details.selected_needs.need_7.advance_details.existing_debt');
+    $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
+    $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
+    $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
 @endphp
 
 <div id="debt-existing-debt" class="tertiary-default-bg calculator-page">
