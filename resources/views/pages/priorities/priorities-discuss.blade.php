@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $topPriorities = session('customer_details.financial_priorities');
+    $topPriorities = session('customer_details.priorities_level');
     $prioritiesDiscuss = session('customer_details.priorities');
 @endphp
 
@@ -53,7 +53,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0 {{$topPriorities[0]}}" data-identifier="{{$topPriorities[0]}}" width="40px" style="left: 10px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 10px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
@@ -70,7 +70,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute {{$topPriorities[1]}}" data-identifier="{{$topPriorities[1]}}" width="40px" style="left: 20px;top: 50px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 20px;top: 50px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
@@ -87,7 +87,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0 {{$topPriorities[2]}}" width="40px" style="left: 60px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 60px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
@@ -104,7 +104,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute {{$topPriorities[3]}}" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
@@ -121,7 +121,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute {{$topPriorities[4]}}" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
@@ -138,7 +138,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0 {{$topPriorities[5]}}" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
@@ -155,6 +155,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
@@ -171,6 +172,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
@@ -250,8 +252,8 @@
                                                                     </div>
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
-                                                                            <label class="form-check-label display-6" for="{{$priority}}Discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}Discuss">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -342,7 +344,7 @@
             var checkboxValues = {};
 
             //Assign the needs sequence
-            const contents = ['protectionDiscuss', 'retirementDiscuss', 'educationDiscuss', 'savingsDiscuss', 'investmentsDiscuss', 'health-medicalDiscuss', 'debt-cancellationDiscuss'];
+            const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss'];
 
             // First set all to true
             $('input[type="checkbox"]').each(function() {
@@ -367,7 +369,7 @@
                         droppedDiv.forEach(function(element) {
                             var droppedAttribute = element.getAttribute("data-identifier");
                             var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
                             // if (image) {
                                 image.style.display = 'none';
                             }
@@ -377,7 +379,7 @@
                         droppedDiv.forEach(function(element) {
                             var droppedAttribute = element.getAttribute("data-identifier");
                             var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
                             // if (image) {
                                 image.style.display = 'block';
                             }
@@ -391,27 +393,27 @@
                 for (const checkboxId of contents) {
                     if (checkboxValues[checkboxId] === true) {
                         // Assign link based on the sequence
-                        if (checkboxId === 'protectionDiscuss') {
+                        if (checkboxId === 'protection_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'retirementDiscuss') {
+                        else if (checkboxId === 'retirement_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'educationDiscuss') {
+                        else if (checkboxId === 'education_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'savingsDiscuss') {
+                        else if (checkboxId === 'savings_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'investmentsDiscuss') {
+                        else if (checkboxId === 'investments_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
                             break;
                         }
-                        else if (checkboxId === 'health-medicalDiscuss') {
+                        else if (checkboxId === 'health-medical_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
                             break;
                         }
@@ -436,7 +438,7 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
                         // if (image) {
                             image.style.display = 'none';
                         }
@@ -446,7 +448,7 @@
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
                         var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + 'Discuss' === checkboxId) {
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
                         // if (image) {
                             image.style.display = 'block';
                         }
@@ -463,27 +465,27 @@
                         // Check if the current checkbox is unchecked
                         if (checkboxValues[checkboxId] === true) {
                             // Check the sequence and redirect accordingly
-                            if (checkboxId === 'protectionDiscuss') {
+                            if (checkboxId === 'protection_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'retirementDiscuss') {
+                            else if (checkboxId === 'retirement_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'educationDiscuss') {
+                            else if (checkboxId === 'education_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'savingsDiscuss') {
+                            else if (checkboxId === 'savings_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'investmentsDiscuss') {
+                            else if (checkboxId === 'investments_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
                                 break;
                             }
-                            else if (checkboxId === 'health-medicalDiscuss') {
+                            else if (checkboxId === 'health-medical_discuss') {
                                 document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
                                 break;
                             }

@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Family Dependant Details Page
+ * Template Name: Family Dependent Details Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Family Dependant Details</title>
+<title>Family Dependent Details</title>
 @endsection
 
 @section('content')
@@ -15,20 +15,21 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $familyDependant = session('customer_details.family_details.dependant');
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $childrenData = session('customer_details.family_details.dependant.children_data');
-    $parentsData = session('customer_details.family_details.dependant.parents_data');
-    $siblingsData = session('customer_details.family_details.dependant.siblings_data');
+    $familyDependent = session('customer_details.family_details');
+    $maritalStatus = session('customer_details.identity_details');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $childrenData = session('customer_details.family_details.children_data');
+    $parentsData = session('customer_details.family_details.parents_data');
+    $siblingsData = session('customer_details.family_details.siblings_data');
     $childKeys = is_array($childrenData) ? array_keys($childrenData) : [];
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
 @endphp
 
-<div id="avatar_family_dependant_details">
+<div id="avatar_family_dependent_details">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default">
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
@@ -38,21 +39,21 @@
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 z-index-1">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependant.details') }}" method="POST" id="familyDetailsForm">
+                    <form novalidate action="{{ route('avatar.family.dependent.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
+                                <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
                                         <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
                                     </div>
                                 </div>
-                                <div class="form-container pb-5">
+                                <div class="form-container pb-0 pb-md-5">
                                     @if ($errors->any())
-                                        <div class="row px-4 px-sm-5">
+                                        <div class="row px-4 pb-3 px-md-5">
                                             <div class="col-12">
                                                 <div class="alert alert-warning d-flex align-items-center" role="alert">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -63,9 +64,9 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="row px-4 pb-2 px-sm-5">
+                                    <div class="row px-4 pb-2 px-md-5">
                                         <div class="col-12">
-                                            <div class="accordion accordion-flush" id="accordionDependantDetails">
+                                            <div class="accordion accordion-flush" id="accordionDependentDetails">
                                                 @php
                                                     // Get the current year, month, and day
                                                     $currentYear = date('Y');
@@ -106,17 +107,17 @@
                                                         $selectedDay = sprintf('%02d', $selectedDay);
                                                     }
                                                 @endphp
-                                                @if(isset($familyDependant['spouse']) && $familyDependant['spouse'] === true)
+                                                @if(isset($familyDependent['spouse']) && $familyDependent['spouse'] === true)
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
                                                                 Spouse
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionDependentDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
-                                                                    <div class="col-8">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12">
                                                                         <label for="spouseTitleSelect" class="form-label">Title <span class="text-danger">*</span></label>
                                                                         <select name="spouseTitle" class="form-select @error('spouseTitle') is-invalid @enderror" aria-label="Title" id="spouseTitleSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -131,7 +132,7 @@
                                                                 </div>
                                                                 <div class="row py-2">
                                                                     <div class="col-12 pt-4">
-                                                                        <label for="spouseFullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
+                                                                        <label for="spouseFullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                                         <input type="text" name="spouseFullName" class="form-control @error('spouseFullName') is-invalid @enderror" id="spouseFullNameInput" placeholder="Your Full Name" value="{{ old('spouseFullName', $spouseData['full_name'] ?? '') }}" required>
                                                                         @error('spouseFullName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -148,7 +149,7 @@
                                                                     </div>
                                                                 </div> -->
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4">
                                                                         <label for="spouseCountrySelect" class="form-label">Citizenship <span class="text-danger">*</span></label>
                                                                         <select name="spouseCountry" class="form-select @error('spouseCountry') is-invalid @enderror" aria-label="Countries" id="spouseCountrySelect" autocomplete="country" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -164,7 +165,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('spouseIdType') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('spouseIdType') is-invalid @enderror">
                                                                         <label for="spouseIdSelect" class="form-label">ID Type <span class="text-danger">*</span></label>
                                                                         <select name="spouseIdType" class="form-select" aria-label="ID Type" id="spouseIdSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -218,28 +219,28 @@
                                                                     <div class="col-12 pt-4">                                                                        
                                                                         <label for="spouseday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="spouseAgeDiv">( <div id="spouseAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
-                                                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($spouseData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
+                                                                                    {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day', substr($spouseData['dob'], -2)), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                                 @else
                                                                                     {!! Form::select('day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('day'), ['class' => 'form-select' . ($errors->has('day') ? ' is-invalid' : ''), 'id' => 'spouseday']) !!}
                                                                                 @endif
                                                                                 </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
-                                                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($spouseData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
+                                                                                    {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month', substr($spouseData['dob'], 5, 2)), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                                 @else
                                                                                     {!! Form::select('month', ['' => 'Select'] + $monthNames, old('month'), ['class' => 'form-select' . ($errors->has('month') ? ' is-invalid' : ''), 'id' => 'spousemonth']) !!}
                                                                                 @endif
                                                                                 </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($spouseData['dob']))
                                                                                     {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                        return substr($year, -4);
-                                                                                    }, $yearRange), $yearRange), old('year', substr($spouseData['dob'], -4)), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
+                                                                                        return substr($year, 0, 4);
+                                                                                    }, $yearRange), $yearRange), old('year', substr($spouseData['dob'], 0, 4)), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                                 @else
                                                                                     {!! Form::select('year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                        return substr($year, -4);
+                                                                                        return substr($year, 0, 4);
                                                                                     }, $yearRange), $yearRange), old('year'), ['class' => 'form-select' . ($errors->has('year') ? ' is-invalid' : ''), 'id' => 'spouseyear']) !!}
                                                                                 @endif
                                                                                 </div>
@@ -262,13 +263,13 @@
                                                                         <label for="spouseMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('gender') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="gender" id="spouseMaleInput" autocomplete="off" value="male"
-                                                                                {{ (old('gender') === 'male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="gender" id="spouseMaleInput" autocomplete="off" value="Male"
+                                                                                {{ (old('gender') === 'Male' || (isset($spouseData['gender']) && $spouseData['gender'] === 'Male')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="gender" id="spouseFemaleInput" autocomplete="off" value="female"
-                                                                                {{ (old('gender') === 'female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="gender" id="spouseFemaleInput" autocomplete="off" value="Female"
+                                                                                {{ (old('gender') === 'Female' || (isset($spouseData['gender']) && $spouseData['gender'] === 'Female')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                             </label>
                                                                         </div>
@@ -282,13 +283,13 @@
                                                                         <label for="smoker" class="form-label">Your Habits <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('habits') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="smoker"
-                                                                                {{ (old('habits') === 'smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'smoker')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="Smoker"
+                                                                                {{ (old('habits') === 'Smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'Smoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="habits" id="nonSmoker" autocomplete="off" value="nonSmoker"
-                                                                                {{ (old('habits') === 'nonSmoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'nonSmoker')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="habits" id="nonSmoker" autocomplete="off" value="Non-Smoker"
+                                                                                {{ (old('habits') === 'Non-Smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'Non-Smoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
                                                                             </label>
                                                                         </div>
@@ -298,7 +299,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('spouseOccupation') is-invalid @enderror">
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('spouseOccupation') is-invalid @enderror">
                                                                         <label for="spouseOccupationSelect" class="form-label">Occupation <span class="text-danger">*</span></label>
                                                                         <select name="spouseOccupation" class="form-select" aria-label="Countries" id="spouseOccupationSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
@@ -315,7 +316,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if(isset($familyDependant['children']) && $familyDependant['children'] === true)
+                                                @if(isset($familyDependent['children']) && $familyDependent['children'] === true)
                                                     @foreach ($childrenData as $key => $value)
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$key}}">
@@ -323,11 +324,11 @@
                                                                 {{$value['relation']}}
                                                                 </button>
                                                             </h2>
-                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependantDetails">
+                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependentDetails">
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
-                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$key}}FullName" class="form-control @error($key . 'FullName') is-invalid @enderror" id="{{$key}}FullNameInput" placeholder="Your Full Name" value="{{ old($key . 'FullName', $childrenData[$key]['full_name'] ?? '') }}" required>
                                                                             @error($key . 'FullName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -348,13 +349,13 @@
                                                                             <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="Male"
+                                                                                    {{ (old($key . 'Gender') === 'Male' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'Male')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="Female"
+                                                                                    {{ (old($key . 'Gender') === 'Female' || (isset($childrenData[$key]['gender']) && $childrenData[$key]['gender'] === 'Female')) ? 'checked' : '' }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
@@ -367,25 +368,25 @@
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
-                                                                                        {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($childrenData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
+                                                                                        {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($childrenData[$key]['dob'], -2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
                                                                                     @else
                                                                                         {{ Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) }}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
-                                                                                        {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month', substr($childrenData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
+                                                                                        {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month', substr($childrenData[$key]['dob'], 5, 2)), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
                                                                                     @else
                                                                                         {{ Form::select($key .'month', ['' => 'Select'] + $monthNames, old($key .'month'), ['class' => 'form-select' . ($errors->has($key .'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) }}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($childrenData[$key]['dob']))
-                                                                                        {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -4); }, $yearRange), $yearRange), old($key . 'year', substr($childrenData[$key]['dob'], -4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
+                                                                                        {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, 0, 4); }, $yearRange), $yearRange), old($key . 'year', substr($childrenData[$key]['dob'], 0, 4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
                                                                                     @else
-                                                                                    {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, -4); }, $yearRange), $yearRange), old($key . 'year'), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
+                                                                                    {{ Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) { return substr($year, 0, 4); }, $yearRange), $yearRange), old($key . 'year'), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) }}
                                                                                     @endif
                                                                                 </div>
                                                                                 @if ($errors->has($key . 'day') || $errors->has($key . 'month') || $errors->has($key . 'year'))
@@ -403,8 +404,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
-                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
+                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
@@ -412,8 +413,8 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
-                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
+                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status​ <span class="text-danger">*</span></label>
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Child Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
@@ -430,7 +431,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if(isset($familyDependant['parents']) && $familyDependant['parents'] === true)
+                                                @if(isset($familyDependent['parents']) && $familyDependent['parents'] === true)
                                                     @foreach ($parentsData as $key => $value)
                                                     <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$key}}">
@@ -438,11 +439,11 @@
                                                                     Parent ({{ $key }})
                                                                 </button>
                                                             </h2>
-                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependantDetails">
+                                                            <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionDependentDetails">
                                                                 <div class="accordion-body">
                                                                     <div class="row py-2">
                                                                         <div class="col-12">
-                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
+                                                                            <label for="{{$key}}FullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                                             <input type="text" name="{{$key}}FullName" class="form-control @error($key . 'FullName') is-invalid @enderror" id="{{$key}}FullNameInput" placeholder="Your Full Name" value="{{ old($key . 'FullName', $parentsData[$key]['full_name'] ?? '') }}" required>
                                                                             @error($key . 'FullName')
                                                                                 <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -463,13 +464,13 @@
                                                                             <label for="{{$key}}GenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                             <div class="d-flex btn-group @error($key . 'Gender') is-invalid @enderror" role="group">
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="male"
-                                                                                    {{ (old($key . 'Gender') === 'male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'male')) ? 'checked' : ($key == 'father' ? 'checked' : '') }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderMaleInput" autocomplete="off" value="Male"
+                                                                                    {{ (old($key . 'Gender') === 'Male' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'Male')) ? 'checked' : ($key == 'father' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                                 </label>
                                                                                 <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="female"
-                                                                                    {{ (old($key . 'Gender') === 'female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'female')) ? 'checked' : ($key == 'mother' ? 'checked' : '') }}>
+                                                                                    <input type="radio" class="btn-check" name="{{$key}}Gender" id="{{$key}}GenderFemaleInput" autocomplete="off" value="Female"
+                                                                                    {{ (old($key . 'Gender') === 'Female' || (isset($parentsData[$key]['gender']) && $parentsData[$key]['gender'] === 'Female')) ? 'checked' : ($key == 'mother' ? 'checked' : '') }}>
                                                                                     <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                                 </label>
                                                                             </div>
@@ -482,28 +483,28 @@
                                                                         <div class="col-12 pt-4">
                                                                             <label for="{{$key}}day" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="{{$key}}AgeDiv">( <div id="{{$key}}Age" class="d-inline-block"></div> )</span></label>
                                                                             <div class="row">
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
-                                                                                        {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($parentsData[$key]['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
+                                                                                        {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day', substr($parentsData[$key]['dob'], -2)), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
                                                                                     @else
                                                                                         {!! Form::select($key . 'day', ['' => 'Select'] + array_combine($dateRange, $dateRange), old($key . 'day'), ['class' => 'form-select' . ($errors->has($key . 'day') ? ' is-invalid' : ''), 'id' => $key . 'day']) !!}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
-                                                                                        {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', substr($parentsData[$key]['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
+                                                                                        {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month', substr($parentsData[$key]['dob'], 5, 2)), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
                                                                                     @else
                                                                                         {!! Form::select($key . 'month', ['' => 'Select'] + $monthNames, old($key . 'month'), ['class' => 'form-select' . ($errors->has($key . 'month') ? ' is-invalid' : ''), 'id' => $key . 'month']) !!}
                                                                                     @endif
                                                                                 </div>
-                                                                                <div class="col-md-4 pb-2 pb-md-0">
+                                                                                <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                     @if(isset($parentsData[$key]['dob']))
                                                                                         {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                            return substr($year, -4);
-                                                                                        }, $yearRange), $yearRange), old($key . 'year', substr($parentsData[$key]['dob'], -4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
+                                                                                            return substr($year, 0, 4);
+                                                                                        }, $yearRange), $yearRange), old($key . 'year', substr($parentsData[$key]['dob'], 0, 4)), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
                                                                                     @else
                                                                                         {!! Form::select($key . 'year', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                            return substr($year, -4);
+                                                                                            return substr($year, 0, 4);
                                                                                         }, $yearRange), $yearRange), old($key . 'year'), ['class' => 'form-select' . ($errors->has($key . 'year') ? ' is-invalid' : ''), 'id' => $key . 'year']) !!}
                                                                                     @endif
                                                                                 </div>
@@ -522,8 +523,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
-                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
+                                                                            <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                             <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
@@ -531,8 +532,8 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="row py-2">
-                                                                        <div class="col-8 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
-                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                        <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'MaritalStatus') is-invalid @enderror">
+                                                                            <label for="{{$key}}MaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
                                                                             <select name="{{$key}}MaritalStatus" class="form-select" aria-label="Parents Marital Status" id="{{$key}}MaritalStatusSelect" required>
                                                                                 <option value="" selected disabled>Please Select</option>
                                                                                 @foreach ($maritalstatuses as $status)
@@ -549,18 +550,18 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if(isset($familyDependant['siblings']) && $familyDependant['siblings'] === true)
+                                                @if(isset($familyDependent['siblings']) && $familyDependent['siblings'] === true)
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingSibling">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSibling" aria-expanded="true" aria-controls="flush-collapseSibling">
                                                                 Sibling
                                                             </button>
                                                         </h2>
-                                                        <div id="flush-collapseSibling" class="accordion-collapse collapse" aria-labelledby="flush-headingSibling" data-bs-parent="#accordionDependantDetails">
+                                                        <div id="flush-collapseSibling" class="accordion-collapse collapse" aria-labelledby="flush-headingSibling" data-bs-parent="#accordionDependentDetails">
                                                             <div class="accordion-body">
                                                                 <div class="row py-2">
                                                                     <div class="col-12">
-                                                                        <label for="siblingFullNameInput" class="form-label">Full Name (as per I.C.) <span class="text-danger">*</span></label>
+                                                                        <label for="siblingFullNameInput" class="form-label">Full Name (as per I.C) <span class="text-danger">*</span></label>
                                                                         <input type="text" name="siblingFullName" class="form-control @error('siblingFullName') is-invalid @enderror" id="siblingFullNameInput" placeholder="Your Full Name" value="{{ old('siblingFullName', $siblingsData['full_name'] ?? '') }}" required>
                                                                         @error('siblingFullName')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -581,13 +582,13 @@
                                                                         <label for="siblingGenderMaleInput" class="form-label">Gender <span class="text-danger">*</span></label>
                                                                         <div class="d-flex btn-group @error('siblingGender') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderMaleInput" autocomplete="off" value="male"
-                                                                                {{ (old('siblingGender') === 'male' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'male')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderMaleInput" autocomplete="off" value="Male"
+                                                                                {{ (old('siblingGender') === 'Male' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'Male')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Male</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderFemaleInput" autocomplete="off" value="female"
-                                                                                {{ (old('siblingGender') === 'female' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'female')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="siblingGender" id="siblingGenderFemaleInput" autocomplete="off" value="Female"
+                                                                                {{ (old('siblingGender') === 'Female' || (isset($siblingsData['gender']) && $siblingsData['gender'] === 'Female')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Female</span>
                                                                             </label>
                                                                         </div>
@@ -600,28 +601,28 @@
                                                                     <div class="col-12 pt-4">
                                                                         <label for="siblingday" class="form-label">Date of Birth <span class="text-danger">*</span> <span id="siblingAgeDiv">( <div id="siblingAge" class="d-inline-block"></div> )</span></label>
                                                                         <div class="row">
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
-                                                                                    {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday', substr($siblingsData['dob'], 0, 2)), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
+                                                                                    {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday', substr($siblingsData['dob'], -2)), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
                                                                                 @else
                                                                                     {!! Form::select('siblingday', ['' => 'Select'] + array_combine($dateRange, $dateRange), old('siblingday'), ['class' => 'form-select' . ($errors->has('siblingday') ? ' is-invalid' : ''), 'id' => 'siblingday']) !!}
                                                                                 @endif
                                                                             </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
-                                                                                    {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth', substr($siblingsData['dob'], 3, 2)), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
+                                                                                    {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth', substr($siblingsData['dob'], 5, 2)), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
                                                                                 @else
                                                                                     {!! Form::select('siblingmonth', ['' => 'Select'] + $monthNames, old('siblingmonth'), ['class' => 'form-select' . ($errors->has('siblingmonth') ? ' is-invalid' : ''), 'id' => 'siblingmonth']) !!}
                                                                                 @endif
                                                                             </div>
-                                                                            <div class="col-md-4 pb-2 pb-md-0">
+                                                                            <div class="col-lg-4 col-md-12 col-sm-4 pb-2 pb-lg-0">
                                                                                 @if(isset($siblingsData['dob']))
                                                                                     {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                        return substr($year, -4);
-                                                                                    }, $yearRange), $yearRange), old('siblingyear', substr($siblingsData['dob'], -4)), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
+                                                                                        return substr($year, 0, 4);
+                                                                                    }, $yearRange), $yearRange), old('siblingyear', substr($siblingsData['dob'], 0, 4)), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
                                                                                 @else
                                                                                     {!! Form::select('siblingyear', ['' => 'Select'] + array_combine(array_map(function ($year) {
-                                                                                        return substr($year, -4);
+                                                                                        return substr($year, 0, 4);
                                                                                     }, $yearRange), $yearRange), old('siblingyear'), ['class' => 'form-select' . ($errors->has('siblingyear') ? ' is-invalid' : ''), 'id' => 'siblingyear']) !!}
                                                                                 @endif
                                                                             </div>
@@ -640,8 +641,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
-                                                                        <label for="siblingYearsOfSupportInput" class="form-label">Years of Support <span class="text-danger">*</span></label>
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
+                                                                        <label for="siblingYearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
                                                                         <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
                                                                     </div>
                                                                     @error('siblingYearsOfSupport')
@@ -649,8 +650,8 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="row py-2">
-                                                                    <div class="col-8 pt-4 @error('siblingMaritalStatus') is-invalid @enderror">
-                                                                        <label for="siblingMaritalStatusSelect" class="form-label">Dependent Marital Status <span class="text-danger">*</span></label>
+                                                                    <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingMaritalStatus') is-invalid @enderror">
+                                                                        <label for="siblingMaritalStatusSelect" class="form-label">Dependent's Marital Status <span class="text-danger">*</span></label>
                                                                         <select name="siblingMaritalStatus" class="form-select" aria-label="Siblings Marital Status" id="siblingMaritalStatusSelect" required>
                                                                             <option value="" selected disabled>Please Select</option>
                                                                             @foreach ($maritalstatuses as $status)
@@ -672,14 +673,14 @@
                                 </div>
                             </div>
                         </section>
-                    
+                        <div class="bottomObeserver"></div>
                         <section class="footer bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
-                                        <input type="hidden" name="familyDependantButtonInput" id="familyDependantButtonInput" value="{{ json_encode($familyDependant) }}">
-                                        <a href="{{route('avatar.family.dependant')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
+                                        <a href="{{route('avatar.family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>
@@ -692,15 +693,29 @@
     </div>
 </div>
 
+@if (empty($maritalStatus))
+    @php
+        $missingPage = 'Marital Status';
+    @endphp
+@elseif($familyDependent['spouse'] === false && $familyDependent['children'] === false)
+    @php
+        $missingPage = 'Family Dependent';
+    @endphp
+@else
+    @php
+        $missingPage = '';
+    @endphp
+@endif
+
 <!-- Modal -->
 <div class="modal fade" id="missingFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">Family Dependant is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingFieldsLabel">{{$missingPage}} is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to fill up the form in Family Dependant page first.</p>
+                <p>Please click proceed to fill up the form in {{$missingPage}} page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
@@ -710,10 +725,11 @@
 </div>
 
 <script>
-var spouse_session = {!! json_encode(session('customer_details.family_details.dependant.spouse')) !!};
-var siblings_session = {!! json_encode(session('customer_details.family_details.dependant.siblings')) !!};
+var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
+var siblings_session = {!! json_encode(session('customer_details.family_details.siblings')) !!};
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
-var family_details = {!! json_encode(session('customer_details.family_details.dependant')) !!};
+var family_details = {!! json_encode(session('customer_details.family_details')) !!};
+var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {

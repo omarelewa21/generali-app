@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
     $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
     $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
@@ -24,6 +25,16 @@
     $customOtherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources_custom');
     $otherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources');
     $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
+=======
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
+    $otherIncomeResources = session('customer_details.retirement_needs.otherIncomeResources');
+    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
+    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
+    $retirementAge = session('customer_details.retirement_needs.retirementAge');
+    $supportingYears = session('customer_details.retirement_needs.supportingYears');
+>>>>>>> zeno
 @endphp
 
 <div id="retirement_allocated_funds" class="tertiary-default-bg calculator-page">

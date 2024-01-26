@@ -43,7 +43,7 @@
                                                 <p class="text-white display-6 lh-base">Click to add your assets next to your avatar.</p>
                                             </div>
                                             <div class="col-12">
-                                                <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button">Refresh</a></p>
+                                                <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="assetsButtonInput" id="assetsButtonInput" value="{{ json_encode($assets) }}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="top.priorities">
-                                        <a href="{{route('avatar.family.dependant.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

@@ -14,9 +14,16 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $educationPriority = session('customer_details.priorities.educationDiscuss');
     $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
+=======
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $education = session('customer_details.education_needs');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
+>>>>>>> zeno
 
     $relationship = session('customer_details.selected_needs.need_3.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_3.advance_details.child_name');
@@ -132,7 +139,7 @@
                 <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to input your child name in Family dependant page first.</p>
+                <p>Please click proceed to input your child name in Family dependent page first.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>

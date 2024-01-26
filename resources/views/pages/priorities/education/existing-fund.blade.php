@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $educationPriority = session('customer_details.priorities.educationDiscuss');
     $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.total_education_needed','0');
     $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
@@ -15,6 +16,17 @@
     $edcationSaving = session('customer_details.selected_needs.need_3.advance_details.existing_fund');
     $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
     $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
+=======
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $education = session('customer_details.education_needs');
+    $edcationSaving = session('customer_details.education_needs.existingFund');
+    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
+    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
+    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
+    $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
+    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+>>>>>>> zeno
 @endphp
 
 <div id="education-existing-fund" class="tertiary-default-bg calculator-page">

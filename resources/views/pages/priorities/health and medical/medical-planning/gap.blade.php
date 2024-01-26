@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $health_medical = session('customer_details.selected_needs.need_6.advance_details.health_care');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
@@ -14,6 +15,15 @@
     $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.total_health_medical_needed');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
+=======
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
+    $health_medical = session('customer_details.health-medical_needs.medical_planning');
+    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
+    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
+    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
+    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
+>>>>>>> zeno
 @endphp
 
 <div id="medical-summary" class="secondary-default-bg summary-page">

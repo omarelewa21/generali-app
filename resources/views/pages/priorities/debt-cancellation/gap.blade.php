@@ -7,6 +7,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
     $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
@@ -17,6 +18,18 @@
     $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
     $criticalIllnessCoverage = session('customer_details.selected_needs.need_7.advance_details.critical_illness');
     $coverageAmount = session('customer_details.selected_needs.need_7.advance_details.critical_illness_amount');
+=======
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
+    $debtCancellation = session('customer_details.debt-cancellation_needs');
+    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
+    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
+    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
+    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
+    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
+    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
+    $criticalIllnessCoverage = session('customer_details.debt-cancellation_needs.criticalIllnessCoverage');
+    $coverageAmount = session('customer_details.debt-cancellation_needs.criticalIllnessCoverageAmount');
+>>>>>>> zeno
 @endphp
 
 <div id="debt-cancellation-summary" class="secondary-default-bg summary-page">

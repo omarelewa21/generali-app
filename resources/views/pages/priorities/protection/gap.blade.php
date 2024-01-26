@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $protection = session('customer_details.selected_needs.need_1.advance_details');
     $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
@@ -21,6 +22,15 @@
     $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_1.advance_details.insurance_amount');
+=======
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $protection = session('customer_details.protection_needs');
+    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
+    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
+    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
+    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
+    $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
+>>>>>>> zeno
 @endphp
 
 <div id="protection_summary" class="summary-page secondary-default-bg">

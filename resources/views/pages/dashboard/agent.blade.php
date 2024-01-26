@@ -30,7 +30,7 @@
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold">Create New Transaction</a>
+                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
@@ -43,7 +43,7 @@
                                 <div class="col-12 btn-tick">
                                     <a href="" class="btn w-100">
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-green text-start btn-text avatar-text fw-bold d-flex align-items-center">Completed</div>
+                                            <div class="col-8 text-green text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-check me-3"></i>Completed</div>
                                             <div class="col-4 fw-bold text-green display-4 text-end">3</div>
                                         </div>
                                     </a>
@@ -53,7 +53,7 @@
                                 <div class="col-12 btn-draft">
                                     <a href="" class="btn w-100">
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-yellow text-start btn-text avatar-text fw-bold d-flex align-items-center">Draft</div>
+                                            <div class="col-8 text-yellow text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-regular fa-clock me-3"></i>Draft</div>
                                             <div class="col-4 fw-bold text-yellow display-4 text-end">2</div>
                                         </div>
                                     </a>
@@ -63,7 +63,7 @@
                                 <div class="col-12 btn-cancelled">
                                     <a href="" class="btn w-100">
                                         <div class="row align-items-center">
-                                            <div class="col-8 text-primary text-start btn-text avatar-text fw-bold d-flex align-items-center">Cancelled</div>
+                                            <div class="col-8 text-primary text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-xmark me-3"></i>Cancelled</div>
                                             <div class="col-4 fw-bold text-primary display-4 text-end">1</div>
                                         </div>
                                     </a>
@@ -78,7 +78,7 @@
                                 <table class="table table-striped" id="agentTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Entry ID</th>
                                             <th scope="col">Customer Name</th>
                                             <th scope="col">Customer ID</th>
                                             <th scope="col">Last Saved</th>
@@ -95,7 +95,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>
@@ -110,7 +110,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>
@@ -125,7 +125,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>
@@ -140,7 +140,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>
@@ -155,7 +155,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>
@@ -170,7 +170,7 @@
                                             <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
                                             <td class="text-center">
                                                 <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('images/general/icon-more.png') }}" width="auto" height="20px" alt="More Options"></a>
+                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a class="dropdown-item" href="#">Delete</a></li>
                                                     </ul>

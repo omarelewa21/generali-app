@@ -12,6 +12,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
 
     $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns','5');
@@ -20,6 +21,16 @@
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
     $investmentSupportingYears = session('customer_details.selected_needs.need_5.advance_details.supporting_years');
+=======
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
+    $investment = session('customer_details.investments_needs');
+    $investmentPA = session('customer_details.investments_needs.annualReturn','5');
+    $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');
+    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded');
+    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
+    $investmentMonthlyPayment = session('customer_details.investments_needs.monthlyInvestmentAmount');
+    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
+>>>>>>> zeno
 @endphp
 
 

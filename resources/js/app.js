@@ -6,7 +6,6 @@ import './button-multiple-select';
 import './avatar';
 import './form-display';
 import './button-avatar-display';
-import './coverage-carousel';
 import './carousel-needs';
 import './protection-validation';
 import './retirement-validation';
@@ -21,6 +20,7 @@ import './drag-drop';
 import 'bootstrap5-toggle';
 import './phoneValidation';
 import './datatables';
+import './sortable';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {
@@ -133,23 +133,6 @@ $(document).ready(function () {
 
 // Session Clear
 document.getElementById('saveSession').addEventListener('click', function() {
-    var clearRoute = this.getAttribute('data-clear-route');
-
-    $.ajax({
-        url: clearRoute,
-        method: "GET",
-        success: function(response) {
-            console.log("Session data cleared.");
-            localStorage.clear();
-        },
-        error: function(xhr, status, error) {
-            console.log("Error clearing session data:", error);
-        }
-    });
-});
-
-// Session Clear
-document.getElementById('clearSession').addEventListener('click', function() {
     var clearRoute = this.getAttribute('data-clear-route');
 
     $.ajax({

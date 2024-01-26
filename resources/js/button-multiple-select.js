@@ -1,6 +1,6 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
-    'family-dependant',
+    'family-dependent',
     'assets',
     'financial-priorities'
 ];
@@ -13,7 +13,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (path == '/family-dependant') {
+    if (path == '/family-dependent') {
         // Add event listener to each button with the 'data-required' attribute
         const dataButtons = document.querySelectorAll('[data-avatar]');
 
@@ -150,59 +150,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
             }
         });
-
-        // document.addEventListener('click', function(event) {
-        //     const clickedElement = event.target;
-        //     const removeButton = clickedElement.closest('.remove-button');
-        //     const dataIdentifier = removeButton.dataset.identifier;
-
-        //     // Check if a remove button was clicked
-        //     if (removeButton) {
-        //         event.preventDefault(); // Prevent the default behavior of the remove button click
-
-        //         const needs = document.getElementById('needs');
-        //         const buttonsToRemove = needs.querySelectorAll(`[data-identifier="${dataIdentifier}"]`);
-        //         console.log(buttonsToRemove);
-        //         const container = removeButton.closest('.dropped');
-        //         console.log('Remove button clicked for container:', container);
-        
-        //         // Add logic to handle the remove button click
-        //     }
-        // });
-
-        // const removeButton = document.querySelector('.remove-button');
-        // var addedNeedsImages = sessionData ? sessionData : [];
-        
-        // addedNeedsImages.forEach(function(image) {
-        //     if (removeButton) {
-        //         removeButton.addEventListener('click', function(event) {
-        //             event.preventDefault(); // Prevent the default behavior of the remove button click
-    
-        //             const container = this.closest('.dropped');
-        //             console.log('Remove button clicked for container:', container);
-    
-        //             // Add logic to handle the remove button click
-        //         });
-        //     }
-        // });
-
-
-        // otherAssetsButton.addEventListener('click', function() {
-        //     const selectedOthersButton = document.querySelector('[data-avatar="othersAssets"][data-required]');
-        //     const otherAssetsInput = document.getElementById('otherAssetsInput');
-        //     const selectedOthers = otherAssetsInput.value;
-
-        //     if (selectedOthersButton) {
-        //         if (selectedOthers.length > 0) {
-        //             selectedOthersButton.closest('.button-bg').classList.add('selected');
-        //             selectedOthersButton.setAttribute('data-required', 'selected');
-        //         }
-        //         else {
-        //             selectedOthersButton.closest('.button-bg').classList.remove('selected');
-        //             selectedOthersButton.setAttribute('data-required', '');
-        //         }
-        //     }
-        // });
     }
     
     // Preselect the button on page load

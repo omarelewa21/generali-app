@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AvatarController;
-use App\Http\Controllers\formProtectionController;
-use App\Http\Controllers\formRetirementController;
 use App\Http\Controllers\ProtectionController;
 use App\Http\Controllers\RetirementController;
 use App\Http\Controllers\EducationController;
@@ -26,7 +24,6 @@ use App\Http\Controllers\DebtCancellationController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\TransactionController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -38,9 +35,9 @@ Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic
 /* Avatar pages */
 Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
 Route::view('/marital-status', 'pages.avatar.marital-status')->name('avatar.marital.status');
-Route::view('/family-dependant', 'pages.avatar.family-dependant')->name('avatar.family.dependant');
-Route::get('/family-dependant/details', [DropdownController::class, 'familyDependantDetails'])->name('avatar.family.dependant.details');
-Route::post('/family-dependant/details', [FormController::class, 'familyDependantDetails'])->name('form.family.dependant.details');
+Route::view('/family-dependent', 'pages.avatar.family-dependent')->name('avatar.family.dependent');
+Route::get('/family-dependent/details', [DropdownController::class, 'familyDependentDetails'])->name('avatar.family.dependent.details');
+Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/avatar', 'pages.avatar.gender')->name('avatar.gender.selection');
@@ -205,7 +202,6 @@ Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->nam
 Route::view('/login', 'pages.login')->name('login');
 Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
-// Route::get('/agent/logs', [TransactionController::class, 'index'])->name('transactions.logs');
 Route::get('/agent/logs', function () {
     return view('pages.dashboard.logs');
 });

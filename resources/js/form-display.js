@@ -1,8 +1,8 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'identity-details',
-    '/family-dependant',
-    '/family-dependant/details',
+    '/family-dependent',
+    '/family-dependent/details',
     'existing-policy'
 ];
 
@@ -257,7 +257,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         yearField.addEventListener('change', calculateAge);
     }
 
-    if (path == '/family-dependant') {
+    if (path == '/family-dependent') {
         document.addEventListener('DOMContentLoaded', function() {
             if (marital_status) {
                 var maritalStatus = marital_status;
@@ -294,40 +294,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
             else {
                 if (maritalStatus == null || maritalStatus == undefined || maritalStatus == '') {
-                    var myModal = document.getElementById('missingFields');
-                    myModal.classList.add('show');
-                    myModal.style.display = 'block';
-                    document.querySelector('body').style.paddingRight = '0px';
-                    document.querySelector('body').style.overflow = 'hidden';
-                    document.querySelector('body').classList.add('modal-open');
-
-                    var modalBackdrop = document.createElement('div');
-                    modalBackdrop.className = 'modal-backdrop fade show';
-                    document.querySelector('body.modal-open').append(modalBackdrop);
-
-                    // Close the modal
-                    var closeButton = document.querySelector('#missingFields .btn-exit-sidebar');
-                    closeButton.addEventListener('click', function() {
-                        myModal.classList.remove('show');
-                        myModal.style.display = 'none';
-                        document.querySelector('body').style.paddingRight = '';
-                        document.querySelector('body').style.overflow = '';
-                        document.querySelector('body').classList.remove('modal-open');
-                        var modalBackdrop = document.querySelector('.modal-backdrop');
-                        if (modalBackdrop) {
-                            modalBackdrop.remove();
-                        }
-                        window.location.href = '/marital-status';
-                    });
+                    missingPages();
                 }
             }
         });
     }
 
-    if (path == '/family-dependant/details') {
+    if (path == '/family-dependent/details') {
         document.addEventListener('DOMContentLoaded', function() {
             if (family_details) {
-                var dependant = family_details;
+                var dependent = family_details;
                 var spouse = spouse_session;
                 var siblings = siblings_session;
                 
@@ -626,34 +602,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         }
                     }
                 }
+                if ((dependent['spouse'] === false && dependent['children'] == false) && dependent['parents'] === undefined && dependent['siblings'] === undefined) {
+                    missingPages();
+                }
             }
             else {
-                if (dependant == null || dependant == undefined || dependant == '') {
-                    var myModal = document.getElementById('missingFields');
-                    myModal.classList.add('show');
-                    myModal.style.display = 'block';
-                    document.querySelector('body').style.paddingRight = '0px';
-                    document.querySelector('body').style.overflow = 'hidden';
-                    document.querySelector('body').classList.add('modal-open');
-        
-                    var modalBackdrop = document.createElement('div');
-                    modalBackdrop.className = 'modal-backdrop fade show';
-                    document.querySelector('body.modal-open').append(modalBackdrop);
-        
-                    // Close the modal
-                    var closeButton = document.querySelector('#missingFields .btn-exit-sidebar');
-                    closeButton.addEventListener('click', function() {
-                        myModal.classList.remove('show');
-                        myModal.style.display = 'none';
-                        document.querySelector('body').style.paddingRight = '';
-                        document.querySelector('body').style.overflow = '';
-                        document.querySelector('body').classList.remove('modal-open');
-                        var modalBackdrop = document.querySelector('.modal-backdrop');
-                        if (modalBackdrop) {
-                            modalBackdrop.remove();
-                        }
-                        window.location.href = '/family-dependant';
-                    });
+                if (dependent == null || dependent == undefined || dependent == '') {
+                    missingPages();
                 }
             }
         });
@@ -663,7 +618,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         document.addEventListener('DOMContentLoaded', function() {
             // Show dropdown based on selected radio buttons
             var ownerRadioButton = document.querySelector('input[name="policyRole"][value="owner"]');
-            var dependantRadioButton = document.querySelector('input[name="policyRole"][value="life insured"]');
+            var dependentRadioButton = document.querySelector('input[name="policyRole"][value="life insured"]');
             var bothRadioButton = document.querySelector('input[name="policyRole"][value="both"]');
             var first_name_dropdown = document.getElementById('policyFirstNameSelect');
             var last_name_dropdown = document.getElementById('policyLastNameSelect');
@@ -777,7 +732,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 last_name_dropdown.add(last_name_option);
             });
 
-            dependantRadioButton.addEventListener('click', function() {
+            dependentRadioButton.addEventListener('click', function() {
                 first_name_dropdown.innerHTML = '';
                 last_name_dropdown.innerHTML = '';
 
@@ -1027,7 +982,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 i++;
 
                 var ownerRadioButton2 = document.querySelector('input[name="policyRole2"][value="owner"]');
-                var dependantRadioButton2 = document.querySelector('input[name="policyRole2"][value="life insured"]');
+                var dependentRadioButton2 = document.querySelector('input[name="policyRole2"][value="life insured"]');
                 var bothRadioButton2 = document.querySelector('input[name="policyRole2"][value="both"]');
                 var first_name_dropdown2 = document.getElementById('policyFirstNameSelect2');
                 var last_name_dropdown2 = document.getElementById('policyLastNameSelect2');
@@ -1054,7 +1009,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     last_name_dropdown2.add(last_name_option);
                 });
 
-                dependantRadioButton2.addEventListener('click', function() {
+                dependentRadioButton2.addEventListener('click', function() {
                     first_name_dropdown2.innerHTML = '';
                     last_name_dropdown2.innerHTML = '';
     
@@ -1414,6 +1369,38 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     input.value = '';
                 }
             });
+        });
+    }
+    function missingPages () {
+        var myModal = document.getElementById('missingFields');
+        myModal.classList.add('show');
+        myModal.style.display = 'block';
+        document.querySelector('body').style.paddingRight = '0px';
+        document.querySelector('body').style.overflow = 'hidden';
+        document.querySelector('body').classList.add('modal-open');
+
+        var modalBackdrop = document.createElement('div');
+        modalBackdrop.className = 'modal-backdrop fade show';
+        document.querySelector('body.modal-open').append(modalBackdrop);
+
+        // Close the modal
+        var closeButton = document.querySelector('#missingFields .btn-exit-sidebar');
+        closeButton.addEventListener('click', function() {
+            myModal.classList.remove('show');
+            myModal.style.display = 'none';
+            document.querySelector('body').style.paddingRight = '';
+            document.querySelector('body').style.overflow = '';
+            document.querySelector('body').classList.remove('modal-open');
+            var modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.remove();
+            }
+            if (marital_status == null || marital_status == undefined || marital_status == '') {
+                window.location.href = '/marital-status';
+            }
+            else if (spouse_session === false && family_details['children'] === false) {
+                window.location.href = '/family-dependent';
+            }
         });
     }
 }

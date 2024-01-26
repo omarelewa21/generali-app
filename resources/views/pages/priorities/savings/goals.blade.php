@@ -14,8 +14,12 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
+=======
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
+>>>>>>> zeno
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
     $savingsGoals = session('customer_details.selected_needs.need_4.advance_details.goal_target');

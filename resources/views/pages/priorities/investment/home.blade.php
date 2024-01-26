@@ -11,11 +11,11 @@
 @section('content')
 @php
     // Retrieving values from the session
-    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
 @endphp
 
 <div id="investment_home">

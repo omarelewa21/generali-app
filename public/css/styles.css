@@ -47,7 +47,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .parallax-bottom, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default, body.overflow #home {
   overflow: hidden;
 }
 
@@ -205,7 +205,7 @@ input[type="number"] {
   margin-bottom: 10px;
 }
 
-.form-signin label {
+.form-floating label {
   color: rgba(10, 4, 60, 0.30);
 }
 
@@ -223,26 +223,6 @@ input[type="number"] {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.fa-id:before {
-  content: "";
-  background-image: url('/images/general/agentid-icon.png');
-  width: 20px;
-  height: 20px;
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.fa-password:before {
-  content: "";
-  background-image: url('/images/general/password-icon.png');
-  width: 20px;
-  height: 20px;
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .form-floating > .form-control:not(:placeholder-shown) ~ label {
   transform: scale(0.85) translateY(-1rem) translateX(0.15rem);
 }
@@ -253,7 +233,26 @@ input[type="number"] {
   margin-right: 10px;
 }
 
+.form-check-input:checked {
+  background-color: #C21B17;
+  border-color: #C21B17;
+}
+
 /* ============================== Tables ============================== */
+table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting_asc:before {
+  content: "\f0de"!important;
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  font-size: 1rem!important;
+}
+
+table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:after {
+  content: "\f0dd"!important;
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  font-size: 1rem!important;
+}
+
 .dataTable tr th, #agentTable tr th {
   background-color: #EBEBEB;
   font-size: 18px;
@@ -276,7 +275,7 @@ input[type="number"] {
 }
 
 table.dataTable thead>tr>th.sorting:before, table.dataTable thead>tr>th.sorting:after, table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_asc:after {
-  line-height: 15px!important;
+  line-height: 1px!important;
   opacity: .3!important;
 }
 
@@ -381,6 +380,17 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 
 .alert.alert-warning svg path {
   fill: #664d03;
+}
+
+/* ============================== Font Awesome ============================== */
+.fa-solid.fa-plus {
+  border: 3px solid #C21B17;
+  border-radius: 100%;
+  padding: 4px;
+}
+
+.btn-create:hover .fa-solid.fa-plus {
+  border: 3px solid #ffffff;
 }
 
 /* ============================== Navigation Menu ============================== */
@@ -543,99 +553,6 @@ p.nav-text {
 .btn-exit:before {
   content: "";
   background-image: url(/images/general/Logout.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-refresh:before {
-  content: "";
-  background-image: url(/images/general/refresh.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-create:before {
-  content: "";
-  background-image: url(/images/general/create.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-create:hover:before {
-  content: "";
-  background-image: url(/images/general/create-white.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-tick .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-tick.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-draft .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-draft.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-cancelled .btn-text:before {
-  content: "";
-  background-image: url(/images/general/icon-cancel.png);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 45px;
-}
-
-.btn-refresh-red:before {
-  content: "";
-  background-image: url(/images/general/refresh-red.svg);
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.btn-refresh-red:hover:before {
-  content: "";
-  background-image: url(/images/general/refresh-white.svg);
   width: 30px;
   height: 30px;
   display: inline-block;
@@ -1061,7 +978,7 @@ h2.display-5, .currencyField {
 }
 
 /* ============================== Marital Status Page ============================== */
-#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependant .avatar-design-placeholder, #avatar_family_dependant_details .avatar-design-placeholder {
+#identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
   background-image: url(/images/marital-status/vector-plant.png);
   background-size: 20%;
   background-position: bottom right;
@@ -1075,7 +992,7 @@ h2.display-5, .currencyField {
   font-weight: 700;
 }
 
-#avatar_family_dependant .content-avatar-default, #avatar_family_dependant_details .content-avatar-default {
+#avatar_family_dependent .content-avatar-default, #avatar_family_dependent_details .content-avatar-default {
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-gap: 0;
 }
@@ -1158,10 +1075,11 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Top Priorities Page ============================== */
 #sortable button {
-  background-color: transparent;
+  background-color: #ffffff;
   border: none;
   margin: 0;
   padding: 0;
+  border-radius: 100%;
 }
 
 .dropped {
@@ -1329,6 +1247,69 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortable .eight {
   grid-column: 72 / span 14;
   grid-row: 59 / 96;
+}
+
+#sortable-main .item-dropped.digit{
+  stroke-width: 0;
+}
+
+#sortablemobile {
+  list-style-type: none;
+}
+
+#sortablemobile ul.dropdown-menu {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: inherit;
+}
+
+#sortablemobile ul.dropdown-menu li {
+  padding: 12px 22px 12px 22px!important;
+}
+
+#sortablemobile ul.dropdown-menu li:hover {
+  background-color: #f8f9fa;
+}
+
+#sortablemobile li {
+  margin-bottom: 16px;
+  padding: 12px 40px 12px 22px;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  position: relative;
+}
+
+#sortablemobile li.is-empty {
+  border: 2px dashed #ffffff;
+  background-color: #F2F2F288;
+  color: white;
+  font-weight: 700;
+}
+
+#sortablemobile .ui-sortable-placeholder {
+  visibility: visible !important;
+  border: 2px dashed #ffffff;
+  background: rgba(242, 242, 242, 0.50);
+}
+
+#sortablemobile li .arrowIcon {
+  position: absolute;
+  right: 10px;
+  top: inherit;
+  cursor: pointer;
+}
+
+#sortablemobile li.is-empty .arrowIcon {
+  color: #fff;
+}
+
+#sortablemobile li .needs-icon {
+  height: 2em;
+  margin-right: 15px;
 }
 
 /* ============================== Retirement Home Page ============================== */
@@ -1594,6 +1575,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  #top_priorities .wrapper-avatar-default {
+    display:block;
+  }
+  body.overflow #top_priorities .wrapper-avatar-default {
+    overflow: auto;
+  }
   .homeVector {
     width: 100%;
     height:auto;
@@ -1612,7 +1599,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     flex-flow: nowrap;
     overflow: auto;
   }
-  #avatar_marital_status .main-content, #avatar_family_dependant .main-content, #avatar_my_assets .main-content, #top_priorities .main-content {
+  #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
   .avatar-text {
@@ -1640,7 +1627,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .wrapper-avatar {
     grid-template-rows: 10vh 20vh 60vh;
   }
-  #identity_details .bg-primary, #avatar_family_dependant_details .bg-primary {
+  #identity_details .bg-primary, #avatar_family_dependent_details .bg-primary {
     margin-top: -200px;
   }
   #home {
@@ -1807,15 +1794,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_welcome section.footer .female {
     bottom: 2%;
     right: 10%;
-  }
-
-
-
-  #avatar_gender_selection .main-content h4,
-  #avatar_marital_status .main-content h4,
-  #avatar_family_dependant .main-content h4,
-  #avatar_my_assets .main-content h4 {
-    font-weight: 700;
   }
 
   .main-content .overflow-auto.full-height-350 {

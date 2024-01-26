@@ -14,6 +14,7 @@
 
 @php
     // Retrieving values from the session
+<<<<<<< HEAD
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $criticalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount');
     $criticalYear = session('customer_details.selected_needs.need_6.advance_details.critical_illness.year');
@@ -21,6 +22,15 @@
     $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.total_health_medical_needed', '0');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_6.advance_details.critical_illness.relationship');
+=======
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
+    $criticalAmountNeeded = session('customer_details.health-medical_needs.critical_illness.neededAmount');
+    $criticalYear = session('customer_details.health-medical_needs.critical_illness.year');
+    $existingProtectionAmount = session('customer_details.health-medical_needs.critical_illness.existingProtectionAmount');
+    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.critical_illness.totalHealthMedicalNeeded', '0');
+    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.critical_illness.fundPercentage', '0');
+    $relationship = session('customer_details.health-medical_needs.critical_illness.coverFor');
+>>>>>>> zeno
 @endphp
 
 <div id="critical-illness_amount_needed" class="bg-hnm calculator-page">
