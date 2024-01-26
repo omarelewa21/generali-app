@@ -300,17 +300,17 @@
 </div>
 
 <script>
-    var lastPageInput = {!! json_encode($topPriorities) !!};
-    var priority = {!! json_encode($prioritiesDiscuss) !!};
+var lastPageInput = {!! json_encode($topPriorities) !!};
+var priority = {!! json_encode($prioritiesDiscuss) !!};
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ensure the first accordion item is always open
-        const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure the first accordion item is always open
+    const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
 
-        if (firstAccordionItem) {
-            const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
-            firstCollapse.classList.add('show');
-        }
-    });
+    if (firstAccordionItem) {
+        const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
+        firstCollapse.classList.add('show');
+    }
+});
 </script>
 @endsection

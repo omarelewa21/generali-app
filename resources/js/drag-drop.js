@@ -126,20 +126,41 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             topPrioritiesButtonInput.value = JSON.stringify(addedNeedsImages);
         }
 
-        // Function to sort
-        $("#sortable .svg-button").sortable({
+        $(window).resize(function () {
+            if ($("#topPrioritiesButtonInput").val() && JSON.stringify(addedNeedsImages) != $("#topPrioritiesButtonInput").val().replaceAll(",null", "")) {
+              const data = JSON.parse($("#topPrioritiesButtonInput").val().replaceAll(",null", ""));
+              const remainingData = data.filter(item => !addedNeedsImages.includes(item));
+      
+              if (remainingData.length) {
+                for (let i = 0; i < remainingData.length; i++) {
+                  const dataAvatar = $(`button[data-avatar="${remainingData[i]}"]`);
+                  const dataName = dataAvatar.find("img").attr("src");
+      
+                  dataAvatar.trigger("click");
+                  addImageToSortable(dataName, dataAvatar.attr("data-avatar"));
+                }
+              }
+            }
+        });
+      
+          // Initialize sortable functionality for dropped items
+          // $sortable.find(".dropped").sortable({
+          $("#sortable .svg-button").sortable({
             // Configuration options for the sortable functionality
             connectWith: ".svg-button",
             placeholder: "ui-state-highlight",
             items: ".sortable-container",
+            // handle: ".inner-dropped",
             start: function (event, ui) {
                 const draggingBox = ui.item;
                 const droppedPoint = draggingBox.closest(".item-dropped");
                 const index = droppedPoint.attr("data-index");
+        
                 const attributeComp = droppedPoint.find(".dropped")[0];
                 const attribute = $(attributeComp).attr("data-identifier");
                 droppedPoint.addClass("draggingItem");
                 const container = droppedPoint.find(".sortable-container")[0];
+                // console.log(7777);
                 $(container)[0].setAttribute("data-source-index", index);
                 $(container)[0].setAttribute("data-source-identifier", attribute);
             },
@@ -148,96 +169,90 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
                 const droppedParent = droppedBox.closest(".item-dropped");
                 const index = droppedParent.attr("data-index");
                 const attributeComp = droppedParent.find(".dropped")[0];
-
+        
                 if (droppedParent.find(".sortable-container").length === 0) {
                     event.preventDefault();
                     return;
                 }
-
+        
                 const attribute = $(attributeComp).attr("data-identifier");
                 droppedParent.addClass("droppedContainer");
                 const containers = droppedParent.find(".sortable-container");
-
+        
                 const container = containers.filter(function (index, item) {
                     const sourceIndex = $(item).attr("data-source-index");
                     const sourceIdentifier = $(item).attr("data-source-identifier");
                     return sourceIndex === undefined && sourceIdentifier === undefined;
                 })[0];
-
-                if($(container)[0] !== undefined){
-                    $(container)[0].setAttribute("data-destination-index", index);
-                    $(container)[0].setAttribute("data-destination-identifier", attribute);
+        
+                if ($(container)[0] !== undefined) {
+                $(container)[0].setAttribute("data-destination-index", index);
+                $(container)[0].setAttribute("data-destination-identifier", attribute);
                 }
             },
             stop: function (event, ui) {
                 const sourceBox = $(".item-dropped.draggingItem");
                 const destinationBox = $(".item-dropped.droppedContainer");
-
+        
                 if (destinationBox.length === 0) {
                     sourceBox.removeClass("draggingItem");
+            
+                    const container = $(sourceBox.find(".sortable-container")[0]);
+            
+                    container.removeAttr("data-source-index");
+                    container.removeAttr("data-source-identifier");
+            
                     event.preventDefault();
                     return;
                 }
-
+        
                 const sourceContainer = destinationBox.find(".sortable-container").filter(function (index, item) {
                     const sourceIndex = $(item).attr("data-source-index");
                     const sourceIdentifier = $(item).attr("data-source-identifier");
                     return sourceIndex !== undefined && sourceIdentifier !== undefined;
                 });
-
+        
                 const destinationContainer = destinationBox.find(".sortable-container").filter(function (index, item) {
                     const destinationIndex = $(item).attr("data-destination-index");
                     const destinationIdentifier = $(item).attr("data-destination-identifier");
                     return destinationIndex !== undefined && destinationIdentifier !== undefined;
                 });
-
+        
                 const sourceAttribute = sourceContainer.attr("data-source-identifier");
                 const destinationAttribute = destinationContainer.attr("data-destination-identifier");
-
+        
                 sourceContainer.removeAttr("data-source-index");
                 sourceContainer.removeAttr("data-source-identifier");
-
+        
                 destinationContainer.removeAttr("data-destination-index");
                 destinationContainer.removeAttr("data-destination-identifier");
-
+        
                 const sourceDropped = sourceBox.find(".dropped");
                 sourceDropped[0].setAttribute("data-identifier", destinationAttribute);
                 sourceDropped.find(".sortable-container").remove();
-
+        
                 sourceDropped.append(destinationContainer);
-
+        
                 const destinationDropped = destinationBox.find(".dropped");
                 destinationDropped[0].setAttribute("data-identifier", sourceAttribute);
-
+        
                 sourceBox.removeClass("draggingItem");
                 destinationBox.removeClass("droppedContainer");
-
+        
                 const updatedImages = [];
-
+        
                 $sortable.find(".dropped").each(function () {
                     let dataAvatar = $(this).attr("data-identifier");
                     updatedImages.push(dataAvatar);
                 });
-
-                addedNeedsImages = updatedImages.map((x) =>
-                    x !== undefined ? x : null
-                );
-
+        
+                addedNeedsImages = updatedImages.map(x => (x !== undefined ? x : null));
+        
                 updateHiddenInputValue();
-            },
-        });
+            }
+        });      
 
-        // Function to update the addedNeedsImages array based on the current order of images
-        function updateAddedNeedsImages() {
-            addedNeedsImages = [];
-
-            $(".dropped .sorting-div img.inner-dropped").each(function() {
-                addedNeedsImages.push($(this).attr("src"));
-            });
-        }
-
-        // Function to drag and drop
-        var draggedItem = null;
+        var dblclick = false;
 
         $("button img", $needs).draggable({
             cancel: "a.ui-icon",
@@ -245,15 +260,31 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             containment: "document",
             helper: "clone",
             cursor: "move",
-            start: function(event, ui) {
+            start: function (event, ui) {
                 if ($(this).hasClass("item-dropped")) {
-                    ui.helper.addClass("item-dropped");
+                ui.helper.addClass("item-dropped");
                 }
-                // draggedItem = $(this);
+
+                if (dblclick) {
+                setTimeout(() => {
+                    $(event.currentTarget).trigger("click");
+                    $(event.currentTarget).trigger("dragstop");
+                    $(event.currentTarget).trigger("mouseup");
+                }, 10);
+
+                dblclick = false;
+                }
+            },
+            stop: function (event, ui) {
+                ui.helper.hide();
             }
         });
 
-        // $("#sortable > div > div").droppable({
+        $("button img", $needs).on("dblclick", function (e) {
+            e.preventDefault();
+            dblclick = true;
+        });
+
         $("#top_priorities").droppable({
             accept: "#needs button img:not(.item-dropped)",
             classes: {
