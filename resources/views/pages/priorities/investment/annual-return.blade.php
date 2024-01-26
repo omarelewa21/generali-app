@@ -12,25 +12,35 @@
 
 @php
     // Retrieving values from the session
-    $investmentPriority = session('customer_details.priorities.investments_discuss');
-    $investment = session('customer_details.investments_needs');
-    $investmentPA = session('customer_details.investments_needs.annualReturn','5');
-    $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');
-    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded');
-    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
-    $investmentMonthlyPayment = session('customer_details.investments_needs.monthlyInvestmentAmount');
-    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+
+    $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns','5');
+    $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
+    $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.total_investment_needed', '0');
+    $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
+    $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
+    $investmentSupportingYears = session('customer_details.selected_needs.need_5.advance_details.supporting_years');
 @endphp
 
 
 <div id="investment-annual-return" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalInvestmentFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ number_format(floatval($totalInvestmentNeeded)) }}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Investment Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.investment.annual.return')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

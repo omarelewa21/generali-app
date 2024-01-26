@@ -24,13 +24,12 @@
     $spouseData = session('customer_details.family_details.dependent.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
 
-    $relationship = session('customer_details.retirement_needs.coverFor');
-    $selectedInsuredName = session('customer_details.retirement_needs.selectedInsuredName');
-    $othersCoverForName = session('customer_details.retirement_needs.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.retirement_needs.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.retirement_needs.othersCoverForDob');
+    $relationship = session('customer_details.selected_needs.need_2.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_2.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_2.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_2.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_2.advance_details.spouse_dob');
 @endphp
-
 <div id="retirement_coverage" class="secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">

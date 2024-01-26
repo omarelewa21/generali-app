@@ -25,12 +25,12 @@
     $spouseData = session('customer_details.family_details.dependent.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
 
-    $relationship = session('customer_details.health-medical_needs.critical_illness.coverFor');
-    $selectedInsuredName = session('customer_details.health-medical_needs.critical_illness.selectedInsuredName');
-    $othersCoverForName = session('customer_details.health-medical_needs.critical_illness.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.health-medical_needs.critical_illness.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.health-medical_needs.critical_illness.othersCoverForDob');
-    $selectedCritical = session('customer_details.health-medical_needs.criticalIllnessSelection');
+    $relationship = session('customer_details.selected_needs.need_6.advance_details.critical_illness.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_6.advance_details.critical_illness.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_6.advance_details.critical_illness.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_dob');
+    $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
 @endphp
 
 <div id="critical-illness_coverage" class="secondary-default-bg">

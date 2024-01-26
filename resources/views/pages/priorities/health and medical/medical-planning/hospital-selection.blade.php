@@ -13,9 +13,9 @@
 
 @php
     // Retrieving values from the session
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $selectedHospital = session('customer_details.health-medical_needs.medical_planning.typeOfHospital');
-    $relationship = session('customer_details.health-medical_needs.medical_planning.coverFor');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $selectedHospital = session('customer_details.selected_needs.need_6.advance_details.health_care.type_of_hospital');
+    $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
 @endphp
 
 <div id="medical-hospital-selection">

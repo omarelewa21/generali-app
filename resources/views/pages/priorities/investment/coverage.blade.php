@@ -13,23 +13,22 @@
 
 @php
     // Retrieving values from the session
-    $investmentPriority = session('customer_details.priorities.investments_discuss');
-    $investment = session('customer_details.investments_needs');
+    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependent');
-    $childData = session('customer_details.family_details.dependent.children_data');
+    $familyDependent = session('customer_details.family_details.dependant');
+    $childData = session('customer_details.family_details.dependant.children_data');
+    $spouseData = session('customer_details.family_details.dependant.spouse_data');
+    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
 
-    $spouseData = session('customer_details.family_details.dependent.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
-
-    $relationship = session('customer_details.investments_needs.coverFor');
-    $selectedInsuredName = session('customer_details.investments_needs.selectedInsuredName');
-    $othersCoverForName = session('customer_details.investments_needs.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.investments_needs.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.investments_needs.othersCoverForDob');
+    $relationship = session('customer_details.selected_needs.need_5.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_5.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_5.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_5.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_5.advance_details.spouse_dob');
 @endphp
 
 <div id="investment-coverage" class="secondary-default-bg">
@@ -43,7 +42,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I’d like to set up a lump sum investment program for my:</h2>
+                                <h2 class="display-5 fw-bold lh-sm text-center">I want to make an investment plan for my:</h2>
                             </div>
                         </div>
                     </div>

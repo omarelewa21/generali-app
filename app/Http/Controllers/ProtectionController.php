@@ -12,12 +12,6 @@ class ProtectionController extends Controller
 {
     public function validateProtectionCoverageSelection(Request $request)
     {
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
-
-        // Get existing protection_needs from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
@@ -48,17 +42,46 @@ class ProtectionController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+
+        // Get existing protection_needs from the session
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+
+        // $totalPriority = count($customerDetails['financial_priorities']);
+        $index = array_search('protection', $customerDetails['financial_priorities'], true);
+
+        if ($customerDetails['priorities']['protection'] == true || $customerDetails['priorities']['protection'] == 'true'){
+            $coverAnswer = 'Yes';
+        } else{
+            $coverAnswer = 'No';
+        }
+        if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+            $discussAnswer = 'Yes';
+            $needs = $customerDetails['selected_needs']['need_1'] ?? [];
+            $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
+        } else{
+            $discussAnswer = 'No';
+        }
+
         // Update specific keys with new values
-        $protection = array_merge($protection, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+        $needs = array_merge($needs, [
+            'need_no' => 'N1',
+            'priority' => $index+1,
+            'cover' => $coverAnswer,
+            'discuss' => $discussAnswer
+        ]);
+        $advanceDetails = array_merge($advanceDetails, [
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated protection_needs back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['selected_needs']['need_1'] = $needs;
+        $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -75,8 +98,9 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
-        return redirect()->route('protection.amount.needed');
+        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('protection.amount.needed');
     }
 
     public function validateProtectionAmountNeeded(Request $request)
@@ -124,28 +148,30 @@ class ProtectionController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing protection_needs from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_1'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $protection = array_merge($protection, [
-            'monthlySupportAmount' => $protection_monthly_support,
-            'supportingYears' => $protection_supporting_years
+        $advanceDetails = array_merge($advanceDetails, [
+            'covered_amount_monthly' => $protection_monthly_support,
+            'covered_amount' => $protection_monthly_support*12,
+            'supporting_years' => $protection_supporting_years
         ]);
 
         if ($totalProtectionFund === $protectionTotalFund){
 
-            $protection = array_merge($protection, [
-                'totalProtectionNeeded' => $totalProtectionFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_protection_needed' => $totalProtectionFund
             ]);
         }
         else{
-            $protection = array_merge($protection, [
-                'totalProtectionNeeded' => $protectionTotalFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_protection_needed' => $protectionTotalFund
             ]);
         }
 
         // Set the updated protection back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -162,10 +188,10 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
+        
         return redirect()->route('protection.existing.policy');
     }
-
+    
     public function validateProtectionExistingPolicy(Request $request){
 
         $customMessages = [
@@ -199,58 +225,59 @@ class ProtectionController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing protection_needs from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $existing_policy_amount = str_replace(',','',$request->input('existing_policy_amount'));
         $protection_existing_policy = $request->input('protection_existing_policy');
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
+        $totalExisting = floatval($customerDetails['selected_needs']['need_1']['advance_details']['covered_amount'])*floatval($customerDetails['selected_needs']['need_1']['advance_details']['supporting_years']);
         if ($existing_policy_amount === '' || $existing_policy_amount === null){
-            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - 0);
-            $newProtectionPercentage = floatval(0 / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+            $newProtectionTotalAmountNeeded =  $totalExisting - 0;
+            $newProtectionPercentage = floatval(0 / $totalExisting * 100);
         } else {
-            $newProtectionTotalAmountNeeded = floatval($customerDetails['protection_needs']['totalProtectionNeeded'] - $existing_policy_amount);
-            $newProtectionPercentage = floatval($existing_policy_amount / $customerDetails['protection_needs']['totalProtectionNeeded'] * 100);
+            $newProtectionTotalAmountNeeded = floatval($totalExisting - $existing_policy_amount);
+            $newProtectionPercentage = floatval($existing_policy_amount / $totalExisting * 100);
         }
 
         // Update specific keys with new values
-        $protection = array_merge($protection, [
-            'existingPolicyAmount' => $existing_policy_amount,
-            'existingPolicy' => $protection_existing_policy
+        $advanceDetails = array_merge($advanceDetails, [
+            'existing_amount' => $existing_policy_amount,
+            'existing_policy' => $protection_existing_policy
         ]);
 
         if ($newProtectionTotalAmountNeeded === $totalAmountNeeded && $newProtectionPercentage === $totalPercentage){
             if ($newProtectionTotalAmountNeeded <= 0){
-                $protection = array_merge($protection, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $protection = array_merge($protection, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newProtectionTotalAmountNeeded <= 0){
-                $protection = array_merge($protection, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $protection = array_merge($protection, [
-                    'totalAmountNeeded' => $newProtectionTotalAmountNeeded,
-                    'fundPercentage' => $newProtectionPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $newProtectionTotalAmountNeeded,
+                    'fund_percentage' => $newProtectionPercentage
                 ]);
             }
         }
 
         // Set the updated protection back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -267,7 +294,8 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
         return redirect()->route('protection.gap');
     }
 
@@ -277,10 +305,10 @@ class ProtectionController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing protection_needs from the session
-        $protection = $customerDetails['protection_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 
         // Set the updated protection back to the customer_details session
-        $customerDetails['protection_needs'] = $protection;
+        $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

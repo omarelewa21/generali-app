@@ -705,9 +705,9 @@ h5.gap-value {
         bottom: 7% !important;
     }
 
-    .slick-slide {
+    /* .slick-slide {
         height: 76vh !important;
-    }
+    } */
 
     #protection_home .needs-home {
         grid-template-rows: 21vh 69vh 7vh;
@@ -790,9 +790,9 @@ h5.gap-value {
 
 /* target iPad */
 @media only screen and (width: 768px) and (orientation:portrait) {
-    .slick-slide {
+    /* .slick-slide {
         height: 66vh !important;
-    }
+    } */
 
     #protection_home .needs-home {
         grid-template-rows: 18vh 69vh 12vh;
@@ -819,9 +819,9 @@ h5.gap-value {
 /* Nexus 10 */
 @media only screen and (width:800px) and (orientation:portrait),
 (width:950px) and (orientation:portrait){
-    .slick-slide {
+    /* .slick-slide {
         height: 73vh !important;
-    }
+    } */
     #retirement_home .needs-home{
     grid-template-rows: 39vh 52vh 11vh;
     }
@@ -838,9 +838,9 @@ h5.gap-value {
 /* target iPad Air */
 @media only screen and (width: 820px) and (orientation:portrait) {
 
-    .slick-slide {
+    /* .slick-slide {
         height: 70vh !important;
-    }
+    } */
 
     #retirement_home .needs-home {
         grid-template-rows: 33vh 57vh 10vh;

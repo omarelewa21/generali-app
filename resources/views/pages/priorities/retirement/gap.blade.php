@@ -14,13 +14,14 @@
 
 @php
     // Retrieving values from the session
-    $retirementPriority = session('customer_details.priorities.retirement_discuss');
-    $retirement = session('customer_details.retirement_needs');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+
+    $retirement = session('customer_details.selected_needs.need_2.advance_details');
+    $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
+    $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
 @endphp
 
 <div id="retirement_summary" class="secondary-default-bg summary-page">
@@ -61,8 +62,10 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center" style="font-size:80px;line-height:90px;">{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%
-                                                <h5 class="f-family text-black" style="font-size:25px;">covered</h5>
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/retirement-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%</span>
+                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +89,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I should have a fund of</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to build a retirement fund of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
                                         </div>
@@ -98,7 +101,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I have set aside</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($retirementSavings))}}</h4>
                                         </div>
@@ -110,7 +113,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a plan for</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a retirement plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>

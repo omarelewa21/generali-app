@@ -14,11 +14,12 @@
 
 @php
     // Retrieving values from the session
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsGoals = session('customer_details.savings_needs.goalTarget');
-    $relationship = session('customer_details.savings_needs.coverFor');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $savingsGoals = session('customer_details.selected_needs.need_4.advance_details.goal_target');
+    $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
 @endphp
 
 <div id="savings-goals">
@@ -31,7 +32,7 @@
                         <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                         <section class="content-avatar-default">
                             <div class="col-12 text-center position-relative">
-                                <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I Plan to have a saving goal of<br>
+                                <h2 class="display-5 fw-bold lh-base text-center @error('savings_goals_amount') is-invalid @enderror">I plan to have a savings goal of<br>
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_goals_amount" class="form-control display-5 fw-bold lh-base position-relative border-0 d-inline-block w-25 text-primary @error('savings_goals_amount') is-invalid @enderror" id="savings_goals_amount" value="{{ $goalsAmount !== null ? number_format(floatval($goalsAmount)) : $goalsAmount }}"></span> to:
                                 </h2>
                                 @if ($errors->has('savings_goals_amount'))
@@ -161,12 +162,12 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Enable them to pursue their interests' :'Travel around the world'}}" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Pursue their interests' :'Travel around the world'}}" data-required="">
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'interest' :'travel').'.png') }}" width="auto" height="110px" alt="{{$goal_1}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
-                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Enable them to pursue their interests' : 'Travel around the world'}}</p>
+                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Pursue their interests' : 'Travel around the world'}}</p>
                                                         </div>
                                                     </button>
                                                 </div>
@@ -175,12 +176,12 @@
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
-                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'To start their own business' : 'Upgrade my assets & lifestyle'}}" data-required="">
+                                                    <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Start their own business' : 'Upgrade my assets & lifestyle'}}" data-required="">
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'business' :'home').'.png') }}" width="auto" height="110px" alt="{{$goal_2}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
-                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'To start their own business' : 'Upgrade my assets & lifestyle'}}</p>
+                                                            <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Start their own business' : 'Upgrade my assets & lifestyle'}}</p>
                                                         </div>
                                                     </button>
                                                 </div>
@@ -270,7 +271,7 @@
 </div>
 <script>
     var savingsPriority = '{{$savingsPriority}}';
-    var sessionData = {!! json_encode(session('customer_details.savings_needs.goalTarget')) !!};
+    var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

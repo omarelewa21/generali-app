@@ -318,6 +318,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalsavingsPercentage = document.getElementById("percentage");
         
                 var totalSavingsFund = document.getElementById("TotalSavingsFund");
+                var TotalSavingsFundMob = document.getElementById("TotalSavingsFundMob");
         
                 monthlyInput.addEventListener("input", function() {
         
@@ -342,6 +343,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = totalPerYear.toLocaleString();
                         totalSavingsFund.innerText = "RM" + result;
+                        TotalSavingsFundMob.innerText = "RM" + result;
                         if (!isNaN(savingsYears)){
                             // var result = totalSavings.toLocaleString();
                             // totalSavingsFund.innerText = "RM" + result;
@@ -350,6 +352,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                                 totalsavingsPercentage.value = 100;
                                 $('.calculation-progress-bar').css('width','100%');
                                 totalSavingsFund.innerText = "RM 0";
+                                TotalSavingsFundMob.innerText = "RM 0";
                             }
                             else{
                                 totalAmountNeeded.value = total;
@@ -357,12 +360,14 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                                 $('.calculation-progress-bar').css('width', totalPercentage + '%');
                                 var totalResult = total.toLocaleString();
                                 totalSavingsFund.innerText = "RM" + totalResult;
+                                TotalSavingsFundMob.innerText = "RM" + totalResult;
                             }
                         }
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = monthlyInputValue;
                         totalSavingsFund.innerText = "RM 0";
+                        TotalSavingsFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalSavingsNeeded.value =  totalSavings;
@@ -388,11 +393,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = Year;
                         var result = total.toLocaleString();
                         totalSavingsFund.innerText = "RM" + result;
+                        TotalSavingsFundMob.innerText = "RM" + result;
                         if (total <= 0){
                             totalAmountNeeded.value = 0;
                             totalsavingsPercentage.value = 100;
                             $('.calculation-progress-bar').css('width','100%');
                             totalSavingsFund.innerText = "RM 0";
+                            TotalSavingsFundMob.innerText = "RM 0";
                         }
                         else{
                             totalAmountNeeded.value = total;
@@ -400,11 +407,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             $('.calculation-progress-bar').css('width', totalPercentage + '%');
                             var totalResult = total.toLocaleString();
                             totalSavingsFund.innerText = "RM" + totalResult;
+                            TotalSavingsFundMob.innerText = "RM" + totalResult;
                         }
                     } else {
                         // Input is not a valid number
                         this.value = goalDurationValue;
                         totalSavingsFund.innerText = "RM 0";
+                        TotalSavingsFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalSavingsNeeded.value =  totalAmount;
@@ -445,134 +454,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-        // else if (path == '/savings-monthly-payment') {
-        //     // Get the input value
-        //     var monthlyInput = document.getElementById("savings_monthly_payment");
-        //     var totalSavingsNeeded = document.getElementById("total_savingsNeeded");
-    
-        //     var totalSavingsFund = document.getElementById("TotalSavingsFund");
-    
-        //     monthlyInput.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var monthlyInputValue = monthlyInput.value;
-    
-        //         // Remove non-digit characters
-        //         const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-    
-        //         // Attempt to parse the cleaned value as a float
-        //         const parsedValue = parseFloat(cleanedValue);
-    
-        //         // Check if the parsed value is a valid number
-        //         if (!isNaN(parsedValue)) {
-        //         // If it's a valid number, format it with commas
-        //             const formattedValue = parsedValue.toLocaleString('en-MY');
-        //             this.value = formattedValue;
-        //         } else {
-        //         // If it's not a valid number, display the cleaned value as is
-        //             this.value = monthlyInputValue;
-        //         }
-    
-        //         var monthlyAmount = parseInt(cleanedValue);
-    
-        //         // Calculate months
-        //         var amountPerYear = monthlyAmount * 12;
-    
-        //         if (isNaN(monthlyAmount)) {
-        //             // Input is not a valid number
-        //             totalSavingsFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = amountPerYear.toLocaleString();
-    
-        //             totalSavingsFund.innerText = "RM" + result;
-        //         }
-    
-        //         // Set the value of the hidden input field
-        //         totalSavingsNeeded.value = amountPerYear;
-        //     });
-    
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         monthlyInput.addEventListener("blur", function() {
-        //             validateNumberField(monthlyInput);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         var value = field.value.replace(/,/g, ''); // Remove commas
-        //         var numericValue = parseFloat(value);
-    
-        //         if (isNaN(numericValue)) {
-        //             // field.classList.remove("is-valid");
-        //             field.classList.add("is-invalid");
-    
-        //         } else {
-        //             // field.classList.add("is-valid");
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
-        // else if (path == '/savings-goal-duration') {
-        //     // Get the input value
-        //     var goalDuration = document.getElementById("savings_goal_duration");
-        //     var newTotalFund = document.getElementById("newTotal_savingsNeeded");
-        //     var totalSavingsFund = document.getElementById("TotalSavingsFund");
-    
-        //     if (goalDurationSessionValue !== '' || goalDurationSessionValue !== 0 && oldTotalFund !== '') {
-        //             newTotalFund.value = goalDurationSessionValue * oldTotalFund;
-        //     } 
-            
-    
-        //     goalDuration.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var goalDurationValue = goalDuration.value;
-    
-        //         var Year = parseInt(goalDurationValue);
-    
-        //         // Calculate months
-        //         var totalAmount = Year * oldTotalFund;
-    
-        //         if (isNaN(Year)) {
-        //             // Input is not a valid number
-        //             totalSavingsFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = totalAmount.toLocaleString();
-    
-        //             totalSavingsFund.innerText = "RM" + result;
-        //         }
-        //         if(totalAmount >= 10000000000){
-        //             totalSavingsFund.classList.add('f-40');
-        //             totalSavingsFund.classList.remove('f-50');
-        //         }
-        //         else{
-        //             totalSavingsFund.classList.add('f-50');
-        //             totalSavingsFund.classList.remove('f-40');
-        //         }
-                
-        //         newTotalFund.value = Year * oldTotalFund;
-                
-        //     });
-        
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         goalDuration.addEventListener("blur", function() {
-        //             validateNumberField(goalDuration);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-    
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
         if (path == '/savings/annual-return') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
@@ -713,17 +594,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                                 case 'High Risk':
                                     const selectedHighPR = highPotentialReturn.querySelector('#high-potential-return');
                                     selectedHighPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'High Potential Return';
+                                    selectedPotential.value = 'High';
                                     break;
                                 case 'Medium Risk':
                                     const selectedMediumPR = mediumPotentialReturn.querySelector('#medium-potential-return');
                                     selectedMediumPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Medium Potential Return';
+                                    selectedPotential.value = 'Medium';
                                     break;
                                 case 'Low Risk':
                                     const selectedLowPR = lowPotentialReturn.querySelector('#low-potential-return');
                                     selectedLowPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Low Potential Return';
+                                    selectedPotential.value = 'Low';
                                     break;
                                 default:
                                     break;

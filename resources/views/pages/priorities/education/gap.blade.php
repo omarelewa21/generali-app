@@ -7,13 +7,13 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.education_discuss');
-    $education = session('customer_details.education_needs');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
-    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
-    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded');
-    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $education = session('customer_details.selected_needs.need_3.advance_details');
+    $totalEducationYear = session('customer_details.selected_needs.need_3.advance_details.remaining_years');
+    $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
+    $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.total_education_needed','0');
+    $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
 @endphp
 
 <div id="education-summary" class="secondary-default-bg summary-page">
@@ -54,7 +54,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/education-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
@@ -67,7 +69,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">Within the next</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$totalEducationYear}} years</h4>
                                         </div>
@@ -79,7 +81,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to give my child a head start with</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to fund my child's education with</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalEducationNeeded))}}</h4>
                                         </div>
@@ -91,7 +93,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I have put aside</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So far, I've set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($educationSavingAmount))}}</h4>
                                         </div>
@@ -103,7 +105,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need to plan for</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need an education plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (5 /100)) )}}</h4>
                                         </div>

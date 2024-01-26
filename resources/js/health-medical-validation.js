@@ -515,6 +515,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             } else{
                 var totalFundNeeded = document.getElementById("total_healthMedicalNeeded");
                 var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
+                var TotalHealthMedicalFundMob = document.getElementById("TotalHealthMedicalFundMob");
         
                 // Get the input value
                 amountNeeded.addEventListener("input", function() {
@@ -536,9 +537,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = amountPerYear.toLocaleString();
                         totalDisplayFund.innerText = "RM" + result;
+                        TotalHealthMedicalFundMob.innerText = "RM" + result;
                         if (!isNaN(healthMedicalYears)){
                             var result = totalHealthMedical.toLocaleString();
                             totalDisplayFund.innerText = "RM" + result;
+                            TotalHealthMedicalFundMob.innerText = "RM" + result;
                         }
                         
                     } else {
@@ -546,6 +549,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = amountNeededValue;
                         // Input is not a valid number
                         totalDisplayFund.innerText = "RM 0";
+                        TotalHealthMedicalFundMob.innerText = "RM 0";
                         
                     }
                     // Set the value of the hidden input field
@@ -566,10 +570,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (!isNaN(Year)) {
                         var result = totalAmount.toLocaleString();
                         totalDisplayFund.innerText = "RM" + result;
+                        TotalHealthMedicalFundMob.innerText = "RM" + result;
                     } else {
                         // Input is not a valid number
                         this.value = supportingYearsValue;
                         totalDisplayFund.innerText = "RM 0";
+                        TotalHealthMedicalFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalFundNeeded.value =  totalAmount;
@@ -647,6 +653,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalAmountNeeded = document.getElementById("total_amountNeeded");
                 var totalHealthMedicalPercentage = document.getElementById("percentage");
                 var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
+                var TotalHealthMedicalFundMob = document.getElementById("TotalHealthMedicalFundMob");
         
                 existing_protection_amount.addEventListener("input", function() {
         
@@ -670,18 +677,21 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             totalHealthMedicalPercentage.value = 100;
                             $('.calculation-progress-bar').css('width','100%');
                             totalDisplayFund.innerText = "RM 0";
+                            TotalHealthMedicalFundMob.innerText = "RM 0";
                         }
                         else{
                             totalAmountNeeded.value = total;
                             totalHealthMedicalPercentage.value = totalPercentage;
                             $('.calculation-progress-bar').css('width', totalPercentage + '%');
                             totalDisplayFund.innerText = "RM" + result;
+                            TotalHealthMedicalFundMob.innerText = "RM" + result;
                         }
         
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = existingProtectionAmountValue;
                         totalDisplayFund.innerText = "RM 0";
+                        TotalHealthMedicalFundMob.innerText = "RM 0";
                     }
             
                 });
@@ -743,7 +753,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/health-medical/critical-illness/gap' || path == '/health-medical/medical-planning/gap') {
-            if (!lastPageInput || !('existingProtectionAmount' in lastPageInput)) {
+            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

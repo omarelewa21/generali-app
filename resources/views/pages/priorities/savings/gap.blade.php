@@ -7,16 +7,18 @@
 
 @php
     // Retrieving values from the session
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsRiskProfile = session('customer_details.savings_needs.riskProfile');
-    $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+
+    $savings = session('customer_details.selected_needs.need_4.advance_details');
+    $savingsGoalDuration = session('customer_details.selected_needs.need_4.advance_details.supporting_years');
+    $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
+    $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile');
+    $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return');
+    $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
 @endphp
 
 <div id="savings-summary" class="secondary-default-bg summary-page">
@@ -57,7 +59,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/savings-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
@@ -69,20 +73,8 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
-                                            </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalDuration}} years</h4>
-                                        </div>
-                                    </div>
-                                    <span class="align-self-center green-tick"></span>
-                                </div>
-                                <div class="row justify-content-center py-2">
-                                    <div class="col-10 d-flex align-items-center">
-                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
-                                            <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to achieve my goal of</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">My goal is to build a total savings funds of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($goalsAmount))}}</h4>
                                         </div>
@@ -93,8 +85,33 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
+                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" alt="input icon" width="54">
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">If I set aside monthly savings of </p>
+                                            </div>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($savingsMonthlyPayment))}}</h4>
+                                        </div>
+                                    </div>
+                                    <span class="align-self-center green-tick"></span>
+                                </div>
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-10 d-flex align-items-center">
+                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">For the next</p>
+                                            </div>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalDuration}} years</h4>
+                                        </div>
+                                    </div>
+                                    <span class="align-self-center green-tick"></span>
+                                </div>
+                                
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-10 d-flex align-items-center">
+                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
+                                            <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I am expecting annual returns of</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">While expecting annual returns of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalPA}}% p.a.</h4>
                                         </div>
@@ -106,7 +123,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a savings plan for</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I will need a regular savings plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>

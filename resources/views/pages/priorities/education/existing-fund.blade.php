@@ -7,25 +7,34 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.education_discuss');
-    $education = session('customer_details.education_needs');
-    $edcationSaving = session('customer_details.education_needs.existingFund');
-    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
-    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded','0');
-    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
-    $tertiaryEducationAmount = session('customer_details.education_needs.tertiaryEducationAmount');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
+    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.total_education_needed','0');
+    $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
+    $tertiaryEducationAmount = session('customer_details.selected_needs.need_3.advance_details.covered_amount');
+    $totalEducationYear = session('customer_details.selected_needs.need_3.advance_details.remaining_years');
+    $edcationSaving = session('customer_details.selected_needs.need_3.advance_details.existing_fund');
+    $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
 @endphp
 
 <div id="education-existing-fund" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $educationSavingAmount === null || $educationSavingAmount === '' ? number_format(floatval($totalEducationNeeded)) : ($totalEducationNeeded > $educationSavingAmount ? number_format(floatval($totalEducationNeeded - $educationSavingAmount)) : '0') }}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Education Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.education.existing.fund')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
