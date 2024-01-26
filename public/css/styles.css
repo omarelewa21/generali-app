@@ -900,6 +900,9 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
+.changeImage {
+  z-index: 3;
+}
 /* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);

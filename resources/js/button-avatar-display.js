@@ -117,7 +117,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 height: "100%",
                 alt: "Car",
                 class: "position-absolute car",
-                style: "bottom:150px;right:-200px"
+                style: "bottom:150px;right:-200px;z-index:2"
             }
         ];
 
@@ -128,7 +128,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 height: "100%",
                 alt: "Scooter",
                 class: "position-absolute scooter",
-                style: "bottom:150px;left:0"
+                style: "bottom:150px;left:0;z-index:2"
             }
         ];
 
@@ -313,24 +313,57 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                 if (assets && assets.house === true) {
                     var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
-                    $(".imageContainerHouse").html(newImage);
+                    $(".imageContainerHouse").append(newImage);
                 }
 
                 if (assets && assets.bungalow === true) {
                     var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
-                    $(".imageContainerHouse").html(newImage);
+                    $(".imageContainerHouse").append(newImage);
                 }
 
                 if (assets && assets.condo === true) {
                     var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
-                    $(".imageContainerHouse").html(newImage);
+                    $(".imageContainerHouse").append(newImage);
+                }
+
+                var $imageContainer = $(".imageContainerHouse");
+                if ($imageContainer.find("img").length == 2) {
+                    if ($imageContainer.find("img.condo").length == 1) {
+                        $imageContainer.find("img.bungalow").css("position", "absolute");
+                        $imageContainer.find("img.bungalow").css("bottom", "0");
+                        $imageContainer.find("img.bungalow").css("left", "0");
+                        $imageContainer.find("img.bungalow").css("width", "550px");
+                        $imageContainer.find("img.bungalow").css("height", "auto");
+                    }
+                    else {
+                        $imageContainer.find("img.house").css("position", "absolute");
+                        $imageContainer.find("img.house").css("bottom", "0");
+                        $imageContainer.find("img.house").css("right", "0");
+                        $imageContainer.find("img.house").css("width", "450px");
+                        $imageContainer.find("img.house").css("height", "auto");
+                    }
+                }
+                else if ($imageContainer.find("img").length == 3) {
+                    $imageContainer.find("img.house").css("position", "absolute");
+                    $imageContainer.find("img.house").css("bottom", "0");
+                    $imageContainer.find("img.house").css("right", "0");
+                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("height", "auto");
+                    $imageContainer.find("img.house").css("z-index", "2");
+                    $imageContainer.find("img.bungalow").css("position", "absolute");
+                    $imageContainer.find("img.bungalow").css("bottom", "0");
+                    $imageContainer.find("img.bungalow").css("left", "0");
+                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("height", "auto");
+                    $imageContainer.find("img.bungalow").css("z-index", "1");
                 }
             }
 
             function clearAvatar() {
                 var $imageContainerCar = $(".imageContainerCar");
                 var $imageContainerHouse = $(".imageContainerHouse");
-    
+                var buttonbgElements = document.querySelectorAll(".button-bg");
+
                 $imageContainerCar.empty();
                 $imageContainerHouse.empty();
     
@@ -339,6 +372,11 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 selectedAssets['scooter'] = false;
                 selectedAssets['bungalow'] = false;
                 selectedAssets['condo'] = false;
+
+                buttonbgElements.forEach(function(element) {
+                    element.classList.remove('selected');
+                    element.removeAttribute('data-required');
+                });
     
                 if (assetsButtonInput.value == '') {
                     assetsButtonInput.value = JSON.stringify(selectedAssets);
@@ -612,13 +650,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
-        const selectedAssets = {
-            car: false,
-            scooter: false,
-            house: false,
-            bungalow: false,
-            others: false
-        };
+        var selectedAssets = sessionData ? sessionData : false;
 
         // Car Selection
         $("#carButton").on("click", function () {
@@ -686,7 +718,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             if ($imageContainer.find("img.house").length > 0) {
                 // If an image exists, remove it
-                $imageContainer.find("img").remove();
+                $imageContainer.find("img.house").remove();
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
@@ -694,14 +726,34 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + houseImages[houseImageIndex].src + '" width="' + houseImages[houseImageIndex].width + '" height="' + houseImages[houseImageIndex].height + '" alt="' + houseImages[houseImageIndex].alt + '" class="' + houseImages[houseImageIndex].class + '" style="' + houseImages[houseImageIndex].style + '">';
-                $(".imageContainerHouse").html(newImage);
+                $(".imageContainerHouse").append(newImage);
 
-                selectedAssets['house'] = true;
-                selectedAssets['bungalow'] = false;
-                selectedAssets['condo'] = false;
+                if ($imageContainer.find("img").length > 1) {
+                    $imageContainer.find("img.house").css("position", "absolute");
+                    $imageContainer.find("img.house").css("bottom", "0");
+                    $imageContainer.find("img.house").css("right", "0");
+                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("height", "auto");
+                    $imageContainer.find("img.house").css("z-index", "2");
+                }
 
-                $("#bungalowButton").closest('.button-bg').removeClass('selected');
-                $("#condoButton").closest('.button-bg').removeClass('selected');
+                if ($imageContainer.find("img.house").length > 0) {
+                    selectedAssets['house'] = true;
+                }
+
+                if ($imageContainer.find("img.bungalow").length > 0) {
+                    selectedAssets['bungalow'] = true;
+                }
+
+                if ($imageContainer.find("img.condo").length > 0) {
+                    selectedAssets['condo'] = true;
+                }
+                
+                // selectedAssets['bungalow'] = false;
+                // selectedAssets['condo'] = false;
+
+                // $("#bungalowButton").closest('.button-bg').removeClass('selected');
+                // $("#condoButton").closest('.button-bg').removeClass('selected');
             }
 
             if (assetsButtonInput.value == '') {
@@ -714,7 +766,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     bungalow: selectedAssets.bungalow,
                     condo: selectedAssets.condo
                 });
-            }
+            } console.log(selectedAssets);
         });
 
         // Bungalow Selection
@@ -723,22 +775,73 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             if ($imageContainer.find("img.bungalow").length > 0) {
                 // If an image exists, remove it
-                $imageContainer.find("img").remove();
+                $imageContainer.find("img.bungalow").remove();
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
                 selectedAssets['bungalow'] = false;
+
+                if ($imageContainer.find("img").length == 1) {
+                    $imageContainer.find("img.house").css("position", "relative");
+                    $imageContainer.find("img.house").css("bottom", "inherit");
+                    $imageContainer.find("img.house").css("right", "inherit");
+                    $imageContainer.find("img.house").css("width", "inherit");
+                    $imageContainer.find("img.house").css("height", "100%");
+                }
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + bungalowImages[bungalowImageIndex].src + '" width="' + bungalowImages[bungalowImageIndex].width + '" height="' + bungalowImages[bungalowImageIndex].height + '" alt="' + bungalowImages[bungalowImageIndex].alt + '" class="' + bungalowImages[bungalowImageIndex].class + '" style="' + bungalowImages[bungalowImageIndex].style + '">';
-                $(".imageContainerHouse").html(newImage);
+                $(".imageContainerHouse").append(newImage);
+                
+                if ($imageContainer.find("img").length == 2) {
+                    if ($imageContainer.find("img.condo").length == 1) {
+                        $imageContainer.find("img.bungalow").css("position", "absolute");
+                        $imageContainer.find("img.bungalow").css("bottom", "0");
+                        $imageContainer.find("img.bungalow").css("left", "0");
+                        $imageContainer.find("img.bungalow").css("width", "550px");
+                        $imageContainer.find("img.bungalow").css("height", "auto");
+                    }
+                    else {
+                        $imageContainer.find("img.house").css("position", "absolute");
+                        $imageContainer.find("img.house").css("bottom", "0");
+                        $imageContainer.find("img.house").css("right", "0");
+                        $imageContainer.find("img.house").css("width", "450px");
+                        $imageContainer.find("img.house").css("height", "auto");
+                    }
+                }
+                else if ($imageContainer.find("img").length == 3) {
+                    $imageContainer.find("img.house").css("position", "absolute");
+                    $imageContainer.find("img.house").css("bottom", "0");
+                    $imageContainer.find("img.house").css("right", "0");
+                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("height", "auto");
+                    $imageContainer.find("img.house").css("z-index", "2");
+                    $imageContainer.find("img.bungalow").css("position", "absolute");
+                    $imageContainer.find("img.bungalow").css("bottom", "0");
+                    $imageContainer.find("img.bungalow").css("left", "0");
+                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("height", "auto");
+                    $imageContainer.find("img.bungalow").css("z-index", "1");
+                }
 
-                selectedAssets['bungalow'] = true;
-                selectedAssets['house'] = false;
-                selectedAssets['condo'] = false;
+                if ($imageContainer.find("img.house").length > 0) {
+                    selectedAssets['house'] = true;
+                }
 
-                $("#houseButton").closest('.button-bg').removeClass('selected');
-                $("#condoButton").closest('.button-bg').removeClass('selected');
+                if ($imageContainer.find("img.bungalow").length > 0) {
+                    selectedAssets['bungalow'] = true;
+                }
+
+                if ($imageContainer.find("img.condo").length > 0) {
+                    selectedAssets['condo'] = true;
+                }
+
+                // selectedAssets['bungalow'] = true;
+                // selectedAssets['house'] = false;
+                // selectedAssets['condo'] = false;
+
+                // $("#houseButton").closest('.button-bg').removeClass('selected');
+                // $("#condoButton").closest('.button-bg').removeClass('selected');
             }
 
             if (assetsButtonInput.value == '') {
@@ -751,7 +854,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     house: selectedAssets.house,
                     condo: selectedAssets.condo
                 });
-            }
+            } console.log(selectedAssets);
         });
 
         // Condo Selection
@@ -760,22 +863,79 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
             if ($imageContainer.find("img.condo").length > 0) {
                 // If an image exists, remove it
-                $imageContainer.find("img").remove();
+                $imageContainer.find("img.condo").remove();
                 this.removeAttribute('data-required', 'selected');
                 this.closest('.button-bg').classList.remove('selected');
 
                 selectedAssets['condo'] = false;
+                if ($imageContainer.find("img").length == 1) {
+                    $imageContainer.find("img.house").css("position", "relative");
+                    $imageContainer.find("img.house").css("bottom", "inherit");
+                    $imageContainer.find("img.house").css("right", "inherit");
+                    $imageContainer.find("img.house").css("width", "inherit");
+                    $imageContainer.find("img.house").css("height", "100%");
+                    $imageContainer.find("img.bungalow").css("position", "relative");
+                    $imageContainer.find("img.bungalow").css("bottom", "inherit");
+                    $imageContainer.find("img.bungalow").css("right", "inherit");
+                    $imageContainer.find("img.bungalow").css("width", "inherit");
+                    $imageContainer.find("img.bungalow").css("height", "100%");
+                } else if ($imageContainer.find("img").length == 2) {
+                    $imageContainer.find("img.bungalow").css("position", "relative");
+                    $imageContainer.find("img.bungalow").css("bottom", "inherit");
+                    $imageContainer.find("img.bungalow").css("right", "inherit");
+                    $imageContainer.find("img.bungalow").css("width", "inherit");
+                    $imageContainer.find("img.bungalow").css("height", "100%");
+                }
             } else {
                 // If no image exists, create a new one and append it
                 var newImage = '<img src="' + condoImages[condoImageIndex].src + '" width="' + condoImages[condoImageIndex].width + '" height="' + condoImages[condoImageIndex].height + '" alt="' + condoImages[condoImageIndex].alt + '" class="' + condoImages[condoImageIndex].class + '" style="' + condoImages[condoImageIndex].style + '">';
-                $(".imageContainerHouse").html(newImage);
+                $(".imageContainerHouse").append(newImage);
 
-                selectedAssets['condo'] = true;
-                selectedAssets['house'] = false;
-                selectedAssets['bungalow'] = false;
+                if ($imageContainer.find("img").length == 2) {
+                    $imageContainer.find("img.house").css("position", "absolute");
+                    $imageContainer.find("img.house").css("bottom", "0");
+                    $imageContainer.find("img.house").css("right", "0");
+                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("height", "auto");
+                    $imageContainer.find("img.bungalow").css("position", "absolute");
+                    $imageContainer.find("img.bungalow").css("bottom", "0");
+                    $imageContainer.find("img.bungalow").css("left", "0");
+                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("height", "auto");
+                }
+                else if ($imageContainer.find("img").length == 3) {
+                    $imageContainer.find("img.house").css("position", "absolute");
+                    $imageContainer.find("img.house").css("bottom", "0");
+                    $imageContainer.find("img.house").css("right", "0");
+                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("height", "auto");
+                    $imageContainer.find("img.house").css("z-index", "2");
+                    $imageContainer.find("img.bungalow").css("position", "absolute");
+                    $imageContainer.find("img.bungalow").css("bottom", "0");
+                    $imageContainer.find("img.bungalow").css("left", "0");
+                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("height", "auto");
+                    $imageContainer.find("img.bungalow").css("z-index", "1");
+                }
 
-                $("#houseButton").closest('.button-bg').removeClass('selected');
-                $("#bungalowButton").closest('.button-bg').removeClass('selected');
+                if ($imageContainer.find("img.house").length > 0) {
+                    selectedAssets['house'] = true;
+                }
+
+                if ($imageContainer.find("img.bungalow").length > 0) {
+                    selectedAssets['bungalow'] = true;
+                }
+
+                if ($imageContainer.find("img.condo").length > 0) {
+                    selectedAssets['condo'] = true;
+                }
+
+                // selectedAssets['condo'] = true;
+                // selectedAssets['house'] = false;
+                // selectedAssets['bungalow'] = false;
+
+                // $("#houseButton").closest('.button-bg').removeClass('selected');
+                // $("#bungalowButton").closest('.button-bg').removeClass('selected');
             }
 
             if (assetsButtonInput.value == '') {
@@ -788,7 +948,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     condo: selectedAssets.condo,
                     house: selectedAssets.house
                 });
-            }
+            } console.log(selectedAssets);
         });
 
         // Others Selection

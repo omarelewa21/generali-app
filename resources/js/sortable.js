@@ -1,7 +1,7 @@
 import Sortable from 'sortablejs';
 
 const specificPageURLs = [
-    'financial-priorities',
+    'financial-priorities'
 ];
 
 const currentURL = window.location.href;
@@ -152,10 +152,11 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
     }
 
-    function resetPriorities() {
+    $("#refresh").on("click", function (event) {
+        event.preventDefault();
         updateMobileFields([null, null, null, null, null, null, null, null]);
         removeAllInWeb();
-    }
+    });
 
     // Priority To Discuss Page JS
     document.addEventListener('DOMContentLoaded', function() {
