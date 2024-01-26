@@ -7,7 +7,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
     $savings = session('customer_details.selected_needs.need_4.advance_details');
@@ -20,18 +19,6 @@
     $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile');
     $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return');
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
-=======
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsRiskProfile = session('customer_details.savings_needs.riskProfile');
-    $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn');
->>>>>>> zeno
 @endphp
 
 <div id="savings-summary" class="secondary-default-bg summary-page">

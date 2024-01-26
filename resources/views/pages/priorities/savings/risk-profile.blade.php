@@ -13,19 +13,11 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
     $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile','High Risk');
     $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return','High');
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
-=======
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsRiskProfile = session('customer_details.savings_needs.riskProfile','High Risk');
-    $savingsPotentialReturn = session('customer_details.savings_needs.potentialReturn','High Potential Return');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn');
->>>>>>> zeno
 @endphp
 
 <div id="savings-risk-profile" class="tertiary-default-bg">

@@ -7,7 +7,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $existingProtection = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_protection');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
@@ -16,16 +15,6 @@
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
     $medicalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.covered_amount');
     $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
-=======
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $existingProtection = session('customer_details.health-medical_needs.medical_planning.existingProtection');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
-    $medicalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.neededAmount');
-    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
->>>>>>> zeno
 @endphp
 
 <div id="medical-existing-protection" class="tertiary-default-bg calculator-page">

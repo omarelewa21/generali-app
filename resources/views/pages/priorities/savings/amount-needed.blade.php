@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
 
     $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
@@ -23,16 +22,6 @@
     $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
-=======
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
-    $goalsAmount = session('customer_details.savings_needs.goalsAmount');
-    $savingsMonthlyPayment = session('customer_details.savings_needs.monthlyInvestmentAmount');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
->>>>>>> zeno
 @endphp
 
 <div id="savings-amount-needed" class="tertiary-default-bg calculator-page">

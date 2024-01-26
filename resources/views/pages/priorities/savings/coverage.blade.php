@@ -13,29 +13,16 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $savingsPriority = session('customer_details.priorities.savingsDiscuss');
     
-=======
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
->>>>>>> zeno
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-<<<<<<< HEAD
     $familyDependent = session('customer_details.family_details.dependant');
     $childData = session('customer_details.family_details.dependant.children_data');
     $spouseData = session('customer_details.family_details.dependant.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
-=======
-    $familyDependent = session('customer_details.family_details.dependent');
-    $childData = session('customer_details.family_details.dependent.children_data');
-
-    $spouseData = session('customer_details.family_details.dependent.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
->>>>>>> zeno
 
     $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_4.advance_details.child_name');

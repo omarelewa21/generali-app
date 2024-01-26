@@ -13,7 +13,6 @@
 @section('content')
 
 @php
-<<<<<<< HEAD
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
 
     $retirementAge = session('customer_details.selected_needs.need_2.advance_details.remaining_years');
@@ -23,16 +22,6 @@
     $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
     $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
 
-=======
-    $retirementPriority = session('customer_details.priorities.retirement_discuss');
-    $retirementAge = session('customer_details.retirement_needs.retirementAge');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
->>>>>>> zeno
 @endphp
 
 <div id="retirement_period" class="tertiary-default-bg calculator-page">

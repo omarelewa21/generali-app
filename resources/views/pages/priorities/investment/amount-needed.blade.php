@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
 
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
@@ -22,15 +21,6 @@
     $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.total_investment_needed', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_5.advance_details.relationship');
-=======
-    $investmentPriority = session('customer_details.priorities.investments_discuss');
-    $investment = session('customer_details.investments_needs');
-    $investmentMonthlyPayment = session('customer_details.investments_needs.monthlyInvestmentAmount');
-    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
-    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded', '0');
-    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
-    $relationship = session('customer_details.investments_needs.coverFor');
->>>>>>> zeno
 @endphp
 
 <div id="investment-amount-needed" class="tertiary-default-bg calculator-page">

@@ -12,7 +12,6 @@
 @section('content')
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
     $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
@@ -21,16 +20,6 @@
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
-=======
-    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
-    $protectionPriority = session('customer_details.priorities.protection_discuss');
-    $retirementPriority = session('customer_details.priorities.retirement_discuss');
-    $educationPriority = session('customer_details.priorities.education_discuss');
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $investmentPriority = session('customer_details.priorities.investments_discuss');
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
->>>>>>> zeno
 @endphp
 
 <div id="debt-cancellation_home">

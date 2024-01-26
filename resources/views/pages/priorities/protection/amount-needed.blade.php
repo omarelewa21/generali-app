@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $protectionPriority = session('customer_details.priorities.protectionDiscuss');
     $protectionMonthlySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount_monthly');
     $protectionAnnuallySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount');
@@ -23,15 +22,6 @@
     $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed', '0');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
-=======
-    $protectionPriority = session('customer_details.priorities.protection_discuss');
-    $protectionMonthlySupport = session('customer_details.protection_needs.monthlySupportAmount');
-    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
-    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
-    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded', '0');
-    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
-    $relationship = session('customer_details.protection_needs.coverFor');
->>>>>>> zeno
 @endphp
 
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">

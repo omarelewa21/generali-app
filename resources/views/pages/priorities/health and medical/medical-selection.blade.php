@@ -14,18 +14,10 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
     $selectedHealthMedical = session('customer_details.selected_needs.need_6.number_of_selection');
     $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
-=======
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $healthMedical = session('customer_details.health-medical_needs');
-    $selectedHealthMedical = session('customer_details.health-medical_needs.numberOfSelection');
-    $selectedCritical = session('customer_details.health-medical_needs.criticalIllnessSelection');
-    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
->>>>>>> zeno
 @endphp
 
 <div id="health-medical-selection" class="secondary-default-bg">

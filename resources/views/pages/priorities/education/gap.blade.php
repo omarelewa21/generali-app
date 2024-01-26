@@ -7,7 +7,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $educationPriority = session('customer_details.priorities.educationDiscuss');
     $education = session('customer_details.selected_needs.need_3.advance_details');
     $totalEducationYear = session('customer_details.selected_needs.need_3.advance_details.remaining_years');
@@ -15,15 +14,6 @@
     $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.total_education_needed','0');
     $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
-=======
-    $educationPriority = session('customer_details.priorities.education_discuss');
-    $education = session('customer_details.education_needs');
-    $totalEducationYear = session('customer_details.education_needs.tertiaryEducationYear');
-    $educationSavingAmount = session('customer_details.education_needs.existingFundAmount');
-    $totalEducationNeeded = session('customer_details.education_needs.totalEducationNeeded');
-    $educationFundPercentage = session('customer_details.education_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.education_needs.totalAmountNeeded');
->>>>>>> zeno
 @endphp
 
 <div id="education-summary" class="secondary-default-bg summary-page">

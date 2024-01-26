@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $retirementPriority = session('customer_details.priorities.retirementDiscuss');
 
     $retirement = session('customer_details.selected_needs.need_2.advance_details');
@@ -23,15 +22,6 @@
     $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
     $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
-=======
-    $retirementPriority = session('customer_details.priorities.retirement_discuss');
-    $retirement = session('customer_details.retirement_needs');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.retirement_needs.totalAmountNeeded');
->>>>>>> zeno
 @endphp
 
 <div id="retirement_summary" class="secondary-default-bg summary-page">

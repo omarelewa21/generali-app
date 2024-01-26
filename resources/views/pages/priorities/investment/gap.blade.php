@@ -7,7 +7,6 @@
 
 @php
     // Retrieving values from the session
-<<<<<<< HEAD
     $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
 
     $investment = session('customer_details.selected_needs.need_5.advance_details');
@@ -19,17 +18,6 @@
     $investmentPotentialReturn = session('customer_details.selected_needs.need_5.advance_details.potential_return');
     $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
-=======
-    $investmentPriority = session('customer_details.priorities.investments_discuss');
-    $investment = session('customer_details.investments_needs');
-    $investmentSupportingYears = session('customer_details.investments_needs.investmentTimeFrame');
-    $totalInvestmentNeeded = session('customer_details.investments_needs.totalInvestmentNeeded', '0');
-    $investmentPA = session('customer_details.investments_needs.annualReturn');
-    $totalAnnualReturn = session('customer_details.investments_needs.annualReturnAmount');
-    $investmentFundPercentage = session('customer_details.investments_needs.fundPercentage', '0');
-    $investmentRiskProfile = session('customer_details.investments_needs.riskProfile');
-    $investmentPotentialReturn = session('customer_details.investments_needs.potentialReturn');
->>>>>>> zeno
 @endphp
 
 <div id="investment-summary" class="secondary-default-bg summary-page">
