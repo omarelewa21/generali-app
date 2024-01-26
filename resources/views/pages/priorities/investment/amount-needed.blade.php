@@ -26,11 +26,21 @@
 <div id="investment-amount-needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalInvestmentFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ number_format(floatval($totalInvestmentNeeded))}}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Investment Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.investment.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -53,7 +63,7 @@
                                 <h2 class="display-5 fw-bold lh-sm currencyField">I plan to invest a lump sum of
                                 <!-- <p class="display-5 fw-bold currencyField"> -->
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="investment_monthly_payment" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('investment_monthly_payment') is-invalid @enderror" id="investment_monthly_payment" value="{{ $investmentMonthlyPayment !== null ? number_format(floatval($investmentMonthlyPayment)) : $investmentMonthlyPayment }}" required></span>
-                                /month over the next
+                                over the next
                                     <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('investment_supporting_years') is-invalid @enderror" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required></span>
                                 years.</h2>
                                 <input type="hidden" name="total_investmentNeeded" id="total_investmentNeeded" value="{{$totalInvestmentNeeded}}">

@@ -214,6 +214,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalProtectionNeeded = document.getElementById("total_protectionNeeded");
         
                 var totalProtectionFund = document.getElementById("TotalProtectionFund");
+                var TotalProtectionFundMob = document.getElementById("TotalProtectionFundMob");
         
                 monthlyInput.addEventListener("input", function() {
         
@@ -235,14 +236,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = amountPerYear.toLocaleString();
                         totalProtectionFund.innerText = "RM" + result;
+                        TotalProtectionFundMob.innerText = "RM" + result;
                         if (!isNaN(protectionYears)){
                             var result = totalProtection.toLocaleString();
                             totalProtectionFund.innerText = "RM" + result;
+                            TotalProtectionFundMob.innerText = "RM" + result;
                         }
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = monthlyInputValue;
                         totalProtectionFund.innerText = "RM 0";
+                        TotalProtectionFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalProtectionNeeded.value =  totalProtection;
@@ -264,10 +268,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         // Display the result
                         var result = totalAmount.toLocaleString();
                         totalProtectionFund.innerText = "RM" + result;
+                        TotalProtectionFundMob.innerText = "RM" + result;
                     } else {
                         // Input is not a valid number
                         this.value = supportingYearsValue;
                         totalProtectionFund.innerText = "RM 0";
+                        TotalProtectionFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalProtectionNeeded.value =  totalAmount;
@@ -287,7 +293,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         
                 function validateAmountNumberField(field) {
                     var value = field.value.replace(/,/g, ''); // Remove commas
-                    var numericValue = parseFloat(value);
+                    var valueRM = value.replace(/RM/g, ''); // Remove RM
+                    var numericValue = parseFloat(valueRM);
         
                     if (isNaN(numericValue)) {
                         field.classList.add("is-invalid");
@@ -463,6 +470,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalAmountNeeded = document.getElementById("total_amountNeeded");
                 var totalProtectionPercentage = document.getElementById("percentage");
                 var totalDisplayFund = document.getElementById("TotalProtectionFund");
+                var TotalProtectionFundMob = document.getElementById("TotalProtectionFundMob");
         
                 existing_policy_amount.addEventListener("input", function() {
         
@@ -487,17 +495,20 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             totalProtectionPercentage.value = 100;
                             $('.calculation-progress-bar').css('width','100%');
                             totalDisplayFund.innerText = "RM 0";
+                            TotalProtectionFundMob.innerText = "RM 0";
                         }
                         else{
                             totalAmountNeeded.value = total;
                             totalProtectionPercentage.value = totalPercentage;
                             $('.calculation-progress-bar').css('width', totalPercentage + '%');
                             totalDisplayFund.innerText = "RM" + result;
+                            TotalProtectionFundMob.innerText = "RM" + result;
                         }
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = existingPolicyAmountValue;
                         totalDisplayFund.innerText = "RM 0";
+                        TotalProtectionFundMob.innerText = "RM 0";
                     }
             
                 });

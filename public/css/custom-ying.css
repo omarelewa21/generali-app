@@ -91,6 +91,9 @@ button.choice.default.selected img{
     top: 50%;
     left: 50%;
 }
+.w-85{
+    width: 85% !important;
+}
 
 /* ===============================  Risk Profile =======================================*/
 #savings-risk-profile .content-needs-grey,
@@ -149,4 +152,104 @@ button.choice.default.selected img{
 .potential-btn.border-start-0.border-end-0.selected{
     border-left: 1px solid #C0232C !important;
     border-right: 1px solid #C0232C !important;
+}
+
+/* Health medical - medical plan room selection */
+#hospital-room-selection .needs-stand-bg{
+    padding: 75px;
+}
+.wrapper-room-selection{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 85%;
+    grid-template-areas:
+        "room-selection-title"
+        "room-selection-content";
+    grid-gap: 0px;
+}
+.room-selection-title{
+    grid-area: room-selection-title;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    display: grid;
+}
+.room-selection-content{
+    grid-area: room-selection-content;
+    display: grid;
+    
+    grid-template-rows: 100%;
+}
+.single.room-selection-content {
+    grid-template-columns: 15% 60% 25%;
+    /* grid-template-columns: 20% 55% 25%; */
+}
+.patient,
+.patient-2 {
+    grid-template-areas:
+        "windows"
+        "avatar-patient";
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+}
+.avatar-patient{
+    grid-area: avatar-patient;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.single-patient,
+.single-patient-2{
+    display: flex;
+    padding: 0;
+}
+.single-patient{
+    justify-content: start;
+}
+.single-patient-2{
+    justify-content: end;
+}
+
+/* Coverage slider style */
+@media only screen and (min-width: 768px) and (max-width: 992px) and (orientation: portrait){
+    .coverage_slick button div.justify-content-end{
+        justify-content: center !important;
+    }
+}
+@media only screen and (width: 1024px) and (height: 768px) and (orientation: landscape){
+    .coverage_slick button div.justify-content-end{
+        justify-content: center !important;
+    }
+}
+@media only screen and (width: 600px) and (height: 960px) and (orientation: portrait){
+    .coverage_slick button div.justify-content-end{
+        justify-content: flex-start !important;
+    }
+    #education_coverage .slick-track{
+        padding-bottom: 55px;
+    }
+}
+/* Calculator style */
+@media only screen and (max-width: 767px){
+    .header p.display-6{
+        font-size: 14px;
+    }
+    .text-sm-center{
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 767px){
+    .calculator-page .content-needs-grey {
+        grid-auto-rows: 8vh 0vh 62vh;
+    }
+}
+@media only screen and (min-width: 768px){
+    .w-md-50{
+        width: 50% !important;
+    }
+}
+@media only screen and (min-width: 1600px){
+    .col-xxxl-5 {
+        flex: 0 0 auto;
+        width: 41.66666667%;
+    }
 }

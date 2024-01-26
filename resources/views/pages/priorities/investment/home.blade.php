@@ -39,8 +39,8 @@
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
-                                <div class="col-xl-5 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4">Now let's plan for a Lump Sum Investments.</h2>
+                                <div class="col-xl-6 col-xxl-5 text-center">
+                                    <h2 class="display-5 fw-bold lh-sm py-4">Now let's plan for your Lump Sum Investments.</h2>
                                 </div>
                             </div>
                         </div>

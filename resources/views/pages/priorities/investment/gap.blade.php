@@ -17,6 +17,7 @@
     $investmentRiskProfile = session('customer_details.selected_needs.need_5.advance_details.risk_profile');
     $investmentPotentialReturn = session('customer_details.selected_needs.need_5.advance_details.potential_return');
     $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
+    $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
 @endphp
 
 <div id="investment-summary" class="secondary-default-bg summary-page">
@@ -71,8 +72,20 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
+                                                <img src="{{ asset('images/needs/general/icon-tree.png') }}" alt="tree icon" width="54">
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I plan to invest a lump sum of</p>
+                                            </div>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($investmentMonthlyPayment))}}</h4>
+                                        </div>
+                                    </div>
+                                    <span class="align-self-center green-tick"></span>
+                                </div>
+                                <div class="row justify-content-center py-2">
+                                    <div class="col-10 d-flex align-items-center">
+                                        <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
+                                            <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">And let it grow for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">{{$investmentSupportingYears}} years</h4>
                                         </div>
@@ -84,9 +97,9 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to achieve my goal with</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">With annual returns of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">{{$investmentPA}}% p.a.</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -96,9 +109,10 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I expected to have an annual return of</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">For a projected future investment value of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">{{$investmentPA}}% p.a.</h4>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded) + (floatval($totalInvestmentNeeded) * (4 /100)) )}}</h4>
+                                            <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4> -->
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>

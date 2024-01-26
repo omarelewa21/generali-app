@@ -27,11 +27,28 @@
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12 fixed-top z-2">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $existingPolicyAmount === null || $existingPolicyAmount === '' 
+                                ? number_format(floatval($totalProtectionNeeded)) 
+                                : ($existingPolicyAmount > floatval($totalProtectionNeeded) 
+                                ? '0' 
+                                : number_format(floatval($totalProtectionNeeded) - floatval($existingPolicyAmount)))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Protection Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.protection.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <div class="top-menu pt-md-0">@include ('templates.nav.nav-sidebar-needs')</div>
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -57,12 +74,13 @@
                             <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                                 <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Increment">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1">
+                            <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
                                 <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
                                 <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
                                 / month for
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
                                 years</p>
                                 <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
                             </div>

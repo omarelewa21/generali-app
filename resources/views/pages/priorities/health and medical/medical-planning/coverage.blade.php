@@ -30,6 +30,7 @@
     $selectedCoverForDob = session('customer_details.selected_needs.need_6.advance_details.health_care.child_dob');
     $othersCoverForDob = session('customer_details.selected_needs.need_6.advance_details.health_care.spouse_dob');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
+    $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
 @endphp
 
 <div id="medical-planning-coverage" class="secondary-default-bg">
@@ -43,7 +44,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-12 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I'd like to provide Medical Plan Care for my:</h2>
+                                <h2 class="display-5 fw-bold lh-sm text-center">I'd like to provide Hospitalisation coverage for my:</h2>
                             </div>
                         </div>
                     </div>
@@ -110,7 +111,8 @@
                                     <input type="hidden" name="othersCoverForNameInput" id="othersCoverForNameInput" value="{{$othersCoverForName}}">
                                     <input type="hidden" name="selectedCoverForDobInput" id="selectedCoverForDobInput" value="{{$selectedCoverForDob}}">
                                     <input type="hidden" name="othersCoverForDobInput" id="othersCoverForDobInput" value="{{$othersCoverForDob}}">
-                                    <a href="{{route('health.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{$selectedCritical === 'Yes' ? route('health.medical.critical.gap') : route('health.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <!-- <a href="{{route('health.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a> -->
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>

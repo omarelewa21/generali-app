@@ -215,7 +215,7 @@ class HealthMedicalController extends Controller
             DB::rollBack();
         }
 
-        if ($selectionCriticalInput === 'Critical Illness Care'){
+        if ($selectionCriticalInput === 'Yes'){
             return redirect()->route('health.medical.critical.illness.coverage');
         }
         else{
@@ -514,7 +514,7 @@ class HealthMedicalController extends Controller
         }
 
         // // Process the form data and perform any necessary actions
-        if ($customerDetails['health-medical_needs']['medicalPlanningSelection'] === 'Medical Planning Care'){
+        if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Yes'){
             return redirect()->route('health.medical.medical.planning.coverage');
         } else{
             return redirect()->route('debt.cancellation.home');

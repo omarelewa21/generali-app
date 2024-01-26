@@ -199,7 +199,6 @@ class SavingsController extends Controller
             $customerDetails = $request->session()->get('customer_details', []);
 
             // Get existing savings_needs from the session
-            $need_sequence = $this->calculateNeedSequence($request);
             $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
             $advanceDetails = array_merge($advanceDetails, [
@@ -241,7 +240,6 @@ class SavingsController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing savings_needs from the session
-        $need_sequence = $this->calculateNeedSequence($request);
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         $customMessages = [
@@ -373,7 +371,6 @@ class SavingsController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing savings_needs from the session
-        $need_sequence = $this->calculateNeedSequence($request);
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
@@ -470,7 +467,6 @@ class SavingsController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing savings_needs from the session
-        $need_sequence = $this->calculateNeedSequence($request);
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Update specific keys with new values
@@ -507,7 +503,6 @@ class SavingsController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing savings_needs from the session
-        $need_sequence = $this->calculateNeedSequence($request);
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
         // Set the updated savings_needs back to the customer_details session

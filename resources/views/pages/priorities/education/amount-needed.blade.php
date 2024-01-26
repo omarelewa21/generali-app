@@ -25,11 +25,28 @@
 <div id="education-amount-needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $educationSavingAmount === null || $educationSavingAmount === '' 
+                                ? number_format(floatval($totalEducationNeeded)) 
+                                : ($educationSavingAmount > floatval($totalEducationNeeded) 
+                                ? '0' 
+                                : number_format(floatval($totalEducationNeeded) - floatval($educationSavingAmount)))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Education Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.education.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

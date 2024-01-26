@@ -36,7 +36,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-4 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I want to prepare a tertiary education fund for my:</h2>
+                                <h2 class="display-5 fw-bold lh-sm text-center">I want to prepare a tertiary education fund for:</h2>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                                 @foreach($childData as $child)
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                            <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
+                                            <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                                 @php
                                                     $birthdate = $child['dob'];
 
@@ -62,8 +62,8 @@
                                                     $ageInterval = $currentDate->diff($dobDate);
                                                     $age = $ageInterval->y; // Access the years property of the interval
                                                 @endphp
-                                                <div>
-                                                    <p class="py-2 m-auto mt-3 f-family coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
+                                                <div class="d-flex justify-content-center" style="flex-direction: column;">
+                                                    <p class="py-2 m-auto mt-3 f-family mb-0 coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
                                                     <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>

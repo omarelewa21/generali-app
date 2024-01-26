@@ -25,11 +25,28 @@
 <div id="medical-amount-needed" class="bg-hnm calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalHealthMedicalFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $existingProtectionAmount === null || $existingProtectionAmount === '' 
+                                ? number_format(floatval($totalHealthMedicalNeeded)) 
+                                : ($existingProtectionAmount > floatval($totalHealthMedicalNeeded) 
+                                ? '0' 
+                                : number_format(floatval($totalHealthMedicalNeeded) - floatval($existingProtectionAmount)))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Health & Medical Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.medical.planning.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -56,12 +73,12 @@
                                 <img src="{{ asset('images/needs/health-medical/medical-planning/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Increment">
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">In the event of any Medical/Hospitalisation needs, I would require</h2>
+                                <h2 class="display-5 fw-bold lh-sm">In the event of hospitalisation, I would like to have an annual fund of</h2>
                                 <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded !== null || $medicalAmountNeeded !== '' ? number_format(floatval($medicalAmountNeeded)) : $medicalAmountNeeded }}" required></span>
-                                /month to take care of myself and my family.
+                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded === null || $medicalAmountNeeded === '' ? $medicalAmountNeeded : number_format(floatval($medicalAmountNeeded)) }}" required></span>
+                                /month to cover any hospital bills.
                                     <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="medical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
-                                years to build this fund.</p>
+                                years</p>
                                 <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
                             </div>
                         </div>

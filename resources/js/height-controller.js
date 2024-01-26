@@ -51,10 +51,26 @@ $(document).ready(function() {
     }
   
     setResponsiveHeader();
-  
+
+    function setResponsiveCalcuator(){
+        const windowWidth = $(window).width();
+
+        if(windowWidth < 768){
+            const calculatorHeight = $(".calculatorMob").outerHeight();
+            const footerHeight = $(".footer.fixed-bottom").outerHeight();
+            $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
+            $(".content-needs-grey").css("padding-top" , calculatorHeight + "px");
+        } else{
+            $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , 0);
+            $(".content-needs-grey").css("padding-top" , 0);
+        }
+    }
+    setResponsiveCalcuator();
+
     $(window).resize(function() {
         setMainContentPadding();
         setResponsiveMainContentPadding();
         setResponsiveHeader();
+        setResponsiveCalcuator();
     });
 });

@@ -25,11 +25,28 @@
 <div id="debt-cancellation-amount-needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalDebtCancellationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $existingDebtAmount === null || $existingDebtAmount === '' 
+                                ? number_format(floatval($totalDebtNeeded)) 
+                                : ($existingDebtAmount > floatval($totalDebtNeeded) 
+                                ? '0' 
+                                : number_format(floatval($totalDebtNeeded) - floatval($existingDebtAmount)))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Debt Cancellation</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.debt.cancellation.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

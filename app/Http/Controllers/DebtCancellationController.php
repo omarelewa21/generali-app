@@ -370,7 +370,7 @@ class DebtCancellationController extends Controller
         // Get existing debt-cancellation_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_7']['advance_details'] ?? [];
 
-        $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
+        $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

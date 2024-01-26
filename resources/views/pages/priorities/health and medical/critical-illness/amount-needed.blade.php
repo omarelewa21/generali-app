@@ -26,11 +26,28 @@
 <div id="critical-illness_amount_needed" class="bg-hnm calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalHealthMedicalFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $existingProtectionAmount === null || $existingProtectionAmount === '' 
+                                ? number_format(floatval($totalHealthMedicalNeeded)) 
+                                : ($existingProtectionAmount > floatval($totalHealthMedicalNeeded) 
+                                ? '0' 
+                                : number_format(floatval($totalHealthMedicalNeeded) - floatval($existingProtectionAmount)))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Health & Medical Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.critical.illness.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -62,7 +79,7 @@
                                     <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="critical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('critical_amount_needed') is-invalid @enderror" id="critical_amount_needed" value="{{ $criticalAmountNeeded !== null ? number_format(floatval($criticalAmountNeeded)) : $criticalAmountNeeded }}" required></span>
                                 /month for
                                     <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="critical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('critical_year') is-invalid @enderror" id="critical_year" value="{{$criticalYear}}" required></span>
-                                years to take care of myself and my loves one.</p>
+                                years to take care of myself and my loved ones.</p>
                                 <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
                             </div>
                         </div>

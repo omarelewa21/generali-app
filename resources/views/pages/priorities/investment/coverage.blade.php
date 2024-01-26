@@ -42,7 +42,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I’d like to set up a lump sum investment program for my:</h2>
+                                <h2 class="display-5 fw-bold lh-sm text-center">I want to make an investment plan for my:</h2>
                             </div>
                         </div>
                     </div>
