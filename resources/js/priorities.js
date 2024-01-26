@@ -35,7 +35,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     } else {
         document.addEventListener('DOMContentLoaded', function() {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    
+
             // Sent checkbox value to controller
             var checkboxValues = {};
     
