@@ -21,6 +21,7 @@ import 'bootstrap5-toggle';
 import './phoneValidation';
 import './datatables';
 import './sortable';
+import './priorities';
 
 // Remove class 'overflow' to <body> tag
 $(document).ready(function () {

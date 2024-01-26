@@ -164,4 +164,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    var sessionData = {!! json_encode(session('customer_details.assets')) !!};
+</script>
 @endsection
