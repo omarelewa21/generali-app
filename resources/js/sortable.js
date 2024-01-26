@@ -54,20 +54,26 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             liElem.appendChild(iconElem);
 
             if (value) {
-                const imgElem = document.createElement('img');
-                imgElem.classList.add('needs-icon');
-                imgElem.setAttribute('src', `/images/top-priorities/${value}-icon.png`);
-                liElem.appendChild(imgElem);
-                const textElem = document.createElement('div');
+                const draggableLi = document.createElement("div");
+                draggableLi.classList.add("draggable-li", "d-flex", "align-items-center", "flex-grow-1");
+        
+                const imgElem = document.createElement("img");
+                imgElem.classList.add("needs-icon");
+                imgElem.setAttribute("src", `/images/top-priorities/${value}-icon.png`);
+                draggableLi.appendChild(imgElem);
+                const textElem = document.createElement("div");
                 // textElem.addClass('handle');
                 textElem.innerHTML = `${priorityMap[value]}`;
-                liElem.appendChild(textElem);
+                draggableLi.appendChild(textElem);
+        
+                liElem.appendChild(draggableLi);
             } else {
-                const textElem = document.createElement('div');
+                const textElem = document.createElement("div");
+                textElem.classList.add("draggable-li", "d-flex", "align-items-center", "flex-grow-1");
                 // textElem.addClass('handle');
                 textElem.innerHTML = `${index + 1}`;
                 liElem.appendChild(textElem);
-            }
+            }        
 
             const dropdownElem = document.createElement('ul');
             dropdownElem.classList.add('dropdown-menu', 'p-0', 'overflow-y-scroll');
@@ -84,7 +90,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     $(function () {
         new Sortable($("#sortablemobile").get(0), {
-            handle: 'div',
+            handle: ".draggable-li",
             animation: 200,
             onSort: function (event, ui) {
                 updateMobileFields();
@@ -135,6 +141,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 noOptions.innerHTML = 'No options available';
                 dropdownElem.append(noOptions);
             }
+            dropdownElem.addClass("dropdown-transform");
         });
 
         $("#sortablemobile").on('click', '.updateIndex', function () {
@@ -144,7 +151,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             data[index] = value;
             updateMobileFields(data);
         });
+        $(window).resize(function () {
+            const data = JSON.parse($("#topPrioritiesButtonInput").val());
+            updateMobileFields(data);
+        });
     });
+
+    $("head").append(
+        $("<style>").attr("type", "text/css").text(`.dropdown-transform { transform: translate3d(0px, ${$(".arrowIcon").parent().outerHeight()}px, 0px) !important; }`)
+    );
+    
 
     function removeAllInWeb() {
         $("#sortable").find(".remove-button").toArray().map(function (value) {
