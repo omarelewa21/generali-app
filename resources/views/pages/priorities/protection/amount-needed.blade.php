@@ -27,7 +27,7 @@
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12 fixed-top z-2">
+            <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
@@ -47,7 +47,7 @@
             </div>
             <form novalidate action="{{route('validate.protection.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu pt-md-0 py-3 z-2">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
+                <section class="bottom-content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
@@ -104,7 +104,7 @@
                     <div class="bg-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end pt-4">
+                                <div class="col-12 d-flex gap-2 d-md-block text-end">
                                     <a href="{{route('protection.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>

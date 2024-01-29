@@ -65,6 +65,7 @@ $(document).ready(function() {
             const responsiveHeight = needsMenuHeight + calculatorHeight;
             $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
             $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
+            $("#protection_summary .bottom-content").css("padding-top" , 0);
         } else{
             // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , 0);
             $(".bottom-content .calculatorContent").css("padding-bottom" , 0);

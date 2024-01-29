@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
     $protection = session('customer_details.selected_needs.need_1.advance_details');
     $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
@@ -43,7 +43,7 @@
                     <div class="container h-100">
                         <div class="row h-100">
                             <div class="col-xl-5 col-lg-5 col-md-12 h-100 d-flex justify-content-center align-items-end">
-                                <div class="svg-container h-100" style="transform:scale(1.3)">
+                                <div class="svg-container h-100 graph-size">
                                     <div class="card-gap h-100" id="gap">
                                         <div class="card-gap__percent h-100">
                                             <svg>

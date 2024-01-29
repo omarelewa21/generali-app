@@ -24,15 +24,15 @@ class RetirementController extends Controller
         // Set the default value for $need_sequence
         // $need_sequence = 0;
 
-        // if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+        // if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
         //     $need_sequence = 2;
-        // } else if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+        // } else if ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true'){
         //     $need_sequence = 1;
         // }
-    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
-    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+    //     $protection_discuss = isset($customerDetails['priorities']['protection_discuss']) && ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true');
+    //     $retirement_discuss = isset($customerDetails['priorities']['retirement_discuss']) && ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true');
 
-    //     $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
+    //     $need_sequence = ($protection_discuss ? ($retirement_discuss ? 2 : 1) : 1);
 
     //     return $need_sequence;
     // }
@@ -74,13 +74,13 @@ class RetirementController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('retirement', $customerDetails['financial_priorities'], true);
+        $index = array_search('retirement', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['retirement'] == true || $customerDetails['priorities']['retirement'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';

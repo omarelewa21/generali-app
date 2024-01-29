@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
     $existingPolicy = session('customer_details.selected_needs.need_1.advance_details.existing_policy');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
     $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed');
@@ -28,19 +28,19 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Protection Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-center m-0 pe-4">Total Protection Fund Needed</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.protection.existing.policy')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -54,13 +54,13 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/protection/existing-policy.png') }}" width="auto" height="100%" alt="Existing Policy">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/protection/existing-policy.png') }}" width="auto" height="100%" alt="Protection Existing Policy">
                             </div>
-                            <div class="col-xl-5 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
+                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent h-sm-100">
                                 <h2 class="display-5 fw-bold lh-sm">Luckily, I do have an existing life insurance policy.</h2>
                                 <p class="d-flex pt-5">
                                     <span class="me-5 d-flex">
