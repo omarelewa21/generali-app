@@ -429,7 +429,6 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
             try {
                 DB::transaction(function () use ($request,$customerDetails) {
@@ -462,7 +461,7 @@ class FormController extends Controller {
                 Log::debug($e);
                 DB::rollBack();
             }
-
+            Log::debug($customerDetails);
             // Store the updated array back into the session
             return redirect()->route($dataUrl);
         } else {
