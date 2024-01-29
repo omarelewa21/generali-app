@@ -1,7 +1,8 @@
 import Sortable from 'sortablejs';
 
 const specificPageURLs = [
-    'financial-priorities'
+    'financial-priorities',
+    'financial-priorities/discuss'
 ];
 
 const currentURL = window.location.href;
@@ -168,14 +169,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
     }
 
-    $("#refresh").on("click", function (event) {
-        event.preventDefault();
+    function resetPriorities() {
         updateMobileFields([null, null, null, null, null, null, null, null]);
         removeAllInWeb();
-    });
+      }    
 
     // Priority To Discuss Page JS
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", function () {
+        $("#refresh").on("click", resetPriorities);
+
         // Ensure the first accordion item is always open
         const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -196,22 +198,25 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Update checkboxValues object when any checkbox is changed
-        $('input[type="checkbox"]').on('change', function() {
-            var checkboxId = $(this).attr('id');
-            var isChecked = $(this).prop('checked');
+        $('input[type="checkbox"]').on("change", function () {
+            var checkboxId = $(this).attr("id");
+            var isChecked = $(this).prop("checked");
             checkboxValues[checkboxId] = isChecked;
-            if(checkboxId.includes('Discuss')){
-                checkboxId = checkboxId.replace('Discuss','');
-                if (!isChecked) {
-
-                    $('[data-identifier='+checkboxId+']').siblings('img').hide()
-                    
-                    return true;
-                }else{
-                    $('[data-identifier='+checkboxId+']').siblings('img').show()
-                }
+    
+            if (checkboxId.includes("discuss")) {
+            checkboxId = checkboxId.replace("_discuss", "");
+            if (!isChecked) {
+                $("[data-identifier=" + checkboxId + "]")
+                .siblings("img")
+                .hide();
+    
+                return true;
+            } else {
+                $("[data-identifier=" + checkboxId + "]")
+                .siblings("img")
+                .show();
             }
-                
+            }
         });
 
         $('#priorityNext').on('click', function(event) {
