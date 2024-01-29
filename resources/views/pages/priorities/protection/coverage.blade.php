@@ -20,10 +20,10 @@
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
     $familyDependent = session('customer_details.family_details.dependent');
-    $childData = session('customer_details.family_details.dependent.children_data');
+    $childData = session('customer_details.family_details.children_data');
 
-    $spouseData = session('customer_details.family_details.dependent.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_1.advance_details.child_name');

@@ -52,8 +52,8 @@
                 </p>
             </a>
         </div>
-        <div class="col-auto">
-            <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu">
+        <div class="col-auto pe-sm-0">
+            <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu" class="d-flex align-items-center">
                 <div class="progress color d-inline-flex mx-2">
                     <span class="progress-left">
                         <span class="progress-bar"></span>

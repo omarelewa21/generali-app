@@ -52,16 +52,18 @@ class ProtectionController extends Controller
 
         // Get existing protection_needs from the session
         $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_1'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 
-        // $totalPriority = count($customerDetails['financial_priorities']);
-        $index = array_search('protection', $customerDetails['financial_priorities'], true);
+        $totalPriority = count($customerDetails['priorities_level']);
+        $index = array_search('protection', $customerDetails['priorities_level'], true);
 
         if ($customerDetails['priorities']['protection'] == true || $customerDetails['priorities']['protection'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
             $discussAnswer = 'Yes';
             $needs = $customerDetails['selected_needs']['need_1'] ?? [];
             $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];

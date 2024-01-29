@@ -74,13 +74,13 @@ class SavingsController extends Controller
         $needs = $customerDetails['selected_needs']['need_4'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
-        $index = array_search('savings', $customerDetails['financial_priorities'], true);
+        $index = array_search('savings', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['savings'] == true || $customerDetails['priorities']['savings'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['savingsDiscuss'] == true || $customerDetails['priorities']['savingsDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['savings_discuss'] == true || $customerDetails['priorities']['savings_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';

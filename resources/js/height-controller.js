@@ -56,13 +56,20 @@ $(document).ready(function() {
         const windowWidth = $(window).width();
 
         if(windowWidth < 768){
+            const needsMenuHeight = 85.5;
+            const needsSubMenuHeight = 76;
             const calculatorHeight = $(".calculatorMob").outerHeight();
-            const footerHeight = $(".footer.fixed-bottom").outerHeight();
-            $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
-            $(".content-needs-grey").css("padding-top" , calculatorHeight + "px");
+            const footerHeight = $(".footer.fixed-bottom").innerHeight();
+            // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
+            $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
+            const responsiveHeight = needsMenuHeight + calculatorHeight;
+            $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
+            $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
         } else{
-            $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , 0);
+            // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , 0);
+            $(".bottom-content .calculatorContent").css("padding-bottom" , 0);
             $(".content-needs-grey").css("padding-top" , 0);
+            $(".bottom-content").css("padding-top" , 0);
         }
     }
     setResponsiveCalcuator();
