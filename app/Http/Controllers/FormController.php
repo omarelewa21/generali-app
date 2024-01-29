@@ -39,7 +39,7 @@ class FormController extends Controller {
             //save into session storage
             $transactionService->handleTransaction($request,$customerDetails);
 
-
+            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -129,7 +129,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             return redirect()->route('avatar.welcome')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
@@ -317,7 +317,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status')->with($transactionData);
         } else {

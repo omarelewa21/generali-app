@@ -49,7 +49,7 @@ class ProtectionController extends Controller
         $selectedNeeds = $customerDetails['selected_needs'] ?? [];
 
         // $totalPriority = count($customerDetails['financial_priorities']);
-        $index = array_search('protection', $customerDetails['financial_priorities'], true);
+        $index = array_search('protection', $customerDetails['priorities_level'], true);
 
         if ($customerDetails['priorities']['protection'] == true || $customerDetails['priorities']['protection'] == 'true'){
             $coverAnswer = 'Yes';
