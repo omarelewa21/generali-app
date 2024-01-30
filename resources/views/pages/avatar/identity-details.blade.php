@@ -17,6 +17,7 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $identityDetails = session('customer_details.identity_details');
     $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
+    $transactionId ??= session('transaction_id');
 @endphp
 
 <div id="identity_details">
@@ -32,7 +33,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('form.submit.identity') }}" method="POST" id="identityForm">
+                    <form novalidate action="{{ route('form.submit.identity',['transaction_id' => $transactionId]) }}" method="POST" id="identityForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -284,7 +285,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('avatar.gender.selection')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.gender.selection' ,['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>

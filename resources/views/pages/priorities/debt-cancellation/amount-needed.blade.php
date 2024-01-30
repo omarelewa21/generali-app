@@ -13,7 +13,7 @@
 @section('content')
 
 @php
-    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
     $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
     $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
     $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');

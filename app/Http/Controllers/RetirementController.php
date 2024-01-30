@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -470,9 +465,9 @@ class RetirementController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('retirement.gap');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('retirement.gap');
     }
 
     public function submitRetirementGap(Request $request){
@@ -517,5 +512,4 @@ class RetirementController extends Controller
             return redirect()->route('existing.policy');
         }
     }
-
 }

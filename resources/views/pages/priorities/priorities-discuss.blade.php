@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
-                <section class="content-avatar-default">
+                <section class="content-avatar-default d-none d-md-block">
                     <div class="col-12 text-center position-relative">
                         <h2 class="display-5 fw-bold lh-base text-center">I'd like to figure out future plans for these:</h2>
                         <div id="sortable-main" class="position-relative pt-3">
@@ -203,7 +203,7 @@
                             </div> 
                             <div class="row px-4 pb-2 px-md-5">
                                 <div class="col-12">
-                                    <div class="accordion accordion-flush" id="accordionPriorities">
+                                    <div class="accordion accordion-flush position-relative z-0" id="accordionPriorities">
                                         @php
                                             if (isset($topPriorities)) {
                                                 foreach($topPriorities as $priority) {
@@ -300,226 +300,17 @@
 </div>
 
 <script>
-    var lastPageInput = {!! json_encode($topPriorities) !!};
-    if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
-        var nameModal = document.getElementById('missingLastPageInputFields');
-        nameModal.classList.add('show');
-        nameModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
+var lastPageInput = {!! json_encode($topPriorities) !!};
+var priority = {!! json_encode($prioritiesDiscuss) !!};
 
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure the first accordion item is always open
+    const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
 
-        // Close the modal
-        var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            nameModal.classList.remove('show');
-            nameModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities';
-        });
-
-    } else{
-        document.addEventListener('DOMContentLoaded', function() {
-            var priority = {!! json_encode($prioritiesDiscuss) !!};
-            // Ensure the first accordion item is always open
-            const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            if (firstAccordionItem) {
-                const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
-                firstCollapse.classList.add('show');
-            }
-
-            // Sent checkbox value to controller
-            var checkboxValues = {};
-
-            //Assign the needs sequence
-            const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss'];
-
-            // First set all to true
-            $('input[type="checkbox"]').each(function() {
-                var checkboxId = $(this).attr('id');
-                if(priority){
-                    for (var key in priority) {
-                        var value = priority[key];
-                        if (value === 'true') {
-                            checkboxValues[key] = true;
-                            $('#' + key).prop('checked', true);
-                        }
-                        else{
-                            checkboxValues[key] = false;
-                            $('#' + key).prop('checked', false);
-                        }
-                    }
-                    var isChecked = $(this).prop('checked');
-                    checkboxValues[checkboxId] = isChecked;
-                    var droppedDiv = document.querySelectorAll('.dropped');
-
-                    if (!isChecked) {
-                        droppedDiv.forEach(function(element) {
-                            var droppedAttribute = element.getAttribute("data-identifier");
-                            var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + '_discuss' === checkboxId) {
-                            // if (image) {
-                                image.style.display = 'none';
-                            }
-                        });
-                    }
-                    else {
-                        droppedDiv.forEach(function(element) {
-                            var droppedAttribute = element.getAttribute("data-identifier");
-                            var image = document.querySelector('img.' + droppedAttribute);
-                            if (image && droppedAttribute + '_discuss' === checkboxId) {
-                            // if (image) {
-                                image.style.display = 'block';
-                            }
-                        });
-                    }
-                } else{
-                    checkboxValues[checkboxId] = true;
-                    $(this).prop('checked', true); // Check the checkboxes initially
-                }
-
-                for (const checkboxId of contents) {
-                    if (checkboxValues[checkboxId] === true) {
-                        // Assign link based on the sequence
-                        if (checkboxId === 'protection_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
-                            break;
-                        }
-                        else if (checkboxId === 'retirement_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
-                            break;
-                        }
-                        else if (checkboxId === 'education_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
-                            break;
-                        }
-                        else if (checkboxId === 'savings_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
-                            break;
-                        }
-                        else if (checkboxId === 'investments_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
-                            break;
-                        }
-                        else if (checkboxId === 'health-medical_discuss') {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
-                            break;
-                        }
-
-                        else {
-                            document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
-                            break;
-                        }
-                    }
-                }
-            });
-
-            // Update checkboxValues object when any checkbox is changed
-            $('input[type="checkbox"]').on('change', function() {
-                var checkboxId = $(this).attr('id');
-                
-                var isChecked = $(this).prop('checked');
-                checkboxValues[checkboxId] = isChecked;
-                var droppedDiv = document.querySelectorAll('.dropped');
-
-                if (!isChecked) {
-                    droppedDiv.forEach(function(element) {
-                        var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'none';
-                        }
-                    });
-                }
-                else {
-                    droppedDiv.forEach(function(element) {
-                        var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'block';
-                        }
-                    });
-                }
-
-                // Get the list of unchecked checkboxes
-                const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
-
-                // Check if there are unchecked checkboxes
-                if (uncheckedCheckboxes.length > 0) {
-                    // Iterate through the sequence of content checkboxes
-                    for (const checkboxId of contents) {
-                        // Check if the current checkbox is unchecked
-                        if (checkboxValues[checkboxId] === true) {
-                            // Check the sequence and redirect accordingly
-                            if (checkboxId === 'protection_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("protection.home") }}');
-                                break;
-                            }
-                            else if (checkboxId === 'retirement_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("retirement.home") }}');
-                                break;
-                            }
-                            else if (checkboxId === 'education_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("education.home") }}');
-                                break;
-                            }
-                            else if (checkboxId === 'savings_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("savings.home") }}');
-                                break;
-                            }
-                            else if (checkboxId === 'investments_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("investment.home") }}');
-                                break;
-                            }
-                            else if (checkboxId === 'health-medical_discuss') {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("health.medical.home") }}');
-                                break;
-                            }
-
-                            else {
-                                document.getElementById('priorityNext').setAttribute('href', '{{ route("debt.cancellation.home") }}');
-                                break;
-                            }
-                            // Break out of the loop once the first unchecked checkbox is handled
-                            break;
-                        }
-                    }
-                } else {
-                    // Handle the case where no checkboxes are unchecked
-                }
-            });
-
-            $('#priorityNext').on('click', function(event) {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('priorities.redirect') }}",
-                    data: checkboxValues,
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function(response) {
-                        // Handle success, if needed
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error, if needed
-                    }
-                });
-            });
-        });
+    if (firstAccordionItem) {
+        const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
+        firstCollapse.classList.add('show');
     }
+});
 </script>
 @endsection

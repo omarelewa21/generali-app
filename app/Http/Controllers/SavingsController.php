@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -189,11 +184,6 @@ class SavingsController extends Controller
             $savings_goals_amount = str_replace(',','',$request->input('savings_goals_amount'));
             $savingsGoalsSerialized = $request->input('savingsGoalsButtonInput');
             $savingsGoalsButtonInput = json_decode($savingsGoalsSerialized, true);
-            
-            // $savingsGoalsButtonInput = array_filter($savingsGoalsButtonInput, function($value) {
-            //     return $value !== null;
-            // });
-            // $savingsGoalsButtonInput = array_values($savingsGoalsButtonInput);
 
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
@@ -402,46 +392,8 @@ class SavingsController extends Controller
 
         return redirect()->route('savings.risk.profile');
     }
-    
 
     public function validateSavingsRiskProfile(Request $request){
-
-        // Define custom validation rule for button selection
-        // Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
-        //     if ($value !== null) {
-        //         return true;
-        //     }
-            
-        //     $customMessage = "Please select at least one risk.";
-        //     $validator->errors()->add($attribute, $customMessage);
-    
-        //     return false;
-        // });
-
-        // Validator::extend('at_least_one_potential_selected', function ($attribute, $value, $parameters, $validator) {
-        //     if ($value !== null) {
-        //         return true;
-        //     }
-            
-        //     $customMessage = "Please select at least one potential return.";
-        //     $validator->errors()->add($attribute, $customMessage);
-    
-        //     return false;
-        // });
-
-        // $validator = Validator::make($request->all(), [
-        //     'savingsRiskProfileInput' => [
-        //         'at_least_one_selected',
-        //     ],
-        //     'savingsPotentialReturnInput' => [
-        //         'at_least_one_potential_selected',
-        //     ],
-        // ]);
-
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
         $customMessages = [
             'savingsRiskProfileInput.required' => 'Please select a risk level.',
             'savingsRiskProfileInput.in' => 'Invalid risk level selected.',

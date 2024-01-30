@@ -10,175 +10,95 @@
 <title>Agent Dashboard</title>
 @endsection
 
-@section('content')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+@section('content')
 <div id="dashboard">
+    
     <div class="container-fluid">
         <div class="row">
+            
             @include('templates.nav.nav-white')
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section-agent">
                 <section class="main-content pb-5">
                     <div class="container">
+                        
                         <div class="row pt-4 px-4 pb-4 sticky-md-top bg-accent-bg-grey">
                             <div class="col-8">
                                 <h2 class="display-5 fw-bold lh-sm text-primary">Hi, Agent Lee</h2>
                                 <p class="text-gray my-0">15428</p>
+                                
                             </div>
+                            
                             <div class="col-4 text-end">
                                 <p class="text-gray">Last login: 2023-11-01 20:01:00</p>
+                                <div style="float: right;" id="user-button"></div>
                             </div>
+                            
                         </div>
                         <div class="row px-4 pt-5">
                             <div class="col-12">
-                                <a href="http://127.0.0.1:8000" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
+                                {{-- <a href="{{ route('forms.create', ['new' => true]) }}">Create New Form</a> --}}
+                                <a href="{{ route('welcome') }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">
-                            <div class="col-12">
-                                <h3 class="avatar-text fw-bold pb-3">Overview</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="avatar-text fw-bold pb-3">Overview</h3>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <button class="status-btn btn btn-danger btn-sm" onclick="updateText('ALL')" data-url="{{ route('agent.index', ['status' => 'all']) }}">Reset</button>
+                                </div>
                             </div>
                         </div>
                         <div class="row px-4">
                             <div class="col-12 col-lg-4 pb-2">
                                 <div class="col-12 btn-tick">
-                                    <a href="" class="btn w-100">
+                                    <a id="completedBtn"  class="btn w-100 status-btn" onclick="updateText('Completed')" data-url='{{ route('agent.index', ['status' => 'completed']) }}'>
                                         <div class="row align-items-center">
                                             <div class="col-8 text-green text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-check me-3"></i>Completed</div>
-                                            <div class="col-4 fw-bold text-green display-4 text-end">3</div>
+                                            <div class="col-4 fw-bold text-green display-4 text-end">{{ $completedCount }}</div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4 pb-2">
                                 <div class="col-12 btn-draft">
-                                    <a href="" class="btn w-100">
+                                    <a id="draftBtn"  class="btn w-100 status-btn" onclick="updateText('Draft')" data-url='{{ route('agent.index', ['status' => 'draft']) }}'>
                                         <div class="row align-items-center">
                                             <div class="col-8 text-yellow text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-regular fa-clock me-3"></i>Draft</div>
-                                            <div class="col-4 fw-bold text-yellow display-4 text-end">2</div>
+                                            <div class="col-4 fw-bold text-yellow display-4 text-end">{{ $draftCount }}</div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-4 pb-2">
                                 <div class="col-12 btn-cancelled">
-                                    <a href="" class="btn w-100">
+                                    <a id="cancelledBtn" class="btn w-100 status-btn" onclick="updateText('Cancelled')" data-url='{{ route('agent.index', ['status' => 'cancelled']) }}'>
                                         <div class="row align-items-center">
                                             <div class="col-8 text-primary text-start btn-text avatar-text fw-bold d-flex align-items-center"><i class="fa-solid fa-circle-xmark me-3"></i>Cancelled</div>
-                                            <div class="col-4 fw-bold text-primary display-4 text-end">1</div>
+                                            <div class="col-4 fw-bold text-primary display-4 text-end">{{ $cancelledCount }}</div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="row pt-5 px-4">
-                            <div class="col-12">
-                                <h4 class="display-6 lh-base fw-bold pb-3">Saved Sessions</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="display-6 lh-base fw-bold pb-3">Saved Sessions</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-end">
+                                        <h6 id="statusText" class="text-justify">Current View: ALL</h6>
+                                    </div>
+                                </div>
+                                
                             </div>
+                            
                             <div id="datatable" class="col-12 table-responsive">
-                                <table class="table table-striped" id="agentTable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Entry ID</th>
-                                            <th scope="col">Customer Name</th>
-                                            <th scope="col">Customer ID</th>
-                                            <th scope="col">Last Saved</th>
-                                            <th scope="col">Action</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>01234</td>
-                                            <td>Customer Abc</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>09584</td>
-                                            <td>Customer M</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>07392</td>
-                                            <td>Customer Zee</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>02849</td>
-                                            <td>Customer Phg</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>03654</td>
-                                            <td>Customer Az</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>05673</td>
-                                            <td>Customer Lum</td>
-                                            <td>999999-14-9999</td>
-                                            <td>2023-11-01 20:01:00</td>
-                                            <td><a href="http://127.0.0.1:8000/basic-details" class="btn btn-primary btn-sm w-100">Restore</a></td>
-                                            <td class="text-center">
-                                                <div type="button" class="dropdown-options btn-group dropstart">
-                                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical text-gray fa-lg"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="card-body">{!! $dataTable->table() !!}</div>
                             </div>
                         </div>
                         <div class="row py-5 px-4">
@@ -223,3 +143,25 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+     {!! $dataTable->scripts() !!}
+
+     <script>
+        
+        $('.status-btn').on('click', function () {
+            var url = $(this).data('url'); 
+            // $(this).prop('disabled', true);
+            filterData(url);
+        });
+    
+    
+        function filterData(url) {
+            $("#sessions-table").DataTable().ajax.url(url).load();
+        }
+
+        function updateText(viewName) {
+            $('#statusText').text('Current View: ' + viewName);
+        }
+     </script>
+@endpush

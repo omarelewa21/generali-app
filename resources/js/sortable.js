@@ -2,6 +2,7 @@ import Sortable from 'sortablejs';
 
 const specificPageURLs = [
     'financial-priorities',
+    'financial-priorities/discuss'
 ];
 
 const currentURL = window.location.href;
@@ -54,20 +55,26 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             liElem.appendChild(iconElem);
 
             if (value) {
-                const imgElem = document.createElement('img');
-                imgElem.classList.add('needs-icon');
-                imgElem.setAttribute('src', `/images/top-priorities/${value}-icon.png`);
-                liElem.appendChild(imgElem);
-                const textElem = document.createElement('div');
+                const draggableLi = document.createElement("div");
+                draggableLi.classList.add("draggable-li", "d-flex", "align-items-center", "flex-grow-1");
+        
+                const imgElem = document.createElement("img");
+                imgElem.classList.add("needs-icon");
+                imgElem.setAttribute("src", `/images/top-priorities/${value}-icon.png`);
+                draggableLi.appendChild(imgElem);
+                const textElem = document.createElement("div");
                 // textElem.addClass('handle');
                 textElem.innerHTML = `${priorityMap[value]}`;
-                liElem.appendChild(textElem);
+                draggableLi.appendChild(textElem);
+        
+                liElem.appendChild(draggableLi);
             } else {
-                const textElem = document.createElement('div');
+                const textElem = document.createElement("div");
+                textElem.classList.add("draggable-li", "d-flex", "align-items-center", "flex-grow-1");
                 // textElem.addClass('handle');
                 textElem.innerHTML = `${index + 1}`;
                 liElem.appendChild(textElem);
-            }
+            }        
 
             const dropdownElem = document.createElement('ul');
             dropdownElem.classList.add('dropdown-menu', 'p-0', 'overflow-y-scroll');
@@ -84,7 +91,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     $(function () {
         new Sortable($("#sortablemobile").get(0), {
-            handle: 'div',
+            handle: ".draggable-li",
             animation: 200,
             onSort: function (event, ui) {
                 updateMobileFields();
@@ -135,6 +142,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 noOptions.innerHTML = 'No options available';
                 dropdownElem.append(noOptions);
             }
+            dropdownElem.addClass("dropdown-transform");
         });
 
         $("#sortablemobile").on('click', '.updateIndex', function () {
@@ -144,7 +152,16 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             data[index] = value;
             updateMobileFields(data);
         });
+        $(window).resize(function () {
+            const data = JSON.parse($("#topPrioritiesButtonInput").val());
+            updateMobileFields(data);
+        });
     });
+
+    $("head").append(
+        $("<style>").attr("type", "text/css").text(`.dropdown-transform { transform: translate3d(0px, ${$(".arrowIcon").parent().outerHeight()}px, 0px) !important; }`)
+    );
+    
 
     function removeAllInWeb() {
         $("#sortable").find(".remove-button").toArray().map(function (value) {
@@ -155,10 +172,12 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     function resetPriorities() {
         updateMobileFields([null, null, null, null, null, null, null, null]);
         removeAllInWeb();
-    }
+      }    
 
     // Priority To Discuss Page JS
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener("DOMContentLoaded", function () {
+        $("#refresh").on("click", resetPriorities);
+
         // Ensure the first accordion item is always open
         const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -179,22 +198,25 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Update checkboxValues object when any checkbox is changed
-        $('input[type="checkbox"]').on('change', function() {
-            var checkboxId = $(this).attr('id');
-            var isChecked = $(this).prop('checked');
+        $('input[type="checkbox"]').on("change", function () {
+            var checkboxId = $(this).attr("id");
+            var isChecked = $(this).prop("checked");
             checkboxValues[checkboxId] = isChecked;
-            if(checkboxId.includes('Discuss')){
-                checkboxId = checkboxId.replace('Discuss','');
-                if (!isChecked) {
-
-                    $('[data-identifier='+checkboxId+']').siblings('img').hide()
-                    
-                    return true;
-                }else{
-                    $('[data-identifier='+checkboxId+']').siblings('img').show()
-                }
+    
+            if (checkboxId.includes("discuss")) {
+            checkboxId = checkboxId.replace("_discuss", "");
+            if (!isChecked) {
+                $("[data-identifier=" + checkboxId + "]")
+                .siblings("img")
+                .hide();
+    
+                return true;
+            } else {
+                $("[data-identifier=" + checkboxId + "]")
+                .siblings("img")
+                .show();
             }
-                
+            }
         });
 
         $('#priorityNext').on('click', function(event) {

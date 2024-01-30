@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
 
@@ -50,13 +45,13 @@ class DebtCancellationController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('education', $customerDetails['financial_priorities'], true);
+        $index = array_search('education', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['education'] == true || $customerDetails['priorities']['education'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['education_discuss'] == true || $customerDetails['priorities']['education_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';
@@ -286,7 +281,7 @@ class DebtCancellationController extends Controller
             DB::rollBack();
         }
 
-        // // Process the form data and perform any necessary actions
+        // Process the form data and perform any necessary actions
         return redirect()->route('debt.cancellation.critical.illness');
     }
 
@@ -358,7 +353,7 @@ class DebtCancellationController extends Controller
             DB::rollBack();
         }
 
-        // // Process the form data and perform any necessary actions
+        // Process the form data and perform any necessary actions
         return redirect()->route('debt.cancellation.gap');
     }
 

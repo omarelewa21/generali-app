@@ -11,23 +11,36 @@ use App\Models\maritalStatus;
 use App\Models\Company;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
-
+use App\Models\SessionStorage;
+use Illuminate\Http\Request;
 class DropdownController extends Controller
 {
-    public function titles()
+    public function titles(Request $request)
     {
         $countries = Country::all();
         $titles = Title::all();
-        return view('pages/main/basic-details', compact('titles','countries'));
+        $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
+
+        if($basicDetails){
+            $basicDetails = $basicDetails['basic_details'] ?? '';
+        }
+        return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
     }
 
-    public function identityDetails()
+    public function identityDetails(Request $request)
     {
         $countries = Country::all();
         $idtypes = idtype::all();
         $occupations = Occupation::all();
         $educationLevels = educationLevel::all();
-        return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
+
+        $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
+
+        if($basicDetails){
+            $basicDetails = $basicDetails['basic_details'] ?? '';
+        }
+
+        return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
     }
 
     public function familyDependentDetails()

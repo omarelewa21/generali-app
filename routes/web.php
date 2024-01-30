@@ -10,6 +10,7 @@
 |
 */
 
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
@@ -24,12 +25,17 @@ use App\Http\Controllers\DebtCancellationController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TransactionController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
+
+Route::get('/basic-details/{transaction_id?}', [DropdownController::class, 'titles'])->name('restore.basic.details');
+
+
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 
 /* Avatar pages */
@@ -197,11 +203,22 @@ Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');
 Route::get('/getSessionData', [SessionController::class, 'getSessionData'])->name('get.session.data');
+Route::get('/clear-session-storage', [SessionController::class, 'clearSessionStorage'])->name('clear_session_storage');
 
 // Admin Dashboard
 Route::view('/login', 'pages.login')->name('login');
-Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
+// Route::view('/agent', 'pages.dashboard.agent')->name('dashboard');
 Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
-Route::get('/agent/logs', function () {
-    return view('pages.dashboard.logs');
-});
+Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
+Route::get('/agent/logs', [TransactionController::class,'index'])->name('transaction.index');
+Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete');
+
+// Route::get('/agent/logs', function () {
+//     return view('pages.dashboard.logs');
+// });
+
+//Create New Transaction Form, always create a new session id 
+Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');
+
+// Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
+// Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');

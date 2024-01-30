@@ -83,6 +83,11 @@ $form-feedback-invalid-color: #C21B17;
 $input-btn-focus-blur: none;
 $input-btn-focus-box-shadow: none;
 $form-select-focus-box-shadow: none;
+$form-select-bg: transparent;
+$form-select-border-color: #000000;
+$form-select-border-radius: 0;
+$input-bg: transparent;
+$input-focus-bg: transparent;
 
 // Offcanvas Menu
 $offcanvas-bg-color: #C21B17;
@@ -118,6 +123,19 @@ $accordion-border-color: #CCCCCC;
 // Datatables
 $table-striped-bg: #EBEBEB;
 $table-striped-order: even;
+
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+ 
+ 
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+ 
+// DataTables
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css";
+@import 'datatables.net-select-bs5/css/select.bootstrap5.css';
 
 
 
@@ -221,8 +239,6 @@ $btn-font-weight: 500;
 $btn-padding-x: 1.5rem; //24px
 
 $btn-padding-y: 0.9rem; //14.4px
-
-$input-bg: transparent;
 
 $input-border-color: #000000;
 

@@ -35,7 +35,7 @@ if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agen
                     </div>
                     <div class="timeline-item <?php echo $isLogsPage ? 'active' : ''; ?>">
                         <a class="nav-item text-light text-decoration-none text-uppercase" href="{{ url('agent/logs') }}">
-                            <p class="nav-text">Transaction Logs</p>
+                            <p class="nav-text">Entry Logs</p>
                         </a>
                     </div>
                 </div>

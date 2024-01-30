@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
 
@@ -77,13 +72,13 @@ class EducationController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('education', $customerDetails['financial_priorities'], true);
+        $index = array_search('education', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['education'] == true || $customerDetails['priorities']['education'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['education_discuss'] == true || $customerDetails['priorities']['education_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';
@@ -344,8 +339,7 @@ class EducationController extends Controller
             DB::rollBack();
         }
 
-        // Process the form data and perform any necessary actions
-        if (isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] === 'true' || $customerDetails['priorities']['savingsDiscuss'] === true)) {
+        if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
             return redirect()->route('savings.home');
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
             return redirect()->route('investment.home');

@@ -30,5 +30,16 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    // 'salesforce' => [
+    //     'client_id' => env('SALESFORCE_CLIENT_ID'),
+    //     'client_secret' => env('SALESFORCE_CLIENT_SECRET'),
+    //     'redirect' => env('SALESFORCE_REDIRECT_URI'),
+    // ],
+    // 'socialite' => [
+    //     'salesforce' => [
+    //         'client_id' => env('SALESFORCE_CLIENT_ID'),
+    //         'client_secret' => env('SALESFORCE_CLIENT_SECRET'),
+    //         'redirect' => env('SALESFORCE_REDIRECT_URI'),
+    //     ],
+    // ],
 ];

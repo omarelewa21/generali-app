@@ -658,6 +658,11 @@ button[data-required="selected"] img {
   border: 10px solid #8995C8;
 }
 
+#top_priorities .button-bg.selected .hover,
+#top_priorities .button-bg.selected .border-default{
+  border: 10px solid transparent;
+}
+
 .button-bg .hover img {
   transition: transform 0.7s ease;
 }
@@ -900,6 +905,9 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
+.changeImage {
+  z-index: 3;
+}
 /* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
@@ -1215,7 +1223,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortable .second {
   grid-column: 22 / span 16;
   grid-row: 28 / 73;
-  transform: translate(1px, 2px);
+  /* transform: translate(1px, 2px); */
 }
 
 #sortable .third {
@@ -1241,7 +1249,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortable .seventh {
   grid-column: 68 / span 16;
   grid-row: 28 / 73;
-  transform: translate(-2px, 3px);
+  /* transform: translate(-2px, 3px); */
 }
 
 #sortable .eight {
@@ -1299,7 +1307,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 #sortablemobile li .arrowIcon {
   position: absolute;
   right: 10px;
-  top: inherit;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   cursor: pointer;
 }
 
@@ -1575,12 +1585,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
-  #top_priorities .wrapper-avatar-default {
+  #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     display:block;
   }
-  body.overflow #top_priorities .wrapper-avatar-default {
+  /* body.overflow #top_priorities .wrapper-avatar-default {
     overflow: auto;
-  }
+  } */
   .homeVector {
     width: 100%;
     height:auto;

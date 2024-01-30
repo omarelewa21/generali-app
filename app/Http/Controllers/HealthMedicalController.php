@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
-use SebastianBergmann\Environment\Console;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
 
@@ -122,13 +117,13 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
-        $index = array_search('investment', $customerDetails['financial_priorities'], true);
+        $index = array_search('investment', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['investmentsDiscuss'] == true || $customerDetails['priorities']['investmentsDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['investments_discuss'] == true || $customerDetails['priorities']['investments_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';
@@ -377,7 +372,7 @@ class HealthMedicalController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
+        
         return redirect()->route('health.medical.critical.existing.protection');
     }
 
