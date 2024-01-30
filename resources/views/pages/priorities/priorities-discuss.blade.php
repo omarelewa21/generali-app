@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0 order-md-1 order-sm-2 order-2">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
-                <section class="content-avatar-default">
+                <section class="content-avatar-default d-none d-md-block">
                     <div class="col-12 text-center position-relative">
                         <h2 class="display-5 fw-bold lh-base text-center">I'd like to figure out future plans for these:</h2>
                         <div id="sortable-main" class="position-relative pt-3">
