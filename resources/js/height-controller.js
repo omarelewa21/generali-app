@@ -55,21 +55,41 @@ $(document).ready(function() {
     function setResponsiveCalcuator(){
         const windowWidth = $(window).width();
 
+        const needsMenuHeight = 85.5;
+        const needsSubMenuHeight = 76;
+        const calculatorHeight = $(".calculatorMob").outerHeight();
+        const footerHeight = $(".footer.fixed-bottom").innerHeight();
+        const titleHeight = $(".summary-page .heading .container").outerHeight();
+        const responsiveHeight = needsMenuHeight + calculatorHeight;
+        const gapMenu = needsMenuHeight + needsSubMenuHeight;
+        const graphMenu = titleHeight + needsMenuHeight -30;
+
         if(windowWidth < 768){
-            const needsMenuHeight = 85.5;
-            const needsSubMenuHeight = 76;
-            const calculatorHeight = $(".calculatorMob").outerHeight();
-            const footerHeight = $(".footer.fixed-bottom").innerHeight();
             // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
             $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
-            const responsiveHeight = needsMenuHeight + calculatorHeight;
             $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
+            $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $(".summary-page .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            $(".summary-page .bottom-content .graph-col").css("padding-top" , graphMenu + "px");
             $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
-            $("#protection_summary .bottom-content").css("padding-top" , 0);
-        } else{
+            $(".ideal .bottom-content").css("padding-top" , 0);
+            $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
+            $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
+        } else if (windowWidth >=768 && windowWidth <= 1199 ){
+            $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
+            $(".summary-page .bottom-content .graph-col").css("padding-top" , titleHeight + "px");
+            $(".summary-page .bottom-content .graph-col").css("padding-bottom" ,  "20px");
+        } else if (windowWidth >=1200 && windowWidth <= 1450){
+            $("#retirement_allocated_funds .bottom-content .col-xl-5 .h-100.row").css("padding-bottom" , footerHeight + "px");
+        }
+        else{
+            $(".summary-page .bottom-content .gap-col").css("padding-bottom" , 0);
+            $(".summary-page .bottom-content .graph-col").css("padding-top" , 0);
             // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , 0);
             $(".bottom-content .calculatorContent").css("padding-bottom" , 0);
             $(".content-needs-grey").css("padding-top" , 0);
+            $(".summary-page .content-needs-grey .heading").css("padding-top" , 0);
+            $(".summary-page .content-needs-grey .top-menu").css("padding-top" , 0);
             $(".bottom-content").css("padding-top" , 0);
         }
     }

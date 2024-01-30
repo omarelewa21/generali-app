@@ -13,7 +13,7 @@
 @section('content')
 
 @php
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
 
     $retirementMonthlySupport = session('customer_details.selected_needs.need_2.advance_details.monthly_covered_amount');
     $retirementAnnual = session('customer_details.selected_needs.need_2.advance_details.covered_amount');
@@ -32,7 +32,7 @@
                 <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                        <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
                             ? number_format(floatval($totalRetirementNeeded))
                             : ($retirementSavings === null || $retirementSavings === ''
@@ -43,14 +43,14 @@
                             }}
                         </h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Retirement Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -73,19 +73,21 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/retirement/monthly-support.png') }}" width="auto" height="100%" alt="Increment">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/retirement/monthly-support.png') }}" width="auto" height="100%" alt="Retirement Monthly Support Avatar">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">It would be great to have</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_monthly_support') is-invalid @enderror" id="retirement_monthly_support" value="{{ $retirementMonthlySupport !== null ? number_format(floatval($retirementMonthlySupport)) : $retirementMonthlySupport }}" required></span>
-                                    / month to support myself and my loved ones when I retire.
-                                </p>
-                                <input type="hidden" name="total_retirementNeeded" id="total_retirementNeeded" value="{{$totalRetirementNeeded}}">
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row h-sm-100">
+                                    <h2 class="display-5 fw-bold lh-sm">It would be great to have</h2>
+                                    <p class="display-5 fw-bold currencyField">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_monthly_support') is-invalid @enderror" id="retirement_monthly_support" value="{{ $retirementMonthlySupport !== null ? number_format(floatval($retirementMonthlySupport)) : $retirementMonthlySupport }}" required></span>
+                                        / month to support myself and my loved ones when I retire.
+                                    </p>
+                                    <input type="hidden" name="total_retirementNeeded" id="total_retirementNeeded" value="{{$totalRetirementNeeded}}">
+                                </div>
                             </div>
                         </div>
                     </div>

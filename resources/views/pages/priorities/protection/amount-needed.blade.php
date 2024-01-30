@@ -73,17 +73,19 @@
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                             <!-- <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg"> -->
-                                <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Increment">
+                                <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent h-sm-100">
-                            <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
-                                <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
-                                / month for
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
-                                years</p>
-                                <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row h-sm-100">
+                                <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
+                                    <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
+                                    <p class="display-5 fw-bold currencyField">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
+                                    / month for
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
+                                    years</p>
+                                    <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
+                                </div>
                             </div>
                         </div>
                     </div>

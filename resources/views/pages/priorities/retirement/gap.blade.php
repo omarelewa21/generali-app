@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
 
     $retirement = session('customer_details.selected_needs.need_2.advance_details');
     $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
@@ -28,7 +28,7 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
-            <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="content-needs-grey"">
+            <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
@@ -40,11 +40,11 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content">
+                <section class="bottom-content z-1">
                     <div class="container h-100">
                         <div class="row h-100">
-                            <div class="col-xl-5 col-lg-5 col-md-12 h-100 d-flex justify-content-center align-items-end">
-                                <div class="svg-container h-100" style="transform:scale(1.3)">
+                            <div class="col-xl-5 col-md-12 h-100 d-flex justify-content-center align-items-end graph-col">
+                                <div class="svg-container h-100 graph-size">
                                     <div class="card-gap h-100" id="gap">
                                         <div class="card-gap__percent h-100">
                                             <svg>
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 py-xxxl-5">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
