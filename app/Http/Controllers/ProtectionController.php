@@ -56,7 +56,7 @@ class ProtectionController extends Controller
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
             $discussAnswer = 'Yes';
             $needs = $customerDetails['selected_needs']['need_1'] ?? [];
             $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
@@ -98,9 +98,9 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('protection.amount.needed');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('protection.amount.needed');
     }
 
     public function validateProtectionAmountNeeded(Request $request)

@@ -117,13 +117,13 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
-        $index = array_search('investment', $customerDetails['financial_priorities'], true);
+        $index = array_search('investment', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['investmentsDiscuss'] == true || $customerDetails['priorities']['investmentsDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['investments_discuss'] == true || $customerDetails['priorities']['investments_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';

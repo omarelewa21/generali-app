@@ -13,7 +13,7 @@
 
 @php
     // Retrieving values from the session
-    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
     
     $selfData = session('customer_details.basic_details');
     $selfDataDob = session('customer_details.identity_details.dob');

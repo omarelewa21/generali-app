@@ -203,7 +203,7 @@
                             </div> 
                             <div class="row px-4 pb-2 px-md-5">
                                 <div class="col-12">
-                                    <div class="accordion accordion-flush" id="accordionPriorities">
+                                    <div class="accordion accordion-flush position-relative z-0" id="accordionPriorities">
                                         @php
                                             if (isset($topPriorities)) {
                                                 foreach($topPriorities as $priority) {

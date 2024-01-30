@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
 
     $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');
     $relationship = session('customer_details.selected_needs.need_2.advance_details.relationship');

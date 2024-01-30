@@ -13,7 +13,7 @@
 @section('content')
 
 @php
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
     $tertiaryEducationAmount = session('customer_details.selected_needs.need_3.advance_details.covered_amount');
     $totalEducationYear = session('customer_details.selected_needs.need_3.advance_details.remaining_years');
     $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');

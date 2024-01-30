@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
     $protectionMonthlySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount_monthly');
     $protectionAnnuallySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
