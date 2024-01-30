@@ -208,6 +208,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalInvestmentNeeded = document.getElementById("total_investmentNeeded");
         
                 var totalInvestmentFund = document.getElementById("TotalInvestmentFund");
+                var TotalInvestmentFundMob = document.getElementById("TotalInvestmentFundMob");
         
                 monthlyInput.addEventListener("input", function() {
         
@@ -229,14 +230,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = amountPerYear.toLocaleString();
                         totalInvestmentFund.innerText = "RM" + result;
+                        TotalInvestmentFundMob.innerText = "RM" + result;
                         if (!isNaN(investmentYears)){
                             var totalResult = totalInvestment.toLocaleString();
                             totalInvestmentFund.innerText = "RM" + totalResult;
+                            TotalInvestmentFundMob.innerText = "RM" + totalResult;
                         }
                     } else {
                         // If it's not a valid number, display the cleaned value as is
                         this.value = monthlyInputValue;
                         totalInvestmentFund.innerText = "RM 0";
+                        TotalInvestmentFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalInvestmentNeeded.value =  totalInvestment;
@@ -259,10 +263,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = Year;
                         var result = totalAmount.toLocaleString();
                         totalInvestmentFund.innerText = "RM" + result;
+                        TotalInvestmentFundMob.innerText = "RM" + result;
                     } else {
                         // Input is not a valid number
                         this.value = supportYearsValue;
                         totalInvestmentFund.innerText = "RM 0";
+                        TotalInvestmentFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalInvestmentNeeded.value =  totalAmount;
@@ -303,130 +309,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-        // else if (path == '/investment-monthly-payment') {
-        //     // Get the input value
-        //     var monthlyInput = document.getElementById("investment_monthly_payment");
-        //     var totalInvestmentNeeded = document.getElementById("total_investmentNeeded");
-        //     var totalInvestmentFund = document.getElementById("TotalInvestmentFund");
-    
-        //     monthlyInput.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var monthlyInputValue = monthlyInput.value;
-    
-        //         // Remove non-digit characters
-        //         const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-    
-        //         // Attempt to parse the cleaned value as a float
-        //         const parsedValue = parseFloat(cleanedValue);
-    
-        //         // Check if the parsed value is a valid number
-        //         if (!isNaN(parsedValue)) {
-        //         // If it's a valid number, format it with commas
-        //             const formattedValue = parsedValue.toLocaleString('en-MY');
-        //             this.value = formattedValue;
-        //         } else {
-        //         // If it's not a valid number, display the cleaned value as is
-        //             this.value = monthlyInputValue;
-        //         }
-    
-        //         var monthlyAmount = parseInt(cleanedValue);
-    
-        //         // Calculate months
-        //         var amountPerYear = monthlyAmount * 12;
-    
-        //         if (isNaN(monthlyAmount)) {
-        //             // Input is not a valid number
-        //             totalInvestmentFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = amountPerYear.toLocaleString();
-    
-        //             totalInvestmentFund.innerText = "RM" + result;
-        //         }
-    
-        //         // Set the value of the hidden input field
-        //         totalInvestmentNeeded.value = amountPerYear;
-        //     });
-    
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         monthlyInput.addEventListener("blur", function() {
-        //             validateNumberField(monthlyInput);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         var value = field.value.replace(/,/g, ''); // Remove commas
-        //         var numericValue = parseFloat(value);
-    
-        //         if (isNaN(numericValue)) {
-        //             field.classList.add("is-invalid");
-    
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
-        // else if (path == '/investment-supporting') {
-        //     // Get the input value
-        //     var supportingYears = document.getElementById("investment_supporting_years");
-        //     var newTotalFund = document.getElementById("newTotal_investmentNeeded");
-        //     var totalInvestmentFund = document.getElementById("TotalInvestmentFund");
-    
-        //     if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
-        //         newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
-        //     } 
-    
-        //     supportingYears.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var supportingYearsValue = supportingYears.value;
-    
-        //         var Year = parseInt(supportingYearsValue);
-    
-        //         // Calculate months
-        //         var totalAmount = Year * oldTotalFund;
-    
-        //         if (isNaN(Year)) {
-        //             // Input is not a valid number
-        //             totalInvestmentFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = totalAmount.toLocaleString();
-    
-        //             totalInvestmentFund.innerText = "RM" + result;
-        //         }
-        //         if(totalAmount >= 10000000000){
-        //             totalInvestmentFund.classList.add('f-40');
-        //             totalInvestmentFund.classList.remove('f-50');
-        //         }
-        //         else{
-        //             totalInvestmentFund.classList.add('f-50');
-        //             totalInvestmentFund.classList.remove('f-40');
-        //         }
-                
-        //         newTotalFund.value = Year * oldTotalFund;
-                
-        //     });
         
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         supportingYears.addEventListener("blur", function() {
-        //             validateNumberField(supportingYears);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-    
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
         if (path == '/investment/annual-return') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
@@ -578,17 +461,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                                 case 'High Risk':
                                     const selectedHighPR = highPotentialReturn.querySelector('#high-potential-return');
                                     selectedHighPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'High Potential Return';
+                                    selectedPotential.value = 'High';
                                     break;
                                 case 'Medium Risk':
                                     const selectedMediumPR = mediumPotentialReturn.querySelector('#medium-potential-return');
                                     selectedMediumPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Medium Potential Return';
+                                    selectedPotential.value = 'Medium';
                                     break;
                                 case 'Low Risk':
                                     const selectedLowPR = lowPotentialReturn.querySelector('#low-potential-return');
                                     selectedLowPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Low Potential Return';
+                                    selectedPotential.value = 'Low';
                                     break;
                                 default:
                                     break;

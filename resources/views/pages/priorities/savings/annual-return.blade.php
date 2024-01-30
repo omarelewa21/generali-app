@@ -12,25 +12,35 @@
 
 @php
     // Retrieving values from the session
-    $savingsPriority = session('customer_details.priorities.savings_discuss');
-    $savings = session('customer_details.savings_needs');
-    $savingsGoalPA = session('customer_details.savings_needs.annualReturn', '5');
-    $totalSavingsNeeded = session('customer_details.savings_needs.totalSavingsNeeded', '0');
-    $savingsFundPercentage = session('customer_details.savings_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.savings_needs.totalAmountNeeded');
-    $savingsMonthlyPayment = session('customer_details.savings_needs.monthlyInvestmentAmount');
-    $savingsGoalDuration = session('customer_details.savings_needs.investmentTimeFrame');
+    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
+
+    $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns', '5');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
+    $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
+    $savingsGoalDuration = session('customer_details.selected_needs.need_4.advance_details.supporting_years');
 @endphp
 
 
 <div id="savings-annual-return" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalSavingsFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ number_format(floatval($totalAmountNeeded)) }}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Regular Savings Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.savings.annual.return')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

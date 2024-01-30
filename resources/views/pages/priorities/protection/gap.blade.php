@@ -14,13 +14,13 @@
 
 @php
     // Retrieving values from the session
-    $protectionPriority = session('customer_details.priorities.protection_discuss');
-    $protection = session('customer_details.protection_needs');
-    $protectionSupportingYears = session('customer_details.protection_needs.supportingYears');
-    $existingPolicyAmount = session('customer_details.protection_needs.existingPolicyAmount');
-    $totalProtectionNeeded = session('customer_details.protection_needs.totalProtectionNeeded');
-    $protectionFundPercentage = session('customer_details.protection_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.protection_needs.totalAmountNeeded');
+    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
+    $protection = session('customer_details.selected_needs.need_1.advance_details');
+    $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
+    $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
+    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed');
+    $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_1.advance_details.insurance_amount');
 @endphp
 
 <div id="protection_summary" class="summary-page secondary-default-bg">
@@ -60,8 +60,12 @@
                                             </svg>
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
-                                            <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%
+                                            <div class="circle circle__small">
+                                            
+                                            </div>
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/protection-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
@@ -74,7 +78,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">For the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$protectionSupportingYears}} years</h4>
                                         </div>
@@ -86,7 +90,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I should have a fund of</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to be financially protected with</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalProtectionNeeded))}}</h4>
                                         </div>
@@ -98,7 +102,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I have set aside</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($existingPolicyAmount))}}</h4>
                                         </div>
@@ -110,7 +114,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a plan for</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a protection fund plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>
@@ -179,6 +183,7 @@
     var newTotalProtectionNeeded = parseFloat({{ $totalProtectionNeeded }});
     var existingPolicyAmount = parseFloat({{$existingPolicyAmount}});
     var lastPageInput = {!! json_encode($protection) !!};
+    console.log(lastPageInput);
 </script>
 
 @endsection

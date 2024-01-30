@@ -247,6 +247,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalRetirementNeeded = document.getElementById("total_retirementNeeded");
         
                 var totalRetirementFund = document.getElementById("TotalRetirementFund");
+                var TotalRetirementFundMob = document.getElementById("TotalRetirementFundMob");
         
                 monthlyInput.addEventListener("input", function() {
         
@@ -266,10 +267,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = amountPerYear.toLocaleString();
                         totalRetirementFund.innerText = "RM" + result;
+                        TotalRetirementFundMob.innerText = "RM" + result;
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = monthlyInputValue;
                         totalRetirementFund.innerText = "RM 0";
+                        TotalRetirementFundMob.innerText = "RM 0";
                     }
         
                     // Set the value of the hidden input field
@@ -331,6 +334,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 var totalRetirementNeeded = document.getElementById("total_retirementNeeded");
         
                 var totalRetirementFund = document.getElementById("TotalRetirementFund");
+                var TotalRetirementFundMob = document.getElementById("TotalRetirementFundMob");
         
                 supportingYears.addEventListener("input", function() {
         
@@ -347,10 +351,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         // Display the result
                         var result = totalAmount.toLocaleString();
                         totalRetirementFund.innerText = "RM" + result;
+                        TotalRetirementFundMob.innerText = "RM" + result;
                     } else {
                         // Input is not a valid number
                         this.value = supportingYearsValue;
                         totalRetirementFund.innerText = "RM 0";
+                        TotalRetirementFundMob.innerText = "RM 0";
                     }
                     // Set the value of the hidden input field
                     totalRetirementNeeded.value =  totalAmount;
@@ -403,103 +409,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-        // else if (path == '/retirement-supporting-years') {
-        //     // Get the input value
-    
-        //     var supportingYears = document.getElementById("supporting_years");
-        //     var newTotalFund = document.getElementById("newTotal_retirementNeeded");
-            
-        //     var totalRetirementFund = document.getElementById("TotalRetirementFund");
-    
-        //     if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
-        //             newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
-        //     } 
-            
-    
-        //     supportingYears.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var supportingYearsValue = supportingYears.value;
-    
-        //         var Year = parseInt(supportingYearsValue);
-    
-        //         // Calculate months
-        //         var totalAmount = Year * oldTotalFund;
-    
-        //         if (isNaN(Year)) {
-        //             // Input is not a valid number
-        //             totalRetirementFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = totalAmount.toLocaleString();
-    
-        //             totalRetirementFund.innerText = "RM" + result;
-        //         }
-                
-        //         newTotalFund.value = Year * oldTotalFund;
-                
-        //     });
-        
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         supportingYears.addEventListener("blur", function() {
-        //             validateNumberField(supportingYears);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-    
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
-    
-        // else if (path == '/retirement-retire-age') {
-        //     // Get the input value
-    
-        //     var retirementAge = document.getElementById("retirement_age");
-            
-    
-        //     retirementAge.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var retirementAgeValue = retirementAge.value;
-    
-        //         var Year = parseInt(retirementAgeValue);
-    
-        //         if (isNaN(Year)) {
-        //             // Input is not a valid number
-        //             totalRetirementFund.innerText = "RM 0";
-        //         } else {
-        //             // Input is a valid number, perform the calculation
-        //             // Display the result
-        //             var result = newTotalFund.toLocaleString();
-    
-        //             totalRetirementFund.innerText = "RM" + result;
-        //         }
-                
-        //     });
-        
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         retirementAge.addEventListener("blur", function() {
-        //             validateNumberField(retirementAge);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-    
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
+
         if (path == '/retirement/allocated-funds') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
@@ -531,12 +441,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             } else{
                 var retirement_savings = document.getElementById('retirement_savings');
                 var other_income_sources = document.getElementById('other_income_sources');
+                var incomeSourcesCheckboxes = document.querySelectorAll('.other-income-checkbox');
+                var other_income_sources_5_text = document.getElementById('other_income_sources_5_text');
                 var totalAmountNeeded = document.getElementById("total_amountNeeded");
                 var totalRetirementPercentage = document.getElementById("percentage");
                 var totalRetirementFund = document.getElementById("TotalRetirementFund");
+                var TotalRetirementFundMob = document.getElementById("TotalRetirementFundMob");
         
-                other_income_sources.addEventListener('blur', function() {
-                    validateInputField(other_income_sources);
+                other_income_sources_5_text.addEventListener('blur', function() {
+                    validateInputField(other_income_sources_5_text);
                 });
         
                 function validateInputField(field) {
@@ -546,7 +459,41 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         field.classList.add('is-invalid');
                     }
                 }
-        
+
+                // Add click event listeners to each checkbox
+                incomeSourcesCheckboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', updateHiddenInput);
+                });
+                
+                other_income_sources_5_text.addEventListener('input', updateHiddenInput);
+
+                function updateHiddenInput() {
+                    var selectedResources = [];
+            
+                    // Loop through the checkboxes and add checked ones to the array
+                    incomeSourcesCheckboxes.forEach(function (checkbox) {
+                        if (checkbox.checked) {
+                            if (checkbox.value === 'Others') {
+                                selectedResources.push(other_income_sources_5_text.value);
+                                jQuery('#other_income_sources_5_text').removeClass('disabled-color');
+                                jQuery('#other_income_sources_5_text').attr('required',true);
+                                jQuery('#other_income_sources_5_text').removeAttr('disabled');
+                            }
+                            else{
+                                selectedResources.push(checkbox.value);
+                            }
+                        } else{
+                            if (checkbox.value === 'Others') {
+                                other_income_sources_5_text.value = '';
+                            }
+                        }
+                    });
+
+                    // Update the hidden input value with the selected resources
+                    other_income_sources.value = selectedResources.join(', ');
+                    
+                }
+
                 retirement_savings.addEventListener("input", function() {
         
                     // Retrieve the current input value
@@ -565,6 +512,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         this.value = formattedValue;
                         var result = total.toLocaleString();
                         totalRetirementFund.innerText = "RM" + result;
+                        TotalRetirementFundMob.innerText = "RM" + result;
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = retirementSavingsValue;
@@ -623,7 +571,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/retirement/gap') {
-            if (!lastPageInput || !('otherIncomeResources' in lastPageInput)) {
+            if (!lastPageInput || !('other_sources' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

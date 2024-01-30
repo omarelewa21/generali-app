@@ -7,24 +7,34 @@
 
 @php
     // Retrieving values from the session
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $existingProtection = session('customer_details.health-medical_needs.medical_planning.existingProtection');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.medical_planning.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.medical_planning.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.medical_planning.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.totalAmountNeeded');
-    $medicalAmountNeeded = session('customer_details.health-medical_needs.medical_planning.neededAmount');
-    $medicalYear = session('customer_details.health-medical_needs.medical_planning.year');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $existingProtection = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_protection');
+    $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.total_health_medical_needed');
+    $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
+    $medicalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.covered_amount');
+    $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
 @endphp
 
 <div id="medical-existing-protection" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalHealthMedicalFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $existingProtectionAmount === null || $existingProtectionAmount === '' ? number_format(floatval($totalHealthMedicalNeeded)) : ($totalHealthMedicalNeeded > $existingProtectionAmount ? number_format(floatval($totalHealthMedicalNeeded - $existingProtectionAmount)) : '0') }}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Health & Medical Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.medical.planning.existing.protection')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -44,7 +54,7 @@
                                 <img src="{{ asset('images/needs/health-medical/medical-planning/existing-protection/avatar.png') }}" width="auto" height="100%" alt="Existing Policy">
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">I already have Medical/ Hospitalisation coverage.</h2>
+                                <h2 class="display-5 fw-bold lh-sm">I already have Hospitalisation coverage.</h2>
                                 <p class="d-flex pt-5">
                                     <span class="me-5 d-flex">
                                         <input type="radio" class="needs-radio @error('existing_protection_amount') checked-yes @enderror {{$existingProtection === 'yes' ? 'checked-yes' : ''}}" id="yes" name="medical_existing_protection" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_protection_amount').attr('required',true);"

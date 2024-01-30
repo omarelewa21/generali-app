@@ -10,6 +10,28 @@ use App\Models\SessionStorage;
 
 class RetirementController extends Controller
 {
+    // protected $need_sequence;
+
+    // public function calculateNeedSequence(Request $request) {
+
+        // $customerDetails = $request->session()->get('customer_details', []);
+
+        // Set the default value for $need_sequence
+        // $need_sequence = 0;
+
+        // if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+        //     $need_sequence = 2;
+        // } else if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+        //     $need_sequence = 1;
+        // }
+    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
+    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+
+    //     $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
+
+    //     return $need_sequence;
+    // }
+
     public function validateRetirementCoverageSelection(Request $request)
     {
         // Define custom validation rule for button selection
@@ -35,6 +57,11 @@ class RetirementController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+        // $need_sequence = $this->calculateNeedSequence($request);
+
         // Validation passed, perform any necessary processing.
         $relationshipInput = $request->input('relationshipInput');
         $selectedInsuredNameInput = $request->input('selectedInsuredNameInput');
@@ -42,24 +69,42 @@ class RetirementController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+        $index = array_search('retirement', $customerDetails['financial_priorities'], true);
+        if ($customerDetails['priorities']['retirement'] == true || $customerDetails['priorities']['retirement'] == 'true'){
+            $coverAnswer = 'Yes';
+        } else{
+            $coverAnswer = 'No';
+        }
+        if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+            $discussAnswer = 'Yes';
+        } else{
+            $discussAnswer = 'No';
+        }
 
-        // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
-        
+        // $needs = $customerDetails['selected_needs']['need_'.$need_sequence] ?? [];
+        // $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_2'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
+
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+        $needs = array_merge($needs, [
+            'need_no' => 'N2',
+            'priority' => $index+1,
+            'cover' => $coverAnswer,
+            'discuss' => $discussAnswer
+        ]);
+        $advanceDetails = array_merge($advanceDetails, [
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated retirement_needs back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
-
+        $customerDetails['selected_needs']['need_2'] = $needs;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
+        
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         Log::debug($customerDetails);
@@ -77,6 +122,7 @@ class RetirementController extends Controller
         }
 
         return redirect()->route('retirement.ideal');
+        
     }
 
     public function validateIdeal(Request $request)
@@ -111,15 +157,18 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+        // $need_sequence = $this->calculateNeedSequence($request);
+        $needs = $customerDetails['selected_needs']['need_2'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'idealRetirement' => $retirementIdealInput
+        $advanceDetails = array_merge($advanceDetails, [
+            'ideal_retirement' => $retirementIdealInput
         ]);
 
         // Set the updated retirement_needs back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -180,26 +229,27 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'monthlySupportAmount' => $retirement_monthly_support
+        $advanceDetails = array_merge($advanceDetails, [
+            'monthly_covered_amount' => $retirement_monthly_support,
+            'covered_amount' => $retirement_monthly_support*12
         ]);
 
         if ($totalRetirementFund === $retirementTotalFund){
-            $retirement = array_merge($retirement, [
-                'totalRetirementNeeded' => $totalRetirementFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_retirement_needed' => $totalRetirementFund
             ]);
         }
         else{
-            $retirement = array_merge($retirement, [
-                'totalRetirementNeeded' => $retirementTotalFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_retirement_needed' => $retirementTotalFund
             ]);
         }
 
         // Set the updated retirement_needs back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -216,7 +266,6 @@ class RetirementController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
         return redirect()->route('retirement.period');
     }
 
@@ -247,34 +296,34 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $supporting_years = $request->input('supporting_years');
         $retirement_age = $request->input('retirement_age');
-        $retirementTotalFund = floatval($customerDetails['retirement_needs']['monthlySupportAmount'] * 12 * $supporting_years);
+        $retirementTotalFund = floatval($customerDetails['selected_needs']['need_2']['advance_details']['monthly_covered_amount'] * 12 * $supporting_years);
         $totalRetirementFund = floatval($request->input('total_retirementFund'));
 
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'supportingYears' => $supporting_years,
-            'retirementAge' => $retirement_age
+        $advanceDetails = array_merge($advanceDetails, [
+            'supporting_years' => $supporting_years,
+            'remaining_years' => $retirement_age
         ]);
 
         if ($totalRetirementFund === $retirementTotalFund){
 
-            $retirement = array_merge($retirement, [
-                'totalRetirementNeeded' => $totalRetirementFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_retirement_needed' => $totalRetirementFund
             ]);
         }
         else{
-            $retirement = array_merge($retirement, [
-                'totalRetirementNeeded' => $retirementTotalFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_retirement_needed' => $retirementTotalFund
             ]);
         }
 
         // Set the updated retirement back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -297,13 +346,31 @@ class RetirementController extends Controller
 
     public function validateRetirementOthers(Request $request){
 
+        Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
+            if ($value !== null) {
+                return true; 
+            }
+            
+            $customMessage = "Please select at least one.";
+            $validator->errors()->add($attribute, $customMessage);
+            // $validator->errors()->add($attribute);
+    
+            return false;
+        });
+
         $customMessages = [
-            'other_income_sources.required' => 'Please enter a source of income.',
+            'other_income_sources_5_text.required_if' => 'Please enter a source of income.',
+            // 'other_income_sources.required' => 'Please enter a source of income.',
+            // 'other_income_sources.at_least_one_selected' => 'Please select at least one source of income.',
             'retirement_savings.regex' => 'The amount must be a number.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'other_income_sources' => 'required|max:60',
+            // 'other_income_sources_5_text' => 'required_if: other_income_sources_5|max:60',
+            'other_income_sources_5_text' => 'required_if:other_income_sources_5,Others|max:60',
+            'other_income_sources' => [
+                'at_least_one_selected',
+            ],
             'retirement_savings' => [
                 'regex:/^[0-9,]+$/',
                 'nullable',
@@ -326,10 +393,9 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
-        $other_income_sources = $request->input('other_income_sources');
         $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
         if ($retirement_savings === '' || $retirement_savings === 0){
             $retirement_savings = 0;
@@ -337,49 +403,52 @@ class RetirementController extends Controller
         else{
             $retirement_savings = str_replace(',','',$request->input('retirement_savings'));
         }
-        $newRetirementTotalAmountNeeded = floatval(($customerDetails['retirement_needs']['monthlySupportAmount'] * 12 * $customerDetails['retirement_needs']['supportingYears']) - $retirement_savings);
-        $newRetirementPercentage = floatval($retirement_savings / ($customerDetails['retirement_needs']['monthlySupportAmount'] * 12 * $customerDetails['retirement_needs']['supportingYears']) * 100);
+        $newRetirementTotalAmountNeeded = floatval(($customerDetails['selected_needs']['need_2']['advance_details']['monthly_covered_amount'] * 12 * $customerDetails['selected_needs']['need_2']['advance_details']['supporting_years']) - $retirement_savings);
+        $newRetirementPercentage = floatval($retirement_savings / ($customerDetails['selected_needs']['need_2']['advance_details']['monthly_covered_amount'] * 12 * $customerDetails['selected_needs']['need_2']['advance_details']['supporting_years']) * 100);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
+        $other_income_sources_5_text = $request->input('other_income_sources_5_text');
+        $other_income_sources = $request->input('other_income_sources');
         
 
         // Update specific keys with new values
-        $retirement = array_merge($retirement, [
-            'retirementSavingsAmount' => $retirement_savings,
-            'otherIncomeResources' => $other_income_sources
+        $advanceDetails = array_merge($advanceDetails, [
+            'existing_amount' => $retirement_savings,
+            'other_sources_custom' => $other_income_sources_5_text,
+            'other_sources' => $other_income_sources
         ]);
 
         if ($newRetirementTotalAmountNeeded === $totalAmountNeeded && $newRetirementPercentage === $totalPercentage){
             if ($newRetirementTotalAmountNeeded <= 0){
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newRetirementTotalAmountNeeded <= 0){
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $retirement = array_merge($retirement, [
-                    'totalAmountNeeded' => $newRetirementTotalAmountNeeded,
-                    'fundPercentage' => $newRetirementPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $newRetirementTotalAmountNeeded,
+                    'fund_percentage' => $newRetirementPercentage
                 ]);
             }
         }
 
         // Set the updated retirement back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -396,8 +465,9 @@ class RetirementController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
-        return redirect()->route('retirement.gap');
+        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('retirement.gap');
     }
 
     public function submitRetirementGap(Request $request){
@@ -406,10 +476,10 @@ class RetirementController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing retirement_needs from the session
-        $retirement = $customerDetails['retirement_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Set the updated retirement back to the customer_details session
-        $customerDetails['retirement_needs'] = $retirement;
+        $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

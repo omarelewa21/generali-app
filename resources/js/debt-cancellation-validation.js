@@ -505,7 +505,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/debt-cancellation/critical-illness') {
-            if (!lastPageInput || !('existingDebtAmount' in lastPageInput)) {
+            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

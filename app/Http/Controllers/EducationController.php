@@ -10,6 +10,33 @@ use App\Models\SessionStorage;
 
 class EducationController extends Controller
 {
+    // protected $need_sequence;
+
+    // public function calculateNeedSequence(Request $request) {
+
+    //     $customerDetails = $request->session()->get('customer_details', []);
+
+        // Set the default value for $need_sequence
+        // $need_sequence = 0;
+
+        // if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
+        //     if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+        //         $need_sequence = 3;
+        //     } else { 
+        //         $need_sequence = 2;
+        //     }
+        // } else{
+        //     $need_sequence = 1;
+        // }
+    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
+    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+    //     $educationDiscuss = isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true');
+
+    //     $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
+
+    //     return $need_sequence;
+    // }
+
     public function validateEducationCoverageSelection(Request $request)
     {
 
@@ -35,6 +62,8 @@ class EducationController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
 
         // Validation passed, perform any necessary processing.
         $relationshipInput = $request->input('relationshipInput');
@@ -43,23 +72,40 @@ class EducationController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+        $index = array_search('education', $customerDetails['financial_priorities'], true);
+        if ($customerDetails['priorities']['education'] == true || $customerDetails['priorities']['education'] == 'true'){
+            $coverAnswer = 'Yes';
+        } else{
+            $coverAnswer = 'No';
+        }
+        if ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true'){
+            $discussAnswer = 'Yes';
+        } else{
+            $discussAnswer = 'No';
+        }
 
         // Get existing education_needs from the session
-        $education = $customerDetails['education_needs'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_3'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_3']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $education = array_merge($education, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+        $needs = array_merge($needs, [
+            'need_no' => 'N3',
+            'priority' => $index+1,
+            'cover' => $coverAnswer,
+            'discuss' => $discussAnswer
+        ]);
+        $advanceDetails = array_merge($advanceDetails, [
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated education_needs back to the customer_details session
-        $customerDetails['education_needs'] = $education;
+        $customerDetails['selected_needs']['need_3'] = $needs;
+        $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -119,24 +165,23 @@ class EducationController extends Controller
         // Validation passed, perform any necessary processing.
         $tertiary_education_amount = str_replace(',','',$request->input('tertiary_education_amount'));
         $tertiary_education_years = $request->input('tertiary_education_years');
-        // $educationTotalFund = floatval($tertiary_education_amount / $tertiary_education_years);
         $totalEducationFund = floatval($request->input('total_educationNeeded'));
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing education_needs from the session
-        $education = $customerDetails['education_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_3']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $education = array_merge($education, [
-            'tertiaryEducationAmount' => $tertiary_education_amount,
-            'tertiaryEducationYear' => $tertiary_education_years,
-            'totalEducationNeeded' => $totalEducationFund
+        $advanceDetails = array_merge($advanceDetails, [
+            'covered_amount' => $tertiary_education_amount,
+            'remaining_years' => $tertiary_education_years,
+            'total_education_needed' => $totalEducationFund
         ]);
 
         // Set the updated education back to the customer_details session
-        $customerDetails['education_needs'] = $education;
+        $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -154,6 +199,7 @@ class EducationController extends Controller
             DB::rollBack();
         }
 
+        // Process the form data and perform any necessary actions
         return redirect()->route('education.existing.fund');
     }
 
@@ -194,7 +240,7 @@ class EducationController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing education_needs from the session
-        $education = $customerDetails['education_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_3']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $education_saving_amount = str_replace(',','',$request->input('education_saving_amount'));
@@ -202,50 +248,50 @@ class EducationController extends Controller
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
         if ($education_saving_amount === '' || $education_saving_amount === null){
-            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - 0);
-            $newEducationPercentage = floatval(0 / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+            $newEducationTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_3']['advance_details']['covered_amount'] - 0);
+            $newEducationPercentage = floatval(0 / $customerDetails['selected_needs']['need_3']['advance_details']['covered_amount'] * 100);
         } else{
-            $newEducationTotalAmountNeeded = floatval($customerDetails['education_needs']['totalEducationNeeded'] - $education_saving_amount);
-            $newEducationPercentage = floatval($education_saving_amount / $customerDetails['education_needs']['totalEducationNeeded'] * 100);
+            $newEducationTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_3']['advance_details']['covered_amount'] - $education_saving_amount);
+            $newEducationPercentage = floatval($education_saving_amount / $customerDetails['selected_needs']['need_3']['advance_details']['covered_amount'] * 100);
         }
 
         // Update specific keys with new values
-        $education = array_merge($education, [
-            'existingFund' => $education_other_savings,
-            'existingFundAmount' => $education_saving_amount
+        $advanceDetails = array_merge($advanceDetails, [
+            'existing_fund' => $education_other_savings,
+            'existing_amount' => $education_saving_amount
         ]);
 
         if ($newEducationTotalAmountNeeded === $totalAmountNeeded && $newEducationPercentage === $totalPercentage){
             if ($newEducationTotalAmountNeeded <= 0){
-                $education = array_merge($education, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $education = array_merge($education, [
-                    'totalAmountNeeded' => $totalAmountNeeded,
-                    'fundPercentage' => $totalPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $totalAmountNeeded,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newEducationTotalAmountNeeded <= 0){
-                $education = array_merge($education, [
-                    'totalAmountNeeded' => '0',
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => '0',
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $education = array_merge($education, [
-                    'totalAmountNeeded' => $newEducationTotalAmountNeeded,
-                    'fundPercentage' => $newEducationPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'insurance_amount' => $newEducationTotalAmountNeeded,
+                    'fund_percentage' => $newEducationPercentage
                 ]);
             }
         }
 
         // Set the updated education_needs back to the customer_details session
-        $customerDetails['education_needs'] = $education;
+        $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -272,10 +318,10 @@ class EducationController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing education_needs from the session
-        $education = $customerDetails['education_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_3']['advance_details'] ?? [];
 
         // Set the updated education_needs back to the customer_details session
-        $customerDetails['education_needs'] = $education;
+        $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

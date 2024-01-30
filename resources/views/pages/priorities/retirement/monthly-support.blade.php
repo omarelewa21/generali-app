@@ -13,23 +13,45 @@
 @section('content')
 
 @php
-    $retirementPriority = session('customer_details.priorities.retirement_discuss');
-    $retirementMonthlySupport = session('customer_details.retirement_needs.monthlySupportAmount');
-    $retirementSavings = session('customer_details.retirement_needs.retirementSavingsAmount');
-    $supportingYears = session('customer_details.retirement_needs.supportingYears');
-    $totalRetirementNeeded = session('customer_details.retirement_needs.totalRetirementNeeded', '0');
-    $retirementFundPercentage = session('customer_details.retirement_needs.fundPercentage', '0');
-    $retirementIdeal = session('customer_details.retirement_needs.idealRetirement');
+    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+
+    $retirementMonthlySupport = session('customer_details.selected_needs.need_2.advance_details.monthly_covered_amount');
+    $retirementAnnual = session('customer_details.selected_needs.need_2.advance_details.covered_amount');
+    $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
+    $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
+
+    $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');
 @endphp
 
 <div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                            $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
+                            ? number_format(floatval($totalRetirementNeeded))
+                            : ($retirementSavings === null || $retirementSavings === ''
+                                ? number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))
+                                : ($retirementSavings > (floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))
+                                    ? '0'
+                                    : number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears) - floatval($retirementSavings))))
+                            }}
+                        </h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Retirement Fund Needed</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

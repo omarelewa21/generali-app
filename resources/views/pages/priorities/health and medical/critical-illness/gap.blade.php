@@ -7,14 +7,13 @@
 
 @php
     // Retrieving values from the session
-    $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $health_medical = session('customer_details.health-medical_needs.critical_illness');
-    $criticalYear = session('customer_details.health-medical_needs.critical_illness.year');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.critical_illness.existingProtectionAmount');
-    $totalHealthMedicalNeeded = session('customer_details.health-medical_needs.critical_illness.totalHealthMedicalNeeded');
-    $healthMedicalFundPercentage = session('customer_details.health-medical_needs.critical_illness.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.health-medical_needs.critical_illness.totalAmountNeeded');
-    $existingProtectionAmount = session('customer_details.health-medical_needs.critical_illness.existingProtectionAmount');
+    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $health_medical = session('customer_details.selected_needs.need_6.advance_details.critical_illness');
+    $criticalYear = session('customer_details.selected_needs.need_6.advance_details.critical_illness.year');
+    $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.total_health_medical_needed');
+    $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.insurance_amount');
 @endphp
 
 <div id="critical-summary" class="secondary-default-bg summary-page">
@@ -55,7 +54,9 @@
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
-                                            <div class="card-gap__number text-primary text-center">{{ $totalAmountNeeded > $totalHealthMedicalNeeded ? '100' : floor(floatval($healthMedicalFundPercentage))}}%
+                                            <div class="card-gap__number text-primary text-center">
+                                                <img src="{{ asset('images/top-priorities/health-medical-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <span>{{ $totalAmountNeeded > $totalHealthMedicalNeeded ? '100' : floor(floatval($healthMedicalFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
@@ -80,7 +81,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to be prepared for any healthcare needs with</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">I want to be prepared for critical illness care expenses with</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalHealthMedicalNeeded))}}</h4>
                                         </div>
@@ -92,7 +93,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I have set aside</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{$existingProtectionAmount === '' ? '0' : number_format(floatval($existingProtectionAmount))}}</h4>
                                         </div>
@@ -104,7 +105,7 @@
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a plan for</p>
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">So I need a critical illness care plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>

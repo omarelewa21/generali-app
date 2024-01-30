@@ -25,11 +25,11 @@
     $spouseData = session('customer_details.family_details.dependent.spouse_data');
     $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
 
-    $relationship = session('customer_details.debt-cancellation_needs.coverFor');
-    $selectedInsuredName = session('customer_details.debt-cancellation_needs.selectedInsuredName');
-    $othersCoverForName = session('customer_details.debt-cancellation_needs.othersCoverForName');
-    $selectedCoverForDob = session('customer_details.debt-cancellation_needs.selectedCoverForDob');
-    $othersCoverForDob = session('customer_details.debt-cancellation_needs.othersCoverForDob');
+    $relationship = session('customer_details.selected_needs.need_7.advance_details.relationship');
+    $selectedInsuredName = session('customer_details.selected_needs.need_7.advance_details.child_name');
+    $othersCoverForName = session('customer_details.selected_needs.need_7.advance_details.spouse_name');
+    $selectedCoverForDob = session('customer_details.selected_needs.need_7.advance_details.child_dob');
+    $othersCoverForDob = session('customer_details.selected_needs.need_7.advance_details.spouse_dob');
 @endphp
 
 <div id="debt-coverage" class="secondary-default-bg">

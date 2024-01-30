@@ -7,26 +7,35 @@
 
 @php
     // Retrieving values from the session
-    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
-    $debtCancellation = session('customer_details.debt-cancellation_needs');
-    $existingDebt = session('customer_details.debt-cancellation_needs.existingDebt');
-    $existingDebtAmount = session('customer_details.debt-cancellation_needs.existingDebtAmount');
-    $totalDebtNeeded = session('customer_details.debt-cancellation_needs.totalDebtCancellationFund');
-    $newTotalDebtNeeded = session('customer_details.debt-cancellation_needs.newTotalDebtCancellationFund');
-    $debtFundPercentage = session('customer_details.debt-cancellation_needs.fundPercentage', '0');
-    $totalAmountNeeded = session('customer_details.debt-cancellation_needs.totalAmountNeeded');
-    $debtOutstandingLoan = session('customer_details.debt-cancellation_needs.outstandingLoan');
-    $settlementYears = session('customer_details.debt-cancellation_needs.remainingYearsOfSettlement');
+    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
+    $existingDebt = session('customer_details.selected_needs.need_7.advance_details.existing_debt');
+    $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
+    $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
+    $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
+    $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
 @endphp
 
 <div id="debt-existing-debt" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
+            <div class="header col-12">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob">
+                    <div class="col-6">   
+                        <h1 id="TotalDebtCancellationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $existingDebtAmount === null || $existingDebtAmount === '' ? number_format(floatval($totalDebtNeeded)) : ($totalDebtNeeded > $existingDebtAmount ? number_format(floatval($totalDebtNeeded - $existingDebtAmount)) : '0') }}</h1>
+                    </div>
+                    <div class="col-6 m-auto p-0">
+                        <p class="text-white display-6 lh-base text-center m-0">Total Debt Cancellation</p>
+                    </div>
+                </div>
+            </div>
             <form novalidate action="{{route('validate.debt.existing.debt')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">

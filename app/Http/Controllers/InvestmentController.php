@@ -10,10 +10,57 @@ use App\Models\SessionStorage;
 
 class InvestmentController extends Controller
 {
+    // protected $need_sequence;
+
+    // public function calculateNeedSequence(Request $request) {
+
+    //     $customerDetails = $request->session()->get('customer_details', []);
+
+        // Set the default value for $need_sequence
+    //     $need_sequence = 0;
+
+    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
+    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
+    //     $educationDiscuss = isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true');
+    //     $savingsDiscuss = isset($customerDetails['priorities']['savingsDiscuss']) && ($customerDetails['priorities']['savingsDiscuss'] == true || $customerDetails['priorities']['savingsDiscuss'] == 'true');
+
+    //     $need_sequence = (
+    //         $protectionDiscuss ? (
+    //             $retirementDiscuss ? (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? 5 : 4
+    //                 ) : (
+    //                     $savingsDiscuss ? 4 : 3
+    //                 )
+    //             ) : (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? 4 : 3
+    //                 ) : (
+    //                     $savingsDiscuss ? 3 : 2
+    //                 )
+    //             )
+    //         ) : (
+    //             $retirementDiscuss ? (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? 4 : 3
+    //                 ) : (
+    //                     $savingsDiscuss ? 3 : 2
+    //                 )
+    //             ) : (
+    //                 $educationDiscuss ? (
+    //                     $savingsDiscuss ? 3 : 2
+    //                 ) : (
+    //                     $savingsDiscuss ? 2 : 1
+    //                 )
+    //             )
+    //         )
+    //     );    
+
+    //     return $need_sequence;
+    // }
+
     public function validateInvestmentCoverageSelection(Request $request)
     {
-        // Get the existing array from the session
-        $arrayData = session('passingArrays', []);
 
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -47,21 +94,42 @@ class InvestmentController extends Controller
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
 
         // Get existing investments_needs from the session
-        $investment = $customerDetails['investments_needs'] ?? [];
+        $needs = $customerDetails['selected_needs']['need_5'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+
+        $index = array_search('investment', $customerDetails['financial_priorities'], true);
+        if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
+            $coverAnswer = 'Yes';
+        } else{
+            $coverAnswer = 'No';
+        }
+        if ($customerDetails['priorities']['investmentsDiscuss'] == true || $customerDetails['priorities']['investmentsDiscuss'] == 'true'){
+            $discussAnswer = 'Yes';
+        } else{
+            $discussAnswer = 'No';
+        }
 
         // Update specific keys with new values
-        $investment = array_merge($investment, [
-            'coverFor' => $relationshipInput,
-            'selectedInsuredName' => $selectedInsuredNameInput,
-            'selectedCoverForDob' => $selectedCoverForDobInput,
-            'othersCoverForName' => $othersCoverForNameInput,
-            'othersCoverForDob' => $othersCoverForDobInput
+        $needs = array_merge($needs, [
+            'need_no' => 'N5',
+            'priority' => $index+1,
+            'cover' => $coverAnswer,
+            'discuss' => $discussAnswer
+        ]);
+        $advanceDetails = array_merge($advanceDetails, [
+            'relationship' => $relationshipInput,
+            'child_name' => $selectedInsuredNameInput,
+            'child_dob' => $selectedCoverForDobInput,
+            'spouse_name' => $othersCoverForNameInput,
+            'spouse_dob' => $othersCoverForDobInput
         ]);
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['investments_needs'] = $investment;
+        $customerDetails['selected_needs']['need_5'] = $needs;
+        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -88,7 +156,7 @@ class InvestmentController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing investments_needs from the session
-        $investment = $customerDetails['investments_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
         $customMessages = [
             'investment_monthly_payment.required' => 'You are required to enter an amount.',
@@ -131,24 +199,24 @@ class InvestmentController extends Controller
         $totalInvestmentNeeded = floatval($request->input('total_investmentNeeded'));
 
         // Update specific keys with new values
-        $investment = array_merge($investment, [
-            'monthlyInvestmentAmount' => $investment_monthly_payment,
-            'investmentTimeFrame' => $investment_supporting_years,
+        $advanceDetails = array_merge($advanceDetails, [
+            'covered_amount' => $investment_monthly_payment,
+            'supporting_years' => $investment_supporting_years,
         ]);
 
         if ($totalInvestmentNeeded === $investmentTotalFund){
-            $investment = array_merge($investment, [
-                'totalInvestmentNeeded' => $totalInvestmentNeeded
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_investment_needed' => $totalInvestmentNeeded
             ]);
         }
         else{
-            $investment = array_merge($investment, [
-                'totalInvestmentNeeded' => $investmentTotalFund
+            $advanceDetails = array_merge($advanceDetails, [
+                'total_investment_needed' => $investmentTotalFund
             ]);
         }
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['investments_needs'] = $investment;
+        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -182,51 +250,51 @@ class InvestmentController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing investments_needs from the session
-        $investment = $customerDetails['investments_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $investment_pa = $request->input('investment_pa');
         $totalAnnualReturn = $request->input('total_annualReturn');
-        $newTotalAnnualReturn = floatval($customerDetails['investments_needs']['totalInvestmentNeeded'] * $investment_pa / 100);
+        $newTotalAnnualReturn = floatval($customerDetails['selected_needs']['need_5']['advance_details']['total_investment_needed'] * $investment_pa / 100);
         $totalPercentage = $request->input('percentage');
-        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['investments_needs']['totalInvestmentNeeded'] * 100);
+        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['selected_needs']['need_5']['advance_details']['total_investment_needed'] * 100);
 
         // Update specific keys with new values
-        $investment = array_merge($investment, [
-            'annualReturn' => $investment_pa
+        $advanceDetails = array_merge($advanceDetails, [
+            'annual_returns' => $investment_pa
         ]);
 
         if ($newTotalAnnualReturn === $totalAnnualReturn && $newInvestmentPercentage === $totalPercentage){
             if ($newInvestmentPercentage > 100){
-                $investment = array_merge($investment, [
-                    'annualReturnAmount' => $totalAnnualReturn,
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'annual_return_amount' => $totalAnnualReturn,
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $investment = array_merge($investment, [
-                    'annualReturnAmount' => $totalAnnualReturn,
-                    'fundPercentage' => $totalPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'annual_return_amount' => $totalAnnualReturn,
+                    'fund_percentage' => $totalPercentage
                 ]);
             }
         }
         else{
             if ($newInvestmentPercentage > 100){
-                $investment = array_merge($investment, [
-                    'annualReturnAmount' => $newTotalAnnualReturn,
-                    'fundPercentage' => '100'
+                $advanceDetails = array_merge($advanceDetails, [
+                    'annual_return_amount' => $newTotalAnnualReturn,
+                    'fund_percentage' => '100'
                 ]);
             }
             else{
-                $investment = array_merge($investment, [
-                    'annualReturnAmount' => $newTotalAnnualReturn,
-                    'fundPercentage' => $newInvestmentPercentage
+                $advanceDetails = array_merge($advanceDetails, [
+                    'annual_return_amount' => $newTotalAnnualReturn,
+                    'fund_percentage' => $newInvestmentPercentage
                 ]);
             }
         }
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['investments_needs'] = $investment;
+        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -273,16 +341,16 @@ class InvestmentController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing investments_needs from the session
-        $investment = $customerDetails['investments_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $investment = array_merge($investment, [
-            'riskProfile' => $investmentRiskProfileInput,
-            'potentialReturn' => $investmentPotentialReturnInput
+        $advanceDetails = array_merge($advanceDetails, [
+            'risk_profile' => $investmentRiskProfileInput,
+            'potential_return' => $investmentPotentialReturnInput
         ]);
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['investments_needs'] = $investment;
+        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -310,10 +378,10 @@ class InvestmentController extends Controller
         $customerDetails = $request->session()->get('customer_details', []);
 
         // Get existing investments_needs from the session
-        $investment = $customerDetails['investments_needs'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['investments_needs'] = $investment;
+        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

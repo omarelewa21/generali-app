@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-12 position-absolute d-grid" style="top: 55%; grid-gap: 20px;">
                             <div class="col-12 d-flex justify-content-center">
-                                <button onClick="resetPriorities()" id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end z-1" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</button></p>
+                                <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end z-1" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</button></p>
                             </div>
                             <div class="col-12">
                                 <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->

@@ -985,11 +985,12 @@ class FormController extends Controller {
                 return $value !== null;
             });
             $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
-
+            
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
+            unset($customerDetails['priorities']);
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
@@ -1019,10 +1020,23 @@ class FormController extends Controller {
         
         if ($validToken) {
             $checkboxValues = $request->all();
+            $requiredPriorities = ['protection', 'retirement', 'health-medical', 'education', 'savings', 'debt-cancellation', 'investments', 'others'];
 
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
             
+            // Get the current priorities from the session
+            $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
+
+            // Check if all required priorities are present
+            if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
+                // All required priorities are present
+                $customerDetails['customers_choice'] = '1';
+            } else {
+                // Only partial priorities are present
+                $customerDetails['customers_choice'] = '2';
+            }
+
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
 
