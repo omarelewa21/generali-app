@@ -650,7 +650,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
         });
 
-        var selectedAssets = sessionData ? sessionData : false;
+        var selectedAssets = { ...selectedAssets, ...sessionData };
+
+        for (const key in selectedAssets) {
+            if (selectedAssets.hasOwnProperty(key) && selectedAssets[key] !== true) {
+                selectedAssets[key] = false;
+            }
+        }
 
         // Car Selection
         $("#carButton").on("click", function () {
@@ -680,6 +686,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     car: selectedAssets.car 
                 });
             }
+            console.log(selectedAssets);
         });
 
         // Scooter Selection

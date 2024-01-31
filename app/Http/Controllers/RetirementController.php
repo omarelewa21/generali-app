@@ -69,13 +69,13 @@ class RetirementController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('retirement', $customerDetails['financial_priorities'], true);
+        $index = array_search('retirement', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['retirement'] == true || $customerDetails['priorities']['retirement'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
+        if ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';
@@ -465,9 +465,9 @@ class RetirementController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('retirement.gap');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('retirement.gap');
     }
 
     public function submitRetirementGap(Request $request){

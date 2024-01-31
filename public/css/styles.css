@@ -1585,12 +1585,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
-  #top_priorities .wrapper-avatar-default {
+  #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     display:block;
   }
-  body.overflow #top_priorities .wrapper-avatar-default {
+  /* body.overflow #top_priorities .wrapper-avatar-default {
     overflow: auto;
-  }
+  } */
   .homeVector {
     width: 100%;
     height:auto;

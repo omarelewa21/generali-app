@@ -7,7 +7,7 @@
 
 @php
     // Retrieving values from the session
-    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
     $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
     $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
     $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');

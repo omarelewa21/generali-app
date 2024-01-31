@@ -13,7 +13,7 @@
 @section('content')
 
 @php
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
 
     $retirementMonthlySupport = session('customer_details.selected_needs.need_2.advance_details.monthly_covered_amount');
     $retirementAnnual = session('customer_details.selected_needs.need_2.advance_details.covered_amount');

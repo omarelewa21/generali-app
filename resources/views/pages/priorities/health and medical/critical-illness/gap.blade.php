@@ -7,7 +7,7 @@
 
 @php
     // Retrieving values from the session
-    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $health_medical = session('customer_details.selected_needs.need_6.advance_details.critical_illness');
     $criticalYear = session('customer_details.selected_needs.need_6.advance_details.critical_illness.year');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount');

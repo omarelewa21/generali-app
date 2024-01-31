@@ -14,9 +14,9 @@
 
 @php
     // Retrieving values from the session
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $familyDependent = session('customer_details.family_details.dependant');
-    $childData = session('customer_details.family_details.dependant.children_data');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
 
     $relationship = session('customer_details.selected_needs.need_3.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_3.advance_details.child_name');

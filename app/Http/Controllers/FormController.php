@@ -130,7 +130,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            
             return redirect()->route('avatar.welcome')->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
