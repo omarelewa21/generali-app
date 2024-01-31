@@ -33,7 +33,7 @@
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
-                            $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
+                            ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')
                             ? number_format(floatval($totalRetirementNeeded))
                             : ($retirementSavings === null || $retirementSavings === ''
                                 ? number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))
@@ -59,7 +59,7 @@
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$retirementFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h1 id="TotalRetirementFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ 
-                                    $retirementSavings === null || $retirementSavings === '' && $supportingYears === null || $supportingYears === ''
+                                    ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')
                                     ? number_format(floatval($totalRetirementNeeded))
                                     : ($retirementSavings === null || $retirementSavings === ''
                                         ? number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears))

@@ -19,10 +19,10 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependant');
-    $childData = session('customer_details.family_details.dependant.children_data');
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_4.advance_details.child_name');
@@ -31,7 +31,7 @@
     $othersCoverForDob = session('customer_details.selected_needs.need_4.advance_details.spouse_dob');
 @endphp
 
-<div id="savings-coverage" class="secondary-default-bg">
+<div id="savings-coverage" class="secondary-default-bg coverage">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
@@ -41,7 +41,7 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-4 col-xl-6 pb-5">
+                            <div class="col-xxl-4 col-xl-6">
                                 <h2 class="display-5 fw-bold lh-sm text-center">I’d like to set up a Regular Savings plan for my:</h2>
                             </div>
                         </div>

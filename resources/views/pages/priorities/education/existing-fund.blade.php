@@ -21,13 +21,13 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $educationSavingAmount === null || $educationSavingAmount === '' ? number_format(floatval($totalEducationNeeded)) : ($totalEducationNeeded > $educationSavingAmount ? number_format(floatval($totalEducationNeeded - $educationSavingAmount)) : '0') }}</h1>
+                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ $educationSavingAmount === null || $educationSavingAmount === '' ? number_format(floatval($totalEducationNeeded)) : ($totalEducationNeeded > $educationSavingAmount ? number_format(floatval($totalEducationNeeded - $educationSavingAmount)) : '0') }}</h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Education Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Education Fund Needed</p>
                     </div>
                 </div>
             </div>
@@ -47,31 +47,33 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/education/other/education-other-avatar.png') }}" width="auto" height="100%" alt="Existing Policy">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/education/other/education-other-avatar.png') }}" width="auto" height="100%" alt="Education Existing Policy Avatar">
                             </div>
-                            <div class="col-xl-5 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">Luckily, I do have funds saved up for my child’s education.</h2>
-                                <p class="d-flex pt-5">
-                                    <span class="me-5 d-flex">
-                                        <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#education_saving_amount').attr('required',true);"
-                                        {{ ($edcationSaving && $edcationSaving === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
-                                        <label for="yes" class="form-label display-6 lh-base">Yes</label>
-                                    </span>
-                                    <span class="d-flex me-5">
-                                        <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#education_saving_amount').removeAttr('required',false);"
-                                        {{ ($edcationSaving && $edcationSaving === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
-                                        <label for="no" class="form-label display-6 lh-base">No</label>
-                                    </span>
-                                </p>
-                                <div class="hide-content">
-                                    <p class="display-6">Current savings amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="education_saving_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" value="{{ $educationSavingAmount !== null ? number_format(floatval($educationSavingAmount)) : $educationSavingAmount }}" required></span></p>
+                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row">
+                                    <h2 class="display-5 fw-bold lh-sm">Luckily, I do have funds saved up for my child’s education.</h2>
+                                    <p class="d-flex pt-5">
+                                        <span class="me-5 d-flex">
+                                            <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#education_saving_amount').attr('required',true);"
+                                            {{ ($edcationSaving && $edcationSaving === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
+                                            <label for="yes" class="form-label display-6 lh-base">Yes</label>
+                                        </span>
+                                        <span class="d-flex me-5">
+                                            <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#education_saving_amount').removeAttr('required',false);"
+                                            {{ ($edcationSaving && $edcationSaving === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
+                                            <label for="no" class="form-label display-6 lh-base">No</label>
+                                        </span>
+                                    </p>
+                                    <div class="hide-content">
+                                        <p class="display-6">Current savings amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="education_saving_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('education_saving_amount') is-invalid @enderror" id="education_saving_amount" value="{{ $educationSavingAmount !== null ? number_format(floatval($educationSavingAmount)) : $educationSavingAmount }}" required></span></p>
+                                    </div>
+                                    <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                    <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
                                 </div>
-                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                <input type="hidden" name="percentage" id="percentage" value="{{$educationFundPercentage}}">
                             </div>
                         </div>
                     </div>

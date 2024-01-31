@@ -26,10 +26,10 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                        <h1 id="TotalEducationFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $educationSavingAmount === null || $educationSavingAmount === '' 
                                 ? number_format(floatval($totalEducationNeeded)) 
                                 : ($educationSavingAmount > floatval($totalEducationNeeded) 
@@ -38,14 +38,14 @@
                             }}
                         </h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Education Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Education Fund Needed</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.education.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -66,21 +66,23 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/education/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Increment">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/education/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Education Amount Needed Avatar">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">I plan to build an education fund of</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="tertiary_education_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('tertiary_education_amount') is-invalid @enderror" id="tertiary_education_amount" value="{{ $tertiaryEducationAmount !== null ? number_format(floatval($tertiaryEducationAmount)) : $tertiaryEducationAmount }}" required></span>
-                                over the next
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="tertiary_education_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('tertiary_education_years') is-invalid @enderror" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
-                                years.</p>
-                                <input type="hidden" name="total_educationNeeded" id="total_educationNeeded" value="{{$totalEducationNeeded}}">
-                                <a href="#" class="btn btn-primary text-uppercase mt-4" data-bs-toggle="modal" data-bs-target="#tuitionFees">View Tuition Cost Guide</a>
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row h-sm-100">
+                                    <h2 class="display-5 fw-bold lh-sm">I plan to build an education fund of</h2>
+                                    <p class="display-5 fw-bold currencyField">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="tertiary_education_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('tertiary_education_amount') is-invalid @enderror" id="tertiary_education_amount" value="{{ $tertiaryEducationAmount !== null ? number_format(floatval($tertiaryEducationAmount)) : $tertiaryEducationAmount }}" required></span>
+                                    over the next
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="tertiary_education_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('tertiary_education_years') is-invalid @enderror" id="tertiary_education_years" value="{{$totalEducationYear}}" required></span>
+                                    years.</p>
+                                    <input type="hidden" name="total_educationNeeded" id="total_educationNeeded" value="{{$totalEducationNeeded}}">
+                                    <a href="#" class="btn btn-primary text-uppercase mt-4 w-auto" data-bs-toggle="modal" data-bs-target="#tuitionFees">View Tuition Cost Guide</a>
+                                </div>
                             </div>
                         </div>
                     </div>

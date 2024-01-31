@@ -304,6 +304,12 @@ button.choice.default.selected img{
         background-size: contain;
         background-position: left center;
     }
+    .calculator-page .bottom-content a{
+        margin:0px 12px;
+    }
+    #education-amount-needed .bottom-content .h-sm-100{
+        justify-content: center;
+    }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
     .h-sm-100{

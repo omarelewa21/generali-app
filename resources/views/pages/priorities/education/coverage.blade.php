@@ -25,7 +25,7 @@
     $othersCoverForDob = session('customer_details.selected_needs.need_3.advance_details.spouse_dob');
 @endphp
 
-<div id="education_coverage" class="secondary-default-bg">
+<div id="education_coverage" class="secondary-default-bg coverage">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>

@@ -75,6 +75,9 @@ $(document).ready(function() {
             $(".ideal .bottom-content").css("padding-top" , 0);
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
+            if(windowWidth < 385) {
+                $("#education_coverage .bottom-content").css("padding-top" , "42px");
+            } 
         } else if (windowWidth >=768 && windowWidth <= 1199 ){
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".summary-page .bottom-content .graph-col").css("padding-top" , titleHeight + "px");
