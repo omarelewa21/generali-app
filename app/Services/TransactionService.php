@@ -29,7 +29,6 @@ class TransactionService
                     $formData = SessionStorage::findSessionId($sessionId)->get();
                 }
 
-
                 if ($formData->isNotEmpty()) {
                     static::updateTransaction($formData, $sessionStorage,$customerDetails);
                 } else {

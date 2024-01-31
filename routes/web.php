@@ -212,7 +212,6 @@ Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
 Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
 Route::get('/agent/logs', [TransactionController::class,'index'])->name('transaction.index');
 Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete');
-
 // Route::get('/agent/logs', function () {
 //     return view('pages.dashboard.logs');
 // });
@@ -222,3 +221,5 @@ Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');
 
 // Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
 // Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');
+
+Route::get('/send_fes','App\Http\Controllers\FesController@sendFes')->name('send_fes');

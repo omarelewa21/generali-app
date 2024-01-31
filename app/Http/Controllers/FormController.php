@@ -39,8 +39,9 @@ class FormController extends Controller {
             //save into session storage
             $transactionService->handleTransaction($request,$customerDetails);
 
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-            return response()->json(['message' => 'Button click saved successfully']);
+            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully'] + $transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

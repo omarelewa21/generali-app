@@ -38,6 +38,8 @@ class SessionsDataTable extends DataTable
                     // return '-';
                 }
 
+                $sendButton = '<a href="' . route('send_fes',['transaction_id'=> $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">FES</a>';
+
                 $button = '<a href="' . route('basic.details', ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
                 
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">
@@ -47,7 +49,7 @@ class SessionsDataTable extends DataTable
                     </ul>
                 </div>';
 
-                return $button . ' ' . $dropdownToggle;
+                return $sendButton . ' '. $button . ' ' . $dropdownToggle;
             })
             ->editColumn('status', function ($data) {
                 return ucfirst($data->status);
