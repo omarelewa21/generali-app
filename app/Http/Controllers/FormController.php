@@ -11,6 +11,7 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
 use App\Services\TransactionService;
+use Illuminate\Support\Facades\Session;
 
 class FormController extends Controller {
     public function pdpa(Request $request,TransactionService $transactionService)
@@ -1254,6 +1255,7 @@ class FormController extends Controller {
     public function createNewForm(Request $request)
     {
         // Regenerate the session ID
+        Session::flush();
         $session = $request->session()->regenerate();
         $sessionId = $request->session()->getId();
 
