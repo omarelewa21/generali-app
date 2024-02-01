@@ -69,9 +69,16 @@ $(document).ready(function() {
             $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
             $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
             $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $("#savings-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $(".summary-page .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            $("#health-medical-selection .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            $("#health-medical-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $(".summary-page .bottom-content .graph-col").css("padding-top" , graphMenu + "px");
+            $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
+            $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
+            $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
@@ -92,7 +99,14 @@ $(document).ready(function() {
             $(".bottom-content .calculatorContent").css("padding-bottom" , 0);
             $(".content-needs-grey").css("padding-top" , 0);
             $(".summary-page .content-needs-grey .heading").css("padding-top" , 0);
+            $("#health-medical-selection .content-needs-grey .heading").css("padding-top" , 0);
+            $("#health-medical-selection .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#health-medical-selection .bottom-content").css("padding-top" , 0);
             $(".summary-page .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#savings-risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#savings-risk-profile .bottom-content").css("padding-top" , 0);
+            $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#investment-risk-profile .bottom-content").css("padding-top" , 0);
             $(".bottom-content").css("padding-top" , 0);
         }
     }

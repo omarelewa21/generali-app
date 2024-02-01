@@ -17,13 +17,13 @@
     $existingPolicy = session('customer_details.existing_policy');
     $basicDetails = session('customer_details.basic_details');
 
-    $debtPriority = session('customer_details.priorities.debt-cancellationDiscuss');
-    $protectionPriority = session('customer_details.priorities.protectionDiscuss');
-    $retirementPriority = session('customer_details.priorities.retirementDiscuss');
-    $educationPriority = session('customer_details.priorities.educationDiscuss');
-    $savingsPriority = session('customer_details.priorities.savingsDiscuss');
-    $investmentPriority = session('customer_details.priorities.investmentsDiscuss');
-    $healthPriority = session('customer_details.priorities.health-medicalDiscuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
 @endphp
 

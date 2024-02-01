@@ -97,12 +97,11 @@ button.choice.default.selected img{
 .lh-normal{
     line-height: normal;
 }
+.mh-55{
+    max-height: 55%;
+}
 
 /* ===============================  Risk Profile =======================================*/
-#savings-risk-profile .content-needs-grey,
-#investment-risk-profile .content-needs-grey{
-    grid-template-rows: 5vh 60vh;
-}
 .risk-header{
     grid-area: risk-header;
     grid-template-columns: 100%;
@@ -157,6 +156,19 @@ button.choice.default.selected img{
     border-right: 1px solid #C0232C !important;
 }
 
+/* Health medical - critical illness plan amount needed background */
+.bg-hnm {
+    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top 50% left;
+}
+
+/* Health medical - selection */
+.selection_height{
+    height:100%;
+    max-height:400px;
+}
 /* Health medical - medical plan room selection */
 #hospital-room-selection .needs-stand-bg{
     padding: 75px;
@@ -251,6 +263,19 @@ button.choice.default.selected img{
         padding-bottom: 55px;
     }
 }
+@media only screen and (max-width: 500px){
+    .selection_height{
+        max-height: 250px;
+    }
+}
+@media only screen and (max-width: 320px){
+    .risk-btn{
+        width: 100%;
+    }
+    .selection_height{
+        max-height: 150px;
+    }
+}
 @media only screen and (max-width: 767px){
     /* Calculator style */
     .header p.display-6{
@@ -259,7 +284,9 @@ button.choice.default.selected img{
     .text-sm-center{
         text-align: center;
     }
-    .calculator-page .content-needs-grey {
+    .calculator-page .content-needs-grey,
+    #savings-risk-profile .content-needs-grey,
+    #investment-risk-profile .content-needs-grey {
         grid-auto-rows: 0vh 0vh 70vh;
     }
     .wrapper-bottom-grey{
@@ -281,13 +308,21 @@ button.choice.default.selected img{
         height: 50% !important;
         max-height: 100% !important;
     }
+    #savings-annual-return .bottom-content .h-100{
+        height: 100% !important;
+        max-height: 100% !important;
+    }
+    #savings-annual-return.secondary-default-bg{
+        background-position: bottom;
+    }
     .h-sm-100{
         height: 100%;
     }
     .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
     }
-    .summary-page .wrapper-bottom-grey{
+    .summary-page .wrapper-bottom-grey,
+    #savings-annual-return .wrapper-bottom-grey{
         /* grid-template-rows: 10vh 90vh 0vh; */
         grid-template-rows: 0vh 100vh 0vh;
     }
@@ -309,6 +344,29 @@ button.choice.default.selected img{
     }
     #education-amount-needed .bottom-content .h-sm-100{
         justify-content: center;
+    }
+    #savings-risk-profile .calculatorContent,
+    #investment-risk-profile .calculatorContent{
+        text-align: center;
+    }
+    #savings-risk-profile #high-risk-potential-content .col-12.d-flex,
+    #savings-risk-profile #medium-risk-potential-content .col-12.d-flex,
+    #savings-risk-profile #low-risk-potential-content .col-12.d-flex,
+    #investment-risk-profile #high-risk-potential-content .col-12.d-flex,
+    #investment-risk-profile #medium-risk-potential-content .col-12.d-flex,
+    #investment-risk-profile #low-risk-potential-content .col-12.d-flex{
+        justify-content: center;
+    }
+    .bg-hnm {
+        background:none;
+    }
+    #critical-illness_amount_needed .tertiary-mobile-bg,
+    #medical-amount-needed .tertiary-mobile-bg{
+        background-image: url(/images/needs/health-medical/background/bg-hnm.png);
+        background-position: center;
+    }
+    #health-medical-selection .content-needs-grey{
+        grid-auto-rows: 0vh 0vh 65vh;
     }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
@@ -335,6 +393,13 @@ button.choice.default.selected img{
     }
     .ideal .content-needs-grey {
         grid-auto-rows: 5vh 60vh;
+    }
+    #savings-annual-return .content-needs-grey{
+        grid-template-rows: 10vh 50vh;
+    }
+    #savings-risk-profile .content-needs-grey,
+    #investment-risk-profile .content-needs-grey{
+        grid-template-rows: 0vh 65vh;
     }
 }
 @media only screen and (max-width: 780px){
@@ -380,6 +445,10 @@ button.choice.default.selected img{
     #retirement_ideal .bottom-content img {
         max-width: 450px;
     }
+    .bg-hnm {
+        background-size: cover;
+        background-position: center;
+    }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){
     .summary-page .bottom-content .graph-col.h-100{
@@ -411,6 +480,11 @@ button.choice.default.selected img{
         width: 41.66666667%;
     }
     .summary-page .wrapper-bottom-grey{
-        overflow-y: hidden;
+        overflow-y: auto;
+    }
+}
+@media only screen and (min-width: 2000px){
+    #hnm-selection button img{
+        height: 70%;
     }
 }

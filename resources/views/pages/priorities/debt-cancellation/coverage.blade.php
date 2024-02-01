@@ -19,11 +19,11 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependent');
-    $childData = session('customer_details.family_details.dependent.children_data');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
 
-    $spouseData = session('customer_details.family_details.dependent.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependent.spouse_data.full_name');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_7.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_7.advance_details.child_name');
@@ -32,7 +32,7 @@
     $othersCoverForDob = session('customer_details.selected_needs.need_7.advance_details.spouse_dob');
 @endphp
 
-<div id="debt-coverage" class="secondary-default-bg">
+<div id="debt-coverage" class="secondary-default-bg coverage">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
