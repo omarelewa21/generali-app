@@ -19,6 +19,7 @@ class TransactionService
                 $sessionStorage->data = $customerDetails;
                 $sessionStorage->page_route = $route;
                 $sessionStorage->session_id = $sessionId;
+                $sessionStorage->customer_name = $customerDetails['basic_details']['full_name'] ??'';
 
                 if(!empty($request->input('transaction_id')))
                 {
@@ -44,20 +45,24 @@ class TransactionService
     private static function updateTransaction($formData, $sessionStorage,$customerDetails)
     {
         $decodedForm = json_decode($formData,true);
-      
-        foreach ($customerDetails as $key => $value) {
+
+        foreach ($decodedForm[0]['data'] as $databaseExistingKey => $databaseValue) {
             
-            if (array_key_exists($key, $decodedForm[0]['data'])) {
+            if (array_key_exists($databaseExistingKey, $customerDetails)) {
                 // Update only if the key exists in the first array
-                $decodedForm[0]['data'][$key] = $value;
+                $decodedForm[0]['data'][$databaseExistingKey] = $customerDetails[$databaseExistingKey];
+            }
+            else
+            {
+                $decodedForm[0]['data'][$databaseExistingKey] = $databaseValue;
             }
         }
 
         SessionStorage::where('transaction_id', $formData[0]['transaction_id'])
             ->update([
-                'data' => $decodedForm ? $sessionStorage->data : "",
+                'data' => $decodedForm[0]['data'],
                 'page_route' => $sessionStorage->page_route,
-                'customer_name' => $sessionStorage->data['basic_details']['full_name'] ?? "",
+                'customer_name' => $decodedForm[0]['data']['basic_details']['full_name'] ?? "",
                 'customer_id' => $formData[0]['customer_id'] && isset($sessionStorage->data['identity_details']['id_number'])  
                                  ? $sessionStorage->data['identity_details']['id_number'] 
                                  : NULL,

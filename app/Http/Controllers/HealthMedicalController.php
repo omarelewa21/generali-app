@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
+use App\Services\TransactionService;
 
 class HealthMedicalController extends Controller
 {
@@ -77,7 +78,7 @@ class HealthMedicalController extends Controller
     //     return $need_sequence;
     // }
 
-    public function validateHealthMedicalSelection(Request $request)
+    public function validateHealthMedicalSelection(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -196,31 +197,21 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if ($selectionCriticalInput === 'Yes'){
-            return redirect()->route('health.medical.critical.illness.coverage');
+            return redirect()->route('health.medical.critical.illness.coverage')->with($transactionData);
         }
         else{
-            return redirect()->route('health.medical.medical.planning.coverage');
+            return redirect()->route('health.medical.medical.planning.coverage')->with($transactionData);
         }
         
     }
 
     // Critical Illness
-    public function validateCriticalIllnessCoverageSelection(Request $request)
+    public function validateCriticalIllnessCoverageSelection(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -272,23 +263,13 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-    
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        return redirect()->route('health.medical.critical.amount.needed');
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+
+        return redirect()->route('health.medical.critical.amount.needed')->with($transactionData);
     }
-    public function validateCriticalIllnessAmountNeeded(Request $request)
+    public function validateCriticalIllnessAmountNeeded(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -359,24 +340,14 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-    
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
+
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
-        return redirect()->route('health.medical.critical.existing.protection');
+        return redirect()->route('health.medical.critical.existing.protection')->with($transactionData);
     }
 
-    public function validateCriticalIllnessExistingProtection(Request $request){
+    public function validateCriticalIllnessExistingProtection(Request $request, TransactionService $transactionService){
 
         $customMessages = [
             'critical_existing_protection.required' => 'Please select an option',
@@ -463,25 +434,15 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.critical.gap');
+        return redirect()->route('health.medical.critical.gap')->with($transactionData);
     }
 
-    public function submitCriticalIllnessGap(Request $request){
+    public function submitCriticalIllnessGap(Request $request,TransactionService $transactionService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -494,31 +455,21 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
         if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Yes'){
-            return redirect()->route('health.medical.medical.planning.coverage');
+            return redirect()->route('health.medical.medical.planning.coverage')->with($transactionData);
         } else{
-            return redirect()->route('debt.cancellation.home');
+            return redirect()->route('debt.cancellation.home')->with($transactionData);
         }
     }
 
 
     //Medical Planning
-    public function validateMedicalPlanningCoverageSelection(Request $request)
+    public function validateMedicalPlanningCoverageSelection(Request $request,TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -570,24 +521,14 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-    
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        return redirect()->route('health.medical.planning.hospital.selection');
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+
+        return redirect()->route('health.medical.planning.hospital.selection')->with($transactionData);
     }
 
-    public function validateMedicalPlanningHospitalSelection(Request $request)
+    public function validateMedicalPlanningHospitalSelection(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -631,24 +572,14 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.room.selection');
+        return redirect()->route('health.medical.planning.room.selection')->with($transactionData);
     }
 
-    public function validateMedicalPlanningRoomSelection(Request $request)
+    public function validateMedicalPlanningRoomSelection(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -692,24 +623,14 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.amount.needed');
+        return redirect()->route('health.medical.planning.amount.needed')->with($transactionData);
     }
 
-    public function validateMedicalPlanningAmountNeeded(Request $request)
+    public function validateMedicalPlanningAmountNeeded(Request $request, TransactionService $transactionService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -780,24 +701,14 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.existing.protection');
+        return redirect()->route('health.medical.planning.existing.protection')->with($transactionData);
     }
 
-    public function validateMedicalPlanningExistingProtection(Request $request){
+    public function validateMedicalPlanningExistingProtection(Request $request, TransactionService $transactionService){
 
         $customMessages = [
             'medical_existing_protection.required' => 'Please select an option',
@@ -884,25 +795,15 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.planning.gap');
+        return redirect()->route('health.medical.planning.gap')->with($transactionData);
     }
 
-    public function submitMedicalPlanningGap(Request $request){
+    public function submitMedicalPlanningGap(Request $request, TransactionService $transactionService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -915,26 +816,16 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
         if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home');
+            return redirect()->route('debt.cancellation.home')->with($transactionData);
         }
         else {
-            return redirect()->route('existing.policy');
+            return redirect()->route('existing.policy')->with($transactionData);
         }
     }
 }
