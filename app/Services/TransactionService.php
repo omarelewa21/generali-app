@@ -51,10 +51,18 @@ class TransactionService
             if (array_key_exists($databaseExistingKey, $customerDetails)) {
                 // Update only if the key exists in the first array
                 $decodedForm[0]['data'][$databaseExistingKey] = $customerDetails[$databaseExistingKey];
-            }
+            }  
             else
             {
                 $decodedForm[0]['data'][$databaseExistingKey] = $databaseValue;
+            }
+        }
+
+        foreach($customerDetails as $customerKey => $customerValue)
+        {
+            if(!array_key_exists ($customerKey,$decodedForm[0]['data']))
+            {
+                $decodedForm[0]['data'][$customerKey] = $customerValue;
             }
         }
 
