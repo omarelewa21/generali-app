@@ -117,13 +117,13 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
-        $index = array_search('investment', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
+        $index = array_search('health-medical', $customerDetails['priorities_level'], true);
+        if ($customerDetails['priorities']['health-medical'] == true || $customerDetails['priorities']['health-medical'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
             $coverAnswer = 'No';
         }
-        if ($customerDetails['priorities']['investments_discuss'] == true || $customerDetails['priorities']['investments_discuss'] == 'true'){
+        if ($customerDetails['priorities']['health-medical_discuss'] == true || $customerDetails['priorities']['health-medical_discuss'] == 'true'){
             $discussAnswer = 'Yes';
         } else{
             $discussAnswer = 'No';
@@ -210,7 +210,7 @@ class HealthMedicalController extends Controller
             DB::rollBack();
         }
 
-        if ($selectionCriticalInput === 'Yes'){
+        if ($criticalPlan === 'Yes'){
             return redirect()->route('health.medical.critical.illness.coverage');
         }
         else{

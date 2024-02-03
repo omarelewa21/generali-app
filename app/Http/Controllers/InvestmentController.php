@@ -100,7 +100,7 @@ class InvestmentController extends Controller
         $needs = $customerDetails['selected_needs']['need_5'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
-        $index = array_search('investment', $customerDetails['priorities_level'], true);
+        $index = array_search('investments', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
             $coverAnswer = 'Yes';
         } else{

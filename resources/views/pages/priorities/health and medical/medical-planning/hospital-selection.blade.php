@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content">
+                <section class="bottom-content pt-0">
                     <div class="container h-100">
                     <div class="row justify-content-center h-100 d-flex align-items-end" id="hnm-selection">
                             <div class="h-100 d-flex justify-content-center align-items-center col-5">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-2 plant d-none d-xl-block">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center" style="top:55%;">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
                         </div>
                     </div>
                 </section>

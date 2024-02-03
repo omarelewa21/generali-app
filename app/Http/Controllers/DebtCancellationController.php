@@ -45,7 +45,7 @@ class DebtCancellationController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('education', $customerDetails['priorities_level'], true);
+        $index = array_search('debt-cancellation', $customerDetails['priorities_level'], true);
         if ($customerDetails['priorities']['education'] == true || $customerDetails['priorities']['education'] == 'true'){
             $coverAnswer = 'Yes';
         } else{
