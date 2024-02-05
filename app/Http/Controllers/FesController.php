@@ -11,7 +11,12 @@ class FesController extends Controller
 {
     public function sendFes(Request $request)
     {
-       $fesId = $request->input('transaction_id');
+       $fesId = $request->input('transaction_id') ?? '';
+
+       if ( empty($fesId) ) {
+            abort(404);
+       }
+
        $fesData = SessionStorage::where('transaction_id',$fesId)->first()->get();
 
         try 

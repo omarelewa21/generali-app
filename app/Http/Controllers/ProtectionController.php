@@ -91,7 +91,7 @@ class ProtectionController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.amount.needed')->with($transactionData);
+        return redirect()->route('protection.amount.needed',$transactionData);
     }
 
     public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)
@@ -170,7 +170,7 @@ class ProtectionController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
-        return redirect()->route('protection.existing.policy')->with($transactionData);
+        return redirect()->route('protection.existing.policy',$transactionData);
     }
     
     public function validateProtectionExistingPolicy(Request $request, TransactionService $transactionService){
@@ -267,7 +267,7 @@ class ProtectionController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.gap')->with($transactionData);
+        return redirect()->route('protection.gap',$transactionData);
     }
 
     public function submitProtectionGap(Request $request, TransactionService $transactionService){
@@ -288,20 +288,20 @@ class ProtectionController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['retirement_discuss']) && ($customerDetails['priorities']['retirement_discuss'] === 'true' || $customerDetails['priorities']['retirement_discuss'] === true)) {
-            return redirect()->route('retirement.home')->with($transactionData);
+            return redirect()->route('retirement.home',$transactionData);
         } else if (isset($customerDetails['priorities']['education_discuss']) && ($customerDetails['priorities']['education_discuss'] === 'true' || $customerDetails['priorities']['education_discuss'] === true)) {
-            return redirect()->route('education.home')->with($transactionData);
+            return redirect()->route('education.home',$transactionData);
         } else if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home')->with($transactionData);
+            return redirect()->route('savings.home',$transactionData);
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home')->with($transactionData);
+            return redirect()->route('investment.home',$transactionData);
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home')->with($transactionData);
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

@@ -88,7 +88,7 @@ class DebtCancellationController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('debt.cancellation.amount.needed')->with($transactionData);
+        return redirect()->route('debt.cancellation.amount.needed',$transactionData);
     }
 
     public function validateDebtCancellationAmountNeeded(Request $request, TransactionService $transactionService){
@@ -155,7 +155,7 @@ class DebtCancellationController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
     
-        return redirect()->route('debt.cancellation.existing.debt')->with($transactionData);
+        return redirect()->route('debt.cancellation.existing.debt',$transactionData);
     }
 
     public function validateDebtCancellationExistingDebt(Request $request, TransactionService $transactionService){
@@ -256,7 +256,7 @@ class DebtCancellationController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
         // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.critical.illness')->with($transactionData);
+        return redirect()->route('debt.cancellation.critical.illness',$transactionData);
     }
 
     public function validateDebtCancellationCriticalIllness(Request $request, TransactionService $transactionService){
@@ -320,7 +320,7 @@ class DebtCancellationController extends Controller
         
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.gap')->with($transactionData);
+        return redirect()->route('debt.cancellation.gap',$transactionData);
     }
 
     public function submitDebtCancellationGap(Request $request, TransactionService $transactionService){
@@ -340,7 +340,7 @@ class DebtCancellationController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('existing.policy')->with($transactionData);
+        return redirect()->route('existing.policy',$transactionData);
     }
 
 }

@@ -112,7 +112,7 @@ class RetirementController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('retirement.ideal')->with($transactionData);
+        return redirect()->route('retirement.ideal',$transactionData);
         
     }
 
@@ -167,7 +167,7 @@ class RetirementController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('retirement.monthly.support')->with($transactionData);
+        return redirect()->route('retirement.monthly.support',$transactionData);
     }
 
     public function validateRetirementMonthlySupport(Request $request, TransactionService $transactionService){
@@ -237,7 +237,7 @@ class RetirementController extends Controller
         $transactionService->handleTransaction($request,$customerDetails);
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        return redirect()->route('retirement.period')->with($transactionData);
+        return redirect()->route('retirement.period',$transactionData);
     }
 
     public function validateRetirementPeriod(Request $request, TransactionService $transactionService){
@@ -302,7 +302,7 @@ class RetirementController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('retirement.allocated.funds')->with($transactionData);
+        return redirect()->route('retirement.allocated.funds',$transactionData);
     }
 
     public function validateRetirementOthers(Request $request, TransactionService $transactionService){
@@ -418,7 +418,7 @@ class RetirementController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('retirement.gap')->with($transactionData);
+        return redirect()->route('retirement.gap',$transactionData);
     }
 
     public function submitRetirementGap(Request $request, TransactionService $transactionService){
@@ -439,18 +439,18 @@ class RetirementController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['education_discuss']) && ($customerDetails['priorities']['education_discuss'] === 'true' || $customerDetails['priorities']['education_discuss'] === true)) {
-            return redirect()->route('education.home')->with($transactionData);
+            return redirect()->route('education.home',$transactionData);
         } else if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home')-with($transactionData);
+            return redirect()->route('savings.home',$transactionData);
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home')->with($transactionData);
+            return redirect()->route('investment.home',$transactionData);
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home')->with($transactionData);
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 }

@@ -202,10 +202,10 @@ class HealthMedicalController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if ($selectionCriticalInput === 'Yes'){
-            return redirect()->route('health.medical.critical.illness.coverage')->with($transactionData);
+            return redirect()->route('health.medical.critical.illness.coverage',$transactionData);
         }
         else{
-            return redirect()->route('health.medical.medical.planning.coverage')->with($transactionData);
+            return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
         }
         
     }
@@ -267,7 +267,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.critical.amount.needed')->with($transactionData);
+        return redirect()->route('health.medical.critical.amount.needed',$transactionData);
     }
     public function validateCriticalIllnessAmountNeeded(Request $request, TransactionService $transactionService)
     {
@@ -344,7 +344,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
-        return redirect()->route('health.medical.critical.existing.protection')->with($transactionData);
+        return redirect()->route('health.medical.critical.existing.protection',$transactionData);
     }
 
     public function validateCriticalIllnessExistingProtection(Request $request, TransactionService $transactionService){
@@ -439,7 +439,7 @@ class HealthMedicalController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.critical.gap')->with($transactionData);
+        return redirect()->route('health.medical.critical.gap',$transactionData);
     }
 
     public function submitCriticalIllnessGap(Request $request,TransactionService $transactionService){
@@ -461,9 +461,9 @@ class HealthMedicalController extends Controller
 
         // // Process the form data and perform any necessary actions
         if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Yes'){
-            return redirect()->route('health.medical.medical.planning.coverage')->with($transactionData);
+            return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
         } else{
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
     }
 
@@ -525,7 +525,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.hospital.selection')->with($transactionData);
+        return redirect()->route('health.medical.planning.hospital.selection',$transactionData);
     }
 
     public function validateMedicalPlanningHospitalSelection(Request $request, TransactionService $transactionService)
@@ -576,7 +576,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.room.selection')->with($transactionData);
+        return redirect()->route('health.medical.planning.room.selection',$transactionData);
     }
 
     public function validateMedicalPlanningRoomSelection(Request $request, TransactionService $transactionService)
@@ -627,7 +627,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.amount.needed')->with($transactionData);
+        return redirect()->route('health.medical.planning.amount.needed',$transactionData);
     }
 
     public function validateMedicalPlanningAmountNeeded(Request $request, TransactionService $transactionService)
@@ -705,7 +705,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.planning.existing.protection')->with($transactionData);
+        return redirect()->route('health.medical.planning.existing.protection',$transactionData);
     }
 
     public function validateMedicalPlanningExistingProtection(Request $request, TransactionService $transactionService){
@@ -800,7 +800,7 @@ class HealthMedicalController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.planning.gap')->with($transactionData);
+        return redirect()->route('health.medical.planning.gap',$transactionData);
     }
 
     public function submitMedicalPlanningGap(Request $request, TransactionService $transactionService){
@@ -822,10 +822,10 @@ class HealthMedicalController extends Controller
 
         // // Process the form data and perform any necessary actions
         if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 }

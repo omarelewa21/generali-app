@@ -115,7 +115,7 @@ class EducationController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('education.amount.needed')->with($transactionData);
+        return redirect()->route('education.amount.needed',$transactionData);
     }
 
     public function validateEducationAmountNeeded(Request $request, TransactionService $transactionService){
@@ -182,7 +182,7 @@ class EducationController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('education.existing.fund')->with($transactionData);
+        return redirect()->route('education.existing.fund',$transactionData);
     }
 
     public function validateEducationExistingFund(Request $request, TransactionService $transactionService){
@@ -281,7 +281,7 @@ class EducationController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('education.gap')->with($transactionData);
+        return redirect()->route('education.gap',$transactionData);
     }
 
     public function submitEducationGap(Request $request, TransactionService $transactionService){
@@ -302,16 +302,16 @@ class EducationController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home')->with($transactionData);
+            return redirect()->route('savings.home',$transactionData);
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home')->with($transactionData);
+            return redirect()->route('investment.home',$transactionData);
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home')->with($transactionData);
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

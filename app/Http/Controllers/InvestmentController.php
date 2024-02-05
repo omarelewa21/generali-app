@@ -138,7 +138,7 @@ class InvestmentController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('investment.amount.needed')->with($transactionData);
+        return redirect()->route('investment.amount.needed',$transactionData);
     }
 
     public function validateInvestmentAmountNeeded(Request $request,TransactionService $transactionService){
@@ -216,7 +216,7 @@ class InvestmentController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('investment.annual.return')->with($transactionData);
+        return redirect()->route('investment.annual.return',$transactionData);
     }
 
     public function validateInvestmentAnnualReturn(Request $request, TransactionService $transactionService){
@@ -295,7 +295,7 @@ class InvestmentController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('investment.risk.profile')->with($transactionData);
+        return redirect()->route('investment.risk.profile',$transactionData);
     }
 
     public function validateInvestmentRiskProfile(Request $request, TransactionService $transactionService){
@@ -342,7 +342,7 @@ class InvestmentController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.gap')->with($transactionData);
+        return redirect()->route('investment.gap',$transactionData);
     }
     
     public function submitInvestmentGap(Request $request, TransactionService $transactionService){
@@ -363,12 +363,12 @@ class InvestmentController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home')->with($transactionData);
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

@@ -321,7 +321,7 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.marital.status')->with($transactionData);
+            return redirect()->route('avatar.marital.status',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -438,7 +438,7 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Store the updated array back into the session
-            return redirect()->route($dataUrl)->with($transactionData);
+            return redirect()->route($dataUrl,$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -934,7 +934,7 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.my.assets')->with($transactionData);
+            return redirect()->route('avatar.my.assets',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1003,7 +1003,7 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss')->with($transactionData);
+            return redirect()->route('priorities.to.discuss',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

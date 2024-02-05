@@ -108,7 +108,7 @@ class SavingsController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // return redirect()->route('savings.goals');
-        return redirect()->route('savings.goals')->with($transactionData);
+        return redirect()->route('savings.goals',$transactionData);
     }
 
     public function goals(Request $request, TransactionService $transactionService)
@@ -197,7 +197,7 @@ class SavingsController extends Controller
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('savings.amount.needed')->with($transactionData);
+            return redirect()->route('savings.amount.needed',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -304,7 +304,7 @@ class SavingsController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // Process the form data and perform any necessary actions
-        return redirect()->route('savings.annual.return')->with($transactionData);
+        return redirect()->route('savings.annual.return',$transactionData);
     }
 
     public function validateSavingsAnnualReturn(Request $request, TransactionService $transactionService){
@@ -347,7 +347,7 @@ class SavingsController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('savings.risk.profile')->with($transactionData);
+        return redirect()->route('savings.risk.profile',$transactionData);
     }
 
     public function validateSavingsRiskProfile(Request $request, TransactionService $transactionService){
@@ -393,7 +393,7 @@ class SavingsController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('savings.gap')->with($transactionData);
+        return redirect()->route('savings.gap',$transactionData);
     }
 
     public function submitSavingsGap(Request $request, TransactionService $transactionService){
@@ -415,14 +415,14 @@ class SavingsController extends Controller
 
         // // Process the form data and perform any necessary actions
         if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home')->with($transactionData);
+            return redirect()->route('investment.home',$transactionData);
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home')->with($transactionData);
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home')->with($transactionData);
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy')->with($transactionData);
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

@@ -46,7 +46,7 @@ Route::get('/family-dependent/details', [DropdownController::class, 'familyDepen
 Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
-Route::view('/avatar', 'pages.avatar.gender')->name('avatar.gender.selection');
+Route::view('/avatar', 'pages.avatar.gender')->name('avatar');
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
