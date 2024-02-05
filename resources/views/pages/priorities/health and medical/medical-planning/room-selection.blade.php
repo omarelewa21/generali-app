@@ -7,7 +7,7 @@
 @extends('templates.master')
 
 @section('title')
-<title>Gender Selection</title>
+<title>Health Medical - Hospitalisation Room Selection Page</title>
 @endsection
 
 @section('content')
@@ -44,8 +44,9 @@
                         @csrf
                         <section class="main-content">
                             <div class="container">
+                            <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
-                                    <div class="col-12">
+                                    <div class="col-12 pt-3 pt-md-5">
                                         <p class="text-white display-6 lh-base">Select your preferred room option.</p>
                                     </div>
                                 </div>

@@ -76,6 +76,9 @@ $(document).ready(function() {
             $("#health-medical-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#medical-hospital-selection .content-needs-grey .heading").css("padding-top" , needsSubMenuHeight + "px");
             $("#medical-hospital-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $(".coverage .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $(".coverage .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            $(".coverage .content-needs-grey .bottom-content .coverage_slick").css("padding-top" , needsMenuHeight + "px");
             $(".summary-page .bottom-content .graph-col").css("padding-top" , graphMenu + "px");
             $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $("#medical-hospital-selection .bottom-content #hnm-selection").css("padding-top" , needsSubMenuHeight + "px");
@@ -83,6 +86,7 @@ $(document).ready(function() {
             $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
+            $(".ideal .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             // $("#medical-hospital-selection .bottom-content").css("padding-top" , 0);
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
@@ -115,6 +119,10 @@ $(document).ready(function() {
             $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);
             $("#investment-risk-profile .bottom-content").css("padding-top" , 0);
             $(".bottom-content").css("padding-top" , 0);
+            $(".coverage .content-needs-grey .top-menu").css("padding-top" , 0);
+            $(".coverage .content-needs-grey .heading").css("padding-top" , 0);
+            $(".coverage .content-needs-grey .bottom-content").css("padding-top" , 0);
+            $(".ideal .content-needs-grey .top-menu").css("padding-top" , 0);
         }
     }
     setResponsiveCalcuator();

@@ -143,8 +143,9 @@
                                             $goal_3 = 'goal-donate';
                                         }
                                     @endphp
+                                    <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                                     <div class="row px-4 pt-3 pb-2 px-sm-5 pt-md-5 right-sidebar">
-                                        <div class="col-12">
+                                        <div class="col-12 pt-3 pt-md-5">
                                             <p class="text-white display-6 lh-base">Drag and drop your goals on top of your avatar.</p>
                                         </div>
                                     </div>
