@@ -15,9 +15,10 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $identityDetails = session('customer_details.identity_details');
+    $identityDetails = session('customer_details.identity_details') ?? $basicDetails;
     $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
-    $transactionId ??= session('transaction_id');
+    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    
 @endphp
 
 <div id="identity_details">

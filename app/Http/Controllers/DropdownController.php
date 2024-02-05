@@ -37,7 +37,7 @@ class DropdownController extends Controller
         $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
 
         if($basicDetails){
-            $basicDetails = $basicDetails['basic_details'] ?? '';
+            $basicDetails = $basicDetails['identity_details'] ?? '';
         }
 
         return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
