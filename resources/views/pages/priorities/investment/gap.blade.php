@@ -111,8 +111,8 @@
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For a projected future investment value of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded) + (floatval($totalInvestmentNeeded) * (4 /100)) )}}</h4>
-                                            <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4> -->
+                                            <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded) + (floatval($totalInvestmentNeeded) * (4 /100)) )}}</h4> -->
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -129,11 +129,11 @@
                                     </div>
                                     <span class="align-self-center {{ $totalAnnualReturn === '0' ? 'green-tick' : 'red-tick' }}"></span>
                                 </div> -->
-                                <div class="row justify-content-center py-2">
+                                <!-- <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <p>*Calculated based on an average inflation rate of 4%.​</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

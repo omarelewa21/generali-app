@@ -174,10 +174,14 @@ button.choice.default.selected img{
     top: 55% !important;
 }
 /* Health medical - medical plan room selection */
-#hospital-room-selection .needs-stand-bg{
-    padding: 75px;
+#hospital-room-selection .content-avatar-default{
+    grid-auto-rows: 15vh 30vh 55vh;
+    grid-template-areas:
+        "room-selection-title"
+        "room-selection-content"
+        "room-selection-footer";
 }
-.wrapper-room-selection{
+/* .wrapper-room-selection{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 15% 85%;
@@ -185,24 +189,33 @@ button.choice.default.selected img{
         "room-selection-title"
         "room-selection-content";
     grid-gap: 0px;
-}
-.room-selection-title{
+} */
+/* .room-selection-title{
     grid-area: room-selection-title;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
     display: grid;
+} */
+.room-selection-title{
+    grid-area: room-selection-title;
+    display: grid;
+    grid-template-rows: 100%;
 }
 .room-selection-content{
     grid-area: room-selection-content;
     display: grid;
-    
     grid-template-rows: 100%;
 }
-.single.room-selection-content {
-    grid-template-columns: 15% 60% 25%;
-    /* grid-template-columns: 20% 55% 25%; */
+.room-selection-footer{
+    grid-area: room-selection-footer;
+    display: grid;
+    grid-template-rows: 100%;
 }
-.patient,
+/* .single.room-selection-content {
+    grid-template-columns: 15% 60% 25%;
+    // grid-template-columns: 20% 55% 25%; 
+} */
+/* .patient,
 .patient-2 {
     grid-template-areas:
         "windows"
@@ -226,7 +239,7 @@ button.choice.default.selected img{
 }
 .single-patient-2{
     justify-content: end;
-}
+} */
 
 /* Needs Summary Page */
 .summary-page .wrapper-bottom-grey{
@@ -455,6 +468,9 @@ button.choice.default.selected img{
     .bg-hnm {
         background-size: cover;
         background-position: center;
+    }
+    .needs-icon {
+        height: 70px;
     }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){

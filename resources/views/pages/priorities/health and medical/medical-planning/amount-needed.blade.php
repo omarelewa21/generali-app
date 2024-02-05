@@ -77,7 +77,7 @@
                                     <h2 class="display-5 fw-bold lh-sm">In the event of hospitalisation, I would like to have an annual fund of</h2>
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded === null || $medicalAmountNeeded === '' ? $medicalAmountNeeded : number_format(floatval($medicalAmountNeeded)) }}" required></span>
-                                    /month to cover any hospital bills.
+                                    to cover any hospital bills.
                                         <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="medical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
                                     years</p>
                                     <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">

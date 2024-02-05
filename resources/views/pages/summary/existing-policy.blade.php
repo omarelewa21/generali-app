@@ -24,7 +24,7 @@
     $savingsPriority = session('customer_details.priorities.savings_discuss');
     $investmentPriority = session('customer_details.priorities.investments_discuss');
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
-    $selectedMedical = session('customer_details.health-medical_needs.medicalPlanningSelection');
+    $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
 @endphp
 
 <div id="existing_policy">
@@ -204,7 +204,7 @@
                                             if ($debtPriority === 'true' || $debtPriority === true) {
                                                 $route = route('debt.cancellation.gap');
                                             } elseif ($healthPriority === 'true' || $healthPriority === true) {
-                                                if($selectedMedical === 'Medical Planning Care'){
+                                                if($selectedMedical === 'Yes'){
                                                     $route = route('health.medical.planning.gap');
                                                 } else{ 
                                                     $route = route('health.medical.critical.gap');
