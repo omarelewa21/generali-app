@@ -132,7 +132,7 @@ class FormController extends Controller {
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
             
-            return redirect()->route('avatar.welcome')->with($transactionData);
+            return redirect()->route('avatar.welcome',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1246,7 +1246,7 @@ class FormController extends Controller {
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-            return redirect()->route('summary.monthly-goals')->with($transactionData);
+            return redirect()->route('summary.monthly-goals',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

@@ -56,6 +56,6 @@ class AvatarController extends Controller
         $transactionService->handleTransaction($request,$customerDetails);
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('identity.details')->with($transactionData);
+        return redirect()->route('identity.details',$transactionData);
     } 
 }
