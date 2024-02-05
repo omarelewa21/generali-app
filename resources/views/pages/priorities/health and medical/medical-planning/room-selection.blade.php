@@ -1,6 +1,6 @@
 <?php
  /**
- * Template Name: Gender Selection Page
+ * Template Name: Health Medical - Hospitalisation Room Selection Page
  */
 ?>
 
