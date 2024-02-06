@@ -15,15 +15,17 @@ class TransactionService
                 $sessionStorage = new SessionStorage();
                 $route = strval(request()->path());
                 $sessionId = $request->session()->getId();
+                $transactionId = $request->input('transaction_id') ?? '';
 
                 $sessionStorage->data = $customerDetails;
                 $sessionStorage->page_route = $route;
                 $sessionStorage->session_id = $sessionId;
                 $sessionStorage->customer_name = $customerDetails['basic_details']['full_name'] ??'';
 
-                if(!empty($request->input('transaction_id')))
+                //check transaction id ,if not found ,use  session id        
+                if(!empty($transactionId))
                 {
-                    $formData = SessionStorage::findTransactionId($request->input('transaction_id'))->get();
+                    $formData = SessionStorage::findTransactionId($transactionId)->get();
                 }
                 else
                 {
@@ -70,6 +72,7 @@ class TransactionService
             ->update([
                 'data' => $decodedForm[0]['data'],
                 'page_route' => $sessionStorage->page_route,
+                'session_id' => $sessionStorage->session_id,
                 'customer_name' => $decodedForm[0]['data']['basic_details']['full_name'] ?? "",
                 'customer_id' => $formData[0]['customer_id'] && isset($sessionStorage->data['identity_details']['id_number'])  
                                  ? $sessionStorage->data['identity_details']['id_number'] 

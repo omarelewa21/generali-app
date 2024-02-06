@@ -41,7 +41,7 @@ class SessionsDataTable extends DataTable
 
                 // $sendButton = '<a href="' . route('send_fes',['transaction_id'=> $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">FES</a>';
 
-                $pageRoute = str_replace("-",".",$data->page_route);
+                $pageRoute = str_replace(['-', '/'],".",$data->page_route);
                 $button = '<a href="' . route($pageRoute, ['transaction_id' => $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">Restore</a>';
                 
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">

@@ -8,7 +8,11 @@ const specificPageURLs = [
 
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => 
+    currentURL.endsWith(url.toLowerCase()) ||
+    currentURL.endsWith(`${url.toLowerCase()}?`) ||
+    currentURL.includes(url.toLowerCase()))
+) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;

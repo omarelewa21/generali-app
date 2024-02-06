@@ -29,6 +29,7 @@ use App\Http\Controllers\TransactionController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
+Route::get('/welcome-new', [FormController::class, 'createNewForm'])->name('welcome-new');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
@@ -215,9 +216,6 @@ Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete
 // Route::get('/agent/logs', function () {
 //     return view('pages.dashboard.logs');
 // });
-
-//Create New Transaction Form, always create a new session id 
-Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');
 
 // Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
 // Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');

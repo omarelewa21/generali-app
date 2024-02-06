@@ -9,12 +9,11 @@ const parameterName = 'transaction_id';
 
 const currentURL = window.location.href;
 
-if (
-    specificPageURLs.some(
-        url =>
-      currentURL.toLowerCase().endsWith(url.toLowerCase()) ||
-      currentURL.toLowerCase().endsWith(`${url.toLowerCase()}?`) ||
-      currentURL.includes(parameterName.toLowerCase())) )
+if  ( specificPageURLs.some(url =>
+      currentURL.endsWith(url.toLowerCase()) ||
+      currentURL.endsWith(`${url.toLowerCase()}?`) ||
+      currentURL.includes(specificPageURLs)) 
+    )
     {
 
     // Add phone code library

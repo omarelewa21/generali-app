@@ -438,7 +438,7 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Store the updated array back into the session
-            return redirect()->route($dataUrl,$transactionData);
+            return redirect()->route($dataUrl,$transactionData)->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1107,7 +1107,7 @@ class FormController extends Controller {
                     'regex:/^(19\d{2}|20\d{2})$/',
                     function ($attribute, $value, $fail) use ($request) {
                         $dob = $request->session()->get('customer_details.identity_details.dob', []);
-                        $dobYear = substr($dob, -4);
+                        $dobYear = substr($dob, 0,4);
                         $currentYear = date('Y');
                         $customerAge = $currentYear - $dobYear;
                         $maturityYear = 100 - $customerAge;
