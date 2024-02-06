@@ -38,19 +38,19 @@
             </a>
             <a class="nav-item text-decoration-none text-dark" href="{{route('savings.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'savings' ? 'active' : '' }}" data-folder-name="savings">
-                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'savings' ? 'text-primary' : '' }}">Savings</p>
+                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'savings' ? 'text-primary' : '' }}">Regular Savings</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{route('investment.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'investment' ? 'active' : '' }}" data-folder-name="investment">
-                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'investment' ? 'text-primary' : '' }}">Investments</p>
+                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'investment' ? 'text-primary' : '' }}">Lump Sum Investment</p>
                 </div>
             </a>
 
             <a class="nav-item text-decoration-none text-dark" href="{{route('health.medical.home') }}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'health' ? 'active' : '' }}" data-folder-name="health and medical">
-                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'health' ? 'text-primary' : '' }}">Health and Medical</p>
+                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'health' ? 'text-primary' : '' }}">Health & Medical</p>
                 </div>
             </a>
 

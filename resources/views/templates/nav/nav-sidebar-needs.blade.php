@@ -21,13 +21,13 @@
                     // Extract the folder name from the route name (assuming folder names are
                     //separated by '.')
                     $folderName = explode('.', $routeName)[0];
-
+    
                     // Get all routes matching the current folder name (prefix)
                     $folderRoutes = collect(Route::getRoutes()->getRoutesByName())
                     ->filter(function ($value, $key) use ($folderName) {
                     return $key === $folderName || strpos($key, $folderName . '.') === 0;
                     });
-
+                    
                     $routeKeys = $folderRoutes->keys()->all();
                     // Get the current route index (page number)
                     $currentPage = array_search($routeName, $routeKeys);
@@ -47,7 +47,7 @@
                     } 
                     
                     @endphp 
-                    {{ ucfirst($folderName) }}
+                    {{ ($folderName == 'savings') ? 'Regular Savings' : (($folderName == 'investment') ? 'Lump Sum Investment' : (($folderName == 'health') ? 'Health & Medical' : (($folderName == 'debt') ? 'Debt Cancellation' : ucfirst($folderName)))) }}
                     <!-- Display the folder name with the first letter in uppercase -->
                 </p>
             </a>

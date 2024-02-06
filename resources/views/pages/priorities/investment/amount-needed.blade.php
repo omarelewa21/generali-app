@@ -33,7 +33,7 @@
                         <h1 id="TotalInvestmentFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ number_format(floatval($totalInvestmentNeeded))}}</h1>
                     </div>
                     <div class="col-6 m-auto">
-                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Investment Fund Needed</p>
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Lump Sum Investment Fund Needed</p>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$investmentFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h1 id="TotalInvestmentFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ number_format(floatval($totalInvestmentNeeded))}}</h1>
-                                <p class="text-white display-6 lh-base text-center">Total Investment Fund Needed</p>
+                                <p class="text-white display-6 lh-base text-center">Total Lump Sum Investment Fund Needed</p>
                             </div>
                         </div>
                     </div>

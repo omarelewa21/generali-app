@@ -88,8 +88,10 @@ $(document).ready(function() {
             $(".ideal .bottom-content").css("padding-top" , 0);
             $(".ideal .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             // $("#medical-hospital-selection .bottom-content").css("padding-top" , 0);
+            $("#monthly_goals .bottom-content .last-content").css("padding-bottom" , footerHeight + "px");
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
+            $(".summary-overview .bottom-content .tertiary-mobile-bg").css("padding-top" ,"20px");
             if(windowWidth < 385) {
                 $("#education_coverage .bottom-content").css("padding-top" , "42px");
             } 
@@ -123,6 +125,8 @@ $(document).ready(function() {
             $(".coverage .content-needs-grey .heading").css("padding-top" , 0);
             $(".coverage .content-needs-grey .bottom-content").css("padding-top" , 0);
             $(".ideal .content-needs-grey .top-menu").css("padding-top" , 0);
+            $(".summary-overview .bottom-content .tertiary-mobile-bg").css("padding-top" , 0);
+            $("#monthly_goals .bottom-content .last-content").css("padding-bottom" , 0);
         }
     }
     setResponsiveCalcuator();

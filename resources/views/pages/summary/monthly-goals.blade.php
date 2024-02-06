@@ -22,33 +22,39 @@
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu')</div></div>
             <form novalidate action="{{route('validate.summary.monthly.goals')}}" method="POST" class="content-needs-grey">
                 @csrf
+                <section class="top-menu"></section>
                 <section class="heading"></section>
-                <section class="bottom-content z-1 d-flex justify-content-center align-items-center">
-                    <div class="container">
-                        <div class="row justify-content-center align-items-center mb-xl-5 pb-xl-5">
-                            <div class="col-md-4 d-flex justify-content-end">
+                <section class="bottom-content z-1 d-flex justify-content-center align-items-center pt-0 m-auto h-100">
+                    <div class="container h-100">
+                        <div class="row justify-content-center align-items-center position-relative h-100">
+                            <div class="col-md-3 col-xl-4 d-flex justify-content-end col-12 pt-3">
                                 <div class="col-xxl-6">
                                     <h2 class="display-5 fw-bold text-end lh-base">I’m willing to set aside</h2>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <!-- Just keep this empty -->
+                            <div class="col-md-6 col-xl-4 col-12 h-100 h-sm-auto">
+                                <div class="row justify-content-center position-relative h-100 h-sm-auto">
+                                    <img src="{{ asset('images/summary/tabung.png') }}" height="auto" width="90%" alt="Monthly Goals" class="m-auto mh-100">
+                                    <div class="col-12 position-absolute center px-5">
+                                        <p class="display-3 currencyField d-flex justify-content-center">
+                                            <span class="text-black fw-bold border-bottom border-dark border-3">RM<input type="text" name="financial_statement_monthly_support" class="form-control display-3 position-relative border-0 d-inline-block w-75 w-md-50 fw-bold text-primary @error('financial_statement_monthly_support') is-invalid @enderror" id="financial_statement_monthly_support" value="{{ $financialStatementMonthlySupport !== null ? number_format(floatval($financialStatementMonthlySupport)) : $financialStatementMonthlySupport }}" required></span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4 d-flex justify-content-start">
+                            <div class="col-md-3 col-xl-4 d-flex justify-content-start col-12 last-content">
                                 <div class="col-xxl-7">
                                     <h2 class="display-5 fw-bold text-start lh-base">per month to fulfill my goals.</h2>
                                 </div>
                             </div>
                         </div>
                         <!-- <div class="container"> -->
-                        <div class="row justify-content-center position-relative">
-                            <div class="col-md-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -90px">
-                                <img src="{{ asset('images/summary/bank-container.png') }}" width="90%" alt="Monthly Goals">
-                                <div class="col-12 position-absolute px-5">
-                                    <p class="display-3 currencyField"><span class="text-black fw-bold border-bottom border-dark border-3">RM<input type="text" name="financial_statement_monthly_support" class="form-control display-3 position-relative border-0 d-inline-block w-50 fw-bold text-primary @error('financial_statement_monthly_support') is-invalid @enderror" id="financial_statement_monthly_support" value="{{ $financialStatementMonthlySupport !== null ? number_format(floatval($financialStatementMonthlySupport)) : $financialStatementMonthlySupport }}" required></span></p>
-                                </div>
+                        <!-- <div class="row justify-content-center position-relative">
+                            <div class="col-md-6 col-xl-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -90px">
+                                <img src="{{ asset('images/summary/bank-container.png') }}" width="90%" alt="Monthly Goals" class="d-md-block d-none">
+                                
                             </div>
-                        </div>
+                        </div> -->
                         <!-- </div> -->
                     </div>
                 </section>

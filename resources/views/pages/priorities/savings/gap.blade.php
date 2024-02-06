@@ -32,7 +32,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-4 text-center">Total Savings Fund</h2>
+                                <h2 class="display-4 text-center">Total Regular Savings Fund</h2>
                             </div>
                         </div>
                     </div>
