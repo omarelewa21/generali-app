@@ -197,8 +197,8 @@ Route::post('/financial-statement/expected-income', [SummaryController::class, '
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::post('/financial-statement/increment-amount', [SummaryController::class, 'validateSummaryIncrementAmount'])->name('validate.summary.increment.amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
-Route::view('/overview-new', 'pages.summary.overview')->name('overview');
-Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview', 'pages.summary.overview')->name('overview');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

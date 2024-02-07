@@ -17,7 +17,7 @@
     $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
     $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
     $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
-    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.goals_amount');
     $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_7.advance_details.relationship');
 @endphp

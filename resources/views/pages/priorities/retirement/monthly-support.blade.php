@@ -19,7 +19,7 @@
     $retirementAnnual = session('customer_details.selected_needs.need_2.advance_details.covered_amount');
     $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
     $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
-    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.goals_amount', '0');
     $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
 
     $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');

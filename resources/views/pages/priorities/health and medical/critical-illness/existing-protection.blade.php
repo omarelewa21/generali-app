@@ -10,7 +10,7 @@
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $existingProtection = session('customer_details.selected_needs.need_6.advance_details.critical_illness.existing_protection');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount');
-    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.total_health_medical_needed');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.goals_amount');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.insurance_amount');
     $criticalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount');

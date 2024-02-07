@@ -177,7 +177,7 @@ class EducationController extends Controller
         $advanceDetails = array_merge($advanceDetails, [
             'covered_amount' => $tertiary_education_amount,
             'remaining_years' => $tertiary_education_years,
-            'total_education_needed' => $totalEducationFund
+            'goals_amount' => $totalEducationFund
         ]);
 
         // Set the updated education back to the customer_details session

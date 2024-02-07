@@ -163,7 +163,7 @@ class HealthMedicalController extends Controller
                 'spouse_dob' => '',
                 'covered_amount' => '',
                 'year' => '',
-                'total_health_medical_needed' => '',
+                'goals_amount' => '',
                 'existing_protection' => '',
                 'existing_amount' => '',
                 'insurance_amount' => '',
@@ -181,7 +181,7 @@ class HealthMedicalController extends Controller
                 'room_option' => '',
                 'covered_amount' => '',
                 'year' => '',
-                'total_health_medical_needed' => '',
+                'goals_amount' => '',
                 'existing_protection' => '',
                 'existing_amount' => '',
                 'insurance_amount' => '',
@@ -345,12 +345,12 @@ class HealthMedicalController extends Controller
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $criticalIllness = array_merge($criticalIllness, [
-                'total_health_medical_needed' => $totalHealthMedicalNeeded
+                'goals_amount' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $criticalIllness = array_merge($criticalIllness, [
-                'total_health_medical_needed' => $healthMedicalTotalFund
+                'goals_amount' => $healthMedicalTotalFund
             ]);
         }
 
@@ -418,10 +418,10 @@ class HealthMedicalController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $critical_existing_protection = $request->input('critical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['goals_amount'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
@@ -766,12 +766,12 @@ class HealthMedicalController extends Controller
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $medicalPlanning = array_merge($medicalPlanning, [
-                'total_health_medical_needed' => $totalHealthMedicalNeeded
+                'goals_amount' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $medicalPlanning = array_merge($medicalPlanning, [
-                'total_health_medical_needed' => $healthMedicalTotalFund
+                'goals_amount' => $healthMedicalTotalFund
             ]);
         }
 
@@ -839,10 +839,10 @@ class HealthMedicalController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $medical_existing_protection = $request->input('medical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['goals_amount'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['health_care']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [

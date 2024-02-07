@@ -150,7 +150,7 @@ class DebtCancellationController extends Controller
         $advanceDetails = array_merge($advanceDetails, [
             'covered_amount' => $debt_outstanding_loan,
             'remaining_years' => $debt_settlement_years,
-            'total_debt_cancellation_fund' => $totalDebtFund
+            'goals_amount' => $totalDebtFund
         ]);
 
         // Set the updated debt-cancellation_needs back to the customer_details session
@@ -220,11 +220,11 @@ class DebtCancellationController extends Controller
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
         if ($existing_debt_amount === '' || $existing_debt_amount === null){
-            $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_7']['advance_details']['total_debt_cancellation_fund'] - 0);
-            $newPercentage = floatval(0 / $customerDetails['selected_needs']['need_7']['advance_details']['total_debt_cancellation_fund'] * 100);
+            $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_7']['advance_details']['goals_amount'] - 0);
+            $newPercentage = floatval(0 / $customerDetails['selected_needs']['need_7']['advance_details']['goals_amount'] * 100);
         } else {
-            $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_7']['advance_details']['total_debt_cancellation_fund'] - $existing_debt_amount);
-            $newPercentage = floatval($existing_debt_amount / $customerDetails['selected_needs']['need_7']['advance_details']['total_debt_cancellation_fund'] * 100);
+            $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_7']['advance_details']['goals_amount'] - $existing_debt_amount);
+            $newPercentage = floatval($existing_debt_amount / $customerDetails['selected_needs']['need_7']['advance_details']['goals_amount'] * 100);
         }
 
         // Update specific keys with new values

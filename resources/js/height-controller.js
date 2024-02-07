@@ -92,6 +92,7 @@ $(document).ready(function() {
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
             $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
             $(".summary-overview .bottom-content .tertiary-mobile-bg").css("padding-top" ,"20px");
+            $("#overview .table-wrapper").css("padding-bottom" , footerHeight-50 + "px");
             if(windowWidth < 385) {
                 $("#education_coverage .bottom-content").css("padding-top" , "42px");
             } 

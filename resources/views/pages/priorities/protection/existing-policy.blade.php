@@ -17,7 +17,7 @@
     $protectionPriority = session('customer_details.priorities.protection_discuss');
     $existingPolicy = session('customer_details.selected_needs.need_1.advance_details.existing_policy');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
-    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed');
+    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.goals_amount');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_1.advance_details.insurance_amount');
     $protectionMonthlySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount_monthly');

@@ -18,7 +18,7 @@
 
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
     $investmentSupportingYears = session('customer_details.selected_needs.need_5.advance_details.supporting_years');
-    $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.total_investment_needed', '0');
+    $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.goals_amount', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_5.advance_details.relationship');
 @endphp

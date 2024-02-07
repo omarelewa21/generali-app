@@ -163,12 +163,12 @@ class ProtectionController extends Controller
         if ($totalProtectionFund === $protectionTotalFund){
 
             $advanceDetails = array_merge($advanceDetails, [
-                'total_protection_needed' => $totalProtectionFund
+                'goals_amount' => $totalProtectionFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_protection_needed' => $protectionTotalFund
+                'goals_amount' => $protectionTotalFund
             ]);
         }
 

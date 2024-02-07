@@ -11,7 +11,7 @@
     $health_medical = session('customer_details.selected_needs.need_6.advance_details.health_care');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
     $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
-    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.total_health_medical_needed');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.goals_amount');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
 @endphp

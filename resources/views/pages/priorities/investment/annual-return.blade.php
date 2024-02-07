@@ -16,7 +16,7 @@
 
     $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns','5');
     $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
-    $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.total_investment_needed', '0');
+    $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.goals_amount', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
     $investmentSupportingYears = session('customer_details.selected_needs.need_5.advance_details.supporting_years');

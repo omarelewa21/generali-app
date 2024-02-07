@@ -14,7 +14,7 @@
     $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
     $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
     $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
-    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.goals_amount');
     $criticalIllnessCoverage = session('customer_details.selected_needs.need_7.advance_details.critical_illness');
     $coverageAmount = session('customer_details.selected_needs.need_7.advance_details.critical_illness_amount');
 @endphp

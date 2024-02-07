@@ -19,7 +19,7 @@
     $protectionAnnuallySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
     $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
-    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed', '0');
+    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.goals_amount', '0');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
 @endphp

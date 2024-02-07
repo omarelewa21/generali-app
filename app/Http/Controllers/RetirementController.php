@@ -239,12 +239,12 @@ class RetirementController extends Controller
 
         if ($totalRetirementFund === $retirementTotalFund){
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $totalRetirementFund
+                'goals_amount' => $totalRetirementFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $retirementTotalFund
+                'goals_amount' => $retirementTotalFund
             ]);
         }
 
@@ -313,12 +313,12 @@ class RetirementController extends Controller
         if ($totalRetirementFund === $retirementTotalFund){
 
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $totalRetirementFund
+                'goals_amount' => $totalRetirementFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $retirementTotalFund
+                'goals_amount' => $retirementTotalFund
             ]);
         }
 

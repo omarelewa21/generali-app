@@ -206,12 +206,12 @@ class InvestmentController extends Controller
 
         if ($totalInvestmentNeeded === $investmentTotalFund){
             $advanceDetails = array_merge($advanceDetails, [
-                'total_investment_needed' => $totalInvestmentNeeded
+                'goals_amount' => $totalInvestmentNeeded
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_investment_needed' => $investmentTotalFund
+                'goals_amount' => $investmentTotalFund
             ]);
         }
 
@@ -255,9 +255,9 @@ class InvestmentController extends Controller
         // Validation passed, perform any necessary processing.
         $investment_pa = $request->input('investment_pa');
         $totalAnnualReturn = $request->input('total_annualReturn');
-        $newTotalAnnualReturn = floatval($customerDetails['selected_needs']['need_5']['advance_details']['total_investment_needed'] * $investment_pa / 100);
+        $newTotalAnnualReturn = floatval($customerDetails['selected_needs']['need_5']['advance_details']['goals_amount'] * $investment_pa / 100);
         $totalPercentage = $request->input('percentage');
-        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['selected_needs']['need_5']['advance_details']['total_investment_needed'] * 100);
+        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['selected_needs']['need_5']['advance_details']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [

@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
-    $topPriorities = session('customer_details.financial_priorities');
+    $topPriorities = session('customer_details.priorities_level');
     $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
 @endphp
 
@@ -193,7 +193,7 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <a href="{{ $selectedExpectingInput === 'Yes' ? route('summary.increment-amount') : route('summary.expected-income')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                <a href="{{route('overview-new')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Next</a>
+                                <a href="{{route('overview')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Next</a>
                             </div>
                         </div>
                     </div>

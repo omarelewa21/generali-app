@@ -100,6 +100,12 @@ button.choice.default.selected img{
 .mh-55{
     max-height: 55%;
 }
+.text-grey{
+    color: #707070;
+}
+.f-family{
+    font-family: 'Helvetica Neue';
+}
 
 /* ===============================  Risk Profile =======================================*/
 .risk-header{
@@ -286,6 +292,24 @@ button.choice.default.selected img{
     font-weight: 300;
     line-height: 1.2;
 }
+/* Summary Overview Bar Chart */
+.bar_chart_wrapper{
+    width: 100%;
+    background: transparent;
+    height: 15px;
+    border-radius: 8px;
+}
+.bar_chart_value{
+    height: 15px;
+    border-radius: 8px;
+}
+#overview-table th{
+    font-weight: 400;
+}
+#overview-table tbody tr:nth-child(odd) {
+    background-color: #F3F3F3;
+}
+
 /* Coverage slider style */
 @media only screen and (min-width: 768px) and (max-width: 992px) and (orientation: portrait){
     .coverage_slick button div.justify-content-end{
@@ -458,6 +482,9 @@ button.choice.default.selected img{
     .h-sm-auto{
         height: auto !important;
     }
+    .wrapper-overview{
+        grid-template-rows: 15vh 75vh 0vh;
+    }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
     .h-sm-100{
@@ -555,6 +582,9 @@ button.choice.default.selected img{
     }
     #monthly_goals .content-needs-grey {
         grid-auto-rows: 5vh 75vh;
+    }
+    .wrapper-overview{
+        grid-template-rows: 13vh 77vh 0vh;
     }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){
