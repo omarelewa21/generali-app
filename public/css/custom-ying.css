@@ -106,6 +106,15 @@ button.choice.default.selected img{
 .f-family{
     font-family: 'Helvetica Neue';
 }
+.text-placeholder{
+    color: rgba(10, 4, 60, 0.30);
+}
+.lh-placeholder{
+    line-height: 2.2;
+}
+.border-btm{
+    border-bottom: 3px solid black;
+}
 
 /* ===============================  Risk Profile =======================================*/
 .risk-header{
