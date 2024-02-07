@@ -275,12 +275,12 @@
                     <div class="row">
                         <div class="col-12 d-flex px-4 d-none d-sm-flex">
                             <a href="#" class="btn btn-primary text-uppercase" data-bs-toggle="modal" data-bs-target="#emailSummary">Email me</a>
-                            <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary ms-auto me-md-2 text-uppercase">Back</a>
+                            <a href="{{route('summary')}}" class="btn btn-secondary ms-auto me-md-2 text-uppercase">Back</a>
                             <a href="#" class="btn btn-primary me-md-2 text-uppercase" data-bs-toggle="modal" data-bs-target="#endSession">Submit</a>
                         </div>
                         <div class="col-12 d-sm-none mb-3 px-4"><a href="#" class="btn btn-primary w-100 text-uppercase" data-bs-toggle="modal" data-bs-target="#emailSummary">Email me</a></div>
                         <div class="col-12 d-flex gap-2 d-sm-none text-end px-4">
-                            <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                            <a href="{{route('summary')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                             <a href="#" class="btn btn-primary me-md-2 text-uppercase" data-bs-toggle="modal" data-bs-target="#endSession">Submit</a>
                         </div>
                     </div>
