@@ -11,6 +11,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get('transaction_id');
+    const log = console.log.bind(document);
+
     if (debtPriority === 'false' || debtPriority === undefined || debtPriority === '' || debtPriority === null || debtPriority === false){
         var missingModal = document.getElementById('missingDebtFields');
         missingModal.classList.add('show');
@@ -35,11 +39,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             if (modalBackdrop) {
                 modalBackdrop.remove();
             }
-            window.location.href = '/financial-priorities/discuss';
+            window.location.href = '/financial-priorities/discuss?transaction_id='+paramValue;
         });
 
     } else{
-        if (path === '/debt-cancellation/coverage') {
+        if (path === '/debt-cancellation/coverage' || path === '/debt-cancellation/coverage?transaction_id='+paramValue) {
             if (selfData == null || selfData == undefined || selfData == '') {
                 var nameModal = document.getElementById('missingSelfFields');
                 nameModal.classList.add('show');
@@ -64,7 +68,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (modalBackdrop) {
                         modalBackdrop.remove();
                     }
-                    window.location.href = '/basic-details';
+                    window.location.href = '/basic-details?transaction_id='+paramValue;
                 });
 
             } else if(familyDependent){
@@ -93,7 +97,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             if (modalBackdrop) {
                                 modalBackdrop.remove();
                             }
-                            window.location.href = '/family-dependent/details';
+                            window.location.href = '/family-dependent/details?transaction_id='+paramValue;
                         });
                     }  
                 }
@@ -122,7 +126,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             if (modalBackdrop) {
                                 modalBackdrop.remove();
                             }
-                            window.location.href = '/family-dependent/details';
+                            window.location.href = '/family-dependent/details?transaction_id='+paramValue;
                         });
                     } 
                 }
@@ -289,85 +293,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-        // else if (path == '/debt-cancellation-outstanding-loan') {
-        //     // Get the input value
-        //     var outstandingLoan = document.getElementById("debt_outstanding_loan");
-        //     var totalDebtNeeded = document.getElementById("total_debtFund");
-        //     var totalDebtFund = document.getElementById("TotalDebtCancellationFund");
-    
-        //     outstandingLoan.addEventListener("input", function() {
-    
-        //         // Retrieve the current input value
-        //         var outstandingLoanValue = outstandingLoan.value;
-    
-        //         // Remove non-digit characters
-        //         const cleanedValue = parseFloat(outstandingLoanValue.replace(/\D/g, ''));
-    
-        //         // Attempt to parse the cleaned value as a float
-        //         const parsedValue = parseFloat(cleanedValue);
-    
-        //         // Check if the parsed value is a valid number
-        //         if (!isNaN(parsedValue)) {
-        //         // If it's a valid number, format it with commas
-        //             const formattedValue = parsedValue.toLocaleString('en-MY');
-        //             this.value = formattedValue;
-        //             // Display the result
-        //             totalDebtFund.innerText = "RM" + formattedValue;
-        //         } else {
-        //         // If it's not a valid number, display the cleaned value as is
-        //             this.value = outstandingLoanValue;
-        //             totalDebtFund.innerText = "RM 0";
-        //         }
-    
-        //         // Set the value of the hidden input field
-        //         totalDebtNeeded.value = parsedValue;
-        //     });
-    
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         outstandingLoan.addEventListener("blur", function() {
-        //             validateNumberField(outstandingLoan);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         var value = field.value.replace(/,/g, ''); // Remove commas
-        //         var numericValue = parseFloat(value);
-    
-        //         if (isNaN(numericValue)) {
-        //             field.classList.add("is-invalid");
-    
-        //         } else {
-        //             field.classList.remove("is-invalid");
-        //         }
-        //     }
-        // }
-        // else if (path == '/debt-cancellation-settlement-years') {
-    
-        //     // Get the input value
-        //     var debtSettlementYears = document.getElementById("debt_settlement_years");
-        
-        //     document.addEventListener("DOMContentLoaded", function() {
-        //         debtSettlementYears.addEventListener("blur", function() {
-        //             validateNumberField(debtSettlementYears);
-        //         });
-        //     });
-    
-        //     function validateNumberField(field) {
-        //         const value = field.value.trim();
-    
-        //         if (value === "" || isNaN(value)) {
-        //             field.classList.add("is-invalid");
-        //         } else {
-        //             var Year = parseInt(value);
-        //             if(Year > 99 || Year < 1){
-        //                 field.classList.add("is-invalid");
-        //             }
-        //             else{
-        //                 field.classList.remove("is-invalid");
-        //             }
-        //         }
-        //     }
-        // }
+       
+      
         if (path == '/debt-cancellation/existing-debt') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
