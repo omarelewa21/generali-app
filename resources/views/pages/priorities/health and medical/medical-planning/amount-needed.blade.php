@@ -14,7 +14,6 @@
     // Retrieving values from the session
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $medicalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.covered_amount');
-    $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
     $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.goals_amount', '0');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
@@ -78,8 +77,7 @@
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="medical_amount_needed" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('medical_amount_needed') is-invalid @enderror" id="medical_amount_needed" value="{{ $medicalAmountNeeded === null || $medicalAmountNeeded === '' ? $medicalAmountNeeded : number_format(floatval($medicalAmountNeeded)) }}" required></span>
                                     to cover any hospital bills.
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="medical_year" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('medical_year') is-invalid @enderror" id="medical_year" value="{{$medicalYear}}" required></span>
-                                    years</p>
+                                    </p>
                                     <input type="hidden" name="total_healthMedicalNeeded" id="total_healthMedicalNeeded" value="{{$totalHealthMedicalNeeded}}">
                                 </div>
                             </div>
@@ -148,7 +146,7 @@
 </div>
 <script>
     var amountNeeded = document.getElementById("medical_amount_needed");
-    var supportingYears = document.getElementById("medical_year");
+    var supportingYears = '1';
     var healthPriority = '{{$healthPriority}}';
     var lastPageInput = '{{$selectedRoom}}';
 </script>

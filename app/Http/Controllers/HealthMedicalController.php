@@ -720,14 +720,9 @@ class HealthMedicalController extends Controller
         $customMessages = [
             'medical_amount_needed.required' => 'You are required to enter an amount.',
             'medical_amount_needed.regex' => 'You must enter number',
-            'medical_year.required' => 'You are required to enter a year.',
-            'medical_year.integer' => 'The year must be a number.',
-            'medical_year.min' => 'The year must be at least :min.',
-            'medical_year.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'medical_year' => 'required|integer|min:1|max:99',
             'medical_amount_needed' => [
                 'required',
                 'regex:/^[0-9,]+$/',
@@ -753,14 +748,12 @@ class HealthMedicalController extends Controller
 
         // Validation passed, perform any necessary processing.
         $medical_amount_needed = str_replace(',','',$request->input('medical_amount_needed'));
-        $supportingYears = $request->input('medical_year');
         $healthMedicalTotalFund = floatval($medical_amount_needed * $supportingYears);
         $totalHealthMedicalNeeded = floatval($request->input('total_healthMedicalNeeded'));
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
             'covered_amount' => $medical_amount_needed,
-            'year' => $supportingYears
         ]);
 
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
