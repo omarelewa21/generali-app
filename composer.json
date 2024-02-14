@@ -20,7 +20,7 @@
         "phpoffice/phpspreadsheet": "^1.29",
         "socialiteproviders/salesforce": "^4.1",
         "victorybiz/laravel-tel-input": "^1.5",
-        "yajra/laravel-datatables": "^10.1"
+        "yajra/laravel-datatables": "^10.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
