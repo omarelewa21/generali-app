@@ -29,6 +29,7 @@ use App\Http\Controllers\TransactionController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
+Route::get('/welcome-new', [FormController::class, 'createNewForm'])->name('welcome-new');
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
@@ -46,7 +47,7 @@ Route::get('/family-dependent/details', [DropdownController::class, 'familyDepen
 Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
-Route::view('/avatar', 'pages.avatar.gender')->name('avatar.gender.selection');
+Route::view('/avatar', 'pages.avatar.gender')->name('avatar');
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
 Route::post('/identity-details', [FormController::class, 'submitIdentity'])->name('form.submit.identity');
 Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('changeImage');
@@ -212,13 +213,11 @@ Route::view('/agent/logs', 'pages.dashboard.logs')->name('logs');
 Route::get('/agent', [AgentController::class,'index'])->name('agent.index');
 Route::get('/agent/logs', [TransactionController::class,'index'])->name('transaction.index');
 Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete');
-
 // Route::get('/agent/logs', function () {
 //     return view('pages.dashboard.logs');
 // });
 
-//Create New Transaction Form, always create a new session id 
-Route::get('/', [FormController::class, 'createNewForm'])->name('welcome');
-
 // Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
 // Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');
+
+Route::get('/send_fes','App\Http\Controllers\FesController@sendFes')->name('send_fes');

@@ -4,8 +4,11 @@ const specificPageURLs = [
 
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get('transaction_id');
+
     if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
         var nameModal = document.getElementById('missingLastPageInputFields');
         nameModal.classList.add('show');
@@ -30,7 +33,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (modalBackdrop) {
                 modalBackdrop.remove();
             }
-            window.location.href = '/financial-priorities';
+            window.location.href = '/financial-priorities?transaction_id='+paramValue;
         });
     } else {
         // Sent checkbox value to controller

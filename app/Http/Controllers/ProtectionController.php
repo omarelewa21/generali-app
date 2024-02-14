@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage; 
+use App\Services\TransactionService;
 
 class ProtectionController extends Controller
 {
-    public function validateProtectionCoverageSelection(Request $request)
+    public function validateProtectionCoverageSelection(Request $request,TransactionService $transactionService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -87,25 +88,15 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-        
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
+
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.amount.needed');
+        return redirect()->route('protection.amount.needed',$transactionData);
     }
 
-    public function validateProtectionAmountNeeded(Request $request)
+    public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)
     {
         $customMessages = [
             'protection_monthly_support.required' => 'You are required to enter an amount.',
@@ -177,24 +168,14 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
+
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
-        
-        return redirect()->route('protection.existing.policy');
+        return redirect()->route('protection.existing.policy',$transactionData);
     }
     
-    public function validateProtectionExistingPolicy(Request $request){
+    public function validateProtectionExistingPolicy(Request $request, TransactionService $transactionService){
 
         $customMessages = [
             'protection_existing_policy.required' => 'Please select an option.',
@@ -283,25 +264,15 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.gap');
+        return redirect()->route('protection.gap',$transactionData);
     }
 
-    public function submitProtectionGap(Request $request){
+    public function submitProtectionGap(Request $request, TransactionService $transactionService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -314,35 +285,25 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['retirement_discuss']) && ($customerDetails['priorities']['retirement_discuss'] === 'true' || $customerDetails['priorities']['retirement_discuss'] === true)) {
-            return redirect()->route('retirement.home');
+            return redirect()->route('retirement.home',$transactionData);
         } else if (isset($customerDetails['priorities']['education_discuss']) && ($customerDetails['priorities']['education_discuss'] === 'true' || $customerDetails['priorities']['education_discuss'] === true)) {
-            return redirect()->route('education.home');
+            return redirect()->route('education.home',$transactionData);
         } else if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home');
+            return redirect()->route('savings.home',$transactionData);
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home');
+            return redirect()->route('investment.home',$transactionData);
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home');
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home');
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy');
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

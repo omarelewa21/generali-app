@@ -11,6 +11,10 @@
 @endsection
 
 @section('content')
+@php
+    // Retrieving values from the session
+    $transactionId ??= request()->input('transaction_id');
+@endphp
 
 <div id="pdpa">
     <div class="container-fluid">
@@ -43,7 +47,7 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
-                                <a id="acceptButton" href="{{ route('basic.details') }}" class="btn btn-primary flex-fill">ACCEPT</a>
+                                <a id="acceptButton" href="{{ route('basic.details',['transaction_id' => $transactionId]) }}" class="btn btn-primary flex-fill">ACCEPT</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function pdpa(decision, route) {
         $.ajax({
             type: "POST",
-            url: "{{ route('pdpa.disclosure') }}",
+            url: "{{ route('pdpa.disclosure',['transaction_id' => $transactionId]) }}",
             data: { decision: decision, route: route },
             headers: {
                 'X-CSRF-TOKEN': csrfToken

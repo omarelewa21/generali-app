@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\SessionStorage; 
+use App\Models\SessionStorage;
+use App\Services\TransactionService; 
 
 class InvestmentController extends Controller
 {
@@ -59,7 +60,7 @@ class InvestmentController extends Controller
     //     return $need_sequence;
     // }
 
-    public function validateInvestmentCoverageSelection(Request $request)
+    public function validateInvestmentCoverageSelection(Request $request, TransactionService $transactionService)
     {
 
         // Define custom validation rule for button selection
@@ -133,24 +134,14 @@ class InvestmentController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('investment.amount.needed');
+        return redirect()->route('investment.amount.needed',$transactionData);
     }
 
-    public function validateInvestmentAmountNeeded(Request $request){
+    public function validateInvestmentAmountNeeded(Request $request,TransactionService $transactionService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -220,13 +211,15 @@ class InvestmentController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
+
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('investment.annual.return');
+        return redirect()->route('investment.annual.return',$transactionData);
     }
 
-    public function validateInvestmentAnnualReturn(Request $request){
+    public function validateInvestmentAnnualReturn(Request $request, TransactionService $transactionService){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
@@ -298,24 +291,14 @@ class InvestmentController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-        
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        return redirect()->route('investment.risk.profile');
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+
+        return redirect()->route('investment.risk.profile',$transactionData);
     }
 
-    public function validateInvestmentRiskProfile(Request $request){
+    public function validateInvestmentRiskProfile(Request $request, TransactionService $transactionService){
 
         $customMessages = [
             'investmentRiskProfileInput.required' => 'Please select a risk level.',
@@ -354,25 +337,15 @@ class InvestmentController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
-        
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionService->handleTransaction($request,$customerDetails);
+
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.gap');
+        return redirect()->route('investment.gap',$transactionData);
     }
     
-    public function submitInvestmentGap(Request $request){
+    public function submitInvestmentGap(Request $request, TransactionService $transactionService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -385,27 +358,17 @@ class InvestmentController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        $transactionService->handleTransaction($request,$customerDetails);
 
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home');
+            return redirect()->route('health.medical.home',$transactionData);
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home');
+            return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy');
+            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

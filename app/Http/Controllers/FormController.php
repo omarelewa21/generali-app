@@ -11,6 +11,7 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
 use App\Services\TransactionService;
+use Illuminate\Support\Facades\Session;
 
 class FormController extends Controller {
     public function pdpa(Request $request,TransactionService $transactionService)
@@ -39,8 +40,9 @@ class FormController extends Controller {
             //save into session storage
             $transactionService->handleTransaction($request,$customerDetails);
 
-            Log::debug($customerDetails);
-            return response()->json(['message' => 'Button click saved successfully']);
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
+
+            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully'] + $transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -129,8 +131,8 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
-            return redirect()->route('avatar.welcome')->with($transactionData);
+            
+            return redirect()->route('avatar.welcome',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -317,15 +319,15 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
+
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.marital.status')->with($transactionData);
+            return redirect()->route('avatar.marital.status',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function handleAvatarSelection(Request $request)
+    public function handleAvatarSelection(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -430,46 +432,19 @@ class FormController extends Controller {
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionId = $request->session()->getId();
-                    $sessionStorage->session_id = $sessionId; 
-                    $fullName = $customerDetails['basic_details']['full_name'] ?? NULL;
-                    
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-                    //if session from request able to match with db then do update
-                    $dbSessionId = SessionStorage::findSessionId($sessionId)->get();
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-                    if (!empty($dbSessionId)) {
-                        SessionStorage::where('session_id',$dbSessionId[0]['session_id'])
-                        ->update(['data' => $sessionStorage->data, 
-                                  'page_route' => $sessionStorage->page_route,
-                                  'customer_name' => $fullName
-                                ]);
-                    }
-                    else
-                    {
-                        $sessionStorage->save();
-                    }               
-                 
-                });
-            } catch (\Exception $e) {
-                Log::debug($e);
-                DB::rollBack();
-            }
-            Log::debug($customerDetails);
             // Store the updated array back into the session
-            return redirect()->route($dataUrl);
+            return redirect()->route($dataUrl,$transactionData)->with($transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function familyDependentDetails(Request $request)
+    public function familyDependentDetails(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -952,28 +927,20 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
+
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.my.assets');
+            return redirect()->route('avatar.my.assets',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function topPriorities(Request $request)
+    public function topPriorities(Request $request,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1030,28 +997,19 @@ class FormController extends Controller {
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
             
-            Log::debug($customerDetails);
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss');
+            return redirect()->route('priorities.to.discuss',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function priorities(Request $request)
+    public function priorities(Request $request ,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1086,19 +1044,11 @@ class FormController extends Controller {
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
@@ -1106,7 +1056,7 @@ class FormController extends Controller {
         }
     }
 
-    public function existingPolicy(Request $request)
+    public function existingPolicy(Request $request ,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1157,7 +1107,7 @@ class FormController extends Controller {
                     'regex:/^(19\d{2}|20\d{2})$/',
                     function ($attribute, $value, $fail) use ($request) {
                         $dob = $request->session()->get('customer_details.identity_details.dob', []);
-                        $dobYear = substr($dob, -4);
+                        $dobYear = substr($dob, 0,4);
                         $currentYear = date('Y');
                         $customerAge = $currentYear - $dobYear;
                         $maturityYear = 100 - $customerAge;
@@ -1290,21 +1240,13 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            Log::debug($customerDetails);
+            
+            //save into session storage
+            $transactionService->handleTransaction($request,$customerDetails);
 
-            try {
-                DB::transaction(function () use ($request,$customerDetails) {
-                    $sessionStorage = new SessionStorage();
-                    $sessionStorage->data = json_encode($customerDetails);
-                    $route = strval(request()->path());
-                    $sessionStorage->page_route = $route;
-                    $sessionStorage->save();
-                });
-            } catch (\Exception $e) {
-                DB::rollBack();
-            }
+            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-            return redirect()->route('summary.monthly-goals');
+            return redirect()->route('summary.monthly-goals',$transactionData);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1313,6 +1255,7 @@ class FormController extends Controller {
     public function createNewForm(Request $request)
     {
         // Regenerate the session ID
+        Session::flush();
         $session = $request->session()->regenerate();
         $sessionId = $request->session()->getId();
 

@@ -39,7 +39,7 @@
                         <div class="row px-4 pt-5">
                             <div class="col-12">
                                 {{-- <a href="{{ route('forms.create', ['new' => true]) }}">Create New Form</a> --}}
-                                <a href="{{ route('welcome') }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
+                                <a href="{{ route('welcome-new') }}" class="btn btn-secondary btn-create fw-bold"><i class="fa-solid fa-plus me-3"></i> Create New Entry</a>
                             </div>
                         </div>
                         <div class="row px-4 pt-5">

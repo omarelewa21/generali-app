@@ -15,6 +15,7 @@
 @php
     // Retrieving values from the session
     $basicDetails ??= session('customer_details.basic_details');
+    $transactionId ??= request()->input('transaction_id');
 @endphp
 
 <div id="basic_details">
@@ -106,8 +107,8 @@
                         <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                    <div class="col-12 d-flex gap-2 d-md-block text-end px-4">                     
+                                        <a href="{{route('pdpa.disclosure',['transaction_id' => $transactionId])}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
