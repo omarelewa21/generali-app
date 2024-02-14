@@ -100,9 +100,9 @@ class ProtectionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        return ($formattedArray);
-        // return redirect()->route('protection.amount.needed');
+        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        // return ($formattedArray);
+        return redirect()->route('protection.amount.needed');
     }
 
     public function validateProtectionAmountNeeded(Request $request)
