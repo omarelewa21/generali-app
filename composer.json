@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
+        "league/csv": "^9.14",
         "phpoffice/phpspreadsheet": "^1.29",
         "socialiteproviders/salesforce": "^4.1",
         "victorybiz/laravel-tel-input": "^1.5",

@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('countries');
-            $table->string('phone_code');
+            $table->foreignId('customer_id')->constrained()->index();
+            $table->boolean('car')->default(false);
+            $table->boolean('bungalow')->default(false);
+            $table->boolean('house')->default(false);
+            $table->boolean('condo')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('assets');
     }
 };
