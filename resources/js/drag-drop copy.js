@@ -15,13 +15,12 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
         // Function to click to drop
         function addImageToSortable(imageName, dataAvatar) {
             // Check if dataAvatar already exists in the array
-            if (addedNeedsImages.includes(dataAvatar)) {
+            if (addedNeedsImages.includes(dataAvatar) || !dataAvatar) {
                 return; // Don't add it again
             }
 
-            var thebutton = document.querySelector(
-                "button[data-avatar=" + dataAvatar + "]"
-            );
+            var thebutton = document.querySelector("button[data-avatar='" + dataAvatar + "']");
+
             thebutton.closest(".button-bg").classList.add("selected");
             thebutton.setAttribute("disabled", "true");
 
@@ -86,7 +85,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             $(this).closest(".svg-container").addClass("blank-item").removeClass("item-dropped");
             const sortable = $(this).closest(".sortable-container");
             var dataAvatar = sortable.parent().attr("data-identifier")
-            var theButton = $(this).closest("#top_priorities").find("button[data-avatar=" + dataAvatar + "]");
+            var theButton = $(this).closest($("#topPrioritiesButtonInput").length ? "#top_priorities" : "#savings-goals").find("button[data-avatar='" + dataAvatar + "']");
             theButton.attr("disabled", false);
             theButton.closest(".button-bg").removeClass("selected");
 
@@ -122,24 +121,29 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
 
         // Function to update the hidden field
         function updateHiddenInputValue() {
-            var topPrioritiesButtonInput = document.getElementById('topPrioritiesButtonInput');
-            topPrioritiesButtonInput.value = JSON.stringify(addedNeedsImages);
-        }
+            if ($("#topPrioritiesButtonInput").length) {
+              const topPrioritiesButtonInput = document.getElementById("topPrioritiesButtonInput");
+              topPrioritiesButtonInput.value = JSON.stringify(addedNeedsImages);
+            } else {
+              const savingsGoalsButtonInput = document.getElementById("savingsGoalsButtonInput");
+              savingsGoalsButtonInput.value = JSON.stringify(addedNeedsImages);
+            }
+        }      
 
         $(window).resize(function () {
             if ($("#topPrioritiesButtonInput").val() && JSON.stringify(addedNeedsImages) != $("#topPrioritiesButtonInput").val().replaceAll(",null", "")) {
-              const data = JSON.parse($("#topPrioritiesButtonInput").val().replaceAll(",null", ""));
-              const remainingData = data.filter(item => !addedNeedsImages.includes(item));
-      
-              if (remainingData.length) {
-                for (let i = 0; i < remainingData.length; i++) {
-                  const dataAvatar = $(`button[data-avatar="${remainingData[i]}"]`);
-                  const dataName = dataAvatar.find("img").attr("src");
-      
-                  dataAvatar.trigger("click");
-                  addImageToSortable(dataName, dataAvatar.attr("data-avatar"));
+                const data = JSON.parse($("#topPrioritiesButtonInput").val().replaceAll(",null", ""));
+                const remainingData = data.filter(item => !addedNeedsImages.includes(item));
+        
+                if (remainingData.length) {
+                    for (let i = 0; i < remainingData.length; i++) {
+                        const dataAvatar = $(`button[data-avatar="${remainingData[i]}"]`);
+                        const dataName = dataAvatar.find("img").attr("src");
+            
+                        dataAvatar.trigger("click");
+                        addImageToSortable(dataName, dataAvatar.attr("data-avatar"));
+                    }
                 }
-              }
             }
         });
       
@@ -285,22 +289,24 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             dblclick = true;
         });
 
-        $("#top_priorities").droppable({
+        $("#top_priorities, #savings-goals").droppable({
             accept: "#needs button img:not(.item-dropped)",
             classes: {
-                "ui-droppable-active": "ui-state-highlight"
+              "ui-droppable-active": "ui-state-highlight"
             },
-
-            drop: function(event, ui) {
-
-                if($(this).find('.dropped').is(':empty')){
+            drop: function (event, ui) {
+              // console.log($(this).find('.dropped').is(':empty'));
+                if ($(this).find(".dropped").is(":empty")) {
                     var imageName = ui.draggable.parent().find("img").attr("src");
-                    var button = ui.draggable.parent();
+                    var button = ui.draggable.closest("button");
+        
                     var dataAvatar = button.attr("data-avatar");
+        
                     addImageToSortable(imageName, dataAvatar);
                 }
             }
         });
+      
         
         // Add click functionality to #needs button images
         $("button[data-avatar]", $needs).on("click", function (event) {

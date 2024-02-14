@@ -658,6 +658,18 @@ button[data-required="selected"] img {
   border: 10px solid #8995C8;
 }
 
+#top_priorities .button-bg:not(.selected):hover .hover img,
+#savings-goals  .button-bg:not(.selected):hover .hover img,
+#top_priorities .button-bg.selected .border-default img, 
+#savings-goals  .button-bg.selected .border-default img {
+  transform: scale(1.1);
+}
+
+#top_priorities .button-bg.selected img:not(.ui-draggable-dragging),
+#savings-goals .button-bg.selected img:not(.ui-draggable-dragging)  {
+  filter: grayscale(1);
+}
+
 #top_priorities .button-bg.selected .hover,
 #top_priorities .button-bg.selected .border-default{
   border: 10px solid transparent;
