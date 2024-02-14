@@ -27,8 +27,17 @@ if (specificPageURLs.some(url =>
             var birthcertgroup = document.getElementById('birthcertgroup');
             var policegroup = document.getElementById('policegroup');
             var registrationgroup = document.getElementById('registrationgroup');
+            const countrySelect = document.getElementById('countrySelect');
 
             var selectedOption;
+
+            // First check what country is selected
+            countrySelect.addEventListener('change', function() {
+                if (this.value === 'Malaysia') {
+                    idTypeSelect.value = 'New IC';
+                    showSelectedGroup(idTypeSelect.value);
+                }
+            });
 
             idTypeSelect.addEventListener('change', function() {
                 selectedOption = this.value;
@@ -606,7 +615,7 @@ if (specificPageURLs.some(url =>
                         }
                     }
                 }
-                if ((dependent['spouse'] === false && dependent['children'] == false) && dependent['parents'] === undefined && dependent['siblings'] === undefined) {
+                if ((dependent['spouse'] === false && dependent['children'] == false && dependent['parents'] == false)) {
                     missingPages();
                 }
             }

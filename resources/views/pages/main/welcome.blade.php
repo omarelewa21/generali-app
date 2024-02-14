@@ -13,7 +13,9 @@
 @section('content')
 
 <div id="home" class="wrapper-home">
-    <div class="header-home">@include('templates.nav.nav-red')</div>
+    <div class="header-home">
+        @include('templates.nav.nav-red')
+    </div>
     <section class="content-home">
         <div class="container px-5">
             <div class="row">

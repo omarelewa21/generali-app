@@ -319,7 +319,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status',$transactionData);
         } else {
@@ -357,7 +357,7 @@ class FormController extends Controller {
 
                 if ((isset($decodedValue['spouse']) && $decodedValue['spouse'] === true) || (isset($decodedValue['children']) && $decodedValue['children'] === true) || (isset($decodedValue['parents']) && $decodedValue['parents'] === true) || (isset($decodedValue['siblings']) && $decodedValue['siblings'] === true)) {
                     return true;
-                }
+                }                
 
                 // If any of the conditions are not met, add a different error message
                 $customMessage = "Please select at least one.";
@@ -370,9 +370,9 @@ class FormController extends Controller {
                 'maritalStatusButtonInput' => [
                     'at_least_one_selected',
                 ],
-                'familyDependentButtonInput' => [
-                    'at_least_one_selected_family',
-                ],
+                // 'familyDependentButtonInput' => [
+                //     'at_least_one_selected_family',
+                // ],
             ]);
 
             if ($validator->fails()) {
@@ -436,7 +436,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             // Store the updated array back into the session
             return redirect()->route($dataUrl,$transactionData)->with($transactionData);
         } else {

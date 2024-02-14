@@ -92,7 +92,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')
