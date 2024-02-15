@@ -33,10 +33,7 @@ Route::get('/welcome-new', [FormController::class, 'createNewForm'])->name('welc
 Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclosure');
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
-
 Route::get('/basic-details/{transaction_id?}', [DropdownController::class, 'titles'])->name('restore.basic.details');
-
-
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 
 /* Avatar pages */
