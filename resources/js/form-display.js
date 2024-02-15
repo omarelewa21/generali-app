@@ -8,11 +8,7 @@ const specificPageURLs = [
 
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => 
-    currentURL.endsWith(url.toLowerCase()) ||
-    currentURL.endsWith(`${url.toLowerCase()}?`) ||
-    currentURL.includes(url.toLowerCase()))
-) {
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -27,17 +23,8 @@ if (specificPageURLs.some(url =>
             var birthcertgroup = document.getElementById('birthcertgroup');
             var policegroup = document.getElementById('policegroup');
             var registrationgroup = document.getElementById('registrationgroup');
-            const countrySelect = document.getElementById('countrySelect');
 
             var selectedOption;
-
-            // First check what country is selected
-            countrySelect.addEventListener('change', function() {
-                if (this.value === 'Malaysia') {
-                    idTypeSelect.value = 'New IC';
-                    showSelectedGroup(idTypeSelect.value);
-                }
-            });
 
             idTypeSelect.addEventListener('change', function() {
                 selectedOption = this.value;
@@ -615,7 +602,7 @@ if (specificPageURLs.some(url =>
                         }
                     }
                 }
-                if ((dependent['spouse'] === false && dependent['children'] == false && dependent['parents'] == false)) {
+                if ((dependent['spouse'] === false || dependent['spouse'] === undefined) && (dependent['children'] == undefined || dependent['children'] == false) && (dependent['parents'] === undefined || dependent['parents'] === false) && (dependent['siblings'] === false || dependent['siblings'] === undefined)) {
                     missingPages();
                 }
             }
