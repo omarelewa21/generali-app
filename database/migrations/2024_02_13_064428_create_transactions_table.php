@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('agent_id')->constrained();
             $table->string('pdpa')->nullable();
+            $table->string('status')->default('draft');
+            $table->string('page_route')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -24,6 +24,8 @@
     $childKeys = is_array($childrenData) ? array_keys($childrenData) : [];
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
+
+    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_family_dependent_details">
@@ -41,7 +43,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependent.details') }}" method="POST" id="familyDetailsForm">
+                    <form novalidate action="{{ route('avatar.family.dependent.details',['transaction_id' => $transactionId]) }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">

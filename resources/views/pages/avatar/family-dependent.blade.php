@@ -16,7 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $familyDependent = session('customer_details.family_details');
-    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_family_dependent">

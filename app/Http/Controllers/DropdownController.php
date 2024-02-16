@@ -9,9 +9,11 @@ use App\Models\idtype;
 use App\Models\educationLevel;
 use App\Models\maritalStatus;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
 use App\Models\SessionStorage;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 class DropdownController extends Controller
 {
@@ -19,12 +21,18 @@ class DropdownController extends Controller
     {
         $countries = Country::all();
         $titles = Title::all();
-        $basicDetails = optional(SessionStorage::where('transaction_id',$request->input('transaction_id')))->value('data');
 
-        if($basicDetails){
-            $basicDetails = $basicDetails['basic_details'] ?? '';
+        $basicDetails = optional(Transaction::with('customer')->where('id',$request->input('transaction_id'))->first())->customer;
+
+        if($basicDetails)
+        {
+            return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
         }
-        return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
+        else
+        {
+            // if transaction not found, back to agent page
+            return view('pages/main/basic-details', compact('titles','countries'));
+        }
     }
 
     public function identityDetails(Request $request)

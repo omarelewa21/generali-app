@@ -13,7 +13,7 @@
 @section('content')
 @php
     // Retrieving values from the session
-    $transactionId ??= request()->input('transaction_id');
+    $transactionId = !empty(request()->input('transaction_id')) ? request()->input('transaction_id') : session('customer_details.transaction_id');
 @endphp
 
 <div id="pdpa">

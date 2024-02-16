@@ -18,7 +18,7 @@
     $skintone = session('customer_details.avatar.skin_tone', 'white');
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $fullName = session('customer_details.basic_details.full_name');
-    $transactionId ??= request()->input('transaction_id');
+    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_gender_selection">

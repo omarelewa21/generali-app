@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the previous page
-    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_welcome">

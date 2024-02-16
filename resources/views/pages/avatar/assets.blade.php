@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $assets = session('customer_details.assets');
+    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_my_assets">
@@ -31,7 +32,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
-                <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
+                <form action="{{ route('handle.avatar.selection',['transaction_id' => $transactionId]) }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
                             <div class="container">
@@ -132,7 +133,7 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="assetsButtonInput" id="assetsButtonInput" value="{{ json_encode($assets) }}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="top.priorities">
-                                        <a href="{{route('avatar.family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.family.dependent.details',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

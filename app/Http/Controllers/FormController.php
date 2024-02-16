@@ -12,10 +12,10 @@ use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Session;
-// use App\Services\CustomerService;
+use App\Services\CustomerService;
 
 class FormController extends Controller {
-    public function pdpa(Request $request,TransactionService $transactionService)
+    public function pdpa(Request $request)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -38,18 +38,13 @@ class FormController extends Controller {
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully'] + $transactionData);
+            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function basicDetails(Request $request,TransactionService $transactionService)
+    public function basicDetails(Request $request,CustomerService $customerService,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -80,6 +75,11 @@ class FormController extends Controller {
 
             // Parse the phone number
             $phoneNumberUtil = PhoneNumberUtil::getInstance();
+
+            $customerId = session()->get('customer_id') ?? $_GET;
+
+            dd($request->input('transaction_id'));
+
 
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
@@ -125,13 +125,16 @@ class FormController extends Controller {
                 'email' => $validatedData['email']
             ];
 
-            // Store the updated customer_details array back into the session
+            //store first data in customer table  then  proceed on transaction
+            $customerId = $customerService->handleCustomer($request,$customerDetails);
+
+            // session()->get('customer_details.basic_details.full_name');
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $transactionData = ['transaction_id' => $transactionId];
+            $customerDetails['transaction_id'] = $transactionId;
+
             $request->session()->put('customer_details', $customerDetails);
-
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
+            // $request->session()->get('customer_id',$customerId);
             
             return redirect()->route('avatar.welcome',$transactionData);
         } else {
@@ -284,6 +287,8 @@ class FormController extends Controller {
 
             // Get existing identity_details from the session
             $identityDetails = $customerDetails['identity_details'] ?? [];
+
+            $customerId = session()->get('customer_id');
 
             if ($day !== NULL && $day !== '') {
                 $dob = $year . '-' . $month . '-' . $day;

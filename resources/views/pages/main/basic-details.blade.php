@@ -15,7 +15,8 @@
 @php
     // Retrieving values from the session
     $basicDetails ??= session('customer_details.basic_details');
-    $transactionId ??= request()->input('transaction_id');
+    $transactionId = !empty(request()->input('transaction_id')) ? request()->input('transaction_id') : session('customer_details.transaction_id');
+    
 @endphp
 
 <div id="basic_details">
@@ -108,7 +109,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">                     
-                                        <a href="{{route('pdpa.disclosure',['transaction_id' => $transactionId])}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>
