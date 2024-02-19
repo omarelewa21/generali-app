@@ -1398,7 +1398,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             if (marital_status == null || marital_status == undefined || marital_status == '') {
                 window.location.href = '/marital-status';
             }
-            else if (spouse_session === false && family_details['children'] === false) {
+            else if ((family_details['spouse'] === false || family_details['spouse'] === undefined) && (family_details['children'] == undefined || family_details['children'] == false) && (family_details['parents'] === undefined || family_details['parents'] === false) && (family_details['siblings'] === false || family_details['siblings'] === undefined)) {
                 window.location.href = '/family-dependent';
             }
         });

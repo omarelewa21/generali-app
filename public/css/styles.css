@@ -1383,6 +1383,56 @@ fieldset legend {
   background-color: #fff;
 }
 
+/* ============================== Sorting ============================== */
+#savings-goals #sortable .first { 
+  grid-column: 30 / span 3; 
+  grid-row: 37 / 88; 
+  transform: translate(-7%, -19px); 
+} 
+
+#savings-goals .first .remove-button { 
+  right: -3%; 
+  bottom: 25%; 
+} 
+
+#savings-goals #sortable .second { 
+  grid-column: 28 / span 9; 
+  grid-row: 20 / 44; 
+  transform: translate(24%, -12px); 
+} 
+
+#savings-goals .second .remove-button { 
+  bottom: -20%; 
+  right: 43%; 
+} 
+
+#savings-goals #sortable .third { 
+  grid-column: 36 / span 7; 
+  grid-row: 13 / 45; 
+  transform: translate(-6%, 2px); 
+} 
+
+#savings-goals .third .remove-button { 
+  bottom: -3%; 
+  right: 49%; 
+} 
+
+#savings-goals #sortable .fourth { 
+  grid-column: 46 / span 3; 
+  grid-row: 35 / 85; 
+  transform: translate(-70%, 5px); 
+} 
+
+#savings-goals .fourth .remove-button { 
+  bottom: 30%; 
+  left: 7%; 
+  right: unset; 
+} 
+
+#savings-goals .display-5 { 
+  font-size: calc(1.3375rem + 1.05vw) !important; 
+} 
+
 /* ============================== Needs Page ============================== */
 button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
     background-image: url('/images/needs/hover-coverage.png');

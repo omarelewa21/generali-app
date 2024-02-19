@@ -697,7 +697,7 @@
     @php
         $missingPage = 'Marital Status';
     @endphp
-@elseif((isset($familyDependent['spouse']) && $familyDependent['spouse'] === false) && (isset($familyDependent['children']) && $familyDependent['children'] === false) && (isset($familyDependent['parents']) && $familyDependent['parents'] === false) && (isset($familyDependent['siblings']) && $familyDependent['siblings'] === false))
+@elseif((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
     @php
         $missingPage = 'Family Dependent';
     @endphp

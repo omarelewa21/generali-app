@@ -397,6 +397,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 event.preventDefault();
                 clearAvatar();
             });
+
+            var selectedAssets = { ...selectedAssets, ...sessionData };
+
+            for (const key in selectedAssets) {
+                if (selectedAssets.hasOwnProperty(key) && selectedAssets[key] !== true) {
+                    selectedAssets[key] = false;
+                }
+            }
         }
 
         // Do the logics for button clicks
@@ -530,6 +538,23 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     children_data: clickedAvatars.children_data
                 });
             }
+
+            // Customise the urlInput field according to selection
+            var urlInput = document.getElementById('urlInput');
+            var familyDependent = JSON.parse(familyDependentButtonInput.value);
+
+            if (familyDependent.spouse === true) {
+                urlInput.value = 'avatar.family.dependent.details';
+                
+            }
+            else {
+                if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
+                    urlInput.value = 'avatar.my.assets';
+                }
+                else {
+                    urlInput.value = 'avatar.family.dependent.details';
+                }
+            }
         });
 
         // Parents selection
@@ -617,6 +642,23 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     parents_data: clickedAvatars.parents_data
                 });
             }
+
+            // Customise the urlInput field according to selection
+            var urlInput = document.getElementById('urlInput');
+            var familyDependent = JSON.parse(familyDependentButtonInput.value);
+
+            if (familyDependent.spouse === true) {
+                urlInput.value = 'avatar.family.dependent.details';
+                
+            }
+            else {
+                if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
+                    urlInput.value = 'avatar.my.assets';
+                }
+                else {
+                    urlInput.value = 'avatar.family.dependent.details';
+                }
+            }
         });
 
         // Siblings selection
@@ -648,15 +690,32 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     siblings_data: clickedAvatars.siblings_data
                 });
             }
+
+            // Customise the urlInput field according to selection
+            var urlInput = document.getElementById('urlInput');
+            var familyDependent = JSON.parse(familyDependentButtonInput.value);
+
+            if (familyDependent.spouse === true) {
+                urlInput.value = 'avatar.family.dependent.details';
+                
+            }
+            else {
+                if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
+                    urlInput.value = 'avatar.my.assets';
+                }
+                else {
+                    urlInput.value = 'avatar.family.dependent.details';
+                }
+            }
         });
 
-        var selectedAssets = { ...selectedAssets, ...sessionData };
+        // var selectedAssets = { ...selectedAssets, ...sessionData };
 
-        for (const key in selectedAssets) {
-            if (selectedAssets.hasOwnProperty(key) && selectedAssets[key] !== true) {
-                selectedAssets[key] = false;
-            }
-        }
+        // for (const key in selectedAssets) {
+        //     if (selectedAssets.hasOwnProperty(key) && selectedAssets[key] !== true) {
+        //         selectedAssets[key] = false;
+        //     }
+        // }
 
         // Car Selection
         $("#carButton").on("click", function () {
