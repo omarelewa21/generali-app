@@ -251,29 +251,37 @@ class InvestmentController extends Controller
 
         // Get existing investments_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $investment_pa = $request->input('investment_pa');
-        $totalAnnualReturn = $request->input('total_annualReturn');
-        $newTotalAnnualReturn = floatval($customerDetails['selected_needs']['need_5']['advance_details']['goals_amount'] * $investment_pa / 100);
+        // $totalAnnualReturn = $request->input('total_annualReturn');
+        // $newTotalAnnualReturn = floatval($customerDetails['selected_needs']['need_5']['advance_details']['goals_amount'] * $investment_pa / 100);
         $totalPercentage = $request->input('percentage');
-        $newInvestmentPercentage = floatval($newTotalAnnualReturn / $customerDetails['selected_needs']['need_5']['advance_details']['goals_amount'] * 100);
+        $newInvestmentPercentage = floatval($investment_pa);
+
+        $lastPage = str_replace(url('/'), '', url()->previous());
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
             'annual_returns' => $investment_pa
         ]);
 
-        if ($newTotalAnnualReturn === $totalAnnualReturn && $newInvestmentPercentage === $totalPercentage){
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
+
+        // if ($newTotalAnnualReturn === $totalAnnualReturn && $newInvestmentPercentage === $totalPercentage){
+        if ($newInvestmentPercentage === $totalPercentage){
             if ($newInvestmentPercentage > 100){
                 $advanceDetails = array_merge($advanceDetails, [
-                    'annual_return_amount' => $totalAnnualReturn,
+                    // 'annual_return_amount' => $totalAnnualReturn,
                     'fund_percentage' => '100'
                 ]);
             }
             else{
                 $advanceDetails = array_merge($advanceDetails, [
-                    'annual_return_amount' => $totalAnnualReturn,
+                    // 'annual_return_amount' => $totalAnnualReturn,
                     'fund_percentage' => $totalPercentage
                 ]);
             }
@@ -281,13 +289,13 @@ class InvestmentController extends Controller
         else{
             if ($newInvestmentPercentage > 100){
                 $advanceDetails = array_merge($advanceDetails, [
-                    'annual_return_amount' => $newTotalAnnualReturn,
+                    // 'annual_return_amount' => $newTotalAnnualReturn,
                     'fund_percentage' => '100'
                 ]);
             }
             else{
                 $advanceDetails = array_merge($advanceDetails, [
-                    'annual_return_amount' => $newTotalAnnualReturn,
+                    // 'annual_return_amount' => $newTotalAnnualReturn,
                     'fund_percentage' => $newInvestmentPercentage
                 ]);
             }
@@ -295,6 +303,7 @@ class InvestmentController extends Controller
 
         // Set the updated investments_needs back to the customer_details session
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -311,66 +320,65 @@ class InvestmentController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
         }
-
-        return redirect()->route('investment.risk.profile');
+        return redirect()->route('risk.profile');
     }
 
-    public function validateInvestmentRiskProfile(Request $request){
+    // public function validateInvestmentRiskProfile(Request $request){
 
-        $customMessages = [
-            'investmentRiskProfileInput.required' => 'Please select a risk level.',
-            'investmentRiskProfileInput.in' => 'Invalid risk level selected.',
-            'investmentPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
-        ];
+    //     $customMessages = [
+    //         'investmentRiskProfileInput.required' => 'Please select a risk level.',
+    //         'investmentRiskProfileInput.in' => 'Invalid risk level selected.',
+    //         'investmentPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
+    //     ];
 
-        $validatedData = Validator::make($request->all(), [
-            'investmentRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-            'investmentPotentialReturnInput' => 'required_if:investmentRiskProfileInput,High Risk,Medium Risk,Low Risk',
+    //     $validatedData = Validator::make($request->all(), [
+    //         'investmentRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+    //         'investmentPotentialReturnInput' => 'required_if:investmentRiskProfileInput,High Risk,Medium Risk,Low Risk',
             
-        ], $customMessages);
+    //     ], $customMessages);
 
-        if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData)->withInput();
-        }
+    //     if ($validatedData->fails()) {
+    //         return redirect()->back()->withErrors($validatedData)->withInput();
+    //     }
 
-        // Validation passed, perform any necessary processing.
-        $investmentRiskProfileInput = $request->input('investmentRiskProfileInput');
-        $investmentPotentialReturnInput = $request->input('investmentPotentialReturnInput');
+    //     // Validation passed, perform any necessary processing.
+    //     $investmentRiskProfileInput = $request->input('investmentRiskProfileInput');
+    //     $investmentPotentialReturnInput = $request->input('investmentPotentialReturnInput');
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+    //     // Get the existing customer_details array from the session
+    //     $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing investments_needs from the session
-        $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+    //     // Get existing investments_needs from the session
+    //     $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
 
-        // Update specific keys with new values
-        $advanceDetails = array_merge($advanceDetails, [
-            'risk_profile' => $investmentRiskProfileInput,
-            'potential_return' => $investmentPotentialReturnInput
-        ]);
+    //     // Update specific keys with new values
+    //     $advanceDetails = array_merge($advanceDetails, [
+    //         'risk_profile' => $investmentRiskProfileInput,
+    //         'potential_return' => $investmentPotentialReturnInput
+    //     ]);
 
-        // Set the updated investments_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
+    //     // Set the updated investments_needs back to the customer_details session
+    //     $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
-        // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+    //     // Store the updated customer_details array back into the session
+    //     $request->session()->put('customer_details', $customerDetails);
+    //     Log::debug($customerDetails);
         
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+    //     try {
+    //         DB::transaction(function () use ($request,$customerDetails) {
+    //             $sessionStorage = new SessionStorage();
+    //             $sessionStorage->data = json_encode($customerDetails);
+    //             $route = strval(request()->path());
+    //             $sessionStorage->page_route = $route;
+    //             $sessionStorage->save();
+    //         });
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //     }
 
-        // // Process the form data and perform any necessary actions
-        return redirect()->route('investment.gap');
-    }
+    //     // // Process the form data and perform any necessary actions
+    //     return redirect()->route('investment.gap');
+    // }
     
     public function submitInvestmentGap(Request $request){
 
@@ -405,7 +413,17 @@ class InvestmentController extends Controller
             return redirect()->route('debt.cancellation.home');
         }
         else {
-            return redirect()->route('existing.policy');
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investment']) && ($customerDetails['priorities']['investment'] === 'true' || $customerDetails['priorities']['investment'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy');
+            } else{
+                return redirect()->route('summary.monthly-goals');
+            }
         }
     }
 

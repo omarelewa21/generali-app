@@ -231,6 +231,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         $customMessages = [
             'savings_monthly_payment.required' => 'You are required to enter an amount.',
@@ -276,10 +277,16 @@ class SavingsController extends Controller
         $totalPercentage = floatval($request->input('percentage'));
         $savingsTotalPercentage = floatval($savingsTotalFund / $customerDetails['selected_needs']['need_4']['advance_details']['goals_amount'] * 100);
 
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
             'covered_amount' => $savings_monthly_payment,
             'supporting_years' => $savings_goal_duration
+        ]);
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
         ]);
 
         if ($totalSavingsNeeded === $savingsTotalFund && $savingsTotalAmountNeeded === $totalAmountNeeded && $totalPercentage === $savingsTotalPercentage){
@@ -319,6 +326,7 @@ class SavingsController extends Controller
 
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -390,64 +398,64 @@ class SavingsController extends Controller
             DB::rollBack();
         }
 
-        return redirect()->route('savings.risk.profile');
+        return redirect()->route('risk.profile');
     }
 
-    public function validateSavingsRiskProfile(Request $request){
-        $customMessages = [
-            'savingsRiskProfileInput.required' => 'Please select a risk level.',
-            'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
-            'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
-        ];
+    // public function validateSavingsRiskProfile(Request $request){
+    //     $customMessages = [
+    //         'savingsRiskProfileInput.required' => 'Please select a risk level.',
+    //         'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
+    //         'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
+    //     ];
 
-        $validatedData = Validator::make($request->all(), [
-            'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-            // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-            'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
+    //     $validatedData = Validator::make($request->all(), [
+    //         'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+    //         // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+    //         'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
             
-        ], $customMessages);
+    //     ], $customMessages);
 
-        if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData)->withInput();
-        }
+    //     if ($validatedData->fails()) {
+    //         return redirect()->back()->withErrors($validatedData)->withInput();
+    //     }
 
-        // Validation passed, perform any necessary processing.
-        $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
-        $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
+    //     // Validation passed, perform any necessary processing.
+    //     $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
+    //     $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+    //     // Get the existing customer_details array from the session
+    //     $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing savings_needs from the session
-        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+    //     // Get existing savings_needs from the session
+    //     $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
-        // Update specific keys with new values
-        $advanceDetails = array_merge($advanceDetails, [
-            'risk_profile' => $savingsRiskProfileInput,
-            'potential_return' => $savingsPotentialReturnInput
-        ]);
+    //     // Update specific keys with new values
+    //     $advanceDetails = array_merge($advanceDetails, [
+    //         'risk_profile' => $savingsRiskProfileInput,
+    //         'potential_return' => $savingsPotentialReturnInput
+    //     ]);
 
-        // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+    //     // Set the updated savings_needs back to the customer_details session
+    //     $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
-        // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+    //     // Store the updated customer_details array back into the session
+    //     $request->session()->put('customer_details', $customerDetails);
+    //     Log::debug($customerDetails);
         
-        try {
-            DB::transaction(function () use ($request,$customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $sessionStorage->data = json_encode($customerDetails);
-                $route = strval(request()->path());
-                $sessionStorage->page_route = $route;
-                $sessionStorage->save();
-            });
-        } catch (\Exception $e) {
-            DB::rollBack();
-        }
+    //     try {
+    //         DB::transaction(function () use ($request,$customerDetails) {
+    //             $sessionStorage = new SessionStorage();
+    //             $sessionStorage->data = json_encode($customerDetails);
+    //             $route = strval(request()->path());
+    //             $sessionStorage->page_route = $route;
+    //             $sessionStorage->save();
+    //         });
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //     }
 
-        return redirect()->route('savings.gap');
-    }
+    //     return redirect()->route('savings.gap');
+    // }
 
     public function submitSavingsGap(Request $request){
 

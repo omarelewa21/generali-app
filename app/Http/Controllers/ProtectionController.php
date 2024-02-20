@@ -60,8 +60,6 @@ class ProtectionController extends Controller
         }
         if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
             $discussAnswer = 'Yes';
-            $needs = $customerDetails['selected_needs']['need_1'] ?? [];
-            $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
         } else{
             $discussAnswer = 'No';
         }
@@ -82,7 +80,7 @@ class ProtectionController extends Controller
         ]);
 
         // Set the updated protection_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_1'] = $needs;
+        // $customerDetails['selected_needs']['need_1'] = $needs;
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
@@ -342,7 +340,17 @@ class ProtectionController extends Controller
             return redirect()->route('debt.cancellation.home');
         }
         else {
-            return redirect()->route('existing.policy');
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investment']) && ($customerDetails['priorities']['investment'] === 'true' || $customerDetails['priorities']['investment'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy');
+            } else{
+                return redirect()->route('summary.monthly-goals');
+            }
         }
     }
 

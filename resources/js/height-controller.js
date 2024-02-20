@@ -69,6 +69,7 @@ $(document).ready(function() {
             $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
             $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
             $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            $("#risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $(".summary-page .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
@@ -83,6 +84,7 @@ $(document).ready(function() {
             $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $("#medical-hospital-selection .bottom-content #hnm-selection").css("padding-top" , needsSubMenuHeight + "px");
             $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
+            $("#risk-profile .bottom-content").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
@@ -117,6 +119,8 @@ $(document).ready(function() {
             $("#medical-hospital-selection .content-needs-grey .top-menu").css("padding-top" , 0);
             $("#medical-hospital-selection .bottom-content").css("padding-top" , 0);
             $(".summary-page .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);
+            $("#risk-profile .bottom-content").css("padding-top" , 0);
             $("#savings-risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);
             $("#savings-risk-profile .bottom-content").css("padding-top" , 0);
             $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , 0);

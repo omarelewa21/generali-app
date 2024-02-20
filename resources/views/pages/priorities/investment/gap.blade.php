@@ -14,8 +14,10 @@
     $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.goals_amount', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns');
-    $investmentRiskProfile = session('customer_details.selected_needs.need_5.advance_details.risk_profile');
-    $investmentPotentialReturn = session('customer_details.selected_needs.need_5.advance_details.potential_return');
+
+    $riskProfile = session('customer_details.risk_profile.selected_risk_profile');
+    $potentialReturn = session('customer_details.risk_profile.selected_potential_return');
+
     $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
 @endphp
@@ -104,19 +106,19 @@
                                     </div>
                                     <span class="align-self-center green-tick"></span>
                                 </div>
-                                <div class="row justify-content-center py-2">
+                                <!-- <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For a projected future investment value of</p>
-                                            </div>
+                                            </div> -->
                                             <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded) + (floatval($totalInvestmentNeeded) * (4 /100)) )}}</h4> -->
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4>
+                                            <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
-                                </div>
+                                </div> -->
                                 <!-- <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -143,7 +145,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('investment.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -186,7 +188,7 @@
     </div>
 </div>
 <script>
-    var lastPageInput = '{{$investmentRiskProfile === "" || $investmentRiskProfile === null ? $investmentRiskProfile : $investmentPotentialReturn}}';
+    var lastPageInput = '{{$riskProfile === "" || $riskProfile === null ? $riskProfile : $potentialReturn}}';
     var investmentAnnualReturn =  parseFloat({{$totalAnnualReturn}});
     var newTotalInvestmentNeeded = parseFloat({{$totalInvestmentNeeded}});
     var percentage = parseFloat({{$investmentFundPercentage}});

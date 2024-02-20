@@ -12,6 +12,7 @@ import './retirement-validation';
 import './education-validation';
 import './savings-validation';
 import './investment-validation';
+import './risk-profile';
 import './health-medical-validation';
 import './debt-cancellation-validation';
 import './summary';
