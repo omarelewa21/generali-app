@@ -1022,13 +1022,43 @@ class FormController extends Controller {
         
         if ($validToken) {
             $checkboxValues = $request->all();
-            $requiredPriorities = ['protection', 'retirement', 'health-medical', 'education', 'savings', 'debt-cancellation', 'investments', 'others'];
+            $requiredPriorities = ['protection', 'retirement', 'education', 'savings', 'investments', 'health-medical', 'debt-cancellation', 'others'];
 
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
+            $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+            $test = $customerDetails['selected_needs']['test'] ?? [];
             
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
+            
+            $seq = 0;
+            foreach ($priorities as $value) {
+            //     $index = array_search($value, $requiredPriorities);
+            //     $seq = array_search($value, $customerDetails['priorities_level'], true);
+            //     $needs = $customerDetails['selected_needs']['need_'.$seq] ?? [];
+            //     if ($index !== false) {
+            //         $seq = $index + 1;
+            //     }
+            //     if ($customerDetails['priorities'][$value] == true || $customerDetails['priorities'][$value] == 'true'){
+            //         $coverAnswer = 'Yes';
+            //     } else{
+            //         $coverAnswer = 'No';
+            //     }
+            //     if ($customerDetails['priorities'][$value. '_discuss'] == true || $customerDetails['priorities'][$value . '_discuss'] == 'true'){
+            //         $discussAnswer = 'Yes';
+            //     } else{
+            //         $discussAnswer = 'No';
+            //     }
+            }
+            // $needs = array_merge($needs, [
+            //     'need_no' => 'N'.$index,
+            //     'priority' => $seq,
+            //     'cover' => $coverAnswer,
+            //     'discuss' => $discussAnswer
+            // ]);
+            // $customerDetails['selected_needs']['need_' . $seq] = $needs;
+            $customerDetails['selected_needs']['test'] = $test;
 
             // Check if all required priorities are present
             if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {

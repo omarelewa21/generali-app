@@ -142,6 +142,10 @@ Route::post('/investment-monthly-payment', [InvestmentController::class, 'valida
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
 
+// Risk Profile
+Route::view('/risk-profile', 'pages.priorities.risk-profile.risk-profile')->name('risk.profile');
+Route::post('/risk-profile', [SummaryController::class, 'validateRiskProfile'])->name('validate.risk.profile');
+
 /* Priorities - Health and Medical */
 Route::view('/health-medical', 'pages.priorities.health and medical.home')->name('health.medical.home');
 Route::view('/health-medical/medical-selection', 'pages.priorities.health and medical.medical-selection')->name('health.medical.selection');

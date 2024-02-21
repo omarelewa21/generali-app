@@ -371,6 +371,7 @@ button.choice.default.selected img{
         text-align: center;
     }
     .calculator-page .content-needs-grey,
+    #risk-profile .content-needs-grey,
     #savings-risk-profile .content-needs-grey,
     #investment-risk-profile .content-needs-grey,
     .summary-overview .content-needs-grey{
@@ -448,10 +449,14 @@ button.choice.default.selected img{
     #education-amount-needed .bottom-content .h-sm-100{
         justify-content: center;
     }
+    #risk-profile .calculatorContent,
     #savings-risk-profile .calculatorContent,
     #investment-risk-profile .calculatorContent{
         text-align: center;
     }
+    #risk-profile #high-risk-potential-content .col-12.d-flex,
+    #risk-profile #medium-risk-potential-content .col-12.d-flex,
+    #risk-profile #low-risk-potential-content .col-12.d-flex,
     #savings-risk-profile #high-risk-potential-content .col-12.d-flex,
     #savings-risk-profile #medium-risk-potential-content .col-12.d-flex,
     #savings-risk-profile #low-risk-potential-content .col-12.d-flex,
@@ -523,6 +528,7 @@ button.choice.default.selected img{
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }
+    #risk-profile .content-needs-grey,
     #savings-risk-profile .content-needs-grey,
     #investment-risk-profile .content-needs-grey{
         grid-template-rows: 0vh 65vh;

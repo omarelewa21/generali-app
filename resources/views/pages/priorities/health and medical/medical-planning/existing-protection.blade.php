@@ -14,7 +14,6 @@
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
     $medicalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.covered_amount');
-    $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
 @endphp
 
 <div id="medical-existing-protection" class="tertiary-default-bg calculator-page">
@@ -143,6 +142,6 @@
     var fundPercentage = parseFloat({{ $healthMedicalFundPercentage }});
     var sessionExistingProtectionAmount = parseFloat({{$existingProtectionAmount}});
     var healthPriority = '{{$healthPriority}}';
-    var lastPageInput = '{{$medicalAmountNeeded === "" || $medicalAmountNeeded === null ? $medicalAmountNeeded : $medicalYear}}';
+    var lastPageInput = '{{$medicalAmountNeeded}}';
 </script>
 @endsection

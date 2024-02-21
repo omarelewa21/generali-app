@@ -15,7 +15,6 @@
     $investmentPriority = session('customer_details.priorities.investments_discuss');
 
     $investmentPA = session('customer_details.selected_needs.need_5.advance_details.annual_returns','5');
-    $totalAnnualReturn = session('customer_details.selected_needs.need_5.advance_details.annual_return_amount');
     $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.goals_amount', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $investmentMonthlyPayment = session('customer_details.selected_needs.need_5.advance_details.covered_amount');
@@ -65,7 +64,6 @@
                                     <!-- <p class="display-5 fw-bold currencyField"> -->
                                         <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_pa" class="form-control fw-bold position-relative text-center border-0 d-inline-block w-25 text-primary @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{ $investmentPA }}" required></span>
                                     % p.a.</h2>
-                                    <input type="hidden" name="total_annualReturn" id="total_annualReturn" value="{{$totalAnnualReturn}}">
                                     <input type="hidden" name="percentage" id="percentage" value="{{$investmentFundPercentage}}">
                                 </div>
                             </div>

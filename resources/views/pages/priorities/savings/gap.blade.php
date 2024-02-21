@@ -16,8 +16,10 @@
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
     $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
-    $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile');
-    $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return');
+
+    $riskProfile = session('customer_details.risk_profile.selected_risk_profile');
+    $potentialReturn = session('customer_details.risk_profile.selected_potential_return');
+
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
 @endphp
 
@@ -145,7 +147,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('savings.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -192,7 +194,7 @@
     var percentage = parseFloat({{$savingsFundPercentage}});
     var goals = parseFloat({{$goalsAmount}});
     var savingsPriority = '{{$savingsPriority}}';
-    var lastPageInput = '{{$savingsRiskProfile === "" || $savingsRiskProfile === null ? $savingsRiskProfile : $savingsPotentialReturn}}';
+    var lastPageInput = '{{$riskProfile === "" || $riskProfile === null ? $riskProfile : $potentialReturn}}';
 </script>
 
 @endsection

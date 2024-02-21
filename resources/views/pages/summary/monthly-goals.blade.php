@@ -14,6 +14,20 @@
 
 @php
     $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
+    $protectionCovered = session('customer_details.priorities.protection');
+    $retirementCovered = session('customer_details.priorities.retirement');
+    $educationCovered = session('customer_details.priorities.education');
+    $savingsCovered = session('customer_details.priorities.savings');
+    $investmentCovered = session('customer_details.priorities.investments');
+    $healthCovered = session('customer_details.priorities.health-medical');
+    $debtCovered = session('customer_details.priorities.debt-cancellation');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
 @endphp
 
 <div id="monthly_goals" class="secondary-default-bg">
@@ -75,7 +89,36 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('existing.policy')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    @php
+                                        if($debtCovered === 'true' || $debtCovered === true || $healthCovered === 'true' || $healthCovered === true || $investmentCovered === 'true' || $investmentCovered === true || $savingsCovered === 'true' || $savingsCovered === true || $educationCovered === 'true' || $educationCovered === true || $retirementCovered === 'true' || $retirementCovered === true || $protectionCovered === 'true' || $protectionCovered === true){
+                                            $route = route('existing.policy');
+                                        }
+                                        else {
+                                            if($debtPriority === 'true' || $debtPriority === true){
+                                                $route = route('debt.cancellation.gap');
+                                            } elseif ($healthPriority === 'true' || $healthPriority === true) {
+                                                if($selectedMedical === 'Yes'){
+                                                    $route = route('health.medical.planning.gap');
+                                                } else{ 
+                                                    $route = route('health.medical.critical.gap');
+                                                }
+                                            } elseif ($investmentPriority === 'true' || $investmentPriority === true) {
+                                                $route = route('investment.gap');
+                                            } elseif ($savingsPriority === 'true' || $savingsPriority === true) {
+                                                $route = route('savings.gap');
+                                            } elseif ($educationPriority === 'true' || $educationPriority === true) {
+                                                $route = route('education.gap');
+                                            } elseif ($retirementPriority === 'true' || $retirementPriority === true) {
+                                                $route = route('retirement.gap');
+                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                                $route = route('protection.gap');
+                                            }
+                                            else {
+                                                $route = route('priorities.to.discuss');
+                                            }
+                                        }
+                                    @endphp
+                                    <a href="{{ $route }}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>

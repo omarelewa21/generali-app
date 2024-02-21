@@ -669,7 +669,7 @@ class HealthMedicalController extends Controller
 
         // Validation passed, perform any necessary processing.
         $medical_amount_needed = str_replace(',','',$request->input('medical_amount_needed'));
-        $healthMedicalTotalFund = floatval($medical_amount_needed * $supportingYears);
+        $healthMedicalTotalFund = floatval($medical_amount_needed);
         $totalHealthMedicalNeeded = floatval($request->input('total_healthMedicalNeeded'));
 
         // Update specific keys with new values
