@@ -35,7 +35,7 @@
             
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
-                    <form action="{{ route('handle.avatar.selection',['transaction_id'=> $transactionId]) }}" method="post" class="buttonForm">
+                    <form action="{{ route('form.avatar.marital.status',['transaction_id'=> $transactionId]) }}" method="post" class="buttonForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -108,7 +108,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent">
+                                        <input type="hidden" name="urlInput" id="urlInput" value="family.dependent">
                                         <a href="{{route('identity.details',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>

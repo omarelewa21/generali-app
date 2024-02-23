@@ -6,6 +6,7 @@ use App\Models\Agent;
 use App\Models\Transaction;
 use App\Models\SessionStorage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TransactionService
 {
@@ -17,12 +18,17 @@ class TransactionService
 
             // temporarily use this agent 
             $agentId = Agent::find(1)->id;
+            $route = strval(request()->path());
+            $id = session('transaction_id') ?? "";
+            
+            // dd(request()->path());
+            Log::debug($route);
 
             $transaction = Transaction::updateOrCreate(
-                ['customer_id' => $customerId , 'agent_id' => $agentId],
-                ['pdpa' => session()->get('customer_details.pdpa') ?? "Accepted"]
+                ['id' => $id ,'customer_id' => $customerId , 'agent_id' => $agentId],
+                ['page_route' => $route , 'pdpa' => session()->get('customer_details.pdpa') ?? "Accepted"]
             );
-
+           
             // $sessionStorage = new SessionStorage();
             // $route = strval(request()->path());
             // $sessionId = $request->session()->getId();

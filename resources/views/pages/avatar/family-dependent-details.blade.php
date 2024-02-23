@@ -43,7 +43,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependent.details',['transaction_id' => $transactionId]) }}" method="POST" id="familyDetailsForm">
+                    <form novalidate action="{{ route('form.family.dependent.details',['transaction_id' => $transactionId]) }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -408,7 +408,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -527,7 +527,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -645,7 +645,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
                                                                         <label for="siblingYearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
+                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['year_support'] ?? '') }}" required>
                                                                     </div>
                                                                     @error('siblingYearsOfSupport')
                                                                         <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -682,7 +682,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
-                                        <a href="{{route('avatar.family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>

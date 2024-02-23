@@ -41,11 +41,15 @@ Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic
 
 /* Avatar pages */
 Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
-Route::view('/marital-status', 'pages.avatar.marital-status')->name('avatar.marital.status');
-Route::view('/family-dependent', 'pages.avatar.family-dependent')->name('avatar.family.dependent');
-Route::get('/family-dependent/details', [DropdownController::class, 'familyDependentDetails'])->name('avatar.family.dependent.details');
+Route::view('/marital-status', 'pages.avatar.marital-status')->name('marital.status');
+Route::post('/marital-status', [FormController::class, 'handleAvatarSelection'])->name('form.avatar.marital.status');
+Route::view('/family-dependent', 'pages.avatar.family-dependent')->name('family.dependent');
+Route::post('/family-dependent', [FormController::class, 'handleAvatarSelection'])->name('form.avatar.family.dependent');
+Route::get('/family-dependent/details', [DropdownController::class, 'familyDependentDetails'])->name('family.dependent.details');
 Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
+Route::get('/assets', [DropdownController::class, 'assets'])->name('assets');
+Route::post('/assets', [FormController::class, 'handleAvatarSelection'])->name('assets');
 Route::get('/identity-details', [DropdownController::class, 'identityDetails'])->name('identity.details');
 Route::view('/avatar', 'pages.avatar.gender')->name('avatar');
 Route::post('/avatar', [AvatarController::class, 'changeImage'])->name('change.image');
@@ -54,8 +58,11 @@ Route::post('/change-image', [AvatarController::class, 'changeImage'])->name('ch
 Route::post('/handle-avatar-selection', [FormController::class, 'handleAvatarSelection'])->name('handle.avatar.selection');
 Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name('validate.avatar');
 
+
+
 /* Priorities */
-Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
+// Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
+Route::get('/financial-priorities', [DropdownController::class, 'financialPriorities'])->name('financial.priorities');
 Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
 Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');

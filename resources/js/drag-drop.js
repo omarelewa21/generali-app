@@ -4,8 +4,9 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
+const queryString = window.location.search;
 
-if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith(queryString))) {
     document.addEventListener('DOMContentLoaded', function() {
         var $needs = $("#needs"),
         $sortable = $("#sortable");

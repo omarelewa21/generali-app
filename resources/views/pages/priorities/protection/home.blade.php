@@ -14,6 +14,7 @@
 @php
     // Retrieving values from the session
     $protectionPriority = session('customer_details.priorities.protection_discuss');
+    // dd($protectionPriority);
 @endphp
 
 <div id="protection_home">

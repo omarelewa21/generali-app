@@ -18,6 +18,8 @@
     $identityDetails = session('customer_details.identity_details') ?? $basicDetails;
     $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
     $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
+
+    // dd(session()->all());
     
 @endphp
 

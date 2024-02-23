@@ -3,8 +3,9 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
+const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
+if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || currentURL.endsWith(queryString))) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const urlParams = new URLSearchParams(window.location.search);
     const paramValue = urlParams.get('transaction_id');
@@ -90,6 +91,9 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
                 if (checkboxValues[checkboxId] === true) {
                     // Assign link based on the sequence
                     if (checkboxId === 'protection_discuss') {
+                        
+                        console.log(checkboxId);
+                        // console.log('first console check box ');
                         document.getElementById('priorityNext').setAttribute('href', '/protection');
                         break;
                     }

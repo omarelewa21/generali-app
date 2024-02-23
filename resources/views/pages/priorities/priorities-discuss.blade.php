@@ -17,6 +17,7 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.priorities_level');
     $prioritiesDiscuss = session('customer_details.priorities');
+    // dd($topPriorities);
 @endphp
 
 <div id="priorities_to_discuss">
@@ -272,7 +273,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('financial.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
@@ -306,10 +307,16 @@ var priority = {!! json_encode($prioritiesDiscuss) !!};
 document.addEventListener('DOMContentLoaded', function() {
     // Ensure the first accordion item is always open
     const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-
+    const secondAccordionItem = document.querySelectorAll('.accordion-item')[1];
+    console.log(secondAccordionItem);
     if (firstAccordionItem) {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');
+    }
+
+    if (secondAccordionItem) {
+        const secondCollapse = secondAccordionItem.querySelector('.accordion-collapse');
+        secondCollapse.classList.add('show');
     }
 });
 </script>

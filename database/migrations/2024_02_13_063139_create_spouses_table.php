@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('birth_cert')->nullable();
             $table->string('police_number')->nullable();
             $table->string('registration_number')->nullable();
-            $table->timestamp('dob')->nullable();
+            $table->string('dob')->nullable();
             $table->integer('age')->nullable();   
             $table->string('gender')->nullable();
             $table->string('habit')->nullable();

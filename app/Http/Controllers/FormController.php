@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use libphonenumber\PhoneNumberUtil;
-use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
+use App\Services\AssetService;
+use App\Services\AvatarService;
+use Illuminate\Validation\Rule;
+use App\Services\CustomerService;
+use App\Services\PriorityService;
+use App\Services\DependentService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use libphonenumber\PhoneNumberUtil;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Session;
-use App\Services\CustomerService;
+use libphonenumber\NumberParseException;
+use Illuminate\Support\Facades\Validator;
 
 class FormController extends Controller {
     public function pdpa(Request $request)
@@ -76,10 +80,6 @@ class FormController extends Controller {
             // Parse the phone number
             $phoneNumberUtil = PhoneNumberUtil::getInstance();
 
-            $customerId = session()->get('customer_id') ?? $_GET;
-
-            dd($request->input('transaction_id'));
-
 
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
@@ -124,25 +124,32 @@ class FormController extends Controller {
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
             ];
+           
+            // Determine the latest array key
+            $latestKey = array_key_last($customerDetails);
+
 
             //store first data in customer table  then  proceed on transaction
-            $customerId = $customerService->handleCustomer($request,$customerDetails);
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
 
             // session()->get('customer_details.basic_details.full_name');
             $transactionId = $transactionService->handleTransaction($customerId);
-            $transactionData = ['transaction_id' => $transactionId];
-            $customerDetails['transaction_id'] = $transactionId;
+           
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             $request->session()->put('customer_details', $customerDetails);
             // $request->session()->get('customer_id',$customerId);
             
-            return redirect()->route('avatar.welcome',$transactionData);
+            return redirect()->route('avatar.welcome');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function submitIdentity(Request $request,TransactionService $transactionService)
+    public function submitIdentity(Request $request,CustomerService $customerService,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -156,7 +163,7 @@ class FormController extends Controller {
         if ($validToken) {
             // Fetch from the database
             $countries = DB::table('countries')->pluck('countries')->toArray();
-            $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+            $idtypes = DB::table('id_types')->pluck('idtypes')->toArray();
             $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
             $occupation = DB::table('occupations')->pluck('name')->toArray();
             $day = $request->input('day');
@@ -288,8 +295,6 @@ class FormController extends Controller {
             // Get existing identity_details from the session
             $identityDetails = $customerDetails['identity_details'] ?? [];
 
-            $customerId = session()->get('customer_id');
-
             if ($day !== NULL && $day !== '') {
                 $dob = $year . '-' . $month . '-' . $day;
 
@@ -319,21 +324,28 @@ class FormController extends Controller {
             // Set the updated identity_details back to the customer_details session
             $customerDetails['identity_details'] = $identityDetails;
 
+            // Determine the latest array key
+            $latestKey = array_key_last($customerDetails);
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.marital.status',$transactionData);
+            return redirect()->route('marital.status');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function handleAvatarSelection(Request $request,TransactionService $transactionService)
+    public function handleAvatarSelection(Request $request,TransactionService $transactionService, CustomerService $customerService, DependentService $dependentService, AssetService $assetService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -435,22 +447,37 @@ class FormController extends Controller {
                 $customerDetails['assets'] = $assetsButtonInput;
             }
 
+            //identity_details, family_details, assets
+            $latestKey = array_key_last($customerDetails);
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if (isset($customerDetails['family_details']) && $latestKey ==='family_details')
+            {
+                $dependentService->handleDependent($customerDetails,$customerId);
+            }
+            
+            if (isset($customerDetails['assets']) && $latestKey === 'assets') {
+                $assetService->handleAsset($customerDetails,$customerId);
+            }
+        
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
             // Store the updated array back into the session
-            return redirect()->route($dataUrl,$transactionData)->with($transactionData);
+            return redirect()->route($dataUrl);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function familyDependentDetails(Request $request,TransactionService $transactionService)
+    public function familyDependentDetails(Request $request,TransactionService $transactionService,CustomerService $customerService, DependentService $dependentService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -466,7 +493,7 @@ class FormController extends Controller {
             $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $countries = DB::table('countries')->pluck('countries')->toArray();
-            $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+            $idtypes = DB::table('id_types')->pluck('idtypes')->toArray();
             $occupation = DB::table('occupations')->pluck('name')->toArray();
 
             // Get the existing customer_details array from the session
@@ -831,7 +858,7 @@ class FormController extends Controller {
                     'dob' => $dob,
                     'age' => $age,
                     'gender' => $validatedData['gender'],
-                    'habits' => $validatedData['habits'],
+                    'habit' => $validatedData['habits'],
                     'occupation' => $validatedData['spouseOccupation'],
                     'marital_status' => $marital_status,
                     'children' => $numOfChildren
@@ -860,7 +887,7 @@ class FormController extends Controller {
                         'full_name' => $validatedData[$childKey . 'FullName'],
                         // 'last_name' => $validatedData[$childKey . 'LastName'],
                         'gender' => $validatedData[$childKey . 'Gender'],
-                        'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
+                        'year_support' => $validatedData[$childKey . 'YearsOfSupport'],
                         'dob' => $dob,
                         'age' => $age,
                         'marital_status' => $validatedData[$childKey . 'MaritalStatus'],
@@ -894,14 +921,20 @@ class FormController extends Controller {
                     if ($day !== NULL && $day !== '') {
                         // $dob = $day . '-' . $month . '-' . $year;
                         $dob = $year . '-' . $month . '-' . $day;
+
+                        $selectedYear = $year;
+                        $currentYear = now()->year;
+
+                        $age = $currentYear - $selectedYear;
                     }
 
                     $parentsData = [
                         'full_name' => $validatedData[$parentkey . 'FullName'],
                         // 'last_name' => $validatedData[$parentkey . 'LastName'],
                         'gender' => $validatedData[$parentkey . 'Gender'],
-                        'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
+                        'year_support' => $validatedData[$parentkey . 'YearsOfSupport'],
                         'dob' => $dob,
+                        'age' => $age,
                         'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
                     ];
                     $customerDetails['family_details']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['parents_data'][$parentkey], $parentsData);
@@ -918,6 +951,10 @@ class FormController extends Controller {
                 if ($day !== NULL && $day !== '') {
                     // $dob = $day . '-' . $month . '-' . $year;
                     $dob = $year . '-' . $month . '-' . $day;
+                    $selectedYear = $year;
+                    $currentYear = now()->year;
+
+                    $age = $currentYear - $selectedYear;
                 }
 
                 $siblingData = [
@@ -925,28 +962,36 @@ class FormController extends Controller {
                     // 'last_name' => $validatedData['siblingLastName'],
                     'gender' => $validatedData['siblingGender'],
                     'dob' => $dob,
-                    'years_support' => $validatedData['siblingYearsOfSupport'],
+                    'age' => $age,
+                    'year_support' => $validatedData['siblingYearsOfSupport'],
                     'marital_status' => $validatedData['siblingMaritalStatus']
                 ];
                 $customerDetails['family_details']['siblings_data'] = array_merge($customerDetails['family_details']['siblings_data'], $siblingData);
             }
 
+            $latestKey = array_key_last($customerDetails);
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $dependentId = $dependentService->handleDependent($customerDetails,$customerId);
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.my.assets',$transactionData);
+            return redirect()->route('avatar.my.assets');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function topPriorities(Request $request,TransactionService $transactionService)
+    public function topPriorities(Request $request,TransactionService $transactionService,PriorityService $priorityService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -993,23 +1038,28 @@ class FormController extends Controller {
                 return $value !== null;
             });
             $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
-            
+            // dd($topPrioritiesButtonInput);
+
+           
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
+            $customerId = $customerDetails['customer_id'];
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
             unset($customerDetails['priorities']);
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $priorityId = $priorityService->handlePriority($customerId,$topPrioritiesButtonInput);
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
             
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss',$transactionData);
+            return redirect()->route('priorities.to.discuss');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1036,6 +1086,8 @@ class FormController extends Controller {
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
 
+            // dd($priorities);
+
             // Check if all required priorities are present
             if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
                 // All required priorities are present
@@ -1045,8 +1097,11 @@ class FormController extends Controller {
                 $customerDetails['customers_choice'] = '2';
             }
 
+            dd($customerDetails);
+
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
+
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);

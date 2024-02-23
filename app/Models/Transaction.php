@@ -15,7 +15,7 @@ class Transaction extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'customer_id','agent_id','pdpa'
+        'customer_id','agent_id','pdpa','status','page_route'
     ];
 
     public function customer(): BelongsTo

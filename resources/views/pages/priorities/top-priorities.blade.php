@@ -16,6 +16,7 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.priorities_level');
+    // dd($image);
 @endphp
 
 <div id="top_priorities">
@@ -338,7 +339,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="{{ json_encode($topPriorities) }}">
-                                        <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
