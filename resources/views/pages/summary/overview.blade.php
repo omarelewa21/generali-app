@@ -34,58 +34,60 @@
                         <div class="col-md-8 col-xl-9 col-6 pe-xl-5 py-4 py-xl-0 pb-2">
                             <h4 class="display-6 fw-bold lh-base">Coverage Completion %</h4>
                         </div>
-                        @if ($all_needs)
                         @php
                             $count = 0; 
+                            $need_title = '';
+                            $chart_color = '';
+                            $chart_percent = '';
                         @endphp
+                        @if ($all_needs)
                             @foreach($all_needs as $need)
                                 @php
-                                    $need_title = '';
-                                    $chart_color = '';
-                                    $chart_percent = '';
-                                    switch($need['need_no']) {
-                                        case 'N1':
-                                            $need_title = 'Protection';
-                                            $chart_color = '#C0232C';
-                                            break;
-                                        case 'N2':
-                                            $need_title = 'Retirement';
-                                            $chart_color = '#14A38B';
-                                            break;
-                                        case 'N3':
-                                            $need_title = 'Education';
-                                            $chart_color = '#F2AC57';
-                                            break;
-                                        case 'N4':
-                                            $need_title = 'Regular Savings';
-                                            $chart_color = '#B3222A';
-                                            break;
-                                        case 'N5':
-                                            $need_title = 'Lump Sum Investment';
-                                            $chart_color = '#0880AE';
-                                            break;
-                                        case 'N6':
-                                            $need_title = 'Health & Medical';
-                                            $chart_color = '#FD5B5B';
-                                            break;
-                                        case 'N7':
-                                            $need_title = 'Debt Cancellation';
-                                            $chart_color = '#CCCCCC';
-                                            break;
-                                        default:
-                                            $need_title = '';
-                                            $chart_color = '';
-                                    }
-                                    if ($need['need_no'] == 'N6'){
-                                        if($need['number_of_selection'] == 2 || ($need['advance_details']['critical_illness']['critical_illness_plan'] && $need['advance_details']['health_care']['medical_care_plan'] ) == Yes ){
-                                            if (isset($need['advance_details']['critical_illness']['fund_percentage']) || isset($need['advance_details']['health_care']['fund_percentage']) ){
-                                                $chart_percent = ($need['advance_details']['critical_illness']['fund_percentage'] + $need['advance_details']['health_care']['fund_percentage']) / 2;
-                                            }
-                                            
+                                    if(isset($need['need_no'])){
+                                        switch($need) {
+                                            case 'N1':
+                                                $need_title = 'Protection';
+                                                $chart_color = '#C0232C';
+                                                break;
+                                            case 'N2':
+                                                $need_title = 'Retirement';
+                                                $chart_color = '#14A38B';
+                                                break;
+                                            case 'N3':
+                                                $need_title = 'Education';
+                                                $chart_color = '#F2AC57';
+                                                break;
+                                            case 'N4':
+                                                $need_title = 'Regular Savings';
+                                                $chart_color = '#B3222A';
+                                                break;
+                                            case 'N5':
+                                                $need_title = 'Lump Sum Investment';
+                                                $chart_color = '#0880AE';
+                                                break;
+                                            case 'N6':
+                                                $need_title = 'Health & Medical';
+                                                $chart_color = '#FD5B5B';
+                                                break;
+                                            case 'N7':
+                                                $need_title = 'Debt Cancellation';
+                                                $chart_color = '#CCCCCC';
+                                                break;
+                                            default:
+                                                $need_title = '';
+                                                $chart_color = '';
                                         }
-                                    } else{
-                                        if (isset($need['advance_details']['fund_percentage'])){
-                                            $chart_percent = $need['advance_details']['fund_percentage'];
+                                        if ($need['need_no'] == 'N6'){
+                                            if($need['number_of_selection'] == 2 || ($need['advance_details']['critical_illness']['critical_illness_plan'] && $need['advance_details']['health_care']['medical_care_plan'] ) == Yes ){
+                                                if (isset($need['advance_details']['critical_illness']['fund_percentage']) || isset($need['advance_details']['health_care']['fund_percentage']) ){
+                                                    $chart_percent = ($need['advance_details']['critical_illness']['fund_percentage'] + $need['advance_details']['health_care']['fund_percentage']) / 2;
+                                                }
+                                                
+                                            }
+                                        } else{
+                                            if (isset($need['advance_details']['fund_percentage'])){
+                                                $chart_percent = $need['advance_details']['fund_percentage'];
+                                            }
                                         }
                                     }
                                     $count++;
@@ -99,7 +101,7 @@
                                             <!-- <div class="bar_chart_wrapper"> -->
                                                 <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             <!-- </div> -->
-                                            <p class="display-6 fw-bold lh-base m-0 px-3">{{round($chart_percent)}}%</p>
+                                            <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +182,9 @@
                                                             } else if(isset($need['advance_details']['relationship']) && $need['advance_details']['relationship'] == 'Child'){
                                                                 $coverage_person = $need['advance_details']['child_name'];
                                                             } else{
-                                                                $coverage_person = $need['advance_details']['relationship'];
+                                                                if (isset($need['advance_details']['relationship'])){
+                                                                    $coverage_person = $need['advance_details']['relationship'];
+                                                                }
                                                             }
                                                             if(isset($need['advance_details']['goals_amount']) || isset($need['advance_details']['existing_amount']) || isset($need['advance_details']['insurance_amount'])){
                                                                 if($need['need_no'] == 'N4' || $need['need_no'] == 'N5'){

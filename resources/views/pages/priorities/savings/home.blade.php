@@ -38,7 +38,7 @@
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
-                                <div class="col-xl-6 text-center">
+                                <div class="col-xl-7 text-center">
                                     <h2 class="display-5 fw-bold lh-sm py-4">Let’s make a plan to achieve your goals with Regular Savings.</h2>
                                 </div>
                             </div>

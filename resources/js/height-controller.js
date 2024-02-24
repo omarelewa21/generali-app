@@ -13,6 +13,7 @@ $(document).ready(function() {
             $(".main-content").css("padding-bottom", 0);
             $("#pdpa .main-content, #basic_details .main-content, #identity_details .main-content, #avatar_marital_status .main-content, #avatar_family_dependent_details .main-content, #top_priorities .main-content, #priorities_to_discuss .main-content").css("padding-bottom", mainContentPadding + "px");            
         }
+        if ($("#savingsGoalsButtonInput").length) $(".main-content").css("padding-bottom", mainContentPadding + "px");
     }
   
     setMainContentPadding();

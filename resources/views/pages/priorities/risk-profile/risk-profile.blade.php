@@ -51,9 +51,9 @@
                                     <p class="risk-potential-title fw-bold">expecting potential returns that are</p>
                                     <div class="row mb-3">
                                         <div class="col-12 d-flex">
-                                            <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'High') default @endif" id="high-potential-return" data-risk="High" data-required="">High</button>
-                                            <button class="potential-btn risk-potential-content border-start-0 border-end-0 f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'Medium') default @endif" id="medium-potential-return" data-risk="Medium" data-required="">Medium</button>
-                                            <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'Low') default @endif" id="low-potential-return" data-risk="Low" data-required="">Low</button>
+                                            <button class="potential-btn risk-potential-content border-end-0 f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'High') default @endif" id="high-potential-return" data-risk="High" data-required="">High</button>
+                                            <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'Medium') default @endif" id="medium-potential-return" data-risk="Medium" data-required="">Medium</button>
+                                            <!-- <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'High Risk' && $potentialReturn === 'Low') default @endif" id="low-potential-return" data-risk="Low" data-required="">Low</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -77,8 +77,8 @@
                                     <p class="risk-potential-title fw-bold">expecting potential returns that are</p>
                                     <div class="row mb-3">
                                         <div class="col-12 d-flex">
-                                            <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'Low Risk' && $potentialReturn === 'High') default @endif" id="high-potential-return" data-risk="High" data-required="">High</button>
-                                            <button class="potential-btn risk-potential-content border-start-0 border-end-0 f-family @if($riskProfile === 'Low Risk' && $potentialReturn === 'Medium') default @endif" id="medium-potential-return" data-risk="Medium" data-required="">Medium</button>
+                                            <!-- <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'Low Risk' && $potentialReturn === 'High') default @endif" id="high-potential-return" data-risk="High" data-required="">High</button> -->
+                                            <button class="potential-btn risk-potential-content border-end-0 f-family @if($riskProfile === 'Low Risk' && $potentialReturn === 'Medium') default @endif" id="medium-potential-return" data-risk="Medium" data-required="">Medium</button>
                                             <button class="potential-btn risk-potential-content f-family @if($riskProfile === 'Low Risk' && $potentialReturn === 'Low') default @endif" id="low-potential-return" data-risk="Low" data-required="">Low</button>
                                         </div>
                                     </div>

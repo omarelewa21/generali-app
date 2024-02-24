@@ -118,34 +118,19 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
-        $index = array_search('health-medical', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['health-medical'] == true || $customerDetails['priorities']['health-medical'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['health-medical_discuss'] == true || $customerDetails['priorities']['health-medical_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
         if ($selectionCriticalInput != null || $selectionCriticalInput != ''){
-            $criticalPlan = 'Yes';
+            $criticalPlan = 'Critical Illness';
         } else{
-            $criticalPlan = 'No';
+            $criticalPlan = '';
         }
         if ($selectionMedicalInput != null || $selectionMedicalInput != ''){
-            $medicalPlan = 'Yes';
+            $medicalPlan = 'Health Planning';
         } else{
-            $medicalPlan = 'No';
+            $medicalPlan = '';
         }
 
         // Update specific keys with new values
         $needs = array_merge($needs, [
-            'need_no' => 'N6',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer,
             'number_of_selection' => $healthMedicalSelectedInput,
         ]);
         $criticalIllness = array_merge($criticalIllness, [
@@ -201,7 +186,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        if ($criticalPlan === 'Yes'){
+        if ($criticalPlan === 'Critical Illness'){
             return redirect()->route('health.medical.critical.illness.coverage',$transactionData);
         }
         else{
@@ -460,7 +445,7 @@ class HealthMedicalController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Yes'){
+        if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Health Planning'){
             return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
         } else{
             return redirect()->route('debt.cancellation.home',$transactionData);
@@ -818,7 +803,17 @@ class HealthMedicalController extends Controller
             return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy',$transactionData);
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy',$transactionData);
+            } else{
+                return redirect()->route('summary.monthly-goals',$transactionData);
+            }
         }
     }
 }

@@ -25,6 +25,7 @@
     $investmentPriority = session('customer_details.priorities.investments_discuss');
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
+
 @endphp
 
 <div id="existing_policy">
@@ -65,17 +66,17 @@
                                                 <p class="text-gray">What is your role in this policy?</p>
                                                 <div class="d-flex btn-group @error('policyRole') is-invalid @enderror" role="group">
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyOwnerInput" autocomplete="off" value="owner" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyOwnerInput" autocomplete="off" value="owner" data-key="role"
                                                         {{ (old('policyRole') === 'owner' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'owner')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The policy owner</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyInsuredInput" autocomplete="off" value="life insured" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyInsuredInput" autocomplete="off" value="life insured" data-key="role"
                                                         {{ (old('policyRole') === 'life insured' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'life insured')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The life insured</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyBothInput" autocomplete="off" value="both" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyBothInput" autocomplete="off" value="both" data-key="role"
                                                         {{ (old('policyRole') === 'both' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'both')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Both</span>
                                                     </label>
@@ -203,7 +204,7 @@
                                             if ($debtPriority === 'true' || $debtPriority === true) {
                                                 $route = route('debt.cancellation.gap');
                                             } elseif ($healthPriority === 'true' || $healthPriority === true) {
-                                                if($selectedMedical === 'Yes'){
+                                                if($selectedMedical === 'Health Planning'){
                                                     $route = route('health.medical.planning.gap');
                                                 } else{ 
                                                     $route = route('health.medical.critical.gap');
@@ -459,8 +460,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const index = parseInt($("#form").attr("data-index")) + 1;
         if (index <= 7) {
             $("#form").attr("data-index", index);
-
-            $("#form").append(`<h4 class="display-7 text-gray pb-4 mt-5">Policy ${index}</h4>`);
+            $("#form").append(`<h4 class="display-7 text-gray pb-4 mt-5 d-flex justify-content-between"><span>Policy ${index}</span><i class="fa-solid fa-trash-can text-danger align-self-center ms-3 delete-policy" data-index="${index}"></i></h4>`);
+            
             $("#form").append(`<div class="row">
                 <div class="col-md-12 pb-5">
                     <p class="text-gray">What is your role in this policy?</p>
@@ -575,6 +576,7 @@ document.addEventListener('DOMContentLoaded', function() {
             existingPolicies[`policy_${index+1}`][key] = $(e.currentTarget).val();
             $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
         }
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
     });
 
     $(document).on("click", "[id='addFieldsBtn']", (e) => {
@@ -587,22 +589,92 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#addBenefitsBtn").on("click", (e) => {
         const index = parseInt($(e.currentTarget).attr("data-index"));
         const benefitsNo = $(`[data-id='additionalBenefit${index+1}']`).length;
+        const additionalBenefit = existingPolicies[`policy_${index+1}`].additionalBenefit;
+        const benefitName = capitalizeFirstWord($("#addBenefitsInput").val());
 
-        if (benefitsNo < 4) {
-            existingPolicies[`policy_${index+1}`].additionalBenefit.push({
-                benefit: $("#addBenefitsInput").val(),
-                benefit_amount: "",
-            });
+        if (benefitsNo < 4 && benefitName.length) {
+            if (!additionalBenefit.some(benefit => benefit.benefit === benefitName)) {
+                additionalBenefit.push({
+                    benefit: benefitName,
+                    benefit_amount: "",
+                });
 
-            $(`[id='addFields']:eq(${index})`).prev().append(`<div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                <label for="additionalBenefit${index+1}_${benefitsNo}" class="form-label">${$("#addBenefitsInput").val()}</label>
-                <div class="input-group">
-                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" class="form-control border-black" name="additionalBenefit" id="additionalBenefit${index+1}_${benefitsNo}" data-id="additionalBenefit${index+1}" value="" data-index="${index}" data-object-id="${benefitsNo}" data-key="benefit_amount">
-                </div>
-            </div>`);
-            $("#addBenefitsInput").val("");
+                $(`[id='addFields']:eq(${index})`).prev().append(`<div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                    <label for="additionalBenefit${index+1}_${benefitsNo}" class="form-label">${benefitName}</label>
+                    <div class="input-group">
+                        <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span>
+                        <input type="text" class="form-control border-black" name="additionalBenefit" id="additionalBenefit${index+1}_${benefitsNo}" data-id="additionalBenefit${index+1}" value="" data-index="${index}" data-object-id="${benefitsNo}" data-key="benefit_amount">
+                        <i class="fa-solid fa-trash-can text-danger align-self-center ms-3 delete-benefit" data-key="policy_${index+1}" data-index="${benefitsNo}"></i>
+                    </div>
+                </div>`);
+                $("#addBenefitsInput").val("");
+            }
         }
     });
+
+    $(document).on("click", "i.delete-benefit", (e) => {
+        const key = $(e.currentTarget).attr("data-key");
+        const index = $(e.currentTarget).attr("data-index");
+
+        existingPolicies[key].additionalBenefit.splice(index, 1);
+        $(e.currentTarget).parent().parent().remove();
+
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
+    });
+
+    $(document).on("click", "i.delete-policy", (e) => {
+        const index = parseInt($(e.currentTarget).attr("data-index"));
+
+        delete existingPolicies[`policy_${index}`];
+
+        $(e.currentTarget).parent().nextAll().slice(0, 4).remove();
+        $(e.currentTarget).parent().remove();
+
+        const $target = $('.main-content');
+        $target.animate({scrollTop: $target.prop("scrollHeight")}, 500);
+
+        const policiesNo = parseInt($("#form").attr("data-index"));
+        if (policiesNo > index) {
+            for (let i = index+1; i <= policiesNo; i++) {
+                const newIndex = i-1;
+                const header = $(`span:contains('Policy ${i}')`);
+                if (header.length) {
+                    header.text(`Policy ${newIndex}`);
+                    header.next().attr("data-index", newIndex);
+
+                    $(`[name='policyRole${i}']`).attr("name", "policyRole" + newIndex);
+                    header.parent().next("[id='addFields']");
+
+                    const additionalBenefit = $(`[data-id='additionalBenefit${i}']`);
+                    for (let x = 0; x < additionalBenefit.length; x++) {
+                        const objectId = $(additionalBenefit[x]).attr("data-object-id");
+                        $(additionalBenefit[x]).attr("id", `additionalBenefit${newIndex}_${objectId}`);
+                        $(additionalBenefit[x]).parent().prev().attr("for", `additionalBenefit${newIndex}_${objectId}`);
+
+                        $(additionalBenefit[x]).attr("data-id", `additionalBenefit${newIndex}`);
+                        $(additionalBenefit[x]).attr("data-index", newIndex-1);
+                        $(additionalBenefit[x]).next().attr("data-key", `policy_${newIndex}`);
+
+                        existingPolicies[`policy_${newIndex}`] = existingPolicies[`policy_${i}`];
+                        delete existingPolicies[`policy_${i}`];
+                    }
+                }
+            }
+        }
+
+        $("#form").attr("data-index", policiesNo - 1);
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
+    });
+
+    const capitalizeFirstWord = (str) => {
+        const words = str.split(' ');
+
+        if (words.length > 0) {
+            words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+        }
+
+        return words.join(' ');
+    }
 });
 </script>
 

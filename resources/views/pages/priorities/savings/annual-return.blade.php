@@ -15,7 +15,7 @@
     $savingsPriority = session('customer_details.priorities.savings_discuss');
 
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns', '5');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');

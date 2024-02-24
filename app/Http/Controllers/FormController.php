@@ -1027,38 +1027,55 @@ class FormController extends Controller {
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
             $selectedNeeds = $customerDetails['selected_needs'] ?? [];
-            $test = $customerDetails['selected_needs']['test'] ?? [];
+            $test = $customerDetails['test'] ?? [];
             
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
-            
-            $seq = 0;
+            $remainingNeed = [];
+
             foreach ($priorities as $value) {
-            //     $index = array_search($value, $requiredPriorities);
-            //     $seq = array_search($value, $customerDetails['priorities_level'], true);
-            //     $needs = $customerDetails['selected_needs']['need_'.$seq] ?? [];
-            //     if ($index !== false) {
-            //         $seq = $index + 1;
-            //     }
-            //     if ($customerDetails['priorities'][$value] == true || $customerDetails['priorities'][$value] == 'true'){
-            //         $coverAnswer = 'Yes';
-            //     } else{
-            //         $coverAnswer = 'No';
-            //     }
-            //     if ($customerDetails['priorities'][$value. '_discuss'] == true || $customerDetails['priorities'][$value . '_discuss'] == 'true'){
-            //         $discussAnswer = 'Yes';
-            //     } else{
-            //         $discussAnswer = 'No';
-            //     }
+                // loop the needs
+                $index = array_search($value, $requiredPriorities);
+                $seq = array_search($value, $customerDetails['priorities_level'], true);
+                $needs = $customerDetails['selected_needs']['need_'.$index+1] ?? [];
+
+                if (isset($checkboxValues[$value]) && $checkboxValues[$value] == 'true'){
+                    $coverAnswer = 'Yes';
+                } else{
+                    $coverAnswer = 'No';
+                }
+                if (isset($checkboxValues[$value . '_discuss']) && $checkboxValues[$value . '_discuss'] == 'true'){
+                    $discussAnswer = 'Yes';
+                } else{
+                    $discussAnswer = 'No';
+                }
+                $needs = array_merge($needs, [
+                    'need_no' => 'N'.$index+1,
+                    'priority' => $seq+1,
+                    'cover' => $coverAnswer,
+                    'discuss' => $discussAnswer
+                ]);
+                $customerDetails['selected_needs']['need_' . $index+1] = $needs;
+
+                //trying to delete the whole needs if user deleted its previous selection
+                $remainingNeed[] = 'need_' . ($index + 1);
+                $keysToUnset = [];
+                foreach ($customerDetails['selected_needs'] as $key => $key_value){
+                    $found = false;
+                    foreach ($remainingNeed as $remain_value){
+                        if ($key == $remain_value) {
+                            $found = true;
+                            break;
+                        }
+                    }
+                    if (!$found) {
+                        $keysToUnset[] = $key;
+                    }
+                }
             }
-            // $needs = array_merge($needs, [
-            //     'need_no' => 'N'.$index,
-            //     'priority' => $seq,
-            //     'cover' => $coverAnswer,
-            //     'discuss' => $discussAnswer
-            // ]);
-            // $customerDetails['selected_needs']['need_' . $seq] = $needs;
-            $customerDetails['selected_needs']['test'] = $test;
+            foreach ($keysToUnset as $key) {
+                unset($customerDetails['selected_needs'][$key]);
+            }
 
             // Check if all required priorities are present
             if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
@@ -1151,15 +1168,55 @@ class FormController extends Controller {
                 'premiumMode' => 'required|in:' . implode(',', $mode),
                 'premiumContribution' => [
                     'required',
-                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                    'regex:/^[0-9,]+$/',
+                    function ($attribute, $value, $fail) {
+                        // Remove commas and check if the value is at least 1
+                        $numericValue = str_replace(',', '', $value);
+                        $min = 1;
+                        $max = 20000000;
+                        if (intval($numericValue) < $min) {
+                            $fail('Your amount must be at least ' .$min. '.');
+                        }
+                        if (intval($numericValue) > $max) {
+                            $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                        }
+                    },
                 ],
+                // 'premiumContribution' => [
+                //     'required',
+                //     'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                // ],
                 'lifeCoverage' => [
                     'required',
-                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                    'regex:/^[0-9,]+$/',
+                    function ($attribute, $value, $fail) {
+                        // Remove commas and check if the value is at least 1
+                        $numericValue = str_replace(',', '', $value);
+                        $min = 1;
+                        $max = 20000000;
+                        if (intval($numericValue) < $min) {
+                            $fail('Your amount must be at least ' .$min. '.');
+                        }
+                        if (intval($numericValue) > $max) {
+                            $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                        }
+                    },
                 ],
                 'criticalIllness' => [
                     'required',
-                    'regex:/^\$?(\d{1,2}(,\d{3})*|\d{1,8})$/',
+                    'regex:/^[0-9,]+$/',
+                    function ($attribute, $value, $fail) {
+                        // Remove commas and check if the value is at least 1
+                        $numericValue = str_replace(',', '', $value);
+                        $min = 1;
+                        $max = 20000000;
+                        if (intval($numericValue) < $min) {
+                            $fail('Your amount must be at least ' .$min. '.');
+                        }
+                        if (intval($numericValue) > $max) {
+                            $fail('Your amount must not more than RM' .number_format(floatval($max)). '.');
+                        }
+                    },
                 ],
                 'policyFirstName2'=> 'nullable',
                 'policyFirstName3'=> 'nullable',

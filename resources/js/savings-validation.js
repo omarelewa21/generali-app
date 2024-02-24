@@ -205,35 +205,35 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             } else{
                 // Add event listener to each button with the 'data-required' attribute
-                const dataButtons = document.querySelectorAll('[data-avatar]');
+                // const dataButtons = document.querySelectorAll('[data-avatar]');
             
-                dataButtons.forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the button click
+                // dataButtons.forEach(button => {
+                //     button.addEventListener('click', function(event) {
+                //         event.preventDefault(); // Prevent the default behavior of the button click
         
-                        dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                        // Add 'selected' attribute to the clicked button
-                        this.setAttribute('data-required', 'selected');
+                //         dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+                //         // Add 'selected' attribute to the clicked button
+                //         this.setAttribute('data-required', 'selected');
         
-                        dataButtons.forEach(btn => btn.classList.remove('selected'));
+                //         dataButtons.forEach(btn => btn.classList.remove('selected'));
         
-                        // Get the selected data-avatar value
-                        const dataRelation = this.getAttribute('data-relation');
+                //         // Get the selected data-avatar value
+                //         const dataRelation = this.getAttribute('data-relation');
         
-                        // Update the hidden input field value with the selected avatar
-                        document.getElementById('relationshipInput').value = dataRelation;
-                    });
-                });
+                //         // Update the hidden input field value with the selected avatar
+                //         document.getElementById('relationshipInput').value = dataRelation;
+                //     });
+                // });
         
                 // Preselect the button on page load
-                window.addEventListener('DOMContentLoaded', function() {
-                    const defaultBtn = document.querySelectorAll('.default');
+                // window.addEventListener('DOMContentLoaded', function() {
+                //     const defaultBtn = document.querySelectorAll('.default');
         
-                    defaultBtn.forEach(defaultBtn => {
-                        // Add the 'selected' class to the closest .button-bg div of each default button
-                        defaultBtn.classList.add('selected');
-                    });
-                });
+                //     defaultBtn.forEach(defaultBtn => {
+                //         // Add the 'selected' class to the closest .button-bg div of each default button
+                //         defaultBtn.classList.add('selected');
+                //     });
+                // });
 
                 var goalsAmount = document.getElementById("savings_goals_amount");
         
@@ -250,6 +250,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // If it's a valid number, format it with commas
                         const formattedValue = cleanedValue.toLocaleString('en-MY');
                         this.value = formattedValue;
+                        console.log('hihi');
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = goalsAmountValue;
@@ -728,7 +729,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (modalBackdrop) {
                         modalBackdrop.remove();
                     }
-                    window.location.href = '/savings/risk-profile';
+                    window.location.href = '/risk-profile';
                 });
 
             } else{

@@ -14,8 +14,8 @@
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
-    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
 
     $riskProfile = session('customer_details.risk_profile.selected_risk_profile');
     $potentialReturn = session('customer_details.risk_profile.selected_potential_return');

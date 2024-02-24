@@ -592,12 +592,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (modalBackdrop) {
                         modalBackdrop.remove();
                     }
-                    window.location.href = '/investment/risk-profile';
+                    window.location.href = '/risk-profile';
                 });
 
             } else {
                 var Uncovered = (100 - Covered).toFixed(2);
-                var Covered = (investmentAnnualReturn / newTotalInvestmentNeeded * 100).toFixed(2);
+                var Covered = (percentage).toFixed(2);
+                // var Covered = (investmentAnnualReturn / newTotalInvestmentNeeded * 100).toFixed(2);
                 var circle = document.getElementById("circle");
                 var dotCircle = document.getElementById("dotCircle");
         

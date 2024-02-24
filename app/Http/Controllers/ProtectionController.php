@@ -51,27 +51,7 @@ class ProtectionController extends Controller
         $needs = $customerDetails['selected_needs']['need_1'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 
-        $totalPriority = count($customerDetails['priorities_level']);
-        $index = array_search('protection', $customerDetails['priorities_level'], true);
-
-        if ($customerDetails['priorities']['protection'] == true || $customerDetails['priorities']['protection'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
-
         // Update specific keys with new values
-        $needs = array_merge($needs, [
-            'need_no' => 'N1',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer
-        ]);
         $advanceDetails = array_merge($advanceDetails, [
             'relationship' => $relationshipInput,
             'child_name' => $selectedInsuredNameInput,
@@ -81,7 +61,6 @@ class ProtectionController extends Controller
         ]);
 
         // Set the updated protection_needs back to the customer_details session
-        // $customerDetails['selected_needs']['need_1'] = $needs;
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
@@ -89,9 +68,9 @@ class ProtectionController extends Controller
         $transactionService->handleTransaction($request,$customerDetails);
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('protection.amount.needed',$transactionData);
+        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('protection.amount.needed',$transactionData);
     }
 
     public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)
@@ -305,14 +284,13 @@ class ProtectionController extends Controller
             isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
             isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
             isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
-            isset($customerDetails['priorities']['investment']) && ($customerDetails['priorities']['investment'] === 'true' || $customerDetails['priorities']['investment'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
             isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
             isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
-                return redirect()->route('existing.policy');
+                return redirect()->route('existing.policy',$transactionData);
             } else{
-                return redirect()->route('summary.monthly-goals');
+                return redirect()->route('summary.monthly-goals',$transactionData);
             }
-            return redirect()->route('existing.policy',$transactionData);
         }
     }
 

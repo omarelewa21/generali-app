@@ -152,6 +152,10 @@ button.choice.default.selected img{
     font-family: 'Helvetica Neue';
     line-height: 22px;
 }
+#high-risk-potential-content .potential-btn,
+#low-risk-potential-content .potential-btn{
+    width: 150px;
+}
 .potential-btn{
     background-color: #fff;
     border: 1px solid #A0A0A0;
@@ -168,6 +172,11 @@ button.choice.default.selected img{
 .potential-btn.border-start-0.border-end-0[data-required="selected"],
 .potential-btn.border-start-0.border-end-0.selected{
     border-left: 1px solid #C0232C !important;
+    border-right: 1px solid #C0232C !important;
+}
+.potential-btn.border-end-0:hover,
+.potential-btn.border-end-0[data-required="selected"],
+.potential-btn.border-end-0.selected{
     border-right: 1px solid #C0232C !important;
 }
 

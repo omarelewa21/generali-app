@@ -16,10 +16,10 @@
     // Retrieving values from the session
     $savingsPriority = session('customer_details.priorities.savings_discuss');
 
-    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
     $savingsGoalDuration = session('customer_details.selected_needs.need_4.advance_details.supporting_years');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
 @endphp

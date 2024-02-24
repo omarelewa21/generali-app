@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 class SummaryController extends Controller
 {
     public function validateRiskProfile(Request $request){
+    // public function validateRiskProfile(Request $request, TransactionService $transactionService){
         $customMessages = [
             'riskProfileInput.required' => 'Please select a risk level.',
             'riskProfileInput.in' => 'Invalid risk level selected.',
@@ -44,16 +45,19 @@ class SummaryController extends Controller
 
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['risk_profile'] = $riskProfile;
-        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
+        // $transactionService->handleTransaction($request,$customerDetails);
+
+        // $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
         if ($customerDetails['lastPageUrl']['last_page_url'] == '/investment/annual-return'){
             return redirect()->route('investment.gap');
+            // return redirect()->route('investment.gap',$transactionData);
         } else{
             return redirect()->route('savings.gap');
+            // return redirect()->route('savings.gap',$transactionData);
         }
         
     }

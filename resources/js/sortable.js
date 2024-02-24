@@ -2,13 +2,14 @@ import Sortable from 'sortablejs';
 
 const specificPageURLs = [
     'financial-priorities',
-    'financial-priorities/discuss'
+    'financial-priorities/discuss',
+    'savings/goals'
 ];
 
 const currentURL = window.location.href;
 
 if (specificPageURLs.some(url => currentURL.endsWith(url))) {
-    const data = $('#topPrioritiesButtonInput').val();
+    const data = $("#topPrioritiesButtonInput").length ? $("#topPrioritiesButtonInput").val() : $("#savingsGoalsButtonInput").val();
     if (data === 'null' || data === null) {
         updateMobileFields();
     }
@@ -33,7 +34,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         let data = newArray ?? $("#sortablemobile").children('li.ui-state-default').toArray().map(function (value, index) {
             return allNull ? null : nullIfNone($(value).data('identifier'));
         });
-        data = Array(8).fill(null).map((value, index) => nullIfNone(data[index]));
+        data = Array($("#topPrioritiesButtonInput").length ? 8 : 4).fill(null).map((value, index) => nullIfNone(data[index]));
         let liElems = [];
         let priorityMap = test;
 
@@ -60,7 +61,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         
                 const imgElem = document.createElement("img");
                 imgElem.classList.add("needs-icon");
-                imgElem.setAttribute("src", `/images/top-priorities/${value}-icon.png`);
+                imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.png`);
                 draggableLi.appendChild(imgElem);
                 const textElem = document.createElement("div");
                 // textElem.addClass('handle');
@@ -86,7 +87,12 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         $('#sortablemobile').html(liElems);
-        $('#topPrioritiesButtonInput').val(JSON.stringify(newData));
+
+        if ($("#topPrioritiesButtonInput").length) {
+            $("#topPrioritiesButtonInput").val(JSON.stringify(newData));
+        } else {
+            $("#savingsGoalsButtonInput").val(JSON.stringify(newData));
+        }
     }
 
     $(function () {
@@ -104,10 +110,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             dropdownElem.html('');
 
             const priorityMap = test;
-            const data = JSON.parse($('#topPrioritiesButtonInput').val());
+            const data = JSON.parse($("#topPrioritiesButtonInput").length ? $("#topPrioritiesButtonInput").val() : $("#savingsGoalsButtonInput").val());
             const index = $(this).data('index');
             const options = [];
-            Object.keys(priorityMap).map(function (value) {
+            Object.keys(map).map(function (value) {
                 if (data.includes(value)) {
                     return;
                 }
@@ -121,7 +127,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 innerWithImage.classList.add('dropdown-item', 'd-flex', 'align-items-center', 'justify-content-start', 'p-0');
                 const imgElem = document.createElement('img');
                 imgElem.classList.add('needs-icon');
-                imgElem.setAttribute('src', `/images/top-priorities/${value}-icon.png`);
+                imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.png`);
                 innerWithImage.appendChild(imgElem);
                 const textElem = document.createElement('span');
                 textElem.innerHTML = priorityMap[value];
@@ -148,12 +154,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $("#sortablemobile").on('click', '.updateIndex', function () {
             const index = $(this).data('index');
             const value = $(this).data('value');
-            const data = JSON.parse($('#topPrioritiesButtonInput').val());
+            const data = JSON.parse($("#topPrioritiesButtonInput").length ? $("#topPrioritiesButtonInput").val() : $("#savingsGoalsButtonInput").val());
+            if (data[index] != null) $(`#sortable-main .remove-button:eq(${index})`).trigger("click");
             data[index] = value;
             updateMobileFields(data);
         });
         $(window).resize(function () {
-            const data = JSON.parse($("#topPrioritiesButtonInput").val());
+            const data = JSON.parse($("#topPrioritiesButtonInput").length ? $("#topPrioritiesButtonInput").val() : $("#savingsGoalsButtonInput").val());
             updateMobileFields(data);
         });
     });
@@ -167,10 +174,10 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $("#sortable").find(".remove-button").toArray().map(function (value) {
             $(value).click();
         });
-    }
+    }   
 
-    function resetPriorities() {
-        updateMobileFields([null, null, null, null, null, null, null, null]);
+    function reset() {
+        updateMobileFields($("#topPrioritiesButtonInput").length ? [null, null, null, null, null, null, null, null] : [null, null, null, null]);
         removeAllInWeb();
       }    
 

@@ -43,6 +43,8 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         function sessionDetails(customer_details) {
+            if (!customer_details) return;
+            
             if (customer_details.basic_details) {
                 allFieldsFilled.push('/basic-details');
             }
