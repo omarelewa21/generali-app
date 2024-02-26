@@ -44,9 +44,9 @@
                         <input type="hidden" name="existingPolicy">
                         <section class="main-content">
                             <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
-                                        <h1 class="display-3 text-uppercase">Please fill in your existing policies.</h1>
+                                        <h1 class="display-5 text-uppercase">Please fill in your existing policies.</h1>
                                     </div>
                                 </div>
                                 <div class="row px-4" id="formContainer">
@@ -60,7 +60,7 @@
                                     @endif
                                     <div class="custom-alert"></div>
                                     <div class="col-12 pt-4 pb-2" id="form" data-index="1">
-                                        <h4 class="display-7 text-gray pb-4">Policy 1</h4>
+                                        <h4 class="display-7 text-gray pb-2">Policy 1</h4>
                                         <div class="row">
                                             <div class="col-md-12 pb-5">
                                                 <p class="text-gray">What is your role in this policy?</p>
@@ -88,7 +88,7 @@
                                         </div>
                                         <h4 class="display-7 text-gray">Policy Details</h4>
                                         <div class="row">
-                                            <div class="pt-4 col-12">
+                                            <div class="pt-3 col-12">
                                                 <label for="policyFullNameInput" class="form-label">Full Name (as per I.C)<span class="text-danger">*</span></label>
                                                 <input type="text" name="policyFullName" class="form-control @error('policyFullName') is-invalid @enderror" id="policyFullNameInput" placeholder="Full Name" value="{{ old('policyFullName', $existingPolicy['policy_1']['full_name'] ?? '') }}" data-key="full_name" required>
                                                 @error('policyFullName')

@@ -32,7 +32,7 @@
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changePosition">
                     </div>
                 </section>
             </div>

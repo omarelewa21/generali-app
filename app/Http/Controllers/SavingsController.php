@@ -63,7 +63,6 @@ class SavingsController extends Controller
         ]);
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_4'] = $needs;
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session

@@ -30,7 +30,7 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 py-5 pt-md-0">
+                            <div class="col-xxl-6 col-xl-6 py-3 pt-md-0">
                                 <h2 class="display-5 fw-bold lh-sm text-center">My ideal retirement involves:</h2>
                             </div>
                         </div>
