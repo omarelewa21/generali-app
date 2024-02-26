@@ -46,6 +46,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             const criticalIllness = document.getElementById('critical_illness');
             const medicalPlanning = document.getElementById('medical_planning');
 
+
             dataButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     event.preventDefault(); // Prevent the default behavior of the button click
@@ -61,8 +62,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     } else{
                         this.setAttribute('data-required', isSelected ? '' : 'selected');
                     }
-
-                    document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    if(document.querySelectorAll('[data-required="selected"]').length == 0){
+                        document.getElementById('selectionHealthMedicalInput').value = '';
+                    } else{
+                        document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    }
                 });
             });
 
