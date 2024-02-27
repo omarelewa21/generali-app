@@ -68,7 +68,7 @@ Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name
 // Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
 Route::get('/financial-priorities', [DropdownController::class, 'financialPriorities'])->name('financial.priorities');
 Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
-Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
+// Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
 Route::get('/financial-priorities/discuss', [DropdownController::class, 'financialPrioritiesDiscuss'])->name('financial.priorities.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 

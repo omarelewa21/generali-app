@@ -18,7 +18,7 @@
     $skintone = session('customer_details.avatar.skin_tone', 'white');
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $fullName = session('customer_details.basic_details.full_name');
-    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_gender_selection">
@@ -135,7 +135,7 @@
                                         <input type="hidden" name="genderImage" id="genderImage" value="{{$image}}">
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
-                                        <a href="{{route('avatar.welcome',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>

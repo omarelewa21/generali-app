@@ -290,7 +290,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('avatar' ,['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>

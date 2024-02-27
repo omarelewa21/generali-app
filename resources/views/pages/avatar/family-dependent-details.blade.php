@@ -25,7 +25,7 @@
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
 
-    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
 <div id="avatar_family_dependent_details">

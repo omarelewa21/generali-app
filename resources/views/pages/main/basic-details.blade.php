@@ -15,7 +15,7 @@
 @php
     // Retrieving values from the session
     $basicDetails ??= session('customer_details.basic_details');
-    $transactionId = !empty(request()->input('transaction_id')) ? request()->input('transaction_id') : session('customer_details.transaction_id');
+    $transactionId =  session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
     
 @endphp
 
