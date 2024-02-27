@@ -17,9 +17,7 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $identityDetails = session('customer_details.identity_details') ?? $basicDetails;
     $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
-    $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
-
-    // dd(session()->all());
+    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
     
 @endphp
 

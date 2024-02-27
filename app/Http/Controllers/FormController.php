@@ -453,7 +453,7 @@ class FormController extends Controller {
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
 
-            if (isset($customerDetails['family_details']) && $latestKey ==='family_details')
+            if (isset($customerDetails['family_details']) && $latestKey === 'family_details')
             {
                 $dependentService->handleDependent($customerDetails,$customerId);
             }
@@ -1038,12 +1038,11 @@ class FormController extends Controller {
                 return $value !== null;
             });
             $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
-            // dd($topPrioritiesButtonInput);
 
            
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
-            $customerId = $customerDetails['customer_id'];
+            $customerId = $request->session()->get('customer_id');
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
             unset($customerDetails['priorities']);
@@ -1059,7 +1058,7 @@ class FormController extends Controller {
             $request->session()->put('customer_details', $customerDetails);
             
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss');
+            return redirect()->route('financial.priorities.discuss');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
@@ -1085,9 +1084,6 @@ class FormController extends Controller {
             
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
-
-            // dd($priorities);
-
             // Check if all required priorities are present
             if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
                 // All required priorities are present
@@ -1097,19 +1093,17 @@ class FormController extends Controller {
                 $customerDetails['customers_choice'] = '2';
             }
 
-            dd($customerDetails);
-
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
-
+            $customerId = $request->session()->get('customer_id');
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
             return response()->json(['message' => 'Button click saved successfully']);
         } else {

@@ -17,8 +17,8 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $familyDependent = session('customer_details.family_details');
     $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
-
     // dd($familyDependent);
+    // dd(session()->all());
 @endphp
 
 <div id="avatar_family_dependent">
@@ -112,7 +112,7 @@
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="family.dependent.details">
                                         
-                                        <a href="{{route('marital.status',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

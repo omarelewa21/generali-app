@@ -14,7 +14,7 @@
 @php
     // Retrieving values from the session
     $protectionPriority = session('customer_details.priorities.protection_discuss');
-    // dd($protectionPriority);
+    $topPriorities = session('customer_details.priorities_level');
 @endphp
 
 <div id="protection_home">
@@ -47,7 +47,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('priorities.to.discuss')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('financial.priorities.discuss')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <a href="{{route('protection.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>
@@ -78,6 +78,7 @@
 
 <script>
     var protectionPriority = '{{$protectionPriority}}';
+    var lastPageInput = {!! json_encode($topPriorities) !!};
 </script>
 
 @endsection

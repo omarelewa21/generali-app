@@ -91,9 +91,6 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
                 if (checkboxValues[checkboxId] === true) {
                     // Assign link based on the sequence
                     if (checkboxId === 'protection_discuss') {
-                        
-                        console.log(checkboxId);
-                        // console.log('first console check box ');
                         document.getElementById('priorityNext').setAttribute('href', '/protection');
                         break;
                     }

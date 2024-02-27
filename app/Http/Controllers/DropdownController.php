@@ -61,7 +61,7 @@ class DropdownController extends Controller
         $idtypes = Idtype::all();
         $occupations = Occupation::all();
         $educationLevels = EducationLevel::all();
-        $transactionId = $request->input('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
 
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
@@ -81,11 +81,112 @@ class DropdownController extends Controller
         $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
 
         if($basicDetails){
+
+            session(['customer_details.identity_details' => $basicDetails]);
             return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
         }
         else{
             return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
         }
+    }
+
+    public function maritalStatus(Request $request)
+    {
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        
+        if(!empty($transactionId)){
+            session(['transaction_id' => $transactionId]);
+
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
+            session(['customer_id' => $customerId]);
+           
+        } else {
+            $transactionId = null;
+        }
+
+        if (!is_null($transactionId)) {
+            $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
+            $avatarImage = $avatar->image;
+            session(['customer_details.avatar.image' => $avatarImage]);
+
+            $maritalStatus = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->marital_status;
+            session(['customer_details.identity_details.marital_status' => $maritalStatus]);
+        }
+         
+        return view('pages/avatar/marital-status');
+    }
+
+    public function familyDependent(Request $request)
+    {
+        $familyDependent = [];
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+
+        if(!empty($transactionId)){
+
+            session(['transaction_id' => $transactionId]);
+
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
+
+            session(['customer_id' => $customerId]);
+           
+        } else {
+            $transactionId = null;
+        }
+
+        if (!is_null($transactionId)) {
+            $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
+            $avatarImage = $avatar->image;
+            session(['customer_details.avatar.image' => $avatarImage]);
+
+            $maritalStatus = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->marital_status;
+            session(['customer_details.identity_details.marital_status' => $maritalStatus]);
+
+            $customerSpouse = optional(Customer::with('spouse')->where('id',$customerId)->first())
+                                ->spouse->toArray();
+
+            $customerDependent = optional(Customer::with('dependents')->where('id',$customerId)->first())
+                                ->dependents->toArray();
+            
+            
+            if ($customerSpouse) {
+                session(['customer_details.family_details.spouse' => true ]); 
+                session(['customer_details.family_details.spouse_data' => $customerSpouse ]);   
+            }
+ 
+            if ($customerDependent) {
+
+                foreach ($customerDependent as $dependent) {
+    
+                    if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
+                    {
+                        $parentData[lcfirst($dependent['relation'])] = $dependent;
+                    }
+                    elseif ($dependent['relation'] == 'Sibling') 
+                    {
+                        $siblingData = $dependent;
+                    }
+                    else // child 
+                    {
+                        $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
+                    }
+                }
+        
+                $familyDependent['children_data'] = $childData;
+                $familyDependent['parents_data'] = $parentData;
+                $familyDependent['siblings_data'] = $siblingData;
+            
+                foreach ($familyDependent as $key => $value) {
+                    if (isset($value)) {
+                
+                        $substring = strstr($key, '_data',true);
+                        session(['customer_details.family_details.' . $substring => true]);
+                        session(['customer_details.family_details.' . $key => $value]);
+                    }
+                }
+            }
+        }
+
+        return view('pages/avatar/family-dependent');
     }
 
     public function familyDependentDetails(Request $request)
@@ -126,7 +227,11 @@ class DropdownController extends Controller
             session(['customer_details.avatar.image' => $avatarImage]);
 
             $customerDependent = optional(Customer::with('dependents')->where('id',$customerId)->first())
-                                ->dependents->toArray(); 
+                                ->dependents->toArray();
+            
+            $customerSpouse = optional(Customer::with('spouse')->where('id',$customerId)->first())
+                                ->spouse->toArray(); 
+
 
             // $maritalstatuses = $basicDetails->marital_status;
             session(['customer_details.identity_details.marital_status' => $basicDetails->marital_status]);
@@ -148,6 +253,10 @@ class DropdownController extends Controller
 
             // $occupations = $basicDetails->occupation;
             session(['customer_details.identity_details.occupation' => $basicDetails->occupation]);
+        }
+
+        if ($customerSpouse) {
+            session(['customer_details.family_details.spouse_data' => $customerSpouse ]); 
         }
 
         if ($customerDependent) {
@@ -172,8 +281,8 @@ class DropdownController extends Controller
             $familyDetail['parents_data'] = $parentData;
             $familyDetail['siblings_data'] = $siblingData;
 
-            session(['customer_details.family_details.children'=> true]);
-            session(['customer_details.family_details.spouse'=> true]);
+            session(['customer_details.family_details.children' => true]);
+            session(['customer_details.family_details.spouse' => true]);
 
             session(['customer_details.family_details.children_data'=>  $familyDetail['children_data']]);
             session(['customer_details.family_details.parents_data'=>  $familyDetail['parents_data']]);
@@ -253,6 +362,63 @@ class DropdownController extends Controller
         return view('pages/priorities/top-priorities',compact('priorityData'));
     
     }
+    public function financialPrioritiesDiscuss(Request $request)
+    {
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $prioritiesDiscuss = [];
+
+        if(!empty($transactionId)){
+            session(['transaction_id' => $transactionId]);
+
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
+            session(['customer_id' => $customerId]);
+           
+        } else {
+            $transactionId = null;   
+        }
+
+        if (!is_null($transactionId)) {
+            $priorityDetails = Customer::with('priorities')->find($customerId);
+            $customerPriority = $priorityDetails->priorities;
+
+            foreach ($customerPriority as $cpValue) {
+                $prioritiesDiscuss[$cpValue['sequence']-1] = $cpValue['priority'];
+            }
+            ksort($prioritiesDiscuss);
+            session(['customer_details.priorities_level' => $prioritiesDiscuss]);
+
+            $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
+            $avatarImage = $avatar->image;
+            session(['customer_details.avatar.image' => $avatarImage]);
+            session(['customer_details.priorities' => $prioritiesDiscuss]);
+        }
+        
+        return view('pages/priorities/priorities-discuss',compact('prioritiesDiscuss'));
+    
+    }
+
+    public function protectionCoverage(Request $request)
+    {
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $protectionCoverageData = [];
+
+        if (!empty($transactionId)) {
+            session(['transaction_id' => $transactionId]);
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
+            session(['customer_id' => $customerId]);
+        }
+        else{
+            $transactionId = null;
+        }
+
+        if (!is_null($transactionId)) {
+            # code...
+        }
+
+        return view('pages/priorities/coverage');
+
+    }
+
 
     public function existingPolicy()
     {

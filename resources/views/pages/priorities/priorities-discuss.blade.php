@@ -17,7 +17,6 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.priorities_level');
     $prioritiesDiscuss = session('customer_details.priorities');
-    // dd($topPriorities);
 @endphp
 
 <div id="priorities_to_discuss">
@@ -314,10 +313,6 @@ document.addEventListener('DOMContentLoaded', function() {
         firstCollapse.classList.add('show');
     }
 
-    if (secondAccordionItem) {
-        const secondCollapse = secondAccordionItem.querySelector('.accordion-collapse');
-        secondCollapse.classList.add('show');
-    }
 });
 </script>
 @endsection

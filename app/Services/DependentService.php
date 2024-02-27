@@ -24,26 +24,38 @@ class DependentService
             $agentId = Agent::find(1)->id;
             $newchildrenData = [];
             $newParentData = [];
+            $newSiblingData = [];
             $createdDependentId = [];
             $createdSpouseId = [];
 
-            $newSiblingData['sibling'] = $customerDetails['family_details']['siblings_data'];
-            $newSiblingData['sibling']['customer_id'] = $customerId;
-
-            $newSpouseData['spouse'] = $customerDetails['family_details']['spouse_data'];
-            $newSpouseData['spouse']['customer_id'] = $customerId;
-
-            $childrenData = $customerDetails['family_details']['children_data'];
-            $parentData = $customerDetails['family_details']['parents_data'];
-
-            foreach ($childrenData as $childrenKey => $childrenValue) {
-                $newchildrenData[$childrenKey] = $childrenValue;
-                $newchildrenData[$childrenKey]['customer_id'] = $customerId;
+            if (isset($customerDetails['family_details']['siblings_data']) && $customerDetails['family_details']['siblings'] === true) {
+                $newSiblingData['sibling'] = $customerDetails['family_details']['siblings_data'];
+                $newSiblingData['sibling']['customer_id'] = $customerId;
             }
 
-            foreach ($parentData as $parentKey => $parentValue) {
-                $newParentData[$parentKey] = $parentValue;
-                $newParentData[$parentKey]['customer_id'] = $customerId;
+            if (isset($customerDetails['family_details']['spouse_data']) && $customerDetails['family_details']['spouse'] === true) {
+                $newSpouseData['spouse'] = $customerDetails['family_details']['spouse_data'];
+                $newSpouseData['spouse']['customer_id'] = $customerId;
+            }
+
+            if (isset($customerDetails['family_details']['children_data']) ) {
+
+                $childrenData = $customerDetails['family_details']['children_data'];
+
+                foreach ($childrenData as $childrenKey => $childrenValue) {
+                    $newchildrenData[$childrenKey] = $childrenValue;
+                    $newchildrenData[$childrenKey]['customer_id'] = $customerId;
+                }
+            }
+
+            if (isset($customerDetails['family_details']['parents_data']) ) {
+
+                $parentData = $customerDetails['family_details']['parents_data'];
+
+                foreach ($parentData as $parentKey => $parentValue) {
+                    $newParentData[$parentKey] = $parentValue;
+                    $newParentData[$parentKey]['customer_id'] = $customerId;
+                }
             }
 
             $newDependentDetail = array_merge($newchildrenData,$newParentData,$newSiblingData,$newSpouseData);
