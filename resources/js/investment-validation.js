@@ -342,7 +342,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Get the input value
                 var investmentPA = document.getElementById("investment_pa");
                 var totalInvestmentPercentage = document.getElementById("percentage");
-                var totalAnnualReturn = document.getElementById("total_annualReturn");
+                // var totalAnnualReturn = document.getElementById("total_annualReturn");
         
                 investmentPA.addEventListener("input", function() {
         
@@ -356,7 +356,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     var totalPercentage = total_AR_amount / oldTotalFund * 100;
                     if (!isNaN(annualReturn)) {
                         this.value = annualReturn;
-                        totalAnnualReturn.value = total_AR_amount;
+                        // totalAnnualReturn.value = total_AR_amount;
                         if(totalPercentage > 100){
                             totalInvestmentPercentage.value = 100;
                             $('.calculation-progress-bar').css('width','100%');
@@ -388,185 +388,185 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-        if (path == '/investment/risk-profile') {
+        // if (path == '/investment/risk-profile') {
 
-            if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
-                var nameModal = document.getElementById('missingLastPageInputFields');
-                nameModal.classList.add('show');
-                nameModal.style.display = 'block';
-                document.querySelector('body').style.paddingRight = '0px';
-                document.querySelector('body').style.overflow = 'hidden';
-                document.querySelector('body').classList.add('modal-open');
+        //     if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+        //         var nameModal = document.getElementById('missingLastPageInputFields');
+        //         nameModal.classList.add('show');
+        //         nameModal.style.display = 'block';
+        //         document.querySelector('body').style.paddingRight = '0px';
+        //         document.querySelector('body').style.overflow = 'hidden';
+        //         document.querySelector('body').classList.add('modal-open');
 
-                var modalBackdrop = document.createElement('div');
-                modalBackdrop.className = 'modal-backdrop fade show';
-                document.querySelector('body.modal-open').append(modalBackdrop);
+        //         var modalBackdrop = document.createElement('div');
+        //         modalBackdrop.className = 'modal-backdrop fade show';
+        //         document.querySelector('body.modal-open').append(modalBackdrop);
 
-                // Close the modal
-                var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
-                closeButton.addEventListener('click', function() {
-                    nameModal.classList.remove('show');
-                    nameModal.style.display = 'none';
-                    document.querySelector('body').style.paddingRight = '';
-                    document.querySelector('body').style.overflow = '';
-                    document.querySelector('body').classList.remove('modal-open');
-                    var modalBackdrop = document.querySelector('.modal-backdrop');
-                    if (modalBackdrop) {
-                        modalBackdrop.remove();
-                    }
-                    window.location.href = '/investment/annual-return';
-                });
+        //         // Close the modal
+        //         var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
+        //         closeButton.addEventListener('click', function() {
+        //             nameModal.classList.remove('show');
+        //             nameModal.style.display = 'none';
+        //             document.querySelector('body').style.paddingRight = '';
+        //             document.querySelector('body').style.overflow = '';
+        //             document.querySelector('body').classList.remove('modal-open');
+        //             var modalBackdrop = document.querySelector('.modal-backdrop');
+        //             if (modalBackdrop) {
+        //                 modalBackdrop.remove();
+        //             }
+        //             window.location.href = '/investment/annual-return';
+        //         });
 
-            } else {
-                const dataButtons = document.querySelectorAll('[data-avatar]');
-                const dataPotentialBtns = document.querySelectorAll('[data-risk]');
-                var highRisk = document.getElementById("high-risk");
-                var mediumRisk = document.getElementById("medium-risk");
-                var lowRisk = document.getElementById("low-risk");
-                var highRiskImg = document.getElementById("high-risk-img");
-                var mediumRiskImg = document.getElementById("medium-risk-img");
-                var lowRiskImg = document.getElementById("low-risk-img");
-                var highPotentialReturn = document.getElementById("high-risk-potential-content");
-                var mediumPotentialReturn = document.getElementById("medium-risk-potential-content");
-                var lowPotentialReturn = document.getElementById("low-risk-potential-content");
-                const dataSelected = document.querySelectorAll('.default');
+        //     } else {
+        //         const dataButtons = document.querySelectorAll('[data-avatar]');
+        //         const dataPotentialBtns = document.querySelectorAll('[data-risk]');
+        //         var highRisk = document.getElementById("high-risk");
+        //         var mediumRisk = document.getElementById("medium-risk");
+        //         var lowRisk = document.getElementById("low-risk");
+        //         var highRiskImg = document.getElementById("high-risk-img");
+        //         var mediumRiskImg = document.getElementById("medium-risk-img");
+        //         var lowRiskImg = document.getElementById("low-risk-img");
+        //         var highPotentialReturn = document.getElementById("high-risk-potential-content");
+        //         var mediumPotentialReturn = document.getElementById("medium-risk-potential-content");
+        //         var lowPotentialReturn = document.getElementById("low-risk-potential-content");
+        //         const dataSelected = document.querySelectorAll('.default');
         
-                dataButtons.forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the button click
+        //         dataButtons.forEach(button => {
+        //             button.addEventListener('click', function(event) {
+        //                 event.preventDefault(); // Prevent the default behavior of the button click
         
-                        // Remove 'data-required' from all elements with the class 'risk-profile-content'
-                        dataPotentialBtns.forEach(btn => {
-                            btn.removeAttribute('data-required');
-                        });
+        //                 // Remove 'data-required' from all elements with the class 'risk-profile-content'
+        //                 dataPotentialBtns.forEach(btn => {
+        //                     btn.removeAttribute('data-required');
+        //                 });
         
-                        dataButtons.forEach(btn => btn.removeAttribute('data-required'));
-                        // Add 'selected' attribute to the clicked button
-                        this.setAttribute('data-required', 'selected');
+        //                 dataButtons.forEach(btn => btn.removeAttribute('data-required'));
+        //                 // Add 'selected' attribute to the clicked button
+        //                 this.setAttribute('data-required', 'selected');
         
-                        const selectedData = this.getAttribute('data-required');
+        //                 const selectedData = this.getAttribute('data-required');
         
-                        dataButtons.forEach(btn => btn.classList.remove('selected'));
+        //                 dataButtons.forEach(btn => btn.classList.remove('selected'));
         
-                        // Get the selected data-avatar value
-                        const dataAvatar = this.getAttribute('data-avatar');
+        //                 // Get the selected data-avatar value
+        //                 const dataAvatar = this.getAttribute('data-avatar');
         
-                        // Update the hidden input field value with the selected avatar
-                        document.getElementById('investmentRiskProfileInput').value = dataAvatar;
+        //                 // Update the hidden input field value with the selected avatar
+        //                 document.getElementById('investmentRiskProfileInput').value = dataAvatar;
         
-                        const selectedPotential = document.getElementById('investmentPotentialReturnInput');
+        //                 const selectedPotential = document.getElementById('investmentPotentialReturnInput');
         
-                        if(selectedData === 'selected'){
-                            switch(dataAvatar) {
-                                case 'High Risk':
-                                    const selectedHighPR = highPotentialReturn.querySelector('#high-potential-return');
-                                    selectedHighPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'High';
-                                    break;
-                                case 'Medium Risk':
-                                    const selectedMediumPR = mediumPotentialReturn.querySelector('#medium-potential-return');
-                                    selectedMediumPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Medium';
-                                    break;
-                                case 'Low Risk':
-                                    const selectedLowPR = lowPotentialReturn.querySelector('#low-potential-return');
-                                    selectedLowPR.setAttribute('data-required', 'selected');
-                                    selectedPotential.value = 'Low';
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-                });
+        //                 if(selectedData === 'selected'){
+        //                     switch(dataAvatar) {
+        //                         case 'High Risk':
+        //                             const selectedHighPR = highPotentialReturn.querySelector('#high-potential-return');
+        //                             selectedHighPR.setAttribute('data-required', 'selected');
+        //                             selectedPotential.value = 'High';
+        //                             break;
+        //                         case 'Medium Risk':
+        //                             const selectedMediumPR = mediumPotentialReturn.querySelector('#medium-potential-return');
+        //                             selectedMediumPR.setAttribute('data-required', 'selected');
+        //                             selectedPotential.value = 'Medium';
+        //                             break;
+        //                         case 'Low Risk':
+        //                             const selectedLowPR = lowPotentialReturn.querySelector('#low-potential-return');
+        //                             selectedLowPR.setAttribute('data-required', 'selected');
+        //                             selectedPotential.value = 'Low';
+        //                             break;
+        //                         default:
+        //                             break;
+        //                     }
+        //                 }
+        //             });
+        //         });
         
-                dataPotentialBtns.forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default behavior of the button click
+        //         dataPotentialBtns.forEach(button => {
+        //             button.addEventListener('click', function(event) {
+        //                 event.preventDefault(); // Prevent the default behavior of the button click
         
-                        dataPotentialBtns.forEach(btn => btn.removeAttribute('data-required'));
-                        // Add 'selected' attribute to the clicked button
-                        this.setAttribute('data-required', 'selected');
+        //                 dataPotentialBtns.forEach(btn => btn.removeAttribute('data-required'));
+        //                 // Add 'selected' attribute to the clicked button
+        //                 this.setAttribute('data-required', 'selected');
         
-                        dataPotentialBtns.forEach(btn => btn.classList.remove('selected'));
+        //                 dataPotentialBtns.forEach(btn => btn.classList.remove('selected'));
         
-                        // Get the selected data-avatar value
-                        const dataPotential = this.getAttribute('data-risk');
+        //                 // Get the selected data-avatar value
+        //                 const dataPotential = this.getAttribute('data-risk');
         
-                        // Update the hidden input field value with the selected avatar
-                        document.getElementById('investmentPotentialReturnInput').value = dataPotential;
-                    });
-                });       
+        //                 // Update the hidden input field value with the selected avatar
+        //                 document.getElementById('investmentPotentialReturnInput').value = dataPotential;
+        //             });
+        //         });       
         
-                // Preselect the button on page load
-                window.addEventListener('DOMContentLoaded', function() {
-                    const defaultBtn = document.querySelectorAll('.default');
+        //         // Preselect the button on page load
+        //         window.addEventListener('DOMContentLoaded', function() {
+        //             const defaultBtn = document.querySelectorAll('.default');
         
-                    defaultBtn.forEach(defaultBtn => {
-                        defaultBtn.classList.add('selected');
-                    });
-                });
+        //             defaultBtn.forEach(defaultBtn => {
+        //                 defaultBtn.classList.add('selected');
+        //             });
+        //         });
         
-                $(document).ready(function () {
-                    if ($('.risk-btn.selected')){
-                        var selectedId = $('.risk-btn.selected').attr('id');
-                        document.getElementById(selectedId + "-img").style.display = "block";
-                        document.getElementById(selectedId + "-potential-content").style.display = "block";
-                    }
-                });
+        //         $(document).ready(function () {
+        //             if ($('.risk-btn.selected')){
+        //                 var selectedId = $('.risk-btn.selected').attr('id');
+        //                 document.getElementById(selectedId + "-img").style.display = "block";
+        //                 document.getElementById(selectedId + "-potential-content").style.display = "block";
+        //             }
+        //         });
         
-                highRisk.onclick = function(){
-                    highRiskImg.style.display = "block";
-                    mediumRiskImg.style.display = "none";
-                    lowRiskImg.style.display = "none";
-                    highPotentialReturn.style.display ="block";
-                    mediumPotentialReturn.style.display = "none";
-                    lowPotentialReturn.style.display = "none";
-                }
-                mediumRisk.onclick = function(){
-                    mediumRiskImg.style.display = "block";
-                    highRiskImg.style.display = "none";
-                    lowRiskImg.style.display = "none";
-                    mediumPotentialReturn.style.display = "block";
-                    highPotentialReturn.style.display = "none";
-                    lowPotentialReturn.style.display = "none";
-                }
-                lowRisk.onclick = function(){
-                    lowRiskImg.style.display = "block";
-                    highRiskImg.style.display = "none";
-                    mediumRiskImg.style.display = "none";
-                    lowPotentialReturn.style.display = "block";
-                    highPotentialReturn.style.display = "none";
-                    mediumPotentialReturn.style.display = "none";
-                }
+        //         highRisk.onclick = function(){
+        //             highRiskImg.style.display = "block";
+        //             mediumRiskImg.style.display = "none";
+        //             lowRiskImg.style.display = "none";
+        //             highPotentialReturn.style.display ="block";
+        //             mediumPotentialReturn.style.display = "none";
+        //             lowPotentialReturn.style.display = "none";
+        //         }
+        //         mediumRisk.onclick = function(){
+        //             mediumRiskImg.style.display = "block";
+        //             highRiskImg.style.display = "none";
+        //             lowRiskImg.style.display = "none";
+        //             mediumPotentialReturn.style.display = "block";
+        //             highPotentialReturn.style.display = "none";
+        //             lowPotentialReturn.style.display = "none";
+        //         }
+        //         lowRisk.onclick = function(){
+        //             lowRiskImg.style.display = "block";
+        //             highRiskImg.style.display = "none";
+        //             mediumRiskImg.style.display = "none";
+        //             lowPotentialReturn.style.display = "block";
+        //             highPotentialReturn.style.display = "none";
+        //             mediumPotentialReturn.style.display = "none";
+        //         }
         
-                dataSelected.forEach(btnSelected => {
-                    highRiskImg.style.display = "none";
-                    mediumRiskImg.style.display = "none";
-                    lowRiskImg.style.display = "none";
+        //         dataSelected.forEach(btnSelected => {
+        //             highRiskImg.style.display = "none";
+        //             mediumRiskImg.style.display = "none";
+        //             lowRiskImg.style.display = "none";
         
-                    const defaultSelection = btnSelected.getAttribute('data-avatar');
-                    if (defaultSelection === 'High Risk') {
-                        highPotentialReturn.style.display = "block";
-                    } else if (defaultSelected === 'Medium Risk'){
-                        mediumPotentialReturn.style.display = "block";
-                    }
-                    else if (defaultSelected === 'Low Risk'){
-                        lowRiskImg.style.display = "block";
-                    }
-                });
+        //             const defaultSelection = btnSelected.getAttribute('data-avatar');
+        //             if (defaultSelection === 'High Risk') {
+        //                 highPotentialReturn.style.display = "block";
+        //             } else if (defaultSelected === 'Medium Risk'){
+        //                 mediumPotentialReturn.style.display = "block";
+        //             }
+        //             else if (defaultSelected === 'Low Risk'){
+        //                 lowRiskImg.style.display = "block";
+        //             }
+        //         });
         
-                const oldRiskLevel = document.getElementById('investmentRiskProfileInput').value;
-                if (oldRiskLevel === 'High Risk') {
-                    highPotentialReturn.style.display = "block";
-                } else if (oldRiskLevel === 'Medium Risk'){
-                    mediumPotentialReturn.style.display = "block";
-                }
-                else if (oldRiskLevel === 'Low Risk'){
-                    lowPotentialReturn.style.display = "block";
-                }
-            }
-        }
+        //         const oldRiskLevel = document.getElementById('investmentRiskProfileInput').value;
+        //         if (oldRiskLevel === 'High Risk') {
+        //             highPotentialReturn.style.display = "block";
+        //         } else if (oldRiskLevel === 'Medium Risk'){
+        //             mediumPotentialReturn.style.display = "block";
+        //         }
+        //         else if (oldRiskLevel === 'Low Risk'){
+        //             lowPotentialReturn.style.display = "block";
+        //         }
+        //     }
+        // }
         if (path == '/investment/gap') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
@@ -592,12 +592,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     if (modalBackdrop) {
                         modalBackdrop.remove();
                     }
-                    window.location.href = '/investment/risk-profile';
+                    window.location.href = '/risk-profile';
                 });
 
             } else {
                 var Uncovered = (100 - Covered).toFixed(2);
-                var Covered = (investmentAnnualReturn / newTotalInvestmentNeeded * 100).toFixed(2);
+                var Covered = (percentage).toFixed(2);
+                // var Covered = (investmentAnnualReturn / newTotalInvestmentNeeded * 100).toFixed(2);
                 var circle = document.getElementById("circle");
                 var dotCircle = document.getElementById("dotCircle");
         

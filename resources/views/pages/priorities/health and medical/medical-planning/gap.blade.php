@@ -11,7 +11,7 @@
     $health_medical = session('customer_details.selected_needs.need_6.advance_details.health_care');
     $existingProtectionAmount = session('customer_details.selected_needs.need_6.advance_details.health_care.existing_amount');
     $medicalYear = session('customer_details.selected_needs.need_6.advance_details.health_care.year');
-    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.total_health_medical_needed');
+    $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.goals_amount');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
 @endphp
@@ -35,8 +35,8 @@
                 <section class="bottom-content z-1">
                     <div class="container h-100">
                         <div class="row h-100">
-                            <div class="col-xl-5 col-lg-5 col-md-12 h-100 d-flex justify-content-center align-items-end">
-                                <div class="svg-container h-100" style="transform:scale(1.3)">
+                            <div class="col-xl-5 col-md-12 h-100 d-flex justify-content-center align-items-end graph-col">
+                                <div class="svg-container h-100 graph-size">
                                     <div class="card-gap h-100" id="gap">
                                         <div class="card-gap__percent h-100">
                                             <svg>
@@ -55,7 +55,7 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/health-medical-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <img src="{{ asset('images/top-priorities/new-health-medical-icon.png') }}" style="width:85px;" class="mb-3"><br>
                                                 <span>{{ $totalAmountNeeded > $totalHealthMedicalNeeded ? '100' : floor(floatval($healthMedicalFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black">covered</p>
                                             </div>
@@ -63,12 +63,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 py-xxxl-5">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$medicalYear}} years</h4>
@@ -80,7 +80,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">I want to be prepared for any hospitalisation expenses with</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalHealthMedicalNeeded))}}</h4>
@@ -92,7 +92,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{$existingProtectionAmount === '' ? '0' : number_format(floatval($existingProtectionAmount))}}</h4>
@@ -104,7 +104,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So I need a hospitalisation plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (11 /100)) )}}</h4>

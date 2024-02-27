@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -80,22 +81,11 @@ class HealthMedicalController extends Controller
 
     public function validateHealthMedicalSelection(Request $request, TransactionService $transactionService)
     {
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
-        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
-
-        // Get existing healthMedical_needs from the session
-        $needs = $customerDetails['selected_needs']['need_6'] ?? [];
-        $advanceDetails = $customerDetails['selected_needs']['need_6']['advance_details'] ?? [];
-        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
-        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
-
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
             if ($value !== null) {
-                return true;
+                return true; 
             }
-            
             $customMessage = "Please select at least one.";
             $validator->errors()->add($attribute, $customMessage);
     
@@ -108,7 +98,6 @@ class HealthMedicalController extends Controller
             ],
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -118,82 +107,43 @@ class HealthMedicalController extends Controller
         $selectionCriticalInput = $request->input('selectionCriticalInput');
         $selectionMedicalInput = $request->input('selectionMedicalInput');
 
-        $index = array_search('investment', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['investments'] == true || $customerDetails['priorities']['investments'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['investments_discuss'] == true || $customerDetails['priorities']['investments_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
-        if ($selectionCriticalInput != null || $selectionCriticalInput != ''){
-            $criticalPlan = 'Yes';
-        } else{
-            $criticalPlan = 'No';
-        }
-        if ($selectionMedicalInput != null || $selectionMedicalInput != ''){
-            $medicalPlan = 'Yes';
-        } else{
-            $medicalPlan = 'No';
-        }
+        // Get the existing customer_details array from the session
+        $customerDetails = $request->session()->get('customer_details', []);
+        $selectedNeeds = $customerDetails['selected_needs'] ?? [];
+
+        // Get existing healthMedical_needs from the session
+        $needs = $customerDetails['selected_needs']['need_6'] ?? [];
+        $advanceDetails = $customerDetails['selected_needs']['need_6']['advance_details'] ?? [];
+        $criticalIllness = $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] ?? [];
+        $medicalPlanning = $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] ?? [];
 
         // Update specific keys with new values
         $needs = array_merge($needs, [
-            'need_no' => 'N6',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer,
             'number_of_selection' => $healthMedicalSelectedInput,
         ]);
-        $criticalIllness = array_merge($criticalIllness, [
-            'critical_illness_plan' => $criticalPlan
-        ]);
-        $medicalPlanning = array_merge($medicalPlanning, [
-            'medical_care_plan' => $medicalPlan
-        ]);
 
-        if ($selectionCriticalInput === '' || $selectionCriticalInput === null ){
+        if ($selectionCriticalInput !== '' && $selectionCriticalInput !== null){
             $criticalIllness = array_merge($criticalIllness, [
-                'relationship' => '',
-                'child_name' => '',
-                'child_dob' => '',
-                'spouse_name' => '',
-                'spouse_dob' => '',
-                'covered_amount' => '',
-                'year' => '',
-                'total_health_medical_needed' => '',
-                'existing_protection' => '',
-                'existing_amount' => '',
-                'insurance_amount' => '',
-                'fund_percentage' => ''
+                'critical_illness_plan' => $selectionCriticalInput
             ]);
         }
-        if ($selectionMedicalInput === '' || $selectionMedicalInput === null){
+        if ($selectionMedicalInput !== '' && $selectionMedicalInput !== null){
             $medicalPlanning = array_merge($medicalPlanning, [
-                'relationship' => '',
-                'child_name' => '',
-                'child_dob' => '',
-                'spouse_name' => '',
-                'spouse_dob' => '',
-                'type_of_hospital' => '',
-                'room_option' => '',
-                'covered_amount' => '',
-                'year' => '',
-                'total_health_medical_needed' => '',
-                'existing_protection' => '',
-                'existing_amount' => '',
-                'insurance_amount' => '',
-                'fund_percentage' => ''
+                'medical_care_plan' => 'Health Planning'
             ]);
         }
-
-        // Set the updated health-medical_needs back to the customer_details session
+       
+        // Set the updated protection_needs back to the customer_details session
         $customerDetails['selected_needs']['need_6'] = $needs;
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
+
+        if ($selectionCriticalInput === '' || $selectionCriticalInput === null ){
+            unset($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']);
+        } 
+        if ($selectionMedicalInput === '' || $selectionMedicalInput === null){
+            unset($customerDetails['selected_needs']['need_6']['advance_details']['health_care']);
+        } 
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -201,7 +151,7 @@ class HealthMedicalController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        if ($selectionCriticalInput === 'Yes'){
+        if ($selectionCriticalInput === 'Critical Illness'){
             return redirect()->route('health.medical.critical.illness.coverage',$transactionData);
         }
         else{
@@ -326,12 +276,12 @@ class HealthMedicalController extends Controller
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $criticalIllness = array_merge($criticalIllness, [
-                'total_health_medical_needed' => $totalHealthMedicalNeeded
+                'goals_amount' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $criticalIllness = array_merge($criticalIllness, [
-                'total_health_medical_needed' => $healthMedicalTotalFund
+                'goals_amount' => $healthMedicalTotalFund
             ]);
         }
 
@@ -389,10 +339,10 @@ class HealthMedicalController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $critical_existing_protection = $request->input('critical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['goals_amount'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['total_health_medical_needed'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $criticalIllness = array_merge($criticalIllness, [
@@ -460,7 +410,7 @@ class HealthMedicalController extends Controller
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Yes'){
+        if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Health Planning'){
             return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
         } else{
             return redirect()->route('debt.cancellation.home',$transactionData);
@@ -641,14 +591,9 @@ class HealthMedicalController extends Controller
         $customMessages = [
             'medical_amount_needed.required' => 'You are required to enter an amount.',
             'medical_amount_needed.regex' => 'You must enter number',
-            'medical_year.required' => 'You are required to enter a year.',
-            'medical_year.integer' => 'The year must be a number.',
-            'medical_year.min' => 'The year must be at least :min.',
-            'medical_year.max' => 'The year must not more than :max.',
         ];
 
         $validatedData = Validator::make($request->all(), [
-            'medical_year' => 'required|integer|min:1|max:99',
             'medical_amount_needed' => [
                 'required',
                 'regex:/^[0-9,]+$/',
@@ -674,25 +619,23 @@ class HealthMedicalController extends Controller
 
         // Validation passed, perform any necessary processing.
         $medical_amount_needed = str_replace(',','',$request->input('medical_amount_needed'));
-        $supportingYears = $request->input('medical_year');
-        $healthMedicalTotalFund = floatval($medical_amount_needed * 12 * $supportingYears);
+        $healthMedicalTotalFund = floatval($medical_amount_needed);
         $totalHealthMedicalNeeded = floatval($request->input('total_healthMedicalNeeded'));
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
             'covered_amount' => $medical_amount_needed,
-            'year' => $supportingYears
         ]);
 
         if ($totalHealthMedicalNeeded === $healthMedicalTotalFund){
 
             $medicalPlanning = array_merge($medicalPlanning, [
-                'total_health_medical_needed' => $totalHealthMedicalNeeded
+                'goals_amount' => $totalHealthMedicalNeeded
             ]);
         }
         else{
             $medicalPlanning = array_merge($medicalPlanning, [
-                'total_health_medical_needed' => $healthMedicalTotalFund
+                'goals_amount' => $healthMedicalTotalFund
             ]);
         }
 
@@ -750,10 +693,10 @@ class HealthMedicalController extends Controller
         // Validation passed, perform any necessary processing.
         $existing_protection_amount = str_replace(',','',$request->input('existing_protection_amount'));
         $medical_existing_protection = $request->input('medical_existing_protection');
-        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] - $existing_protection_amount);
+        $newTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['goals_amount'] - $existing_protection_amount);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['health_care']['total_health_medical_needed'] * 100);
+        $newPercentage = floatval($existing_protection_amount / $customerDetails['selected_needs']['need_6']['advance_details']['health_care']['goals_amount'] * 100);
 
         // Update specific keys with new values
         $medicalPlanning = array_merge($medicalPlanning, [
@@ -825,7 +768,17 @@ class HealthMedicalController extends Controller
             return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy',$transactionData);
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy',$transactionData);
+            } else{
+                return redirect()->route('summary.monthly-goals',$transactionData);
+            }
         }
     }
 }

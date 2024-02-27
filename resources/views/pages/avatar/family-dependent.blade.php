@@ -17,15 +17,17 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $familyDependent = session('customer_details.family_details');
     $transactionId = session('customer_details.transaction_id') ?? ($_GET['transaction_id'] ?? null);
-    // dd($familyDependent);
-    // dd(session()->all());
 @endphp
 
 <div id="avatar_family_dependent">
     <div class="container-fluid">
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 order-md-1 order-sm-2 order-2 parallax-inner parallax-bottom">
-                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
+                <div class="header">
+                    <div class="row">
+                        @include('templates.nav.nav-red-white-menu')
+                    </div>
+                </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
@@ -63,7 +65,7 @@
                                     <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
-                                                <button class="border-0 w-100 py-4 @if(isset($familyDependent['spouse']) && $familyDependent['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
+                                                <button class="border-0 w-100 py-4 @if (isset($familyDependent['spouse']) && $familyDependent['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
                                                     <img src="{{ asset('images/family-dependent/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
                                                 </button>
@@ -110,8 +112,11 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="family.dependent.details">
-                                        
+                                        @if ((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
+                                            <input type="hidden" name="urlInput" id="urlInput" value="assets">
+                                        @else
+                                            <input type="hidden" name="urlInput" id="urlInput" value="family.dependent.details">
+                                        @endif
                                         <a href="{{route('marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
@@ -193,7 +198,6 @@
 <script>
     var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
     var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
-    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};    
 </script>
-
 @endsection

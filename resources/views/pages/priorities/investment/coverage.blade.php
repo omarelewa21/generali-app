@@ -19,10 +19,10 @@
     $selfDataDob = session('customer_details.identity_details.dob');
     $selfDataName = session('customer_details.basic_details.full_name');
     $selfGender = session('customer_details.identity_details.gender');
-    $familyDependent = session('customer_details.family_details.dependant');
-    $childData = session('customer_details.family_details.dependant.children_data');
-    $spouseData = session('customer_details.family_details.dependant.spouse_data');
-    $spouseDataName = session('customer_details.family_details.dependant.spouse_data.full_name');
+    $familyDependent = session('customer_details.family_details');
+    $childData = session('customer_details.family_details.children_data');
+    $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_5.advance_details.relationship');
     $selectedInsuredName = session('customer_details.selected_needs.need_5.advance_details.child_name');
@@ -31,7 +31,7 @@
     $othersCoverForDob = session('customer_details.selected_needs.need_5.advance_details.spouse_dob');
 @endphp
 
-<div id="investment-coverage" class="secondary-default-bg">
+<div id="investment-coverage" class="secondary-default-bg coverage">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
@@ -41,7 +41,7 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 pb-5">
+                            <div class="col-xxl-6 col-xl-6 pb-4">
                                 <h2 class="display-5 fw-bold lh-sm text-center">I want to make an investment plan for my:</h2>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
@@ -64,7 +64,7 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
@@ -76,7 +76,7 @@
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                                 <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>
                                             </button>

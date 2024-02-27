@@ -26,22 +26,21 @@
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
             <form novalidate action="{{route('validate.savings.risk.profile')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <div class="top-menu pt-xl-0">@include ('templates.nav.nav-sidebar-needs')</div>
+                <section class="heading d-none d-md-block">
                     <div class="container">
-                        <div class="row justify-content-center">
-                        </div>
+                        <div class="row justify-content-center"></div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                                 <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" width="auto" height="100%" alt="High Risk Avatar" style="display:block;">
                                 <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
                                 <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 order-md-2 order-1 order-sm-1">
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-0 pt-4 calculatorContent">
                                 <h2 class="display-5 fw-bold lh-sm mb-4">I consider myself a</h2>
                                 <div class="col-12 mb-3 z-1">
                                     <button class="risk-btn f-family @if($savingsRiskProfile === 'High Risk') default @endif" id="high-risk" data-avatar="High Risk" data-required="{{old('savingsRiskProfileInput') === 'High Risk' ? 'selected' : ''}}">High Risk Taker</button>

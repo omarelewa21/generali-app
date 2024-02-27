@@ -254,7 +254,7 @@
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) default @endif" data-avatar="savings" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('savings', $topPriorities)) disabled @endif>
                                                 <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/savings-icon.png') }}" width="auto" height="100px" alt="Savings">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Savings</p>
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Regular Savings</p>
                                             </button>
                                         </div>
                                     </div>

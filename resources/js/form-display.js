@@ -8,11 +8,7 @@ const specificPageURLs = [
 
 const currentURL = window.location.href;
 
-if (specificPageURLs.some(url => 
-    currentURL.endsWith(url.toLowerCase()) ||
-    currentURL.endsWith(`${url.toLowerCase()}?`) ||
-    currentURL.includes(url.toLowerCase()))
-) {
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -606,7 +602,7 @@ if (specificPageURLs.some(url =>
                         }
                     }
                 }
-                if ((dependent['spouse'] === false && dependent['children'] == false) && dependent['parents'] === undefined && dependent['siblings'] === undefined) {
+                if ((dependent['spouse'] === false || dependent['spouse'] === undefined) && (dependent['children'] == undefined || dependent['children'] == false) && (dependent['parents'] === undefined || dependent['parents'] === false) && (dependent['siblings'] === false || dependent['siblings'] === undefined)) {
                     missingPages();
                 }
             }
@@ -1402,7 +1398,7 @@ if (specificPageURLs.some(url =>
             if (marital_status == null || marital_status == undefined || marital_status == '') {
                 window.location.href = '/marital-status';
             }
-            else if (spouse_session === false && family_details['children'] === false) {
+            else if ((family_details['spouse'] === false || family_details['spouse'] === undefined) && (family_details['children'] == undefined || family_details['children'] == false) && (family_details['parents'] === undefined || family_details['parents'] === false) && (family_details['siblings'] === false || family_details['siblings'] === undefined)) {
                 window.location.href = '/family-dependent';
             }
         });

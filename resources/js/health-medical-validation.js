@@ -46,6 +46,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             const criticalIllness = document.getElementById('critical_illness');
             const medicalPlanning = document.getElementById('medical_planning');
 
+
             dataButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     event.preventDefault(); // Prevent the default behavior of the button click
@@ -61,8 +62,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     } else{
                         this.setAttribute('data-required', isSelected ? '' : 'selected');
                     }
-
-                    document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    if(document.querySelectorAll('[data-required="selected"]').length == 0){
+                        document.getElementById('selectionHealthMedicalInput').value = '';
+                    } else{
+                        document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    }
                 });
             });
 
@@ -526,10 +530,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Remove non-digit characters
                     const cleanedValue = parseFloat(amountNeededValue.replace(/\D/g, ''));
                     const healthMedicalYears = parseInt(supportingYears.value);
-        
-                    var amountPerYear = cleanedValue * 12;
-                    var totalHealthMedical = healthMedicalYears * amountPerYear;
-        
+
+                    if (path == '/health-medical/critical-illness/amount-needed'){
+                        var amountPerYear = 12 * cleanedValue;
+                        var totalHealthMedical = healthMedicalYears * 12 * cleanedValue;
+                    } else{
+                        var totalHealthMedical = healthMedicalYears * cleanedValue;
+                        var amountPerYear = cleanedValue;
+                    }
+                    
                     // Check if the parsed value is a valid number
                     if (!isNaN(cleanedValue)) {
                         // If it's a valid number, format it with commas
@@ -560,8 +569,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         
                     // Retrieve the current input value
                     var supportingYearsValue = supportingYears.value;
-        
-                    var healthMedicalAmountNeeded = parseFloat(amountNeeded.value.replace(/\D/g, '')) * 12; 
+
+                    if (path == '/health-medical/critical-illness/amount-needed'){
+                        var healthMedicalAmountNeeded = parseFloat(amountNeeded.value.replace(/\D/g, '') * 12); 
+                    } else{
+                        var healthMedicalAmountNeeded = parseFloat(amountNeeded.value.replace(/\D/g, '')); 
+                    }
+                    
                     var Year = parseInt(supportingYearsValue);
         
                     // Calculate months
@@ -753,7 +767,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/health-medical/critical-illness/gap' || path == '/health-medical/medical-planning/gap') {
-            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
+            if (!lastPageInput || !('existing_amount' in lastPageInput) || lastPageInput['existing_protection'] === '' ) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

@@ -37,6 +37,7 @@
         "datatables.net-searchbuilder": "^1.6.0",
         "datatables.net-searchbuilder-bs5": "^1.6.0",
         "datatables.net-select-bs5": "^1.7.0",
+        "esbuild": "^0.18.11",
         "gsap": "^3.12.3",
         "intl-tel-input": "^18.2.1",
         "jquery-ui": "^1.13.2",

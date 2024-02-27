@@ -36,9 +36,9 @@
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
-                                        <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
+                                        <h1 class="display-5 text-uppercase">Do introduce yourself.</h1>
                                     </div>
                                 </div>
                                 <div class="row px-4">
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="pt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                                            <div class="pt-5 col-md-12">
                                                 <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
                                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="email" placeholder="yourname@email.com" value="{{ old('email', $basicDetails['email'] ?? '') }}">
                                                 @error('email')

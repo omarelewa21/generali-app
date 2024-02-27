@@ -11,27 +11,6 @@ use App\Services\TransactionService;
 
 class RetirementController extends Controller
 {
-    // protected $need_sequence;
-
-    // public function calculateNeedSequence(Request $request) {
-
-        // $customerDetails = $request->session()->get('customer_details', []);
-
-        // Set the default value for $need_sequence
-        // $need_sequence = 0;
-
-        // if ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true'){
-        //     $need_sequence = 2;
-        // } else if ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true'){
-        //     $need_sequence = 1;
-        // }
-    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
-    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
-
-    //     $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? 2 : 1) : 1);
-
-    //     return $need_sequence;
-    // }
 
     public function validateRetirementCoverageSelection(Request $request, TransactionService $transactionService)
     {
@@ -70,30 +49,12 @@ class RetirementController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('retirement', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['retirement'] == true || $customerDetails['priorities']['retirement'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
-
         // $needs = $customerDetails['selected_needs']['need_'.$need_sequence] ?? [];
         // $advanceDetails = $customerDetails['selected_needs']['need_'.$need_sequence]['advance_details'] ?? [];
         $needs = $customerDetails['selected_needs']['need_2'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_2']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $needs = array_merge($needs, [
-            'need_no' => 'N2',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer
-        ]);
         $advanceDetails = array_merge($advanceDetails, [
             'relationship' => $relationshipInput,
             'child_name' => $selectedInsuredNameInput,
@@ -103,7 +64,6 @@ class RetirementController extends Controller
         ]);
 
         // Set the updated retirement_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_2'] = $needs;
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
         
         // Store the updated customer_details array back into the session
@@ -220,12 +180,12 @@ class RetirementController extends Controller
 
         if ($totalRetirementFund === $retirementTotalFund){
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $totalRetirementFund
+                'goals_amount' => $totalRetirementFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $retirementTotalFund
+                'goals_amount' => $retirementTotalFund
             ]);
         }
 
@@ -284,12 +244,12 @@ class RetirementController extends Controller
         if ($totalRetirementFund === $retirementTotalFund){
 
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $totalRetirementFund
+                'goals_amount' => $totalRetirementFund
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_retirement_needed' => $retirementTotalFund
+                'goals_amount' => $retirementTotalFund
             ]);
         }
 
@@ -450,7 +410,17 @@ class RetirementController extends Controller
             return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy',$transactionData);
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy',$transactionData);
+            } else{
+                return redirect()->route('summary.monthly-goals',$transactionData);
+            }
         }
     }
 }

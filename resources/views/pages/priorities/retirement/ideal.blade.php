@@ -30,7 +30,7 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 py-5 pt-md-0">
+                            <div class="col-xxl-6 col-xl-6 py-3 pt-md-0">
                                 <h2 class="display-5 fw-bold lh-sm text-center">My ideal retirement involves:</h2>
                             </div>
                         </div>
@@ -38,23 +38,25 @@
                 </section>
                 <section class="bottom-content">
                     <div class="container h-100">
-                        <div class="row h-100">
-                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
+                        <div class="row h-100 ideal_carousel justify-content-center align-items-center d-flex">
+                            <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-bucket-list.png') }}" height="auto" width="100%" class="pb-3">
-                                    <p class="avatar-text text-center fw-bold">Visiting destinations on my bucket list</p>
+                                    <!-- <div class="d-flex justify-content-end" style="flex-direction: column;"> -->
+                                        <img src="{{ asset('images/needs/retirement/ideal-bucketlist.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                        <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Visiting destinations on my bucket list</p>
+                                    <!-- </div> -->
                                 </button>
                             </div>
-                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
+                            <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3">
-                                    <p class="avatar-text text-center fw-bold">Maintaining a comfortable lifestyle</p>
+                                    <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
-                            <div class="col-md-4 h-100 d-flex justify-content-center py-3">
+                            <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3">
-                                    <p class="avatar-text text-center fw-bold">Retiring early with secure finances</p>
+                                    <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Retiring early with secure finances</p>
                                 </button>
                             </div>
                         </div>

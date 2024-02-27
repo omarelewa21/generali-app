@@ -29,7 +29,7 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
+                        <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-5 fw-bold lh-sm text-center">I'd like to select coverage for:​</h2>
                             </div>
@@ -38,19 +38,19 @@
                 </section>
                 <section class="bottom-content">
                     <div class="container h-100">
-                        <div class="row justify-content-center h-100" id="hnm-selection">
-                            <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedCritical === 'Yes') default @endif" id="critical_illness" data-avatar="Critical Illness Care" data-required="">
+                        <div class="row justify-content-center h-100 d-flex align-items-end" id="hnm-selection">
+                            <div class="h-100 d-flex justify-content-center align-items-center col-5">
+                                <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedCritical === 'Critical Illness') default @endif" id="critical_illness" data-avatar="Critical Illness" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/selection/critical-illness.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        <img src="{{ asset('images/needs/health-medical/selection/critical-illness-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Critical Illness Care</p>
                                     </div>
                                 </button>
                             </div>
-                            <div class="h-100 d-flex justify-content-center align-items-center col-3">
-                                <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedMedical === 'Yes') default @endif" id="medical_planning" data-avatar="Medical Planning Care" data-required="">
+                            <div class="h-100 d-flex justify-content-center align-items-center col-5">
+                                <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedMedical === 'Health Planning') default @endif" id="medical_planning" data-avatar="Health Planning" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/selection/medical-planning.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        <img src="{{ asset('images/needs/health-medical/selection/hospitalisation-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Medical Plan Care</p>
                                     </div>
                                 </button>

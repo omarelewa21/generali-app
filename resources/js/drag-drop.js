@@ -317,5 +317,20 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var dataAvatar = button.attr("data-avatar");
             addImageToSortable(imageName, dataAvatar);
         });
+
+        // Sortable JS for Savings page
+        if ($("#savings_goals_amount").length) {
+            $("#mobile_savings_goals_amount").val($("#desktop_savings_goals_amount").val());
+    
+            $("#desktop_savings_goals_amount").on("change", e => {
+                $("#mobile_savings_goals_amount").val($(e.target).val());
+                $("#savings_goals_amount").val($(e.target).val());
+            });
+    
+            $("#mobile_savings_goals_amount").on("change", e => {
+                $("#desktop_savings_goals_amount").val($(e.target).val());
+                $("#savings_goals_amount").val($(e.target).val());
+            });
+        }
     });
 }

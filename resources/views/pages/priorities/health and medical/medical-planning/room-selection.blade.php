@@ -1,13 +1,13 @@
 <?php
  /**
- * Template Name: Health & Medical - Medical Planning Room Selection
+ * Template Name: Health Medical - Hospitalisation Room Selection Page
  */
 ?>
 
 @extends('templates.master')
 
 @section('title')
-<title>Health & Medical - Medical Planning Room Selection</title>
+<title>Health Medical - Hospitalisation Room Selection Page</title>
 @endsection
 
 @section('content')
@@ -21,62 +21,37 @@
 
 <div id="hospital-room-selection">
     <div class="container-fluid">
-        <div class="row scrollable-content vh-100 overflow-hidden">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 position-relative vh-100 wrapper-avatar-default bg-white z-99">
-                <div class="header-avatar-default">@include('templates.nav.nav-red-menu')</div>    
-                <section class="avatar-design-placeholder content-avatar-default">
-                    <div class="col-12 text-center wrapper-room-selection">
-                        <div class="row justify-content-center room-selection-title">
-                            <div class="col-8 col-xxl-6 m-auto">
-                                <h4 class="fw-bold">If I had to stay, I would rather have:</h4>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center room-selection-content position-relative">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/plant.png') }}" alt="room selection plant" style="width:180px;" class="position-absolute start-0 bottom-0 ps-0 z-1">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}" alt="room selection avatar" width="auto" height="450px" class="z-1">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/right-counter.png') }}" alt="room selection right counter" style="width:225px;" class="position-absolute end-0 z-1 pe-0">
-                        <!-- <div class="row justify-content-center single room-selection-content"> -->
-                            <!-- <div class="col-12 z-1 mt-auto single-patient position-relative" id="room-first-col"> -->
-                                <!-- <img class="pb-5 ml-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/plant.png') }}"> -->
-                                <!-- <div class="windows couple-room"></div>
-                                <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-avatar.png') }}">
-                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/first-roommate.png') }}"> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-12 z-99 mt-auto mx-auto mh-100 h-100 position-relative" id="room-center-col"> -->
-                                <!-- <img class="ml-auto windows own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}"> -->
-                                <!-- <img class="mw-100 mh-100 row mx-auto avatar-patient mt-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}"> -->
-                                <!-- <img class="windows mw-100 w-75 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/window.png') }}">
-                                <img class="mw-100 row avatar-patient mt-auto ms-auto pb-3 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/single-room-counter.png') }}">
-                                <img class="position-absolute w-75 roommate more-rooms" style="left:10%;" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/beside-counter.png') }}"> -->
-                            <!-- </div>
-                            <div class="col-12 z-1 mt-auto single-patient-2 position-relative" id="room-last-col"> -->
-                                <!-- <img class="pb-3 mr-auto own-space" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/right-counter.png') }}"> -->
-                                <!-- <img class="ml-auto windows pt-4 couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/clock.png') }}">
-                                <img class="avatar-patient mw-100 mt-auto couple-room" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/campanion-avatar.png') }}">
-                                <img class="position-absolute roommate more-rooms" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/second-roommate.png') }}"> -->
-                            <!-- </div> -->
+        <div class="row parallax-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
+                <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
+                <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
+                    <div class="col-12 text-center d-flex justify-content-center room-selection-title">
+                        <div class="col-xl-6 col-lg-10 col-md-12 col-8">
+                            <h2 class="display-5 fw-bold lh-sm text-center">If I had to be hospitalized, I'd rather have:</h2>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="position-absolute bg-btn_bar bottom-0 needs-stand-bg"></div>
-                        </div>
+                    <div class="col-12 text-center d-flex justify-content-center room-selection-content z-1">
+                        <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}" alt="room selection avatar" width="auto" height="200%">
                     </div>
+                    <div class="col-12 text-center d-flex justify-content-center bg-accent-light-white room-selection-footer"></div>
                 </section>
+                <div class="bottomObeserver bg-accent-light-white"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0">
+            
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
                     <form action="{{ route('validate.medical.planning.room.selection') }}" method="post" class="buttonForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row px-4 pt-4 pb-2 px-sm-5 pt-sm-5 right-sidebar">
-                                    <div class="col-12">
+                            <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                                <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
+                                    <div class="col-12 pt-3 pt-md-5">
                                         <p class="text-white display-6 lh-base">Select your preferred room option.</p>
                                     </div>
                                 </div>
-                                @if ($errors->has('roomTypeInput'))
-                                    <div class="row px-4 pb-4 px-sm-5">
+                                <div class="row px-4 px-md-5">
+                                    @if ($errors->has('roomTypeInput'))
                                         <div class="col-12">
                                             <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
@@ -85,17 +60,49 @@
                                                 <div class="text">{{ $errors->first('roomTypeInput') }}</div>
                                             </div>
                                         </div>
+                                    @endif
+                                </div>
+                                <div class="row px-4 px-md-5 pb-md-5 action_button_slider d-md-none d-block">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 w-100 py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="100px" alt="own-space" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">My own space</p>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                @endif
-                                <div id="needs" class="row px-4 pb-4 px-sm-5 needs">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 w-100 py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">A companion</p>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                        <div class="col-12 button-bg">
+                                            <div class="col-12 d-flex align-items-center justify-content-center hover">
+                                                <button class="border-0 w-100 py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">More roommates</p>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row px-4 px-md-5 pb-md-5 d-md-block d-none">
                                     <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                         <div class="col-12 button-bg @if($selectedRoom === 'my own space') default @endif">
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
-                                                    <div class="col-4">
+                                                    <div class="col-md-4 col-12">
                                                         <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="110px" alt="own-space">
                                                     </div>
-                                                    <div class="col-8 d-flex">
+                                                    <div class="col-md-8 col-12 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">My own space</p>
                                                     </div>
                                                 </button>
@@ -133,11 +140,11 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="footer bg-accent-light-white py-4 fixed-bottom">
+                        
+                        <section class="footer bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="roomTypeInput" id="roomTypeInput" value="{{$selectedRoom}}">
                                         <a href="{{route('health.medical.planning.hospital.selection')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
@@ -182,6 +189,7 @@
         </div>
     </div>
 </div>
+
 <script>
     var healthPriority = '{{$healthPriority}}';
     var selectionInput = document.getElementById('roomTypeInput');

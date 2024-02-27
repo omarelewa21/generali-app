@@ -17,7 +17,7 @@
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
     $retirementSavings = session('customer_details.selected_needs.need_2.advance_details.existing_amount');
     $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
-    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.total_retirement_needed', '0');
+    $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.goals_amount', '0');
     $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
     $retirementAge = session('customer_details.selected_needs.need_2.advance_details.remaining_years');
 
@@ -30,10 +30,10 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                        <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $retirementSavings === null || $retirementSavings === '' 
                                 ? number_format(floatval($totalRetirementNeeded)) 
                                 : ($retirementSavings > floatval($totalRetirementNeeded) 
@@ -42,14 +42,14 @@
                             }}
                         </h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Retirement Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
             </div>
-            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey h-100">
+            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -70,33 +70,35 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Increment">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Retirement Other Income Sources Avatar">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 order-md-2 order-1 order-sm-1" style="height:81vh;">
-                                <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
-                                    <br>for my retirement,through these income sources:
-                                    <!-- <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeSources }}" required></span> -->
-                                </p>
-                                <p><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_1" id="other_income_sources_1" {{strpos($otherIncomeSources, 'Unit Trust') !== false ? 'checked' : '' }} value="Unit Trust"><label for="other_income_sources_1" class="form-label display-6 lh-base">Unit Trust</label></p>
-                                <p><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_2" id="other_income_sources_2" {{strpos($otherIncomeSources, 'Stock Trust') !== false ? 'checked' : '' }} value="Stock Trust"><label for="other_income_sources_2" class="form-label display-6 lh-base">Stock Trust</label></p>
-                                <p><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_3" id="other_income_sources_3" {{strpos($otherIncomeSources, 'Fixed Deposit (FD)') !== false ? 'checked' : '' }} value="Fixed Deposit (FD)"><label for="other_income_sources_3" class="form-label display-6 lh-base">Fixed Deposit (FD)</label></p>
-                                <p><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_4" id="other_income_sources_4" {{strpos($otherIncomeSources, 'Employee Provident Fund (EPF)') !== false ? 'checked' : '' }} value="Employee Provident Fund (EPF)"><label for="other_income_sources_4" class="form-label display-6 lh-base">Employee Provident Fund (EPF)</label></p>
-                                <p>
-                                    <input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_5" id="other_income_sources_5" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? 'checked' : '' }} value="Others">
-                                    <label for="other_income_sources_5" class="form-label display-6 lh-base">Others</label>
-                                    <span>
-                                        <input type="text" name="other_income_sources_5_text" class="form-control position-relative d-inline-block w-50 bg-transparent {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled-color' }} @error('other_income_sources_5_text') is-invalid @enderror" id="other_income_sources_5_text" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled' }} value="{{ $customOtherIncomeSources }}">
-                                    </span>
-                                </p>
-                                <p><input type="hidden" name="other_income_sources" id="other_income_sources" value="{{$otherIncomeSources}}"></p>
-                                <p><input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}"></p>
-                                <p><input type="hidden" name="percentage" id="percentage" value="{{$retirementFundPercentage}}"></p>
+                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="h-sm-100 row">
+                                    <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
+                                    <p class="display-5 fw-bold currencyField">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
+                                        <br>for my retirement,through these income sources:
+                                        <!-- <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeSources }}" required></span> -->
+                                    </p>
+                                    <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_1" id="other_income_sources_1" {{strpos($otherIncomeSources, 'Unit Trust') !== false ? 'checked' : '' }} value="Unit Trust"><label for="other_income_sources_1" class="form-label display-6 lh-base">Unit Trust</label></p>
+                                    <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_2" id="other_income_sources_2" {{strpos($otherIncomeSources, 'Stock Trust') !== false ? 'checked' : '' }} value="Stock Trust"><label for="other_income_sources_2" class="form-label display-6 lh-base">Stock Trust</label></p>
+                                    <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_3" id="other_income_sources_3" {{strpos($otherIncomeSources, 'Fixed Deposit (FD)') !== false ? 'checked' : '' }} value="Fixed Deposit (FD)"><label for="other_income_sources_3" class="form-label display-6 lh-base">Fixed Deposit (FD)</label></p>
+                                    <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_4" id="other_income_sources_4" {{strpos($otherIncomeSources, 'Employee Provident Fund (EPF)') !== false ? 'checked' : '' }} value="Employee Provident Fund (EPF)"><label for="other_income_sources_4" class="form-label display-6 lh-base">Employee Provident Fund (EPF)</label></p>
+                                    <p class="text-start">
+                                        <input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_5" id="other_income_sources_5" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? 'checked' : '' }} value="Others">
+                                        <label for="other_income_sources_5" class="form-label display-6 lh-base">Others</label>
+                                        <span>
+                                            <input type="text" name="other_income_sources_5_text" class="form-control position-relative d-inline-block w-50 bg-transparent {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled-color' }} @error('other_income_sources_5_text') is-invalid @enderror" id="other_income_sources_5_text" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled' }} value="{{ $customOtherIncomeSources }}">
+                                        </span>
+                                    </p>
+                                    <p><input type="hidden" name="other_income_sources" id="other_income_sources" value="{{$otherIncomeSources}}"></p>
+                                    <p><input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}"></p>
+                                    <p><input type="hidden" name="percentage" id="percentage" value="{{$retirementFundPercentage}}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -15,7 +15,7 @@
     $savingsPriority = session('customer_details.priorities.savings_discuss');
 
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns', '5');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
@@ -23,23 +23,23 @@
 @endphp
 
 
-<div id="savings-annual-return" class="tertiary-default-bg calculator-page">
+<div id="savings-annual-return" class="secondary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalSavingsFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ number_format(floatval($totalAmountNeeded)) }}</h1>
+                        <h1 id="TotalSavingsFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ number_format(floatval($totalAmountNeeded)) }}</h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Regular Savings Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Regular Savings Fund Needed</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.savings.annual.return')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -53,17 +53,17 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row justify-content-center">
-                            <div class="col-md-6 col-xl-4 text-center col-12 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                            <div class="col-md-6 col-xl-4 text-center col-12 h-100 d-flex justify-content-center align-items-end">
                                 <h2 class="display-5 fw-bold lh-sm">Ultimately, I’m expecting annual returns of:</h2>
                             </div>
                         </div>
                         <div class="row h-100">
-                            <div class="col-12 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                            <div class="col-12 h-100 d-flex justify-content-center align-items-end calculatorContent">
                                 <div class="position-relative">
-                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="100%" alt="Increment" class="pb-5">
+                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="100%" alt="Savings Annual Return Avata" class="pb-5">
                                     <p class="display-5 fw-bold currencyField position-absolute center w-100 text-center">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary text-center @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
                                     % p.a.</p>

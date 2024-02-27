@@ -35,7 +35,6 @@ Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdp
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
 
-
 /* Avatar pages */
 Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
 // Route::view('/marital-status', 'pages.avatar.marital-status')->name('marital.status');
@@ -161,6 +160,10 @@ Route::post('/investment-monthly-payment', [InvestmentController::class, 'valida
 Route::view('/investment-supporting', 'pages.priorities.investment.investment-supporting')->name('investment.supporting');
 Route::post('/investment-supporting', [InvestmentController::class, 'validateInvestmentSupporting'])->name('validate.investment.supporting');
 
+// Risk Profile
+Route::view('/risk-profile', 'pages.priorities.risk-profile.risk-profile')->name('risk.profile');
+Route::post('/risk-profile', [SummaryController::class, 'validateRiskProfile'])->name('validate.risk.profile');
+
 /* Priorities - Health and Medical */
 Route::view('/health-medical', 'pages.priorities.health and medical.home')->name('health.medical.home');
 Route::view('/health-medical/medical-selection', 'pages.priorities.health and medical.medical-selection')->name('health.medical.selection');
@@ -214,8 +217,8 @@ Route::post('/financial-statement/expected-income', [SummaryController::class, '
 Route::view('/financial-statement/increment-amount', 'pages.summary.increment-amount')->name('summary.increment-amount');
 Route::post('/financial-statement/increment-amount', [SummaryController::class, 'validateSummaryIncrementAmount'])->name('validate.summary.increment.amount');
 Route::view('/summary', 'pages.summary.summary')->name('summary');
-Route::view('/overview-new', 'pages.summary.overview')->name('overview');
-Route::view('/overview', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
+Route::view('/overview', 'pages.summary.overview')->name('overview');
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

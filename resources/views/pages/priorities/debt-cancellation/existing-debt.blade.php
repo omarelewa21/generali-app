@@ -11,7 +11,7 @@
     $debtCancellation = session('customer_details.selected_needs.need_7.advance_details');
     $existingDebt = session('customer_details.selected_needs.need_7.advance_details.existing_debt');
     $existingDebtAmount = session('customer_details.selected_needs.need_7.advance_details.existing_amount');
-    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.total_debt_cancellation_fund');
+    $totalDebtNeeded = session('customer_details.selected_needs.need_7.advance_details.goals_amount');
     $debtFundPercentage = session('customer_details.selected_needs.need_7.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
     $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
@@ -22,19 +22,19 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalDebtCancellationFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ $existingDebtAmount === null || $existingDebtAmount === '' ? number_format(floatval($totalDebtNeeded)) : ($totalDebtNeeded > $existingDebtAmount ? number_format(floatval($totalDebtNeeded - $existingDebtAmount)) : '0') }}</h1>
+                        <h1 id="TotalDebtCancellationFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ $existingDebtAmount === null || $existingDebtAmount === '' ? number_format(floatval($totalDebtNeeded)) : ($totalDebtNeeded > $existingDebtAmount ? number_format(floatval($totalDebtNeeded - $existingDebtAmount)) : '0') }}</h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Debt Cancellation</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Debt Cancellation</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.debt.existing.debt')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -48,31 +48,33 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/debt-cancellation/existing-debt/avatar.png') }}" width="auto" height="100%" alt="Existing Policy">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                <img src="{{ asset('images/needs/debt-cancellation/existing-debt/avatar.png') }}" width="auto" height="100%" alt="Existing Debt Avatar">
                             </div>
-                            <div class="col-xl-5 col-lg-6 col-md-6 py-5 order-md-2 order-1 order-sm-1">
-                                <h2 class="display-5 fw-bold lh-sm">I already have Debt Cancellation coverage.</h2>
-                                <p class="d-flex pt-5">
-                                    <span class="me-5 d-flex">
-                                        <input type="radio" class="needs-radio @error('existing_debt_amount') checked-yes @enderror {{$existingDebt === 'yes' ? 'checked-yes' : ''}}" id="yes" name="existing_debt" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_debt_amount').attr('required',true);"
-                                        {{ ($existingDebt && $existingDebt === 'yes' || $errors->has('existing_debt_amount') ? 'checked' : '')  }} >
-                                        <label for="yes" class="form-label display-6 lh-base">Yes</label>
-                                    </span>
-                                    <span class="d-flex me-5">
-                                        <input type="radio" class="needs-radio" id="no" name="existing_debt" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#existing_debt_amount').removeAttr('required',false);"
-                                        {{ ($existingDebt && $existingDebt === 'no' && !$errors->has('existing_debt_amount') ? 'checked' : '') }} >
-                                        <label for="no" class="form-label display-6 lh-base">No</label>
-                                    </span>
-                                </p>
-                                <div class="hide-content">
-                                    <p class="display-6">Current covered amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_debt_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_debt_amount') is-invalid @enderror" id="existing_debt_amount" value="{{ $existingDebtAmount !== null ? number_format(floatval($existingDebtAmount)) : $existingDebtAmount }}" required></span></p>
+                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row">
+                                    <h2 class="display-5 fw-bold lh-sm">I already have Debt Cancellation coverage.</h2>
+                                    <p class="d-flex pt-5">
+                                        <span class="me-5 d-flex">
+                                            <input type="radio" class="needs-radio @error('existing_debt_amount') checked-yes @enderror {{$existingDebt === 'yes' ? 'checked-yes' : ''}}" id="yes" name="existing_debt" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_debt_amount').attr('required',true);"
+                                            {{ ($existingDebt && $existingDebt === 'yes' || $errors->has('existing_debt_amount') ? 'checked' : '')  }} >
+                                            <label for="yes" class="form-label display-6 lh-base">Yes</label>
+                                        </span>
+                                        <span class="d-flex me-5">
+                                            <input type="radio" class="needs-radio" id="no" name="existing_debt" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#existing_debt_amount').removeAttr('required',false);"
+                                            {{ ($existingDebt && $existingDebt === 'no' && !$errors->has('existing_debt_amount') ? 'checked' : '') }} >
+                                            <label for="no" class="form-label display-6 lh-base">No</label>
+                                        </span>
+                                    </p>
+                                    <div class="hide-content">
+                                        <p class="display-6">Current covered amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_debt_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_debt_amount') is-invalid @enderror" id="existing_debt_amount" value="{{ $existingDebtAmount !== null ? number_format(floatval($existingDebtAmount)) : $existingDebtAmount }}" required></span></p>
+                                    </div>
+                                    <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
+                                    <input type="hidden" name="percentage" id="percentage" value="{{$debtFundPercentage}}">
                                 </div>
-                                <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
-                                <input type="hidden" name="percentage" id="percentage" value="{{$debtFundPercentage}}">
                             </div>
                         </div>
                     </div>

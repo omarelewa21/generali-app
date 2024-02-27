@@ -27,7 +27,7 @@
                 <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
-                    <img src="{{ asset($image) }}" width="auto" height="70%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
+                    <img src="{{ asset($image) }}" width="auto" height="50%" alt="Avatar" class="changeImage position-absolute" style="bottom: 50px;">
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
@@ -38,10 +38,10 @@
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Right, let’s get an idea of your finances and loans.</h1>
+                                        <h1 class="display-5 text-white pb-3 fw-bold">Right, let’s get an idea of your finances and loans.</h1>
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="text-white display-6 lh-base">Click to add your assets next to your avatar.</p>
+                                                <p class="text-white display-6 lh-1">Click to add your assets next to your avatar.</p>
                                             </div>
                                             <div class="col-12">
                                                 <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
@@ -133,7 +133,12 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="assetsButtonInput" id="assetsButtonInput" value="{{ json_encode($assets) }}">
                                         <input type="hidden" name="urlInput" id="urlInput" value="financial.priorities">
-                                        <a href="{{route('family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        @if ((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
+                                            <a href="{{route('family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        @else
+                                            <a href="{{route('family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        @endif
+                                        
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

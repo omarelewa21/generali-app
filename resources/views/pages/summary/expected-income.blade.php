@@ -14,6 +14,8 @@
 
 @php
     $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
+    $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
+@endphp
 @endphp
 
 <div id="expected_income" class="secondary-default-bg">
@@ -31,17 +33,17 @@
                         </div>
                     </div>
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-4 col-6">
                                 <div class="col-12 d-flex justify-content-end">
                                     <!-- <a href="http://127.0.0.1:8000/gender" class="btn btn-primary text-uppercase btn-lg" style="z-index:1">Yes</a> -->
                                     <button class="btn btn-primary text-uppercase btn-summary d-flex justify-content-center align-items-center z-1 @if($selectedExpectingInput === 'Yes') default @endif" id="yesExpecting" data-avatar="Yes" data-required="">Yes</button>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-sm-4 d-none d-sm-block">
                                 <!-- Just keep this empty -->
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-sm-4 col-6">
                                 <div class="col-12 d-flex justify-content-start">
                                     <!-- <a href="http://127.0.0.1:8000/gender" class="btn btn-primary text-uppercase btn-lg" style="z-index:1">No</a> -->
                                     <button class="btn btm-no text-uppercase btn-summary d-flex justify-content-center align-items-center z-1 @if($selectedExpectingInput === 'No') default @endif" id="noExpecting" data-avatar="No" data-required="">No</button>
@@ -83,5 +85,22 @@
         </form>
     </div>
 </div>
-
+<div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please click proceed to input the value in previous page first.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var lastPageInput = '{{$financialStatementMonthlySupport}}';
+</script>
 @endsection

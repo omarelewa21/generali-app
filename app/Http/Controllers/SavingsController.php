@@ -11,23 +11,6 @@ use App\Services\TransactionService;
 
 class SavingsController extends Controller
 {
-    // protected $need_sequence;
-
-    // public function calculateNeedSequence(Request $request) {
-
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-        // Set the default value for $need_sequence
-    //     $need_sequence = 0;
-        
-    //     $protectionDiscuss = isset($customerDetails['priorities']['protectionDiscuss']) && ($customerDetails['priorities']['protectionDiscuss'] == true || $customerDetails['priorities']['protectionDiscuss'] == 'true');
-    //     $retirementDiscuss = isset($customerDetails['priorities']['retirementDiscuss']) && ($customerDetails['priorities']['retirementDiscuss'] == true || $customerDetails['priorities']['retirementDiscuss'] == 'true');
-    //     $educationDiscuss = isset($customerDetails['priorities']['educationDiscuss']) && ($customerDetails['priorities']['educationDiscuss'] == true || $customerDetails['priorities']['educationDiscuss'] == 'true');
-
-    //     $need_sequence = ($protectionDiscuss ? ($retirementDiscuss ? ($educationDiscuss ? 4 : 3) : ($educationDiscuss ? 3 : 2)) : ($retirementDiscuss ? ($educationDiscuss ? 3 : 2) : ($educationDiscuss ? 2 : 1)));
-
-    //     return $need_sequence;
-    // }
 
     public function validateSavingsCoverageSelection(Request $request, TransactionService $transactionService)
     {
@@ -70,25 +53,7 @@ class SavingsController extends Controller
         $needs = $customerDetails['selected_needs']['need_4'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
-        $index = array_search('savings', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['savings'] == true || $customerDetails['priorities']['savings'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['savings_discuss'] == true || $customerDetails['priorities']['savings_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
-
         // Update specific keys with new values
-        $needs = array_merge($needs, [
-            'need_no' => 'N4',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer
-        ]);
         $advanceDetails = array_merge($advanceDetails, [
             'relationship' => $relationshipInput,
             'child_name' => $selectedInsuredNameInput,
@@ -98,7 +63,6 @@ class SavingsController extends Controller
         ]);
 
         // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_4'] = $needs;
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
@@ -147,7 +111,7 @@ class SavingsController extends Controller
             ];
             
             $validator = Validator::make($request->all(), [
-                'savingsSelectedAvatarInput' => [
+                'savingsGoalsButtonInput' => [
                     'at_least_one_selected',
                 ],
                 'savings_goals_amount' => [
@@ -183,8 +147,8 @@ class SavingsController extends Controller
             $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
             $advanceDetails = array_merge($advanceDetails, [
-                // 'goalTarget' => $savingsSelectedAvatarInput,
-                'goals_amount' => $savings_goals_amount
+                'goal_target' => $savingsGoalsButtonInput,
+                'goal_amount' => $savings_goals_amount
             ]);
 
             // Set the updated savings_needs back to the customer_details session
@@ -209,6 +173,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         $customMessages = [
             'savings_monthly_payment.required' => 'You are required to enter an amount.',
@@ -249,15 +214,21 @@ class SavingsController extends Controller
         $savings_goal_duration = $request->input('savings_goal_duration');
         $savingsTotalFund = floatval($savings_monthly_payment * 12 * $savings_goal_duration);
         $totalSavingsNeeded = floatval($request->input('total_savingsNeeded'));
-        $savingsTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_4']['advance_details']['goals_amount'] - $savingsTotalFund);
+        $savingsTotalAmountNeeded = floatval($customerDetails['selected_needs']['need_4']['advance_details']['goal_amount'] - $savingsTotalFund);
         $totalAmountNeeded = floatval($request->input('total_amountNeeded'));
         $totalPercentage = floatval($request->input('percentage'));
-        $savingsTotalPercentage = floatval($savingsTotalFund / $customerDetails['selected_needs']['need_4']['advance_details']['goals_amount'] * 100);
+        $savingsTotalPercentage = floatval($savingsTotalFund / $customerDetails['selected_needs']['need_4']['advance_details']['goal_amount'] * 100);
+
+        $lastPage = str_replace(url('/'), '', url()->previous());
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
             'covered_amount' => $savings_monthly_payment,
             'supporting_years' => $savings_goal_duration
+        ]);
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
         ]);
 
         if ($totalSavingsNeeded === $savingsTotalFund && $savingsTotalAmountNeeded === $totalAmountNeeded && $totalPercentage === $savingsTotalPercentage){
@@ -274,12 +245,12 @@ class SavingsController extends Controller
                 ]);
             }
             $advanceDetails = array_merge($advanceDetails, [
-                'total_savings_needed' => $totalSavingsNeeded
+                'goals_amount' => $totalSavingsNeeded
             ]);
         }
         else{
             $advanceDetails = array_merge($advanceDetails, [
-                'total_savings_needed' => $savingsTotalFund
+                'goals_amount' => $savingsTotalFund
             ]);
             if ($savingsTotalAmountNeeded <= 0){
                 $advanceDetails = array_merge($advanceDetails, [
@@ -297,6 +268,7 @@ class SavingsController extends Controller
 
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -347,54 +319,54 @@ class SavingsController extends Controller
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('savings.risk.profile',$transactionData);
+        return redirect()->route('risk.profile',$transactionData);
     }
 
-    public function validateSavingsRiskProfile(Request $request, TransactionService $transactionService){
-        $customMessages = [
-            'savingsRiskProfileInput.required' => 'Please select a risk level.',
-            'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
-            'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
-        ];
+    // public function validateSavingsRiskProfile(Request $request, TransactionService $transactionService){
+        // $customMessages = [
+        //     'savingsRiskProfileInput.required' => 'Please select a risk level.',
+        //     'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
+        //     'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
+        // ];
 
-        $validatedData = Validator::make($request->all(), [
-            'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-            // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-            'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
+    //     $validatedData = Validator::make($request->all(), [
+    //         'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+    //         // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
+    //         'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
             
-        ], $customMessages);
+    //     ], $customMessages);
 
-        if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData)->withInput();
-        }
+    //     if ($validatedData->fails()) {
+    //         return redirect()->back()->withErrors($validatedData)->withInput();
+    //     }
 
-        // Validation passed, perform any necessary processing.
-        $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
-        $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
+    //     // Validation passed, perform any necessary processing.
+    //     $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
+    //     $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
 
-        // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);
+    //     // Get the existing customer_details array from the session
+    //     $customerDetails = $request->session()->get('customer_details', []);
 
-        // Get existing savings_needs from the session
-        $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+    //     // Get existing savings_needs from the session
+    //     $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
 
-        // Update specific keys with new values
-        $advanceDetails = array_merge($advanceDetails, [
-            'risk_profile' => $savingsRiskProfileInput,
-            'potential_return' => $savingsPotentialReturnInput
-        ]);
+    //     // Update specific keys with new values
+    //     $advanceDetails = array_merge($advanceDetails, [
+    //         'risk_profile' => $savingsRiskProfileInput,
+    //         'potential_return' => $savingsPotentialReturnInput
+    //     ]);
 
-        // Set the updated savings_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+    //     // Set the updated savings_needs back to the customer_details session
+    //     $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
+    //     $request->session()->put('customer_details', $customerDetails);
+    //     $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+    //     $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('savings.gap',$transactionData);
-    }
+    //     return redirect()->route('savings.gap',$transactionData);
+    // }
 
     public function submitSavingsGap(Request $request, TransactionService $transactionService){
 
@@ -422,7 +394,17 @@ class SavingsController extends Controller
             return redirect()->route('debt.cancellation.home',$transactionData);
         }
         else {
-            return redirect()->route('existing.policy',$transactionData);
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy',$transactionData);
+            } else{
+                return redirect()->route('summary.monthly-goals',$transactionData);
+            }
         }
     }
 

@@ -18,7 +18,7 @@
     $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
 @endphp
 
-<div id="medical-hospital-selection">
+<div id="medical-hospital-selection" class="secondary-default-bg">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row navbar-scroll">@include('templates.nav.nav-red-menu-needs')</div></div>
@@ -34,20 +34,20 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content">
+                <section class="bottom-content pt-0">
                     <div class="container h-100">
-                        <div class="row justify-content-center h-100" id="hnm-selection">
-                            <div class="h-100 d-flex justify-content-center align-items-center col-3">
+                    <div class="row justify-content-center h-100 d-flex align-items-end" id="hnm-selection">
+                            <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedHospital === 'private hospital') default @endif" id="private_hospital" data-avatar="private hospital" data-required="">
-                                    <div>
+                                    <div class="mt-auto">
                                         <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/private-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
                                         <p class="avatar-text text-center mb-0 fw-bold">Private hospital</p>
                                     </div>
                                 </button>
                             </div>
-                            <div class="h-100 d-flex justify-content-center align-items-center col-3">
+                            <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedHospital === 'general hospital') default @endif" id="general_hospital" data-avatar="general hospital" data-required="">
-                                    <div>
+                                    <div class="mt-auto">
                                         <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/general-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
                                         <p class="avatar-text text-center mb-0 fw-bold">General hospital</p>
                                     </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-2 plant d-none d-xl-block">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center" style="top:55%;">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
                         </div>
                     </div>
                 </section>

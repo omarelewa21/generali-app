@@ -14,10 +14,12 @@
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
-    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
-    $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile');
-    $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
+
+    $riskProfile = session('customer_details.risk_profile.selected_risk_profile');
+    $potentialReturn = session('customer_details.risk_profile.selected_potential_return');
+
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
 @endphp
 
@@ -32,7 +34,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 pb-5">
-                                <h2 class="display-4 text-center">Total Savings Fund</h2>
+                                <h2 class="display-4 text-center">Total Regular Savings Fund</h2>
                             </div>
                         </div>
                     </div>
@@ -40,8 +42,8 @@
                 <section class="bottom-content z-1">
                     <div class="container h-100">
                         <div class="row h-100">
-                            <div class="col-xl-5 col-lg-5 col-md-12 h-100 d-flex justify-content-center align-items-end">
-                                <div class="svg-container h-100" style="transform:scale(1.3)">
+                            <div class="col-xl-5 col-md-12 h-100 d-flex justify-content-center align-items-end graph-col">
+                                <div class="svg-container h-100 graph-size">
                                     <div class="card-gap h-100" id="gap">
                                         <div class="card-gap__percent h-100">
                                             <svg>
@@ -68,12 +70,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 py-xxxl-5">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">My goal is to build a total savings funds of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($goalsAmount))}}</h4>
@@ -85,7 +87,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" alt="input icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" alt="input icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">If I set aside monthly savings of </p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($savingsMonthlyPayment))}}</h4>
@@ -97,7 +99,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalDuration}} years</h4>
@@ -110,7 +112,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">While expecting annual returns of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalPA}}% p.a.</h4>
@@ -122,19 +124,20 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
-                                                <p class="avatar-text fw-bold text-black m-0 px-3">I will need a regular savings plan for</p>
+                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="45">
+                                                <p class="avatar-text fw-bold text-black m-0 px-3">Projected accumalated Saving Fund is</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
+                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded))}}</h4>
+                                            <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4> -->
                                         </div>
                                     </div>
                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
                                 </div>
-                                <div class="row justify-content-center py-2">
+                                <!-- <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <p>*Calculated based on an average inflation rate of 4%.​</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -144,7 +147,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('savings.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -191,7 +194,7 @@
     var percentage = parseFloat({{$savingsFundPercentage}});
     var goals = parseFloat({{$goalsAmount}});
     var savingsPriority = '{{$savingsPriority}}';
-    var lastPageInput = '{{$savingsRiskProfile === "" || $savingsRiskProfile === null ? $savingsRiskProfile : $savingsPotentialReturn}}';
+    var lastPageInput = '{{$riskProfile === "" || $riskProfile === null ? $riskProfile : $potentialReturn}}';
 </script>
 
 @endsection

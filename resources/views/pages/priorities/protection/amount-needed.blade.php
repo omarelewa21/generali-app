@@ -19,7 +19,7 @@
     $protectionAnnuallySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount');
     $existingPolicyAmount = session('customer_details.selected_needs.need_1.advance_details.existing_amount');
     $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
-    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.total_protection_needed', '0');
+    $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.goals_amount', '0');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
 @endphp
@@ -27,11 +27,11 @@
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
-            <div class="header col-12 fixed-top z-2">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+            <div class="header col-12">
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
                 <div class="bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
-                        <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden text-center text-nowrap my-2">RM{{ 
+                        <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $existingPolicyAmount === null || $existingPolicyAmount === '' 
                                 ? number_format(floatval($totalProtectionNeeded)) 
                                 : ($existingPolicyAmount > floatval($totalProtectionNeeded) 
@@ -40,14 +40,14 @@
                             }}
                         </h1>
                     </div>
-                    <div class="col-6 m-auto p-0">
-                        <p class="text-white display-6 lh-base text-center m-0">Total Protection Fund Needed</p>
+                    <div class="col-6 m-auto">
+                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Protection Fund Needed</p>
                     </div>
                 </div>
             </div>
             <form novalidate action="{{route('validate.protection.amount.needed')}}" method="POST" class="content-needs-grey">
                 @csrf
-                <div class="top-menu pt-md-0">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -68,21 +68,24 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-1">
-                    <div class="container h-100">
+                <section class="bottom-content z-md-1">
+                    <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Increment">
+                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                            <!-- <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg"> -->
+                                <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1">
-                            <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
-                                <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
-                                <p class="display-5 fw-bold currencyField">
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
-                                / month for
-                                    <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
-                                years</p>
-                                <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
+                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                                <div class="row h-sm-100">
+                                <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
+                                    <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
+                                    <p class="display-5 fw-bold currencyField">
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
+                                    / month for
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
+                                    years</p>
+                                    <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,7 +106,7 @@
                     <div class="bg-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
+                                <div class="col-12 d-flex gap-2 d-md-block text-end">
                                     <a href="{{route('protection.coverage')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>

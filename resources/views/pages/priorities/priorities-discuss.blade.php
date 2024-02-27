@@ -217,13 +217,13 @@
                                                         $title = 'Education';
                                                     }
                                                     else if ($priority === 'savings') {
-                                                        $title = 'Savings';
+                                                        $title = 'Regular Savings';
                                                     }
                                                     else if ($priority === 'debt-cancellation') {
                                                         $title = 'Debt Cancellation';
                                                     }
                                                     else if ($priority === 'health-medical') {
-                                                        $title = 'Health Medical';
+                                                        $title = 'Health & Medical';
                                                     }
                                                     else if ($priority === 'investments') {
                                                         $title = 'Lump Sum Investment';
