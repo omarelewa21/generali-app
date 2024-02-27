@@ -82,9 +82,9 @@
                                 <div class="row h-sm-100">
                                     <h2 class="display-5 fw-bold lh-sm">I plan to retire at the age of</h2>
                                     <p class="display-5 fw-bold currencyField">
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="retirement_age" class="form-control fw-bold position-relative border-0 d-inline-block text-center w-25 text-primary @error('retirement_age') is-invalid @enderror" id="retirement_age" value="{{$retirementAge}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="retirement_age" class="form-control fw-bold position-relative border-0 d-inline-block text-center w-25 text-primary @error('retirement_age') is-invalid @enderror" id="retirement_age" value="{{$retirementAge}}" required></span>
                                         so I can enjoy my retirement for the next
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('supporting_years') is-invalid @enderror" id="supporting_years" value="{{$supportingYears}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('supporting_years') is-invalid @enderror" id="supporting_years" value="{{$supportingYears}}" required></span>
                                         years.
                                     </p>
                                     <input type="hidden" name="total_retirementNeeded" id="total_retirementNeeded" value="{{$totalRetirementNeeded}}">

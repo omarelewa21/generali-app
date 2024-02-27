@@ -349,13 +349,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Retrieve the current input value
                     var investmentPAValue = investmentPA.value;
         
-                    var annualReturn = parseInt(investmentPAValue);
+                    var annualReturn = parseFloat(investmentPAValue);
         
                     // Calculate annual return
                     var total_AR_amount = oldTotalFund * annualReturn / 100;
                     var totalPercentage = total_AR_amount / oldTotalFund * 100;
-                    if (!isNaN(annualReturn)) {
-                        this.value = annualReturn;
+                    if (!isNaN(investmentPAValue)) {
+                        this.value = investmentPAValue;
                         // totalAnnualReturn.value = total_AR_amount;
                         if(totalPercentage > 100){
                             totalInvestmentPercentage.value = 100;

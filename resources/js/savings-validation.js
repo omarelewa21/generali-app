@@ -493,9 +493,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Retrieve the current input value
                     var savingsGoalPAValue = savingsGoalPA.value;
         
-                    var annualReturn = parseInt(savingsGoalPAValue);
+                    // var annualReturn = parseFloat(savingsGoalPAValue);
+                    // this.value = annualReturn;
         
-                    if (!isNaN(annualReturn)) {
+                    if (!isNaN(savingsGoalPAValue)) {
                         this.value = annualReturn;
                     }
                     else{

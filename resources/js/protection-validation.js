@@ -251,7 +251,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Set the value of the hidden input field
                     totalProtectionNeeded.value =  totalProtection;
                 });
-        
+    
                 supportingYears.addEventListener("input", function() {
         
                     // Retrieve the current input value

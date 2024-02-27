@@ -52,6 +52,7 @@ class SavingsController extends Controller
         // Get existing savings_needs from the session
         $needs = $customerDetails['selected_needs']['need_4'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
@@ -62,8 +63,15 @@ class SavingsController extends Controller
             'spouse_dob' => $othersCoverForDobInput
         ]);
 
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
+
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -145,14 +153,22 @@ class SavingsController extends Controller
 
             // Get existing savings_needs from the session
             $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+            $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
             $advanceDetails = array_merge($advanceDetails, [
                 'goal_target' => $savingsGoalsButtonInput,
                 'goal_amount' => $savings_goals_amount
             ]);
 
+            $lastPage = str_replace(url('/'), '', url()->previous());
+
+            $lastPageUrl = array_merge($lastPageUrl, [
+                'last_page_url' => $lastPage
+            ]);
+
             // Set the updated savings_needs back to the customer_details session
             $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+            $customerDetails['lastPageUrl'] = $lastPageUrl;
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
@@ -301,6 +317,7 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         // Validation passed, perform any necessary processing.
         $savings_goal_pa = $request->input('savings_goal_pa');
@@ -310,8 +327,15 @@ class SavingsController extends Controller
             'annual_returns' => $savings_goal_pa
         ]);
 
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
+
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -375,9 +399,17 @@ class SavingsController extends Controller
 
         // Get existing savings_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
+
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
 
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);

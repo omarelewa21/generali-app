@@ -65,7 +65,7 @@
                                     <!-- <p class="display-5 fw-bold currencyField"> -->
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="investment_monthly_payment" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('investment_monthly_payment') is-invalid @enderror" id="investment_monthly_payment" value="{{ $investmentMonthlyPayment !== null ? number_format(floatval($investmentMonthlyPayment)) : $investmentMonthlyPayment }}" required></span>
                                     /month over the next
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('investment_supporting_years') is-invalid @enderror" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="investment_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('investment_supporting_years') is-invalid @enderror" id="investment_supporting_years" value="{{$investmentSupportingYears}}" required></span>
                                     years.</h2>
                                     <input type="hidden" name="total_investmentNeeded" id="total_investmentNeeded" value="{{$totalInvestmentNeeded}}">
                                 </div>

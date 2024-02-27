@@ -68,9 +68,9 @@ class ProtectionController extends Controller
         $transactionService->handleTransaction($request,$customerDetails);
 
         $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
-        // return ($formattedArray);
-        return redirect()->route('protection.amount.needed',$transactionData);
+        $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
+        return ($formattedArray);
+        // return redirect()->route('protection.amount.needed',$transactionData);
     }
 
     public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)

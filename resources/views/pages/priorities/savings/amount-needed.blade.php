@@ -76,7 +76,7 @@
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="savings_monthly_payment" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('savings_monthly_payment') is-invalid @enderror" id="savings_monthly_payment" value="{{ $savingsMonthlyPayment !== null ? number_format(floatval($savingsMonthlyPayment)) : $savingsMonthlyPayment }}" required></span>
                                     / month over the next
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_duration" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('savings_goal_duration') is-invalid @enderror" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="savings_goal_duration" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('savings_goal_duration') is-invalid @enderror" id="savings_goal_duration" value="{{$savingsGoalDuration}}" required></span>
                                     years to achieve my goals.</p>
                                     <input type="hidden" name="total_savingsNeeded" id="total_savingsNeeded" value="{{$totalSavingsNeeded}}">
                                     <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">

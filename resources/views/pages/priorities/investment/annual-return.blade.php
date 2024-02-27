@@ -62,7 +62,7 @@
                                 <div class="row">
                                     <h2 class="display-5 fw-bold lh-sm currencyField">Of course, ideally I'd like to see annual returns of
                                     <!-- <p class="display-5 fw-bold currencyField"> -->
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="investment_pa" class="form-control fw-bold position-relative text-center border-0 d-inline-block w-25 text-primary @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{ $investmentPA }}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="investment_pa" class="form-control fw-bold position-relative text-center border-0 d-inline-block w-25 text-primary @error('investment_pa') is-invalid @enderror" id="investment_pa" value="{{ $investmentPA }}" required></span>
                                     % p.a.</h2>
                                     <input type="hidden" name="percentage" id="percentage" value="{{$investmentFundPercentage}}">
                                 </div>
