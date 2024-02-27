@@ -306,8 +306,7 @@ var priority = {!! json_encode($prioritiesDiscuss) !!};
 document.addEventListener('DOMContentLoaded', function() {
     // Ensure the first accordion item is always open
     const firstAccordionItem = document.querySelector('.accordion-item:first-of-type');
-    const secondAccordionItem = document.querySelectorAll('.accordion-item')[1];
-    console.log(secondAccordionItem);
+   
     if (firstAccordionItem) {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');

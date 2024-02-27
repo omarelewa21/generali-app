@@ -17,6 +17,7 @@
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.priorities_level');
     // dd($image);
+    // dd(session()->all());
 @endphp
 
 <div id="top_priorities">
@@ -354,6 +355,7 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.priorities_level')) !!};
+    var lastPageInput = {!! json_encode(session('customer_details.priorities_level')) !!};
     var test = {!! json_encode($prioritiesMap) !!}
 
     // Load the animation using Lottie

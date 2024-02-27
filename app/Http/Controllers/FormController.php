@@ -1064,7 +1064,7 @@ class FormController extends Controller {
         }
     }
 
-    public function priorities(Request $request ,TransactionService $transactionService)
+    public function priorities(Request $request ,TransactionService $transactionService, CustomerService $customerService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1083,6 +1083,8 @@ class FormController extends Controller {
             $customerDetails = $request->session()->get('customer_details', []);
             $selectedNeeds = $customerDetails['selected_needs'] ?? [];
             $test = $customerDetails['test'] ?? [];
+
+            Log::debug($customerDetails);
             
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
@@ -1141,9 +1143,15 @@ class FormController extends Controller {
                 $customerDetails['customers_choice'] = '2';
             }
 
+
+            $latestKey = array_key_last($customerDetails);
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+
+
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
-            $customerId = $request->session()->get('customer_id');
+
             $transactionId = $transactionService->handleTransaction($customerId);
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,

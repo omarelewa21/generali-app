@@ -386,11 +386,12 @@ class DropdownController extends Controller
             }
             ksort($prioritiesDiscuss);
             session(['customer_details.priorities_level' => $prioritiesDiscuss]);
+            session(['customer_details.priorities' => $prioritiesDiscuss]);
 
             $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
             $avatarImage = $avatar->image;
             session(['customer_details.avatar.image' => $avatarImage]);
-            session(['customer_details.priorities' => $prioritiesDiscuss]);
+            
         }
         
         return view('pages/priorities/priorities-discuss',compact('prioritiesDiscuss'));
@@ -415,7 +416,7 @@ class DropdownController extends Controller
             # code...
         }
 
-        return view('pages/priorities/coverage');
+        return view('pages/priorities/protection/coverage');
 
     }
 

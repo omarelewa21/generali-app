@@ -30,6 +30,10 @@ class CustomerService
                 $email = $customerDetails['basic_details']['email'];
             }
 
+            if ($latestKey == 'customers_choice') {
+                $customerChoice = $customerDetails['customers_choice'];
+            }
+
             //avatar
             $genderAvatar =  $customerDetails['avatar']['gender'] ?? "";
             $image =  $customerDetails['avatar']['image'] ?? "";
@@ -95,6 +99,12 @@ class CustomerService
                     case 'assets':
                         $updateParameter = [
                             'gender' => $genderAvatar                     
+                        ];
+                        break;
+                    
+                    case 'customers_choice':
+                        $updateParameter = [
+                            'customer_choice' => $customerChoice                     
                         ];
                         break;
         

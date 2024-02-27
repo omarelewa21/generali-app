@@ -22,7 +22,6 @@ class TransactionService
             $id = session('transaction_id') ?? "";
             
             // dd(request()->path());
-            Log::debug($route);
 
             $transaction = Transaction::updateOrCreate(
                 ['id' => $id ,'customer_id' => $customerId , 'agent_id' => $agentId],
