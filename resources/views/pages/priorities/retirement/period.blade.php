@@ -138,7 +138,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var lastPageInput = '{{$retirementMonthlySupport}}';
 </script>

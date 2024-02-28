@@ -139,7 +139,7 @@
 </div>
 
 <script>
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var selfData = '{{$selfDataName}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
 

@@ -132,7 +132,7 @@
 <script>
     var amountNeeded = document.getElementById("medical_amount_needed");
     var supportingYears = '1';
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var lastPageInput = '{{$selectedRoom}}';
 </script>
 @endsection

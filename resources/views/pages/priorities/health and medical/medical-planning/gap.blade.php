@@ -157,7 +157,7 @@
     var existingProtectionAmount =  parseFloat({{$existingProtectionAmount}});
     var percentage = parseFloat({{$healthMedicalFundPercentage}});
     var totalHealthMedicalNeeded = parseFloat({{$totalHealthMedicalNeeded}});
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var lastPageInput = {!! json_encode($health_medical) !!};
 </script>
 

@@ -155,7 +155,7 @@
     var existingDebtAmount =  parseFloat({{$existingDebtAmount}});
     var percentage = parseFloat({{$debtFundPercentage}});
     var totalDebtFund = parseFloat({{$totalDebtNeeded}});
-    var priority = '{{$debtPriority}}';
+    var needs_priority = '{{$debtPriority}}';
     var lastPageInput = '{{$criticalIllnessCoverage === "" || $criticalIllnessCoverage === null ? $criticalIllnessCoverage : $coverageAmount}}';
 </script>
 

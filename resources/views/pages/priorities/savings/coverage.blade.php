@@ -168,7 +168,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$savingsPriority}}';
+    var needs_priority = '{{$savingsPriority}}';
     var selfData = '{{$selfDataName}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
 

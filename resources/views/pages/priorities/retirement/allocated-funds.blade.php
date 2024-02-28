@@ -153,7 +153,7 @@
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var retirementFundPercentage = parseFloat({{ $retirementFundPercentage }});
     var sessionRetirementSavings = parseFloat({{$retirementSavings}});
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var lastPageInput = '{{$supportingYears === "" || $supportingYears === null ? $supportingYears : $retirementAge}}';
 </script>
 

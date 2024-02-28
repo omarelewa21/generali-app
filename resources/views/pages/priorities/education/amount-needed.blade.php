@@ -223,7 +223,7 @@
 </div>
 
 <script>
-    var priority = '{{$educationPriority}}';
+    var needs_priority = '{{$educationPriority}}';
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

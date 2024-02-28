@@ -138,7 +138,7 @@
 </div>
 
 <script>
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var lastPageInput = '{{$retirementIdeal}}';
 </script>
 @endsection

@@ -135,7 +135,7 @@
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
     var sessionExistingPolicy = '{{$existingPolicy}}';
-    var priority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
     var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? $protectionMonthlySupport : $protectionSupportingYears}}';
 </script>
 @endsection

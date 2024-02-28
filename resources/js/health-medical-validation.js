@@ -12,8 +12,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (priority === 'false' || priority === undefined || priority === '' || priority === null || priority === false){
-
+    if (needs_priority && needs_priority === 'false' || !needs_priority) {
+            
     } else{
         if (path === '/health-medical/medical-selection') {
             // Add event listener to each button with the 'data-required' attribute

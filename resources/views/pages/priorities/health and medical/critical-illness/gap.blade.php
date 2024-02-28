@@ -154,7 +154,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var existingProtectionAmount =  parseFloat({{$existingProtectionAmount}});
     var percentage = parseFloat({{$healthMedicalFundPercentage}});
     var totalHealthMedicalNeeded = parseFloat({{$totalHealthMedicalNeeded}});

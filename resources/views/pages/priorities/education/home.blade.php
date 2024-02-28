@@ -73,6 +73,6 @@
 </div>
 
 <script>
-    var priority = '{{$educationPriority}}';
+    var needs_priority = '{{$educationPriority}}';
 </script>
 @endsection 

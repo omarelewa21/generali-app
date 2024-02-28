@@ -125,7 +125,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$debtPriority}}';
+    var needs_priority = '{{$debtPriority}}';
     var oldTotalFund = parseFloat({{ $totalDebtNeeded }});
     var fundPercentage = parseFloat({{ $debtFundPercentage }});
     var sessionExistingDebtAmount = parseFloat({{$existingDebtAmount}});

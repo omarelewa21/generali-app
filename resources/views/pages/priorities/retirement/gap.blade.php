@@ -161,7 +161,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var retirementSavings =  parseFloat({{ $retirementSavings }});
     var percentage = parseFloat({{ $retirementFundPercentage }});
     var newTotalRetirementNeeded = parseFloat({{ $totalRetirementNeeded }});

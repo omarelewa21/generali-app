@@ -132,7 +132,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$savingsPriority}}';
+    var needs_priority = '{{$savingsPriority}}';
     var goalAmount = parseFloat({{ $goalsAmount }});
     var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
     var lastPageInput = '{{$goalsAmount}}';

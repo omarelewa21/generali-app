@@ -15,8 +15,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const paramValue = urlParams.get('transaction_id');
     const log = console.log.bind(document);
 
-    if (priority === 'false' || priority === undefined || priority === '' || priority === null || priority === false){
-
+    if (needs_priority && needs_priority === 'false' || !needs_priority) {
+            
     } else{
         if (path === '/debt-cancellation/coverage' || path === '/debt-cancellation/coverage?transaction_id='+paramValue) {
             if (selfData == null || selfData == undefined || selfData == '') {

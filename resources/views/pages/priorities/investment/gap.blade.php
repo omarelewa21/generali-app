@@ -177,7 +177,7 @@
     var investmentAnnualReturn =  parseFloat({{$totalAnnualReturn}});
     var newTotalInvestmentNeeded = parseFloat({{$totalInvestmentNeeded}});
     var percentage = parseFloat({{$investmentFundPercentage}});
-    var priority = '{{$investmentPriority}}';
+    var needs_priority = '{{$investmentPriority}}';
 </script>
 
 @endsection

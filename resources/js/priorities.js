@@ -154,6 +154,46 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
                         image.style.display = 'block';
                     }
                 });
+
+                for (const checkboxId of contents) {
+                    if (checkboxValues[checkboxId] === true) {
+                        // Assign link based on the sequence
+                        if (checkboxId === 'protection_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/protection');
+                            break;
+                        }
+                        else if (checkboxId === 'retirement_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/retirement');
+                            break;
+                        }
+                        else if (checkboxId === 'education_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/education');
+                            break;
+                        }
+                        else if (checkboxId === 'savings_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/savings');
+                            break;
+                        }
+                        else if (checkboxId === 'investments_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/investment');
+                            break;
+                        }
+                        else if (checkboxId === 'health-medical_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/health-medical');
+                            break;
+                        }
+                        else if (checkboxId === 'debt-cancellation_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/debt-cancellation');
+                            break;
+                        }
+                        else {
+                            document.getElementById('priorityNext').setAttribute('href', '/existing-policy');
+                            break;
+                        }
+                    } else{
+                        document.getElementById('priorityNext').setAttribute('href', '/financial-statement/monthly-goals');
+                    }
+                }
             }
             // Get the list of unchecked checkboxes
             const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
@@ -164,7 +204,6 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
                 for (const checkboxId of contents) {
                     // Check if the current checkbox is unchecked
                     if (checkboxValues[checkboxId] === true) {
-                        console.log(checkboxId);
                         // Check the sequence and redirect accordingly
                         if (checkboxId === 'protection_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '/protection');

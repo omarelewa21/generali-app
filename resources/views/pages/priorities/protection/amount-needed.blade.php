@@ -135,7 +135,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

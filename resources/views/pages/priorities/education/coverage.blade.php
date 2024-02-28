@@ -127,7 +127,7 @@
 </div>
 
 <script>
-    var priority = '{{$educationPriority}}';
+    var needs_priority = '{{$educationPriority}}';
     var childDatas = {!! json_encode($childData) !!};
     var familyDependent = {!! json_encode($familyDependent) !!};
     if(childDatas){

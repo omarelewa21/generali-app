@@ -132,7 +132,7 @@
     </div>
 </div>
 <script>
-    var priority = '{{$debtPriority}}';
+    var needs_priority = '{{$debtPriority}}';
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

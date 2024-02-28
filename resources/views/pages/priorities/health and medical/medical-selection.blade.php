@@ -95,6 +95,6 @@
 </div>
 
 <script>
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
 </script>
 @endsection

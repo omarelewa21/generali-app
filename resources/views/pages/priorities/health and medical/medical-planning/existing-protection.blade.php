@@ -126,7 +126,7 @@
     var oldTotalFund = parseFloat({{ $totalHealthMedicalNeeded }});
     var fundPercentage = parseFloat({{ $healthMedicalFundPercentage }});
     var sessionExistingProtectionAmount = parseFloat({{$existingProtectionAmount}});
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var lastPageInput = '{{$medicalAmountNeeded}}';
 </script>
 @endsection

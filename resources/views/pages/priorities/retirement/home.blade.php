@@ -61,6 +61,6 @@
 </div>
 
 <script>
-    var priority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
 </script>
 @endsection 

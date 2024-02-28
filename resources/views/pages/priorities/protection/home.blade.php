@@ -60,7 +60,7 @@
 </div>
 
 <script>
-    var priority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
 </script>
 
 @endsection

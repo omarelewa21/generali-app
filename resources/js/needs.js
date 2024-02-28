@@ -14,7 +14,9 @@ const currentURL = window.location.href;
 
 // Check if the current URL contains any of the specific folder names
 if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
-    if (priority === 'false' || priority === undefined || priority === '' || priority === null || priority === false){
+    // if (needs_priority && needs_priority === 'false' || !needs_priority) {
+        console.log(needs_priority);
+    if (needs_priority && needs_priority === 'false' || !needs_priority) {
         var missingModal = document.getElementById('missingNeedsFields');
         missingModal.classList.add('show');
         missingModal.style.display = 'block';
@@ -40,6 +42,5 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
             window.location.href = '/financial-priorities/discuss';
         });
-
     }
 }

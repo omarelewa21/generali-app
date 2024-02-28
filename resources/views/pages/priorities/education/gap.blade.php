@@ -157,7 +157,7 @@
     var educationSavingAmount =  parseFloat({{ $educationSavingAmount }});
     var newTotalEducationFundNeeded = parseFloat({{$totalEducationNeeded}});
     var percentage = parseFloat({{$educationFundPercentage}});
-    var priority = '{{$educationPriority}}';
+    var needs_priority = '{{$educationPriority}}';
     var lastPageInput = {!! json_encode($education) !!};
 </script>
 

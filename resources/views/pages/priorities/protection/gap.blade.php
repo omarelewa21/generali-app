@@ -163,7 +163,7 @@
 </div>
 
 <script>
-    var priority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
     var percentage = parseFloat({{$protectionFundPercentage}});
     var newTotalProtectionNeeded = parseFloat({{ $totalProtectionNeeded }});
     var existingPolicyAmount = parseFloat({{$existingPolicyAmount}});

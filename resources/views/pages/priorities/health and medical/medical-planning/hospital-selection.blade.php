@@ -107,7 +107,7 @@
 </div>
 <script>
     var selectionInput = document.getElementById('medicalHospitalSelectedInput');
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

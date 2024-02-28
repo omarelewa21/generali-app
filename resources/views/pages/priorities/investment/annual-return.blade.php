@@ -117,7 +117,7 @@
 </div>
 <script>
     var lastPageInput = '{{$investmentMonthlyPayment === "" || $investmentMonthlyPayment === null ? $investmentMonthlyPayment : $investmentSupportingYears}}';
-    var priority = '{{$investmentPriority}}';
+    var needs_priority = '{{$investmentPriority}}';
     var oldTotalFund = parseFloat({{ $totalInvestmentNeeded }});
 </script>
 @endsection

@@ -176,7 +176,7 @@
 </div>
 
 <script>
-    var priority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
     var selectionInput = document.getElementById('roomTypeInput');
     var lastPageInput = '{{$selectedHospital}}';
 </script>
