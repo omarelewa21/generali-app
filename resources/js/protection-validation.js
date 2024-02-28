@@ -11,32 +11,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (protectionPriority === 'false' || protectionPriority === undefined || protectionPriority === '' || protectionPriority === null || protectionPriority === false){
-        var missingModal = document.getElementById('missingProtectionFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingProtectionFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss';
-        });
+    if (priority === 'false' || priority === undefined || priority === '' || priority === null || priority === false){
 
     } else{
         if (path === '/protection/coverage') {
@@ -76,11 +51,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         document.querySelector('body').style.paddingRight = '0px';
                         document.querySelector('body').style.overflow = 'hidden';
                         document.querySelector('body').classList.add('modal-open');
-    
+
                         var modalBackdrop = document.createElement('div');
                         modalBackdrop.className = 'modal-backdrop fade show';
                         document.querySelector('body.modal-open').append(modalBackdrop);
-    
+
                         // Close the modal
                         var closeButton = document.querySelector('#missingSpouseFields .btn-exit-sidebar');
                         closeButton.addEventListener('click', function() {
@@ -105,11 +80,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         document.querySelector('body').style.paddingRight = '0px';
                         document.querySelector('body').style.overflow = 'hidden';
                         document.querySelector('body').classList.add('modal-open');
-    
+
                         var modalBackdrop = document.createElement('div');
                         modalBackdrop.className = 'modal-backdrop fade show';
                         document.querySelector('body.modal-open').append(modalBackdrop);
-    
+
                         // Close the modal
                         var closeButton = document.querySelector('#missingChildFields .btn-exit-sidebar');
                         closeButton.addEventListener('click', function() {
@@ -135,21 +110,21 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             dataButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     event.preventDefault(); // Prevent the default behavior of the button click
-    
+
                     dataButtons.forEach(btn => btn.removeAttribute('data-required'));
                     // Add 'selected' attribute to the clicked button
                     this.setAttribute('data-required', 'selected');
-    
+
                     // selectedAvatar = this.getAttribute('data-required');
-    
+
                     dataButtons.forEach(btn => btn.classList.remove('selected'));
-    
+
                     // Get the selected data-avatar value
                     const dataAvatar = this.getAttribute('data-avatar');
                     const dataAvatarDob = this.getAttribute('data-avatar-dob');
                     const dataRelation = this.getAttribute('data-relation');
                     // const dataAvatarImg = this.querySelector('img').getAttribute('src');
-    
+
                     // Update the hidden input field value with the selected avatar
                     document.getElementById('relationshipInput').value = dataRelation;
                     document.getElementById('selectedInsuredNameInput').value = '';
@@ -167,11 +142,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // document.getElementById('protectionSelectedAvatarImage').value = dataAvatarImg;
                 });
             });
-    
+
             // Preselect the button on page load
             window.addEventListener('DOMContentLoaded', function() {
                 const defaultBtn = document.querySelectorAll('.default');
-    
+
                 defaultBtn.forEach(defaultBtn => {
                     // Add the 'selected' class to the closest .button-bg div of each default button
                     defaultBtn.classList.add('selected');
@@ -251,7 +226,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Set the value of the hidden input field
                     totalProtectionNeeded.value =  totalProtection;
                 });
-    
+
                 supportingYears.addEventListener("input", function() {
         
                     // Retrieve the current input value
@@ -319,20 +294,20 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //     // Get the input value
         //     var monthlyInput = document.getElementById("protection_monthly_support");
         //     var totalProtectionNeeded = document.getElementById("total_protectionNeeded");
-    
+
         //     var totalProtectionFund = document.getElementById("TotalProtectionFund");
-    
+
         //     monthlyInput.addEventListener("input", function() {
-    
+
         //         // Retrieve the current input value
         //         var monthlyInputValue = monthlyInput.value;
-    
+
         //         // Remove non-digit characters
         //         const cleanedValue = parseFloat(monthlyInputValue.replace(/\D/g, ''));
-    
+
         //         // Attempt to parse the cleaned value as a float
         //         const parsedValue = parseFloat(cleanedValue);
-    
+
         //         // Check if the parsed value is a valid number
         //         if (!isNaN(parsedValue)) {
         //         // If it's a valid number, format it with commas
@@ -342,12 +317,12 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //         // If it's not a valid number, display the cleaned value as is
         //             this.value = monthlyInputValue;
         //         }
-    
+
         //         var monthlyAmount = parseInt(cleanedValue);
-    
+
         //         // Calculate months
         //         var amountPerYear = monthlyAmount * 12;
-    
+
         //         if (isNaN(monthlyAmount)) {
         //             // Input is not a valid number
         //             totalProtectionFund.innerText = "RM 0";
@@ -355,27 +330,27 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //             // Input is a valid number, perform the calculation
         //             // Display the result
         //             var result = amountPerYear.toLocaleString();
-    
+
         //             totalProtectionFund.innerText = "RM" + result;
         //         }
-    
+
         //         // Set the value of the hidden input field
         //         totalProtectionNeeded.value = amountPerYear;
         //     });
-    
+
         //     document.addEventListener("DOMContentLoaded", function() {
         //         monthlyInput.addEventListener("blur", function() {
         //             validateNumberField(monthlyInput);
         //         });
         //     });
-    
+
         //     function validateNumberField(field) {
         //         var value = field.value.replace(/,/g, ''); // Remove commas
         //         var numericValue = parseFloat(value);
-    
+
         //         if (isNaN(numericValue)) {
         //             field.classList.add("is-invalid");
-    
+
         //         } else {
         //             field.classList.remove("is-invalid");
         //         }
@@ -383,27 +358,27 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         // }
         // else if (path == '/protection-supporting-years') {
         //     // Get the input value
-    
+
         //     var supportingYears = document.getElementById("protection_supporting_years");
         //     var newTotalFund = document.getElementById("newTotal_protectionNeeded");
             
         //     var totalProtectionFund = document.getElementById("TotalProtectionFund");
-    
+
         //     if (supportingYearsSessionValue !== '' || supportingYearsSessionValue !== 0 && oldTotalFund !== '') {
         //             newTotalFund.value = supportingYearsSessionValue * oldTotalFund;
         //     } 
             
-    
+
         //     supportingYears.addEventListener("input", function() {
-    
+
         //         // Retrieve the current input value
         //         var supportingYearsValue = supportingYears.value;
-    
+
         //         var Year = parseInt(supportingYearsValue);
-    
+
         //         // Calculate months
         //         var totalAmount = Year * oldTotalFund;
-    
+
         //         if (isNaN(Year)) {
         //             // Input is not a valid number
         //             totalProtectionFund.innerText = "RM 0";
@@ -411,7 +386,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //             // Input is a valid number, perform the calculation
         //             // Display the result
         //             var result = totalAmount.toLocaleString();
-    
+
         //             totalProtectionFund.innerText = "RM" + result;
         //         }
                 
@@ -424,10 +399,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //             validateNumberField(supportingYears);
         //         });
         //     });
-    
+
         //     function validateNumberField(field) {
         //         const value = field.value.trim();
-    
+
         //         if (value === "" || isNaN(value)) {
         //             field.classList.add("is-invalid");
         //         } else {
@@ -828,6 +803,5 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 }
             }
         }
-
     }
 }

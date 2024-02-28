@@ -114,8 +114,8 @@ Route::view('/savings/amount-needed', 'pages.priorities.savings.amount-needed')-
 Route::post('/savings/amount-needed', [SavingsController::class, 'validateSavingsAmountNeeded'])->name('validate.savings.amount.needed');
 Route::view('/savings/annual-return', 'pages.priorities.savings.annual-return')->name('savings.annual.return');
 Route::post('/savings/annual-return', [SavingsController::class, 'validateSavingsAnnualReturn'])->name('validate.savings.annual.return');
-Route::view('/savings/risk-profile', 'pages.priorities.savings.risk-profile')->name('savings.risk.profile');
-Route::post('/savings/risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
+// Route::view('/savings/risk-profile', 'pages.priorities.savings.risk-profile')->name('savings.risk.profile');
+// Route::post('/savings/risk-profile', [SavingsController::class, 'validateSavingsRiskProfile'])->name('validate.savings.risk.profile');
 Route::view('/savings/gap', 'pages.priorities.savings.gap')->name('savings.gap');
 Route::post('/savings/gap', [SavingsController::class, 'submitSavingsGap'])->name('form.submit.savings.gap');
 
@@ -132,8 +132,8 @@ Route::view('/investment/amount-needed', 'pages.priorities.investment.amount-nee
 Route::post('/investment/amount-needed', [InvestmentController::class, 'validateInvestmentAmountNeeded'])->name('validate.investment.amount.needed');
 Route::view('/investment/annual-return', 'pages.priorities.investment.annual-return')->name('investment.annual.return');
 Route::post('/investment/annual-return', [InvestmentController::class, 'validateInvestmentAnnualReturn'])->name('validate.investment.annual.return');
-Route::view('/investment/risk-profile', 'pages.priorities.investment.risk-profile')->name('investment.risk.profile');
-Route::post('/investment/risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
+// Route::view('/investment/risk-profile', 'pages.priorities.investment.risk-profile')->name('investment.risk.profile');
+// Route::post('/investment/risk-profile', [InvestmentController::class, 'validateInvestmentRiskProfile'])->name('validate.investment.risk.profile');
 Route::view('/investment/gap', 'pages.priorities.investment.gap')->name('investment.gap');
 Route::post('/investment/gap', [InvestmentController::class, 'submitInvestmentGap'])->name('form.submit.investment.gap');
 

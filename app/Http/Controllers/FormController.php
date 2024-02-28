@@ -992,7 +992,38 @@ class FormController extends Controller {
             $customerDetails = $request->session()->get('customer_details', []);
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
-            unset($customerDetails['priorities']);
+            
+
+            // Get the existing array from the session
+            $priorities = $customerDetails['priorities'] ?? [];
+            
+            // Unset Needs based on the selection instead of whole priority
+            $remainingPriority = [];
+
+            foreach ($topPrioritiesButtonInput as $value) {
+                //trying to delete the whole needs if user deleted its previous selection
+                $remainingPriority[] = $value;
+                $remainingPriority[] = $value . '_discuss';
+                $valueToUnset = [];
+                if(isset($customerDetails['priorities'])){
+                    foreach ($customerDetails['priorities'] as $key_priority => $priority_value){
+                        $rem = false;
+                        foreach ($remainingPriority as $remain_priority){
+                            if ($key_priority == $remain_priority) {
+                                $rem = true;
+                                break;
+                            }
+                        }
+                        if (!$rem) {
+                            $valueToUnset[] = $key_priority;
+                        }
+                    }
+                }
+            }
+            foreach ($valueToUnset as $data_unset) {
+                unset($customerDetails['priorities'][$data_unset]);
+            }
+            // unset($customerDetails['priorities']);
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
@@ -1027,7 +1058,6 @@ class FormController extends Controller {
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
             $selectedNeeds = $customerDetails['selected_needs'] ?? [];
-            $test = $customerDetails['test'] ?? [];
             
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
