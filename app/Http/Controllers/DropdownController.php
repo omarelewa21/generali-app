@@ -86,6 +86,7 @@ class DropdownController extends Controller
             return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
         }
         else{
+            session(['customer_details.identity_details' => []]);
             return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels'));
         }
     }
@@ -413,11 +414,76 @@ class DropdownController extends Controller
         }
 
         if (!is_null($transactionId)) {
-            # code...
+
+            $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+
+            if(isset($basicDetails)){
+                session(['customer_details.basic_details' => $basicDetails->toArray()]);
+                session(['customer_details.identity_details' => $basicDetails->toArray()]);
+            }
+
+            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId) {
+                $query->where('priority', 'protection');
+            })->find($customerId)->priorities()->where('priority', 'protection')->get()->toArray();
+
+            if(isset ($prioritySequence['priority']))
+            {
+                session(['customer_details.priorities.protection_discuss' => true]);
+            }
+
+            $customerSpouse = optional(Customer::with('spouse')->where('id',$customerId)->first())
+                                ->spouse->toArray();
+
+            $customerDependent = optional(Customer::with('dependents')->where('id',$customerId)->first())
+                                ->dependents->toArray();
+            
+            if ($customerSpouse) {
+                session(['customer_details.family_details.spouse' => true ]); 
+                session(['customer_details.family_details.spouse_data' => $customerSpouse ]);   
+                session(['customer_details.family_details.dependent.spouse_data' => $customerSpouse]);
+            }
+
+            if ($customerDependent) {
+
+                foreach ($customerDependent as $dependent) {
+    
+                    if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
+                    {
+                        $parentData[lcfirst($dependent['relation'])] = $dependent;
+                    }
+                    elseif ($dependent['relation'] == 'Sibling') 
+                    {
+                        $siblingData = $dependent;
+                    }
+                    else // child 
+                    {
+                        $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
+                    }
+                }
+        
+                $familyDependent['children_data'] = $childData;
+                $familyDependent['parents_data'] = $parentData;
+                $familyDependent['siblings_data'] = $siblingData;
+            
+                foreach ($familyDependent as $key => $value) {
+                    if (isset($value)) {
+                
+                        $substring = strstr($key, '_data',true);
+                        session(['customer_details.family_details.' . $substring => true]);
+                        session(['customer_details.family_details.' . $key => $value]);
+                    }
+                }
+              
+                $existingData = session('customer_details.family_details.dependent', []);
+
+                session(['customer_details.family_details.dependent.children_data' => $childData]);
+                $childArray = session('customer_details.family_details.dependent.children_data');
+
+                array_merge_recursive($existingData, $childArray);
+            }
         }
 
         return view('pages/priorities/protection/coverage');
-
     }
 
 

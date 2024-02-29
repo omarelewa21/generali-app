@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use App\Models\SessionStorage; 
+use App\Services\CustomerService;
 use App\Services\TransactionService;
+use App\Services\CustomerNeedService;
+use Illuminate\Support\Facades\Validator;
 
 class ProtectionController extends Controller
 {
-    public function validateProtectionCoverageSelection(Request $request,TransactionService $transactionService)
+    public function validateProtectionCoverageSelection(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService, CustomerService $customerService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -30,7 +29,6 @@ class ProtectionController extends Controller
                 'at_least_one_selected',
             ],
         ]);
-
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -63,14 +61,26 @@ class ProtectionController extends Controller
         // Set the updated protection_needs back to the customer_details session
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
+        // Determine the latest array key
+        $latestKey = "selected_needs";
+
+        $customerId = session('customer_id');
+
+        // $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+        
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.amount.needed',$transactionData);
+        return redirect()->route('protection.amount.needed');
     }
 
     public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)
@@ -143,13 +153,16 @@ class ProtectionController extends Controller
         // Set the updated protection back to the customer_details session
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
+        $latestKey = "protection_amount_needed";
+        $customerId = session('customer_id');
+
+        $transactionService->handleTransaction($customerId);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
+       
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        
-        return redirect()->route('protection.existing.policy',$transactionData);
+        return redirect()->route('protection.existing.policy');
     }
     
     public function validateProtectionExistingPolicy(Request $request, TransactionService $transactionService){
@@ -239,17 +252,21 @@ class ProtectionController extends Controller
         // Set the updated protection back to the customer_details session
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
+        $latestKey = "protection_existing_policy";
+        $customerId = session('customer_id');
+
+        $transactionService->handleTransaction($customerId);
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
+        
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+    
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        return redirect()->route('protection.gap',$transactionData);
+        return redirect()->route('protection.gap');
     }
 
-    public function submitProtectionGap(Request $request, TransactionService $transactionService){
+    public function submitProtectionGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -261,23 +278,26 @@ class ProtectionController extends Controller
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+        $latestKey = "protection_gap";
+        $customerId = session('customer_id');
+        $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $request->session()->put('customer_details', $customerDetails);
 
         if (isset($customerDetails['priorities']['retirement_discuss']) && ($customerDetails['priorities']['retirement_discuss'] === 'true' || $customerDetails['priorities']['retirement_discuss'] === true)) {
-            return redirect()->route('retirement.home',$transactionData);
+            return redirect()->route('retirement.home');
         } else if (isset($customerDetails['priorities']['education_discuss']) && ($customerDetails['priorities']['education_discuss'] === 'true' || $customerDetails['priorities']['education_discuss'] === true)) {
-            return redirect()->route('education.home',$transactionData);
+            return redirect()->route('education.home');
         } else if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home',$transactionData);
+            return redirect()->route('savings.home');
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home',$transactionData);
+            return redirect()->route('investment.home');
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home',$transactionData);
+            return redirect()->route('health.medical.home');
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home',$transactionData);
+            return redirect()->route('debt.cancellation.home');
         }
         else {
             if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
@@ -287,9 +307,9 @@ class ProtectionController extends Controller
             isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
             isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
             isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
-                return redirect()->route('existing.policy',$transactionData);
+                return redirect()->route('existing.policy');
             } else{
-                return redirect()->route('summary.monthly-goals',$transactionData);
+                return redirect()->route('summary.monthly-goals');
             }
         }
     }
