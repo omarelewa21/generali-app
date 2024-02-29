@@ -15,8 +15,8 @@ const currentURL = window.location.href;
 // Check if the current URL contains any of the specific folder names
 if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     // if (needs_priority && needs_priority === 'false' || !needs_priority) {
-        console.log(needs_priority);
-    if (needs_priority && needs_priority === 'false' || !needs_priority) {
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+
         var missingModal = document.getElementById('missingNeedsFields');
         missingModal.classList.add('show');
         missingModal.style.display = 'block';

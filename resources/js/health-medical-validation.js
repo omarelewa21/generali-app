@@ -12,7 +12,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (needs_priority && needs_priority === 'false' || !needs_priority) {
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
         if (path === '/health-medical/medical-selection') {

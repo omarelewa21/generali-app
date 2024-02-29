@@ -13,7 +13,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const path = url.pathname;
     // Check if the page has been loaded before
 
-    if (needs_priority && needs_priority === 'false' || !needs_priority) {
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
         if (path === '/education/coverage') {
