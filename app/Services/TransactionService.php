@@ -15,8 +15,8 @@ class TransactionService
     {
         DB::transaction(function () use ($customerId) {
 
-            if (empty($customerId)) {
-               abort(404);
+            if (!isset($customerId)) {
+                return false;
             }
 
             // temporarily use this agent 
@@ -28,12 +28,12 @@ class TransactionService
                 ['id' => $id ,'customer_id' => $customerId , 'agent_id' => $agentId],
                 ['page_route' => $route , 'pdpa' => session()->get('customer_details.pdpa') ?? "Accepted"]
             );
-           
-
             $this->transactionId = $transaction->id;
         });
 
-        return $this->transactionId;
+        return true;
+
+        // return $this->transactionId;
     }
 
 }

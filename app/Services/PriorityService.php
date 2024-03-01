@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 class PriorityService
 {
     public $priorityId;
+    public $prioritySubjectId;
 
     public  function handlePriority($customerId,$topPrioritiesButtonInput)
     {
@@ -42,4 +43,26 @@ class PriorityService
         return $this->priorityId;
     }
 
+    public function handlePrioritySubject($customerId,$result)
+    {
+        DB::transaction(function () use ($customerId, $result) {
+
+            foreach ($result as $decisionKey => $decisionValue) {
+
+                $column = (str_ends_with($decisionKey, '_discuss')) ? 'discuss' : 'covered';
+
+                $priorityColumn = $decisionKey;
+
+                if (str_ends_with($decisionKey, '_discuss')) {
+                    $priorityColumn = str_replace('_discuss', '', $decisionKey);
+                }
+            
+                Priority::where('priority', $priorityColumn)
+                        ->where('customer_id', $customerId)
+                        ->update([$column => $decisionValue]);
+                
+            }
+        });
+
+    }
 }

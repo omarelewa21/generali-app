@@ -27,6 +27,7 @@ class DependentService
             $newSiblingData = [];
             $createdDependentId = [];
             $createdSpouseId = [];
+            $newSpouseData = [];
 
             if (isset($customerDetails['family_details']['siblings_data']) && $customerDetails['family_details']['siblings'] === true) {
                 $newSiblingData['sibling'] = $customerDetails['family_details']['siblings_data'];

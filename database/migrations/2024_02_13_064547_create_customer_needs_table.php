@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('spouse_name')->nullable();
             $table->timestamp('spouse_dob')->nullable();
             $table->float('covered_amount')->nullable();
+            $table->float('covered_amount_monthly')->nullable();
             $table->integer('supporting_year')->nullable();
+            $table->float('goals_amount')->nullable();
             $table->float('total_needed')->nullable();
             $table->string('existing_policy')->nullable();
             $table->float('existing_amount')->nullable();

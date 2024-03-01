@@ -186,9 +186,7 @@
 
 <script>
 
-var toastEl = document.querySelector('.toast');
-  var toast = new bootstrap.Toast(toastEl);
-  toast.show();
+
     $('.status-btn').on('click', function () {
             var url = $(this).data('url'); 
             // $(this).prop('disabled', true);

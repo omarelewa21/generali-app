@@ -83,7 +83,7 @@ class ProtectionController extends Controller
         return redirect()->route('protection.amount.needed');
     }
 
-    public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService)
+    public function validateProtectionAmountNeeded(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         $customMessages = [
             'protection_monthly_support.required' => 'You are required to enter an amount.',
@@ -156,7 +156,9 @@ class ProtectionController extends Controller
         $latestKey = "protection_amount_needed";
         $customerId = session('customer_id');
 
-        $transactionService->handleTransaction($customerId);
+        $transactionId = $transactionService->handleTransaction($customerId);
+
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -165,7 +167,7 @@ class ProtectionController extends Controller
         return redirect()->route('protection.existing.policy');
     }
     
-    public function validateProtectionExistingPolicy(Request $request, TransactionService $transactionService){
+    public function validateProtectionExistingPolicy(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'protection_existing_policy.required' => 'Please select an option.',
@@ -255,12 +257,12 @@ class ProtectionController extends Controller
         $latestKey = "protection_existing_policy";
         $customerId = session('customer_id');
 
+
         $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         
-
-    
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
         return redirect()->route('protection.gap');

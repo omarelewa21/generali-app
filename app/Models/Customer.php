@@ -55,4 +55,9 @@ class Customer extends Model
         return $this->hasMany(Priority::class);
     }
 
+    public function customerNeeds(): HasMany
+    {
+        return $this->hasMany(customerNeed::class);
+    }
+
 }

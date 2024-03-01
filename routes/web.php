@@ -73,21 +73,20 @@ Route::get('/financial-priorities/discuss', [DropdownController::class, 'financi
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
 /* Priorities - Protection */
-Route::view('/protection', 'pages.priorities.protection.home')->name('protection.home');
-Route::view('/protection/coverage', 'pages.priorities.protection.coverage')->name('protection.coverage');
-
+Route::get('/protection', [DropdownController::class, 'protectionHome'])->name('protection.home');
 Route::get('/protection/coverage',[DropdownController::class, 'protectionCoverage'])->name('protection.coverage');
-
 Route::post('/protection/coverage', [ProtectionController::class, 'validateProtectionCoverageSelection'])->name('validate.protection.coverage.selection');
-Route::view('/protection/amount-needed', 'pages.priorities.protection.amount-needed')->name('protection.amount.needed');
+Route::get('/protection/amount-needed', [DropdownController::class, 'protectionAmountNeeded'])->name('protection.amount.needed');
 Route::post('/protection/amount-needed', [ProtectionController::class, 'validateProtectionAmountNeeded'])->name('validate.protection.amount.needed');
-Route::view('/protection/existing-policy', 'pages.priorities.protection.existing-policy')->name('protection.existing.policy');
+Route::get('/protection/existing-policy', [DropdownController::class, 'protectionExistingPolicy'])->name('protection.existing.policy');
 Route::post('/protection/existing-policy', [ProtectionController::class, 'validateProtectionExistingPolicy'])->name('validate.protection.existing.policy');
-Route::view('/protection/gap', 'pages.priorities.protection.gap')->name('protection.gap');
+Route::get('/protection/gap', [DropdownController::class, 'protectionGap'])->name('protection.gap');
 Route::post('/protection/gap', [ProtectionController::class, 'submitProtectionGap'])->name('form.submit.protection.gap');
 
 /* Priorities - Retirement */
-Route::view('/retirement', 'pages.priorities.retirement.home')->name('retirement.home');
+// Route::view('/retirement', 'pages.priorities.retirement.home')->name('retirement.home');
+Route::get('/retirement', [DropdownController::class, 'retirementHome'])->name('retirement.home');
+
 Route::view('/retirement/coverage', 'pages.priorities.retirement.coverage')->name('retirement.coverage');
 Route::post('/retirement/coverage', [RetirementController::class, 'validateRetirementCoverageSelection'])->name('validate.retirement.coverage.selection');
 Route::view('/retirement/ideal', 'pages.priorities.retirement.ideal')->name('retirement.ideal');

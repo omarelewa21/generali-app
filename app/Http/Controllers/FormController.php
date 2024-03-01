@@ -126,14 +126,17 @@ class FormController extends Controller {
             ];
            
             // Determine the latest array key
-            $latestKey = array_key_last($customerDetails);
-
-
+            $latestKey = "basic_details";
             //store first data in customer table  then  proceed on transaction
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
-
-            // session()->get('customer_details.basic_details.full_name');
             $transactionId = $transactionService->handleTransaction($customerId);
+            
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
            
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
@@ -141,7 +144,6 @@ class FormController extends Controller {
             ], $customerDetails);
 
             $request->session()->put('customer_details', $customerDetails);
-            // $request->session()->get('customer_id',$customerId);
             
             return redirect()->route('avatar.welcome');
         } else {
@@ -325,10 +327,17 @@ class FormController extends Controller {
             $customerDetails['identity_details'] = $identityDetails;
 
             // Determine the latest array key
-            $latestKey = array_key_last($customerDetails);
+            $latestKey = 'identity_details';
 
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
@@ -452,6 +461,13 @@ class FormController extends Controller {
 
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
             if (isset($customerDetails['family_details']) && $latestKey === 'family_details')
             {
@@ -969,11 +985,18 @@ class FormController extends Controller {
                 $customerDetails['family_details']['siblings_data'] = array_merge($customerDetails['family_details']['siblings_data'], $siblingData);
             }
 
-            $latestKey = array_key_last($customerDetails);
+            $latestKey = "family_details";
 
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
             $dependentId = $dependentService->handleDependent($customerDetails,$customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
@@ -1049,6 +1072,13 @@ class FormController extends Controller {
             $transactionId = $transactionService->handleTransaction($customerId);
             $priorityId = $priorityService->handlePriority($customerId,$topPrioritiesButtonInput);
 
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
                 'customer_id' => $customerId
@@ -1064,7 +1094,7 @@ class FormController extends Controller {
         }
     }
 
-    public function priorities(Request $request ,TransactionService $transactionService, CustomerService $customerService)
+    public function priorities(Request $request ,TransactionService $transactionService, CustomerService $customerService, PriorityService $priorityService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1077,6 +1107,12 @@ class FormController extends Controller {
         
         if ($validToken) {
             $checkboxValues = $request->all();
+
+            $result = array_filter($checkboxValues, function ($key) {
+                return is_string($key);
+            }, ARRAY_FILTER_USE_KEY);
+
+            
             $requiredPriorities = ['protection', 'retirement', 'education', 'savings', 'investments', 'health-medical', 'debt-cancellation', 'others'];
 
             // Get the existing array from the session
@@ -1084,8 +1120,6 @@ class FormController extends Controller {
             $selectedNeeds = $customerDetails['selected_needs'] ?? [];
             $test = $customerDetails['test'] ?? [];
 
-            Log::debug($customerDetails);
-            
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
             $remainingNeed = [];
@@ -1143,16 +1177,25 @@ class FormController extends Controller {
                 $customerDetails['customers_choice'] = '2';
             }
 
-
-            $latestKey = array_key_last($customerDetails);
+            $latestKey = "customers_choice";
 
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
 
-
             // Add or update the data value in the array
-            $customerDetails['priorities'] = $checkboxValues;
-
+            $customerDetails['priorities'] = $result;
             $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
+
+            $priorityId = $priorityService->handlePrioritySubject($customerId,$result);
+
+
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
                 'customer_id' => $customerId
@@ -1167,7 +1210,7 @@ class FormController extends Controller {
         }
     }
 
-    public function existingPolicy(Request $request ,TransactionService $transactionService)
+    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1246,9 +1289,19 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
+
+            $latestKey = "existing_policy";
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 

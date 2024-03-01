@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#priorityNext').on('click', function(event) {
         $.ajax({
             type: "POST",
-            url: "{{ route('priorities.redirect') }}",
+            url: "route('priorities.redirect')",
             data: checkboxValues,
             headers: {
                 'X-CSRF-TOKEN': csrfToken
