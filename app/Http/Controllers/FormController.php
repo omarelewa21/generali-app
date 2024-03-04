@@ -306,8 +306,7 @@ class FormController extends Controller {
                 $age = $currentYear - $selectedYear;
             }
 
-            // Update specific keys with new values
-            $identityDetails = array_merge($identityDetails, [
+            $customerDetails['identity_details'] = [
                 'country' => $validatedData['country'],
                 'id_type' => $validatedData['idType'],
                 'id_number' => $validatedData['idNumber'],
@@ -321,10 +320,10 @@ class FormController extends Controller {
                 'habits' => $validatedData['btnradio'],
                 'education_level' => $validatedData['educationLevel'],
                 'occupation' => $validatedData['occupation']
-            ]);
+            ];
 
             // Set the updated identity_details back to the customer_details session
-            $customerDetails['identity_details'] = $identityDetails;
+            // $customerDetails['identity_details'] = $identityDetails;
 
             // Determine the latest array key
             $latestKey = 'identity_details';

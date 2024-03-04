@@ -108,8 +108,16 @@ class CustomerService
                         ];
                         break;
         
+                    case 'existing_policy':
+                        $updateParameter = [
+                            'customer_choice' => 1                     
+                        ];
+                        break;
+        
                     default:
-                        # code...
+                        $updateParameter = [
+                            'gender' => $genderAvatar                     
+                        ];
                         break;
                 }
 
