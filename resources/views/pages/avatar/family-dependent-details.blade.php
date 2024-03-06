@@ -24,6 +24,7 @@
     $childKeys = is_array($childrenData) ? array_keys($childrenData) : [];
     $parentKeys = is_array($parentsData) ? array_keys($parentsData) : [];
     $selectedCountry = session('passingArrays.Country', '');
+    // dd($spouseData);
 
     $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
@@ -286,12 +287,12 @@
                                                                         <div class="d-flex btn-group @error('habits') is-invalid @enderror" role="group">
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
                                                                                 <input type="radio" class="btn-check" name="habits" id="smoker" autocomplete="off" value="Smoker"
-                                                                                {{ (old('habit') === 'Smoker' || (isset($spouseData['habit']) && $spouseData['habit'] === 'Smoker')) ? 'checked' : '' }}>
+                                                                                {{ (old('habits') === 'Smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'Smoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Smoker</span>
                                                                             </label>
                                                                             <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                                                <input type="radio" class="btn-check" name="habit" id="nonSmoker" autocomplete="off" value="Non-Smoker"
-                                                                                {{ (old('habit') === 'Non-Smoker' || (isset($spouseData['habit']) && $spouseData['habit'] === 'Non-Smoker')) ? 'checked' : '' }}>
+                                                                                <input type="radio" class="btn-check" name="habits" id="nonSmoker" autocomplete="off" value="Non-Smoker"
+                                                                                {{ (old('habits') === 'Non-Smoker' || (isset($spouseData['habits']) && $spouseData['habits'] === 'Non-Smoker')) ? 'checked' : '' }}>
                                                                                 <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Non-Smoker</span>
                                                                             </label>
                                                                         </div>

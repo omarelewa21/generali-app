@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Asset;
 use App\Models\Title;
 use App\Models\Avatar;
@@ -18,6 +19,7 @@ use App\Models\maritalStatus;
 use App\Models\EducationLevel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class DropdownController extends Controller
 {
@@ -25,32 +27,52 @@ class DropdownController extends Controller
     {
         $countries = Country::all();
         $titles = Title::all();
-        $transactionId = $request->input('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id'); 
 
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
-            // Set session variable 'transaction_id' to the value of 'transaction_id' from the current request
-            session(['transaction_id' => $transactionId]);
-        }  else {
-            // If 'transaction_id' is not present in both the current request and session, set it to null
-            if (session()->has('transaction_id')) {
-                $transactionId = session('transaction_id');
+
+            $transactionId = intval($transactionId) ?? NULL;
+
+            if ( is_null($transactionId) || $transactionId == 0)
+            {
+                $transactionId = NULL;
+                $customerId = NULL;
+
+                Session::flush();
+            }   
+            else
+            {
+                $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+
+                if(!is_null($customerId))
+                {
+                    session(['customer_id' => $customerId->id]);
+                    session(['transaction_id' => $transactionId]);
+                    session(['customer_details.basic_details' => $customerId]);
+
+                    return view('pages/main/basic-details', compact('titles','countries','customerId'));
+                }
+                else
+                {
+                    Session::flush();
+                    return view('pages/main/basic-details', compact('titles','countries'));
+                }
+            }
+
+            $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+
+            if($basicDetails)
+            {
+                return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
             }
             else
             {
-                $transactionId = null;
+                // if transaction not found, back to agent page
+                return view('pages/main/basic-details', compact('titles','countries'));
             }
-        }
-
-        $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
-
-        if($basicDetails)
-        {
-            return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
-        }
-        else
-        {
-            // if transaction not found, back to agent page
+        }  else {
+            
             return view('pages/main/basic-details', compact('titles','countries'));
         }
     }
@@ -81,6 +103,12 @@ class DropdownController extends Controller
         $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
 
         if($basicDetails){
+            // cast dob format
+            //1995-12-08 00:00:00
+            //1995-12-08
+            $basicDetails['habits']= $basicDetails['habit'];
+            $basicDetails['dob'] = Carbon::parse($basicDetails['dob'])->format('Y-m-d');
+            unset($basicDetails['habit']);
 
             session(['customer_details.identity_details' => $basicDetails]);
             return view('pages/avatar/identity-details', compact('countries', 'idtypes', 'occupations', 'educationLevels','basicDetails'));
@@ -109,8 +137,56 @@ class DropdownController extends Controller
             $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
             $avatarImage = $avatar->image ?? 'images/avatar-general/gender-male.svg';
             session(['customer_details.avatar.image' => $avatarImage]);
-            session(['customer_details.family_details.children_data' => $avatar]);
-            session(['customer_details.family_details.spouse_data' => $avatar]);
+
+            $customer = Customer::with(['spouse', 'dependents'])->find($customerId);
+
+            if ($customer && $customer->spouse) {
+                $customerSpouse = $customer->spouse->toArray();
+            } else {
+                $customerSpouse = []; // Or any other default value you want to assign
+            }
+
+            session(['customer_details.family_details.spouse_data' => $customerSpouse]);
+
+
+            if ($customer && $customer->dependents) {
+                $customerDependent = $customer->dependents->toArray();
+            } else {
+                $customerDependent = []; // Or any other default value you want to assign
+            }
+
+            if ($customerDependent) {
+
+                foreach ($customerDependent as $dependent) {
+    
+                    if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
+                    {
+                        $parentData[lcfirst($dependent['relation'])] = $dependent;
+                    }
+                    elseif ($dependent['relation'] == 'Sibling') 
+                    {
+                        $siblingData = $dependent;
+                    }
+                    else // child 
+                    {
+                        $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
+                    }
+                }
+        
+                $familyDependent['children_data'] = $childData;
+                $familyDependent['parents_data'] = $parentData;
+                $familyDependent['siblings_data'] = $siblingData;
+            
+                foreach ($familyDependent as $key => $value) {
+                    if (isset($value)) {
+                
+                        $substring = strstr($key, '_data',true);
+                        session(['customer_details.family_details.' . $substring => true]);
+                        session(['customer_details.family_details.' . $key => $value]);
+                    }
+                }
+            }
+            
 
             $maritalStatus = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->marital_status;
 
@@ -228,7 +304,7 @@ class DropdownController extends Controller
         $countries = Country::all();
         $idtypes = Idtype::all();
         $occupations = Occupation::all();
-        $transactionId = $request->input('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
 
         $childData = [];
         $siblingData = [];
@@ -273,6 +349,9 @@ class DropdownController extends Controller
             }
             
             if ($customerSpouse) {
+
+                $customerSpouse['habits'] = $customerSpouse['habit'];
+                unset($customerSpouse['habit']);
                 session(['customer_details.family_details.spouse_data' => $customerSpouse ]); 
             }
                         
@@ -346,17 +425,17 @@ class DropdownController extends Controller
         {
             $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
             $avatarImage = $avatar->image ?? 'images/avatar-general/gender-male.svg';
-            $avatarGender = $avatar->gender;
+            $avatarGender = $avatar->gender ?? "Male";
              $assetDetails = Customer::with('asset')->find($customerId);
             $assetImage = $assetDetails->asset;
 
             //if data found, set the corresponding session data to frontend
             session(['customer_details.avatar.image' => $avatarImage]);
             session(['customer_details.avatar.gender' => $avatarGender]);
-            session(['customer_details.assets.car'=> $assetImage->car]);
-            session(['customer_details.assets.scooter'=> $assetImage->scooter]);
-            session(['customer_details.assets.house'=> $assetImage->house]);
-            session(['customer_details.assets.bungalow'=> $assetImage->bungalow]);
+            session(['customer_details.assets.car'=> $assetImage->car ?? 0]);
+            session(['customer_details.assets.scooter'=> $assetImage->scooter ?? 0]);
+            session(['customer_details.assets.house'=> $assetImage->house ?? 0]);
+            session(['customer_details.assets.bungalow'=> $assetImage->bungalow ?? 0]);
         }
         
         return view('pages/avatar/assets', compact('assetImage'));
@@ -365,7 +444,8 @@ class DropdownController extends Controller
     public function financialPriorities(Request $request)
     {
         $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-        $priorityData = [];
+        $prioritiesDiscuss = [];
+        $prioritiesLevel = [];
 
         if(!empty($transactionId)){
             session(['transaction_id' => $transactionId]);
@@ -379,25 +459,32 @@ class DropdownController extends Controller
 
         if (!is_null($transactionId)) {
             $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities;
+            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');
+
+            // dd($customerPriority);
 
             foreach ($customerPriority as $cpValue) {
-                $priorityData[$cpValue['sequence']-1] = $cpValue['priority'];
+                $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
+                $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
+                $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
             }
-            ksort($priorityData);
-            session(['customer_details.priorities_level' => $priorityData]);
+            ksort($prioritiesLevel);
+            session(['customer_details.priorities_level' => $prioritiesLevel]);
+            session(['customer_details.priorities' => $prioritiesDiscuss]);
 
+            // dd($prioritiesLevel);
             $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
             $avatarImage = $avatar->image ?? 'images/avatar-general/gender-male.svg';
             session(['customer_details.avatar.image' => $avatarImage]);
         }
-        return view('pages/priorities/top-priorities',compact('priorityData'));
+        return view('pages/priorities/top-priorities');
     
     }
     public function financialPrioritiesDiscuss(Request $request)
     {
         $transactionId = $request->input('transaction_id') ?? session('transaction_id');
         $prioritiesDiscuss = [];
+        $prioritiesLevel = [];
 
         if(!empty($transactionId)){
             session(['transaction_id' => $transactionId]);
@@ -411,13 +498,16 @@ class DropdownController extends Controller
 
         if (!is_null($transactionId)) {
             $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities;
+            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');                        
 
             foreach ($customerPriority as $cpValue) {
-                $prioritiesDiscuss[$cpValue['sequence']-1] = $cpValue['priority'];
+                $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
+
+                $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
+                $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
             }
-            ksort($prioritiesDiscuss);
-            session(['customer_details.priorities_level' => $prioritiesDiscuss]);
+            ksort($prioritiesLevel);
+            session(['customer_details.priorities_level' => $prioritiesLevel]);
             session(['customer_details.priorities' => $prioritiesDiscuss]);
 
             $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
@@ -428,331 +518,6 @@ class DropdownController extends Controller
         return view('pages/priorities/priorities-discuss',compact('prioritiesDiscuss'));
     
     }
-
-    public function protectionHome(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-        $priorityData = [];
-
-        if (!empty($transactionId)) {
-
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId))
-        {
-            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId) {
-                $query->where('priority', 'protection');
-            })->find($customerId)->priorities()->where('priority', 'protection')->get()->toArray();
-
-
-            if(isset ($prioritySequence[0]['priority']))
-            {
-                session(['customer_details.priorities.protection_discuss' => 'true']);
-            }
-
-            $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities;
-
-            foreach ($customerPriority as $cpValue) {
-                $priorityData[$cpValue['sequence']-1] = $cpValue['priority'];
-            }
-            ksort($priorityData);
-            session(['customer_details.priorities_level' => $priorityData]);
-        }
-
-        return view('pages/priorities/protection/home');
-    }
-
-    public function protectionCoverage(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-        $protectionCoverageData = [];
-
-        if (!empty($transactionId)) {
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId)) {
-
-            $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
-
-            if(isset($basicDetails)){
-                session(['customer_details.basic_details' => $basicDetails->toArray()]);
-                session(['customer_details.identity_details' => $basicDetails->toArray()]);
-            }
-
-            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId) {
-                $query->where('priority', 'protection');
-            })->find($customerId)->priorities()->where('priority', 'protection')->get()->toArray();
-
-            if(isset ($prioritySequence['priority']))
-            {
-                session(['customer_details.priorities.protection_discuss' => 'true']);
-            }
-
-            $customer = Customer::with(['spouse', 'dependents'])->find($customerId);
-           
-            if ($customer && $customer->spouse) {
-                $customerSpouse = $customer->spouse->toArray();
-            } else {
-                $customerSpouse = []; // Or any other default value you want to assign
-            }
-
-            if ($customer && $customer->dependents) {
-                $customerDependent = $customer->dependents->toArray();
-            } else {
-                $customerDependent = []; // Or any other default value you want to assign
-            }
-            
-            if ($customerSpouse) {
-                session(['customer_details.family_details.spouse' => true ]); 
-                session(['customer_details.family_details.spouse_data' => $customerSpouse ]);   
-                session(['customer_details.family_details.dependent.spouse_data' => $customerSpouse]);
-            }
-
-            if ($customerDependent) {
-
-                foreach ($customerDependent as $dependent) {
-    
-                    if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
-                    {
-                        $parentData[lcfirst($dependent['relation'])] = $dependent;
-                    }
-                    elseif ($dependent['relation'] == 'Sibling') 
-                    {
-                        $siblingData = $dependent;
-                    }
-                    else // child 
-                    {
-                        $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
-                    }
-                }
-        
-                $familyDependent['children_data'] = $childData;
-                $familyDependent['parents_data'] = $parentData;
-                $familyDependent['siblings_data'] = $siblingData;
-            
-                foreach ($familyDependent as $key => $value) {
-                    if (isset($value)) {
-                
-                        $substring = strstr($key, '_data',true);
-                        session(['customer_details.family_details.' . $substring => true]);
-                        session(['customer_details.family_details.' . $key => $value]);
-                    }
-                }
-              
-                $existingData = session('customer_details.family_details.dependent', []);
-
-                session(['customer_details.family_details.dependent.children_data' => $childData]);
-                $childArray = session('customer_details.family_details.dependent.children_data');
-
-                array_merge_recursive($existingData, $childArray);
-            }
-
-            $customerNeed = Customer::with('customerNeeds')->find($customerId)->customerNeeds->toArray();
-
-            foreach ($customerNeed as $value) {
-            
-                if ($value['type'] == "N1") {
-                    session(['customer_details.selected_needs.need_1.advance_details.relationship' => $value['relationship']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.child_name' => $value['child_name']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.spouse_name' => $value['spouse_name']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.child_dob' => $value['child_dob']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.spouse_dob' => $value['spouse_dob']]);
-                }
-            }
-        }
-
-        return view('pages/priorities/protection/coverage');
-    }
-
-    public function protectionAmountNeeded(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-
-        if (!empty($transactionId)) {
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId)) {
-
-            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId) {
-                $query->where('priority', 'protection');
-            })->find($customerId)->priorities()->where('priority', 'protection')->get()->toArray();
-
-            if(isset ($prioritySequence['priority']))
-            {
-                session(['customer_details.priorities.protection_discuss' => 'true']);
-            }
-
-            $customerNeed = Customer::with('customerNeeds')->find($customerId)->customerNeeds->toArray();
-
-            foreach ($customerNeed as $value) {
-                
-                // N1 is protection need
-                if ($value['type'] == "N1") {
-                    session(['customer_details.selected_needs.need_1.advance_details.covered_amount_monthly' => $value['covered_amount_monthly']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.covered_amount' => $value['covered_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.existing_amount' => $value['existing_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.supporting_years' => $value['supporting_year']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.goals_amount' => $value['goals_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.fund_percentage' => $value['fund_percentage']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.relationship' => $value['relationship']]);
-                }
-            }
-
-        }
-
-        return view('pages/priorities/protection/amount-needed');
-
-    }
-
-    public function protectionExistingPolicy(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-
-        if (!empty($transactionId)) {
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId)) {
-
-            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId) {
-                $query->where('priority', 'protection');
-            })->find($customerId)->priorities()->where('priority', 'protection')->get()->toArray();
-
-            if(isset ($prioritySequence['priority']))
-            {
-                session(['customer_details.priorities.protection_discuss' => 'true']);
-            }
-        }
-
-        $customerNeed = Customer::with('customerNeeds')->find($customerId)->customerNeeds->toArray();
-
-            foreach ($customerNeed as $value) {
-                // N1 is protection need
-                if ($value['type'] == "N1") {
-                    session(['customer_details.selected_needs.need_1.advance_details.covered_amount_monthly' => $value['covered_amount_monthly']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.existing_policy' => $value['existing_policy']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.existing_amount' => $value['existing_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.goals_amount' => $value['goals_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.supporting_years' => $value['supporting_year']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.fund_percentage' => $value['fund_percentage']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.insurance_amount' => $value['insurance_amount']]);
-                }
-            }
-
-        return view('pages/priorities/protection/existing-policy');
-    }
-
-    public function protectionGap(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-        $prioritiesDiscuss = [];
-
-        if (!empty($transactionId)) {
-
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId))
-        {
-            $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
-            $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities;
-
-            foreach ($customerPriority as $cpValue) {
-                $prioritiesDiscuss[$cpValue['sequence']-1] = $cpValue['priority'];
-
-                if ($cpValue['priority'] == "protection")
-                {
-                    // $protectionDiscuss = true;
-                    session(['customer_details.priorities.protection_discuss' => 'true']);
-                }
-
-            }
-
-            ksort($prioritiesDiscuss);
-
-            $customerNeed = Customer::with('customerNeeds')->find($customerId)->customerNeeds->toArray();
-
-            foreach ($customerNeed as $value) {
-                
-                // N1 is protection need
-                if ($value['type'] == "N1") {
-                    session(['customer_details.selected_needs.need_1.advance_details.supporting_years' => $value['supporting_year']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.goals_amount' => $value['goal']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.existing_amount' => $value['existing_amount']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.fund_percentage' => $value['fund_percentage']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.insurance_amount' => $value['insurance_amount']]);
-                }
-            }
-        }
-
-        return view('pages/priorities/protection/gap');
-    }
-
-    public function retirementHome(Request $request)
-    {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-
-        if (!empty($transactionId)) {
-
-            session(['transaction_id' => $transactionId]);
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
-        }
-        else{
-            $transactionId = null;
-        }
-
-        if (!is_null($transactionId))
-        {   
-
-            $retirementPriorities = ['protection','retirement'];
-
-            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($customerId,$retirementPriorities) {
-                $query->whereIn('priority', $retirementPriorities);
-            })->find($customerId)->priorities()->whereIn('priority',$retirementPriorities)->get()->toArray();
-
-            foreach ($prioritySequence as $key => $value) {
-                
-                session(['customer_details.priorities.'."$value[priority]".'_discuss' => $value['discuss'] ]);
-            }
-
-            // $retirementPriority = session('customer_details.priorities.retirement_discuss');
-            // $protectionPriority = session('customer_details.priorities.protection_discuss');
-        }
-
-        return view('pages/priorities/retirement/home');
-    }
-
 
     public function existingPolicy()
     {

@@ -16,7 +16,7 @@ class CustomerService
 
             $pdpa = $customerDetails['pdpa'] ?? "";
             //if customer id found in session, cross check the detail in db first
-            $customerSessionId = session()->get('customer_id') ?? "";
+            $customerSessionId = session()->get('customer_id') ?? session('customer_details.customer_id') ?? "";
             $verifiedCustomerId = Customer::find($customerSessionId);
             
             if($latestKey == 'basic_details' && isset($customerDetails['basic_details']))
@@ -36,7 +36,7 @@ class CustomerService
 
             //avatar
             $genderAvatar =  $customerDetails['avatar']['gender'] ?? "";
-            $image =  $customerDetails['avatar']['image'] ?? "";
+            $image =  $customerDetails['avatar']['image'] ?? "images/avatar-general/gender-male.svg";
             $skinTone =  $customerDetails['avatar']['skin_tone'] ?? "";
 
             //identity details
@@ -85,9 +85,15 @@ class CustomerService
                             'country' => $country, 'id_type' => $idType, 'id_number' => $idNumber, 'passport_number' => $passportNumber,
                             'birth_cert' => $birthCert, 'police_number' => $policeNumber, 'registration_number' => $registrationNumber,
                             'gender' => $gender, 'dob' => $dob, 'age' => $age, 'habit' => $habits , 'education_level' => $educationLevel,
-                            'occupation' => $occupation , 'marital_status' => $maritalStatus             
+                            'occupation' => $occupation              
                         ];
                         break;
+                    
+                        case 'marital_status':
+                            $updateParameter = [
+                                'marital_status' => $maritalStatus                  
+                            ];
+                            break;   
 
 
                     case 'family_details':

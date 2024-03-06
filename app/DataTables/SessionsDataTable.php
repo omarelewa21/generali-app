@@ -35,8 +35,8 @@ class SessionsDataTable extends DataTable
                 // $sendButton = '<a href="' . route('send_fes',['transaction_id'=> $data->transaction_id]) . '" class="btn btn-primary btn-sm w-90">FES</a>';
 
                 $pageRoute = str_replace(['-', '/'],".",$data->page_route);
-                $button = '<a href="' . route($pageRoute) . '" style="margin-left: 8%;padding-left:10px" class="btn btn-primary btn-sm w-90">Restore</a>';
-                session(['transaction_id' => $data->id]);
+                $button = '<a href="' . route($pageRoute,['transaction_id' => $data->id]) . '" style="margin-left: 8%;padding-left:10px" class="btn btn-primary btn-sm w-90">Restore</a>';
+                // session(['transaction_id' => $data->id]);
                 
                 $dropdownToggle = '<div type="button" class="dropdown-options btn-group dropstart">
                     <a class="dropdown-toggle" style="margin-left: 40%;" data-bs-toggle="dropdown" aria-expanded="false"><img src="' . asset('images/general/more.png') . '" width="auto" height="20px" alt="More Options"></a>

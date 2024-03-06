@@ -424,6 +424,8 @@ class FormController extends Controller {
 
                 if (isset($customerDetails['identity_details'])) {
                     $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
+
+                    $customerDetails['marital_status'] = $maritalStatusButtonInput;
                 }
                 else {
                     $customerDetails['identity_details'] = $newData;
@@ -456,7 +458,25 @@ class FormController extends Controller {
             }
 
             //identity_details, family_details, assets
-            $latestKey = array_key_last($customerDetails);
+            $route = strval(request()->path());
+
+            switch ($route) {
+                case 'marital-status':
+                    $latestKey = 'marital_status';
+                    break;
+                
+                case 'family-dependent':
+                    $latestKey = 'family_details';
+                break;
+
+                case 'assets':
+                    $latestKey = 'assets';
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
 
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
@@ -1064,7 +1084,7 @@ class FormController extends Controller {
            
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
-            $customerId = $request->session()->get('customer_id');
+            $customerId = $request->session()->get('customer_id') ?? session('customer_details.customer_id') ?? "";
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
             unset($customerDetails['priorities']);

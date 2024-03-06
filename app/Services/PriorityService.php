@@ -20,6 +20,12 @@ class PriorityService
             $agentId = Agent::find(1)->id;
          
             $id = session('transaction_id') ?? "";
+
+            $priorityList = ["protection","retirement","savings","education","debt-cancellation",
+                             "health-medical","others","investments"];
+            
+            Priority::whereNotIn('priority', $topPrioritiesButtonInput)->update(['sequence' => null]);
+
         
             foreach ($topPrioritiesButtonInput as $key => $value) {
                 // Increment the key by 1 to get the sequence
@@ -32,9 +38,26 @@ class PriorityService
                 $data = [
                     'sequence' => $sequence
                 ];
-            
+
                 // Update or create the record
                 $priority = Priority::updateOrCreate($criteria, $data);
+
+                // $existingPriority = Priority::where('priority', $value)->first();
+
+            
+                // if ($existingPriority) {
+                //     // Swap the sequence values
+                //     $tempSequence = $existingPriority->sequence;
+                //     $existingPriority->sequence = $data['sequence'];
+                //     $data['sequence'] = $tempSequence;
+                
+                //     // Update both rows
+                //     $priority = Priority::updateOrCreate($criteria, $data);
+                //     $existingPriority->save();
+                // } else {
+                //     // If there's no existing row with the same $data, proceed as usual
+                //     $priority = Priority::updateOrCreate($criteria, $data);
+                // }
             }
 
             $this->priorityId = $priority->id;

@@ -273,6 +273,8 @@ class ProtectionController extends Controller
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
+        $retirementPriority = session('customer_details.priorities.retirement_discuss');
+
         // Get existing protection_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_1']['advance_details'] ?? [];
 

@@ -19,10 +19,10 @@ class AssetService
             // temporarily use this agent 
             $agentId = Agent::find(1)->id;
 
-            $car = $customerDetails['assets']['car'];
-            $scooter = $customerDetails['assets']['scooter'];
-            $house = $customerDetails['assets']['house'];
-            $bungalow = $customerDetails['assets']['bungalow'];
+            $car = $customerDetails['assets']['car'] ?? 0;
+            $scooter = $customerDetails['assets']['scooter'] ?? 0;
+            $house = $customerDetails['assets']['house'] ?? 0;
+            $bungalow = $customerDetails['assets']['bungalow'] ?? 0;
 
             $asset = Asset::updateOrCreate(
                 ['customer_id' => $customerId],
