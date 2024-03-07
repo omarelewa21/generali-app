@@ -18,7 +18,7 @@
     $skintone = session('customer_details.avatar.skin_tone', 'white');
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $fullName = session('customer_details.basic_details.full_name');
-    $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
+    $transactionId ??= request()->input('transaction_id');
 @endphp
 
 <div id="avatar_gender_selection">
@@ -118,7 +118,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
-                                                    <img src="{{ asset('images/gender-selection/button-gender-female.png') }}" width="117.5" alt="Gender Female">
+                                                    <img src="{{ asset('images/gender-selection/button-gender-female.png') }}" width="140" alt="Gender Female">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
                                                 </button>
                                             </div>
@@ -135,7 +135,7 @@
                                         <input type="hidden" name="genderImage" id="genderImage" value="{{$image}}">
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
-                                        <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.welcome',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>

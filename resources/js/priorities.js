@@ -3,9 +3,8 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
-const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || currentURL.endsWith(queryString))) {
+if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const urlParams = new URLSearchParams(window.location.search);
     const paramValue = urlParams.get('transaction_id');
@@ -39,6 +38,7 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
     } else {
         // Sent checkbox value to controller
         var checkboxValues = {};
+
         //Assign the needs sequence
         const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss'];
 
@@ -48,7 +48,7 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
             if(priority){
                 for (var key in priority) {
                     var value = priority[key];
-                    if (value == 'true') {
+                    if (value === 'true') {
                         checkboxValues[key] = true;
                         $('#' + key).prop('checked', true);
                     }

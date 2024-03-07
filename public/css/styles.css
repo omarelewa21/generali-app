@@ -73,13 +73,6 @@ body #login {
   color: #707070;
 }
 
-.toast {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .text-green {
   color: #14A38B!important;
 }
@@ -695,7 +688,7 @@ button[data-required="selected"] img {
 }
 
 /* ============================== Right Sidebar ============================== */
-.right-sidebar h1 {
+.right-sidebar h1, .priorities-heading {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -924,9 +917,9 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-.changeImage {
+/* .changeImage {
   z-index: 3;
-}
+} */
 /* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
@@ -986,6 +979,10 @@ h2.display-5, .currencyField {
 .slide-button.right-bottom {
   bottom: 40%;
   right: 10%;
+}
+
+.changeImage {
+  z-index: 1;
 }
 
 /* ============================== Identity Details Page ============================== */
@@ -1282,6 +1279,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 #sortablemobile {
   list-style-type: none;
+  padding-inline-start: 0;
 }
 
 #sortablemobile ul.dropdown-menu {
@@ -1315,6 +1313,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   background-color: #F2F2F288;
   color: white;
   font-weight: 700;
+}
+
+.sortable-text {
+  font-family: 'Helvetica Neue Medium', sans-serif;
 }
 
 #sortablemobile .ui-sortable-placeholder {
@@ -1500,6 +1502,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
+body.overflow #summary .main-content {
+  overflow-y: hidden;
+}
+
 #gap .circle{
   filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
 }
@@ -1571,11 +1577,26 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .footerVector {
     display: none;
   }
+  #summary .dropped img:not(.close) {
+    max-height: 70px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
+  }
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 992px){
   .svg-container {
     transform: scale(1.1) !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #summary .dropped img:not(.close) {
+    max-height: 50px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
   }
 }
 
@@ -1604,11 +1625,8 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     overflow-y: auto;
     height: 100vh;
   }
-  body.overflow #summary .main-content {
-    overflow-y: hidden;
-  }
   .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
-    z-index: 2;
+    z-index: 3;
   }
   .wrapper-home {
     display: grid;
@@ -1654,15 +1672,15 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  .gender-button img {
+    width: 70px;
+  }
   #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     display:block;
   }
-  /* body.overflow #top_priorities .wrapper-avatar-default {
-    overflow: auto;
-  } */
   .homeVector {
-    width: 100%;
-    height:auto;
+    width: 60%;
+    max-height: 340px;
   }
   body #login {
     height: inherit;
@@ -1792,6 +1810,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .bottomObeserver {
     height:50px;
   }
+  .header p.display-6:not(#protection_home .header p.display-6){
+      font-size: 11px;
+  }
 }
 
 @media only screen and (max-width: 375px) {
@@ -1805,374 +1826,3 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     padding-top: inherit!important;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.btn-check+.btn:hover {
-  border-radius: 0;
-  background-color: #d3d4d5;
-  color: inherit;
-  width: 100%;
-}
-
-
-
-
-
-
-
-
-
-
- .form-select {
-  color: rgba(10, 4, 60, 0.50);
-} 
-
-  .input:-internal-autofill-selected {
-    background-image: inherit;
-  }
-
-
-
-
-
-
-
-  .overflow-height {
-    max-height: 800px;
-    overflow-x: hidden !important
-  }
-
-  .main-content .overflow-auto.full-height {
-    height: calc(100vh - 250px);
-    overflow-x: hidden !important;
-  }
-
-  #avatar_welcome section.footer .male {
-    bottom: 2%;
-    left: 10%;
-  }
-
-  #avatar_welcome section.footer .female {
-    bottom: 2%;
-    right: 10%;
-  }
-
-  .main-content .overflow-auto.full-height-350 {
-    height: calc(100vh - 350px);
-    overflow-x: hidden !important;
-  }
-
-  .overflow-auto.full-height-100 {
-    height: calc(100vh - 100px);
-    overflow-x: hidden !important;
-  }
-
-  
-
-
-
-  .bg-retirement-home {
-    background-image: url(/images/needs/retirement/bg-home.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-  .needs-home-avatar {
-    z-index: 1;
-    width:100%;
-  }
-  .needs-home-avatar img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .retirement-coverage {
-    background-image: url(/images/needs/retirement/bg-coverage.jpg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-
-.coverage-avatar {
-  z-index: 10;
-}
-.coverage-avatar img.self-avatar{
-  width: 20vh;
-}
-.coverage-avatar img.spouse-avatar{
-  width: 18vh;
-}
-.coverage-avatar img.kid-avatar{
-  width: 17vh;
-}
-.coverage-avatar img.parent-avatar{
-  width: 35vh;
-}
-
-
-  .bg-image {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
-  }
-
-  .bg-image-avatar {
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: -1;
-    background-position: center right;
-    left: 30px;
-    top: 10px;
-  }
-
-  .protection-home {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .avatar-content {
-    margin-top: 14.75rem;
-  }
-
-  .male-avatar {
-    left: 160px;
-    bottom: 25px;
-    transform: scale(0.7);
-
-  }
-
-  .female-avatar {
-    right: 100px;
-    bottom: 10px;
-    transform: scale(0.7);
-  }
-
-  .male-avatar-character {
-    left: 32%;
-  }
-
-  .parent-father {
-    left: 0;
-    top: 30px;
-  }
-
-  .parent-mother {
-    left: 170px;
-    top: 60px;
-  }
-
-  .spouse {
-    right: 90px;
-    top: 50px;
-  }
-
-  .children-boy {
-    top: 180px;
-    right: 50px;
-  }
-
-  .children-girl {
-    right: 100px;
-    top: 290px;
-
-  }
-
-  img.male-avatar,
-  img.female-avatar {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-
-
-
-  .nav-header {
-    margin-top: 13.063rem;
-  }
-
-  .text-scroll {
-    max-height: 67vh;
-    overflow-y: auto;
-  }
-
-
-
-
-  @media (min-width: 576px) {
-    .h-sm-100 {
-      height: 100%;
-    }
-  }
-
-
-
-  input#flexRadioDefault1,
-  input#flexRadioDefault2 {
-    margin-top: 8px;
-  }
-
-  .form-check-input {
-    transform: scale(1.2);
-  }
-
-  .bg-welcome {
-    z-index: -1;
-  }
-
-  .p-basic-details {
-    padding-left: 5.438rem;
-    padding-right: 6.875rem;
-  }
-
-  .main-vh {
-    height: 87vh;
-  }
-
-  .sticky-bottom {
-    z-index: 1019;
-  }
-
- 
-
-
-
-
-
-
-
-
-
-
-  .btn-avatar {
-    border: 0;
-  }
-
-  .btn-skip {
-    padding-left: 2.813rem;
-    padding-right: 2.813rem;
-  }
-
-  .btn-exit:hover {
-    background-color: #ffffff;
-    color: #C21B17;
-  }
-
-
-  .float-text {
-    top: 20px;
-    right: 10px;
-    padding: 10px;
-  }
-
-  .min-height-100 {
-    height: 100vh;
-  }
-
-  .bg-needs {
-    background-image: url('/images/needs/protection/bg-home.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-  }
-
-  .font-color-default {
-    color: #000;
-  }
-
-  .bg-btn_bar {
-    background-color: #F0F0F0;
-  }
-
-  .bg-needs_text {
-    background-color: #E9E9E9;
-  }
-
-
-
-  @media only screen and (min-width: 768px) {
-    .min-height-100 {
-      height: auto;
-    }
-
-   
-  }
-
-  @media only screen and (max-width: 767px) {
-    
-    #home {
-      background-size: cover;
-    }
-
-    
-
-
-
-
-  }
-
-  @media only screen and (min-width: 576px) {
-    
-
-    
-  }
-
-
-
-
-
-  .timeline-item-needs {
-    position: relative;
-    margin-bottom: 53px;
-    padding-right: 73px;
-  }
-
-  .timeline-item-needs:first-child::before {
-    display: none;
-  }
-  
-  
-
-#bm {
-  height:200px;
-}
-
-
-
-
-  #left-container {
-    width: 120px;
-    height: 120px;
-    background-color: lightgreen;
-    border-radius: 50%;
-    padding: 10px;
-  }
-*/
-
-  

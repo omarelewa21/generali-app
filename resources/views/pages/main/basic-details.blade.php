@@ -15,18 +15,17 @@
 @php
     // Retrieving values from the session
     $basicDetails ??= session('customer_details.basic_details');
-    $transactionId =  session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
-    
+    $transactionId ??= request()->input('transaction_id');
 @endphp
 
 <div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
-                <div class="navbar-scroll fixed-top">
+            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white-menu')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                        <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+                        <h2 class="display-5 fw-bold py-3 px-md-0 px-3">Hello! Let's get to know you better.</h2>
                     </div>
                 </div>
             </div>
@@ -109,7 +108,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">                     
-                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('pdpa.disclosure',['transaction_id' => $transactionId])}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>

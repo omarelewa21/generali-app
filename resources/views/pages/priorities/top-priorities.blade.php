@@ -16,8 +16,6 @@
     // Retrieving values from the session
     $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $topPriorities = session('customer_details.priorities_level');
-    // dd($image);
-    // dd(session()->all());
 @endphp
 
 <div id="top_priorities">
@@ -315,20 +313,22 @@
                                 ];
                             @endphp
                             <div class="row px-4 px-md-5 d-flex d-md-none">
-                                <ul id="sortablemobile">
-                                    @foreach($topPriorities as $topPriority)
-                                        <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
-                                            <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
-                                            @if($topPriority && $topPriority != 'undefined')
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
-                                                {{ $prioritiesMap[$topPriority] }}
-                                            @else
-                                                {{ $loop->iteration }}
-                                            @endif
-                                            <ul class="dropdown-menu pre-scrollable" role="menu"></ul>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <div class="col-12">
+                                    <ul id="sortablemobile">
+                                        @foreach($topPriorities as $topPriority)
+                                            <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
+                                                <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
+                                                @if($topPriority && $topPriority != 'undefined')
+                                                    <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
+                                                    {{ $prioritiesMap[$topPriority] }}
+                                                @else
+                                                    {{ $loop->iteration }}
+                                                @endif
+                                                <ul class="dropdown-menu pre-scrollable" role="menu"></ul>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -340,7 +340,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="topPrioritiesButtonInput" id="topPrioritiesButtonInput" value="{{ json_encode($topPriorities) }}">
-                                        <a href="{{route('assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.my.assets')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -355,8 +355,7 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.priorities_level')) !!};
-    var lastPageInput = {!! json_encode(session('customer_details.priorities_level')) !!};
-    var test = {!! json_encode($prioritiesMap) !!}
+    var priority = {!! json_encode($prioritiesMap) !!}
 
     // Load the animation using Lottie
     const animationMale = lottie.loadAnimation({
@@ -367,5 +366,6 @@
         path: '{{ asset('images/top-priorities/priorities.json') }}'
     });
 </script>
+
     
 @endsection

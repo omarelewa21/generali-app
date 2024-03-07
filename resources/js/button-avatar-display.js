@@ -6,9 +6,8 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
-const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith(queryString))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -98,7 +97,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                 width: "auto",
                 height: "90%",
                 alt: "Grandmother",
-                class: "position-absolute bottom-0 pb-2",
+                class: "position-absolute bottom-0",
                 style: "right: -80px;z-index: 1"
             },
             {
@@ -106,7 +105,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                 width: "auto",
                 height: "100%",
                 alt: "Grandfather",
-                class: "pb-2",
+                class: "pb-4",
                 style: ""
             }
         ];
@@ -278,7 +277,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
 
                     } else if (familyDependent.parents_data.hasOwnProperty("father")) {
                         if (!parentImages[1].class.includes('position-absolute')) {
-                            parentImages[1].class = 'pb-2 position-absolute';
+                            parentImages[1].class = 'pb-4 position-absolute';
                         }
                         if (!parentImages[1].style.includes('right:-80px')) {
                             parentImages[1].style = 'right:-80px';
@@ -545,15 +544,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'assets';
+                    urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
@@ -617,8 +616,8 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     }
                 }
                 else if (selectedImages.length === 2) {
-                    if (!selectedImages[0].class.includes('pb-2')) {
-                        selectedImages[0].class += 'pb-2';
+                    if (!selectedImages[0].class.includes('pb-4')) {
+                        selectedImages[0].class += 'pb-4';
                     }
                     selectedImages[0].style = '';
                 }
@@ -649,15 +648,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'assets';
+                    urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
@@ -697,15 +696,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'assets';
+                    urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
