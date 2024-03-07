@@ -373,9 +373,6 @@ button.choice.default.selected img{
 }
 @media only screen and (max-width: 767px){
     /* Calculator style */
-    .header p.display-6{
-        font-size: 14px;
-    }
     .text-sm-center{
         text-align: center;
     }
@@ -665,10 +662,6 @@ button.choice.default.selected img{
     font-size: 14px;
   }
 
-  .changePosition {
-    z-index: 1;
-  }
-
   .display-5a{
   font-size: calc(1rem + 1.05vw);
   }
@@ -679,13 +672,6 @@ button.choice.default.selected img{
   .homeVector {
     width: 100%;
     max-height: 700px;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .homeVector {
-    width: 60%;
-    max-height: 340px;
   }
 }
 
@@ -702,14 +688,14 @@ button.choice.default.selected img{
 /* Media query for targeting mobile devices */
 @media screen and (max-width: 768px) {
   /* Targeting the male image */
-  img[src$="button-gender-male.png"] {
-      width: 70px; /* Set the width for male image on mobile */
-  }
+  /* img[src$="button-gender-male.png"] {
+      width: 70px;
+  } */
   
   /* Targeting the female image */
-  img[src$="button-gender-female.png"] {
-      width: 60px; /* Set the width for female image on mobile */
-  }
+  /* img[src$="button-gender-female.png"] {
+      width: 60px;
+  } */
 
   .color-box-wrapper{
     width: 350px;
@@ -775,13 +761,13 @@ button.choice.default.selected img{
   filter: grayscale(0.95);
 }
 
-#savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
+/* #savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
 {
   border: 10px solid transparent;
-}
-#top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
+} */
+/* #top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
   border: 10px solid transparent;
-}
+} */
 
 /* ===============================  Advance Fix for Saving Goals=======================================*/
 
@@ -818,4 +804,3 @@ z-index: unset;
   font-size: 3rem;
 }
 }
-  
