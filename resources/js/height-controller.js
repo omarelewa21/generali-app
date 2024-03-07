@@ -57,13 +57,13 @@ $(document).ready(function() {
         const windowWidth = $(window).width();
 
         const needsMenuHeight = 85.5;
-        const needsSubMenuHeight = 76;
+        const needsSubMenuHeight = 65;
         const calculatorHeight = $(".calculatorMob").outerHeight();
         const footerHeight = $(".footer.fixed-bottom").innerHeight();
         const titleHeight = $(".summary-page .heading .container").outerHeight();
         const responsiveHeight = needsMenuHeight + calculatorHeight;
         const gapMenu = needsMenuHeight + needsSubMenuHeight;
-        const graphMenu = titleHeight + needsMenuHeight -30;
+        const graphMenu = titleHeight + needsMenuHeight -20;
 
         if(windowWidth < 768){
             // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
@@ -81,13 +81,13 @@ $(document).ready(function() {
             $(".coverage .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $(".coverage .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
             $(".coverage .content-needs-grey .bottom-content .coverage_slick").css("padding-top" , needsMenuHeight + "px");
-            $(".summary-page .bottom-content .graph-col").css("padding-top" , graphMenu + "px");
             $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $("#medical-hospital-selection .bottom-content #hnm-selection").css("padding-top" , needsSubMenuHeight + "px");
             $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
             $("#risk-profile .bottom-content").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
+            $(".summary-page .bottom-content .graph-col").css("padding-top" ,  graphMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
             $(".ideal .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             // $("#medical-hospital-selection .bottom-content").css("padding-top" , 0);
@@ -98,6 +98,9 @@ $(document).ready(function() {
             $("#overview .table-wrapper").css("padding-bottom" , footerHeight-50 + "px");
             if(windowWidth < 385) {
                 $("#education_coverage .bottom-content").css("padding-top" , "42px");
+            } 
+            if(windowWidth < 500) {
+                $(".summary-page .bottom-content .graph-col").css("padding-top" , "115px");
             } 
         } else if (windowWidth >=768 && windowWidth <= 1199 ){
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");

@@ -34,7 +34,7 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 pb-5">
+                            <div class="col-xxl-6 col-xl-6 pb-md-5 pb-3">
                                 <h2 class="display-4 text-center">Total Retirement Fund</h2>
                             </div>
                         </div>
@@ -65,13 +65,13 @@
                                             <div class="card-gap__number text-primary text-center">
                                                 <img src="{{ asset('images/top-priorities/retirement-icon.png') }}" style="width:85px;" class="mb-3"><br>
                                                 <span>{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%</span>
-                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
+                                                <p class="display-5 text-center fw-bold text-black">covered</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">

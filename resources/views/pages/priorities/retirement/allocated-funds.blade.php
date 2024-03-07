@@ -81,7 +81,7 @@
                                     <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
-                                        <br>for my retirement,through these income sources:
+                                        <br>for my retirement, through these income sources:
                                         <!-- <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeSources }}" required></span> -->
                                     </p>
                                     <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_1" id="other_income_sources_1" {{strpos($otherIncomeSources, 'Unit Trust') !== false ? 'checked' : '' }} value="Unit Trust"><label for="other_income_sources_1" class="form-label display-6 lh-base">Unit Trust</label></p>

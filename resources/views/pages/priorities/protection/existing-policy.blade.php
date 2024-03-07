@@ -76,7 +76,7 @@
                                         </span>
                                     </p>
                                     <div class="hide-content">
-                                        <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_policy_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_policy_amount') is-invalid @enderror" id="existing_policy_amount" value="{{ $existingPolicyAmount !== null ? number_format(floatval($existingPolicyAmount)) : $existingPolicyAmount }}" required></span></p>
+                                        <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_policy_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-sm-start text-center text-primary @error('existing_policy_amount') is-invalid @enderror" id="existing_policy_amount" value="{{ $existingPolicyAmount !== null ? number_format(floatval($existingPolicyAmount)) : $existingPolicyAmount }}" required></span></p>
                                     </div>
                                     <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                     <input type="hidden" name="percentage" id="percentage" value="{{$protectionFundPercentage}}">

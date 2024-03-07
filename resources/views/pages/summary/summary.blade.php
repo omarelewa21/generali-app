@@ -27,9 +27,36 @@
                 <div class="text-white px-4 px-xl-5 py-3">
                     <h2 class="display-5 fw-bold">Summary</h2>
                 </div>
+                @php
+                    $topPriorities = array_pad($topPriorities ?? [], 8, null);
+                    $prioritiesMap = [
+                        'protection' => 'Protection',
+                        'retirement' => 'Retirement',
+                        'education' => 'Education',
+                        'savings' => 'Savings',
+                        'debt-cancellation' => 'Debt Cancellation',
+                        'health-medical' => 'Health & Medical',
+                        'investments' => 'Lump Sum Investment',
+                        'others' => 'Others',
+                    ];
+                @endphp
+                <div class="row px-4 px-md-5 d-flex d-md-none">
+                    <ul id="sortablemobile">
+                        @foreach($topPriorities as $topPriority)
+                            <li class="@if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
+                                @if($topPriority && $topPriority != 'undefined')
+                                    <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
+                                    {{ $prioritiesMap[$topPriority] }}
+                                @else
+                                    {{ $loop->iteration }}
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
-                <section class="avatar-design-placeholder content-avatar-default main-content">
+                <section class="avatar-design-placeholder content-avatar-default main-content d-none d-md-block">
                     <div class="col-12 text-center position-relative pt-5">
                         <h4 class="fw-bold">The summary of needs in discussed</h4>
                         <div id="sortable-main" class="position-relative pt-3">

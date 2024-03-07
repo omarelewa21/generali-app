@@ -32,6 +32,7 @@
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 py-3 pt-md-0">
                                 <h2 class="display-5 fw-bold lh-sm text-center">My ideal retirement involves:</h2>
+                                <p class="d-md-none d-block lh-normal m-0 text-center">Please select one below:</p>
                             </div>
                         </div>
                     </div>
