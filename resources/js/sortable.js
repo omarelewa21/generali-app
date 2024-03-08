@@ -70,7 +70,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.png`);
         draggableLi.appendChild(imgElem);
         const textElem = document.createElement("div");
-        textElem.setAttribute("class", "sortable-text display-6 fw-bold");
+        textElem.setAttribute("class", "sortable-text fw-bold");
         textElem.innerHTML = `${priorityMap[value]}`;
         draggableLi.appendChild(textElem);
 

@@ -511,9 +511,9 @@ button.choice.default.selected img{
     .wrapper-overview{
         grid-template-rows: 15vh 75vh 0vh;
     }
-    #retirement_ideal .heading h2.display-5{
+    /* #retirement_ideal .heading h2.display-5{
         font-size: calc(1rem + 2.7vw);
-    }
+    } */
     /* Bug Fixes start here */
     #retirement_home .content-needs img{
         height: 80%;
@@ -533,9 +533,7 @@ button.choice.default.selected img{
     .summary-page h2.display-4{
         font-size: calc(1.3375rem + 1.05vw);
     }
-    .wrapper-needs-grey {
-        grid-template-rows: 9vh 38vh 25vh 12vh !important;
-    }
+    
     .h-sm-90{
         height: 90%;
     }

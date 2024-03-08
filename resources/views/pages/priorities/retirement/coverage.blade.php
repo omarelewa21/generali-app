@@ -41,7 +41,7 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I want to plan a happy retirement for my:</h2>
+                                <h2 class="display-5 fw-bold text-center">I want to plan a happy retirement for my:</h2>
                             </div>
                         </div>
                     </div>

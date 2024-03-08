@@ -27,7 +27,16 @@
                 <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
-                    <img src="{{ asset($image) }}" width="auto" height="70%" alt="Avatar" class="changeImageAsset position-absolute" style="bottom: 50px;">
+                    <img src="{{ asset($image) }}" width="auto" height="60%" alt="Avatar" class="changeImageAsset position-absolute" style="bottom: 100px;">
+                </section>
+                <section class="bg-grey">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <a href="#" id="refresh" class="btn btn-secondary btn-refresh px-4 py-2 text-uppercase" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
@@ -42,9 +51,6 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <p class="text-white display-6">Click to add your assets next to your avatar.</p>
-                                            </div>
-                                            <div class="col-12">
-                                                <a href="#" id="refresh" class="btn btn-outline-secondary btn-refresh px-4 py-2 float-end" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
                                             </div>
                                         </div>
                                     </div>

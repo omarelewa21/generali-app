@@ -282,8 +282,8 @@
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) disabled @endif>
-                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investments">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investments</p>
                                             </button>
                                         </div>
                                     </div>

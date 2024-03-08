@@ -89,6 +89,10 @@ body #login {
   background-color: #F8F8F8;
 }
 
+.bg-grey {
+  background-color: rgba(233, 233, 233, 1);
+}
+
 .z-index-1 {
   z-index:1;
 }
@@ -541,9 +545,9 @@ p.nav-text {
   color: #C21B17;
 }
 
-.btn-refresh {
+/* .btn-refresh {
   font-family: 'Helvetica Neue Regular', sans-serif;
-}
+} */
 
 .btn-exit:hover {
   background-color: #ffffff;
@@ -629,7 +633,7 @@ div.dt-buttons>.dt-button:hover, div.dt-buttons>.dt-button:focus {
   overflow: hidden;
 }
 
-button[data-required="selected"] img {
+button[data-required="selected"] img:not(button.choice[data-required="selected"] img) {
   transform: scale(1.1);
 }
 
@@ -788,11 +792,22 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content"
+      "footer-avatar-grey"
+      "refresh";
+  grid-template-rows: 20vh 50vh 20vh 10vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+/* .wrapper-avatar-grey {
+  grid-template-areas:
+      "header"
+      "content"
       "footer-avatar-grey";
   grid-template-rows: 20vh 55vh 25vh;
   display: grid;
   grid-template-columns: 100%;
-}
+} */
 
 .wrapper-overview {
   grid-template-areas:
@@ -1545,6 +1560,101 @@ body.overflow #summary .main-content {
   background-position: center bottom 21%;
 }
 
+.needs-progress {
+  font-size: 22px;
+}
+/* ============================== Priorities Menu ============================== */
+.progress {
+  width: 44px;
+  height: 44px;
+  line-height: 150px;
+  background: transparent;
+  margin: 0 auto;
+  box-shadow: none;
+  position: relative;
+}
+
+.progress:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #A0A0A0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress>span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left {
+  left: 0;
+}
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 2px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+  animation: loading-left 0.8s linear forwards;
+}
+
+.progress .progress-right {
+  right: 0;
+}
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+  animation: loading-right 0.8s linear forwards;
+}
+
+.progress-value p {
+  font-size: 20px;
+}
+
+.progress .progress-value {
+  width: 100%;
+  height: 100%;
+  border-radius: 80px;
+  background: #ffffff;
+  color: #d10b4f;
+  line-height: 3.2em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress.color .progress-bar {
+  border-color: #d10b4f;
+}
+
+.progress.color .progress-left .progress-bar {
+  animation-delay: 0.8s; /* Delay the animation for the left progress bar */
+}
 /* ============================== Calculator ============================== */
 .calculation-progress-bar-wrapper {
   border-bottom-right-radius: 1.3rem;
@@ -1748,7 +1858,7 @@ body.overflow #summary .main-content {
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 9vh 40vh 23vh 12vh;
+    grid-template-rows: 9vh 38vh 25vh 12vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1807,7 +1917,7 @@ body.overflow #summary .main-content {
     background-size: 15%;
   }
   .wrapper-avatar-grey {
-    grid-template-rows: 10vh 35vh 25vh;
+    grid-template-rows: 10vh 35vh 20vh 10vh;
   }
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
@@ -1829,9 +1939,9 @@ body.overflow #summary .main-content {
   .bottomObeserver {
     height:50px;
   }
-  .header p.display-6:not(#protection_home .header p.display-6){
+  /* .header p.display-6{
       font-size: 11px;
-  }
+  } */
   #home h2, #home .h2 {
     font-size: calc(1rem + 2.7vw);
     line-height: 1;
