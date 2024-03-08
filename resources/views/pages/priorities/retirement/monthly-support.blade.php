@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading d-none d-md-block content">
+                <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-md-1">
+                <section class="content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
