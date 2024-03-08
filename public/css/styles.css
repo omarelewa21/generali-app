@@ -904,10 +904,10 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-.homeVector {
+/* .homeVector {
   width: 550px;
   height:auto;
-}
+} */
 
 /* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
@@ -1660,6 +1660,9 @@ body.overflow #summary .main-content {
   .navbar-scroll.fixed-top {
     position: relative;
   }
+  .homeVector {
+    max-height: 700px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px){
@@ -1671,6 +1674,9 @@ body.overflow #summary .main-content {
 @media only screen and (max-width: 767px) {
   h1.display-3 {
     font-size: 1.9rem;
+  }
+  h1.display-4 {
+    font-size: 1.25rem;
   }
   .gender-button img {
     width: 70px;
@@ -1812,6 +1818,10 @@ body.overflow #summary .main-content {
   }
   .header p.display-6:not(#protection_home .header p.display-6){
       font-size: 11px;
+  }
+  #home h2, #home .h2 {
+    font-size: calc(1rem + 2.7vw);
+    line-height: 1;
   }
 }
 

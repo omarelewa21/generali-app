@@ -86,9 +86,9 @@
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
                                         @if(isset($fullName))
-                                            <h1 class="display-5 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you, {{ $fullName }}</h1>
+                                            <h1 class="display-4 text-white font-normal pb-md-3 fw-bold text-center text-md-start">Nice to meet you, {{ $fullName }}</h1>
                                         @else 
-                                            <h1 class="display-5 text-white font-normal pb-3 fw-bold text-center text-md-start">Nice to meet you.</h1>
+                                            <h1 class="display-4 text-white font-normal pb-md-3 fw-bold text-center text-md-start">Nice to meet you.</h1>
                                         @endif
                                         <p class="text-white display-6 lh-base text-center text-md-start">Please click to select your gender.</p>
                                     </div>

@@ -713,25 +713,17 @@ button.choice.default.selected img{
 /* =============================== Welcome Page =======================================*/
 
  @media only screen and (min-width: 768px) {
-  .homeVector {
+  /* .homeVector {
     width: 100%;
     max-height: 700px !important;
-  }
+  } */
 }
 
 @media only screen and (max-width: 767px) {
-  .homeVector {
+  /* .homeVector {
     width: 60%;
     max-height: 340px !important;
-  }
-}
-
-/* Media query for targeting mobile devices */
-@media screen and (max-width: 768px) {
-  #home h2, #home .h2 {
-    font-size: calc(1rem + 2.7vw);
-    line-height: 1;
-  }
+  } */
 }
 
  /* =============================== Avatar =======================================*/
