@@ -33,7 +33,7 @@
             </div>
             <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey-calculator">
                 @csrf
-                <div class="calculator bg-primary row d-md-none calculatorMob">
+                <div class="calculator bg-primary row d-md-none calculatorMob d-flex align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')
@@ -47,10 +47,10 @@
                         </h1>
                     </div>
                     <div class="col-6 m-auto">
-                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Retirement Fund Needed</p>
+                        <p class="text-white display-6 text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
-                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -68,7 +68,7 @@
                                             : number_format(floatval($retirementMonthlySupport) * 12 * floatval($supportingYears) - floatval($retirementSavings))))
                                     }}
                                 </h1>
-                                <p class="text-white display-6 lh-base text-center">Total Retirement Fund Needed</p>
+                                <p class="text-white display-6 text-center">Total Retirement Fund Needed</p>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
-                                    <h2 class="display-5 fw-bold lh-sm">It would be great to have</h2>
+                                    <h2 class="display-5 fw-bold">It would be great to have</h2>
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_monthly_support') is-invalid @enderror" id="retirement_monthly_support" value="{{ $retirementMonthlySupport !== null ? number_format(floatval($retirementMonthlySupport)) : $retirementMonthlySupport }}" required></span>
                                         / month to support myself and my loved ones when I retire.
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="bg-white py-4 footer-scroll">
+                    <div class="bg-accent-light-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

@@ -69,11 +69,11 @@ $(document).ready(function() {
             // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
             $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
             // $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
-            $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            // $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#investment-risk-profile .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
-            $(".summary-page .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            // $(".summary-page .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
             $("#health-medical-selection .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
             $("#health-medical-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#medical-hospital-selection .content-needs-grey .heading").css("padding-top" , needsSubMenuHeight + "px");
@@ -87,13 +87,13 @@ $(document).ready(function() {
             $("#risk-profile .bottom-content").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
-            $(".summary-page .bottom-content .graph-col").css("padding-top" ,  graphMenu + "px");
+            // $(".summary-page .bottom-content .graph-col").css("padding-top" ,  graphMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
             // $(".ideal .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             // $("#medical-hospital-selection .bottom-content").css("padding-top" , 0);
             $("#monthly_goals .bottom-content .last-content").css("padding-bottom" , footerHeight + "px");
             $(".summary-page .bottom-content .gap-col").css("padding-bottom" , footerHeight + "px");
-            $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
+            // $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
             $(".summary-overview .bottom-content .tertiary-mobile-bg").css("padding-top" ,"20px");
             $("#overview .table-wrapper").css("padding-bottom" , footerHeight-50 + "px");
             if(windowWidth < 385) {

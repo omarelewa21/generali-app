@@ -773,9 +773,9 @@ h2.display-5, .currencyField {
 .wrapper-bottom-grey-calculator {
   grid-template-areas:
       "header"
-      "content-needs-grey"
+      "content-needs-grey-calculator"
       "footer-avatar-grey";
-  grid-template-rows: 15vh 50vh 35vh;
+  grid-template-rows: 12vh 53vh 35vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -858,13 +858,13 @@ h2.display-5, .currencyField {
 .content-needs-grey-calculator {
   grid-template-areas:"calculator" "top-menu" "content";
   display: grid;
-  grid-auto-rows: 10vh 10vh 45vh;
+  grid-auto-rows: 10vh 10vh 50vh;
   grid-template-columns: 100%;
-  grid-area: content-needs-grey;
+  grid-area: content-needs-grey-calculator;
 }
 
 #retirement_ideal .content-needs-grey {
-  grid-auto-rows: 10vh 16vh 45vh;
+  grid-auto-rows: 10vh 10vh 55vh;
 }
 
 .heading {
@@ -1394,7 +1394,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #retirement_ideal .bottom-content img {
-  max-width: 324px;
+  max-width: 258px;
 }
 
 #retirement_period.tertiary-default-bg {
@@ -1520,7 +1520,9 @@ button.choice.default.selected img{
   position: relative;
   padding-left: 40px;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0;
 }
 
 .needs-radio:checked + label::after {
@@ -1570,6 +1572,10 @@ body.overflow #summary .main-content {
 #gap .card-gap__number {
   font-size: 80px;
   font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+#gap .card-gap__number p.display-5 {
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
 .green-tick {
@@ -1745,6 +1751,12 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (min-width: 768px) {
+  .content-needs-grey-calculator {
+    grid-auto-rows: 5vh 10vh 50vh;
+  }
+  #retirement_allocated_funds .content-needs-grey-calculator {
+    grid-auto-rows: 0vh 10vh 50vh;
+  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;
@@ -1906,9 +1918,9 @@ body.overflow #summary .main-content {
     text-align: center;
     justify-content: center;
   }
-  .tertiary-default-bg, #retirement_period.tertiary-default-bg {
+  /* .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
-  }
+  } */
   .tertiary-mobile-bg {
     background-image: url(/images/general/tertiary-default-bg.png);
     background-size: contain;

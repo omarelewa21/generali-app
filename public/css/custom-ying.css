@@ -267,10 +267,10 @@ button.choice[data-required=""]{
 } */
 
 /* Needs Summary Page */
-.summary-page .wrapper-bottom-grey{
+/* .summary-page .wrapper-bottom-grey{
     grid-template-rows: unset;
     overflow-y: auto;
-}
+} */
 .summary-page.secondary-default-bg{
     background-position: center bottom 8% !important;
 }
@@ -426,20 +426,19 @@ button.choice[data-required=""]{
     .h-sm-100{
         height: 100%;
     }
-    .summary-page .wrapper-bottom-grey{
+    /* .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
-    }
-    .summary-page .wrapper-bottom-grey,
+    } */
+    /* .summary-page .wrapper-bottom-grey,
     #savings-annual-return .wrapper-bottom-grey{
-        /* grid-template-rows: 10vh 90vh 0vh; */
         grid-template-rows: 0vh 100vh 0vh;
-    }
+    } */
     .summary-page .bottom-content .graph-col.h-100{
         height: fit-content !important;
     }
-    .summary-page .wrapper-bottom-grey{
+    /* .summary-page .wrapper-bottom-grey{
         overflow-y:unset;
-    }
+    } */
     /* #retirement_period .tertiary-mobile-bg{
         background-size: contain;
         background-position: left center;
@@ -662,9 +661,9 @@ button.choice[data-required=""]{
         background-position: bottom;
         background-size: contain;
     }
-    .summary-page .content-needs-grey{
+    /* .summary-page .content-needs-grey{
         grid-auto-rows: 0vh 0vh 65vh;
-    }
+    } */
 }
 @media only screen and (min-width: 1600px){
     .col-xxxl-5 {

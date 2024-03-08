@@ -31,10 +31,10 @@
             <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div class="col-xxl-6 col-xl-6 pb-5">
+                            <div class="col-xxl-6 col-xl-6">
                                 <h2 class="display-4 text-center">Total Retirement Fund</h2>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                                 <img src="{{ asset('images/needs/general/icon-clock.png') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$supportingYears}} years</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">{{$supportingYears}} years</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -91,7 +91,7 @@
                                                 <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">I want to build a retirement fund of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -103,7 +103,7 @@
                                                 <img src="{{ asset('images/needs/general/icon-saving.png') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($retirementSavings))}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">RM {{number_format(floatval($retirementSavings))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -115,7 +115,7 @@
                                                 <img src="{{ asset('images/needs/general/icon-summary.png') }}" class="sum-icon" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So I need a retirement plan of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
@@ -130,7 +130,7 @@
                     </div>
                 </section>
                 <section class="footer fixed-bottom">
-                    <div class="bg-white py-4 footer-scroll">
+                    <div class="bg-accent-light-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
