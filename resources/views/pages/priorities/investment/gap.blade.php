@@ -31,7 +31,7 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
+                        <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-4 text-center">Total Lump Sum Investment Fund</h2>
                             </div>
@@ -61,20 +61,20 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/investments-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <img src="{{ asset('images/top-priorities/investments-icon.png') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{floor(floatval($investmentFundPercentage))}}%</span>
-                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
+                                                <p class="avatar-text text-center fw-bold text-black mt-2 mt-md-0">covered</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-tree.png') }}" alt="tree icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-tree.png') }}" class="sum-icon" alt="tree icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">I plan to invest a lump sum of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($investmentMonthlyPayment))}}</h4>
@@ -86,7 +86,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">And let it grow for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">{{$investmentSupportingYears}} years</h4>
@@ -98,7 +98,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">With annual returns of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">{{$investmentPA}}% p.a.</h4>
@@ -110,7 +110,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For a projected future investment value of</p>
                                             </div>
                                             <!-- <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end w-50">RM {{number_format(floatval($totalInvestmentNeeded) + (floatval($totalInvestmentNeeded) * (4 /100)) )}}</h4> -->

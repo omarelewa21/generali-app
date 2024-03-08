@@ -32,7 +32,7 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
+                        <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-4 text-center">Total Regular Savings Fund</h2>
                             </div>
@@ -62,20 +62,20 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/savings-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <img src="{{ asset('images/top-priorities/savings-icon.png') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%</span>
-                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
+                                                <p class="avatar-text text-center fw-bold text-black mt-2 mt-md-0">covered</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">My goal is to build a total savings funds of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($goalsAmount))}}</h4>
@@ -87,7 +87,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" alt="input icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" class="sum-icon" alt="input icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">If I set aside monthly savings of </p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($savingsMonthlyPayment))}}</h4>
@@ -99,7 +99,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalDuration}} years</h4>
@@ -112,7 +112,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">While expecting annual returns of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalPA}}% p.a.</h4>
@@ -124,7 +124,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" class="sum-icon" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">Projected accumalated Saving Fund is</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded))}}</h4>

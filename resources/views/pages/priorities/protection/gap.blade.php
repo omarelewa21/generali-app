@@ -32,7 +32,7 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
+                        <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-4 text-center">Total Protection Fund</h2>
                             </div>
@@ -60,9 +60,7 @@
                                             </svg>
                                             <div class="circle"></div>
                                             <div class="circle circle__medium"></div>
-                                            <div class="circle circle__small">
-                                            
-                                            </div>
+                                            <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
                                                 <img src="{{ asset('images/top-priorities/protection-icon.png') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{ $totalAmountNeeded > $totalProtectionNeeded ? '100' : floor(floatval($protectionFundPercentage))}}%</span>

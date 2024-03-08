@@ -78,7 +78,7 @@
                                                 $chart_color = '';
                                         }
                                         if ($need['need_no'] == 'N6'){
-                                            if($need['number_of_selection'] == 2 || ($need['advance_details']['critical_illness']['critical_illness_plan'] && $need['advance_details']['health_care']['medical_care_plan'] ) == Yes ){
+                                            if(isset($need['number_of_selection']) && ($need['number_of_selection'] == 2 || ($need['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $need['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
                                                 if (isset($need['advance_details']['critical_illness']['fund_percentage']) || isset($need['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($need['advance_details']['critical_illness']['fund_percentage'] + $need['advance_details']['health_care']['fund_percentage']) / 2;
                                                 }
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="row pt-4 pb-md-5 pb-xl-0 table-wrapper">
-                                <div class="col-12">
+                                <div class="col-12 overflow-x-auto">
                                     <table id="overview-table" class="w-100">
                                         <thead class="text-grey">
                                             <tr>
@@ -203,7 +203,7 @@
                                                     }
                                                     @endphp
                                                     @if ( isset($need['need_no']) && $need['need_no'] == 'N6')
-                                                        @if($need['advance_details']['critical_illness']['critical_illness_plan'] == 'Yes')
+                                                        @if(isset($need['advance_details']['critical_illness']['critical_illness_plan']) && $need['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness Care
@@ -228,7 +228,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endif
-                                                        @if ($need['advance_details']['health_care']['medical_care_plan'] == 'Yes')
+                                                        @if (isset($need['advance_details']['health_care']['medical_care_plan']) && $need['advance_details']['health_care']['medical_care_plan'] == 'Health Planning')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
@@ -253,6 +253,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endif
+                                                    @elseif(isset($need['need_no']) && $need['need_no'] == 'N8')   
                                                     @else
                                                         <tr>
                                                             <td class="d-flex align-items-center py-3">
