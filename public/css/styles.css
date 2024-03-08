@@ -765,7 +765,7 @@ h2.display-5, .currencyField {
       "header"
       "content-needs-grey"
       "footer-avatar-grey";
-  grid-template-rows: 15vh 50vh 35vh;
+  grid-template-rows: 10vh 50vh 35vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -1786,6 +1786,9 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  .coverage .content-needs-grey{
+      grid-auto-rows: 10vh 12vh 55vh;
+  }
   .accordion-button {
     font-size: 1.25rem;
   }
@@ -1872,10 +1875,12 @@ body.overflow #summary .main-content {
   }
   .tertiary-mobile-bg {
     background-image: url(/images/general/tertiary-default-bg.png);
-    background-size: cover;
+    background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;
     background-color: #fff;
+    height: 50%!important;
+    max-height: 100%;
   }
 
   #retirement_period .tertiary-mobile-bg {
@@ -1886,7 +1891,7 @@ body.overflow #summary .main-content {
     background-color: #fff;
   }
   .calculator-page .bottom-content img {
-    height: 80%;
+    height: 85%;
   }
   #retirement_ideal .content-needs-grey {
     display: block;

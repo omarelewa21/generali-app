@@ -395,34 +395,31 @@ button.choice.default.selected img{
     .summary-overview.secondary-default-bg{
         background:none;
     }
-    .coverage .content-needs-grey{
-        grid-auto-rows: 0vh 0vh 80vh;
-    }
     .coverage button img{
         height: 80%;
     }
     /* .coverage .content-needs-grey{
         grid-auto-rows: 15vh 10vh 50vh;
     } */
-    .wrapper-bottom-grey{
+    /* .wrapper-bottom-grey{
         grid-template:
         "header" 0vh
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
-    }
+    } */
     .pe-sm-0{
         padding-right: 0 !important;
     }
-    .calculator-page .bottom-content img{
+    /* .calculator-page .bottom-content img{
         height: 85% !important;
-    }
-    .bottom-content .tertiary-mobile-bg{
+    } */
+    /* .bottom-content .tertiary-mobile-bg{
         background-size: contain;
-    }
-    .bottom-content .tertiary-mobile-bg.h-100{
+    } */
+    /* .bottom-content .tertiary-mobile-bg.h-100{
         height: 50% !important;
         max-height: 100% !important;
-    }
+    } */
     .summary-overview .bottom-content .tertiary-mobile-bg.h-100{
         height: 70% !important;
         max-height: 100% !important;

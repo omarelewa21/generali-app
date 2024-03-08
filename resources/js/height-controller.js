@@ -78,12 +78,12 @@ $(document).ready(function() {
             $("#health-medical-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
             $("#medical-hospital-selection .content-needs-grey .heading").css("padding-top" , needsSubMenuHeight + "px");
             $("#medical-hospital-selection .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
-            $(".coverage .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
-            $(".coverage .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
-            $(".coverage .content-needs-grey .bottom-content .coverage_slick").css("padding-top" , needsMenuHeight + "px");
+            // $(".coverage .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
+            // $(".coverage .content-needs-grey .heading").css("padding-top" , gapMenu + "px");
+            // $(".coverage .content-needs-grey .bottom-content .coverage_slick").css("padding-top" , needsMenuHeight + "px");
             $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $("#medical-hospital-selection .bottom-content #hnm-selection").css("padding-top" , needsSubMenuHeight + "px");
-            $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
+            // $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
             $("#risk-profile .bottom-content").css("padding-top" , needsMenuHeight + "px");
             $("#savings-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
             $("#investment-risk-profile .bottom-content").css("padding-top" , gapMenu + "px");
