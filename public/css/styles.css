@@ -56,10 +56,10 @@ body #login {
   height: 100vh;
 }
 
-.fade-effect img {
+/* .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
-}
+} */
 
 .fade-effect button:not([disabled]):hover img {
   opacity: 1;
@@ -630,7 +630,7 @@ div.dt-buttons>.dt-button:hover, div.dt-buttons>.dt-button:focus {
 }
 
 button[data-required="selected"] img {
-  opacity: 1;
+  transform: scale(1.1);
 }
 
 .button-bg {
@@ -1021,6 +1021,10 @@ h2.display-5, .currencyField {
 /* ============================== Assets Page ============================== */
 .assets-overlay {
   position: relative;
+}
+
+.changeImageAsset {
+  z-index: 2;
 }
 
 /* ============================== Skin Tone ============================== */
@@ -1672,6 +1676,9 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  .accordion-button {
+    font-size: 1.25rem;
+  }
   h1.display-3 {
     font-size: 1.9rem;
   }
@@ -1705,9 +1712,12 @@ body.overflow #summary .main-content {
   #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
-  .avatar-text {
-    font-size: 18px;
+  #avatar_my_assets .footer-scroll {
+    z-index: 2;
   }
+  /* .avatar-text {
+    font-size: 18px;
+  } */
   .main-logo, .white-logo, .red-logo {
     max-width: 172px
   }
@@ -1791,10 +1801,13 @@ body.overflow #summary .main-content {
     grid-template-rows: 20vh 50vh;
   }
   .wrapper-avatar-default {
-    grid-template-rows: 10vh 80vh;
+    grid-template-rows: 5vh 40vh;
+  }
+  #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
+    background-size: 15%;
   }
   .wrapper-avatar-grey {
-    grid-template-rows: 10vh 55vh 25vh;
+    grid-template-rows: 10vh 35vh 25vh;
   }
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
@@ -1828,6 +1841,12 @@ body.overflow #summary .main-content {
 @media only screen and (max-width: 375px) {
   .btn-primary {
     font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .otherModalText {
+    font-size: 4rem;
   }
 }
 

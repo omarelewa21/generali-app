@@ -44,8 +44,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Now let’s get into the details.</h1>
-                                        <p class="text-white display-6 lh-base">*All fields are mandatory, so we can make the best recommendations for you.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Now let’s get into the details.</h1>
+                                        <p class="text-white display-6">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                     </div>
                                 </div>
                                 <div class="form-container pb-0 pb-md-5">

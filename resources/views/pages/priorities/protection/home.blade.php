@@ -31,7 +31,7 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="90%" width="auto" class="position-absolute h-sm-90" style="bottom:-40px" alt="Protection Home">
+                            <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">

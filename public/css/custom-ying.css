@@ -740,9 +740,9 @@ button.choice.default.selected img{
       width: 60px;
   } */
 
-  .color-box-wrapper{
+  /* .color-box-wrapper{
     width: 350px;
-  }
+  } */
 }
 
  /* =============================== Savings Goal =======================================*/
@@ -842,8 +842,8 @@ z-index: unset;
 }
 
 /* ============================== Modal / Popover ============================== */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
 .otherModalText {
   font-size: 3rem;
 }
-}
+} */

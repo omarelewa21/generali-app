@@ -203,8 +203,8 @@
                         <div class="container">
                             <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
-                                    <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
-                                    <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
+                                    <h1 class="display-4 text-white fw-bold pb-md-3">What are your top financial priorities?</h1>
+                                    <p class="text-white display-6">Select your priorities by first to last.</p>
                                 </div>
                             </div>
                             <div id="needs" class="row px-4 px-md-5 needs d-none d-md-flex">
