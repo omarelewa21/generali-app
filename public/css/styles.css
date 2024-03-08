@@ -1669,8 +1669,8 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
-  h1.display-2 {
-    font-size: 30px;
+  h1.display-3 {
+    font-size: 1.9rem;
   }
   .gender-button img {
     width: 70px;
