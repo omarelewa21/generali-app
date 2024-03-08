@@ -19,14 +19,6 @@ button.choice[data-required=""]{
     background: none !important;
     width: 100% !important;
 }
-button.choice:hover img,
-button.choice[data-required="selected"] img,
-button.choice.default.selected img{
-    background-image: url(/images/needs/hover-coverage.png);
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100%;
-}
 
 /* Change disabled border color */
 .disabled-color{
@@ -560,9 +552,9 @@ button.choice.default.selected img{
     .z-md-1{
         z-index: 1;
     }
-    .ideal .content-needs-grey {
+    /* .ideal .content-needs-grey {
         grid-auto-rows: 5vh 60vh;
-    }
+    } */
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }

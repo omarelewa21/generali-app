@@ -765,7 +765,17 @@ h2.display-5, .currencyField {
       "header"
       "content-needs-grey"
       "footer-avatar-grey";
-  grid-template-rows: 10vh 50vh 35vh;
+  grid-template-rows: 15vh 50vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.wrapper-bottom-grey-calculator {
+  grid-template-areas:
+      "header"
+      "content-needs-grey"
+      "footer-avatar-grey";
+  grid-template-rows: 15vh 50vh 35vh;
   display: grid;
   grid-template-columns: 100%;
 }
@@ -844,9 +854,23 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
   grid-area: content-needs-grey;
 }
+
+.content-needs-grey-calculator {
+  grid-template-areas:"calculator" "top-menu" "content";
+  display: grid;
+  grid-auto-rows: 10vh 10vh 45vh;
+  grid-template-columns: 100%;
+  grid-area: content-needs-grey;
+}
+
+#retirement_ideal .content-needs-grey {
+  grid-auto-rows: 10vh 16vh 45vh;
+}
+
 .heading {
   grid-area: heading;
 }
+
 .bottom-content {
   grid-area: bottom-content;
 }
@@ -1467,6 +1491,15 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     width: 60%;
 }
 
+button.choice:hover img,
+button.choice[data-required="selected"] img,
+button.choice.default.selected img{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+}
+
 .coverage_slick div {
   height: 100%;
 }
@@ -1786,6 +1819,9 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  .wrapper-bottom-grey {
+    grid-template-rows: 12vh 53vh 35vh;
+  }
   .coverage .content-needs-grey{
       grid-auto-rows: 10vh 12vh 55vh;
   }
@@ -1892,9 +1928,6 @@ body.overflow #summary .main-content {
   }
   .calculator-page .bottom-content img {
     height: 85%;
-  }
-  #retirement_ideal .content-needs-grey {
-    display: block;
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
     background-position: center bottom 18%;

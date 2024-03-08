@@ -27,10 +27,13 @@
 
 <div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey">
+        <div class="row wrapper-bottom-grey-calculator">
             <div class="header col-12">
                 <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+            </div>
+            <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey-calculator">
+                @csrf
+                <div class="calculator bg-primary row d-md-none calculatorMob">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')
@@ -47,11 +50,8 @@
                         <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
-            </div>
-            <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey">
-                @csrf
                 <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading d-none d-md-block">
+                <section class="heading d-none d-md-block content">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4 bg-primary calculation-progress-bar-wrapper">
