@@ -592,15 +592,32 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // // Calculate the position for the dotCircle based on the end point of the graph
                     const percent = Math.floor(percentage);
                     let angle = (360 * percent) / 100;
-                    let pointerX = 90 + 144 * Math.cos(angle * Math.PI / 180);
-                    let pointerY = 90 + 144 * Math.sin(angle * Math.PI / 180);
+                    let xPositions = [];
+                    let yPositions = [];
+                    for (let i = 0; i <= angle; i++) {
+                        let x = 90 + 144 * Math.cos(i * Math.PI / 180);
+                        let y = 90 + 144 * Math.sin(i * Math.PI / 180);
+                        xPositions.push(x);
+                        yPositions.push(y);
+                    }
         
                     if ( percent === 0 || percent >= 100){
                     }
                     else{
-                        dotCircle.setAttribute('cx', pointerX);
-                        dotCircle.setAttribute('cy', pointerY);
                         dotCircle.style.display = "block";
+
+                        let index = 0;
+                        function animatePointer() {
+                            dotCircle.setAttribute('cx', xPositions[index]);
+                            dotCircle.setAttribute('cy', yPositions[index]);
+                            index++;
+                        
+                            if (index < xPositions.length) {
+                                let duration = 1900 / xPositions.length;
+                                setTimeout(animatePointer, duration);
+                            }
+                        }
+                        animatePointer();
                     }
                 }
             }
