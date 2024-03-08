@@ -234,8 +234,8 @@
                                                     else {
                                                         $title = '';
                                                     }
-
-                                                    if ($priority) { @endphp
+                                                    if ($priority) { 
+                                                        $discuss = ''; @endphp
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$priority}}">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
@@ -247,13 +247,20 @@
                                                                     <div class="row py-2 px-3">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                            @php
+                                                                                if (isset($prioritiesDiscuss)){
+                                                                                    foreach($prioritiesDiscuss as $key => $discuss_value){
+                                                                                        $discuss = $key;
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                            <input type="checkbox" {{ ($discuss == $priority.'_discuss' && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : ''}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -31,7 +31,7 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
+                            <img src="{{ asset('images/needs/protection/home-vector.png') }}" height="90%" width="auto" class="position-absolute h-sm-90" style="bottom:-40px" alt="Protection Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
@@ -59,24 +59,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingProtectionFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingProtectionFieldsLabel">Protection Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable protection priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    var protectionPriority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
 </script>
 
 @endsection

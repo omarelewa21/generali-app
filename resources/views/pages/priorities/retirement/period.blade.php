@@ -82,9 +82,9 @@
                                 <div class="row h-sm-100">
                                     <h2 class="display-5 fw-bold lh-sm">I plan to retire at the age of</h2>
                                     <p class="display-5 fw-bold currencyField">
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="retirement_age" class="form-control fw-bold position-relative border-0 d-inline-block text-center w-25 text-primary @error('retirement_age') is-invalid @enderror" id="retirement_age" value="{{$retirementAge}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="retirement_age" class="form-control fw-bold position-relative border-0 d-inline-block text-center w-25 text-primary @error('retirement_age') is-invalid @enderror" id="retirement_age" value="{{$retirementAge}}" required></span>
                                         so I can enjoy my retirement for the next
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('supporting_years') is-invalid @enderror" id="supporting_years" value="{{$supportingYears}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-center text-primary @error('supporting_years') is-invalid @enderror" id="supporting_years" value="{{$supportingYears}}" required></span>
                                         years.
                                     </p>
                                     <input type="hidden" name="total_retirementNeeded" id="total_retirementNeeded" value="{{$totalRetirementNeeded}}">
@@ -122,22 +122,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -154,7 +138,7 @@
     </div>
 </div>
 <script>
-    var retirementPriority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var lastPageInput = '{{$retirementMonthlySupport}}';
 </script>

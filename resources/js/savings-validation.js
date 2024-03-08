@@ -11,33 +11,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (savingsPriority === 'false' || savingsPriority === undefined || savingsPriority === '' || savingsPriority === null || savingsPriority === false){
-        var missingModal = document.getElementById('missingSavingsFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingSavingsFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss';
-        });
-
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+            
     } else{
         
         if (path === '/savings/coverage') {
@@ -493,9 +468,10 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Retrieve the current input value
                     var savingsGoalPAValue = savingsGoalPA.value;
         
-                    var annualReturn = parseInt(savingsGoalPAValue);
+                    // var annualReturn = parseFloat(savingsGoalPAValue);
+                    // this.value = annualReturn;
         
-                    if (!isNaN(annualReturn)) {
+                    if (!isNaN(savingsGoalPAValue)) {
                         this.value = annualReturn;
                     }
                     else{

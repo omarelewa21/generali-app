@@ -11,33 +11,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    if (investmentPriority === 'false' || investmentPriority === undefined || investmentPriority === '' || investmentPriority === null || investmentPriority === false){
-        var missingModal = document.getElementById('missingInvestmentFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingInvestmentFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss';
-        });
-
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+            
     } else{
         if (path === '/investment/coverage') {
             if (selfData == null || selfData == undefined || selfData == '') {
@@ -349,13 +324,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Retrieve the current input value
                     var investmentPAValue = investmentPA.value;
         
-                    var annualReturn = parseInt(investmentPAValue);
+                    var annualReturn = parseFloat(investmentPAValue);
         
                     // Calculate annual return
                     var total_AR_amount = oldTotalFund * annualReturn / 100;
                     var totalPercentage = total_AR_amount / oldTotalFund * 100;
-                    if (!isNaN(annualReturn)) {
-                        this.value = annualReturn;
+                    if (!isNaN(investmentPAValue)) {
+                        this.value = investmentPAValue;
                         // totalAnnualReturn.value = total_AR_amount;
                         if(totalPercentage > 100){
                             totalInvestmentPercentage.value = 100;

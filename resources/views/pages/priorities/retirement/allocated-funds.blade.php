@@ -81,7 +81,7 @@
                                     <h2 class="display-5 fw-bold lh-sm">So far, I’ve put aside</h2>
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="retirement_savings" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('retirement_savings') is-invalid @enderror" id="retirement_savings" value="{{ $retirementSavings !== null ? number_format(floatval($retirementSavings)) : $retirementSavings }}"></span>
-                                        <br>for my retirement,through these income sources:
+                                        <br>for my retirement, through these income sources:
                                         <!-- <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="other_income_sources" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('other_income_sources') is-invalid @enderror" id="other_income_sources" value="{{ $otherIncomeSources }}" required></span> -->
                                     </p>
                                     <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_1" id="other_income_sources_1" {{strpos($otherIncomeSources, 'Unit Trust') !== false ? 'checked' : '' }} value="Unit Trust"><label for="other_income_sources_1" class="form-label display-6 lh-base">Unit Trust</label></p>
@@ -133,21 +133,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -168,7 +153,7 @@
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var retirementFundPercentage = parseFloat({{ $retirementFundPercentage }});
     var sessionRetirementSavings = parseFloat({{$retirementSavings}});
-    var retirementPriority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var lastPageInput = '{{$supportingYears === "" || $supportingYears === null ? $supportingYears : $retirementAge}}';
 </script>
 

@@ -15,33 +15,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const paramValue = urlParams.get('transaction_id');
     const log = console.log.bind(document);
 
-    if (debtPriority === 'false' || debtPriority === undefined || debtPriority === '' || debtPriority === null || debtPriority === false){
-        var missingModal = document.getElementById('missingDebtFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingDebtFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss?transaction_id='+paramValue;
-        });
-
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+            
     } else{
         if (path === '/debt-cancellation/coverage' || path === '/debt-cancellation/coverage?transaction_id='+paramValue) {
             if (selfData == null || selfData == undefined || selfData == '') {

@@ -76,7 +76,7 @@
                                         </span>
                                     </p>
                                     <div class="hide-content">
-                                        <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_policy_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary @error('existing_policy_amount') is-invalid @enderror" id="existing_policy_amount" value="{{ $existingPolicyAmount !== null ? number_format(floatval($existingPolicyAmount)) : $existingPolicyAmount }}" required></span></p>
+                                        <p class="display-6">Existing policy amount: <span class="text-primary fw-bold border-bottom border-dark border-3 currencyField display-5 d-inline-block">RM<input type="text" name="existing_policy_amount" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-sm-start text-center text-primary @error('existing_policy_amount') is-invalid @enderror" id="existing_policy_amount" value="{{ $existingPolicyAmount !== null ? number_format(floatval($existingPolicyAmount)) : $existingPolicyAmount }}" required></span></p>
                                     </div>
                                     <input type="hidden" name="total_amountNeeded" id="total_amountNeeded" value="{{$totalAmountNeeded}}">
                                     <input type="hidden" name="percentage" id="percentage" value="{{$protectionFundPercentage}}">
@@ -114,21 +114,6 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="missingProtectionFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingProtectionFieldsLabel">Protection Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable protection priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -150,7 +135,7 @@
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
     var sessionExistingPolicy = '{{$existingPolicy}}';
-    var protectionPriority = '{{$protectionPriority}}';
+    var needs_priority = '{{$protectionPriority}}';
     var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? $protectionMonthlySupport : $protectionSupportingYears}}';
 </script>
 @endsection

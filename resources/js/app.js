@@ -7,6 +7,7 @@ import './avatar';
 import './form-display';
 import './button-avatar-display';
 import './carousel-needs';
+import './needs';
 import './protection-validation';
 import './retirement-validation';
 import './education-validation';

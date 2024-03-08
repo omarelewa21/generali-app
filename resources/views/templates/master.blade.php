@@ -46,7 +46,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4">
-                <h3 class="modal-title fs-4 text-center" id="staticBackdropLabel">Are you sure you want to leave this section?</h2>
+                <h3 class="modal-title fs-4 text-center" id="staticBackdropLabel">Are you sure you want to leave this section?</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Any changes made will be lost unless you save them.</p>
@@ -58,5 +58,41 @@
         </div>
     </div>
 </div>
+@php
+    $currentPath = request()->path();
+    $priority = '';
+    $priorityMap = [
+        'protection' => 'Protection',
+        'retirement' => 'Retirement',
+        'education' => 'Education',
+        'savings' => 'Savings',
+        'investment' => 'Investment',
+        'health-medical' => 'Health Medical',
+        'debt-cancellation' => 'Debt Cancellation'
+    ];
+    foreach ($priorityMap as $keyword => $value) {
+        if (str_contains($currentPath, $keyword)) {
+            $priority = $value;
+            break; // Once priority is found, exit the loop
+        }
+    }
+@endphp
+@if ($priority)
+    <div class="modal fade" id="missingNeedsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header px-4 pt-4 justify-content-center">
+                    <h3 class="modal-title fs-4 text-center" id="missingNeedsFieldsLabel">{{$priority}} priority to discuss is required.</h3>
+                </div>
+                <div class="modal-body text-dark text-center px-4 pb-4">
+                    <p>Please click proceed to enable {{$priority}} priority to discuss in Priorities To Discuss page first.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 </html>

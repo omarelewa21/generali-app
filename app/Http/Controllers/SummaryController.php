@@ -52,7 +52,7 @@ class SummaryController extends Controller
 
         // $transactionData = ['transaction_id' => $request->input('transaction_id')];
         
-        if ($customerDetails['lastPageUrl']['last_page_url'] == '/investment/annual-return'){
+        if (strstr($customerDetails['lastPageUrl']['last_page_url'], 'investment') !== false || strstr($customerDetails['lastPageUrl']['last_page_url'], '/investment/') !== false){
             return redirect()->route('investment.gap');
             // return redirect()->route('investment.gap',$transactionData);
         } else{
