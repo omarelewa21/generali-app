@@ -917,9 +917,6 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-/* .changeImage {
-  z-index: 3;
-} */
 /* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
@@ -1672,6 +1669,9 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  h1.display-2 {
+    font-size: 30px;
+  }
   .gender-button img {
     width: 70px;
   }

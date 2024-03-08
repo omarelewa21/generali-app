@@ -152,7 +152,7 @@ class FormController extends Controller {
         if ($validToken) {
             // Fetch from the database
             $countries = DB::table('countries')->pluck('countries')->toArray();
-            $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+            $idtypes = DB::table('id_types')->pluck('idtypes')->toArray();
             $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
             $occupation = DB::table('occupations')->pluck('name')->toArray();
             $day = $request->input('day');

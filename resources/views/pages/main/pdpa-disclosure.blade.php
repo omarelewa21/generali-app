@@ -28,11 +28,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
-                <section class="main-content">
+                <section class="main-content bg-accent-bg-grey">
                     <div class="container">
-                        <div class="row pt-4 px-4 pb-2 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                        <div class="row pt-4 px-4 pb-md-4 pb-2 pt-md-5 sticky-md-top bg-accent-bg-grey">
                             <div class="col-12">
-                                <h1 class="display-5 text-uppercase">DATA PROTECTION STATEMENT</h1>
+                                <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT</h1>
                             </div>
                         </div>
                         <div class="row px-4">
