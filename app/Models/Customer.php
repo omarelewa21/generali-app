@@ -8,6 +8,7 @@ use App\Models\Spouse;
 use App\Models\Priority;
 use App\Models\Dependent;
 use App\Models\Transaction;
+use App\Models\CustomerNeed;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -57,7 +58,7 @@ class Customer extends Model
 
     public function customerNeeds(): HasMany
     {
-        return $this->hasMany(customerNeed::class);
+        return $this->hasMany(CustomerNeed::class);
     }
 
 }

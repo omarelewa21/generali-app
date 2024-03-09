@@ -28,18 +28,19 @@ class DropdownController extends Controller
         $countries = Country::all();
         $titles = Title::all();
         $transactionId = $request->input('transaction_id') ?? session('transaction_id'); 
-
+        // dd($transactionId);
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
 
             $transactionId = intval($transactionId) ?? NULL;
-
+            // dd($transactionId);
             if ( is_null($transactionId) || $transactionId == 0)
             {
                 $transactionId = NULL;
                 $customerId = NULL;
 
                 Session::flush();
+                return view('pages/main/basic-details', compact('titles','countries'));
             }   
             else
             {
@@ -60,17 +61,17 @@ class DropdownController extends Controller
                 }
             }
 
-            $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+            // $basicDetails = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
 
-            if($basicDetails)
-            {
-                return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
-            }
-            else
-            {
-                // if transaction not found, back to agent page
-                return view('pages/main/basic-details', compact('titles','countries'));
-            }
+            // if($basicDetails)
+            // {
+            //     return view('pages/main/basic-details', compact('titles','countries','basicDetails'));
+            // }
+            // else
+            // {
+            //     // if transaction not found, back to agent page
+            //     return view('pages/main/basic-details', compact('titles','countries'));
+            // }
         }  else {
             
             return view('pages/main/basic-details', compact('titles','countries'));
