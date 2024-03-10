@@ -19,14 +19,6 @@ button.choice[data-required=""]{
     background: none !important;
     width: 100% !important;
 }
-button.choice:hover img,
-button.choice[data-required="selected"] img,
-button.choice.default.selected img{
-    background-image: url(/images/needs/hover-coverage.png);
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100%;
-}
 
 /* Change disabled border color */
 .disabled-color{
@@ -275,10 +267,10 @@ button.choice.default.selected img{
 } */
 
 /* Needs Summary Page */
-.summary-page .wrapper-bottom-grey{
+/* .summary-page .wrapper-bottom-grey{
     grid-template-rows: unset;
     overflow-y: auto;
-}
+} */
 .summary-page.secondary-default-bg{
     background-position: center bottom 8% !important;
 }
@@ -382,9 +374,6 @@ button.choice.default.selected img{
 }
 @media only screen and (max-width: 767px){
     /* Calculator style */
-    .header p.display-6{
-        font-size: 14px;
-    }
     .text-sm-center{
         text-align: center;
     }
@@ -401,34 +390,31 @@ button.choice.default.selected img{
     .summary-overview.secondary-default-bg{
         background:none;
     }
-    .coverage .content-needs-grey{
-        grid-auto-rows: 0vh 0vh 80vh;
-    }
     .coverage button img{
         height: 80%;
     }
     /* .coverage .content-needs-grey{
         grid-auto-rows: 15vh 10vh 50vh;
     } */
-    .wrapper-bottom-grey{
+    /* .wrapper-bottom-grey{
         grid-template:
         "header" 0vh
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
-    }
+    } */
     .pe-sm-0{
         padding-right: 0 !important;
     }
-    .calculator-page .bottom-content img{
+    /* .calculator-page .bottom-content img{
         height: 85% !important;
-    }
-    .bottom-content .tertiary-mobile-bg{
+    } */
+    /* .bottom-content .tertiary-mobile-bg{
         background-size: contain;
-    }
-    .bottom-content .tertiary-mobile-bg.h-100{
+    } */
+    /* .bottom-content .tertiary-mobile-bg.h-100{
         height: 50% !important;
         max-height: 100% !important;
-    }
+    } */
     .summary-overview .bottom-content .tertiary-mobile-bg.h-100{
         height: 70% !important;
         max-height: 100% !important;
@@ -443,20 +429,19 @@ button.choice.default.selected img{
     .h-sm-100{
         height: 100%;
     }
-    .summary-page .wrapper-bottom-grey{
+    /* .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
-    }
-    .summary-page .wrapper-bottom-grey,
+    } */
+    /* .summary-page .wrapper-bottom-grey,
     #savings-annual-return .wrapper-bottom-grey{
-        /* grid-template-rows: 10vh 90vh 0vh; */
         grid-template-rows: 0vh 100vh 0vh;
-    }
+    } */
     .summary-page .bottom-content .graph-col.h-100{
         height: fit-content !important;
     }
-    .summary-page .wrapper-bottom-grey{
+    /* .summary-page .wrapper-bottom-grey{
         overflow-y:unset;
-    }
+    } */
     /* #retirement_period .tertiary-mobile-bg{
         background-size: contain;
         background-position: left center;
@@ -517,9 +502,9 @@ button.choice.default.selected img{
     .wrapper-overview{
         grid-template-rows: 15vh 75vh 0vh;
     }
-    #retirement_ideal .heading h2.display-5{
+    /* #retirement_ideal .heading h2.display-5{
         font-size: calc(1rem + 2.7vw);
-    }
+    } */
     /* Bug Fixes start here */
     #retirement_home .content-needs img{
         height: 80%;
@@ -539,9 +524,7 @@ button.choice.default.selected img{
     .summary-page h2.display-4{
         font-size: calc(1.3375rem + 1.05vw);
     }
-    .wrapper-needs-grey {
-        grid-template-rows: 9vh 38vh 25vh 12vh !important;
-    }
+    
     .h-sm-90{
         height: 90%;
     }
@@ -571,9 +554,9 @@ button.choice.default.selected img{
     .z-md-1{
         z-index: 1;
     }
-    .ideal .content-needs-grey {
+    /* .ideal .content-needs-grey {
         grid-auto-rows: 5vh 60vh;
-    }
+    } */
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }
@@ -681,9 +664,9 @@ button.choice.default.selected img{
         background-position: bottom;
         background-size: contain;
     }
-    .summary-page .content-needs-grey{
+    /* .summary-page .content-needs-grey{
         grid-auto-rows: 0vh 0vh 65vh;
-    }
+    } */
 }
 @media only screen and (min-width: 1600px){
     .col-xxxl-5 {
@@ -712,10 +695,6 @@ button.choice.default.selected img{
     font-size: 14px;
   }
 
-  .changePosition {
-    z-index: 1;
-  }
-
   .display-5a{
   font-size: calc(1rem + 1.05vw);
   }
@@ -723,25 +702,17 @@ button.choice.default.selected img{
 /* =============================== Welcome Page =======================================*/
 
  @media only screen and (min-width: 768px) {
-  .homeVector {
+  /* .homeVector {
     width: 100%;
     max-height: 700px !important;
-  }
+  } */
 }
 
 @media only screen and (max-width: 767px) {
-  .homeVector {
+  /* .homeVector {
     width: 60%;
     max-height: 340px !important;
-  }
-}
-
-/* Media query for targeting mobile devices */
-@media screen and (max-width: 768px) {
-  #home h2, #home .h2 {
-    font-size: calc(1rem + 2.7vw);
-    line-height: 1;
-  }
+  } */
 }
 
  /* =============================== Avatar =======================================*/
@@ -749,18 +720,18 @@ button.choice.default.selected img{
 /* Media query for targeting mobile devices */
 @media screen and (max-width: 768px) {
   /* Targeting the male image */
-  img[src$="button-gender-male.png"] {
-      width: 70px; /* Set the width for male image on mobile */
-  }
+  /* img[src$="button-gender-male.png"] {
+      width: 70px;
+  } */
   
   /* Targeting the female image */
-  img[src$="button-gender-female.png"] {
-      width: 60px; /* Set the width for female image on mobile */
-  }
+  /* img[src$="button-gender-female.png"] {
+      width: 60px;
+  } */
 
-  .color-box-wrapper{
+  /* .color-box-wrapper{
     width: 350px;
-  }
+  } */
 }
 
  /* =============================== Savings Goal =======================================*/
@@ -822,13 +793,13 @@ button.choice.default.selected img{
   filter: grayscale(0.95);
 }
 
-#savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
+/* #savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
 {
   border: 10px solid transparent;
-}
-#top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
+} */
+/* #top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
   border: 10px solid transparent;
-}
+} */
 
 /* ===============================  Advance Fix for Saving Goals=======================================*/
 
@@ -860,9 +831,8 @@ z-index: unset;
 }
 
 /* ============================== Modal / Popover ============================== */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
 .otherModalText {
   font-size: 3rem;
 }
-}
-  
+} */

@@ -152,7 +152,7 @@ class FormController extends Controller {
         if ($validToken) {
             // Fetch from the database
             $countries = DB::table('countries')->pluck('countries')->toArray();
-            $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+            $idtypes = DB::table('id_types')->pluck('idtypes')->toArray();
             $educationLevel = DB::table('education_levels')->pluck('level')->toArray();
             $occupation = DB::table('occupations')->pluck('name')->toArray();
             $day = $request->input('day');
@@ -320,6 +320,7 @@ class FormController extends Controller {
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
             
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.marital.status',$transactionData);
         } else {
@@ -460,7 +461,7 @@ class FormController extends Controller {
             $maritalStatus = DB::table('marital_statuses')->pluck('maritalStatus')->toArray();
             $titles = DB::table('titles')->pluck('titles')->toArray();
             $countries = DB::table('countries')->pluck('countries')->toArray();
-            $idtypes = DB::table('idtypes')->pluck('idtypes')->toArray();
+            $idtypes = DB::table('id_types')->pluck('idtypes')->toArray();
             $occupation = DB::table('occupations')->pluck('name')->toArray();
 
             // Get the existing customer_details array from the session
@@ -932,7 +933,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('avatar.my.assets',$transactionData);
         } else {
@@ -1032,7 +1033,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
             return redirect()->route('priorities.to.discuss',$transactionData);
         } else {
@@ -1126,7 +1127,7 @@ class FormController extends Controller {
             $transactionService->handleTransaction($request,$customerDetails);
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
+            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);

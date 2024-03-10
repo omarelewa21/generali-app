@@ -16,7 +16,6 @@
     $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
     $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
 @endphp
-@endphp
 
 <div id="expected_income" class="secondary-default-bg">
     <div class="container-fluid">

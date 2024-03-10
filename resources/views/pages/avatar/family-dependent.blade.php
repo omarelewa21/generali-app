@@ -45,8 +45,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family.</h1>
-                                        <p class="text-white display-6 lh-base">Click to select your family details.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Great, now let’s get to know your family.</h1>
+                                        <p class="text-white display-6">Click to select your family details.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 px-md-5">
@@ -137,7 +137,7 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 pt-2 pb-0">
+            <div class="modal-header px-md-5 pt-2 pb-0">
                 <h3 class="modal-title text-center text-uppercase otherModalText" id="parentAvatarsLabel">Parent(s)</h3>
             </div>
             <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
@@ -161,7 +161,7 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 pt-2 pb-0">
+            <div class="modal-header px-md-5 pt-2 pb-0">
                 <h3 class="modal-title text-center text-uppercase otherModalText" id="childrenAvatarsLabel">Child(ren)</h3>
             </div>
             <div class="modal-body text-center text-center px-5 pt-5 bg-primary">

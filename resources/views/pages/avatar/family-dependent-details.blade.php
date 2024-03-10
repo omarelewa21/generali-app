@@ -47,8 +47,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-5 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
-                                        <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Thanks for introducing your family!</h1>
+                                        <p class="text-white display-6">Tell us more about each of them.</p>
                                     </div>
                                 </div>
                                 <div class="form-container pb-0 pb-md-5">

@@ -203,8 +203,8 @@
                         <div class="container">
                             <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
-                                    <h1 class="display-4 text-white fw-bold pb-3">What are your top financial priorities?</h1>
-                                    <p class="text-white display-6 lh-base">Select your priorities by first to last.</p>
+                                    <h1 class="display-4 text-white fw-bold pb-md-3">What are your top financial priorities?</h1>
+                                    <p class="text-white display-6">Select your priorities by first to last.</p>
                                 </div>
                             </div>
                             <div id="needs" class="row px-4 px-md-5 needs d-none d-md-flex">
@@ -282,8 +282,8 @@
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
                                             <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) default @endif" data-avatar="investments" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('investments', $topPriorities)) disabled @endif>
-                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investment">
-                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investment</p>
+                                                <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/investments-icon.png') }}" width="auto" height="100px" alt="Lump Sum Investments">
+                                                <p class="avatar-text text-center pt-4 mb-0 fw-bold">Lump Sum Investments</p>
                                             </button>
                                         </div>
                                     </div>
@@ -313,20 +313,22 @@
                                 ];
                             @endphp
                             <div class="row px-4 px-md-5 d-flex d-md-none">
-                                <ul id="sortablemobile">
-                                    @foreach($topPriorities as $topPriority)
-                                        <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
-                                            <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
-                                            @if($topPriority && $topPriority != 'undefined')
-                                                <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
-                                                {{ $prioritiesMap[$topPriority] }}
-                                            @else
-                                                {{ $loop->iteration }}
-                                            @endif
-                                            <ul class="dropdown-menu pre-scrollable" role="menu"></ul>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <div class="col-12">
+                                    <ul id="sortablemobile">
+                                        @foreach($topPriorities as $topPriority)
+                                            <li class="handle ui-state-default dropdown @if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
+                                                <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $topPriority }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
+                                                @if($topPriority && $topPriority != 'undefined')
+                                                    <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.png') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
+                                                    {{ $prioritiesMap[$topPriority] }}
+                                                @else
+                                                    {{ $loop->iteration }}
+                                                @endif
+                                                <ul class="dropdown-menu pre-scrollable" role="menu"></ul>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -353,7 +355,7 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.priorities_level')) !!};
-    var test = {!! json_encode($prioritiesMap) !!}
+    var priority = {!! json_encode($prioritiesMap) !!}
 
     // Load the animation using Lottie
     const animationMale = lottie.loadAnimation({
@@ -364,5 +366,6 @@
         path: '{{ asset('images/top-priorities/priorities.json') }}'
     });
 </script>
+
     
 @endsection

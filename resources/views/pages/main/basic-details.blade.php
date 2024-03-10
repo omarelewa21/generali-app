@@ -21,11 +21,11 @@
 <div id="basic_details">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
-                <div class="navbar-scroll fixed-top">
+            <div class="col-12 col-md-4 col-lg-3 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white-menu')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                        <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+                        <h2 class="display-5 fw-bold py-3 px-md-0 px-3">Hello! Let's get to know you better.</h2>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <div class="container">
                                 <div class="row pt-4 px-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
-                                        <h1 class="display-5 text-uppercase">Do introduce yourself.</h1>
+                                        <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                     </div>
                                 </div>
                                 <div class="row px-4">

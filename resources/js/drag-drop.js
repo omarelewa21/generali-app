@@ -10,7 +10,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
         var $needs = $("#needs"),
         $sortable = $("#sortable");
 
-        var addedNeedsImages = sessionData ? sessionData : Array(8).fill(null);
+        var addedNeedsImages = sessionData ? sessionData : Array($("#topPrioritiesButtonInput").length ? 8 : 4).fill(null);
 
         // Function to click to drop
         function addImageToSortable(imageName, dataAvatar) {
@@ -84,7 +84,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             // Remove the image from the DOM and update related elements
             $(this).closest(".svg-container").addClass("blank-item").removeClass("item-dropped");
             const sortable = $(this).closest(".sortable-container");
-            var dataAvatar = sortable.parent().attr("data-identifier")
+            var dataAvatar = sortable.parent().attr("data-identifier");
             var theButton = $(this).closest($("#topPrioritiesButtonInput").length ? "#top_priorities" : "#savings-goals").find("button[data-avatar='" + dataAvatar + "']");
             theButton.attr("disabled", false);
             theButton.closest(".button-bg").removeClass("selected");
@@ -158,6 +158,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             start: function (event, ui) {
                 const draggingBox = ui.item;
                 const droppedPoint = draggingBox.closest(".item-dropped");
+                droppedPoint.addClass("z-1");
                 const index = droppedPoint.attr("data-index");
         
                 const attributeComp = droppedPoint.find(".dropped")[0];
@@ -196,6 +197,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
             },
             stop: function (event, ui) {
                 const sourceBox = $(".item-dropped.draggingItem");
+                sourceBox.removeClass("z-1");
                 const destinationBox = $(".item-dropped.droppedContainer");
         
                 if (destinationBox.length === 0) {
@@ -269,7 +271,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
                 ui.helper.addClass("item-dropped");
                 }
 
-                if (dblclick) {
+                if (dblclick || $(event.currentTarget).parents(".button-bg").hasClass("selected")) {
                 setTimeout(() => {
                     $(event.currentTarget).trigger("click");
                     $(event.currentTarget).trigger("dragstop");
