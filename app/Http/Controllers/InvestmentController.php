@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
+use App\Services\CustomerNeedService;
 use App\Services\TransactionService; 
 
 class InvestmentController extends Controller
 {
 
-    public function validateInvestmentCoverageSelection(Request $request, TransactionService $transactionService)
+    public function validateInvestmentCoverageSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
 
         // Define custom validation rule for button selection
@@ -66,16 +67,23 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5'] = $needs;
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('investment.amount.needed',$transactionData);
+        return redirect()->route('investment.amount.needed');
     }
 
-    public function validateInvestmentAmountNeeded(Request $request,TransactionService $transactionService){
+    public function validateInvestmentAmountNeeded(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -143,17 +151,23 @@ class InvestmentController extends Controller
         // Set the updated investments_needs back to the customer_details session
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('investment.annual.return',$transactionData);
+        return redirect()->route('investment.annual.return');
     }
 
-    public function validateInvestmentAnnualReturn(Request $request, TransactionService $transactionService){
+    public function validateInvestmentAnnualReturn(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing array from the session
         $arrayData = session('passingArrays', []);
@@ -232,13 +246,19 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('risk.profile',$transactionData);
+        return redirect()->route('risk.profile');
     }
 
     // public function validateInvestmentRiskProfile(Request $request, TransactionService $transactionService){
@@ -288,7 +308,7 @@ class InvestmentController extends Controller
         // return redirect()->route('investment.gap',$transactionData);
     // }
     
-    public function submitInvestmentGap(Request $request, TransactionService $transactionService){
+    public function submitInvestmentGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -299,16 +319,22 @@ class InvestmentController extends Controller
         // Set the updated investments_needs back to the customer_details session
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home',$transactionData);
+            return redirect()->route('health.medical.home');
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home',$transactionData);
+            return redirect()->route('debt.cancellation.home');
         }
         else {
             if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
@@ -318,9 +344,9 @@ class InvestmentController extends Controller
             isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
             isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
             isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
-                return redirect()->route('existing.policy',$transactionData);
+                return redirect()->route('existing.policy');
             } else{
-                return redirect()->route('summary.monthly-goals',$transactionData);
+                return redirect()->route('summary.monthly-goals');
             }
         }
     }

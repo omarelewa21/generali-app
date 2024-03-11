@@ -7,7 +7,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\SessionStorage; 
+use App\Models\SessionStorage;
+use App\Services\CustomerNeedService;
 use App\Services\TransactionService;
 
 class HealthMedicalController extends Controller
@@ -79,7 +80,7 @@ class HealthMedicalController extends Controller
     //     return $need_sequence;
     // }
 
-    public function validateHealthMedicalSelection(Request $request, TransactionService $transactionService)
+    public function validateHealthMedicalSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -145,23 +146,30 @@ class HealthMedicalController extends Controller
             unset($customerDetails['selected_needs']['need_6']['advance_details']['health_care']);
         } 
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if ($selectionCriticalInput === 'Critical Illness'){
-            return redirect()->route('health.medical.critical.illness.coverage',$transactionData);
+            return redirect()->route('health.medical.critical.illness.coverage');
         }
         else{
-            return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
+            return redirect()->route('health.medical.medical.planning.coverage');
         }
         
     }
 
     // Critical Illness
-    public function validateCriticalIllnessCoverageSelection(Request $request, TransactionService $transactionService)
+    public function validateCriticalIllnessCoverageSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -211,15 +219,22 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('health.medical.critical.amount.needed',$transactionData);
+        return redirect()->route('health.medical.critical.amount.needed');
     }
-    public function validateCriticalIllnessAmountNeeded(Request $request, TransactionService $transactionService)
+    public function validateCriticalIllnessAmountNeeded(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -288,16 +303,22 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        
-        return redirect()->route('health.medical.critical.existing.protection',$transactionData);
+        return redirect()->route('health.medical.critical.existing.protection');
     }
 
-    public function validateCriticalIllnessExistingProtection(Request $request, TransactionService $transactionService){
+    public function validateCriticalIllnessExistingProtection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'critical_existing_protection.required' => 'Please select an option',
@@ -382,17 +403,23 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.critical.gap',$transactionData);
+        return redirect()->route('health.medical.critical.gap');
     }
 
-    public function submitCriticalIllnessGap(Request $request,TransactionService $transactionService){
+    public function submitCriticalIllnessGap(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -403,23 +430,30 @@ class HealthMedicalController extends Controller
         // Get existing critical_illness from the session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
         if ($customerDetails['selected_needs']['need_6']['advance_details']['health_care']['medical_care_plan'] === 'Health Planning'){
-            return redirect()->route('health.medical.medical.planning.coverage',$transactionData);
+            return redirect()->route('health.medical.medical.planning.coverage');
         } else{
-            return redirect()->route('debt.cancellation.home',$transactionData);
+            return redirect()->route('debt.cancellation.home');
         }
     }
 
 
     //Medical Planning
-    public function validateMedicalPlanningCoverageSelection(Request $request,TransactionService $transactionService)
+    public function validateMedicalPlanningCoverageSelection(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -469,16 +503,22 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('health.medical.planning.hospital.selection',$transactionData);
+        return redirect()->route('health.medical.planning.hospital.selection');
     }
 
-    public function validateMedicalPlanningHospitalSelection(Request $request, TransactionService $transactionService)
+    public function validateMedicalPlanningHospitalSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -520,16 +560,23 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+        
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('health.medical.planning.room.selection',$transactionData);
+        return redirect()->route('health.medical.planning.room.selection');
     }
 
-    public function validateMedicalPlanningRoomSelection(Request $request, TransactionService $transactionService)
+    public function validateMedicalPlanningRoomSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -571,16 +618,22 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('health.medical.planning.amount.needed',$transactionData);
+        return redirect()->route('health.medical.planning.amount.needed');
     }
 
-    public function validateMedicalPlanningAmountNeeded(Request $request, TransactionService $transactionService)
+    public function validateMedicalPlanningAmountNeeded(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -642,16 +695,22 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('health.medical.planning.existing.protection',$transactionData);
+        return redirect()->route('health.medical.planning.existing.protection');
     }
 
-    public function validateMedicalPlanningExistingProtection(Request $request, TransactionService $transactionService){
+    public function validateMedicalPlanningExistingProtection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'medical_existing_protection.required' => 'Please select an option',
@@ -736,17 +795,23 @@ class HealthMedicalController extends Controller
         // Set the updated medicalPlanning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
-        return redirect()->route('health.medical.planning.gap',$transactionData);
+        return redirect()->route('health.medical.planning.gap');
     }
 
-    public function submitMedicalPlanningGap(Request $request, TransactionService $transactionService){
+    public function submitMedicalPlanningGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -757,15 +822,22 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         // // Process the form data and perform any necessary actions
         if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home',$transactionData);
+            return redirect()->route('debt.cancellation.home');
         }
         else {
             if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
@@ -775,9 +847,9 @@ class HealthMedicalController extends Controller
             isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
             isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
             isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
-                return redirect()->route('existing.policy',$transactionData);
+                return redirect()->route('existing.policy');
             } else{
-                return redirect()->route('summary.monthly-goals',$transactionData);
+                return redirect()->route('summary.monthly-goals');
             }
         }
     }
