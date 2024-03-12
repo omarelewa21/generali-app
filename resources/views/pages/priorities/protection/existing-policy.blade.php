@@ -151,6 +151,6 @@
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
     var sessionExistingPolicy = '{{$existingPolicy}}';
     var protectionPriority = '{{$protectionPriority}}';
-    var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? $protectionMonthlySupport : $protectionSupportingYears}}';
+    var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? json_encode($protectionMonthlySupport) : json_encode($protectionSupportingYears)}}';
 </script>
 @endsection

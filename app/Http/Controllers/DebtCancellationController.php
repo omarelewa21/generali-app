@@ -64,8 +64,9 @@ class DebtCancellationController extends Controller
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -136,8 +137,9 @@ class DebtCancellationController extends Controller
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -241,8 +243,9 @@ class DebtCancellationController extends Controller
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -309,8 +312,9 @@ class DebtCancellationController extends Controller
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -335,8 +339,9 @@ class DebtCancellationController extends Controller
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,

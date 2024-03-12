@@ -68,8 +68,9 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -152,8 +153,9 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -247,8 +249,9 @@ class InvestmentController extends Controller
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -320,8 +323,9 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,

@@ -11,76 +11,43 @@ class CustomerNeedService
 {
     public $customerNeedId;
 
-    public function handleNeeds($customerDetails,$customerId)
+    public function handleNeeds($customerDetails,$customerId,$selectedNeed)
     {
-        DB::transaction(function () use ($customerDetails, $customerId) {
+        DB::transaction(function () use ($customerDetails, $customerId,$selectedNeed) {
 
             $createdNeedsId = [];
             $selectedNeeds = $customerDetails['selected_needs'];
-            
 
             foreach($selectedNeeds as $selectedKey => $selectedValue){
-                $relationship = null;
-                $coveredAmount = null;
-                $coveredAmountMonthly = null;
-                $supportingYears = null;
-                $existingAmount = null;
-                $existingPolicy = null;
-                $insuranceAmount = null;
-                $fundPercentage = null;
-                $goalsAmount = null;
-                $childName = null;
-                $spousename = null;
-                $childDob = null;
-                $spouseDob = null;
-
-                $typeNumber = substr($selectedKey,5);
-                $selectedType = "N".$typeNumber;
         
-                if (isset($selectedNeeds[$selectedKey]['advance_details'])) {
-                    $relationship = $selectedNeeds[$selectedKey]['advance_details']['relationship'] ?? null;
-                    $coveredAmount =  $selectedNeeds[$selectedKey]['advance_details']['covered_amount'] ?? null;
-                    $coveredAmountMonthly = $selectedNeeds[$selectedKey]['advance_details']['covered_amount_monthly'] ?? null;
-                    $supportingYears = $selectedNeeds[$selectedKey]['advance_details']['supporting_years'] ?? null;
-                    $existingAmount =  $selectedNeeds[$selectedKey]['advance_details']['existing_amount'] ?? null;
-                    $existingPolicy =  $selectedNeeds[$selectedKey]['advance_details']['existing_policy'] ?? null;
-                    $insuranceAmount = $selectedNeeds[$selectedKey]['advance_details']['insurance_amount'] ?? null;
-                    $fundPercentage = $selectedNeeds[$selectedKey]['advance_details']['fund_percentage'] ?? null;
-                    $goalsAmount = $selectedNeeds[$selectedKey]['advance_details']['goals_amount'] ?? null;
+                $typeNumber = substr($selectedNeed,5);
+                $selectedType = "N".$typeNumber;
+                $advanceDetail = $selectedNeeds[$selectedNeed]['advance_details'];
 
-                    $childName = $selectedNeeds[$selectedKey]['advance_details']['child_name'] ?? null;
-                    $spousename = $selectedNeeds[$selectedKey]['advance_details']['spouse_name'] ?? null;
-                    $childDob = $selectedNeeds[$selectedKey]['advance_details']['child_dob'] ?? null;
-                    $spouseDob = $selectedNeeds[$selectedKey]['advance_details']['spouse_dob'] ?? null;
+                $goalTarget = isset($advanceDetail['goal_target']) ? array_values($advanceDetail['goal_target']) : NULL;
+                $advanceDetail['existing_amount'] = isset($advanceDetail['existing_amount']) ? ($advanceDetail['existing_amount'] === "" ? 0.0 : $advanceDetail['existing_amount']) : NULL;
 
-                    if($existingAmount == "")
-                    {
-                        $existingAmount = 0.0;
-                    }
-                }
+                $advanceDetail['supporting_year'] = isset($advanceDetail['supporting_years']) ? $advanceDetail['supporting_years'] : NULL;
+                $advanceDetail['covered_amount_monthly'] = isset($advanceDetail['monthly_covered_amount']) ? $advanceDetail['monthly_covered_amount'] : NULL;
+                $advanceDetail['remaining_year'] = isset($advanceDetail['remaining_years']) ? $advanceDetail['remaining_years'] : NULL;
+                $advanceDetail['other_source'] = isset($advanceDetail['other_sources']) ? $advanceDetail['other_sources'] : NULL;
+                $advanceDetail['annual_return'] = isset($advanceDetail['annual_returns']) ? $advanceDetail['annual_returns'] : NULL;
+
+                $advanceDetail['goal_target'] = $goalTarget;
+                $advanceDetail['selection'] = isset($selectedNeeds[$selectedNeed]['number_of_selection']) ? $selectedNeeds[$selectedNeed]['number_of_selection'] : NULL;
+
+                $advanceDetail['critical_illness'] = isset($advanceDetail['critical_illness']) ? $advanceDetail['critical_illness'] : NULL;
+                $advanceDetail['health_care'] = isset($advanceDetail['health_care']) ? $advanceDetail['health_care']['medical_care_plan'] : NULL;
+                $advanceDetail['critical_illness_plan'] = isset($advanceDetail['critical_illness_plan']) ? $advanceDetail['critical_illness_plan'] : NULL;
+                $advanceDetail['medical_care_plan'] = isset($advanceDetail['medical_care_plan']) ? $advanceDetail['health_care']['medical_care_plan'] : NULL;
 
                 $customerNeed = CustomerNeed::updateOrCreate(
                     [
-                    'customer_id' => $customerId , 'type' =>  $selectedType
-                    ],
-                    [
-                        'relationship' => $relationship,
-                        'covered_amount' => $coveredAmount,
-                        'covered_amount_monthly' => $coveredAmountMonthly,
-                        'supporting_year' => $supportingYears,
-                        'existing_amount' => $existingAmount,
-                        'existing_policy' => $existingPolicy,
-                        'insurance_amount' => $insuranceAmount,
-                        'fund_percentage' => $fundPercentage,
-                        'goals_amount' => $goalsAmount,
-                        'child_name' => $childName,
-                        'spouse_name' => $spousename,
-                        'child_dob' => $childDob,
-                        'spouse_dob' => $spouseDob,
+                        'customer_id' => $customerId , 'type' =>  $selectedType
                     ]
+                    , $selectedNeeds[$selectedNeed]['advance_details']
                     );
-
-
+                
                 $createdNeedsId[] = $customerNeed->id;
             }
 

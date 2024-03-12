@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Services\TransactionService;
+use App\Services\CustomerNeedService;
+use Illuminate\Support\Facades\Validator;
 
 class SummaryController extends Controller
 {
-    public function validateRiskProfile(Request $request){
+    public function validateRiskProfile(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService){
     // public function validateRiskProfile(Request $request, TransactionService $transactionService){
         $customMessages = [
             'riskProfileInput.required' => 'Please select a risk level.',
@@ -29,7 +31,7 @@ class SummaryController extends Controller
         // Validation passed, perform any necessary processing.
         $riskProfileInput = $request->input('riskProfileInput');
         $potentialReturnInput = $request->input('potentialReturnInput');
-
+       
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
@@ -47,10 +49,29 @@ class SummaryController extends Controller
         $customerDetails['risk_profile'] = $riskProfile;
 
         // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
         // $transactionService->handleTransaction($request,$customerDetails);
 
-        // $transactionData = ['transaction_id' => $request->input('transaction_id')];
+        $customerId = session('customer_id');
+
+        if ($lastPageUrl['last_page_url'] == '/investment/annual-return') {
+
+            $selectedNeed = "need_7";
+        }
+        else
+        {
+            $selectedNeed = "need_4";
+        }
+         
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
+        $request->session()->put('customer_details', $customerDetails);
+
         
         if ($customerDetails['lastPageUrl']['last_page_url'] == '/investment/annual-return'){
             return redirect()->route('investment.gap');

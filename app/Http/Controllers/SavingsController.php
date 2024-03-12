@@ -67,8 +67,9 @@ class SavingsController extends Controller
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_4"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -164,7 +165,8 @@ class SavingsController extends Controller
 
             $customerId = session('customer_id');
             $transactionId = $transactionService->handleTransaction($customerId);
-            $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+            $selectedNeed = "need_4"; 
+            $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
             $customerDetails = array_merge([
                 'transaction_id' => $transactionId,
@@ -287,7 +289,8 @@ class SavingsController extends Controller
 
         $customerId = session('customer_id');
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $selectedNeed = "need_4"; 
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -320,6 +323,8 @@ class SavingsController extends Controller
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
+
 
         // Get existing savings_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
@@ -335,9 +340,16 @@ class SavingsController extends Controller
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
+
         $customerId = session('customer_id');
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $selectedNeed = "need_4"; 
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -409,8 +421,9 @@ class SavingsController extends Controller
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_4"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,

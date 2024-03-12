@@ -147,8 +147,9 @@ class HealthMedicalController extends Controller
         } 
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -220,8 +221,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -304,8 +306,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -404,8 +407,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -431,8 +435,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -504,8 +509,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -561,8 +567,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -619,8 +626,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -696,8 +704,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -796,8 +805,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -823,8 +833,9 @@ class HealthMedicalController extends Controller
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
         $customerId = session('customer_id');
+        $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -833,7 +844,6 @@ class HealthMedicalController extends Controller
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-
 
         // // Process the form data and perform any necessary actions
         if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {

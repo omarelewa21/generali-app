@@ -145,6 +145,6 @@
     var fundPercentage = parseFloat({{ $debtFundPercentage }});
     var sessionExistingDebtAmount = parseFloat({{$existingDebtAmount}});
     var sessionExistingDebt = parseFloat({{$existingDebt}});
-    var lastPageInput = '{{$debtOutstandingLoan === "" || $debtOutstandingLoan === null ? $debtOutstandingLoan : $settlementYears}}';
+    var lastPageInput = '{{$debtOutstandingLoan === "" || $debtOutstandingLoan === null ? json_encode($debtOutstandingLoan) : json_encode($settlementYears)}}';
 </script>
 @endsection

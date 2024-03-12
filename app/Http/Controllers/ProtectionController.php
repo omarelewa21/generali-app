@@ -64,11 +64,13 @@ class ProtectionController extends Controller
         // Determine the latest array key
         $latestKey = "selected_needs";
 
+        $selectedNeed = "need_1"; 
+
         $customerId = session('customer_id');
 
         // $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
         $transactionId = $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $customerDetails = array_merge([
             'transaction_id' => $transactionId,
@@ -155,10 +157,11 @@ class ProtectionController extends Controller
 
         $latestKey = "protection_amount_needed";
         $customerId = session('customer_id');
+        $selectedNeed = "need_1"; 
 
         $transactionId = $transactionService->handleTransaction($customerId);
 
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
@@ -256,10 +259,11 @@ class ProtectionController extends Controller
 
         $latestKey = "protection_existing_policy";
         $customerId = session('customer_id');
+        $selectedNeed = "need_1"; 
 
 
         $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         
@@ -286,7 +290,9 @@ class ProtectionController extends Controller
         $latestKey = "protection_gap";
         $customerId = session('customer_id');
         $transactionService->handleTransaction($customerId);
-        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId);
+        $selectedNeed = "need_1"; 
+
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
         $request->session()->put('customer_details', $customerDetails);
 
