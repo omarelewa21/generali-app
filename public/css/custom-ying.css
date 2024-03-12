@@ -280,6 +280,9 @@ button.choice[data-required=""]{
 .sum-needs-icon{
     width: 85px;
 }
+#gap svg g{
+    transition: all 3.5s ease !important;
+}
 
 /* Retirement Ideal */
 /* .ideal .slick-track{
@@ -696,41 +699,6 @@ button.choice[data-required=""]{
   font-size: calc(1rem + 1.05vw);
   }
 
-/* =============================== Welcome Page =======================================*/
-
- @media only screen and (min-width: 768px) {
-  /* .homeVector {
-    width: 100%;
-    max-height: 700px !important;
-  } */
-}
-
-@media only screen and (max-width: 767px) {
-  /* .homeVector {
-    width: 60%;
-    max-height: 340px !important;
-  } */
-}
-
- /* =============================== Avatar =======================================*/
-
-/* Media query for targeting mobile devices */
-@media screen and (max-width: 768px) {
-  /* Targeting the male image */
-  /* img[src$="button-gender-male.png"] {
-      width: 70px;
-  } */
-  
-  /* Targeting the female image */
-  /* img[src$="button-gender-female.png"] {
-      width: 60px;
-  } */
-
-  /* .color-box-wrapper{
-    width: 350px;
-  } */
-}
-
  /* =============================== Savings Goal =======================================*/
  #savings-goals #sortable .first {
     grid-column: 30 / span 1;
@@ -790,14 +758,6 @@ button.choice[data-required=""]{
   filter: grayscale(0.95);
 }
 
-/* #savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
-{
-  border: 10px solid transparent;
-} */
-/* #top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
-  border: 10px solid transparent;
-} */
-
 /* ===============================  Advance Fix for Saving Goals=======================================*/
 
 #top_priorities .footer,
@@ -826,10 +786,3 @@ display: block;
 z-index: unset;
 }
 }
-
-/* ============================== Modal / Popover ============================== */
-/* @media only screen and (min-width: 768px) {
-.otherModalText {
-  font-size: 3rem;
-}
-} */

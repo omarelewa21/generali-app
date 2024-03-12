@@ -55,7 +55,8 @@
                                                 </defs>
                                                 <g id="circle">
                                                     <circle cx="90" cy="90" r="144" stroke="url(#gradient)"></circle>
-                                                    <circle r="15" style="fill:white;display:none;" id="dotCircle"></circle>
+                                                    <!-- this is my pointer -->
+                                                    <circle r="15" fill="#fff" style="display:none;" id="dotCircle"></circle>
                                                 </g>
                                             </svg>
                                             <div class="circle"></div>
@@ -69,6 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
                                 <div class="row justify-content-center py-2">

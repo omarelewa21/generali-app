@@ -44,3 +44,30 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         });
     }
 }
+// if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+//     var nameModal = document.getElementById('missingLastPageInputFields');
+//     nameModal.classList.add('show');
+//     nameModal.style.display = 'block';
+//     document.querySelector('body').style.paddingRight = '0px';
+//     document.querySelector('body').style.overflow = 'hidden';
+//     document.querySelector('body').classList.add('modal-open');
+
+//     var modalBackdrop = document.createElement('div');
+//     modalBackdrop.className = 'modal-backdrop fade show';
+//     document.querySelector('body.modal-open').append(modalBackdrop);
+
+//     // Close the modal
+//     var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
+//     closeButton.addEventListener('click', function() {
+//         nameModal.classList.remove('show');
+//         nameModal.style.display = 'none';
+//         document.querySelector('body').style.paddingRight = '';
+//         document.querySelector('body').style.overflow = '';
+//         document.querySelector('body').classList.remove('modal-open');
+//         var modalBackdrop = document.querySelector('.modal-backdrop');
+//         if (modalBackdrop) {
+//             modalBackdrop.remove();
+//         }
+//     });
+// } 
+    
