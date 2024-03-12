@@ -103,6 +103,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row align-items-center px-5 pb-md-5 mt-3 mx-auto mb-3 d-none w-75">
+                                    <button type="button" class="slick-btns me-3 slick-prev">Prev</button>
+                                    <div class="slick-scrollbar"></div>
+                                    <button type="button" class="slick-btns ms-3 slick-next">Next</button>
+                                </div>
                             </div>
                         </section>
                         
