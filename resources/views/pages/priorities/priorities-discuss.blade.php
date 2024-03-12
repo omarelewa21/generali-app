@@ -245,7 +245,7 @@
                                                             </h2>
                                                             <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
                                                                 <div class="accordion-body">
-                                                                    <div class="row py-2 px-3">
+                                                                    {{-- <div class="row py-2 px-3">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
                                                                             <?php
@@ -270,7 +270,27 @@
                                                                                 } ?>
                                                                             <input type="checkbox" {{$checked}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
                                                                         </div>
+                                                                    </div> --}}
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
+                                                                            @php
+                                                                                if (isset($prioritiesDiscuss)){
+                                                                                    foreach($prioritiesDiscuss as $key => $discuss_value){
+                                                                                        $discuss = $key;
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                        </div>
                                                                     </div>
+                                                                    <div class="row py-2 px-3 discussthis">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" {{ ($discuss == $priority.'_discuss' && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : ''}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
