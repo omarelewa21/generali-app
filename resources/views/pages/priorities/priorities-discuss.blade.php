@@ -261,10 +261,13 @@
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
-                                                                            <?php if (isset($prioritiesDiscuss)) {
+                                                                            <?php 
                                                                                 $priority_discuss = $priority.'_discuss';
-                                                                                $checked = isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] === 'true' ? 'checked' : '';
-                                                                            } ?>
+                                                                                if (isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] == 'true') {
+                                                                                    $checked = 'checked';
+                                                                                } else {
+                                                                                    $checked = '';
+                                                                                } ?>
                                                                             <input type="checkbox" {{$checked}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
                                                                         </div>
                                                                     </div>
