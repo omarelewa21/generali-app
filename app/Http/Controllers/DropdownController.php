@@ -520,6 +520,44 @@ class DropdownController extends Controller
     
     }
 
+    public function overView(Request $request)
+    {
+        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
+        if ($transactionId) {
+            
+            $customerNeed = Customer::with('customerNeeds')->find($customer->id)->customerNeeds->toArray();
+            $customerNumber = [];
+
+            foreach ($customerNeed as $value) {
+
+                $number = explode("N",$value['type']);
+                $oriNumber = $number[1];
+
+                $customerNumber['need_'.$oriNumber] = $value;                 
+            }
+            ksort($customerNumber);
+
+            // dd($customerNumber);
+
+            session(['customer_details.selected_needs' => $customerNumber]);
+        
+            return view('pages/summary/overview');
+        }
+    }
+
     public function existingPolicy()
     {
         $companies = Company::all();

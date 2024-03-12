@@ -284,14 +284,17 @@ Route::prefix('financial-statement')->group(function () {
     Route::get('/expected-income',  [PriorityController::class, 'expectedIncome'])->name('summary.expected-income');
     Route::post('/expected-income', [SummaryController::class, 'validateSummaryExpectedIncome'])->name('validate.summary.expected.income');
 
-    Route::get('/increment-amount',  [PriorityController::class, 'incrementAmount'])->name('summary.increment-amount');
+    Route::get('/increment-amount',  [PriorityController::class, 'incrementAmount'])->name('financial.statement.increment.amount');
     Route::post('/increment-amount', [SummaryController::class, 'validateSummaryIncrementAmount'])->name('validate.summary.increment.amount');
 
 });
 
 Route::view('/summary', 'pages.summary.summary')->name('summary');
 Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
-Route::view('/overview', 'pages.summary.overview')->name('overview');
+// Route::view('/overview', 'pages.summary.overview')->name('overview');
+
+Route::get('/overview', [DropdownController::class, 'overView'])->name('overview');
+
 
 // Sessions
 Route::get('/clear-session', [SessionController::class, 'clearSessionData'])->name('clear_session_data');

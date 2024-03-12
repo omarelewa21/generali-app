@@ -78,7 +78,7 @@
                                                 $chart_color = '';
                                         }
                                         if ($needKey == 'need_6'){
-                                            if($all_needs[$needKey]['number_of_selection'] == 2 || ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] && $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == Yes ){
+                                            if($all_needs[$needKey]['selection'] == 2 || ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] && $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == Yes ){
                                                 if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) || isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
                                                 }

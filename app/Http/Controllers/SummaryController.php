@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\FinancialService;
 use Illuminate\Support\Facades\Log;
 use App\Services\TransactionService;
 use App\Services\CustomerNeedService;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Calculation\Financial\FinancialValidations;
 
 class SummaryController extends Controller
 {
@@ -83,7 +85,7 @@ class SummaryController extends Controller
         
     }
 
-    public function validateSummaryMonthlyGoals(Request $request)
+    public function validateSummaryMonthlyGoals(Request $request, TransactionService $transactionService, FinancialService $financialService)
     {
 
         $customMessages = [
@@ -132,13 +134,21 @@ class SummaryController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
         return redirect()->route('summary.expected-income');
     }
-    public function validateSummaryExpectedIncome(Request $request)
+    public function validateSummaryExpectedIncome(Request $request,TransactionService $transactionService, FinancialService $financialService)
     {
 
         // Define custom validation rule for button selection
@@ -181,9 +191,17 @@ class SummaryController extends Controller
         // Set the updated financialStatement back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
         if ($selectedExpectingInput === 'Yes'){
             return redirect()->route('summary.increment-amount');
@@ -194,7 +212,7 @@ class SummaryController extends Controller
         
     }
 
-    public function validateSummaryIncrementAmount(Request $request){
+    public function validateSummaryIncrementAmount(Request $request,TransactionService $transactionService, FinancialService $financialService){
 
         $customMessages = [
             'approximate_increment_amount.required' => 'You are required to enter an amount.',
@@ -242,9 +260,17 @@ class SummaryController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
         return redirect()->route('summary');
