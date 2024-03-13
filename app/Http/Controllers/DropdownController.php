@@ -6,6 +6,7 @@ use App\Models\Title;
 use App\Models\idtype;
 use App\Models\Company;
 use App\Models\Country;
+use App\Models\Customer;
 use App\Models\Occupation;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;

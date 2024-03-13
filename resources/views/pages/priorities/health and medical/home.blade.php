@@ -67,7 +67,7 @@
                                             }
                                         @endphp
                                         <a href="{{ $route }}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
-                                        <a href="{{route('health.medical.selection')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
+                                        <a href="{{route('health.medical.medical.selection')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>
                             </div>

@@ -307,7 +307,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('financial.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
