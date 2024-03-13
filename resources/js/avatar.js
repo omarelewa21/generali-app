@@ -57,7 +57,7 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
             const dataColor = document.getElementById('skinSelection').value;
             const filePrefix = selectedGenderValue === 'Female' ? 'fe' : '';
 
-            const newImageSrc = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".svg";
+            const newImageSrc = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".json";
             avatar.setAttribute('src', newImageSrc);
 
             // Update the hidden input field value with the selected avatar
@@ -91,15 +91,15 @@ if (specificPageURLs.some(url => window.location.href.includes(url))) {
                 document.getElementById('skinSelection').value = dataColor;
             });
         });
-
-        // btnLeft.addEventListener('click', function() {
-        //     currentIndex = (currentIndex - 1 + svgFileNames.length) % svgFileNames.length;
-        //     updateAvatarSource(currentIndex);
-        // });
-
-        // btnRight.addEventListener('click', function() {
-        //     currentIndex = (currentIndex + 1) % svgFileNames.length;
-        //     updateAvatarSource(currentIndex);
-        // });
     });
 }
+
+// Load the animation using Lottie
+// Identity Details Page
+const animationMale = lottie.loadAnimation({
+    container: document.getElementById('lottie-male-animation'),
+    renderer: 'svg', 
+    loop: true,
+    autoplay: true,
+    path: '/images/avatar-general/gender-male.json'
+});
