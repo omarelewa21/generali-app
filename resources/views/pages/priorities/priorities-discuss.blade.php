@@ -235,44 +235,44 @@
                                                         $title = '';
                                                     }
                                                     if ($priority) { 
-                                                        $discuss = '';
-                                                    } ?>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-heading{{$priority}}">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                                <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
-                                                            </button>
-                                                        </h2>
-                                                        <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
-                                                            <div class="accordion-body">
-                                                                <div class="row py-2 px-3">
-                                                                    <div class="col-12 form-check form-check-reverse">
-                                                                        <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
-                                                                        <?php
-                                                                            if (isset($prioritiesDiscuss)){
-                                                                                foreach($prioritiesDiscuss as $key => $discuss_value){
-                                                                                    $discuss = $key;
+                                                        $discuss = ''; ?>
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="flush-heading{{$priority}}">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
+                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
+                                                                <div class="accordion-body">
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
+                                                                            <?php
+                                                                                if (isset($prioritiesDiscuss)){
+                                                                                    foreach($prioritiesDiscuss as $key => $discuss_value){
+                                                                                        $discuss = $key;
+                                                                                    }
                                                                                 }
-                                                                            }
-                                                                        ?>
-                                                                        <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                            ?>
+                                                                            <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row py-2 px-3 discussthis">
-                                                                    <div class="col-12 form-check form-check-reverse">
-                                                                        <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
-                                                                        <?php $checked = '';
-                                                                        if (isset($prioritiesDiscuss)) {
-                                                                            $priority_discuss = $priority.'_discuss';
-                                                                            $checked = isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] === 'true' ? 'checked' : '';
-                                                                        } ?>
-                                                                        <input type="checkbox" {{$checked}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                    <div class="row py-2 px-3 discussthis">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
+                                                                            <?php $checked = '';
+                                                                            if (isset($prioritiesDiscuss)) {
+                                                                                $priority_discuss = $priority.'_discuss';
+                                                                                $checked = isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] === 'true' ? 'checked' : '';
+                                                                            } ?>
+                                                                            <input type="checkbox" {{$checked}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                <?php } 
+                                                    <?php } 
+                                                }
                                             }
                                         ?>
                                     </div>
