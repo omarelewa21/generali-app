@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Occupation;
-use App\Models\Country;
 use App\Models\Title;
 use App\Models\idtype;
-use App\Models\educationLevel;
-use App\Models\maritalStatus;
 use App\Models\Company;
+use App\Models\Country;
+use App\Models\Occupation;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
-use App\Models\SessionStorage;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\maritalStatus;
+use App\Models\educationLevel;
+use App\Models\SessionStorage;
+
 class DropdownController extends Controller
 {
     public function titles(Request $request)

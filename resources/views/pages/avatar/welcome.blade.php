@@ -27,8 +27,8 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6">
                             <h1 class="display-3 text-uppercase text-dark">Now, shall we build your signature look?</h1>
                             <div class="d-grid gap-2 col-6 mx-auto pt-4">
-                                <a href="{{ route('avatar',['transaction_id' => $transactionId]) }}" class="btn btn-primary text-uppercase">Create</a>
-                                <a href="{{ route('identity.details',['transaction_id' => $transactionId]) }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
+                                <a href="{{ route('avatar') }}" class="btn btn-primary text-uppercase">Create</a>
+                                <a href="{{ route('identity.details') }}" class="btn but-skip btn-outline-primary text-uppercase">Skip</a>
                             </div>
                         </div>
                     </div>

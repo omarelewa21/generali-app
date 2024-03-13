@@ -39,7 +39,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
-                    <form action="{{ route('handle.avatar.selection',['transaction_id' => $transactionId]) }}" method="post" class="buttonForm">
+                    <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
                             <div class="container">
@@ -122,7 +122,7 @@
                                         @else
                                             <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent.details">
                                         @endif
-                                        <a href="{{route('avatar.marital.status',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

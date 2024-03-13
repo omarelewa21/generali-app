@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use libphonenumber\PhoneNumberUtil;
-use libphonenumber\NumberParseException;
 use App\Models\SessionStorage;
+use App\Services\AssetService;
+use App\Services\AvatarService;
+use Illuminate\Validation\Rule;
+use App\Services\CustomerService;
+use App\Services\PriorityService;
+use App\Services\DependentService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use libphonenumber\PhoneNumberUtil;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Session;
+use libphonenumber\NumberParseException;
+use Illuminate\Support\Facades\Validator;
 
 class FormController extends Controller {
-    public function pdpa(Request $request,TransactionService $transactionService)
+    public function pdpa(Request $request)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -37,18 +42,13 @@ class FormController extends Controller {
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully'] + $transactionData);
+            return redirect()->route('basic.details')->with(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function basicDetails(Request $request,TransactionService $transactionService)
+    public function basicDetails(Request $request,CustomerService $customerService,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -79,6 +79,7 @@ class FormController extends Controller {
 
             // Parse the phone number
             $phoneNumberUtil = PhoneNumberUtil::getInstance();
+
 
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
@@ -123,22 +124,34 @@ class FormController extends Controller {
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
             ];
-
-            // Store the updated customer_details array back into the session
-            $request->session()->put('customer_details', $customerDetails);
-
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
+           
+            // Determine the latest array key
+            $latestKey = "basic_details";
+            //store first data in customer table  then  proceed on transaction
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
             
-            return redirect()->route('avatar.welcome',$transactionData);
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+           
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
+            $request->session()->put('customer_details', $customerDetails);
+            
+            return redirect()->route('avatar.welcome');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function submitIdentity(Request $request,TransactionService $transactionService)
+    public function submitIdentity(Request $request,CustomerService $customerService,TransactionService $transactionService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -293,8 +306,7 @@ class FormController extends Controller {
                 $age = $currentYear - $selectedYear;
             }
 
-            // Update specific keys with new values
-            $identityDetails = array_merge($identityDetails, [
+            $customerDetails['identity_details'] = [
                 'country' => $validatedData['country'],
                 'id_type' => $validatedData['idType'],
                 'id_number' => $validatedData['idNumber'],
@@ -308,27 +320,40 @@ class FormController extends Controller {
                 'habits' => $validatedData['btnradio'],
                 'education_level' => $validatedData['educationLevel'],
                 'occupation' => $validatedData['occupation']
-            ]);
+            ];
 
             // Set the updated identity_details back to the customer_details session
-            $customerDetails['identity_details'] = $identityDetails;
+            // $customerDetails['identity_details'] = $identityDetails;
+
+            // Determine the latest array key
+            $latestKey = 'identity_details';
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            
-            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.marital.status',$transactionData);
+            return redirect()->route('marital.status');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function handleAvatarSelection(Request $request,TransactionService $transactionService)
+    public function handleAvatarSelection(Request $request,TransactionService $transactionService, CustomerService $customerService, DependentService $dependentService, AssetService $assetService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -399,6 +424,8 @@ class FormController extends Controller {
 
                 if (isset($customerDetails['identity_details'])) {
                     $customerDetails['identity_details'] = array_merge($customerDetails['identity_details'], $newData);
+
+                    $customerDetails['marital_status'] = $maritalStatusButtonInput;
                 }
                 else {
                     $customerDetails['identity_details'] = $newData;
@@ -430,22 +457,62 @@ class FormController extends Controller {
                 $customerDetails['assets'] = $assetsButtonInput;
             }
 
+            //identity_details, family_details, assets
+            $route = strval(request()->path());
+
+            switch ($route) {
+                case 'marital-status':
+                    $latestKey = 'marital_status';
+                    break;
+                
+                case 'family-dependent':
+                    $latestKey = 'family_details';
+                break;
+
+                case 'assets':
+                    $latestKey = 'assets';
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
+            if (isset($customerDetails['family_details']) && $latestKey === 'family_details')
+            {
+                $dependentService->handleDependent($customerDetails,$customerId);
+            }
+            
+            if (isset($customerDetails['assets']) && $latestKey === 'assets') {
+                $assetService->handleAsset($customerDetails,$customerId);
+            }
+        
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
             // Store the updated array back into the session
-            return redirect()->route($dataUrl,$transactionData)->with($transactionData);
+            return redirect()->route($dataUrl);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function familyDependentDetails(Request $request,TransactionService $transactionService)
+    public function familyDependentDetails(Request $request,TransactionService $transactionService,CustomerService $customerService, DependentService $dependentService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -826,7 +893,7 @@ class FormController extends Controller {
                     'dob' => $dob,
                     'age' => $age,
                     'gender' => $validatedData['gender'],
-                    'habits' => $validatedData['habits'],
+                    'habit' => $validatedData['habits'],
                     'occupation' => $validatedData['spouseOccupation'],
                     'marital_status' => $marital_status,
                     'children' => $numOfChildren
@@ -855,7 +922,7 @@ class FormController extends Controller {
                         'full_name' => $validatedData[$childKey . 'FullName'],
                         // 'last_name' => $validatedData[$childKey . 'LastName'],
                         'gender' => $validatedData[$childKey . 'Gender'],
-                        'years_support' => $validatedData[$childKey . 'YearsOfSupport'],
+                        'year_support' => $validatedData[$childKey . 'YearsOfSupport'],
                         'dob' => $dob,
                         'age' => $age,
                         'marital_status' => $validatedData[$childKey . 'MaritalStatus'],
@@ -889,14 +956,20 @@ class FormController extends Controller {
                     if ($day !== NULL && $day !== '') {
                         // $dob = $day . '-' . $month . '-' . $year;
                         $dob = $year . '-' . $month . '-' . $day;
+
+                        $selectedYear = $year;
+                        $currentYear = now()->year;
+
+                        $age = $currentYear - $selectedYear;
                     }
 
                     $parentsData = [
                         'full_name' => $validatedData[$parentkey . 'FullName'],
                         // 'last_name' => $validatedData[$parentkey . 'LastName'],
                         'gender' => $validatedData[$parentkey . 'Gender'],
-                        'years_support' => $validatedData[$parentkey . 'YearsOfSupport'],
+                        'year_support' => $validatedData[$parentkey . 'YearsOfSupport'],
                         'dob' => $dob,
+                        'age' => $age,
                         'marital_status' => $validatedData[$parentkey . 'MaritalStatus'],
                     ];
                     $customerDetails['family_details']['parents_data'][$parentkey] = array_merge($customerDetails['family_details']['parents_data'][$parentkey], $parentsData);
@@ -913,6 +986,10 @@ class FormController extends Controller {
                 if ($day !== NULL && $day !== '') {
                     // $dob = $day . '-' . $month . '-' . $year;
                     $dob = $year . '-' . $month . '-' . $day;
+                    $selectedYear = $year;
+                    $currentYear = now()->year;
+
+                    $age = $currentYear - $selectedYear;
                 }
 
                 $siblingData = [
@@ -920,28 +997,43 @@ class FormController extends Controller {
                     // 'last_name' => $validatedData['siblingLastName'],
                     'gender' => $validatedData['siblingGender'],
                     'dob' => $dob,
-                    'years_support' => $validatedData['siblingYearsOfSupport'],
+                    'age' => $age,
+                    'year_support' => $validatedData['siblingYearsOfSupport'],
                     'marital_status' => $validatedData['siblingMaritalStatus']
                 ];
                 $customerDetails['family_details']['siblings_data'] = array_merge($customerDetails['family_details']['siblings_data'], $siblingData);
             }
 
+            $latestKey = "family_details";
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $dependentId = $dependentService->handleDependent($customerDetails,$customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+
+
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
 
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
-            return redirect()->route('avatar.my.assets',$transactionData);
+            return redirect()->route('assets');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function topPriorities(Request $request,TransactionService $transactionService)
+    public function topPriorities(Request $request,TransactionService $transactionService,PriorityService $priorityService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -988,60 +1080,40 @@ class FormController extends Controller {
                 return $value !== null;
             });
             $topPrioritiesButtonInput = array_values($topPrioritiesButtonInput);
-            
+
+           
             // Get the existing customer_details array from the session
             $customerDetails = $request->session()->get('customer_details', []);
+            $customerId = $request->session()->get('customer_id') ?? session('customer_details.customer_id') ?? "";
 
             $customerDetails['priorities_level'] = $topPrioritiesButtonInput;
-            
+            unset($customerDetails['priorities']);
+            $transactionId = $transactionService->handleTransaction($customerId);
+            $priorityId = $priorityService->handlePriority($customerId,$topPrioritiesButtonInput);
 
-            // Get the existing array from the session
-            $priorities = $customerDetails['priorities'] ?? [];
-            
-            // Unset Needs based on the selection instead of whole priority
-            $remainingPriority = [];
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
-            foreach ($topPrioritiesButtonInput as $value) {
-                //trying to delete the whole needs if user deleted its previous selection
-                $remainingPriority[] = $value;
-                $remainingPriority[] = $value . '_discuss';
-                $valueToUnset = [];
-                if(isset($customerDetails['priorities'])){
-                    foreach ($customerDetails['priorities'] as $key_priority => $priority_value){
-                        $rem = false;
-                        foreach ($remainingPriority as $remain_priority){
-                            if ($key_priority == $remain_priority) {
-                                $rem = true;
-                                break;
-                            }
-                        }
-                        if (!$rem) {
-                            $valueToUnset[] = $key_priority;
-                        }
-                    }
-                }
-            }
-            foreach ($valueToUnset as $data_unset) {
-                unset($customerDetails['priorities'][$data_unset]);
-            }
-            // unset($customerDetails['priorities']);
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
             
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
-
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
             // Process the form data and perform any necessary actions
-            return redirect()->route('priorities.to.discuss',$transactionData);
+            return redirect()->route('financial.priorities.discuss');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function priorities(Request $request ,TransactionService $transactionService)
+    public function priorities(Request $request ,TransactionService $transactionService, CustomerService $customerService, PriorityService $priorityService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1054,12 +1126,19 @@ class FormController extends Controller {
         
         if ($validToken) {
             $checkboxValues = $request->all();
+
+            $result = array_filter($checkboxValues, function ($key) {
+                return is_string($key);
+            }, ARRAY_FILTER_USE_KEY);
+
+            
             $requiredPriorities = ['protection', 'retirement', 'education', 'savings', 'investments', 'health-medical', 'debt-cancellation', 'others'];
 
             // Get the existing array from the session
             $customerDetails = $request->session()->get('customer_details', []);
             $selectedNeeds = $customerDetails['selected_needs'] ?? [];
-            
+            $test = $customerDetails['test'] ?? [];
+
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
             $remainingNeed = [];
@@ -1117,24 +1196,40 @@ class FormController extends Controller {
                 $customerDetails['customers_choice'] = '2';
             }
 
+            $latestKey = "customers_choice";
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+
             // Add or update the data value in the array
-            $customerDetails['priorities'] = $checkboxValues;
+            $customerDetails['priorities'] = $result;
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
+
+
+            $priorityId = $priorityService->handlePrioritySubject($customerId,$result);
+
+
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
 
             // Store the updated array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
-            //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
 
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
-            Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function existingPolicy(Request $request ,TransactionService $transactionService)
+    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1213,9 +1308,19 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-            
+
+            $latestKey = "existing_policy";
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             //save into session storage
-            $transactionService->handleTransaction($request,$customerDetails);
+            $transactionId = $transactionService->handleTransaction($customerId);
+
+            if(!$transactionId)
+            {
+                $route = strval(request()->path());
+                $pageRoute = str_replace(['-', '/'],".",$route);
+                return response()->json(['error' => 'Missing Customer Id'], 400);
+            }
 
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
