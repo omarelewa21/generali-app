@@ -132,7 +132,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var goalAmount = parseFloat({{ $goalsAmount }});
     var savingsPercentage = parseFloat({{ $savingsFundPercentage }});
     var lastPageInput = '{{$goalsAmount}}';

@@ -67,7 +67,7 @@
             
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
                 <div class="scrollable-content">
-                    <form novalidate action="{{route('change.image'}}" method="POST" id="gender_selection">
+                    <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
                         <section class="main-content">
                             <div class="container">

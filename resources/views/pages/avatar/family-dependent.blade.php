@@ -118,11 +118,11 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
                                         @if ((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
-                                            <input type="hidden" name="urlInput" id="urlInput" value="avatar.my.assets">
+                                            <input type="hidden" name="urlInput" id="urlInput" value="assets">
                                         @else
-                                            <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent.details">
+                                            <input type="hidden" name="urlInput" id="urlInput" value="family.dependent.details">
                                         @endif
-                                        <a href="{{route('avatar.marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

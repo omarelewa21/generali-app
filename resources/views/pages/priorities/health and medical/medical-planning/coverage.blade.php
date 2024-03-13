@@ -190,7 +190,7 @@
     var selectedCoverForDobInput = document.getElementById('selectedCoverForDobInput');
     var othersCoverForNameInput = document.getElementById('othersCoverForNameInput');
     var othersCoverForDobInput = document.getElementById('othersCoverForDobInput');
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var selfData = '{{$selfDataName}}';
     var lastPageInput = '{{$selectedMedical}}';
     var familyDependent = {!! json_encode($familyDependent) !!};

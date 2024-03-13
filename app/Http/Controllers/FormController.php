@@ -458,9 +458,17 @@ class FormController extends Controller {
             }
 
             //identity_details, family_details, assets
-            $route = strval(request()->path());
+            $route = session('_previous');
+            $url = $route['url'];
+            // Parse the URL to get the path
+            $path = parse_url($url, PHP_URL_PATH);
 
-            switch ($route) {
+            // Explode the path by '/' and get the last element
+            $segments = explode('/', $path);
+            $lastSegment = end($segments);
+
+
+            switch ($lastSegment) {
                 case 'marital-status':
                     $latestKey = 'marital_status';
                     break;
@@ -477,7 +485,6 @@ class FormController extends Controller {
                     # code...
                     break;
             }
-
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
 

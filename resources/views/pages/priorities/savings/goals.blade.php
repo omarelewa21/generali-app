@@ -406,7 +406,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
 </script>

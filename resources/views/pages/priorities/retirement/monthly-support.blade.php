@@ -138,7 +138,7 @@
 </div>
 
 <script>
-    var needs_priority = '{{$retirementPriority}}';
+    var needs_priority = '{{json_encode($retirementPriority)}}';
     var lastPageInput = '{{$retirementIdeal}}';
 </script>
 @endsection

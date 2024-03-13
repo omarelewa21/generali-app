@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProtectionController extends Controller
 {
-    public function validateProtectionCoverageSelection(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService, CustomerService $customerService)
+    public function validateProtectionCoverageSelection(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -68,7 +68,6 @@ class ProtectionController extends Controller
         $selectedNeed = "need_1"; 
         $customerId = session('customer_id');
 
-        // $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 

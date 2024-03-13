@@ -143,11 +143,11 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="assetsButtonInput" id="assetsButtonInput" value="{{ json_encode($assets) }}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="top.priorities">
+                                        <input type="hidden" name="urlInput" id="urlInput" value="financial.priorities">
                                         @if ((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
-                                            <a href="{{route('avatar.family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                            <a href="{{route('family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         @else
-                                            <a href="{{route('avatar.family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                            <a href="{{route('family.dependent.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         @endif
                                         
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
