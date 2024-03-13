@@ -40,7 +40,7 @@
                 <section class="heading d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6">
+                            <div class="col-xl-7">
                                 <h2 class="display-5 fw-bold text-center m-0">I want to plan a happy retirement for my:</h2>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="bg-accent-light-white py-4 footer-scroll">
+                    <div class="bg-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -111,7 +111,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldsLabel">Your Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldsLabel">Your Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Basic Details page first.</p>
@@ -126,7 +126,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Family Depandent Details page first.</p>

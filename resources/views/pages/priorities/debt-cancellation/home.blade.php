@@ -43,8 +43,8 @@
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
-                                <div class="col-xl-5 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4 px-3">Let's set you up with Debt Cancellation plans.</h2>
+                                <div class="col-xl-6 text-center">
+                                    <h2 class="display-5 fw-bold py-4 px-3">Let's set you up with Debt Cancellation plans.</h2>
                                 </div>
                             </div>
                         </div>

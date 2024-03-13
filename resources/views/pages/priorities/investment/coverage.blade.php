@@ -38,11 +38,11 @@
             <form novalidate action="{{route('validate.investment.coverage.selection')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading">
+                <section class="heading d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 pb-4">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I want to make an investment plan for my:</h2>
+                            <div class="col-xxl-6 col-xl-6">
+                                <h2 class="display-5 fw-bold text-center m-0">I want to make an investment plan for my:</h2>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             @if ($selfData)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
-                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                        <div class="d-flex justify-content-start" style="flex-direction: column;">
                                             <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
@@ -63,7 +63,7 @@
                             @if ($spouseDataName)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
-                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                        <div class="d-flex justify-content-start" style="flex-direction: column;">
                                             <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
@@ -75,7 +75,7 @@
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
-                                                <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                                <div class="d-flex justify-content-start" style="flex-direction: column;">
                                                     <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>
@@ -126,7 +126,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldssLabel">Your Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldsLabel">Your Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Basic Details page first.</p>
@@ -141,7 +141,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Family Depandent Details page first.</p>
@@ -156,7 +156,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your child name in Family dependent page first.</p>

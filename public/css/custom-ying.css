@@ -325,7 +325,6 @@ button.choice[data-required=""]{
 #overview-table tbody tr:nth-child(odd) {
     background-color: #F3F3F3;
 }
-
 /* Bug Fixes */
 
 
@@ -370,6 +369,11 @@ button.choice[data-required=""]{
 @media only screen and (max-width: 767px) and (max-height: 850px){
     .coverage button img{
         height: 70% !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 800px){
+    .coverage .wrapper-bottom-grey {
+        grid-template-rows: 10vh 55vh 35vh;
     }
 }
 @media only screen and (max-width: 767px){
@@ -530,6 +534,13 @@ button.choice[data-required=""]{
     }
     #retirement_period form{
         padding-left: 0px;
+    }
+    /* Coverage Page */
+    .coverage .content-needs-grey {
+        grid-auto-rows: 8vh 12vh 57vh;
+    }
+    .tertiary-default-bg.calculator-page{
+        background: none;
     }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
@@ -786,3 +797,10 @@ display: block;
 z-index: unset;
 }
 }
+
+/* ============================== Modal / Popover ============================== */
+/* @media only screen and (min-width: 768px) {
+.otherModalText {
+  font-size: 3rem;
+}
+} */

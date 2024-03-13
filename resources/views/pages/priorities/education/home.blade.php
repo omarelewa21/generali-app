@@ -33,7 +33,7 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative vector">
-                            <img src="{{ asset('images/needs/education/home-vector.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
+                            <img src="{{ asset('images/needs/education/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">

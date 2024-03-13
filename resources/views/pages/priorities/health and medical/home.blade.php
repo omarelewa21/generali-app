@@ -35,14 +35,14 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs bg-hm-home-element">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/health-medical/home/health-medical-home-avatar.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-40px" alt="Health Medical Home">
+                            <img src="{{ asset('images/needs/health-medical/home/health-medical-home-avatar.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Health Medical Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
-                                <div class="col-xl-6 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4">Alright, let’s get you covered with Health & Medical plans.</h2>
+                                <div class="col-xl-7 text-center">
+                                    <h2 class="display-5 fw-bold py-4">Alright, let’s get you covered with Health & Medical plans.</h2>
                                 </div>
                             </div>
                         </div>
