@@ -146,7 +146,7 @@ class HealthMedicalController extends Controller
             unset($customerDetails['selected_needs']['need_6']['advance_details']['health_care']);
         } 
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -220,7 +220,7 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -305,7 +305,7 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -406,7 +406,7 @@ class HealthMedicalController extends Controller
         // Set the updated critical_illness back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -434,7 +434,7 @@ class HealthMedicalController extends Controller
         // Get existing critical_illness from the session
         $customerDetails['selected_needs']['need_6']['advance_details']['critical_illness'] = $criticalIllness;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -508,7 +508,7 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -566,7 +566,7 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -625,7 +625,7 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -703,7 +703,7 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -804,7 +804,7 @@ class HealthMedicalController extends Controller
         // Set the updated medicalPlanning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -832,7 +832,7 @@ class HealthMedicalController extends Controller
         // Set the updated medical_planning back to the customer_details session
         $customerDetails['selected_needs']['need_6']['advance_details']['health_care'] = $medicalPlanning;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_6"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);

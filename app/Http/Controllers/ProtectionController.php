@@ -66,7 +66,7 @@ class ProtectionController extends Controller
 
         // Determine the latest array key
         $selectedNeed = "need_1"; 
-        $customerId = session('customer_id');
+         $customerId = session('customer_id') ?? session('customer_details.customer_id');
 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -154,7 +154,7 @@ class ProtectionController extends Controller
         // Set the updated protection back to the customer_details session
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_1"; 
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -257,7 +257,7 @@ class ProtectionController extends Controller
 
         // Set the updated protection back to the customer_details session
         $customerDetails['selected_needs']['need_1']['advance_details'] = $advanceDetails;
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_1"; 
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -289,7 +289,7 @@ class ProtectionController extends Controller
 
         // Store the updated customer_details array back into the session
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_1"; 
 
         $transactionService->handleTransaction($customerId);

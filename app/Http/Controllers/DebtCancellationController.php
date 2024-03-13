@@ -63,7 +63,7 @@ class DebtCancellationController extends Controller
         // Set the updated debt_cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -136,7 +136,7 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -242,7 +242,7 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -311,7 +311,7 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -338,7 +338,7 @@ class DebtCancellationController extends Controller
 
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_7"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);

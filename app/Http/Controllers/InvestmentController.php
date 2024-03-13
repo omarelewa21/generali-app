@@ -73,7 +73,7 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -166,7 +166,7 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -262,7 +262,7 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -344,7 +344,7 @@ class InvestmentController extends Controller
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_5"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);

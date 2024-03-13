@@ -66,7 +66,7 @@ class EducationController extends Controller
         $selectedNeed = "need_3"; 
 
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
 
@@ -138,7 +138,7 @@ class EducationController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_3"; 
 
 
@@ -248,7 +248,7 @@ class EducationController extends Controller
         // Set the updated education_needs back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_3"; 
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -277,7 +277,7 @@ class EducationController extends Controller
         // Set the updated education_needs back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_3"; 
 
         $transactionId = $transactionService->handleTransaction($customerId);

@@ -65,7 +65,7 @@ class RetirementController extends Controller
         // Set the updated retirement_needs back to the customer_details session
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
 
         $selectedNeed = "need_2";
 
@@ -128,7 +128,7 @@ class RetirementController extends Controller
         // Set the updated retirement_needs back to the customer_details session
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_2";
 
         $transactionId = $transactionService->handleTransaction($customerId); // boolean true false
@@ -207,7 +207,7 @@ class RetirementController extends Controller
         // Set the updated retirement_needs back to the customer_details session
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_2";
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -280,7 +280,7 @@ class RetirementController extends Controller
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
         // Store the updated customer_details array back into the session
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_2";
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -402,7 +402,7 @@ class RetirementController extends Controller
         // Set the updated retirement back to the customer_details session
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_2";
 
         $transactionId = $transactionService->handleTransaction($customerId);
@@ -429,7 +429,7 @@ class RetirementController extends Controller
         // Set the updated retirement back to the customer_details session
         $customerDetails['selected_needs']['need_2']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_2";
 
         $transactionId = $transactionService->handleTransaction($customerId);

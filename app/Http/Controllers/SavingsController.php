@@ -66,7 +66,7 @@ class SavingsController extends Controller
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_4"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -163,7 +163,7 @@ class SavingsController extends Controller
             // Set the updated savings_needs back to the customer_details session
             $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
-            $customerId = session('customer_id');
+            $customerId = session('customer_id') ?? session('customer_details.customer_id');
             $transactionId = $transactionService->handleTransaction($customerId);
             $selectedNeed = "need_4"; 
             $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -287,7 +287,7 @@ class SavingsController extends Controller
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
         $customerDetails['lastPageUrl'] = $lastPageUrl;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $transactionId = $transactionService->handleTransaction($customerId);
         $selectedNeed = "need_4"; 
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -346,7 +346,7 @@ class SavingsController extends Controller
             'last_page_url' => $lastPage
         ]);
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $transactionId = $transactionService->handleTransaction($customerId);
         $selectedNeed = "need_4"; 
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
@@ -420,7 +420,7 @@ class SavingsController extends Controller
         // Set the updated savings_needs back to the customer_details session
         $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
 
-        $customerId = session('customer_id');
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
         $selectedNeed = "need_4"; 
         $transactionId = $transactionService->handleTransaction($customerId);
         $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
