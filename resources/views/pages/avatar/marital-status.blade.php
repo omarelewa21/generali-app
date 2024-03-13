@@ -24,9 +24,9 @@
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
-                <section class="content-avatar-default overflow-hidden">
+                <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changePosition">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                         <div class="position-relative imageContainerMarried"></div>
                     </div>
                 </section>
@@ -35,14 +35,14 @@
             
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
-                    <form action="{{ route('form.avatar.marital.status',['transaction_id'=> $transactionId]) }}" method="post" class="buttonForm">
+                    <form action="{{ route('handle.avatar.selection',['transaction_id'=> $transactionId]) }}" method="post" class="buttonForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-5 text-white pb-3 fw-bold">May we know your relationship status?</h1>
-                                        <p class="text-white display-8 lh-base">Click to select your marital status.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">May we know your relationship status?</h1>
+                                        <p class="text-white display-6">Click to select your marital status.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 px-md-5">
@@ -99,6 +99,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row align-items-center px-5 pb-md-5 mt-3 mx-auto mb-3 d-none w-75">
+                                    <button type="button" class="slick-btns me-3 slick-prev">Prev</button>
+                                    <div class="slick-scrollbar"></div>
+                                    <button type="button" class="slick-btns ms-3 slick-next">Next</button>
+                                </div>
                             </div>
                         </section>
 
@@ -108,8 +113,8 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="family.dependent">
-                                        <a href="{{route('identity.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent">
+                                        <a href="{{route('identity.details',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

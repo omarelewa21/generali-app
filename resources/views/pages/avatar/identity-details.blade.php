@@ -25,18 +25,18 @@
     <div class="container-fluid">
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
-                <div class="header">
+                <div class="header z-3">
                     <div class="row">
                         @include('templates.nav.nav-red-red-menu')
                     </div>
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changePosition">
+                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-2">
                 <div class="scrollable-content">
                     <form novalidate action="{{ route('form.submit.identity',['transaction_id' => $transactionId]) }}" method="POST" id="identityForm">
                         @csrf
@@ -44,8 +44,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Now let’s get into the details.</h1>
-                                        <p class="text-white display-6 lh-base">*All fields are mandatory, so we can make the best recommendations for you.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Now let’s get into the details.</h1>
+                                        <p class="text-white display-6">*All fields are mandatory, so we can make the best recommendations for you.</p>
                                     </div>
                                 </div>
                                 <div class="form-container pb-0 pb-md-5">
@@ -290,7 +290,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{route('avatar')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar' ,['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>

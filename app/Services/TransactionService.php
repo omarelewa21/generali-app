@@ -31,9 +31,9 @@ class TransactionService
             $this->transactionId = $transaction->id;
         });
 
-        return true;
+        // return true;
 
-        // return $this->transactionId;
+        return $this->transactionId;
     }
 
 }

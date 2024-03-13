@@ -53,6 +53,7 @@ class InvestmentController extends Controller
         // Get existing investments_needs from the session
         $needs = $customerDetails['selected_needs']['need_5'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         // Update specific keys with new values
         $advanceDetails = array_merge($advanceDetails, [
@@ -62,10 +63,15 @@ class InvestmentController extends Controller
             'spouse_name' => $othersCoverForNameInput,
             'spouse_dob' => $othersCoverForDobInput
         ]);
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
 
         // Set the updated investments_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_5'] = $needs;
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         $customerId = session('customer_id');
         $selectedNeed = "need_5"; 
@@ -91,6 +97,7 @@ class InvestmentController extends Controller
 
         // Get existing investments_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
 
         $customMessages = [
             'investment_monthly_payment.required' => 'You are required to enter an amount.',
@@ -149,8 +156,15 @@ class InvestmentController extends Controller
             ]);
         }
 
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
+
         // Set the updated investments_needs back to the customer_details session
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         $customerId = session('customer_id');
         $selectedNeed = "need_5"; 
@@ -318,9 +332,17 @@ class InvestmentController extends Controller
 
         // Get existing investments_needs from the session
         $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
+        $lastPageUrl = $customerDetails['lastPageUrl'] ?? [];
+
+        $lastPage = str_replace(url('/'), '', url()->previous());
+
+        $lastPageUrl = array_merge($lastPageUrl, [
+            'last_page_url' => $lastPage
+        ]);
 
         // Set the updated investments_needs back to the customer_details session
         $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
+        $customerDetails['lastPageUrl'] = $lastPageUrl;
 
         $customerId = session('customer_id');
         $selectedNeed = "need_5"; 

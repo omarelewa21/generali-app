@@ -75,7 +75,7 @@ class SummaryController extends Controller
         $request->session()->put('customer_details', $customerDetails);
 
         
-        if ($customerDetails['lastPageUrl']['last_page_url'] == '/investment/annual-return'){
+        if (strstr($customerDetails['lastPageUrl']['last_page_url'], 'investment') !== false || strstr($customerDetails['lastPageUrl']['last_page_url'], '/investment/') !== false){
             return redirect()->route('investment.gap');
             // return redirect()->route('investment.gap',$transactionData);
         } else{

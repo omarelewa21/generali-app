@@ -32,22 +32,22 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/retirement/home-vector.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
+                            <img src="{{ asset('images/needs/retirement/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Protection Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
                                 <div class="col-xl-6 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4">Now let's talk about your plans for Retirement.</h2>
+                                    <h2 class="display-5 fw-bold py-4 px-3">Now let's talk about your plans for Retirement.</h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white py-4 fixed-bottom footer-scroll">
+                        <div class="bg-accent-light-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{$protectionPriority === 'true' || $protectionPriority === true ? route('protection.gap') : route('financial.priorities.discuss')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{$protectionPriority === 'true' ? route('protection.gap') : route('priorities.to.discuss')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <a href="{{route('retirement.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>
@@ -60,23 +60,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    var retirementPriority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
 </script>
 @endsection 

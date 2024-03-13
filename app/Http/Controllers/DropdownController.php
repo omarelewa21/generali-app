@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Asset;
-use App\Models\Title;
-use App\Models\Avatar;
-use App\Models\Idtype;
-use App\Models\Company;
-use App\Models\Country;
-use App\Models\Customer;
 use App\Models\Occupation;
+use App\Models\Country;
+use App\Models\Title;
+use App\Models\idtype;
+use App\Models\educationLevel;
+use App\Models\maritalStatus;
+use App\Models\Company;
 use App\Models\PolicyPlan;
 use App\Models\PremiumMode;
-use App\Models\Transaction;
+use App\Models\SessionStorage;
 use Illuminate\Http\Request;
-use App\Models\maritalStatus;
-use App\Models\EducationLevel;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
-
 class DropdownController extends Controller
 {
     public function titles(Request $request)
@@ -28,7 +20,6 @@ class DropdownController extends Controller
         $countries = Country::all();
         $titles = Title::all();
         $transactionId = $request->input('transaction_id') ?? session('transaction_id'); 
-        // dd($transactionId);
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
 

@@ -7,9 +7,8 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
-const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith(queryString))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -257,17 +256,19 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
         monthField.addEventListener('change', calculateAge);
         yearField.addEventListener('change', calculateAge);
     }
-    if (path == '/family-dependent') { 
+
+    if (path == '/family-dependent') {
         document.addEventListener('DOMContentLoaded', function() {
             if (marital_status) {
                 var maritalStatus = marital_status;
-                
+
                 // Disable the 'Spouse' button if maritalStatus is 'single'
                 if (maritalStatus === 'Single') {
                     const spouseButton = document.getElementById('spouseButton');
                     const childButton = document.getElementById('childButton');
                     spouseButton.disabled = true;
                     childButton.disabled = true;
+        
                     // Remove hover effect if it is disabled
                     const spouseParentDiv = spouseButton.parentElement;
                     const childParentDiv = childButton.parentElement;
@@ -290,7 +291,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     const spouseImg = spouseButton.querySelector('img');
                     spouseImg.style.opacity = '0.5'; 
                 }
-                
             }
             else {
                 if (maritalStatus == null || maritalStatus == undefined || maritalStatus == '') {

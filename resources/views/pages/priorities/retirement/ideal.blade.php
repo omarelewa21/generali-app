@@ -31,7 +31,8 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-6 col-xl-6 py-3 pt-md-0">
-                                <h2 class="display-5 fw-bold lh-sm text-center">My ideal retirement involves:</h2>
+                                <h2 class="display-5 fw-bold text-center">My ideal retirement involves:</h2>
+                                <p class="d-md-none d-block m-0 text-center">Please select one below:</p>
                             </div>
                         </div>
                     </div>
@@ -43,20 +44,20 @@
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
                                     <!-- <div class="d-flex justify-content-end" style="flex-direction: column;"> -->
                                         <img src="{{ asset('images/needs/retirement/ideal-bucketlist.png') }}" height="auto" width="100%" class="pb-3 m-auto">
-                                        <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Visiting destinations on my bucket list</p>
+                                        <p class="avatar-text text-center fw-bold py-2 mb-0">Visiting destinations on my bucket list</p>
                                     <!-- </div> -->
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3 m-auto">
-                                    <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Maintaining a comfortable lifestyle</p>
+                                    <p class="avatar-text text-center fw-bold py-2 mb-0">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
                                     <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3 m-auto">
-                                    <p class="avatar-text text-center fw-bold py-2 mb-0 lh-normal">Retiring early with secure finances</p>
+                                    <p class="avatar-text text-center fw-bold py-2 mb-0">Retiring early with secure finances</p>
                                 </button>
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="bg-white py-4 footer-scroll">
+                    <div class="bg-accent-light-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -88,22 +89,6 @@
                     </div>
                 </section>
             </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
         </div>
     </div>
 </div>
@@ -124,7 +109,7 @@
 </div>
 
 <script>
-    var retirementPriority = '{{$retirementPriority}}';
+    var needs_priority = '{{$retirementPriority}}';
     var lastPageInput = '{{$relationship}}';
 </script>
 @endsection

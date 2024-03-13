@@ -29,7 +29,6 @@
                 @csrf
                 <div class="row">
                     @php
-                        $desk_icon = '';
                         if($relationship === 'Child'){
                             $goal_1 = 'Pursue their interests';
                             $goal_2 = 'Start their own business';
@@ -166,7 +165,10 @@
                                                 @else
                                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center not-available" data-identifier="{{$savingsGoals[0]}}">
                                                         <div class='sortable-container'>
-                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $savingsGoals[0] . '.png') }}" style="width: 100px;">
+                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . (($relationship === 'Child') ? (isset($savingsGoals[0]) && $savingsGoals[0] == $goal_1 ? 'interest' : 
+                                                                                            ($savingsGoals[0] == $goal_2 ? 'business' : ($savingsGoals[0] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[0]) && $savingsGoals[0] != '' ? 
+                                                                                            ($savingsGoals[0] == $goal_1 ? 'travel' : ($savingsGoals[0] == $goal_2 ? 'home' : ($savingsGoals[0] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
+
                                                             <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[0]}}" data-index="1"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
                                                         </div>
                                                     </div>
@@ -183,7 +185,9 @@
                                                 @else
                                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center not-available" data-identifier="{{$savingsGoals[1]}}">
                                                         <div class='sortable-container'>
-                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $savingsGoals[1] . '.png') }}" style="width: 100px;">
+                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . (($relationship === 'Child') ? (isset($savingsGoals[1]) && $savingsGoals[1] == $goal_1 ? 'interest' : 
+                                                                                            ($savingsGoals[1] == $goal_2 ? 'business' : ($savingsGoals[1] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[1]) && $savingsGoals[1] != '' ? 
+                                                                                            ($savingsGoals[1] == $goal_1 ? 'travel' : ($savingsGoals[1] == $goal_2 ? 'home' : ($savingsGoals[1] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
                                                             <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[1]}}" data-index="2"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
                                                         </div>
                                                     </div>
@@ -200,7 +204,9 @@
                                                 @else
                                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center not-available" data-identifier="{{$savingsGoals[2]}}">
                                                         <div class='sortable-container'>
-                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $savingsGoals[2] . '.png') }}" style="width: 100px;">
+                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' .  (($relationship === 'Child') ? (isset($savingsGoals[2]) && $savingsGoals[2] == $goal_1 ? 'interest' : 
+                                                                                            ($savingsGoals[2] == $goal_2 ? 'business' : ($savingsGoals[2] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[2]) && $savingsGoals[2] != '' ? 
+                                                                                            ($savingsGoals[2] == $goal_1 ? 'travel' : ($savingsGoals[2] == $goal_2 ? 'home' : ($savingsGoals[2] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
                                                             <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[2]}}" data-index="3"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
                                                         </div>
                                                     </div>
@@ -217,7 +223,9 @@
                                                 @else
                                                     <div class="dropped position-absolute d-flex justify-content-center align-items-center not-available" data-identifier="{{$savingsGoals[3]}}">
                                                         <div class='sortable-container'>
-                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . $savingsGoals[3] . '.png') }}" style="width: 100px;">
+                                                            <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' .  (($relationship === 'Child') ? (isset($savingsGoals[3]) && $savingsGoals[3] == $goal_1 ? 'interest' : 
+                                                                                            ($savingsGoals[3] == $goal_2 ? 'business' : ($savingsGoals[3] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[3]) && $savingsGoals[3] != '' ? 
+                                                                                            ($savingsGoals[3] == $goal_1 ? 'travel' : ($savingsGoals[3] == $goal_2 ? 'home' : ($savingsGoals[3] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
                                                             <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[3]}}" data-index="4"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
                                                         </div>
                                                     </div>
@@ -382,21 +390,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -413,7 +406,7 @@
     </div>
 </div>
 <script>
-    var savingsPriority = '{{$savingsPriority}}';
+    var needs_priority = '{{$savingsPriority}}';
     var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
 </script>

@@ -10,11 +10,11 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
-<section class="d-flex justify-content-end">
+<section class="d-flex justify-content-end pt-2 pt-md-0">
     <div class="row align-items-center px-4 py-md-4">
-        <div class="col-auto">
+        <div class="col-auto pe-0">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">
-                <p class="display-6 text-dark m-1">
+                <p class="display-6 text-dark m-1 needs-progress">
                     @php
                     // Get the current route name
                     $routeName = Route::currentRouteName();
@@ -52,7 +52,7 @@
                 </p>
             </a>
         </div>
-        <div class="col-auto pe-sm-0">
+        <div class="col-auto pe-sm-0 ps-0">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu" class="d-flex align-items-center">
                 <div class="progress color d-inline-flex mx-2">
                     <span class="progress-left">
@@ -91,137 +91,22 @@
 
 {{-- Nav Sidebar Right Needs --}}
 
-
-<style>
-/* code for progress bar css */
-
-.progress {
-    width: 44px;
-    height: 44px;
-    line-height: 150px;
-    background: transparent;
-    margin: 0 auto;
-    box-shadow: none;
-    position: relative;
-}
-
-.progress:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid #A0A0A0;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.progress>span {
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-}
-
-.progress .progress-left {
-    left: 0;
-}
-
-.progress .progress-bar {
-    width: 100%;
-    height: 100%;
-    background: none;
-    border-width: 2px;
-    border-style: solid;
-    position: absolute;
-    top: 0;
-}
-
-.progress .progress-left .progress-bar {
-    left: 100%;
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px;
-    border-left: 0;
-    -webkit-transform-origin: center left;
-    transform-origin: center left;
-}
-
-.progress .progress-right {
-    right: 0;
-}
-
-.progress .progress-right .progress-bar {
-    left: -100%;
-    border-top-left-radius: 80px;
-    border-bottom-left-radius: 80px;
-    border-right: 0;
-    -webkit-transform-origin: center right;
-    transform-origin: center right;
-    animation: loading-right 0.8s linear forwards;
-}
-
-.progress-value p {
-    font-size: 20px;
-}
-
-.progress .progress-value {
-    width: 100%;
-    height: 100%;
-    border-radius: 80px;
-    background: #ffffff;
-    color: #d10b4f;
-    line-height: 3.2em;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.progress.color .progress-bar {
-    border-color: #d10b4f;
-}
-
-.progress.color .progress-left .progress-bar {
-    animation: loading-left 0.8s linear forwards 0.8s;
-}
-
-
+<script>
 @keyframes loading-left {
-0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-}
-
-100% {
-    -webkit-transform: rotate({{$progressLeft}}deg);
-    transform: rotate({{$progressLeft}}deg);
-}
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(calc({{ $progressLeft }} * 1deg));
+  }
 }
 
 @keyframes loading-right {
-0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(calc({{ $progressRight }} * 1deg));
+  }
 }
-
-100% {
-    -webkit-transform: rotate({{$progressRight}}deg);
-    transform: rotate({{$progressRight}}deg);
-}
-}
-
-@media only screen and (max-device-width:986px) {
-.progress .progress-value{
-    background:transparent;
-}
-
-/* .progress-mobile {
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-    } */
-}
-
-</style>
+</script>

@@ -7,6 +7,7 @@ import './avatar';
 import './form-display';
 import './button-avatar-display';
 import './carousel-needs';
+import './needs';
 import './protection-validation';
 import './retirement-validation';
 import './education-validation';
@@ -38,6 +39,7 @@ $(document).ready(function () {
     var health_home = $('#health-medical_home');
     var debt_home = $('#debt-cancellation_home');
     var education_home = $('#education_home');
+    var summary = $('#summary');
 
     // Check if the element exists on the page
     if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1 || login.length === 1) {

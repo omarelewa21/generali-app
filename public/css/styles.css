@@ -56,10 +56,10 @@ body #login {
   height: 100vh;
 }
 
-.fade-effect img {
+/* .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
-}
+} */
 
 .fade-effect button:not([disabled]):hover img {
   opacity: 1;
@@ -71,13 +71,6 @@ body #login {
 
 .text-gray {
   color: #707070;
-}
-
-.toast {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .text-green {
@@ -94,6 +87,10 @@ body #login {
 
 .bg-accent-bg-grey {
   background-color: #F8F8F8;
+}
+
+.bg-grey {
+  background-color: rgba(233, 233, 233, 1);
 }
 
 .z-index-1 {
@@ -372,9 +369,58 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
   background-color: #8995C8;
   opacity: 1;
 }
-
-.action_button_slider .slick-dots {
-  position: static;
+/* added KK code */
+.slick-scrollbar {
+  width: auto;
+  position: relative;
+  box-sizing: border-box;
+  flex-grow: 1;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+}
+ 
+.slick-scrollbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--scrollbar-width);
+  height: 100%;
+  background-color: #000;
+  transition: width 0.35s;
+}
+ 
+.slick-next,
+.slick-prev {
+  position: static !important;
+  transform: unset !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: 16px !important;
+  font-family: "Helvetica Neue", sans-serif !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+}
+ 
+.slick-next:before,
+.slick-prev:before {
+  content: unset !important;
+}
+ 
+.slick-track {
+  display: flex !important;
+}
+ 
+.slick-slide {
+  height: inherit !important;
+}
+ 
+#hospital-room-selection .slick-slide div {
+  height: 100%;
 }
 /* ============================== Alerts ============================== */
 .alert div.text {
@@ -548,9 +594,9 @@ p.nav-text {
   color: #C21B17;
 }
 
-.btn-refresh {
+/* .btn-refresh {
   font-family: 'Helvetica Neue Regular', sans-serif;
-}
+} */
 
 .btn-exit:hover {
   background-color: #ffffff;
@@ -636,8 +682,8 @@ div.dt-buttons>.dt-button:hover, div.dt-buttons>.dt-button:focus {
   overflow: hidden;
 }
 
-button[data-required="selected"] img {
-  opacity: 1;
+button[data-required="selected"] img:not(button.choice[data-required="selected"] img) {
+  transform: scale(1.1);
 }
 
 .button-bg {
@@ -695,7 +741,7 @@ button[data-required="selected"] img {
 }
 
 /* ============================== Right Sidebar ============================== */
-.right-sidebar h1 {
+.right-sidebar h1, .priorities-heading {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -773,6 +819,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-bottom-grey-calculator {
+  grid-template-areas:
+      "header"
+      "content-needs-grey-calculator"
+      "footer-avatar-grey";
+  grid-template-rows: 12vh 53vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .wrapper-needs-grey {
   grid-template-areas:
       "header"
@@ -795,11 +851,22 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content"
+      "footer-avatar-grey"
+      "refresh";
+  grid-template-rows: 20vh 50vh 20vh 10vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+/* .wrapper-avatar-grey {
+  grid-template-areas:
+      "header"
+      "content"
       "footer-avatar-grey";
   grid-template-rows: 20vh 55vh 25vh;
   display: grid;
   grid-template-columns: 100%;
-}
+} */
 
 .wrapper-overview {
   grid-template-areas:
@@ -836,9 +903,23 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
   grid-area: content-needs-grey;
 }
+
+.content-needs-grey-calculator {
+  grid-template-areas:"calculator" "top-menu" "content";
+  display: grid;
+  grid-auto-rows: 10vh 10vh 50vh;
+  grid-template-columns: 100%;
+  grid-area: content-needs-grey-calculator;
+}
+
+#retirement_ideal .content-needs-grey {
+  grid-auto-rows: 10vh 10vh 55vh;
+}
+
 .heading {
   grid-area: heading;
 }
+
 .bottom-content {
   grid-area: bottom-content;
 }
@@ -911,10 +992,10 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-.homeVector {
+/* .homeVector {
   width: 550px;
   height:auto;
-}
+} */
 
 /* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
@@ -924,9 +1005,6 @@ h2.display-5, .currencyField {
   background-repeat: no-repeat;
 }
 
-.changeImage {
-  z-index: 3;
-}
 /* ============================== Gender Page ============================== */
 .main-default-bg {
   background-image: url(/images/general/main-default-bg.png);
@@ -988,6 +1066,10 @@ h2.display-5, .currencyField {
   right: 10%;
 }
 
+.changeImage {
+  z-index: 1;
+}
+
 /* ============================== Identity Details Page ============================== */
 .btn-check:checked+.btn {
   border-radius: 0;
@@ -1027,6 +1109,10 @@ h2.display-5, .currencyField {
 /* ============================== Assets Page ============================== */
 .assets-overlay {
   position: relative;
+}
+
+.changeImageAsset {
+  z-index: 2;
 }
 
 /* ============================== Skin Tone ============================== */
@@ -1282,6 +1368,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 #sortablemobile {
   list-style-type: none;
+  padding-inline-start: 0;
 }
 
 #sortablemobile ul.dropdown-menu {
@@ -1315,6 +1402,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   background-color: #F2F2F288;
   color: white;
   font-weight: 700;
+}
+
+.sortable-text {
+  font-family: 'Helvetica Neue Medium', sans-serif;
 }
 
 #sortablemobile .ui-sortable-placeholder {
@@ -1352,7 +1443,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #retirement_ideal .bottom-content img {
-  max-width: 324px;
+  max-width: 258px;
 }
 
 #retirement_period.tertiary-default-bg {
@@ -1449,6 +1540,15 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     width: 60%;
 }
 
+button.choice:hover img,
+button.choice[data-required="selected"] img,
+button.choice.default.selected img{
+    background-image: url(/images/needs/hover-coverage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
+}
+
 .coverage_slick div {
   height: 100%;
 }
@@ -1469,7 +1569,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   position: relative;
   padding-left: 40px;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0;
 }
 
 .needs-radio:checked + label::after {
@@ -1500,6 +1602,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
+body.overflow #summary .main-content {
+  overflow-y: hidden;
+}
+
 #gap .circle{
   filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
 }
@@ -1515,6 +1621,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 #gap .card-gap__number {
   font-size: 80px;
   font-family: 'Helvetica Neue Bold', sans-serif;
+}
+
+#gap .card-gap__number p.display-5 {
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
 .green-tick {
@@ -1538,6 +1648,101 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   background-position: center bottom 21%;
 }
 
+.needs-progress {
+  font-size: 22px;
+}
+/* ============================== Priorities Menu ============================== */
+.progress {
+  width: 44px;
+  height: 44px;
+  line-height: 150px;
+  background: transparent;
+  margin: 0 auto;
+  box-shadow: none;
+  position: relative;
+}
+
+.progress:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #A0A0A0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress>span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left {
+  left: 0;
+}
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 2px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+  animation: loading-left 0.8s linear forwards;
+}
+
+.progress .progress-right {
+  right: 0;
+}
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+  animation: loading-right 0.8s linear forwards;
+}
+
+.progress-value p {
+  font-size: 20px;
+}
+
+.progress .progress-value {
+  width: 100%;
+  height: 100%;
+  border-radius: 80px;
+  background: #ffffff;
+  color: #d10b4f;
+  line-height: 3.2em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress.color .progress-bar {
+  border-color: #d10b4f;
+}
+
+.progress.color .progress-left .progress-bar {
+  animation-delay: 0.8s; /* Delay the animation for the left progress bar */
+}
 /* ============================== Calculator ============================== */
 .calculation-progress-bar-wrapper {
   border-bottom-right-radius: 1.3rem;
@@ -1571,6 +1776,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .footerVector {
     display: none;
   }
+  #summary .dropped img:not(.close) {
+    max-height: 70px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
+  }
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 992px){
@@ -1579,7 +1790,22 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
 }
 
+@media only screen and (max-width: 991px) {
+  #summary .dropped img:not(.close) {
+    max-height: 50px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
+  }
+}
+
 @media only screen and (min-width: 768px) {
+  .content-needs-grey-calculator {
+    grid-auto-rows: 5vh 10vh 50vh;
+  }
+  #retirement_allocated_funds .content-needs-grey-calculator {
+    grid-auto-rows: 0vh 10vh 50vh;
+  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;
@@ -1604,11 +1830,8 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     overflow-y: auto;
     height: 100vh;
   }
-  body.overflow #summary .main-content {
-    overflow-y: hidden;
-  }
   .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
-    z-index: 2;
+    z-index: 3;
   }
   .wrapper-home {
     display: grid;
@@ -1645,6 +1868,9 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .navbar-scroll.fixed-top {
     position: relative;
   }
+  .homeVector {
+    max-height: 700px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px){
@@ -1654,15 +1880,30 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  .wrapper-bottom-grey {
+    grid-template-rows: 12vh 53vh 35vh;
+  }
+  .coverage .content-needs-grey{
+      grid-auto-rows: 10vh 12vh 55vh;
+  }
+  .accordion-button {
+    font-size: 1.25rem;
+  }
+  h1.display-3 {
+    font-size: 1.9rem;
+  }
+  h1.display-4 {
+    font-size: 1.25rem;
+  }
+  .gender-button img {
+    width: 70px;
+  }
   #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     display:block;
   }
-  /* body.overflow #top_priorities .wrapper-avatar-default {
-    overflow: auto;
-  } */
   .homeVector {
-    width: 100%;
-    height:auto;
+    width: 60%;
+    max-height: 340px;
   }
   body #login {
     height: inherit;
@@ -1681,9 +1922,12 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
-  .avatar-text {
-    font-size: 18px;
+  #avatar_my_assets .footer-scroll {
+    z-index: 2;
   }
+  /* .avatar-text {
+    font-size: 18px;
+  } */
   .main-logo, .white-logo, .red-logo {
     max-width: 172px
   }
@@ -1714,7 +1958,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     background-size: auto 60%;
   }
   .wrapper-needs-grey {
-    grid-template-rows: 9vh 40vh 23vh 12vh;
+    grid-template-rows: 9vh 38vh 25vh 12vh;
   }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
@@ -1723,15 +1967,17 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     text-align: center;
     justify-content: center;
   }
-  .tertiary-default-bg, #retirement_period.tertiary-default-bg {
+  /* .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
-  }
+  } */
   .tertiary-mobile-bg {
     background-image: url(/images/general/tertiary-default-bg.png);
-    background-size: cover;
+    background-size: contain;
     background-position: center top;
     background-repeat: no-repeat;
     background-color: #fff;
+    height: 50%!important;
+    max-height: 100%;
   }
 
   #retirement_period .tertiary-mobile-bg {
@@ -1742,10 +1988,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     background-color: #fff;
   }
   .calculator-page .bottom-content img {
-    height: 80%;
-  }
-  #retirement_ideal .content-needs-grey {
-    display: block;
+    height: 85%;
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
     background-position: center bottom 18%;
@@ -1767,10 +2010,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     grid-template-rows: 20vh 50vh;
   }
   .wrapper-avatar-default {
-    grid-template-rows: 10vh 80vh;
+    grid-template-rows: 5vh 40vh;
+  }
+  #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
+    background-size: 15%;
   }
   .wrapper-avatar-grey {
-    grid-template-rows: 10vh 55vh 25vh;
+    grid-template-rows: 10vh 35vh 20vh 10vh;
   }
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
@@ -1792,6 +2038,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .bottomObeserver {
     height:50px;
   }
+  /* .header p.display-6{
+      font-size: 11px;
+  } */
+  #home h2, #home .h2 {
+    font-size: calc(1rem + 2.7vw);
+    line-height: 1;
+  }
 }
 
 @media only screen and (max-width: 375px) {
@@ -1800,379 +2053,14 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
 }
 
+@media only screen and (max-width: 576px) {
+  .otherModalText {
+    font-size: 4rem;
+  }
+}
+
 @media only screen and (max-width: 320px) {
   .main-logo {
     padding-top: inherit!important;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.btn-check+.btn:hover {
-  border-radius: 0;
-  background-color: #d3d4d5;
-  color: inherit;
-  width: 100%;
-}
-
-
-
-
-
-
-
-
-
-
- .form-select {
-  color: rgba(10, 4, 60, 0.50);
-} 
-
-  .input:-internal-autofill-selected {
-    background-image: inherit;
-  }
-
-
-
-
-
-
-
-  .overflow-height {
-    max-height: 800px;
-    overflow-x: hidden !important
-  }
-
-  .main-content .overflow-auto.full-height {
-    height: calc(100vh - 250px);
-    overflow-x: hidden !important;
-  }
-
-  #avatar_welcome section.footer .male {
-    bottom: 2%;
-    left: 10%;
-  }
-
-  #avatar_welcome section.footer .female {
-    bottom: 2%;
-    right: 10%;
-  }
-
-  .main-content .overflow-auto.full-height-350 {
-    height: calc(100vh - 350px);
-    overflow-x: hidden !important;
-  }
-
-  .overflow-auto.full-height-100 {
-    height: calc(100vh - 100px);
-    overflow-x: hidden !important;
-  }
-
-  
-
-
-
-  .bg-retirement-home {
-    background-image: url(/images/needs/retirement/bg-home.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-  .needs-home-avatar {
-    z-index: 1;
-    width:100%;
-  }
-  .needs-home-avatar img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .retirement-coverage {
-    background-image: url(/images/needs/retirement/bg-coverage.jpg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-
-.coverage-avatar {
-  z-index: 10;
-}
-.coverage-avatar img.self-avatar{
-  width: 20vh;
-}
-.coverage-avatar img.spouse-avatar{
-  width: 18vh;
-}
-.coverage-avatar img.kid-avatar{
-  width: 17vh;
-}
-.coverage-avatar img.parent-avatar{
-  width: 35vh;
-}
-
-
-  .bg-image {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
-  }
-
-  .bg-image-avatar {
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: -1;
-    background-position: center right;
-    left: 30px;
-    top: 10px;
-  }
-
-  .protection-home {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .avatar-content {
-    margin-top: 14.75rem;
-  }
-
-  .male-avatar {
-    left: 160px;
-    bottom: 25px;
-    transform: scale(0.7);
-
-  }
-
-  .female-avatar {
-    right: 100px;
-    bottom: 10px;
-    transform: scale(0.7);
-  }
-
-  .male-avatar-character {
-    left: 32%;
-  }
-
-  .parent-father {
-    left: 0;
-    top: 30px;
-  }
-
-  .parent-mother {
-    left: 170px;
-    top: 60px;
-  }
-
-  .spouse {
-    right: 90px;
-    top: 50px;
-  }
-
-  .children-boy {
-    top: 180px;
-    right: 50px;
-  }
-
-  .children-girl {
-    right: 100px;
-    top: 290px;
-
-  }
-
-  img.male-avatar,
-  img.female-avatar {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-
-
-
-  .nav-header {
-    margin-top: 13.063rem;
-  }
-
-  .text-scroll {
-    max-height: 67vh;
-    overflow-y: auto;
-  }
-
-
-
-
-  @media (min-width: 576px) {
-    .h-sm-100 {
-      height: 100%;
-    }
-  }
-
-
-
-  input#flexRadioDefault1,
-  input#flexRadioDefault2 {
-    margin-top: 8px;
-  }
-
-  .form-check-input {
-    transform: scale(1.2);
-  }
-
-  .bg-welcome {
-    z-index: -1;
-  }
-
-  .p-basic-details {
-    padding-left: 5.438rem;
-    padding-right: 6.875rem;
-  }
-
-  .main-vh {
-    height: 87vh;
-  }
-
-  .sticky-bottom {
-    z-index: 1019;
-  }
-
- 
-
-
-
-
-
-
-
-
-
-
-  .btn-avatar {
-    border: 0;
-  }
-
-  .btn-skip {
-    padding-left: 2.813rem;
-    padding-right: 2.813rem;
-  }
-
-  .btn-exit:hover {
-    background-color: #ffffff;
-    color: #C21B17;
-  }
-
-
-  .float-text {
-    top: 20px;
-    right: 10px;
-    padding: 10px;
-  }
-
-  .min-height-100 {
-    height: 100vh;
-  }
-
-  .bg-needs {
-    background-image: url('/images/needs/protection/bg-home.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-  }
-
-  .font-color-default {
-    color: #000;
-  }
-
-  .bg-btn_bar {
-    background-color: #F0F0F0;
-  }
-
-  .bg-needs_text {
-    background-color: #E9E9E9;
-  }
-
-
-
-  @media only screen and (min-width: 768px) {
-    .min-height-100 {
-      height: auto;
-    }
-
-   
-  }
-
-  @media only screen and (max-width: 767px) {
-    
-    #home {
-      background-size: cover;
-    }
-
-    
-
-
-
-
-  }
-
-  @media only screen and (min-width: 576px) {
-    
-
-    
-  }
-
-
-
-
-
-  .timeline-item-needs {
-    position: relative;
-    margin-bottom: 53px;
-    padding-right: 73px;
-  }
-
-  .timeline-item-needs:first-child::before {
-    display: none;
-  }
-  
-  
-
-#bm {
-  height:200px;
-}
-
-
-
-
-  #left-container {
-    width: 120px;
-    height: 120px;
-    background-color: lightgreen;
-    border-radius: 50%;
-    padding: 10px;
-  }
-*/
-
-  

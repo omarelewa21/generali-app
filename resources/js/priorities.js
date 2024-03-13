@@ -3,9 +3,8 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
-const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || currentURL.endsWith(queryString))) {
+if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const urlParams = new URLSearchParams(window.location.search);
     const paramValue = urlParams.get('transaction_id');
@@ -39,8 +38,9 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
     } else {
         // Sent checkbox value to controller
         var checkboxValues = {};
+
         //Assign the needs sequence
-        const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss'];
+        const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss', 'others'];
 
         // First set all to true
         $('input[type="checkbox"]').each(function() {
@@ -48,7 +48,7 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
             if(priority){
                 for (var key in priority) {
                     var value = priority[key];
-                    if (value == 'true') {
+                    if (value === 'true') {
                         checkboxValues[key] = true;
                         $('#' + key).prop('checked', true);
                     }
@@ -113,11 +113,16 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
                         document.getElementById('priorityNext').setAttribute('href', '/health-medical');
                         break;
                     }
-
-                    else {
+                    else if (checkboxId === 'debt-cancellation_discuss') {
                         document.getElementById('priorityNext').setAttribute('href', '/debt-cancellation');
                         break;
                     }
+                    else {
+                        document.getElementById('priorityNext').setAttribute('href', '/existing-policy');
+                        break;
+                    }
+                } else{
+                    document.getElementById('priorityNext').setAttribute('href', '/financial-statement/monthly-goals');
                 }
             }
         });
@@ -149,18 +154,10 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
                         image.style.display = 'block';
                     }
                 });
-            }
 
-            // Get the list of unchecked checkboxes
-            const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
-
-            // Check if there are unchecked checkboxes
-            if (uncheckedCheckboxes.length > 0) {
-                // Iterate through the sequence of content checkboxes
                 for (const checkboxId of contents) {
-                    // Check if the current checkbox is unchecked
                     if (checkboxValues[checkboxId] === true) {
-                        // Check the sequence and redirect accordingly
+                        // Assign link based on the sequence
                         if (checkboxId === 'protection_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '/protection');
                             break;
@@ -185,13 +182,58 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs) || curren
                             document.getElementById('priorityNext').setAttribute('href', '/health-medical');
                             break;
                         }
-
-                        else {
+                        else if (checkboxId === 'debt-cancellation_discuss') {
                             document.getElementById('priorityNext').setAttribute('href', '/debt-cancellation');
+                            break;
+                        }
+                        else {
+                            document.getElementById('priorityNext').setAttribute('href', '/existing-policy');
+                            break;
+                        }
+                    } else{
+                        document.getElementById('priorityNext').setAttribute('href', '/financial-statement/monthly-goals');
+                    }
+                }
+            }
+            // Get the list of unchecked checkboxes
+            const uncheckedCheckboxes = contents.filter(checkboxId => checkboxValues[checkboxId] === false);
+
+            // Check if there are unchecked checkboxes
+            if (uncheckedCheckboxes.length > 0) {
+                // Iterate through the sequence of content checkboxes
+                for (const checkboxId of contents) {
+                    // Check if the current checkbox is unchecked
+                    if (checkboxValues[checkboxId] === true) {
+                        // Check the sequence and redirect accordingly
+                        if (checkboxId === 'protection_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/protection');
+                            break;
+                        } else if (checkboxId === 'retirement_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/retirement');
+                            break;
+                        } else if (checkboxId === 'education_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/education');
+                            break;
+                        } else if (checkboxId === 'savings_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/savings');
+                            break;
+                        } else if (checkboxId === 'investments_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/investment');
+                            break;
+                        } else if (checkboxId === 'health-medical_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/health-medical');
+                            break;
+                        } else if (checkboxId === 'debt-cancellation_discuss') {
+                            document.getElementById('priorityNext').setAttribute('href', '/debt-cancellation');
+                            break;
+                        } else{
+                            document.getElementById('priorityNext').setAttribute('href', '/existing-policy');
                             break;
                         }
                         // Break out of the loop once the first unchecked checkbox is handled
                         break;
+                    } else{
+                        document.getElementById('priorityNext').setAttribute('href', '/financial-statement/monthly-goals');
                     }
                 }
             } else {

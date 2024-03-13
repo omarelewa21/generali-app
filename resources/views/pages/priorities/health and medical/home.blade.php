@@ -51,15 +51,15 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         @php
-                                            if ($investmentPriority === 'true' || $investmentPriority === true) {
+                                            if ($investmentPriority === 'true') {
                                                 $route = route('investment.gap');
-                                            } elseif ($savingsPriority === 'true' || $savingsPriority === true) {
+                                            } elseif ($savingsPriority === 'true') {
                                                 $route = route('savings.gap');
-                                            } elseif ($educationPriority === 'true' || $educationPriority === true) {
+                                            } elseif ($educationPriority === 'true') {
                                                 $route = route('education.gap');
-                                            } elseif ($retirementPriority === 'true' || $retirementPriority === true) {
+                                            } elseif ($retirementPriority === 'true') {
                                                 $route = route('retirement.gap');
-                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                            } elseif ($protectionPriority === 'true') {
                                                 $route = route('protection.gap');
                                             }
                                             else {
@@ -79,22 +79,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
-    var healthPriority = '{{$healthPriority}}';
+    var needs_priority = '{{$healthPriority}}';
 </script>
 @endsection
