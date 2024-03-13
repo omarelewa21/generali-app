@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('full_name')->nullable()->index();
             $table->string('gender')->nullable();
             $table->string('year_support')->nullable();
-            $table->timestamp('dob')->nullable(); 
+            $table->string('dob')->nullable(); 
             $table->integer('age')->nullable();
             $table->string('marital_status')->nullable();
             $table->timestamps();
