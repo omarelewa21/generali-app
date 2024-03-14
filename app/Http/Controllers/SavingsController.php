@@ -451,7 +451,7 @@ class SavingsController extends Controller
             isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
                 return redirect()->route('existing.policy');
             } else{
-                return redirect()->route('summary.monthly-goals');
+                return redirect()->route('financial.statement.monthly.goals');
             }
         }
     }

@@ -146,7 +146,7 @@ class SummaryController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        return redirect()->route('summary.expected-income');
+        return redirect()->route('financial.statement.expected.income');
     }
     public function validateSummaryExpectedIncome(Request $request,TransactionService $transactionService, FinancialService $financialService)
     {
@@ -204,7 +204,7 @@ class SummaryController extends Controller
         $request->session()->put('customer_details', $customerDetails);
 
         if ($selectedExpectingInput === 'Yes'){
-            return redirect()->route('summary.increment-amount');
+            return redirect()->route('financial.statement.increment.amount');
         }
         else{
             return redirect()->route('summary');

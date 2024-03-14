@@ -2779,13 +2779,15 @@ class PriorityController extends Controller
                 session(['customer_details.priorities.' . $value['priority']  => $value['discuss']]);
             }
 
-            $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement->toArray();
+            $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement;
+
 
             if($customerFinancial){
-               
-                session(['customer_details.financialStatement.amountAvailable'  => $customerFinancial['amount_available']]);
-                session(['customer_details.financialStatement.isChangeinAmount'  => $customerFinancial['change_in_amount']]);
-                session(['customer_details.financialStatement.approximateIncrementAmount'  => $customerFinancial['increment_amount']]);
+                $cFinancial = $customerFinancial->toArray();
+
+                session(['customer_details.financialStatement.amountAvailable'  => $cFinancial['amount_available']]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $cFinancial['change_in_amount']]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $cFinancial['increment_amount']]);
             }
         }
         return view('pages/summary/monthly-goals');

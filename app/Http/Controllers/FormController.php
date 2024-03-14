@@ -1330,7 +1330,7 @@ class FormController extends Controller {
             }
 
 
-            return redirect()->route('summary.monthly-goals');
+            return redirect()->route('financial.statement.monthly.goals');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
