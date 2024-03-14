@@ -383,8 +383,6 @@ button.choice[data-required=""]{
     }
     .calculator-page .content-needs-grey,
     #risk-profile .content-needs-grey,
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey,
     .summary-overview .content-needs-grey{
         grid-auto-rows: 0vh 0vh 70vh;
     }
@@ -400,12 +398,12 @@ button.choice[data-required=""]{
     /* .coverage .content-needs-grey{
         grid-auto-rows: 15vh 10vh 50vh;
     } */
-    /* .wrapper-bottom-grey{
+    .wrapper-bottom-grey{
         grid-template:
         "header" 0vh
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
-    } */
+    }
     .pe-sm-0{
         padding-right: 0 !important;
     }
@@ -436,10 +434,10 @@ button.choice[data-required=""]{
     /* .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
     } */
-    /* .summary-page .wrapper-bottom-grey,
+    .summary-page .wrapper-bottom-grey,
     #savings-annual-return .wrapper-bottom-grey{
         grid-template-rows: 0vh 100vh 0vh;
-    } */
+    }
     .summary-page .bottom-content .graph-col.h-100{
         height: fit-content !important;
     }
@@ -456,20 +454,12 @@ button.choice[data-required=""]{
     #education-amount-needed .bottom-content .h-sm-100{
         justify-content: center;
     }
-    #risk-profile .calculatorContent,
-    #savings-risk-profile .calculatorContent,
-    #investment-risk-profile .calculatorContent{
+    #risk-profile .calculatorContent{
         text-align: center;
     }
     #risk-profile #high-risk-potential-content .col-12.d-flex,
     #risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #risk-profile #low-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #low-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #low-risk-potential-content .col-12.d-flex{
+    #risk-profile #low-risk-potential-content .col-12.d-flex {
         justify-content: center;
     }
     .bg-hnm {
@@ -571,9 +561,7 @@ button.choice[data-required=""]{
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }
-    #risk-profile .content-needs-grey,
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey{
+    #risk-profile .content-needs-grey{
         grid-template-rows: 0vh 65vh;
     }
     .w-md-50{

@@ -254,53 +254,6 @@ class InvestmentController extends Controller
 
         return redirect()->route('risk.profile',$transactionData);
     }
-
-    // public function validateInvestmentRiskProfile(Request $request, TransactionService $transactionService){
-
-    //     $customMessages = [
-    //         'investmentRiskProfileInput.required' => 'Please select a risk level.',
-    //         'investmentRiskProfileInput.in' => 'Invalid risk level selected.',
-    //         'investmentPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
-    //     ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'investmentRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-    //         'investmentPotentialReturnInput' => 'required_if:investmentRiskProfileInput,High Risk,Medium Risk,Low Risk',
-            
-    //     ], $customMessages);
-
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $investmentRiskProfileInput = $request->input('investmentRiskProfileInput');
-    //     $investmentPotentialReturnInput = $request->input('investmentPotentialReturnInput');
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing investments_needs from the session
-    //     $advanceDetails = $customerDetails['selected_needs']['need_5']['advance_details'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $advanceDetails = array_merge($advanceDetails, [
-    //         'risk_profile' => $investmentRiskProfileInput,
-    //         'potential_return' => $investmentPotentialReturnInput
-    //     ]);
-
-    //     // Set the updated investments_needs back to the customer_details session
-    //     $customerDetails['selected_needs']['need_5']['advance_details'] = $advanceDetails;
-
-        // Store the updated customer_details array back into the session
-        // $request->session()->put('customer_details', $customerDetails);
-        // $transactionService->handleTransaction($request,$customerDetails);
-
-        // $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        // // Process the form data and perform any necessary actions
-        // return redirect()->route('investment.gap',$transactionData);
-    // }
     
     public function submitInvestmentGap(Request $request, TransactionService $transactionService){
 
