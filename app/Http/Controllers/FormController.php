@@ -83,6 +83,8 @@ class FormController extends Controller {
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
                 $countryCode = $parsedPhoneNumber->getCountryCode();
+                $cleanPhoneNumber = $parsedPhoneNumber->getNationalNumber();
+                Log::debug($cleanPhoneNumber);
                 $parsedcountryCode = '+' . $countryCode;
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
@@ -126,7 +128,7 @@ class FormController extends Controller {
 
             // Store the updated customer_details array back into the session
             $request->session()->put('customer_details', $customerDetails);
-
+            Log::debug($customerDetails);
             //save into session storage
             $transactionService->handleTransaction($request,$customerDetails);
 
