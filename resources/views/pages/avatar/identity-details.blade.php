@@ -32,8 +32,8 @@
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        <div id="lottie-male-animation" class="changeImage"></div>
+                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
+                        <div id="lottie-male-animation"></div>
                     </div>
                 </section>
             </div>
@@ -305,6 +305,8 @@
 </div>
 
 <script>
+var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
@@ -392,7 +394,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
-
 </script>
 
 @endsection

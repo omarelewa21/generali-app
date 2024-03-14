@@ -26,21 +26,21 @@
 
 <div id="protection_existing_policy" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey">
+        <div class="row wrapper-bottom-grey-calculator">
             <div class="header col-12">
-                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+            </div>
+            <form novalidate action="{{route('validate.protection.existing.policy')}}" method="POST" class="content-needs-grey-calculator">
+                @csrf
+                <div class="row calculator bg-primary d-md-none calculatorMob d-flex align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
                     </div>
                     <div class="col-6 m-auto">
-                        <p class="text-white display-6 lh-base text-end m-0 pe-4">Total Protection Fund Needed</p>
+                        <p class="text-white display-6 text-end m-0 pe-4">Total Protection Fund Needed</p>
                     </div>
                 </div>
-            </div>
-            <form novalidate action="{{route('validate.protection.existing.policy')}}" method="POST" class="content-needs-grey">
-                @csrf
-                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -49,7 +49,7 @@
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h1 id="TotalProtectionFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
-                                <p class="text-white display-6 lh-base text-center">Total Protection Fund Needed</p>
+                                <p class="text-white display-6 text-center">Total Protection Fund Needed</p>
                             </div>
                         </div>
                     </div>

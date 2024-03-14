@@ -25,10 +25,10 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        {{-- <div id="lottie-male-animation" class="changeImage"></div> --}}
-                        <div class="position-relative imageContainerMarried"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center">
+                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
+                        <div id="lottie-male-animation" class="changeImage"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
                 </section>
                 <div class="bottomObeserver"></div>

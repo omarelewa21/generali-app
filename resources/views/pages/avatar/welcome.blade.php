@@ -37,33 +37,14 @@
             <section class="footer-main">
                 <div class="d-flex justify-content-center align-items-center">
                     <!-- <img src="{{ asset('images/avatar-welcome/main-male.png') }}" width="auto" height="100%" alt="Male Avatar"> -->
-                    <div id="lottie-male-animation" class="homeVector" style="width:auto; height:100%"></div>
+                    <div id="lottie-avatar-male-animation" class="homeVector" style="width:auto; height:100%"></div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
                     <!-- <img src="{{ asset('images/avatar-welcome/main-female.png') }}" width="auto" height="100%" alt="Female Avatar"> -->
-                    <div id="lottie-female-animation" class="homeVector" style="width:auto; height:100%"></div>
+                    <div id="lottie-avatar-female-animation" class="homeVector" style="width:auto; height:100%"></div>
                 </div>
             </section>
         </div>
     </div>
 </div>
-
-<script>
-    // Load the animation using Lottie
-    const animationMale = lottie.loadAnimation({
-        container: document.getElementById('lottie-male-animation'),
-        renderer: 'svg', 
-        loop: true,
-        autoplay: true,
-        path: '{{ asset('images/avatar-welcome/male-avatar.json') }}'
-    });
-
-    const animationFemale = lottie.loadAnimation({
-        container: document.getElementById('lottie-female-animation'),
-        renderer: 'svg', 
-        loop: true,
-        autoplay: true,
-        path: '{{ asset('images/avatar-welcome/female-avatar.json') }}'
-    });
-</script>
 @endsection

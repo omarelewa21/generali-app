@@ -33,7 +33,7 @@
             </div>
             <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey-calculator">
                 @csrf
-                <div class="calculator bg-primary row d-md-none calculatorMob d-flex align-items-center">
+                <div class="row calculator bg-primary d-md-none calculatorMob d-flex align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')

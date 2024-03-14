@@ -32,6 +32,8 @@
                     <div class="position-relative imageContainerParents"></div>
                     <div class="position-relative d-flex justify-content-center imageContainerSpouse">
                         <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        {{-- <div id="lottie-male-animation" class="changeImage"></div>
+                        <div class="position-relative imageContainerMarried"></div> --}}
                     </div>
                     <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
                 </section>

@@ -40,7 +40,7 @@
                 <section class="heading d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6">
+                            <div class="col-12">
                                 <h2 class="display-5 fw-bold text-center m-0">I want to plan a happy retirement for my:</h2>
                             </div>
                         </div>

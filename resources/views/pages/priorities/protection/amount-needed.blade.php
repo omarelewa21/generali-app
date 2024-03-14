@@ -26,10 +26,13 @@
 
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey">
+        <div class="row wrapper-bottom-grey-calculator">
             <div class="header col-12">
-                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
+            </div>
+            <form novalidate action="{{route('validate.protection.amount.needed')}}" method="POST" class="content-needs-grey-calculator">
+                @csrf
+                <div class="row calculator bg-primary d-md-none calculatorMob d-flex align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $existingPolicyAmount === null || $existingPolicyAmount === '' 
@@ -41,13 +44,10 @@
                         </h1>
                     </div>
                     <div class="col-6 m-auto">
-                        <p class="text-white display-6 lh-base text-end pe-4 m-0">Total Protection Fund Needed</p>
+                        <p class="text-white display-6 text-end pe-4 m-0">Total Protection Fund Needed</p>
                     </div>
                 </div>
-            </div>
-            <form novalidate action="{{route('validate.protection.amount.needed')}}" method="POST" class="content-needs-grey">
-                @csrf
-                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
+                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -63,22 +63,20 @@
                                         : number_format(floatval($totalProtectionNeeded) - floatval($existingPolicyAmount)))
                                     }}
                                 </h1>
-                                <p class="text-white display-6 lh-base text-center">Total Protection Fund Needed</p>
+                                <p class="text-white display-6 text-center">Total Protection Fund Needed</p>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section class="bottom-content z-md-1">
+                <section class="content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                            <!-- <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg"> -->
                                 <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
-                                <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
-                                    <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
+                                    <h2 class="display-5 fw-bold">If anything should happen to me, I’d like to support my family with</h2>
                                     <p class="display-5 fw-bold currencyField">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-start text-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
                                     / month for
