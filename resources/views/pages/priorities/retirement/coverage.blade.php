@@ -37,7 +37,7 @@
             <form novalidate action="{{route('validate.retirement.coverage.selection')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading d-flex align-items-center">
+                <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-12">
@@ -52,7 +52,7 @@
                             @if ($selfData)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
-                                        <div class="d-flex justify-content-start" style="flex-direction: column;">
+                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
                                             <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
@@ -62,7 +62,7 @@
                             @if ($spouseDataName)
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
-                                        <div class="d-flex justify-content-start" style="flex-direction: column;">
+                                        <div class="d-flex justify-content-end" style="flex-direction: column;">
                                             <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>

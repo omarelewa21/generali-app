@@ -32,7 +32,7 @@
             <form novalidate action="{{route('validate.education.coverage.selection')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading d-flex align-items-center">
+                <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-xxl-4 col-xl-6">

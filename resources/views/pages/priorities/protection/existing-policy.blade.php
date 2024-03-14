@@ -26,13 +26,10 @@
 
 <div id="protection_existing_policy" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey-calculator">
+        <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
-            </div>
-            <form novalidate action="{{route('validate.protection.existing.policy')}}" method="POST" class="content-needs-grey-calculator">
-                @csrf
-                <div class="row calculator bg-primary d-md-none calculatorMob d-flex align-items-center">
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="row bg-primary d-md-none calculatorMob">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
                     </div>
@@ -40,7 +37,10 @@
                         <p class="text-white display-6 text-end m-0 pe-4">Total Protection Fund Needed</p>
                     </div>
                 </div>
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+            </div>
+            <form novalidate action="{{route('validate.protection.existing.policy')}}" method="POST" class="content-needs-grey">
+                @csrf
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -63,7 +63,7 @@
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
                                     <h2 class="display-5 fw-bold lh-sm">Luckily, I do have an existing life insurance policy.</h2>
-                                    <p class="d-flex pt-5">
+                                    <p class="d-flex pt-5 pb-3 pb-md-0">
                                         <span class="me-5 d-flex">
                                             <input type="radio" class="needs-radio @error('existing_policy_amount') checked-yes @enderror {{$existingPolicy === 'yes' ? 'checked-yes' : ''}}" id="yes" name="protection_existing_policy" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_policy_amount').attr('required',true);"
                                             {{ ($existingPolicy && $existingPolicy === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
