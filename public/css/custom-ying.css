@@ -229,41 +229,12 @@
     display: grid;
     grid-template-rows: 100%;
 }
-/* .single.room-selection-content {
-    grid-template-columns: 15% 60% 25%;
-    // grid-template-columns: 20% 55% 25%; 
-} */
-/* .patient,
-.patient-2 {
-    grid-template-areas:
-        "windows"
-        "avatar-patient";
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10% 90%;
-}
-.avatar-patient{
-    grid-area: avatar-patient;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-}
-.single-patient,
-.single-patient-2{
-    display: flex;
-    padding: 0;
-}
-.single-patient{
-    justify-content: start;
-}
-.single-patient-2{
-    justify-content: end;
-} */
 
 /* Needs Summary Page */
-/* .summary-page .wrapper-bottom-grey{
+.summary-page .wrapper-bottom-grey{
     grid-template-rows: unset;
     overflow-y: auto;
-} */
+}
 .summary-page.secondary-default-bg{
     background-position: center bottom 8% !important;
 }
@@ -432,10 +403,10 @@
     /* .summary-page .wrapper-bottom-grey{
         overflow-y:unset;
     } */
-    /* #retirement_period .tertiary-mobile-bg{
+    #retirement_period .tertiary-mobile-bg{
         background-size: contain;
         background-position: left center;
-    } */
+    }
     .calculator-page .bottom-content a{
         margin:0px 12px;
     }
