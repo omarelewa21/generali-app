@@ -485,9 +485,6 @@
         padding-left: 0px;
     }
     /* Coverage Page */
-    .coverage .content-needs-grey {
-        grid-auto-rows: 8vh 12vh 57vh;
-    }
     .tertiary-default-bg.calculator-page{
         background: none;
     }
