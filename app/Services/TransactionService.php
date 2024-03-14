@@ -22,7 +22,7 @@ class TransactionService
             // temporarily use this agent 
             $agentId = Agent::find(1)->id;
             $route = strval(request()->path());
-            $id = session('transaction_id') ? session('customer_details.transaction_id') :"";
+            $id = session('transaction_id') ?? session('customer_details.transaction_id') ?? "";
             
             $transaction = Transaction::updateOrCreate(
                 ['id' => $id ,'customer_id' => $customerId , 'agent_id' => $agentId],

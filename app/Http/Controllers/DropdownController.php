@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Title;
 use App\Models\idtype;
 use App\Models\Company;
@@ -151,7 +152,7 @@ class DropdownController extends Controller
             }
 
             if ($customerDependent) {
-
+                $foundDependent = false; 
                 foreach ($customerDependent as $dependent) {
     
                     if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
@@ -166,19 +167,34 @@ class DropdownController extends Controller
                     {
                         $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
                     }
+
+                    $foundDependent = true; 
                 }
-        
-                $familyDependent['children_data'] = $childData;
-                $familyDependent['parents_data'] = $parentData;
-                $familyDependent['siblings_data'] = $siblingData;
-            
-                foreach ($familyDependent as $key => $value) {
-                    if (isset($value)) {
-                
-                        $substring = strstr($key, '_data',true);
-                        session(['customer_details.family_details.' . $substring => true]);
-                        session(['customer_details.family_details.' . $key => $value]);
+
+                $familyDependent = [];
+
+
+                if ($foundDependent) {
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
                     }
+                    if (!empty($parentData ) && !empty($parentData)) {
+                        $familyDependent['parents_data'] = $parentData;
+                    }
+                    if (isset($siblingData) && !empty($siblingData)) {
+                        $familyDependent['siblings_data'] = $siblingData;
+                    }
+                        
+                    foreach ($familyDependent as $key => $value) {
+                        if (isset($value)) {
+                            $substring = strstr($key, '_data', true);
+                            session(['customer_details.family_details.' . $substring => true]);
+                            session(['customer_details.family_details.' . $key => $value]);
+                        }
+                    }
+                } else {
+                    // Unset $familyDependent if no dependent is found
+                    unset($familyDependent);
                 }
             }
             
@@ -255,9 +271,11 @@ class DropdownController extends Controller
                 session(['customer_details.family_details.spouse' => true ]); 
                 session(['customer_details.family_details.spouse_data' => $customerSpouse ]);   
             }
- 
-            if ($customerDependent) {
 
+            $familyDependent = [];
+
+            if ($customerDependent) {
+                $foundDependent = false;
                 foreach ($customerDependent as $dependent) {
     
                     if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
@@ -272,19 +290,30 @@ class DropdownController extends Controller
                     {
                         $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
                     }
+                    $foundDependent = true;
                 }
         
-                $familyDependent['children_data'] = $childData;
-                $familyDependent['parents_data'] = $parentData;
-                $familyDependent['siblings_data'] = $siblingData;
-            
-                foreach ($familyDependent as $key => $value) {
-                    if (isset($value)) {
-                
-                        $substring = strstr($key, '_data',true);
-                        session(['customer_details.family_details.' . $substring => true]);
-                        session(['customer_details.family_details.' . $key => $value]);
+                if ($foundDependent) {
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
                     }
+                    if (!empty($parentData ) && !empty($parentData)) {
+                        $familyDependent['parents_data'] = $parentData;
+                    }
+                    if (isset($siblingData) && !empty($siblingData)) {
+                        $familyDependent['siblings_data'] = $siblingData;
+                    }
+                        
+                    foreach ($familyDependent as $key => $value) {
+                        if (isset($value)) {
+                            $substring = strstr($key, '_data', true);
+                            session(['customer_details.family_details.' . $substring => true]);
+                            session(['customer_details.family_details.' . $key => $value]);
+                        }
+                    }
+                } else {
+                    // Unset $familyDependent if no dependent is found
+                    unset($familyDependent);
                 }
             }
         }
@@ -531,7 +560,89 @@ class DropdownController extends Controller
         }
 
         if ($transactionId) {
-            
+        
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+          
+            if($customerId){
+                $customerId['habits']= $customerId['habit'];
+                $customerId['dob'] = Carbon::parse($customerId['dob'])->format('Y-m-d');
+                unset($customerId['habit']);
+    
+                session(['customer_details.identity_details' => $customerId->toArray(),
+                        'customer_details.basic_details' => $customerId->toArray()]
+                    );
+            }
+
+            $avatar = optional(Customer::with('avatar')->where('id',$customerId)->first())->avatar;
+            $avatarImage = $avatar->image ?? 'images/avatar-general/gender-male.svg';
+            session(['customer_details.avatar.image' => $avatarImage]);
+
+            $customerFamily = Customer::with(['spouse', 'dependents'])->find($customer->id);
+
+            if ($customerFamily && $customerFamily->spouse) {
+                $customerSpouse = $customerFamily->spouse->toArray();
+
+                session(['customer_details.family_details.spouse' => true]);
+            } else {
+                $customerSpouse = []; // Or any other default value you want to assign
+            }
+
+            session(['customer_details.family_details.spouse_data' => $customerSpouse]);
+
+
+            if ($customerFamily && $customerFamily->dependents) {
+                $customerDependent = $customerFamily->dependents->toArray();
+            } else {
+                $customerDependent = []; // Or any other default value you want to assign
+            }
+
+            if ($customerDependent) {
+                $foundDependent = false; 
+                foreach ($customerDependent as $dependent) {
+    
+                    if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
+                    {
+                        $parentData[lcfirst($dependent['relation'])] = $dependent;
+                    }
+                    elseif ($dependent['relation'] == 'Sibling') 
+                    {
+                        $siblingData = $dependent;
+                    }
+                    else // child 
+                    {
+                        $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
+                    }
+
+                    $foundDependent = true; 
+                }
+
+                $familyDependent = [];
+
+
+                if ($foundDependent) {
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
+                    }
+                    if (!empty($parentData ) && !empty($parentData)) {
+                        $familyDependent['parents_data'] = $parentData;
+                    }
+                    if (isset($siblingData) && !empty($siblingData)) {
+                        $familyDependent['siblings_data'] = $siblingData;
+                    }
+                        
+                    foreach ($familyDependent as $key => $value) {
+                        if (isset($value)) {
+                            $substring = strstr($key, '_data', true);
+                            session(['customer_details.family_details.' . $substring => true]);
+                            session(['customer_details.family_details.' . $key => $value]);
+                        }
+                    }
+                } else {
+                    // Unset $familyDependent if no dependent is found
+                    unset($familyDependent);
+                }
+            }
+
             $customerNeed = Customer::with('customerNeeds')->find($customer->id)->customerNeeds->toArray();
             $customerNumber = [];
 
@@ -543,13 +654,71 @@ class DropdownController extends Controller
                 $customerNumber['need_'.$oriNumber] = $value;                 
             }
             ksort($customerNumber);
-
-            // dd($customerNumber);
-
-            session(['customer_details.selected_needs' => $customerNumber]);
-        
-            return view('pages/summary/overview');
+            session(['customer_details.selected_needs' => $customerNumber]);    
         }
+        return view('pages/summary/overview');
+    }
+
+    public function summary(Request $request)
+    {
+        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
+        if ($transactionId) {
+        
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+          
+            if($customerId){
+                $customerId['habits']= $customerId['habit'];
+                $customerId['dob'] = Carbon::parse($customerId['dob'])->format('Y-m-d');
+                unset($customerId['habit']);
+    
+                session(['customer_details.identity_details' => $customerId->toArray(),
+                        'customer_details.basic_details' => $customerId->toArray()]
+                    );
+            }
+
+            $customerModel = Customer::with(['avatar','financialStatement','priorities'])->where('id', $customer->id)->first();
+            $avatarImage = $customerModel->replicate()->avatar->image;
+            $financialData =  $customerModel->replicate()->financialStatement;
+
+            // dd($financialData);
+            $priorityDbData =  $customerModel->replicate()->priorities->toArray();
+
+            session(['customer_details.avatar.image' => $avatarImage]);
+            
+            if($financialData){
+                session(['customer_details.financialStatement.amountAvailable'  => $financialData->amount_available]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $financialData->change_in_amount]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $financialData->increment_amount]);
+            }
+
+            $priorityData = [];
+
+            foreach ($priorityDbData as $cpValue) {
+                $priorityData[$cpValue['sequence']-1] = $cpValue['priority'];
+            }
+
+            if ($priorityData) {
+                ksort($priorityData);
+
+                session(['customer_details.priorities_level' => $priorityData]);
+            }        
+
+        }
+
+        return view('pages/summary/summary');
     }
 
     public function existingPolicy()

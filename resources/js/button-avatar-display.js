@@ -544,7 +544,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
@@ -552,7 +552,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });
@@ -648,7 +648,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
@@ -656,7 +656,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });
@@ -696,7 +696,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
@@ -704,7 +704,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     urlInput.value = 'avatar.my.assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });

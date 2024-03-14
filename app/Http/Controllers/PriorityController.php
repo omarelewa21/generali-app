@@ -103,8 +103,10 @@ class PriorityController extends Controller
                 session(['customer_details.family_details.dependent.spouse_data' => $customerSpouse]);
             }
 
+            $familyDependent = [];
             if ($customerDependent) {
 
+                $foundDependent = false; 
                 foreach ($customerDependent as $dependent) {
     
                     if($dependent['relation'] == 'Father' || $dependent['relation'] == 'Mother')
@@ -119,26 +121,32 @@ class PriorityController extends Controller
                     {
                         $childData[strtolower(str_replace(' ', '_', $dependent['relation']))] = $dependent;
                     }
+                    $foundDependent = true;
                 }
-        
-                $familyDependent['children_data'] = $childData;
-                $familyDependent['parents_data'] = $parentData;
-                $familyDependent['siblings_data'] = $siblingData;
-            
-                foreach ($familyDependent as $key => $value) {
-                    if (isset($value)) {
-                        $substring = strstr($key, '_data',true);
-                        session(['customer_details.family_details.' . $substring => true]);
-                        session(['customer_details.family_details.' . $key => $value]);
+
+                if ($foundDependent) {
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
                     }
+                    if (!empty($parentData ) && !empty($parentData)) {
+                        $familyDependent['parents_data'] = $parentData;
+                    }
+                    if (isset($siblingData) && !empty($siblingData)) {
+                        $familyDependent['siblings_data'] = $siblingData;
+                    }
+                        
+                    foreach ($familyDependent as $key => $value) {
+                        if (isset($value)) {
+                            $substring = strstr($key, '_data', true);
+                            session(['customer_details.family_details.' . $substring => true]);
+                            session(['customer_details.family_details.' . $key => $value]);
+                        }
+                    }
+                } else {
+                    // Unset $familyDependent if no dependent is found
+                    unset($familyDependent);
                 }
-              
-                $existingData = session('customer_details.family_details.dependent', []);
 
-                session(['customer_details.family_details.dependent.children_data' => $childData]);
-                $childArray = session('customer_details.family_details.dependent.children_data');
-
-                array_merge_recursive($existingData, $childArray);
             }
 
             $customerNeed = Customer::with('customerNeeds')->find($customerId)->customerNeeds->toArray();
@@ -371,7 +379,7 @@ class PriorityController extends Controller
             if ($dependent) {
 
                 $familyDependent = [];
-
+                $foundDependent = false; 
                 foreach ($dependent as $family) {
     
                     if($family['relation'] == 'Father' || $family['relation'] == 'Mother')
@@ -386,27 +394,33 @@ class PriorityController extends Controller
                     {
                         $childData[strtolower(str_replace(' ', '_', $family['relation']))] = $family;
                     }
+                    $foundDependent = true;
+                }
+
+                if($foundDependent){
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
+                    }
+                    if (!empty($parentData ) && !empty($parentData)) {
+                        $familyDependent['parents_data'] = $parentData;
+                    }
+                    if (isset($siblingData) && !empty($siblingData)) {
+                        $familyDependent['siblings_data'] = $siblingData;
+                    }
+
+                    foreach ($familyDependent as $key => $value) {
+                        if (isset($value)) {
+                            $substring = strstr($key, '_data', true);
+                            session(['customer_details.family_details.' . $substring => true]);
+                            session(['customer_details.family_details.' . $key => $value]);
+                        }
+                    }
+                }
+                else{
+                    unset($familyDependent);
                 }
         
-                $familyDependent['children_data'] = $childData;
-                $familyDependent['parents_data'] = $parentData;
-                $familyDependent['siblings_data'] = $siblingData;
-
-                session(['customer_details.family_details' => $familyDependent]);
-            
-                // foreach ($familyDependent as $key => $value) {
-                //     if (isset($value)) {
-                //         $substring = strstr($key, '_data',true);
-                //         session(['customer_details.family_details.' . $substring => true]);
-                //         session(['customer_details.family_details.' . $key => $value]);
-                //     }
-                // }
-              
-                // $existingData = session('customer_details.family_details.dependent', []);
-
-                // session(['customer_details.family_details.dependent.children_data' => $childData]);
-                // $childArray = session('customer_details.family_details.dependent.children_data');
-                // array_merge_recursive($existingData, $childArray);
+    
             }
            
             if ($customerDependent && $customerDependent->spouse) {
@@ -786,7 +800,7 @@ class PriorityController extends Controller
             if ($dependent) {
 
                 $familyDependent = [];
-
+                $foundDependent = false; 
                 foreach ($dependent as $family) {
     
                     if($family['relation'] == 'Father' || $family['relation'] == 'Mother')
@@ -801,13 +815,21 @@ class PriorityController extends Controller
                     {
                         $childData[strtolower(str_replace(' ', '_', $family['relation']))] = $family;
                     }
+                    $foundDependent = true;
                 }
-        
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
 
-                session(['customer_details.family_details' => $familyDependent]);
+                if($foundDependent)
+                {
+                    if (!empty($childData) && !empty($childData)) {
+                        $familyDependent['children_data'] = $childData;
+                    }
+
+                    session(['customer_details.family_details' => $familyDependent]);
+                }
+                else
+                {
+                    unset($familyDependent);
+                }
             }
         }
 
@@ -2731,9 +2753,48 @@ class PriorityController extends Controller
     //financial-statement
     public function monthlyGoals(Request $request)
     {
-        $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
-        $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
-        $approximateAmount = session('customer_details.financialStatement.approximateIncrementAmount');
+        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
+        if ($transactionId) {
+            $retirementPriorities = ['protection', 'retirement','education','savings','investments','health-medical','debt-cancellation'];
+
+            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($retirementPriorities) {
+                $query->whereIn('priority', $retirementPriorities);
+            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)->get()->toArray();
+
+            foreach ($prioritySequence as $value) {
+                session(['customer_details.priorities.' . $value['priority'] . '_discuss' => $value['discuss']]);
+                session(['customer_details.priorities.' . $value['priority']  => $value['discuss']]);
+            }
+
+            $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement->toArray();
+
+            if($customerFinancial){
+               
+                session(['customer_details.financialStatement.amountAvailable'  => $customerFinancial['amount_available']]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $customerFinancial['change_in_amount']]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $customerFinancial['increment_amount']]);
+            }
+        }
+        return view('pages/summary/monthly-goals');
+    }
+
+    public function expectedIncome(Request $request)
+    {
+        // $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
+        // $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
 
         $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
         
@@ -2761,42 +2822,59 @@ class PriorityController extends Controller
                 session(['customer_details.priorities.' . $value['priority']  => $value['discuss']]);
             }
 
-            // $customerNeed = Customer::with('customerNeeds')->find($customer->id)->customerNeeds->toArray();
+            $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement->toArray();
 
-            // foreach ($customerNeed as $value) {
-                
-            //     // N7 is debt cancellation need
-            //     if ($value['type'] == "N7") {
-
-            //         session(['customer_details.selected_needs.need_7.advance_details.remaining_years' => $value['remaining_year']]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.fund_percentage' => $value['fund_percentage']]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.insurance_amount' => $value['insurance_amount']]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.covered_amount' => $value['covered_amount']]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.existing_amount' => $value['existing_amount']]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.goals_amount' => $value['goals_amount']]);
-
-            //         $criticalIllnessAmount = json_decode($value['critical_illness_plan'],true);
-
-            //         session(['customer_details.selected_needs.need_7.advance_details.critical_illness' => $criticalIllnessAmount]);
-            //         session(['customer_details.selected_needs.need_7.advance_details.critical_illness_amount' => $criticalIllnessAmount['critical_illness_amount'] ?? NULL]);
-            //     }
-            // }
+            if($customerFinancial){
+               
+                session(['customer_details.financialStatement.amountAvailable'  => $customerFinancial['amount_available']]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $customerFinancial['change_in_amount']]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $customerFinancial['increment_amount']]);
+            }
         }
-        return view('pages/summary/monthly-goals');
-    }
-
-    public function expectedIncome(Request $request)
-    {
-        $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
-        $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
 
         return view('pages/summary/expected-income');
     }
 
     public function incrementAmount(Request $request)
     {
-        $approximateAmount = session('customer_details.financialStatement.approximateIncrementAmount');
-        $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
+        // $approximateAmount = session('customer_details.financialStatement.approximateIncrementAmount');
+        // $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
+
+        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
+        if ($transactionId) {
+            $retirementPriorities = ['protection', 'retirement','education','savings','investments','health-medical','debt-cancellation'];
+
+            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($retirementPriorities) {
+                $query->whereIn('priority', $retirementPriorities);
+            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)->get()->toArray();
+
+            foreach ($prioritySequence as $value) {
+                session(['customer_details.priorities.' . $value['priority'] . '_discuss' => $value['discuss']]);
+                session(['customer_details.priorities.' . $value['priority']  => $value['discuss']]);
+            }
+
+            $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement->toArray();
+
+            if($customerFinancial){
+               
+                session(['customer_details.financialStatement.amountAvailable'  => $customerFinancial['amount_available']]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $customerFinancial['change_in_amount']]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $customerFinancial['increment_amount']]);
+            }
+        }
 
         return view('pages/summary/increment-amount');
     }

@@ -24,7 +24,6 @@ class PriorityService
             $priorityList = ["protection","retirement","savings","education","debt-cancellation",
                              "health-medical","others","investments"];
             
-            Priority::whereNotIn('priority', $topPrioritiesButtonInput)->update(['sequence' => null]);
 
         
             foreach ($topPrioritiesButtonInput as $key => $value) {

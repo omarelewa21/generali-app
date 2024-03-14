@@ -1329,9 +1329,8 @@ class FormController extends Controller {
                 return response()->json(['error' => 'Missing Customer Id'], 400);
             }
 
-            $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-            return redirect()->route('summary.monthly-goals',$transactionData);
+            return redirect()->route('summary.monthly-goals');
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

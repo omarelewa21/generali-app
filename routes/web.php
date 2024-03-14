@@ -278,10 +278,10 @@ Route::get('/existing-policy', [DropdownController::class, 'existingPolicy'])->n
 
 Route::prefix('financial-statement')->group(function () {
 
-    Route::get('/monthly-goals',  [PriorityController::class, 'monthlyGoals'])->name('summary.monthly-goals');
+    Route::get('/monthly-goals',  [PriorityController::class, 'monthlyGoals'])->name('financial.statement.monthly.goals');
     Route::post('/monthly-goals', [SummaryController::class, 'validateSummaryMonthlyGoals'])->name('validate.summary.monthly.goals');
 
-    Route::get('/expected-income',  [PriorityController::class, 'expectedIncome'])->name('summary.expected-income');
+    Route::get('/expected-income',  [PriorityController::class, 'expectedIncome'])->name('financial.statement.expected.income');
     Route::post('/expected-income', [SummaryController::class, 'validateSummaryExpectedIncome'])->name('validate.summary.expected.income');
 
     Route::get('/increment-amount',  [PriorityController::class, 'incrementAmount'])->name('financial.statement.increment.amount');
@@ -289,11 +289,13 @@ Route::prefix('financial-statement')->group(function () {
 
 });
 
-Route::view('/summary', 'pages.summary.summary')->name('summary');
+// Route::view('/summary', 'pages.summary.summary')->name('summary');
 Route::view('/overview-new', 'pages.summary.overview-new')->name('overview-new');
 // Route::view('/overview', 'pages.summary.overview')->name('overview');
 
 Route::get('/overview', [DropdownController::class, 'overView'])->name('overview');
+Route::get('/summary', [DropdownController::class, 'summary'])->name('summary');
+
 
 
 // Sessions
