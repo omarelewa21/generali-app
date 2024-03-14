@@ -14,7 +14,7 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.json');
     $identityDetails = session('customer_details.identity_details') ?? $basicDetails;
     $selectedCountry = session('customer_details.identity_details.country', 'Malaysia');
     $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
@@ -32,7 +32,8 @@
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
+                        <div id="lottie-male-animation"></div>
                     </div>
                 </section>
             </div>
@@ -304,6 +305,8 @@
 </div>
 
 <script>
+var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
+
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');
     var idType = document.getElementById('idType');
@@ -391,7 +394,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 });
-
 </script>
 
 @endsection

@@ -48,7 +48,7 @@ class AvatarController extends Controller
             'image' => $genderImage,
             'skin_tone' => $skintone
         ];
-
+        Log::debug($customerDetails);
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 

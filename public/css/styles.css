@@ -369,9 +369,58 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
   background-color: #8995C8;
   opacity: 1;
 }
-
-.action_button_slider .slick-dots {
-  position: static;
+/* added KK code */
+.slick-scrollbar {
+  width: auto;
+  position: relative;
+  box-sizing: border-box;
+  flex-grow: 1;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+}
+ 
+.slick-scrollbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--scrollbar-width);
+  height: 100%;
+  background-color: #000;
+  transition: width 0.35s;
+}
+ 
+.slick-next,
+.slick-prev {
+  position: static !important;
+  transform: unset !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: 16px !important;
+  font-family: "Helvetica Neue", sans-serif !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+}
+ 
+.slick-next:before,
+.slick-prev:before {
+  content: unset !important;
+}
+ 
+.slick-track {
+  display: flex !important;
+}
+ 
+.slick-slide {
+  height: inherit !important;
+}
+ 
+#hospital-room-selection .slick-slide div {
+  height: 100%;
 }
 /* ============================== Alerts ============================== */
 .alert div.text {
@@ -691,6 +740,14 @@ button[data-required="selected"] img:not(button.choice[data-required="selected"]
   width: 100%;
 }
 
+button.choice:hover,
+button.choice[data-required="selected"],
+button.choice.default.selected,
+button.choice[data-required=""]{
+    background: none !important;
+    width: 100% !important;
+}
+
 /* ============================== Right Sidebar ============================== */
 .right-sidebar h1, .priorities-heading {
   font-family: 'Helvetica Neue', sans-serif;
@@ -933,6 +990,25 @@ h2.display-5, .currencyField {
 .tutorial {
   border-radius: 10px;
   border: 1px solid #cccccc;
+}
+
+/* ============================== Animations ============================== */
+
+#lottie-female-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 24%;
+}
+
+#lottie-female-animation svg {
+  padding-top: 50px;
+  width: auto!important;
+}
+
+#avatar_family_dependent #lottie-female-animation {
+  right: -28%;
 }
 
 /* ============================== Welcome Page ============================== */

@@ -322,11 +322,11 @@ h5.gap-value {
     /* pointer-events: none; */
 }
 
-.slick-arrow {
+/* .slick-arrow {
     display: flex;
     cursor: pointer;
     font-size: 50px;
-}
+} */
 
 .input-text {
     font-size: 2.125rem;

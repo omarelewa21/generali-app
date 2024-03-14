@@ -16,7 +16,7 @@
     // Retrieving values from the session
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
+    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.json');
     $fullName = session('customer_details.basic_details.full_name');
     $transactionId ??= request()->input('transaction_id');
 @endphp
@@ -59,8 +59,8 @@
                 </section>
                 <section class="avatar-design-placeholder bottom-avatar position-relative">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes">
-                        <!-- <div id="lottie-animation" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"></div> -->
+                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"> --}}
+                        <div id="lottie-animation"></div>
                     </div>
                 </section>
             </div>
@@ -135,14 +135,7 @@
         </div>
     </div>
 </div>
-
 <script>
-    const animationFemale = lottie.loadAnimation({
-        container: document.getElementById('lottie-animation'),
-        renderer: 'svg', 
-        loop: true,
-        autoplay: true,
-        path: '{{ asset('images/avatar-general/gender-female.json') }}'
-    });
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 </script>
 @endsection

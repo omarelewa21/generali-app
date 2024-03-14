@@ -12,13 +12,6 @@
     border: 1px solid #C21B17;
     color: #C21B17;
 }
-button.choice:hover,
-button.choice[data-required="selected"],
-button.choice.default.selected,
-button.choice[data-required=""]{
-    background: none !important;
-    width: 100% !important;
-}
 
 /* Change disabled border color */
 .disabled-color{
