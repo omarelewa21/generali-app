@@ -23,7 +23,7 @@ class DropdownController extends Controller
     {
         $countries = Country::all();
         $titles = Title::all();
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id'); 
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
 
@@ -79,7 +79,7 @@ class DropdownController extends Controller
         $idtypes = Idtype::all();
         $occupations = Occupation::all();
         $educationLevels = EducationLevel::all();
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         // Check if 'transaction_id' is not empty in the current request
         if (!empty($transactionId)) {
@@ -117,7 +117,7 @@ class DropdownController extends Controller
 
     public function maritalStatus(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if(!empty($transactionId)){
             session(['transaction_id' => $transactionId]);
@@ -231,18 +231,25 @@ class DropdownController extends Controller
     public function familyDependent(Request $request)
     {
         $familyDependent = [];
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        // $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if(!empty($transactionId)){
 
             session(['transaction_id' => $transactionId]);
 
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
+            $transaction = Transaction::with('customer')->where('id', $transactionId)->first();
 
-            session(['customer_id' => $customerId]);
-           
+            if ($transaction) {
+                $customerId = optional($transaction->customer)->id;
+            } else {
+                $customerId = NULL;
+                $transactionId = NULL;
+            }
+            session(['customer_id' => $customerId]);   
+            
         } else {
-            $transactionId = null;
+            $transactionId = NULL;
         }
 
         if (!is_null($transactionId)) {
@@ -328,7 +335,7 @@ class DropdownController extends Controller
         $countries = Country::all();
         $idtypes = Idtype::all();
         $occupations = Occupation::all();
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         $childData = [];
         $siblingData = [];
@@ -430,7 +437,7 @@ class DropdownController extends Controller
 
     public function assets(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
         $assetImage = [];
 
         if(!empty($transactionId)){
@@ -467,7 +474,7 @@ class DropdownController extends Controller
 
     public function financialPriorities(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
         $prioritiesDiscuss = [];
         $prioritiesLevel = [];
 
@@ -506,7 +513,7 @@ class DropdownController extends Controller
     }
     public function financialPrioritiesDiscuss(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
         $prioritiesDiscuss = [];
         $prioritiesLevel = [];
 
@@ -545,7 +552,7 @@ class DropdownController extends Controller
 
     public function overView(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -661,7 +668,7 @@ class DropdownController extends Controller
 
     public function summary(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;

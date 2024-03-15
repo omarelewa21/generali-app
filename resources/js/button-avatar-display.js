@@ -6,8 +6,9 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
+const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith(queryString))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;

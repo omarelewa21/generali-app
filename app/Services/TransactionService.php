@@ -22,6 +22,20 @@ class TransactionService
             // temporarily use this agent 
             $agentId = Agent::find(1)->id;
             $route = strval(request()->path());
+            $previousRoute = session('_previous') ?? NULL;
+
+            if (isset($previousRoute)) {
+                $url = $previousRoute['url'];
+                $path = parse_url($url, PHP_URL_PATH);
+
+                $segments = explode('/', $path);
+                $lastSegment = end($segments);
+
+                $route = $lastSegment;
+            }
+
+    
+
             $id = session('transaction_id') ?? session('customer_details.transaction_id') ?? "";
             
             $transaction = Transaction::updateOrCreate(
