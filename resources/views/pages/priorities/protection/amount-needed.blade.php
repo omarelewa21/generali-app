@@ -29,7 +29,7 @@
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $existingPolicyAmount === null || $existingPolicyAmount === '' 
@@ -121,7 +121,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>

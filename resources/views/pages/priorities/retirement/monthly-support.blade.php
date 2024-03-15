@@ -27,13 +27,10 @@
 
 <div id="retirement-monthly-support" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey-calculator">
+        <div class="row wrapper-bottom-grey">
             <div class="header col-12">
-                <div class="row">@include('templates.nav.nav-red-menu-needs')</div>
-            </div>
-            <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey-calculator">
-                @csrf
-                <div class="row calculator bg-primary d-md-none calculatorMob d-flex align-items-center">
+                <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             ($retirementSavings === null || $retirementSavings === '') && ($supportingYears === null || $supportingYears === '')
@@ -50,7 +47,10 @@
                         <p class="text-white display-6 text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+            </div>
+            <form novalidate action="{{route('validate.retirement.monthly.support')}}" method="POST" class="content-needs-grey">
+                @csrf
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="content z-md-1">
+                <section class="bottom-content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">

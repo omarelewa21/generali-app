@@ -77,13 +77,15 @@
                                                 $need_title = '';
                                                 $chart_color = '';
                                         }
-                                        if ($need['need_no'] == 'N6'){
-                                            if(isset($need['number_of_selection']) && ($need['number_of_selection'] == 2 || ($need['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $need['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
-                                                if (isset($need['advance_details']['critical_illness']['fund_percentage']) || isset($need['advance_details']['health_care']['fund_percentage']) ){
-                                                    $chart_percent = ($need['advance_details']['critical_illness']['fund_percentage'] + $need['advance_details']['health_care']['fund_percentage']) / 2;
+                                        if ($all_needs[$needKey]['need_no'] == 'N6'){
+                                            if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 || ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
+                                                if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) || isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
+                                                    $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
                                                 }
                                                 
                                             }
+                                        } elseif(isset($all_needs[$needKey]['need_no']) && $all_needs[$needKey]['need_no'] == 'N8') {
+
                                         } else{
                                             if (isset($all_needs[$needKey]['advance_details']['fund_percentage'])){
                                                 $chart_percent = $all_needs[$needKey]['advance_details']['fund_percentage'];
@@ -202,8 +204,8 @@
                                                         }
                                                     }
                                                     @endphp
-                                                    @if ( isset($need['need_no']) && $need['need_no'] == 'N6')
-                                                        @if(isset($need['advance_details']['critical_illness']['critical_illness_plan']) && $need['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness')
+                                                    @if ( isset($all_needs[$needKey]['need_no']) && $all_needs[$needKey]['need_no'] == 'N6')
+                                                        @if(isset($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan']) && $all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness Care
@@ -228,7 +230,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endif
-                                                        @if (isset($need['advance_details']['health_care']['medical_care_plan']) && $need['advance_details']['health_care']['medical_care_plan'] == 'Health Planning')
+                                                        @if (isset($all_needs[$needKey]['advance_details']['health_care']['medical_care_plan']) && $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] == 'Health Planning')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
@@ -253,7 +255,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endif
-                                                    @elseif(isset($need['need_no']) && $need['need_no'] == 'N8')   
+                                                    @elseif(isset($all_needs[$needKey]['need_no']) && $all_needs[$needKey]['need_no'] == 'N8')   
                                                     @else
                                                         <tr>
                                                             <td class="d-flex align-items-center py-3">

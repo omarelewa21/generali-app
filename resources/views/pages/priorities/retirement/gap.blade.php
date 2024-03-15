@@ -31,7 +31,7 @@
             <form novalidate action="{{route('form.submit.retirement.gap')}}" method="POST" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
-                <section class="heading d-flex align-items-center">
+                <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6">
@@ -130,7 +130,7 @@
                     </div>
                 </section>
                 <section class="footer fixed-bottom">
-                    <div class="bg-accent-light-white py-4 footer-scroll">
+                    <div class="bg-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -149,7 +149,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>

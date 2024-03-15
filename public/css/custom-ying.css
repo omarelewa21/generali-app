@@ -468,7 +468,8 @@
         background-position: left top 10%;
         background-repeat: no-repeat !important;
     }
-    #retirement_period .tertiary-mobile-bg {
+    #retirement_period .tertiary-mobile-bg,
+    #risk-profile {
         background: none;
     }
     .summary-page h2.display-4{
@@ -487,6 +488,9 @@
     }
     .coverage .content-needs-grey {
         grid-auto-rows: 0vh 0vh 80vh;
+    }
+    #retirement_period.tertiary-default-bg{
+        background: none;
     }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){

@@ -21,7 +21,7 @@
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalDebtCancellationFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{number_format(floatval($totalAmountNeeded))}}</h1>
                     </div>
@@ -55,7 +55,7 @@
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row">
                                     <h2 class="display-5 fw-bold lh-sm">I would also like to include Critical Illness Protection.</h2>
-                                    <p class="d-flex pt-5">
+                                    <p class="d-flex pt-5 pb-3 pb-md-0">
                                         <span class="me-5 d-flex">
                                             <input type="radio" class="needs-radio @error('critical_coverage_amount') checked-yes @enderror {{$criticalIllnessCoverage === 'yes' ? 'checked-yes' : ''}}" id="yes" name="critical_coverage" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#critical_coverage_amount').attr('required',true);"
                                             {{ ($criticalIllnessCoverage && $criticalIllnessCoverage === 'yes' || $errors->has('critical_coverage_amount') ? 'checked' : '')  }} >
