@@ -10,23 +10,24 @@
 |
 */
 
-use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AvatarController;
-use App\Http\Controllers\ProtectionController;
-use App\Http\Controllers\RetirementController;
-use App\Http\Controllers\EducationController;
 use App\Http\Controllers\SavingsController;
-use App\Http\Controllers\InvestmentController;
-use App\Http\Controllers\HealthMedicalController;
-use App\Http\Controllers\DebtCancellationController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\PriorityController;
-use App\Http\Controllers\SessionController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\ProtectionController;
+use App\Http\Controllers\RetirementController;
+use App\Http\Controllers\SalesforceController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\HealthMedicalController;
+use App\Http\Controllers\DebtCancellationController;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -315,7 +316,7 @@ Route::get('/delete/{id}', [AgentController::class, 'softDelete'])->name('delete
 //     return view('pages.dashboard.logs');
 // });
 
-// Route::get('/salesforce/auth', 'App\Http\Controllers\SalesforceController@redirectToSalesforce');
-// Route::get('/salesforce/callback', 'App\Http\Controllers\SalesforceController@handleSalesforceCallback');
+Route::get('/salesforce/auth', [SalesforceController::class, 'redirectToSalesforce']);
+Route::get('/authentication/getAccessToken',[SalesforceController::class, 'handleSalesforceCallback']);
 
 Route::get('/send_fes','App\Http\Controllers\FesController@sendFes')->name('send_fes');

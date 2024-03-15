@@ -14,7 +14,7 @@ class FesController extends Controller
         try 
         {
             $customerDetails = $request->session()->get('customer_details', []);
-            
+
             $client = new Client([
                 'base_uri' => env('FES_URL'),
                 'timeout' => 10.0,
@@ -49,7 +49,7 @@ class FesController extends Controller
                 'response_header' => $responseHeaders
             ];
             
-            return $fullResponse;
+            return view('pages/summary/overview');
 
         } catch (GuzzleHttp\Exception\BadResponseException $e) {
             Log::error('Exception: ' . $e->getMessage());
