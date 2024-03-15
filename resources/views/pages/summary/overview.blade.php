@@ -35,7 +35,7 @@
                             <h4 class="display-6 fw-bold lh-base">Coverage Completion %</h4>
                         </div>
                         @php
-                            $count = 0; 
+                            $count = 1; 
                             $need_title = '';
                             $chart_color = '';
                             $chart_percent = '';
@@ -84,29 +84,32 @@
                                                 }
                                                 
                                             }
-                                        } elseif(isset($all_needs[$needKey]['need_no']) && $all_needs[$needKey]['need_no'] == 'N8') {
-
                                         } else{
                                             if (isset($all_needs[$needKey]['advance_details']['fund_percentage'])){
                                                 $chart_percent = $all_needs[$needKey]['advance_details']['fund_percentage'];
                                             }
                                         }
                                     }
-                                    $count++;
                                 @endphp
-                                <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
-                                    <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
-                                </div>
-                                <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 d-flex align-items-center">
-                                            <!-- <div class="bar_chart_wrapper"> -->
-                                                <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            <!-- </div> -->
-                                            <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                @if ($all_needs[$needKey]['need_no'] == 'N8')
+                                @else
+                                    <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
+                                        <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
+                                    </div>
+                                    <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 d-flex align-items-center">
+                                                <!-- <div class="bar_chart_wrapper"> -->
+                                                    <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <!-- </div> -->
+                                                <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    @php 
+                                        $count++;
+                                    @endphp
+                                @endif
                             @endforeach
                         @endif
                     </div>
@@ -135,7 +138,7 @@
                                         <tbody class="fw-bold display-6 f-family">
                                             @if ($all_needs)
                                                 @foreach($all_needs as $needKey => $needValue)
-                                                    @php
+                                                    @php 
                                                     $icon = '';
                                                     $needs = '';
                                                     $coverage_person = '';
@@ -189,13 +192,17 @@
                                                                 }
                                                             }
                                                             if(isset($all_needs[$needKey]['advance_details']['goals_amount']) || isset($all_needs[$needKey]['advance_details']['existing_amount']) || isset($all_needs[$needKey]['advance_details']['insurance_amount'])){
-                                                                if($all_needs[$needKey] == 'need_4' || $all_needs[$needKey] == 'need_5'){
+                                                                if($all_needs[$needKey]['need_no'] == 'N4' || $all_needs[$needKey]['need_no'] == 'N5'){
                                                                     $existing_plan = 'N/A';
                                                                 } else{
                                                                     $existing_plan = $all_needs[$needKey]['advance_details']['existing_amount'];
                                                                 }
+                                                                if($all_needs[$needKey]['need_no'] == 'N5' || $all_needs[$needKey]['need_no'] == 'N8'){
+                                                                    $gap = 'N/A';
+                                                                } else{
+                                                                    $gap = $all_needs[$needKey]['advance_details']['insurance_amount'];
+                                                                }
                                                                 $goals = $all_needs[$needKey]['advance_details']['goals_amount'];
-                                                                $gap = $all_needs[$needKey]['advance_details']['insurance_amount'];
                                                             } else {
                                                                 $goals = 'N/A';
                                                                 $existing_plan = 'N/A';
