@@ -57,7 +57,7 @@ class SummaryController extends Controller
 
         if ($lastPageUrl['last_page_url'] == '/investment/annual-return') {
 
-            $selectedNeed = "need_7";
+            $selectedNeed = "need_5";
         }
         else
         {

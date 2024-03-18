@@ -68,7 +68,6 @@ class PriorityService
     public function handlePrioritySubject($customerId,$result)
     {
         DB::transaction(function () use ($customerId, $result) {
-
             foreach ($result as $decisionKey => $decisionValue) {
 
                 $column = (str_ends_with($decisionKey, '_discuss')) ? 'discuss' : 'covered';

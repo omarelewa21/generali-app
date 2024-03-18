@@ -406,7 +406,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -525,7 +525,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -643,7 +643,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
                                                                         <label for="siblingYearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
+                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['year_support'] ?? '') }}" required>
                                                                     </div>
                                                                     @error('siblingYearsOfSupport')
                                                                         <div class="invalid-feedback text-red">{{ $message }}</div>

@@ -140,6 +140,8 @@ class PriorityController extends Controller
                             $substring = strstr($key, '_data', true);
                             session(['customer_details.family_details.' . $substring => true]);
                             session(['customer_details.family_details.' . $key => $value]);
+                            session(['customer_details.family_details.dependent.'. $key => $value]);
+
                         }
                     }
                 } else {
@@ -296,7 +298,7 @@ class PriorityController extends Controller
                 // N1 is protection need
                 if ($value['type'] == "N1") {
                     session(['customer_details.selected_needs.need_1.advance_details.supporting_years' => $value['supporting_year']]);
-                    session(['customer_details.selected_needs.need_1.advance_details.goals_amount' => $value['goal']]);
+                    session(['customer_details.selected_needs.need_1.advance_details.goals_amount' => $value['goals_amount']]);
                     session(['customer_details.selected_needs.need_1.advance_details.existing_amount' => $value['existing_amount']]);
                     session(['customer_details.selected_needs.need_1.advance_details.fund_percentage' => $value['fund_percentage']]);
                     session(['customer_details.selected_needs.need_1.advance_details.insurance_amount' => $value['insurance_amount']]);
@@ -1838,8 +1840,8 @@ class PriorityController extends Controller
 
                     $decodeCriticalIllness= json_decode($value['critical_illness'], true);
                     session(['customer_details.selected_needs.need_6.number_of_selection' => $value['selection']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $value['medical_care_plan']]);                           
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $value['medical_care_plan'] ?? NULL]);                           
                 }
             }
         }
@@ -1937,11 +1939,11 @@ class PriorityController extends Controller
 
                     $decodeCriticalIllness = json_decode($value['critical_illness'], true);
 
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.relationship' => $decodeCriticalIllness['relationship']]);                 
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.child_dob' => $decodeCriticalIllness['child_dob']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.child_name' => $decodeCriticalIllness['child_name']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_name' => $decodeCriticalIllness['spouse_name']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_dob' => $decodeCriticalIllness['spouse_dob']]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.relationship' => $decodeCriticalIllness['relationship'] ?? NULL]);                 
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.child_dob' => $decodeCriticalIllness['child_dob'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.child_name' => $decodeCriticalIllness['child_name'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_name' => $decodeCriticalIllness['spouse_name'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_dob' => $decodeCriticalIllness['spouse_dob'] ?? NULL]);       
                     session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan']]);     
                 }
             }
@@ -1985,12 +1987,12 @@ class PriorityController extends Controller
 
                     $decodeCriticalIllness = json_decode($value['critical_illness'], true);
 
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount' => $decodeCriticalIllness['covered_amount']]);                 
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.year' => $decodeCriticalIllness['year']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount' => $decodeCriticalIllness['existing_amount']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.goals_amount' => $decodeCriticalIllness['goals_amount']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage' => $decodeCriticalIllness['fund_percentage']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.relationship' => $decodeCriticalIllness['relationship']]);     
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount' => $decodeCriticalIllness['covered_amount']?? NULL]);                 
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.year' => $decodeCriticalIllness['year'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount' => $decodeCriticalIllness['existing_amount'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.goals_amount' => $decodeCriticalIllness['goals_amount'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage' => $decodeCriticalIllness['fund_percentage'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.relationship' => $decodeCriticalIllness['relationship'] ?? NULL]);     
                 }
             }
         }
@@ -2032,13 +2034,13 @@ class PriorityController extends Controller
 
                     $decodeCriticalIllness = json_decode($value['critical_illness'], true);
 
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_protection' => $decodeCriticalIllness['existing_protection']]);   
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount' => $decodeCriticalIllness['existing_amount']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.goals_amount' => $decodeCriticalIllness['goals_amount']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage' => $decodeCriticalIllness['fund_percentage']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.insurance_amount' => $decodeCriticalIllness['insurance_amount']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount' => $decodeCriticalIllness['covered_amount']]);     
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.year' => $decodeCriticalIllness['year']]);     
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_protection' => $decodeCriticalIllness['existing_protection'] ?? NULL]);   
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.existing_amount' => $decodeCriticalIllness['existing_amount'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.goals_amount' => $decodeCriticalIllness['goals_amount'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.fund_percentage' => $decodeCriticalIllness['fund_percentage'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.insurance_amount' => $decodeCriticalIllness['insurance_amount'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.covered_amount' => $decodeCriticalIllness['covered_amount'] ?? NULL]);     
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.year' => $decodeCriticalIllness['year'] ?? NULL]);     
 
                 }
             }
@@ -2589,6 +2591,9 @@ class PriorityController extends Controller
 
                     // $decodeHealthCare = json_decode($value['health_care'], true);
                     session(['customer_details.selected_needs.need_7.advance_details' => $value]);
+                    session(['customer_details.selected_needs.need_7.advance_details.remaining_years' => $value['remaining_year']]);
+
+
                 }
             }
         }
@@ -2677,10 +2682,15 @@ class PriorityController extends Controller
                     session(['customer_details.selected_needs.need_7.advance_details.fund_percentage' => $value['fund_percentage']]);
                     session(['customer_details.selected_needs.need_7.advance_details.insurance_amount' => $value['insurance_amount']]);
 
-                    $criticalIllnessAmount = json_decode($value['critical_illness'],true);
+                    // $criticalIllnessAmount = json_decode($value['critical_illness'],true);
 
-                    session(['customer_details.selected_needs.need_7.advance_details.critical_illness' => $criticalIllnessAmount]);
-                    session(['customer_details.selected_needs.need_7.advance_details.critical_illness_amount' => $criticalIllnessAmount['critical_illness_amount'] ?? NULL]);
+                    if(isset($value['critical_illness_amount'] ) && $value['critical_illness_amount'] > 0)
+                    {
+                        session(['customer_details.selected_needs.need_7.advance_details.critical_illness' => "yes"]);
+
+                    }
+
+                    session(['customer_details.selected_needs.need_7.advance_details.critical_illness_amount' => $value['critical_illness_amount'] ?? NULL]);
                 }
             }
         }

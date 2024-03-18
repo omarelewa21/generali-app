@@ -550,7 +550,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
                     urlInput.value = 'family.dependent.details';
@@ -654,7 +654,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
                     urlInput.value = 'family.dependent.details';
@@ -702,7 +702,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
                     urlInput.value = 'family.dependent.details';

@@ -51,7 +51,6 @@ Route::post('/family-dependent', [FormController::class, 'handleAvatarSelection'
 Route::get('/family-dependent/details', [DropdownController::class, 'familyDependentDetails'])->name('family.dependent.details');
 Route::post('/family-dependent/details', [FormController::class, 'familyDependentDetails'])->name('form.family.dependent.details');
 
-// Route::view('/assets', 'pages.avatar.assets')->name('avatar.my.assets');
 Route::get('/assets', [DropdownController::class, 'assets'])->name('assets');
 Route::post('/assets', [FormController::class, 'handleAvatarSelection'])->name('assets');
 
@@ -147,7 +146,7 @@ Route::post('/education-supporting-years', [EducationController::class, 'validat
 /* Priorities - Savings */
 Route::prefix('savings')->group(function () {
 
-    Route::get('/savings', [PriorityController::class, 'savingsHome'])->name('savings.home');
+    Route::get('/', [PriorityController::class, 'savingsHome'])->name('savings.home');
 
     Route::get('/coverage', [PriorityController::class, 'savingsCoverage'])->name('savings.coverage');
     Route::post('/coverage', [SavingsController::class, 'validateSavingsCoverageSelection'])->name('validate.savings.coverage.selection');
