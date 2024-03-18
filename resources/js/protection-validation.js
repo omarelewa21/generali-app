@@ -588,18 +588,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (change < 0) {
                     change = 0; // 0 represents 100% coverage
                     circle.style.strokeDashoffset = change;
+                    circle.style.transition = 'all 1.5s ease';
                 }
                 else   {
-                    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
-                    
                     // // Calculate the position for the dotCircle based on the end point of the graph
                     const percent = Math.floor(percentage);
                     let angle = (360 * percent) / 100;
-                    // let initialX = 90 + 144 * Math.cos(0);
-                    // let initialY = 90 + 144 * Math.sin(0);
-                    // let pointerX = 90 + 144 * Math.cos(angle * Math.PI / 180);
-                    // let pointerY = 90 + 144 * Math.sin(angle * Math.PI / 180);
-                    // Calculate the position of the pointer at various points along the circumference
+
                     let xPositions = [];
                     let yPositions = [];
                     for (let i = 0; i <= angle; i++) {
@@ -620,11 +615,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             dotCircle.setAttribute('cx', xPositions[index]);
                             dotCircle.setAttribute('cy', yPositions[index]);
                             index++;
+
+                            let change = 904.896 - (904.896 * Covered * (index + 1) / xPositions.length) / 100;
+                            circle.style.strokeDashoffset = change;
                         
                             if (index < xPositions.length) {
-                                let duration = 1900 / xPositions.length; // Calculate duration for each step
+                                let duration = 1500 / xPositions.length; // Calculate duration for each step
                                 setTimeout(animatePointer, duration);
-                                // setTimeout(animatePointer, 1.5); 
                             }
                         }
                         

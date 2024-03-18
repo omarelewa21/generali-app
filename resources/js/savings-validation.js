@@ -719,10 +719,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (change < 0) {
                     change = 0; // 0 represents 100% coverage
                     circle.style.strokeDashoffset = change;
+                    circle.style.transition = 'all 1.5s ease';
                 }
                 else   {
-                    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
-        
                     // Calculate the position for the dotCircle based on the end point of the graph
                     const percent = Math.floor(percentage);
                     let angle = (360 * percent) / 100;
@@ -740,16 +739,21 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     else{
                         dotCircle.style.display = "block";
                         let index = 0;
+
                         function animatePointer() {
                             dotCircle.setAttribute('cx', xPositions[index]);
                             dotCircle.setAttribute('cy', yPositions[index]);
                             index++;
+
+                            let change = 904.896 - (904.896 * Covered * (index + 1) / xPositions.length) / 100;
+                            circle.style.strokeDashoffset = change;
                         
                             if (index < xPositions.length) {
-                                let duration = 1900 / xPositions.length;
+                                let duration = 1500 / xPositions.length; // Calculate duration for each step
                                 setTimeout(animatePointer, duration);
                             }
                         }
+                        
                         animatePointer();
                     }
                 }
