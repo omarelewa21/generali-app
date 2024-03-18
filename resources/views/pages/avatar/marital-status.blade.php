@@ -27,7 +27,7 @@
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 position-relative text-center d-flex justify-content-center">
                         {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
-                        <div id="lottie-male-animation" class="changeImage"></div>
+                        <div id="lottie-animation"></div>
                         <div class="imageContainerMarried"></div>
                     </div>
                 </section>
@@ -130,5 +130,6 @@
 
 <script>
     var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+    var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
 </script>
 @endsection

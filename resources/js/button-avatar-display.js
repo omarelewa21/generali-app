@@ -430,37 +430,69 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         // Married selection
         $("#marriedButton").on("click", function () {
             var $imageContainer = $(".imageContainerMarried");
-            var $existingImage = $imageContainer.find("img");
+            var $existingImage = $imageContainer.find("div");
 
             // If an existing image is found, update its attributes
             if ($existingImage.length) {
                 $imageContainer.empty();
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                var newDiv = '<div id="lottie-female-animation"></div>';
-                $imageContainer.append(newDiv);
                 
-                var lottieAnimationPath = customer_details.avatar.image;
-                const animationFemale = lottie.loadAnimation({
-                    container: document.getElementById('lottie-female-animation'),
-                    renderer: 'svg', 
-                    loop: true,
-                    autoplay: true,
-                    path: lottieAnimationPath
-                });
+                if (gender_session) {
+                    if (gender_session == 'Male') {
+                        var newDiv = '<div id="lottie-female-animation"></div>';
+                        $imageContainer.append(newDiv);
+                        
+                        const animationFemale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-female-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-female.json'
+                        });
+                    }
+                    else if (gender_session == 'Female') {
+                        var newDiv = '<div id="lottie-male-animation"></div>';
+                        $imageContainer.append(newDiv);
+                        
+                        const animationMale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-male-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-male.json'
+                        });
+                    }
+                }
             } else {
                 // If no existing image, create a new one and append it
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                var newDiv = '<div id="lottie-female-animation"></div>';
-                $imageContainer.append(newDiv);
                 
-                var lottieAnimationPath = customer_details.avatar.image;
-                const animationFemale = lottie.loadAnimation({
-                    container: document.getElementById('lottie-female-animation'),
-                    renderer: 'svg', 
-                    loop: true,
-                    autoplay: true,
-                    path: lottieAnimationPath
-                });
+                if (gender_session) {
+                    if (gender_session == 'Male') {
+                        var newDiv = '<div id="lottie-female-animation"></div>';
+                        $imageContainer.append(newDiv);
+                        
+                        const animationFemale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-female-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-female.json'
+                        });
+                    }
+                    else if (gender_session == 'Female') {
+                        var newDiv = '<div id="lottie-male-animation"></div>';
+                        $imageContainer.append(newDiv);
+                        
+                        const animationMale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-male-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-male.json'
+                        });
+                    }
+                }
             }
         });
 

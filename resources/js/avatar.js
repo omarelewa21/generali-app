@@ -1,7 +1,8 @@
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'avatar',
-    'identity-details'
+    'identity-details',
+    'marital-status'
 ];
 
 const currentURL = window.location.href;
@@ -151,20 +152,28 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
     }
 
-    if (path == '/identity-details') {
-        const animationMale = lottie.loadAnimation({
-            container: document.getElementById('lottie-male-animation'),
-            renderer: 'svg', 
-            loop: true,
-            autoplay: true,
-            path: '/images/avatar-general/gender-male.json'
-        });
+    if (path == '/identity-details' || path == '/marital-status') {
+        if (avatar_session) {
+            var container = document.getElementById('lottie-animation');
+    
+            // Remove all child elements (including the SVG) from the container
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            const animationGender = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: avatar_session
+            });
+        }
     }
 }
 
 // Load the animation using Lottie
 // General
-
 const animationFemale = lottie.loadAnimation({
     container: document.getElementById('lottie-female-animation'),
     renderer: 'svg', 
