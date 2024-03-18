@@ -59,7 +59,7 @@
                                                 $route = route('protection.gap');
                                             }
                                             else {
-                                                $route = route('financial.priorities.discuss');
+                                                $route = route('priorities.to.discuss');
                                             }
                                         @endphp
                                         <a href="{{ $route }}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
