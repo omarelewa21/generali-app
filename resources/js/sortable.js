@@ -1,6 +1,6 @@
 import Sortable from "sortablejs";
 
-const specificPageURLs = ["financial-priorities", "financial-priorities/discuss", "savings/goals"];
+const specificPageURLs = ["financial-priorities", "savings/goals"];
 
 const currentURL = window.location.href;
 
@@ -194,62 +194,62 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
   document.addEventListener("DOMContentLoaded", function () {
     $("#refresh").on("click", reset);
 
-    // Ensure the first accordion item is always open
-    const firstAccordionItem = document.querySelector(".accordion-item:first-of-type");
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    // // Ensure the first accordion item is always open
+    // const firstAccordionItem = document.querySelector(".accordion-item:first-of-type");
+    // const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
-    if (firstAccordionItem) {
-      const firstCollapse = firstAccordionItem.querySelector(".accordion-collapse");
-      firstCollapse.classList.add("show");
-    }
+    // if (firstAccordionItem) {
+    //   const firstCollapse = firstAccordionItem.querySelector(".accordion-collapse");
+    //   firstCollapse.classList.add("show");
+    // }
 
-    // Sent checkbox value to controller
-    var checkboxValues = {};
+    // // Sent checkbox value to controller
+    // var checkboxValues = {};
 
-    // First set all to true
-    $('input[type="checkbox"]').each(function () {
-      var checkboxId = $(this).attr("id");
-      checkboxValues[checkboxId] = true;
-      $(this).prop("checked", true); // Check the checkboxes initially
-    });
+    // // First set all to true
+    // $('input[type="checkbox"]').each(function () {
+    //   var checkboxId = $(this).attr("id");
+    //   checkboxValues[checkboxId] = true;
+    //   $(this).prop("checked", true); // Check the checkboxes initially
+    // });
 
-    // Update checkboxValues object when any checkbox is changed
-    $('input[type="checkbox"]').on("change", function () {
-      var checkboxId = $(this).attr("id");
-      var isChecked = $(this).prop("checked");
-      checkboxValues[checkboxId] = isChecked;
+    // // Update checkboxValues object when any checkbox is changed
+    // $('input[type="checkbox"]').on("change", function () {
+    //   var checkboxId = $(this).attr("id");
+    //   var isChecked = $(this).prop("checked");
+    //   checkboxValues[checkboxId] = isChecked;
 
-      if (checkboxId.includes("discuss")) {
-        checkboxId = checkboxId.replace("_discuss", "");
-        if (!isChecked) {
-          $("[data-identifier=" + checkboxId + "]")
-            .siblings("img")
-            .hide();
+    //   if (checkboxId.includes("discuss")) {
+    //     checkboxId = checkboxId.replace("_discuss", "");
+    //     if (!isChecked) {
+    //       $("[data-identifier=" + checkboxId + "]")
+    //         .siblings("img")
+    //         .hide();
 
-          return true;
-        } else {
-          $("[data-identifier=" + checkboxId + "]")
-            .siblings("img")
-            .show();
-        }
-      }
-    });
+    //       return true;
+    //     } else {
+    //       $("[data-identifier=" + checkboxId + "]")
+    //         .siblings("img")
+    //         .show();
+    //     }
+    //   }
+    // });
 
-    $("#priorityNext").on("click", function (event) {
-      $.ajax({
-        type: "POST",
-        url: "{{ route('priorities.redirect') }}",
-        data: checkboxValues,
-        headers: {
-          "X-CSRF-TOKEN": csrfToken
-        },
-        success: function (response) {
-          // Handle success, if needed
-        },
-        error: function (xhr, status, error) {
-          // Handle error, if needed
-        }
-      });
-    });
+    // $("#priorityNext").on("click", function (event) {
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "{{ route('priorities.redirect') }}",
+    //     data: checkboxValues,
+    //     headers: {
+    //       "X-CSRF-TOKEN": csrfToken
+    //     },
+    //     success: function (response) {
+    //       // Handle success, if needed
+    //     },
+    //     error: function (xhr, status, error) {
+    //       // Handle error, if needed
+    //     }
+    //   });
+    // });
   });
 }

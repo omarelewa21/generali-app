@@ -460,6 +460,8 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         } else{
                             if (checkbox.value === 'Others') {
                                 other_income_sources_5_text.value = '';
+                                jQuery('#other_income_sources_5_text').prop('disabled', true);
+                                jQuery('#other_income_sources_5_text').addClass('disabled-color');
                             }
                         }
                     });

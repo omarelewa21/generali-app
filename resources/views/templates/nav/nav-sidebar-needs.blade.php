@@ -90,23 +90,29 @@
 </section>
 
 {{-- Nav Sidebar Right Needs --}}
-
 <script>
-@keyframes loading-left {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(calc({{ $progressLeft }} * 1deg));
-  }
-}
+    var progressLeft = {{ $progressLeft }};
+    var progressRight = {{ $progressRight }};
 
-@keyframes loading-right {
-  0% {
-      transform: rotate(0deg);
-  }
-  100% {
-      transform: rotate(calc({{ $progressRight }} * 1deg));
-  }
-}
+    var style = document.createElement('style');
+    style.textContent = `
+    @keyframes loading-left {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(calc(${progressLeft} * 1deg));
+        }
+    }
+
+    @keyframes loading-right {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(calc(${progressRight} * 1deg));
+        }
+    }
+    `;
+    document.head.appendChild(style);
 </script>
