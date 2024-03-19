@@ -182,6 +182,9 @@
 .hospital_avatar{
     top: 55% !important;
 }
+#medical-hospital-selection .slick-track{
+    height: 100%;
+}
 /* Health medical - medical plan room selection */
 #savings-goals .progress .progress-value,
 #hospital-room-selection .progress .progress-value{

@@ -1055,7 +1055,10 @@ class FormController extends Controller {
         }
         
         if ($validToken) {
-            $checkboxValues = $request->all();
+            $allValue = $request->all();
+            
+            $checkboxValues = $allValue['checkboxValues'];
+            $choice = $allValue['choice'];
             $requiredPriorities = ['protection', 'retirement', 'education', 'savings', 'investments', 'health-medical', 'debt-cancellation', 'others'];
 
             // Get the existing array from the session
@@ -1065,6 +1068,8 @@ class FormController extends Controller {
             // Get the current priorities from the session
             $priorities = isset($customerDetails['priorities_level']) ? $customerDetails['priorities_level'] : [];
             $remainingNeed = [];
+            
+            $customerDetails['customers_choice'] = $choice;
 
             foreach ($priorities as $value) {
                 // loop the needs
@@ -1109,16 +1114,6 @@ class FormController extends Controller {
             foreach ($keysToUnset as $key) {
                 unset($customerDetails['selected_needs'][$key]);
             }
-
-            // Check if all required priorities are present
-            if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
-                // All required priorities are present
-                $customerDetails['customers_choice'] = '1';
-            } else {
-                // Only partial priorities are present
-                $customerDetails['customers_choice'] = '2';
-            }
-
             // Add or update the data value in the array
             $customerDetails['priorities'] = $checkboxValues;
 
@@ -1131,6 +1126,15 @@ class FormController extends Controller {
             $transactionData = ['transaction_id' => $request->input('transaction_id')];
             Log::debug($customerDetails);
             return response()->json(['message' => 'Button click saved successfully']);
+            
+            // // Check if all required priorities discuss are present
+            // if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
+            //     // All required priorities are present
+            //     $customerDetails['customers_choice'] = '1';
+            // } else {
+            //     // Only partial priorities are present
+            //     $customerDetails['customers_choice'] = '2';
+            // }
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }

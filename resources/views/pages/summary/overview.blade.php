@@ -78,7 +78,7 @@
                                                 $chart_color = '';
                                         }
                                         if ($all_needs[$needKey]['need_no'] == 'N6'){
-                                            if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 || ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
+                                            if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 && ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
                                                 if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) || isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
                                                 }

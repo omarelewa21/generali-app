@@ -42,6 +42,8 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
         //Assign the needs sequence
         const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss', 'others'];
 
+        const discussContent = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss', 'others_discuss'];
+
         // First set all to true
         $('input[type="checkbox"]').each(function() {
             var checkboxId = $(this).attr('id');
@@ -134,7 +136,6 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             var isChecked = $(this).prop('checked');
             checkboxValues[checkboxId] = isChecked;
             var droppedDiv = document.querySelectorAll('.dropped');
-
             if (!isChecked) {
                 droppedDiv.forEach(function(element) {
                     var droppedAttribute = element.getAttribute("data-identifier");
@@ -239,13 +240,63 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             } else {
                 // Handle the case where no checkboxes are unchecked
             }
-        });
 
+            var allFalse = true;
+            var allChecked = true;
+            discussContent.forEach(function(checkboxId) {
+                if ($('#' + checkboxId).prop('checked')) {
+                    allFalse = false;
+                    return false;
+                }
+                if (!$('#' + checkboxId).length || !$('#' + checkboxId).prop('checked')) {
+                    allChecked = false;
+                    return false; // Break out of the loop if any checkbox is missing or unchecked
+                }
+            });
+
+            var choiceValue = '';
+            // If all _discuss checkboxes are false, do something
+            if (allFalse) {
+                $('#discuss_error').removeClass('d-none'); 
+                $('#priorityNext').attr('href', '#');
+            } else{
+                $('#discuss_error').addClass('d-none'); 
+
+            }
+            // If all checkboxes exist and are checked
+            if (allChecked) {
+                choiceValue = 1;
+            } else{
+                choiceValue = 2;
+            }
+        });
+        
         $('#priorityNext').on('click', function(event) {
+            var allChecked = true;
+            discussContent.forEach(function(checkboxId) {
+                if (!$('#' + checkboxId).length || !$('#' + checkboxId).prop('checked')) {
+                    allChecked = false;
+                    return false; // Break out of the loop if any checkbox is missing or unchecked
+                }
+            });
+
+            var choiceValue = '';
+            // If all checkboxes exist and are checked
+            if (allChecked) {
+                choiceValue = 1;
+            } else{
+                choiceValue = 2;
+            }
+            var requestData = {
+                choice: choiceValue, 
+                checkboxValues: checkboxValues 
+            };
+            console.log(requestData);
+
             $.ajax({
                 type: "POST",
                 url: "/financial-priorities/discuss",
-                data: checkboxValues,
+                data: requestData,
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },

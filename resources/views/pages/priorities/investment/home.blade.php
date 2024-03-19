@@ -16,6 +16,8 @@
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
     $educationPriority = session('customer_details.priorities.education_discuss');
     $savingsPriority = session('customer_details.priorities.savings_discuss');
+    
+    $check =  session('customer_details.customers_choice');
 @endphp
 
 <div id="investment_home">
@@ -25,6 +27,7 @@
                 @include('templates.nav.nav-white-menu')
                 <div class="text-white px-4 px-xl-5 py-3">
                     <h2 class="display-5 fw-bold">My Priorities</h2>
+                    <h2 class="display-5 fw-bold">{{$check}}</h2>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey content-section px-0">
