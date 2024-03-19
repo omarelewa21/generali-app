@@ -1569,7 +1569,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 
 button.choice:hover img,
 button.choice[data-required="selected"] img,
-button.choice.default.selected img{
+button.choice.default.selected img,
+button.choice:hover svg,
+button.choice[data-required="selected"] svg,
+button.choice.default.selected svg{
     background-image: url(/images/needs/hover-coverage.png);
     background-repeat: no-repeat;
     background-position: center bottom;

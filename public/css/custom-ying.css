@@ -33,6 +33,15 @@
     background-color: transparent;
 }
 
+/* Needs Style */
+.needs_avatar{
+    height: 90%;
+    width: auto;
+}
+.needs_coverage_avatar{
+    height: 85% !important;
+    width: auto;
+}
 /* Education Cost Guide Modal Style */
 #tuitionFees .modal-dialog{
     max-width: 1200px;
@@ -621,6 +630,11 @@
         height: 60% !important;
     }
 }  */
+@media only screen and (max-width: 1024px){
+    .needs_coverage_avatar{
+        height: 80% !important;
+    }
+}
 @media only screen and (max-width: 1199px){
     .summary-page.secondary-default-bg {
         background-position: bottom;

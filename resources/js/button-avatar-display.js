@@ -241,14 +241,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     var newDiv = '<div id="lottie-female-animation"></div>';
                     $imageContainer.append(newDiv);
 
-                    var lottieAnimationPath = customer_details.avatar.image;
-                    const animationFemale = lottie.loadAnimation({
-                        container: document.getElementById('lottie-female-animation'),
-                        renderer: 'svg', 
-                        loop: true,
-                        autoplay: true,
-                        path: lottieAnimationPath
-                    });
+                    // var lottieAnimationPath = customer_details.avatar.image;
+                    // const animationFemale = lottie.loadAnimation({
+                    //     container: document.getElementById('lottie-female-animation'),
+                    //     renderer: 'svg', 
+                    //     loop: true,
+                    //     autoplay: true,
+                    //     path: lottieAnimationPath
+                    // });
                 }
 
                 if (familyDependent.children_data) {

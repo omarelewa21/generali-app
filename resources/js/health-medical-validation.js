@@ -815,7 +815,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             circle.style.strokeDashoffset = change;
                         
                             if (index < xPositions.length) {
-                                let duration = 1500 / xPositions.length; // Calculate duration for each step
+                                let duration = 500 / xPositions.length; // Calculate duration for each step
                                 setTimeout(animatePointer, duration);
                             }
                         }
