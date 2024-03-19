@@ -2,7 +2,8 @@
 const specificPageURLs = [
     'avatar',
     'identity-details',
-    'marital-status'
+    'marital-status',
+    'family-dependent'
 ];
 
 const currentURL = window.location.href;
@@ -14,9 +15,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
     if (path == '/avatar') {
         document.addEventListener('DOMContentLoaded', function() {
-            // var avatar = document.getElementById('avatar-skin-gender');
-            // var btnLeft = document.getElementById('avatar-left');
-            // var btnRight = document.getElementById('avatar-right');
             var genderSelection = document.getElementById('genderSelection');
             var genderImage = document.getElementById('genderImage');
             const links = document.querySelectorAll('.skin-tone');
@@ -64,7 +62,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 const filePrefix = selectedGenderValue === 'Female' ? 'fe' : '';
     
                 const newImage = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".json";
-                // avatar.setAttribute('src', newImageSrc);
     
                 var container = document.getElementById('lottie-animation');
     
@@ -83,7 +80,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 });
     
                 // Update the hidden input field value with the selected avatar
-                // genderImage.value = avatar.getAttribute('src');
                 genderImage.value = newImage;
                 genderSelection.value = selectedGenderValue;
             }
@@ -107,7 +103,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     const filePrefix = selectedGenderValue === 'Female' ? 'fe' : '';
     
                     const newImage = "/images/avatar-general/skin-tone/gender-" + filePrefix + svgFileNames[currentIndex] + "-" + dataColor + ".json";
-                    // avatar.setAttribute('src', newImageSrc);
     
                     var container = document.getElementById('lottie-animation');
     
@@ -152,7 +147,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
     }
 
-    if (path == '/identity-details' || path == '/marital-status') {
+    if (path == '/identity-details' || path == '/marital-status' || path == '/family-dependent') {
         if (avatar_session) {
             var container = document.getElementById('lottie-animation');
     
@@ -168,6 +163,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 autoplay: true,
                 path: avatar_session
             });
+            
+            if (gender_session) {
+                if (gender_session == 'Male') {
+                    container.classList.add('male');
+                }
+                else if (gender_session == 'Female') {
+                    container.classList.add('female');
+                }
+            }
         }
     }
 }

@@ -1002,13 +1002,51 @@ h2.display-5, .currencyField {
   right: 24%;
 }
 
-#lottie-female-animation svg {
+#lottie-male-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 21%;
+}
+
+#lottie-daughter-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -12%;
+}
+
+#lottie-female-animation svg, #lottie-animation.female svg {
   padding-top: 50px;
+  width: auto!important;
+}
+
+#lottie-son-animation svg {
+  padding-top: 100px;
+  width: auto!important;
+}
+
+#lottie-daughter-animation svg {
+  padding-top: 260px;
+  width: auto!important;
+}
+
+#lottie-animation svg, #lottie-male-animation svg {
   width: auto!important;
 }
 
 #avatar_family_dependent #lottie-female-animation {
   right: -28%;
+}
+
+#avatar_family_dependent #lottie-male-animation {
+  right: -37%;
+}
+
+#lottie-animation {
+  z-index: 1;
 }
 
 /* ============================== Welcome Page ============================== */

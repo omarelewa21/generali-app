@@ -193,21 +193,34 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         
             if (preselect.value == 'Married') {
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                var newDiv = '<div id="lottie-female-animation"></div>';
-                $(".imageContainerMarried").append(newDiv);
-                var lottieAnimationPath = customer_details.avatar.image;
-                const animationFemale = lottie.loadAnimation({
-                    container: document.getElementById('lottie-female-animation'),
-                    renderer: 'svg', 
-                    loop: true,
-                    autoplay: true,
-                    path: lottieAnimationPath
-                });
+                
+                if (gender_session) {
+                    if (gender_session == 'Male') {
+                        var newDiv = '<div id="lottie-female-animation" class="appended-image"></div>';
+                        $(".imageContainerMarried").append(newDiv);
+                        
+                        const animationFemale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-female-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-female.json'
+                        });
+                    }
+                    else if (gender_session == 'Female') {
+                        var newDiv = '<div id="lottie-male-animation" class="appended-image"></div>';
+                        $(".imageContainerMarried").append(newDiv);
+                        
+                        const animationMale = lottie.loadAnimation({
+                            container: document.getElementById('lottie-male-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/spouse-male.json'
+                        });
+                    }
+                }
             }
-            // else if (preselect.value == 'widowed') {
-            //     var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
-            //     $(".imageContainerMarried").append(newImage);
-            // }
             else {
                 $(".imageContainerMarried").empty;
             }
@@ -238,17 +251,33 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 var familyDependent = JSON.parse(familyDependentInputValue);
                 if (spouse_session === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                    var newDiv = '<div id="lottie-female-animation"></div>';
-                    $imageContainer.append(newDiv);
-
-                    var lottieAnimationPath = customer_details.avatar.image;
-                    const animationFemale = lottie.loadAnimation({
-                        container: document.getElementById('lottie-female-animation'),
-                        renderer: 'svg', 
-                        loop: true,
-                        autoplay: true,
-                        path: lottieAnimationPath
-                    });
+                    
+                    if (gender_session) {
+                        if (gender_session == 'Male') {
+                            var newDiv = '<div id="lottie-female-animation" class="appended-image"></div>';
+                            $(".imageContainerMarried").append(newDiv);
+                            
+                            const animationFemale = lottie.loadAnimation({
+                                container: document.getElementById('lottie-female-animation'),
+                                renderer: 'svg', 
+                                loop: true,
+                                autoplay: true,
+                                path: '/images/avatar-general/spouse-female.json'
+                            });
+                        }
+                        else if (gender_session == 'Female') {
+                            var newDiv = '<div id="lottie-male-animation"></div>';
+                            $(".imageContainerMarried").append(newDiv);
+                            
+                            const animationMale = lottie.loadAnimation({
+                                container: document.getElementById('lottie-male-animation'),
+                                renderer: 'svg', 
+                                loop: true,
+                                autoplay: true,
+                                path: '/images/avatar-general/spouse-male.json'
+                            });
+                        }
+                    }
                 }
 
                 if (familyDependent.children_data) {
@@ -257,31 +286,60 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
                     // Loop through familyDependent.children_data
                     var numberOfChildren = Object.keys(familyDependent.children_data).length;
+                    
+                    // for (var i = 0; i < numberOfChildren; i++) {
+                    //     var childIndex = i % childrenImages.length; // Get the index within childrenImages
+                    //     var childImage = '<img src="' + childrenImages[childIndex].src + '" width="' + childrenImages[childIndex].width + '" height="' + childrenImages[childIndex].height + '" alt="' + childrenImages[childIndex].alt + '" class="' + childrenImages[childIndex].class + '" style="' + childrenImages[childIndex].style + '">';
+                    //     childImages.push(childImage);
+                    // }
 
-                    for (var i = 0; i < numberOfChildren; i++) {
-                        var childIndex = i % childrenImages.length; // Get the index within childrenImages
-                        var childImage = '<img src="' + childrenImages[childIndex].src + '" width="' + childrenImages[childIndex].width + '" height="' + childrenImages[childIndex].height + '" alt="' + childrenImages[childIndex].alt + '" class="' + childrenImages[childIndex].class + '" style="' + childrenImages[childIndex].style + '">';
-                        childImages.push(childImage);
+                    if (numberOfChildren >= 1) {
+                        // selectedImages.push(childrenImages[0]);
+                        var newDiv = '<div id="lottie-son-animation"></div>';
+                        $(".imageContainerChildren").append(newDiv);
+                        
+                        const animationSon = lottie.loadAnimation({
+                            container: document.getElementById('lottie-son-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/son.json'
+                        });
+                    }
+                
+                    if (numberOfChildren >= 2) {
+                        // selectedImages.push(childrenImages[1]);
+                        var newDiv = '<div id="lottie-daughter-animation"></div>';
+                        $(".imageContainerChildren").append(newDiv);
+                        
+                        const animationSon = lottie.loadAnimation({
+                            container: document.getElementById('lottie-daughter-animation'),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: '/images/avatar-general/daughter.json'
+                        });
                     }
                     
                     // Append child images to the container
-                    $(".imageContainerChildren").append(childImages.join(''));
+                    // $(".imageContainerChildren").append(childImages.join(''));
 
                     var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + numberOfChildren + '</div>';
                     $(".imageContainerChildren").append(newButton);
 
                     // Move the avatar closer based on selections
-                    var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+                    var $imageContainerSpouse = document.querySelector('.avatar-design-placeholder');
                     var $imageContainerSpouseDom = $('.imageContainerSpouse');
                     var $appended = $imageContainerSpouseDom.find('.appended-image');
 
                     if ($appended.length == '0') {
-                        var $childrenContainer = document.querySelector('.imageContainerChildren');
-                        var imageElement = $childrenContainer.querySelector('.end-0');
-                        if (imageElement) {
-                            imageElement.className = 'position-absolute start-0';
-                        }
-                        $imageContainerSpouse.append($childrenContainer);
+                        var $sonContainer = document.querySelector('#lottie-son-animation');
+                        var $daughterContainer = document.querySelector('#lottie-daughter-animation');
+                        $sonContainer.style.position = 'absolute';
+                        $sonContainer.style.right = '59%';
+                        $sonContainer.style.width = 'auto';
+                        $sonContainer.style.height = '100%';
+                        $daughterContainer.style.right = '29%';
                     }
                 }
 
@@ -439,7 +497,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 
                 if (gender_session) {
                     if (gender_session == 'Male') {
-                        var newDiv = '<div id="lottie-female-animation"></div>';
+                        var newDiv = '<div id="lottie-female-animation" class="appended-image"></div>';
                         $imageContainer.append(newDiv);
                         
                         const animationFemale = lottie.loadAnimation({
@@ -469,7 +527,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 
                 if (gender_session) {
                     if (gender_session == 'Male') {
-                        var newDiv = '<div id="lottie-female-animation"></div>';
+                        var newDiv = '<div id="lottie-female-animation" class="appended-image"></div>';
                         $imageContainer.append(newDiv);
                         
                         const animationFemale = lottie.loadAnimation({
@@ -500,18 +558,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         $("#widowedButton").on("click", function () {
             var $imageContainer = $(".imageContainerMarried");
             $imageContainer.empty();
-            // var $existingImage = $imageContainer.find("img");
-
-            // // If an existing image is found, update its attributes
-            // if ($existingImage.length) {
-            //     $imageContainer.empty();
-            //     var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
-            //     $imageContainer.append(newImage);
-            // } else {
-            //     // If no existing image, create a new one and append it
-            //     var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
-            //     $imageContainer.append(newImage);
-            // }
         });
 
         // Single selection
@@ -542,20 +588,31 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             // Clear the existing images
             $(".imageContainerChildren").empty();
         
-            var selectedImages = [];
-        
             if (selectedValue >= 1) {
-                selectedImages.push(childrenImages[0]);
+                var newDiv = '<div id="lottie-son-animation"></div>';
+                $(".imageContainerChildren").append(newDiv);
+                
+                const animationSon = lottie.loadAnimation({
+                    container: document.getElementById('lottie-son-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: '/images/avatar-general/son.json'
+                });
             }
         
             if (selectedValue >= 2) {
-                selectedImages.push(childrenImages[1]);
+                var newDiv = '<div id="lottie-daughter-animation"></div>';
+                $(".imageContainerChildren").append(newDiv);
+                
+                const animationSon = lottie.loadAnimation({
+                    container: document.getElementById('lottie-daughter-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: '/images/avatar-general/daughter.json'
+                });
             }
-        
-            selectedImages.forEach(function (image) {
-                var newImage = '<img src="' + image.src + '" width="' + image.width + '" height="' + image.height + '" alt="' + image.alt + '" class="' + image.class + '" style="' + image.style + '">';
-                $(".imageContainerChildren").append(newImage);
-            });
             
             if (selectedValue) {
                 var newButton = '<div class="popover position-absolute py-1" style="top:10%;right:inherit"> x' + selectedValue + '</div>';
@@ -563,17 +620,18 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             }
 
             // Move the avatar closer based on selections
-            var $imageContainerSpouse = document.querySelector('.imageContainerSpouse');
+            var $imageContainerSpouse = document.querySelector('.avatar-design-placeholder');
             var $imageContainerSpouseDom = $('.imageContainerSpouse');
             var $appended = $imageContainerSpouseDom.find('.appended-image');
-            
+
             if ($appended.length == '0') {
-                var $childrenContainer = document.querySelector('.imageContainerChildren');
-                var imageElement = $childrenContainer.querySelector('.end-0');
-                if (imageElement) {
-                    imageElement.className = 'position-absolute start-0';
-                }
-                $imageContainerSpouse.append($childrenContainer);
+                var $sonContainer = document.querySelector('#lottie-son-animation');
+                var $daughterContainer = document.querySelector('#lottie-daughter-animation');
+                $sonContainer.style.position = 'absolute';
+                $sonContainer.style.right = '59%';
+                $sonContainer.style.width = 'auto';
+                $sonContainer.style.height = '100%';
+                $daughterContainer.style.right = '29%';
             }
 
             const childrenSelect = document.getElementById('childrenSelect');
@@ -645,7 +703,17 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 clickedAvatars['parents_data'] = {};
 
                 if (selectedValue === "father") {
-                    selectedImages.push(parentImages[1]);
+                    // selectedImages.push(parentImages[1]);
+                    var newDiv = '<div id="lottie-father-animation"></div>';
+                    $(".imageContainerParents").append(newDiv);
+                    
+                    const animationSon = lottie.loadAnimation({
+                        container: document.getElementById('lottie-father-animation'),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: '/images/avatar-general/father.json'
+                    });
                     const parentKey = 'father';
                     const dataAvatarval = {
                         relation: 'Father'
@@ -816,7 +884,6 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     car: selectedAssets.car 
                 });
             }
-            console.log(selectedAssets);
         });
 
         // Scooter Selection
@@ -903,7 +970,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     bungalow: selectedAssets.bungalow,
                     condo: selectedAssets.condo
                 });
-            } console.log(selectedAssets);
+            }
         });
 
         // Bungalow Selection
@@ -991,7 +1058,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     house: selectedAssets.house,
                     condo: selectedAssets.condo
                 });
-            } console.log(selectedAssets);
+            }
         });
 
         // Condo Selection
@@ -1085,7 +1152,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     condo: selectedAssets.condo,
                     house: selectedAssets.house
                 });
-            } console.log(selectedAssets);
+            }
         });
 
         // Others Selection

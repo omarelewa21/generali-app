@@ -306,6 +306,7 @@
 
 <script>
 var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
+var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('countrySelect');

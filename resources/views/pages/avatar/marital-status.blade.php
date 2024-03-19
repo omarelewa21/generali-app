@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.json');
     $maritalStatus = session('customer_details.identity_details.marital_status');
     $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
@@ -26,7 +25,6 @@
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
                     <div class="col-12 position-relative text-center d-flex justify-content-center">
-                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
                         <div id="lottie-animation"></div>
                         <div class="imageContainerMarried"></div>
                     </div>
