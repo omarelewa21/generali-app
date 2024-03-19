@@ -29,18 +29,12 @@
                     </div>
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="imageContainerParents"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerParents"></div>
                     <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerSpouse">
                         <div id="lottie-animation"></div>
                         <div class="imageContainerMarried"></div>
                     </div>
                     <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerChildren"></div>
-                    {{-- <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <div id="lottie-animation"></div>
-                        <div class="position-relative imageContainerMarried"></div>
-                    </div>
-                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div> --}}
                 </section>
                 <div class="bottomObeserver"></div>
             </div>

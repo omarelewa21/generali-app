@@ -3,7 +3,9 @@ const specificPageURLs = [
     'avatar',
     'identity-details',
     'marital-status',
-    'family-dependent'
+    'family-dependent',
+    'family-dependent/details',
+    'assets'
 ];
 
 const currentURL = window.location.href;
@@ -132,7 +134,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     renderer: 'svg', 
                     loop: true,
                     autoplay: true,
-                    path: 'images/avatar-general/gender-' + gender_session + '.json'
+                    path: '/images/avatar-general/gender-' + gender_session + '.json'
                 });
             }
             else {
@@ -141,13 +143,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                     renderer: 'svg', 
                     loop: true,
                     autoplay: true,
-                    path: 'images/avatar-general/gender-male.json'
+                    path: '/images/avatar-general/gender-male.json'
                 });
             }
         });
     }
 
-    if (path == '/identity-details' || path == '/marital-status' || path == '/family-dependent') {
+    if (path == '/identity-details' || path == '/marital-status' || path == '/family-dependent' || path == '/family-dependent/details' || path == '/assets') {
         if (avatar_session) {
             var container = document.getElementById('lottie-animation');
     
