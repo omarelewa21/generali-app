@@ -18,9 +18,10 @@
     }
     
     .btn-check[disabled]+.btn, .btn-check:disabled+.btn{
-        opacity: inherit;
+        opacity: 1 !important;
       }
       
+
     /* =============================== Heading =======================================*/
     #retirement_period .tertiary-mobile-bg {
       background-size: cover;

@@ -1169,6 +1169,7 @@ h2.display-5, .currencyField {
   color: #0A043C;
   width: 100%;
   border-color: #A0A0A0;
+  opacity:1; 
 }
 
 .btn-check+.btn {
