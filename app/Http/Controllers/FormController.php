@@ -1159,11 +1159,11 @@ class FormController extends Controller {
                 'existingPolicy' => 'required',
                 'existingPolicy.*.role' => 'required',
                 'existingPolicy.*.full_name' => 'required',
-                'existingPolicy.*.company' => 'required|in:' . implode(',', $companies),
+                'existingPolicy.*.company_name' => 'required|in:' . implode(',', $companies),
                 'existingPolicy.*.companyOthers' => [
                     'nullable',
                     Rule::requiredIf(function () use ($request) {
-                        return $request->input('company') === 'Others';
+                        return $request->input('company_name') === 'Others';
                     })
                 ],
                 'existingPolicy.*.inception_year' => [

@@ -291,7 +291,7 @@
                                 <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
                                     <div class="col-12 button-bg h-100">
                                         <div class="col-12 d-flex align-items-center justify-content-center hover h-100">
-                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) disabled @endif>
+                                            <button class="border-0 w-100 py-4 @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) default @endif" data-avatar="others" data-required="" @if(isset($topPriorities) && is_array($topPriorities) && in_array('others', $topPriorities)) disabled @endif   data-bs-toggle="modal" data-bs-target="#othersPriorities">
                                                 <img class="needs-icon mx-auto" src="{{ asset('images/top-priorities/others-icon.png') }}" width="auto" height="100px" alt="Others">
                                                 <p class="avatar-text text-center pt-4 mb-0 fw-bold">Others</p>
                                             </button>
@@ -366,6 +366,26 @@
         path: '{{ asset('images/top-priorities/priorities.json') }}'
     });
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="othersPriorities" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="othersPrioritiesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="d-flex justify-content-end px-3 py-3">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-header px-5 pt-2 pb-0">
+                <h3 class="modal-title text-center text-uppercase otherModalText" id="otherAssetsLabel">I WANT TO</h3>
+            </div>
+            <div class="modal-body text-white text-center px-5 pt-5 bg-primary">
+                <input type="text" name="otherAssetsInput" class="form-control bg-white @error('othersPrioritiesInput') is-invalid @enderror" id="othersPrioritiesInput" placeholder="Add other priorities" value="{{ old('otherAssetsInput', $assets['others_data'] ?? '') }}">
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar btn-exit-assetsOthers" data-bs-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     
 @endsection

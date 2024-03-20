@@ -1,0 +1,544 @@
+/* #sortable .first {
+    grid-column: 6 / span 9;
+    grid-row: 35 / 96;
+} */
+
+/* .button-bg.selected .hover, .button-bg.selected .border-default{
+    border: 10px solid transparent;
+  } */
+
+  /* .btn-check[disabled]+.btn, .btn-check:disabled+.btn{
+    opacity: inherit;
+  } */
+
+  @media only screen and (max-width: 767px){
+    .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
+        justify-content: initial;
+        }
+    }
+    
+    .btn-check[disabled]+.btn, .btn-check:disabled+.btn{
+        opacity: inherit;
+      }
+      
+    /* =============================== Heading =======================================*/
+    #retirement_period .tertiary-mobile-bg {
+      background-size: cover;
+    }
+    
+    @media (max-width: 767px) {
+      .display-6 {
+        font-size: 14px;
+      }
+    }
+    
+    /* .display-8 {
+        font-size: 14px;
+      } */
+    
+    .changePosition {
+      z-index: 1;
+    }
+    
+    display-5a {
+      font-size: calc(1rem + 1.05vw);
+    }
+    
+    button.choice:hover,
+    button.choice[data-required="selected"],
+    button.choice.default.selected,
+    button.choice[data-required=""] {
+      width: 85% !important;
+    }
+    
+    /* @media only screen and (max-width: 767px) {
+      .calculator-page .bottom-content img {
+        height: 75% !important;
+      }
+    } */
+    
+    @media only screen and (max-width: 767px) {
+      .calculator-page .bottom-content h2,
+      .calculator-page .bottom-content p {
+        text-align: left;
+      }
+    }
+    
+    #sortablemobile li {
+      display: flex;
+    }
+    /* =============================== Welcome Page =======================================*/
+    
+    @media only screen and (min-width: 768px) {
+      .homeVector {
+        width: 100%;
+        max-height: 700px;
+      }
+    }
+    
+    @media only screen and (max-width: 767px) {
+      .homeVector {
+        width: 60%;
+        max-height: 340px;
+      }
+    }
+    
+    /* Media query for targeting mobile devices */
+    @media screen and (max-width: 768px) {
+      #home h2,
+      #home .h2 {
+        font-size: calc(1rem + 2.7vw);
+        line-height: 1;
+      }
+    }
+    
+    /* =============================== Avatar =======================================*/
+    
+    /* Media query for targeting mobile devices */
+    @media screen and (max-width: 768px) {
+      /* Targeting the male image */
+      img[src$="button-gender-male.png"] {
+        width: 70px; /* Set the width for male image on mobile */
+      }
+    
+      /* Targeting the female image */
+      img[src$="button-gender-female.png"] {
+        width: 60px; /* Set the width for female image on mobile */
+      }
+    
+      .color-box-wrapper {
+        width: 350px;
+      }
+    }
+    
+    /* =============================== Savings Goal =======================================*/
+    #savings-goals #sortable .first {
+      grid-column: 30 / span 1;
+      grid-row: 37 / 88;
+      transform: translate(-7%, -19px);
+    }
+    #savings-goals .first .remove-button {
+      right: -110%;
+      bottom: 27%;
+    }
+    #savings-goals #sortable .second {
+      grid-column: 28 / span 9;
+      grid-row: 20 / 44;
+      transform: translate(24%, -12px);
+      /* left: 90%;
+          top: -13%;  */
+    }
+    #savings-goals .second .remove-button {
+      bottom: -12%;
+      right: 45%;
+    }
+    #savings-goals #sortable .third {
+      grid-column: 36 / span 7;
+      grid-row: 13 / 45;
+      transform: translate(-6%, 2px);
+    }
+    #savings-goals .third .remove-button {
+      bottom: -3%;
+      right: 53%;
+    }
+    #savings-goals #sortable .fourth {
+      /* grid-column: 45 / span 8; */
+      grid-column: 46 / span 2;
+      grid-row: 35 / 85;
+      transform: translate(-70%, 5px);
+    }
+    
+    #savings-goals .fourth .remove-button {
+      bottom: 30%;
+      left: -30%;
+      right: unset;
+    }
+    #savings-goals .display-5 {
+      font-size: calc(1.3375rem + 1.05vw) !important;
+    }
+    
+    /* KK New Code */
+    #top_priorities .button-bg:not(.selected):hover .hover img,
+    #savings-goals .button-bg:not(.selected):hover .hover img,
+    #top_priorities .button-bg.selected .border-default img,
+    #savings-goals .button-bg.selected .border-default img {
+      transform: scale(1.1);
+    }
+    
+    /* KK New Code */
+    #top_priorities .button-bg.selected img:not(.ui-draggable-dragging),
+    #savings-goals .button-bg.selected img:not(.ui-draggable-dragging) {
+      filter: grayscale(0.95);
+    }
+    
+    /* #savings-goals .button-bg.selected .hover, .button-bg.selected .border-default
+    {
+      border: 10px solid transparent;
+    } */
+    
+    /* #top_priorities .button-bg.selected .hover, .button-bg.selected .border-default{
+      border: 10px solid transparent;
+    } */
+    
+    .offBoarder {
+      border: 10px solid transparent;
+    }
+    
+    /* ===============================  Advance Fix for Saving Goals=======================================*/
+    
+    #top_priorities .footer,
+    #savings-goals .footer {
+      z-index: 2;
+    }
+    
+    body.overflow #top_priorities .wrapper-avatar-default,
+    body.overflow #savings-goals .wrapper-avatar-default,
+    body.overflow #priorities_to_discuss .wrapper-avatar-default,
+    body.overflow #home {
+      overflow: hidden;
+    }
+    
+    @media only screen and (max-width: 767px) {
+      #top_priorities .wrapper-avatar-default,
+      #savings-goals .wrapper-avatar-default,
+      #priorities_to_discuss .wrapper-avatar-default {
+        display: block;
+      }
+    }
+    
+    @media only screen and (min-width: 768px) {
+      #top_priorities .footer,
+      #savings-goals .footer {
+        z-index: unset;
+      }
+    
+      .wrapper-avatar-default {
+        z-index: 2;
+      }
+    }
+    
+    /* ============================== Modal / Popover ============================== */
+    @media only screen and (min-width: 768px) {
+      .otherModalText {
+        font-size: 3rem;
+      }
+    }
+    
+    @media only screen and (min-width: 768px) {
+      .needs-icon {
+        z-index: 0;
+      }
+    }
+    
+    /* ============================== Top Priorities Page ============================== */
+    #sortablemobile ul.dropdown-menu {
+      z-index: 2;
+    }
+    
+    #sortablemobile li .arrowIcon {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      padding-right: 10px;
+      align-items: center;
+      justify-content: end;
+      left: 0;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    
+    #sortablemobile li .needs-icon {
+      z-index: 0;
+    }
+    
+    /* ===============================  Spacing =======================================*/
+    @media only screen and (max-width: 767px) {
+      #avatar_family_dependent_details .wrapper-avatar-default.parallax-top {
+        grid-template-rows: 90px 50vh;
+      }
+    
+      #education_home .wrapper-avatar-default.parallax-top {
+        grid-template-rows: 90px 50vh;
+      }
+    }
+    
+    @media only screen and (max-width: 500px) {
+      .popover {
+        top: 15% !important;
+        left: 50%;
+        width: 55px;
+        font-size: 18px;
+      }
+    }
+    
+    /* ===============================  Image =======================================*/
+    img.md-size {
+      position: absolute;
+      height: 80% !important;
+      bottom: 0;
+    }
+    
+    img.md-size[alt="Grandmother"] {
+      height: 72% !important;
+      right: -40px !important;
+    }
+    
+    img.md-size[alt="Spouse"] {
+      right: -70px !important;
+    }
+    
+    img.md-size[height="75%"] {
+      height: 60% !important;
+    }
+    
+    img.md-size[height="60%"] {
+      height: 48% !important;
+    }
+    
+    .md-size.popover {
+      top: 20% !important;
+      font-size: 18px;
+      width: 60px;
+    }
+    
+    /* =============================== Issue #180,#182 =======================================*/
+    @media (max-width: 767px) {
+      #gap .card-gap__number {
+        font-size: 50px !important;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      #retirement_summary .heading h2 {
+        font-size: 23px;
+      }
+    }
+    
+    /* =============================== Issue #183 =======================================*/
+    @media (max-width: 500px) {
+      #retirement_summary .bottom-content div img {
+        width: 40px;
+      }
+    
+      #retirement_summary .bottom-content div p {
+        font-size: 16px;
+      }
+    
+      #retirement_summary .bottom-content div h4 {
+        font-size: 18px !important;
+      }
+    
+      #retirement_summary .bottom-content .green-tick,
+      #retirement_summary .bottom-content .red-tick {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    
+    /* =============================== Slick Styling =======================================*/
+    .slick-scrollbar {
+      width: auto;
+      position: relative;
+      box-sizing: border-box;
+      flex-grow: 1;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .slick-scrollbar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--scrollbar-width);
+      height: 100%;
+      background-color: #000;
+      transition: width 0.35s;
+    }
+    
+    .slick-next,
+    .slick-prev {
+      position: static !important;
+      transform: unset !important;
+      width: auto !important;
+      height: auto !important;
+      font-size: 16px !important;
+      font-family: "Helvetica Neue", sans-serif !important;
+      font-weight: 500 !important;
+      line-height: 1 !important;
+      color: #fff !important;
+      text-transform: uppercase !important;
+    }
+    
+    .slick-next:before,
+    .slick-prev:before {
+      content: unset !important;
+    }
+    
+    .slick-track {
+      display: flex !important;
+    }
+    
+    .slick-slide {
+      height: inherit !important;
+    }
+    
+    #hospital-room-selection .slick-slide div {
+      height: 100%;
+    }
+    
+    /* ============================== Refresh Button ============================== */
+    @media only screen and (max-width: 767px) {
+      #avatar_my_assets .wrapper-avatar-grey {
+        grid-template-rows: 10vh 35vh 30vh;
+      }
+    
+      #avatar_my_assets .changeImage {
+        bottom: 165px !important;
+        width: 115px !important;
+        height: auto !important;
+      }
+    
+      #avatar_my_assets .main-default-bg {
+        background-size: auto 60%;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img,
+      #avatar_my_assets .imageContainerCar img {
+        bottom: 0 !important;
+        position: absolute !important;
+        height: 70% !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img {
+        height: 100% !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[alt="House"] {
+        z-index: 1;
+        height: 70% !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[src="/images/assets/condo-vector.png"] {
+        height: 120% !important;
+      }
+    
+      #avatar_my_assets .imageContainerCar img {
+        bottom: 180px !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[alt="House"]:first-child:last-child {
+        transform: unset !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+    
+    @media only screen and (max-width: 650px) {
+      #avatar_my_assets .imageContainerHouse img[alt="House"] {
+        transform: translateX(35%) !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[alt="House"]:first-child:last-child {
+        transform: unset !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+    
+    @media only screen and (max-width: 500px) {
+      #avatar_my_assets .changeImage {
+        width: 100px !important;
+      }
+    
+      #avatar_my_assets .imageContainerCar img {
+        height: 50% !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[alt="House"] {
+        transform: translateX(50%) !important;
+      }
+    
+      #avatar_my_assets .imageContainerHouse img[alt="House"]:first-child:last-child {
+        transform: unset !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+    
+    .footer-avatar-grey [id="refresh"] {
+      bottom: 115px;
+      border-radius: 66px;
+      font-size: 14px;
+    }
+    
+    /* ============================== #12 and #13 ============================== */
+    
+    @media only screen and (max-width: 767px) {
+      #avatar_gender_selection .wrapper-avatar {
+        position: absolute;
+        background: unset;
+        grid-template-rows: 12.5vh 10vh 58vh;
+      }
+    
+      #avatar_gender_selection .top-avatar {
+        z-index: 1;
+      }
+    
+      #avatar_gender_selection .top-avatar,
+      #avatar_gender_selection .bottom-avatar {
+        transform: translateX(100%);
+        transition: transform 0.35s;
+      }
+    
+      #avatar_gender_selection .top-avatar.move-left,
+      #avatar_gender_selection .bottom-avatar.move-left {
+        transform: translateX(0);
+      }
+    
+      #avatar_gender_selection .main-content {
+        transform: translateX(0);
+        transition: transform 0.35s;
+      }
+    
+      #avatar_gender_selection .main-content.move-left {
+        transform: translateX(-100%);
+      }
+    
+      #avatar_gender_selection .top-avatar p.display-6 {
+        padding: 0 25px;
+        font-size: 25px;
+        color: #fff;
+      }
+    
+      #avatar_gender_selection #avatar-clothes {
+        position: absolute;
+        bottom: 0;
+        height: 80% !important;
+      }
+    }
+    
+    /* ============================== #Protection ============================== */
+    @media only screen and (max-width: 767px) {
+      .wrapper-needs-grey {
+        grid-template-rows: 7vh 40vh 23vh 12vh !important;
+      }
+    }
+    
+    @media (min-width: 801px) {
+      .footer-avatar-grey [id="refresh"] {
+        display: none !important;
+      }
+    }
+    
+    
+    @media only screen and (max-width: 767px){
+    .tertiary-mobile-bg {
+      height: 45% !important;
+    }
+    }
