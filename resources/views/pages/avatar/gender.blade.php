@@ -59,7 +59,6 @@
                 </section>
                 <section class="avatar-design-placeholder bottom-avatar position-relative">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"> --}}
                         <div id="lottie-animation"></div>
                     </div>
                 </section>

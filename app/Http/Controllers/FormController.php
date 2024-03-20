@@ -84,7 +84,6 @@ class FormController extends Controller {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
                 $countryCode = $parsedPhoneNumber->getCountryCode();
                 $cleanPhoneNumber = $parsedPhoneNumber->getNationalNumber();
-                Log::debug($cleanPhoneNumber);
                 $parsedcountryCode = '+' . $countryCode;
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
