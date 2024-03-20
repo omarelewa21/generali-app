@@ -66,20 +66,30 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
                 if (!isChecked) {
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'none';
+                        var svgButton = element.parentNode;
+                        while (svgButton && !svgButton.classList.contains('svg-button')) {
+                            svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                        }
+                        if (svgButton) {
+                            var image = svgButton.querySelector('img');
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
+                                image.style.display = 'none';
+                            }
                         }
                     });
                 }
                 else {
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'block';
+                        var svgButton = element.parentNode;
+                        while (svgButton && !svgButton.classList.contains('svg-button')) {
+                            svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                        }
+                        if (svgButton) {
+                            var image = svgButton.querySelector('img');
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
+                                image.style.display = 'block';
+                            }
                         }
                     });
                 }
@@ -139,20 +149,31 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             if (!isChecked) {
                 droppedDiv.forEach(function(element) {
                     var droppedAttribute = element.getAttribute("data-identifier");
-                    var image = document.querySelector('img.' + droppedAttribute);
-                    if (image && droppedAttribute + '_discuss' === checkboxId) {
-                    // if (image) {
-                        image.style.display = 'none';
+                    var svgButton = element.parentNode;
+                    while (svgButton && !svgButton.classList.contains('svg-button')) {
+                        svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                    }
+                    if (svgButton) {
+                        var image = svgButton.querySelector('img');
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
+                            image.style.display = 'none';
+                        }
                     }
                 });
             }
             else {
                 droppedDiv.forEach(function(element) {
                     var droppedAttribute = element.getAttribute("data-identifier");
-                    var image = document.querySelector('img.' + droppedAttribute);
-                    if (image && droppedAttribute + '_discuss' === checkboxId) {
-                    // if (image) {
-                        image.style.display = 'block';
+                    // var image = document.querySelector('img.' + droppedAttribute);
+                    var svgButton = element.parentNode;
+                    while (svgButton && !svgButton.classList.contains('svg-button')) {
+                        svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                    }
+                    if (svgButton) {
+                        var image = svgButton.querySelector('img');
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
+                            image.style.display = 'block';
+                        }
                     }
                 });
 
