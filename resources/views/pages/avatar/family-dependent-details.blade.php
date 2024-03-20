@@ -32,11 +32,12 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changePosition">
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerParents"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerSpouse">
+                        <div id="lottie-animation"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
-                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
@@ -730,6 +731,7 @@ var siblings_session = {!! json_encode(session('customer_details.family_details.
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 var family_details = {!! json_encode(session('customer_details.family_details')) !!};
 var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
+var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!}
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {

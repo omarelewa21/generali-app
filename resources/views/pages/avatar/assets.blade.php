@@ -27,7 +27,8 @@
                 <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
-                    <img src="{{ asset($image) }}" width="auto" height="60%" alt="Avatar" class="changeImageAsset position-absolute" style="bottom: 100px;">
+                    {{-- <img src="{{ asset($image) }}" width="auto" height="60%" alt="Avatar" class="changeImageAsset position-absolute" style="bottom: 100px;"> --}}
+                    <div id="lottie-animation" class="changeImageAsset"></div>
                 </section>
                 <section class="bg-grey">
                     <div class="container">
@@ -184,5 +185,7 @@
 
 <script>
     var sessionData = {!! json_encode(session('customer_details.assets')) !!};
+    var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 </script>
 @endsection

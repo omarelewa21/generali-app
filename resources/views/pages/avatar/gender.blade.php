@@ -16,7 +16,7 @@
     // Retrieving values from the session
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.json');
+    $image = session('customer_details.avatar.image', '/images/avatar-general/gender-male.json');
     $fullName = session('customer_details.basic_details.full_name');
     $transactionId ??= request()->input('transaction_id');
 @endphp
