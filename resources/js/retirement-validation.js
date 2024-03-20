@@ -14,6 +14,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else {
+        if (path === '/retirement') {
+            const newImage = "/images/needs/retirement/home/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/retirement/coverage') {
             if (selfData == null || selfData == undefined || selfData == '') {
                 var nameModal = document.getElementById('missingSelfFields');
@@ -122,6 +133,27 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     defaultBtn.classList.add('selected');
                 });
             });
+
+            var containerSelf = document.getElementById('lottie-animation-self');
+            var containerSpouse = document.getElementById('lottie-animation-spouse');
+
+            const newImageSelf = "/images/needs/coverage/gender-" + selfGender + "-" + skintone + ".json";
+            const newImageSpouse = "/images/needs/coverage/spouse-gender-" + spouseGender + "-" + skintone + ".json";
+
+            const animationAvatarSelf = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-self'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSelf
+            });
+            const animationAvatarSpouse = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-spouse'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSpouse
+            });
         } 
         if (path == '/retirement/ideal') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -187,6 +219,35 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     });
                 });
             }
+            var containerTravel = document.getElementById('lottie-animation-travel');
+            var containerLifestyle = document.getElementById('lottie-animation-lifestyle');
+            var containerSavings = document.getElementById('lottie-animation-savings');
+
+            const newImageTravel = "/images/needs/retirement/ideal/travel-gender-" + gender + "-" + skintone + ".json";
+            const newImageLifestyle = "/images/needs/retirement/ideal/lifestyle-gender-" + gender + "-" + skintone + ".json";
+            const newImageSavings = "/images/needs/retirement/ideal/savings-gender-" + gender + "-" + skintone + ".json";
+
+            const animationAvatarTravel = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-travel'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageTravel
+            });
+            const animationAvatarLifestyle = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-lifestyle'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageLifestyle
+            });
+            const animationAvatarSavings = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-savings'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSavings
+            });
         }
         if (path == '/retirement/monthly-support') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -272,6 +333,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/retirement/monthly-support/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/retirement/period') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -383,6 +453,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/retirement/period/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
 
         if (path == '/retirement/allocated-funds') {
@@ -488,8 +567,13 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         const formattedValue = cleanedValue.toLocaleString('en-MY');
                         this.value = formattedValue;
                         var result = total.toLocaleString();
-                        totalRetirementFund.innerText = "RM" + result;
-                        TotalRetirementFundMob.innerText = "RM" + result;
+                        if(total < 0){
+                            totalRetirementFund.innerText = "RM 0";
+                            TotalRetirementFundMob.innerText = "RM 0";
+                        } else{
+                            totalRetirementFund.innerText = "RM" + result;
+                            TotalRetirementFundMob.innerText = "RM" + result;
+                        }
                     } else {
                     // If it's not a valid number, display the cleaned value as is
                         this.value = retirementSavingsValue;
@@ -546,6 +630,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/retirement/allocated-fund/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/retirement/gap') {
             if (!lastPageInput || !('other_sources' in lastPageInput)) {

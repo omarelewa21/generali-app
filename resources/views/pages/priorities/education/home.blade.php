@@ -16,6 +16,9 @@
     $educationPriority = session('customer_details.priorities.education_discuss');
     $protectionPriority = session('customer_details.priorities.protection_discuss');
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="education_home">
@@ -33,7 +36,11 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative vector">
-                            <img src="{{ asset('images/needs/education/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
+                            @if(isset($gender) || isset($skintone))
+                                <div id="lottie-animation" class="position-absolute needs_avatar" style="bottom:-50px;"></div>
+                            @else
+                                <img src="{{ asset('images/needs/education/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
+                            @endif
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
@@ -74,5 +81,8 @@
 
 <script>
     var needs_priority = '{{$educationPriority}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection 

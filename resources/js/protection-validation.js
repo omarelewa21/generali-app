@@ -167,7 +167,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
 
             var containerSelf = document.getElementById('lottie-animation-self');
             var containerSpouse = document.getElementById('lottie-animation-spouse');
-            var containerChild = document.getElementById('lottie-animation-child');
             var num = 0;
 
             for (var childKey in childDatas) {

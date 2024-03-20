@@ -16,6 +16,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
+        if (path === '/education') {
+            const newImage = "/images/needs/education/home/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/education/coverage') {
             if (childData === null || childData === undefined) {
                 var nameModal = document.getElementById('missingChildFields');
@@ -82,6 +93,25 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         defaultBtn.classList.add('selected');
                     });
                 });
+
+                var num = 0;
+
+                for (var childKey in childDatas) {
+                    if (childDatas.hasOwnProperty(childKey)) {
+                        num++;
+                        var child = childDatas[childKey];
+                        var childGender = child.gender.toLowerCase();
+                        const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                        const animationAvatarChild = lottie.loadAnimation({
+                            container: document.getElementById('lottie-animation-child-' + num),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: newImageChild
+                        });
+                    }
+                }
 
             }
         }
@@ -215,6 +245,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/education/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/education/existing-fund') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {

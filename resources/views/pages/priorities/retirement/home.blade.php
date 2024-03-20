@@ -15,6 +15,9 @@
     // Retrieving values from the session
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
     $protectionPriority = session('customer_details.priorities.protection_discuss');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="retirement_home">
@@ -32,7 +35,11 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/retirement/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Retirement Home">
+                            @if(isset($gender) || isset($skintone))
+                                <div id="lottie-animation" class="position-absolute needs_avatar" style="bottom:-40px;"></div>
+                            @else
+                                <img src="{{ asset('images/needs/retirement/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Retirement Home">
+                            @endif
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
@@ -62,5 +69,8 @@
 
 <script>
     var needs_priority = '{{$retirementPriority}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection 
