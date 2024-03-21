@@ -526,7 +526,7 @@
     #retirement_period.tertiary-default-bg{
         background: none;
     }
-    .needs_home .header section .py-md-4.py-4{
+    .needs_home .header section .py-md-4.py-3{
         padding-top:0 !important;
         padding-bottom:0 !important;
     }
