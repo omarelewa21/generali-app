@@ -207,4 +207,5 @@
     var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};   
     var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!}; 
 </script>
+
 @endsection

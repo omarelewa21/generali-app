@@ -187,7 +187,8 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
-                            <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                            <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
+                            <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                         </div>
                     </div>
                 </section>
@@ -347,5 +348,15 @@ document.addEventListener('DOMContentLoaded', function() {
         firstCollapse.classList.add('show');
     }
 });
+
+// Load the animation using Lottie
+const animationMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '{{ asset('images/top-priorities/priorities.json') }}'
+    });
+    
 </script>
 @endsection

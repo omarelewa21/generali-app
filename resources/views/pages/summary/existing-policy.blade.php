@@ -188,6 +188,7 @@
                                                 <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                     <label for="premiumContributionInput" class="form-label">Premium Contribution <span class="text-danger">*</span></label>
                                                     <div class="input-group">
+                                                        
                                                         <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="premiumContribution" class="form-control border-black @error('existingPolicy.policy_{{ $i }}.premium_contribution') is-invalid @enderror" id="premiumContributionInput" value="{{ isset($existingPolicy['policy_' . $i]['premium_contribution']) && ($existingPolicy['policy_' . $i]['premium_contribution'] !== '' || $existingPolicy['policy_' . $i]['premium_contribution'] !== null) ? number_format(floatval(str_replace(',', '', $existingPolicy['policy_' . $i]['premium_contribution']))) : '' }} " data-key="premium_contribution">
                                                         @error('existingPolicy.policy_{{ $i }}.premium_contribution')
                                                             <div class="invalid-feedback">{{ $message }}</div>

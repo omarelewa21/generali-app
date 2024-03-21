@@ -694,9 +694,9 @@ button[data-required="selected"] img:not(button.choice[data-required="selected"]
   background-color: transparent;
 }
 
-.button-bg:hover .hover {
+/* .button-bg:hover .hover {
   border: 10px solid #8995C8;
-  transition: border 0.7s ease;
+  transition: border 0.7s ease; */
 }
 
 .button-bg:hover {
@@ -1919,8 +1919,11 @@ body.overflow #summary .main-content {
     overflow-y: auto;
     height: 100vh;
   }
-  .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
-    z-index: 3;
+  .main-default-bg,
+  #top_priorities .wrapper-avatar-default,
+  #priorities_to_discuss .wrapper-avatar-default,
+  #savings-goals .wrapper-avatar-default {
+      z-index: 3;
   }
   .wrapper-home {
     display: grid;

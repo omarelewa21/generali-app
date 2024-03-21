@@ -146,7 +146,7 @@ if ($("#hnm-selection").length) {
             }
         ]
     });
-    handleScrollbar("#hnm-selection");
+    // handleScrollbar("#hnm-selection");
 
     $("#health-medical-selection, #medical-hospital-selection").off("mouseup touchend");
     $("#health-medical-selection, #medical-hospital-selection").on("mouseup touchend", () => {

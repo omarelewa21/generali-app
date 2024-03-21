@@ -21,7 +21,9 @@
         opacity: 1 !important;
       }
       
-
+      .accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed{
+        z-index: 1 !important;
+      }
     /* =============================== Heading =======================================*/
     #retirement_period .tertiary-mobile-bg {
       background-size: cover;
