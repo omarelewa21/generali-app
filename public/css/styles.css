@@ -1002,13 +1002,78 @@ h2.display-5, .currencyField {
   right: 24%;
 }
 
-#lottie-female-animation svg {
+#lottie-male-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 21%;
+}
+
+#lottie-daughter-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -12%;
+}
+
+#lottie-father-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+#lottie-mother-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 45%;
+}
+
+#lottie-female-animation svg, #lottie-animation.female svg {
   padding-top: 50px;
   width: auto!important;
 }
 
-#avatar_family_dependent #lottie-female-animation {
+#lottie-son-animation svg {
+  padding-top: 100px;
+  width: auto!important;
+}
+
+#lottie-daughter-animation svg {
+  padding-top: 260px;
+  width: auto!important;
+}
+
+#lottie-mother-animation svg {
+  padding-top: 85px;
+  width: auto!important;
+}
+
+#lottie-animation svg, #lottie-male-animation svg, #lottie-father-animation svg {
+  width: auto!important;
+}
+
+#avatar_family_dependent #lottie-female-animation, #avatar_family_dependent_details #lottie-female-animation {
   right: -28%;
+}
+
+#avatar_family_dependent #lottie-male-animation, #avatar_family_dependent_details #lottie-male-animation {
+  right: -37%;
+}
+
+#lottie-animation {
+  z-index: 1;
+}
+
+.changeImageAsset {
+  position: absolute;
+  bottom: 11%;
+  height: 60%;
+  z-index: 2!important;
 }
 
 /* ============================== Welcome Page ============================== */
@@ -1136,10 +1201,6 @@ h2.display-5, .currencyField {
 /* ============================== Assets Page ============================== */
 .assets-overlay {
   position: relative;
-}
-
-.changeImageAsset {
-  z-index: 2;
 }
 
 /* ============================== Skin Tone ============================== */

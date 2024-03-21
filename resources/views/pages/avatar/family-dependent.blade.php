@@ -29,13 +29,12 @@
                     </div>
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        {{-- <div id="lottie-male-animation" class="changeImage"></div>
-                        <div class="position-relative imageContainerMarried"></div> --}}
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerParents"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerSpouse">
+                        <div id="lottie-animation"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
-                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerChildren"></div>
                 </section>
                 <div class="bottomObeserver"></div>
             </div>
@@ -205,6 +204,7 @@
 <script>
     var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
     var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
-    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};    
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};   
+    var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!}; 
 </script>
 @endsection

@@ -104,16 +104,29 @@
                                     }
                                     $count++;
                                 @endphp
-                                <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
-                                    <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
-                                </div>
-                                <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 d-flex align-items-center">
-                                            <!-- <div class="bar_chart_wrapper"> -->
-                                                <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            <!-- </div> -->
-                                            <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                @if ($all_needs[$needKey]['advanceDetails']['type'] == 'N8')
+                                @else
+                                    <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
+                                        <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
+                                    </div>
+                                    <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 d-flex align-items-center">
+                                            <style>
+                                                @keyframes progressAnimation-{{$loop->index}} {
+                                                    from { width: 0%; }
+                                                    to { width: {{$chart_percent}}%; }
+                                                }
+                                                .animate-{{$loop->index}} {
+                                                    width: 0%;
+                                                    animation: progressAnimation-{{$loop->index}} 1s ease-out;
+                                                }
+                                            </style>
+                                                <!-- <div class="bar_chart_wrapper"> -->
+                                                    <div class="bar_chart_value animate-{{$loop->index}}" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <!-- </div> -->
+                                                <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +134,7 @@
                         @endif
                     </div>
                     <div class="row pt-3">
-                        <div class="col-12 px-xl-5">
+                        <div class="col-12 px-xl-5">+
                             <hr style="color:#A0A0A0;">
                         </div>
                         <div class="col-12 px-xl-5 pt-4">

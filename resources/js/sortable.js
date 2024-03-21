@@ -192,7 +192,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
   // Priority To Discuss Page JS
   document.addEventListener("DOMContentLoaded", function () {
-    // $("#refresh").on("click", reset);
+    $("#refresh").on("click", reset);
 
     // // Ensure the first accordion item is always open
     // const firstAccordionItem = document.querySelector(".accordion-item:first-of-type");
