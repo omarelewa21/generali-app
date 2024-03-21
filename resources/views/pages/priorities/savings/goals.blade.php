@@ -144,6 +144,8 @@
                                 </div>
                                 <div class="col-12 position-absolute" style="top: 65%; height:300px;">
                                     <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                    <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
+
                                 </div>
                             </div>
                         </section>
