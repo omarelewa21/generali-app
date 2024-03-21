@@ -613,7 +613,16 @@ class DropdownController extends Controller
             $avatarImage = $avatar->image ?? 'images/avatar-general/gender-male.svg';
             session(['customer_details.avatar.image' => $avatarImage]);
 
-            $customerFamily = Customer::with(['spouse', 'dependents'])->find($customer->id);
+            $customerFamily = Customer::with(['spouse', 'dependents','financialStatement'])->find($customer->id);
+
+            $financialData =  $customerFamily->replicate()->financialStatement;
+
+            if($financialData){
+                session(['customer_details.financialStatement.amountAvailable'  => $financialData->amount_available]);
+                session(['customer_details.financialStatement.isChangeinAmount'  => $financialData->change_in_amount]);
+                session(['customer_details.financialStatement.approximateIncrementAmount'  => $financialData->increment_amount]);
+            }
+
 
             if ($customerFamily && $customerFamily->spouse) {
                 $customerSpouse = $customerFamily->spouse->toArray();
@@ -719,6 +728,7 @@ class DropdownController extends Controller
                 }
                 $selectedNeedsByType[] = $selectedNeeds; 
             }
+
 
             session(['customer_details.selected_needs' => $selectedNeedsByType]);    
 
