@@ -1239,7 +1239,7 @@ class PriorityController extends Controller
                 // N4 is education need
                 if ($value['type'] == "N4") {
                     
-                    session(['customer_details.selected_needs.need_4.advance_details.annual_returns' => $value['annual_return']]); 
+                    session(['customer_details.selected_needs.need_4.advance_details.annual_returns' => $value['annual_return'] ?? "5"]); 
                     session(['customer_details.selected_needs.need_4.advance_details.goals_amount' => $value['goals_amount']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.fund_percentage' => $value['fund_percentage']]);
                     session(['customer_details.selected_needs.need_4.advance_details.insurance_amount' => $value['insurance_amount']]);  
@@ -1562,7 +1562,7 @@ class PriorityController extends Controller
                 
                 // N5 is investment need
                 if ($value['type'] == "N5") {
-                    session(['customer_details.selected_needs.need_5.advance_details.annual_returns' => $value['annual_return']]); 
+                    session(['customer_details.selected_needs.need_5.advance_details.annual_returns' => $value['annual_return'] ?? "5"]); 
                     session(['customer_details.selected_needs.need_5.advance_details.goals_amount' => $value['goals_amount']]); 
                     session(['customer_details.selected_needs.need_5.advance_details.fund_percentage' => $value['fund_percentage']]); 
                     session(['customer_details.selected_needs.need_5.advance_details.covered_amount' => $value['covered_amount']]); 

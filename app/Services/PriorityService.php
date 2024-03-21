@@ -23,43 +23,39 @@ class PriorityService
 
             $priorityList = ["protection","retirement","savings","education","debt-cancellation",
                              "health-medical","others","investments"];
-            
 
-        
-            foreach ($topPrioritiesButtonInput as $key => $value) {
-                // Increment the key by 1 to get the sequence
-                $sequence = $key + 1;
-            
-                // Define the criteria for checking if the record exists
-                $criteria = ['customer_id' => $customerId,'priority' => $value];
-            
-                // Define the data to be updated or created
-                $data = [
-                    'sequence' => $sequence
-                ];
+            $existingPriorities = Priority::where('customer_id', $customerId)->get();
 
-                // Update or create the record
-                $priority = Priority::updateOrCreate($criteria, $data);
+            $existingButtonIds = $existingPriorities->pluck('priority')->toArray();
 
-                // $existingPriority = Priority::where('priority', $value)->first();
+            $buttonsToAdd = array_diff($topPrioritiesButtonInput, $existingButtonIds); //[]
+            $buttonsToRemove = array_diff($existingButtonIds, $topPrioritiesButtonInput);
+          
+            // new request is less than existing, remove others that doesn't match
+            if (count($buttonsToAdd) == 0 && count($buttonsToRemove) > 0) {
+                // Perform soft delete
+                $priority = Priority::whereIn('priority', $buttonsToRemove)->where('customer_id', $customerId)->delete();
 
-            
-                // if ($existingPriority) {
-                //     // Swap the sequence values
-                //     $tempSequence = $existingPriority->sequence;
-                //     $existingPriority->sequence = $data['sequence'];
-                //     $data['sequence'] = $tempSequence;
+                $deletedPriority[] = $priority;
+
+            } else {
+                //add priority, but check with existing database, if got already then update sequence
+                foreach ($buttonsToAdd as $addKey => $addValue) {
+
+                    $sequence = $addKey + 1;
                 
-                //     // Update both rows
-                //     $priority = Priority::updateOrCreate($criteria, $data);
-                //     $existingPriority->save();
-                // } else {
-                //     // If there's no existing row with the same $data, proceed as usual
-                //     $priority = Priority::updateOrCreate($criteria, $data);
-                // }
-            }
+                    // Define the criteria for checking if the record exists
+                    $criteria = ['customer_id' => $customerId,'priority' => $addValue];
+                
+                    // Define the data to be updated or created
+                    $data = ['sequence' => $sequence];
 
-            $this->priorityId = $priority->id;
+                    // Update or create the record
+                    $priority = Priority::updateOrCreate($criteria, $data);
+                }
+            }
+        
+            $this->priorityId = $deletedPriority ?? $priority->id ?? NULL;
         });
 
         return $this->priorityId;
@@ -68,6 +64,7 @@ class PriorityService
     public function handlePrioritySubject($customerId,$result)
     {
         DB::transaction(function () use ($customerId, $result) {
+
             foreach ($result as $decisionKey => $decisionValue) {
 
                 $column = (str_ends_with($decisionKey, '_discuss')) ? 'discuss' : 'covered';

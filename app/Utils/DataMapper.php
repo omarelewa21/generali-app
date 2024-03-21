@@ -10,15 +10,16 @@ class DataMapper
     {
         $nameParts = explode(' ', $customerDetails['basic_details']['full_name']);
         $firstName = $nameParts[0];
-        $lastName = isset($nameParts[1]) ? $nameParts[1] : '';
+        $lastName = isset($nameParts[1]) ? $nameParts[1] : '-';
         $customerDetails['firstName'] = $firstName;
         $customerDetails['lastName'] = $lastName;
-        $agentId = "15428";
+
+
 
         $spouseFullName = isset($customerDetails['family_details']['spouse_data']['full_name']) ?  $customerDetails['family_details']['spouse_data']['full_name'] : NULL;
         $spouseFullName = isset($spouseFullName) ? explode(' ', $spouseFullName) : NULL;
 
-        $spouseFirstName = $spouseFullName[0];
+        $spouseFirstName = isset($spouseFullName[0]) ? $spouseFullName[0] : '';
         $spouseLastName = isset($spouseFullName[1]) ? $spouseFullName[1] : '';
 
         $customerDetails['basic_details']['dob'] = Carbon::parse($customerDetails['basic_details']['dob'])->format('Y-m-d') ?? NULL;
@@ -26,8 +27,8 @@ class DataMapper
         $customerDetails['basic_details']['mobile_number'] = str_replace($customerDetails['basic_details']['country_code'], '', $customerDetails['basic_details']['mobile_number']) ?? NULL;
         $customerDetails['basic_details']['house_phone_number'] = str_replace($customerDetails['basic_details']['house_phone_number_country_code'], '', $customerDetails['basic_details']['house_phone_number']);
 
-        $customerDetails['basic_details']['occupation']  = ucwords(strtolower( $customerDetails['basic_details']['occupation'])); 
-        $customerDetails['family_details']['spouse_data']['occupation']  = ucwords(strtolower($customerDetails['family_details']['spouse_data']['occupation']));
+        $customerDetails['basic_details']['occupation']  = isset($customerDetails['basic_details']['occupation']) ? ucwords(strtolower( $customerDetails['basic_details']['occupation'])): NULL; 
+        $customerDetails['family_details']['spouse_data']['occupation']  = isset($customerDetails['family_details']['spouse_data']['occupation']) ? ucwords(strtolower($customerDetails['family_details']['spouse_data']['occupation'])): NULL;
         
         if (isset($customerDetails['basic_details']['country'])) {
             $customerDetails['basic_details']['country'] = "Malaysia" ? "Malaysian" : $customerDetails['basic_details']['country'];
@@ -70,7 +71,7 @@ class DataMapper
                         'annualAmountRetirement' => $customerAdvanceDetail['covered_amount'] ?? NULL,                      
                         'yearsOfSupport' => strval($customerAdvanceDetail['supporting_year']) ?? NULL,
                         'existingIncome' => $customerAdvanceDetail['existing_amount'] ?? NULL,
-                        'otherSourceDuringRetirement' => $customerAdvanceDetail['other_source'] ?? NULL,
+                        'otherSourceDuringRetirment' => $customerAdvanceDetail['other_source'] ?? NULL,
                         'oldAgeamountRetirement' => $customerAdvanceDetail['insurance_amount'] ?? NULL
                     ];
                     break;
@@ -266,30 +267,30 @@ class DataMapper
                     'homePhoneNumber' => $customerDetails['basic_details']['house_phone_number'],
                 ]
             ],
-            'agentId' => $agentId,
+            'agentId' => '15428',
             'spouseDetails' => [
-                'lastModifiedTime' => $customerDetails['family_details']['spouse_data']['updated_at'],
-                'createdTime' => $customerDetails['family_details']['spouse_data']['created_at'],
-                'title' => $customerDetails['family_details']['spouse_data']['title'],
+                'lastModifiedTime' => $customerDetails['family_details']['spouse_data']['updated_at'] ?? NULL,
+                'createdTime' => $customerDetails['family_details']['spouse_data']['created_at'] ?? NULL,
+                'title' => $customerDetails['family_details']['spouse_data']['title'] ?? NULL,
                 'othersValue' => "",
                 'firstName' => $spouseFirstName,
                 'lastName' => $spouseLastName,
-                'identityType' => $customerDetails['family_details']['spouse_data']['id_type'],
-                'identityNo' => $customerDetails['family_details']['spouse_data']['id_number'],
-                'nationality' => $customerDetails['family_details']['spouse_data']['country'],
-                'gender' => $customerDetails['family_details']['spouse_data']['gender'],
-                'dateOfBirth' => $customerDetails['family_details']['spouse_data']['dob'],
-                'smokingStatus' => $customerDetails['family_details']['spouse_data']['habit'],
+                'identityType' => $customerDetails['family_details']['spouse_data']['id_type']  ?? NULL,
+                'identityNo' => $customerDetails['family_details']['spouse_data']['id_number']  ?? NULL,
+                'nationality' => $customerDetails['family_details']['spouse_data']['country']  ?? NULL,
+                'gender' => $customerDetails['family_details']['spouse_data']['gender'] ?? NULL,
+                'dateOfBirth' => $customerDetails['family_details']['spouse_data']['dob']  ?? NULL,
+                'smokingStatus' => $customerDetails['family_details']['spouse_data']['habit']  ?? NULL,
                 'parentCustomerId' => "",
                 'monthlyIncome' => "",
-                'occupation' => $customerDetails['family_details']['spouse_data']['occupation'],
+                'occupation' => $customerDetails['family_details']['spouse_data']['occupation']  ?? NULL,
                 'files' => [],            
                 'email' => "",
             ],
             'dependentDetails' => $dependentData,
             'riskProfile' => [
-                'selectedRiskProfile' => $riskProfile,
-                'selectedReturnExpectation' => $returnExpectation,
+                'selectedRiskProfile' => $riskProfile ?? NULL,
+                'selectedReturnExpectation' => $returnExpectation ?? NULL,
                 'selectedNeeds' => $customerSelectedNeeds
             ],
             'existingPolicies' => [

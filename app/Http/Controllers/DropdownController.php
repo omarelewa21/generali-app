@@ -767,7 +767,7 @@ class DropdownController extends Controller
             }
 
             $customerModel = Customer::with(['avatar','financialStatement','priorities'])->where('id', $customer->id)->first();
-            $avatarImage = $customerModel->replicate()->avatar->image;
+            $avatarImage = $customerModel->replicate()->avatar->image ?? NULL;
             $financialData =  $customerModel->replicate()->financialStatement;
 
             $priorityDbData =  $customerModel->replicate()->priorities->toArray();

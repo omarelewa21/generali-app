@@ -27,7 +27,14 @@ class CustomerNeedService
                 $goalTarget = isset($advanceDetail['goal_target']) ? array_values($advanceDetail['goal_target']) : NULL;
                 $selectedNeeds[$selectedNeed]['advance_details']['existing_amount'] = isset($advanceDetail['existing_amount']) ? ($advanceDetail['existing_amount'] == "" ? 0.0 : $advanceDetail['existing_amount']) : NULL;
                 $selectedNeeds[$selectedNeed]['advance_details']['supporting_year'] = isset($advanceDetail['supporting_years']) ? $advanceDetail['supporting_years'] : NULL;
-                $selectedNeeds[$selectedNeed]['advance_details']['covered_amount_monthly'] = isset($advanceDetail['monthly_covered_amount']) ? $advanceDetail['monthly_covered_amount'] : NULL;
+
+                if ($selectedNeed == "need_1") {
+                    $selectedNeeds[$selectedNeed]['advance_details']['covered_amount_monthly'] = isset($advanceDetail['covered_amount_monthly']) ? $advanceDetail['covered_amount_monthly'] : NULL;
+                }
+                else{
+                    $selectedNeeds[$selectedNeed]['advance_details']['covered_amount_monthly'] = isset($advanceDetail['monthly_covered_amount']) ? $advanceDetail['monthly_covered_amount'] : NULL;
+                }
+
                 $selectedNeeds[$selectedNeed]['advance_details']['remaining_year'] = isset($advanceDetail['remaining_years']) ? $advanceDetail['remaining_years'] : NULL;
                 $selectedNeeds[$selectedNeed]['advance_details']['other_source'] = isset($advanceDetail['other_sources']) ? $advanceDetail['other_sources'] : NULL;
                 $selectedNeeds[$selectedNeed]['advance_details']['other_sources_custom'] = isset($advanceDetail['other_sources_custom']) ? $advanceDetail['other_sources_custom'] : NULL;
