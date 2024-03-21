@@ -441,7 +441,7 @@ class FormController extends Controller {
 
                 } else if ($maritalStatusButtonInput === 'Married') {
                     $customerDetails['family_details']['spouse'] = true;
-                    if (!isset($customerDetails['family_details']['spouse_data'])) {
+                    if (empty($customerDetails['family_details']['spouse_data'])) {
                         $customerDetails['family_details']['spouse_data'] = [
                             'relation' => 'Spouse'
                         ];
