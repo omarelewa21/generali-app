@@ -57,7 +57,7 @@ $(document).ready(function() {
         const windowWidth = $(window).width();
 
         const needsMenuHeight = 85.5;
-        const needsSubMenuHeight = 65;
+        const needsSubMenuHeight = 92;
         const calculatorHeight = $(".calculatorMob").outerHeight();
         const footerHeight = $(".footer.fixed-bottom").innerHeight();
         const titleHeight = $(".summary-page .heading .container").outerHeight();

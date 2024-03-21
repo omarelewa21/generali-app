@@ -526,6 +526,10 @@
     #retirement_period.tertiary-default-bg{
         background: none;
     }
+    .needs_home .header section .py-md-4.py-4{
+        padding-top:0 !important;
+        padding-bottom:0 !important;
+    }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
     .h-sm-100{
