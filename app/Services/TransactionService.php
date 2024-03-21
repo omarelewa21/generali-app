@@ -27,14 +27,9 @@ class TransactionService
             if (isset($previousRoute)) {
                 $url = $previousRoute['url'];
                 $path = parse_url($url, PHP_URL_PATH);
-
-                $segments = explode('/', $path);
-                $lastSegment = end($segments);
-
-                $route = $lastSegment;
+                $cleanPath = ltrim($path, '/'); // Remove leading slash
+                $route = $cleanPath;
             }
-
-    
 
             $id = session('transaction_id') ?? session('customer_details.transaction_id') ?? "";
             

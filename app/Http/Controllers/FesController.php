@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use App\Utils\DataMapper;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
@@ -54,6 +55,16 @@ class FesController extends Controller
 
             if ($decodeResponseContent) {
                 session()->flash('refNumber', $decodeResponseContent['refNumber']);
+            }
+
+            // set status to completed after submit to FES portal
+            $transactionId = session('transaction_id');
+
+            $saveTransaction = Transaction::find($transactionId);
+        
+            if ($saveTransaction) {
+                $saveTransaction->status = 'completed';
+                $saveTransaction->save();
             }
 
             return Redirect::route('overview');

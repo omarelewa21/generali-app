@@ -84,8 +84,6 @@ class FormController extends Controller {
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
                 $countryCode = $parsedPhoneNumber->getCountryCode();
-                $cleanPhoneNumber = $parsedPhoneNumber->getNationalNumber();
-                Log::debug($cleanPhoneNumber);
                 $parsedcountryCode = '+' . $countryCode;
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
@@ -121,7 +119,7 @@ class FormController extends Controller {
                 'title' => $validatedData['title'],
                 'full_name' => $validatedData['fullName'],
                 'country_code' => $parsedcountryCode,
-                'mobile_number' => $cleanPhoneNumber,
+                'mobile_number' => $full_number,
                 'house_phone_number_country_code' => $parsedcountryCodeHouse,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']
@@ -460,17 +458,18 @@ class FormController extends Controller {
             }
 
             //identity_details, family_details, assets
-            $route = session('_previous');
-            $url = $route['url'];
-            // Parse the URL to get the path
-            $path = parse_url($url, PHP_URL_PATH);
 
-            // Explode the path by '/' and get the last element
-            $segments = explode('/', $path);
-            $lastSegment = end($segments);
+            $previousRoute = session('_previous') ?? NULL;
+
+            if (isset($previousRoute)) {
+                $url = $previousRoute['url'];
+                $path = parse_url($url, PHP_URL_PATH);
+                $cleanPath = ltrim($path, '/'); // Remove leading slash
+                $route = $cleanPath;
+            }
 
 
-            switch ($lastSegment) {
+            switch ($route) {
                 case 'marital-status':
                     $latestKey = 'marital_status';
                     break;
