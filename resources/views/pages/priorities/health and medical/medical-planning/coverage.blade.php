@@ -22,6 +22,7 @@
     $childData = session('customer_details.family_details.children_data');
 
     $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseGender = session('customer_details.family_details.spouse_data.gender');
     $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
@@ -31,6 +32,8 @@
     $othersCoverForDob = session('customer_details.selected_needs.need_6.advance_details.health_care.spouse_dob');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
     $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
+
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="medical-planning-coverage" class="secondary-default-bg coverage">
@@ -56,7 +59,11 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                            @if(isset($selfGender) || isset($skintone))
+                                                <div id="lottie-animation-self" class="needs_coverage_avatar"></div>
+                                            @else
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Myself">
+                                            @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
@@ -66,13 +73,20 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                            @if(isset($spouseGender) || isset($skintone))
+                                                <div id="lottie-animation-spouse" class="needs_coverage_avatar"></div>
+                                            @else
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Spouse">
+                                            @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
                             @endif
                             @if ($childData)
+                                @php
+                                    $num = 0;
+                                @endphp
                                 @foreach($childData as $child)
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
@@ -195,10 +209,16 @@
     var selfData = '{{$selfDataName}}';
     var lastPageInput = '{{$selectedMedical}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
+    var selfGenderSet = '{{$selfGender}}';
+    var spouseGenderSet = '{{$spouseGender}}';
+    var skintone = '{{$skintone}}';
+    var selfGender = selfGenderSet.toLowerCase();
+    var spouseGender = spouseGenderSet.toLowerCase();
+
+    var spouseDatas = {!! json_encode($spouseData) !!};
+    var childDatas = {!! json_encode($childData) !!};
 
     if (familyDependent){
-        var spouseDatas = {!! json_encode($spouseData) !!};
-        var childDatas = {!! json_encode($childData) !!};
         if('spouse_data' in familyDependent && spouseDatas){
             if('full_name' in spouseDatas){
                 var spouseData = '{{$spouseDataName}}';

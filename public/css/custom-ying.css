@@ -33,6 +33,18 @@
     background-color: transparent;
 }
 
+/* Needs Style */
+.needs_avatar{
+    height: 90%;
+    width: auto;
+}
+.home_avatar{
+    bottom: -40px;
+}
+.needs_coverage_avatar{
+    height: 85% !important;
+    width: auto;
+}
 /* Education Cost Guide Modal Style */
 #tuitionFees .modal-dialog{
     max-width: 1200px;
@@ -174,6 +186,7 @@
 }
 
 /* Health medical - selection */
+.selection_height svg,
 .selection_height{
     height:100%;
     max-height:400px;
@@ -181,6 +194,12 @@
 /* Health medical - medical plan hospital selection */
 .hospital_avatar{
     top: 55% !important;
+}
+.hospital_avatar svg{
+    max-height: 400px;
+}
+#medical-hospital-selection .slick-track{
+    height: 100%;
 }
 /* Health medical - medical plan room selection */
 #savings-goals .progress .progress-value,
@@ -289,8 +308,23 @@
 #overview-table tbody tr:nth-child(odd) {
     background-color: #F3F3F3;
 }
+#landscapelock{
+    display: none;
+}
 /* Bug Fixes */
-
+@media screen and (min-width:320px) and (max-width:767px) and (orientation: landscape){
+    #landscapelock{
+        display: flex;
+    }
+    main div{
+        display: none;
+    }
+}
+@media screen and (min-width:320px) and (max-width:767px) and (orientation: portrait){
+    main div{
+        display: block;
+    }
+}
 
 /* Coverage slider style */
 @media only screen and (min-width: 768px) and (max-width: 992px) and (orientation: portrait){
@@ -492,6 +526,10 @@
     #retirement_period.tertiary-default-bg{
         background: none;
     }
+    .needs_home .header section .py-md-4.py-3{
+        padding-top:0 !important;
+        padding-bottom:0 !important;
+    }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
     .h-sm-100{
@@ -555,6 +593,9 @@
     .sum-icon{
         width: 30px;
     }
+    .needs-progress{
+        font-size: 18px;
+    }
 }
 @media only screen and (max-width: 400px){
     .graph-size{
@@ -602,6 +643,9 @@
     .wrapper-overview{
         grid-template-rows: 13vh 77vh 0vh;
     }
+    .needs_home .footer-avatar-grey{
+        background-color: transparent;
+    }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){
     .summary-page .bottom-content .graph-col.h-100{
@@ -618,6 +662,75 @@
         height: 60% !important;
     }
 }  */
+@media only screen and (max-width: 767px) and (min-height: 600px){
+    #lottie-animation-mob svg{
+        max-height: 200px;
+    }
+    .needs_avatar_mob{
+        top: -150px;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 700px){
+    #lottie-animation-mob svg{
+        max-height: 280px;
+    }
+    .needs_avatar_mob{
+        top: -240px;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 800px){
+    #lottie-animation-mob svg{
+        max-height: 360px;
+    }
+    .needs_avatar_mob{
+        top: -320px;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 850px){
+    #lottie-animation-mob svg{
+        max-height: 420px;
+    }
+    .needs_avatar_mob{
+        top: -380px;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 950px){
+    #lottie-animation-mob svg{
+        max-height: 500px;
+    }
+    .needs_avatar_mob{
+        top: -460px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (max-height: 1000px){
+    #lottie-animation-mob svg{
+        max-height: 290px;
+    }
+    .needs_avatar_mob{
+        top: -210px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 1001px){
+    #lottie-animation-mob svg{
+        max-height: 450px;
+    }
+    .needs_avatar_mob{
+        top: -360px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 1200px){
+    #lottie-animation-mob svg{
+        max-height: 600px;
+    }
+    .needs_avatar_mob{
+        top: -550px;
+    }
+}
+@media only screen and (max-width: 1024px){
+    .needs_coverage_avatar{
+        height: 80% !important;
+    }
+}
 @media only screen and (max-width: 1199px){
     .summary-page.secondary-default-bg {
         background-position: bottom;
@@ -625,6 +738,20 @@
     }
     .summary-page .content-needs-grey{
         grid-auto-rows: 0vh 0vh 65vh;
+    }
+    .needs_home_bottom {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .needs_home .fixed-bottom{
+        position: relative;
+    }
+    #retirement_home .wrapper-needs-grey {
+        grid-template-rows: 9vh 60vh 0vh 0vh;
+        height: auto;
     }
 }
 @media only screen and (min-width: 1600px){

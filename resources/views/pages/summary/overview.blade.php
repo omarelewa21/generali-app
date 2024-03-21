@@ -78,8 +78,8 @@
                                                 $chart_color = '';
                                         }
                                         if ($all_needs[$needKey]['need_no'] == 'N6'){
-                                            if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 || ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
-                                                if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) || isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
+                                            if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 && ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
+                                                if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) && isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
                                                 }
                                                 
@@ -252,11 +252,14 @@
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
                                                                 </td>
-                                                                <td class="px-2">{{ isset($all_needs[$needKey]['advance_details']['health_care']['relationship']) && $all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Spouse' ? 
-                                                                        $all_needs[$needKey]['advance_details']['health_care']['spouse_name'] : 
-                                                                    (isset($all_needs[$needKey]['advance_details']['health_care']['relationship']) && $all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Child' ? 
-                                                                        $all_needs[$needKey]['advance_details']['health_care']['child_name'] : 
-                                                                    $all_needs[$needKey]['advance_details']['health_care']['relationship']) }}
+                                                                <td class="px-2">
+                                                                    @if (isset($all_needs[$needKey]['advance_details']['health_care']['relationship']))
+                                                                        {{ $all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Spouse' ? 
+                                                                                $all_needs[$needKey]['advance_details']['health_care']['spouse_name'] : 
+                                                                            ($all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Child' ? 
+                                                                                $all_needs[$needKey]['advance_details']['health_care']['child_name'] : 
+                                                                            $all_needs[$needKey]['advance_details']['health_care']['relationship']) }}
+                                                                    @endif
                                                                 </td>
                                                                 <td class="px-2">{{ isset($all_needs[$needKey]['advance_details']['health_care']['goals_amount']) ? 
                                                                     'RM' . number_format(floatval($all_needs[$needKey]['advance_details']['health_care']['goals_amount'])) :
@@ -318,7 +321,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4">
-                <h3 class="modal-title f-family fw-bold f-34 text-center" id="emailSummaryLabel">Thank you for securing your future with us!</h2>
+                <h3 class="display-5 modal-title f-family fw-bold f-34 text-center" id="emailSummaryLabel">Thank you for securing your future with us!</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>We’ve sent you an email summarising your priorities and the coverage needed for your journey ahead.</p>
@@ -334,7 +337,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4">
-                <h3 class="modal-title f-family fw-bold f-34 text-center" id="endSessionLabel">Thank you for sharing your needs and priorities!</h2>
+                <h3 class="display-5 modal-title f-family fw-bold f-34 text-center" id="endSessionLabel">Thank you for sharing your needs and priorities!</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Our advisors are now ready to guide you on how you can best secure your future.</p>

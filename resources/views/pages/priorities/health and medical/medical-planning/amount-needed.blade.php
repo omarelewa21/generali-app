@@ -18,6 +18,8 @@
     $totalHealthMedicalNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.goals_amount', '0');
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $selectedRoom = session('customer_details.selected_needs.need_6.advance_details.health_care.room_option');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 
@@ -69,7 +71,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/health-medical/medical-planning/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Health Medical Medical Planning Amount Needed Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/health-medical/medical-planning/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Health Medical Medical Planning Amount Needed Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row">
@@ -134,5 +140,8 @@
     var supportingYears = '1';
     var needs_priority = '{{$healthPriority}}';
     var lastPageInput = '{{$selectedRoom}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

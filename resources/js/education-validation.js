@@ -16,6 +16,24 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
+        if (path === '/education') {
+            const newImage = "/images/needs/education/home/gender-" + gender + "-" + skintone + ".json";
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/education/coverage') {
             if (childData === null || childData === undefined) {
                 var nameModal = document.getElementById('missingChildFields');
@@ -82,6 +100,25 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         defaultBtn.classList.add('selected');
                     });
                 });
+
+                var num = 0;
+
+                for (var childKey in childDatas) {
+                    if (childDatas.hasOwnProperty(childKey)) {
+                        num++;
+                        var child = childDatas[childKey];
+                        var childGender = child.gender.toLowerCase();
+                        const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                        const animationAvatarChild = lottie.loadAnimation({
+                            container: document.getElementById('lottie-animation-child-' + num),
+                            renderer: 'svg', 
+                            loop: true,
+                            autoplay: true,
+                            path: newImageChild
+                        });
+                    }
+                }
 
             }
         }
@@ -215,6 +252,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/education/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/education/existing-fund') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -349,6 +395,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     education_saving.value = ''; // Clear the money input
                 }
             }
+            const newImage = "/images/needs/education/existing-fund/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/education/gap') {
             if (!lastPageInput || !('existing_amount' in lastPageInput)) {
@@ -419,7 +474,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             circle.style.strokeDashoffset = change;
                         
                             if (index < xPositions.length) {
-                                let duration = 1500 / xPositions.length; // Calculate duration for each step
+                                let duration = 500 / xPositions.length; // Calculate duration for each step
                                 setTimeout(animatePointer, duration);
                             }
                         }
