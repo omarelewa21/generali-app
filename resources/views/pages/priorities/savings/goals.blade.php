@@ -20,6 +20,8 @@
     $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
     $savingsGoals = session('customer_details.selected_needs.need_4.advance_details.goal_target');
     $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="savings-goals">
@@ -40,7 +42,7 @@
                             $goal_3 = 'Contribute to charitable needs';
                         }
                     @endphp
-                    <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
+                    <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white z-1">
                     <!-- <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white order-md-1 order-sm-2 order-2"> -->
                         <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                         <section class="content-avatar-default d-none d-md-block">
@@ -142,8 +144,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 position-absolute" style="top: 65%; height:300px;">
-                                    <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                <div class="col-12 position-absolute" style="top: 58%; height:350px;">
+                                    @if(isset($gender) || isset($skintone))
+                                        @if ($relationship === 'Child')
+                                            <div id="lottie-animation-child" class="w-auto h-100"></div>
+                                        @else
+                                            <div id="lottie-animation" class="w-auto h-100"></div>
+                                        @endif
+                                    @else
+                                        <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -314,5 +324,8 @@
     var needs_priority = '{{$savingsPriority}}';
     var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

@@ -18,6 +18,23 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
+        if (path === '/debt-cancellation') {
+            const newImage = "/images/needs/debt-cancellation/home/gender-" + gender + "-" + skintone + ".json";
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/debt-cancellation/coverage' || path === '/debt-cancellation/coverage?transaction_id='+paramValue) {
             if (selfData == null || selfData == undefined || selfData == '') {
                 var nameModal = document.getElementById('missingSelfFields');
@@ -153,6 +170,43 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     defaultBtn.classList.add('selected');
                 });
             });
+            
+            var num = 0;
+
+            for (var childKey in childDatas) {
+                if (childDatas.hasOwnProperty(childKey)) {
+                    num++;
+                    var child = childDatas[childKey];
+                    var childGender = child.gender.toLowerCase();
+                    const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                    const animationAvatarChild = lottie.loadAnimation({
+                        container: document.getElementById('lottie-animation-child-' + num),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: newImageChild
+                    });
+                }
+            }
+
+            const newImageSelf = "/images/needs/coverage/gender-" + selfGender + "-" + skintone + ".json";
+            const newImageSpouse = "/images/needs/coverage/spouse-gender-" + spouseGender + "-" + skintone + ".json";
+
+            const animationAvatarSelf = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-self'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSelf
+            });
+            const animationAvatarSpouse = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-spouse'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSpouse
+            });
         } 
         if (path == '/debt-cancellation/amount-needed') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -267,6 +321,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/debt-cancellation/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
        
       
@@ -405,6 +468,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     existing_debt_amount.value = ''; // Clear the money input
                 }
             }
+            const newImage = "/images/needs/debt-cancellation/existing-debt/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/debt-cancellation/critical-illness') {
             if (!lastPageInput || !('existing_amount' in lastPageInput)) {
@@ -496,6 +568,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 });
             }
+            const newImage = "/images/needs/debt-cancellation/critical-illness/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/debt-cancellation/gap') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {

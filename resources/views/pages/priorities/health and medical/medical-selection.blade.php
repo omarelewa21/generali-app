@@ -18,6 +18,8 @@
     $selectedHealthMedical = session('customer_details.selected_needs.need_6.number_of_selection');
     $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="health-medical-selection" class="secondary-default-bg">
@@ -42,7 +44,11 @@
                             <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedCritical === 'Critical Illness') default @endif" id="critical_illness" data-avatar="Critical Illness" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/selection/critical-illness-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        @if(isset($gender) || isset($skintone))
+                                            <div id="lottie-animation-critical" class="selection_height"></div>
+                                        @else
+                                            <img src="{{ asset('images/needs/health-medical/selection/critical-illness-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        @endif
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Critical Illness Care</p>
                                     </div>
                                 </button>
@@ -50,7 +56,11 @@
                             <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedMedical === 'Health Planning') default @endif" id="medical_planning" data-avatar="Health Planning" data-required="">
                                     <div>
-                                        <img src="{{ asset('images/needs/health-medical/selection/hospitalisation-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        @if(isset($gender) || isset($skintone))
+                                            <div id="lottie-animation-medical" class="selection_height"></div>
+                                        @else
+                                            <img src="{{ asset('images/needs/health-medical/selection/hospitalisation-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                        @endif
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Medical Plan Care</p>
                                     </div>
                                 </button>
@@ -96,5 +106,8 @@
 
 <script>
     var needs_priority = '{{$healthPriority}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

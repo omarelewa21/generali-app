@@ -17,9 +17,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     } else{
         if (path === '/protection') {
             const newImage = "/images/needs/protection/home/gender-" + gender + "-" + skintone + ".json";
-            var container = document.getElementById('lottie-animation');
             const animationAvatar = lottie.loadAnimation({
                 container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
                 renderer: 'svg', 
                 loop: true,
                 autoplay: true,

@@ -9,7 +9,7 @@
 @include('templates.nav.nav-links-mobile')
 {{--end of nav links --}}
 
-<header id="wrapper-navbar" class="desktop d-none d-md-block">
+<header id="wrapper-navbar" class="desktop d-none d-xl-block">
     <nav class="navbar position-relative">
         <div class="container px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
@@ -24,7 +24,7 @@
     </nav>
 </header>
 
-<header id="wrapper-navbar" class="mobile z-2 position-relative d-block d-md-none">
+<header id="wrapper-navbar" class="mobile z-2 position-relative d-block d-xl-none">
     <nav class="navbar position-relative">
         <div class="container px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">

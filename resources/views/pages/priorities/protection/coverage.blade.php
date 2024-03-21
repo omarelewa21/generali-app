@@ -93,8 +93,8 @@
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                                 <div class="d-flex justify-content-end" style="flex-direction: column;">
                                                     @php 
-                                                    $num++;
-                                                    $childGender = $child['gender'];
+                                                        $num++;
+                                                        $childGender = $child['gender'];
                                                     @endphp
                                                     @if(isset($childGender) || isset($skintone))
                                                         <div id="lottie-animation-child-{{$num}}" style="height:70%;width:auto;"></div>

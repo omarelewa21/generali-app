@@ -18,9 +18,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     } else{
         if (path === '/education') {
             const newImage = "/images/needs/education/home/gender-" + gender + "-" + skintone + ".json";
-            var container = document.getElementById('lottie-animation');
             const animationAvatar = lottie.loadAnimation({
                 container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
                 renderer: 'svg', 
                 loop: true,
                 autoplay: true,
@@ -388,6 +395,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     education_saving.value = ''; // Clear the money input
                 }
             }
+            const newImage = "/images/needs/education/existing-fund/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/education/gap') {
             if (!lastPageInput || !('existing_amount' in lastPageInput)) {

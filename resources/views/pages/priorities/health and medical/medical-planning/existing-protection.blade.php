@@ -14,6 +14,8 @@
     $healthMedicalFundPercentage = session('customer_details.selected_needs.need_6.advance_details.health_care.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.insurance_amount');
     $medicalAmountNeeded = session('customer_details.selected_needs.need_6.advance_details.health_care.covered_amount');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="medical-existing-protection" class="tertiary-default-bg calculator-page">
@@ -50,7 +52,11 @@
                     <div class="container h-100">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/health-medical/medical-planning/existing-protection/avatar.png') }}" width="auto" height="100%" alt="Health Medical Medical Planning Existing Protection Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/health-medical/medical-planning/existing-protection/avatar.png') }}" width="auto" height="100%" alt="Health Medical Medical Planning Existing Protection Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row">
@@ -128,5 +134,8 @@
     var sessionExistingProtectionAmount = parseFloat({{$existingProtectionAmount}});
     var needs_priority = '{{$healthPriority}}';
     var lastPageInput = '{{$medicalAmountNeeded}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

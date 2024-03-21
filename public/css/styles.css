@@ -1873,6 +1873,10 @@ body.overflow #summary .main-content {
   #summary .first .dropped img:not(.close) {
     margin-top: inherit;
   }
+  .wrapper-needs-grey {
+    /* grid-template-rows: 9vh 38vh 25vh 12vh; */
+    grid-template-rows: 9vh 60vh 0vh 0vh;
+  }
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 992px){
@@ -2048,9 +2052,6 @@ body.overflow #summary .main-content {
     background-position: right bottom;
     background-size: auto 60%;
   }
-  .wrapper-needs-grey {
-    grid-template-rows: 9vh 38vh 25vh 12vh;
-  }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
   }
@@ -2135,6 +2136,9 @@ body.overflow #summary .main-content {
   #home h2, #home .h2 {
     font-size: calc(1rem + 2.7vw);
     line-height: 1;
+  }
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 40vh 0vh 0vh;
   }
 }
 

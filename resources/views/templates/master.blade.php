@@ -36,6 +36,9 @@
 <body class="overflow">
     <main>
         @yield('content')
+        <section id="landscapelock" class="vh-100 justify-content-center align-items-center text-center">
+            <h1 class="text-primary">Please Rotate Your Device</h1>
+        </section>
     </main>
 
     @stack('scripts')
