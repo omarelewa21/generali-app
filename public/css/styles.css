@@ -740,6 +740,14 @@ button[data-required="selected"] img:not(button.choice[data-required="selected"]
   width: 100%;
 }
 
+button.choice:hover,
+button.choice[data-required="selected"],
+button.choice.default.selected,
+button.choice[data-required=""]{
+    background: none !important;
+    width: 100% !important;
+}
+
 /* ============================== Right Sidebar ============================== */
 .right-sidebar h1, .priorities-heading {
   font-family: 'Helvetica Neue', sans-serif;
@@ -982,6 +990,25 @@ h2.display-5, .currencyField {
 .tutorial {
   border-radius: 10px;
   border: 1px solid #cccccc;
+}
+
+/* ============================== Animations ============================== */
+
+#lottie-female-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 24%;
+}
+
+#lottie-female-animation svg {
+  padding-top: 50px;
+  width: auto!important;
+}
+
+#avatar_family_dependent #lottie-female-animation {
+  right: -28%;
 }
 
 /* ============================== Welcome Page ============================== */

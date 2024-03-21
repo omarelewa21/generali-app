@@ -84,6 +84,8 @@ class FormController extends Controller {
             try {
                 $parsedPhoneNumber = $phoneNumberUtil->parse($full_number, null);
                 $countryCode = $parsedPhoneNumber->getCountryCode();
+                $cleanPhoneNumber = $parsedPhoneNumber->getNationalNumber();
+                Log::debug($cleanPhoneNumber);
                 $parsedcountryCode = '+' . $countryCode;
 
                 if (!$phoneNumberUtil->isPossibleNumber($parsedPhoneNumber)) {
@@ -119,7 +121,7 @@ class FormController extends Controller {
                 'title' => $validatedData['title'],
                 'full_name' => $validatedData['fullName'],
                 'country_code' => $parsedcountryCode,
-                'mobile_number' => $full_number,
+                'mobile_number' => $cleanPhoneNumber,
                 'house_phone_number_country_code' => $parsedcountryCodeHouse,
                 'house_phone_number' => $full_number_house,
                 'email' => $validatedData['email']

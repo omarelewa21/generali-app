@@ -191,10 +191,19 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             }
 
             var preselect = document.getElementById('maritalStatusButtonInput');
-
+        
             if (preselect.value == 'Married') {
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                $(".imageContainerMarried").append(newImage);
+                var newDiv = '<div id="lottie-female-animation"></div>';
+                $(".imageContainerMarried").append(newDiv);
+                var lottieAnimationPath = customer_details.avatar.image;
+                const animationFemale = lottie.loadAnimation({
+                    container: document.getElementById('lottie-female-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: lottieAnimationPath
+                });
             }
             // else if (preselect.value == 'widowed') {
             //     var newImage = '<img src="' + spouseWidowedImages[spouseWidowedImageIndex].src + '" width="' + spouseWidowedImages[spouseWidowedImageIndex].width + '" height="' + spouseWidowedImages[spouseWidowedImageIndex].height + '" alt="' + spouseWidowedImages[spouseWidowedImageIndex].alt + '" class="' + spouseWidowedImages[spouseWidowedImageIndex].class + '" style="' + spouseWidowedImages[spouseWidowedImageIndex].style + '">';
@@ -230,7 +239,17 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                 var familyDependent = JSON.parse(familyDependentInputValue);
                 if (spouse_session === true) {
                     var newImage = '<img src="' + spouseImages[spouseImageIndex].src + '" width="' + spouseImages[spouseImageIndex].width + '" height="' + spouseImages[spouseImageIndex].height + '" alt="' + spouseImages[spouseImageIndex].alt + '" class="' + spouseImages[spouseImageIndex].class + '" style="' + spouseImages[spouseImageIndex].style + '">';
-                    $imageContainer.append(newImage);
+                    var newDiv = '<div id="lottie-female-animation"></div>';
+                    $imageContainer.append(newDiv);
+
+                    var lottieAnimationPath = customer_details.avatar.image;
+                    const animationFemale = lottie.loadAnimation({
+                        container: document.getElementById('lottie-female-animation'),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: lottieAnimationPath
+                    });
                 }
 
                 if (familyDependent.children_data) {
@@ -418,11 +437,31 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             if ($existingImage.length) {
                 $imageContainer.empty();
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                $imageContainer.append(newImage);           
+                var newDiv = '<div id="lottie-female-animation"></div>';
+                $imageContainer.append(newDiv);
+                
+                var lottieAnimationPath = customer_details.avatar.image;
+                const animationFemale = lottie.loadAnimation({
+                    container: document.getElementById('lottie-female-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: lottieAnimationPath
+                });
             } else {
                 // If no existing image, create a new one and append it
                 var newImage = '<img src="' + spouseMarriedImages[spouseImageIndex].src + '" width="' + spouseMarriedImages[spouseImageIndex].width + '" height="' + spouseMarriedImages[spouseImageIndex].height + '" alt="' + spouseMarriedImages[spouseImageIndex].alt + '" class="' + spouseMarriedImages[spouseImageIndex].class + '" style="' + spouseMarriedImages[spouseImageIndex].style + '">';
-                $imageContainer.append(newImage);
+                var newDiv = '<div id="lottie-female-animation"></div>';
+                $imageContainer.append(newDiv);
+                
+                var lottieAnimationPath = customer_details.avatar.image;
+                const animationFemale = lottie.loadAnimation({
+                    container: document.getElementById('lottie-female-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: lottieAnimationPath
+                });
             }
         });
 

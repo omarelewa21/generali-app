@@ -15,6 +15,8 @@
     // Retrieving values from the session
     $all_needs = session('customer_details.selected_needs');
 
+    // dd($all_needs);
+
     $healthCare = isset($all_needs['need_6']['health_care']) ? json_decode($all_needs['need_6']['health_care'],true) : NULL;
     $healthCarePercentage = $healthCare['fund_percentage'] ?? NULL;
 
@@ -42,7 +44,7 @@
                             <h4 class="display-6 fw-bold lh-base">Coverage Completion %</h4>
                         </div>
                         @php
-                            $count = 0; 
+                            $count = 1; 
                             $need_title = '';
                             $chart_color = '';
                             $chart_percent = '';
@@ -50,6 +52,7 @@
                         @if ($all_needs)
                             @foreach($all_needs as $needKey => $needValue)
                                 @php
+                               
                                     if(isset($needKey)){
                                         switch($needKey) {
                                             case 'need_1':
@@ -100,21 +103,26 @@
                                             }
                                         }
                                     }
-                                    $count++;
                                 @endphp
-                                <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
-                                    <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
-                                </div>
-                                <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 d-flex align-items-center">
-                                            <!-- <div class="bar_chart_wrapper"> -->
-                                                <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            <!-- </div> -->
-                                            <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                @if ($all_needs[$needKey]['type'] == 'N8')
+                                @else
+                                    <div class="col-md-4 col-xl-3 col-6 ps-xl-5 py-2 my-2 d-flex align-items-center">
+                                        <h4 class="display-6 fw-bold lh-base m-0">{{$count}}. {{ $need_title }}</h4>
+                                    </div>
+                                    <div class="col-md-8 col-xl-9 col-6 pe-xl-5 my-auto py-2 my-2">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 d-flex align-items-center">
+                                                <!-- <div class="bar_chart_wrapper"> -->
+                                                    <div class="bar_chart_value" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <!-- </div> -->
+                                                <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    @php 
+                                        $count++;
+                                    @endphp
+                                @endif
                             @endforeach
                         @endif
                     </div>
@@ -143,7 +151,7 @@
                                         <tbody class="fw-bold display-6 f-family">
                                             @if ($all_needs)
                                                 @foreach($all_needs as $needKey => $needValue)
-                                                    @php
+                                                    @php 
                                                     $icon = '';
                                                     $needs = '';
                                                     $coverage_person = '';
@@ -240,7 +248,7 @@
                                                         }
                                                     }
                                                     @endphp
-                                                    @if ( isset($need['need_no']) && $need['need_no'] == 'N6')
+                                                    @if ( isset($need['type']) && $need['type'] == 'N6')
                                                         @if(isset($critical_illness['critical_illness_plan']) && $critical_illness['critical_illness_plan'] == 'Critical Illness')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
@@ -290,7 +298,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endif
-                                                    @elseif(isset($need['need_no']) && $need['need_no'] == 'N8')   
+                                                    @elseif(isset($need['type']) && $need['type'] == 'N8')   
                                                     <tr>
                                                         <td class="d-flex align-items-center py-3">
                                                             <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="{{$needs}} Icon">{{$needs}}

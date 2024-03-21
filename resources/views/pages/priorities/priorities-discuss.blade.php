@@ -235,8 +235,7 @@
                                                         $title = '';
                                                     }
                                                     if ($priority) { 
-                                                        $discuss = '';
-                                                    ?>
+                                                        $discuss = ''; ?>
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$priority}}">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
@@ -261,7 +260,8 @@
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
-                                                                            <?php 
+                                                                            <?php $checked = '';
+                                                                            
                                                                                 $priority_discuss = $priority.'_discuss';
                                                                                 if (isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] == 'true') {
                                                                                     $checked = 'checked';

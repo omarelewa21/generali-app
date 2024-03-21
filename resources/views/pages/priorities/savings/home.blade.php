@@ -32,14 +32,14 @@
                     <section class="header py-3 py-md-0">@include ('templates.nav.nav-sidebar-needs')</section>
                     <section class="content-needs">
                         <div class="col-12 d-flex justify-content-center align-items-center position-relative">
-                            <img src="{{ asset('images/needs/savings/home/avatar.png') }}" height="100%" width="auto" class="position-absolute" style="bottom:-60px" alt="Savings Home">
+                            <img src="{{ asset('images/needs/savings/home/avatar.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-55px" alt="Savings Home">
                         </div>
                     </section>
                     <section class="footer footer-avatar-grey">
                         <div class="container h-100">
                             <div class="row justify-content-center align-items-center h-100">
                                 <div class="col-xl-7 text-center">
-                                    <h2 class="display-5 fw-bold lh-sm py-4">Let’s make a plan to achieve your goals with Regular Savings.</h2>
+                                    <h2 class="display-5 fw-bold py-4">Let’s make a plan to achieve your goals with Regular Savings.</h2>
                                 </div>
                             </div>
                         </div>

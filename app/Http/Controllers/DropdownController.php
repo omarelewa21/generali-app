@@ -15,7 +15,6 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\maritalStatus;
 use App\Models\educationLevel;
-use App\Models\SessionStorage;
 
 class DropdownController extends Controller
 {
@@ -28,7 +27,6 @@ class DropdownController extends Controller
         if (!empty($transactionId)) {
 
             $transactionId = intval($transactionId) ?? NULL;
-
             if ( is_null($transactionId) || $transactionId == 0)
             {
                 $transactionId = NULL;
@@ -105,13 +103,20 @@ class DropdownController extends Controller
 
     public function maritalStatus(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
+        $transactionId = $request->input('transaction_id') ??session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if(!empty($transactionId)){
             session(['transaction_id' => $transactionId]);
 
-            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
-            session(['customer_id' => $customerId]);
+            $transaction = Transaction::with('customer')->where('id', $transactionId)->first();
+
+            if ($transaction) {
+                $customerId = optional($transaction->customer)->id;
+            } else {
+                $customerId = NULL;
+                $transactionId = NULL;
+            }
+            session(['customer_id' => $customerId]);   
            
         } else {
             $transactionId = null;
@@ -131,7 +136,6 @@ class DropdownController extends Controller
             }
 
             session(['customer_details.family_details.spouse_data' => $customerSpouse]);
-
 
             if ($customer && $customer->dependents) {
                 $customerDependent = $customer->dependents->toArray();
@@ -172,9 +176,18 @@ class DropdownController extends Controller
                     if (isset($siblingData) && !empty($siblingData)) {
                         $familyDependent['siblings_data'] = $siblingData;
                     }
+
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
                         
                     foreach ($familyDependent as $key => $value) {
-                        if (isset($value)) {
+                        if (!empty($value)) {
+                                     
                             $substring = strstr($key, '_data', true);
                             session(['customer_details.family_details.' . $substring => true]);
                             session(['customer_details.family_details.' . $key => $value]);
@@ -219,25 +232,18 @@ class DropdownController extends Controller
     public function familyDependent(Request $request)
     {
         $familyDependent = [];
-        // $transactionId = $request->input('transaction_id') ?? session('transaction_id');
         $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if(!empty($transactionId)){
 
             session(['transaction_id' => $transactionId]);
 
-            $transaction = Transaction::with('customer')->where('id', $transactionId)->first();
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
 
-            if ($transaction) {
-                $customerId = optional($transaction->customer)->id;
-            } else {
-                $customerId = NULL;
-                $transactionId = NULL;
-            }
-            session(['customer_id' => $customerId]);   
-
+            session(['customer_id' => $customerId]);
+           
         } else {
-            $transactionId = NULL;
+            $transactionId = null;
         }
 
         if (!is_null($transactionId)) {
@@ -249,17 +255,17 @@ class DropdownController extends Controller
             session(['customer_details.identity_details.marital_status' => $maritalStatus]);
 
             $customer = Customer::with(['spouse', 'dependents'])->find($customerId);
-           
+
             if ($customer && $customer->spouse) {
                 $customerSpouse = $customer->spouse->toArray();
             } else {
-                $customerSpouse = []; // Or any other default value you want to assign
+                $customerSpouse = []; 
             }
 
             if ($customer && $customer->dependents) {
                 $customerDependent = $customer->dependents->toArray();
             } else {
-                $customerDependent = []; // Or any other default value you want to assign
+                $customerDependent = []; 
             }
             
             if ($customerSpouse) {
@@ -268,7 +274,6 @@ class DropdownController extends Controller
             }
 
             $familyDependent = [];
-
             if ($customerDependent) {
                 $foundDependent = false;
                 foreach ($customerDependent as $dependent) {
@@ -279,7 +284,7 @@ class DropdownController extends Controller
                     }
                     elseif ($dependent['relation'] == 'Sibling') 
                     {
-                        $siblingData = $dependent;
+                        $siblingData = $dependent;                       
                     }
                     else // child 
                     {
@@ -290,6 +295,7 @@ class DropdownController extends Controller
         
                 if ($foundDependent) {
                     if (!empty($childData) && !empty($childData)) {
+                        
                         $familyDependent['children_data'] = $childData;
                     }
                     if (!empty($parentData ) && !empty($parentData)) {
@@ -298,9 +304,17 @@ class DropdownController extends Controller
                     if (isset($siblingData) && !empty($siblingData)) {
                         $familyDependent['siblings_data'] = $siblingData;
                     }
-                        
+
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
+                    //$familDependent  //children_data, //parents_data
                     foreach ($familyDependent as $key => $value) {
-                        if (isset($value)) {
+                        if (!empty($value)) {
                             $substring = strstr($key, '_data', true);
                             session(['customer_details.family_details.' . $substring => true]);
                             session(['customer_details.family_details.' . $key => $value]);
@@ -312,7 +326,6 @@ class DropdownController extends Controller
                 }
             }
 
-            //if single, clear the children and spouse session set
             if($maritalStatus == 'Single')
             {
                 $request->session()->forget(['customer_details.family_details.children', 'customer_details.family_details.children_data',
@@ -321,7 +334,6 @@ class DropdownController extends Controller
                 ]);
             }
         }
-
         return view('pages/avatar/family-dependent');
     }
 
@@ -421,10 +433,18 @@ class DropdownController extends Controller
                     if (isset($siblingData) && !empty($siblingData)) {
                         $familyDependent['siblings_data'] = $siblingData;
                     }
+
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
                         
                     foreach ($familyDependent as $key => $value) {
-                        if (!empty($value)) {
-                            $substring = strstr($key, '_data', true);
+                        if (!empty($value)) {                       
+                            $substring = strstr($key, '_data', true);                          
                             session(['customer_details.family_details.' . $substring => true]);
                             session(['customer_details.family_details.' . $key => $value]);
                         }
@@ -435,10 +455,8 @@ class DropdownController extends Controller
                 }
             }
 
-            // $titles = $basicDetails->title;
             session(['customer_details.basic_details' => $basicDetails->toArray()]);
             session(['customer_details.identity_details' => $basicDetails->toArray()]);
-
         }
 
         return view('pages/avatar/family-dependent-details', compact('maritalstatuses', 'titles', 'countries', 'idtypes', 'occupations'));
@@ -453,8 +471,6 @@ class DropdownController extends Controller
 
             $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer->id;
             session(['customer_id' => $customerId]);
-            // $assetDetails = Customer::with('asset')->find($customerId);
-            // $assetImage = $assetDetails->asset;
             
         } else {  
             $transactionId = null;
@@ -506,8 +522,6 @@ class DropdownController extends Controller
         if (!is_null($transactionId)) {
             $priorityDetails = Customer::with('priorities')->find($customerId);
             $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');
-
-            // dd($customerPriority);
 
             foreach ($customerPriority as $cpValue) {
                 $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
@@ -640,7 +654,6 @@ class DropdownController extends Controller
 
                 $familyDependent = [];
 
-
                 if ($foundDependent) {
                     if (!empty($childData) && !empty($childData)) {
                         $familyDependent['children_data'] = $childData;
@@ -651,6 +664,14 @@ class DropdownController extends Controller
                     if (isset($siblingData) && !empty($siblingData)) {
                         $familyDependent['siblings_data'] = $siblingData;
                     }
+
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
                         
                     foreach ($familyDependent as $key => $value) {
                         if (isset($value)) {
@@ -665,18 +686,42 @@ class DropdownController extends Controller
                 }
             }
 
-            $customerNeed = Customer::with('customerNeeds')->find($customer->id)->customerNeeds->toArray();
-            $customerNumber = [];
+            $customerRelationship = Customer::with(['customerNeeds','priorities'])->find($customer->id);
+            $customerNeed =  $customerRelationship->customerNeeds->toArray();
+            $customerPriority = $customerRelationship->priorities->toArray();
 
-            foreach ($customerNeed as $value) {
+            $mapping = [
+                'protection' => 'N1',
+                'retirement' => 'N2',
+                'education' => 'N3',
+                'savings' => 'N4',
+                'investments' => 'N5',
+                'health-medical' => 'N6',
+                'debt-cancellation' => 'N7',
+                'others' => 'N8',
+            ];
 
-                $number = explode("N",$value['type']);
-                $oriNumber = $number[1];
+            $selectedNeedsByType = [];
 
-                $customerNumber['need_'.$oriNumber] = $value;                 
+            foreach ($customerNeed as $need) {
+                $selectedNeeds = [];
+                foreach ($customerPriority as $priority) {
+                    // Check if the priority value is in the mapping array and matches the type value
+                    if (array_key_exists($priority['priority'], $mapping) && $mapping[$priority['priority']] == $need['type']) {
+                        $selectedNeeds = [
+                            'value' => $need['type'],
+                            'priority' => $priority['sequence'],
+                            'cover' => $priority['covered'],
+                            'discuss' => $priority['discuss'],
+                            'advanceDetails' => $need
+                        ];
+                    }
+                }
+                $selectedNeedsByType[] = $selectedNeeds; 
             }
-            ksort($customerNumber);
-            session(['customer_details.selected_needs' => $customerNumber]);    
+
+            session(['customer_details.selected_needs' => $selectedNeedsByType]);    
+
         }
         return view('pages/summary/overview');
     }
@@ -715,7 +760,6 @@ class DropdownController extends Controller
             $avatarImage = $customerModel->replicate()->avatar->image;
             $financialData =  $customerModel->replicate()->financialStatement;
 
-            // dd($financialData);
             $priorityDbData =  $customerModel->replicate()->priorities->toArray();
 
             session(['customer_details.avatar.image' => $avatarImage]);
@@ -737,7 +781,6 @@ class DropdownController extends Controller
 
                 session(['customer_details.priorities_level' => $priorityData]);
             }        
-
         }
 
         return view('pages/summary/summary');

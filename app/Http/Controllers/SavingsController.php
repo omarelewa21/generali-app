@@ -363,52 +363,6 @@ class SavingsController extends Controller
         return redirect()->route('risk.profile');
     }
 
-    // public function validateSavingsRiskProfile(Request $request, TransactionService $transactionService){
-        // $customMessages = [
-        //     'savingsRiskProfileInput.required' => 'Please select a risk level.',
-        //     'savingsRiskProfileInput.in' => 'Invalid risk level selected.',
-        //     'savingsPotentialReturnInput.required_if' => 'Please select a potential return for the chosen risk level.',
-        // ];
-
-    //     $validatedData = Validator::make($request->all(), [
-    //         'savingsRiskProfileInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-    //         // 'savingsPotentialReturnInput' => 'required|in:High Risk,Medium Risk,Low Risk',
-    //         'savingsPotentialReturnInput' => 'required_if:savingsRiskProfileInput,High Risk,Medium Risk,Low Risk',
-            
-    //     ], $customMessages);
-
-    //     if ($validatedData->fails()) {
-    //         return redirect()->back()->withErrors($validatedData)->withInput();
-    //     }
-
-    //     // Validation passed, perform any necessary processing.
-    //     $savingsRiskProfileInput = $request->input('savingsRiskProfileInput');
-    //     $savingsPotentialReturnInput = $request->input('savingsPotentialReturnInput');
-
-    //     // Get the existing customer_details array from the session
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-    //     // Get existing savings_needs from the session
-    //     $advanceDetails = $customerDetails['selected_needs']['need_4']['advance_details'] ?? [];
-
-    //     // Update specific keys with new values
-    //     $advanceDetails = array_merge($advanceDetails, [
-    //         'risk_profile' => $savingsRiskProfileInput,
-    //         'potential_return' => $savingsPotentialReturnInput
-    //     ]);
-
-    //     // Set the updated savings_needs back to the customer_details session
-    //     $customerDetails['selected_needs']['need_4']['advance_details'] = $advanceDetails;
-
-        // Store the updated customer_details array back into the session
-    //     $request->session()->put('customer_details', $customerDetails);
-    //     $transactionService->handleTransaction($request,$customerDetails);
-
-    //     $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-    //     return redirect()->route('savings.gap',$transactionData);
-    // }
-
     public function submitSavingsGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session

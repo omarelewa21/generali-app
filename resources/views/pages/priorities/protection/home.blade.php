@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-accent-light-white py-4 fixed-bottom footer-scroll">
+                        <div class="bg-white py-4 fixed-bottom footer-scroll">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">

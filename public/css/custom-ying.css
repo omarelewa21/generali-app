@@ -12,13 +12,6 @@
     border: 1px solid #C21B17;
     color: #C21B17;
 }
-button.choice:hover,
-button.choice[data-required="selected"],
-button.choice.default.selected,
-button.choice[data-required=""]{
-    background: none !important;
-    width: 100% !important;
-}
 
 /* Change disabled border color */
 .disabled-color{
@@ -236,41 +229,12 @@ button.choice[data-required=""]{
     display: grid;
     grid-template-rows: 100%;
 }
-/* .single.room-selection-content {
-    grid-template-columns: 15% 60% 25%;
-    // grid-template-columns: 20% 55% 25%; 
-} */
-/* .patient,
-.patient-2 {
-    grid-template-areas:
-        "windows"
-        "avatar-patient";
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10% 90%;
-}
-.avatar-patient{
-    grid-area: avatar-patient;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-}
-.single-patient,
-.single-patient-2{
-    display: flex;
-    padding: 0;
-}
-.single-patient{
-    justify-content: start;
-}
-.single-patient-2{
-    justify-content: end;
-} */
 
 /* Needs Summary Page */
-/* .summary-page .wrapper-bottom-grey{
+.summary-page .wrapper-bottom-grey{
     grid-template-rows: unset;
     overflow-y: auto;
-} */
+}
 .summary-page.secondary-default-bg{
     background-position: center bottom 8% !important;
 }
@@ -325,7 +289,6 @@ button.choice[data-required=""]{
 #overview-table tbody tr:nth-child(odd) {
     background-color: #F3F3F3;
 }
-
 /* Bug Fixes */
 
 
@@ -379,8 +342,6 @@ button.choice[data-required=""]{
     }
     .calculator-page .content-needs-grey,
     #risk-profile .content-needs-grey,
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey,
     .summary-overview .content-needs-grey{
         grid-auto-rows: 0vh 0vh 70vh;
     }
@@ -393,15 +354,12 @@ button.choice[data-required=""]{
     .coverage button img{
         height: 80%;
     }
-    /* .coverage .content-needs-grey{
-        grid-auto-rows: 15vh 10vh 50vh;
-    } */
-    /* .wrapper-bottom-grey{
+    .wrapper-bottom-grey{
         grid-template:
         "header" 0vh
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
-    } */
+    }
     .pe-sm-0{
         padding-right: 0 !important;
     }
@@ -429,43 +387,35 @@ button.choice[data-required=""]{
     .h-sm-100{
         height: 100%;
     }
-    /* .summary-page .wrapper-bottom-grey{
+    .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
-    } */
-    /* .summary-page .wrapper-bottom-grey,
+    }
+    .summary-page .wrapper-bottom-grey,
     #savings-annual-return .wrapper-bottom-grey{
         grid-template-rows: 0vh 100vh 0vh;
-    } */
+    }
     .summary-page .bottom-content .graph-col.h-100{
         height: fit-content !important;
     }
     /* .summary-page .wrapper-bottom-grey{
         overflow-y:unset;
     } */
-    /* #retirement_period .tertiary-mobile-bg{
+    #retirement_period .tertiary-mobile-bg{
         background-size: contain;
         background-position: left center;
-    } */
+    }
     .calculator-page .bottom-content a{
         margin:0px 12px;
     }
     #education-amount-needed .bottom-content .h-sm-100{
         justify-content: center;
     }
-    #risk-profile .calculatorContent,
-    #savings-risk-profile .calculatorContent,
-    #investment-risk-profile .calculatorContent{
+    #risk-profile .calculatorContent{
         text-align: center;
     }
     #risk-profile #high-risk-potential-content .col-12.d-flex,
     #risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #risk-profile #low-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #low-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #low-risk-potential-content .col-12.d-flex{
+    #risk-profile #low-risk-potential-content .col-12.d-flex {
         justify-content: center;
     }
     .bg-hnm {
@@ -518,7 +468,8 @@ button.choice[data-required=""]{
         background-position: left top 10%;
         background-repeat: no-repeat !important;
     }
-    #retirement_period .tertiary-mobile-bg {
+    #retirement_period .tertiary-mobile-bg,
+    #risk-profile {
         background: none;
     }
     .summary-page h2.display-4{
@@ -530,6 +481,16 @@ button.choice[data-required=""]{
     }
     #retirement_period form{
         padding-left: 0px;
+    }
+    /* Coverage Page */
+    .tertiary-default-bg.calculator-page{
+        background: none;
+    }
+    .coverage .content-needs-grey {
+        grid-auto-rows: 0vh 0vh 80vh;
+    }
+    #retirement_period.tertiary-default-bg{
+        background: none;
     }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
@@ -560,9 +521,7 @@ button.choice[data-required=""]{
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }
-    #risk-profile .content-needs-grey,
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey{
+    #risk-profile .content-needs-grey{
         grid-template-rows: 0vh 65vh;
     }
     .w-md-50{
@@ -664,9 +623,9 @@ button.choice[data-required=""]{
         background-position: bottom;
         background-size: contain;
     }
-    /* .summary-page .content-needs-grey{
+    .summary-page .content-needs-grey{
         grid-auto-rows: 0vh 0vh 65vh;
-    } */
+    }
 }
 @media only screen and (min-width: 1600px){
     .col-xxxl-5 {
@@ -786,3 +745,10 @@ display: block;
 z-index: unset;
 }
 }
+
+/* ============================== Modal / Popover ============================== */
+/* @media only screen and (min-width: 768px) {
+.otherModalText {
+  font-size: 3rem;
+}
+} */

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client;
 use App\Utils\DataMapper;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class FesController extends Controller
 {
@@ -14,7 +15,7 @@ class FesController extends Controller
         try 
         {
             $customerDetails = $request->session()->get('customer_details', []);
-
+            
             $client = new Client([
                 'base_uri' => env('FES_URL'),
                 'timeout' => 10.0,
@@ -48,8 +49,14 @@ class FesController extends Controller
                 'response_content' => $responseContent,
                 'response_header' => $responseHeaders
             ];
-            
-            return view('pages/summary/overview');
+                       
+            $decodeResponseContent = json_decode($responseContent,true);
+
+            if ($decodeResponseContent) {
+                session()->flash('refNumber', $decodeResponseContent['refNumber']);
+            }
+
+            return Redirect::route('overview');
 
         } catch (GuzzleHttp\Exception\BadResponseException $e) {
             Log::error('Exception: ' . $e->getMessage());

@@ -13,7 +13,7 @@ class PriorityController extends Controller
     //protection priority
     public function protectionHome(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         $priorityData = [];
 
         if (!empty($transactionId)) {
@@ -53,7 +53,7 @@ class PriorityController extends Controller
 
     public function protectionCoverage(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         $protectionCoverageData = [];
 
         if (!empty($transactionId)) {
@@ -134,6 +134,14 @@ class PriorityController extends Controller
                     if (isset($siblingData) && !empty($siblingData)) {
                         $familyDependent['siblings_data'] = $siblingData;
                     }
+
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
                         
                     foreach ($familyDependent as $key => $value) {
                         if (isset($value)) {
@@ -141,7 +149,6 @@ class PriorityController extends Controller
                             session(['customer_details.family_details.' . $substring => true]);
                             session(['customer_details.family_details.' . $key => $value]);
                             session(['customer_details.family_details.dependent.'. $key => $value]);
-
                         }
                     }
                 } else {
@@ -170,7 +177,7 @@ class PriorityController extends Controller
 
     public function protectionAmountNeeded(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if (!empty($transactionId)) {
             session(['transaction_id' => $transactionId]);
@@ -211,12 +218,11 @@ class PriorityController extends Controller
         }
 
         return view('pages/priorities/protection/amount-needed');
-
     }
 
     public function protectionExistingPolicy(Request $request)
     {
-        $transactionId = $request->input('transaction_id') ?? session('transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if (!empty($transactionId)) {
             session(['transaction_id' => $transactionId]);
@@ -259,7 +265,7 @@ class PriorityController extends Controller
 
     public function protectionGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         $prioritiesDiscuss = [];
         if (!empty($transactionId)) {
@@ -282,11 +288,9 @@ class PriorityController extends Controller
                 $prioritiesDiscuss[$cpValue['sequence']-1] = $cpValue['priority'];
 
                 if ($cpValue['priority'] == "protection")
-                {
-                    // $protectionDiscuss = true;
+                {        
                     session(['customer_details.priorities.protection_discuss' => 'true']);
                 }
-
             }
 
             ksort($prioritiesDiscuss);
@@ -312,8 +316,8 @@ class PriorityController extends Controller
     //retirement priority
     public function retirementHome(Request $request)
     {
-        // $transactionId = $request->input('transaction_id') ?? session('transaction_id');
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        // $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -343,7 +347,7 @@ class PriorityController extends Controller
 
     public function retirementCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -410,6 +414,15 @@ class PriorityController extends Controller
                         $familyDependent['siblings_data'] = $siblingData;
                     }
 
+                    //clear the session first , then reassign the value
+                    session()->forget('customer_details.family_details.children_data');
+                    session()->forget('customer_details.family_details.children');
+                    session()->forget('customer_details.family_details.parents_data');
+                    session()->forget('customer_details.family_details.parents');
+                    session()->forget('customer_details.family_details.siblings');
+                    session()->forget('customer_details.family_details.siblings_data');
+                    
+
                     foreach ($familyDependent as $key => $value) {
                         if (isset($value)) {
                             $substring = strstr($key, '_data', true);
@@ -421,8 +434,6 @@ class PriorityController extends Controller
                 else{
                     unset($familyDependent);
                 }
-        
-    
             }
            
             if ($customerDependent && $customerDependent->spouse) {
@@ -433,7 +444,6 @@ class PriorityController extends Controller
 
             if ($spouse) {
                 session(['customer_details.family_details.spouse_data' => $spouse ]);   
-                // session(['customer_details.family_details.spouse_data.full_name' => $spouse['full_name']]);
             }
 
             $customerNeed = Customer::with('customerNeeds')->find($customer->id)->customerNeeds->toArray();
@@ -457,7 +467,7 @@ class PriorityController extends Controller
 
     public function retirementIdeal(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
 
@@ -501,7 +511,7 @@ class PriorityController extends Controller
 
     public function retirementMonthlySupport(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -534,8 +544,6 @@ class PriorityController extends Controller
                 // N2 is retirement need
                 if ($value['type'] == "N2") {
                     session(['customer_details.selected_needs.need_2.advance_details.ideal_retirement' => $value['ideal_retirement']]);
-                    // session(['customer_details.selected_needs.need_2.advance_details.relationship' => $value['relationship']]); 
-
                     session(['customer_details.selected_needs.need_2.advance_details.monthly_covered_amount' => $value['covered_amount_monthly']]); 
                     session(['customer_details.selected_needs.need_2.advance_details.covered_amount' => $value['covered_amount']]); 
                     session(['customer_details.selected_needs.need_2.advance_details.existing_amount' => $value['existing_amount']]); 
@@ -551,7 +559,7 @@ class PriorityController extends Controller
 
     public function retirementPeriod(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -602,7 +610,7 @@ class PriorityController extends Controller
 
     public function retirementAllocatedFunds(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -639,8 +647,6 @@ class PriorityController extends Controller
                 // N2 is retirement need
                 if ($value['type'] == "N2") {
                     session(['customer_details.selected_needs.need_2.advance_details.ideal_retirement' => $value['ideal_retirement']]);
-                    // session(['customer_details.selected_needs.need_2.advance_details.relationship' => $value['relationship']]); 
-
                     session(['customer_details.selected_needs.need_2.advance_details.existing_amount' => $value['existing_amount']]); 
                     session(['customer_details.selected_needs.need_2.advance_details.supporting_years' => $value['supporting_year']]);
                     session(['customer_details.selected_needs.need_2.advance_details.goals_amount' => $value['goals_amount']]);
@@ -657,7 +663,7 @@ class PriorityController extends Controller
 
     public function retirementGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -690,8 +696,6 @@ class PriorityController extends Controller
                 // N2 is retirement need
                 if ($value['type'] == "N2") {
                     session(['customer_details.selected_needs.need_2.advance_details.ideal_retirement' => $value['ideal_retirement']]);
-                    // session(['customer_details.selected_needs.need_2.advance_details.relationship' => $value['relationship']]); 
-
                     session(['customer_details.selected_needs.need_2.advance_details.existing_amount' => $value['existing_amount']]); 
                     session(['customer_details.selected_needs.need_2.advance_details.supporting_years' => $value['supporting_year']]);
                     session(['customer_details.selected_needs.need_2.advance_details.goals_amount' => $value['goals_amount']]);
@@ -704,23 +708,11 @@ class PriorityController extends Controller
 
         return view('pages/priorities/retirement/gap');
     }
-
-    //on hold 
-    public function retirementSupportingYears(Request $request)
-    {
-        return view('pages/priorities/retirement/retirement-supporting-years');
-    }
-
-    //on hold
-    public function retirementAge(Request $request)
-    {
-        return view('pages/priorities/retirement/retirement-retire-age');
-    }
     
     //education priority
     public function educationHome(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -750,7 +742,7 @@ class PriorityController extends Controller
 
     public function educationCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -840,7 +832,7 @@ class PriorityController extends Controller
     
     public function educationAmountNeeded(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -887,7 +879,7 @@ class PriorityController extends Controller
 
     public function educationExistingFund(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -934,7 +926,7 @@ class PriorityController extends Controller
 
     public function educationGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -978,22 +970,10 @@ class PriorityController extends Controller
         return view('pages/priorities/education/gap');
     }
 
-    //on hold
-    public function educationAmount(Request $request)
-    {
-        return view('pages/priorities/education/education-amount');
-    }
-
-    //on hold 
-    public function educationSupportingYears(Request $request)
-    {
-        return view('pages/priorities/education/education-supporting-years');
-    }
-
     //savings priority
     public function savingsHome(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1023,7 +1003,7 @@ class PriorityController extends Controller
 
     public function savingsCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1102,10 +1082,8 @@ class PriorityController extends Controller
                     }
                 }
         
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
-
+                $familyDependent['children_data'] = $childData ?? NULL;
+                
                 session(['customer_details.family_details' => $familyDependent]);
             }
 
@@ -1125,7 +1103,7 @@ class PriorityController extends Controller
 
     public function savingsGoals(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1173,7 +1151,7 @@ class PriorityController extends Controller
 
     public function savingsAmountNeeded(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1213,7 +1191,6 @@ class PriorityController extends Controller
                     session(['customer_details.selected_needs.need_4.advance_details.goal_amount' => $value['goal_amount']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.covered_amount' => $value['covered_amount']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.supporting_years' => $value['supporting_year']]); 
-
                     session(['customer_details.selected_needs.need_4.advance_details.goals_amount' => $value['goals_amount']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.insurance_amount' => $value['insurance_amount']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.fund_percentage' => $value['fund_percentage']]); 
@@ -1225,7 +1202,7 @@ class PriorityController extends Controller
 
     public function savingsAnnualReturn(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1276,7 +1253,7 @@ class PriorityController extends Controller
 
     public function savingsRiskProfile(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1312,7 +1289,6 @@ class PriorityController extends Controller
                 
                 // N4 is education need
                 if ($value['type'] == "N4") {
-                    
                     session(['customer_details.selected_needs.need_4.advance_details.risk_profile' => $value['risk_profile']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.potential_return' => $value['potential_return']]); 
                     session(['customer_details.selected_needs.need_4.advance_details.annual_returns' => $value['annual_return']]);       
@@ -1324,7 +1300,7 @@ class PriorityController extends Controller
 
     public function savingsGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1377,22 +1353,11 @@ class PriorityController extends Controller
         return view('pages/priorities/savings/gap');
     }
 
-    //on hold
-    public function savingsMonthlyPayment(Request $request)
-    {
-        return view('pages/priorities/savings/monthly-payment');
-    }
-
-    //on hold
-    public function savingsGoalDuration(Request $request)
-    {
-        return view('pages/priorities/savings/goal-duration');
-    }
-
+    
     //investment priority
     public function investmentHome(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1422,7 +1387,7 @@ class PriorityController extends Controller
 
     public function investmentCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1501,10 +1466,8 @@ class PriorityController extends Controller
                     }
                 }
         
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
-
+                $familyDependent['children_data'] = $childData ?? NULL;
+        
                 session(['customer_details.family_details' => $familyDependent]);
             }
 
@@ -1523,7 +1486,7 @@ class PriorityController extends Controller
 
     public function investmentAmountNeeded(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1568,7 +1531,7 @@ class PriorityController extends Controller
 
     public function investmentAnnualReturn(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1612,7 +1575,7 @@ class PriorityController extends Controller
 
     public function investmentRiskProfile(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1647,8 +1610,7 @@ class PriorityController extends Controller
             foreach ($customerNeed as $value) {
                 
                 // N5 is investment need
-                if ($value['type'] == "N5") {
-                   
+                if ($value['type'] == "N5") {                
                     session(['customer_details.selected_needs.need_5.advance_details.risk_profile' => $value['risk_profile']]); 
                     session(['customer_details.selected_needs.need_5.advance_details.potential_return' => $value['potential_return']]); 
                     session(['customer_details.selected_needs.need_5.advance_details.annual_returns' => $value['annual_return']]);       
@@ -1660,7 +1622,7 @@ class PriorityController extends Controller
 
     public function investmentGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1711,22 +1673,10 @@ class PriorityController extends Controller
         return view('pages/priorities/investment/gap');
     }
 
-    //on hold
-    public function investmentMonthlyPayment(Request $request)
-    {
-        return view('pages/priorities/investment/monthly-payment');
-    }
-
-    //on hold
-    public function investmentSupporting(Request $request)
-    {
-        return view('pages/priorities/investment/supporting');
-    }
-
     //risk profile priority
     public function riskProfile(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1776,7 +1726,7 @@ class PriorityController extends Controller
     //health and medical priority
     public function healthMedicalHome(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1806,7 +1756,7 @@ class PriorityController extends Controller
 
     public function healthMedicalSelection(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1850,7 +1800,7 @@ class PriorityController extends Controller
 
     public function healthMedicalCriticalIllnessCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -1915,10 +1865,8 @@ class PriorityController extends Controller
                     }
                 }
         
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
-
+                $familyDependent['children_data'] = $childData ?? NULL;
+                
                 session(['customer_details.family_details' => $familyDependent]);
             }
 
@@ -1954,7 +1902,7 @@ class PriorityController extends Controller
     public function healthMedicalCriticalAmountNeeded(Request $request)
     {
 
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2001,7 +1949,7 @@ class PriorityController extends Controller
 
     public function healthMedicalCriticalExistingProtection(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2050,7 +1998,7 @@ class PriorityController extends Controller
 
     public function healthMedicalCriticalGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2094,7 +2042,7 @@ class PriorityController extends Controller
 
     public function healthMedicalPlanningCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2159,10 +2107,8 @@ class PriorityController extends Controller
                     }
                 }
         
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
-
+                $familyDependent['children_data'] = $childData ?? NULL;
+               
                 session(['customer_details.family_details' => $familyDependent]);
             }
 
@@ -2182,16 +2128,15 @@ class PriorityController extends Controller
                 if ($value['type'] == "N6") {
 
                     $decodeHealthCare = json_decode($value['health_care'], true);
+                    $decodeCriticalIllness = json_decode($value['critical_illness'], true);
 
-                    $decodeCriticalIllness = json_decode($value['critical_illness']);
-
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.relationship' => $decodeHealthCare['relationship']]);                 
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.child_dob' => $decodeHealthCare['child_dob']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.child_name' => $decodeHealthCare['child_name']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.spouse_name' => $decodeHealthCare['spouse_name']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.spouse_dob' => $decodeHealthCare['spouse_dob']]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan']]);  
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan']]);     
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.relationship' => $decodeHealthCare['relationship'] ?? NULL]);                 
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.child_dob' => $decodeHealthCare['child_dob'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.child_name' => $decodeHealthCare['child_name'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.spouse_name' => $decodeHealthCare['spouse_name'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.spouse_dob' => $decodeHealthCare['spouse_dob'] ?? NULL]);       
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan'] ?? NULL]);  
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan'] ?? NULL]);     
                 }   
             }
         }
@@ -2200,7 +2145,7 @@ class PriorityController extends Controller
 
     public function healthMedicalHospitalSelection(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2242,7 +2187,7 @@ class PriorityController extends Controller
 
     public function healthMedicalRoomSelection(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2284,7 +2229,7 @@ class PriorityController extends Controller
 
     public function healthMedicalPlanningAmountNeeded(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2329,7 +2274,7 @@ class PriorityController extends Controller
 
     public function healthMedicalPanningExistingProtection(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2375,7 +2320,7 @@ class PriorityController extends Controller
 
     public function healthMedicalPlanningGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2416,7 +2361,7 @@ class PriorityController extends Controller
     //debt cancellation priority
     public function debtCancellationHome(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
 
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2458,7 +2403,7 @@ class PriorityController extends Controller
 
     public function debtCancellationCoverage(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2523,10 +2468,8 @@ class PriorityController extends Controller
                     }
                 }
         
-                $familyDependent['children_data'] = $childData;
-                // $familyDependent['parents_data'] = $parentData;
-                // $familyDependent['siblings_data'] = $siblingData;
-
+                $familyDependent['children_data'] = $childData ?? NULL;
+                
                 session(['customer_details.family_details' => $familyDependent]);
             }
 
@@ -2546,8 +2489,6 @@ class PriorityController extends Controller
                 
                 // N7 is debt cancellation need
                 if ($value['type'] == "N7") {
-
-                    // $decodeHealthCare = json_decode($value['health_care'], true);
                     session(['customer_details.selected_needs.need_7.advance_details' => $value]);
                 }
             }
@@ -2557,7 +2498,7 @@ class PriorityController extends Controller
 
     public function debtCancellationAmountNeeded(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2589,11 +2530,8 @@ class PriorityController extends Controller
                 // N7 is debt cancellation need
                 if ($value['type'] == "N7") {
 
-                    // $decodeHealthCare = json_decode($value['health_care'], true);
                     session(['customer_details.selected_needs.need_7.advance_details' => $value]);
                     session(['customer_details.selected_needs.need_7.advance_details.remaining_years' => $value['remaining_year']]);
-
-
                 }
             }
         }
@@ -2603,7 +2541,7 @@ class PriorityController extends Controller
 
     public function debtCancellationExistingDebt(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2634,8 +2572,6 @@ class PriorityController extends Controller
                 
                 // N7 is debt cancellation need
                 if ($value['type'] == "N7") {
-
-                    // $decodeHealthCare = json_decode($value['health_care'], true);
                     session(['customer_details.selected_needs.need_7.advance_details' => $value]);
                     session(['customer_details.selected_needs.need_7.advance_details.remaining_years' => $value['remaining_year']]);
                 }
@@ -2646,7 +2582,7 @@ class PriorityController extends Controller
 
     public function debtCancellationCriticalIllness(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2682,12 +2618,10 @@ class PriorityController extends Controller
                     session(['customer_details.selected_needs.need_7.advance_details.fund_percentage' => $value['fund_percentage']]);
                     session(['customer_details.selected_needs.need_7.advance_details.insurance_amount' => $value['insurance_amount']]);
 
-                    // $criticalIllnessAmount = json_decode($value['critical_illness'],true);
 
                     if(isset($value['critical_illness_amount'] ) && $value['critical_illness_amount'] > 0)
                     {
                         session(['customer_details.selected_needs.need_7.advance_details.critical_illness' => "yes"]);
-
                     }
 
                     session(['customer_details.selected_needs.need_7.advance_details.critical_illness_amount' => $value['critical_illness_amount'] ?? NULL]);
@@ -2699,7 +2633,7 @@ class PriorityController extends Controller
 
     public function debtCancellationGap(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2748,22 +2682,11 @@ class PriorityController extends Controller
         return view('pages/priorities/debt-cancellation/gap');
     }
 
-    //on hold
-    public function debtCancellationOutStandingLoan(Request $request)
-    {
-        return view('pages/priorities/debt-cancellation/outstanding-loan');
-    }
-
-    //on hold 
-    public function debtCancellationSettlementYears(Request $request)
-    {
-        return view('pages/priorities/debt-cancellation/settlement-years');
-    }
 
     //financial-statement
     public function monthlyGoals(Request $request)
     {
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2791,7 +2714,6 @@ class PriorityController extends Controller
 
             $customerFinancial = Customer::with('financialStatement')->find($customer->id)->financialStatement;
 
-
             if($customerFinancial){
                 $cFinancial = $customerFinancial->toArray();
 
@@ -2805,10 +2727,7 @@ class PriorityController extends Controller
 
     public function expectedIncome(Request $request)
     {
-        // $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
-        // $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
-
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
@@ -2849,10 +2768,7 @@ class PriorityController extends Controller
 
     public function incrementAmount(Request $request)
     {
-        // $approximateAmount = session('customer_details.financialStatement.approximateIncrementAmount');
-        // $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
-
-        $transactionId = intval($request->input('transaction_id') ?? session('transaction_id'));
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
         
         if ($transactionId) {
             $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;

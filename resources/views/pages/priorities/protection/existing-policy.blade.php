@@ -29,12 +29,12 @@
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="row bg-primary d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
                     </div>
                     <div class="col-6 m-auto">
-                        <p class="text-white display-6 lh-base text-end m-0 pe-4">Total Protection Fund Needed</p>
+                        <p class="text-white display-6 text-end m-0 pe-4">Total Protection Fund Needed</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                                     <div class="px-2 calculation-progress-bar" role="progressbar" style="width:{{$protectionFundPercentage}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h1 id="TotalProtectionFund" class="text-center display-3 text-uppercase text-white overflow-hidden text-nowrap">RM{{ $existingPolicyAmount === null || $existingPolicyAmount === '' ? number_format(floatval($totalProtectionNeeded)) : ($totalProtectionNeeded > $existingPolicyAmount ? number_format(floatval($totalProtectionNeeded - $existingPolicyAmount)) : '0') }}</h1>
-                                <p class="text-white display-6 lh-base text-center">Total Protection Fund Needed</p>
+                                <p class="text-white display-6 text-center">Total Protection Fund Needed</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
                                     <h2 class="display-5 fw-bold lh-sm">Luckily, I do have an existing life insurance policy.</h2>
-                                    <p class="d-flex pt-5">
+                                    <p class="d-flex pt-5 pb-3 pb-md-0">
                                         <span class="me-5 d-flex">
                                             <input type="radio" class="needs-radio @error('existing_policy_amount') checked-yes @enderror {{$existingPolicy === 'yes' ? 'checked-yes' : ''}}" id="yes" name="protection_existing_policy" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_policy_amount').attr('required',true);"
                                             {{ ($existingPolicy && $existingPolicy === 'yes' || $errors->has('existing_policy_amount') ? 'checked' : '')  }} >
@@ -118,7 +118,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>

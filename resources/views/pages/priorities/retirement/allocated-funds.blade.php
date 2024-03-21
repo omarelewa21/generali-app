@@ -28,13 +28,10 @@
 
 <div id="retirement_allocated_funds" class="tertiary-default-bg calculator-page">
     <div class="container-fluid">
-        <div class="row wrapper-bottom-grey-calculator">
+        <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-            </div>
-            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey-calculator">
-                @csrf
-                <div class="calculator bg-primary row d-md-none calculatorMob d-flex align-items-center">
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalRetirementFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $retirementSavings === null || $retirementSavings === '' 
@@ -49,7 +46,10 @@
                         <p class="text-white display-6 text-end pe-4 m-0">Total Retirement Fund Needed</p>
                     </div>
                 </div>
-                <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
+            </div>
+            <form novalidate action="{{route('validate.retirement.allocated.funds')}}" method="POST" class="content-needs-grey">
+                @csrf
+                <div class="top-menu pt-md-0 py-3">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading d-none d-md-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -70,13 +70,13 @@
                         </div>
                     </div>
                 </section>
-                <section class="content z-md-1">
+                <section class="bottom-content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                                 <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Retirement Other Income Sources Avatar">
                             </div>
-                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                            <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 pt-xl-0 calculatorContent">
                                 <div class="h-sm-100 row">
                                     <h2 class="display-5 fw-bold">So far, I’ve put aside</h2>
                                     <p class="display-5 fw-bold currencyField">
@@ -88,9 +88,7 @@
                                     <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_2" id="other_income_sources_2" {{strpos($otherIncomeSources, 'Stock Trust') !== false ? 'checked' : '' }} value="Stock Trust"><label for="other_income_sources_2" class="form-label display-6">Stock Trust</label></p>
                                     <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_3" id="other_income_sources_3" {{strpos($otherIncomeSources, 'Fixed Deposit (FD)') !== false ? 'checked' : '' }} value="Fixed Deposit (FD)"><label for="other_income_sources_3" class="form-label display-6">Fixed Deposit (FD)</label></p>
                                     <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_4" id="other_income_sources_4" {{strpos($otherIncomeSources, 'Employee Provident Fund (EPF)') !== false ? 'checked' : '' }} value="Employee Provident Fund (EPF)"><label for="other_income_sources_4" class="form-label display-6">Employee Provident Fund (EPF)</label></p>
-                                    <p class="text-start">
-                                        <input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_5" id="other_income_sources_5" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? 'checked' : '' }} value="Others">
-                                        <label for="other_income_sources_5" class="form-label display-6">Others</label>
+                                    <p class="text-start"><input type="checkbox" class="needs-radio other-income-checkbox" name="other_income_sources_5" id="other_income_sources_5" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? 'checked' : '' }} value="Others"><label for="other_income_sources_5" class="form-label display-6">Others</label>
                                         <span>
                                             <input type="text" name="other_income_sources_5_text" class="form-control position-relative d-inline-block w-50 bg-transparent {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled-color' }} @error('other_income_sources_5_text') is-invalid @enderror" id="other_income_sources_5_text" {{strpos($otherIncomeSources, $customOtherIncomeSources) !== false && $customOtherIncomeSources != null  ? '' : 'disabled' }} value="{{ $customOtherIncomeSources }}">
                                         </span>
@@ -116,7 +114,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="bg-accent-light-white py-4 footer-scroll">
+                    <div class="bg-white py-4 footer-scroll">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
@@ -137,7 +135,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>
