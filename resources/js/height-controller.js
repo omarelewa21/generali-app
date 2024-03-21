@@ -15,14 +15,12 @@ $(document).ready(function() {
         }
         if ($("#savingsGoalsButtonInput").length) $(".main-content").css("padding-bottom", mainContentPadding + "px");
     }
-  
-    setMainContentPadding();
 
     function setResponsiveMainContentPadding() {
         const windowWidth = $(window).width();
         
         // Check if the window width is less than 767px
-        if (windowWidth < 768) {
+        if (windowWidth < 1024) {
             const menuHeight = $(".navbar-scroll").outerHeight();
             const descriptionHeight = $(".fixed-sm-top").outerHeight();
             const responsiveMainContentPadding = menuHeight + descriptionHeight - 85.5;
@@ -32,14 +30,12 @@ $(document).ready(function() {
             $(".content-section").css("padding-top", 0);
         }
     }
-  
-    setResponsiveMainContentPadding();
 
     function setResponsiveHeader() {
         const windowWidth = $(window).width();
 
         // Check if the window width is less than 767px
-        if (windowWidth < 768) {
+        if (windowWidth < 1024) {
             const menuHeight = $("#wrapper-navbar.fixed-top.mobile").outerHeight();
             const menuHeightAgent = $("#wrapper-navbar-agent .fixed-top").outerHeight();
             const responsiveHeader = menuHeight; 
@@ -50,8 +46,12 @@ $(document).ready(function() {
             $(".content-section").css("padding-top", 0);
         }
     }
-  
-    setResponsiveHeader();
+
+    if (window.orientation !== 90 && window.orientation !== -90) {
+        setResponsiveHeader();
+        setMainContentPadding();
+        setResponsiveMainContentPadding();
+    }
 
     function setResponsiveCalcuator(){
         const windowWidth = $(window).width();
@@ -133,9 +133,11 @@ $(document).ready(function() {
     setResponsiveCalcuator();
 
     $(window).resize(function() {
-        setMainContentPadding();
-        setResponsiveMainContentPadding();
-        setResponsiveHeader();
-        setResponsiveCalcuator();
+        if (window.orientation !== 90 && window.orientation !== -90) {
+            setResponsiveMainContentPadding();
+            setMainContentPadding();
+            setResponsiveHeader();
+            setResponsiveCalcuator();
+        }
     });
 });

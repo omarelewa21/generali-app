@@ -347,6 +347,7 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 .action_button_slider .slick-dots li.slick-active button:before, .action_button_slider .slick-dots li button:focus:before, .action_button_slider .slick-dots li button:hover:before, .action_button_slider .slick-dots li button:before {
   opacity:0;
 }
+
 .action_button_slider .slick-dots li {
   box-sizing: content-box;
   -ms-flex: 0 1 auto;
@@ -567,6 +568,7 @@ p.nav-text {
 
 .offcanvas.showing, .offcanvas.hiding, .offcanvas.show {
   height:100vh;
+  padding: 0;
 }
 
 .offcanvas .offcanvas-body {
@@ -1033,11 +1035,6 @@ h2.display-5, .currencyField {
   left: 45%;
 }
 
-#lottie-female-animation svg, #lottie-animation.female svg {
-  padding-top: 50px;
-  width: auto!important;
-}
-
 #lottie-son-animation svg {
   padding-top: 100px;
   width: auto!important;
@@ -1078,7 +1075,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Welcome Page ============================== */
 #home {
-  background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
+  background-image: url(/images/welcome-page/welcome-bg-gradient.webp);
   background-size: auto 90%;
   background-position: right top;
   background-repeat: no-repeat;
@@ -1091,7 +1088,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
-  background-image: url(/images/avatar-welcome/avatar-welcome-bg.jpg);
+  background-image: url(/images/avatar-welcome/avatar-welcome-bg.webp);
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1099,7 +1096,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Gender Page ============================== */
 .main-default-bg {
-  background-image: url(/images/general/main-default-bg.png);
+  background-image: url(/images/general/main-default-bg.webp);
   background-size: auto 70%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1169,6 +1166,7 @@ h2.display-5, .currencyField {
   color: #0A043C;
   width: 100%;
   border-color: #A0A0A0;
+  opacity:1;
 }
 
 .btn-check+.btn {
@@ -1544,7 +1542,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Education Home Page ============================== */
 #education_home .main-default-bg {
-  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.png);
+  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.webp);
   background-size: auto 50%, auto 70%;
   background-position: center top, center;
 }
@@ -1855,9 +1853,21 @@ body.overflow #summary .main-content {
   .homeVector {
     margin-top: -80px;
   }
+  #wrapper-navbar.desktop {
+    display: block!important;
+  }
+  #wrapper-navbar.mobile {
+    display: none!important;
+  }
 }
 
 @media only screen and (max-width: 1199px) {
+  #wrapper-navbar.mobile {
+    display: block!important;
+  }
+  #wrapper-navbar.desktop {
+    display: none!important;
+  }
   #home {
     overflow: auto;
   }
@@ -1888,6 +1898,10 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (min-width: 768px) {
+  #lottie-female-animation svg, #lottie-animation.female svg {
+    padding-top: 50px;
+    width: auto!important;
+  }
   .content-needs-grey-calculator {
     grid-auto-rows: 5vh 10vh 50vh;
   }
@@ -2019,8 +2033,11 @@ body.overflow #summary .main-content {
   .main-logo, .white-logo, .red-logo {
     max-width: 172px
   }
-  .sidebanner .display-5, p.nav-text {
+  .sidebanner .display-5 {
     font-size: 20px;
+  }
+  p.nav-text {
+    font-size: 18px;
   }
   .mobileImg {
     padding-top:100px;
@@ -2039,7 +2056,7 @@ body.overflow #summary .main-content {
     grid-template-rows: 10vh 20vh 60vh;
   }
   #identity_details .bg-primary, #avatar_family_dependent_details .bg-primary {
-    margin-top: -200px;
+    margin-top: -28%;
   }
   #home {
     background-position: right bottom;
@@ -2135,15 +2152,18 @@ body.overflow #summary .main-content {
   }
 }
 
-@media only screen and (max-width: 375px) {
-  .btn-primary {
-    font-size: 16px;
-  }
-}
-
 @media only screen and (max-width: 576px) {
   .otherModalText {
     font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .btn-primary, .btn-secondary, .btn-outline-primary {
+    font-size: 14px;
+  }
+  .color-box-wrapper {
+    height: auto;
   }
 }
 
@@ -2152,3 +2172,65 @@ body.overflow #summary .main-content {
     padding-top: inherit!important;
   }
 }
+
+.tablet-mode {
+  display:none;
+}
+
+.mobile-mode {
+  display:none;
+}
+
+#wrapper-navbar.mobile {
+  display: none;
+}
+
+/* Force portrait orientation */
+@media screen and (max-width:1024px) and (orientation: landscape) {
+  .lottie-welcome-female-animation svg, .lottie-welcome-male-animation svg {
+    height: 100%!important;
+    width: auto!important;
+  }
+  .homeVector {
+    max-height: 500px;
+  }
+  .sidebanner {
+    width: 33.33333333%;
+  }
+  .content-section {
+    width: 66.66666667%;
+  }
+  h1.display-3 {
+    font-size: 1.9rem;
+  }
+  .btn-primary, .btn-secondary, .btn-outline-primary {
+    font-size: 14px;
+  }
+  #wrapper-navbar.desktop {
+    display: block!important;
+  }
+  #wrapper-navbar.mobile {
+    display: none!important;
+  }
+  .content-section {
+    padding-top: 0!important;
+  }
+}
+
+@media screen and (max-width:1024px) and (min-width:768px) and (orientation: portrait) {
+  .fixed-sm-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding-top: 85.5px!important;
+  }
+  .navbar-scroll.fixed-top {
+    position: fixed;
+  }
+  .main-content {
+    overflow-y: hidden;
+    height: 100%;
+  }
+}
+

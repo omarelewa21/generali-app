@@ -413,7 +413,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                         });
                     }
                     else if (gender_session == 'Female') {
-                        var newDiv = '<div id="lottie-male-animation" class="appended-image test"></div>';
+                        var newDiv = '<div id="lottie-male-animation" class="appended-image"></div>';
                         $imageContainer.append(newDiv);
                         
                         const animationMale = lottie.loadAnimation({

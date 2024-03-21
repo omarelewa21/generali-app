@@ -61,7 +61,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Single') default @endif" data-avatar="Single" data-required="" id="singleButton">
-                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="100%" alt="Single">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
                                             </div>
