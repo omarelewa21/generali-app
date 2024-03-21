@@ -53,7 +53,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 10px;">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute top-0" width="40px" style="left: 10px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
@@ -70,7 +70,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 20px;top: 50px">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute" width="40px" style="left: 20px;top: 50px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
@@ -87,7 +87,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 60px;">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute top-0" width="40px" style="left: 60px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
@@ -104,7 +104,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
@@ -121,7 +121,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
@@ -138,7 +138,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
@@ -155,7 +155,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
@@ -172,7 +172,7 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="{{ asset('images/top-priorities/discuss-icon.png') }}" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
                                                     <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
