@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dependents', function (Blueprint $table) {
+        Schema::create('financial_statements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained();
-            $table->string('relation')->nullable();
-            $table->string('full_name')->nullable()->index();
-            $table->string('gender')->nullable();
-            $table->string('year_support')->nullable();
-            $table->string('dob')->nullable(); 
-            $table->integer('age')->nullable();
-            $table->string('marital_status')->nullable();
+            $table->foreignId('transaction_id')->constrained();
+            $table->bigInteger('amount_available')->nullable();
+            $table->string('change_in_amount')->nullable();
+            $table->bigInteger('increment_amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dependents');
+        Schema::dropIfExists('financial_statements');
     }
 };

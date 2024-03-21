@@ -190,7 +190,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$investmentPriority}}';
+    var needs_priority = '{{json_encode($investmentPriority)}}';
     var selfData = '{{$selfDataName}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
     var selfGenderSet = '{{$selfGender}}';

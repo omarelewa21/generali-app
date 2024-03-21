@@ -161,7 +161,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$retirementPriority}}';
+    var needs_priority = '{{json_encode($retirementPriority)}}';
     var retirementSavings =  parseFloat({{ $retirementSavings }});
     var percentage = parseFloat({{ $retirementFundPercentage }});
     var newTotalRetirementNeeded = parseFloat({{ $totalRetirementNeeded }});

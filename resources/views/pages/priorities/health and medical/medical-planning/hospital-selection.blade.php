@@ -113,7 +113,7 @@
 </div>
 <script>
     var selectionInput = document.getElementById('medicalHospitalSelectedInput');
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = '{{$relationship}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

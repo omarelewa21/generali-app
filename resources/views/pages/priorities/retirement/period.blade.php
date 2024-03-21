@@ -144,7 +144,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$retirementPriority}}';
+    var needs_priority = '{{json_encode($retirementPriority)}}';
     var oldTotalFund = parseFloat({{ $totalRetirementNeeded }});
     var lastPageInput = '{{$retirementMonthlySupport}}';
     var genderSet = '{{$gender}}';

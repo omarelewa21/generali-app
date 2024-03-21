@@ -128,7 +128,7 @@
 </div>
 <script>
     var sessionCriticalIllnessCoverageAmount = parseFloat({{$coverageAmount}});
-    var needs_priority = '{{$debtPriority}}';
+    var needs_priority = '{{json_encode($debtPriority)}}';
     var lastPageInput = {!! json_encode($debtCancellation) !!};
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

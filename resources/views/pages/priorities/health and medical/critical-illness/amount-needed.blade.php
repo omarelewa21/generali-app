@@ -141,7 +141,7 @@
 <script>
     var amountNeeded = document.getElementById("critical_amount_needed");
     var supportingYears = document.getElementById("critical_year");
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = '{{$relationship}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

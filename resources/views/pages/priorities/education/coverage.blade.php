@@ -139,7 +139,7 @@
 </div>
 
 <script>
-    var needs_priority = '{{$educationPriority}}';
+    var needs_priority = '{{json_encode($educationPriority)}}';
     var childDatas = {!! json_encode($childData) !!};
     var familyDependent = {!! json_encode($familyDependent) !!};
     var skintone = '{{$skintone}}';

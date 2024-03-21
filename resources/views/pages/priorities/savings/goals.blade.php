@@ -35,11 +35,106 @@
                             $goal_1 = 'Pursue their interests';
                             $goal_2 = 'Start their own business';
                             $goal_3 = 'Contribute to their tuition fees';
+                            if (isset($savingsGoals)) 
+                            {
+                                if($savingsGoals[0] != ''){
+                                    if ($savingsGoals[0] == $goal_1 ){
+                                        $savingsGoals[0] = 'interest';
+                                    } else if($savingsGoals[0] == $goal_2){
+                                        $savingsGoals[0] = 'business';
+                                    } else if($savingsGoals[0] == $goal_3){
+                                        $savingsGoals[0] = 'tuition';
+                                    } else {
+                                        $savingsGoals[0] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[1] != ''){
+                                    if($savingsGoals[1] == $goal_1){
+                                        $savingsGoals[1] = 'interest';
+                                    } else if($savingsGoals[1] == $goal_2){
+                                        $savingsGoals[1] = 'business';
+                                    } else if($savingsGoals[1] == $goal_3){
+                                        $savingsGoals[1] = 'tuition';
+                                    } else {
+                                        $savingsGoals[1] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[2] != ''){
+                                    if($savingsGoals[2] == $goal_1){
+                                        $savingsGoals[2] = 'interest';
+                                    } else if($savingsGoals[2] == $goal_2){
+                                        $savingsGoals[2] = 'business';
+                                    } else if($savingsGoals[2] == $goal_3){
+                                        $savingsGoals[2] = 'tuition';
+                                    } else {
+                                        $savingsGoals[2] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[3] != ''){
+                                    if($savingsGoals[3] == $goal_1){
+                                        $savingsGoals[3] = 'interest';
+                                    } else if($savingsGoals[3] == $goal_2){
+                                        $savingsGoals[3] = 'business';
+                                    } else if($savingsGoals[3] == $goal_3){
+                                        $savingsGoals[3] = 'tuition';
+                                    } else {
+                                        $savingsGoals[3] = 'others';
+                                    }
+                                }
+                            }
+                            
                         }
                         else{
                             $goal_1 = 'Travel around the world';
                             $goal_2 = 'Upgrade my assets & lifestyle';
                             $goal_3 = 'Contribute to charitable needs';
+                            if (isset($savingsGoals)) {
+                                
+                                if($savingsGoals[0] != ''){
+                                    if ($savingsGoals[0] == $goal_1 ){
+                                        $savingsGoals[0] = 'travel';
+                                    } else if($savingsGoals[0] == $goal_2){
+                                        $savingsGoals[0] = 'home';
+                                    } else if($savingsGoals[0] == $goal_3){
+                                        $savingsGoals[0] = 'donate';
+                                    } else {
+                                        $savingsGoals[0] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[1] != ''){
+                                    if($savingsGoals[1] == $goal_1){
+                                        $savingsGoals[1] = 'travel';
+                                    } else if($savingsGoals[1] == $goal_2){
+                                        $savingsGoals[1] = 'home';
+                                    } else if($savingsGoals[1] == $goal_3){
+                                        $savingsGoals[1] = 'donate';
+                                    } else {
+                                        $savingsGoals[1] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[2] != ''){
+                                    if($savingsGoals[2] == $goal_1){
+                                        $savingsGoals[2] = 'travel';
+                                    } else if($savingsGoals[2] == $goal_2){
+                                        $savingsGoals[2] = 'home';
+                                    } else if($savingsGoals[2] == $goal_3){
+                                        $savingsGoals[2] = 'donate';
+                                    } else {
+                                        $savingsGoals[2] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[3] != ''){
+                                    if($savingsGoals[3] == $goal_1){
+                                        $savingsGoals[3] = 'travel';
+                                    } else if($savingsGoals[3] == $goal_2){
+                                        $savingsGoals[3] = 'home';
+                                    } else if($savingsGoals[3] == $goal_3){
+                                        $savingsGoals[3] = 'donate';
+                                    } else {
+                                        $savingsGoals[3] = 'others';
+                                    }
+                                }
+                            }     
                         }
                     @endphp
                     <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white z-1">
@@ -321,7 +416,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
     var genderSet = '{{$gender}}';
