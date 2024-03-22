@@ -45,9 +45,9 @@
                                     <div id="lottie-animation-medium" class="w-auto h-100" style="display:none;"></div>
                                     <div id="lottie-animation-low" class="w-auto h-100" style="display:none;"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" width="auto" height="100%" alt="High Risk Avatar" style="display:block;">
-                                    <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
-                                    <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
+                                    <img src="{{ asset('images/needs/risk-profile/high-risk.webp') }}" id="high-risk-img" width="auto" height="100%" alt="High Risk Avatar" style="display:block;">
+                                    <img src="{{ asset('images/needs/risk-profile/medium-risk.webp') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
+                                    <img src="{{ asset('images/needs/risk-profile/low-risk.webp') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
                                 @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-0 pt-4 calculatorContent">

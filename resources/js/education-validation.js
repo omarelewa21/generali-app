@@ -33,8 +33,62 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 autoplay: true,
                 path: newImage
             });
+            if (!childDatas) {
+                var nameModal = document.getElementById('missingChild');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingChild .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    window.location.href = '/family-dependent';
+                });
+            }
         }
         if (path === '/education/coverage') {
+            if (!childDatas) {
+                var nameModal = document.getElementById('missingChild');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingChild .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    window.location.href = '/family-dependent';
+                });
+            }
             if (childData === null || childData === undefined) {
                 var nameModal = document.getElementById('missingChildFields');
                 nameModal.classList.add('show');
@@ -123,7 +177,33 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             }
         }
         if (path == '/education/amount-needed') {
-            if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+            if (!childDatas) {
+                var nameModal = document.getElementById('missingChild');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingChild .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    window.location.href = '/family-dependent';
+                });
+            } else if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';
@@ -263,7 +343,33 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
         }
         if (path == '/education/existing-fund') {
-            if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+            if (!childDatas) {
+                var nameModal = document.getElementById('missingChild');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingChild .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    window.location.href = '/family-dependent';
+                });
+            } else if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';
@@ -406,7 +512,33 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             });
         }
         if (path == '/education/gap') {
-            if (!lastPageInput || !('existing_amount' in lastPageInput)) {
+            if (!childDatas) {
+                var nameModal = document.getElementById('missingChild');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingChild .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    window.location.href = '/family-dependent';
+                });
+            } else if (!lastPageInput || !('existing_amount' in lastPageInput)) {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
                 nameModal.style.display = 'block';

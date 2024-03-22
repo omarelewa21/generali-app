@@ -24,26 +24,10 @@ $(document).ready(function () {
                     breakpoint: 1200,
                     settings: {
                         centerMode: false,
-                        slidesToShow: 2,
-                        slidesToScroll: 2,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
                         infinite: true,
                         dots: false
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        centerMode: true,
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        centerMode: true,
-                        slidesToShow: 1,
-                        slidesToScroll: 1
                     }
                 }
             ]

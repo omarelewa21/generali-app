@@ -63,7 +63,7 @@
                         <div class="row h-100">
                             <div class="col-12 h-100 d-flex justify-content-center align-items-end calculatorContent">
                                 <div class="position-relative">
-                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="100%" alt="Savings Annual Return Avata" class="pb-5">
+                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.webp') }}" width="auto" height="100%" alt="Savings Annual Return Avata" class="pb-5" style="max-height:400px;">
                                     <p class="display-5 fw-bold currencyField position-absolute center w-100 text-center">
                                         <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary text-center @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
                                     % p.a.</p>

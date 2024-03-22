@@ -69,7 +69,6 @@ $(document).ready(function() {
         const graphMenu = titleHeight + needsMenuHeight -20;
 
         if(windowWidth < 768){
-            // $(".bottom-content .order-md-1.order-sm-2.order-2").css("padding-bottom" , footerHeight + "px");
             $(".bottom-content .calculatorContent").css("padding-bottom" , footerHeight + "px");
             $(".content-needs-grey").css("padding-top" , responsiveHeight + "px");
             $(".summary-page .content-needs-grey .top-menu").css("padding-top" , needsMenuHeight + "px");
@@ -84,7 +83,6 @@ $(document).ready(function() {
             $(".coverage .content-needs-grey .bottom-content .coverage_slick").css("padding-top" , needsMenuHeight + "px");
             $("#health-medical-selection .bottom-content #hnm-selection").css("padding-top" , gapMenu + "px");
             $("#medical-hospital-selection .bottom-content #hnm-selection").css("padding-top" , needsSubMenuHeight + "px");
-            $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
             $("#risk-profile .bottom-content").css("padding-top" , needsMenuHeight + "px");
             $(".summary-page .bottom-content .graph-col").css("padding-top" ,  graphMenu + "px");
             $(".ideal .bottom-content").css("padding-top" , 0);
@@ -95,9 +93,8 @@ $(document).ready(function() {
             // $(".ideal .bottom-content").css("padding-bottom" , footerHeight + "px");
             $(".summary-overview .bottom-content .tertiary-mobile-bg").css("padding-top" ,"20px");
             $("#overview .table-wrapper").css("padding-bottom" , footerHeight-50 + "px");
-            if(windowWidth < 385) {
-                $("#education_coverage .bottom-content").css("padding-top" , "42px");
-            } 
+            $(".bottom-content").css("padding-top" , needsSubMenuHeight + "px");
+            $("#education_coverage .bottom-content").css("padding-top" , gapMenu + "px");
             if(windowWidth < 500) {
                 $(".summary-page .bottom-content .graph-col").css("padding-top" , "115px");
             } 

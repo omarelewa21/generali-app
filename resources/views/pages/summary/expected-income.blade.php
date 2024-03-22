@@ -53,7 +53,7 @@
                 </section>
                 <section class="bottom-avatar">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <img src="{{ asset('images/summary/avatar-open-hands.png') }}" height="100%" width="auto" alt="Expected Income">
+                        <img src="{{ asset('images/summary/avatar-open-hands.webp') }}" height="100%" width="auto" alt="Expected Income">
                     </div>
                 </section>
                 <section class="footer fixed-bottom footer-scroll p-0">

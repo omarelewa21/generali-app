@@ -20,7 +20,7 @@
     $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.goals_amount','0');
     $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_3.advance_details.relationship');
-
+    $childData = session('customer_details.family_details.children_data');
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
@@ -76,7 +76,7 @@
                                 @if(isset($gender) || isset($skintone))
                                     <div id="lottie-animation" class="w-auto h-100"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/education/amount-needed/avatar.png') }}" width="auto" height="100%" alt="Education Amount Needed Avatar">
+                                    <img src="{{ asset('images/needs/education/amount-needed/avatar.webp') }}" width="auto" height="100%" alt="Education Amount Needed Avatar">
                                 @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
@@ -228,6 +228,21 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingChild" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildLabel">You're required to provide Child Details</h3>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please provide your child details in Family dependent page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var needs_priority = '{{json_encode($educationPriority)}}';
@@ -235,5 +250,6 @@
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';
     var gender = genderSet.toLowerCase();
+    var childDatas = {!! json_encode($childData) !!};
 </script>
 @endsection

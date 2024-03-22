@@ -14,6 +14,7 @@
     $totalEducationNeeded = session('customer_details.selected_needs.need_3.advance_details.goals_amount','0');
     $educationFundPercentage = session('customer_details.selected_needs.need_3.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
+    $childData = session('customer_details.family_details.children_data');
 @endphp
 
 <div id="education-summary" class="secondary-default-bg summary-page">
@@ -55,7 +56,7 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/education-icon.png') }}" class="mb-3 sum-needs-icon"><br>
+                                                <img src="{{ asset('images/top-priorities/education-icon.webp') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{ $totalAmountNeeded > $totalEducationNeeded ? '100' : floor(floatval($educationFundPercentage))}}%</span>
                                                 <p class="avatar-text text-center fw-bold text-black mt-2 mt-md-0">covered</p>
                                             </div>
@@ -68,7 +69,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" class="sum-icon" alt="clock icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-clock.webp') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$totalEducationYear}} years</h4>
@@ -80,7 +81,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" class="sum-icon" alt="umbrella icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.webp') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">I want to fund my child's education with</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalEducationNeeded))}}</h4>
@@ -92,7 +93,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" class="sum-icon" alt="saving icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-saving.webp') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So far, I've set aside</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($educationSavingAmount))}}</h4>
@@ -104,7 +105,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" class="sum-icon" alt="summary icon" width="45">
+                                                <img src="{{ asset('images/needs/general/icon-summary.webp') }}" class="sum-icon" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So I need an education plan for</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (5 /100)) )}}</h4>
@@ -153,12 +154,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingChild" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildLabel">You're required to provide Child Details</h3>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please provide your child details in Family dependent page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var educationSavingAmount =  parseFloat({{ $educationSavingAmount }});
     var newTotalEducationFundNeeded = parseFloat({{$totalEducationNeeded}});
     var percentage = parseFloat({{$educationFundPercentage}});
     var needs_priority = '{{json_encode($educationPriority)}}';
     var lastPageInput = {!! json_encode($education) !!};
+    var childDatas = {!! json_encode($childData) !!};
 </script>
 
 @endsection

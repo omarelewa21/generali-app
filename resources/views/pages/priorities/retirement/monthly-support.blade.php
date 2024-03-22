@@ -82,7 +82,7 @@
                                 @if(isset($gender) || isset($skintone))
                                     <div id="lottie-animation" class="w-auto h-100"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/retirement/monthly-support.png') }}" width="auto" height="100%" alt="Retirement Monthly Support Avatar">
+                                    <img src="{{ asset('images/needs/retirement/monthly-support.webp') }}" width="auto" height="100%" alt="Retirement Monthly Support Avatar">
                                 @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">

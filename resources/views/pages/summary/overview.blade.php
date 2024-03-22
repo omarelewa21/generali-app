@@ -255,7 +255,7 @@
                                                         @if(isset($critical_illness['critical_illness_plan']) && $critical_illness['critical_illness_plan'] == 'Critical Illness')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
-                                                                    <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness Care
+                                                                    <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.webp') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness Care
                                                                 </td>
                                                                 <td class="px-2">{{isset($critical_illness['relationship']) && $critical_illness['relationship'] == 'Spouse' ? 
                                                                         $critical_illness['spouse_name'] : 
@@ -280,7 +280,7 @@
                                                         @if (isset($healthCare['medical_care_plan']) && $healthCare['medical_care_plan'] == 'Health Planning')
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
-                                                                    <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
+                                                                    <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.webp') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
                                                                 </td>
                                                                 <td class="px-2">
                                                                     @if (isset($all_needs[$needKey]['advance_details']['health_care']['relationship']))
@@ -318,7 +318,7 @@
                                                     @else
                                                         <tr>
                                                             <td class="d-flex align-items-center py-3">
-                                                                <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="{{$needs}} Icon">{{$needs}}
+                                                                <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.webp') }}" height="100%" width="auto" class="me-3" alt="{{$needs}} Icon">{{$needs}}
                                                             </td>
                                                             <td class="px-2">{{$coverage_person}}</td>
                                                             <td class="px-2">{{ $goals == 'N/A' ? $goals : 'RM' . number_format(floatval($goals))}}</td>

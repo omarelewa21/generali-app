@@ -36,7 +36,7 @@
                         @if(isset($gender) || isset($skintone))
                             <div id="lottie-animation" class="w-auto" style="height:200%;"></div>
                         @else
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}" alt="room selection avatar" width="auto" height="200%">
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.webp') }}" alt="room selection avatar" width="auto" height="200%">
                         @endif
                     </div>
                     <div class="col-12 text-center d-flex justify-content-center bg-accent-light-white room-selection-footer"></div>
@@ -73,7 +73,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="100px" alt="own-space" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.webp') }}" width="auto" height="100px" alt="own-space" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">My own space</p>
                                                 </button>
                                             </div>
@@ -83,7 +83,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.webp') }}" width="auto" height="100px" alt="a-companion" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">A companion</p>
                                                 </button>
                                             </div>
@@ -93,7 +93,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.webp') }}" width="auto" height="100px" alt="more-roommates" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">More roommates</p>
                                                 </button>
                                             </div>
@@ -106,7 +106,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
                                                     <div class="col-md-4 col-12">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="110px" alt="own-space">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.webp') }}" width="auto" height="110px" alt="own-space">
                                                     </div>
                                                     <div class="col-md-8 col-12 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">My own space</p>
@@ -120,7 +120,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
                                                     <div class="col-4">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.webp') }}" width="auto" height="100px" alt="a-companion">
                                                     </div>
                                                     <div class="col-8 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">A companion</p>
@@ -134,7 +134,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
                                                     <div class="col-4">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.webp') }}" width="auto" height="100px" alt="more-roommates">
                                                     </div>
                                                     <div class="col-8 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">More roommates</p>

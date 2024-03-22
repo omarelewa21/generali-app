@@ -16,6 +16,7 @@
     $educationPriority = session('customer_details.priorities.education_discuss');
     $protectionPriority = session('customer_details.priorities.protection_discuss');
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $childData = session('customer_details.family_details.children_data');
 
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
@@ -37,9 +38,9 @@
                     <section class="content-needs">
                         <div class="col-12 justify-content-center align-items-center position-relative vector d-xl-flex d-none">
                             @if(isset($gender) || isset($skintone))
-                                <div id="lottie-animation" class="position-absolute needs_avatar" style="bottom:-50px;"></div>
+                                <div id="lottie-animation" class="position-absolute needs_avatar d-flex justify-content-center" style="bottom:-50px;"></div>
                             @else
-                                <img src="{{ asset('images/needs/education/home-vector.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
+                                <img src="{{ asset('images/needs/education/home-vector.webp') }}" height="90%" width="auto" class="position-absolute" style="bottom:-50px" alt="Education Home">
                             @endif
                         </div>
                     </section>
@@ -67,7 +68,7 @@
                                                 $route = route('protection.gap');
                                             }
                                             else {
-                                                $route = route('financial.priorities.discuss');
+                                                $route = route('priorities.to.discuss');
                                             }
                                         @endphp
                                         <!-- <a href="{{route('retirement.home')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a> -->
@@ -83,11 +84,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingChild" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildLabel">You're required to provide Child Details</h3>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please provide your child details in Family dependent page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var needs_priority = '{{$educationPriority}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';
     var gender = genderSet.toLowerCase();
+    var childDatas = {!! json_encode($childData) !!};
 </script>
 @endsection 
