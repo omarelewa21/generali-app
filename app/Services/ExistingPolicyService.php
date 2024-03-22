@@ -19,7 +19,9 @@ class ExistingPolicyService
 
             $createdExistingPolicy = [];
 
-            $customerExistingPolicy = $customerDetails['existing_policy'];
+            $customerExistingPolicy = json_decode($customerDetails['existing_policy'],true);
+
+            //policy_1:{"role":"life insured"}
 
             foreach ($customerExistingPolicy as $epKey => $epValue) {
 

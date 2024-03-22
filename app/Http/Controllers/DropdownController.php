@@ -558,14 +558,27 @@ class DropdownController extends Controller
 
         if (!is_null($transactionId)) {
             $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');                        
-
-            foreach ($customerPriority as $cpValue) {
-                $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
-
-                $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
-                $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
+            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');     
+            
+            if ($customerPriority) {
+                foreach ($customerPriority as $cpValue) {
+                    $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
+                    $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
+                    $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
+                }
             }
+            else{
+                // first time arrive this page, set all to true
+                $priorities = ['protection', 'retirement', 'education','savings','debt-cancellation','health-medical','investments','others']; 
+
+                foreach ($priorities as $priority) {
+
+                    $prioritiesLevel[] = $priority;
+                    $prioritiesDiscuss[$priority] = true;
+                    $prioritiesDiscuss[$priority . "_discuss"] = true;
+                }
+            }   
+
             ksort($prioritiesLevel);
             session(['customer_details.priorities_level' => $prioritiesLevel]);
             session(['customer_details.priorities' => $prioritiesDiscuss]);
@@ -693,9 +706,32 @@ class DropdownController extends Controller
                 }
             }
 
-            $customerRelationship = Customer::with(['customerNeeds','priorities'])->find($customer->id);
+            $customerRelationship = Customer::with(['customerNeeds','priorities','existingPolicies'])->find($customer->id);
             $customerNeed =  $customerRelationship->customerNeeds->toArray();
             $customerPriority = $customerRelationship->priorities->toArray();
+
+            $customerExistingPolicies = $customerRelationship->replicate()->existingPolicies;
+
+            $policyNumber = [];
+
+            if($customerExistingPolicies)
+            {
+                $count = 1;
+
+                foreach ($customerExistingPolicies as $epValue) {
+
+                    $epValue['premium_contribution'] = (int) str_replace(',', '', $epValue['premium_contribution']);
+                    $epValue['life_coverage_amount'] = (int) str_replace(',', '', $epValue['life_coverage_amount']);
+                    $epValue['critical_illness_amount'] = (int) str_replace(',', '', $epValue['critical_illness_amount']);
+
+
+                    $policyNumber['policy_'.$count] = $epValue;
+
+                    session(['customer_details.existing_policy' => json_encode($policyNumber)]);
+
+                    $count++;
+                }
+            }
 
             $mapping = [
                 'protection' => 'N1',
@@ -844,14 +880,18 @@ class DropdownController extends Controller
 
                 foreach ($customerExistingPolicies as $epValue) {
 
+                    $epValue['premium_contribution'] = (int) str_replace(',', '', $epValue['premium_contribution']);
+                    $epValue['life_coverage_amount'] = (int) str_replace(',', '', $epValue['life_coverage_amount']);
+                    $epValue['critical_illness_amount'] = (int) str_replace(',', '', $epValue['critical_illness_amount']);
+
+
                     $policyNumber['policy_'.$count] = $epValue;
 
-                    session(['customer_details.existing_policy' => $policyNumber]);
+                    session(['customer_details.existing_policy' => json_encode($policyNumber)]);
 
                     $count++;
                 }
             }
-
             $customerNeed = $customerRelationship->replicate()->customerNeeds;
 
             if($customerNeed)

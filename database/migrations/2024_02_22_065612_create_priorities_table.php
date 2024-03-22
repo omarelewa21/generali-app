@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained();
             $table->string('priority');
+            $table->string('covered')->default('true');
+            $table->string('discuss')->default('true');
             $table->string('sequence');
             $table->timestamps();
             $table->softDeletes();

@@ -28,6 +28,7 @@ use App\Http\Controllers\SalesforceController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\HealthMedicalController;
 use App\Http\Controllers\DebtCancellationController;
+use Illuminate\Support\Facades\Artisan;
 
 /* Main pages */
 Route::view('/', 'pages.main.welcome')->name('welcome');
@@ -36,6 +37,16 @@ Route::view('/pdpa-disclosure', 'pages.main.pdpa-disclosure')->name('pdpa.disclo
 Route::post('/pdpa-disclosure', [FormController::class, 'pdpa'])->name('form.pdpa.disclosure');
 Route::get('/basic-details', [DropdownController::class, 'titles'])->name('basic.details');
 Route::post('/basic-details', [FormController::class, 'basicDetails'])->name('form.basic.details');
+
+// Route::get('/optimize', function () {
+//     Artisan::call('optimize:clear');
+//     return 'optimize done';
+// });
+
+// Route::get('/migrate', function () {
+//     Artisan::call('migrate');
+//     return 'migrate done';
+// });
 
 /* Avatar pages */
 Route::view('/welcome', 'pages.avatar.welcome')->name('avatar.welcome');
@@ -66,10 +77,8 @@ Route::post('/validate-avatar', [FormController::class, 'validateButton'])->name
 
 
 /* Priorities */
-// Route::view('/financial-priorities', 'pages.priorities.top-priorities')->name('top.priorities');
 Route::get('/financial-priorities', [DropdownController::class, 'financialPriorities'])->name('financial.priorities');
 Route::post('/financial-priorities', [FormController::class, 'topPriorities'])->name('form.top.priorities');
-// Route::view('/financial-priorities/discuss', 'pages.priorities.priorities-discuss')->name('priorities.to.discuss');
 Route::get('/financial-priorities/discuss', [DropdownController::class, 'financialPrioritiesDiscuss'])->name('financial.priorities.discuss');
 Route::post('/financial-priorities/discuss', [FormController::class, 'priorities'])->name('priorities.redirect');
 
@@ -226,7 +235,7 @@ Route::prefix('health-medical')->group(function () {
     Route::get('/medical-planning/coverage', [PriorityController::class, 'healthMedicalPlanningCoverage'])->name('health.medical.medical.planning.coverage');
     Route::post('/medical-planning/coverage', [HealthMedicalController::class, 'validateMedicalPlanningCoverageSelection'])->name('validate.medical.planning.coverage.selection');
 
-    Route::get('/medical-planning/hospital-selection', [PriorityController::class, 'healthMedicalHospitalSelection'])->name('health.medical.planning.hospital.selection');
+    Route::get('/medical-planning/hospital-selection', [PriorityController::class, 'healthMedicalHospitalSelection'])->name('health.medical.medical.planning.hospital.selection');
     Route::post('/medical-planning/hospital-selection', [HealthMedicalController::class, 'validateMedicalPlanningHospitalSelection'])->name('validate.medical.planning.hospital.selection');
 
     Route::get('/medical-planning/room-selection', [PriorityController::class, 'healthMedicalRoomSelection'])->name('health.medical.planning.room.selection');

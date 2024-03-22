@@ -214,7 +214,7 @@
     var othersCoverForDobInput = document.getElementById('othersCoverForDobInput');
     var needs_priority = '{{json_encode($healthPriority)}}';
     var selfData = '{{$selfDataName}}';
-    var lastPageInput = '{{$selectedCritical}}';
+    var lastPageInput = '{{json_encode($selectedCritical)}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
     var selfGenderSet = '{{$selfGender}}';
     var spouseGenderSet = '{{$spouseGender}}';

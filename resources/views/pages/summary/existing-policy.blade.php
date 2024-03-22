@@ -15,6 +15,8 @@
 @php
     // Retrieving values from the session
     $existingPolicy = json_decode(session('customer_details.existing_policy'), true);
+
+
     $basicDetails = session('customer_details.basic_details');
 
     $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
@@ -126,7 +128,7 @@
                                                 <select name="policyPlan" class="form-select @error('policyPlan') is-invalid @enderror" aria-label="Policy Plan" id="policyPlanSelect" data-key="plan_type" required>
                                                     <option value="" selected disabled>Please Select</option>
                                                     @foreach ($policyPlans as $plan)
-                                                        <option value="{{ $plan->policy_plans }}" {{ old('policyPlan', $existingPolicy['policy_1']['policy_plan'] ?? '') === $plan->policy_plans ? 'selected' : '' }}>{{ $plan->policy_plans }}</option>
+                                                        <option value="{{ $plan->policy_plans }}" {{ old('policyPlan', $existingPolicy['policy_1']['plan_type'] ?? '') == $plan->policy_plans ? 'selected' : '' }}>{{ $plan->policy_plans }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('policyPlan')
@@ -135,7 +137,7 @@
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="maturityYearInput" class="form-label">Year of Maturity <span class="text-danger">*</span></label>
-                                                <input type="number" name="maturityYear" class="form-control @error('maturityYear') is-invalid @enderror" id="maturityYearInput" placeholder="Year" value="{{ old('maturityYear', $existingPolicy['policy_1']['maturity_Year'] ?? '') }}" data-key="maturity_year">
+                                                <input type="number" name="maturityYear" class="form-control @error('maturityYear') is-invalid @enderror" id="maturityYearInput" placeholder="Year" value="{{ old('maturityYear', $existingPolicy['policy_1']['maturity_year'] ?? '') }}" data-key="maturity_year">
                                                 @error('maturityYear')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -164,7 +166,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lifeCoverageInput" class="form-label">Life Coverage <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="lifeCoverage" class="form-control border-black @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ isset($existingPolicy['policy_1']['life_coverage']) && ($existingPolicy['policy_1']['life_coverage'] !== '' || $existingPolicy['policy_1']['life_coverage'] !== null) ? number_format(floatval($lifeCoverage)) : '' }}" data-key="life_coverage_amount">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="lifeCoverage" class="form-control border-black @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ isset($existingPolicy['policy_1']['life_coverage_amount']) && ($existingPolicy['policy_1']['life_coverage_amount'] !== '' || $existingPolicy['policy_1']['life_coverage_amount'] !== null) ? number_format(floatval($existingPolicy['policy_1']['life_coverage_amount'])) : '' }}" data-key="life_coverage_amount">
                                                     @error('lifeCoverage')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -173,7 +175,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="criticalIllnessInput" class="form-label">Critical Illness Benefit <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="criticalIllness" class="form-control border-black @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ isset($existingPolicy['policy_1']['critical_illness']) && ($existingPolicy['policy_1']['critical_illness'] !== '' || $existingPolicy['policy_1']['critical_illness'] !== null) ? number_format(floatval($criticalIllness)) : '' }}" data-key="critical_illness_amount">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="criticalIllness" class="form-control border-black @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ isset($existingPolicy['policy_1']['critical_illness_amount']) && ($existingPolicy['policy_1']['critical_illness_amount'] !== '' || $existingPolicy['policy_1']['critical_illness_amount'] !== null) ? number_format(floatval($existingPolicy['policy_1']['critical_illness_amount'])) : '' }}" data-key="critical_illness_amount">
                                                     @error('criticalIllness')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror

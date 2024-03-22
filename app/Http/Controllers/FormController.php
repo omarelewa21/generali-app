@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use libphonenumber\PhoneNumberUtil;
 use App\Services\TransactionService;
+use App\Services\ExistingPolicyService;
 use Illuminate\Support\Facades\Session;
 use libphonenumber\NumberParseException;
 use Illuminate\Support\Facades\Validator;
@@ -1322,7 +1323,7 @@ class FormController extends Controller {
             $latestKey = "existing_policy";
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             $transactionId = $transactionService->handleTransaction($customerId);
-            $existingPolicyId = $existingPolicyService->handleExistingPolicy($customerId,$transactionId);
+            $existingPolicyId = $existingPolicyService->handleExistingPolicy($customerId,$transactionId,$customerDetails);
 
             if(!$transactionId)
             {
