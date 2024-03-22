@@ -1242,7 +1242,7 @@ class FormController extends Controller {
         }
     }
 
-    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService)
+    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService, ExistingPolicyService $existingPolicyService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1319,14 +1319,10 @@ class FormController extends Controller {
 
             $customerDetails['existing_policy'] = $validatedData["existingPolicy"];
 
-            // Store the updated customer_details array back into the session
-            $request->session()->put('customer_details', $customerDetails);
-
             $latestKey = "existing_policy";
-
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
-            //save into session storage
             $transactionId = $transactionService->handleTransaction($customerId);
+            $existingPolicyId = $existingPolicyService->handleExistingPolicy($customerId,$transactionId);
 
             if(!$transactionId)
             {
@@ -1335,6 +1331,12 @@ class FormController extends Controller {
                 return response()->json(['error' => 'Missing Customer Id'], 400);
             }
 
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+            
+            $request->session()->put('customer_details', $customerDetails);
 
             return redirect()->route('financial.statement.monthly.goals');
         } else {

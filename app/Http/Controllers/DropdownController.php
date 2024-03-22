@@ -834,13 +834,34 @@ class DropdownController extends Controller
 
             $customerRelationship = Customer::with(['customerNeeds','existingPolicies'])->find($customer->id);
 
+            $customerExistingPolicies = $customerRelationship->replicate()->existingPolicies;
+
+            $policyNumber = [];
+
+            if($customerExistingPolicies)
+            {
+                $count = 1;
+
+                foreach ($customerExistingPolicies as $epValue) {
+
+                    $policyNumber['policy_'.$count] = $epValue;
+
+                    session(['customer_details.existing_policy' => $policyNumber]);
+
+                    $count++;
+                }
+            }
+
             $customerNeed = $customerRelationship->replicate()->customerNeeds;
 
-            foreach ($customerNeed as $value) {
+            if($customerNeed)
+            {
+                foreach ($customerNeed as $value) {
                 
-                if ($value['type'] == "N6") {
-                    $decodeHealthCare = json_decode($value['health_care'], true);
-                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan']]);
+                    if ($value['type'] == "N6") {
+                        $decodeHealthCare = json_decode($value['health_care'], true);
+                        session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan']]);
+                    }
                 }
             }
 
