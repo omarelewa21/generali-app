@@ -10,6 +10,7 @@ use App\Models\Dependent;
 use App\Models\Transaction;
 use App\Models\CustomerNeed;
 use App\Models\FinancialStatement;
+use App\Models\ExistingPolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -65,6 +66,11 @@ class Customer extends Model
     public function financialStatement(): HasOne
     {
         return $this->hasOne(FinancialStatement::class);
+    }
+
+    public function existingPolicies(): HasMany
+    {
+        return $this->hasMany(ExistingPolicy::class);
     }
 
 }

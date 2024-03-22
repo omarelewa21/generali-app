@@ -558,14 +558,27 @@ class DropdownController extends Controller
 
         if (!is_null($transactionId)) {
             $priorityDetails = Customer::with('priorities')->find($customerId);
-            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');                        
-
-            foreach ($customerPriority as $cpValue) {
-                $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
-
-                $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
-                $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
+            $customerPriority = $priorityDetails->priorities->whereNotNull('sequence');     
+            
+            if ($customerPriority) {
+                foreach ($customerPriority as $cpValue) {
+                    $prioritiesLevel[$cpValue['sequence']-1] = $cpValue['priority'];
+                    $prioritiesDiscuss[$cpValue['priority']]  = $cpValue['covered'];
+                    $prioritiesDiscuss[$cpValue['priority']."_discuss"]  = $cpValue['discuss'];
+                }
             }
+            else{
+                // first time arrive this page, set all to true
+                $priorities = ['protection', 'retirement', 'education','savings','debt-cancellation','health-medical','investments','others']; 
+
+                foreach ($priorities as $priority) {
+
+                    $prioritiesLevel[] = $priority;
+                    $prioritiesDiscuss[$priority] = true;
+                    $prioritiesDiscuss[$priority . "_discuss"] = true;
+                }
+            }   
+
             ksort($prioritiesLevel);
             session(['customer_details.priorities_level' => $prioritiesLevel]);
             session(['customer_details.priorities' => $prioritiesDiscuss]);
@@ -623,7 +636,6 @@ class DropdownController extends Controller
                 session(['customer_details.financialStatement.approximateIncrementAmount'  => $financialData->increment_amount]);
             }
 
-
             if ($customerFamily && $customerFamily->spouse) {
                 $customerSpouse = $customerFamily->spouse->toArray();
 
@@ -633,7 +645,6 @@ class DropdownController extends Controller
             }
 
             session(['customer_details.family_details.spouse_data' => $customerSpouse]);
-
 
             if ($customerFamily && $customerFamily->dependents) {
                 $customerDependent = $customerFamily->dependents->toArray();
@@ -695,9 +706,32 @@ class DropdownController extends Controller
                 }
             }
 
-            $customerRelationship = Customer::with(['customerNeeds','priorities'])->find($customer->id);
+            $customerRelationship = Customer::with(['customerNeeds','priorities','existingPolicies'])->find($customer->id);
             $customerNeed =  $customerRelationship->customerNeeds->toArray();
             $customerPriority = $customerRelationship->priorities->toArray();
+
+            $customerExistingPolicies = $customerRelationship->replicate()->existingPolicies;
+
+            $policyNumber = [];
+
+            if($customerExistingPolicies)
+            {
+                $count = 1;
+
+                foreach ($customerExistingPolicies as $epValue) {
+
+                    $epValue['premium_contribution'] = (int) str_replace(',', '', $epValue['premium_contribution']);
+                    $epValue['life_coverage_amount'] = (int) str_replace(',', '', $epValue['life_coverage_amount']);
+                    $epValue['critical_illness_amount'] = (int) str_replace(',', '', $epValue['critical_illness_amount']);
+
+
+                    $policyNumber['policy_'.$count] = $epValue;
+
+                    session(['customer_details.existing_policy' => json_encode($policyNumber)]);
+
+                    $count++;
+                }
+            }
 
             $mapping = [
                 'protection' => 'N1',
@@ -796,11 +830,85 @@ class DropdownController extends Controller
         return view('pages/summary/summary');
     }
 
-    public function existingPolicy()
+    public function existingPolicy(Request $request)
     {
         $companies = Company::all();
         $policyPlans = PolicyPlan::all();
         $premiumModes = PremiumMode::all();
+
+        // $existingPolicy = json_decode(session('customer_details.existing_policy'), true);
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
+
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+          
+            if($customerId){
+                $customerId['habits']= $customerId['habit'];
+                $customerId['dob'] = Carbon::parse($customerId['dob'])->format('Y-m-d');
+                unset($customerId['habit']);
+    
+                session(['customer_details.basic_details' => $customerId->toArray()]);
+            }
+
+            $retirementPriorities = ['protection', 'retirement','education','savings','investments','health-medical','debt-cancellation'];
+
+            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($retirementPriorities) {
+                $query->whereIn('priority', $retirementPriorities);
+            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)->get()->toArray();
+
+            foreach ($prioritySequence as $value) {
+                session(['customer_details.priorities.' . $value['priority'] . '_discuss' => $value['discuss']]);
+            }
+
+            $customerRelationship = Customer::with(['customerNeeds','existingPolicies'])->find($customer->id);
+
+            $customerExistingPolicies = $customerRelationship->replicate()->existingPolicies;
+
+            $policyNumber = [];
+
+            if($customerExistingPolicies)
+            {
+                $count = 1;
+
+                foreach ($customerExistingPolicies as $epValue) {
+
+                    $epValue['premium_contribution'] = (int) str_replace(',', '', $epValue['premium_contribution']);
+                    $epValue['life_coverage_amount'] = (int) str_replace(',', '', $epValue['life_coverage_amount']);
+                    $epValue['critical_illness_amount'] = (int) str_replace(',', '', $epValue['critical_illness_amount']);
+
+
+                    $policyNumber['policy_'.$count] = $epValue;
+
+                    session(['customer_details.existing_policy' => json_encode($policyNumber)]);
+
+                    $count++;
+                }
+            }
+            $customerNeed = $customerRelationship->replicate()->customerNeeds;
+
+            if($customerNeed)
+            {
+                foreach ($customerNeed as $value) {
+                
+                    if ($value['type'] == "N6") {
+                        $decodeHealthCare = json_decode($value['health_care'], true);
+                        session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan']]);
+                    }
+                }
+            }
+
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
         return view('pages/summary/existing-policy', compact('companies', 'policyPlans','premiumModes'));
     }
 }

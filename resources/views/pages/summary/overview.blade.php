@@ -85,8 +85,9 @@
                                             default:
                                                 $need_title = 'Others';
                                                 $chart_color = '';
+                                                break;
                                         }
-                                        if ($all_needs[$needKey]['need_no'] == 'N6'){
+                                        if ($needValue['advanceDetails']['type'] == 'N6'){
                                             if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 && ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
                                                 if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) && isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
@@ -121,15 +122,14 @@
                                                     width: 0%;
                                                     animation: progressAnimation-{{$loop->index}} 1s ease-out;
                                                 }
+                                                /*  */
                                             </style>
-                                                <!-- <div class="bar_chart_wrapper"> -->
-                                                    <div class="bar_chart_value animate-{{$loop->index}}" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <!-- </div> -->
+                                                <div class="bar_chart_value animate-{{$loop->index}}" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         @endif
                     </div>
@@ -205,7 +205,8 @@
                                                     }
                                                     if (isset($needValue['advanceDetails']['type'])){
                                                         if($needValue['advanceDetails']['type'] == 'N6'){
-                                                                                         
+                                                            
+                                                           
                                                             if ( isset($healthCare['relationship']) &&  isset($critical_illness['relationship']) )                                                  
                                                             {
                                                                 $coverage_person = $healthCare['spouse_name'] ??  $healthCare['child_name'] ."--". $critical_illness['spouse_name'] ?? $critical_illness['spouse_name'];

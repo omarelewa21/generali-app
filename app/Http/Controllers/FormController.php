@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use libphonenumber\PhoneNumberUtil;
 use App\Services\TransactionService;
+use App\Services\ExistingPolicyService;
 use Illuminate\Support\Facades\Session;
 use libphonenumber\NumberParseException;
 use Illuminate\Support\Facades\Validator;
@@ -1137,6 +1138,11 @@ class FormController extends Controller {
             $allValue = $request->all();
             
             $checkboxValues = $allValue['checkboxValues'];
+
+            $result = array_filter($checkboxValues, function ($key) {
+                return is_string($key);
+            }, ARRAY_FILTER_USE_KEY);
+
             $choice = $allValue['choice'];
             $requiredPriorities = ['protection', 'retirement', 'education', 'savings', 'investments', 'health-medical', 'debt-cancellation', 'others'];
 
@@ -1194,6 +1200,19 @@ class FormController extends Controller {
             foreach ($keysToUnset as $key) {
                 unset($customerDetails['selected_needs'][$key]);
             }
+
+            // Check if all required priorities are present
+            if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
+                // All required priorities are present
+                $customerDetails['customers_choice'] = '1';
+            } else {
+                // Only partial priorities are present
+                $customerDetails['customers_choice'] = '2';
+            }
+
+            $latestKey = "customers_choice";
+
+            $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
             // Add or update the data value in the array
             $customerDetails['priorities'] = $result;
             $transactionId = $transactionService->handleTransaction($customerId);
@@ -1219,20 +1238,12 @@ class FormController extends Controller {
 
             return response()->json(['message' => 'Button click saved successfully']);
             
-            // // Check if all required priorities discuss are present
-            // if (count(array_intersect($requiredPriorities, $priorities)) === count($requiredPriorities)) {
-            //     // All required priorities are present
-            //     $customerDetails['customers_choice'] = '1';
-            // } else {
-            //     // Only partial priorities are present
-            //     $customerDetails['customers_choice'] = '2';
-            // }
         } else {
             return response()->json(['error' => 'Invalid CSRF token'], 403);
         }
     }
 
-    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService)
+    public function existingPolicy(Request $request ,TransactionService $transactionService, CustomerService $customerService, ExistingPolicyService $existingPolicyService)
     {
         // Validate CSRF token
         if ($request->ajax() || $request->wantsJson()) {
@@ -1309,14 +1320,10 @@ class FormController extends Controller {
 
             $customerDetails['existing_policy'] = $validatedData["existingPolicy"];
 
-            // Store the updated customer_details array back into the session
-            $request->session()->put('customer_details', $customerDetails);
-
             $latestKey = "existing_policy";
-
             $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
-            //save into session storage
             $transactionId = $transactionService->handleTransaction($customerId);
+            $existingPolicyId = $existingPolicyService->handleExistingPolicy($customerId,$transactionId,$customerDetails);
 
             if(!$transactionId)
             {
@@ -1325,6 +1332,12 @@ class FormController extends Controller {
                 return response()->json(['error' => 'Missing Customer Id'], 400);
             }
 
+            $customerDetails = array_merge([
+                'transaction_id' => $transactionId,
+                'customer_id' => $customerId
+            ], $customerDetails);
+            
+            $request->session()->put('customer_details', $customerDetails);
 
             return redirect()->route('financial.statement.monthly.goals');
         } else {

@@ -13,14 +13,60 @@ class DataMapper
         $lastName = isset($nameParts[1]) ? $nameParts[1] : '-';
         $customerDetails['firstName'] = $firstName;
         $customerDetails['lastName'] = $lastName;
-
-
-
         $spouseFullName = isset($customerDetails['family_details']['spouse_data']['full_name']) ?  $customerDetails['family_details']['spouse_data']['full_name'] : NULL;
         $spouseFullName = isset($spouseFullName) ? explode(' ', $spouseFullName) : NULL;
 
+        $customerExistingPolicy = isset($customerDetails['existing_policy']) ? json_decode($customerDetails['existing_policy'],true) : NULL;
+
+         
+        if ($customerExistingPolicy) {
+
+            $existingPolicy = [];
+
+            foreach ($customerExistingPolicy as $epKey => $epValue) {
+
+                $fullName = isset($epValue['full_name']) ? $epValue['full_name'] : NULL;
+                $fullName = explode(' ', $fullName);
+                $firstName = $fullName[0];
+                $lastName = isset($fullName[1]) ? $fullName[1] : '-';
+
+                switch ($epValue['role']) {
+                    case 'owner':
+                        $epValue['role'] = 0;
+                        break;
+                    case 'life insured':
+                        $epValue['role'] = 1;
+                        break;
+                    case 'both':
+                        $epValue['role'] = 2;
+                        break;        
+                }
+
+                $existingPolicy[] = [
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'role' => $epValue['role'],
+                    'policyDetails' => [
+                        'lifeInsuredFirstName'	=> $firstName,
+                        'lifeInsuredLastName'	=> $lastName,
+                        'companyName'	=> $epValue['company'],
+                        'inceptionDate'	=> $epValue['inception_year'],
+                        'typeOfplan'	=> $epValue['plan_type'],
+                        'planOthersValue'	=> "",
+                        'companyOthersValue'	=> "",
+                        'maturityDate'	=> $epValue['maturity_year'],
+                        'premiumMode'	=> $epValue['premium_mode'],
+                        'additionalBenefit'		=> $epValue['additional_benefit'],
+                        'premiumContribution'	=> $epValue['premium_contribution'],
+                        'lifeCoverage'	=> $epValue['life_coverage_amount'],
+                        'criticalIllnessBenefit'	=> $epValue['critical_illness_amount'],
+                    ],               
+                ];
+            }
+        }
+
         $spouseFirstName = isset($spouseFullName[0]) ? $spouseFullName[0] : '';
-        $spouseLastName = isset($spouseFullName[1]) ? $spouseFullName[1] : '';
+        $spouseLastName = isset($spouseFullName[1]) ? $spouseFullName[1] : '-';
 
         $customerDetails['basic_details']['dob'] = Carbon::parse($customerDetails['basic_details']['dob'])->format('Y-m-d') ?? NULL;
 
@@ -196,7 +242,7 @@ class DataMapper
                 $childFullName = isset($child['full_name']) ?  $child['full_name'] : NULL;
                 $childFullName = isset($childFullName) ? explode(' ', $childFullName) : NULL;
                 $childFirstName = $childFullName[0];
-                $childLastName = isset($childFullName[1]) ? $childFullName[1] : '';
+                $childLastName = isset($childFullName[1]) ? $childFullName[1] : '-';
                 $child['firstName'] = $childFirstName; 
                 $child['lastName'] = $childLastName; 
                 $child['dateOfBirth'] = $child['dob'];
@@ -207,14 +253,13 @@ class DataMapper
             }
         }
 
-      
         if(isset($customerDetails['family_details']['parents_data'])){
             foreach ($customerDetails['family_details']['parents_data'] as &$parent) {
               
                 $parentFullName = isset($parent['full_name']) ?  $parent['full_name'] : NULL;
                 $parentFullName = isset($parentFullName) ? explode(' ', $parentFullName) : NULL;
                 $parentFirstName = $parentFullName[0];
-                $parentLastName = isset($parentFullName[1]) ? $parentFullName[1] : '';
+                $parentLastName = isset($parentFullName[1]) ? $parentFullName[1] : '-';
                 $parent['firstName'] = $parentFirstName; 
                 $parent['lastName'] = $parentLastName; 
                 $parent['dateOfBirth'] = $parent['dob'];
@@ -228,6 +273,14 @@ class DataMapper
         if(isset($customerDetails['family_details']['siblings_data']))
         {
             unset($customerDetails['family_details']['siblings_data']['dob']);
+
+            $siblingsData =  $customerDetails['family_details']['siblings_data'];
+
+            $siblingsFullName = isset($siblingsData['full_name']) ? $siblingsData['full_name'] : NULL;
+            $siblingsFullName = explode(' ', $siblingsFullName);
+            $siblingsFirstName = $siblingsFullName[0];
+            $siblingsLastName = isset($siblingsFullName[1]) ? $siblingsFullName[1] : '-';
+
             $dependentData[] = $customerDetails['family_details']['siblings_data'];
         }
 
@@ -293,9 +346,7 @@ class DataMapper
                 'selectedReturnExpectation' => $returnExpectation ?? NULL,
                 'selectedNeeds' => $customerSelectedNeeds
             ],
-            'existingPolicies' => [
-
-            ],
+            'existingPolicies' => $existingPolicy,
             'financialStatement' => [
                 'isChangeinAmount' => $customerDetails['financialStatement']['isChangeinAmount'],
                 'amountAvailable' => $customerDetails['financialStatement']['amountAvailable'],
@@ -307,5 +358,4 @@ class DataMapper
         
         return  $completeData;
     }
-
 }

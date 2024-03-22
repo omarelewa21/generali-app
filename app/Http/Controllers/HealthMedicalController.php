@@ -521,7 +521,7 @@ class HealthMedicalController extends Controller
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        return redirect()->route('health.medical.planning.hospital.selection');
+        return redirect()->route('health.medical.medical.planning.hospital.selection');
     }
 
     public function validateMedicalPlanningHospitalSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)

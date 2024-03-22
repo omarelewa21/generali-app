@@ -79,7 +79,7 @@ class DependentService
                             
                     foreach ($existingChildren as $children) {
                        
-                        if (in_array($existingChildren->relation,['Child 1','Child 2','Child 3','Child 4'])) {              
+                        if (in_array($children->relation,['Child 1','Child 2','Child 3','Child 4'])) {              
                             $children->delete();
                         }
                     }

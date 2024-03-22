@@ -1892,7 +1892,7 @@ class PriorityController extends Controller
                     session(['customer_details.selected_needs.need_6.advance_details.critical_illness.child_name' => $decodeCriticalIllness['child_name'] ?? NULL]);       
                     session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_name' => $decodeCriticalIllness['spouse_name'] ?? NULL]);  
                     session(['customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_dob' => $decodeCriticalIllness['spouse_dob'] ?? NULL]);       
-                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan']]);     
+                    session(['customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan' => $decodeCriticalIllness['critical_illness_plan'] ?? NULL]);     
                 }
             }
         }
