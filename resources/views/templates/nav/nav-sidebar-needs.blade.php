@@ -47,6 +47,7 @@
 
     $timelineProgress = [
         'protection' => [
+            'protection',
             'protection/coverage',
             'protection/amount-needed',
             'protection/existing-policy',
