@@ -11,8 +11,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
-    console.log(savingsPriority);
-    console.log(investmentPriority);
     if (!(savingsPriority === 'true' || investmentPriority === 'true')){
         var missingModal = document.getElementById('missingRiskProfileFields');
         missingModal.classList.add('show');
@@ -47,9 +45,9 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         var highRisk = document.getElementById("high-risk");
         var mediumRisk = document.getElementById("medium-risk");
         var lowRisk = document.getElementById("low-risk");
-        var highRiskImg = document.getElementById("high-risk-img");
-        var mediumRiskImg = document.getElementById("medium-risk-img");
-        var lowRiskImg = document.getElementById("low-risk-img");
+        var highRiskImg = document.getElementById("lottie-animation-high");
+        var mediumRiskImg = document.getElementById("lottie-animation-medium");
+        var lowRiskImg = document.getElementById("lottie-animation-low");
         var highPotentialReturn = document.getElementById("high-risk-potential-content");
         var mediumPotentialReturn = document.getElementById("medium-risk-potential-content");
         var lowPotentialReturn = document.getElementById("low-risk-potential-content");
@@ -141,7 +139,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 document.getElementById(selectedId + "-potential-content").style.display = "block";
             }
         });
-
         highRisk.onclick = function(){
             highRiskImg.style.display = "block";
             mediumRiskImg.style.display = "none";
@@ -168,17 +165,17 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         }
 
         dataSelected.forEach(btnSelected => {
-            highRiskImg.style.display = "none";
-            mediumRiskImg.style.display = "none";
-            lowRiskImg.style.display = "none";
+            // highRiskImg.style.display = "block";
+            // mediumRiskImg.style.display = "none";
+            // lowRiskImg.style.display = "none";
 
             const defaultSelection = btnSelected.getAttribute('data-avatar');
             if (defaultSelection === 'High Risk') {
                 highPotentialReturn.style.display = "block";
-            } else if (defaultSelected === 'Medium Risk'){
+            } else if (defaultSelection === 'Medium Risk'){
                 mediumPotentialReturn.style.display = "block";
             }
-            else if (defaultSelected === 'Low Risk'){
+            else if (defaultSelection === 'Low Risk'){
                 lowRiskImg.style.display = "block";
             }
         });
@@ -193,4 +190,28 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
             lowPotentialReturn.style.display = "block";
         }
     }
+    const newImageHigh = "/images/needs/risk-profile/high-gender-" + gender + "-" + skintone + ".json";
+    const newImageMedium = "/images/needs/risk-profile/medium-gender-" + gender + "-" + skintone + ".json";
+    const newImageLow = "/images/needs/risk-profile/low-gender-" + gender + "-" + skintone + ".json";
+    const animationAvatarHigh = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation-high'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: newImageHigh
+    });
+    const animationAvatarMedium = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation-medium'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: newImageMedium
+    });
+    const animationAvatarLow = lottie.loadAnimation({
+        container: document.getElementById('lottie-animation-low'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: newImageLow
+    });
 }

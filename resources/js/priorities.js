@@ -33,7 +33,7 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             if (modalBackdrop) {
                 modalBackdrop.remove();
             }
-            window.location.href = '/financial-priorities?transaction_id='+paramValue;
+            window.location.href = '/financial-priorities';
         });
     } else {
         // Sent checkbox value to controller
@@ -41,6 +41,8 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
 
         //Assign the needs sequence
         const contents = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss', 'others'];
+
+        const discussContent = ['protection_discuss', 'retirement_discuss', 'education_discuss', 'savings_discuss', 'investments_discuss', 'health-medical_discuss', 'debt-cancellation_discuss', 'others_discuss'];
 
         // First set all to true
         $('input[type="checkbox"]').each(function() {
@@ -64,20 +66,30 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
                 if (!isChecked) {
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'none';
+                        var svgButton = element.parentNode;
+                        while (svgButton && !svgButton.classList.contains('svg-button')) {
+                            svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                        }
+                        if (svgButton) {
+                            var image = svgButton.querySelector('img');
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
+                                image.style.display = 'none';
+                            }
                         }
                     });
                 }
                 else {
                     droppedDiv.forEach(function(element) {
                         var droppedAttribute = element.getAttribute("data-identifier");
-                        var image = document.querySelector('img.' + droppedAttribute);
-                        if (image && droppedAttribute + '_discuss' === checkboxId) {
-                        // if (image) {
-                            image.style.display = 'block';
+                        var svgButton = element.parentNode;
+                        while (svgButton && !svgButton.classList.contains('svg-button')) {
+                            svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                        }
+                        if (svgButton) {
+                            var image = svgButton.querySelector('img');
+                            if (image && droppedAttribute + '_discuss' === checkboxId) {
+                                image.style.display = 'block';
+                            }
                         }
                     });
                 }
@@ -134,24 +146,34 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             var isChecked = $(this).prop('checked');
             checkboxValues[checkboxId] = isChecked;
             var droppedDiv = document.querySelectorAll('.dropped');
-
             if (!isChecked) {
                 droppedDiv.forEach(function(element) {
                     var droppedAttribute = element.getAttribute("data-identifier");
-                    var image = document.querySelector('img.' + droppedAttribute);
-                    if (image && droppedAttribute + '_discuss' === checkboxId) {
-                    // if (image) {
-                        image.style.display = 'none';
+                    var svgButton = element.parentNode;
+                    while (svgButton && !svgButton.classList.contains('svg-button')) {
+                        svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                    }
+                    if (svgButton) {
+                        var image = svgButton.querySelector('img');
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
+                            image.style.display = 'none';
+                        }
                     }
                 });
             }
             else {
                 droppedDiv.forEach(function(element) {
                     var droppedAttribute = element.getAttribute("data-identifier");
-                    var image = document.querySelector('img.' + droppedAttribute);
-                    if (image && droppedAttribute + '_discuss' === checkboxId) {
-                    // if (image) {
-                        image.style.display = 'block';
+                    // var image = document.querySelector('img.' + droppedAttribute);
+                    var svgButton = element.parentNode;
+                    while (svgButton && !svgButton.classList.contains('svg-button')) {
+                        svgButton = svgButton.parentNode; // Continue ascending until finding .svg-button
+                    }
+                    if (svgButton) {
+                        var image = svgButton.querySelector('img');
+                        if (image && droppedAttribute + '_discuss' === checkboxId) {
+                            image.style.display = 'block';
+                        }
                     }
                 });
 
@@ -239,13 +261,63 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             } else {
                 // Handle the case where no checkboxes are unchecked
             }
-        });
 
+            var allFalse = true;
+            var allChecked = true;
+            discussContent.forEach(function(checkboxId) {
+                if ($('#' + checkboxId).prop('checked')) {
+                    allFalse = false;
+                    return false;
+                }
+                if (!$('#' + checkboxId).length || !$('#' + checkboxId).prop('checked')) {
+                    allChecked = false;
+                    return false; // Break out of the loop if any checkbox is missing or unchecked
+                }
+            });
+
+            var choiceValue = '';
+            // If all _discuss checkboxes are false, do something
+            if (allFalse) {
+                $('#discuss_error').removeClass('d-none'); 
+                $('#priorityNext').attr('href', '#');
+            } else{
+                $('#discuss_error').addClass('d-none'); 
+
+            }
+            // If all checkboxes exist and are checked
+            if (allChecked) {
+                choiceValue = 1;
+            } else{
+                choiceValue = 2;
+            }
+        });
+        
         $('#priorityNext').on('click', function(event) {
+            var allChecked = true;
+            discussContent.forEach(function(checkboxId) {
+                if (!$('#' + checkboxId).length || !$('#' + checkboxId).prop('checked')) {
+                    allChecked = false;
+                    return false; // Break out of the loop if any checkbox is missing or unchecked
+                }
+            });
+
+            var choiceValue = '';
+            // If all checkboxes exist and are checked
+            if (allChecked) {
+                choiceValue = 1;
+            } else{
+                choiceValue = 2;
+            }
+            var requestData = {
+                choice: choiceValue, 
+                checkboxValues: checkboxValues 
+            };
+            console.log(requestData);
+
             $.ajax({
                 type: "POST",
                 url: "/financial-priorities/discuss",
-                data: checkboxValues,
+                data: requestData,
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },

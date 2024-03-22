@@ -70,7 +70,7 @@
             
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs- content-section">
                 <div class="scrollable-content">
-                    <form novalidate action="{{route('change.image',['transaction_id' => $transactionId])}}" method="POST" id="gender_selection">
+                    <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -126,7 +126,7 @@
                                         <input type="hidden" name="genderImage" id="genderImage" value="{{$image}}">
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
-                                        <a href="{{route('avatar.welcome',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>

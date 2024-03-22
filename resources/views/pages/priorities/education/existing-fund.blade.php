@@ -15,6 +15,9 @@
     $edcationSaving = session('customer_details.selected_needs.need_3.advance_details.existing_fund');
     $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
     $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="education-existing-fund" class="tertiary-default-bg calculator-page">
@@ -51,7 +54,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/education/other/education-other-avatar.png') }}" width="auto" height="100%" alt="Education Existing Policy Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/education/other/education-other-avatar.png') }}" width="auto" height="100%" alt="Education Existing Policy Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row">
@@ -128,8 +135,11 @@
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionSavingAmount = parseFloat({{$educationSavingAmount}}); 
-    var needs_priority = '{{$educationPriority}}';
+    var needs_priority = '{{json_encode($educationPriority)}}';
     var sessionExistingFund = '{{$edcationSaving}}';
     var lastPageInput = '{{$tertiaryEducationAmount === "" || $tertiaryEducationAmount === null ? $tertiaryEducationAmount : $totalEducationYear}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

@@ -20,6 +20,8 @@
     $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
     $savingsGoals = session('customer_details.selected_needs.need_4.advance_details.goal_target');
     $relationship = session('customer_details.selected_needs.need_4.advance_details.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="savings-goals">
@@ -33,14 +35,109 @@
                             $goal_1 = 'Pursue their interests';
                             $goal_2 = 'Start their own business';
                             $goal_3 = 'Contribute to their tuition fees';
+                            if (isset($savingsGoals)) 
+                            {
+                                if($savingsGoals[0] != ''){
+                                    if ($savingsGoals[0] == $goal_1 ){
+                                        $savingsGoals[0] = 'interest';
+                                    } else if($savingsGoals[0] == $goal_2){
+                                        $savingsGoals[0] = 'business';
+                                    } else if($savingsGoals[0] == $goal_3){
+                                        $savingsGoals[0] = 'tuition';
+                                    } else {
+                                        $savingsGoals[0] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[1] != ''){
+                                    if($savingsGoals[1] == $goal_1){
+                                        $savingsGoals[1] = 'interest';
+                                    } else if($savingsGoals[1] == $goal_2){
+                                        $savingsGoals[1] = 'business';
+                                    } else if($savingsGoals[1] == $goal_3){
+                                        $savingsGoals[1] = 'tuition';
+                                    } else {
+                                        $savingsGoals[1] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[2] != ''){
+                                    if($savingsGoals[2] == $goal_1){
+                                        $savingsGoals[2] = 'interest';
+                                    } else if($savingsGoals[2] == $goal_2){
+                                        $savingsGoals[2] = 'business';
+                                    } else if($savingsGoals[2] == $goal_3){
+                                        $savingsGoals[2] = 'tuition';
+                                    } else {
+                                        $savingsGoals[2] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[3] != ''){
+                                    if($savingsGoals[3] == $goal_1){
+                                        $savingsGoals[3] = 'interest';
+                                    } else if($savingsGoals[3] == $goal_2){
+                                        $savingsGoals[3] = 'business';
+                                    } else if($savingsGoals[3] == $goal_3){
+                                        $savingsGoals[3] = 'tuition';
+                                    } else {
+                                        $savingsGoals[3] = 'others';
+                                    }
+                                }
+                            }
+                            
                         }
                         else{
                             $goal_1 = 'Travel around the world';
                             $goal_2 = 'Upgrade my assets & lifestyle';
                             $goal_3 = 'Contribute to charitable needs';
+                            if (isset($savingsGoals)) {
+                                
+                                if($savingsGoals[0] != ''){
+                                    if ($savingsGoals[0] == $goal_1 ){
+                                        $savingsGoals[0] = 'travel';
+                                    } else if($savingsGoals[0] == $goal_2){
+                                        $savingsGoals[0] = 'home';
+                                    } else if($savingsGoals[0] == $goal_3){
+                                        $savingsGoals[0] = 'donate';
+                                    } else {
+                                        $savingsGoals[0] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[1] != ''){
+                                    if($savingsGoals[1] == $goal_1){
+                                        $savingsGoals[1] = 'travel';
+                                    } else if($savingsGoals[1] == $goal_2){
+                                        $savingsGoals[1] = 'home';
+                                    } else if($savingsGoals[1] == $goal_3){
+                                        $savingsGoals[1] = 'donate';
+                                    } else {
+                                        $savingsGoals[1] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[2] != ''){
+                                    if($savingsGoals[2] == $goal_1){
+                                        $savingsGoals[2] = 'travel';
+                                    } else if($savingsGoals[2] == $goal_2){
+                                        $savingsGoals[2] = 'home';
+                                    } else if($savingsGoals[2] == $goal_3){
+                                        $savingsGoals[2] = 'donate';
+                                    } else {
+                                        $savingsGoals[2] = 'others';
+                                    }
+                                }
+                                if($savingsGoals[3] != ''){
+                                    if($savingsGoals[3] == $goal_1){
+                                        $savingsGoals[3] = 'travel';
+                                    } else if($savingsGoals[3] == $goal_2){
+                                        $savingsGoals[3] = 'home';
+                                    } else if($savingsGoals[3] == $goal_3){
+                                        $savingsGoals[3] = 'donate';
+                                    } else {
+                                        $savingsGoals[3] = 'others';
+                                    }
+                                }
+                            }     
                         }
                     @endphp
-                    <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white">
+                    <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white z-1">
                     <!-- <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white order-md-1 order-sm-2 order-2"> -->
                         <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>    
                         <section class="content-avatar-default d-none d-md-block">
@@ -142,8 +239,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 position-absolute" style="top: 65%; height:300px;">
-                                    <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                <div class="col-12 position-absolute" style="top: 58%; height:350px;">
+                                    @if(isset($gender) || isset($skintone))
+                                        @if ($relationship === 'Child')
+                                            <div id="lottie-animation-child" class="w-auto h-100"></div>
+                                        @else
+                                            <div id="lottie-animation" class="w-auto h-100"></div>
+                                        @endif
+                                    @else
+                                        <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                    @endif
                                 </div>
                             </div>
                         </section>
@@ -311,8 +416,11 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var sessionData = {!! json_encode(session('customer_details.selected_needs.need_4.advance_details.goal_target')) !!};
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

@@ -6,8 +6,9 @@ const specificPageURLs = [
 ];
 
 const currentURL = window.location.href;
+const queryString = window.location.search;
 
-if (specificPageURLs.some(url => currentURL.endsWith(url))) {
+if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith(queryString))) {
     var siteurl = window.location.href;
     const url = new URL(siteurl);
     const path = url.pathname;
@@ -548,15 +549,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });
@@ -695,15 +696,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });
@@ -743,15 +744,15 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'avatar.family.dependent.details';
+                urlInput.value = 'family.dependent.details';
                 
             }
             else {
                 if ((familyDependent.children === undefined || familyDependent.children === false) && (familyDependent.parents === undefined || familyDependent.parents === false) && (familyDependent.siblings === undefined || familyDependent.siblings === false)) {
-                    urlInput.value = 'avatar.my.assets';
+                    urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'avatar.family.dependent.details';
+                    urlInput.value = 'family.dependent.details';
                 }
             }
         });

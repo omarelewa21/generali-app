@@ -21,6 +21,8 @@
     $totalInvestmentNeeded = session('customer_details.selected_needs.need_5.advance_details.goals_amount', '0');
     $investmentFundPercentage = session('customer_details.selected_needs.need_5.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_5.advance_details.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="investment-amount-needed" class="tertiary-default-bg calculator-page">
@@ -57,7 +59,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/investment/monthly-payment/avatar.png') }}" width="auto" height="100%" alt="Investment Amount Needed Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/investment/monthly-payment/avatar.png') }}" width="auto" height="100%" alt="Investment Amount Needed Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
@@ -119,7 +125,10 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$investmentPriority}}';
+    var needs_priority = '{{json_encode($investmentPriority)}}';
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

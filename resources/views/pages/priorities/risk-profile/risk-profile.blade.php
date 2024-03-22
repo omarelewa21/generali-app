@@ -20,6 +20,8 @@
 
     $riskProfile = session('customer_details.risk_profile.selected_risk_profile','High Risk');
     $potentialReturn = session('customer_details.risk_profile.selected_potential_return','High');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="risk-profile" class="tertiary-default-bg">
@@ -38,9 +40,15 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" width="auto" height="100%" alt="High Risk Avatar" style="display:block;">
-                                <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
-                                <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation-high" class="w-auto h-100" style="display:block;"></div>
+                                    <div id="lottie-animation-medium" class="w-auto h-100" style="display:none;"></div>
+                                    <div id="lottie-animation-low" class="w-auto h-100" style="display:none;"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/risk-profile/high-risk.png') }}" id="high-risk-img" width="auto" height="100%" alt="High Risk Avatar" style="display:block;">
+                                    <img src="{{ asset('images/needs/risk-profile/medium-risk.png') }}" id="medium-risk-img" width="auto" height="100%" alt="Medium Risk Avatar" style="display:none;">
+                                    <img src="{{ asset('images/needs/risk-profile/low-risk.png') }}" id="low-risk-img" width="auto" height="100%" alt="Low Risk Avatar" style="display:none;">
+                                @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-0 pt-4 calculatorContent">
                                 <h2 class="display-5 fw-bold lh-sm mb-4">I consider myself a</h2>
@@ -137,5 +145,8 @@
 <script>
     var savingsPriority = '{{$savingsPriority}}';
     var investmentPriority = '{{$investmentPriority}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

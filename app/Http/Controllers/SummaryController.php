@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Services\FinancialService;
 use Illuminate\Support\Facades\Log;
+use App\Services\TransactionService;
+use App\Services\CustomerNeedService;
+use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Calculation\Financial\FinancialValidations;
 
 class SummaryController extends Controller
 {
-    public function validateRiskProfile(Request $request){
+    public function validateRiskProfile(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService){
     // public function validateRiskProfile(Request $request, TransactionService $transactionService){
         $customMessages = [
             'riskProfileInput.required' => 'Please select a risk level.',
@@ -29,7 +33,7 @@ class SummaryController extends Controller
         // Validation passed, perform any necessary processing.
         $riskProfileInput = $request->input('riskProfileInput');
         $potentialReturnInput = $request->input('potentialReturnInput');
-
+       
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
 
@@ -47,10 +51,29 @@ class SummaryController extends Controller
         $customerDetails['risk_profile'] = $riskProfile;
 
         // Store the updated customer_details array back into the session
-        $request->session()->put('customer_details', $customerDetails);
         // $transactionService->handleTransaction($request,$customerDetails);
 
-        // $transactionData = ['transaction_id' => $request->input('transaction_id')];
+        $customerId = session('customer_id');
+
+        if ($lastPageUrl['last_page_url'] == '/investment/annual-return') {
+
+            $selectedNeed = "need_5";
+        }
+        else
+        {
+            $selectedNeed = "need_4";
+        }
+         
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
+        $request->session()->put('customer_details', $customerDetails);
+
         
         if (strstr($customerDetails['lastPageUrl']['last_page_url'], 'investment') !== false || strstr($customerDetails['lastPageUrl']['last_page_url'], '/investment/') !== false){
             return redirect()->route('investment.gap');
@@ -62,7 +85,7 @@ class SummaryController extends Controller
         
     }
 
-    public function validateSummaryMonthlyGoals(Request $request)
+    public function validateSummaryMonthlyGoals(Request $request, TransactionService $transactionService, FinancialService $financialService)
     {
 
         $customMessages = [
@@ -111,13 +134,21 @@ class SummaryController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
-        return redirect()->route('summary.expected-income');
+        return redirect()->route('financial.statement.expected.income');
     }
-    public function validateSummaryExpectedIncome(Request $request)
+    public function validateSummaryExpectedIncome(Request $request,TransactionService $transactionService, FinancialService $financialService)
     {
 
         // Define custom validation rule for button selection
@@ -160,12 +191,20 @@ class SummaryController extends Controller
         // Set the updated financialStatement back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
         if ($selectedExpectingInput === 'Yes'){
-            return redirect()->route('summary.increment-amount');
+            return redirect()->route('financial.statement.increment.amount');
         }
         else{
             return redirect()->route('summary');
@@ -173,7 +212,7 @@ class SummaryController extends Controller
         
     }
 
-    public function validateSummaryIncrementAmount(Request $request){
+    public function validateSummaryIncrementAmount(Request $request,TransactionService $transactionService, FinancialService $financialService){
 
         $customMessages = [
             'approximate_increment_amount.required' => 'You are required to enter an amount.',
@@ -221,9 +260,17 @@ class SummaryController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['financialStatement'] = $financialStatement;
 
+        $customerId = session('customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $financialStatement = $financialService->handleFinancialStatement($customerId,$transactionId,$customerDetails);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        Log::debug($customerDetails);
 
         // // Process the form data and perform any necessary actions
         return redirect()->route('summary');

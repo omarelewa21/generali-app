@@ -116,8 +116,8 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent">
-                                        <a href="{{route('identity.details',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="urlInput" id="urlInput" value="family.dependent">
+                                        <a href="{{route('identity.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>

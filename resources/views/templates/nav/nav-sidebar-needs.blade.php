@@ -11,7 +11,7 @@
 {{-- Nav Sidebar Right Needs --}}
 
 <section class="d-flex justify-content-end pt-2 pt-md-0">
-    <div class="row align-items-center px-4 py-md-4">
+    <div class="row align-items-center px-4 py-md-4 py-3">
         <div class="col-auto pe-0">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">
                 <p class="display-6 text-dark m-1 needs-progress">

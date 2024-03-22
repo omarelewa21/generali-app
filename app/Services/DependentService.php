@@ -29,14 +29,37 @@ class DependentService
             $createdSpouseId = [];
             $newSpouseData = [];
 
-            if (isset($customerDetails['family_details']['siblings_data']) && $customerDetails['family_details']['siblings'] === true) {
+            if (isset($customerDetails['family_details']['siblings_data']) && $customerDetails['family_details']['siblings'] == true) {
                 $newSiblingData['sibling'] = $customerDetails['family_details']['siblings_data'];
                 $newSiblingData['sibling']['customer_id'] = $customerId;
+            }
+            else
+            {
+                //perform softdelete, check dependent table
+                $existingSiblings = Customer::with(['dependents'])->find($customerId)->dependents;
+
+                if ($existingSiblings) {
+                            
+                    foreach ($existingSiblings as $sibling) {
+                       
+                        if ($sibling -> relation == 'Sibling') {              
+                            $sibling->delete();
+                        }
+                    }
+                }
             }
 
             if (isset($customerDetails['family_details']['spouse_data']) && $customerDetails['family_details']['spouse'] === true) {
                 $newSpouseData['spouse'] = $customerDetails['family_details']['spouse_data'];
                 $newSpouseData['spouse']['customer_id'] = $customerId;
+            }
+            else
+            {
+                $existingSpouse = Customer::with(['spouse'])->find($customerId)->spouse;
+
+                if ($existingSpouse) {
+                    $existingSpouse->delete();              
+                }
             }
 
             if (isset($customerDetails['family_details']['children_data']) ) {
@@ -48,6 +71,20 @@ class DependentService
                     $newchildrenData[$childrenKey]['customer_id'] = $customerId;
                 }
             }
+            else
+            {
+                $existingChildren = Customer::with(['dependents'])->find($customerId)->dependents;
+
+                if ($existingChildren) {
+                            
+                    foreach ($existingChildren as $children) {
+                       
+                        if (in_array($existingChildren->relation,['Child 1','Child 2','Child 3','Child 4'])) {              
+                            $children->delete();
+                        }
+                    }
+                }
+            }
 
             if (isset($customerDetails['family_details']['parents_data']) ) {
 
@@ -56,6 +93,21 @@ class DependentService
                 foreach ($parentData as $parentKey => $parentValue) {
                     $newParentData[$parentKey] = $parentValue;
                     $newParentData[$parentKey]['customer_id'] = $customerId;
+                }
+            }
+            else
+            {
+                $existingParents = Customer::with(['dependents'])->find($customerId)->dependents;
+
+                if ($existingParents) {
+                    
+                    //convert to array, check if dependent's relation is sibling, then perform soft delete
+                    foreach ($existingParents as $parent) {
+                       
+                        if ($parent->relation == 'Father' || $parent->relation == 'Mother') {           
+                            $parent->delete();
+                        }
+                    }
                 }
             }
 

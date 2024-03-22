@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
-                                <div class="row justify-content-center py-2">
+                                <!-- <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
-                                </div>
+                                </div> -->
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
@@ -157,7 +157,7 @@
     var existingProtectionAmount =  parseFloat({{$existingProtectionAmount}});
     var percentage = parseFloat({{$healthMedicalFundPercentage}});
     var totalHealthMedicalNeeded = parseFloat({{$totalHealthMedicalNeeded}});
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = {!! json_encode($health_medical) !!};
 </script>
 

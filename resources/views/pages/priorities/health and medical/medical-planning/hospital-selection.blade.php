@@ -16,6 +16,8 @@
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedHospital = session('customer_details.selected_needs.need_6.advance_details.health_care.type_of_hospital');
     $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="medical-hospital-selection" class="secondary-default-bg">
@@ -55,7 +57,11 @@
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-2 plant d-none d-xl-block">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
+                            @if(isset($gender) || isset($skintone))
+                                <div id="lottie-animation" class="mh-55 mw-100 position-absolute center hospital_avatar"></div>
+                            @else
+                                <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
+                            @endif
                         </div>
                     </div>
                 </section>
@@ -107,7 +113,10 @@
 </div>
 <script>
     var selectionInput = document.getElementById('medicalHospitalSelectedInput');
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

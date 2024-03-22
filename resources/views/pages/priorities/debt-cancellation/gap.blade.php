@@ -155,8 +155,9 @@
     var existingDebtAmount =  parseFloat({{$existingDebtAmount}});
     var percentage = parseFloat({{$debtFundPercentage}});
     var totalDebtFund = parseFloat({{$totalDebtNeeded}});
-    var needs_priority = '{{$debtPriority}}';
-    var lastPageInput = '{{$criticalIllnessCoverage === "" || $criticalIllnessCoverage === null ? $criticalIllnessCoverage : $coverageAmount}}';
+    var debtPriority = '{{json_encode($debtPriority)}}';
+    var needs_priority = '{{json_encode($debtPriority)}}';
+    var lastPageInput = '{{$criticalIllnessCoverage === "" || $criticalIllnessCoverage === null ? json_encode($criticalIllnessCoverage) : json_encode($coverageAmount)}}';
 </script>
 
 @endsection

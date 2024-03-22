@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
+use App\Services\CustomerNeedService;
+use App\Services\CustomerService;
 use App\Services\TransactionService;
 
 class DebtCancellationController extends Controller
 {
-    public function validateDebtCancellationCoverage(Request $request,TransactionService $transactionService)
+    public function validateDebtCancellationCoverage(Request $request,TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -61,17 +63,23 @@ class DebtCancellationController extends Controller
         // Set the updated debt_cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_7"; 
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('debt.cancellation.amount.needed',$transactionData);
+        return redirect()->route('debt.cancellation.amount.needed');
     }
 
-    public function validateDebtCancellationAmountNeeded(Request $request, TransactionService $transactionService){
+    public function validateDebtCancellationAmountNeeded(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'debt_outstanding_loan.required' => 'You are required to enter an amount.',
@@ -128,17 +136,23 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_7"; 
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-    
-        return redirect()->route('debt.cancellation.existing.debt',$transactionData);
+        return redirect()->route('debt.cancellation.existing.debt');
     }
 
-    public function validateDebtCancellationExistingDebt(Request $request, TransactionService $transactionService){
+    public function validateDebtCancellationExistingDebt(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'existing_debt.required' => 'Please select an option',
@@ -228,18 +242,24 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_7"; 
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        
         // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.critical.illness',$transactionData);
+        return redirect()->route('debt.cancellation.critical.illness');
     }
 
-    public function validateDebtCancellationCriticalIllness(Request $request, TransactionService $transactionService){
+    public function validateDebtCancellationCriticalIllness(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'critical_coverage.required' => 'Please select an option',
@@ -291,19 +311,24 @@ class DebtCancellationController extends Controller
         // Set the updated debt-cancellation_needs back to the customer_details session
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_7"; 
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-        
-
         // Process the form data and perform any necessary actions
-        return redirect()->route('debt.cancellation.gap',$transactionData);
+        return redirect()->route('debt.cancellation.gap');
     }
 
-    public function submitDebtCancellationGap(Request $request, TransactionService $transactionService){
+    public function submitDebtCancellationGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -313,24 +338,32 @@ class DebtCancellationController extends Controller
 
         $customerDetails['selected_needs']['need_7']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_7"; 
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
         
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
         // $formattedArray = "<pre>" . print_r($customerDetails, true) . "</pre>";
         // return ($formattedArray);
-        if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true') || 
-        isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true') || 
-        isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true') || 
-        isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true') || 
-        isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true') || 
-        isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true') || 
-        isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true') ){
-            return redirect()->route('existing.policy',$transactionData);
+        if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+        isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+        isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+        isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+        isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+        isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+        isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+            return redirect()->route('existing.policy');
         } else{
-            return redirect()->route('summary.monthly-goals',$transactionData);
+            return redirect()->route('financial.statement.monthly.goals');
         }
     }
 

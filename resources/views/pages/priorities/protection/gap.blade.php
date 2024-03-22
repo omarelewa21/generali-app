@@ -163,7 +163,7 @@
 </div>
 
 <script>
-    var needs_priority = '{{$protectionPriority}}';
+    var needs_priority = '{{json_encode($protectionPriority)}}';
     var percentage = parseFloat({{$protectionFundPercentage}});
     var newTotalProtectionNeeded = parseFloat({{ $totalProtectionNeeded }});
     var existingPolicyAmount = parseFloat({{$existingPolicyAmount}});
