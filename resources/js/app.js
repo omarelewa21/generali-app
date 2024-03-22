@@ -75,12 +75,13 @@ function navbar_scroll() {
 function footer_scroll() {
     var last_scroll_top = 0;
     var scroll_bottom = $(document).height() - $(window).height();
- 
+    
     $(window).on('scroll', function() {
         var scroll_top = $(this).scrollTop();
  
         if (scroll_top > 50) {
             if (scroll_top < last_scroll_top || scroll_top === scroll_bottom) {
+                console.log(scroll_bottom);
                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
@@ -91,45 +92,58 @@ function footer_scroll() {
         last_scroll_top = scroll_top;
     });
  
-    function hasParallaxSectionClass() {
-        return document.querySelector('.parallax-section') !== null;
-    }
+    // function hasParallaxSectionClass() {
+    //     return document.querySelector('.parallax-section') !== null;
+    // }
  
-    if (hasParallaxSectionClass()) {
-        // Create an intersection observer
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // The observed element is now in view
-                    $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-                    $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-                }
-                else {
-                    // The observed element is not in view
-                    $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-                    $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-                }
-            });
-        });
+    // if (hasParallaxSectionClass()) {
+    //     // Create an intersection observer
+    //     const observer = new IntersectionObserver(entries => {
+    //         entries.forEach(entry => {
+    //             if (entry.isIntersecting) {
+    //                 // The observed element is now in view
+    //                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+    //                 $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+    //             }
+    //             else {
+    //                 // The observed element is not in view
+    //                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+    //                 $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+    //             }
+    //         });
+    //     });
  
-        const bottomObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-                }
-                else {
-                    $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-                }
-            });
-        });
+    //     const bottomObserver = new IntersectionObserver(entries => {
+    //         entries.forEach(entry => {
+    //             if (entry.isIntersecting) {
+    //                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+    //             }
+    //             else {
+    //                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+    //             }
+    //         });
+    //     });
         
-        const targetElement = document.querySelector('.parallax-inner.parallax-top');
-        const bottomElement = document.querySelector('.bottomObeserver');
+    //     const targetElement = document.querySelector('.parallax-inner.parallax-top');
+    //     const bottomElement = document.querySelector('.bottomObeserver');
  
-        // Start observing the target element
-        observer.observe(targetElement);
-        bottomObserver.observe(bottomElement);
-    }
+    //     // Start observing the target element
+    //     observer.observe(targetElement);
+    //     bottomObserver.observe(bottomElement);
+    // }
+
+    // Using Intersection Observer to detect when the footer comes into view
+    // var observer = new IntersectionObserver(function(entries) {
+    //     entries.forEach(function(entry) {
+    //         if (entry.isIntersecting) {
+    //             isFooterVisible = true;
+    //         } else {
+    //             isFooterVisible = false;
+    //         }
+    //     });
+    // }, { threshold: 0 });
+
+    // observer.observe(footer);
 }
 
 $(document).ready(function () {
