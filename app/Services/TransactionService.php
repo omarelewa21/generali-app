@@ -2,92 +2,47 @@
 
 namespace App\Services;
 
-use App\Models\SessionStorage;
+use App\Models\Agent;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class TransactionService
 {
-    public static function handleTransaction($request, $customerDetails)
+    public $transactionId;
+
+    public  function handleTransaction($customerId)
     {
-        try {
-            DB::transaction(function () use ($request, $customerDetails) {
-                $sessionStorage = new SessionStorage();
-                $route = strval(request()->path());
-                $sessionId = $request->session()->getId();
-                $transactionId = $request->input('transaction_id') ?? '';
+        DB::transaction(function () use ($customerId) {
 
-                $sessionStorage->data = $customerDetails;
-                $sessionStorage->page_route = $route;
-                $sessionStorage->session_id = $sessionId;
-                $sessionStorage->customer_name = $customerDetails['basic_details']['full_name'] ??'';
+            if (!isset($customerId)) {
+                return false;
+            }
 
-                //check transaction id ,if not found ,use  session id        
-                if(!empty($transactionId))
-                {
-                    $formData = SessionStorage::findTransactionId($transactionId)->get();
-                }
-                else
-                {
-                    $formData = SessionStorage::findSessionId($sessionId)->get();
-                }
+            // temporarily use this agent 
+            $agentId = Agent::find(1)->id;
+            $route = strval(request()->path());
+            $previousRoute = session('_previous') ?? NULL;
 
-                if ($formData->isNotEmpty()) {
-                    static::updateTransaction($formData, $sessionStorage,$customerDetails);
-                } else {
-                    static::insertTransaction($sessionStorage);
-                }
-            });
-        } catch (\Exception $e) {
-            Log::debug($e);
-            DB::rollBack();
-        }
-    }
+            if (isset($previousRoute)) {
+                $url = $previousRoute['url'];
+                $path = parse_url($url, PHP_URL_PATH);
+                $cleanPath = ltrim($path, '/'); // Remove leading slash
+                $route = $cleanPath;
+            }
 
-    private static function updateTransaction($formData, $sessionStorage,$customerDetails)
-    {
-        $decodedForm = json_decode($formData,true);
-
-        foreach ($decodedForm[0]['data'] as $databaseExistingKey => $databaseValue) {
+            $id = session('transaction_id') ?? session('customer_details.transaction_id') ?? "";
             
-            if (array_key_exists($databaseExistingKey, $customerDetails)) {
-                // Update only if the key exists in the first array
-                $decodedForm[0]['data'][$databaseExistingKey] = $customerDetails[$databaseExistingKey];
-            }  
-            else
-            {
-                $decodedForm[0]['data'][$databaseExistingKey] = $databaseValue;
-            }
-        }
+            $transaction = Transaction::updateOrCreate(
+                ['id' => $id ,'customer_id' => $customerId , 'agent_id' => $agentId],
+                ['page_route' => $route , 'pdpa' => session()->get('customer_details.pdpa') ?? "Accepted"]
+            );
+            $this->transactionId = $transaction->id;
+        });
 
-        foreach($customerDetails as $customerKey => $customerValue)
-        {
-            if(!array_key_exists ($customerKey,$decodedForm[0]['data']))
-            {
-                $decodedForm[0]['data'][$customerKey] = $customerValue;
-            }
-        }
+        // return true;
 
-        SessionStorage::where('transaction_id', $formData[0]['transaction_id'])
-            ->update([
-                'data' => $decodedForm[0]['data'],
-                'page_route' => $sessionStorage->page_route,
-                'session_id' => $sessionStorage->session_id,
-                'customer_name' => $decodedForm[0]['data']['basic_details']['full_name'] ?? "",
-                'customer_id' => $formData[0]['customer_id'] && isset($sessionStorage->data['identity_details']['id_number'])  
-                                 ? $sessionStorage->data['identity_details']['id_number'] 
-                                 : NULL,
-            ]);
+        return $this->transactionId;
     }
 
-    private static function insertTransaction($sessionStorage)
-    {
-        $currentValue = SessionStorage::withTrashed()->max('transaction_id', 1000) ?? 1000;
-        $newValue = $currentValue + 1;
-        $sessionStorage->transaction_id = $newValue;
-
-        // $maxId = SessionStorage::withTrashed()->max('id');
-        
-        $sessionStorage->save();
-    }
 }

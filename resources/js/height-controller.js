@@ -15,8 +15,6 @@ $(document).ready(function() {
         }
         if ($("#savingsGoalsButtonInput").length) $(".main-content").css("padding-bottom", mainContentPadding + "px");
     }
-  
-    setMainContentPadding();
 
     function setResponsiveMainContentPadding() {
         const windowWidth = $(window).width();
@@ -32,8 +30,6 @@ $(document).ready(function() {
             $(".content-section").css("padding-top", 0);
         }
     }
-  
-    setResponsiveMainContentPadding();
 
     function setResponsiveHeader() {
         const windowWidth = $(window).width();
@@ -50,8 +46,15 @@ $(document).ready(function() {
             $(".content-section").css("padding-top", 0);
         }
     }
-  
+
     setResponsiveHeader();
+    setMainContentPadding();
+    setResponsiveMainContentPadding();
+    // if (window.orientation !== 90 && window.orientation !== -90) {
+    //     setResponsiveHeader();
+    //     setMainContentPadding();
+    //     setResponsiveMainContentPadding();
+    // }
 
     function setResponsiveCalcuator(){
         const windowWidth = $(window).width();
@@ -130,9 +133,15 @@ $(document).ready(function() {
     setResponsiveCalcuator();
 
     $(window).resize(function() {
-        setMainContentPadding();
         setResponsiveMainContentPadding();
+        setMainContentPadding();
         setResponsiveHeader();
         setResponsiveCalcuator();
+        // if (window.orientation !== 90 && window.orientation !== -90) {
+        //     setResponsiveMainContentPadding();
+        //     setMainContentPadding();
+        //     setResponsiveHeader();
+        //     setResponsiveCalcuator();
+        // }
     });
 });

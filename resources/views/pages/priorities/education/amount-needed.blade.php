@@ -245,7 +245,7 @@
 </div>
 
 <script>
-    var needs_priority = '{{$educationPriority}}';
+    var needs_priority = '{{json_encode($educationPriority)}}';
     var lastPageInput = '{{$relationship}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

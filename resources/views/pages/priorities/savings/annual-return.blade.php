@@ -123,7 +123,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var lastPageInput = '{{$savingsMonthlyPayment === "" || $savingsMonthlyPayment === null ? $savingsMonthlyPayment : $savingsGoalDuration}}';
 </script>
 @endsection

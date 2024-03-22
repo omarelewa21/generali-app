@@ -138,7 +138,7 @@
 <script>
     var amountNeeded = document.getElementById("medical_amount_needed");
     var supportingYears = '1';
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = '{{$selectedRoom}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

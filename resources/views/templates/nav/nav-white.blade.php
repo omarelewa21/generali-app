@@ -22,7 +22,7 @@ if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agen
             <nav class="navbar position-relative z-1">
                 <div class="container px-4 px-xl-5">
                     <div class="navbar-brand py-3 py-md-5">
-                        <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220;">
+                        <img class="white-logo" src="{{ asset('images/general/main-logo-white.webp') }}" alt="Logo" width="100%">
                     </div>
                 </div>
             </nav>
@@ -48,7 +48,7 @@ if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agen
             <nav class="navbar navbar-default transparent">
                 <div class="container-fluid px-4 px-xl-5">
                     <div class="navbar-brand py-3 py-md-5">
-                        <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="172">
+                        <img class="white-logo" src="{{ asset('images/general/main-logo-white.webp') }}" alt="Logo" width="172">
                     </div>
                     <div class="py-3 py-md-5">
                         <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobileAgent" role="button" aria-controls="offcanvasMenuMobileAgent">
@@ -62,8 +62,8 @@ if (rtrim($current_url, '/') === '/agent' || rtrim($current_url, '/') === '/agen
 <?php } else { ?>
     <nav class="navbar position-relative z-1">
         <div class="container px-4 px-xl-5">
-            <div class="navbar-brand py-3 py-md-5">
-                <img class="white-logo" src="{{ asset('images/general/main-logo-white.png') }}" alt="Logo" width="220;">
+            <div class="navbar-brand py-3 py-xl-5">
+                <img class="white-logo" src="{{ asset('images/general/main-logo-white.webp') }}" alt="Logo" width="100%">
             </div>
         </div>
     </nav>

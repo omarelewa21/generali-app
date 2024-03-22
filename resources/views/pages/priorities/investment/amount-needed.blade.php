@@ -125,7 +125,7 @@
     </div>
 </div>
 <script>
-    var needs_priority = '{{$investmentPriority}}';
+    var needs_priority = '{{json_encode($investmentPriority)}}';
     var lastPageInput = '{{$relationship}}';
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

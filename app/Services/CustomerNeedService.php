@@ -11,76 +11,80 @@ class CustomerNeedService
 {
     public $customerNeedId;
 
-    public function handleNeeds($customerDetails,$customerId)
+    public function handleNeeds($customerDetails,$customerId,$selectedNeed)
     {
-        DB::transaction(function () use ($customerDetails, $customerId) {
+        DB::transaction(function () use ($customerDetails, $customerId,$selectedNeed) {
 
             $createdNeedsId = [];
             $selectedNeeds = $customerDetails['selected_needs'];
-            
 
             foreach($selectedNeeds as $selectedKey => $selectedValue){
-                $relationship = null;
-                $coveredAmount = null;
-                $coveredAmountMonthly = null;
-                $supportingYears = null;
-                $existingAmount = null;
-                $existingPolicy = null;
-                $insuranceAmount = null;
-                $fundPercentage = null;
-                $goalsAmount = null;
-                $childName = null;
-                $spousename = null;
-                $childDob = null;
-                $spouseDob = null;
-
-                $typeNumber = substr($selectedKey,5);
-                $selectedType = "N".$typeNumber;
         
-                if (isset($selectedNeeds[$selectedKey]['advance_details'])) {
-                    $relationship = $selectedNeeds[$selectedKey]['advance_details']['relationship'] ?? null;
-                    $coveredAmount =  $selectedNeeds[$selectedKey]['advance_details']['covered_amount'] ?? null;
-                    $coveredAmountMonthly = $selectedNeeds[$selectedKey]['advance_details']['covered_amount_monthly'] ?? null;
-                    $supportingYears = $selectedNeeds[$selectedKey]['advance_details']['supporting_years'] ?? null;
-                    $existingAmount =  $selectedNeeds[$selectedKey]['advance_details']['existing_amount'] ?? null;
-                    $existingPolicy =  $selectedNeeds[$selectedKey]['advance_details']['existing_policy'] ?? null;
-                    $insuranceAmount = $selectedNeeds[$selectedKey]['advance_details']['insurance_amount'] ?? null;
-                    $fundPercentage = $selectedNeeds[$selectedKey]['advance_details']['fund_percentage'] ?? null;
-                    $goalsAmount = $selectedNeeds[$selectedKey]['advance_details']['goals_amount'] ?? null;
+                $typeNumber = substr($selectedNeed,5);
+                $selectedType = "N".$typeNumber;
+                $advanceDetail = $selectedNeeds[$selectedNeed]['advance_details'];
 
-                    $childName = $selectedNeeds[$selectedKey]['advance_details']['child_name'] ?? null;
-                    $spousename = $selectedNeeds[$selectedKey]['advance_details']['spouse_name'] ?? null;
-                    $childDob = $selectedNeeds[$selectedKey]['advance_details']['child_dob'] ?? null;
-                    $spouseDob = $selectedNeeds[$selectedKey]['advance_details']['spouse_dob'] ?? null;
+                $goalTarget = isset($advanceDetail['goal_target']) ? array_values($advanceDetail['goal_target']) : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['existing_amount'] = isset($advanceDetail['existing_amount']) ? ($advanceDetail['existing_amount'] == "" ? 0.0 : $advanceDetail['existing_amount']) : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['supporting_year'] = isset($advanceDetail['supporting_years']) ? $advanceDetail['supporting_years'] : NULL;
 
-                    if($existingAmount == "")
-                    {
-                        $existingAmount = 0.0;
-                    }
+                if ($selectedNeed == "need_1") {
+                    $selectedNeeds[$selectedNeed]['advance_details']['covered_amount_monthly'] = isset($advanceDetail['covered_amount_monthly']) ? $advanceDetail['covered_amount_monthly'] : NULL;
+                }
+                else{
+                    $selectedNeeds[$selectedNeed]['advance_details']['covered_amount_monthly'] = isset($advanceDetail['monthly_covered_amount']) ? $advanceDetail['monthly_covered_amount'] : NULL;
+                }
+
+                $selectedNeeds[$selectedNeed]['advance_details']['remaining_year'] = isset($advanceDetail['remaining_years']) ? $advanceDetail['remaining_years'] : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['other_source'] = isset($advanceDetail['other_sources']) ? $advanceDetail['other_sources'] : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['other_sources_custom'] = isset($advanceDetail['other_sources_custom']) ? $advanceDetail['other_sources_custom'] : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['existing_fund'] = isset($advanceDetail['existing_fund']) ? $advanceDetail['existing_fund'] : NULL;
+
+                $selectedNeeds[$selectedNeed]['advance_details']['annual_return'] = isset($advanceDetail['annual_returns']) ? $advanceDetail['annual_returns'] : NULL;
+
+        
+                $selectedNeeds[$selectedNeed]['advance_details']['risk_profile'] = isset($customerDetails['risk_profile']['selected_risk_profile']) ? $customerDetails['risk_profile']['selected_risk_profile'] : NULL;
+                $selectedNeeds[$selectedNeed]['advance_details']['potential_return'] = isset($customerDetails['risk_profile']['selected_potential_return']) ? $customerDetails['risk_profile']['selected_potential_return'] : NULL;
+
+                $advanceDetail['goal_target'] = $goalTarget;
+                
+
+                if ($selectedNeed == 'need_6' )  {
+                    $selectedNeeds[$selectedNeed]['advance_details']['critical_illness_plan'] = isset($advanceDetail['critical_illness']['critical_illness_plan']) ? $advanceDetail['critical_illness']['critical_illness_plan'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['relationship'] = isset($advanceDetail['critical_illness']['relationship']) ? $advanceDetail['critical_illness']['relationship'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['child_dob'] = isset($advanceDetail['critical_illness']['child_dob']) ? $advanceDetail['critical_illness']['child_dob'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['child_name'] = isset($advanceDetail['critical_illness']['child_name']) ? $advanceDetail['critical_illness']['child_name'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['spouse_name'] = isset($advanceDetail['critical_illness']['spouse_name']) ? $advanceDetail['critical_illness']['spouse_name'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['spouse_dob'] = isset($advanceDetail['critical_illness']['spouse_dob']) ? $advanceDetail['critical_illness']['spouse_dob'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['covered_amount'] = isset($advanceDetail['critical_illness']['covered_amount']) ? $advanceDetail['critical_illness']['covered_amount'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['supporting_year'] = isset($advanceDetail['critical_illness']['year']) ? $advanceDetail['critical_illness']['year'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['existing_amount'] = isset($advanceDetail['critical_illness']['existing_amount']) ? $advanceDetail['critical_illness']['existing_amount'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['goals_amount'] = isset($advanceDetail['critical_illness']['goals_amount']) ? $advanceDetail['critical_illness']['goals_amount'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['fund_percentage'] = isset($advanceDetail['critical_illness']['fund_percentage']) ? $advanceDetail['critical_illness']['fund_percentage'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['selection'] = isset($selectedNeeds[$selectedNeed]['number_of_selection']) ? $selectedNeeds[$selectedNeed]['number_of_selection'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['critical_illness']['critical_illness_plan'] = isset($advanceDetail['critical_illness']['critical_illness_plan']) ? $advanceDetail['critical_illness']['critical_illness_plan'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['health_care']['medical_care_plan'] = isset($advanceDetail['health_care']['medical_care_plan']) ? $advanceDetail['health_care']['medical_care_plan'] : NULL;
+                }
+
+                if($selectedNeed == 'need_7')
+                {
+                    $selectedNeeds[$selectedNeed]['advance_details']['relationship'] = isset($advanceDetail['relationship']) ? $advanceDetail['relationship'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['child_dob'] = isset($advanceDetail['child_dob']) ? $advanceDetail['child_dob'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['child_name'] = isset($advanceDetail['child_name']) ? $advanceDetail['child_name'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['spouse_name'] = isset($advanceDetail['spouse_name']) ? $advanceDetail['spouse_name'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['spouse_dob'] = isset($advanceDetail['spouse_dob']) ? $advanceDetail['spouse_dob'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['remaining_year'] = isset($advanceDetail['remaining_years']) ? $advanceDetail['remaining_years'] : NULL;
+                    $selectedNeeds[$selectedNeed]['advance_details']['critical_illness_amount'] = isset($advanceDetail['critical_illness_amount']) ? $advanceDetail['critical_illness_amount'] : NULL;
+
                 }
 
                 $customerNeed = CustomerNeed::updateOrCreate(
                     [
-                    'customer_id' => $customerId , 'type' =>  $selectedType
-                    ],
-                    [
-                        'relationship' => $relationship,
-                        'covered_amount' => $coveredAmount,
-                        'covered_amount_monthly' => $coveredAmountMonthly,
-                        'supporting_year' => $supportingYears,
-                        'existing_amount' => $existingAmount,
-                        'existing_policy' => $existingPolicy,
-                        'insurance_amount' => $insuranceAmount,
-                        'fund_percentage' => $fundPercentage,
-                        'goals_amount' => $goalsAmount,
-                        'child_name' => $childName,
-                        'spouse_name' => $spousename,
-                        'child_dob' => $childDob,
-                        'spouse_dob' => $spouseDob,
+                        'customer_id' => $customerId , 'type' =>  $selectedType
                     ]
+                    , $selectedNeeds[$selectedNeed]['advance_details']
                     );
-
-
+                
                 $createdNeedsId[] = $customerNeed->id;
             }
 

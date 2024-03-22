@@ -56,7 +56,7 @@
     <div class="footer-navigation col-12">
         <div class="col-12 px-5 py-4 inline-block">
             <!-- Button trigger modal -->
-            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Save & Logout</a>
         </div>
     </div>
@@ -84,7 +84,7 @@
     <div class="footer-navigation col-12">
         <div class="col-12 px-5 py-4 inline-block">
             <!-- Button trigger modal -->
-            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase pb-2" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <a href="{{route('welcome')}}" class="btn btn-outline-secondary btn-exit text-uppercase" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Save & Logout</a>
         </div>
     </div>

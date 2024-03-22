@@ -31,6 +31,7 @@ $(document).ready(function () {
     // Detect the element with id
     var login = $('#login');
     var home = $('#home');
+    var pdpa = $('#pdpa');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
     var retirement_home = $('#retirement_home');
@@ -42,7 +43,7 @@ $(document).ready(function () {
     var summary = $('#summary');
 
     // Check if the element exists on the page
-    if (home.length === 1 || avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1 || login.length === 1) {
+    if (avatar_welcome.length === 1 || protection_home.length === 1 || retirement_home.length === 1 || education_home.length === 1 || savings_home.length === 1 || investment_home.length === 1 || health_home.length === 1 || debt_home.length === 1 || login.length === 1) {
         // If it exists, remove the 'overflow' class to the body
         $('body').removeClass('overflow');
     }
@@ -132,8 +133,10 @@ function footer_scroll() {
 }
 
 $(document).ready(function () {
-    navbar_scroll();
-    footer_scroll();
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        navbar_scroll();
+        footer_scroll();
+    }
 });
 
 // Session Clear

@@ -150,7 +150,7 @@
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
     var sessionTotalAmount = parseFloat({{ $totalAmountNeeded }});
     var sessionSavingAmount = parseFloat({{$educationSavingAmount}}); 
-    var needs_priority = '{{$educationPriority}}';
+    var needs_priority = '{{json_encode($educationPriority)}}';
     var sessionExistingFund = '{{$edcationSaving}}';
     var lastPageInput = '{{$tertiaryEducationAmount === "" || $tertiaryEducationAmount === null ? $tertiaryEducationAmount : $totalEducationYear}}';
     var genderSet = '{{$gender}}';

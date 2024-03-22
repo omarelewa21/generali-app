@@ -33,7 +33,7 @@ if (specificPageURLs.some(url => currentURL.includes(specificPageURLs))) {
             if (modalBackdrop) {
                 modalBackdrop.remove();
             }
-            window.location.href = '/financial-priorities?transaction_id='+paramValue;
+            window.location.href = '/financial-priorities';
         });
     } else {
         // Sent checkbox value to controller

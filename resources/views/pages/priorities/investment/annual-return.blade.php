@@ -123,7 +123,7 @@
 </div>
 <script>
     var lastPageInput = '{{$investmentMonthlyPayment === "" || $investmentMonthlyPayment === null ? $investmentMonthlyPayment : $investmentSupportingYears}}';
-    var needs_priority = '{{$investmentPriority}}';
+    var needs_priority = '{{json_encode($investmentPriority)}}';
     var oldTotalFund = parseFloat({{ $totalInvestmentNeeded }});
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';

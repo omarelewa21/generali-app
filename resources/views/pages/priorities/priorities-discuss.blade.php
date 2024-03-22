@@ -53,10 +53,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 10px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 10px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -70,10 +70,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 20px;top: 50px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 20px;top: 50px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -87,10 +87,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 60px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 60px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -104,10 +104,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -121,10 +121,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -138,10 +138,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -155,10 +155,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -172,10 +172,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -187,7 +187,8 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
-                            <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                            {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
+                            <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                         </div>
                     </div>
                 </section>
@@ -247,7 +248,7 @@
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$priority}}">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
+                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.webp') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
                                                                 </button>
                                                             </h2>
                                                             <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
@@ -315,7 +316,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('financial.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>
@@ -354,6 +355,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');
     }
+});
+
+// Load the animation using Lottie
+const animationMale = lottie.loadAnimation({
+    container: document.getElementById('lottie-animation'),
+    renderer: 'svg', 
+    loop: true,
+    autoplay: true,
+    path: '{{ asset('images/top-priorities/priorities.json') }}'
 });
 </script>
 @endsection

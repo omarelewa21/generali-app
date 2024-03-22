@@ -178,7 +178,7 @@
     var savingsTotal =  parseFloat({{$totalSavingsNeeded}});
     var percentage = parseFloat({{$savingsFundPercentage}});
     var goals = parseFloat({{$goalsAmount}});
-    var needs_priority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var lastPageInput = '{{$riskProfile === "" || $riskProfile === null ? $riskProfile : $potentialReturn}}';
 </script>
 

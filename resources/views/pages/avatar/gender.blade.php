@@ -21,7 +21,11 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="avatar_gender_selection">
+<div id="landscapeOverlay">
+    <p>Please rotate your device for a better experience.</p>
+</div>
+
+<div id="avatar_gender_selection" class="tablet-view">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar px-0 order-md-1 order-sm-2 order-2">
@@ -30,7 +34,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <p class="pb-3 display-6 fw-bold">Pick the skin colour that’s closest to yours.</p>
+                                <p class="display-6 fw-bold">Pick the skin colour that’s closest to yours.</p>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center mx-2">
@@ -59,15 +63,14 @@
                 </section>
                 <section class="avatar-design-placeholder bottom-avatar position-relative">
                     <div class="col-12 text-center d-flex justify-content-center">
-                        {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage pb-2" id="avatar-clothes"> --}}
                         <div id="lottie-animation"></div>
                     </div>
                 </section>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs- content-section">
                 <div class="scrollable-content">
-                    <form novalidate action="{{route('change.image',['transaction_id' => $transactionId])}}" method="POST" id="gender_selection">
+                    <form novalidate action="{{route('change.image')}}" method="POST" id="gender_selection">
                         @csrf
                         <section class="main-content">
                             <div class="container">
@@ -92,22 +95,22 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2 px-2">
+                                    <div class="col-6 col-lg-6 col-md-12 fade-effect py-2 px-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Male') default @endif" data-avatar="Male" data-required="" value="male" id="gendermale">
-                                                    <img src="{{ asset('images/gender-selection/button-gender-male.png') }}" width="140" alt="Gender Male">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Male</p>
+                                                    <img src="{{ asset('images/gender-selection/button-gender-male.webp') }}" width="140" alt="Gender Male">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Male</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-lg-6 col-md-12 text-dark fade-effect py-2 px-2">
+                                    <div class="col-6 col-lg-6 col-md-12 fade-effect py-2 px-2">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 gender-button @if($gender === 'Female') default @endif" data-avatar="Female" data-required="" value="female" id="genderfemale">
-                                                    <img src="{{ asset('images/gender-selection/button-gender-female.png') }}" width="140" alt="Gender Female">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Female</p>
+                                                    <img src="{{ asset('images/gender-selection/button-gender-female.webp') }}" width="140" alt="Gender Female">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Female</p>
                                                 </button>
                                             </div>
                                         </div>
@@ -123,7 +126,7 @@
                                         <input type="hidden" name="genderImage" id="genderImage" value="{{$image}}">
                                         <input type="hidden" name="genderSelection" id="genderSelection" value="{{$gender}}">
                                         <input type="hidden" name="skinSelection" id="skinSelection" value="{{$skintone}}">
-                                        <a href="{{route('avatar.welcome',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('avatar.welcome')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" id="nextBtn" type="submit">Next</button>
                                     </div>
                                 </div>

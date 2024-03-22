@@ -59,7 +59,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                        <a href="{{$protectionPriority === 'true' ? route('protection.gap') : route('priorities.to.discuss')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                        <a href="{{$protectionPriority === 'true' ? route('protection.gap') : route('financial.priorities.discuss')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                         <a href="{{route('retirement.coverage')}}" class="btn btn-primary flex-fill text-uppercase">Next</a>
                                     </div>
                                 </div>

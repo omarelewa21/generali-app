@@ -133,7 +133,7 @@
                                     <input type="hidden" name="othersCoverForNameInput" id="othersCoverForNameInput" value="{{$othersCoverForName}}">
                                     <input type="hidden" name="selectedCoverForDobInput" id="selectedCoverForDobInput" value="{{$selectedCoverForDob}}">
                                     <input type="hidden" name="othersCoverForDobInput" id="othersCoverForDobInput" value="{{$othersCoverForDob}}">
-                                    <a href="{{route('health.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('health.medical.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
     var selectedCoverForDobInput = document.getElementById('selectedCoverForDobInput');
     var othersCoverForNameInput = document.getElementById('othersCoverForNameInput');
     var othersCoverForDobInput = document.getElementById('othersCoverForDobInput');
-    var needs_priority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var selfData = '{{$selfDataName}}';
     var lastPageInput = '{{$selectedCritical}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
