@@ -46,12 +46,14 @@
  
     $timelineProgress = [
         'protection' => [
+            'protection',
             'protection/coverage',
             'protection/amount-needed',
             'protection/existing-policy',
             'protection/gap'
         ],
         'retirement' => [
+            'retirement',
             'retirement/coverage',
             'retirement/ideal',
             'retirement/monthly-support',
@@ -60,12 +62,14 @@
             'retirement/gap'
         ],
         'education' => [
+            'education',
             'education/coverage',
             'education/amount-needed',
             'education/existing-fund',
             'education/gap'
         ],
         'savings' => [
+            'savings',
             'savings/coverage',
             'savings/goals',
             'savings/amount-needed',
@@ -74,6 +78,7 @@
             'savings/gap'
         ],
         'investment' => [
+            'investment',
             'investment/coverage',
             'investment/amount-needed',
             'investment/annual-return',
@@ -81,6 +86,7 @@
             'investment/gap'
         ],
         'health-medical' => [
+            'health-medical',
             'health-medical/medical-selection',
             [
                 'health-medical/medical-planning/coverage',
@@ -98,6 +104,7 @@
             ]
         ],
         'debt-cancellation' => [
+            'debt-cancellation',
             'debt-cancellation/coverage',
             'debt-cancellation/amount-needed',
             'debt-cancellation/existing-debt',
@@ -123,36 +130,11 @@ getProgressRecursive($timelineProgress, $timelineProgress, $medicalSelection, Re
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasNeeds" class="text-decoration-none">
                 <p class="display-6 text-dark m-1 needs-progress">
                     @php
-                    // Get the current route name
-                    $routeName = Route::currentRouteName();
-                    // Extract the folder name from the route name (assuming folder names are
-                    //separated by '.')
-                    $folderName = explode('.', $routeName)[0];
-    
-                    // Get all routes matching the current folder name (prefix)
-                    $folderRoutes = collect(Route::getRoutes()->getRoutesByName())
-                    ->filter(function ($value, $key) use ($folderName) {
-                    return $key === $folderName || strpos($key, $folderName . '.') === 0;
-                    });
-                    
-                    $routeKeys = $folderRoutes->keys()->all();
-                    // Get the current route index (page number)
-                    $currentPage = array_search($routeName, $routeKeys);
-                    
-                    $totalPagesInFolder = $folderRoutes->count();
-                    // Add 1 to the index to get the page number (since arrays are 0-indexed)
-                    $pageNumber = $currentPage !== false ? $currentPage + 1 : 0;
-                    $progressAverage = 360 / $totalPagesInFolder;
-                    $progress = $progressAverage * $pageNumber;
-                    if ($progress > 180) {
-                    $progressLeft = $progress - 180;
-                    $progressRight = 180;
-                    }
-                    else if ($progress <= 180) { 
-                    $progressLeft=0; 
-                    $progressRight=$progress; 
-                    } 
-                    
+                        // Get the current route name
+                        $routeName = Route::currentRouteName();
+                        // Extract the folder name from the route name (assuming folder names are
+                        //separated by '.')
+                        $folderName = explode('.', $routeName)[0];
                     @endphp 
                     {{ ($folderName == 'savings') ? 'Regular Savings' : (($folderName == 'investment') ? 'Lump Sum Investment' : (($folderName == 'health') ? 'Health & Medical' : (($folderName == 'debt') ? 'Debt Cancellation' : ucfirst($folderName)))) }}
                     <!-- Display the folder name with the first letter in uppercase -->
@@ -161,65 +143,49 @@ getProgressRecursive($timelineProgress, $timelineProgress, $medicalSelection, Re
         </div>
         <div class="col-auto pe-sm-0 ps-0">
             <a data-bs-toggle="offcanvas" href="#offcanvasNeeds" role="button" aria-controls="offcanvasMenu" class="d-flex align-items-center">
-                <div class="progress color d-inline-flex mx-2">
-                    <span class="progress-left">
-                        <span class="progress-bar"></span>
+                @php
+                    $folderNumber = [
+                        'protection' => 1,
+                        'retirement' => 2,
+                        'education' => 3,
+                        'savings' => 4,
+                        'investment' => 5,
+                        'health' => 6,
+                        'debt' => 7,
+                        // 'Others' => 8,
+                    ];
+                    $dynamicNumber = $folderNumber[$folderName] ?? 0;
+                @endphp
+                <div class="progress mx-2">
+                    <span class="progress-value">
+                        <p class="mb-0">{{ $dynamicNumber }}</p>
                     </span>
-                    <span class="progress-right">
-                        <span class="progress-bar"></span>
-                    </span>
-
-                    <div class="progress-value">
-                        @php
-                        
-                            $folderNumber = [
-                            'protection' => 1,
-                            'retirement' => 2,
-                            'education' => 3,
-                            'savings' => 4,
-                            'investment' => 5,
-                            'health' => 6,
-                            'debt' => 7,
-                            // 'Others' => 8,
-                            ];
-
-                            $dynamicNumber = $folderNumber[$folderName] ?? 0;
-                        @endphp
-
-                        <p class="mb-0">
-                            {{ $dynamicNumber }}
-                        </p>
-                    </div>
+                    <div class="overlay"></div>
+                    <div class="left"></div>
+                    <div class="right"></div>
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-{{-- Nav Sidebar Right Needs --}}
-<script>
-    var progressLeft = {{ $progressLeft }};
-    var progressRight = {{ $progressRight }};
-
-    var style = document.createElement('style');
-    style.textContent = `
-    @keyframes loading-left {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(calc(${progressLeft} * 1deg));
-        }
-    }
-
-    @keyframes loading-right {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(calc(${progressRight} * 1deg));
-        }
-    }
-    `;
-    document.head.appendChild(style);
-</script>
+<style>
+    /* code for progress bar css */
+    @if($progress != null)
+        @if($progress > 180)
+            .progress .left {
+                z-index:1;
+                transform: rotate(180deg);
+            }
+            .progress .right {
+                z-index:2;
+                transform: rotate({{ $progress }}deg);
+            }
+        @else
+            .progress .left {
+                z-index:1;
+                transform: rotate({{ $progress }}deg);
+            }
+        @endif
+    @endif
+</style>
