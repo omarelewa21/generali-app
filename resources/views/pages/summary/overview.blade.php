@@ -87,7 +87,7 @@
                                                 $chart_color = '';
                                                 break;
                                         }
-                                        if ($all_needs[$needKey]['need_no'] == 'N6'){
+                                        if ($needValue['advanceDetails']['type'] == 'N6'){
                                             if(isset($all_needs[$needKey]['number_of_selection']) && ($all_needs[$needKey]['number_of_selection'] == 2 && ($all_needs[$needKey]['advance_details']['critical_illness']['critical_illness_plan'] == 'Critical Illness' || $all_needs[$needKey]['advance_details']['health_care']['medical_care_plan'] ) == 'Health Planning' ) ){
                                                 if (isset($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage']) && isset($all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) ){
                                                     $chart_percent = ($all_needs[$needKey]['advance_details']['critical_illness']['fund_percentage'] + $all_needs[$needKey]['advance_details']['health_care']['fund_percentage']) / 2;
@@ -205,7 +205,8 @@
                                                     }
                                                     if (isset($needValue['advanceDetails']['type'])){
                                                         if($needValue['advanceDetails']['type'] == 'N6'){
-                                                                                         
+                                                            
+                                                           
                                                             if ( isset($healthCare['relationship']) &&  isset($critical_illness['relationship']) )                                                  
                                                             {
                                                                 $coverage_person = $healthCare['spouse_name'] ??  $healthCare['child_name'] ."--". $critical_illness['spouse_name'] ?? $critical_illness['spouse_name'];
@@ -281,16 +282,13 @@
                                                             <tr>
                                                                 <td class="d-flex align-items-center py-3">
                                                                     <img src="{{ asset('images/summary/overview/icon/icon-'.($icon).'.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Plan Care
-                                                                </td>
-                                                                <td class="px-2">
-                                                                    @if (isset($all_needs[$needKey]['advance_details']['health_care']['relationship']))
-                                                                        {{ $all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Spouse' ? 
-                                                                                $all_needs[$needKey]['advance_details']['health_care']['spouse_name'] : 
-                                                                            ($all_needs[$needKey]['advance_details']['health_care']['relationship'] == 'Child' ? 
-                                                                                $all_needs[$needKey]['advance_details']['health_care']['child_name'] : 
-                                                                            $all_needs[$needKey]['advance_details']['health_care']['relationship']) }}
-                                                                    @endif
-                                                                </td>
+                                                                </td>                                                                                                      
+                                                                <td class="px-2">{{isset($healthCare['relationship']) && $healthCare['relationship'] == 'Spouse' ? 
+                                                                    $healthCare['spouse_name'] : 
+                                                                    (isset($healthCare['relationship']) && $healthCare['relationship'] == 'Child' ? 
+                                                                    $healthCare['child_name'] : 
+                                                                    $healthCare['relationship']) }}
+                                                                </td>                                                            
                                                                 <td class="px-2">{{ isset($healthCare['goals_amount']) ? 
                                                                     'RM' . number_format(floatval($healthCare['goals_amount'])) :
                                                                     'N/A'}}
