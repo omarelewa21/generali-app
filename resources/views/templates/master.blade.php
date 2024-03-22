@@ -35,6 +35,9 @@
 </head>
 
 <body class="overflow">
+    <div id="landscapeOverlay">
+        <p>Please rotate your device for a better experience.</p>
+    </div>
     <main>
         @yield('content')
     </main>
