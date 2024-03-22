@@ -623,7 +623,6 @@ class DropdownController extends Controller
                 session(['customer_details.financialStatement.approximateIncrementAmount'  => $financialData->increment_amount]);
             }
 
-
             if ($customerFamily && $customerFamily->spouse) {
                 $customerSpouse = $customerFamily->spouse->toArray();
 
@@ -633,7 +632,6 @@ class DropdownController extends Controller
             }
 
             session(['customer_details.family_details.spouse_data' => $customerSpouse]);
-
 
             if ($customerFamily && $customerFamily->dependents) {
                 $customerDependent = $customerFamily->dependents->toArray();
@@ -796,11 +794,60 @@ class DropdownController extends Controller
         return view('pages/summary/summary');
     }
 
-    public function existingPolicy()
+    public function existingPolicy(Request $request)
     {
         $companies = Company::all();
         $policyPlans = PolicyPlan::all();
         $premiumModes = PremiumMode::all();
+
+        // $existingPolicy = json_decode(session('customer_details.existing_policy'), true);
+        $transactionId = $request->input('transaction_id') ?? session()->get('transaction_id') ?? session('customer_details.transaction_id');
+
+        if ($transactionId) {
+            $customer = Transaction::with('customer')->find($transactionId)->customer ?? null;
+
+            if ($customer) {
+                session(['transaction_id' => $transactionId, 'customer_id' => $customer->id]);
+            } else {
+                session()->forget(['transaction_id', 'customer_id']);
+            }
+
+            $customerId = optional(Transaction::with('customer')->where('id',$transactionId)->first())->customer;
+          
+            if($customerId){
+                $customerId['habits']= $customerId['habit'];
+                $customerId['dob'] = Carbon::parse($customerId['dob'])->format('Y-m-d');
+                unset($customerId['habit']);
+    
+                session(['customer_details.basic_details' => $customerId->toArray()]);
+            }
+
+            $retirementPriorities = ['protection', 'retirement','education','savings','investments','health-medical','debt-cancellation'];
+
+            $prioritySequence = Customer::whereHas('priorities', function ($query) use ($retirementPriorities) {
+                $query->whereIn('priority', $retirementPriorities);
+            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)->get()->toArray();
+
+            foreach ($prioritySequence as $value) {
+                session(['customer_details.priorities.' . $value['priority'] . '_discuss' => $value['discuss']]);
+            }
+
+            $customerRelationship = Customer::with(['customerNeeds','existingPolicies'])->find($customer->id);
+
+            $customerNeed = $customerRelationship->replicate()->customerNeeds;
+
+            foreach ($customerNeed as $value) {
+                
+                if ($value['type'] == "N6") {
+                    $decodeHealthCare = json_decode($value['health_care'], true);
+                    session(['customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan' => $decodeHealthCare['medical_care_plan']]);
+                }
+            }
+
+        } else {
+            session()->forget(['transaction_id', 'customer_id']);
+        }
+
         return view('pages/summary/existing-policy', compact('companies', 'policyPlans','premiumModes'));
     }
 }

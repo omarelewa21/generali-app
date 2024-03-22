@@ -85,6 +85,7 @@
                                             default:
                                                 $need_title = 'Others';
                                                 $chart_color = '';
+                                                break;
                                         }
                                         if ($needValue['advanceDetails']['type'] == 'N6'){
                                             if($all_needs[$needKey]['advanceDetails']['selection'] == 2 || ($critical_illness['critical_illness_plan'] && $healthCare['medical_care_plan'] ) == 'Yes' ){
@@ -121,15 +122,14 @@
                                                     width: 0%;
                                                     animation: progressAnimation-{{$loop->index}} 1s ease-out;
                                                 }
+                                                /*  */
                                             </style>
-                                                <!-- <div class="bar_chart_wrapper"> -->
-                                                    <div class="bar_chart_value animate-{{$loop->index}}" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <!-- </div> -->
+                                                <div class="bar_chart_value animate-{{$loop->index}}" role="progressbar" style="width:{{$chart_percent}}%; background:{{ $chart_color }};transition: width 1s ease-out;" aria-valuenow="{{$chart_percent}}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 <p class="display-6 fw-bold lh-base m-0 px-3">{{round(floatval($chart_percent))}}%</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         @endif
                     </div>
