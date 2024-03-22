@@ -74,14 +74,14 @@
                 <section class="bottom-content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                            <div class="col-xl-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
                                 @if(isset($gender) || isset($skintone))
                                     <div id="lottie-animation" class="w-auto h-100"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
+                                    <img src="{{ asset('images/needs/protection/amount-needed.webp') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
                                 @endif
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                            <div class="col-xl-4 col-md-11 py-lg-5 pt-4 calculatorContent m-md-auto m-xl-0">
                                 <div class="row h-sm-100">
                                     <h2 class="display-5 fw-bold">If anything should happen to me, I’d like to support my family with</h2>
                                     <p class="display-5 fw-bold currencyField">
@@ -120,7 +120,7 @@
                     </div>
                 </section>
             </form>
-            <div class="footer-avatar-grey d-none d-md-block"></div>
+            <div class="footer-avatar-grey d-none d-xl-block"></div>
         </div>
     </div>
 </div>

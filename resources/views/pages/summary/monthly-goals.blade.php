@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-6 col-xl-4 col-12 h-100 h-sm-auto">
                                 <div class="row justify-content-center position-relative h-100 h-sm-auto">
-                                    <img src="{{ asset('images/summary/tabung.png') }}" height="auto" width="90%" alt="Monthly Goals" class="m-auto mh-100">
+                                    <img src="{{ asset('images/summary/tabung.webp') }}" height="auto" width="90%" alt="Monthly Goals" class="m-auto mh-100">
                                     <div class="col-12 position-absolute center px-5">
                                         <p class="display-3 currencyField d-flex justify-content-center">
                                             <span class="text-black fw-bold border-bottom border-dark border-3">RM<input type="text" name="financial_statement_monthly_support" class="form-control display-3 position-relative border-0 d-inline-block w-75 w-md-50 fw-bold text-primary @error('financial_statement_monthly_support') is-invalid @enderror" id="financial_statement_monthly_support" value="{{ $financialStatementMonthlySupport !== null ? number_format(floatval($financialStatementMonthlySupport)) : $financialStatementMonthlySupport }}" required></span>
@@ -65,7 +65,7 @@
                         <!-- <div class="container"> -->
                         <!-- <div class="row justify-content-center position-relative">
                             <div class="col-md-6 col-xl-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -90px">
-                                <img src="{{ asset('images/summary/bank-container.png') }}" width="90%" alt="Monthly Goals" class="d-md-block d-none">
+                                <img src="{{ asset('images/summary/tabung.webp') }}" width="90%" alt="Monthly Goals" class="d-md-block d-none">
                                 
                             </div>
                         </div> -->

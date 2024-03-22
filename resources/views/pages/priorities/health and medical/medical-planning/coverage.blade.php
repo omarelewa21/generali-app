@@ -62,7 +62,7 @@
                                             @if(isset($selfGender) || isset($skintone))
                                                 <div id="lottie-animation-self" class="needs_coverage_avatar"></div>
                                             @else
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Myself">
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Myself">
                                             @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
@@ -76,7 +76,7 @@
                                             @if(isset($spouseGender) || isset($skintone))
                                                 <div id="lottie-animation-spouse" class="needs_coverage_avatar"></div>
                                             @else
-                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Spouse">
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-' .($selfGender === 'Female' ? 'female' : 'male').'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Spouse">
                                             @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
@@ -92,7 +92,7 @@
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                                 <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>
                                             </button>

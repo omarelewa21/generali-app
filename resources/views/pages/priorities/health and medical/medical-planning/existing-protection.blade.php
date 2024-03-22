@@ -55,7 +55,7 @@
                                 @if(isset($gender) || isset($skintone))
                                     <div id="lottie-animation" class="w-auto h-100"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/health-medical/medical-planning/existing-protection/avatar.png') }}" width="auto" height="100%" alt="Health Medical Medical Planning Existing Protection Avatar">
+                                    <img src="{{ asset('images/needs/health-medical/medical-planning/existing-protection/avatar.webp') }}" width="auto" height="100%" alt="Health Medical Medical Planning Existing Protection Avatar">
                                 @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
@@ -63,12 +63,12 @@
                                     <h2 class="display-5 fw-bold lh-sm">I already have Hospitalisation coverage.</h2>
                                     <p class="d-flex pt-5 pb-3 pb-md-0">
                                         <span class="me-5 d-flex">
-                                            <input type="radio" class="needs-radio @error('existing_protection_amount') checked-yes @enderror {{$existingProtection === 'yes' ? 'checked-yes' : ''}}" id="yes" name="medical_existing_protection" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_protection_amount').attr('required',true);"
+                                            <input type="radio" class="btn-check needs-radio @error('existing_protection_amount') checked-yes @enderror {{$existingProtection === 'yes' ? 'checked-yes' : ''}}" id="yes" name="medical_existing_protection" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#existing_protection_amount').attr('required',true);"
                                             {{ ($existingProtection && $existingProtection === 'yes' || $errors->has('existing_protection_amount') ? 'checked' : '')  }} >
                                             <label for="yes" class="form-label display-6 lh-base">Yes</label>
                                         </span>
                                         <span class="d-flex me-5">
-                                            <input type="radio" class="needs-radio" id="no" name="medical_existing_protection" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#existing_protection_amount').removeAttr('required',false);"
+                                            <input type="radio" class="btn-check needs-radio" id="no" name="medical_existing_protection" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#existing_protection_amount').removeAttr('required',false);"
                                             {{ ($existingProtection && $existingProtection === 'no' && !$errors->has('existing_protection_amount') ? 'checked' : '') }} >
                                             <label for="no" class="form-label display-6 lh-base">No</label>
                                         </span>

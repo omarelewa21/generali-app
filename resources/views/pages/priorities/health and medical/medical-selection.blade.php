@@ -47,7 +47,7 @@
                                         @if(isset($gender) || isset($skintone))
                                             <div id="lottie-animation-critical" class="selection_height"></div>
                                         @else
-                                            <img src="{{ asset('images/needs/health-medical/selection/critical-illness-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                            <img src="{{ asset('images/needs/health-medical/selection/critical-illness-avatar.webp') }}" width="auto" class="m-auto selection_height pb-3">
                                         @endif
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Critical Illness Care</p>
                                     </div>
@@ -59,7 +59,7 @@
                                         @if(isset($gender) || isset($skintone))
                                             <div id="lottie-animation-medical" class="selection_height"></div>
                                         @else
-                                            <img src="{{ asset('images/needs/health-medical/selection/hospitalisation-avatar.png') }}" width="auto" class="m-auto selection_height pb-3">
+                                            <img src="{{ asset('images/needs/health-medical/selection/hospitalisation-avatar.webp') }}" width="auto" class="m-auto selection_height pb-3">
                                         @endif
                                         <p class="avatar-text text-center pt-2 mb-0 fw-bold">Medical Plan Care</p>
                                     </div>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-2 plant d-none d-xl-block">
-                            <img src="{{ asset('images/needs/health-medical/selection/plant.png') }}" class="mh-100 position-absolute center" style="top:62%;">
+                            <img src="{{ asset('images/needs/health-medical/selection/plant.webp') }}" class="mh-100 position-absolute center" style="top:62%;">
                         </div>
                     </div>
                 </section>

@@ -1099,7 +1099,7 @@ h2.display-5, .currencyField {
 
 /* ============================== Gender Page ============================== */
 .main-default-bg {
-  background-image: url(/images/general/main-default-bg.png);
+  background-image: url(/images/general/main-default-bg.webp);
   background-size: auto 70%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1522,7 +1522,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Retirement Home Page ============================== */
 #retirement_home .wrapper-needs-grey {
-  background-image: url(/images/needs/retirement/home-bg.jpg);
+  background-image: url(/images/needs/retirement/home-bg.webp);
   background-size: cover;
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -1535,7 +1535,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #retirement_period.tertiary-default-bg {
-  background-image: url(/images/needs/retirement/period-bg.png);
+  background-image: url(/images/needs/retirement/period-bg.webp);
   background-size: auto 80%;
   background-position: left top;
   background-repeat: no-repeat;
@@ -1544,7 +1544,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Education Home Page ============================== */
 #education_home .main-default-bg {
-  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.png);
+  background-image: url(/images/needs/education/supporting-bg.webp), url(/images/general/main-default-bg.webp);
   background-size: auto 50%, auto 70%;
   background-position: center top, center;
 }
@@ -1562,7 +1562,7 @@ fieldset legend {
 }
 
 .secondary-default-bg {
-  background-image: url(/images/general/secondary-default-bg.png);
+  background-image: url(/images/general/secondary-default-bg.webp);
   background-size: auto 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1621,7 +1621,7 @@ fieldset legend {
 
 /* ============================== Needs Page ============================== */
 button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
-    background-image: url('/images/needs/hover-coverage.png');
+    background-image: url('/images/needs/hover-coverage.webp');
     background-repeat: no-repeat;
     background-position: center bottom 18%;
     background-size: 100%;
@@ -1634,7 +1634,7 @@ button.choice.default.selected img,
 button.choice:hover svg,
 button.choice[data-required="selected"] svg,
 button.choice.default.selected svg{
-    background-image: url(/images/needs/hover-coverage.png);
+    background-image: url(/images/needs/hover-coverage.webp);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: 100%;
@@ -1645,7 +1645,7 @@ button.choice.default.selected svg{
 }
 
 .tertiary-default-bg {
-  background-image: url(/images/general/tertiary-default-bg.png);
+  background-image: url(/images/general/tertiary-default-bg.webp);
   background-size: auto 80%;
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -1666,7 +1666,7 @@ button.choice.default.selected svg{
 }
 
 .needs-radio:checked + label::after {
-  content: url("/images/needs/general/check.png"); 
+  content: url("/images/needs/general/check.webp"); 
   position: absolute;
   left: 4px;
   top: 1px;
@@ -1722,7 +1722,7 @@ body.overflow #summary .main-content {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url('/images/needs/general/green-tick.png') no-repeat center center;
+  background: url('/images/needs/general/green-tick.webp') no-repeat center center;
   background-size: contain;
 }
 
@@ -1730,7 +1730,7 @@ body.overflow #summary .main-content {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url('/images/needs/general/red-tick.png') no-repeat center center;
+  background: url('/images/needs/general/red-tick.webp') no-repeat center center;
   background-size: contain;
 }
 
@@ -1876,6 +1876,26 @@ body.overflow #summary .main-content {
   .wrapper-needs-grey {
     /* grid-template-rows: 9vh 38vh 25vh 12vh; */
     grid-template-rows: 9vh 60vh 0vh 0vh;
+  }
+  .tertiary-mobile-bg {
+    background-image: url(/images/general/tertiary-default-bg.webp);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    max-height: 100%;
+  }
+
+  #retirement_period .tertiary-mobile-bg {
+    background-image: url(/images/needs/retirement/period-bg.webp);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+  .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
+    text-align: center;
+    justify-content: center;
   }
 }
 
@@ -2055,30 +2075,9 @@ body.overflow #summary .main-content {
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
   }
-  .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
-    text-align: center;
-    justify-content: center;
-  }
   /* .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
   } */
-  .tertiary-mobile-bg {
-    background-image: url(/images/general/tertiary-default-bg.png);
-    background-size: contain;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #fff;
-    height: 50%!important;
-    max-height: 100%;
-  }
-
-  #retirement_period .tertiary-mobile-bg {
-    background-image: url(/images/needs/retirement/period-bg.png);
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #fff;
-  }
   .calculator-page .bottom-content img {
     height: 85%;
   }
@@ -2139,6 +2138,9 @@ body.overflow #summary .main-content {
   }
   .wrapper-needs-grey {
     grid-template-rows: 9vh 40vh 0vh 0vh;
+  }
+  .tertiary-mobile-bg {
+    height: 50%!important;
   }
 }
 

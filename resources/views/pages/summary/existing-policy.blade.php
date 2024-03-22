@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="row mb-3" id="addFields">
                                             <div class="col-md-12 py-5 pb-2">
-                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
+                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="{{ asset('images/existing-policy/button-add.webp') }}" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@
                                 <div class="row customAddBtn pb-5">
                                     <div class="col-md-12">
                                         <fieldset class="border-top border-dark">
-                                            <legend><a id="addFormsBtn"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="mx-3" style="cursor: pointer"></a></legend>
+                                            <legend><a id="addFormsBtn"><img src="{{ asset('images/existing-policy/button-add.webp') }}" width="28px" alt="Add Benefits" class="mx-3" style="cursor: pointer"></a></legend>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>`);
             $("#form").append(`<div class="row mb-3" id="addFields">
                 <div class="col-md-12 py-5 pb-2">
-                    <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="/images/existing-policy/button-add.png" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
+                    <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="/images/existing-policy/button-add.webp" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
                 </div>
             </div>`);
 

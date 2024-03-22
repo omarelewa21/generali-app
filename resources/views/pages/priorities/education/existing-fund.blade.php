@@ -15,7 +15,7 @@
     $edcationSaving = session('customer_details.selected_needs.need_3.advance_details.existing_fund');
     $educationSavingAmount = session('customer_details.selected_needs.need_3.advance_details.existing_amount');
     $totalAmountNeeded = session('customer_details.selected_needs.need_3.advance_details.insurance_amount');
-
+    $childData = session('customer_details.family_details.children_data');
     $gender = session('customer_details.avatar.gender', 'Male');
     $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
@@ -57,7 +57,7 @@
                                 @if(isset($gender) || isset($skintone))
                                     <div id="lottie-animation" class="w-auto h-100"></div>
                                 @else
-                                    <img src="{{ asset('images/needs/education/other/education-other-avatar.png') }}" width="auto" height="100%" alt="Education Existing Policy Avatar">
+                                    <img src="{{ asset('images/needs/education/other/education-other-avatar.webp') }}" width="auto" height="100%" alt="Education Existing Policy Avatar">
                                 @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
@@ -65,12 +65,12 @@
                                     <h2 class="display-5 fw-bold lh-sm">Luckily, I do have funds saved up for my child’s education.</h2>
                                     <p class="d-flex pt-5 pb-3 pb-md-0">
                                         <span class="me-5 d-flex">
-                                            <input type="radio" class="needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#education_saving_amount').attr('required',true);"
+                                            <input type="radio" class="btn-check needs-radio @error('education_saving_amount') checked-yes @enderror {{$edcationSaving === 'yes' ? 'checked-yes' : ''}}" id="yes" name="education_other_savings" value="yes" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','1');jQuery('#education_saving_amount').attr('required',true);"
                                             {{ ($edcationSaving && $edcationSaving === 'yes' || $errors->has('education_saving_amount') ? 'checked' : '')  }} >
                                             <label for="yes" class="form-label display-6 lh-base">Yes</label>
                                         </span>
                                         <span class="d-flex me-5">
-                                            <input type="radio" class="needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#education_saving_amount').removeAttr('required',false);"
+                                            <input type="radio" class="btn-check needs-radio" id="no" name="education_other_savings" value="no" autocomplete="off" onclick="jQuery('.hide-content').css('opacity','0');jQuery('#education_saving_amount').removeAttr('required',false);"
                                             {{ ($edcationSaving && $edcationSaving === 'no' && !$errors->has('education_saving_amount') ? 'checked' : '') }} >
                                             <label for="no" class="form-label display-6 lh-base">No</label>
                                         </span>
@@ -130,6 +130,21 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingChild" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildLabel">You're required to provide Child Details</h3>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please provide your child details in Family dependent page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     var oldTotalFund = parseFloat({{ $totalEducationNeeded }});
     var educationFundPercentage = parseFloat({{ $educationFundPercentage }});
@@ -141,5 +156,6 @@
     var genderSet = '{{$gender}}';
     var skintone = '{{$skintone}}';
     var gender = genderSet.toLowerCase();
+    var childDatas = {!! json_encode($childData) !!};
 </script>
 @endsection

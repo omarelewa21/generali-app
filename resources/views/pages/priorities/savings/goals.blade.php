@@ -74,9 +74,9 @@
                                                         <div class='sortable-container'>
                                                             <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . (($relationship === 'Child') ? (isset($savingsGoals[0]) && $savingsGoals[0] == $goal_1 ? 'interest' : 
                                                                                             ($savingsGoals[0] == $goal_2 ? 'business' : ($savingsGoals[0] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[0]) && $savingsGoals[0] != '' ? 
-                                                                                            ($savingsGoals[0] == $goal_1 ? 'travel' : ($savingsGoals[0] == $goal_2 ? 'home' : ($savingsGoals[0] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
+                                                                                            ($savingsGoals[0] == $goal_1 ? 'travel' : ($savingsGoals[0] == $goal_2 ? 'home' : ($savingsGoals[0] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.webp') }}" style="width: 100px;">
 
-                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[0]}}" data-index="1"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
+                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[0]}}" data-index="1"><img class="close" src="{{ asset('images/top-priorities/close.webp') }}" width="100%"></button>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -94,8 +94,8 @@
                                                         <div class='sortable-container'>
                                                             <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' . (($relationship === 'Child') ? (isset($savingsGoals[1]) && $savingsGoals[1] == $goal_1 ? 'interest' : 
                                                                                             ($savingsGoals[1] == $goal_2 ? 'business' : ($savingsGoals[1] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[1]) && $savingsGoals[1] != '' ? 
-                                                                                            ($savingsGoals[1] == $goal_1 ? 'travel' : ($savingsGoals[1] == $goal_2 ? 'home' : ($savingsGoals[1] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
-                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[1]}}" data-index="2"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
+                                                                                            ($savingsGoals[1] == $goal_1 ? 'travel' : ($savingsGoals[1] == $goal_2 ? 'home' : ($savingsGoals[1] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.webp') }}" style="width: 100px;">
+                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[1]}}" data-index="2"><img class="close" src="{{ asset('images/top-priorities/close.webp') }}" width="100%"></button>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -113,8 +113,8 @@
                                                         <div class='sortable-container'>
                                                             <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' .  (($relationship === 'Child') ? (isset($savingsGoals[2]) && $savingsGoals[2] == $goal_1 ? 'interest' : 
                                                                                             ($savingsGoals[2] == $goal_2 ? 'business' : ($savingsGoals[2] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[2]) && $savingsGoals[2] != '' ? 
-                                                                                            ($savingsGoals[2] == $goal_1 ? 'travel' : ($savingsGoals[2] == $goal_2 ? 'home' : ($savingsGoals[2] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
-                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[2]}}" data-index="3"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
+                                                                                            ($savingsGoals[2] == $goal_1 ? 'travel' : ($savingsGoals[2] == $goal_2 ? 'home' : ($savingsGoals[2] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.webp') }}" style="width: 100px;">
+                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[2]}}" data-index="3"><img class="close" src="{{ asset('images/top-priorities/close.webp') }}" width="100%"></button>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -132,8 +132,8 @@
                                                         <div class='sortable-container'>
                                                             <img class="inner-dropped" src="{{ asset('images/needs/savings/goals/goal-' .  (($relationship === 'Child') ? (isset($savingsGoals[3]) && $savingsGoals[3] == $goal_1 ? 'interest' : 
                                                                                             ($savingsGoals[3] == $goal_2 ? 'business' : ($savingsGoals[3] == $goal_3 ? 'tuition' : 'others'))) : (isset($savingsGoals[3]) && $savingsGoals[3] != '' ? 
-                                                                                            ($savingsGoals[3] == $goal_1 ? 'travel' : ($savingsGoals[3] == $goal_2 ? 'home' : ($savingsGoals[3] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.png') }}" style="width: 100px;">
-                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[3]}}" data-index="4"><img class="close" src="{{ asset('images/top-priorities/close.png') }}" width="100%"></button>
+                                                                                            ($savingsGoals[3] == $goal_1 ? 'travel' : ($savingsGoals[3] == $goal_2 ? 'home' : ($savingsGoals[3] == $goal_3 ? 'donate' : 'others'))) : 'others')) . '.webp') }}" style="width: 100px;">
+                                                            <button class="remove-button btn-remove" data-avatar="{{$savingsGoals[3]}}" data-index="4"><img class="close" src="{{ asset('images/top-priorities/close.webp') }}" width="100%"></button>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -152,7 +152,7 @@
                                             <div id="lottie-animation" class="w-auto h-100"></div>
                                         @endif
                                     @else
-                                        <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.png') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                                        <img src="{{ $relationship === 'Child' ? asset('images/needs/savings/goals/child-avatar.webp') : asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
                                     @endif
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Pursue their interests' :'Travel around the world'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'interest' :'travel').'.png') }}" width="auto" height="110px" alt="{{$goal_1}}">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'interest' :'travel').'.webp') }}" width="auto" height="110px" alt="{{$goal_1}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
                                                             <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Pursue their interests' : 'Travel around the world'}}</p>
@@ -199,7 +199,7 @@
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Start their own business' : 'Upgrade my assets & lifestyle'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'business' :'home').'.png') }}" width="auto" height="110px" alt="{{$goal_2}}">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'business' :'home').'.webp') }}" width="auto" height="110px" alt="{{$goal_2}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
                                                             <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Start their own business' : 'Upgrade my assets & lifestyle'}}</p>
@@ -213,7 +213,7 @@
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_3, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Contribute to their tuition fees' : 'Contribute to charitable needs'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_3, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'tuition' :'donate').'.png') }}" width="auto" height="110px" alt="{{$goal_3}}">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'tuition' :'donate').'.webp') }}" width="auto" height="110px" alt="{{$goal_3}}">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
                                                             <p class="avatar-text text-start mb-0 fw-bold lh-normal col-10">{{$relationship === 'Child' ? 'Contribute to their tuition fees' : 'Contribute to charitable needs'}}</p>
@@ -227,7 +227,7 @@
                                                 <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('Others', $savingsGoals)) default @endif" data-avatar="Others" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('Others', $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
-                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-others.png') }}" width="auto" height="110px" alt="goal-other">
+                                                            <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-others.webp') }}" width="auto" height="110px" alt="goal-other">
                                                         </div>
                                                         <div class="col-8 d-flex justify-content-center">
                                                             <p class="avatar-text text-start mb-0 fw-bold lh-normal col-7">Others</p>
@@ -272,7 +272,7 @@
                                                 <li class="handle ui-state-default dropdown @if(!$savingsGoal) is-empty @endif" data-identifier="{{ $savingsGoal }}">
                                                     <span class="arrowIcon handle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent" data-attribute="{{ $savingsGoal }}" data-index="{{ $loop->index }}" data-bs-offset="0,0"><i class="fa-solid fa-chevron-down"></i></span>
                                                     @if($savingsGoal && $savingsGoal != 'undefined')
-                                                        <img class="needs-icon" src="{{ asset('images/needs/savings/goals/' . $icon . '.png') }}" alt="{{ $savingsGoal }}">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-' . $icon . '.webp') }}" alt="{{ $savingsGoal }}">
                                                         {{ $savingsGoal }}
                                                     @else
                                                         {{ $loop->iteration }}

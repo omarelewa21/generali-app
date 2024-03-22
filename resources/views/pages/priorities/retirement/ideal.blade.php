@@ -46,7 +46,7 @@
                                     @if(isset($gender) || isset($skintone))
                                         <div id="lottie-animation-travel" class="w-100" style="height:350px;"></div>
                                     @else
-                                        <img src="{{ asset('images/needs/retirement/ideal-bucketlist.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                        <img src="{{ asset('images/needs/retirement/ideal-bucketlist.webp') }}" height="auto" width="100%" class="pb-3 m-auto">
                                     @endif
                                     <p class="avatar-text text-center fw-bold py-2 mb-0">Visiting destinations on my bucket list</p>
                                 </button>
@@ -56,7 +56,7 @@
                                     @if(isset($gender) || isset($skintone))
                                         <div id="lottie-animation-lifestyle" class="w-100" style="height:350px;"></div>
                                     @else
-                                        <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                        <img src="{{ asset('images/needs/retirement/ideal-lifestyle.webp') }}" height="auto" width="100%" class="pb-3 m-auto">
                                     @endif
                                     <p class="avatar-text text-center fw-bold py-2 mb-0">Maintaining a comfortable lifestyle</p>
                                 </button>
@@ -66,7 +66,7 @@
                                     @if(isset($gender) || isset($skintone))
                                         <div id="lottie-animation-savings" class="w-100" style="height:350px;"></div>
                                     @else
-                                        <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                        <img src="{{ asset('images/needs/retirement/ideal-retire.webp') }}" height="auto" width="100%" class="pb-3 m-auto">
                                     @endif
                                     <p class="avatar-text text-center fw-bold py-2 mb-0">Retiring early with secure finances</p>
                                 </button>

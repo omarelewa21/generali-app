@@ -39,9 +39,9 @@
                     <section class="content-needs bg-hm-home-element">
                         <div class="col-12 justify-content-center align-items-center position-relative d-xl-flex d-none">
                             @if(isset($gender) || isset($skintone))
-                                <div id="lottie-animation" class="position-absolute needs_avatar" style="bottom:-40px;"></div>
+                                <div id="lottie-animation" class="position-absolute needs_avatar d-flex justify-content-center" style="bottom:-40px;"></div>
                             @else
-                                <img src="{{ asset('images/needs/health-medical/home/health-medical-home-avatar.png') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Health Medical Home">
+                                <img src="{{ asset('images/needs/health-medical/home/health-medical-home-avatar.webp') }}" height="90%" width="auto" class="position-absolute" style="bottom:-40px" alt="Health Medical Home">
                             @endif
                         </div>
                     </section>

@@ -28,6 +28,9 @@
     width: 100px;
     height: 35px;
 }
+.edu_coverage{
+    height: 60% !important;
+}
 
 .bg-transparent{
     background-color: transparent;
@@ -179,7 +182,7 @@
 
 /* Health medical - critical illness plan amount needed background */
 .bg-hnm {
-    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
+    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.webp);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top 50% left;
@@ -351,11 +354,6 @@
         margin-top: auto;
     }
 }
-@media only screen and (max-width: 500px){
-    .selection_height{
-        max-height: 250px;
-    }
-}
 @media only screen and (max-width: 320px){
     .risk-btn{
         width: 100%;
@@ -394,6 +392,12 @@
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
     }
+    .coverage .wrapper-bottom-grey{
+        grid-template:
+        "header" 0vh
+        "content-needs-grey" 60vh
+        "footer-avatar-grey" 35vh / 100%;
+    }
     .pe-sm-0{
         padding-right: 0 !important;
     }
@@ -420,6 +424,9 @@
     }
     .h-sm-100{
         height: 100%;
+    }
+    .h-sm-75{
+        height: 75% !important;
     }
     .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
@@ -457,7 +464,7 @@
     }
     #critical-illness_amount_needed .tertiary-mobile-bg,
     #medical-amount-needed .tertiary-mobile-bg{
-        background-image: url(/images/needs/health-medical/background/bg-hnm.png);
+        background-image: url(/images/needs/health-medical/background/bg-hnm.webp);
         background-position: center;
     }
     #health-medical-selection .content-needs-grey{
@@ -497,7 +504,7 @@
         font-size: calc(1.3375rem + 1.05vw);
     }
     #retirement_period .bottom-content{
-        background-image: url(/images/needs/retirement/period-bg.png);
+        background-image: url(/images/needs/retirement/period-bg.webp);
         background-size: 80%;
         background-position: left top 10%;
         background-repeat: no-repeat !important;
@@ -517,9 +524,6 @@
         padding-left: 0px;
     }
     /* Coverage Page */
-    .tertiary-default-bg.calculator-page{
-        background: none;
-    }
     .coverage .content-needs-grey {
         grid-auto-rows: 0vh 0vh 80vh;
     }
@@ -579,6 +583,11 @@
         transform: scale(1.1);
     }
 }
+@media only screen and (max-width: 600px){
+    .coverage .heading h2{
+        font-size: 20px;
+    }
+}
 @media only screen and (max-width: 500px){
     .graph-size{
         transform: scale(0.9);
@@ -595,6 +604,9 @@
     }
     .needs-progress{
         font-size: 18px;
+    }
+    .selection_height{
+        max-height: 250px;
     }
 }
 @media only screen and (max-width: 400px){
@@ -646,6 +658,15 @@
     .needs_home .footer-avatar-grey{
         background-color: transparent;
     }
+    .edu_coverage{
+        height: 80% !important;
+    }
+    .tertiary-mobile-bg {
+        height: 70%!important;
+    }
+    .calculator-page .content-needs-grey{
+        grid-auto-rows: 5vh 60vh;
+    }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){
     .summary-page .bottom-content .graph-col.h-100{
@@ -669,6 +690,9 @@
     .needs_avatar_mob{
         top: -150px;
     }
+    .needs_coverage_avatar{
+        height: 70% !important;
+    }
 }
 @media only screen and (max-width: 767px) and (min-height: 700px){
     #lottie-animation-mob svg{
@@ -677,6 +701,9 @@
     .needs_avatar_mob{
         top: -240px;
     }
+    .needs_coverage_avatar{
+        height: 75% !important;
+    }
 }
 @media only screen and (max-width: 767px) and (min-height: 800px){
     #lottie-animation-mob svg{
@@ -684,6 +711,9 @@
     }
     .needs_avatar_mob{
         top: -320px;
+    }
+    .needs_coverage_avatar{
+        height: 80% !important;
     }
 }
 @media only screen and (max-width: 767px) and (min-height: 850px){
@@ -709,6 +739,9 @@
     .needs_avatar_mob{
         top: -210px;
     }
+    .needs_coverage_avatar{
+        height: 80% !important;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 1001px){
     #lottie-animation-mob svg{
@@ -725,10 +758,8 @@
     .needs_avatar_mob{
         top: -550px;
     }
-}
-@media only screen and (max-width: 1024px){
     .needs_coverage_avatar{
-        height: 80% !important;
+        height: 90% !important;
     }
 }
 @media only screen and (max-width: 1199px){
@@ -752,6 +783,9 @@
     #retirement_home .wrapper-needs-grey {
         grid-template-rows: 9vh 60vh 0vh 0vh;
         height: auto;
+    }
+    .tertiary-default-bg.calculator-page{
+        background: none;
     }
 }
 @media only screen and (min-width: 1600px){
