@@ -21,7 +21,11 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="avatar_gender_selection">
+<div id="landscapeOverlay">
+    <p>Please rotate your device for a better experience.</p>
+</div>
+
+<div id="avatar_gender_selection" class="tablet-view">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar px-0 order-md-1 order-sm-2 order-2">
@@ -64,7 +68,7 @@
                 </section>
             </div>
             
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs- content-section">
                 <div class="scrollable-content">
                     <form novalidate action="{{route('change.image',['transaction_id' => $transactionId])}}" method="POST" id="gender_selection">
                         @csrf

@@ -726,8 +726,7 @@ z-index: 2;
 
 body.overflow #top_priorities .wrapper-avatar-default,
 body.overflow #savings-goals .wrapper-avatar-default,
-body.overflow #priorities_to_discuss .wrapper-avatar-default,
-body.overflow #home {
+body.overflow #priorities_to_discuss .wrapper-avatar-default {
 overflow: hidden;
 }
 

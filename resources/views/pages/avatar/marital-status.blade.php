@@ -18,7 +18,11 @@
     $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
 
-<div id="avatar_marital_status">
+<div id="landscapeOverlay">
+    <p>Please rotate your device for a better experience.</p>
+</div>
+
+<div id="avatar_marital_status" class="tablet-view">
     <div class="container-fluid">
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
@@ -61,7 +65,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Single') default @endif" data-avatar="Single" data-required="" id="singleButton">
-                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="100%" alt="Single">
+                                                    <img src="{{ asset('images/marital-status/single-icon.webp') }}" width="100%" alt="Single" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
                                                 </button>
                                             </div>
@@ -71,7 +75,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Married') default @endif" data-avatar="Married" data-required="" id="marriedButton">
-                                                    <img src="{{ asset('images/marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/married-icon.webp') }}" width="100%" alt="Married" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
                                                 </button>
                                             </div>
@@ -81,7 +85,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Divorced') default @endif" data-avatar="Divorced" data-required="" id="divorcedButton">
-                                                    <img src="{{ asset('images/marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/divorced-icon.webp') }}" width="100%" alt="Divorced" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
                                                 </button>
                                             </div>
@@ -91,7 +95,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Widowed') default @endif" data-avatar="Widowed" data-required="" id="widowedButton">
-                                                    <img src="{{ asset('images/marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed" class="mx-auto">
+                                                    <img src="{{ asset('images/marital-status/widowed-icon.webp') }}" width="100%" alt="Widowed" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
                                                 </button>
                                             </div>

@@ -18,10 +18,14 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="basic_details">
+<div id="landscapeOverlay">
+    <p>Please rotate your device for a better experience.</p>
+</div>
+
+<div id="basic_details" class="tablet-view">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3 col-lg-12 bg-primary sidebanner">
+            <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">
                 <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white-menu')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
@@ -29,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-12 bg-accent-bg-grey px-0 content-section">
+            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 content-section">
                 <div>
                     <form novalidate action="{{ route('form.basic.details', ['transaction_id' => request()->input('transaction_id')]) }}" method="POST">
                         @csrf

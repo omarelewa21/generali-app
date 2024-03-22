@@ -16,10 +16,14 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="pdpa" class="desktop-mode">
+<div id="landscapeOverlay">
+    <p>Please rotate your device for a better experience.</p>
+</div>
+
+<div id="pdpa" class="tablet-view">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-xl-3 bg-primary sidebanner">
+            <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">
                 <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
@@ -27,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-9 bg-accent-bg-grey px-0 vh-100 content-section">
+            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
                 <section class="main-content bg-accent-bg-grey">
                     <div class="container">
                         <div class="row pt-4 px-4 pb-md-4 pb-2 pt-md-5 sticky-md-top bg-accent-bg-grey">

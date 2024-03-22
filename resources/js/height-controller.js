@@ -20,7 +20,7 @@ $(document).ready(function() {
         const windowWidth = $(window).width();
         
         // Check if the window width is less than 767px
-        if (windowWidth < 1024) {
+        if (windowWidth < 768) {
             const menuHeight = $(".navbar-scroll").outerHeight();
             const descriptionHeight = $(".fixed-sm-top").outerHeight();
             const responsiveMainContentPadding = menuHeight + descriptionHeight - 85.5;
@@ -35,7 +35,7 @@ $(document).ready(function() {
         const windowWidth = $(window).width();
 
         // Check if the window width is less than 767px
-        if (windowWidth < 1024) {
+        if (windowWidth < 768) {
             const menuHeight = $("#wrapper-navbar.fixed-top.mobile").outerHeight();
             const menuHeightAgent = $("#wrapper-navbar-agent .fixed-top").outerHeight();
             const responsiveHeader = menuHeight; 
@@ -47,11 +47,14 @@ $(document).ready(function() {
         }
     }
 
-    if (window.orientation !== 90 && window.orientation !== -90) {
-        setResponsiveHeader();
-        setMainContentPadding();
-        setResponsiveMainContentPadding();
-    }
+    setResponsiveHeader();
+    setMainContentPadding();
+    setResponsiveMainContentPadding();
+    // if (window.orientation !== 90 && window.orientation !== -90) {
+    //     setResponsiveHeader();
+    //     setMainContentPadding();
+    //     setResponsiveMainContentPadding();
+    // }
 
     function setResponsiveCalcuator(){
         const windowWidth = $(window).width();
@@ -133,11 +136,15 @@ $(document).ready(function() {
     setResponsiveCalcuator();
 
     $(window).resize(function() {
-        if (window.orientation !== 90 && window.orientation !== -90) {
-            setResponsiveMainContentPadding();
-            setMainContentPadding();
-            setResponsiveHeader();
-            setResponsiveCalcuator();
-        }
+        setResponsiveMainContentPadding();
+        setMainContentPadding();
+        setResponsiveHeader();
+        setResponsiveCalcuator();
+        // if (window.orientation !== 90 && window.orientation !== -90) {
+        //     setResponsiveMainContentPadding();
+        //     setMainContentPadding();
+        //     setResponsiveHeader();
+        //     setResponsiveCalcuator();
+        // }
     });
 });

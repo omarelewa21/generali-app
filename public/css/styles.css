@@ -47,7 +47,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default {
   overflow: hidden;
 }
 
@@ -448,6 +448,41 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 }
 
 /* ============================== Navigation Menu ============================== */
+#landscapeOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 60%);
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.white-logo {
+  max-width: 220px;
+}
+
+.tablet-mode {
+  display:none;
+}
+
+.mobile-mode {
+  display:none;
+}
+
+#wrapper-navbar.mobile {
+  display: none;
+}
+
+#avatar_welcome #wrapper-navbar.desktop {
+  display: block!important;
+}
+
 .navbar-scroll.scrolled-up {
   transform: translateY(0);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -576,6 +611,10 @@ p.nav-text {
 }
 
 /* ============================== Button Styling ============================== */
+.btn-outline-secondary {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
 .btn-check + .btn:hover {
   background-color: #ffffff;
 }
@@ -1178,9 +1217,9 @@ h2.display-5, .currencyField {
 
 /* ============================== Marital Status Page ============================== */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
-  background-image: url(/images/marital-status/vector-plant.png);
-  background-size: 20%;
-  background-position: bottom right;
+  background-image: url(/images/marital-status/vector-plant.webp);
+  background-size: 130px;
+  background-position: 100% 95%;
   background-repeat: no-repeat;
 }
 
@@ -1853,24 +1892,24 @@ body.overflow #summary .main-content {
   .homeVector {
     margin-top: -80px;
   }
-  #wrapper-navbar.desktop {
+  /* #wrapper-navbar.desktop {
     display: block!important;
   }
   #wrapper-navbar.mobile {
     display: none!important;
-  }
+  } */
 }
 
 @media only screen and (max-width: 1199px) {
-  #wrapper-navbar.mobile {
+  /* #wrapper-navbar.mobile {
     display: block!important;
   }
   #wrapper-navbar.desktop {
     display: none!important;
-  }
-  #home {
+  } */
+  /* #home {
     overflow: auto;
-  }
+  } */
   .footerVector {
     display: none;
   }
@@ -1898,6 +1937,10 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (min-width: 768px) {
+  .inner_action_button img {
+    width: auto;
+    height: 100px;
+  }
   #lottie-female-animation svg, #lottie-animation.female svg {
     padding-top: 50px;
     width: auto!important;
@@ -1982,6 +2025,15 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  #wrapper-navbar.desktop {
+    display: none;
+  }
+  #wrapper-navbar.mobile {
+    display: block;
+  }
+  .btn-primary, .btn-secondary, .btn-outline-primary {
+    font-size: 14px;
+  }
   .wrapper-bottom-grey {
     grid-template-rows: 12vh 53vh 35vh;
   }
@@ -2106,8 +2158,6 @@ body.overflow #summary .main-content {
     padding-top: 85.5px!important;
   }
   .inner_action_button img {
-    width: auto;
-    height: auto;
     max-width: 100px;
     max-height: 76px;
   }
@@ -2159,9 +2209,6 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 375px) {
-  .btn-primary, .btn-secondary, .btn-outline-primary {
-    font-size: 14px;
-  }
   .color-box-wrapper {
     height: auto;
   }
@@ -2173,20 +2220,30 @@ body.overflow #summary .main-content {
   }
 }
 
-.tablet-mode {
-  display:none;
-}
-
-.mobile-mode {
-  display:none;
-}
-
-#wrapper-navbar.mobile {
-  display: none;
-}
-
 /* Force portrait orientation */
-@media screen and (max-width:1024px) and (orientation: landscape) {
+@media screen and (max-width: 1180px) and (min-width: 768px) and (min-height: 375px) {
+  .wrapper-home {
+    display: block;
+  }
+  #home {
+    background-position: right bottom;
+    background-size: auto 60%;
+  }
+}
+
+@media screen and (max-height:599px) and (orientation: landscape) {
+  #landscapeOverlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+  }
+  .tablet-view {
+    display: none;
+  }
+}
+
+@media screen and (max-width:991px) and (orientation: landscape) {
   .lottie-welcome-female-animation svg, .lottie-welcome-male-animation svg {
     height: 100%!important;
     width: auto!important;
@@ -2194,43 +2251,13 @@ body.overflow #summary .main-content {
   .homeVector {
     max-height: 500px;
   }
-  .sidebanner {
-    width: 33.33333333%;
-  }
-  .content-section {
-    width: 66.66666667%;
-  }
   h1.display-3 {
     font-size: 1.9rem;
   }
   .btn-primary, .btn-secondary, .btn-outline-primary {
     font-size: 14px;
   }
-  #wrapper-navbar.desktop {
-    display: block!important;
-  }
-  #wrapper-navbar.mobile {
-    display: none!important;
-  }
-  .content-section {
-    padding-top: 0!important;
-  }
 }
 
-@media screen and (max-width:1024px) and (min-width:768px) and (orientation: portrait) {
-  .fixed-sm-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding-top: 85.5px!important;
-  }
-  .navbar-scroll.fixed-top {
-    position: fixed;
-  }
-  .main-content {
-    overflow-y: hidden;
-    height: 100%;
-  }
-}
+
 

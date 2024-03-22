@@ -15,7 +15,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     document.addEventListener('DOMContentLoaded', function() {
         var carImages = [
             {
-                src: "/images/assets/car-vector.png",
+                src: "/images/assets/car-vector.webp",
                 width: "auto",
                 height: "100%",
                 alt: "Car",
@@ -26,7 +26,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var scooterImages = [
             {
-                src: "/images/assets/scooter-vector.png",
+                src: "/images/assets/scooter-vector.webp",
                 width: "auto",
                 height: "100%",
                 alt: "Scooter",
@@ -37,7 +37,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var houseImages = [
             {
-                src: "/images/assets/house-vector.png",
+                src: "/images/assets/house-vector.webp",
                 width: "auto",
                 height: "100%",
                 alt: "House",
@@ -47,7 +47,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var bungalowImages = [
             {
-                src: "/images/assets/bungalow-vector.png",
+                src: "/images/assets/bungalow-vector.webp",
                 width: "auto",
                 height: "100%",
                 alt: "Bungalow",
@@ -57,7 +57,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         var condoImages = [
             {
-                src: "/images/assets/condo-vector.png",
+                src: "/images/assets/condo-vector.webp",
                 width: "auto",
                 height: "100%",
                 alt: "Bungalow",
@@ -364,7 +364,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         // Do the logics for button clicks
         // Married selection
-        $("#marriedButton").on("click", function () {
+        $(document).on("click", "#marriedButton", function () {
             var $imageContainer = $(".imageContainerMarried");
             var $existingImage = $imageContainer.find("div");
 
@@ -429,19 +429,19 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Widowed selection
-        $("#widowedButton").on("click", function () {
+        $(document).on("click", "#widowedButton", function () {
             var $imageContainer = $(".imageContainerMarried");
             $imageContainer.empty();
         });
 
         // Single selection
-        $("#singleButton").on("click", function () {
+        $(document).on("click", "#singleButton", function () {
             var $imageContainer = $(".imageContainerMarried");
             $imageContainer.empty();
         });
 
         // Divorced selection
-        $("#divorcedButton").on("click", function () {
+        $(document).on("click", "#divorcedButton", function () {
             var $imageContainer = $(".imageContainerMarried");
             $imageContainer.empty();
         });
@@ -755,9 +755,9 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
                 }
             }
         });
-
+        
         // Car Selection
-        $("#carButton").on("click", function () {
+        $(document).on("click", "#carButton", function () {
             var $imageContainer = $(".imageContainerCar");
 
             if ($imageContainer.find("img.car").length > 0) {
@@ -787,7 +787,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Scooter Selection
-        $("#scooterButton").on("click", function () {
+        $(document).on("click", "#scooterButton", function () {
             var $imageContainer = $(".imageContainerCar");
 
             if ($imageContainer.find("img.scooter").length > 0) {
@@ -817,7 +817,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // House Selection
-        $("#houseButton").on("click", function () {
+        $(document).on("click", "#houseButton", function () {
             var $imageContainer = $(".imageContainerHouse");
 
             if ($imageContainer.find("img.house").length > 0) {
@@ -868,7 +868,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Bungalow Selection
-        $("#bungalowButton").on("click", function () {
+        $(document).on("click", "#bungalowButton", function () {
             var $imageContainer = $(".imageContainerHouse");
 
             if ($imageContainer.find("img.bungalow").length > 0) {
@@ -949,7 +949,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         });
 
         // Condo Selection
-        $("#condoButton").on("click", function () {
+        $(document).on("click", "#condoButton", function () {
             var $imageContainer = $(".imageContainerHouse");
 
             if ($imageContainer.find("img.condo").length > 0) {

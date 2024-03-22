@@ -31,6 +31,7 @@ $(document).ready(function () {
     // Detect the element with id
     var login = $('#login');
     var home = $('#home');
+    var pdpa = $('#pdpa');
     var avatar_welcome = $('#avatar_welcome');
     var protection_home = $('#protection_home');
     var retirement_home = $('#retirement_home');
@@ -132,14 +133,7 @@ function footer_scroll() {
 }
 
 $(document).ready(function () {
-    if (window.orientation !== 90 && window.orientation !== -90) {
-        navbar_scroll();
-        footer_scroll();
-    }
-});
-
-$(window).resize(function() {
-    if (window.orientation !== 90 && window.orientation !== -90) {
+    if (window.matchMedia("(max-width: 767px)").matches) {
         navbar_scroll();
         footer_scroll();
     }
