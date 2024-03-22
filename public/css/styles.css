@@ -2245,7 +2245,7 @@ body.overflow #summary .main-content {
       justify-content: center;
       z-index: 3;
   }
-  .tablet-view {
+  main {
     display: none;
   }
 }

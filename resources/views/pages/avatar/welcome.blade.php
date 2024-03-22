@@ -17,11 +17,7 @@
     $transactionId ??= session('transaction_id');
 @endphp
 
-<div id="landscapeOverlay">
-    <p>Please rotate your device for a better experience.</p>
-</div>
-
-<div id="avatar_welcome" class="tablet-view">
+<div id="avatar_welcome">
     <div class="container-fluid">
         <div class="row wrapper">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu')</div></div>

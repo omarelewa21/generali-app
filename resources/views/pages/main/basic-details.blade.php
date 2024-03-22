@@ -18,11 +18,7 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="landscapeOverlay">
-    <p>Please rotate your device for a better experience.</p>
-</div>
-
-<div id="basic_details" class="tablet-view">
+<div id="basic_details">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">

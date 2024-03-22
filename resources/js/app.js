@@ -75,10 +75,10 @@ function navbar_scroll() {
 function footer_scroll() {
     var last_scroll_top = 0;
     var scroll_bottom = $(document).height() - $(window).height();
-
+ 
     $(window).on('scroll', function() {
         var scroll_top = $(this).scrollTop();
-
+ 
         if (scroll_top > 50) {
             if (scroll_top < last_scroll_top || scroll_top === scroll_bottom) {
                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
@@ -90,11 +90,11 @@ function footer_scroll() {
         }
         last_scroll_top = scroll_top;
     });
-
+ 
     function hasParallaxSectionClass() {
         return document.querySelector('.parallax-section') !== null;
     }
-
+ 
     if (hasParallaxSectionClass()) {
         // Create an intersection observer
         const observer = new IntersectionObserver(entries => {
@@ -111,7 +111,7 @@ function footer_scroll() {
                 }
             });
         });
-
+ 
         const bottomObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -125,7 +125,7 @@ function footer_scroll() {
         
         const targetElement = document.querySelector('.parallax-inner.parallax-top');
         const bottomElement = document.querySelector('.bottomObeserver');
-
+ 
         // Start observing the target element
         observer.observe(targetElement);
         bottomObserver.observe(bottomElement);

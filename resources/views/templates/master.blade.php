@@ -35,11 +35,11 @@
 </head>
 
 <body class="overflow">
+    <div id="landscapeOverlay">
+        <p>Please rotate your device for a better experience.</p>
+    </div>
     <main>
         @yield('content')
-        <section id="landscapelock" class="vh-100 justify-content-center align-items-center text-center">
-            <h1 class="text-primary">Please Rotate Your Device</h1>
-        </section>
     </main>
 
     @stack('scripts')

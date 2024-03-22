@@ -21,11 +21,7 @@
     
 @endphp
 
-<div id="landscapeOverlay">
-    <p>Please rotate your device for a better experience.</p>
-</div>
-
-<div id="identity_details" class="tablet-view">
+<div id="identity_details">
     <div class="container-fluid">
         <div class="row parallax-section">
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
