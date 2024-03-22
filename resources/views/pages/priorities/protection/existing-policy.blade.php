@@ -22,6 +22,9 @@
     $totalAmountNeeded = session('customer_details.selected_needs.need_1.advance_details.insurance_amount');
     $protectionMonthlySupport = session('customer_details.selected_needs.need_1.advance_details.covered_amount_monthly');
     $protectionSupportingYears = session('customer_details.selected_needs.need_1.advance_details.supporting_years');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="protection_existing_policy" class="tertiary-default-bg calculator-page">
@@ -58,7 +61,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/protection/existing-policy.png') }}" width="auto" height="100%" alt="Protection Existing Policy Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/protection/existing-policy.png') }}" width="auto" height="100%" alt="Protection Existing Policy Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
@@ -135,8 +142,10 @@
     var protectionFundPercentage = parseFloat({{ $protectionFundPercentage }});
     var sessionExistingPolicyAmount = parseFloat({{$existingPolicyAmount}});
     var sessionExistingPolicy = '{{$existingPolicy}}';
-    var protectionPriority = '{{json_encode($protectionPriority)}}';
-    var needs_priority = '{{json_encode($protectionPriority)}}';
-    var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? json_encode($protectionMonthlySupport) : json_encode($protectionSupportingYears)}}';
+    var needs_priority = '{{$protectionPriority}}';
+    var lastPageInput = '{{$protectionMonthlySupport === "" || $protectionMonthlySupport === null ? $protectionMonthlySupport : $protectionSupportingYears}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

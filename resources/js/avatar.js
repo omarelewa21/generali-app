@@ -197,12 +197,34 @@ const animationWelcomeFemale = lottie.loadAnimation({
     path: '/images/welcome-page/female-avatar.json'
 });
 
+const animationContainersFemale = document.querySelectorAll('.lottie-welcome-female-animation');
+animationContainersFemale.forEach(container => {
+    lottie.loadAnimation({
+        container: container,
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/welcome-page/female-avatar.json'
+    });
+});
+
 const animationWelcomeMale = lottie.loadAnimation({
     container: document.getElementById('lottie-welcome-male-animation'),
     renderer: 'svg', 
     loop: true,
     autoplay: true,
     path: '/images/welcome-page/male-avatar.json'
+});
+
+const animationContainersMale = document.querySelectorAll('.lottie-welcome-male-animation');
+animationContainersMale.forEach(container => {
+    lottie.loadAnimation({
+        container: container,
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/welcome-page/male-avatar.json'
+    });
 });
 
 // Avatar Homepage

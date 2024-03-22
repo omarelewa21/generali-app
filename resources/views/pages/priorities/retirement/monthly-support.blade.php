@@ -21,6 +21,8 @@
     $supportingYears = session('customer_details.selected_needs.need_2.advance_details.supporting_years');
     $totalRetirementNeeded = session('customer_details.selected_needs.need_2.advance_details.goals_amount', '0');
     $retirementFundPercentage = session('customer_details.selected_needs.need_2.advance_details.fund_percentage', '0');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 
     $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');
 @endphp
@@ -77,7 +79,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/retirement/monthly-support.png') }}" width="auto" height="100%" alt="Retirement Monthly Support Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/retirement/monthly-support.png') }}" width="auto" height="100%" alt="Retirement Monthly Support Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row h-sm-100">
@@ -140,5 +146,8 @@
 <script>
     var needs_priority = '{{json_encode($retirementPriority)}}';
     var lastPageInput = '{{$retirementIdeal}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

@@ -23,6 +23,8 @@
     $othersCoverForName = session('customer_details.selected_needs.need_3.advance_details.spouse_name');
     $selectedCoverForDob = session('customer_details.selected_needs.need_3.advance_details.child_dob');
     $othersCoverForDob = session('customer_details.selected_needs.need_3.advance_details.spouse_dob');
+
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="education_coverage" class="secondary-default-bg coverage">
@@ -45,6 +47,9 @@
                     <div class="container h-100">
                         <div class="row justify-content-center h-100 coverage_slick">
                             @if ($childData)
+                                @php
+                                    $num = 0;
+                                @endphp
                                 @foreach($childData as $child)
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
@@ -61,10 +66,17 @@
                                                     // Calculate the difference between the two dates
                                                     $ageInterval = $currentDate->diff($dobDate);
                                                     $age = $ageInterval->y; // Access the years property of the interval
+                                                    $num++;
+                                                    $childGender = $child['gender'];
                                                 @endphp
                                                 <div class="d-flex justify-content-center" style="flex-direction: column;">
                                                     <p class="py-2 m-auto mt-3 f-family mb-0 coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
-                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                                    @if(isset($childGender) || isset($skintone))
+                                                        <div style="height:10%;width:auto;"></div>
+                                                        <div id="lottie-animation-child-{{$num}}" style="height:60%;width:auto;"></div>
+                                                    @else
+                                                        <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                                    @endif
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>
                                             </button>
@@ -130,6 +142,8 @@
     var needs_priority = '{{json_encode($educationPriority)}}';
     var childDatas = {!! json_encode($childData) !!};
     var familyDependent = {!! json_encode($familyDependent) !!};
+    var skintone = '{{$skintone}}';
+
     if(childDatas){
         if (familyDependent){
             if('children_data' in familyDependent){

@@ -16,6 +16,8 @@
     $totalAmountNeeded = session('customer_details.selected_needs.need_7.advance_details.insurance_amount');
     $debtOutstandingLoan = session('customer_details.selected_needs.need_7.advance_details.covered_amount');
     $settlementYears = session('customer_details.selected_needs.need_7.advance_details.remaining_years');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="debt-existing-debt" class="tertiary-default-bg calculator-page">
@@ -52,7 +54,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/debt-cancellation/existing-debt/avatar.png') }}" width="auto" height="100%" alt="Existing Debt Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/debt-cancellation/existing-debt/avatar.png') }}" width="auto" height="100%" alt="Existing Debt Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
                                 <div class="row">
@@ -130,6 +136,9 @@
     var fundPercentage = parseFloat({{ $debtFundPercentage }});
     var sessionExistingDebtAmount = parseFloat({{$existingDebtAmount}});
     var sessionExistingDebt = parseFloat({{$existingDebt}});
-    var lastPageInput = '{{$debtOutstandingLoan === "" || $debtOutstandingLoan === null ? json_encode($debtOutstandingLoan) : json_encode($settlementYears)}}';
+    var lastPageInput = '{{$debtOutstandingLoan === "" || $debtOutstandingLoan === null ? $debtOutstandingLoan : $settlementYears}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

@@ -15,7 +15,8 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+
     @yield('title')
     @vite(['resources/js/jquery.min.js','resources/js/app.js', 'resources/css/app.scss'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -36,6 +37,9 @@
 <body class="overflow">
     <main>
         @yield('content')
+        <section id="landscapelock" class="vh-100 justify-content-center align-items-center text-center">
+            <h1 class="text-primary">Please Rotate Your Device</h1>
+        </section>
     </main>
 
     @stack('scripts')

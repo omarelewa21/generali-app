@@ -24,6 +24,9 @@
     $customOtherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources_custom');
     $otherIncomeSources = session('customer_details.selected_needs.need_2.advance_details.other_sources');
     $totalAmountNeeded = session('customer_details.selected_needs.need_2.advance_details.insurance_amount');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="retirement_allocated_funds" class="tertiary-default-bg calculator-page">
@@ -74,7 +77,11 @@
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
                             <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                                <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Retirement Other Income Sources Avatar">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/retirement/allocated-funds.png') }}" width="auto" height="100%" alt="Retirement Other Income Sources Avatar">
+                                @endif
                             </div>
                             <div class="col-xl-5 col-lg-6 col-md-6 py-lg-5 pt-4 pt-xl-0 calculatorContent">
                                 <div class="h-sm-100 row">
@@ -153,6 +160,9 @@
     var sessionRetirementSavings = parseFloat({{$retirementSavings}});
     var needs_priority = '{{json_encode($retirementPriority)}}';
     var lastPageInput = '{{$supportingYears === "" || $supportingYears === null ? $supportingYears : $retirementAge}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 
 @endsection

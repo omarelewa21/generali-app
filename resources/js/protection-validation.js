@@ -15,6 +15,24 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     if (needs_priority && needs_priority === 'false' || needs_priority == '') {
             
     } else{
+        if (path === '/protection') {
+            const newImage = "/images/needs/protection/home/gender-" + gender + "-" + skintone + ".json";
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/protection/coverage') {
             if (selfData == null || selfData == undefined || selfData == '') {
                 var nameModal = document.getElementById('missingSelfFields');
@@ -153,8 +171,57 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     defaultBtn.classList.add('selected');
                 });
             });
+
+            var containerSelf = document.getElementById('lottie-animation-self');
+            var containerSpouse = document.getElementById('lottie-animation-spouse');
+            var num = 0;
+
+            for (var childKey in childDatas) {
+                if (childDatas.hasOwnProperty(childKey)) {
+                    num++;
+                    var child = childDatas[childKey];
+                    var childGender = child.gender.toLowerCase();
+                    const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                    const animationAvatarChild = lottie.loadAnimation({
+                        container: document.getElementById('lottie-animation-child-' + num),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: newImageChild
+                    });
+                }
+            }
+
+            const newImageSelf = "/images/needs/coverage/gender-" + selfGender + "-" + skintone + ".json";
+            const newImageSpouse = "/images/needs/coverage/spouse-gender-" + spouseGender + "-" + skintone + ".json";
+
+            const animationAvatarSelf = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-self'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSelf
+            });
+            const animationAvatarSpouse = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-spouse'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSpouse
+            });
         } 
         if (path == '/protection/amount-needed') {
+
+            const newImage = "/images/needs/protection/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
 
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
@@ -412,6 +479,16 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         //     }
         // }
         if (path == '/protection/existing-policy') {
+            const newImage = "/images/needs/protection/existing-policy/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
@@ -620,7 +697,7 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                             circle.style.strokeDashoffset = change;
                         
                             if (index < xPositions.length) {
-                                let duration = 1500 / xPositions.length; // Calculate duration for each step
+                                let duration = 500 / xPositions.length; // Calculate duration for each step
                                 setTimeout(animatePointer, duration);
                             }
                         }

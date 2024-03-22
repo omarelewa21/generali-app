@@ -15,9 +15,10 @@
 @php
     // Retrieving values from the session
     $retirementPriority = session('customer_details.priorities.retirement_discuss');
-
     $retirementIdeal = session('customer_details.selected_needs.need_2.advance_details.ideal_retirement');
     $relationship = session('customer_details.selected_needs.need_2.advance_details.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="retirement_ideal" class="ideal">
@@ -42,21 +43,31 @@
                         <div class="row h-100 ideal_carousel justify-content-center align-items-center d-flex">
                             <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-travel') default @endif" id="retirement-travel" data-avatar="retirement-travel" data-required="">
-                                    <!-- <div class="d-flex justify-content-end" style="flex-direction: column;"> -->
+                                    @if(isset($gender) || isset($skintone))
+                                        <div id="lottie-animation-travel" class="w-100" style="height:350px;"></div>
+                                    @else
                                         <img src="{{ asset('images/needs/retirement/ideal-bucketlist.png') }}" height="auto" width="100%" class="pb-3 m-auto">
-                                        <p class="avatar-text text-center fw-bold py-2 mb-0">Visiting destinations on my bucket list</p>
-                                    <!-- </div> -->
+                                    @endif
+                                    <p class="avatar-text text-center fw-bold py-2 mb-0">Visiting destinations on my bucket list</p>
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-lifestyle') default @endif" id="retirement-lifestyle" data-avatar="retirement-lifestyle" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    @if(isset($gender) || isset($skintone))
+                                        <div id="lottie-animation-lifestyle" class="w-100" style="height:350px;"></div>
+                                    @else
+                                        <img src="{{ asset('images/needs/retirement/ideal-lifestyle.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    @endif
                                     <p class="avatar-text text-center fw-bold py-2 mb-0">Maintaining a comfortable lifestyle</p>
                                 </button>
                             </div>
                             <div class="col-md-4 h-100 d-flex justify-content-center align-items-center py-3">
                                 <button class="border-0 bg-transparent position-relative choice h-100 @if($retirementIdeal === 'retirement-savings') default @endif" id="retirement-savings" data-avatar="retirement-savings" data-required="">
-                                    <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    @if(isset($gender) || isset($skintone))
+                                        <div id="lottie-animation-savings" class="w-100" style="height:350px;"></div>
+                                    @else
+                                        <img src="{{ asset('images/needs/retirement/ideal-retire.png') }}" height="auto" width="100%" class="pb-3 m-auto">
+                                    @endif
                                     <p class="avatar-text text-center fw-bold py-2 mb-0">Retiring early with secure finances</p>
                                 </button>
                             </div>
@@ -111,5 +122,8 @@
 <script>
     var needs_priority = '{{json_encode($retirementPriority)}}';
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection
