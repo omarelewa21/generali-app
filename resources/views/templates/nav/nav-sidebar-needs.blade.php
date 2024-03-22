@@ -3,7 +3,114 @@
  * Navbar Section for Right Progress Navigation
  */
 ?>
-
+@php
+    use Illuminate\Support\Facades\Request;
+ 
+    $customerDetails = Request::session()->get('customer_details', []);
+    $medicalSelection = isset($customerDetails['selected_needs']['need_6']['advance_details']) ? $customerDetails['selected_needs']['need_6']['advance_details'] : null;
+ 
+    function getProgressRecursive($timeline, $array, $medicalSelection, $searchItem, &$progress = null) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                getProgressRecursive($timeline, $value, $medicalSelection, $searchItem, $progress);
+            } elseif ($value === $searchItem) {
+                $index = $key + 1;
+                $total = count($array);
+ 
+                if ($searchItem == 'health-medical/medical-selection') {
+                    if (isset($medicalSelection["critical_illness"]) && isset($medicalSelection["health_care"])) {
+                        $total = count($timeline["health-medical"][1]) + count($timeline["health-medical"][2]) + 1;
+                    } else {
+                        $total = count($array[$key+1])+1;
+                    }
+                } else if (strpos($searchItem, 'health-medical') === 0) {
+                    if (isset($medicalSelection["critical_illness"]) && isset($medicalSelection["health_care"])) {
+                        $total = count($timeline["health-medical"][1]) + count($timeline["health-medical"][2]) + 1;
+                        if (strpos($searchItem, 'health-medical/critical-illness') === 0) {
+                            $index += 1;
+                        } else {
+                            $index += 1 + count($timeline["health-medical"][2]);
+                        }
+                    } else {
+                        $index += 1;
+                        $total += 1;
+                    }
+                }
+ 
+                $progress = ($index / $total) * 360;
+ 
+                return;
+            }
+        }
+    }
+ 
+    $timelineProgress = [
+        'protection' => [
+            'protection/coverage',
+            'protection/amount-needed',
+            'protection/existing-policy',
+            'protection/gap'
+        ],
+        'retirement' => [
+            'retirement/coverage',
+            'retirement/ideal',
+            'retirement/monthly-support',
+            'retirement/period',
+            'retirement/allocated-funds',
+            'retirement/gap'
+        ],
+        'education' => [
+            'education/coverage',
+            'education/amount-needed',
+            'education/existing-fund',
+            'education/gap'
+        ],
+        'savings' => [
+            'savings/coverage',
+            'savings/goals',
+            'savings/amount-needed',
+            'savings/annual-return',
+            'risk-profile',
+            'savings/gap'
+        ],
+        'investment' => [
+            'investment/coverage',
+            'investment/amount-needed',
+            'investment/annual-return',
+            'risk-profile',
+            'investment/gap'
+        ],
+        'health-medical' => [
+            'health-medical/medical-selection',
+            [
+                'health-medical/medical-planning/coverage',
+                'health-medical/medical-planning/hospital-selection',
+                'health-medical/medical-planning/room-selection',
+                'health-medical/medical-planning/amount-needed',
+                'health-medical/medical-planning/existing-care',
+                'health-medical/medical-planning/gap'
+            ],
+            [
+                'health-medical/critical-illness/coverage',
+                'health-medical/critical-illness/amount-needed',
+                'health-medical/critical-illness/existing-care',
+                'health-medical/critical-illness/gap'
+            ]
+        ],
+        'debt-cancellation' => [
+            'debt-cancellation/coverage',
+            'debt-cancellation/amount-needed',
+            'debt-cancellation/existing-debt',
+            'debt-cancellation/critical-illness',
+            'debt-cancellation/gap'
+        ],
+    ];
+ 
+ 
+    $progress = null;
+getProgressRecursive($timelineProgress, $timelineProgress, $medicalSelection, Request::path(), $progress);
+@endphp
+ 
 {{-- Links for Needs Sidebar Right --}}
 @include('templates.nav.nav-sidebar-links-needs')
 {{-- Links for Needs Sidebar Right --}}
