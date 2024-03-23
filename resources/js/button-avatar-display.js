@@ -549,7 +549,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
@@ -557,7 +557,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
@@ -696,7 +696,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
@@ -704,7 +704,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
@@ -744,7 +744,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
             var familyDependent = JSON.parse(familyDependentButtonInput.value);
 
             if (familyDependent.spouse === true) {
-                urlInput.value = 'family.dependent.details';
+                urlInput.value = 'avatar.family.dependent.details';
                 
             }
             else {
@@ -752,7 +752,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     urlInput.value = 'assets';
                 }
                 else {
-                    urlInput.value = 'family.dependent.details';
+                    urlInput.value = 'avatar.family.dependent.details';
                 }
             }
         });
