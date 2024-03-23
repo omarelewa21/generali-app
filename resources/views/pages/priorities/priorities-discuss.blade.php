@@ -187,7 +187,6 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
-                            {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
                             <div id="lottie-avatar-priorities-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                         </div>
                     </div>

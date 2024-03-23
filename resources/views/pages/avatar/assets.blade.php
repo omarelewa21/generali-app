@@ -27,7 +27,6 @@
                 <section class="avatar-design-placeholder content position-relative imageContainerHouse"></section>
                 <section class="footer-avatar-grey d-flex justify-content-center">
                     <div class="col-12 position-relative imageContainerCar"></div>
-                    {{-- <img src="{{ asset($image) }}" width="auto" height="60%" alt="Avatar" class="changeImageAsset position-absolute" style="bottom: 100px;"> --}}
                     <div id="lottie-animation" class="changeImageAsset"></div>
                 </section>
                 <section class="bg-grey">

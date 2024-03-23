@@ -73,11 +73,5 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
                 allFieldsFilled.push('/financial-priorities');
             }
         }
-        // Add event listeners for touch events
-        // $('.timeline-item a').on('click touchstart', function(e) {
-        //     if ($(this).hasClass('disabled')) {
-        //         e.preventDefault(); // Prevent default action if link is disabled
-        //     }
-        // });
     });
 }
