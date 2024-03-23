@@ -102,9 +102,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
   }
 
   $(function () {
-    new Sortable($("#sortablemobile").get(0), {
-      handle: ".draggable-li",
-      animation: 200,
+    Sortable.create($("#sortablemobile").get(0), {
       onSort: function (event, ui) {
         updateMobileFields();
       }
