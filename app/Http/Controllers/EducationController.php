@@ -7,38 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use App\Models\SessionStorage;
+use App\Services\CustomerNeedService;
 use App\Services\TransactionService;
 
 class EducationController extends Controller
 {
-    // protected $need_sequence;
 
-    // public function calculateNeedSequence(Request $request) {
-
-    //     $customerDetails = $request->session()->get('customer_details', []);
-
-        // Set the default value for $need_sequence
-        // $need_sequence = 0;
-
-        // if ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true'){
-        //     if ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true'){
-        //         $need_sequence = 3;
-        //     } else { 
-        //         $need_sequence = 2;
-        //     }
-        // } else{
-        //     $need_sequence = 1;
-        // }
-    //     $protectionDiscuss = isset($customerDetails['priorities']['protection_discuss']) && ($customerDetails['priorities']['protection_discuss'] == true || $customerDetails['priorities']['protection_discuss'] == 'true');
-    //     $retirementDiscuss = isset($customerDetails['priorities']['retirement_discuss']) && ($customerDetails['priorities']['retirement_discuss'] == true || $customerDetails['priorities']['retirement_discuss'] == 'true');
-    //     $educationDiscuss = isset($customerDetails['priorities']['education_discuss']) && ($customerDetails['priorities']['education_discuss'] == true || $customerDetails['priorities']['education_discuss'] == 'true');
-
-    //     $need_sequence = $protectionDiscuss ? ($retirementDiscuss ? 3 : 2) : ($retirementDiscuss ? 2 : 1);
-
-    //     return $need_sequence;
-    // }
-
-    public function validateEducationCoverageSelection(Request $request, TransactionService $transactionService)
+    public function validateEducationCoverageSelection(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService)
     {
 
         // Define custom validation rule for button selection
@@ -73,29 +48,11 @@ class EducationController extends Controller
         $othersCoverForNameInput = $request->input('othersCoverForNameInput');
         $othersCoverForDobInput = $request->input('othersCoverForDobInput');
 
-        $index = array_search('education', $customerDetails['priorities_level'], true);
-        if ($customerDetails['priorities']['education'] == true || $customerDetails['priorities']['education'] == 'true'){
-            $coverAnswer = 'Yes';
-        } else{
-            $coverAnswer = 'No';
-        }
-        if ($customerDetails['priorities']['education_discuss'] == true || $customerDetails['priorities']['education_discuss'] == 'true'){
-            $discussAnswer = 'Yes';
-        } else{
-            $discussAnswer = 'No';
-        }
-
         // Get existing education_needs from the session
         $needs = $customerDetails['selected_needs']['need_3'] ?? [];
         $advanceDetails = $customerDetails['selected_needs']['need_3']['advance_details'] ?? [];
 
         // Update specific keys with new values
-        $needs = array_merge($needs, [
-            'need_no' => 'N3',
-            'priority' => $index+1,
-            'cover' => $coverAnswer,
-            'discuss' => $discussAnswer
-        ]);
         $advanceDetails = array_merge($advanceDetails, [
             'relationship' => $relationshipInput,
             'child_name' => $selectedInsuredNameInput,
@@ -105,20 +62,26 @@ class EducationController extends Controller
         ]);
 
         // Set the updated education_needs back to the customer_details session
-        $customerDetails['selected_needs']['need_3'] = $needs;
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
+        $selectedNeed = "need_3"; 
+
+
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
 
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('education.amount.needed',$transactionData);
+        return redirect()->route('education.amount.needed');
     }
 
-    public function validateEducationAmountNeeded(Request $request, TransactionService $transactionService){
+    public function validateEducationAmountNeeded(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'tertiary_education_amount.required' => 'You are required to enter an amount.',
@@ -175,17 +138,27 @@ class EducationController extends Controller
         // Set the updated education back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_3"; 
+
+
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
-
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
+        
 
         // Process the form data and perform any necessary actions
-        return redirect()->route('education.existing.fund',$transactionData);
+        return redirect()->route('education.existing.fund');
     }
 
-    public function validateEducationExistingFund(Request $request, TransactionService $transactionService){
+    public function validateEducationExistingFund(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         $customMessages = [
             'education_other_savings.required' => 'Please select an option.',
@@ -275,16 +248,25 @@ class EducationController extends Controller
         // Set the updated education_needs back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_3"; 
+
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
-        return redirect()->route('education.gap',$transactionData);
+        return redirect()->route('education.gap');
     }
 
-    public function submitEducationGap(Request $request, TransactionService $transactionService){
+    public function submitEducationGap(Request $request, TransactionService $transactionService, CustomerNeedService $customerNeedService){
 
         // Get the existing customer_details array from the session
         $customerDetails = $request->session()->get('customer_details', []);
@@ -295,23 +277,43 @@ class EducationController extends Controller
         // Set the updated education_needs back to the customer_details session
         $customerDetails['selected_needs']['need_3']['advance_details'] = $advanceDetails;
 
+        $customerId = session('customer_id') ?? session('customer_details.customer_id');
+        $selectedNeed = "need_3"; 
+
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $customerNeeds = $customerNeedService->handleNeeds($customerDetails,$customerId,$selectedNeed);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
-        $transactionService->handleTransaction($request,$customerDetails);
 
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
 
         if (isset($customerDetails['priorities']['savings_discuss']) && ($customerDetails['priorities']['savings_discuss'] === 'true' || $customerDetails['priorities']['savings_discuss'] === true)) {
-            return redirect()->route('savings.home',$transactionData);
+            return redirect()->route('savings.home');
         } else if (isset($customerDetails['priorities']['investments_discuss']) && ($customerDetails['priorities']['investments_discuss'] === 'true' || $customerDetails['priorities']['investments_discuss'] === true)) {
-            return redirect()->route('investment.home',$transactionData);
+            return redirect()->route('investment.home');
         } else if (isset($customerDetails['priorities']['health-medical_discuss']) && ($customerDetails['priorities']['health-medical_discuss'] === 'true' || $customerDetails['priorities']['health-medical_discuss'] === true)) {
-            return redirect()->route('health.medical.home',$transactionData);
+            return redirect()->route('health.medical.home');
         } else if (isset($customerDetails['priorities']['debt-cancellation_discuss']) && ($customerDetails['priorities']['debt-cancellation_discuss'] === 'true' || $customerDetails['priorities']['debt-cancellation_discuss'] === true)) {
-            return redirect()->route('debt.cancellation.home',$transactionData);
+            return redirect()->route('debt.cancellation.home');
         }
         else {
-            return redirect()->route('existing.policy',$transactionData);
+            if (isset($customerDetails['priorities']['protection']) && ($customerDetails['priorities']['protection'] === 'true' || $customerDetails['priorities']['protection'] === true) || 
+            isset($customerDetails['priorities']['retirement']) && ($customerDetails['priorities']['retirement'] === 'true' || $customerDetails['priorities']['retirement'] === true) || 
+            isset($customerDetails['priorities']['education']) && ($customerDetails['priorities']['education'] === 'true' || $customerDetails['priorities']['education'] === true) || 
+            isset($customerDetails['priorities']['savings']) && ($customerDetails['priorities']['savings'] === 'true' || $customerDetails['priorities']['savings'] === true) || 
+            isset($customerDetails['priorities']['investments']) && ($customerDetails['priorities']['investments'] === 'true' || $customerDetails['priorities']['investments'] === true) || 
+            isset($customerDetails['priorities']['health-medical']) && ($customerDetails['priorities']['health-medical'] === 'true' || $customerDetails['priorities']['health-medical'] === true) || 
+            isset($customerDetails['priorities']['debt-cancellation']) && ($customerDetails['priorities']['debt-cancellation'] === 'true' || $customerDetails['priorities']['debt-cancellation'] === true) ){
+                return redirect()->route('existing.policy');
+            } else{
+                return redirect()->route('financial.statement.monthly.goals');
+            }
+            
         }
     }
 

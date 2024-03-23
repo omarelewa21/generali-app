@@ -15,34 +15,26 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const paramValue = urlParams.get('transaction_id');
     const log = console.log.bind(document);
 
-    if (debtPriority === 'false' || debtPriority === undefined || debtPriority === '' || debtPriority === null || debtPriority === false){
-        var missingModal = document.getElementById('missingDebtFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingDebtFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss?transaction_id='+paramValue;
-        });
-
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+            
     } else{
+        if (path === '/debt-cancellation') {
+            const newImage = "/images/needs/debt-cancellation/home/gender-" + gender + "-" + skintone + ".json";
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/debt-cancellation/coverage' || path === '/debt-cancellation/coverage?transaction_id='+paramValue) {
             if (selfData == null || selfData == undefined || selfData == '') {
                 var nameModal = document.getElementById('missingSelfFields');
@@ -178,6 +170,43 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     defaultBtn.classList.add('selected');
                 });
             });
+            
+            var num = 0;
+
+            for (var childKey in childDatas) {
+                if (childDatas.hasOwnProperty(childKey)) {
+                    num++;
+                    var child = childDatas[childKey];
+                    var childGender = child.gender.toLowerCase();
+                    const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                    const animationAvatarChild = lottie.loadAnimation({
+                        container: document.getElementById('lottie-animation-child-' + num),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: newImageChild
+                    });
+                }
+            }
+
+            const newImageSelf = "/images/needs/coverage/gender-" + selfGender + "-" + skintone + ".json";
+            const newImageSpouse = "/images/needs/coverage/spouse-gender-" + spouseGender + "-" + skintone + ".json";
+
+            const animationAvatarSelf = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-self'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSelf
+            });
+            const animationAvatarSpouse = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-spouse'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSpouse
+            });
         } 
         if (path == '/debt-cancellation/amount-needed') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -292,6 +321,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/debt-cancellation/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
        
       
@@ -430,6 +468,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     existing_debt_amount.value = ''; // Clear the money input
                 }
             }
+            const newImage = "/images/needs/debt-cancellation/existing-debt/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/debt-cancellation/critical-illness') {
             if (!lastPageInput || !('existing_amount' in lastPageInput)) {
@@ -521,6 +568,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 });
             }
+            const newImage = "/images/needs/debt-cancellation/critical-illness/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/debt-cancellation/gap') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -561,218 +617,42 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (change < 0) {
                     change = 0; // 0 represents 100% coverage
                     circle.style.strokeDashoffset = change;
+                    circle.style.transition = 'all 1.5s ease';
                 }
                 else   {
-                    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
-                    
-                    // // Calculate the position for the dotCircle based on the end point of the graph
+                    // Calculate the position for the dotCircle based on the end point of the graph
                     const percent = Math.floor(percentage);
-                    var startX, startY;
+                    let angle = (360 * percent) / 100;
+                    let xPositions = [];
+                    let yPositions = [];
+                    for (let i = 0; i <= angle; i++) {
+                        let x = 90 + 144 * Math.cos(i * Math.PI / 180);
+                        let y = 90 + 144 * Math.sin(i * Math.PI / 180);
+                        xPositions.push(x);
+                        yPositions.push(y);
+                    }
         
                     if ( percent === 0 || percent >= 100){
                     }
                     else{
                         dotCircle.style.display = "block";
-                        if (percent === 1 || percent === 2){
-                            startX = 234;
-                            startY = 90;
-                            var x = startX - percent;
-                            var y = startY += 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
+                        let index = 0;
+
+                        function animatePointer() {
+                            dotCircle.setAttribute('cx', xPositions[index]);
+                            dotCircle.setAttribute('cy', yPositions[index]);
+                            index++;
+
+                            let change = 904.896 - (904.896 * Covered * (index + 1) / xPositions.length) / 100;
+                            circle.style.strokeDashoffset = change;
+                        
+                            if (index < xPositions.length) {
+                                let duration = 500 / xPositions.length; // Calculate duration for each step
+                                setTimeout(animatePointer, duration);
+                            }
                         }
-                        else if (percent >= 3 && percent <= 6){
-                            startX = 238;
-                            startY = 94;
-                            var x = startX -= 2 * percent;
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 7 && percent <= 10){
-                            startX = 250;
-                            startY = 92;
-                            var x = startX -= 4 * percent;
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 11 && percent <= 15){
-                            startX = 260;
-                            startY = 110;
-                            var x = startX -= 5 * percent;
-                            var y = startY += 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 16 && percent <= 21){
-                            startX = 300;
-                            startY = 145;
-                            var x = startX -= 8 * percent;
-                            var y = startY += 4 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 22 && percent <= 26){
-                            startX = 340;
-                            startY = 209;
-                            var x = startX -= 10 * percent;
-                            var y = startY + percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 27 && percent <= 28){
-                            startX = 289;
-                            startY = 205;
-                            var x = startX -= 8 * percent;
-                            var y = startY + percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if(percent === 29){
-                            dotCircle.setAttribute("cx", "50");
-                            dotCircle.setAttribute("cy", "229");
-                        }
-                        else if (percent === 30 ){
-                            dotCircle.setAttribute("cx", "44");
-                            dotCircle.setAttribute("cy", "226");
-                        }
-                        else if (percent >= 31 && percent <= 35){
-                            startX = 355;
-                            startY = 384;
-                            var x = startX -= 10 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 36 && percent <= 42){
-                            startX = 180;
-                            startY = 385;
-                            var x = startX -= 5 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 43 && percent <= 47){
-                            startX = 90;
-                            startY = 500;
-                            var x = startX -= 3 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 48 && percent <= 49){
-                            startX = 93;
-                            startY = 492;
-                            var x = startX -= 3 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent === 50 ){
-                            dotCircle.setAttribute("cx", "-55");
-                            dotCircle.setAttribute("cy", "90");
-                        }
-                        else if (percent >= 51 && percent <= 58){
-                            startX = -157;
-                            startY = 492;
-                            var x = startX += 2 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 59 && percent <= 61){
-                            startX = -207;
-                            startY = 364;
-                            var x = startX += 3 * percent;
-                            var y = startY -= 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 62 && percent <= 64){
-                            startX = -325;
-                            startY = 364;
-                            var x = startX += 5 * percent;
-                            var y = startY -= 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 65 && percent <= 67){
-                            startX = -386;
-                            startY = 300;
-                            var x = startX += 6 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 68 && percent <= 69){
-                            startX = -318;
-                            startY = 166;
-                            var x = startX += 5 * percent;
-                            var y = startY -= 3 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y); -38
-                        }
-                        else if (percent === 70 ){
-                            dotCircle.setAttribute("cx", "46");
-                            dotCircle.setAttribute("cy", "-47");
-                        }
-                        else if (percent >= 71 && percent <= 77){
-                            startX = -518;
-                            startY = 22;
-                            var x = startX += 8 * percent; 
-                            var y = startY - percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 78 && percent <= 80){
-                            startX = -670;
-                            startY = -209;
-                            var x = startX += 10 * percent; 
-                            var y = startY += 2 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 81 && percent <= 85){
-                            startX = -508;
-                            startY = -370;
-                            var x = startX += 8 * percent; 
-                            var y = startY += 4 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 86 && percent <= 90){
-                            startX = -336;
-                            startY = -539;
-                            var x = startX += 6 * percent; 
-                            var y = startY += 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 91 && percent <= 93){
-                            startX = -245;
-                            startY = -718;
-                            var x = startX += 5 * percent; 
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 94 && percent <= 97){
-                            startX = 37;
-                            startY = -620;
-                            var x = startX += 2 * percent; 
-                            var y = startY += 7 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent === 98){
-                            dotCircle.setAttribute("cx", "231");
-                            dotCircle.setAttribute("cy", "59");
-                        }
-                        else if (percent === 99){
-                            dotCircle.setAttribute("cx", "235");
-                            dotCircle.setAttribute("cy", "90");
-                        }
+                        
+                        animatePointer();
                     }
                 }
             }

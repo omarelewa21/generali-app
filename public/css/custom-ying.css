@@ -1,6 +1,6 @@
 /* Adjust Gap graph style */
 #gap .card-gap__number{
-    font-size: 70px !important;
+    font-size: 60px !important;
     line-height: 45px !important;
 }
 
@@ -11,21 +11,6 @@
     background-color: #fff;
     border: 1px solid #C21B17;
     color: #C21B17;
-}
-button.choice:hover,
-button.choice[data-required="selected"],
-button.choice.default.selected,
-button.choice[data-required=""]{
-    background: none !important;
-    width: 100% !important;
-}
-button.choice:hover img,
-button.choice[data-required="selected"] img,
-button.choice.default.selected img{
-    background-image: url(/images/needs/hover-coverage.png);
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 100%;
 }
 
 /* Change disabled border color */
@@ -43,11 +28,90 @@ button.choice.default.selected img{
     width: 100px;
     height: 35px;
 }
+.edu_coverage{
+    height: 60% !important;
+}
 
 .bg-transparent{
     background-color: transparent;
 }
 
+/* Needs Progress Sidebar Style */
+.progress {
+    display: block;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.progress .progress-value {
+    display:flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: absolute;top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #d10b4f;
+    font-size: 20px; 
+    font-weight: 700; 
+    line-height: 1.5;
+}
+
+.progress .overlay {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    border: 3px solid #A0A0A0;
+    border-radius: 22px 0px 0px 22px;
+    border-right: none;
+    background-color: transparent;
+}
+
+.progress::before {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #A0A0A0;
+    border-radius: 50%;
+}
+
+.progress .left, .progress .right {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 3px solid #d10b4f;
+    border-radius: 22px 0px 0px 22px;
+    border-right: 0;
+    transform-origin: right;
+}
+
+/* Needs Style */
+.needs_avatar{
+    height: 90%;
+    width: auto;
+}
+.home_avatar{
+    bottom: -40px;
+}
+.needs_coverage_avatar{
+    height: 85% !important;
+    width: auto;
+}
 /* Education Cost Guide Modal Style */
 #tuitionFees .modal-dialog{
     max-width: 1200px;
@@ -152,6 +216,10 @@ button.choice.default.selected img{
     font-family: 'Helvetica Neue';
     line-height: 22px;
 }
+#high-risk-potential-content .potential-btn,
+#low-risk-potential-content .potential-btn{
+    width: 150px;
+}
 .potential-btn{
     background-color: #fff;
     border: 1px solid #A0A0A0;
@@ -170,16 +238,22 @@ button.choice.default.selected img{
     border-left: 1px solid #C0232C !important;
     border-right: 1px solid #C0232C !important;
 }
+.potential-btn.border-end-0:hover,
+.potential-btn.border-end-0[data-required="selected"],
+.potential-btn.border-end-0.selected{
+    border-right: 1px solid #C0232C !important;
+}
 
 /* Health medical - critical illness plan amount needed background */
 .bg-hnm {
-    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.png);
+    background: url(/images/needs/health-medical/background/bg-critical-monthly-support.webp);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top 50% left;
 }
 
 /* Health medical - selection */
+.selection_height svg,
 .selection_height{
     height:100%;
     max-height:400px;
@@ -187,6 +261,12 @@ button.choice.default.selected img{
 /* Health medical - medical plan hospital selection */
 .hospital_avatar{
     top: 55% !important;
+}
+.hospital_avatar svg{
+    max-height: 400px;
+}
+#medical-hospital-selection .slick-track{
+    height: 100%;
 }
 /* Health medical - medical plan room selection */
 #savings-goals .progress .progress-value,
@@ -235,35 +315,6 @@ button.choice.default.selected img{
     display: grid;
     grid-template-rows: 100%;
 }
-/* .single.room-selection-content {
-    grid-template-columns: 15% 60% 25%;
-    // grid-template-columns: 20% 55% 25%; 
-} */
-/* .patient,
-.patient-2 {
-    grid-template-areas:
-        "windows"
-        "avatar-patient";
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10% 90%;
-}
-.avatar-patient{
-    grid-area: avatar-patient;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-}
-.single-patient,
-.single-patient-2{
-    display: flex;
-    padding: 0;
-}
-.single-patient{
-    justify-content: start;
-}
-.single-patient-2{
-    justify-content: end;
-} */
 
 /* Needs Summary Page */
 .summary-page .wrapper-bottom-grey{
@@ -276,6 +327,12 @@ button.choice.default.selected img{
 .graph-size{
     transform:scale(1.3)
 }
+.sum-needs-icon{
+    width: 85px;
+}
+/* #gap svg g{
+    transition: all 3.5s ease !important;
+} */
 
 /* Retirement Ideal */
 /* .ideal .slick-track{
@@ -344,11 +401,6 @@ button.choice.default.selected img{
         margin-top: auto;
     }
 }
-@media only screen and (max-width: 500px){
-    .selection_height{
-        max-height: 250px;
-    }
-}
 @media only screen and (max-width: 320px){
     .risk-btn{
         width: 100%;
@@ -364,15 +416,11 @@ button.choice.default.selected img{
 }
 @media only screen and (max-width: 767px){
     /* Calculator style */
-    .header p.display-6{
-        font-size: 14px;
-    }
     .text-sm-center{
         text-align: center;
     }
     .calculator-page .content-needs-grey,
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey,
+    #risk-profile .content-needs-grey,
     .summary-overview .content-needs-grey{
         grid-auto-rows: 0vh 0vh 70vh;
     }
@@ -382,34 +430,34 @@ button.choice.default.selected img{
     .summary-overview.secondary-default-bg{
         background:none;
     }
-    .coverage .content-needs-grey{
-        grid-auto-rows: 0vh 0vh 80vh;
-    }
     .coverage button img{
         height: 80%;
     }
-    /* .coverage .content-needs-grey{
-        grid-auto-rows: 15vh 10vh 50vh;
-    } */
     .wrapper-bottom-grey{
         grid-template:
         "header" 0vh
         "content-needs-grey" 50vh
         "footer-avatar-grey" 35vh / 100%;
     }
+    .coverage .wrapper-bottom-grey{
+        grid-template:
+        "header" 0vh
+        "content-needs-grey" 60vh
+        "footer-avatar-grey" 35vh / 100%;
+    }
     .pe-sm-0{
         padding-right: 0 !important;
     }
-    .calculator-page .bottom-content img{
-        height: 100% !important;
-    }
-    .bottom-content .tertiary-mobile-bg{
+    /* .calculator-page .bottom-content img{
+        height: 85% !important;
+    } */
+    /* .bottom-content .tertiary-mobile-bg{
         background-size: contain;
-    }
-    .bottom-content .tertiary-mobile-bg.h-100{
+    } */
+    /* .bottom-content .tertiary-mobile-bg.h-100{
         height: 50% !important;
         max-height: 100% !important;
-    }
+    } */
     .summary-overview .bottom-content .tertiary-mobile-bg.h-100{
         height: 70% !important;
         max-height: 100% !important;
@@ -424,20 +472,22 @@ button.choice.default.selected img{
     .h-sm-100{
         height: 100%;
     }
+    .h-sm-75{
+        height: 75% !important;
+    }
     .summary-page .wrapper-bottom-grey{
         grid-auto-rows: 0vh 65vh 20vh;
     }
     .summary-page .wrapper-bottom-grey,
     #savings-annual-return .wrapper-bottom-grey{
-        /* grid-template-rows: 10vh 90vh 0vh; */
         grid-template-rows: 0vh 100vh 0vh;
     }
     .summary-page .bottom-content .graph-col.h-100{
         height: fit-content !important;
     }
-    .summary-page .wrapper-bottom-grey{
+    /* .summary-page .wrapper-bottom-grey{
         overflow-y:unset;
-    }
+    } */
     #retirement_period .tertiary-mobile-bg{
         background-size: contain;
         background-position: left center;
@@ -448,16 +498,12 @@ button.choice.default.selected img{
     #education-amount-needed .bottom-content .h-sm-100{
         justify-content: center;
     }
-    #savings-risk-profile .calculatorContent,
-    #investment-risk-profile .calculatorContent{
+    #risk-profile .calculatorContent{
         text-align: center;
     }
-    #savings-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #savings-risk-profile #low-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #high-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #medium-risk-potential-content .col-12.d-flex,
-    #investment-risk-profile #low-risk-potential-content .col-12.d-flex{
+    #risk-profile #high-risk-potential-content .col-12.d-flex,
+    #risk-profile #medium-risk-potential-content .col-12.d-flex,
+    #risk-profile #low-risk-potential-content .col-12.d-flex {
         justify-content: center;
     }
     .bg-hnm {
@@ -465,7 +511,7 @@ button.choice.default.selected img{
     }
     #critical-illness_amount_needed .tertiary-mobile-bg,
     #medical-amount-needed .tertiary-mobile-bg{
-        background-image: url(/images/needs/health-medical/background/bg-hnm.png);
+        background-image: url(/images/needs/health-medical/background/bg-hnm.webp);
         background-position: center;
     }
     #health-medical-selection .content-needs-grey{
@@ -494,6 +540,47 @@ button.choice.default.selected img{
     .wrapper-overview{
         grid-template-rows: 15vh 75vh 0vh;
     }
+    /* #retirement_ideal .heading h2.display-5{
+        font-size: calc(1rem + 2.7vw);
+    } */
+    /* Bug Fixes start here */
+    #retirement_home .content-needs img{
+        height: 80%;
+    }
+    .display-5.currencyField input {
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+    #retirement_period .bottom-content{
+        background-image: url(/images/needs/retirement/period-bg.webp);
+        background-size: 80%;
+        background-position: left top 10%;
+        background-repeat: no-repeat !important;
+    }
+    #retirement_period .tertiary-mobile-bg,
+    #risk-profile {
+        background: none;
+    }
+    .summary-page h2.display-4{
+        font-size: calc(1.3375rem + 1.05vw);
+    }
+    
+    .h-sm-90{
+        height: 90%;
+    }
+    #retirement_period form{
+        padding-left: 0px;
+    }
+    /* Coverage Page */
+    .coverage .content-needs-grey {
+        grid-auto-rows: 0vh 0vh 80vh;
+    }
+    #retirement_period.tertiary-default-bg{
+        background: none;
+    }
+    .needs_home .header section .py-md-4.py-3{
+        padding-top:0 !important;
+        padding-bottom:0 !important;
+    }
 }
 /* @media only screen and (max-width: 390px) and (max-height: 750px){
     .h-sm-100{
@@ -517,14 +604,13 @@ button.choice.default.selected img{
     .z-md-1{
         z-index: 1;
     }
-    .ideal .content-needs-grey {
+    /* .ideal .content-needs-grey {
         grid-auto-rows: 5vh 60vh;
-    }
+    } */
     #savings-annual-return .content-needs-grey{
         grid-template-rows: 10vh 50vh;
     }
-    #savings-risk-profile .content-needs-grey,
-    #investment-risk-profile .content-needs-grey{
+    #risk-profile .content-needs-grey{
         grid-template-rows: 0vh 65vh;
     }
     .w-md-50{
@@ -544,9 +630,30 @@ button.choice.default.selected img{
         transform: scale(1.1);
     }
 }
+@media only screen and (max-width: 600px){
+    .coverage .heading h2{
+        font-size: 20px;
+    }
+}
 @media only screen and (max-width: 500px){
     .graph-size{
-        transform: scale(1);
+        transform: scale(0.9);
+    }
+    .summary-page .avatar-text,
+    .summary-page h4{
+        font-size: 16px;
+    }
+    .sum-needs-icon{
+        width: 75px;
+    }
+    .sum-icon{
+        width: 30px;
+    }
+    .needs-progress{
+        font-size: 18px;
+    }
+    .selection_height{
+        max-height: 250px;
     }
 }
 @media only screen and (max-width: 400px){
@@ -595,6 +702,18 @@ button.choice.default.selected img{
     .wrapper-overview{
         grid-template-rows: 13vh 77vh 0vh;
     }
+    .needs_home .footer-avatar-grey{
+        background-color: transparent;
+    }
+    .edu_coverage{
+        height: 80% !important;
+    }
+    .tertiary-mobile-bg {
+        height: 70%!important;
+    }
+    .calculator-page .content-needs-grey{
+        grid-auto-rows: 5vh 60vh;
+    }
 }
 /* @media only screen and (min-width: 770px) and (max-width: 800px){
     .summary-page .bottom-content .graph-col.h-100{
@@ -611,6 +730,90 @@ button.choice.default.selected img{
         height: 60% !important;
     }
 }  */
+@media only screen and (max-width: 767px) and (min-height: 600px){
+    #lottie-animation-mob svg{
+        max-height: 200px;
+    }
+    .needs_avatar_mob{
+        top: -150px;
+    }
+    .needs_coverage_avatar{
+        height: 70% !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 700px){
+    #lottie-animation-mob svg{
+        max-height: 280px;
+    }
+    .needs_avatar_mob{
+        top: -240px;
+    }
+    .needs_coverage_avatar{
+        height: 75% !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 800px){
+    #lottie-animation-mob svg{
+        max-height: 360px;
+    }
+    .needs_avatar_mob{
+        top: -320px;
+    }
+    .needs_coverage_avatar{
+        height: 80% !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 850px){
+    #lottie-animation-mob svg{
+        max-height: 420px;
+    }
+    .needs_avatar_mob{
+        top: -380px;
+    }
+}
+@media only screen and (max-width: 767px) and (min-height: 950px){
+    #lottie-animation-mob svg{
+        max-height: 500px;
+    }
+    .needs_avatar_mob{
+        top: -460px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (max-height: 1000px){
+    #lottie-animation-mob svg{
+        max-height: 290px;
+    }
+    .needs_avatar_mob{
+        top: -210px;
+    }
+    .needs_coverage_avatar{
+        height: 80% !important;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 1001px){
+    #lottie-animation-mob svg{
+        max-height: 450px;
+    }
+    .needs_avatar_mob{
+        top: -360px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199px) and (min-height: 1200px){
+    #lottie-animation-mob svg{
+        max-height: 600px;
+    }
+    .needs_avatar_mob{
+        top: -550px;
+    }
+    .needs_coverage_avatar{
+        height: 90% !important;
+    }
+}
+@media only screen and (max-width: 992px){
+    .progress .progress-value{
+        background:transparent;
+    }
+}
 @media only screen and (max-width: 1199px){
     .summary-page.secondary-default-bg {
         background-position: bottom;
@@ -618,6 +821,23 @@ button.choice.default.selected img{
     }
     .summary-page .content-needs-grey{
         grid-auto-rows: 0vh 0vh 65vh;
+    }
+    .needs_home_bottom {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .needs_home .fixed-bottom{
+        position: relative;
+    }
+    #retirement_home .wrapper-needs-grey {
+        grid-template-rows: 9vh 60vh 0vh 0vh;
+        height: auto;
+    }
+    .tertiary-default-bg.calculator-page{
+        background: none;
     }
 }
 @media only screen and (min-width: 1600px){
@@ -637,3 +857,110 @@ button.choice.default.selected img{
         top: 64% !important;
     }
 }
+
+
+/* KK code */
+
+ /* =============================== Heading =======================================*/
+
+ .display-8 {
+    font-size: 14px;
+  }
+
+  .display-5a{
+  font-size: calc(1rem + 1.05vw);
+  }
+
+ /* =============================== Savings Goal =======================================*/
+ #savings-goals #sortable .first {
+    grid-column: 30 / span 1;
+    grid-row: 37 / 88;
+    transform: translate(-7%, -19px);
+  }
+  #savings-goals .first .remove-button {
+    right: -110%;
+    bottom: 27%;
+  }
+  #savings-goals #sortable .second {
+    grid-column: 28 / span 9;
+    grid-row: 20 / 44;
+    transform: translate(24%, -12px);
+  }
+  #savings-goals .second .remove-button {
+    bottom: -12%;
+    right: 45%;
+  }
+  #savings-goals #sortable .third {
+    grid-column: 36 / span 7;
+    grid-row: 13 / 45;
+    transform: translate(-6%, 2px);
+  }
+  #savings-goals .third .remove-button {
+    bottom: -3%;
+    right: 53%;
+  }
+  #savings-goals #sortable .fourth {
+    grid-column: 46 / span 2;
+    grid-row: 35 / 85;
+    transform: translate(-70%, 5px);
+  }
+  
+  #savings-goals .fourth .remove-button {
+    bottom: 30%;
+    left: -30%;
+    right: unset;
+  }
+  #savings-goals .display-5 {
+    font-size: calc(1.3375rem + 1.05vw) !important;
+  }
+  
+
+
+  /* KK New Code */
+#top_priorities .button-bg:not(.selected):hover .hover img,
+#savings-goals  .button-bg:not(.selected):hover .hover img,
+#top_priorities .button-bg.selected .border-default img, 
+#savings-goals  .button-bg.selected .border-default img {
+  transform: scale(1.1);
+}
+
+/* KK New Code */
+#top_priorities .button-bg.selected img:not(.ui-draggable-dragging),
+#savings-goals .button-bg.selected img:not(.ui-draggable-dragging)  {
+  filter: grayscale(0.95);
+}
+
+/* ===============================  Advance Fix for Saving Goals=======================================*/
+
+#top_priorities .footer,
+#savings-goals .footer {
+z-index: 2;
+}
+
+body.overflow #top_priorities .wrapper-avatar-default,
+body.overflow #savings-goals .wrapper-avatar-default,
+body.overflow #priorities_to_discuss .wrapper-avatar-default {
+overflow: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+#top_priorities .wrapper-avatar-default,
+#savings-goals .wrapper-avatar-default,
+#priorities_to_discuss .wrapper-avatar-default {
+display: block;
+}
+}
+
+@media only screen and (min-width: 768px) {
+#top_priorities .footer,
+#savings-goals .footer {
+z-index: unset;
+}
+}
+
+/* ============================== Modal / Popover ============================== */
+/* @media only screen and (min-width: 768px) {
+.otherModalText {
+  font-size: 3rem;
+}
+} */

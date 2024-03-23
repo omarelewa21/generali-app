@@ -15,6 +15,8 @@
 @php
     // Retrieving values from the session
     $existingPolicy = json_decode(session('customer_details.existing_policy'), true);
+
+
     $basicDetails = session('customer_details.basic_details');
 
     $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
@@ -25,6 +27,7 @@
     $investmentPriority = session('customer_details.priorities.investments_discuss');
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedMedical = session('customer_details.selected_needs.need_6.advance_details.health_care.medical_care_plan');
+
 @endphp
 
 <div id="existing_policy">
@@ -43,9 +46,9 @@
                         <input type="hidden" name="existingPolicy">
                         <section class="main-content">
                             <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
-                                        <h1 class="display-3 text-uppercase">Please fill in your existing policies.</h1>
+                                        <h1 class="display-5 text-uppercase">Please fill in your existing policies.</h1>
                                     </div>
                                 </div>
                                 <div class="row px-4" id="formContainer">
@@ -59,23 +62,23 @@
                                     @endif
                                     <div class="custom-alert"></div>
                                     <div class="col-12 pt-4 pb-2" id="form" data-index="1">
-                                        <h4 class="display-7 text-gray pb-4">Policy 1</h4>
+                                        <h4 class="display-7 text-gray pb-2">Policy 1</h4>
                                         <div class="row">
                                             <div class="col-md-12 pb-5">
                                                 <p class="text-gray">What is your role in this policy?</p>
                                                 <div class="d-flex btn-group @error('policyRole') is-invalid @enderror" role="group">
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyOwnerInput" autocomplete="off" value="owner" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyOwnerInput" autocomplete="off" value="owner" data-key="role"
                                                         {{ (old('policyRole') === 'owner' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'owner')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The policy owner</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyInsuredInput" autocomplete="off" value="life insured" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyInsuredInput" autocomplete="off" value="life insured" data-key="role"
                                                         {{ (old('policyRole') === 'life insured' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'life insured')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">The life insured</span>
                                                     </label>
                                                     <label class="radio-container d-flex justify-content-center align-items-center flex-1">
-                                                        <input type="radio" class="btn-check role" name="policyRole1" id="policyBothInput" autocomplete="off" value="both" data-key="role"
+                                                        <input type="radio" class="btn-check role" name="policyRole" id="policyBothInput" autocomplete="off" value="both" data-key="role"
                                                         {{ (old('policyRole') === 'both' || (isset($existingPolicy['policy_1']['role']) && $existingPolicy['policy_1']['role'] === 'both')) ? 'checked' : '' }}>
                                                         <span class="btn btn-outline-primary d-flex justify-content-center align-items-center h-100">Both</span>
                                                     </label>
@@ -87,7 +90,7 @@
                                         </div>
                                         <h4 class="display-7 text-gray">Policy Details</h4>
                                         <div class="row">
-                                            <div class="pt-4 col-12">
+                                            <div class="pt-3 col-12">
                                                 <label for="policyFullNameInput" class="form-label">Full Name (as per I.C)<span class="text-danger">*</span></label>
                                                 <input type="text" name="policyFullName" class="form-control @error('policyFullName') is-invalid @enderror" id="policyFullNameInput" placeholder="Full Name" value="{{ old('policyFullName', $existingPolicy['policy_1']['full_name'] ?? '') }}" data-key="full_name" required>
                                                 @error('policyFullName')
@@ -125,7 +128,7 @@
                                                 <select name="policyPlan" class="form-select @error('policyPlan') is-invalid @enderror" aria-label="Policy Plan" id="policyPlanSelect" data-key="plan_type" required>
                                                     <option value="" selected disabled>Please Select</option>
                                                     @foreach ($policyPlans as $plan)
-                                                        <option value="{{ $plan->policy_plans }}" {{ old('policyPlan', $existingPolicy['policy_1']['policy_plan'] ?? '') === $plan->policy_plans ? 'selected' : '' }}>{{ $plan->policy_plans }}</option>
+                                                        <option value="{{ $plan->policy_plans }}" {{ old('policyPlan', $existingPolicy['policy_1']['plan_type'] ?? '') == $plan->policy_plans ? 'selected' : '' }}>{{ $plan->policy_plans }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('policyPlan')
@@ -134,7 +137,7 @@
                                             </div>
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="maturityYearInput" class="form-label">Year of Maturity <span class="text-danger">*</span></label>
-                                                <input type="number" name="maturityYear" class="form-control @error('maturityYear') is-invalid @enderror" id="maturityYearInput" placeholder="Year" value="{{ old('maturityYear', $existingPolicy['policy_1']['maturity_Year'] ?? '') }}" data-key="maturity_year">
+                                                <input type="number" name="maturityYear" class="form-control @error('maturityYear') is-invalid @enderror" id="maturityYearInput" placeholder="Year" value="{{ old('maturityYear', $existingPolicy['policy_1']['maturity_year'] ?? '') }}" data-key="maturity_year">
                                                 @error('maturityYear')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -163,7 +166,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="lifeCoverageInput" class="form-label">Life Coverage <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="lifeCoverage" class="form-control border-black @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ isset($existingPolicy['policy_1']['life_coverage']) && ($existingPolicy['policy_1']['life_coverage'] !== '' || $existingPolicy['policy_1']['life_coverage'] !== null) ? number_format(floatval($lifeCoverage)) : '' }}" data-key="life_coverage_amount">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="lifeCoverage" class="form-control border-black @error('lifeCoverage') is-invalid @enderror" id="lifeCoverageInput" value="{{ isset($existingPolicy['policy_1']['life_coverage_amount']) && ($existingPolicy['policy_1']['life_coverage_amount'] !== '' || $existingPolicy['policy_1']['life_coverage_amount'] !== null) ? number_format(floatval($existingPolicy['policy_1']['life_coverage_amount'])) : '' }}" data-key="life_coverage_amount">
                                                     @error('lifeCoverage')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -172,7 +175,7 @@
                                             <div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
                                                 <label for="criticalIllnessInput" class="form-label">Critical Illness Benefit <span class="text-danger">*</span></label>
                                                 <div class="input-group">
-                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="criticalIllness" class="form-control border-black @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ isset($existingPolicy['policy_1']['critical_illness']) && ($existingPolicy['policy_1']['critical_illness'] !== '' || $existingPolicy['policy_1']['critical_illness'] !== null) ? number_format(floatval($criticalIllness)) : '' }}" data-key="critical_illness_amount">
+                                                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" name="criticalIllness" class="form-control border-black @error('criticalIllness') is-invalid @enderror" id="criticalIllnessInput" value="{{ isset($existingPolicy['policy_1']['critical_illness_amount']) && ($existingPolicy['policy_1']['critical_illness_amount'] !== '' || $existingPolicy['policy_1']['critical_illness_amount'] !== null) ? number_format(floatval($existingPolicy['policy_1']['critical_illness_amount'])) : '' }}" data-key="critical_illness_amount">
                                                     @error('criticalIllness')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -181,7 +184,7 @@
                                         </div>
                                         <div class="row mb-3" id="addFields">
                                             <div class="col-md-12 py-5 pb-2">
-                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
+                                                <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="{{ asset('images/existing-policy/button-add.webp') }}" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
                                             </div>
                                         </div>
                                     </div>
@@ -189,7 +192,7 @@
                                 <div class="row customAddBtn pb-5">
                                     <div class="col-md-12">
                                         <fieldset class="border-top border-dark">
-                                            <legend><a id="addFormsBtn"><img src="{{ asset('images/existing-policy/button-add.png') }}" width="28px" alt="Add Benefits" class="mx-3" style="cursor: pointer"></a></legend>
+                                            <legend><a id="addFormsBtn"><img src="{{ asset('images/existing-policy/button-add.webp') }}" width="28px" alt="Add Benefits" class="mx-3" style="cursor: pointer"></a></legend>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -203,7 +206,7 @@
                                             if ($debtPriority === 'true' || $debtPriority === true) {
                                                 $route = route('debt.cancellation.gap');
                                             } elseif ($healthPriority === 'true' || $healthPriority === true) {
-                                                if($selectedMedical === 'Yes'){
+                                                if($selectedMedical === 'Health Planning'){
                                                     $route = route('health.medical.planning.gap');
                                                 } else{ 
                                                     $route = route('health.medical.critical.gap');
@@ -220,7 +223,7 @@
                                                 $route = route('protection.gap');
                                             }
                                             else {
-                                                $route = route('priorities.to.discuss');
+                                                $route = route('financial.priorities.discuss');
                                             }
                                         @endphp
                                         <a href="{{ $route }}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
@@ -459,8 +462,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const index = parseInt($("#form").attr("data-index")) + 1;
         if (index <= 7) {
             $("#form").attr("data-index", index);
-
-            $("#form").append(`<h4 class="display-7 text-gray pb-4 mt-5">Policy ${index}</h4>`);
+            $("#form").append(`<h4 class="display-7 text-gray pb-4 mt-5 d-flex justify-content-between"><span>Policy ${index}</span><i class="fa-solid fa-trash-can text-danger align-self-center ms-3 delete-policy" data-index="${index}"></i></h4>`);
+            
             $("#form").append(`<div class="row">
                 <div class="col-md-12 pb-5">
                     <p class="text-gray">What is your role in this policy?</p>
@@ -537,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>`);
             $("#form").append(`<div class="row mb-3" id="addFields">
                 <div class="col-md-12 py-5 pb-2">
-                    <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="/images/existing-policy/button-add.png" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
+                    <a id="addFieldsBtn" class="text-uppercase text-dark fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBenefits"><img src="/images/existing-policy/button-add.webp" width="28px" alt="Add Benefits" class="me-2">Add Benefits</a>
                 </div>
             </div>`);
 
@@ -575,6 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
             existingPolicies[`policy_${index+1}`][key] = $(e.currentTarget).val();
             $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
         }
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
     });
 
     $(document).on("click", "[id='addFieldsBtn']", (e) => {
@@ -587,22 +591,92 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#addBenefitsBtn").on("click", (e) => {
         const index = parseInt($(e.currentTarget).attr("data-index"));
         const benefitsNo = $(`[data-id='additionalBenefit${index+1}']`).length;
+        const additionalBenefit = existingPolicies[`policy_${index+1}`].additionalBenefit;
+        const benefitName = capitalizeFirstWord($("#addBenefitsInput").val());
 
-        if (benefitsNo < 4) {
-            existingPolicies[`policy_${index+1}`].additionalBenefit.push({
-                benefit: $("#addBenefitsInput").val(),
-                benefit_amount: "",
-            });
+        if (benefitsNo < 4 && benefitName.length) {
+            if (!additionalBenefit.some(benefit => benefit.benefit === benefitName)) {
+                additionalBenefit.push({
+                    benefit: benefitName,
+                    benefit_amount: "",
+                });
 
-            $(`[id='addFields']:eq(${index})`).prev().append(`<div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
-                <label for="additionalBenefit${index+1}_${benefitsNo}" class="form-label">${$("#addBenefitsInput").val()}</label>
-                <div class="input-group">
-                    <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span><input type="text" class="form-control border-black" name="additionalBenefit" id="additionalBenefit${index+1}_${benefitsNo}" data-id="additionalBenefit${index+1}" value="" data-index="${index}" data-object-id="${benefitsNo}" data-key="benefit_amount">
-                </div>
-            </div>`);
-            $("#addBenefitsInput").val("");
+                $(`[id='addFields']:eq(${index})`).prev().append(`<div class="mt-5 col-xxl-6 col-xl-6 col-lg-6 col-md-12">
+                    <label for="additionalBenefit${index+1}_${benefitsNo}" class="form-label">${benefitName}</label>
+                    <div class="input-group">
+                        <span class="fw-bold mt-auto text-placeholder border-btm lh-placeholder">RM</span>
+                        <input type="text" class="form-control border-black" name="additionalBenefit" id="additionalBenefit${index+1}_${benefitsNo}" data-id="additionalBenefit${index+1}" value="" data-index="${index}" data-object-id="${benefitsNo}" data-key="benefit_amount">
+                        <i class="fa-solid fa-trash-can text-danger align-self-center ms-3 delete-benefit" data-key="policy_${index+1}" data-index="${benefitsNo}"></i>
+                    </div>
+                </div>`);
+                $("#addBenefitsInput").val("");
+            }
         }
     });
+
+    $(document).on("click", "i.delete-benefit", (e) => {
+        const key = $(e.currentTarget).attr("data-key");
+        const index = $(e.currentTarget).attr("data-index");
+
+        existingPolicies[key].additionalBenefit.splice(index, 1);
+        $(e.currentTarget).parent().parent().remove();
+
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
+    });
+
+    $(document).on("click", "i.delete-policy", (e) => {
+        const index = parseInt($(e.currentTarget).attr("data-index"));
+
+        delete existingPolicies[`policy_${index}`];
+
+        $(e.currentTarget).parent().nextAll().slice(0, 4).remove();
+        $(e.currentTarget).parent().remove();
+
+        const $target = $('.main-content');
+        $target.animate({scrollTop: $target.prop("scrollHeight")}, 500);
+
+        const policiesNo = parseInt($("#form").attr("data-index"));
+        if (policiesNo > index) {
+            for (let i = index+1; i <= policiesNo; i++) {
+                const newIndex = i-1;
+                const header = $(`span:contains('Policy ${i}')`);
+                if (header.length) {
+                    header.text(`Policy ${newIndex}`);
+                    header.next().attr("data-index", newIndex);
+
+                    $(`[name='policyRole${i}']`).attr("name", "policyRole" + newIndex);
+                    header.parent().next("[id='addFields']");
+
+                    const additionalBenefit = $(`[data-id='additionalBenefit${i}']`);
+                    for (let x = 0; x < additionalBenefit.length; x++) {
+                        const objectId = $(additionalBenefit[x]).attr("data-object-id");
+                        $(additionalBenefit[x]).attr("id", `additionalBenefit${newIndex}_${objectId}`);
+                        $(additionalBenefit[x]).parent().prev().attr("for", `additionalBenefit${newIndex}_${objectId}`);
+
+                        $(additionalBenefit[x]).attr("data-id", `additionalBenefit${newIndex}`);
+                        $(additionalBenefit[x]).attr("data-index", newIndex-1);
+                        $(additionalBenefit[x]).next().attr("data-key", `policy_${newIndex}`);
+
+                        existingPolicies[`policy_${newIndex}`] = existingPolicies[`policy_${i}`];
+                        delete existingPolicies[`policy_${i}`];
+                    }
+                }
+            }
+        }
+
+        $("#form").attr("data-index", policiesNo - 1);
+        $("[name='existingPolicy']").val(JSON.stringify(existingPolicies));
+    });
+
+    const capitalizeFirstWord = (str) => {
+        const words = str.split(' ');
+
+        if (words.length > 0) {
+            words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+        }
+
+        return words.join(' ');
+    }
 });
 </script>
 

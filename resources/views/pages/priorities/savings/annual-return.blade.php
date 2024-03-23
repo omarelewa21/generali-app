@@ -15,7 +15,7 @@
     $savingsPriority = session('customer_details.priorities.savings_discuss');
 
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns', '5');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
@@ -28,7 +28,7 @@
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalSavingsFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ number_format(floatval($totalAmountNeeded)) }}</h1>
                     </div>
@@ -63,9 +63,9 @@
                         <div class="row h-100">
                             <div class="col-12 h-100 d-flex justify-content-center align-items-end calculatorContent">
                                 <div class="position-relative">
-                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.png') }}" width="auto" height="100%" alt="Savings Annual Return Avata" class="pb-5">
+                                    <img src="{{ asset('images/needs/savings/goal-amount/tabung.webp') }}" width="auto" height="100%" alt="Savings Annual Return Avata" class="pb-5" style="max-height:400px;">
                                     <p class="display-5 fw-bold currencyField position-absolute center w-100 text-center">
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary text-center @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="savings_goal_pa" class="form-control fw-bold position-relative border-0 d-inline-block w-50 text-primary text-center @error('savings_goal_pa') is-invalid @enderror" id="savings_goal_pa" value="{{ $savingsGoalPA }}" required></span>
                                     % p.a.</p>
                                 </div>
                             </div>
@@ -107,21 +107,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -138,7 +123,7 @@
     </div>
 </div>
 <script>
-    var savingsPriority = '{{$savingsPriority}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
     var lastPageInput = '{{$savingsMonthlyPayment === "" || $savingsMonthlyPayment === null ? $savingsMonthlyPayment : $savingsGoalDuration}}';
 </script>
 @endsection

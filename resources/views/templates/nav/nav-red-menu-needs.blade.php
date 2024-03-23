@@ -13,7 +13,7 @@
     <nav class="navbar navbar-default transparent">
         <div class="container-fluid px-4 px-xl-5">
             <div class="navbar-brand py-3">
-                <img class="red-logo img-fluid" src="{{ asset('images/general/main-logo.png') }}" width="220" alt="Logo">
+                <img class="red-logo img-fluid" src="{{ asset('images/general/main-logo.webp') }}" width="220" alt="Logo">
                 <div class="col-12 justify-content-start pt-3">
                     <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
                         <img class="d-inline" src="{{ asset('images/general/menu-red-left-icon.png') }}" alt="Logo" width="32px" height="26px">
@@ -27,7 +27,7 @@
     <nav class="navbar position-relative">
         <div class="container px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
-                <img class="red-logo" src="{{ asset('images/general/main-logo.png') }}" alt="Logo" width="220">
+                <img class="red-logo" src="{{ asset('images/general/main-logo.webp') }}" alt="Logo" width="220">
                 <div class="col-12 justify-content-start pt-3">
                     <a data-bs-toggle="offcanvas" href="#offcanvasMenu" role="button" aria-controls="offcanvasMenu">
                         <img class="d-inline" src="{{ asset('images/general/menu-red-left-icon.png') }}" alt="Logo" width="32px" height="26px">
@@ -42,7 +42,7 @@
     <nav class="navbar position-relative">
         <div class="container px-4 px-xl-5">
             <div class="navbar-brand py-3 py-md-5">
-                <img class="red-logo" src="{{ asset('images/general/main-logo.png') }}" alt="Logo" width="220">
+                <img class="red-logo" src="{{ asset('images/general/main-logo.webp') }}" alt="Logo" width="220">
             </div>
             <div class="py-3 py-md-5">
                 <a data-bs-toggle="offcanvas" href="#offcanvasMenuMobile" role="button" aria-controls="offcanvasMenuMobile">

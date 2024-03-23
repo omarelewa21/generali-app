@@ -2,39 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Transaction;
+// use App\DataTables\TransactionLogsDataTable;
 use Illuminate\Http\Request;
-use App\DataTables\SessionsDataTable;
-use App\DataTables\TransactionLogsDataTable;
-use App\Models\SessionStorage;
 use Illuminate\Support\Facades\Log;
+use App\DataTables\SessionsDataTable;
 
 
 class AgentController extends Controller
 {
     public function index(Request $request,SessionsDataTable $dataTable)
     {
-        $status = $request->query('status');
+        $counts = Transaction::selectRaw('status, count(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->mapWithKeys(fn ($count, $status) => [$status . 'Count' => $count])
+                    ->all();       
 
-
-        // $statuses = ['completed', 'draft', 'cancelled'];
-        // $statusCounts = [];
-
-        // foreach ($statuses as $status) {
-        //     $statusCounts[$status] = SessionStorage::where('status', $status)->count();
-        // }
-        // $statusCounts = SessionStorage::selectRaw('status, COUNT(*) as count')
-        //                 ->groupBy('status')
-        //                 ->get();
-
-        $completedCount = SessionStorage::where('status', 'completed')->count() ?? 0;
-        $draftCount = SessionStorage::where('status', 'draft')->count() ?? 0;
-
-        //need to show the deleted record as well 
-        $cancelledCount = SessionStorage::where('status', 'cancelled')->withTrashed()->count() ?? 0;
+        $completedCount = $counts['completedCount'] ?? 0;
+        $draftCount = $counts['draftCount'] ?? 0;
+        $cancelledCount = $counts['cancelledCount'] ?? 0;
 
         $grandTotal = $completedCount + $draftCount + $cancelledCount;
 
-        $dataTable->setStatus($status);
+        // $dataTable->setStatus($status);
 
         return $dataTable->render('pages.dashboard.agent',compact('completedCount','draftCount','cancelledCount','grandTotal'));
     }

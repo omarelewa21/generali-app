@@ -23,6 +23,7 @@
     $childData = session('customer_details.family_details.children_data');
 
     $spouseData = session('customer_details.family_details.spouse_data');
+    $spouseGender = session('customer_details.family_details.spouse_data.gender');
     $spouseDataName = session('customer_details.family_details.spouse_data.full_name');
 
     $relationship = session('customer_details.selected_needs.need_6.advance_details.critical_illness.relationship');
@@ -31,6 +32,8 @@
     $selectedCoverForDob = session('customer_details.selected_needs.need_6.advance_details.critical_illness.child_dob');
     $othersCoverForDob = session('customer_details.selected_needs.need_6.advance_details.critical_illness.spouse_dob');
     $selectedCritical = session('customer_details.selected_needs.need_6.advance_details.critical_illness.critical_illness_plan');
+
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="critical-illness_coverage" class="secondary-default-bg coverage">
@@ -43,8 +46,8 @@
                 <section class="heading">
                     <div class="container">
                         <div class="row justify-content-center ">
-                            <div class="col-12 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I'd like to provide Critical Illness Care for my:​</h2>
+                            <div class="col-12">
+                                <h2 class="display-5 fw-bold m-0 text-center">I'd like to provide Critical Illness Care for my:​</h2>
                             </div>
                         </div>
                     </div>
@@ -56,7 +59,11 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($relationship === 'Myself') default @endif" id="{{ $selfData['full_name'] }}" data-avatar="{{ $selfData['full_name'] }}" data-avatar-dob="{{$selfDataDob}}" data-relation="Myself" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                            @if(isset($selfGender) || isset($skintone))
+                                                <div id="lottie-animation-self" class="needs_coverage_avatar"></div>
+                                            @else
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-' .($selfGender === 'Female' ? 'female' : 'male').'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Myself">
+                                            @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">Self</p>
                                         </div>
                                     </button>
@@ -66,19 +73,34 @@
                                 <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                     <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Spouse') default @endif" id="{{ $spouseData['full_name'] }}" data-avatar="{{ $spouseData['full_name'] }}" data-avatar-dob="{{ $spouseData['dob'] }}" data-relation="Spouse" data-required="">
                                         <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                            <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-'.($selfGender === 'Female' ? 'male' : 'female').'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                            @if(isset($spouseGender) || isset($skintone))
+                                                <div id="lottie-animation-spouse" class="needs_coverage_avatar"></div>
+                                            @else
+                                                <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-spouse-' .($selfGender === 'Female' ? 'female' : 'male').'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3" alt="Spouse">
+                                            @endif
                                             <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $spouseData['full_name'] }}</p>
                                         </div>
                                     </button>
                                 </div>
                             @endif
                             @if ($childData)
+                                @php
+                                    $num = 0;
+                                @endphp
                                 @foreach($childData as $child)
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
                                                 <div class="d-flex justify-content-end" style="flex-direction: column;">
-                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                                    @php 
+                                                        $num++;
+                                                        $childGender = $child['gender'];
+                                                    @endphp
+                                                    @if(isset($childGender) || isset($skintone))
+                                                        <div id="lottie-animation-child-{{$num}}" style="height:70%;width:auto;"></div>
+                                                    @else
+                                                        <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.webp') }}" height="85%" width="auto" class="mx-auto pb-2 px-3">
+                                                    @endif
                                                     <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
                                                 </div>
                                             </button>
@@ -111,7 +133,7 @@
                                     <input type="hidden" name="othersCoverForNameInput" id="othersCoverForNameInput" value="{{$othersCoverForName}}">
                                     <input type="hidden" name="selectedCoverForDobInput" id="selectedCoverForDobInput" value="{{$selectedCoverForDob}}">
                                     <input type="hidden" name="othersCoverForDobInput" id="othersCoverForDobInput" value="{{$othersCoverForDob}}">
-                                    <a href="{{route('health.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('health.medical.medical.selection')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -124,26 +146,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingSelfFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldssLabel">Your Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSelfFieldsLabel">Your Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Basic Details page first.</p>
@@ -158,7 +165,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingSpouseFieldsLabel">Your Spouse Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your name in Family Depandent Details page first.</p>
@@ -173,7 +180,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your child name in Family dependent page first.</p>
@@ -188,7 +195,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>
@@ -205,14 +212,20 @@
     var selectedCoverForDobInput = document.getElementById('selectedCoverForDobInput');
     var othersCoverForNameInput = document.getElementById('othersCoverForNameInput');
     var othersCoverForDobInput = document.getElementById('othersCoverForDobInput');
-    var healthPriority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var selfData = '{{$selfDataName}}';
-    var lastPageInput = '{{$selectedCritical}}';
+    var lastPageInput = '{{json_encode($selectedCritical)}}';
     var familyDependent = {!! json_encode($familyDependent) !!};
+    var selfGenderSet = '{{$selfGender}}';
+    var spouseGenderSet = '{{$spouseGender}}';
+    var skintone = '{{$skintone}}';
+    var selfGender = selfGenderSet.toLowerCase();
+    var spouseGender = spouseGenderSet.toLowerCase();
+
+    var spouseDatas = {!! json_encode($spouseData) !!};
+    var childDatas = {!! json_encode($childData) !!};
 
     if (familyDependent){
-        var spouseDatas = {!! json_encode($spouseData) !!};
-        var childDatas = {!! json_encode($childData) !!};
         if('spouse_data' in familyDependent && spouseDatas){
             if('full_name' in spouseDatas){
                 var spouseData = '{{$spouseDataName}}';

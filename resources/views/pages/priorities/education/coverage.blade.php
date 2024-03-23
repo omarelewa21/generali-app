@@ -23,6 +23,8 @@
     $othersCoverForName = session('customer_details.selected_needs.need_3.advance_details.spouse_name');
     $selectedCoverForDob = session('customer_details.selected_needs.need_3.advance_details.child_dob');
     $othersCoverForDob = session('customer_details.selected_needs.need_3.advance_details.spouse_dob');
+
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="education_coverage" class="secondary-default-bg coverage">
@@ -34,9 +36,9 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
-                            <div class="col-xxl-4 col-xl-6 pb-5">
-                                <h2 class="display-5 fw-bold lh-sm text-center">I want to prepare a tertiary education fund for:</h2>
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-4 col-xl-6">
+                                <h2 class="display-5 fw-bold text-center m-0">I want to prepare a tertiary education fund for:</h2>
                             </div>
                         </div>
                     </div>
@@ -45,27 +47,37 @@
                     <div class="container h-100">
                         <div class="row justify-content-center h-100 coverage_slick">
                             @if ($childData)
+                                @php
+                                    $num = 0;
+                                @endphp
                                 @foreach($childData as $child)
                                     @if (isset($child['full_name']))
                                         <div class="h-100 d-flex justify-content-center align-items-center col-3">
                                             <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($relationship === 'Child' && $selectedInsuredName === $child['full_name']) default @endif" id="{{ $child['full_name'] }}" data-avatar="{{ $child['full_name'] }}" data-avatar-dob="{{ $child['dob'] }}" data-relation="Child" data-required="">
-                                                @php
-                                                    $birthdate = $child['dob'];
+                                                <div class="d-flex justify-content-end" style="flex-direction: column;">
+                                                    @php 
+                                                        $num++;
+                                                        $childGender = $child['gender'];
 
-                                                    // Convert DOB to DateTime object
-                                                    $dobDate = \DateTime::createFromFormat('Y-m-d', $birthdate);
+                                                        $birthdate = $child['dob'];
 
-                                                    //Get current Date
-                                                    $currentDate = new \DateTime();
+                                                        // Convert DOB to DateTime object
+                                                        $dobDate = \DateTime::createFromFormat('Y-m-d', $birthdate);
 
-                                                    // Calculate the difference between the two dates
-                                                    $ageInterval = $currentDate->diff($dobDate);
-                                                    $age = $ageInterval->y; // Access the years property of the interval
-                                                @endphp
-                                                <div class="d-flex justify-content-center" style="flex-direction: column;">
-                                                    <p class="py-2 m-auto mt-3 f-family mb-0 coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
-                                                    <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.png') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
-                                                    <p class="avatar-text text-center py-2 mb-0 fw-bold">{{ $child['full_name'] }}</p>
+                                                        //Get current Date
+                                                        $currentDate = new \DateTime();
+
+                                                        // Calculate the difference between the two dates
+                                                        $ageInterval = $currentDate->diff($dobDate);
+                                                        $age = $ageInterval->y; // Access the years property of the interval
+                                                    @endphp
+                                                    <p class="py-2 m-auto mb-auto mt-3 f-family mb-0 coverage-age text-white d-flex justify-content-center align-items-center">Age: {{$age}}</p>
+                                                    @if(isset($childGender) || isset($skintone))
+                                                        <div id="lottie-animation-child-{{$num}}" class="w-auto edu_coverage"></div>
+                                                    @else
+                                                        <img src="{{ asset('images/avatar-general/coverage/avatar-coverage-child-'.str_replace(' ', '_', $child['gender']).'.webp') }}" height="75%" width="auto" class="mx-auto pb-2 px-3">
+                                                    @endif
+                                                    <p class="avatar-text text-center py-3 mb-0 fw-bold mb-sm-5 mb-md-0">{{ $child['full_name'] }}</p>
                                                 </div>
                                             </button>
                                         </div>
@@ -110,26 +122,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingEducationFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingEducationFieldsLabel">Education Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable education priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingChildFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingChildFieldsLabel">Your Child Name is required.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input your child name in Family dependent page first.</p>
@@ -140,11 +137,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="missingChild" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header px-4 pt-4 justify-content-center">
+                <h3 class="modal-title fs-4 text-center" id="missingChildLabel">You're required to provide Child Details</h3>
+            </div>
+            <div class="modal-body text-dark text-center px-4 pb-4">
+                <p>Please provide your child details in Family dependent page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    var educationPriority = '{{$educationPriority}}';
+    var needs_priority = '{{json_encode($educationPriority)}}';
     var childDatas = {!! json_encode($childData) !!};
     var familyDependent = {!! json_encode($familyDependent) !!};
+    var skintone = '{{$skintone}}';
+
     if(childDatas){
         if (familyDependent){
             if('children_data' in familyDependent){

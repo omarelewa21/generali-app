@@ -19,20 +19,20 @@
 <div id="pdpa">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
-                <div class="navbar-scroll fixed-top">
+            <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                        <h2 class="display-5 fw-bold py-3">To begin, may we have permission to collect or use your personal details?</h2>
+                        <h2 class="display-5 fw-bold py-3 px-md-0 px-3">To begin, may we have permission to collect or use your personal details?</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
-                <section class="main-content">
+            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 vh-100 content-section">
+                <section class="main-content bg-accent-bg-grey">
                     <div class="container">
-                        <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                        <div class="row pt-4 px-4 pb-md-4 pb-2 pt-md-5 sticky-md-top bg-accent-bg-grey">
                             <div class="col-12">
-                                <h1 class="display-2 text-uppercase">DATA PROTECTION STATEMENT</h1>
+                                <h1 class="display-3 text-uppercase">DATA PROTECTION STATEMENT</h1>
                             </div>
                         </div>
                         <div class="row px-4">
@@ -46,7 +46,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                <a id="declineButton" href="{{ route('welcome') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
+                                <a id="declineButton" href="{{ route('login') }}" class="btn btn-secondary flex-fill me-md-2">DECLINE</a>
                                 <a id="acceptButton" href="{{ route('basic.details',['transaction_id' => $transactionId]) }}" class="btn btn-primary flex-fill">ACCEPT</a>
                             </div>
                         </div>

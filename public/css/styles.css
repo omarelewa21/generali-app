@@ -38,6 +38,16 @@ scrollbar-thumb:hover {
 }
 
 /* ============================== Body ============================== */
+/* Disable zooming on IOS */
+body {
+  touch-action: auto;
+  -ms-touch-action: auto;
+  user-select: none; /* Disable text selection */
+  overscroll-behavior-y: auto;
+  -webkit-user-select: none; /* Disable text selection for Safari */
+  -webkit-touch-callout: none; /* Disable callout (long press) on iOS */
+}
+
 body {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -47,7 +57,7 @@ body.overflow {
   overflow-y: auto;
 }
 
-body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default, body.overflow #home {
+body.overflow #top_priorities .wrapper-avatar-default, body.overflow #priorities_to_discuss .wrapper-avatar-default {
   overflow: hidden;
 }
 
@@ -56,10 +66,10 @@ body #login {
   height: 100vh;
 }
 
-.fade-effect img {
+/* .fade-effect img {
   opacity: 1;
   transition: opacity 0.3s ease;
-}
+} */
 
 .fade-effect button:not([disabled]):hover img {
   opacity: 1;
@@ -87,6 +97,10 @@ body #login {
 
 .bg-accent-bg-grey {
   background-color: #F8F8F8;
+}
+
+.bg-grey {
+  background-color: rgba(233, 233, 233, 1);
 }
 
 .z-index-1 {
@@ -343,6 +357,7 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 .action_button_slider .slick-dots li.slick-active button:before, .action_button_slider .slick-dots li button:focus:before, .action_button_slider .slick-dots li button:hover:before, .action_button_slider .slick-dots li button:before {
   opacity:0;
 }
+
 .action_button_slider .slick-dots li {
   box-sizing: content-box;
   -ms-flex: 0 1 auto;
@@ -365,9 +380,58 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
   background-color: #8995C8;
   opacity: 1;
 }
-
-.action_button_slider .slick-dots {
-  position: static;
+/* added KK code */
+.slick-scrollbar {
+  width: auto;
+  position: relative;
+  box-sizing: border-box;
+  flex-grow: 1;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+}
+ 
+.slick-scrollbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--scrollbar-width);
+  height: 100%;
+  background-color: #000;
+  transition: width 0.35s;
+}
+ 
+.slick-next,
+.slick-prev {
+  position: static !important;
+  transform: unset !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: 16px !important;
+  font-family: "Helvetica Neue", sans-serif !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+}
+ 
+.slick-next:before,
+.slick-prev:before {
+  content: unset !important;
+}
+ 
+.slick-track {
+  display: flex !important;
+}
+ 
+.slick-slide {
+  height: inherit !important;
+}
+ 
+#hospital-room-selection .slick-slide div {
+  height: 100%;
 }
 /* ============================== Alerts ============================== */
 .alert div.text {
@@ -394,6 +458,41 @@ div.dtsb-searchBuilder div.dtsb-group div.dtsb-criteria select.dtsb-data {
 }
 
 /* ============================== Navigation Menu ============================== */
+#landscapeOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 60%);
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.white-logo {
+  max-width: 220px;
+}
+
+.tablet-mode {
+  display:none;
+}
+
+.mobile-mode {
+  display:none;
+}
+
+#wrapper-navbar.mobile {
+  display: none;
+}
+
+#avatar_welcome #wrapper-navbar.desktop {
+  display: block!important;
+}
+
 .navbar-scroll.scrolled-up {
   transform: translateY(0);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -514,6 +613,7 @@ p.nav-text {
 
 .offcanvas.showing, .offcanvas.hiding, .offcanvas.show {
   height:100vh;
+  padding: 0;
 }
 
 .offcanvas .offcanvas-body {
@@ -521,6 +621,10 @@ p.nav-text {
 }
 
 /* ============================== Button Styling ============================== */
+.btn-outline-secondary {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
 .btn-check + .btn:hover {
   background-color: #ffffff;
 }
@@ -541,9 +645,9 @@ p.nav-text {
   color: #C21B17;
 }
 
-.btn-refresh {
+/* .btn-refresh {
   font-family: 'Helvetica Neue Regular', sans-serif;
-}
+} */
 
 .btn-exit:hover {
   background-color: #ffffff;
@@ -629,8 +733,8 @@ div.dt-buttons>.dt-button:hover, div.dt-buttons>.dt-button:focus {
   overflow: hidden;
 }
 
-button[data-required="selected"] img {
-  opacity: 1;
+button[data-required="selected"] img:not(button.choice[data-required="selected"] img) {
+  transform: scale(1.1);
 }
 
 .button-bg {
@@ -687,8 +791,16 @@ button[data-required="selected"] img {
   width: 100%;
 }
 
+button.choice:hover,
+button.choice[data-required="selected"],
+button.choice.default.selected,
+button.choice[data-required=""]{
+    background: none !important;
+    width: 100% !important;
+}
+
 /* ============================== Right Sidebar ============================== */
-.right-sidebar h1 {
+.right-sidebar h1, .priorities-heading {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -766,6 +878,16 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
 }
 
+.wrapper-bottom-grey-calculator {
+  grid-template-areas:
+      "header"
+      "content-needs-grey-calculator"
+      "footer-avatar-grey";
+  grid-template-rows: 12vh 53vh 35vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
 .wrapper-needs-grey {
   grid-template-areas:
       "header"
@@ -788,11 +910,22 @@ h2.display-5, .currencyField {
   grid-template-areas:
       "header"
       "content"
+      "footer-avatar-grey"
+      "refresh";
+  grid-template-rows: 20vh 50vh 20vh 10vh;
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+/* .wrapper-avatar-grey {
+  grid-template-areas:
+      "header"
+      "content"
       "footer-avatar-grey";
   grid-template-rows: 20vh 55vh 25vh;
   display: grid;
   grid-template-columns: 100%;
-}
+} */
 
 .wrapper-overview {
   grid-template-areas:
@@ -829,9 +962,23 @@ h2.display-5, .currencyField {
   grid-template-columns: 100%;
   grid-area: content-needs-grey;
 }
+
+.content-needs-grey-calculator {
+  grid-template-areas:"calculator" "top-menu" "content";
+  display: grid;
+  grid-auto-rows: 10vh 10vh 50vh;
+  grid-template-columns: 100%;
+  grid-area: content-needs-grey-calculator;
+}
+
+#retirement_ideal .content-needs-grey {
+  grid-auto-rows: 10vh 10vh 55vh;
+}
+
 .heading {
   grid-area: heading;
 }
+
 .bottom-content {
   grid-area: bottom-content;
 }
@@ -896,33 +1043,104 @@ h2.display-5, .currencyField {
   border: 1px solid #cccccc;
 }
 
+/* ============================== Animations ============================== */
+
+#lottie-female-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 24%;
+}
+
+#lottie-male-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 21%;
+}
+
+#lottie-daughter-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -34%;
+}
+
+#lottie-father-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+#lottie-mother-animation {
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 45%;
+}
+
+#lottie-son-animation svg {
+  padding-top: 35%;
+  width: auto!important;
+}
+
+#lottie-daughter-animation svg {
+  padding-top: 62%;
+  width: auto!important;
+}
+
+#lottie-mother-animation svg {
+  padding-top: 23%;
+  width: auto!important;
+}
+
+#lottie-animation svg, #lottie-male-animation svg, #lottie-father-animation svg {
+  width: auto!important;
+}
+
+#avatar_family_dependent #lottie-female-animation, #avatar_family_dependent_details #lottie-female-animation {
+  right: -28%;
+}
+
+#avatar_family_dependent #lottie-male-animation, #avatar_family_dependent_details #lottie-male-animation {
+  right: -37%;
+}
+
+#lottie-animation {
+  z-index: 1;
+}
+
+.changeImageAsset {
+  position: absolute;
+  bottom: 11%;
+  height: 60%;
+  z-index: 2!important;
+}
+
 /* ============================== Welcome Page ============================== */
 #home {
-  background-image: url(/images/welcome-page/welcome-bg-gradient.jpg);
+  background-image: url(/images/welcome-page/welcome-bg-gradient.webp);
   background-size: auto 90%;
   background-position: right top;
   background-repeat: no-repeat;
 }
 
-.homeVector {
-  width: 550px;
-  height:auto;
-}
-
 /* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
-  background-image: url(/images/avatar-welcome/avatar-welcome-bg.jpg);
+  background-image: url(/images/avatar-welcome/avatar-welcome-bg.webp);
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.changeImage {
-  z-index: 3;
-}
 /* ============================== Gender Page ============================== */
 .main-default-bg {
-  background-image: url(/images/general/main-default-bg.png);
+  background-image: url(/images/general/main-default-bg.webp);
   background-size: auto 70%;
   background-position: center;
   background-repeat: no-repeat;
@@ -981,6 +1199,10 @@ h2.display-5, .currencyField {
   right: 10%;
 }
 
+.changeImage {
+  z-index: 1;
+}
+
 /* ============================== Identity Details Page ============================== */
 .btn-check:checked+.btn {
   border-radius: 0;
@@ -988,6 +1210,7 @@ h2.display-5, .currencyField {
   color: #0A043C;
   width: 100%;
   border-color: #A0A0A0;
+  opacity:1;
 }
 
 .btn-check+.btn {
@@ -999,9 +1222,9 @@ h2.display-5, .currencyField {
 
 /* ============================== Marital Status Page ============================== */
 #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
-  background-image: url(/images/marital-status/vector-plant.png);
-  background-size: 20%;
-  background-position: bottom right;
+  background-image: url(/images/marital-status/vector-plant.webp);
+  background-size: 130px;
+  background-position: 100% 95%;
   background-repeat: no-repeat;
 }
 
@@ -1094,6 +1317,17 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 /* ============================== Top Priorities Page ============================== */
+#lottie-avatar-priorities-animation {
+  width:100%;
+  height:69%;
+  margin-top: 10px;
+}
+
+.remove-bottom {
+  top: 55%;
+  grid-gap: 20px;
+}
+
 #sortable button {
   background-color: #ffffff;
   border: none;
@@ -1112,9 +1346,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   max-height: 88px;
 }
 
-.first .dropped img:not(.close) {
+/* .first .dropped img:not(.close) {
   margin-top:25px;
-}
+} */
 
 .third .dropped img:not(.close) {
   margin-left:25px;
@@ -1208,10 +1442,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   left: 0;
 }
 
-.needs-icon {
+/* .needs-icon {
   height:100px;
   z-index: 2;
-}
+} */
 
 .svg-button svg {
   width: 100%; 
@@ -1275,6 +1509,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 #sortablemobile {
   list-style-type: none;
+  padding-inline-start: 0;
 }
 
 #sortablemobile ul.dropdown-menu {
@@ -1310,6 +1545,10 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   font-weight: 700;
 }
 
+.sortable-text {
+  font-family: 'Helvetica Neue Medium', sans-serif;
+}
+
 #sortablemobile .ui-sortable-placeholder {
   visibility: visible !important;
   border: 2px dashed #ffffff;
@@ -1336,7 +1575,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Retirement Home Page ============================== */
 #retirement_home .wrapper-needs-grey {
-  background-image: url(/images/needs/retirement/home-bg.jpg);
+  background-image: url(/images/needs/retirement/home-bg.webp);
   background-size: cover;
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -1345,11 +1584,11 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 #retirement_ideal .bottom-content img {
-  max-width: 324px;
+  max-width: 258px;
 }
 
 #retirement_period.tertiary-default-bg {
-  background-image: url(/images/needs/retirement/period-bg.png);
+  background-image: url(/images/needs/retirement/period-bg.webp);
   background-size: auto 80%;
   background-position: left top;
   background-repeat: no-repeat;
@@ -1358,7 +1597,7 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 
 /* ============================== Education Home Page ============================== */
 #education_home .main-default-bg {
-  background-image: url(/images/needs/education/supporting-bg.png), url(/images/general/main-default-bg.png);
+  background-image: url(/images/needs/education/supporting-bg.webp), url(/images/general/main-default-bg.webp);
   background-size: auto 50%, auto 70%;
   background-position: center top, center;
 }
@@ -1376,7 +1615,7 @@ fieldset legend {
 }
 
 .secondary-default-bg {
-  background-image: url(/images/general/secondary-default-bg.png);
+  background-image: url(/images/general/secondary-default-bg.webp);
   background-size: auto 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1435,11 +1674,23 @@ fieldset legend {
 
 /* ============================== Needs Page ============================== */
 button.choice:hover, button.choice:focus, .button-needs[data-required="selected"], .button-needs.selected {
-    background-image: url('/images/needs/hover-coverage.png');
+    background-image: url('/images/needs/hover-coverage.webp');
     background-repeat: no-repeat;
     background-position: center bottom 18%;
     background-size: 100%;
     width: 60%;
+}
+
+button.choice:hover img,
+button.choice[data-required="selected"] img,
+button.choice.default.selected img,
+button.choice:hover svg,
+button.choice[data-required="selected"] svg,
+button.choice.default.selected svg{
+    background-image: url(/images/needs/hover-coverage.webp);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100%;
 }
 
 .coverage_slick div {
@@ -1447,7 +1698,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 .tertiary-default-bg {
-  background-image: url(/images/general/tertiary-default-bg.png);
+  background-image: url(/images/general/tertiary-default-bg.webp);
   background-size: auto 80%;
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -1462,11 +1713,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   position: relative;
   padding-left: 40px;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 0;
 }
 
 .needs-radio:checked + label::after {
-  content: url("/images/needs/general/check.png"); 
+  content: url("/images/needs/general/check.webp"); 
   position: absolute;
   left: 4px;
   top: 1px;
@@ -1493,6 +1746,10 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
+body.overflow #summary .main-content {
+  overflow-y: hidden;
+}
+
 #gap .circle{
   filter: drop-shadow(0px 0px 6px #FFEEE2) drop-shadow(0px 20px 20px rgba(150, 217, 227, 0.3));
 }
@@ -1510,11 +1767,15 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   font-family: 'Helvetica Neue Bold', sans-serif;
 }
 
+#gap .card-gap__number p.display-5 {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
 .green-tick {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url('/images/needs/general/green-tick.png') no-repeat center center;
+  background: url('/images/needs/general/green-tick.webp') no-repeat center center;
   background-size: contain;
 }
 
@@ -1522,7 +1783,7 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   display: inline-block;
   width: 30px;
   height: 30px;
-  background: url('/images/needs/general/red-tick.png') no-repeat center center;
+  background: url('/images/needs/general/red-tick.webp') no-repeat center center;
   background-size: contain;
 }
 
@@ -1531,6 +1792,101 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   background-position: center bottom 21%;
 }
 
+.needs-progress {
+  font-size: 22px;
+}
+/* ============================== Priorities Menu ============================== */
+.progress {
+  width: 44px;
+  height: 44px;
+  line-height: 150px;
+  background: transparent;
+  margin: 0 auto;
+  box-shadow: none;
+  position: relative;
+}
+
+.progress:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #A0A0A0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress>span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left {
+  left: 0;
+}
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 2px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+  animation: loading-left 0.8s linear forwards;
+}
+
+.progress .progress-right {
+  right: 0;
+}
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+  animation: loading-right 0.8s linear forwards;
+}
+
+.progress-value p {
+  font-size: 20px;
+}
+
+.progress .progress-value {
+  width: 100%;
+  height: 100%;
+  border-radius: 80px;
+  background: #ffffff;
+  color: #d10b4f;
+  line-height: 3.2em;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress.color .progress-bar {
+  border-color: #d10b4f;
+}
+
+.progress.color .progress-left .progress-bar {
+  animation-delay: 0.8s; /* Delay the animation for the left progress bar */
+}
 /* ============================== Calculator ============================== */
 .calculation-progress-bar-wrapper {
   border-bottom-right-radius: 1.3rem;
@@ -1558,11 +1914,47 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 1199px) {
-  #home {
-    overflow: auto;
+  .dropped img:not(.close) {
+    width: 52%!important;
+  }
+  .third .dropped img:not(.close) {
+    margin-left: 18%;
+  }
+  .remove-button i {
+    font-size: 27px;
   }
   .footerVector {
     display: none;
+  }
+  #summary .dropped img:not(.close) {
+    max-height: 70px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
+  }
+  .wrapper-needs-grey {
+    /* grid-template-rows: 9vh 38vh 25vh 12vh; */
+    grid-template-rows: 9vh 60vh 0vh 0vh;
+  }
+  .tertiary-mobile-bg {
+    background-image: url(/images/general/tertiary-default-bg.webp);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    max-height: 100%;
+  }
+
+  #retirement_period .tertiary-mobile-bg {
+    background-image: url(/images/needs/retirement/period-bg.webp);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+  .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
+    text-align: center;
+    justify-content: center;
   }
 }
 
@@ -1572,7 +1964,36 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
 }
 
+@media only screen and (max-width: 991px) {
+  .first .remove-button {
+    right:-5%;
+  }
+  .second .remove-button {
+    right:5%;
+  }
+  #summary .dropped img:not(.close) {
+    max-height: 50px;
+  }
+  #summary .first .dropped img:not(.close) {
+    margin-top: inherit;
+  }
+}
+
 @media only screen and (min-width: 768px) {
+  .inner_action_button img {
+    width: auto;
+    height: 100px;
+  }
+  #lottie-female-animation svg, #lottie-animation.female svg {
+    padding-top: 50px;
+    width: auto!important;
+  }
+  .content-needs-grey-calculator {
+    grid-auto-rows: 5vh 10vh 50vh;
+  }
+  #retirement_allocated_funds .content-needs-grey-calculator {
+    grid-auto-rows: 0vh 10vh 50vh;
+  }
   #dataTable_wrapper .bottom, #dataTable_wrapper .top {
     display:flex;
     justify-content: space-between;
@@ -1597,11 +2018,8 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     overflow-y: auto;
     height: 100vh;
   }
-  body.overflow #summary .main-content {
-    overflow-y: hidden;
-  }
   .main-default-bg, #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
-    z-index: 2;
+    z-index: 3;
   }
   .wrapper-home {
     display: grid;
@@ -1635,8 +2053,11 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     right: 0;
     width: 100%;
   }
-  .navbar-scroll.fixed-top {
+  #pdpa .navbar-scroll.fixed-top, #basic_details .navbar-scroll.fixed-top {
     position: relative;
+  }
+  .homeVector {
+    max-height: 700px;
   }
 }
 
@@ -1647,15 +2068,44 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
 }
 
 @media only screen and (max-width: 767px) {
+  .popover {
+    top: 2%!important;
+    width: 58%;
+    font-size: 16px;
+  }
+  #wrapper-navbar.desktop {
+    display: none;
+  }
+  #wrapper-navbar.mobile {
+    display: block;
+  }
+  .btn-primary, .btn-secondary, .btn-outline-primary {
+    font-size: 14px;
+  }
+  .wrapper-bottom-grey {
+    grid-template-rows: 12vh 53vh 35vh;
+  }
+  .coverage .content-needs-grey{
+      grid-auto-rows: 10vh 12vh 55vh;
+  }
+  .accordion-button {
+    font-size: 1.25rem;
+  }
+  h1.display-3 {
+    font-size: 1.9rem;
+  }
+  h1.display-4 {
+    font-size: 1.25rem;
+  }
+  .gender-button img {
+    width: 70px;
+  }
   #top_priorities .wrapper-avatar-default, #priorities_to_discuss .wrapper-avatar-default {
     display:block;
   }
-  /* body.overflow #top_priorities .wrapper-avatar-default {
-    overflow: auto;
-  } */
   .homeVector {
-    width: 100%;
-    height:auto;
+    width: 60%;
+    max-height: 340px;
   }
   body #login {
     height: inherit;
@@ -1674,14 +2124,20 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   #avatar_marital_status .main-content, #avatar_family_dependent .main-content, #avatar_my_assets .main-content {
     padding-bottom: inherit!important;
   }
-  .avatar-text {
-    font-size: 18px;
+  #avatar_my_assets .footer-scroll {
+    z-index: 2;
   }
+  /* .avatar-text {
+    font-size: 18px;
+  } */
   .main-logo, .white-logo, .red-logo {
     max-width: 172px
   }
-  .sidebanner .display-5, p.nav-text {
+  .sidebanner .display-5 {
     font-size: 20px;
+  }
+  p.nav-text {
+    font-size: 18px;
   }
   .mobileImg {
     padding-top:100px;
@@ -1700,45 +2156,20 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     grid-template-rows: 10vh 20vh 60vh;
   }
   #identity_details .bg-primary, #avatar_family_dependent_details .bg-primary {
-    margin-top: -200px;
+    margin-top: -28%;
   }
   #home {
     background-position: right bottom;
     background-size: auto 60%;
   }
-  .wrapper-needs-grey {
-    grid-template-rows: 9vh 40vh 23vh 12vh;
-  }
   .calculator-page .content-needs-grey {
     grid-auto-rows: 10vh 15vh 45vh;
   }
-  .calculator-page .bottom-content h2, .calculator-page .bottom-content p {
-    text-align: center;
-    justify-content: center;
-  }
-  .tertiary-default-bg, #retirement_period.tertiary-default-bg {
+  /* .tertiary-default-bg, #retirement_period.tertiary-default-bg {
     background-image:none;
-  }
-  .tertiary-mobile-bg {
-    background-image: url(/images/general/tertiary-default-bg.png);
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #fff;
-  }
-
-  #retirement_period .tertiary-mobile-bg {
-    background-image: url(/images/needs/retirement/period-bg.png);
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #fff;
-  }
+  } */
   .calculator-page .bottom-content img {
-    height: 80%;
-  }
-  #retirement_ideal .content-needs-grey {
-    display: block;
+    height: 85%;
   }
   .ideal button.choice:hover, .ideal button.choice:focus, .ideal .button-needs[data-required="selected"], .ideal .button-needs.selected {
     background-position: center bottom 18%;
@@ -1751,8 +2182,6 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     padding-top: 85.5px!important;
   }
   .inner_action_button img {
-    width: auto;
-    height: auto;
     max-width: 100px;
     max-height: 76px;
   }
@@ -1760,10 +2189,13 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
     grid-template-rows: 20vh 50vh;
   }
   .wrapper-avatar-default {
-    grid-template-rows: 10vh 80vh;
+    grid-template-rows: 5vh 40vh;
+  }
+  #identity_details .avatar-design-placeholder, #avatar_marital_status .avatar-design-placeholder, #avatar_family_dependent .avatar-design-placeholder, #avatar_family_dependent_details .avatar-design-placeholder {
+    background-size: 15%;
   }
   .wrapper-avatar-grey {
-    grid-template-rows: 10vh 55vh 25vh;
+    grid-template-rows: 7vh 35vh 15vh 3vh;
   }
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
@@ -1785,11 +2217,36 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   .bottomObeserver {
     height:50px;
   }
+  #home h2, #home .h2 {
+    font-size: calc(1rem + 2.7vw);
+    line-height: 1;
+  }
+  .wrapper-needs-grey {
+    grid-template-rows: 9vh 40vh 0vh 0vh;
+  }
+  .tertiary-mobile-bg {
+    height: 50%!important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .otherModalText {
+    font-size: 4rem;
+  }
+  .changeImageAsset {
+    height: 84%;
+  }
 }
 
 @media only screen and (max-width: 375px) {
-  .btn-primary {
-    font-size: 16px;
+  .color-box-wrapper {
+    height: auto;
+  }
+  .toggle {
+    float: none;
+  }
+  .toggle-group .btn {
+    font-size: 14px;
   }
 }
 
@@ -1799,373 +2256,90 @@ button.choice:hover, button.choice:focus, .button-needs[data-required="selected"
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.btn-check+.btn:hover {
-  border-radius: 0;
-  background-color: #d3d4d5;
-  color: inherit;
-  width: 100%;
+/* Force portrait orientation */
+@media screen and (max-width: 1180px) and (min-width: 768px) and (min-height: 375px) {
+  .wrapper-home {
+    display: block;
+  }
+  #home {
+    background-position: right bottom;
+    background-size: auto 60%;
+  }
 }
 
-
-
-
-
-
-
-
-
-
- .form-select {
-  color: rgba(10, 4, 60, 0.50);
-} 
-
-  .input:-internal-autofill-selected {
-    background-image: inherit;
+@media screen and (max-width:1280px) and (min-height:768px) and (orientation: landscape) {
+  .remove-bottom {
+    top: 68%;
   }
-
-
-
-
-
-
-
-  .overflow-height {
-    max-height: 800px;
-    overflow-x: hidden !important
-  }
-
-  .main-content .overflow-auto.full-height {
-    height: calc(100vh - 250px);
-    overflow-x: hidden !important;
-  }
-
-  #avatar_welcome section.footer .male {
-    bottom: 2%;
-    left: 10%;
-  }
-
-  #avatar_welcome section.footer .female {
-    bottom: 2%;
-    right: 10%;
-  }
-
-  .main-content .overflow-auto.full-height-350 {
-    height: calc(100vh - 350px);
-    overflow-x: hidden !important;
-  }
-
-  .overflow-auto.full-height-100 {
-    height: calc(100vh - 100px);
-    overflow-x: hidden !important;
-  }
-
-  
-
-
-
-  .bg-retirement-home {
-    background-image: url(/images/needs/retirement/bg-home.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-  .needs-home-avatar {
-    z-index: 1;
-    width:100%;
-  }
-  .needs-home-avatar img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .retirement-coverage {
-    background-image: url(/images/needs/retirement/bg-coverage.jpg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    background-color: #fff;
-  }
-
-
-.coverage-avatar {
-  z-index: 10;
-}
-.coverage-avatar img.self-avatar{
-  width: 20vh;
-}
-.coverage-avatar img.spouse-avatar{
-  width: 18vh;
-}
-.coverage-avatar img.kid-avatar{
-  width: 17vh;
-}
-.coverage-avatar img.parent-avatar{
-  width: 35vh;
 }
 
-
-  .bg-image {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
+@media screen and (max-width:1366px) and (min-width:1366px) and (min-height:1024px) and (max-height:1024px) and (orientation: landscape) {
+  .remove-bottom {
+    top: 68%;
   }
+}
 
-  .bg-image-avatar {
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: -1;
-    background-position: center right;
-    left: 30px;
-    top: 10px;
+@media screen and (max-width:1024px) and (min-height:800px) and (orientation: portrait) {
+  #top_priorities #wrapper-navbar.desktop, #top_priorities #needs, #top_priorities .content-avatar-default {
+    display: none!important;
   }
-
-  .protection-home {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  #top_priorities #wrapper-navbar.mobile, #top_priorities .wrapper-avatar-default, .needs-tablet {
+    display: block!important;
   }
-
-  .avatar-content {
-    margin-top: 14.75rem;
+  #top_priorities .content-section {
+    width: 100%;
   }
-
-  .male-avatar {
-    left: 160px;
-    bottom: 25px;
-    transform: scale(0.7);
-
+  #top_priorities .content-section {
+    padding-top: 85.5px!important;
   }
-
-  .female-avatar {
-    right: 100px;
-    bottom: 10px;
-    transform: scale(0.7);
-  }
-
-  .male-avatar-character {
-    left: 32%;
-  }
-
-  .parent-father {
-    left: 0;
-    top: 30px;
-  }
-
-  .parent-mother {
-    left: 170px;
-    top: 60px;
-  }
-
-  .spouse {
-    right: 90px;
-    top: 50px;
-  }
-
-  .children-boy {
-    top: 180px;
-    right: 50px;
-  }
-
-  .children-girl {
-    right: 100px;
-    top: 290px;
-
-  }
-
-  img.male-avatar,
-  img.female-avatar {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-
-
-
-  .nav-header {
-    margin-top: 13.063rem;
-  }
-
-  .text-scroll {
-    max-height: 67vh;
-    overflow-y: auto;
-  }
-
-
-
-
-  @media (min-width: 576px) {
-    .h-sm-100 {
-      height: 100%;
-    }
-  }
-
-
-
-  input#flexRadioDefault1,
-  input#flexRadioDefault2 {
-    margin-top: 8px;
-  }
-
-  .form-check-input {
-    transform: scale(1.2);
-  }
-
-  .bg-welcome {
-    z-index: -1;
-  }
-
-  .p-basic-details {
-    padding-left: 5.438rem;
-    padding-right: 6.875rem;
-  }
-
-  .main-vh {
-    height: 87vh;
-  }
-
-  .sticky-bottom {
-    z-index: 1019;
-  }
-
- 
-
-
-
-
-
-
-
-
-
-
-  .btn-avatar {
-    border: 0;
-  }
-
-  .btn-skip {
-    padding-left: 2.813rem;
-    padding-right: 2.813rem;
-  }
-
-  .btn-exit:hover {
-    background-color: #ffffff;
-    color: #C21B17;
-  }
-
-
-  .float-text {
-    top: 20px;
-    right: 10px;
-    padding: 10px;
-  }
-
-  .min-height-100 {
+  #top_priorities {
     height: 100vh;
   }
-
-  .bg-needs {
-    background-image: url('/images/needs/protection/bg-home.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
+  #top_priorities .main-content {
+    height: inherit;
   }
-
-  .font-color-default {
-    color: #000;
+  #avatar_my_assets .house {
+    width: 105%!important;
   }
-
-  .bg-btn_bar {
-    background-color: #F0F0F0;
+  #avatar_my_assets .bungalow {
+    width: 162%!important;
   }
-
-  .bg-needs_text {
-    background-color: #E9E9E9;
+  #avatar_my_assets .wrapper-avatar-grey {
+    grid-template-rows: 20vh 50vh 12vh 23vh;
   }
-
-
-
-  @media only screen and (min-width: 768px) {
-    .min-height-100 {
-      height: auto;
-    }
-
-   
+  #avatar_my_assets .refresh-avatar {
+    position: absolute;
+    bottom: 5%;
   }
+}
 
-  @media only screen and (max-width: 767px) {
-    
-    #home {
-      background-size: cover;
-    }
-
-    
-
-
-
-
+@media screen and (max-height:599px) and (orientation: landscape) {
+  #landscapeOverlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
   }
-
-  @media only screen and (min-width: 576px) {
-    
-
-    
-  }
-
-
-
-
-
-  .timeline-item-needs {
-    position: relative;
-    margin-bottom: 53px;
-    padding-right: 73px;
-  }
-
-  .timeline-item-needs:first-child::before {
+  main {
     display: none;
   }
-  
-  
+}
 
-#bm {
-  height:200px;
+@media screen and (max-width:991px) and (orientation: landscape) {
+  .lottie-welcome-female-animation svg, .lottie-welcome-male-animation svg {
+    height: 100%!important;
+    width: auto!important;
+  }
+  .homeVector {
+    max-height: 500px;
+  }
+  h1.display-3 {
+    font-size: 1.9rem;
+  }
+  .btn-primary, .btn-secondary, .btn-outline-primary {
+    font-size: 14px;
+  }
 }
 
 
 
-
-  #left-container {
-    width: 120px;
-    height: 120px;
-    background-color: lightgreen;
-    border-radius: 50%;
-    padding: 10px;
-  }
-*/
-
-  

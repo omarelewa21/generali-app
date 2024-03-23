@@ -22,6 +22,9 @@
     $totalProtectionNeeded = session('customer_details.selected_needs.need_1.advance_details.goals_amount', '0');
     $protectionFundPercentage = session('customer_details.selected_needs.need_1.advance_details.fund_percentage', '0');
     $relationship = session('customer_details.selected_needs.need_1.advance_details.relationship');
+
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="protection_amount_needed" class="tertiary-default-bg calculator-page">
@@ -29,7 +32,7 @@
         <div class="row wrapper-bottom-grey">
             <div class="header col-12">
                 <div class="row calculatorMenuMob">@include('templates.nav.nav-red-menu-needs')</div>
-                <div class="bg-primary row d-md-none calculatorMob">
+                <div class="bg-primary row d-md-none calculatorMob align-items-center">
                     <div class="col-6">   
                         <h1 id="TotalProtectionFundMob" class="display-3 text-uppercase text-white overflow-hidden ps-4 text-nowrap my-2">RM{{ 
                             $existingPolicyAmount === null || $existingPolicyAmount === '' 
@@ -63,7 +66,7 @@
                                         : number_format(floatval($totalProtectionNeeded) - floatval($existingPolicyAmount)))
                                     }}
                                 </h1>
-                                <p class="text-white display-6 lh-base text-center">Total Protection Fund Needed</p>
+                                <p class="text-white display-6 text-center">Total Protection Fund Needed</p>
                             </div>
                         </div>
                     </div>
@@ -71,18 +74,20 @@
                 <section class="bottom-content z-md-1">
                     <div class="container h-100 px-4 px-md-0">
                         <div class="row h-100">
-                            <div class="col-md-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
-                            <!-- <div class="col-md-6 h-100 order-md-1 order-sm-2 order-2 d-flex justify-content-center align-items-end tertiary-mobile-bg"> -->
-                                <img src="{{ asset('images/needs/protection/amount-needed.png') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
+                            <div class="col-xl-6 h-100 d-flex justify-content-center align-items-end tertiary-mobile-bg">
+                                @if(isset($gender) || isset($skintone))
+                                    <div id="lottie-animation" class="w-auto h-100"></div>
+                                @else
+                                    <img src="{{ asset('images/needs/protection/amount-needed.webp') }}" width="auto" height="100%" alt="Protection Amount Needed Avatar">
+                                @endif
                             </div>
-                            <div class="col-xl-4 col-lg-6 col-md-6 py-lg-5 pt-4 calculatorContent">
+                            <div class="col-xl-4 col-md-11 py-lg-5 pt-4 calculatorContent m-md-auto m-xl-0">
                                 <div class="row h-sm-100">
-                                <!-- <div class="col-xl-4 col-lg-6 col-md-6 py-md-5 py-3 order-md-2 order-1 order-sm-1"> -->
-                                    <h2 class="display-5 fw-bold lh-sm">If anything should happen to me, I’d like to support my family with</h2>
+                                    <h2 class="display-5 fw-bold">If anything should happen to me, I’d like to support my family with</h2>
                                     <p class="display-5 fw-bold currencyField">
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3">RM<input type="text" name="protection_monthly_support" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 w-85 text-sm-start text-center text-primary @error('protection_monthly_support') is-invalid @enderror" id="protection_monthly_support" value="{{ $protectionMonthlySupport !== null ? number_format(floatval($protectionMonthlySupport)) : $protectionMonthlySupport }}" required></span>
                                     / month for
-                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="text" name="protection_supporting_years" class="form-control fw-bold position-relative border-0 d-inline-block w-md-50 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
+                                        <span class="text-primary fw-bold border-bottom border-dark border-3"><input type="number" name="protection_supporting_years" max="100" class="form-control fw-bold position-relative border-0 d-inline-block w-25 text-sm-center text-primary @error('protection_supporting_years') is-invalid @enderror" id="protection_supporting_years" value="{{$protectionSupportingYears}}" required></span>
                                     years</p>
                                     <input type="hidden" name="total_protectionNeeded" id="total_protectionNeeded" value="{{$totalProtectionNeeded}}">
                                 </div>
@@ -115,22 +120,7 @@
                     </div>
                 </section>
             </form>
-            <div class="footer-avatar-grey d-none d-md-block"></div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="missingProtectionFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingProtectionFieldsLabel">Protection Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable protection priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
+            <div class="footer-avatar-grey d-none d-xl-block"></div>
         </div>
     </div>
 </div>
@@ -138,7 +128,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>
@@ -150,7 +140,10 @@
     </div>
 </div>
 <script>
-    var protectionPriority = '{{$protectionPriority}}';
+    var needs_priority = '{{json_encode($protectionPriority)}}';
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

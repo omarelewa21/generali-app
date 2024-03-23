@@ -14,6 +14,20 @@
 
 @php
     $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
+    $protectionCovered = session('customer_details.priorities.protection');
+    $retirementCovered = session('customer_details.priorities.retirement');
+    $educationCovered = session('customer_details.priorities.education');
+    $savingsCovered = session('customer_details.priorities.savings');
+    $investmentCovered = session('customer_details.priorities.investments');
+    $healthCovered = session('customer_details.priorities.health-medical');
+    $debtCovered = session('customer_details.priorities.debt-cancellation');
+    $protectionPriority = session('customer_details.priorities.protection_discuss');
+    $retirementPriority = session('customer_details.priorities.retirement_discuss');
+    $educationPriority = session('customer_details.priorities.education_discuss');
+    $savingsPriority = session('customer_details.priorities.savings_discuss');
+    $investmentPriority = session('customer_details.priorities.investments_discuss');
+    $healthPriority = session('customer_details.priorities.health-medical_discuss');
+    $debtPriority = session('customer_details.priorities.debt-cancellation_discuss');
 @endphp
 
 <div id="monthly_goals" class="secondary-default-bg">
@@ -34,7 +48,7 @@
                             </div>
                             <div class="col-md-6 col-xl-4 col-12 h-100 h-sm-auto">
                                 <div class="row justify-content-center position-relative h-100 h-sm-auto">
-                                    <img src="{{ asset('images/summary/tabung.png') }}" height="auto" width="90%" alt="Monthly Goals" class="m-auto mh-100">
+                                    <img src="{{ asset('images/summary/tabung.webp') }}" height="auto" width="90%" alt="Monthly Goals" class="m-auto mh-100">
                                     <div class="col-12 position-absolute center px-5">
                                         <p class="display-3 currencyField d-flex justify-content-center">
                                             <span class="text-black fw-bold border-bottom border-dark border-3">RM<input type="text" name="financial_statement_monthly_support" class="form-control display-3 position-relative border-0 d-inline-block w-75 w-md-50 fw-bold text-primary @error('financial_statement_monthly_support') is-invalid @enderror" id="financial_statement_monthly_support" value="{{ $financialStatementMonthlySupport !== null ? number_format(floatval($financialStatementMonthlySupport)) : $financialStatementMonthlySupport }}" required></span>
@@ -51,7 +65,7 @@
                         <!-- <div class="container"> -->
                         <!-- <div class="row justify-content-center position-relative">
                             <div class="col-md-6 col-xl-4 text-center position-absolute justify-content-center align-items-center d-flex" style="bottom: -90px">
-                                <img src="{{ asset('images/summary/bank-container.png') }}" width="90%" alt="Monthly Goals" class="d-md-block d-none">
+                                <img src="{{ asset('images/summary/tabung.webp') }}" width="90%" alt="Monthly Goals" class="d-md-block d-none">
                                 
                             </div>
                         </div> -->
@@ -75,7 +89,36 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('existing.policy')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    @php
+                                        if($debtCovered === 'true' || $debtCovered === true || $healthCovered === 'true' || $healthCovered === true || $investmentCovered === 'true' || $investmentCovered === true || $savingsCovered === 'true' || $savingsCovered === true || $educationCovered === 'true' || $educationCovered === true || $retirementCovered === 'true' || $retirementCovered === true || $protectionCovered === 'true' || $protectionCovered === true){
+                                            $route = route('existing.policy');
+                                        }
+                                        else {
+                                            if($debtPriority === 'true' || $debtPriority === true){
+                                                $route = route('debt.cancellation.gap');
+                                            } elseif ($healthPriority === 'true' || $healthPriority === true) {
+                                                if($selectedMedical === 'Yes'){
+                                                    $route = route('health.medical.planning.gap');
+                                                } else{ 
+                                                    $route = route('health.medical.critical.gap');
+                                                }
+                                            } elseif ($investmentPriority === 'true' || $investmentPriority === true) {
+                                                $route = route('investment.gap');
+                                            } elseif ($savingsPriority === 'true' || $savingsPriority === true) {
+                                                $route = route('savings.gap');
+                                            } elseif ($educationPriority === 'true' || $educationPriority === true) {
+                                                $route = route('education.gap');
+                                            } elseif ($retirementPriority === 'true' || $retirementPriority === true) {
+                                                $route = route('retirement.gap');
+                                            } elseif ($protectionPriority === 'true' || $protectionPriority === true) {
+                                                $route = route('protection.gap');
+                                            }
+                                            else {
+                                                $route = route('financial.priorities.discuss');
+                                            }
+                                        }
+                                    @endphp
+                                    <a href="{{ $route }}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>

@@ -14,7 +14,6 @@
 
 @php
     // Retrieving values from the session
-    $image = session('customer_details.avatar.image', 'images/avatar-general/gender-male.svg');
     $maritalStatus = session('customer_details.identity_details.marital_status');
     $transactionId = session('transaction_id') ?? ($_GET['transaction_id'] ?? null);
 @endphp
@@ -25,9 +24,9 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default order-md-1 order-sm-2 order-2 px-0 parallax-inner parallax-bottom">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="col-12 text-center d-flex justify-content-center">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
-                        <div class="position-relative imageContainerMarried"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center">
+                        <div id="lottie-animation"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
                 </section>
                 <div class="bottomObeserver"></div>
@@ -41,8 +40,8 @@
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">May we know your relationship status?</h1>
-                                        <p class="text-white display-6 lh-base">Click to select your marital status.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">May we know your relationship status?</h1>
+                                        <p class="text-white display-6">Click to select your marital status.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 px-md-5">
@@ -58,46 +57,51 @@
                                     @endif
                                 </div>
                                 <div class="row px-4 px-md-5 pb-md-5 action_button_slider">
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Single') default @endif" data-avatar="Single" data-required="" id="singleButton">
-                                                    <img src="{{ asset('images/marital-status/single-icon.png') }}" width="auto" height="100px" alt="Single" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
+                                                    <img src="{{ asset('images/marital-status/single-icon.webp') }}" width="100%" alt="Single" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Single</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Married') default @endif" data-avatar="Married" data-required="" id="marriedButton">
-                                                    <img src="{{ asset('images/marital-status/married-icon.png') }}" width="auto" height="100px" alt="Married" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
+                                                    <img src="{{ asset('images/marital-status/married-icon.webp') }}" width="100%" alt="Married" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Married</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Divorced') default @endif" data-avatar="Divorced" data-required="" id="divorcedButton">
-                                                    <img src="{{ asset('images/marital-status/divorced-icon.png') }}" width="auto" height="100px" alt="Divorced" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
+                                                    <img src="{{ asset('images/marital-status/divorced-icon.webp') }}" width="100%" alt="Divorced" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Divorced</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Widowed') default @endif" data-avatar="Widowed" data-required="" id="widowedButton">
-                                                    <img src="{{ asset('images/marital-status/widowed-icon.png') }}" width="auto" height="100px" alt="Widowed" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
+                                                    <img src="{{ asset('images/marital-status/widowed-icon.webp') }}" width="100%" alt="Widowed" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Widowed</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row align-items-center px-5 pb-md-5 mt-3 mx-auto mb-3 d-none w-75">
+                                    <button type="button" class="slick-btns me-3 slick-prev">Prev</button>
+                                    <div class="slick-scrollbar"></div>
+                                    <button type="button" class="slick-btns ms-3 slick-next">Next</button>
                                 </div>
                             </div>
                         </section>
@@ -108,8 +112,8 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="maritalStatusButtonInput" id="maritalStatusButtonInput" value="{{$maritalStatus}}">
-                                        <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent">
-                                        <a href="{{route('identity.details',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <input type="hidden" name="urlInput" id="urlInput" value="family.dependent">
+                                        <a href="{{route('identity.details')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -124,5 +128,6 @@
 
 <script>
     var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
+    var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!};
 </script>
 @endsection

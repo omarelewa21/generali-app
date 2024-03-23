@@ -29,24 +29,25 @@
                     </div>
                 </div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerParents"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerSpouse">
+                        <div id="lottie-animation"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
-                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerChildren"></div>
                 </section>
                 <div class="bottomObeserver"></div>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section parallax-inner parallax-top">
                 <div class="scrollable-content">
-                    <form action="{{ route('handle.avatar.selection',['transaction_id' => $transactionId]) }}" method="post" class="buttonForm">
+                    <form action="{{ route('handle.avatar.selection') }}" method="post" class="buttonForm">
                     @csrf
                         <section class="main-content">
                             <div class="container">
                                 <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Great, now let’s get to know your family.</h1>
-                                        <p class="text-white display-6 lh-base">Click to select your family details.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Great, now let’s get to know your family.</h1>
+                                        <p class="text-white display-6">Click to select your family details.</p>
                                     </div>
                                 </div>
                                 <div class="row px-4 px-md-5">
@@ -62,46 +63,51 @@
                                     @endif
                                 </div>
                                 <div class="row px-4 px-md-5 pb-md-5 action_button_slider">
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if (isset($familyDependent['spouse']) && $familyDependent['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
-                                                    <img src="{{ asset('images/family-dependent/spouse-icon.png') }}" width="auto" height="100px" alt="Spouse" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                                    <img src="{{ asset('images/family-dependent/spouse-icon.webp') }}" width="100%" alt="Spouse" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Spouse</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['children']) && $familyDependent['children'] === true) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
-                                                    <img src="{{ asset('images/family-dependent/children-icon.png') }}" width="auto" height="100px" alt="Child(ren)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
+                                                    <img src="{{ asset('images/family-dependent/children-icon.webp') }}" width="100%" alt="Child(ren)" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Child(ren)</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['parents']) && $familyDependent['parents'] === true) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
-                                                    <img src="{{ asset('images/family-dependent/parents-icon.png') }}" width="auto" height="100px" alt="Parent(s)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
+                                                    <img src="{{ asset('images/family-dependent/parents-icon.webp') }}" width="100%" alt="Parent(s)" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Parent(s)</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['siblings']) && $familyDependent['siblings'] === true) default @endif" data-avatar="siblings" data-required="" id="siblingButton">
-                                                    <img src="{{ asset('images/family-dependent/siblings-icon.png') }}" width="auto" height="100px" alt="Sibling(s)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
+                                                    <img src="{{ asset('images/family-dependent/siblings-icon.webp') }}" width="100%" alt="Sibling(s)" class="mx-auto">
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Sibling(s)</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row align-items-center px-5 pb-md-5 mt-3 mx-auto mb-3 d-none w-75">
+                                    <button type="button" class="slick-btns me-3 slick-prev">Prev</button>
+                                    <div class="slick-scrollbar"></div>
+                                    <button type="button" class="slick-btns ms-3 slick-next">Next</button>
                                 </div>
                             </div>
                         </section>
@@ -113,11 +119,11 @@
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
                                         @if ((!isset($familyDependent['spouse']) || $familyDependent['spouse'] === false) && (!isset($familyDependent['children']) || $familyDependent['children'] === false) && (!isset($familyDependent['parents']) || $familyDependent['parents'] === false) && (!isset($familyDependent['siblings']) || $familyDependent['siblings'] === false))
-                                            <input type="hidden" name="urlInput" id="urlInput" value="avatar.my.assets">
+                                            <input type="hidden" name="urlInput" id="urlInput" value="assets">
                                         @else
-                                            <input type="hidden" name="urlInput" id="urlInput" value="avatar.family.dependent.details">
+                                            <input type="hidden" name="urlInput" id="urlInput" value="family.dependent.details">
                                         @endif
-                                        <a href="{{route('avatar.marital.status',['transaction_id' => $transactionId])}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('marital.status')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -137,7 +143,7 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 pt-2 pb-0">
+            <div class="modal-header px-md-5 pt-2 pb-0">
                 <h3 class="modal-title text-center text-uppercase otherModalText" id="parentAvatarsLabel">Parent(s)</h3>
             </div>
             <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
@@ -161,7 +167,7 @@
             <div class="d-flex justify-content-end px-3 py-3">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-header px-5 pt-2 pb-0">
+            <div class="modal-header px-md-5 pt-2 pb-0">
                 <h3 class="modal-title text-center text-uppercase otherModalText" id="childrenAvatarsLabel">Child(ren)</h3>
             </div>
             <div class="modal-body text-center text-center px-5 pt-5 bg-primary">
@@ -198,6 +204,7 @@
 <script>
     var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
     var spouse_session = {!! json_encode(session('customer_details.family_details.spouse')) !!};
-    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};    
+    var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};   
+    var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!}; 
 </script>
 @endsection

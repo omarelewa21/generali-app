@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Services\TransactionService;
+use App\Services\CustomerService;
 use Illuminate\Support\Facades\Log;
+use App\Services\TransactionService;
+use Illuminate\Support\Facades\Validator;
+use App\Services\AvatarService;
 
 class AvatarController extends Controller
 {
-    public function changeImage(Request $request, TransactionService $transactionService)
+    public function changeImage(Request $request,CustomerService $customerService, TransactionService $transactionService,AvatarService $avatarService)
     {
         // Define custom validation rule for button selection
         Validator::extend('at_least_one_selected', function ($attribute, $value, $parameters, $validator) {
@@ -40,7 +42,7 @@ class AvatarController extends Controller
         $skintone = $request->input('skinSelection');
 
         // Get the existing customer_details array from the session
-        $customerDetails = $request->session()->get('customer_details', []);        
+        $customerDetails = $request->session()->get('customer_details', []); 
 
         // Add the new array inside the customer_details array
         $customerDetails['avatar'] = [
@@ -49,13 +51,21 @@ class AvatarController extends Controller
             'skin_tone' => $skintone
         ];
 
+        // Determine the latest array key
+        $latestKey = 'avatar';
+
+        $customerId = $customerService->handleCustomer($request,$customerDetails,$latestKey);
+        $transactionId = $transactionService->handleTransaction($customerId);
+        $avatarId = $avatarService->handleAvatar($customerDetails,$customerId);
+
+        $customerDetails = array_merge([
+            'transaction_id' => $transactionId,
+            'customer_id' => $customerId
+        ], $customerDetails);
+
         // Store the updated customer_details array back into the session
         $request->session()->put('customer_details', $customerDetails);
 
-        //use service to update and insert record 
-        $transactionService->handleTransaction($request,$customerDetails);
-        $transactionData = ['transaction_id' => $request->input('transaction_id')];
-
-        return redirect()->route('identity.details',$transactionData);
+        return redirect()->route('identity.details');
     } 
 }

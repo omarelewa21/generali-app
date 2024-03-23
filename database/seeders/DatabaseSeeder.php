@@ -15,6 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+       
+        $this->call(CompaniesTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
+        $this->call(EducationLevelsTableSeeder::class);
+        $this->call(IdTypesTableSeeder::class);
+        $this->call(MaritalStatusesTableSeeder::class);
+        $this->call(OccupationsTableSeeder::class);
+        $this->call(PolicyPlansTableSeeder::class);
+        $this->call(PremiumModesTableSeeder::class);
+        $this->call(TitlesTableSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

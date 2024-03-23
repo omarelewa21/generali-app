@@ -18,24 +18,24 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="basic_details">
+<div id="basic_details" class="bg-accent-bg-grey">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 px-0 bg-primary sidebanner">
-                <div class="navbar-scroll fixed-top">
+            <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">
+                <div class="navbar-scroll fixed-top px-md-0 px-3">
                     @include('templates.nav.nav-white-menu')
                     <div class="text-white px-4 px-xl-5 fixed-sm-top bg-primary">
-                        <h2 class="display-5 fw-bold py-3">Hello! Let's get to know you better.</h2>
+                        <h2 class="display-5 fw-bold py-3 px-md-0 px-3">Hello! Let's get to know you better.</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
-                <div>
+            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 content-section vh-100">
+                <div class="bg-accent-bg-grey">
                     <form novalidate action="{{ route('form.basic.details', ['transaction_id' => request()->input('transaction_id')]) }}" method="POST">
                         @csrf
                         <section class="main-content">
                             <div class="container">
-                                <div class="row pt-4 px-4 pb-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
+                                <div class="row pt-4 px-4 pt-md-5 sticky-md-top bg-accent-bg-grey">
                                     <div class="col-12">
                                         <h1 class="display-3 text-uppercase">Do introduce yourself.</h1>
                                     </div>
@@ -108,7 +108,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">                     
-                                        <a href="{{route('pdpa.disclosure',['transaction_id' => $transactionId])}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                        <a href="{{route('pdpa.disclosure')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                         <button class="btn btn-primary text-uppercase flex-fill" type="submit">Next</button>
                                     </div>
                                 </div>

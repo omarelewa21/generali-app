@@ -19,42 +19,42 @@
                 // Extract the folder name from the URL
                 $folderName = explode('.', $routeName)[0];
             @endphp
-            <a class="nav-item text-decoration-none text-dark" href="{{route('protection.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('protection.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'protection' ? 'active' : '' }}" data-folder-name="protection">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'protection' ? 'text-primary' : '' }}">Protection</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{route('retirement.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('retirement.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'retirement' ? 'active' : '' }}" data-folder-name="retirement">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'retirement' ? 'text-primary' : '' }}">Retirement</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{route('education.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('education.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'education' ? 'active' : '' }}" data-folder-name="education">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'education' ? 'text-primary' : '' }}">Education</p>
                 </div>
             </a>
-            <a class="nav-item text-decoration-none text-dark" href="{{route('savings.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('savings.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'savings' ? 'active' : '' }}" data-folder-name="savings">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'savings' ? 'text-primary' : '' }}">Regular Savings</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{route('investment.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('investment.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'investment' ? 'active' : '' }}" data-folder-name="investment">
-                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'investment' ? 'text-primary' : '' }}">Lump Sum Investment</p>
+                    <p class="nav-text text-uppercase pe-5 {{ $folderName == 'investment' ? 'text-primary' : '' }}">Lump Sum Investments</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{route('health.medical.home') }}">
+            <a class="nav-item text-decoration-none text-black" href="{{route('health.medical.home') }}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'health' ? 'active' : '' }}" data-folder-name="health and medical">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'health' ? 'text-primary' : '' }}">Health & Medical</p>
                 </div>
             </a>
 
-            <a class="nav-item text-decoration-none text-dark" href="{{ route('debt.cancellation.home')}}">
+            <a class="nav-item text-decoration-none text-black" href="{{ route('debt.cancellation.home')}}">
                 <div class="timeline-item-needs position-relative mb-5 {{ $folderName == 'debt' ? 'active' : '' }}" data-folder-name="debt cancellation">
                     <p class="nav-text text-uppercase pe-5 {{ $folderName == 'debt' ? 'text-primary' : '' }}">Debt Cancellation</p>
                 </div>

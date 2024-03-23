@@ -32,23 +32,24 @@
             <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 main-default-bg wrapper-avatar-default px-0 parallax-inner parallax-top">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-red-menu')</div></div>
                 <section class="avatar-design-placeholder content-avatar-default overflow-hidden">
-                    <div class="position-relative imageContainerParents"></div>
-                    <div class="position-relative d-flex justify-content-center imageContainerSpouse">
-                        <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerParents"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerSpouse">
+                        <div id="lottie-animation"></div>
+                        <div class="imageContainerMarried"></div>
                     </div>
-                    <div class="position-relative d-flex justify-content-center imageContainerChildren"></div>
+                    <div class="col-12 position-relative text-center d-flex justify-content-center imageContainerChildren"></div>
                 </section>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 parallax-inner parallax-bottom z-index-1">
                 <div class="scrollable-content">
-                    <form novalidate action="{{ route('avatar.family.dependent.details') }}" method="POST" id="familyDetailsForm">
+                    <form novalidate action="{{ route('form.family.dependent.details') }}" method="POST" id="familyDetailsForm">
                         @csrf
                         <section class="main-content">
                             <div class="container">
                                 <div class="row px-4 pt-4 pb-2 px-md-5 pt-md-5 right-sidebar">
                                     <div class="col-12">
-                                        <h1 class="display-4 text-white pb-3 fw-bold">Thanks for introducing your family!</h1>
-                                        <p class="text-white display-6 lh-base">Tell us more about each of them.</p>
+                                        <h1 class="display-4 text-white pb-md-3 fw-bold">Thanks for introducing your family!</h1>
+                                        <p class="text-white display-6">Tell us more about each of them.</p>
                                     </div>
                                 </div>
                                 <div class="form-container pb-0 pb-md-5">
@@ -406,7 +407,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key .'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $childrenData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -525,7 +526,7 @@
                                                                     <div class="row py-2">
                                                                         <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error($key . 'YearsOfSupport') is-invalid @enderror">
                                                                             <label for="{{$key}}YearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['years_support'] ?? '') }}" required>
+                                                                            <input type="number" name="{{$key}}YearsOfSupport" class="form-control" id="{{$key}}YearsOfSupportInput" placeholder="Number of Years" value="{{ old($key . 'YearsOfSupport', $parentsData[$key]['year_support'] ?? '') }}" required>
                                                                         </div>
                                                                         @error($key . 'YearsOfSupport')
                                                                             <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -643,7 +644,7 @@
                                                                 <div class="row py-2">
                                                                     <div class="col-12 col-lg-7 col-md-12 col-sm-12 pt-4 @error('siblingYearsOfSupport') is-invalid @enderror">
                                                                         <label for="siblingYearsOfSupportInput" class="form-label">No. of Years of Support Needed <span class="text-danger">*</span></label>
-                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['years_support'] ?? '') }}" required>
+                                                                        <input type="number" name="siblingYearsOfSupport" class="form-control" id="siblingYearsOfSupportInput" placeholder="Number of Years" value="{{ old('siblingYearsOfSupport', $siblingsData['year_support'] ?? '') }}" required>
                                                                     </div>
                                                                     @error('siblingYearsOfSupport')
                                                                         <div class="invalid-feedback text-red">{{ $message }}</div>
@@ -680,7 +681,7 @@
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <!-- Add a hidden input field to store the selected button -->
                                         <input type="hidden" name="familyDependentButtonInput" id="familyDependentButtonInput" value="{{ json_encode($familyDependent) }}">
-                                        <a href="{{route('avatar.family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('family.dependent')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button class="btn btn-primary flex-fill text-uppercase" type="submit" id="submitButton">Next</button>
                                     </div>
                                 </div>
@@ -730,6 +731,7 @@ var siblings_session = {!! json_encode(session('customer_details.family_details.
 var gender_session = {!! json_encode(session('customer_details.avatar.gender')) !!};
 var family_details = {!! json_encode(session('customer_details.family_details')) !!};
 var marital_status = {!! json_encode(session('customer_details.identity_details.marital_status')) !!};
+var avatar_session = {!! json_encode(session('customer_details.avatar.image')) !!}
 
 // Ensure the first accordion item is always open
 document.addEventListener('DOMContentLoaded', function() {

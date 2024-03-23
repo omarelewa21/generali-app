@@ -17,6 +17,8 @@
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedRoom = session('customer_details.selected_needs.need_6.advance_details.health_care.room_option');
     $selectedHospital = session('customer_details.selected_needs.need_6.advance_details.health_care.type_of_hospital');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="hospital-room-selection">
@@ -31,7 +33,11 @@
                         </div>
                     </div>
                     <div class="col-12 text-center d-flex justify-content-center room-selection-content z-1">
-                        <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.png') }}" alt="room selection avatar" width="auto" height="200%">
+                        @if(isset($gender) || isset($skintone))
+                            <div id="lottie-animation" class="w-auto" style="height:200%;"></div>
+                        @else
+                            <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/avatar.webp') }}" alt="room selection avatar" width="auto" height="200%">
+                        @endif
                     </div>
                     <div class="col-12 text-center d-flex justify-content-center bg-accent-light-white room-selection-footer"></div>
                 </section>
@@ -67,7 +73,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="100px" alt="own-space" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.webp') }}" width="auto" height="100px" alt="own-space" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">My own space</p>
                                                 </button>
                                             </div>
@@ -77,7 +83,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.webp') }}" width="auto" height="100px" alt="a-companion" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">A companion</p>
                                                 </button>
                                             </div>
@@ -87,7 +93,7 @@
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
-                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates" class="mx-auto">
+                                                    <img src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.webp') }}" width="auto" height="100px" alt="more-roommates" class="mx-auto">
                                                     <p class="avatar-text text-center pt-4 mb-0 fw-bold">More roommates</p>
                                                 </button>
                                             </div>
@@ -100,7 +106,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'my own space') default @endif" data-avatar="my own space" data-required="">
                                                     <div class="col-md-4 col-12">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.png') }}" width="auto" height="110px" alt="own-space">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/own-space-icon.webp') }}" width="auto" height="110px" alt="own-space">
                                                     </div>
                                                     <div class="col-md-8 col-12 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">My own space</p>
@@ -114,7 +120,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'a companion') default @endif" data-avatar="a companion" data-required="">
                                                     <div class="col-4">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.png') }}" width="auto" height="100px" alt="a-companion">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/a-companion-icon.webp') }}" width="auto" height="100px" alt="a-companion">
                                                     </div>
                                                     <div class="col-8 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">A companion</p>
@@ -128,7 +134,7 @@
                                             <div class="col-12 d-flex align-items-center justify-content-start hover">
                                                 <button class="border-0 w-100 d-flex align-items-center py-4 @if($selectedRoom === 'more roommates') default @endif" data-avatar="more roommates" data-required="">
                                                     <div class="col-4">
-                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.png') }}" width="auto" height="100px" alt="more-roommates">
+                                                        <img class="needs-icon" src="{{ asset('images/needs/health-medical/medical-planning/room-selection/more-roomate-icon.webp') }}" width="auto" height="100px" alt="more-roommates">
                                                     </div>
                                                     <div class="col-8 d-flex">
                                                         <p class="avatar-text text-start mb-0 fw-bold lh-normal">More roommates</p>
@@ -146,7 +152,7 @@
                                 <div class="row">
                                     <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                         <input type="hidden" name="roomTypeInput" id="roomTypeInput" value="{{$selectedRoom}}">
-                                        <a href="{{route('health.medical.planning.hospital.selection')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                        <a href="{{route('health.medical.medical.planning.hospital.selection')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                         <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                     </div>
                                 </div>
@@ -159,21 +165,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -191,8 +182,11 @@
 </div>
 
 <script>
-    var healthPriority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var selectionInput = document.getElementById('roomTypeInput');
     var lastPageInput = '{{$selectedHospital}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

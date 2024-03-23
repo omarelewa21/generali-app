@@ -16,7 +16,6 @@
     $selectedExpectingInput = session('customer_details.financialStatement.isChangeinAmount');
     $financialStatementMonthlySupport = session('customer_details.financialStatement.amountAvailable');
 @endphp
-@endphp
 
 <div id="expected_income" class="secondary-default-bg">
     <div class="container-fluid">
@@ -54,7 +53,7 @@
                 </section>
                 <section class="bottom-avatar">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <img src="{{ asset('images/summary/avatar-open-hands.png') }}" height="100%" width="auto" alt="Expected Income">
+                        <img src="{{ asset('images/summary/avatar-open-hands.webp') }}" height="100%" width="auto" alt="Expected Income">
                     </div>
                 </section>
                 <section class="footer fixed-bottom footer-scroll p-0">
@@ -74,8 +73,7 @@
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
                                 <input type="hidden" name="selectedExpectingInput" id="selectedExpectingInput" value="{{$selectedExpectingInput}}">
-                                <a href="{{route('summary.monthly-goals')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
-                                <!-- <a href="{{route('summary.increment-amount')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Next</a> -->
+                                <a href="{{route('financial.statement.monthly.goals')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                 <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                             </div>
                         </div>

@@ -52,7 +52,7 @@ if (specificPageURLs.some((url) => currentURL.endsWith(url))) {
                 var pathClass = parentSvgContainer.attr("data-svg-class");
                 var dataIndex = parentSvgContainer.attr("data-index");
 
-                var removeButton = $("<button class='remove-button btn-remove' data-avatar='" + dataAvatar + "' data-index='" + dataIndex + "'><img class='close' src='/images/top-priorities/close.png' width='100%'></button>");
+                var removeButton = $("<button class='remove-button btn-remove' data-avatar='" + dataAvatar + "' data-index='" + dataIndex + "'><i class='fa-solid fa-circle-xmark fa-xl close text-primary'></i></button>");
 
                 container.append(removeButton);
                 droppedContainer.append(container);

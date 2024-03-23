@@ -14,10 +14,12 @@
     $savingsGoalPA = session('customer_details.selected_needs.need_4.advance_details.annual_returns');
     $savingsFundPercentage = session('customer_details.selected_needs.need_4.advance_details.fund_percentage', '0');
     $totalAmountNeeded = session('customer_details.selected_needs.need_4.advance_details.insurance_amount');
-    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.total_savings_needed', '0');
-    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goals_amount');
-    $savingsRiskProfile = session('customer_details.selected_needs.need_4.advance_details.risk_profile');
-    $savingsPotentialReturn = session('customer_details.selected_needs.need_4.advance_details.potential_return');
+    $totalSavingsNeeded = session('customer_details.selected_needs.need_4.advance_details.goals_amount', '0');
+    $goalsAmount = session('customer_details.selected_needs.need_4.advance_details.goal_amount');
+
+    $riskProfile = session('customer_details.risk_profile.selected_risk_profile');
+    $potentialReturn = session('customer_details.risk_profile.selected_potential_return');
+
     $savingsMonthlyPayment = session('customer_details.selected_needs.need_4.advance_details.covered_amount');
 @endphp
 
@@ -30,7 +32,7 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
+                        <div class="row justify-content-center">
                             <div class="col-xxl-6 col-xl-6 pb-5">
                                 <h2 class="display-4 text-center">Total Regular Savings Fund</h2>
                             </div>
@@ -60,20 +62,20 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/savings-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <img src="{{ asset('images/top-priorities/savings-icon.webp') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{ $totalAmountNeeded > $goalsAmount ? '100' : floor(floatval($savingsFundPercentage))}}%</span>
-                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
+                                                <p class="avatar-text text-center fw-bold text-black mt-2 mt-md-0">covered</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.webp') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">My goal is to build a total savings funds of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($goalsAmount))}}</h4>
@@ -85,7 +87,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-input.png') }}" alt="input icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-input.webp') }}" class="sum-icon" alt="input icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">If I set aside monthly savings of </p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($savingsMonthlyPayment))}}</h4>
@@ -97,7 +99,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-clock.webp') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">For the next</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalDuration}} years</h4>
@@ -110,7 +112,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-saving.webp') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">While expecting annual returns of</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$savingsGoalPA}}% p.a.</h4>
@@ -122,7 +124,7 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-summary.webp') }}" class="sum-icon" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">Projected accumalated Saving Fund is</p>
                                             </div>
                                             <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded))}}</h4>
@@ -145,7 +147,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('savings.risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
+                                    <a href="{{route('risk.profile')}}" class="btn btn-secondary flex-fill me-md-2 text-uppercase">Back</a>
                                     <button type="submit" class="btn btn-primary flex-fill text-uppercase" id="nextButton">Next</button>
                                 </div>
                             </div>
@@ -157,21 +159,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingSavingsFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingSavingsFieldsLabel">Savings Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable savings priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -191,8 +178,8 @@
     var savingsTotal =  parseFloat({{$totalSavingsNeeded}});
     var percentage = parseFloat({{$savingsFundPercentage}});
     var goals = parseFloat({{$goalsAmount}});
-    var savingsPriority = '{{$savingsPriority}}';
-    var lastPageInput = '{{$savingsRiskProfile === "" || $savingsRiskProfile === null ? $savingsRiskProfile : $savingsPotentialReturn}}';
+    var needs_priority = '{{json_encode($savingsPriority)}}';
+    var lastPageInput = '{{$riskProfile === "" || $riskProfile === null ? $riskProfile : $potentialReturn}}';
 </script>
 
 @endsection

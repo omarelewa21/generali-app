@@ -16,24 +16,26 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
     const currentPath = url.pathname;
 
     $(document).ready(function () {
-
         // Define an array of step paths that should be marked as active
         let allFieldsFilled = [];
-
+    
         $.ajax({
             url: '/getSessionData',
             method: 'GET',
             success: function(response) {
                 var customer_details = response.customer_details;
                 sessionDetails(customer_details);
-
+    
                 $('.timeline-item').each(function (index) {
                     var itemURL = $(this).find('a').attr('href');
                     var urlObject = new URL(itemURL);
                     var itemPath = urlObject.pathname;
-
+    
                     if (allFieldsFilled.includes(itemPath)) {
                         $(this).addClass('active');
+                    } else {
+                        $(this).find('a').removeAttr('href');
+                        $(this).find('a').addClass('disabled');
                     }
                 });
             },
@@ -41,8 +43,10 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
                 console.error(error);
             }
         });
-
+    
         function sessionDetails(customer_details) {
+            if (!customer_details) return;
+            
             if (customer_details.basic_details) {
                 allFieldsFilled.push('/basic-details');
             }
@@ -51,45 +55,21 @@ if (!specificPageURLs.some(url => currentURL.endsWith(url))) {
                 allFieldsFilled.push('/avatar');
             }
 
-            if (customer_details.identity_details) {
-                var filled = false;
-            
-                for (var key in customer_details.identity_details) {
-                    if (customer_details.identity_details.hasOwnProperty(key) && key !== 'marital_status' && (customer_details.identity_details[key] === null || customer_details.identity_details[key] === '')) {
-                        filled = true;
-                        break;
-                    }
-                }
-
-                if (customer_details.identity_details && filled == true) {
-                    allFieldsFilled.push('/identity-details');
-                }
+            if (customer_details.identity_details && (customer_details.identity_details.country || customer_details.identity_details.id_type || customer_details.identity_details.id_number || customer_details.identity_details.passport_number || customer_details.identity_details.birth_cert || customer_details.identity_details.police_number || customer_details.identity_details.registration_number || customer_details.identity_details.age || customer_details.identity_details.education_level || customer_details.identity_details.occupation || customer_details.identity_details.marital_status || customer_details.identity_details.habits)) {
+                allFieldsFilled.push('/identity-details');
             }
 
-            if (customer_details.family_details) {
-                var spouse_data = customer_details.family_details.spouse_data
-                var children_data = customer_details.family_details.children_data
-                var parents_data = customer_details.family_details.parents_data
-                var siblings_data = customer_details.family_details.siblings_data
-
-                if (spouse_data && spouse_data.full_name || children_data && children_data.full_name || parents_data || siblings_data && siblings_data.full_name) {
-                    allFieldsFilled.push('/family-dependent');
-                }
+            if (customer_details.identity_details && (customer_details.identity_details.marital_status == 'Single' || customer_details.identity_details.marital_status == 'Divorced' || customer_details.identity_details.marital_status == 'Widowed') && customer_details.family_details) {
+                allFieldsFilled.push('/family-dependent');
+            } else if (customer_details.identity_details && (customer_details.identity_details.marital_status == 'Married') && customer_details.family_details.spouse_data) {
+                allFieldsFilled.push('/family-dependent');
             }
-    
-            if (customer_details.pdpa) {
-                let assets_fields = JSON.parse(localStorage.getItem('visitedPaths')) || [];
 
-                if (currentPath === '/assets') {
-                    localStorage.setItem('visitedPaths', JSON.stringify('/assets'));
-                }
-
-                if (assets_fields === '/assets') {
-                    allFieldsFilled.push('/assets');
-                }
+            if (customer_details.assets) {
+                allFieldsFilled.push('/assets');
             }
             
-            if (customer_details.financial_priorities) {
+            if (customer_details.priorities_level && customer_details.priorities_level.length > 0) {
                 allFieldsFilled.push('/financial-priorities');
             }
         }

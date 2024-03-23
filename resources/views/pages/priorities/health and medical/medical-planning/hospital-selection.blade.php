@@ -16,6 +16,8 @@
     $healthPriority = session('customer_details.priorities.health-medical_discuss');
     $selectedHospital = session('customer_details.selected_needs.need_6.advance_details.health_care.type_of_hospital');
     $relationship = session('customer_details.selected_needs.need_6.advance_details.health_care.relationship');
+    $gender = session('customer_details.avatar.gender', 'Male');
+    $skintone = session('customer_details.avatar.skin_tone', 'white');
 @endphp
 
 <div id="medical-hospital-selection" class="secondary-default-bg">
@@ -40,7 +42,7 @@
                             <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent position-relative choice d-flex justify-content-center h-100 @if($selectedHospital === 'private hospital') default @endif" id="private_hospital" data-avatar="private hospital" data-required="">
                                     <div class="mt-auto">
-                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/private-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
+                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/private-hospital.webp') }}" width="auto" height="90%" class="m-auto pb-4" style="max-height:400px;">
                                         <p class="avatar-text text-center mb-0 fw-bold">Private hospital</p>
                                     </div>
                                 </button>
@@ -48,14 +50,18 @@
                             <div class="h-100 d-flex justify-content-center align-items-center col-5">
                                 <button class="border-0 bg-transparent choice h-100 position-relative d-flex justify-content-center @if($selectedHospital === 'general hospital') default @endif" id="general_hospital" data-avatar="general hospital" data-required="">
                                     <div class="mt-auto">
-                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/general-hospital.png') }}" width="auto" height="90%" class="m-auto pb-4">
+                                        <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/general-hospital.webp') }}" width="auto" height="90%" class="m-auto pb-4" style="max-height:400px;">
                                         <p class="avatar-text text-center mb-0 fw-bold">General hospital</p>
                                     </div>
                                 </button>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-2 plant d-none d-xl-block">
-                            <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.png') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
+                            @if(isset($gender) || isset($skintone))
+                                <div id="lottie-animation" class="mh-55 mw-100 position-absolute center hospital_avatar"></div>
+                            @else
+                                <img src="{{ asset('images/needs/health-medical/medical-planning/hospital-selection/avatar.webp') }}" class="mh-55 mw-100 position-absolute center hospital_avatar">
+                            @endif
                         </div>
                     </div>
                 </section>
@@ -90,21 +96,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="missingHealthFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingHealthFieldsLabel">Health Medical Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable health medical priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -122,7 +113,10 @@
 </div>
 <script>
     var selectionInput = document.getElementById('medicalHospitalSelectedInput');
-    var healthPriority = '{{$healthPriority}}';
+    var needs_priority = '{{json_encode($healthPriority)}}';
     var lastPageInput = '{{$relationship}}';
+    var genderSet = '{{$gender}}';
+    var skintone = '{{$skintone}}';
+    var gender = genderSet.toLowerCase();
 </script>
 @endsection

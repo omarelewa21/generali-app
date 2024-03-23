@@ -53,10 +53,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[0]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 10px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 10px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -70,10 +70,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[1]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 20px;top: 50px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 20px;top: 50px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -87,10 +87,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[2]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 60px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 60px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -104,10 +104,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[3]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -121,10 +121,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[4]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute" width="40px" style="left: 60px;top: -20px">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute" width="40px" style="left: 60px;top: -20px">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -138,10 +138,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[5]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -155,10 +155,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[6]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -172,10 +172,10 @@
                                         @if(!isset($topPriorities) || !isset($topPriorities[7]))
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center"></div>
                                         @else
-                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.png" class="position-absolute top-0" width="40px" style="left: 120px;">
+                                            <img src="http://127.0.0.1:8000/images/top-priorities/discuss-icon.webp" class="position-absolute top-0" width="40px" style="left: 120px;">
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 100px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.webp') }}" style="width: 100px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -187,24 +187,32 @@
                             </div>
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
-                            <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage">
+                            <div id="lottie-avatar-priorities-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section vh-100">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
                             <div class="row px-4 pt-3 pb-2 px-md-5 pt-md-5 right-sidebar">
                                 <div class="col-12">
-                                    <h1 class="display-4 text-white fw-bold pb-3">Let's go through what you'd like to discuss.</h1>
+                                    <h1 class="display-4 text-white fw-bold pb-md-3">Let's go through what you'd like to discuss.</h1>
                                 </div>
                             </div> 
                             <div class="row px-4 pb-2 px-md-5">
+                                <div class="col-12 d-none" id="discuss_error">
+                                    <div class="col-12 alert alert-warning d-flex align-items-center" role="alert">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" width="25">
+                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                        <div class="text">Please discuss at least one.</div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="accordion accordion-flush position-relative z-0" id="accordionPriorities">
-                                        @php
+                                        <?php
                                             if (isset($topPriorities)) {
                                                 foreach($topPriorities as $priority) {
                                                     if ($priority === 'protection') {
@@ -226,7 +234,7 @@
                                                         $title = 'Health & Medical';
                                                     }
                                                     else if ($priority === 'investments') {
-                                                        $title = 'Lump Sum Investment';
+                                                        $title = 'Lump Sum Investments';
                                                     }
                                                     else if ($priority === 'others') {
                                                         $title = 'Others';
@@ -234,35 +242,70 @@
                                                     else {
                                                         $title = '';
                                                     }
-
-                                                    if ($priority) { @endphp
+                                                    if ($priority) { 
+                                                        $discuss = ''; ?>
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="flush-heading{{$priority}}">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$priority}}" aria-expanded="true" aria-controls="flush-collapse{{$priority}}">
-                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.png') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
+                                                                    <img src="{{ asset('images/top-priorities/'.$priority.'-icon.webp') }}" width="60px" height="auto" alt="{{$priority}}" class="pe-4"> {{$title}}
                                                                 </button>
                                                             </h2>
                                                             <div id="flush-collapse{{$priority}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$priority}}" data-bs-parent="#accordionPriorities">
                                                                 <div class="accordion-body">
-                                                                    <div class="row py-2 px-3">
+                                                                    {{-- <div class="row py-2 px-3">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
+                                                                            <?php
+                                                                                if (isset($prioritiesDiscuss)){
+                                                                                    foreach($prioritiesDiscuss as $key => $discuss_value){
+                                                                                        $discuss = $key;
+                                                                                    }
+                                                                                }
+                                                                            ?>
+                                                                            <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row py-2 px-3 discussthis">
                                                                         <div class="col-12 form-check form-check-reverse">
                                                                             <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
-                                                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                            <?php $checked = '';
+                                                                            
+                                                                                $priority_discuss = $priority.'_discuss';
+                                                                                if (isset($prioritiesDiscuss) && isset($prioritiesDiscuss[$priority_discuss]) && $prioritiesDiscuss[$priority_discuss] == 'true') {
+                                                                                    $checked = 'checked';
+                                                                                } else {
+                                                                                    $checked = '';
+                                                                                } ?>
+                                                                            <input type="checkbox" {{$checked}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                        </div>
+                                                                    </div> --}}
+                                                                    <div class="row py-2 px-3">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}">I've got this covered</label>
+                                                                            @php
+                                                                                if (isset($prioritiesDiscuss)){
+                                                                                    foreach($prioritiesDiscuss as $key => $discuss_value){
+                                                                                        $discuss = $key;
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            <input type="checkbox" {{ ($discuss == $priority && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : '' }} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}">
                                                                         </div>
                                                                     </div>
+                                                                    <div class="row py-2 px-3 discussthis">
+                                                                        <div class="col-12 form-check form-check-reverse">
+                                                                            <label class="form-check-label display-6" for="{{$priority}}_discuss">I'd like to discuss this</label>
+                                                                            <input type="checkbox" {{ ($discuss == $priority.'_discuss' && $discuss_value == 'true') || !isset($prioritiesDiscuss) || $priority ? 'checked' : ''}} data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-onlabel="YES" data-offlabel="NO" data-width="90" data-height="25" id="{{$priority}}_discuss">
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    @php } 
+                                                    <?php } 
                                                 }
                                             }
-                                        @endphp
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +315,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                    <a href="{{route('top.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
+                                    <a href="{{route('financial.priorities')}}" class="btn btn-secondary flex-fill text-uppercase me-md-2">Back</a>
                                     <a href="" class="btn btn-primary flex-fill text-uppercase" id="priorityNext">Next</a>
                                 </div>
                             </div>

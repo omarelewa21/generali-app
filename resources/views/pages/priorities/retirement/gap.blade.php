@@ -33,8 +33,8 @@
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">
                     <div class="container">
-                        <div class="row justify-content-center ">
-                            <div class="col-xxl-6 col-xl-6 pb-5">
+                        <div class="row justify-content-center">
+                            <div class="col-xxl-6 col-xl-6">
                                 <h2 class="display-4 text-center">Total Retirement Fund</h2>
                             </div>
                         </div>
@@ -63,23 +63,23 @@
                                             <div class="circle circle__medium"></div>
                                             <div class="circle circle__small"></div>
                                             <div class="card-gap__number text-primary text-center">
-                                                <img src="{{ asset('images/top-priorities/retirement-icon.png') }}" style="width:85px;" class="mb-3"><br>
+                                                <img src="{{ asset('images/top-priorities/retirement-icon.webp') }}" class="mb-3 sum-needs-icon"><br>
                                                 <span>{{ $totalAmountNeeded > $totalRetirementNeeded ? '100' : floor(floatval($retirementFundPercentage))}}%</span>
-                                                <p class="avatar-text text-center fw-bold text-black">covered</p>
+                                                <p class="display-5 text-center fw-bold text-black mt-2 mt-md-0">covered</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-3 pt-xl-0">
+                            <div class="col-xl-7 col-md-12 py-xxxl-5 gap-col pt-sm-3 pt-0 pt-xl-0">
                                 <div class="row justify-content-center py-2">
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-clock.png') }}" alt="clock icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-clock.webp') }}" class="sum-icon" alt="clock icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">After the next</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">{{$supportingYears}} years</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">{{$supportingYears}} years</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -88,10 +88,10 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-umbrella.png') }}" alt="umbrella icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-umbrella.webp') }}" class="sum-icon" alt="umbrella icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">I want to build a retirement fund of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">RM {{number_format(floatval($totalRetirementNeeded))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -100,10 +100,10 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-saving.png') }}" alt="saving icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-saving.webp') }}" class="sum-icon" alt="saving icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So far, I have set aside</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end">RM {{number_format(floatval($retirementSavings))}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end">RM {{number_format(floatval($retirementSavings))}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center green-tick"></span>
@@ -112,10 +112,10 @@
                                     <div class="col-10 d-flex align-items-center">
                                         <div class="d-flex bg-white rounded p-3 align-items-center border w-100 justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ asset('images/needs/general/icon-summary.png') }}" alt="summary icon" width="54">
+                                                <img src="{{ asset('images/needs/general/icon-summary.webp') }}" class="sum-icon" alt="summary icon" width="45">
                                                 <p class="avatar-text fw-bold text-black m-0 px-3">So I need a retirement plan of</p>
                                             </div>
-                                            <h4 class="display-5 fw-bold lh-sm m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
+                                            <h4 class="display-5 fw-bold m-0 text-primary text-end {{ $totalAmountNeeded === '0' ? 'text-correct' : '' }}">RM {{number_format(floatval($totalAmountNeeded) + (floatval($totalAmountNeeded) * (4 /100)) )}}</h4>
                                         </div>
                                     </div>
                                     <span class="align-self-center {{ $totalAmountNeeded === '0' ? 'green-tick' : 'red-tick' }}"></span>
@@ -145,27 +145,11 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="missingRetirementFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingRetirementFieldsLabel">Retirement Priority to discuss is required.</h2>
-            </div>
-            <div class="modal-body text-dark text-center px-4 pb-4">
-                <p>Please click proceed to enable retirement priority to discuss in Priorities To Discuss page first.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary text-uppercase btn-exit-sidebar" data-bs-dismiss="modal">Proceed</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="missingLastPageInputFields" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header px-4 pt-4 justify-content-center">
-                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h2>
+                <h3 class="modal-title fs-4 text-center" id="missingLastPageInputFieldsLabel">You're required to enter previous value before you proceed to this page.</h3>
             </div>
             <div class="modal-body text-dark text-center px-4 pb-4">
                 <p>Please click proceed to input the value in previous page first.</p>
@@ -177,7 +161,7 @@
     </div>
 </div>
 <script>
-    var retirementPriority = '{{$retirementPriority}}';
+    var needs_priority = '{{json_encode($retirementPriority)}}';
     var retirementSavings =  parseFloat({{ $retirementSavings }});
     var percentage = parseFloat({{ $retirementFundPercentage }});
     var newTotalRetirementNeeded = parseFloat({{ $totalRetirementNeeded }});

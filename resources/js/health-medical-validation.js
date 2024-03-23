@@ -12,39 +12,32 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
     const url = new URL(siteurl);
     const path = url.pathname;
 
-    if (healthPriority === 'false' || healthPriority === undefined || healthPriority === '' || healthPriority === null || healthPriority === false){
-        var missingModal = document.getElementById('missingHealthFields');
-        missingModal.classList.add('show');
-        missingModal.style.display = 'block';
-        document.querySelector('body').style.paddingRight = '0px';
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').classList.add('modal-open');
-
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.className = 'modal-backdrop fade show';
-        document.querySelector('body.modal-open').append(modalBackdrop);
-
-        // Close the modal
-        var closeButton = document.querySelector('#missingHealthFields .btn-exit-sidebar');
-        closeButton.addEventListener('click', function() {
-            missingModal.classList.remove('show');
-            missingModal.style.display = 'none';
-            document.querySelector('body').style.paddingRight = '';
-            document.querySelector('body').style.overflow = '';
-            document.querySelector('body').classList.remove('modal-open');
-            var modalBackdrop = document.querySelector('.modal-backdrop');
-            if (modalBackdrop) {
-                modalBackdrop.remove();
-            }
-            window.location.href = '/financial-priorities/discuss';
-        });
-
+    if (needs_priority && needs_priority === 'false' || needs_priority == '') {
+            
     } else{
+        if (path === '/health-medical') {
+            const newImage = "/images/needs/health-medical/home/gender-" + gender + "-" + skintone + ".json";
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+            const animationAvatarMob = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-mob'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
         if (path === '/health-medical/medical-selection') {
             // Add event listener to each button with the 'data-required' attribute
             const dataButtons = document.querySelectorAll('[data-avatar]');
             const criticalIllness = document.getElementById('critical_illness');
             const medicalPlanning = document.getElementById('medical_planning');
+
 
             dataButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
@@ -61,8 +54,11 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     } else{
                         this.setAttribute('data-required', isSelected ? '' : 'selected');
                     }
-
-                    document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    if(document.querySelectorAll('[data-required="selected"]').length == 0){
+                        document.getElementById('selectionHealthMedicalInput').value = '';
+                    } else{
+                        document.getElementById('selectionHealthMedicalInput').value = document.querySelectorAll('[data-required="selected"]').length;
+                    }
                 });
             });
 
@@ -87,6 +83,23 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     // Add the 'selected' class to the closest .button-bg div of each default button
                     defaultBtn.classList.add('selected');
                 });
+            });
+
+            const newImageCritical = "/images/needs/health-medical/selection/critical-gender-" + gender + "-" + skintone + ".json";
+            const newImageMedical = "/images/needs/health-medical/selection/medical-gender-" + gender + "-" + skintone + ".json";
+            const animationAvatarCritical = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-critical'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageCritical
+            });
+            const animationAvatarMedical = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-medical'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageMedical
             });
         }
         if (path === '/health-medical/critical-illness/coverage' || path === '/health-medical/medical-planning/coverage') {
@@ -253,6 +266,42 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     });
                 });
             }
+            var num = 0;
+
+            for (var childKey in childDatas) {
+                if (childDatas.hasOwnProperty(childKey)) {
+                    num++;
+                    var child = childDatas[childKey];
+                    var childGender = child.gender.toLowerCase();
+                    const newImageChild = "/images/needs/coverage/child-gender-" + childGender + "-" + skintone + ".json";
+
+                    const animationAvatarChild = lottie.loadAnimation({
+                        container: document.getElementById('lottie-animation-child-' + num),
+                        renderer: 'svg', 
+                        loop: true,
+                        autoplay: true,
+                        path: newImageChild
+                    });
+                }
+            }
+
+            const newImageSelf = "/images/needs/coverage/gender-" + selfGender + "-" + skintone + ".json";
+            const newImageSpouse = "/images/needs/coverage/spouse-gender-" + spouseGender + "-" + skintone + ".json";
+
+            const animationAvatarSelf = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-self'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSelf
+            });
+            const animationAvatarSpouse = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation-spouse'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImageSpouse
+            });
         }
         if (path === '/health-medical/medical-planning/hospital-selection') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -316,6 +365,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     });
                 });
             }
+            const newImage = "/images/needs/health-medical/hospital-selection/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path === '/health-medical/medical-planning/room-selection') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -349,56 +407,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 // Add event listener to each button with the 'data-required' attribute
                 const dataButtons = document.querySelectorAll('[data-avatar]');
                 const dataSelected = document.querySelectorAll('.default');
-                const roomSelection = document.querySelectorAll('.room-selection-content');
-                // const singleRoom = document.querySelectorAll('.own-space');
-                // const coupleRoom = document.querySelectorAll('.couple-room');
-                // const moreRooms = document.querySelectorAll('.more-rooms');
-        
-                // Hide all option elements
-                // singleRoom.forEach(el => el.style.display = 'block');
-                // coupleRoom.forEach(el => el.style.display = 'none');
-                // moreRooms.forEach(el => el.style.display = 'none');
-        
-                // dataSelected.forEach(btnSelected => {
-                    // Hide all option elements
-                    // singleRoom.forEach(el => el.style.display = 'none');
-                    // coupleRoom.forEach(el => el.style.display = 'none');
-                    // moreRooms.forEach(el => el.style.display = 'none');
-        
-                    // const defaultSelection = btnSelected.getAttribute('data-avatar');
-                    // if (defaultSelection === 'my own space') {
-                    //     singleRoom.forEach(el => el.style.display = 'block');
-                    //     roomSelection.forEach(element => {
-                    //         element.classList.add('single');
-                    //         element.classList.remove('couple');
-                    //     });
-                    //     document.getElementById("room-first-col").classList.add('single-patient'); 
-                    //     document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
-                    //     document.getElementById("room-center-col").classList.add('z-99'); 
-                    //     document.getElementById("room-center-col").classList.remove('h-100'); 
-                    //     document.getElementById("room-last-col").classList.add('single-patient-2'); 
-                    //     document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
-        
-                    // } else {
-                        // roomSelection.forEach(element => {
-                        //     element.classList.remove('single');
-                        //     element.classList.add('couple');
-                        // });
-        
-                        // document.getElementById("room-first-col").classList.remove('single-patient'); 
-                        // document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
-                        // document.getElementById("room-center-col").classList.remove('z-99'); 
-                        // document.getElementById("room-center-col").classList.add('h-100', 'z-1'); 
-                        // document.getElementById("room-last-col").classList.remove('single-patient-2'); 
-                        // document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
-                        // if (defaultSelection === 'a companion') {
-                        //     coupleRoom.forEach(el => el.style.display = 'block');
-                        // } else if (defaultSelection === 'more roommates') {
-                        //     moreRooms.forEach(el => el.style.display = 'block');
-                        //     coupleRoom.forEach(el => el.style.display = 'block');
-                        // }
-                    // }
-                // });
         
                 dataButtons.forEach(button => {
                     button.addEventListener('click', function(event) {
@@ -419,34 +427,6 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
         
                         // Update the hidden input field value with the selected avatar
                         selectionInput.value = dataAvatar;
-        
-                        // roomSelection.forEach(element => {
-        
-                            // if (dataAvatar === 'my own space') {
-                            //     element.classList.add('single');
-                                // element.classList.remove('couple');
-        
-                                // document.getElementById("room-first-col").classList.add('single-patient'); 
-                                // document.getElementById("room-first-col").classList.remove('patient-2', 'h-100'); 
-                                // document.getElementById("room-center-col").classList.add('z-99'); 
-                                // document.getElementById("room-center-col").classList.remove('h-100'); 
-                                // document.getElementById("room-last-col").classList.add('single-patient-2'); 
-                                // document.getElementById("room-last-col").classList.remove('patient-2', 'h-100'); 
-        
-                            // } else {
-                            //     element.classList.remove('single');
-                            //     element.classList.add('couple');
-        
-                            //     document.getElementById("room-first-col").classList.remove('single-patient'); 
-                            //     document.getElementById("room-first-col").classList.add('patient-2', 'h-100'); 
-                            //     document.getElementById("room-center-col").classList.remove('z-99'); 
-                            //     document.getElementById("room-center-col").classList.add('h-100'); 
-                            //     document.getElementById("room-last-col").classList.remove('single-patient-2'); 
-                            //     document.getElementById("room-last-col").classList.add('patient-2', 'h-100'); 
-                            // }
-                        // });
-        
-                        // updateView(dataAvatar);
                     });
                 });
         
@@ -459,28 +439,18 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                         defaultBtn.classList.add('selected');
                     });
                 });
-        
-                // function updateView(selectedOption) {
-        
-                //     // Hide all option elements
-                //     singleRoom.forEach(el => el.style.display = 'none');
-                //     coupleRoom.forEach(el => el.style.display = 'none');
-                //     moreRooms.forEach(el => el.style.display = 'none');
-                
-                //     // Show the option elements based on the selected option
-                //     if (selectedOption === 'my own space') {
-                //         singleRoom.forEach(el => el.style.display = 'block');
-        
-                //     } else if (selectedOption === 'a companion') {
-                //         coupleRoom.forEach(el => el.style.display = 'block');
-                //     } else if (selectedOption === 'more roommates') {
-                //         moreRooms.forEach(el => el.style.display = 'block');
-                //         coupleRoom.forEach(el => el.style.display = 'block');
-                //     }
-                // }
             }
+            const newImage = "/images/needs/health-medical/room-selection/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
-        if (path == '/health-medical/critical-illness/amount-needed' || path == '/health-medical/medical-planning/amount-needed') {
+        if (path == '/health-medical/critical-illness/amount-needed') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
                 var nameModal = document.getElementById('missingLastPageInputFields');
                 nameModal.classList.add('show');
@@ -623,6 +593,124 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/health-medical/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
+        }
+        if (path == '/health-medical/medical-planning/amount-needed') {
+            if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
+                var nameModal = document.getElementById('missingLastPageInputFields');
+                nameModal.classList.add('show');
+                nameModal.style.display = 'block';
+                document.querySelector('body').style.paddingRight = '0px';
+                document.querySelector('body').style.overflow = 'hidden';
+                document.querySelector('body').classList.add('modal-open');
+
+                var modalBackdrop = document.createElement('div');
+                modalBackdrop.className = 'modal-backdrop fade show';
+                document.querySelector('body.modal-open').append(modalBackdrop);
+
+                // Close the modal
+                var closeButton = document.querySelector('#missingLastPageInputFields .btn-exit-sidebar');
+                closeButton.addEventListener('click', function() {
+                    nameModal.classList.remove('show');
+                    nameModal.style.display = 'none';
+                    document.querySelector('body').style.paddingRight = '';
+                    document.querySelector('body').style.overflow = '';
+                    document.querySelector('body').classList.remove('modal-open');
+                    var modalBackdrop = document.querySelector('.modal-backdrop');
+                    if (modalBackdrop) {
+                        modalBackdrop.remove();
+                    }
+                    if (path == '/health-medical/critical-illness/amount-needed'){
+                        window.location.href = '/health-medical/critical-illness/coverage';
+                    } else{
+                        window.location.href = '/health-medical/medical-planning/room-selection';
+                    }
+                });
+
+            } else{
+                var totalFundNeeded = document.getElementById("total_healthMedicalNeeded");
+                var totalDisplayFund = document.getElementById("TotalHealthMedicalFund");
+                var TotalHealthMedicalFundMob = document.getElementById("TotalHealthMedicalFundMob");
+        
+                // Get the input value
+                amountNeeded.addEventListener("input", function() {
+        
+                    // Retrieve the current input value
+                    var amountNeededValue = amountNeeded.value;
+        
+                    // Remove non-digit characters
+                    const cleanedValue = parseFloat(amountNeededValue.replace(/\D/g, ''));
+                    const healthMedicalYears = parseInt(supportingYears.value);
+
+                    if (path == '/health-medical/critical-illness/amount-needed'){
+                        var amountPerYear = 12 * cleanedValue;
+                        var totalHealthMedical = healthMedicalYears * 12 * cleanedValue;
+                    } else{
+                        var totalHealthMedical = healthMedicalYears * cleanedValue;
+                        var amountPerYear = cleanedValue;
+                    }
+                    
+                    // Check if the parsed value is a valid number
+                    if (!isNaN(cleanedValue)) {
+                        // If it's a valid number, format it with commas
+                        const formattedValue = cleanedValue.toLocaleString('en-MY');
+                        this.value = formattedValue;
+                        var result = amountPerYear.toLocaleString();
+                        totalDisplayFund.innerText = "RM" + result;
+                        TotalHealthMedicalFundMob.innerText = "RM" + result;
+                        if (!isNaN(healthMedicalYears)){
+                            var result = totalHealthMedical.toLocaleString();
+                            totalDisplayFund.innerText = "RM" + result;
+                            TotalHealthMedicalFundMob.innerText = "RM" + result;
+                        }
+                        
+                    } else {
+                    // If it's not a valid number, display the cleaned value as is
+                        this.value = amountNeededValue;
+                        // Input is not a valid number
+                        totalDisplayFund.innerText = "RM 0";
+                        TotalHealthMedicalFundMob.innerText = "RM 0";
+                        
+                    }
+                    // Set the value of the hidden input field
+                    totalFundNeeded.value = totalHealthMedical;
+                });
+        
+                document.addEventListener("DOMContentLoaded", function() {
+                    amountNeeded.addEventListener("blur", function() {
+                        validateNumberField(amountNeeded);
+                    });
+                });
+
+                function validateNumberField(field) {
+                    var value = field.value.replace(/,/g, ''); // Remove commas
+                    var numericValue = parseFloat(value);
+        
+                    if (isNaN(numericValue)) {
+                        field.classList.add("is-invalid");
+        
+                    } else {
+                        field.classList.remove("is-invalid");
+                    }
+                }
+            }
+            const newImage = "/images/needs/health-medical/amount-needed/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/health-medical/critical-illness/existing-care' || path == '/health-medical/medical-planning/existing-care') {
             if (lastPageInput == null || lastPageInput == undefined || lastPageInput == '') {
@@ -761,6 +849,15 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                     }
                 }
             }
+            const newImage = "/images/needs/health-medical/existing-care/gender-" + gender + "-" + skintone + ".json";
+            var container = document.getElementById('lottie-animation');
+            const animationAvatar = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg', 
+                loop: true,
+                autoplay: true,
+                path: newImage
+            });
         }
         if (path == '/health-medical/critical-illness/gap' || path == '/health-medical/medical-planning/gap') {
             if (!lastPageInput || !('existing_amount' in lastPageInput) || lastPageInput['existing_protection'] === '' ) {
@@ -806,218 +903,42 @@ if (specificPageURLs.some(folderName => currentURL.includes(folderName))) {
                 if (change < 0) {
                     change = 0; // 0 represents 100% coverage
                     circle.style.strokeDashoffset = change;
+                    circle.style.transition = 'all 1.5s ease';
                 }
                 else   {
-                    circle.style.strokeDashoffset = change; // 904.896 represents 0% coverage
-                    
-                    // // Calculate the position for the dotCircle based on the end point of the graph
+                    // Calculate the position for the dotCircle based on the end point of the graph
                     const percent = Math.floor(percentage);
-                    var startX, startY;
+                    let angle = (360 * percent) / 100;
+                    let xPositions = [];
+                    let yPositions = [];
+                    for (let i = 0; i <= angle; i++) {
+                        let x = 90 + 144 * Math.cos(i * Math.PI / 180);
+                        let y = 90 + 144 * Math.sin(i * Math.PI / 180);
+                        xPositions.push(x);
+                        yPositions.push(y);
+                    }
         
                     if ( percent === 0 || percent >= 100){
                     }
                     else{
                         dotCircle.style.display = "block";
-                        if (percent === 1 || percent === 2){
-                            startX = 234;
-                            startY = 90;
-                            var x = startX - percent;
-                            var y = startY += 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
+                        let index = 0;
+
+                        function animatePointer() {
+                            dotCircle.setAttribute('cx', xPositions[index]);
+                            dotCircle.setAttribute('cy', yPositions[index]);
+                            index++;
+
+                            let change = 904.896 - (904.896 * Covered * (index + 1) / xPositions.length) / 100;
+                            circle.style.strokeDashoffset = change;
+                        
+                            if (index < xPositions.length) {
+                                let duration = 500 / xPositions.length; // Calculate duration for each step
+                                setTimeout(animatePointer, duration);
+                            }
                         }
-                        else if (percent >= 3 && percent <= 6){
-                            startX = 238;
-                            startY = 94;
-                            var x = startX -= 2 * percent;
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 7 && percent <= 10){
-                            startX = 250;
-                            startY = 92;
-                            var x = startX -= 4 * percent;
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 11 && percent <= 15){
-                            startX = 260;
-                            startY = 110;
-                            var x = startX -= 5 * percent;
-                            var y = startY += 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 16 && percent <= 21){
-                            startX = 300;
-                            startY = 145;
-                            var x = startX -= 8 * percent;
-                            var y = startY += 4 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 22 && percent <= 26){
-                            startX = 340;
-                            startY = 209;
-                            var x = startX -= 10 * percent;
-                            var y = startY + percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 27 && percent <= 28){
-                            startX = 289;
-                            startY = 205;
-                            var x = startX -= 8 * percent;
-                            var y = startY + percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if(percent === 29){
-                            dotCircle.setAttribute("cx", "50");
-                            dotCircle.setAttribute("cy", "229");
-                        }
-                        else if (percent === 30 ){
-                            dotCircle.setAttribute("cx", "44");
-                            dotCircle.setAttribute("cy", "226");
-                        }
-                        else if (percent >= 31 && percent <= 35){
-                            startX = 355;
-                            startY = 384;
-                            var x = startX -= 10 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 36 && percent <= 42){
-                            startX = 180;
-                            startY = 385;
-                            var x = startX -= 5 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 43 && percent <= 47){
-                            startX = 90;
-                            startY = 500;
-                            var x = startX -= 3 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 48 && percent <= 49){
-                            startX = 93;
-                            startY = 492;
-                            var x = startX -= 3 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent === 50 ){
-                            dotCircle.setAttribute("cx", "-55");
-                            dotCircle.setAttribute("cy", "90");
-                        }
-                        else if (percent >= 51 && percent <= 58){
-                            startX = -157;
-                            startY = 492;
-                            var x = startX += 2 * percent;
-                            var y = startY -= 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 59 && percent <= 61){
-                            startX = -207;
-                            startY = 364;
-                            var x = startX += 3 * percent;
-                            var y = startY -= 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 62 && percent <= 64){
-                            startX = -325;
-                            startY = 364;
-                            var x = startX += 5 * percent;
-                            var y = startY -= 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 65 && percent <= 67){
-                            startX = -386;
-                            startY = 300;
-                            var x = startX += 6 * percent;
-                            var y = startY -= 5 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 68 && percent <= 69){
-                            startX = -318;
-                            startY = 166;
-                            var x = startX += 5 * percent;
-                            var y = startY -= 3 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y); -38
-                        }
-                        else if (percent === 70 ){
-                            dotCircle.setAttribute("cx", "46");
-                            dotCircle.setAttribute("cy", "-47");
-                        }
-                        else if (percent >= 71 && percent <= 77){
-                            startX = -518;
-                            startY = 22;
-                            var x = startX += 8 * percent; 
-                            var y = startY - percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 78 && percent <= 80){
-                            startX = -670;
-                            startY = -209;
-                            var x = startX += 10 * percent; 
-                            var y = startY += 2 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 81 && percent <= 85){
-                            startX = -508;
-                            startY = -370;
-                            var x = startX += 8 * percent; 
-                            var y = startY += 4 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 86 && percent <= 90){
-                            startX = -336;
-                            startY = -539;
-                            var x = startX += 6 * percent; 
-                            var y = startY += 6 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 91 && percent <= 93){
-                            startX = -245;
-                            startY = -718;
-                            var x = startX += 5 * percent; 
-                            var y = startY += 8 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent >= 94 && percent <= 97){
-                            startX = 37;
-                            startY = -620;
-                            var x = startX += 2 * percent; 
-                            var y = startY += 7 * percent;
-                            dotCircle.setAttribute("cx", x);
-                            dotCircle.setAttribute("cy", y);
-                        }
-                        else if (percent === 98){
-                            dotCircle.setAttribute("cx", "231");
-                            dotCircle.setAttribute("cy", "59");
-                        }
-                        else if (percent === 99){
-                            dotCircle.setAttribute("cx", "235");
-                            dotCircle.setAttribute("cy", "90");
-                        }
+                        
+                        animatePointer();
                     }
                 }
             }

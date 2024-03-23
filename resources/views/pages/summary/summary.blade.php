@@ -27,9 +27,36 @@
                 <div class="text-white px-4 px-xl-5 py-3">
                     <h2 class="display-5 fw-bold">Summary</h2>
                 </div>
+                @php
+                    $topPriorities = array_pad($topPriorities ?? [], 8, null);
+                    $prioritiesMap = [
+                        'protection' => 'Protection',
+                        'retirement' => 'Retirement',
+                        'education' => 'Education',
+                        'savings' => 'Savings',
+                        'debt-cancellation' => 'Debt Cancellation',
+                        'health-medical' => 'Health & Medical',
+                        'investments' => 'Lump Sum Investment',
+                        'others' => 'Others',
+                    ];
+                @endphp
+                <div class="row px-4 px-md-5 d-flex d-md-none">
+                    <ul id="sortablemobile">
+                        @foreach($topPriorities as $topPriority)
+                            <li class="@if(!$topPriority) is-empty @endif" data-identifier="{{ $topPriority }}">
+                                @if($topPriority && $topPriority != 'undefined')
+                                    <img class="needs-icon" src="{{ asset('images/top-priorities/' . $topPriority . '-icon.webp') }}" alt="{{ ucwords(str_replace('-', ' ', $topPriority)) }}">
+                                    {{ $prioritiesMap[$topPriority] }}
+                                @else
+                                    {{ $loop->iteration }}
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <div class="col-12 col-md-8 col-lg-9 bg-accent-bg-grey px-0 content-section">
-                <section class="avatar-design-placeholder content-avatar-default main-content">
+                <section class="avatar-design-placeholder content-avatar-default main-content d-none d-md-block">
                     <div class="col-12 text-center position-relative pt-5">
                         <h4 class="fw-bold">The summary of needs in discussed</h4>
                         <div id="sortable-main" class="position-relative pt-3">
@@ -60,7 +87,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[0]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[0] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -76,7 +103,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[1]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[1] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -92,7 +119,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[2]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[2] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -108,7 +135,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[3]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[3] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -124,7 +151,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[4]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[4] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -140,7 +167,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[5]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[5] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -156,7 +183,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[6]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[6] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -172,7 +199,7 @@
                                         @else
                                             <div class="dropped position-absolute d-flex justify-content-center align-items-center" data-identifier="{{$topPriorities[7]}}">
                                                 <div class='sortable-container'>
-                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.png') }}" style="width: 150px;">
+                                                    <img class="inner-dropped" src="{{ asset('images/top-priorities/' . $topPriorities[7] . '-icon.webp') }}" style="width: 150px;">
                                                 </div>
                                             </div>
                                         @endif
@@ -192,7 +219,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 d-flex gap-2 d-md-block text-end px-4">
-                                <a href="{{ $selectedExpectingInput === 'Yes' ? route('summary.increment-amount') : route('summary.expected-income')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
+                                <a href="{{ $selectedExpectingInput === 'Yes' ? route('financial.statement.increment.amount') : route('financial.statement.expected.income')}}" class="btn btn-secondary text-uppercase flex-fill me-md-2">Back</a>
                                 <a href="{{route('overview')}}" class="btn btn-primary text-uppercase flex-fill me-md-2">Next</a>
                             </div>
                         </div>

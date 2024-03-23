@@ -313,7 +313,7 @@
                                             @if ($protection_needs && $prioritiesProtection === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-protection.png') }}" height="100%" width="auto" class="me-3" alt="Protection Icon">Protection
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-protection.webp') }}" height="100%" width="auto" class="me-3" alt="Protection Icon">Protection
                                                     </td>
                                                     <td>{{$protection_needs['coverFor'] === 'Spouse' ? $protection_needs['othersCoverForName'] : ($protection_needs['coverFor'] === 'Child' ? $protection_needs['selectedInsuredName'] : $protection_needs['coverFor']) }}</td>
                                                     <td>{{$protection_needs['supportingYears']}} years</td>
@@ -325,7 +325,7 @@
                                             @if ($retirement_needs && $prioritiesRetirement === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-retirement.png') }}" height="100%" width="auto" class="me-3" alt="Retirement Icon">Retirement
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-retirement.webp') }}" height="100%" width="auto" class="me-3" alt="Retirement Icon">Retirement
                                                     </td>
                                                     <td>{{$retirement_needs['coverFor'] === 'Spouse' ? $retirement_needs['othersCoverForName'] : ($retirement_needs['coverFor'] === 'Child' ? $retirement_needs['selectedInsuredName'] : $retirement_needs['coverFor']) }}</td>
                                                     <td>{{$retirement_needs['supportingYears']}} years</td>
@@ -337,7 +337,7 @@
                                             @if ($education_needs && $prioritiesEducation === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-education.png') }}" height="100%" width="auto" class="me-3" alt="Education Icon">Education
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-education.webp') }}" height="100%" width="auto" class="me-3" alt="Education Icon">Education
                                                     </td>
                                                     <td>{{$education_needs['coverFor'] === 'Spouse' ? $education_needs['othersCoverForName'] : ($education_needs['coverFor'] === 'Child' ? $education_needs['selectedInsuredName'] : $education_needs['coverFor']) }}</td>
                                                     <td>{{$education_needs['tertiaryEducationYear']}} years</td>
@@ -349,7 +349,7 @@
                                             @if ($savings_needs && $prioritiesSavings === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-savings.png') }}" height="100%" width="auto" class="me-3" alt="Savings Icon">Savings
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-savings.webp') }}" height="100%" width="auto" class="me-3" alt="Savings Icon">Savings
                                                     </td>
                                                     <td>{{$savings_needs['coverFor'] === 'Spouse' ? $savings_needs['othersCoverForName'] : ($savings_needs['coverFor'] === 'Child' ? $savings_needs['selectedInsuredName'] : $savings_needs['coverFor']) }}</td>
                                                     <td>{{$savings_needs['investmentTimeFrame']}} years</td>
@@ -361,7 +361,7 @@
                                             @if ($health_medical_planning_needs && $prioritiesHealthMedical === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Planning
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-medical.webp') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Medical Planning
                                                     </td>
                                                     <td>{{$health_medical_planning_needs['coverFor'] === 'Spouse' ? $health_medical_planning_needs['othersCoverForName'] : ($health_medical_planning_needs['coverFor'] === 'Child' ? $health_medical_planning_needs['selectedInsuredName'] : $health_medical_planning_needs['coverFor']) }}</td>
                                                     <td>{{$health_medical_planning_needs['year']}} years</td>
@@ -373,7 +373,7 @@
                                             @if ($health_medical_critical_needs && $prioritiesHealthMedical === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-medical.png') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-medical.webp') }}" height="100%" width="auto" class="me-3" alt="Health & Medical Icon">Health & Medical - Critical Illness
                                                     </td>
                                                     <td>{{$health_medical_critical_needs['coverFor'] === 'Spouse' ? $health_medical_critical_needs['othersCoverForName'] : ($health_medical_critical_needs['coverFor'] === 'Child' ? $health_medical_critical_needs['selectedInsuredName'] : $health_medical_critical_needs['coverFor']) }}</td>
                                                     <td>{{$health_medical_critical_needs['year']}} years</td>
@@ -385,7 +385,7 @@
                                             @if ($investments_needs && $prioritiesInvestment === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-investment.png') }}" height="100%" width="auto" class="me-3" alt="Lump Sum Investment Icon">Lump Sum Investment
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-investment.webp') }}" height="100%" width="auto" class="me-3" alt="Lump Sum Investment Icon">Lump Sum Investment
                                                     </td>
                                                     <td>{{$investments_needs['coverFor'] === 'Spouse' ? $investments_needs['othersCoverForName'] : ($investments_needs['coverFor'] === 'Child' ? $investments_needs['selectedInsuredName'] : $investments_needs['coverFor']) }}</td>
                                                     <td>{{$investments_needs['investmentTimeFrame']}} years</td>
@@ -397,7 +397,7 @@
                                             @if ($debt_cancellation_needs && $prioritiesDebtCancellation === 'true')
                                                 <tr>
                                                     <td class="d-flex align-items-center">
-                                                        <img src="{{ asset('images/summary/overview/icon/icon-debt.png') }}" height="100%" width="auto" class="me-3" alt="Debt Cancellation Icon">Debt Cancellation
+                                                        <img src="{{ asset('images/summary/overview/icon/icon-debt.webp') }}" height="100%" width="auto" class="me-3" alt="Debt Cancellation Icon">Debt Cancellation
                                                     </td>
                                                     <td>{{$debt_cancellation_needs['coverFor'] === 'Spouse' ? $debt_cancellation_needs['othersCoverForName'] : ($debt_cancellation_needs['coverFor'] === 'Child' ? $debt_cancellation_needs['selectedInsuredName'] : $debt_cancellation_needs['coverFor']) }}</td>
                                                     <td>{{$debt_cancellation_needs['remainingYearsOfSettlement']}} years</td>
