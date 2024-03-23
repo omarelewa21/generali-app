@@ -754,8 +754,8 @@ class DropdownController extends Controller
                         $selectedNeeds = [
                             'value' => $need['type'],
                             'priority' => $priority['sequence'],
-                            'cover' => $priority['covered'],
-                            'discuss' => $priority['discuss'],
+                            'cover' => $need['covered_amount_monthly'],
+                            'discuss' => session('priorities', [$priority['priority'] . '_discuss' => false])[$priority['priority'] . '_discuss'],
                             'advanceDetails' => $need
                         ];
                     }
