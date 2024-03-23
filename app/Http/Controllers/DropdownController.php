@@ -862,7 +862,12 @@ class DropdownController extends Controller
 
             $prioritySequence = Customer::whereHas('priorities', function ($query) use ($retirementPriorities) {
                 $query->whereIn('priority', $retirementPriorities);
-            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)->get()->toArray();
+            })->find(session('customer_id'))->priorities()->whereIn('priority', $retirementPriorities)
+            ->get()
+            ->map(function ($priority) {
+                $priority->discuss = session('priorities', [$priority->priority . '_discuss' => false])[$priority->priority . '_discuss'];
+                return $priority;
+            });
 
             foreach ($prioritySequence as $value) {
                 session(['customer_details.priorities.' . $value['priority'] . '_discuss' => $value['discuss']]);
