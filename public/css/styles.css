@@ -38,6 +38,16 @@ scrollbar-thumb:hover {
 }
 
 /* ============================== Body ============================== */
+/* Disable zooming on IOS */
+body {
+  touch-action: auto;
+  -ms-touch-action: auto;
+  user-select: none; /* Disable text selection */
+  overscroll-behavior-y: auto;
+  -webkit-user-select: none; /* Disable text selection for Safari */
+  -webkit-touch-callout: none; /* Disable callout (long press) on iOS */
+}
+
 body {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -1056,7 +1066,7 @@ h2.display-5, .currencyField {
   height: 100%;
   position: absolute;
   top: 0;
-  right: -12%;
+  right: -34%;
 }
 
 #lottie-father-animation {
@@ -1075,17 +1085,17 @@ h2.display-5, .currencyField {
 }
 
 #lottie-son-animation svg {
-  padding-top: 100px;
+  padding-top: 35%;
   width: auto!important;
 }
 
 #lottie-daughter-animation svg {
-  padding-top: 260px;
+  padding-top: 62%;
   width: auto!important;
 }
 
 #lottie-mother-animation svg {
-  padding-top: 85px;
+  padding-top: 23%;
   width: auto!important;
 }
 
@@ -1119,11 +1129,6 @@ h2.display-5, .currencyField {
   background-position: right top;
   background-repeat: no-repeat;
 }
-
-/* .homeVector {
-  width: 550px;
-  height:auto;
-} */
 
 /* ============================== Avatar Welcome Page ============================== */
 #avatar_welcome {
@@ -1312,6 +1317,17 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
 }
 
 /* ============================== Top Priorities Page ============================== */
+#lottie-avatar-priorities-animation {
+  width:100%;
+  height:56%;
+  margin-top: 10px;
+}
+
+.remove-bottom {
+  top: 55%;
+  grid-gap: 20px;
+}
+
 #sortable button {
   background-color: #ffffff;
   border: none;
@@ -1330,9 +1346,9 @@ body:has(a[style="--bg: var(--gradient-6);"]:focus) {
   max-height: 88px;
 }
 
-.first .dropped img:not(.close) {
+/* .first .dropped img:not(.close) {
   margin-top:25px;
-}
+} */
 
 .third .dropped img:not(.close) {
   margin-left:25px;
@@ -1895,24 +1911,18 @@ body.overflow #summary .main-content {
   .homeVector {
     margin-top: -80px;
   }
-  /* #wrapper-navbar.desktop {
-    display: block!important;
-  }
-  #wrapper-navbar.mobile {
-    display: none!important;
-  } */
 }
 
 @media only screen and (max-width: 1199px) {
-  /* #wrapper-navbar.mobile {
-    display: block!important;
+  .dropped img:not(.close) {
+    width: 52%!important;
   }
-  #wrapper-navbar.desktop {
-    display: none!important;
-  } */
-  /* #home {
-    overflow: auto;
-  } */
+  .third .dropped img:not(.close) {
+    margin-left: 18%;
+  }
+  .remove-button i {
+    font-size: 27px;
+  }
   .footerVector {
     display: none;
   }
@@ -1955,6 +1965,12 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 991px) {
+  .first .remove-button {
+    right:-5%;
+  }
+  .second .remove-button {
+    right:5%;
+  }
   #summary .dropped img:not(.close) {
     max-height: 50px;
   }
@@ -2037,9 +2053,9 @@ body.overflow #summary .main-content {
     right: 0;
     width: 100%;
   }
-  .navbar-scroll.fixed-top {
+  /* .navbar-scroll.fixed-top {
     position: relative;
-  }
+  } */
   .homeVector {
     max-height: 700px;
   }
@@ -2052,6 +2068,11 @@ body.overflow #summary .main-content {
 }
 
 @media only screen and (max-width: 767px) {
+  .popover {
+    top: 2%!important;
+    width: 58%;
+    font-size: 16px;
+  }
   #wrapper-navbar.desktop {
     display: none;
   }
@@ -2196,9 +2217,6 @@ body.overflow #summary .main-content {
   .bottomObeserver {
     height:50px;
   }
-  /* .header p.display-6{
-      font-size: 11px;
-  } */
   #home h2, #home .h2 {
     font-size: calc(1rem + 2.7vw);
     line-height: 1;
@@ -2221,6 +2239,12 @@ body.overflow #summary .main-content {
   .color-box-wrapper {
     height: auto;
   }
+  .toggle {
+    float: none;
+  }
+  .toggle-group .btn {
+    font-size: 14px;
+  }
 }
 
 @media only screen and (max-width: 320px) {
@@ -2237,6 +2261,30 @@ body.overflow #summary .main-content {
   #home {
     background-position: right bottom;
     background-size: auto 60%;
+  }
+}
+
+@media screen and (max-width:1280px) and (min-height:800px) and (orientation: landscape) {
+  .remove-bottom {
+    top: 68%;
+  }
+}
+
+@media screen and (max-width:1024px) and (min-height:800px) and (orientation: portrait) {
+  #top_priorities #wrapper-navbar.desktop, #top_priorities #needs, #top_priorities .content-avatar-default {
+    display: none!important;
+  }
+  #top_priorities #wrapper-navbar.mobile, #top_priorities .wrapper-avatar-default, .needs-tablet {
+    display: block!important;
+  }
+  #top_priorities .content-section {
+    width: 100%;
+  }
+  #top_priorities .content-section {
+    padding-top: 85.5px!important;
+  }
+  #top_priorities {
+    height: 100vh;
   }
 }
 

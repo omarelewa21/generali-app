@@ -57,42 +57,42 @@
                                     @endif
                                 </div>
                                 <div class="row px-4 px-md-5 pb-md-5 action_button_slider">
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Single') default @endif" data-avatar="Single" data-required="" id="singleButton">
                                                     <img src="{{ asset('images/marital-status/single-icon.webp') }}" width="100%" alt="Single" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Single</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Single</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Married') default @endif" data-avatar="Married" data-required="" id="marriedButton">
                                                     <img src="{{ asset('images/marital-status/married-icon.webp') }}" width="100%" alt="Married" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Married</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Married</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Divorced') default @endif" data-avatar="Divorced" data-required="" id="divorcedButton">
                                                     <img src="{{ asset('images/marital-status/divorced-icon.webp') }}" width="100%" alt="Divorced" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Divorced</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Divorced</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover">
                                                 <button class="border-0 w-100 py-4 @if($maritalStatus === 'Widowed') default @endif" data-avatar="Widowed" data-required="" id="widowedButton">
                                                     <img src="{{ asset('images/marital-status/widowed-icon.webp') }}" width="100%" alt="Widowed" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Widowed</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Widowed</p>
                                                 </button>
                                             </div>
                                         </div>

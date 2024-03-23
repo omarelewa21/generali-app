@@ -18,10 +18,10 @@
     $topPriorities = session('customer_details.priorities_level');
 @endphp
 
-<div id="top_priorities">
+<div id="top_priorities" class="bg-primary">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-7 col-xl-7 wrapper-avatar-default bg-white px-0">
+            <div class="col-12 col-md-7 wrapper-avatar-default bg-white px-0">
                 <div class="header"><div class="row">@include('templates.nav.nav-red-white-menu')</div></div>
                 <section class="content-avatar-default d-none d-md-block">
                     <div class="col-12 text-center position-relative">
@@ -185,19 +185,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 position-absolute d-grid" style="top: 55%; grid-gap: 20px;">
+                        <div class="col-12 position-absolute d-grid remove-bottom">
                             <div class="col-12 d-flex justify-content-center">
                                 <button id="refresh" class="btn btn-outline-secondary btn-refresh-red px-4 py-2 text-uppercase float-end z-1" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</button></p>
                             </div>
                             <div class="col-12">
-                                <!-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> -->
-                                <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
+                                <div id="lottie-avatar-priorities-animation" class="homeVector"></div>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 content-section">
+            <div class="col-12 col-md-5 bg-primary px-0 content-section">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -312,7 +311,7 @@
                                     'others' => 'Others',
                                 ];
                             @endphp
-                            <div class="row px-4 px-md-5 d-flex d-md-none">
+                            <div class="row px-4 px-md-5 d-flex d-md-none needs-tablet">
                                 <div class="col-12">
                                     <ul id="sortablemobile">
                                         @foreach($topPriorities as $topPriority)
@@ -356,16 +355,5 @@
 <script>
     var sessionData = {!! json_encode(session('customer_details.priorities_level')) !!};
     var priority = {!! json_encode($prioritiesMap) !!}
-
-    // Load the animation using Lottie
-    const animationMale = lottie.loadAnimation({
-        container: document.getElementById('lottie-animation'),
-        renderer: 'svg', 
-        loop: true,
-        autoplay: true,
-        path: '{{ asset('images/top-priorities/priorities.json') }}'
-    });
 </script>
-
-    
 @endsection

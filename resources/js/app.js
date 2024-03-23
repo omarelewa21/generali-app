@@ -54,20 +54,29 @@ var scroll_top = 0;
 
 function navbar_scroll() {
     var last_scroll_top = 0;
+    var scroll_bottom = $(document).height() - $(window).height();
 
     $(window).on('scroll', function() {
-        scroll_top = $(this).scrollTop(); // Update the global variable scroll_top
+        scroll_top = $(this).scrollTop();
+
         if (scroll_top === 0) {
             $('.navbar-scroll').removeClass('scrolled-up');
         } else if (scroll_top > 50) {
-            if(scroll_top < last_scroll_top) {
+            if(scroll_top < last_scroll_top || scroll_top >= scroll_bottom) {
                 $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
-                $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                var scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (scrollableHeight <= scroll_top) {
+                    $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                }
+                else {
+                    $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                }
             }
         } else {
             $('.navbar-scroll').removeClass('scrolled-down');
         }
+
         last_scroll_top = scroll_top;
     });
 }
@@ -75,75 +84,28 @@ function navbar_scroll() {
 function footer_scroll() {
     var last_scroll_top = 0;
     var scroll_bottom = $(document).height() - $(window).height();
-    
+
     $(window).on('scroll', function() {
         var scroll_top = $(this).scrollTop();
- 
+
         if (scroll_top > 50) {
-            if (scroll_top < last_scroll_top || scroll_top === scroll_bottom) {
-                console.log(scroll_bottom);
+            if (scroll_top < last_scroll_top || scroll_top >= scroll_bottom) {
                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
             } else {
-                $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                var scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (scrollableHeight <= scroll_top) {
+                    $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
+                }
+                else {
+                    $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
+                }
             }
         } else {
             $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
         }
+
         last_scroll_top = scroll_top;
     });
- 
-    // function hasParallaxSectionClass() {
-    //     return document.querySelector('.parallax-section') !== null;
-    // }
- 
-    // if (hasParallaxSectionClass()) {
-    //     // Create an intersection observer
-    //     const observer = new IntersectionObserver(entries => {
-    //         entries.forEach(entry => {
-    //             if (entry.isIntersecting) {
-    //                 // The observed element is now in view
-    //                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-    //                 $('.navbar-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-    //             }
-    //             else {
-    //                 // The observed element is not in view
-    //                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-    //                 $('.navbar-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-    //             }
-    //         });
-    //     });
- 
-    //     const bottomObserver = new IntersectionObserver(entries => {
-    //         entries.forEach(entry => {
-    //             if (entry.isIntersecting) {
-    //                 $('.footer-scroll').removeClass('scrolled-down').addClass('scrolled-up');
-    //             }
-    //             else {
-    //                 $('.footer-scroll').removeClass('scrolled-up').addClass('scrolled-down');
-    //             }
-    //         });
-    //     });
-        
-    //     const targetElement = document.querySelector('.parallax-inner.parallax-top');
-    //     const bottomElement = document.querySelector('.bottomObeserver');
- 
-    //     // Start observing the target element
-    //     observer.observe(targetElement);
-    //     bottomObserver.observe(bottomElement);
-    // }
-
-    // Using Intersection Observer to detect when the footer comes into view
-    // var observer = new IntersectionObserver(function(entries) {
-    //     entries.forEach(function(entry) {
-    //         if (entry.isIntersecting) {
-    //             isFooterVisible = true;
-    //         } else {
-    //             isFooterVisible = false;
-    //         }
-    //     });
-    // }, { threshold: 0 });
-
-    // observer.observe(footer);
 }
 
 $(document).ready(function () {
@@ -151,6 +113,15 @@ $(document).ready(function () {
         navbar_scroll();
         footer_scroll();
     }
+
+    // JavaScript to prevent pinch-to-zoom, double-tap-to-zoom, and viewport scaling on iOS
+    document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('dblclick', function (e) {
+        e.preventDefault();
+    });
 });
 
 // Session Clear

@@ -188,12 +188,12 @@
                         </div>
                         <div class="col-12 position-absolute" style="top: 50%;">
                             {{-- <img src="{{ asset($image) }}" width="auto" height="100%" alt="Avatar" class="changeImage"> --}}
-                            <div id="lottie-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
+                            <div id="lottie-avatar-priorities-animation" class="homeVector" style="width:100%; height:500px;margin-top: 10px;"></div>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section">
+            <div class="col-12 col-md-6 col-lg-6 col-xxl-5 col-xl-5 bg-primary px-0 order-md-2 order-1 order-xs-1 content-section vh-100">
                 <div class="scrollable-content">
                     <section class="main-content">
                         <div class="container">
@@ -355,15 +355,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstCollapse = firstAccordionItem.querySelector('.accordion-collapse');
         firstCollapse.classList.add('show');
     }
-});
-
-// Load the animation using Lottie
-const animationMale = lottie.loadAnimation({
-    container: document.getElementById('lottie-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '{{ asset('images/top-priorities/priorities.json') }}'
 });
 </script>
 @endsection

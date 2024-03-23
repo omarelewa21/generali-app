@@ -63,42 +63,42 @@
                                     @endif
                                 </div>
                                 <div class="row px-4 px-md-5 pb-md-5 action_button_slider">
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if (isset($familyDependent['spouse']) && $familyDependent['spouse'] === true) default @endif" data-avatar="spouse" data-required="" id="spouseButton">
                                                     <img src="{{ asset('images/family-dependent/spouse-icon.webp') }}" width="100%" alt="Spouse" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Spouse</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Spouse</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['children']) && $familyDependent['children'] === true) default @endif" data-avatar="children" data-required="" id="childButton" data-bs-toggle="modal" data-bs-target="#childrenAvatars">
                                                     <img src="{{ asset('images/family-dependent/children-icon.webp') }}" width="100%" alt="Child(ren)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Child(ren)</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Child(ren)</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['parents']) && $familyDependent['parents'] === true) default @endif" data-avatar="parents" data-required="" id="parentButton" data-bs-toggle="modal" data-bs-target="#parentAvatars">
                                                     <img src="{{ asset('images/family-dependent/parents-icon.webp') }}" width="100%" alt="Parent(s)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Parent(s)</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Parent(s)</p>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 text-dark fade-effect py-2 px-2 inner_action_button">
+                                    <div class="col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-6 fade-effect py-2 px-2 inner_action_button">
                                         <div class="col-12 button-bg">
                                             <div class="col-12 d-flex align-items-center justify-content-center hover border-default">
                                                 <button class="border-0 w-100 py-4 @if(isset($familyDependent['siblings']) && $familyDependent['siblings'] === true) default @endif" data-avatar="siblings" data-required="" id="siblingButton">
                                                     <img src="{{ asset('images/family-dependent/siblings-icon.webp') }}" width="100%" alt="Sibling(s)" class="mx-auto">
-                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold">Sibling(s)</p>
+                                                    <p class="avatar-text text-center pt-4 mb-0 fw-bold text-dark">Sibling(s)</p>
                                                 </button>
                                             </div>
                                         </div>

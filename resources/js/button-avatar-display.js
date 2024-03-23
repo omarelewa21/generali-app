@@ -1,3 +1,5 @@
+import lottie from 'lottie-web';
+
 const specificPageURLs = [
     'marital-status',
     'family-dependent',

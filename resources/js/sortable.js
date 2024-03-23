@@ -67,7 +67,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
 
         const imgElem = document.createElement("img");
         imgElem.classList.add("needs-icon");
-        imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.png`);
+        imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.webp`);
         draggableLi.appendChild(imgElem);
         const textElem = document.createElement("div");
         textElem.setAttribute("class", "sortable-text fw-bold");
@@ -132,7 +132,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
         innerWithImage.classList.add("dropdown-item", "d-flex", "align-items-center", "justify-content-start", "p-0");
         const imgElem = document.createElement("img");
         imgElem.classList.add("needs-icon");
-        imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.png`);
+        imgElem.setAttribute("src", `/images/${$("#topPrioritiesButtonInput").length || value == "others" ? "top-priorities" : "needs/savings/goals"}/${$("#topPrioritiesButtonInput").length || value == "others" ? value + "-icon" : value}.webp`);
         innerWithImage.appendChild(imgElem);
         const textElem = document.createElement("span");
         textElem.innerHTML = priorityMap[value];

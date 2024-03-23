@@ -1,3 +1,5 @@
+import lottie from 'lottie-web';
+
 // Array of specific page URLs where the script should run
 const specificPageURLs = [
     'avatar',
@@ -150,96 +152,109 @@ if (specificPageURLs.some(url => currentURL.endsWith(url))) {
     }
 
     if (path == '/identity-details' || path == '/marital-status' || path == '/family-dependent' || path == '/family-dependent/details' || path == '/assets') {
-        if (avatar_session) {
-            var container = document.getElementById('lottie-animation');
-    
-            // Remove all child elements (including the SVG) from the container
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            if (avatar_session) {
+                var container = document.getElementById('lottie-animation');
+        
+                // Remove all child elements (including the SVG) from the container
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
 
-            const animationGender = lottie.loadAnimation({
-                container: document.getElementById('lottie-animation'),
-                renderer: 'svg', 
-                loop: true,
-                autoplay: true,
-                path: avatar_session
-            });
+                const animationGender = lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation'),
+                    renderer: 'svg', 
+                    loop: true,
+                    autoplay: true,
+                    path: avatar_session
+                });
             
-            if (gender_session) {
-                if (gender_session == 'Male') {
-                    container.classList.add('male');
-                }
-                else if (gender_session == 'Female') {
-                    container.classList.add('female');
+                if (gender_session) {
+                    if (gender_session == 'Male') {
+                        container.classList.add('male');
+                    }
+                    else if (gender_session == 'Female') {
+                        container.classList.add('female');
+                    }
                 }
             }
-        }
+        });
     }
 }
 
 // Load the animation using Lottie
-// General
-const animationFemale = lottie.loadAnimation({
-    container: document.getElementById('lottie-female-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '/images/avatar-general/spouse-female.json'
-});
-
-// Main Homepage
-const animationWelcomeFemale = lottie.loadAnimation({
-    container: document.getElementById('lottie-welcome-female-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '/images/welcome-page/female-avatar.json'
-});
-
-const animationContainersFemale = document.querySelectorAll('.lottie-welcome-female-animation');
-animationContainersFemale.forEach(container => {
-    lottie.loadAnimation({
-        container: container,
+document.addEventListener('DOMContentLoaded', function() {
+    // General
+    const animationFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-female-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/avatar-general/spouse-female.json'
+    });
+    
+    // Main Homepage
+    const animationWelcomeFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-welcome-female-animation'),
         renderer: 'svg', 
         loop: true,
         autoplay: true,
         path: '/images/welcome-page/female-avatar.json'
     });
-});
-
-const animationWelcomeMale = lottie.loadAnimation({
-    container: document.getElementById('lottie-welcome-male-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '/images/welcome-page/male-avatar.json'
-});
-
-const animationContainersMale = document.querySelectorAll('.lottie-welcome-male-animation');
-animationContainersMale.forEach(container => {
-    lottie.loadAnimation({
-        container: container,
+    
+    const animationContainersFemale = document.querySelectorAll('.lottie-welcome-female-animation');
+    animationContainersFemale.forEach(container => {
+        lottie.loadAnimation({
+            container: container,
+            renderer: 'svg', 
+            loop: true,
+            autoplay: true,
+            path: '/images/welcome-page/female-avatar.json'
+        });
+    });
+    
+    const animationWelcomeMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-welcome-male-animation'),
         renderer: 'svg', 
         loop: true,
         autoplay: true,
         path: '/images/welcome-page/male-avatar.json'
     });
-});
+    
+    const animationContainersMale = document.querySelectorAll('.lottie-welcome-male-animation');
+    animationContainersMale.forEach(container => {
+        lottie.loadAnimation({
+            container: container,
+            renderer: 'svg', 
+            loop: true,
+            autoplay: true,
+            path: '/images/welcome-page/male-avatar.json'
+        });
+    });
+    
+    // Avatar Homepage
+    const animationAvatarMale = lottie.loadAnimation({
+        container: document.getElementById('lottie-avatar-male-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/avatar-welcome/male-avatar.json'
+    });
+    
+    const animationAvatarFemale = lottie.loadAnimation({
+        container: document.getElementById('lottie-avatar-female-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/avatar-welcome/female-avatar.json'
+    });
 
-// Avatar Homepage
-const animationAvatarMale = lottie.loadAnimation({
-    container: document.getElementById('lottie-avatar-male-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '/images/avatar-welcome/male-avatar.json'
-});
-
-const animationAvatarFemale = lottie.loadAnimation({
-    container: document.getElementById('lottie-avatar-female-animation'),
-    renderer: 'svg', 
-    loop: true,
-    autoplay: true,
-    path: '/images/avatar-welcome/female-avatar.json'
+    // Top Priorities
+    const animationPriorities = lottie.loadAnimation({
+        container: document.getElementById('lottie-avatar-priorities-animation'),
+        renderer: 'svg', 
+        loop: true,
+        autoplay: true,
+        path: '/images/top-priorities/priorities.json'
+    });
 });

@@ -50,11 +50,6 @@ $(document).ready(function() {
     setResponsiveHeader();
     setMainContentPadding();
     setResponsiveMainContentPadding();
-    // if (window.orientation !== 90 && window.orientation !== -90) {
-    //     setResponsiveHeader();
-    //     setMainContentPadding();
-    //     setResponsiveMainContentPadding();
-    // }
 
     function setResponsiveCalcuator(){
         const windowWidth = $(window).width();
