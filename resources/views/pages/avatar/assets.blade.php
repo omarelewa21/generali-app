@@ -33,7 +33,7 @@
                 <section class="bg-grey">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 d-flex justify-content-center">
+                            <div class="col-12 d-flex justify-content-center refresh-avatar">
                                 <a href="#" id="refresh" class="btn btn-secondary btn-refresh px-4 py-2 text-uppercase" type="button"><i class="fa-solid fa-rotate-right me-3 fa-lg"></i>Refresh</a></p>
                             </div>
                         </div>

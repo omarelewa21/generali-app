@@ -18,7 +18,7 @@
     $transactionId ??= request()->input('transaction_id');
 @endphp
 
-<div id="basic_details">
+<div id="basic_details" class="bg-accent-bg-grey">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-5 col-lg-3 bg-primary sidebanner">
@@ -29,8 +29,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 content-section">
-                <div>
+            <div class="col-12 col-md-7 col-lg-9 bg-accent-bg-grey px-0 content-section vh-100">
+                <div class="bg-accent-bg-grey">
                     <form novalidate action="{{ route('form.basic.details', ['transaction_id' => request()->input('transaction_id')]) }}" method="POST">
                         @csrf
                         <section class="main-content">

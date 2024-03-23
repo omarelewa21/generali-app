@@ -2053,9 +2053,9 @@ body.overflow #summary .main-content {
     right: 0;
     width: 100%;
   }
-  /* .navbar-scroll.fixed-top {
+  #pdpa .navbar-scroll.fixed-top, #basic_details .navbar-scroll.fixed-top {
     position: relative;
-  } */
+  }
   .homeVector {
     max-height: 700px;
   }
@@ -2195,7 +2195,7 @@ body.overflow #summary .main-content {
     background-size: 15%;
   }
   .wrapper-avatar-grey {
-    grid-template-rows: 10vh 35vh 20vh 10vh;
+    grid-template-rows: 7vh 35vh 15vh 3vh;
   }
   #avatar_gender_selection .parallax-top, #priorities_to_discuss .parallax-top {
     padding-bottom: 50px;
@@ -2232,6 +2232,9 @@ body.overflow #summary .main-content {
 @media only screen and (max-width: 576px) {
   .otherModalText {
     font-size: 4rem;
+  }
+  .changeImageAsset {
+    height: 84%;
   }
 }
 
@@ -2292,8 +2295,21 @@ body.overflow #summary .main-content {
   #top_priorities {
     height: 100vh;
   }
-  .main-content {
+  #top_priorities .main-content {
     height: inherit;
+  }
+  #avatar_my_assets .house {
+    width: 105%!important;
+  }
+  #avatar_my_assets .bungalow {
+    width: 162%!important;
+  }
+  #avatar_my_assets .wrapper-avatar-grey {
+    grid-template-rows: 20vh 50vh 12vh 23vh;
+  }
+  #avatar_my_assets .refresh-avatar {
+    position: absolute;
+    bottom: 5%;
   }
 }
 

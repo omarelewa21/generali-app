@@ -23,7 +23,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                 height: "100%",
                 alt: "Car",
                 class: "position-absolute car",
-                style: "bottom:150px;right:-200px;z-index:2"
+                style: "bottom:88%;right:-22%;z-index:2"
             }
         ];
 
@@ -34,7 +34,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                 height: "100%",
                 alt: "Scooter",
                 class: "position-absolute scooter",
-                style: "bottom:150px;left:0;z-index:2"
+                style: "bottom:88%;left:0;z-index:2"
             }
         ];
 
@@ -290,14 +290,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                         $imageContainer.find("img.bungalow").css("position", "absolute");
                         $imageContainer.find("img.bungalow").css("bottom", "0");
                         $imageContainer.find("img.bungalow").css("left", "0");
-                        $imageContainer.find("img.bungalow").css("width", "550px");
+                        $imageContainer.find("img.bungalow").css("width", "55%");
                         $imageContainer.find("img.bungalow").css("height", "auto");
                     }
                     else {
                         $imageContainer.find("img.house").css("position", "absolute");
                         $imageContainer.find("img.house").css("bottom", "0");
                         $imageContainer.find("img.house").css("right", "0");
-                        $imageContainer.find("img.house").css("width", "450px");
+                        $imageContainer.find("img.house").css("width", "52%");
                         $imageContainer.find("img.house").css("height", "auto");
                     }
                 }
@@ -305,13 +305,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     $imageContainer.find("img.house").css("position", "absolute");
                     $imageContainer.find("img.house").css("bottom", "0");
                     $imageContainer.find("img.house").css("right", "0");
-                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("width", "52%");
                     $imageContainer.find("img.house").css("height", "auto");
                     $imageContainer.find("img.house").css("z-index", "2");
                     $imageContainer.find("img.bungalow").css("position", "absolute");
                     $imageContainer.find("img.bungalow").css("bottom", "0");
                     $imageContainer.find("img.bungalow").css("left", "0");
-                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("width", "55%");
                     $imageContainer.find("img.bungalow").css("height", "auto");
                     $imageContainer.find("img.bungalow").css("z-index", "1");
                 }
@@ -839,7 +839,7 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     $imageContainer.find("img.house").css("position", "absolute");
                     $imageContainer.find("img.house").css("bottom", "0");
                     $imageContainer.find("img.house").css("right", "0");
-                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("width", "52%");
                     $imageContainer.find("img.house").css("height", "auto");
                     $imageContainer.find("img.house").css("z-index", "2");
                 }
@@ -899,14 +899,14 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                         $imageContainer.find("img.bungalow").css("position", "absolute");
                         $imageContainer.find("img.bungalow").css("bottom", "0");
                         $imageContainer.find("img.bungalow").css("left", "0");
-                        $imageContainer.find("img.bungalow").css("width", "550px");
+                        $imageContainer.find("img.bungalow").css("width", "55%");
                         $imageContainer.find("img.bungalow").css("height", "auto");
                     }
                     else {
                         $imageContainer.find("img.house").css("position", "absolute");
                         $imageContainer.find("img.house").css("bottom", "0");
                         $imageContainer.find("img.house").css("right", "0");
-                        $imageContainer.find("img.house").css("width", "450px");
+                        $imageContainer.find("img.house").css("width", "52%");
                         $imageContainer.find("img.house").css("height", "auto");
                     }
                 }
@@ -914,13 +914,13 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     $imageContainer.find("img.house").css("position", "absolute");
                     $imageContainer.find("img.house").css("bottom", "0");
                     $imageContainer.find("img.house").css("right", "0");
-                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("width", "52%");
                     $imageContainer.find("img.house").css("height", "auto");
                     $imageContainer.find("img.house").css("z-index", "2");
                     $imageContainer.find("img.bungalow").css("position", "absolute");
                     $imageContainer.find("img.bungalow").css("bottom", "0");
                     $imageContainer.find("img.bungalow").css("left", "0");
-                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("width", "55%");
                     $imageContainer.find("img.bungalow").css("height", "auto");
                     $imageContainer.find("img.bungalow").css("z-index", "1");
                 }
@@ -989,25 +989,25 @@ if (specificPageURLs.some(url => currentURL.endsWith(url) || currentURL.endsWith
                     $imageContainer.find("img.house").css("position", "absolute");
                     $imageContainer.find("img.house").css("bottom", "0");
                     $imageContainer.find("img.house").css("right", "0");
-                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("width", "52%");
                     $imageContainer.find("img.house").css("height", "auto");
                     $imageContainer.find("img.bungalow").css("position", "absolute");
                     $imageContainer.find("img.bungalow").css("bottom", "0");
                     $imageContainer.find("img.bungalow").css("left", "0");
-                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("width", "55%");
                     $imageContainer.find("img.bungalow").css("height", "auto");
                 }
                 else if ($imageContainer.find("img").length == 3) {
                     $imageContainer.find("img.house").css("position", "absolute");
                     $imageContainer.find("img.house").css("bottom", "0");
                     $imageContainer.find("img.house").css("right", "0");
-                    $imageContainer.find("img.house").css("width", "450px");
+                    $imageContainer.find("img.house").css("width", "52%");
                     $imageContainer.find("img.house").css("height", "auto");
                     $imageContainer.find("img.house").css("z-index", "2");
                     $imageContainer.find("img.bungalow").css("position", "absolute");
                     $imageContainer.find("img.bungalow").css("bottom", "0");
                     $imageContainer.find("img.bungalow").css("left", "0");
-                    $imageContainer.find("img.bungalow").css("width", "550px");
+                    $imageContainer.find("img.bungalow").css("width", "55%");
                     $imageContainer.find("img.bungalow").css("height", "auto");
                     $imageContainer.find("img.bungalow").css("z-index", "1");
                 }
