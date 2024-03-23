@@ -27,7 +27,7 @@
     <div class="container-fluid">
         <div class="row wrapper-bottom-grey">
             <div class="header col-12"><div class="row">@include('templates.nav.nav-red-menu-needs')</div></div>
-            <form novalidate action="{{route('form.submit.protection.gap')}}" method="POST" class="content-needs-grey">
+            <form novalidate action="{{route('existing.policy')}}" method="GET" class="content-needs-grey">
                 @csrf
                 <div class="top-menu">@include ('templates.nav.nav-sidebar-needs')</div>
                 <section class="heading">

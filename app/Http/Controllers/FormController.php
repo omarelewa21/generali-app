@@ -1302,7 +1302,7 @@ class FormController extends Controller {
                 'policyFirstName2'=> 'nullable',
                 'policyFirstName3'=> 'nullable',
             ]);
-
+            
             $customerDetails['existing_policy'] = $validatedData["existingPolicy"];
 
             $latestKey = "existing_policy";
