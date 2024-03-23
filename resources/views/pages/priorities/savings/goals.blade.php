@@ -174,7 +174,7 @@
                                         @endif
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
-                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
+                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Pursue their interests' :'Travel around the world'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_1, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'interest' :'travel').'.png') }}" width="auto" height="110px" alt="{{$goal_1}}">
@@ -188,7 +188,7 @@
                                         </div>
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
-                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
+                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Start their own business' : 'Upgrade my assets & lifestyle'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_2, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'business' :'home').'.png') }}" width="auto" height="110px" alt="{{$goal_2}}">
@@ -202,7 +202,7 @@
                                         </div>
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
-                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
+                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_3, $savingsGoals)) default @endif" data-avatar="{{$relationship === 'Child' ? 'Contribute to their tuition fees' : 'Contribute to charitable needs'}}" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array($goal_3, $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-'.($relationship === 'Child' ? 'tuition' :'donate').'.png') }}" width="auto" height="110px" alt="{{$goal_3}}">
@@ -216,7 +216,7 @@
                                         </div>
                                         <div class="col-12 text-dark fade-effect pt-2 pb-3">
                                             <div class="col-12 button-bg">
-                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start hover">
+                                                <div class="col-12 py-4 d-flex align-items-center justify-content-start">
                                                     <button class="border-0 w-100 d-flex align-items-center @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('Others', $savingsGoals)) default @endif" data-avatar="Others" data-required="" @if(isset($savingsGoals) && is_array($savingsGoals) && in_array('Others', $savingsGoals)) disabled @endif>
                                                         <div class="col-4">
                                                             <img class="needs-icon" src="{{ asset('images/needs/savings/goals/goal-others.png') }}" width="auto" height="110px" alt="goal-other">
